@@ -1,0 +1,14 @@
+# Entorno Python
+.venv/
+__pycache__/
+*.pyc
+
+# macOS
+.DS_Store
+
+# Fuentes crudas pesadas (1.4GB de PDFs/imágenes) — quedan solo local
+# glob por "4*" para evitar problemas de normalización Unicode (NFD) de macOS
+fuentes/4*/
+
+# Claude local (settings personales, no compartir)
+.claude/settings.local.json
