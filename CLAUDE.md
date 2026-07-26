@@ -22,12 +22,16 @@ tiempo repitiendo cosas que ya deberían estar escritas en algún lado.
 | ICS | Ingeniería y Calidad de Software |
 
 ## ESTRUCTURA
-- `materias/[CÓDIGO].md` → la wiki de esa materia (única fuente de verdad).
+- `materias/[CÓDIGO]/` → una carpeta por materia. Adentro:
+  - `materias/[CÓDIGO]/[CÓDIGO].md` → la wiki (única fuente de verdad).
+  - derivados de estudio que generamos: `resumen.md`, `banco-preguntas.md`,
+    sus exportaciones a `.docx`, y `figs/` (imágenes usadas en esos docs).
 - `fuentes/[CÓDIGO]/` → originales crudos que subo (PDF, apuntes, etc.).
   Inmutables, nunca los edites.
 - `scripts/ingest.py` → wrapper de markitdown para convertir fuentes no-md.
+  Corre con el venv del proyecto: `.venv/bin/python scripts/ingest.py <archivo>`.
 
-Estructura interna de cada `materias/[CÓDIGO].md`:
+Estructura interna de cada `materias/[CÓDIGO]/[CÓDIGO].md`:
 
     # [MATERIA] — Wiki
     ## Índice
@@ -53,8 +57,8 @@ Cuando te paso o guardo un archivo nuevo en `fuentes/[CÓDIGO]/`:
    sobre el binario original.
 2. Si no está claro a qué materia pertenece por la carpeta o el contenido,
    preguntame antes de tocar nada.
-3. Identificá a qué unidad del índice de `materias/[CÓDIGO].md` pertenece
-   (si no existe la unidad, creala y actualizá el índice).
+3. Identificá a qué unidad del índice de `materias/[CÓDIGO]/[CÓDIGO].md`
+   pertenece (si no existe la unidad, creala y actualizá el índice).
 4. Editá el archivo directo: fusioná el contenido nuevo con lo que ya está
    en esa unidad — no dupliques, no dejes bloques cronológicos sueltos.
 5. Agregá una línea al Log del archivo.
@@ -63,7 +67,7 @@ Cuando te paso o guardo un archivo nuevo en `fuentes/[CÓDIGO]/`:
 ## OPERACIÓN: QUERY
 Cuando te pregunto algo para estudiar o resolver un ejercicio:
 1. Si no está claro a qué materia corresponde, preguntame.
-2. Leé `materias/[CÓDIGO].md`, priorizando la unidad relevante.
+2. Leé `materias/[CÓDIGO]/[CÓDIGO].md`, priorizando la unidad relevante.
 3. Respondé basándote en eso, citando de qué unidad sale.
 4. Si armamos algo nuevo y valioso, ofrecé integrarlo al archivo y hacelo
    si confirmo.

@@ -1,15 +1,21 @@
-#!/usr/bin/env python3
+#!/Users/juanbonadeo/Desktop/UTN/.venv/bin/python
 """
 Wrapper de markitdown para convertir fuentes no-markdown (PDF, PPTX, DOCX,
 imágenes, audio, etc.) a texto markdown.
+
+Requiere markitdown, instalado en el virtualenv del proyecto (.venv).
+El python del sistema (3.9) no sirve: markitdown necesita Python >= 3.10.
+Si hay que recrear el entorno:
+    /opt/homebrew/bin/python3.12 -m venv .venv
+    ./.venv/bin/python -m pip install 'markitdown[all]'
 
 Uso:
     from ingest import ingest
     texto = ingest("fuentes/TPA/apunte-unidad1.pdf")
 
-Desde la terminal:
-    python scripts/ingest.py fuentes/TPA/apunte-unidad1.pdf
-    python scripts/ingest.py fuentes/TPA/apunte.pdf salida.md
+Desde la terminal (usar el python del venv):
+    .venv/bin/python scripts/ingest.py fuentes/TPA/apunte-unidad1.pdf
+    .venv/bin/python scripts/ingest.py fuentes/TPA/apunte.pdf salida.md
 """
 
 import sys
