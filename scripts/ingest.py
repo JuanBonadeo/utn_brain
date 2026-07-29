@@ -34,6 +34,11 @@ def ingest(path: str) -> str:
 
 
 def main() -> None:
+    # En Windows stdout redirigido usa cp1252 y revienta con símbolos
+    # matemáticos (≤, α, Σ, →) muy comunes en los apuntes.
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
     if len(sys.argv) < 2:
         print("Uso: python scripts/ingest.py <archivo> [salida.md]", file=sys.stderr)
         raise SystemExit(1)
