@@ -4587,7 +4587,7 @@ B corrige la convención de nombres (verbo en infinitivo) pero **pierde el nombr
 
 Encontradas al revisar los documentos el 2026-07-29. Ninguna es de contenido: todas son de trazabilidad, y la Etapa 3 se apoya en esos números.
 
-**Corregidas** — en `ASI26_310_UNIDAD1_corregido.docx` y `ASI26_310_UNIDAD2_corregido.docx` (carpeta de trabajo de la materia, fuera del brain). Los originales quedaron intactos en `fuentes/ASI/`.
+**Corregidas** — en `materias/ASI/ASI26_310_UNIDAD1_corregido.docx` y `materias/ASI/ASI26_310_UNIDAD2_corregido.docx`. Los originales entregados quedaron intactos en `fuentes/ASI/`, que es inmutable.
 
 | # | Dónde | Problema | Qué se hizo |
 |---|---|---|---|
@@ -4791,8 +4791,14 @@ Presentación sugerida: **dos planos, no nueve.** (1) Base operativa en una plan
 - `fuentes/ASI/ASI26_TPIntegrador_Etapa3 - Proyecto de TI.md` — consigna Etapa 3.
 - `fuentes/ASI/TPIntegrador - Etapa 3 - Practica Sugerencias.md` — sugerencias de cátedra 28/07/2026.
 
+Derivados que generamos (en esta misma carpeta, `materias/ASI/`):
+
+- `ASI26_310_UNIDAD1_corregido.docx` — Etapa 1 con la corrección I5 aplicada.
+- `ASI26_310_UNIDAD2_corregido.docx` — Etapa 2 con las correcciones I1 e I2 aplicadas.
+
 ## Log
 
 - 2026-07-29: primer ingest completo de la materia. Se incorporó todo el Material de Cursado (Unidad 1 y Unidad 2), las resoluciones de las Etapas 1 y 2 del TPI, el BPMN del proceso, y la consigna + sugerencias de la Etapa 3. Se crearon las cuatro unidades del índice. Se detectaron 6 inconsistencias en lo ya entregado (ver sección TP Integrador) y se dejaron 3 candidatos de proyecto para la Etapa 3 a decidir.
 - 2026-07-29: corregidas I1, I2 e I5 sobre copias nuevas (`ASI26_310_UNIDAD1_corregido.docx`, `ASI26_310_UNIDAD2_corregido.docx`). Verificado por reconversión y diff: solo cambiaron las 8 celdas previstas. Quedan pendientes I3 (decisión), I4 (falta dato de fechas) e I6 (falta archivo).
 - 2026-07-29: documentada la Etapa 3 — comparación de los tres candidatos, desarrollo completo del candidato B (trazabilidad con Etapas 1 y 2, solución, alcance, 4 objetivos cuantificables, matriz de alternativas, ciclo de vida, 11 fases y 9 sectores de H&S), y las cinco decisiones abiertas D1–D5. **Preferencia por B declarada, sin cerrar.** Discusión con el grupo pendiente. Punto de retomada marcado al inicio de la sección Etapa 3.
+- 2026-07-29: los dos `.docx` corregidos pasan a `materias/ASI/` como derivados, para que los tenga el grupo. Se subieron también las fuentes crudas a `fuentes/ASI/` (23 archivos).
