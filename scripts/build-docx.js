@@ -38,9 +38,9 @@ const BODY = 22;                                  // 11 pt
 const TBL = 18;                                   // 9 pt
 const INK = '1A1A1A';
 const RED = 'B00020';
-const RULE = '9AA0A6';
-const GRID = 'BFC4C9';
-const HEAD_FILL = 'EDF0F2';
+const GRID_H = 'C7CBCF';   // horizontales de tabla
+const GRID_V = 'E2E5E8';   // verticales de tabla, más tenues
+const HEAD_FILL = 'F4F5F6';
 
 const line = (color, size) => ({ style: BorderStyle.SINGLE, size, color });
 
@@ -88,6 +88,9 @@ function buildTable(rows, colPct) {
 
   const body = rows.slice(2); // saltea la fila de guiones
 
+  // en columnas angostas justificar deja ríos horribles: solo se justifica
+  // el texto de las columnas anchas
+  const JUSTIFY_MIN = 22;
   const mkRow = (cells, head) => new TableRow({
     tableHeader: head,
     cantSplit: true,
@@ -98,7 +101,8 @@ function buildTable(rows, colPct) {
       margins: { top: 90, bottom: 90, left: 120, right: 120 },
       children: [new Paragraph({
         children: runs(c, { size: TBL, ...(head ? { bold: true } : {}), ...warn(c) }),
-        alignment: AlignmentType.LEFT,
+        alignment: (!head && pct[idx] >= JUSTIFY_MIN)
+          ? AlignmentType.JUSTIFIED : AlignmentType.LEFT,
         spacing: { before: 0, after: 0, line: 252 },
       })],
     })),
@@ -109,9 +113,9 @@ function buildTable(rows, colPct) {
     columnWidths: widths,
     layout: TableLayoutType.FIXED,
     borders: {
-      top: line(GRID, 4), bottom: line(GRID, 4),
-      left: line(GRID, 4), right: line(GRID, 4),
-      insideHorizontal: line(GRID, 2), insideVertical: line(GRID, 2),
+      top: line(GRID_H, 4), bottom: line(GRID_H, 4),
+      left: line(GRID_V, 2), right: line(GRID_V, 2),
+      insideHorizontal: line(GRID_H, 2), insideVertical: line(GRID_V, 2),
     },
     rows: [mkRow(rows[0], true), ...body.map((r) => mkRow(r, false))],
   });
@@ -120,20 +124,18 @@ function buildTable(rows, colPct) {
 /* ---------- encabezados ---------- */
 function heading(level, text) {
   const clean = text.replace(/\*\*/g, '');
+  // Nada de filetes: la jerarquía se marca con cuerpo, mayúsculas,
+  // espaciado entre letras y aire alrededor.
   if (level === 1 || level === 2) {
     const isTitle = level === 1;
     return new Paragraph({
       heading: isTitle ? HeadingLevel.TITLE : HeadingLevel.HEADING_1,
       alignment: AlignmentType.CENTER,
       keepNext: true,
-      spacing: { before: isTitle ? 0 : 400, after: 200 },
-      border: {
-        top: line(RULE, 8),
-        bottom: line(RULE, 8),
-      },
+      spacing: { before: isTitle ? 0 : 560, after: 260 },
       children: [new TextRun({
         text: clean.toUpperCase(), font: FONT, bold: true,
-        size: isTitle ? 30 : 26, color: INK, characterSpacing: 20,
+        size: isTitle ? 30 : 25, color: INK, characterSpacing: 30,
       })],
     });
   }
@@ -141,18 +143,17 @@ function heading(level, text) {
     return new Paragraph({
       heading: HeadingLevel.HEADING_2,
       keepNext: true,
-      spacing: { before: 320, after: 120 },
-      border: { bottom: line(RULE, 4) },
+      spacing: { before: 400, after: 140 },
       children: [new TextRun({
         text: clean.toUpperCase(), font: FONT, bold: true,
-        size: 22, color: INK, characterSpacing: 14,
+        size: 21, color: INK, characterSpacing: 18,
       })],
     });
   }
   return new Paragraph({
     heading: HeadingLevel.HEADING_3,
     keepNext: true,
-    spacing: { before: 240, after: 100 },
+    spacing: { before: 280, after: 110 },
     children: [new TextRun({ text: clean, font: FONT, bold: true, size: 22, color: INK })],
   });
 }
@@ -178,10 +179,7 @@ while (i < lines.length) {
   if (trimmed.startsWith('<!--')) { i++; continue; }
 
   if (trimmed === '---') {
-    children.push(new Paragraph({
-      text: '', spacing: { before: 120, after: 240 },
-      border: { bottom: line(RULE, 6) },
-    }));
+    children.push(new Paragraph({ text: '', spacing: { before: 0, after: 260 } }));
     i++; continue;
   }
 
@@ -209,9 +207,8 @@ while (i < lines.length) {
     children.push(new Paragraph({
       children: runs(txt, { size: 20, ...warn(txt) }),
       alignment: AlignmentType.JUSTIFIED,
-      indent: { left: 340, right: 200 },
-      border: { left: { ...line(RULE, 12), space: 14 } },
-      spacing: { before: 140, after: 240, line: 264 },
+      indent: { left: 454, right: 454 },
+      spacing: { before: 180, after: 260, line: 264 },
     }));
     continue;
   }
@@ -242,6 +239,7 @@ while (i < lines.length) {
 
 /* ---------- documento ---------- */
 const doc = new Document({
+  hyphenation: { autoHyphenation: true },
   numbering: {
     config: [{
       reference: 'ol',
