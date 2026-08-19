@@ -1,0 +1,11 @@
+{
+  "name": "utn-wiki",
+  "private": true,
+  "description": "Toolchain de la wiki de materias: conversores md -> docx.",
+  "scripts": {
+    "docx": "node scripts/build-docx.js"
+  },
+  "dependencies": {
+    "docx": "^9.5.1"
+  }
+}
