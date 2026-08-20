@@ -42,6 +42,8 @@ const GRID_H = 'C7CBCF';   // horizontales de tabla
 const GRID_V = 'E2E5E8';   // verticales de tabla, más tenues
 const HEAD_FILL = 'F4F5F6';
 
+const LANG = { value: 'es-AR' };
+
 const line = (color, size) => ({ style: BorderStyle.SINGLE, size, color });
 
 /* ---------- inline ---------- */
@@ -51,7 +53,7 @@ function runs(text, base = {}) {
   let last = 0, m;
   const push = (t, extra) => {
     if (!t) return;
-    out.push(new TextRun({ text: t, font: FONT, size: BODY, color: INK, ...base, ...extra }));
+    out.push(new TextRun({ text: t, font: FONT, size: BODY, color: INK, language: LANG, ...base, ...extra }));
   };
   while ((m = re.exec(text)) !== null) {
     push(text.slice(last, m.index));
@@ -62,7 +64,7 @@ function runs(text, base = {}) {
     last = m.index + tok.length;
   }
   push(text.slice(last));
-  return out.length ? out : [new TextRun({ text: '', font: FONT, size: base.size || BODY })];
+  return out.length ? out : [new TextRun({ text: '', font: FONT, size: base.size || BODY, language: LANG })];
 }
 
 const warn = (s) => (s.includes('⚠') ? { color: RED, italics: true } : {});
@@ -70,10 +72,11 @@ const warn = (s) => (s.includes('⚠') ? { color: RED, italics: true } : {});
 const para = (text, opts = {}) => new Paragraph({
   children: runs(text, { ...warn(text), ...(opts.runProps || {}) }),
   alignment: opts.alignment ?? AlignmentType.JUSTIFIED,
-  spacing: { after: 140, line: 288, ...(opts.spacing || {}) },
+  spacing: { after: 120, line: 280, ...(opts.spacing || {}) },
   ...(opts.bullet ? { bullet: opts.bullet } : {}),
   ...(opts.numbering ? { numbering: opts.numbering } : {}),
   ...(opts.indent ? { indent: opts.indent } : {}),
+  ...(opts.keepNext ? { keepNext: true } : {}),
 });
 
 /* ---------- tablas ---------- */
@@ -86,12 +89,20 @@ function buildTable(rows, colPct) {
   // corrige el redondeo en la última columna
   widths[nCols - 1] += CONTENT_W - widths.reduce((a, b) => a + b, 0);
 
+  // Si la primera fila viene vacía (| | |) la tabla es sin encabezado:
+  // se usa para fichas de datos tipo «rótulo | valor».
+  const headless = rows[0].every((c) => c === '');
   const body = rows.slice(2); // saltea la fila de guiones
 
-  // en columnas angostas justificar deja ríos horribles: solo se justifica
-  // el texto de las columnas anchas
-  const JUSTIFY_MIN = 22;
-  const mkRow = (cells, head) => new TableRow({
+  // Las celdas van siempre alineadas a la izquierda. Justificar dentro de una
+  // columna angosta abre ríos de espacio y queda peor que la bandera.
+  // Una tabla corta no debería partirse entre páginas: keepNext en todas las
+  // filas menos la última la mantiene entera.
+  const keepWhole = rows.length <= 7;
+  const lastIdx = rows.length - 1;
+  const firstCol = 0;
+
+  const mkRow = (cells, head, rowIdx) => new TableRow({
     tableHeader: head,
     cantSplit: true,
     children: cells.map((c, idx) => new TableCell({
@@ -100,9 +111,13 @@ function buildTable(rows, colPct) {
       shading: head ? { type: ShadingType.CLEAR, color: 'auto', fill: HEAD_FILL } : undefined,
       margins: { top: 90, bottom: 90, left: 120, right: 120 },
       children: [new Paragraph({
-        children: runs(c, { size: TBL, ...(head ? { bold: true } : {}), ...warn(c) }),
-        alignment: (!head && pct[idx] >= JUSTIFY_MIN)
-          ? AlignmentType.JUSTIFIED : AlignmentType.LEFT,
+        children: runs(c, {
+          size: TBL,
+          ...((head || (headless && idx === firstCol)) ? { bold: true } : {}),
+          ...warn(c),
+        }),
+        alignment: AlignmentType.LEFT,
+        keepNext: keepWhole && rowIdx < lastIdx,
         spacing: { before: 0, after: 0, line: 252 },
       })],
     })),
@@ -117,7 +132,9 @@ function buildTable(rows, colPct) {
       left: line(GRID_V, 2), right: line(GRID_V, 2),
       insideHorizontal: line(GRID_H, 2), insideVertical: line(GRID_V, 2),
     },
-    rows: [mkRow(rows[0], true), ...body.map((r) => mkRow(r, false))],
+    rows: headless
+      ? body.map((r, k) => mkRow(r, false, k + 2))
+      : [mkRow(rows[0], true, 0), ...body.map((r, k) => mkRow(r, false, k + 2))],
   });
 }
 
@@ -132,10 +149,10 @@ function heading(level, text) {
       heading: isTitle ? HeadingLevel.TITLE : HeadingLevel.HEADING_1,
       alignment: AlignmentType.CENTER,
       keepNext: true,
-      spacing: { before: isTitle ? 0 : 560, after: 260 },
+      spacing: { before: isTitle ? 0 : 380, after: 220 },
       children: [new TextRun({
         text: clean.toUpperCase(), font: FONT, bold: true,
-        size: isTitle ? 30 : 25, color: INK, characterSpacing: 30,
+        size: isTitle ? 30 : 25, color: INK, characterSpacing: 30, language: LANG,
       })],
     });
   }
@@ -143,10 +160,10 @@ function heading(level, text) {
     return new Paragraph({
       heading: HeadingLevel.HEADING_2,
       keepNext: true,
-      spacing: { before: 400, after: 140 },
+      spacing: { before: 300, after: 120 },
       children: [new TextRun({
         text: clean.toUpperCase(), font: FONT, bold: true,
-        size: 21, color: INK, characterSpacing: 18,
+        size: 21, color: INK, characterSpacing: 18, language: LANG,
       })],
     });
   }
@@ -154,7 +171,7 @@ function heading(level, text) {
     heading: HeadingLevel.HEADING_3,
     keepNext: true,
     spacing: { before: 280, after: 110 },
-    children: [new TextRun({ text: clean, font: FONT, bold: true, size: 22, color: INK })],
+    children: [new TextRun({ text: clean, font: FONT, bold: true, size: 22, color: INK, language: LANG })],
   });
 }
 
@@ -165,6 +182,9 @@ const lines = (start >= 0 ? src.slice(start + 1) : src).split('\n');
 
 const children = [];
 let pendingCols = null;
+let olInstance = 0;    // una instancia por lista, si no la numeración se encadena
+let lastWasOl = false;
+let lastHeadingLvl = 0;   // para detectar el subtítulo del documento
 let i = 0;
 
 while (i < lines.length) {
@@ -179,7 +199,7 @@ while (i < lines.length) {
   if (trimmed.startsWith('<!--')) { i++; continue; }
 
   if (trimmed === '---') {
-    children.push(new Paragraph({ text: '', spacing: { before: 0, after: 260 } }));
+    children.push(new Paragraph({ text: '', spacing: { before: 0, after: 160 } }));
     i++; continue;
   }
 
@@ -191,12 +211,16 @@ while (i < lines.length) {
     }
     children.push(buildTable(rows, pendingCols));
     pendingCols = null;
-    children.push(new Paragraph({ text: '', spacing: { after: 200 } }));
+    children.push(new Paragraph({ text: '', spacing: { after: 160 } }));
     continue;
   }
 
   const h = line0.match(/^(#{1,4})\s+(.*)$/);
-  if (h) { children.push(heading(h[1].length, h[2])); i++; continue; }
+  if (h) {
+    children.push(heading(h[1].length, h[2]));
+    lastHeadingLvl = h[1].length;
+    i++; continue;
+  }
 
   if (trimmed.startsWith('>')) {
     const buf = [];
@@ -222,10 +246,16 @@ while (i < lines.length) {
   }
 
   const ol = trimmed.match(/^(\d+)\.\s+(.*)$/);
+  if (!ol) lastWasOl = false;
   if (ol) {
     const buf = [ol[2]]; i++;
     while (i < lines.length && /^\s{2,}\S/.test(lines[i]) && lines[i].trim()) { buf.push(lines[i].trim()); i++; }
-    children.push(para(buf.join(' '), { numbering: { reference: 'ol', level: 0 }, spacing: { after: 100, line: 276 } }));
+    if (!lastWasOl) olInstance += 1;
+    children.push(para(buf.join(' '), {
+      numbering: { reference: 'ol', level: 0, instance: olInstance },
+      spacing: { after: 100, line: 276 },
+    }));
+    lastWasOl = true;
     continue;
   }
 
@@ -234,12 +264,20 @@ while (i < lines.length) {
          && !/^([-*]\s|>|#{1,4}\s|\||\d+\.\s|---$|<!--)/.test(lines[i].trim())) {
     buf.push(lines[i].trim()); i++;
   }
-  children.push(para(buf.join(' ')));
+  const txt = buf.join(' ');
+  // párrafo enteramente en negrita justo debajo del título → subtítulo centrado
+  const isSubtitle = lastHeadingLvl <= 2 && /^\*\*[^*]+\*\*$/.test(txt);
+  // renglones de formulario ("Nombre: ____"): no deben quedar separados
+  const isFormField = /_{5,}/.test(txt);
+  lastHeadingLvl = 0;
+  children.push(para(txt, isSubtitle
+    ? { alignment: AlignmentType.CENTER, spacing: { after: 260, line: 288 } }
+    : (isFormField ? { alignment: AlignmentType.LEFT, keepNext: true } : {})));
 }
 
 /* ---------- documento ---------- */
 const doc = new Document({
-  hyphenation: { autoHyphenation: true },
+  hyphenation: { autoHyphenation: true, doNotHyphenateCaps: true, consecutiveHyphenLimit: 2 },
   numbering: {
     config: [{
       reference: 'ol',
@@ -249,7 +287,7 @@ const doc = new Document({
       }],
     }],
   },
-  styles: { default: { document: { run: { font: FONT, size: BODY, color: INK } } } },
+  styles: { default: { document: { run: { font: FONT, size: BODY, color: INK, language: LANG } } } },
   sections: [{
     properties: {
       page: {
@@ -273,7 +311,18 @@ const doc = new Document({
   }],
 });
 
-Packer.toBuffer(doc).then((buf) => {
-  fs.writeFileSync(outPath, buf);
-  console.log(`Escrito: ${outPath} (${buf.length} bytes)`);
-});
+const JSZip = require('jszip');
+
+Packer.toBuffer(doc)
+  .then((buf) => JSZip.loadAsync(buf))
+  .then(async (zip) => {
+    const xml = await zip.file('word/document.xml').async('string');
+    let n = 0;
+    const fixed = xml.replace(/<w:tc>[\s\S]*?<\/w:tc>/g, (tc) =>
+      tc.replace(/<w:spacing /g, () => { n += 1; return '<w:suppressAutoHyphens/><w:spacing '; }));
+    zip.file('word/document.xml', fixed);
+    const out = await zip.generateAsync({ type: 'nodebuffer', compression: 'DEFLATE' });
+    fs.writeFileSync(outPath, out);
+    console.log(`Escrito: ${outPath} (${out.length} bytes) · sin partición en ${n} celdas`);
+  })
+  .catch((e) => { console.error('Error:', e.message); process.exit(1); });
