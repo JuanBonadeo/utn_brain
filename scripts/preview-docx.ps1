@@ -9,7 +9,7 @@ $ErrorActionPreference = 'Stop'
 $In = (Resolve-Path $In).Path
 New-Item -ItemType Directory -Force -Path $Out | Out-Null
 $base = [System.IO.Path]::GetFileNameWithoutExtension($In)
-$pdf  = Join-Path $Out "$base.pdf"
+$pdf  = [string](Join-Path $Out "$base.pdf")   # [string] explicito: SaveAs no acepta el PSObject de Join-Path
 
 # Word en vez de LibreOffice: es lo que suele estar instalado en Windows.
 $word = New-Object -ComObject Word.Application
@@ -26,7 +26,7 @@ try {
 }
 
 # pymupdf vive en el venv del proyecto
-$py = Join-Path $PSScriptRoot "..\.venv\Scripts\python.exe"
+$py = [string](Join-Path $PSScriptRoot "..\.venv\Scripts\python.exe")
 & $py -c @"
 import sys, pymupdf
 pdf, out, base = sys.argv[1], sys.argv[2], sys.argv[3]

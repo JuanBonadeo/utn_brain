@@ -25,7 +25,7 @@
 
 ## ACTA DEL PROYECTO
 
-**Implementación de la Plataforma de Gestión de Órdenes de Trabajo de Campo (OT-Campo) para el proceso de instalación de internet con fibra óptica**
+**Implementar una plataforma de gestión de órdenes de trabajo con aplicación móvil de campo para resolver trazabilidad, priorización y control de competencias técnicas en instalaciones de fibra óptica**
 
 ---
 

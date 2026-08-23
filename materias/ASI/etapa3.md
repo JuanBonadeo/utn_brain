@@ -208,11 +208,105 @@ Se adopta un **ciclo de vida híbrido**.
 
 ### 4.3 Estructura de Desglose de Trabajo (EDT)
 
-*En elaboración.* Se descompone cada una de las once fases hasta el nivel de paquete de trabajo, con identificador, actividad, predecesora, duración estimada, perfil responsable y entregable verificable, en el formato que fija la cátedra. El diseño contempla desde el inicio el solapamiento de actividades que compiten por un mismo perfil, requisito para el aplanamiento de recursos del punto 10.
+La estructura se descompone en once paquetes de primer nivel, correspondientes a las fases, y cuarenta y seis paquetes de trabajo. Cada paquete se define hasta el nivel que permite asignar un responsable, estimar una duración y verificar un entregable, según el criterio fijado por la cátedra.
+
+**Perfiles asignados.** Se identifican con la sigla que se utiliza en la columna correspondiente:
+
+<!-- cols: 10,32,58 -->
+
+| Sigla | Perfil | Alcance de su intervención |
+|---|---|---|
+| JP | Jefe de Proyecto | Coordinación de alcance, tiempo, costo y comunicación; contratación y cierre |
+| AF | Analista funcional | Relevamiento, requerimientos, validación con usuarios y acompañamiento de la configuración |
+| EI | Especialista de integraciones | Interfaces con SGOT, CRM, base de datos, NMS y sistema de stock; migración de datos |
+| ES | Especialista de seguridad | Requerimientos de seguridad, autenticación, privilegios y pruebas de seguridad |
+| CP | Consultor de la plataforma | Configuración de la plataforma contratada; provisto por el proveedor |
+| UX | Diseñador de experiencia de uso | Diseño y validación de la aplicación de campo con los técnicos |
+| QA | Responsable de pruebas | Diseño y ejecución del plan de pruebas |
+| CA | Capacitador | Material de capacitación y dictado |
+| RO | Referente de operaciones | Conocimiento del proceso, datos maestros, piloto y despliegue |
+
+**Estructura de desglose.** Las duraciones se expresan en días hábiles.
+
+<!-- cols: 7,36,11,9,12,25 -->
+
+| ID | Paquete de trabajo | Pred. | Dur. | Perfil | Entregable |
+|---|---|---|---|---|---|
+| **1** | **Inicio** | | | | |
+| 1.1 | Elaborar el Acta de Proyecto | — | 3 | JP | Acta de Proyecto aprobada |
+| 1.2 | Conformar el equipo y asignar dedicaciones | 1.1 | 2 | JP | Matriz de asignación de recursos |
+| 1.3 | Realizar la reunión de arranque | 1.2 | 1 | JP | Minuta de inicio |
+| **2** | **Relevamiento y análisis** | | | | |
+| 2.1 | Relevar el proceso actual de despacho y ejecución de órdenes | 1.3 | 8 | AF, RO | Documento del proceso actual |
+| 2.2 | Especificar los requerimientos funcionales | 2.1 | 10 | AF | Documento de requerimientos |
+| 2.3 | Especificar los requerimientos de integración | 2.1 | 6 | EI | Especificación de interfaces |
+| 2.4 | Medir las líneas base de los objetivos O1 a O4 | 2.1 | 15 | AF, RO | Informe de línea base |
+| 2.5 | Especificar los requerimientos de seguridad y cumplimiento | 2.1 | 5 | ES | Requerimientos de seguridad |
+| 2.6 | Validar los requerimientos con los usuarios clave | 2.2, 2.3, 2.5 | 3 | AF, RO | Requerimientos aprobados |
+| **3** | **Selección de proveedor** | | | | |
+| 3.1 | Elaborar y emitir el RFI | 2.6 | 5 | JP, AF | RFI emitido |
+| 3.2 | Analizar las respuestas y conformar la lista corta | 3.1 | 5 | JP, AF | Lista corta de proveedores |
+| 3.3 | Elaborar y emitir el RFP | 3.2 | 7 | JP, AF, ES | RFP emitido |
+| 3.4 | Evaluar las propuestas técnicas y económicas | 3.3 | 8 | JP, AF, EI, ES | Cuadro comparativo de propuestas |
+| 3.5 | Negociar y firmar el contrato | 3.4 | 6 | JP | Contrato firmado |
+| **4** | **Diseño y configuración** | | | | |
+| 4.1 | Configurar los flujos de orden de trabajo, estados y roles | 3.5 | 10 | CP, AF | Flujos configurados |
+| 4.2 | Parametrizar la matriz impacto/urgencia y los acuerdos de nivel de servicio | 4.1 | 6 | CP, AF | Motor de priorización operativo |
+| 4.3 | Configurar el motor de asignación por competencia, zona, carga y ventana horaria | 4.2 | 8 | CP, AF | Motor de asignación operativo |
+| 4.4 | Relevar y cargar la matriz de competencias por técnico | 3.5 | 7 | RO | Matriz de competencias cargada |
+| 4.5 | Diseñar y validar la experiencia de uso de la aplicación de campo | 3.5 | 8 | UX | Prototipo validado con técnicos |
+| 4.6 | Configurar la aplicación de campo según el diseño validado | 4.3, 4.5 | 8 | CP, UX | Aplicación de campo configurada |
+| 4.7 | Configurar los tableros de indicadores | 4.2 | 4 | CP | Tableros operativos |
+| **5** | **Integración y seguridad** | | | | |
+| 5.1 | Integrar con el sistema de gestión de órdenes de trabajo | 4.1 | 10 | EI | Integración operativa |
+| 5.2 | Integrar con el CRM | 5.1 | 8 | EI | Integración operativa |
+| 5.3 | Integrar con la base de datos de clientes y órdenes | 5.2 | 6 | EI | Integración operativa |
+| 5.4 | Integrar con el sistema de monitoreo de red | 5.3 | 5 | EI | Integración operativa |
+| 5.5 | Implementar el inicio de sesión único y el doble factor | 3.5 | 6 | ES | Autenticación operativa |
+| 5.6 | Implementar el mínimo privilegio y la baja automática de credenciales | 5.5 | 8 | ES, EI | Control de accesos operativo |
+| **6** | **Migración de datos** | | | | |
+| 6.1 | Migrar las órdenes de trabajo abiertas | 5.3 | 4 | EI | Órdenes migradas |
+| 6.2 | Cargar el padrón de técnicos y los datos maestros | 4.4 | 3 | RO | Datos maestros cargados |
+| **7** | **Pruebas** | | | | |
+| 7.1 | Diseñar el plan y los casos de prueba | 2.6 | 6 | QA | Plan de pruebas |
+| 7.2 | Ejecutar las pruebas funcionales | 4.6, 4.7, 7.1 | 8 | QA, AF | Informe de pruebas funcionales |
+| 7.3 | Ejecutar las pruebas de integración | 5.4, 6.1, 7.1 | 6 | QA, EI | Informe de pruebas de integración |
+| 7.4 | Ejecutar las pruebas de carga | 7.3 | 4 | QA | Informe de pruebas de carga |
+| 7.5 | Ejecutar las pruebas de seguridad | 5.6, 7.1 | 5 | ES, QA | Informe de pruebas de seguridad |
+| 7.6 | Corregir las observaciones y volver a probar | 7.2, 7.4, 7.5 | 6 | CP, EI | Observaciones cerradas |
+| **8** | **Piloto** | | | | |
+| 8.1 | Preparar el piloto: zona, técnicos y dispositivos | 7.6 | 4 | JP, RO | Piloto preparado |
+| 8.2 | Ejecutar el piloto en zona acotada | 8.1, 6.2 | 15 | RO, CP | Piloto en operación |
+| 8.3 | Ajustar las reglas de asignación y la experiencia de uso | 8.2 | 8 | CP, UX | Ajustes aplicados |
+| 8.4 | Elaborar el informe de piloto y decidir el avance | 8.3 | 2 | JP | Informe de piloto aprobado |
+| **9** | **Capacitación** | | | | |
+| 9.1 | Elaborar el material de capacitación | 7.2 | 8 | CA, AF | Material de capacitación |
+| 9.2 | Capacitar a supervisores, despacho y NOC | 8.4, 9.1 | 4 | CA | Personal de gestión capacitado |
+| 9.3 | Capacitar a los técnicos de campo por olas | 9.2 | 10 | CA | Técnicos capacitados |
+| 9.4 | Evaluar la capacitación | 9.3 | 3 | CA | Evaluaciones registradas |
+| **10** | **Despliegue por olas** | | | | |
+| 10.1 | Desplegar la ola 1 | 9.2 | 6 | CP, RO | Ola 1 en producción |
+| 10.2 | Desplegar la ola 2 | 10.1 | 6 | CP, RO | Ola 2 en producción |
+| 10.3 | Desplegar la ola 3 | 10.2 | 6 | CP, RO | Ola 3 en producción |
+| **11** | **Estabilización y cierre** | | | | |
+| 11.1 | Acompañar la operación en período de estabilización | 10.3 | 15 | CP, RO | Operación estabilizada |
+| 11.2 | Dar de alta el elemento de configuración en la CMDB y cerrar el cambio ante el CAB | 10.3 | 3 | EI | Elemento de configuración registrado |
+| 11.3 | Transferir a operación y documentar | 11.1 | 5 | JP, AF | Documentación de traspaso |
+| 11.4 | Elaborar el acta de cierre y las lecciones aprendidas | 11.2, 11.3 | 3 | JP | Acta de cierre |
+
+**Solapamientos previstos.** La estructura contempla deliberadamente actividades concurrentes que comparten un mismo perfil. Son el insumo del análisis de sobreasignación y del aplanamiento de recursos del punto 10:
+
+- **Analista funcional.** Los paquetes 2.2, 2.3 y 2.4 arrancan simultáneamente al terminar 2.1, y el analista participa de 2.2 y 2.4 a la vez. La medición de la línea base (2.4) es además la actividad más larga de la fase.
+- **Especialista de integraciones.** Los paquetes 5.1 a 5.4 se planifican encadenados sobre un único especialista, mientras 5.6 y 6.1 lo requieren en la misma ventana. Es el conflicto de mayor impacto sobre la duración total.
+- **Especialista de seguridad.** Interviene en 3.3 y 3.4 durante la selección del proveedor, y en 5.5 y 5.6 durante la implementación, con solapamiento sobre el cierre de la fase 3.
+- **Consultor de la plataforma.** Los paquetes 4.6, 4.7 y 5.1 comparten ventana temporal, y más adelante 8.3, 10.1 y 11.1 vuelven a concentrarse sobre el mismo perfil.
+- **Referente de operaciones.** Participa de 2.1 y 2.4 en el relevamiento y de 4.4 durante la configuración, además del piloto y las tres olas de despliegue.
+
+**Criterio de descomposición.** No se descompone por debajo del nivel en que un paquete tiene un único entregable verificable y un responsable identificable. Los paquetes de las fases 9 y 10 se abren por ola de despliegue porque cada una constituye una entrega con valor propio y admite decisión de avance o retroceso.
 
 ### 4.4 Acta de Proyecto
 
-Se adjunta como **Anexo I**, confeccionada según la plantilla de la cátedra.
+Se incluye como **Anexo I** al final de este documento, confeccionada según la plantilla de la cátedra.
 
 ---
 
@@ -261,3 +355,254 @@ Se adjunta como **Anexo I**, confeccionada según la plantilla de la cátedra.
 ## 12. ANÁLISIS DE FACTIBILIDAD
 
 *En elaboración.* Factibilidad técnica, económica y legal. La factibilidad legal es la de mayor peso en este proyecto: el tratamiento de datos personales de clientes en una plataforma contratada como servicio activa la Ley 25.326 en materia de transferencia internacional de datos, figura del encargado de tratamiento, medidas de seguridad exigibles y obligación de notificación ante brecha, en concurrencia con la Ley 27.078 y las normativas de calidad de servicio del ENACOM.
+
+---
+
+## ANEXO I — ACTA DE PROYECTO
+
+### ACTA DEL PROYECTO
+
+**Implementar una plataforma de gestión de órdenes de trabajo con aplicación móvil de campo para resolver trazabilidad, priorización y control de competencias técnicas en instalaciones de fibra óptica**
+
+---
+
+#### DE
+
+**Gerencia de Operaciones** — Personal (Telecom Argentina)
+
+*Patrocinador del proyecto. Es el área titular del proceso crítico afectado y de
+los objetivos de negocio que el proyecto compromete.*
+
+#### PARA
+
+Integrantes de las áreas de la organización que deben tomar conocimiento del proyecto:
+
+- Gerencia de Operaciones — Supervisión de Instalaciones
+- Gerencia de Tecnología y Sistemas — Desarrollo, Infraestructura y Seguridad de la Información
+- Centro de Operaciones de Red (NOC)
+- Gerencia Comercial — Atención al Cliente
+- Logística y Almacenes
+- Compras y Abastecimiento
+- Recursos Humanos
+- Servicio de Higiene y Seguridad Laboral
+
+Y el equipo del proyecto, inicialmente conformado por las personas indicadas en
+el apartado DESIGNACIÓN.
+
+#### DESIGNACIÓN
+
+El patrocinador designa los siguientes roles para la ejecución del proyecto:
+
+<!-- cols: 44,56 -->
+
+| Rol designado | Área de procedencia |
+|---|---|
+| Director de Proyecto | Gerencia de Tecnología y Sistemas |
+| Arquitecto de Software / Líder Técnico | Gerencia de Tecnología y Sistemas — Desarrollo |
+| Analista Funcional | Gerencia de Tecnología y Sistemas — Desarrollo |
+| Responsable de Seguridad de la Información | Gerencia de Tecnología y Sistemas — Seguridad de la Información |
+| Referente de Operaciones | Gerencia de Operaciones — Supervisión de Instalaciones |
+
+El resto del equipo —desarrollo, experiencia de usuario, datos, pruebas,
+infraestructura y capacitación— es conformado por el Director de Proyecto según
+los perfiles y competencias descriptos en el punto 5 de esta etapa.
+
+#### DESCRIPCIÓN DE SU RESPONSABILIDAD
+
+**Director de Proyecto.** Dirigir el proyecto y **conformar el equipo que lo
+llevará adelante**: desarrollo, diseño de experiencia de usuario, datos, pruebas,
+infraestructura y capacitación. Los perfiles y competencias de ese equipo se
+detallan en el punto 5 de esta etapa. Es responsable de la planificación, del
+cumplimiento del cronograma, del presupuesto aprobado, de la gestión de riesgos y
+de las comunicaciones con el patrocinador y las áreas involucradas. Responde por
+la entrega de los entregables comprometidos en este Acta.
+
+**Arquitecto de Software / Líder Técnico.** Definir la arquitectura de la
+plataforma y de las integraciones con SGOT, CRM, la base de datos de clientes y
+órdenes de trabajo, y el sistema de gestión de red (NMS). Conducir técnicamente al
+equipo de desarrollo que designe el Director de Proyecto y responder por la
+calidad técnica de los entregables.
+
+**Analista Funcional.** Relevar y validar los requerimientos con Supervisión de
+Instalaciones, técnicos de campo, NOC y Logística. Responsable de la **medición
+de las líneas base** de los indicadores comprometidos en los objetivos, y de la
+definición de las reglas de priorización y del motor de asignación.
+
+**Responsable de Seguridad de la Información.** Definir e implementar los
+controles de acceso, autenticación y auditoría de la plataforma, incluida la
+baja automática de credenciales integrada con Recursos Humanos. Verificar el
+cumplimiento de la Ley 25.326 de Protección de Datos Personales sobre los datos
+de clientes que la aplicación de campo trata.
+
+**Referente de Operaciones.** Ser el nexo entre el equipo del proyecto y la
+operación. Facilitar el acceso a la información del proceso, a los técnicos y a
+las zonas de trabajo; coordinar el piloto y validar funcionalmente los
+entregables antes de su aceptación.
+
+#### DESCRIPCIÓN DE SU AUTORIDAD
+
+**Director de Proyecto.** Tiene autoridad para asignar trabajo dentro del equipo
+del proyecto, coordinar con las áreas involucradas y con proveedores, y validar
+entregables intermedios. Puede aprobar cambios que **no afecten** el alcance, el
+costo total ni la fecha de finalización comprometidos en este Acta; todo cambio
+que afecte alguno de esos tres factores debe elevarse al patrocinador para su
+aprobación. Tiene autoridad para acceder a las instalaciones de la organización
+en horario de funcionamiento y, cuando el proyecto lo requiera, fuera de él,
+coordinando previamente con el Referente de Operaciones.
+
+**Arquitecto de Software / Líder Técnico.** Tiene autoridad para definir la
+arquitectura técnica y aprobar o rechazar diseños de integración. Las decisiones
+que impliquen modificar los sistemas existentes (SGOT, CRM, NMS) requieren
+acuerdo previo del área propietaria de cada sistema.
+
+**Analista Funcional.** Tiene autoridad para convocar a usuarios clave de
+Operaciones, NOC y Logística a instancias de relevamiento y validación, dentro
+de la disponibilidad acordada con cada área.
+
+**Responsable de Seguridad de la Información.** Tiene autoridad para **bloquear
+la puesta en producción** de cualquier componente que no cumpla las políticas de
+seguridad de la organización o la normativa de protección de datos personales.
+Esta decisión solo puede ser revertida por la Gerencia de Tecnología y Sistemas.
+
+**Referente de Operaciones.** Tiene autoridad para autorizar el ingreso del
+equipo del proyecto a las zonas operativas y para definir, junto con Supervisión
+de Instalaciones, la zona y el momento del piloto.
+
+⚠ *Autoridad de compra: el Director de Proyecto puede aprobar adquisiciones
+hasta el monto fijado por la política de compras vigente de la organización;
+para excederlo debe solicitar autorización a la Gerencia de Administración y
+Finanzas.* **(Completar con el monto real si el grupo lo define. Este es el
+campo donde el ejemplo de cátedra es más concreto — conviene no dejarlo genérico.)**
+
+---
+
+### ALCANCE DEL PROYECTO
+
+#### Justificación
+
+El proceso de instalación de internet con fibra óptica, relevado y modelado en
+la Etapa 1 de este trabajo, presenta tres debilidades que fueron identificadas y
+documentadas en las etapas anteriores y que hoy no tienen tratamiento:
+
+1. **Falta de trazabilidad de la orden de trabajo.** El estado real de la
+   instalación no está disponible en tiempo real para las áreas que lo
+   necesitan, lo que genera reclamos duplicados y consultas manuales entre
+   Operaciones, NOC y el área Comercial.
+
+2. **Ausencia de criterio de priorización en la cola de órdenes de trabajo.**
+   Identificado en la Etapa 2 como riesgo **R07**, valorado en severidad 12 y
+   **sin plan de tratamiento**.
+
+3. **Falta de control de competencias técnicas al asignar una orden.**
+   Identificado en la Etapa 2 como riesgo **R04** — técnico sin capacitación en
+   el nuevo modelo de ONT —, valorado en severidad 12 y **también sin plan de
+   tratamiento**.
+
+Este proyecto constituye el tratamiento de los riesgos R04 y R07, cubriendo un
+hueco de la etapa anterior, y contribuye adicionalmente a la mitigación de R06
+(ausencia de flujo de escalamiento en el CRM) al eliminar aguas arriba la causa
+de los reclamos duplicados, y de R05 (credenciales de contratistas sin baja),
+dado que la aplicación de campo es el control ya comprometido en la Etapa 2 para
+que los técnicos contratistas operen sin acceso a los sistemas de backend.
+
+Asimismo, el proyecto da cumplimiento al **objetivo de TI ya definido por la
+organización en la Etapa 1** — *implementar una aplicación de gestión para
+técnicos de campo que permita aumentar la productividad operativa en un 5%* — y
+a la meta de TI *Asignación Optimizada de Técnicos*, ambos alineados con el
+objetivo de negocio de *aumentar el rendimiento de los técnicos en un 5%,
+medido como instalaciones sobre horas de trabajo*.
+
+#### Producto
+
+**Plataforma de gestión de órdenes de trabajo con aplicación móvil de campo**:
+solución de mercado de *Field Service Management*, contratada como servicio,
+configurada e integrada con los sistemas existentes y en producción, que gestiona
+el ciclo completo de la orden de trabajo de instalación de fibra óptica, desde el
+despacho hasta el cierre con conformidad del cliente.
+
+Comprende seis componentes:
+
+1. Módulo de despacho y priorización, con cola única alimentada por CRM, SGOT y
+   excepciones del NMS, cronómetro de SLA y escalamiento.
+2. Motor de asignación por competencia certificada, zona o nodo, carga del día,
+   ventana horaria y stock del vehículo.
+3. Aplicación móvil de campo *offline-first* del proveedor, configurada con
+   agenda, ficha de orden de trabajo, checklist por modelo de ONT, registro de
+   mediciones ópticas, evidencia fotográfica, geolocalización, consumo de
+   materiales, tipificación obligatoria del motivo cuando la visita no se
+   completa y conformidad del cliente con firma digital.
+4. Integraciones con SGOT, CRM, base de datos de clientes y órdenes de trabajo,
+   NMS y sistema de stock.
+5. Capa de seguridad: inicio de sesión único con doble factor, mínimo
+   privilegio, baja automática de credenciales integrada con Recursos Humanos y
+   registro de auditoría.
+6. Tablero de indicadores para Supervisión y Gerencia de Operaciones.
+
+Los componentes 1, 2, 3 y 6 se obtienen configurando la plataforma contratada;
+los componentes 4 y 5 —integraciones y capa de seguridad— se construyen sobre
+la infraestructura de la organización.
+
+#### Entregables
+
+Primera aproximación de la Estructura de Desglose de Trabajo, con los
+entregables principales por fase:
+
+<!-- cols: 30,70 -->
+
+| Fase | Entregable principal |
+|---|---|
+| 1. Inicio | Acta de Proyecto aprobada |
+| 2. Relevamiento y análisis | Documento de requerimientos validado y **medición de las líneas base** de los indicadores |
+| 3. Selección de proveedor | RFI, lista corta, RFP evaluado y contrato firmado |
+| 4. Diseño y configuración | Plataforma configurada: flujos, roles, matriz de competencias, reglas de priorización, SLA y tableros |
+| 5. Integración y seguridad | Integraciones operativas y controles de seguridad implementados |
+| 6. Migración de datos | Matriz de competencias y datos maestros cargados |
+| 7. Pruebas | Informe de pruebas funcionales, de integración y de seguridad |
+| 8. Piloto | Informe de piloto en zona acotada, con ajustes aplicados |
+| 9. Capacitación | Técnicos, supervisores y despachantes capacitados |
+| 10. Despliegue por olas | Plataforma en producción en todas las zonas |
+| 11. Estabilización y cierre | Documentación, transferencia operativa, alta del elemento de configuración en la CMDB y cierre formal |
+
+#### Objetivos
+
+<!-- cols: 5,22,27,16,13,17 -->
+
+| # | Objetivo | Indicador | Línea base | Meta | Plazo |
+|---|---|---|---|---|---|
+| O1 | Aumentar la productividad del técnico de campo | Instalaciones finalizadas conformes ÷ horas-técnico disponibles | 0,50 inst./hora-técnico *(supuesto)* | 0,525 (+5%) | 6 meses desde la puesta en producción |
+| O2 | Reducir la latencia de registro del cierre de la orden de trabajo | % de órdenes cerradas en el sistema dentro de los 15 minutos de terminada la visita, y tiempo medio entre asignación y cierre | 20% · 26 h *(supuesto)* | ≥90% · ≤8 h | Mes 4, sostenido 3 meses |
+| O3 | Reducir las visitas fallidas por causa evitable | Órdenes reprogramadas por "técnico sin competencia" o "kit incompleto" ÷ órdenes despachadas | 12% *(supuesto)* | ≤6% | 6 meses desde la puesta en producción |
+| O4 | Asegurar el cumplimiento de la priorización de la cola | % de órdenes despachadas según el orden del motor de priorización, y % de cumplimiento del SLA de primera respuesta | No medible en la situación actual — esa imposibilidad **es** la definición del riesgo R07 | ≥95% · ≥90% | Mes 3 desde la puesta en producción |
+
+> **Sobre las líneas base.** Los valores indicados como *supuesto* son
+> estimaciones: las Etapas 1 y 2 de este trabajo no relevaron indicadores de
+> operación. Su medición formal constituye un entregable propio de la fase 2
+> (Relevamiento y análisis), y las metas se recalibrarán sobre los valores
+> reales medidos.
+
+#### Límite
+
+El proyecto **no incluye**:
+
+- El rediseño del flujo de escalamiento del CRM (riesgo R06), que cuenta con
+  plan de tratamiento propio en la Etapa 2.
+- El reemplazo o la migración del CRM, del SGOT o de la base de datos de
+  clientes y órdenes de trabajo.
+- Obra civil, tendido troncal, ampliación de nodos (riesgo R11) y mantenimiento
+  preventivo del cable (riesgo R08).
+- El reemplazo del firewall (riesgo R03), la redundancia del balanceador de
+  carga (riesgo R09) y la correlación de eventos del NMS (riesgo R10).
+- Los procesos de venta, facturación y recupero de clientes.
+- Otros procesos de campo distintos de la instalación: reparaciones, mudanzas y
+  desinstalaciones.
+- La adquisición de vehículos y fusionadoras de fibra óptica.
+- Las actividades 1 y 2 del proceso modelado en la Etapa 1 —recepción de la
+  solicitud y verificación de cobertura—, que continúan gestionándose en el CRM.
+
+---
+
+#### Firma Autorizante
+
+Nombre: _______________________________________________
+
+Título: _______________________________________________
