@@ -15,8 +15,108 @@
 11. Unidad 11 — Gestión de stocks _(sin desarrollar)_
 12. Unidad 12 — Programación no lineal _(sin desarrollar)_
 
-> **Primer parcial:** entra de la Unidad 1 a la 5 inclusive (según el alcance del
-> resumen de primer parcial, que cierra en Dualidad).
+> **Primer parcial:** entra de la Unidad 1 a la 5 inclusive. Confirmado contra el
+> parcial del **26/07/2025** (`fuentes/IO/parciales/2025-07-26/`), cuyos puntos fueron:
+> método gráfico y tipos de solución · restricciones activas/pasivas · modelización y
+> forma estándar **con M grande** · lectura de tabla óptima (no factible por ficticia en
+> base / no acotada) · Simplex matricial ($B^{-1}$, $Y_j$, $z_j$, $c_j-z_j$) · planteo del
+> **dual** · costos reducidos e interpretación económica · rangos de variación de $c_j$ y $b_i$.
+
+---
+
+## Formato de respuesta de la cátedra
+
+Reconstruido de la resolución del profesor **Vaccaro** del 1º parcial del 26/07/2025.
+Esto no es estilo: es cómo esperan ver escrita la respuesta.
+
+### La solución se escribe como vector columna, y se llama S*
+
+No se escribe `x1 = 40, x2 = 0, …` en línea. Va **vector columna con todas las
+variables**, holguras y ficticias incluidas, en orden $x_1 \dots x_n$; y el funcional
+aparte, abajo, como $z^*$ (max) o $W^*$ (min):
+
+```
+         40
+          0
+S*  =     0
+         50
+          0
+
+W* = 320
+```
+
+Con **soluciones alternativas** va un vector por vértice, subindicado con el nombre del
+punto en el gráfico: $S^*_K$, $S^*_L$.
+
+### Después del vector, la interpretación línea por línea
+
+Formato literal del parcial:
+
+```
+x : cantidad de pizzas Margaritas
+ 1
+x : cantidad de pizzas Napolitanas
+ 2
+x : cantidad de pizzas Fugazzetas
+ 3
+
+Se producen 40 pizzas Margaritas
+No se producen pizzas Napolitanas ni Fugazzetas
+Sobra una capacidad de horno de 50 pizzas diarias
+El costo mínimo diario es de $ 320
+```
+
+El patrón: lo que **sí** se produce → lo que **no** se produce (explícito, no se omite) →
+**la holgura interpretada en unidades del problema** → el funcional con unidad monetaria
+y período.
+
+### Vocabulario de la cátedra
+
+| Ellos dicen | No uses |
+|---|---|
+| **recta de isobeneficio** | recta de nivel |
+| **RF**, y `RF = ∅` para no factible | conjunto factible vacío |
+| **variables ficticias** | variables artificiales |
+| **se cumple con holgura** | está holgada / no se satura |
+
+### Las justificaciones son de una sola oración
+
+Molde: **afirmación + `porque` / `ya que` / `por lo tanto` + el hecho numérico.**
+Citas literales de la resolución:
+
+- "Es activa porque su holgura es cero."
+- "El óptimo se da en un segmento, no en un solo punto."
+- "No satisface todas las restricciones (por ejemplo $2x_1 \geq 4$)."
+- "Reemplazo los puntos L y K en la restricción f y en ambos casos obtengo un número menor a 24, por lo tanto, f se cumple con holgura."
+- "La región factible contiene todos los puntos de su borde o frontera."
+
+### Frases hechas por tipo de solución
+
+```
+UNICA
+  "La solución es única ya que todos los (cj – zj) son nulos para las
+   variables básicas y negativos para las variables no básicas."
+
+ALTERNATIVAS
+  "El óptimo se da en un segmento, no en un solo punto."
+
+NO FACTIBLE
+  "Estoy en el óptimo y hay variables ficticias en la base, por lo tanto,
+   el problema es no factible, es decir, la región factible es nula (RF = ∅)."
+
+NO ACOTADA
+  "No puede salir ninguna variable, por lo tanto, el problema tiene
+   solución no acotada."
+```
+
+> El profesor escribió **en la propia resolución**: *"No confundir región factible no
+> acotada con solución no acotada."* Está señalado a propósito — ese punto se toma.
+
+### Otras convenciones observadas
+
+- Las restricciones se **numeran** `1)`, `2)`, `3)`, y la no negatividad va numerada como una más: `4) x_j ≥ 0`.
+- En problemas de **mínimo** muestran las dos formas lado a lado: `Min w = …` y su equivalente `Max z = – …`.
+- Los rangos de sensibilidad se escriben con el cálculo antes del resultado: `Max(−8/2 ; −4/1) ≤ Δc₃ ≤ ∞` → `−4 ≤ Δc₃ ≤ ∞`, y después la frase de interpretación económica.
 
 ---
 
@@ -175,9 +275,10 @@ El redondeo es aceptable **cuanto más grandes son los valores** de las variable
 
 #### Ejercicios resueltos tipo
 
-##### Tipo A — Modelización + método gráfico (Práctica 1, Ejercicio 1)
+##### Ejercicio 1 — Solución única (Práctica 1)
 
-Taller que fabrica piezas A y B, con tres procesos:
+Taller que fabrica piezas A y B, que pasan por estampado, soldado y pintado. Insumos en
+horas por pieza; disponibilidad semanal; contribución marginal 2 u.m. por A y 3 u.m. por B.
 
 | | Estampado | Soldado | Pintado |
 |---|---|---|---|
@@ -185,64 +286,330 @@ Taller que fabrica piezas A y B, con tres procesos:
 | B | 4 | 4 | 4 |
 | Disponible | 320 | 240 | 560 |
 
-Contribución marginal: 2 u.m. por A, 3 u.m. por B.
+Resuelto en el formato de la cátedra (ver [Formato de respuesta](#formato-de-respuesta-de-la-cátedra)):
 
-**Variables:** $x_1$ = unidades de pieza A por semana; $x_2$ = unidades de pieza B por semana.
+```
+1) VARIABLES DE DECISION
 
-$$\text{Max } z = 2x_1 + 3x_2$$
+   x : cantidad de piezas A a producir por semana
+    1
+   x : cantidad de piezas B a producir por semana
+    2
+
+
+2) MODELO  (forma canonica)
+
+   Max z = 2 x  + 3 x                    (beneficio semanal, en u.m.)
+              1      2
+   SA
+   1)  4 x  + 4 x   <=  320              (estampado, hs/semana)
+          1      2
+   2)  2 x  + 4 x   <=  240              (soldado,   hs/semana)
+          1      2
+   3)  8 x  + 4 x   <=  560              (pintado,   hs/semana)
+          1      2
+   4)  x  >= 0 ;  j = 1, 2
+        j
+
+
+3) FORMA ESTANDAR
+
+   Max z = 2 x  + 3 x  + 0 x  + 0 x  + 0 x
+              1      2      3      4      5
+   SA
+       4 x  + 4 x  + x                 = 320
+          1      2    3
+       2 x  + 4 x       + x            = 240
+          1      2         4
+       8 x  + 4 x            + x       = 560
+          1      2              5
+
+       x  >= 0 ;  j = 1, ... 5
+        j
+
+   Las tres restricciones son del tipo <=, por lo tanto se agregan tres
+   variables de holgura. No se requieren variables ficticias.
+
+
+4) CORTES CON LOS EJES  (ecuacion segmentaria)
+
+   1)   x /80  + x /80  = 1      ->   (80 ; 0)   y  (0 ; 80)
+         1        2
+   2)   x /120 + x /60  = 1      ->   (120 ; 0)  y  (0 ; 60)
+         1        2
+   3)   x /70  + x /140 = 1      ->   (70 ; 0)   y  (0 ; 140)
+         1        2
+
+
+5) GRAFICO
+
+   [ region factible RF sombreada, las tres rectas rotuladas 1), 2) y 3),
+     vector n = (2 ; 3) y la recta de isobeneficio desplazada en ese
+     sentido hasta el ultimo punto de contacto ]
+
+
+6) DETERMINACION DEL OPTIMO
+
+   La recta de isobeneficio toca por ultima vez la RF en el vertice
+   interseccion de 1) y 2):
+
+       4 x  + 4 x  = 320
+          1      2
+       2 x  + 4 x  = 240        resto
+          1      2
+       -------------------
+       2 x         =  80    ->   x  = 40   ->   x  = 40
+          1                       1              2
+
+   Reemplazo en las holguras:
+
+       x  = 320 - [4(40) + 4(40)]  = 320 - 320 =  0
+        3
+       x  = 240 - [2(40) + 4(40)]  = 240 - 240 =  0
+        4
+       x  = 560 - [8(40) + 4(40)]  = 560 - 480 = 80
+        5
+
+
+7) SOLUCION OPTIMA
+
+            40
+            40
+   S*  =     0
+             0
+            80
+
+   z* = 2(40) + 3(40) = 200
+
+
+8) INTERPRETACION
+
+   Se producen 40 piezas A y 40 piezas B por semana.
+   Se agotan las horas disponibles de estampado y de soldado.
+   Sobra una capacidad de 80 horas semanales en pintado.
+   El beneficio maximo semanal es de 200 u.m.
+
+
+9) TIPO DE SOLUCION
+
+   El optimo se da en un solo punto y no en un segmento, por lo tanto la
+   solucion es unica. La RF es acotada y no vacia.
+
+
+10) CLASIFICACION DE LAS RESTRICCIONES
+
+   1) estampado : ACTIVA, porque su holgura es cero (x  = 0).
+                                                     3
+   2) soldado   : ACTIVA, porque su holgura es cero (x  = 0).
+                                                     4
+   3) pintado   : PASIVA, ya que se cumple con holgura (x  = 80).
+                                                        5
+                  Es pasiva NECESARIA: si se suprimiera, el punto (80 ; 0)
+                  pasaria a ser factible y la RF cambiaria.
+```
+
+**Por qué el óptimo cae ahí.** Comparando pendientes: la recta de isobeneficio tiene
+pendiente $-2/3$, estampado $-1$ y soldado $-1/2$. Queda **encajada entre las dos**, así
+que al desplazarla en el sentido de $n$ se traba justo en el vértice donde esas dos se
+cruzan. Este razonamiento resuelve el Ejercicio 3 de antemano: allí $c_2 = 4$, la
+pendiente pasa a $-1/2$ — **idéntica a la de soldado** — y por eso aparecen soluciones
+alternativas sobre ese lado.
+
+**Los vértices de la RF, si se pide el método de los vértices.** Los cortes con los ejes
+salen de la segmentaria y el vértice sobre cada eje es el corte **más chico**
+($\min(80,120,70)=70$ y $\min(80,60,140)=60$); solo los vértices interiores requieren
+resolver un sistema.
+
+| Vértice | Intersección | $z$ |
+|---|---|---|
+| $(0;0)$ | los dos ejes | 0 |
+| $(70;0)$ | pintado ∩ eje $x_1$ | 140 |
+| $(60;20)$ | estampado ∩ pintado | 180 |
+| $(40;40)$ | estampado ∩ soldado | **200** |
+| $(0;60)$ | soldado ∩ eje $x_2$ | 180 |
+
+El cruce soldado ∩ pintado da $(53{,}33;33{,}33)$ pero **se descarta**: estampado da
+$346{,}67 > 320$, o sea cae fuera de la RF.
+
+##### Ejercicio 2 — Restricción de una sola variable y redundancia analítica (Práctica 1)
+
+Paquetes de alimento para aves. Grano I: 480 kg; grano II: 600 kg. Paquete A lleva 2 kg de I
+y 4 de II; paquete B lleva 4 de I y 2 de II. Demanda de A: máximo 150 unidades.
+Beneficio 6 u.m. (A) y 4 u.m. (B). **Pide explícitamente calcular e interpretar las holguras.**
+
+$$\text{Max } z = 6x_1 + 4x_2$$
 $$
 \begin{aligned}
-4x_1 + 4x_2 &\leq 320 \quad \text{(estampado)}\\
-2x_1 + 4x_2 &\leq 240 \quad \text{(soldado)}\\
-8x_1 + 4x_2 &\leq 560 \quad \text{(pintado)}\\
+2x_1 + 4x_2 &\leq 480 &&\text{(grano I)}\\
+4x_1 + 2x_2 &\leq 600 &&\text{(grano II)}\\
+x_1 &\leq 150 &&\text{(demanda máx. de A)}\\
 x_1, x_2 &\geq 0
 \end{aligned}
 $$
 
-Evaluando los vértices de la región factible:
+**Óptimo:** $(120;60)$, $z^* = 960$. $S^* = (120;\,60;\,0;\,0;\,30)^T$.
 
-| Vértice | Origen | $z$ |
-|---|---|---|
-| $(0;60)$ | soldado ∩ eje $x_2$ | 180 |
-| $(40;40)$ | estampado ∩ soldado | **200** |
-| $(60;20)$ | estampado ∩ pintado | 180 |
-| $(70;0)$ | pintado ∩ eje $x_1$ | 140 |
+| Restricción | Uso | Holgura | Clasificación |
+|---|---|---|---|
+| grano I | 480 de 480 | $x_3 = 0$ | **ACTIVA** |
+| grano II | 600 de 600 | $x_4 = 0$ | **ACTIVA** |
+| demanda A | 120 de 150 | $x_5 = 30$ | PASIVA, **redundante analíticamente** |
 
-**Óptimo:** $x_1^* = 40$, $x_2^* = 40$, $z^* = 200$. Estampado y soldado quedan **activas**; pintado queda **pasiva** con holgura $560 - 480 = 80$.
+**Lo que enseña este ejercicio:**
 
-##### Tipo B — El mismo problema con otro $c_j$ (Práctica 1, Ejercicio 3)
+1. **Restricción con una sola variable.** El tope es solo para los paquetes A, así que va $x_1 \leq 150$, **no** $x_1 + x_2 \leq 150$. Gráficamente es una **recta vertical** y **no tiene ecuación segmentaria** — no corta el eje $x_2$. Regla: solo $x_1$ → recta vertical; solo $x_2$ → recta horizontal.
+2. **Redundancia analítica.** Si se suprime $x_1 \leq 150$ la RF **no cambia**: el vértice $(150;0)$ ya lo definen grano II y el eje $x_2 = 0$. De hecho $x_1 = 150$ es combinación lineal de ambas: $\tfrac14(4x_1+2x_2) - \tfrac12(x_2) = x_1$ y $\tfrac14(600) = 150$.
+3. **Vértice degenerado.** En $(150;0)$ concurren **tres** rectas (grano II, demanda y el eje). La solución básica allí es $(150;0;180;0;0)$: solo **dos** componentes no nulas con $m=3$, o sea una **SBF degenerada**.
 
-Mismas restricciones, pero $\text{Max } z = 2x_1 + 4x_2$.
+> El error de tipeo de la resolución oficial: figura $4x_1 + 1x_2 \leq 600$. Por el enunciado va $2x_2$; con ese coeficiente el resultado oficial $(120;60)$ cierra, con el impreso no.
 
-Ahora $(40;40)$ y $(0;60)$ dan **ambos** $z = 240$. La recta de nivel quedó **paralela a la restricción de soldado**. Hay **soluciones alternativas**: todo el segmento entre esos dos vértices es óptimo.
+##### Ejercicio 3 — Soluciones alternativas (Práctica 1)
 
-Las dos soluciones básicas completas (en forma estándar, con $x_3, x_4, x_5$ holguras de estampado, soldado y pintado):
+Mismas restricciones que el Ejercicio 1, pero $\text{Max } z = 2x_1 + 4x_2$.
 
-| | $x_1$ | $x_2$ | $x_3$ | $x_4$ | $x_5$ | $z$ | |
-|---|---|---|---|---|---|---|---|
-| $P_1$ | 40 | 40 | 0 | 0 | 80 | 240 | Básica |
-| $P_2$ | 0 | 60 | 80 | 0 | 320 | 240 | Básica |
-| $\alpha = 0{,}5$ | 20 | 50 | 40 | 0 | 200 | 240 | **No** básica |
+**Detección, por dos vías que se confirman entre sí:**
 
-Cualquier punto intermedio se obtiene con $P = \alpha P_1 + (1-\alpha)P_2$ y sigue valiendo $z = 240$, pero **no es solución básica**.
+```
+POR PENDIENTES
+  recta de isobeneficio  2x1 + 4x2 = z     pendiente = -1/2
+  soldado                2x1 + 4x2 = 240   pendiente = -1/2      IDENTICAS
 
-##### Tipo C — Sistema incompatible (Práctica 1, Ejercicio 4)
+POR VERTICES  (misma RF del ej. 1, nueva FO)
+  (0;0)     z =   0
+  (70;0)    z = 140
+  (60;20)   z = 200
+  (40;40)   z = 240   <-- empate
+  (0;60)    z = 240   <-- empate
+```
 
-Cajas reductoras Z1 y Z2. Recursos: 1.700 kg de hierro, 100 hs de montaje, 70 hs de maquinado, 90 hs de embalaje. Deben producirse **al menos 300 unidades** semanales.
+**Las dos soluciones básicas óptimas:**
 
-Primero **unificar unidades**: los insumos vienen en minutos y los recursos en horas.
+```
+          40                     0
+          40                    60
+S*  =      0          S*  =     80
+  P1       0            P2       0
+          80                   320
+
+     z* = 240                z* = 240
+```
+
+Las holguras de $P_1$ son las mismas del Ejercicio 1: **las holguras no dependen de la
+función objetivo**, solo del punto y de las restricciones.
+
+**Ecuación paramétrica del segmento:**
+
+$$P = \alpha P_1 + (1-\alpha)P_2 \quad\Longrightarrow\quad (x_1;x_2) = (40\alpha\ ;\ 60-20\alpha), \qquad 0 \leq \alpha \leq 1$$
+
+**Básicas vs no básicas.** Con $\alpha = 0{,}5$: $(20;\,50;\,40;\,0;\,200)$ — **cuatro**
+componentes no nulas. Como $m = 3$, una solución básica admite a lo sumo 3, así que los
+puntos interiores del segmento son **óptimos pero NO básicos**. Solo los dos extremos son
+SBF, y por el teorema de equivalencia, puntos extremos.
+
+> Frase de la cátedra para el bloque 9: *"El óptimo se da en un segmento, no en un solo punto."*
+
+##### Ejercicio 4 — Sistema incompatible y trampa de unidades (Práctica 1)
+
+Cajas reductoras Z1 y Z2. Recursos: 1.700 kg de hierro, 100 hs de montaje, 70 hs de
+maquinado, 90 hs de embalaje. **Al menos 300 unidades semanales.**
+Insumos unitarios **en minutos**: Z1 (10 kg, 40, 20, 30) y Z2 (10 kg, 50, 30, 40).
+
+**Primero unificar unidades** — los recursos vienen en horas y los insumos en minutos:
+
+$$100\text{ hs} = 6000\text{ min}, \quad 70\text{ hs} = 4200\text{ min}, \quad 90\text{ hs} = 5400\text{ min}$$
 
 $$
 \begin{aligned}
 10x_1 + 10x_2 &\leq 1700 &&\text{(hierro, kg)}\\
-40x_1 + 50x_2 &\leq 6000 &&\text{(montaje, 100 hs = 6000 min)}\\
-20x_1 + 30x_2 &\leq 4200 &&\text{(maquinado, 70 hs = 4200 min)}\\
-30x_1 + 40x_2 &\leq 5400 &&\text{(embalaje, 90 hs = 5400 min)}\\
-x_1 + x_2 &\geq 300 &&\text{(mínimo de producción)}
+40x_1 + 50x_2 &\leq 6000 &&\text{(montaje, min)}\\
+20x_1 + 30x_2 &\leq 4200 &&\text{(maquinado, min)}\\
+30x_1 + 40x_2 &\leq 5400 &&\text{(embalaje, min)}\\
+x_1 + x_2 &\geq 300 &&\text{(producción mínima, unidades)}
 \end{aligned}
 $$
 
-**El sistema es incompatible.** La forma rápida de demostrarlo sin graficar: de $x_1 + x_2 \geq 300$ y como todos los coeficientes de montaje son $\geq 40$, resulta $40x_1 + 50x_2 \geq 40(x_1+x_2) \geq 12000 > 6000$. Ningún punto satisface las dos a la vez, así que el polígono de soluciones no queda definido.
+**Resolución en una línea, sin graficar.** Dividiendo la restricción de hierro por 10:
+
+$$x_1 + x_2 \leq 170 \qquad\text{contra}\qquad x_1 + x_2 \geq 300$$
+
+El mismo lado izquierdo no puede ser a la vez menor a 170 y mayor a 300.
+
+> **El sistema resulta incompatible.** Ningún conjunto de puntos satisface en forma
+> simultánea a las restricciones definidas. El polígono de soluciones posibles no queda
+> definido. $RF = \emptyset$ → el problema **no tiene solución**.
+
+**Lo que enseña:**
+
+1. **Chequeo dimensional.** `40x1 + 50x2 ≤ 100` tiene minutos a la izquierda y horas a la derecha. Si las unidades no cancelan, el término está mal.
+2. **Primera restricción $\geq$.** "Por lo menos" → $\geq$, se **resta** una variable de **exceso** (no se suma holgura), y su semiplano es el que **no** contiene al origen.
+3. **La alarma de escala.** Si una segmentaria da un corte en 2,5 en un problema que habla de 300 unidades, son las unidades.
+
+##### Ejercicio 5 — Óptimo sobre un eje y redundancia geométrica (Práctica 1)
+
+Alimento balanceado para gatos, común y premium. Disponible por semana: 160 kg de
+carbohidratos, 120 de proteínas, 90 de grasas. Precio 2 u.m./kg el común y 3 el premium.
+
+| | Carbohidratos | Proteínas | Grasas |
+|---|---|---|---|
+| Común | 0,5 | 0,3 | 0,2 |
+| Premium | 0,4 | 0,4 | 0,2 |
+
+$$\text{Max } z = 2x_1 + 3x_2$$
+$$
+\begin{aligned}
+0{,}5x_1 + 0{,}4x_2 &\leq 160 &&\text{(carbohidratos)}\\
+0{,}3x_1 + 0{,}4x_2 &\leq 120 &&\text{(proteínas)}\\
+0{,}2x_1 + 0{,}2x_2 &\leq 90 &&\text{(grasas)}
+\end{aligned}
+$$
+
+**Cortes con los ejes** — sacando los decimales primero, que es donde se pierde la cuenta:
+
+```
+0,5x1 + 0,4x2 <= 160   x10 ->  5x1 + 4x2 <= 1600   ->  1600/5=320   1600/4=400
+0,3x1 + 0,4x2 <= 120   x10 ->  3x1 + 4x2 <= 1200   ->  1200/3=400   1200/4=300
+0,2x1 + 0,2x2 <=  90   x10 ->  2x1 + 2x2 <=  900
+                        :2 ->    x1 +   x2 <=  450  ->   450/1=450    450/1=450
+```
+
+**Vértices:** $(0;0)\to 0$; $(320;0)\to 640$; $(200;150)\to 850$; $(0;300)\to \mathbf{900}$.
+
+**Óptimo:** $(0;300)$, $z^* = 900$. $S^* = (0;\,300;\,40;\,0;\,30)^T$.
+
+| Restricción | Uso | Holgura | Clasificación |
+|---|---|---|---|
+| carbohidratos | 120 de 160 | $x_3 = 40$ | PASIVA **necesaria** |
+| proteínas | 120 de 120 | $x_4 = 0$ | **ACTIVA** |
+| grasas | 60 de 90 | $x_5 = 30$ | PASIVA, **redundante geométricamente** |
+
+**Interpretación:** no se produce alimento común; se producen 300 kg semanales de premium;
+sobran 40 kg de carbohidratos y 30 de grasas; las **proteínas son el recurso crítico**;
+la ganancia máxima semanal es de 900 u.m.
+
+**Lo que enseña:**
+
+1. **Óptimo sobre un eje.** Uno de los productos no se fabrica, y hay que decirlo explícitamente en la interpretación.
+2. **Redundancia geométrica, demostrada con un número.** Grasas equivale a $x_1 + x_2 \leq 450$, pero el máximo de $x_1+x_2$ sobre la RF es 350, en $(200;150)$. La recta **nunca toca la RF**. No alcanza con decir "se ve en el gráfico".
+3. **Comparar con el Ejercicio 1.** Ahí pintado era pasiva pero **necesaria**; acá grasas es pasiva **y prescindible**. Es el contraste que buscan cuando piden clasificar restricciones.
+
+##### Trampas prácticas de la Práctica 1
+
+Los cuatro errores que efectivamente aparecieron al resolverla:
+
+| Trampa | Dónde apareció | Antídoto |
+|---|---|---|
+| Leer la tabla **por fila** en vez de por columna | Ej. 1 y 5 | Cada **restricción es un recurso** = una columna |
+| Recursos y consumos en **unidades distintas** | Ej. 4 (hs vs min) | Chequeo dimensional antes de escribir |
+| Restricción sobre **un producto** modelada como total | Ej. 2 ($x_1 \leq 150$, no $x_1+x_2$) | Releer a qué sustantivo se refiere el tope |
+| **Dividir por decimales** al sacar los cortes | Ej. 5 ($90/0{,}2 = 450$, no 180) | Multiplicar por 10 y simplificar **antes** de dividir |
+
+**El control de 3 segundos antes de dibujar.** Poné los cortes en columna y mirá si están en
+la misma escala. Si uno da 180 y el resto anda por 300–450, o uno da 2,5 en un problema de
+300 unidades, algo se rompió — o un coeficiente o las unidades.
+
+**El control de que estás en un vértice.** En dos variables un vértice tiene **al menos dos
+restricciones activas**, contando los ejes. Si en tu "óptimo" hay una sola holgura en cero,
+no estás en un vértice: estás en el medio de un lado y todavía podés mejorar.
 
 #### Dudas / pendientes
 
@@ -751,5 +1118,8 @@ Práctica 4 (`PL4UTN.pdf`), que integra sensibilidad, dualidad y parametrizació
 
 - 2026-08-13: Se ingirió el **Material de cursado 2023** completo a `fuentes/IO/` (44 archivos: apunte PLC1–PLC9, PPTs de cátedra, prácticas PL1–PL6 con resoluciones, CPM/PERT, stock, PNL). Convertidos a markdown; **todavía sin volcar a la wiki** salvo PLC1 y PLC2.
 - 2026-08-13: Se ingirió el **TPI 2026** (enunciado + Etapa 1 del Grupo 1, comisión 402) a `fuentes/IO/TPI/`.
+- 2026-08-13: Se resolvieron y volcaron los **ejercicios 1 a 5 de la Práctica 1** en la Unidad 1, en formato de cátedra, más una sección de **trampas prácticas**. Se verificaron computacionalmente los ejercicios 4 y 5 (sin resolución oficial vigente).
+- 2026-08-13: Se ingirió el **1º parcial del 26/07/2025 con la resolución del profesor Vaccaro** a `fuentes/IO/parciales/2025-07-26/`. De ahí se extrajo la sección **Formato de respuesta de la cátedra** (notación `S*`, vocabulario, frases hechas por tipo de solución) y se confirmó el alcance del primer parcial. Se reescribió el ejercicio resuelto tipo de la Unidad 1 en ese formato.
+- 2026-08-13: Se generó el machete [[machete-metodo-grafico]] (una carilla: procedimiento de 10 pasos, tipos de solución, clasificación de restricciones, formato de cátedra y las cuatro trampas).
 - 2026-08-13: Se generó el derivado de estudio [[resumen-hasta-simplex]] (Unidades 1 y 2 en formato machete, con checklist de parcial y banco de 10 preguntas de teoría).
 - 2026-08-13: Se ingirió `resumen-primer-parcial.docx`. Las fórmulas venían como ecuaciones OMML y se perdían con markitdown; se extrajeron del XML del `.docx` (183 ecuaciones) y las 12 figuras se volcaron a `figs/`. Se creó el índice de 12 unidades y se desarrollaron las **Unidades 1 a 5** (alcance del primer parcial), fusionando el resumen con los capítulos 1 y 2 del apunte. Quedaron marcados tres errores del resumen en la Unidad 4.
