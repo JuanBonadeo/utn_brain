@@ -4606,7 +4606,7 @@ Costo total = RRHH + adquisiciones + servicios + indirectos + contingencia
 
 > El apunte aclara: **no confundir la tasa de descuento con la tasa de inflación**.
 
-> **Para la Etapa 3.** La consigna pide "variables para calcular los costos" y factibilidad económica — no exige VAN ni TIR. Pero con desarrollo interno (inversión alta adelante, ahorro después) el **TR** y el **VAN** son los que muestran de verdad si conviene contra SaaS. Es el lugar natural para el TCO a 3 años.
+> **Para la Etapa 3.** La consigna pide "variables para calcular los costos" y factibilidad económica — no exige VAN ni TIR. Con **SaaS** (costo recurrente por usuario, sin inversión inicial fuerte) el indicador que mejor muestra el peso real es el **TCO a 3 años**; el TR y el VAN sirven para contrastar el ahorro de horas contra la licencia acumulada.
 
 ##### 12. Análisis de Factibilidad
 
@@ -4774,7 +4774,7 @@ Contenidos según el Programa Analítico: proyectos innovadores y emprendimiento
 | Proceso crítico elegido | **Instalación de internet con fibra óptica** |
 | Etapa 1 | Entregada 23/04/2026 · corregida por cátedra 19/05/2026 · ajustada por el grupo 21/05/2026 (v3) |
 | Etapa 2 | Entregada 18/05/2026 (v1). **La tabla de versiones no registra corrección posterior — corregir antes de la Etapa 3.** |
-| Etapa 3 | En curso. Consigna y sugerencias recibidas 28–29/07/2026. Proyecto y alternativa cerrados por el grupo el 10/08/2026 (candidato B, alcance B medio, desarrollo interno). Validación con el docente: 11/08/2026 |
+| Etapa 3 | En curso. Consigna y sugerencias recibidas 28–29/07/2026. Alcance cerrado por el grupo el 10/08/2026 (candidato B, alcance B medio). **Punto 3 validado por el docente el 23/08/2026**: proyecto aprobado, modo de construcción SaaS FSM configurable, y alternativas redefinidas como proyectos distintos. Puntos 1 a 4 escritos; 5 a 12 pendientes |
 
 ##### Formato del documento de entrega (usar el mismo en la Etapa 3)
 
@@ -5050,11 +5050,11 @@ Encontradas al revisar los documentos el 2026-07-29. Ninguna es de contenido: to
 
 ##### Etapa 3 — Proyecto de TI (en curso)
 
-**Estado al 2026-08-10:** proyecto y alternativa **cerrados por el grupo**. Candidato **B** (gestión de OT + app de campo), alcance **B medio**, alternativa de construcción **A1 — desarrollo interno con componentes de mercado acotados**. Cerradas D1, D2, D4 y D5. Queda **D3** (líneas base), a consultar con el docente el 2026-08-11 junto con la validación del punto 3.
+**Estado al 2026-08-23: punto 3 validado por el docente.** Proyecto aprobado con su formulación; modo de construcción **SaaS FSM configurable**; las alternativas del punto 3 pasan a ser **proyectos distintos que atacan otros problemas**, dos de ellas solo mencionadas. Cerradas D1, D4 y D5. **D2 y D3 siguen abiertas**: el docente no respondió las consultas de cronograma ni de líneas base. Escritos los puntos 1 a 4; faltan del 5 al 12.
 
 ###### ▶ Por dónde retomar
 
-**Paso 1 — Clase del 2026-08-11: validar el punto 3 con el docente.** La consigna lo exige explícitamente. Llevar: nombre del proyecto, problema, alcance incluye/no incluye, la matriz re-ponderada y la selección de desarrollo interno con la desventaja de plazo admitida. Ver *Paquete de validación* más abajo.
+**Paso 1 — Reescribir el punto 3 con el encuadre nuevo. HECHO el 2026-08-23.** El docente validó el proyecto y redefinió qué son las "alternativas". Ver *Alternativas y selección*. Queda enviarle el mensaje de seguimiento con las tres consultas que no respondió más la que surgió de su respuesta — ver *Validación del punto 3*.
 
 **Paso 2 — Producir, en este orden de dependencia:**
 
@@ -5066,15 +5066,15 @@ EDT ──┬─→ perfiles y competencias (punto 5)
 En paralelo, sin depender de la EDT: Acta de Proyecto (punto 4.b) y layout de H&S (punto 6).
 ```
 
-**Ojo con D5 al armar la EDT**, no después: hay que meter paralelismo real y hacer que dos o tres tareas compitan por el mismo perfil. Con desarrollo interno esto aparece casi solo (ver D5), pero hay que diseñarlo, no esperarlo.
+**Ojo con D5 al armar la EDT**, no después: hay que meter paralelismo real y hacer que dos o tres tareas compitan por el mismo perfil. Con SaaS **ya no aparece solo** — hay que diseñarlo explícitamente (ver D5).
 
-**El punto más pesado ahora es la factibilidad económica (punto 12).** Con desarrollo interno el argumento ya no es corto: hace falta un **TCO a 3 años comparado contra SaaS** — horas × valor hora por perfil + hardware + infraestructura, contra licencia recurrente por usuario × N técnicos × 3 años.
+**El punto más pesado ahora es la factibilidad legal (punto 12).** Con SaaS los datos personales de clientes salen del perímetro, lo que agrava R05 (severidad 15) y activa de lleno la Ley 25.326: transferencia internacional, encargado de tratamiento, región de alojamiento, cláusulas contractuales y notificación de brecha. Es un apartado ganador si se escribe bien y una masacre si se omite. La factibilidad económica se resuelve con el TCO a 3 años de la licencia por usuario acumulada contra las horas y los costos evitados.
 
 **Acta de Proyecto (punto 4.b) — BORRADOR ESCRITO al 2026-08-19.** Fuente de verdad: `materias/ASI/etapa3-acta-proyecto.md`; el `.docx` se regenera con `npm run docx -- <in.md> <out.docx>` (`scripts/build-docx.js`), no se edita a mano. Sigue el Anexo I de cátedra y las instrucciones campo por campo del apunte T2 (ver Unidad 5 §6).
 
 Pendiente de resolver en el Acta: los **nombres propios** (van inventados, marcados con ⚠ y en rojo en el `.docx`) y el **monto de autoridad de compra** del Director de Proyecto, que hoy quedó genérico — es el campo donde el ejemplo de cátedra es más concreto.
 
-> **Dependencia con D4.** El Acta se apoya en A1 desarrollo interno. Si el docente objeta la alternativa, cambian `Producto` y `Entregables` (pasan a "solución configurada") y cae la autoridad de compra de infraestructura. `Justificación`, `Objetivos` y `Límite` no se tocan en ningún escenario.
+> **Dependencia con D4 — ya se activó.** El Acta se había escrito sobre A1 desarrollo interno. Con la validación del 23/08 hay que actualizar `Producto` y `Entregables` (pasan a "solución configurada sobre plataforma FSM de mercado") y la autoridad de compra (de infraestructura a licenciamiento y servicios). `Justificación`, `Objetivos` y `Límite` no cambian.
 
 **Lo que falta conseguir:** fecha de entrega, y si la cátedra acepta cronograma en meses relativos.
 
@@ -5158,21 +5158,53 @@ Pendiente de resolver en el Acta: los **nombres propios** (van inventados, marca
 | O3 | Visitas fallidas por causa evitable | OT reprogramadas por "técnico sin competencia" o "kit incompleto" ÷ OT despachadas | 12% *(supuesto)* | ≤6% | 6 meses desde go-live |
 | O4 | Cumplimiento de la priorización de la cola | % de OT despachadas según el orden del motor; % de cumplimiento de SLA de primera respuesta | No medible hoy (esa **es** la definición de R07) | ≥95% / ≥90% | Mes 3 desde go-live |
 
-**Alternativas y matriz de selección — DECIDIDA (D4): A1, desarrollo interno.**
+**Alternativas y selección — REDEFINIDA POR EL DOCENTE (2026-08-23).**
 
-Regla de la cátedra (Bloque 4 de las sugerencias): *"las alternativas deben resolver **el mismo problema**, pero de maneras diferentes"*. Las tres construyen el mismo alcance **B medio** — cambia el modo de construcción, no lo que se construye. La distinción con D1 es esa: D1 define **qué** se construye (alcance), D4 define **cómo** (modo de construcción). Presentar alcances distintos como alternativas es el error que marca la cátedra.
+Respuesta textual del docente a la consulta del punto 3:
 
-| | Qué significa |
-|---|---|
-| **A1 — Desarrollo interno** | El área de sistemas de Personal diseña y desarrolla la plataforma, con componentes de mercado acotados (ver abajo) |
-| A2 — SaaS FSM configurable | Se contrata una plataforma de *Field Service Management* de mercado y se configura |
-| A3 — Desarrollo tercerizado | Una consultora la desarrolla a medida, con hosting en infraestructura de Personal |
+> Hola Gonza! me parece muy buen proyecto TI, lo validaría como: implementar una plataforma de gestión de órdenes de trabajo con app móvil de campo para resolver trazabilidad, priorización y control de competencias técnicas en instalaciones de fibra óptica.
+> En alternativa solo dejaría SaaS FSM configurable. Y piensen en otra alternativa TI distinta al proyecto, otro problema que detecten que puedan atacar (uno o dos alternativas). No hace falta que la elaboren/desarrollen, simplemente mencionarlas
 
-**Criterios.** La cátedra lista diez: costo, tiempo, calidad, riesgo, conocimientos disponibles, dependencia de proveedores, seguridad, escalabilidad, mantenimiento e integración. La matriz usa ocho de ellos (calidad y riesgo quedan absorbidos en integración, seguridad y mantenimiento; declararlo en el documento).
+Tiene tres consecuencias, y la primera es la que más cambia el trabajo:
 
-**Justificación de los pesos** — este es el argumento que sostiene toda la elección, y sale del propio trabajo del grupo:
+1. **"Alternativas" no son modos de construcción sino proyectos distintos.** El grupo las había planteado como interno / SaaS / tercerizado: tres formas de construir lo mismo. El docente las lee como **proyectos alternativos que atacan problemas distintos**. Bajo su lectura, "seleccionar una y justificar" recién tiene sentido — con una sola alternativa no había nada que seleccionar.
+2. **El modo de construcción queda fijado en SaaS FSM configurable.** Esto revierte D4, que el grupo había cerrado en A1 desarrollo interno el 10/08.
+3. **El nombre del proyecto lo da él.** Usar su formulación textual: si el que corrige propone el título, ese es el título.
 
-> Los pesos reflejan el análisis de riesgos de la Etapa 2. Allí se identificaron **R03** (firewall sin reglas segmentadas) y **R05** (credenciales de contratistas sin baja) **ambos en severidad 15**, los dos más altos del trabajo: para este proceso, el control de accesos y el perímetro dominan. Además, cinco de los seis componentes de la solución dependen de integrarse con SGOT, CRM, BD y NMS — la integración no es un criterio más, es el núcleo técnico. Y por tratarse de un proceso operativo central (no una herramienta de soporte), la dependencia de un proveedor externo compromete la continuidad del negocio.
+###### Estructura del punto 3
+
+<!-- cols: 6,30,42,22 -->
+
+| | Alternativa | Problema que ataca | Estado |
+|---|---|---|---|
+| 1 | **OT-Campo** — plataforma de gestión de órdenes de trabajo con app móvil de campo, sobre **SaaS FSM configurable** | Falta de trazabilidad de la OT, ausencia de criterio de priorización en la cola (**R07**, sev. 12, sin tratamiento) y falta de control de competencias al asignar (**R04**, sev. 12, sin tratamiento) | **Seleccionada** — se desarrolla |
+| 2 | Plataforma de seguridad perimetral y gestión de identidades | Perímetro sobre equipo obsoleto sin soporte (**R03**, sev. 15) y credenciales de contratistas que sobreviven al fin del contrato (**R05**, sev. 15) — los dos riesgos más altos del trabajo | Solo mencionada |
+| 3 | Gestión de capacidad y mantenimiento preventivo de planta externa | Nodos que se saturan sin aviso y bloquean altas comerciales (**R11**) y cable que se degrada sin plan de inspección hasta que corta (**R08**) | Solo mencionada |
+
+**Por qué esas dos y no otras.** Las tres condiciones que tienen que cumplir: atacar un problema **distinto** del proyecto elegido, salir del análisis de riesgos que el grupo ya hizo, y no pisarse entre sí.
+
+- La 2 es de **otro dominio**: perímetro e identidades, no gestión de OT. Y ataca los dos únicos riesgos de severidad 15 del trabajo, así que es la que más contrasta en importancia.
+- La 3 es de **otro dominio otra vez**: planta externa, ni sistemas de gestión ni infraestructura de datacenter. Ataca dos riesgos de severidad 9.
+- Se descartó mencionar la **plataforma ITSM unificada con CMDB**, aunque está analizada en esta wiki: se pisa con el proyecto elegido, porque ambos tocan R06/R07 y la cola de tickets. El docente pidió *otro problema*.
+
+**Justificación de la selección** (cualitativa, no por matriz — ver la consulta pendiente abajo). Se selecciona la alternativa 1 por cuatro razones, en orden de peso:
+
+1. **Trata riesgos que quedaron sin tratamiento.** R04 y R07 fueron identificados y valorados en severidad 12 en la Etapa 2, y no recibieron planilla. Este proyecto es el tratamiento de ambos: cierra un hueco de la entrega anterior en lugar de repetirla.
+2. **Ejecuta un objetivo ya comprometido.** El objetivo de TI de la Etapa 1 —"implementar una aplicación de gestión para técnicos de campo… aumentar la productividad operativa en un 5%"— es literalmente el alcance de este proyecto, con el mismo indicador que el objetivo de negocio.
+3. **Impacta directamente sobre el proceso crítico.** Interviene las actividades 3 a 9 del proceso modelado en la Etapa 1. Las alternativas 2 y 3 sostienen la infraestructura o la planta, pero no modifican ninguna actividad del proceso.
+4. **Habilita el resto de la planificación.** Al tocar oficina, depósito y trabajo de campo, es el único de los tres que da material real para el layout de higiene y seguridad del punto 6.
+
+**Modo de construcción: SaaS FSM configurable**, por indicación del docente. Se contrata una plataforma de *Field Service Management* de mercado y se configura: flujos, roles, matriz de competencias, reglas de priorización, SLA y app de campo. La organización no construye el producto; construye las **integraciones**, la **configuración funcional** y la **capa de seguridad**.
+
+**Contrapartida a declarar en el documento** (la cátedra pide que la desventaja se admita explícitamente): costo recurrente por usuario que crece con la dotación, dependencia del proveedor, y —lo más sensible acá— los datos personales de clientes salen del perímetro de la organización. Esto último agrava directamente **R05**, valorado en severidad 15 en la Etapa 2, y por eso se compensa por contrato: región de alojamiento habilitada, cifrado en tránsito y en reposo, SSO con doble factor, mínimo privilegio, notificación de bajas de credenciales en menos de 24 horas y derecho de auditoría. Ese párrafo es obligatorio en la factibilidad legal del punto 12.
+
+> **Qué se cae de lo decidido el 10/08.** La matriz ponderada de ocho criterios que comparaba interno / SaaS / tercerizado, con los pesos justificados por R03 y R05. Queda archivada más abajo como respaldo: si el docente responde que igual quiere una matriz, se readapta a las tres alternativas nuevas; si no, no va al documento. **Consulta pendiente.**
+
+###### Matriz de construcción (archivada — respaldo, no va al documento salvo que el docente la pida)
+
+Comparaba las tres formas de construir el mismo alcance. El docente indicó dejar solo SaaS, de modo que la comparación perdió objeto, pero la justificación de los pesos sigue siendo material reutilizable.
+
+<!-- cols: 41,10,16,16,17 -->
 
 | Criterio | Peso | A1 Interno | A2 SaaS FSM | A3 Tercerizado |
 |---|---|---|---|---|
@@ -5186,27 +5218,23 @@ Regla de la cátedra (Bloque 4 de las sugerencias): *"las alternativas deben res
 | Conocimiento disponible en el equipo | 5% | 3 | 4 | 3 |
 | **Ponderado** | **100%** | **4,00** | **3,60** | **3,50** |
 
-> **Cómo se llegó acá.** La primera versión de la matriz usaba 6 criterios y pesos parejos, y daba SaaS 4,00 · Tercerizado 3,55 · Interno 3,45. Al completar los criterios que pide la cátedra (se sumaron dependencia del proveedor y escalabilidad) quedó SaaS 3,85 · Interno 3,60 · Tercerizado 3,45. La versión final **no cambia ningún puntaje** — solo los pesos, con el fundamento de arriba. Dejar constancia de esto en el documento es preferible a que parezca que los números se acomodaron al resultado.
+**Ciclo de vida: híbrido.** Predictivo para la selección del proveedor, la contratación, la arquitectura de integración, la seguridad y el cumplimiento normativo: requerimientos estables, compras corporativas con RFI/RFP, evaluación legal e integraciones con sistemas heredados definidas de antemano. Incremental/iterativo para la configuración funcional, la UX de la app de campo, las reglas de priorización y de asignación, y el despliegue territorial: la usabilidad con guantes, bajo sol directo y con conectividad intermitente no se especifica por adelantado, y los pesos del motor de asignación se calibran con datos de operación, no en una reunión de diseño.
 
-**Redacción de la selección** (sigue el modelo de la cátedra: mayor ponderado + razones concretas + desventaja admitida):
+No cascada pura: si la app se especifica de punta a punta y se entrega recién al final, el riesgo es entregar una herramienta que los técnicos no usan y falsean —cierres cargados en masa a fin de jornada—, lo que destruye la medición de O1 y O2 y deja el proyecto sin evidencia de resultado. No ágil puro: hay compromisos contractuales con un proveedor, adquisiciones con plazos de entrega, marco regulatorio de datos personales y un presupuesto que la Gerencia de Operaciones necesita aprobado por anticipado.
 
-> *Se selecciona el desarrollo interno porque obtiene el mayor resultado ponderado (4,00) bajo criterios que priorizan la seguridad, la integración con los sistemas existentes y la independencia de proveedores, coherentes con los riesgos R03 y R05 identificados en la Etapa 2 en severidad 15. Los datos personales de clientes no salen del perímetro de la organización y la integración con SGOT, CRM y NMS se resuelve sin intermediarios. **Como contrapartida, es la alternativa de mayor plazo hasta el go-live y de mayor inversión inicial**, lo que se compensa por la ausencia de licenciamiento recurrente por usuario a partir del segundo año.*
+> **Cambio respecto del 10/08.** Con SaaS el tramo iterativo se justifica por la **configuración y la adopción**, no por la construcción: no se desarrolla la app, se la configura y se la calibra contra el uso real. El argumento sigue en pie, pero hay que redactarlo así — decir que se itera "porque se construye" ya no aplica.
 
-**No es 100% interno.** Desarrollar la app de campo y el motor de asignación es creíble; desarrollar un motor de mapas y geocodificación desde cero, no. Se compran: servicio de mapas/geolocalización, MDM para los dispositivos, dispositivos rugerizados, infraestructura (cloud propio u on-premise) y licencias de software base. Esto además sostiene los puntos 7, 8 y 9 — sin nada que adquirir, el RFI/RFP se queda sin caso concreto y la consigna exige indicar en qué adquisición puntual se usaría cada uno.
+**Fases propuestas (base de la EDT) — 11 fases:** 1. Inicio (Acta aprobada) · 2. Relevamiento y análisis (**incluye la medición de líneas base como entregable propio**, ver D3) · 3. Selección de proveedor (RFI → lista corta → RFP → evaluación → contrato) · 4. Diseño y configuración de la plataforma (flujos, roles, matriz de competencias, reglas de priorización, SLA, tableros) · 5. Integración y seguridad (SGOT, CRM, BD, NMS y stock; SSO, doble factor, mínimo privilegio, baja automática de credenciales) · 6. Migración de datos (OT abiertas, padrón de técnicos, matriz de competencias inicial) · 7. Pruebas (funcionales, de integración, de carga y de seguridad) · 8. Piloto en zona acotada · 9. Capacitación · 10. Despliegue por olas geográficas · 11. Estabilización y cierre.
 
-**Repliegue.** Ya no hace falta el de datos personales: con desarrollo interno no salen del perímetro. Si la objeción es el **plazo**, el repliegue es **A3 tercerizado con hosting propio** (3,50) — mantiene los datos adentro y acorta el go-live.
+> **Volvimos de 12 a 11 fases.** Con desarrollo interno se habían partido en *arquitectura y diseño técnico* + *adquisiciones* + *desarrollo por módulos*. Con SaaS eso se reunifica en *selección de proveedor* + *diseño y configuración*. Es exactamente la estructura que tenía la wiki el 29/07.
 
-**Objeción previsible del docente:** *"¿por qué desarrollar si hay producto de mercado?"*. La respuesta no es preferencia del grupo: es que el proceso maneja datos personales de clientes, que el propio análisis de riesgos puso el control de accesos y el perímetro como los dos riesgos de mayor severidad, y que es un proceso operativo central donde la dependencia de un proveedor compromete la continuidad.
-
-**Ciclo de vida: híbrido.** Predictivo para arquitectura, integraciones, seguridad, cumplimiento y adquisición de hardware e infraestructura (requerimientos estables, compras corporativas, RFI/RFP, evaluación legal). Incremental/iterativo para la app de campo, las reglas de priorización y del motor de asignación, y el despliegue territorial: la usabilidad con guantes, bajo sol y con conectividad intermitente no se especifica por adelantado, y los pesos del motor se calibran con datos de operación. No cascada pura: se entregaría una app que los técnicos no usan y falsean, destruyendo la medición de O1 y O2. No ágil puro: hay compras corporativas, plazos de entrega, marco regulatorio y presupuesto a aprobar.
-
-> Con **A1 desarrollo interno** el tramo iterativo queda mejor justificado que con SaaS: no se configura un producto cerrado, se construye la app y el motor, que es exactamente donde la incertidumbre de uso es alta.
-
-**Fases propuestas (base de la EDT) — 12 fases:** 1. Inicio (Acta aprobada) · 2. Relevamiento y análisis (**incluye la medición de líneas base como entregable propio**, ver D3) · 3. Arquitectura y diseño técnico · 4. Adquisiciones (dispositivos, infraestructura, servicio de mapas, MDM — RFI → RFP → contrato) · 5. Desarrollo por módulos · 6. Integración y seguridad · 7. Migración de datos · 8. Pruebas · 9. Piloto en zona acotada · 10. Capacitación · 11. Despliegue por olas · 12. Estabilización y cierre.
-
-> **Las fases 4 y 5 corren en paralelo** — las compras no bloquean el desarrollo. Ahí nace buena parte del conflicto de recursos que exige D5.
+> **Dónde nace el paralelismo ahora (D5).** Con SaaS ya no aparece solo, hay que diseñarlo: las adquisiciones de dispositivos rugerizados y MDM corren en paralelo a la configuración; las cuatro integraciones (SGOT, CRM, BD, NMS) se planifican solapadas compitiendo por **un único especialista de integraciones**; el material de capacitación se prepara en paralelo a las pruebas; y la carga de la matriz de competencias va en paralelo a la integración. Sin eso, el punto 10 se responde con "no se detectaron conflictos", que es la peor respuesta posible.
 
 > La fase 11 cierra el circuito con la Etapa 2: el nuevo sistema es un CI nuevo en la CMDB (clase Software/Aplicación) y su puesta en producción es un **cambio normal que pasa por el CAB**, tal como se definió en el punto 11.2. Es un punto fácil de sumar.
+
+**Adquisiciones — vuelven al perfil SaaS.** Licencias de plataforma FSM por usuario/mes (dimensionar: técnicos + supervisores + NOC + despacho) · servicio de implantación y configuración por partner certificado (horas) · horas de consultoría para las cuatro integraciones · dispositivos móviles rugerizados para los técnicos · MDM para administrarlos · servicio de mapas y geolocalización si no viene incluido en la plataforma · ambiente de pruebas no productivo · capacitación · soporte premium durante el período de estabilización. Cada uno con forma de adquisición distinta: suscripción anual, contrato de servicios por hora, compra directa, pago por uso.
+
+> **Esto mejora los puntos 7, 8 y 9.** Con SaaS hay un mercado real, diverso y comparable de plataformas FSM, con diferencias sustantivas entre proveedores en motor de asignación, modo offline, precio por usuario y región de alojamiento. El **RFI** se justifica solo —relevar qué plataformas existen, con qué conectores, en qué rango de precio y dónde alojan los datos— y el **RFP** también, una vez definidos los requisitos de integración, SLA y seguridad. Con desarrollo interno este punto era más flojo.
 
 **Sectores para el layout de Higiene y Seguridad** — la mayor ventaja de este candidato: cubre los dos bloques de la guía en un solo trabajo.
 
@@ -5224,15 +5252,17 @@ Regla de la cátedra (Bloque 4 de las sugerencias): *"las alternativas deben res
 
 Presentación sugerida: **dos planos, no nueve.** (1) Base operativa en una planta: depósito, playa de carga, mesa de despacho, NOC y sala técnica, con circulación peatonal/vehicular, matafuegos, salidas y punto de encuentro. (2) Croquis tipo de trabajo en campo con la escena de tendido aéreo y vallado; domicilio y cámara subterránea como esquemas complementarios.
 
-###### Decisiones — estado al 2026-08-10
+###### Decisiones — estado al 2026-08-23
+
+<!-- cols: 6,54,40 -->
 
 | | Decisión | Estado |
 |---|---|---|
 | D1 | Alcance: **B medio** | **Cerrada** por el grupo |
-| D2 | Cronograma en **meses relativos** + plazo de O1 desde el go-live | **Cerrada** por el grupo |
-| D3 | Líneas base | **Abierta** — se consulta al docente el 2026-08-11 |
-| D4 | Alternativa: **A1 desarrollo interno** (con componentes de mercado acotados) | **Cerrada** por el grupo, **falta validar con el docente** (lo exige el punto 3) |
-| D5 | Paralelismo obligatorio en la EDT | **Cerrada** por el grupo |
+| D2 | Cronograma en **meses relativos** + plazo de O1 desde el go-live | **Cerrada** por el grupo — **sin confirmar** por el docente (consulta 3, no respondida) |
+| D3 | Líneas base declaradas como supuestos, con su medición como entregable de la fase 2 | **Abierta** — consulta 2, no respondida |
+| D4 | Alternativa: **SaaS FSM configurable**, y alternativas = proyectos distintos | **Cerrada por el docente** el 2026-08-23 |
+| D5 | Paralelismo obligatorio en la EDT | **Cerrada** por el grupo — ahora hay que diseñarlo, ya no aparece solo |
 
 **D1 — Dónde se corta el alcance de B. → CERRADA: B medio.**
 
@@ -5246,9 +5276,9 @@ Presentación sugerida: **dos planos, no nueve.** (1) Base operativa en una plan
 
 **D2 — El calendario. → CERRADA: meses relativos + plazo desde el go-live.** El objetivo dice "para el año 2026". Se descartaron: fechar el inicio en enero 2026 para que el Gantt cierre en el año (es ficción), y usar fechas de calendario absolutas. Se adopta **Gantt en meses relativos** (Mes 1, Mes 2…) desde la aprobación del Acta, y el plazo de O1 medido **desde el go-live**, declarado como ajuste. Lo que no puede pasar es que el Gantt diga una cosa y el objetivo otra.
 
-> **Consecuencia con A1.** El desarrollo interno de seis componentes, app offline-first y cuatro integraciones no son 6 meses: son del orden de 12 a 18. D2 lo absorbe, pero **el Gantt tiene que decir la verdad** — no comprimirlo para que cierre con el año. Falta confirmar con el docente si acepta meses relativos.
+> **Consecuencia con SaaS.** El plazo se acorta respecto del desarrollo interno: configuración, cuatro integraciones, piloto y despliegue por olas son del orden de 7 a 9 meses, no de 12 a 18. Sigue sin cerrar dentro de 2026 si se arranca ahora, así que D2 se mantiene. **El docente no respondió si acepta meses relativos** — está en el mensaje de seguimiento.
 
-**D3 — Las líneas base. → ABIERTA, se consulta al docente el 2026-08-11.** No hay ningún dato medido en las Etapas 1 y 2, así que los valores van a ser estimados. Eso no es el problema; el problema es cómo se presentan. Un número estimado presentado como dato medido es lo más fácil de detectar. Un número estimado **declarado como supuesto** es metodológicamente correcto — así se planifica cuando todavía no se mide.
+**D3 — Las líneas base. → SIGUE ABIERTA.** Se consultó el 2026-08-19 y el docente no la respondió; está en el mensaje de seguimiento. No hay ningún dato medido en las Etapas 1 y 2, así que los valores van a ser estimados. Eso no es el problema; el problema es cómo se presentan. Un número estimado presentado como dato medido es lo más fácil de detectar. Un número estimado **declarado como supuesto** es metodológicamente correcto — así se planifica cuando todavía no se mide.
 
 Lo que lo blinda: **la medición de la línea base es una actividad con entregable propio en la fase 2 de la EDT**. El proyecto mismo se hace cargo de medirla. Redacción a usar en el documento:
 
@@ -5256,46 +5286,50 @@ Lo que lo blinda: **la medición de la línea base es una actividad con entregab
 
 No pedir permiso para estimar: preguntar si **este tratamiento** le sirve.
 
-**D4 — La alternativa. → CERRADA por el grupo: A1, desarrollo interno.** Falta la validación con el docente, que la consigna exige en el punto 3. Matriz re-ponderada, justificación y repliegue: ver *Alternativas y matriz de selección* más arriba.
+**D4 — La alternativa. → CERRADA POR EL DOCENTE (2026-08-23).** Respondió la consulta 1 del documento de validación. Dos definiciones: el modo de construcción es **SaaS FSM configurable**, y las alternativas del punto 3 pasan a ser **proyectos distintos que atacan problemas distintos**, no modos de construir el mismo proyecto. Ver *Alternativas y selección* más arriba.
 
-> **Por qué, y por qué no por lo que parece.** El disparador del grupo fue "si contratamos SaaS esquivamos el laburo". Eso no se puede escribir en el documento y además es sólo medio cierto: acá no se construye nada, se planifica, así que SaaS no ahorra trabajo de TP — produce un plan más pobre. Lo que sí sostiene la elección: con desarrollo interno el punto 5 (perfiles) pasa de un equipo flaco a uno real (arquitecto, backend, mobile, UX, DBA, seguridad, QA); el punto 10 resuelve **D5 casi solo**, porque la sobreasignación entre módulos paralelos aparece sin forzarla; y el punto 12 se vuelve fuerte en factibilidad legal — los datos no salen del perímetro, no hay transferencia internacional ni encargado de tratamiento externo.
+> **Qué implicó el cambio.** El grupo había cerrado A1 desarrollo interno el 10/08 con una matriz re-ponderada. La indicación del docente lo revierte. Lo que se perdió y cómo se compensa:
 >
-> **Lo que cuesta:** el plazo (ver D2) y la factibilidad económica, que ahora exige el TCO a 3 años contra SaaS. Y hay que sostener por escrito, en la factibilidad técnica, que Personal tiene capacidad interna de desarrollo — es creíble en una telco con área de sistemas propia, pero no se da por obvio.
+> | Punto | Qué se pierde con SaaS | Compensación |
+> |---|---|---|
+> | 5 — Perfiles | El equipo deja de tener arquitecto, backend, mobile y DBA | Queda un equipo igual defendible: PM, analista funcional, **especialista de integraciones** (son cuatro), especialista de seguridad, consultor del proveedor, UX de configuración, tester, capacitador y referente de operaciones |
+> | 10 — Aplanamiento | La sobreasignación ya no aparece sola entre módulos paralelos | Hay que diseñarla: integraciones solapadas sobre un único integrador, adquisiciones en paralelo a la configuración, capacitación en paralelo a pruebas. Ver D5 |
+> | 11 — Costos | Deja de haber inversión inicial fuerte; pasa a OPEX recurrente | El TCO a 3 años sigue sirviendo, ahora para mostrar cuánto pesa la licencia por usuario acumulada |
+> | 12 — Legal | Se pierde el argumento "los datos no salen del perímetro" | **Mejora**: ahora hay transferencia internacional de datos, encargado de tratamiento, región de alojamiento y notificación de brecha bajo Ley 25.326. Es material propio y específico, no genérico, y reconecta con R05 |
+> | 7, 8, 9 — Adquisiciones y RFI/RFP | Nada | **Mejora**: hay mercado real y comparable, el RFI y el RFP se justifican sin forzar el ejemplo |
+>
+> Saldo: se pierde en los puntos 5 y 10, se gana en 7, 8, 9 y 12. Y el rehacer está acotado porque el análisis SaaS ya existía en esta wiki desde el 29/07.
 
 **D5 — Paralelismo en el cronograma. → CERRADA: paralelismo obligatorio, diseñado desde la EDT.** El punto 10 pide aplanar recursos. Si el cronograma sale secuencial no hay conflicto que aplanar y ese punto se responde con "no se detectaron conflictos", que es la peor respuesta posible. Hay que meterlo desde el diseño de la EDT y que dos o tres actividades compitan por **el mismo perfil**, para que aparezca sobreasignación genuina.
 
 Fuentes de paralelismo con A1: adquisiciones (fase 4) en paralelo al desarrollo (fase 5) · módulo de despacho e integraciones compitiendo por el mismo desarrollador backend · el especialista en seguridad partido entre SSO/MFA y la revisión de la app · material de capacitación en paralelo a las pruebas · carga de la matriz de competencias en paralelo a la integración.
 
-> Con desarrollo interno esto aparece casi solo — pero *casi*. Hay que diseñarlo en la EDT, no esperar que salga.
+> Con SaaS **no aparece solo**: hay que diseñarlo en la EDT a propósito. Las fuentes de paralelismo están listadas en el bloque de fases, más arriba.
 
-###### Documento de validación del punto 3
+###### Validación del punto 3 — respuesta del docente (2026-08-23)
 
-**Escrito el 2026-08-19** — `materias/ASI/etapa3-validacion-punto3.md`, con su `.docx` y su `.pdf` generados. Es lo que se le manda al docente: contiene **solo los puntos 1, 2 y 3** de la consigna (proyecto, objetivos, alternativas y selección), más las cuatro consultas al final. 4 páginas.
+El documento `materias/ASI/etapa3-validacion-punto3.md` se le envió el 2026-08-19 con los puntos 1, 2 y 3 y cuatro consultas al final. Respondió el 2026-08-23.
 
-> **El Acta y la EDT quedan retenidas hasta que valide.** El Acta ya está escrita, pero es el punto 4.b y se apoya en la alternativa elegida; si la objeta, cambia. Mandarla ahora invita a la pregunta de por qué se hizo el 4 antes de validar el 3.
+**Respondió la consulta 1.** Validó el proyecto, dio la formulación del nombre, indicó dejar solo SaaS FSM configurable como modo de construcción, y pidió agregar una o dos alternativas de TI que ataquen **otro problema**, solo mencionadas. Texto completo y consecuencias: ver *Alternativas y selección* más arriba.
 
-Se dejó fuera a propósito la consulta por la plantilla del Acta y por el apunte teórico: ambos se consiguieron del campus el 19/08.
+**No respondió las consultas 2, 3 ni 4.** Quedan abiertas:
 
-###### Paquete de validación — contenido (referencia)
+<!-- cols: 8,52,40 -->
 
-**Lo que se presenta** (punto 3 de la consigna, "Validar con el docente"):
+| # | Consulta | Qué bloquea |
+|---|---|---|
+| 2 | ¿Vale declarar las líneas base como supuestos y poner su medición como entregable de la fase de Relevamiento? | **D3.** Los cuatro objetivos O1–O4 y el Acta, que ya los reproduce |
+| 3 | ¿Gantt en meses relativos desde la aprobación del Acta, o fechas de calendario? | **D2 definitivo.** El diagrama de red, el Gantt y el aplanamiento (punto 10) |
+| 4 | Fecha de entrega de la Etapa 3 | La planificación del grupo |
 
-1. Nombre del proyecto.
-2. Problema y necesidad, con el argumento de que **R04 y R07 quedaron en severidad 12 y sin planilla de tratamiento** en la Etapa 2 — este proyecto es el tratamiento de ambos.
-3. Alcance: qué incluye y qué no incluye (B medio).
-4. Las tres alternativas, la matriz re-ponderada y la selección de **desarrollo interno**, con la desventaja de plazo admitida.
-5. La justificación de los pesos: salen del análisis de riesgos de la propia Etapa 2 (R03 y R05, severidad 15).
+**Consulta nueva que surgió de su respuesta:** si las alternativas ahora son proyectos distintos, ¿se mantiene una matriz ponderada para justificar la selección, o alcanza con la justificación cualitativa y las otras dos solo mencionadas? Comparar proyectos incomparables con criterios de costo, tiempo e integración es forzado, y él mismo dijo que las otras dos no hace falta elaborarlas.
 
-**Lo que se pregunta:**
+**Mensaje de seguimiento a enviar:**
 
-1. **D3** — ¿sirve declarar las líneas base como supuestos y poner su medición como entregable de la fase 2 de la EDT?
-2. **Pesos de la matriz** — ¿acepta que se justifiquen con el análisis de riesgos de la Etapa 2? Si dice que sí, la elección de D4 queda blindada.
-3. **Cronograma** — ¿meses relativos (Mes 1, Mes 2…) o fechas de calendario? (cierra D2 definitivamente)
-4. ~~Plantilla del Acta de Proyecto~~ — **ya la tenemos** (llegó el 19/08). En su lugar, preguntar por el **apunte teórico de la unidad**: el caso integral cita `ASI-5-T1` a `T5` y no están en el campus que vemos.
-5. **Fecha de entrega** de la Etapa 3.
-6. **I3** — R04 y R07 sin planilla de tratamiento en la Etapa 2: ¿alcanza con que el proyecto sea el tratamiento, o hay que agregar las planillas faltantes como anexo?
-
-**Objeción a tener preparada:** *"¿por qué desarrollar si hay producto de mercado?"* → ver la respuesta en D4.
+> Gracias! Dos cosas para no equivocar el enfoque:
+>
+> 1. Con las alternativas como proyectos distintos, ¿mantenemos la matriz ponderada para justificar la selección, o alcanza con una justificación cualitativa y las otras dos solo mencionadas?
+> 2. Nos quedaron tres consultas del documento sin responder: (a) las líneas base no están medidas — ¿vale declararlas como supuestos y poner su medición como entregable de la fase de Relevamiento?; (b) ¿acepta un Gantt en meses relativos desde la aprobación del Acta o pide fechas de calendario?; (c) ¿cuál es la fecha de entrega de la Etapa 3?
 
 #### Dudas / pendientes
 
@@ -5337,3 +5371,4 @@ Derivados que generamos (en esta misma carpeta, `materias/ASI/`):
 - 2026-08-19: ingerida la carpeta `Ejercitación` (4 archivos) → `fuentes/ASI/Ejercitación/`. Aporta tres cosas que faltaban: **(1) la plantilla oficial del Acta de Proyecto** — desbloquea el punto 4.b de la Etapa 3, que estaba trabado desde el 29/07; **(2) el caso integral resuelto** (Centro de Servicios) — primer y único ejemplo resuelto de la unidad, con CPM completo (ES/EF/LS/LF, holguras, camino crítico `1→2→4→5→7→9`, duración 39 h, BAC $3.700); **(3) la ejercitación de U5**, que es más ancha que la Etapa 3 e incluye RFI ejecutado, RFP con 3 cotizaciones y TCO. Se agregaron a la Unidad 3: CPM y aplanamiento en §7, criterios de evaluación de proveedores y variables de TCO en §10, BAC y monetización de beneficios en §11, checklist legal e indicadores VAN/TIR/TPR en §12, la plantilla del Acta con ejemplo en §6, y el nuevo §13 con la tabla comparativa U5 vs. Etapa 3. La sección "Ejercicios resueltos tipo", que estaba vacía, ahora tiene el caso completo. **Dos hallazgos:** la cátedra numera esta unidad como **Unidad 5** (la wiki la llama Unidad 3), y falta el apunte teórico — el caso cita `ASI-5-T1` a `ASI-5-T5`, ninguno en nuestras fuentes.
 - 2026-08-19: redactado el **borrador del Acta de Proyecto** (punto 4.b de la Etapa 3) en `materias/ASI/etapa3-acta-proyecto.md`, con su `.docx` generado por `scripts/build-docx.js` (conversor md→docx reutilizable: A4, Arial 11, justificado con partición es-AR, tablas con anchos por directiva `<!-- cols: … -->`, pie con numeración). Se instaló LibreOffice y `scripts/preview-docx.sh` para **ver el render** antes de dar por bueno un entregable — revisando a ciegas se habían colado listas con numeración encadenada, celdas justificadas con ríos y partición de palabras en inglés. El Acta quedó en 5 páginas. Trazabilidad completa hacia atrás: la justificación cita R04 y R07 sin tratamiento de la Etapa 2 y el objetivo de TI del 5% de la Etapa 1; los objetivos son O1–O4 con las líneas base declaradas como supuestos y su medición como entregable de la fase 2; el límite reproduce el "qué no incluye" acordado. Quedan por definir los nombres propios y el monto de autoridad de compra.
 - 2026-08-19: ingerido el **campus completo** (`ASI_Apuntes_Campus`, 93 archivos). Se copiaron 28 a `fuentes/ASI/Campus/` — Unidades 3, 4 y 5 completas más Normas de Cátedra; se dejaron fuera los complementarios de U2 (NIST, MAGERIT, SEI), la U6, los exámenes finales y los duplicados de U1/U2 que ya estaban. **Reestructuración mayor de la wiki**: el Programa Analítico (Plan 2023) define **6 unidades**, no 3. La vieja "Unidad 3 — Proyectos de TI" pasó a ser **Unidad 5**, y se crearon **Unidad 3 (Dirección de Talento y Capital Humano)** y **Unidad 4 (Higiene y Seguridad Laboral)** — las dos que sostienen los puntos 5 y 6 de la Etapa 3 y que hasta ahora se venían respondiendo con conocimiento general. Se agregó también un stub de **Unidad 6 (Emprendedorismo)**. En la Unidad 5 se volcaron los cinco capítulos del apunte: definición formal de proyecto, tipos, portafolio/programa/subproyecto y triple restricción (T1); la **plantilla del Acta anotada campo por campo con el ejemplo ESABAL** y el contenido PMI del Acta de Constitución (T2); el esquema de nodo de la red, AON/AOA, el método completo de **histograma de recursos y aplanamiento**, y fast tracking vs. crashing (T3); y las **cuatro técnicas de evaluación de inversiones** TR/TPR/VAN/TIR con el valor del dinero en el tiempo (T4). **Hallazgo para el punto 6 de la Etapa 3:** los tres niveles de prevención de la Unidad 4 explican por qué la cátedra rechaza "silla ergonómica y pausas activas" — son prevención sobre la persona, el escalón más débil; el layout tiene que mostrar **prevención en el diseño**. Se sumó además la legislación laboral (Leyes 19.587, 24.557, 20.744 y 27.555), que le faltaba a la factibilidad legal.
+- 2026-08-23: **el docente validó el punto 3** y redefinió el encuadre de las alternativas. Aprobó el proyecto y dio su formulación del nombre; indicó dejar **SaaS FSM configurable** como único modo de construcción —lo que revierte D4, cerrada por el grupo en desarrollo interno el 10/08— y pidió sumar una o dos **alternativas de TI que ataquen otro problema**, solo mencionadas. En consecuencia se reescribió el punto 3 con las alternativas como *proyectos distintos* (OT-Campo seleccionada · seguridad perimetral e identidades · capacidad y mantenimiento de planta externa), la matriz de construcción quedó archivada como respaldo, el ciclo de vida volvió a justificarse por configuración y adopción, las fases volvieron de 12 a 11 y las adquisiciones al perfil SaaS. Se actualizó el **Acta** (`Producto`, `Entregables`, autoridad de compra) y se creó **`materias/ASI/etapa3.md`**, el entregable consolidado que se sube a Drive a medida que se completa. **No respondió las consultas 2, 3 ni 4** (líneas base, meses relativos, fecha de entrega): D2 y D3 siguen abiertas y quedó redactado el mensaje de seguimiento.

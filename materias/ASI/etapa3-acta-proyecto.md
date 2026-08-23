@@ -9,11 +9,11 @@
 > (`fuentes/ASI/Campus/ASI-Unidad5_Adm_Recursos_en_ProyectosIT/ASI-5-T1-Proyectos_AnexoI_ActaProyecto.doc`),
 > con las instrucciones campo por campo del apunte T2. Ver Unidad 5 §6 de la wiki.
 >
-> **Estado al 2026-08-19: borrador.** Depende de D4 (alternativa A1, cerrada por
-> el grupo pero **sin validar con el docente**). Si el docente objeta A1:
-> `Producto` y `Entregables` cambian a "solución configurada" en vez de
-> "desarrollada", y cae la autoridad de compra de infraestructura.
-> `Justificación`, `Objetivos` y `Límite` **no se tocan** en ningún caso.
+> **Estado al 2026-08-23: borrador actualizado.** El docente validó el punto 3 el
+> 23/08 e indicó **SaaS FSM configurable** como modo de construcción. `Producto` y
+> `Entregables` ya se reescribieron sobre esa base y la autoridad de compra pasó de
+> infraestructura a licenciamiento y servicios. `Justificación`, `Objetivos` y
+> `Límite` no cambiaron. Falta definir los nombres propios y el monto de autoridad.
 >
 > **Sin nombres propios, por decisión del grupo (2026-08-19).** Patrocinador y
 > designados se identifican por **rol y área**, no por persona. El nombre del
@@ -177,10 +177,11 @@ medido como instalaciones sobre horas de trabajo*.
 
 ### Producto
 
-**Plataforma de Gestión de Órdenes de Trabajo de Campo (OT-Campo)**: solución de
-desarrollo interno, en producción e integrada con los sistemas existentes, que
-gestiona el ciclo completo de la orden de trabajo de instalación de fibra
-óptica, desde el despacho hasta el cierre con conformidad del cliente.
+**Plataforma de gestión de órdenes de trabajo con aplicación móvil de campo**:
+solución de mercado de *Field Service Management*, contratada como servicio,
+configurada e integrada con los sistemas existentes y en producción, que gestiona
+el ciclo completo de la orden de trabajo de instalación de fibra óptica, desde el
+despacho hasta el cierre con conformidad del cliente.
 
 Comprende seis componentes:
 
@@ -188,11 +189,11 @@ Comprende seis componentes:
    excepciones del NMS, cronómetro de SLA y escalamiento.
 2. Motor de asignación por competencia certificada, zona o nodo, carga del día,
    ventana horaria y stock del vehículo.
-3. Aplicación móvil de campo *offline-first*, con agenda, ficha de orden de
-   trabajo, checklist por modelo de ONT, registro de mediciones ópticas,
-   evidencia fotográfica, geolocalización, consumo de materiales, tipificación
-   obligatoria del motivo cuando la visita no se completa y conformidad del
-   cliente con firma digital.
+3. Aplicación móvil de campo *offline-first* del proveedor, configurada con
+   agenda, ficha de orden de trabajo, checklist por modelo de ONT, registro de
+   mediciones ópticas, evidencia fotográfica, geolocalización, consumo de
+   materiales, tipificación obligatoria del motivo cuando la visita no se
+   completa y conformidad del cliente con firma digital.
 4. Integraciones con SGOT, CRM, base de datos de clientes y órdenes de trabajo,
    NMS y sistema de stock.
 5. Capa de seguridad: inicio de sesión único con doble factor, mínimo
@@ -200,9 +201,9 @@ Comprende seis componentes:
    registro de auditoría.
 6. Tablero de indicadores para Supervisión y Gerencia de Operaciones.
 
-⚠ *Si el docente objeta el desarrollo interno, este apartado cambia a "solución
-de mercado configurada e integrada" y el componente 3 pasa a ser configuración
-de la aplicación del proveedor.*
+Los componentes 1, 2, 3 y 6 se obtienen configurando la plataforma contratada;
+los componentes 4 y 5 —integraciones y capa de seguridad— se construyen sobre
+la infraestructura de la organización.
 
 ### Entregables
 
@@ -215,16 +216,15 @@ entregables principales por fase:
 |---|---|
 | 1. Inicio | Acta de Proyecto aprobada |
 | 2. Relevamiento y análisis | Documento de requerimientos validado y **medición de las líneas base** de los indicadores |
-| 3. Arquitectura y diseño técnico | Documento de arquitectura y diseño de integraciones aprobado |
-| 4. Adquisiciones | Dispositivos, infraestructura y servicios contratados |
-| 5. Desarrollo por módulos | Módulos de despacho, motor de asignación y aplicación móvil construidos |
-| 6. Integración y seguridad | Integraciones operativas y controles de seguridad implementados |
-| 7. Migración de datos | Matriz de competencias y datos maestros cargados |
-| 8. Pruebas | Informe de pruebas funcionales, de integración y de seguridad |
-| 9. Piloto | Informe de piloto en zona acotada, con ajustes aplicados |
-| 10. Capacitación | Técnicos, supervisores y despachantes capacitados |
-| 11. Despliegue por olas | Plataforma en producción en todas las zonas |
-| 12. Estabilización y cierre | Documentación, transferencia operativa, alta del elemento de configuración en la CMDB y cierre formal |
+| 3. Selección de proveedor | RFI, lista corta, RFP evaluado y contrato firmado |
+| 4. Diseño y configuración | Plataforma configurada: flujos, roles, matriz de competencias, reglas de priorización, SLA y tableros |
+| 5. Integración y seguridad | Integraciones operativas y controles de seguridad implementados |
+| 6. Migración de datos | Matriz de competencias y datos maestros cargados |
+| 7. Pruebas | Informe de pruebas funcionales, de integración y de seguridad |
+| 8. Piloto | Informe de piloto en zona acotada, con ajustes aplicados |
+| 9. Capacitación | Técnicos, supervisores y despachantes capacitados |
+| 10. Despliegue por olas | Plataforma en producción en todas las zonas |
+| 11. Estabilización y cierre | Documentación, transferencia operativa, alta del elemento de configuración en la CMDB y cierre formal |
 
 ### Objetivos
 
