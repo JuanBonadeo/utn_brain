@@ -11,32 +11,71 @@
 >
 > **Estado al 2026-08-23.** Puntos 1 a 4.2 escritos, con el punto 3 validado por el
 > docente. El Acta (4.4) va como Anexo I, en archivo aparte. Faltan la EDT y los puntos
-> 5 a 12.
+> 5 a 12. **Fecha de entrega: 28/08/2026.**
+>
+> **Decisiones tomadas por el grupo ante consultas que el docente no respondió:**
+> líneas base declaradas como supuestos con su medición como entregable de la fase 2
+> (D3); cronograma en meses relativos desde la aprobación del Acta (D2); justificación
+> de la selección cualitativa, sin matriz ponderada, en línea con su indicación de que
+> las otras dos alternativas solo se mencionan. Las tres quedan sujetas a revisión si
+> el docente se pronuncia.
 >
 > Contenido tomado de la wiki: Unidad 5 y sección TP Integrador → Etapa 3.
 
 ---
 
-## ETAPA 3 — PLANIFICACIÓN DE UN PROYECTO DE TI
+## UNIVERSIDAD TECNOLÓGICA NACIONAL
 
-**Proyecto de TI para Personal (Telecom Argentina) — Proceso de instalación de internet con fibra óptica**
+### CÁTEDRA
 
-<!-- cols: 24,76 -->
+Administración de Sistemas de Información — 4º Año Ingeniería en Sistemas de Información
 
-| | |
-|---|---|
-| Cátedra | Administración de Sistemas de Información — 4º Año Ingeniería en Sistemas de Información |
-| Comisión | 403 |
-| Grupo | 310 |
-| Integrantes | 53535 Bonadeo, Juan Cruz · 52674 Casermeiro, Gonzalo · 53543 De la Rosa, Valentín Yael · 53215 Lezcano, Diego · 52688 Lurati, Ignacio |
+### TRABAJO PRÁCTICO INTEGRADOR 2026 — ETAPA 3
 
-<!-- cols: 12,20,25,43 -->
+**Planificación de un Proyecto de TI**
+
+*Proyecto de TI para Personal (Telecom Argentina) — Proceso de instalación de internet con fibra óptica*
+
+**Comisión Nº:** 403
+
+**Grupo Nº:** 310
+
+### INTEGRANTES
+
+*Legajo, Apellido y Nombres, Email*
+
+- 53535, Bonadeo Juan Cruz, juancruzbonadeo04@gmail.com
+- 52674, Casermeiro Gonzalo, gonzacasermeiro@gmail.com
+- 53543, De la Rosa Valentín Yael, mferreyra079@gmail.com
+- 53215, Lezcano Diego, diegolezcano209@gmail.com
+- 52688, Lurati Ignacio, ignaciolurati2@gmail.com
+
+### VERSIÓN DEL DOCUMENTO
+
+<!-- cols: 10,18,22,50 -->
 
 | Mod | Fecha | Autor | Descripción |
 |---|---|---|---|
-| 1 | 19/08/2026 | Grupo N310 | Envío de los puntos 1 a 3 para validación |
+| 1 | 19/08/2026 | Grupo N310 | Envío de los puntos 1 a 3 para validación del docente |
 | 2 | 23/08/2026 | CC | Validación del punto 3 y redefinición de las alternativas |
-| 3 | 23/08/2026 | Grupo N310 | Reformulación del punto 3 según lo indicado |
+| 3 | 23/08/2026 | Grupo N310 | Reformulación del punto 3 y avance de los puntos 4.1 y 4.2 |
+
+### ÍNDICE
+
+1. Proyecto propuesto
+2. Objetivos
+3. Alternativas y selección
+4. Ciclo de vida, fases y estructura de desglose de trabajo
+5. Recursos humanos — perfiles y competencias
+6. Higiene y seguridad laboral
+7. Activos a adquirir
+8. Forma de adquisición
+9. RFI y RFP
+10. Tiempos del proyecto
+11. Variables de costo
+12. Análisis de factibilidad
+
+Anexo I — Acta de Proyecto
 
 ---
 
@@ -209,7 +248,7 @@ Se adjunta como **Anexo I**, confeccionada según la plantilla de la cátedra.
 
 ## 10. TIEMPOS DEL PROYECTO
 
-*En elaboración.* Asignación de recursos a la EDT, estimación de duraciones, diagrama de Red con determinación del camino crítico y de las holguras, diagrama de Gantt con la cantidad de personas por perfil, aplanamiento de recursos y estimación de la duración total del proyecto.
+*En elaboración.* Asignación de recursos a la EDT, estimación de duraciones, diagrama de Red con determinación del camino crítico y de las holguras, diagrama de Gantt con la cantidad de personas por perfil, aplanamiento de recursos y estimación de la duración total del proyecto. El cronograma se expresa en **meses relativos** contados desde la aprobación del Acta de Proyecto, no en fechas de calendario, para no atar la planificación a una fecha de inicio todavía no definida.
 
 ---
 
