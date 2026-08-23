@@ -12,3 +12,6 @@ fuentes/4*/
 
 # Claude local (settings personales, no compartir)
 .claude/settings.local.json
+
+# Node (toolchain de docx) — se restaura con `npm install`
+node_modules/

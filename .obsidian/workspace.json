@@ -4,19 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "f697d378ec934ea0",
+        "id": "f66779a35cc6ee58",
         "type": "tabs",
         "children": [
           {
-            "id": "b3911abefc302117",
+            "id": "dc06b06f1f33f52c",
             "type": "leaf",
             "state": {
-              "type": "pdf",
-              "state": {
-                "file": "fuentes/RD/Medin-1er-parcial/3 - Capa de Red - IPv4.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "3 - Capa de Red - IPv4"
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
             }
           }
         ]
@@ -39,7 +37,9 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical",
-                "autoReveal": false
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
@@ -76,7 +76,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 551.5
   },
   "right": {
     "id": "4c62a2c33c0e5c3f",
@@ -92,7 +92,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "fuentes/RD/Medin-1er-parcial/3 - Capa de Red - IPv4.pdf",
+                "file": "fuentes/RD/Medin-1er-parcial/2 - Capa de Red - Ruta óptima origen-destino.pdf",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for 3 - Capa de Red - IPv4"
+              "title": "Backlinks for 2 - Capa de Red - Ruta óptima origen-destino"
             }
           },
           {
@@ -111,12 +111,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "fuentes/RD/Medin-1er-parcial/3 - Capa de Red - IPv4.pdf",
+                "file": "fuentes/RD/Medin-1er-parcial/2 - Capa de Red - Ruta óptima origen-destino.pdf",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from 3 - Capa de Red - IPv4"
+              "title": "Outgoing links from 2 - Capa de Red - Ruta óptima origen-destino"
             }
           },
           {
@@ -154,13 +154,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "fuentes/RD/Medin-1er-parcial/3 - Capa de Red - IPv4.pdf",
+                "file": "fuentes/RD/Medin-1er-parcial/2 - Capa de Red - Ruta óptima origen-destino.pdf",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 3 - Capa de Red - IPv4"
+              "title": "Outline of 2 - Capa de Red - Ruta óptima origen-destino"
             }
           }
         ]
@@ -181,10 +181,25 @@
       "bases:Create new base": false
     }
   },
-  "active": "b3911abefc302117",
+  "active": "f753d77b2cf429be",
   "lastOpenFiles": [
-    "fuentes/RD/Medin-1er-parcial/1 - Capa de Enlace - Control de Flujo.pdf",
-    "materias/RD/resumen.md",
-    "materias/RD/multiple-choice.md"
+    "fuentes/RD/Medin-1er-parcial/3 - Capa de Red - IPv4.pdf",
+    "fuentes/RD/Medin-1er-parcial/2 - Capa de Red - Ruta óptima origen-destino.pdf",
+    "fuentes/RD/Medin-1er-parcial/2 - Capa de Transporte - Características de transporte.pdf",
+    "fuentes/RD/Medin-1er-parcial/3 - Capa de Transporte - Protocolo TCP.pdf",
+    "fuentes/RD/Medin-1er-parcial/Capa de Red.pdf",
+    "materias/RD/machete-protocolos.docx",
+    "materias/RD/machete-protocolos.md",
+    "fuentes/RD/Medin-1er-parcial/6 - Capa de Red - Protocolos de control.pdf",
+    "fuentes/RD/Medin-1er-parcial/4 - Capa de Red - Control de Congestión.pdf",
+    "materias/RD/simulacro-respuestas.docx",
+    "materias/RD/simulacro.docx",
+    "materias/RD/simulacro-respuestas.md",
+    "materias/RD/simulacro.md",
+    "fuentes/RD/Medin-1er-parcial/1 - Capa de Red - Servicios y distribución.pdf",
+    "materias/RD/multiple-choice.md",
+    "materias/RD/banco-preguntas.md",
+    "materias/RD/RD.md",
+    "materias/RD/resumen.md"
   ]
 }

@@ -28,8 +28,24 @@ tiempo repitiendo cosas que ya deberían estar escritas en algún lado.
     sus exportaciones a `.docx`, y `figs/` (imágenes usadas en esos docs).
 - `fuentes/[CÓDIGO]/` → originales crudos que subo (PDF, apuntes, etc.).
   Inmutables, nunca los edites.
+- `fuentes/4º AÑO/` → **pozo de material**, no es una materia. Es un dump
+  heredado (drive de la facu) con carpetas por nombre largo de materia:
+  `Investigación Operativa`, `Redes de Datos`, `Simulación`, `Legislación`,
+  `Ingeniería y Calidad de Software`, `Administración de Sistemas de
+  Información`, `Tecnologías para la Automatización`. Adentro suele haber
+  `Material de cursado/`, `Resúmenes/` y `Examenes/` (parciales y finales
+  viejos, muchos como foto `.jpg`).
+  - Es la reserva de la que sacamos material cuando una materia lo necesita:
+    se **copia** lo que se va a usar a `fuentes/[CÓDIGO]/` y recién ahí se
+    ingiere. Nunca ingieras directo desde acá.
+  - También es inmutable: no muevas ni borres nada de adentro, aunque quede
+    duplicado con `fuentes/[CÓDIGO]/`.
+  - Si te pido material de una materia y su `fuentes/[CÓDIGO]/` está flaca,
+    fijate acá antes de decir que no hay nada.
 - `scripts/ingest.py` → wrapper de markitdown para convertir fuentes no-md.
   Corre con el venv del proyecto: `.venv/bin/python scripts/ingest.py <archivo>`.
+  Ojo con los zips de Google Drive: `unzip` rompe los acentos de los nombres
+  (`Práctica` → `Pr+?ctica`). Usá `ditto -x -k <zip> <destino>`.
 
 Estructura interna de cada `materias/[CÓDIGO]/[CÓDIGO].md`:
 
@@ -77,12 +93,45 @@ Cuando pido "revisá [MATERIA]" o "revisá todo":
 - Temas del índice sin desarrollo real
 - Unidades desactualizadas (hay fuentes en fuentes/[CÓDIGO]/ más nuevas
   que el Log)
+- Material sin aprovechar: hay algo en `fuentes/4º AÑO/[nombre largo]/` que
+  cubre una unidad floja y todavía no se copió a `fuentes/[CÓDIGO]/`
 - Contradicciones entre fuentes distintas dentro de la misma unidad
 - Reportá en lista corta. No reescribas nada sin que lo confirme.
 
+## OPERACIÓN: GIT (automática)
+El repo se sincroniza solo. No me preguntes por pull/commit/push: es parte
+del trabajo, no una decisión mía. Trabajamos siempre sobre `main`.
+
+**Al iniciar cada sesión (antes de leer o escribir nada):**
+1. `git pull --rebase origin main` — así arranco con lo último de la otra
+   máquina.
+2. Si el pull falla por cambios locales sin commitear, commiteá primero
+   esos cambios (mensaje descriptivo) y reintentá.
+3. Si hay conflicto de merge/rebase que no sea trivial, pará y avisame.
+   No resuelvas a ciegas ni descartes trabajo mío.
+
+**Al avanzar en cualquier tarea (durante la sesión):**
+- Cada vez que termines una unidad de trabajo con sentido propio
+  (ingesta terminada, unidad de una wiki escrita, resumen/machete/docx
+  generado, TP avanzado), hacé `git add` de lo tocado + `commit` + `push`.
+  No esperes al final de la sesión ni a que yo lo pida.
+- Un commit por unidad de trabajo, no un mega-commit con todo mezclado.
+- Mensaje: `[CÓDIGO]: qué cambió` en minúsculas y en castellano.
+  Ej: `IO: unidad 3 — método simplex, ejercicios resueltos`,
+  `RD: machete de protocolos + docx`, `ingest: fuentes crudas de SIM`.
+- Si el push es rechazado (la otra máquina pusheó antes), hacé
+  `git pull --rebase` y volvé a pushear.
+- Mencioná el push en una línea corta, sin ceremonia. No me muestres el
+  diff ni el output de git salvo que algo haya fallado.
+
+**Qué NO commitear:** nada de `.venv/`, `node_modules/`, ni basura del SO.
+Si aparece algo así sin ignorar, agregalo a `.gitignore` en vez de
+commitearlo.
+
 ## AL INICIAR CADA SESIÓN
-Preguntame en qué materia quiero trabajar hoy, y si es para ingestar una
-fuente, resolver algo puntual, o repasar.
+1. Sincronizá el repo (ver OPERACIÓN: GIT).
+2. Preguntame en qué materia quiero trabajar hoy, y si es para ingestar
+   una fuente, resolver algo puntual, o repasar.
 
 ## NOMBRE DE SESIÓN
 Nombrá cada chat como `[CÓDIGO] — [tema]`, con el código de la tabla de

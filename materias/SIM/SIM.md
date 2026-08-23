@@ -7,8 +7,9 @@
 
 1. Introducción a la Simulación
 2. Simulación a Eventos Discretos (DES)
+3. Trabajo Práctico Integrador (TPI) — consigna y estado
 
-> Unidades 3 en adelante: pendientes de que suba el programa completo de la materia o más material de clase.
+> Unidades teóricas 3 en adelante: pendientes de que suba el programa completo de la materia o más material de clase. La sección 3 no es una unidad teórica: es el seguimiento del TPI.
 
 ---
 
@@ -167,6 +168,113 @@ La rutina de eventos (initialization → main program → timing routine → eve
 
 ---
 
+## Unidad 3 — Trabajo Práctico Integrador (TPI)
+
+> Fuente: `fuentes/SIM/TPI Simulación - Enunciado.md`. Modalidad grupal, software **AnyLogic**.
+
+### Conceptos clave
+
+- **Objeto**: estudio de simulación completo sobre un **caso real**, partiendo de un problema de decisión concreto. Se modela el sistema, se experimenta y se emite una **recomendación fundada en evidencia estadística**.
+- **Mínimo estructural**: un escenario **base** (sistema tal como está hoy) + al menos **un escenario alternativo** (hipótesis de mejora). Comparación por **corridas múltiples + test de medias**.
+- "No hay diferencia significativa" **es un resultado válido** si está bien fundamentado. No hay que forzar que la mejora dé positiva.
+- El informe se estructura sobre los **10 pasos de un estudio de simulación** (los 10 deben quedar referenciados, el orden es flexible):
+  1. Formulación del problema y planificación del estudio
+  2. Recolección de datos y definición del modelo
+  3. Validación del modelo conceptual
+  4. Construcción y verificación del programa
+  5. Ejecuciones piloto
+  6. Validación del modelo programado
+  7. Diseño de experimentos
+  8. Corridas de producción
+  9. Análisis de los datos de salida
+  10. Documentación, presentación y uso de resultados
+
+### Entregables (ambos al Classroom, o no se considera entregado)
+
+**1. Informe PDF**
+- Hecho en **LaTeX** (mismas pautas que las entregas parciales).
+- Portada, índice, introducción, desarrollo, conclusiones y recomendaciones, bibliografía.
+- Referencia explícita a los 10 pasos.
+- Explicación de los escenarios (≥2).
+- Test de medias entre escenarios: **fórmulas empleadas + comentario de resultados**.
+- Citas de todas las fuentes externas. **Wikipedia prohibida**.
+- Se sube el archivo, no un link.
+
+**2. Video de exposición**
+- Criterio de exposición en vivo: caso → escenarios y variables medidas → análisis → conclusión.
+- Debe mostrar un extracto de **AnyLogic corriendo**.
+- **Todos los integrantes en cámara** (OBS o grabación de Zoom).
+- Slides en Google Slides como apoyo.
+- **Máx. 3 minutos, pauta estricta**. **Sin editar**.
+- YouTube en visibilidad "Oculto", no marcar "contenido para niños". Se entrega el link.
+
+### Causales automáticas de recuperatorio (checklist antes de entregar)
+
+- [ ] Menos de dos escenarios
+- [ ] Una sola corrida en alguno de los escenarios
+- [ ] Falta el test de medias
+- [ ] Video > 3 minutos
+- [ ] Informe fuera de LaTeX
+- [ ] Wikipedia como referencia
+- [ ] Falta alguno de los dos entregables
+
+### Criterios de selección del tema
+
+Un tema sirve si cumple las cuatro:
+1. **Aleatoriedad relevante** — hay fenómenos estocásticos que justifican simular (si no hay varianza, no hay TP).
+2. **Datos disponibles o estimables** — hay datos de entrada, o una forma *defendible* de estimarlos.
+3. **Hipótesis de mejora concreta** — existe al menos una modificación evaluable como escenario alternativo.
+4. **Alcance acotable** — abordable en el cuatrimestre.
+
+Casos de años anteriores: transporte y logística, salud y emergencias, producción industrial, organización de eventos masivos.
+
+Se evalúa: claridad del problema, rigor de modelado e implementación, calidad del análisis y las conclusiones, efectividad de la exposición, **originalidad y aplicabilidad del caso**.
+
+### Primera actividad — elección del tema
+
+Formulario con integrantes (nombre y legajo) + **tres temas candidatos**, cada uno con:
+- **Tema**: una oración en formato libre.
+- **Observaciones**: comentario breve (motivo de la elección, acceso previsto a la información).
+
+Prioridad **por fecha de entrega del formulario** (conviene mandarlo temprano). El docente confirma viabilidad o pide reformulación; **no arrancar el modelado antes de esa confirmación**.
+
+**Estado**: entregable armado —
+- Fuente en markdown: [`TPI/formulario-eleccion-tema.md`](TPI/formulario-eleccion-tema.md)
+- Documento Word: [`TPI/TPI_Simulacion_Propuesta_de_Tema.docx`](TPI/TPI_Simulacion_Propuesta_de_Tema.docx), con la carátula, estilos, header/footer y logo heredados de los informes de RD (ver `rd-informe-formato` en memoria).
+
+Se presentan **2 temas** (el enunciado pide 3 — decisión del grupo, con el riesgo de reformulación anotado en el propio documento).
+
+**Integrantes**: Juan Cruz Bonadeo (53533) y Matias Estevez (53528).
+
+### Temas candidatos y datasets verificados
+
+| # | Tema | Dataset | Estado |
+|---|---|---|---|
+| 1 | **Ecobici** — rebalanceo en el corredor Constitución/Retiro–Catalinas/Puerto Madero | [BA Data — Bicicletas Públicas](https://data.buenosaires.gob.ar/dataset/bicicletas-publicas) (3.559.284 viajes 2024) + capacidad de 394 estaciones vía feed GBFS del operador | ✅ Descargado y perfilado |
+| 2 | **Despacho de emergencias** (San Francisco) — unidad adicional / política de despacho | [DataSF `nuek-vuh3`](https://data.sfgov.org/Public-Safety/Fire-Department-and-Emergency-Medical-Services-Dis/nuek-vuh3) (7.386.640 registros) | ✅ Muestra semanal perfilada |
+| — | *Reserva*: **molinetes de subte** — dimensionamiento en hora pico | [BA Data — Subte Viajes Molinetes](https://data.buenosaires.gob.ar/dataset/subte-viajes-molinetes) (hasta 2025) | ⚠️ Cobertura verificada, columnas no. Fuera de la entrega |
+
+Hallazgo que sostiene el Tema 1: el desbalance de Ecobici **no es anual sino intradiario y se revierte**. En días hábiles, Constitución pierde ~19,7 bicicletas netas entre 7 y 10 h (sobre 54 anclajes) y recupera ~15,1 entre 17 y 20 h; Madero Office hace el espejo, recibiendo ~14,5 netas a la mañana sobre 28 anclajes. Es el patrón commuter terminal ferroviaria → área de oficinas.
+
+### Dudas / pendientes
+
+- Fechas de entrega y presentación: se publican en Classroom (no están en el enunciado).
+- Confirmar que la **Comisión 403** (heredada del formato de RD) aplique también a Simulación, y si hay que consignar los profesores de la cátedra en la carátula.
+- Decidir si se suma un tercer tema: el enunciado pide 3 y se entregan 2.
+- Enviar el formulario (prioridad por fecha de entrega).
+- Confirmar si la plantilla LaTeX de las entregas parciales se reutiliza tal cual.
+- Los archivos de datos (765 MB) no van al repo — mantenerlos afuera o en `.gitignore`.
+
+### Fuentes
+
+- `fuentes/SIM/TPI Simulación - Enunciado.md`
+- Perfilado de datos propio (2026-07-29), ver anexo de `TPI/formulario-eleccion-tema.md`
+
+---
+
 ## Log
 
+- **2026-07-31**: armado el entregable en Word (`TPI/TPI_Simulacion_Propuesta_de_Tema.docx`) reutilizando carátula, estilos, header/footer y logo del informe de RD. Grupo actualizado a Bonadeo + Estevez (sale Casermeiro) y la propuesta reducida a 2 temas (Ecobici y emergencias); molinetes queda como reserva documentada.
+- **2026-07-29**: redactado el formulario de elección de tema (`TPI/formulario-eleccion-tema.md`) con los 3 candidatos: Ecobici (prioritario), despacho de emergencias SF y molinetes de subte. Perfilados y verificados los datasets: Ecobici 2024 (3.559.284 viajes, 395 estaciones) + capacidad por GBFS, y DataSF `nuek-vuh3` (7,39 M registros, muestra semanal). Detectado el desbalance intradiario reversible de Ecobici, que es el fenómeno que justifica el escenario de rebalanceo. Documentadas las limitaciones a declarar (solo viajes exitosos, 9,11% de viajes <1 min, 13,47% origen=destino).
+- **2026-07-29**: ingerido el enunciado del TP Integrador (`fuentes/SIM/TPI Simulación - Enunciado.md`). Se creó la sección 3 (TPI) con consigna, entregables, causales de recuperatorio, criterios de selección de tema y primera actividad. Pendiente: elegir los 3 temas candidatos.
 - **2026-07-08**: ingerido el contenido de la wiki anterior de SIM (construida a partir de `Simulación_clase_2_2026.pdf`, `Simulacion_Intro_Completa.pdf`, `Resumen_de_Simulación.pdf`). Se creó el índice (Unidades 1 y 2) y se desarrollaron ambas unidades. Falta cargar el programa completo de la materia para completar el índice (Unidades 3+).

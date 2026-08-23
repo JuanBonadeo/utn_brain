@@ -6,14 +6,20 @@
 
 ## Índice
 
-1. Unidad 1 — Gobierno de TI y Planeamiento Estratégico
-2. Unidad 2 — Administración de Recursos en Áreas de SI: riesgos y servicios
-3. Unidad 3 — Proyectos de TI: planificación, tiempos, costos y factibilidad
-4. TP Integrador — Personal (Telecom) / Proceso de instalación de fibra óptica
+> Numeración **oficial de cátedra**, según el Programa Analítico (Plan 2023, versión 2022_11_27).
+> La asignatura es **anual**, 6 hs cátedra semanales, 144 hs reloj.
+
+1. Unidad 1 — Gobierno de TIC y Planeamiento Estratégico
+2. Unidad 2 — Administración de Recursos en áreas de Sistemas de Información
+3. Unidad 3 — Dirección de Talento y Capital Humano
+4. Unidad 4 — Higiene y Seguridad Laboral
+5. Unidad 5 — Administración de Recursos en Proyectos de Sistemas y Tecnologías de Información
+6. Unidad 6 — Emprendedorismo
+7. TP Integrador — Personal (Telecom) / Proceso de instalación de fibra óptica
 
 ## Desarrollo
 
-### Unidad 1 — Gobierno de TI y Planeamiento Estratégico
+### Unidad 1 — Gobierno de TIC y Planeamiento Estratégico
 
 #### Conceptos clave
 
@@ -908,7 +914,7 @@ Todo lo de esta subsección es inferencia a partir de la forma del documento, no
 
 ---
 
-### Unidad 2 — Administración de Recursos en Áreas de SI: riesgos y servicios
+### Unidad 2 — Administración de Recursos en áreas de Sistemas de Información
 
 #### Conceptos clave
 
@@ -4107,9 +4113,145 @@ Nota sobre la conversión: el .docx incluye un organigrama del Comité de Seguri
 
 ---
 
-### Unidad 3 — Proyectos de TI: planificación, tiempos, costos y factibilidad
+### Unidad 3 — Dirección de Talento y Capital Humano
 
-> Al 2026-07-29 **no hay apunte ni PPT de cátedra de esta unidad en `fuentes/ASI/`**. Todo lo que sigue proviene de: (a) la consigna de la Etapa 3 del TPI, (b) el documento de sugerencias/explicaciones de cátedra de la clase del 28/07/2026, y (c) marco PMI general. Está indicado en cada caso.
+> Unidad ingerida el 2026-08-19 desde el campus. **Desarrollo parcial**: los DIAP de cátedra son mayormente imágenes y la conversión rescató poco texto. Lo que sigue es lo que sí se extrajo, más el ejemplo de puesto de trabajo, que es lo que la Etapa 3 necesita.
+
+#### Conceptos clave
+
+- **De "recursos humanos" a "talento humano"** — el cambio de paradigma que plantea la cátedra: la persona deja de ser un recurso intercambiable y pasa a ser portadora de competencias.
+- **El planeamiento del capital humano se deriva del planeamiento estratégico de la organización**, no al revés. Es el mismo encadenamiento de la Unidad 1.
+- **Tres familias de procesos de RRHH**: *atraer y captar* (reclutamiento y selección) · *retener* (remuneración, ambiente seguro, higiene laboral, relaciones laborales) · *desarrollar* (capacitación, evaluación de desempeño, desarrollo de personal).
+- **Perfil ≠ descripción de puesto.** La descripción dice qué se hace en el puesto; el perfil dice qué tiene que tener la persona para hacerlo.
+- **Gestión por competencias** (Alles) — bibliografía obligatoria de la cátedra para esta unidad.
+
+#### Desarrollo
+
+##### 1. Descripción de puesto y perfil — la plantilla de cátedra
+
+Este es el aporte concreto de la unidad para el **punto 5 de la Etapa 3**. La cátedra tiene un ejemplo real (`EjemploPuestoTrabajo/`) con esta estructura:
+
+| Bloque | Campos |
+|---|---|
+| **Identificación** | Nombre del puesto · Área · Objetivo del puesto · El puesto reporta a · Personal a cargo |
+| **Descripción de tareas** | Principales tareas y responsabilidades, redactadas como acciones con finalidad (*"analizar los procesos operativos… **con la finalidad de** desarrollar e instalar sistemas de información"*) |
+| **Perfil del puesto** | Estudios · Experiencia requerida · Idiomas · Conocimientos específicos · Capacidades y habilidades |
+
+> Ejemplo de cátedra: *Encargado de Sistemas* del Instituto de Bioquímica Clínica. Objetivo del puesto: "gestionar y coordinar los recursos necesarios relacionados con el desarrollo e implementación de Sistemas de Información". Reporta a Dirección, con soporte técnico y desarrollador a cargo. En *capacidades y habilidades* lista: liderazgo, habilidad analítica, iniciativa, flexibilidad, orientación al cliente, manejo de personal, trabajo en equipo, responsabilidad, disciplina, toma de decisiones.
+
+**Para la Etapa 3**: la consigna pide "perfiles y competencias". Esta plantilla es más rica que la tabla de cinco columnas que sugieren las prácticas — conviene usar la tabla resumen para la vista general y esta ficha para dos o tres perfiles clave.
+
+##### 2. Evaluación de desempeño
+
+La cátedra da un ejemplo completo (`3-Evaluacion de desempeño - Encargado de Sistemas.doc`) y una planilla modelo. No lo pide la Etapa 3, pero es contenido de unidad evaluable.
+
+#### Ejercicios resueltos tipo
+
+- `ASI-3_Ejercitacion1- Talento y Capital Humano.docx` — ejercitación de la unidad. *(Ingerida, sin desarrollar en detalle.)*
+- `EjemploPuestoTrabajo/` — 4 archivos: consigna del trabajo final de Adm. RRHH, descripción de puesto y perfil, planilla modelo y evaluación de desempeño.
+
+#### Dudas / pendientes
+
+- **Desarrollo incompleto.** Los DIAP v2.3 y v2.4 son casi todo imágenes; la conversión rescató los títulos pero no el contenido de las láminas. Hay que leerlos a mano o pedir el apunte en texto.
+- **No hay apunte de texto** de esta unidad, solo diapositivas.
+- No se copió `CompetenciasIngSistemas/` del campus (CONFEDI, Res. 1254-2018, Competencias del Ingeniero Iberoamericano) — son 4 PDF grandes de estándares de carrera. Están en el campus si hacen falta.
+
+#### Fuentes
+
+- `fuentes/ASI/Campus/ASI-Unidad3_DireccionTalento_CapitalHumano/ASI-3-Direccion de Talento y Capital Humano_DIAP.v2.3.pdf` y `otros/…v2.4.pdf`
+- `fuentes/ASI/Campus/ASI-Unidad3_DireccionTalento_CapitalHumano/ASI-3_Ejercitacion1- Talento y Capital Humano.docx`
+- `fuentes/ASI/Campus/ASI-Unidad3_DireccionTalento_CapitalHumano/EjemploPuestoTrabajo/` (4 archivos, `.doc` legacy → `textutil`)
+- `fuentes/ASI/Campus/ASI-Unidad3_DireccionTalento_CapitalHumano/ASI-3-…_EjemploEvaluaciónCompetencias.pdf`
+
+---
+
+### Unidad 4 — Higiene y Seguridad Laboral
+
+> Unidad ingerida el 2026-08-19 desde el campus. Apunte de 64 páginas (Lic. Sergio J. Gasparroni) + diapositivas.
+> **Es la unidad que sostiene el punto 6 de la Etapa 3** (layout + medidas de protección).
+
+#### Conceptos clave
+
+- **Riesgo laboral** = la posibilidad de que un trabajador sufra un determinado daño derivado del trabajo. **Daños derivados del trabajo** = enfermedades o accidentes laborales.
+- **Salud, definición de la OMS**: no es la mera ausencia de afecciones y enfermedades, sino el **estado de plena satisfacción física, psíquica y social**. Por eso la unidad no se agota en accidentes.
+- **Condiciones de trabajo** — cuatro grupos: *de seguridad* (locales, instalaciones, equipos, almacenamiento y manipulación de cargas, inflamables, químicos) · *ambientales* (agentes físicos, químicos y biológicos, calor y frío, iluminación, ventilación) · *carga de trabajo* (física y mental) · *organización del trabajo* (monotonía, repetitividad, aislamiento, participación). Cuando pueden originar daño se las llama **factores de riesgo** o **peligros**.
+- **Tres tipos de riesgo**: de **accidentes** · **ambientales** (dosis de agente recibida; efectos *agudos* inmediatos vs. *crónicos* diferidos) · **psicosociales**.
+- **Cinco disciplinas de la prevención**: Seguridad en el Trabajo · Higiene Industrial · Medicina del Trabajo · Psicosociología del Trabajo · **Ergonomía**.
+- **Tres niveles de prevención (OMS)** — y esto es lo más útil para el TP, ver abajo.
+
+#### Desarrollo
+
+##### 1. Agentes de riesgo ambiental
+
+| Químicos | Físicos | Biológicos |
+|---|---|---|
+| Gases · Vapores · Nieblas · Polvos · Humos | Ruido · Vibraciones · Presiones extremas · Temperaturas extremas · Radiaciones | Insectos · Bacterias · Virus · Hongos · Mohos |
+
+##### 2. Los tres niveles de prevención — y por qué importan en el layout
+
+**Prevención primaria** — evitar el riesgo o su materialización. Es *la más eficaz y la más eficiente*, y se ordena en cuatro acciones, de mayor a menor jerarquía:
+
+| Orden | Acción | Objeto |
+|---|---|---|
+| 1 | **En el diseño** — de instalaciones, equipos, herramientas y **puestos de trabajo** | Evitar el riesgo o minimizarlo |
+| 2 | **En el origen** — evitar riesgos por defectos de fabricación, construcción o instalación | Eliminar o reducir el riesgo |
+| 3 | **En el medio de transmisión** — interponer barreras entre el origen y la persona | Controlar el riesgo |
+| 4 | **Sobre la persona** — EPP, educación, vigilancia de la salud, reducción del tiempo de exposición | Proteger a la persona |
+
+**Prevención secundaria** — la alteración de la salud ya empezó aunque no se manifieste: vigilancia de la salud, diagnóstico precoz, tratamiento eficaz.
+**Prevención terciaria** — evitar reincidencias, recaídas, complicaciones o secuelas: tratamiento y rehabilitación.
+
+> **Por qué esto resuelve la crítica de la cátedra al punto 6.** Las prácticas advierten que no alcanza con "silla ergonómica, pausas activas y matafuegos". El motivo, con el marco de la unidad a la vista, es que **todas esas medidas son de nivel 4 — prevención sobre la persona, el escalón más débil**. Un layout bien hecho demuestra **prevención en el diseño** (nivel 1): circulación separada de peatones y vehículos, distancias, ubicación de salidas, zonas restringidas. El EPP se menciona como complemento, no como respuesta principal.
+
+##### 3. Las cinco disciplinas
+
+- **Seguridad en el Trabajo** — medidas en todas las fases de actividad de la empresa para evitar o minimizar los riesgos laborales.
+- **Higiene Industrial** — protege la integridad física y mental estudiando dos variables, *el hombre y su ambiente de trabajo*. Es preventiva: identificar agentes · medir la exposición (concentración y tiempo) · valorar contra valores de referencia · corregir · controlar periódicamente · **capacitar a los trabajadores sobre los riesgos identificados**.
+- **Medicina del Trabajo** — exámenes preocupacionales y periódicos, psicotécnicos, aptitud para **trabajos en altura**, asistencia por accidentes, campañas y capacitación.
+- **Psicosociología del Trabajo** — precariedad, estrés, esfuerzo mental, monotonía, acoso laboral, síndrome del trabajador quemado (*burn-out*).
+- **Ergonomía** — adaptación del puesto a la persona.
+
+##### 4. Sistema de Gestión en Higiene y Seguridad Laboral
+
+Elementos que enumera el apunte: administración y entrega de **EPP** · mediciones de desempeño del personal (sistemas seguros de trabajo, **permisos de trabajo**, respeto de procedimientos) · mediciones de efectividad por auditorías, acciones correctivas e **indicadores de siniestralidad** · mediciones de agentes químicos por laboratorios acreditados · **preparación y respuesta ante emergencias**. Cierra con verificación (no conformidades, acciones correctivas y preventivas, auditorías internas y externas) y revisión por la Dirección.
+
+Certificación: **OHSAS 18001** (*Occupational Health and Safety Assessment Series*), compatible con ISO 9001 e ISO 14001. La bibliografía del programa suma la familia **ISO 45000**.
+
+##### 5. Legislación argentina
+
+| Norma | Qué regula |
+|---|---|
+| **Ley 19.587** de Higiene y Seguridad en el Trabajo + decreto reglamentario | Marco general de condiciones de higiene y seguridad |
+| **Ley 24.557** de Riesgos del Trabajo (1995) + decreto reglamentario | Cambio estructural: crea el sistema de **ART** y la **SRT** (Superintendencia de Riesgos del Trabajo) |
+| **Ley 20.744** de Contrato de Trabajo | Relación laboral |
+| **Ley 27.555** de Teletrabajo | Régimen legal del contrato de teletrabajo |
+
+> Esta tabla alimenta directamente la **factibilidad legal** de la Etapa 3, que hasta ahora solo tenía las normas de telecomunicaciones y datos personales. Un proyecto con trabajo en altura, espacios confinados y riesgo eléctrico tiene obligaciones bajo 19.587 y 24.557 que hay que nombrar.
+
+#### Ejercicios resueltos tipo
+
+- *(Pendiente: no hay ejercitación específica de esta unidad en el campus.)*
+
+#### Dudas / pendientes
+
+- El apunte es de **abril de 2014** y menciona OHSAS 18001, que fue reemplazada por **ISO 45001:2018**. La bibliografía del Programa Analítico sí cita la familia ISO 45000. Confirmar cuál toma la cátedra hoy.
+- Los Anexos I a IV del apunte (riesgos por lugar de trabajo, ergonomía y psicología aplicada, medicina laboral, certificación OHSAS) están ingeridos pero **sin desarrollar acá**. El Anexo I es el catálogo de riesgos por tipo de lugar y equipo — es la fuente natural para justificar las medidas del layout.
+- Falta el número de decreto reglamentario de la Ley 19.587 (es el **351/79**, *conocimiento general, no del apunte* — verificar antes de citarlo en la entrega).
+
+#### Fuentes
+
+- `fuentes/ASI/Campus/ASI-Unidad4_Higiene_y_Seguridad_Laboral/ASI-4-Higiene y Seguridad_APUNTE.V1.2.pdf` — 64 páginas, Lic. Sergio J. Gasparroni.
+- `fuentes/ASI/Campus/ASI-Unidad4_Higiene_y_Seguridad_Laboral/ASI-4-Higiene y Seguridad_DIAP.V2.0.pdf` — **casi todo imágenes, la conversión rescató muy poco**.
+
+---
+
+### Unidad 5 — Administración de Recursos en Proyectos de Sistemas y Tecnologías de Información
+
+> Unidad de cinco capítulos en el campus: **T1 Proyectos · T2 Integración, Alcance y Cierre · T3 Gestión del Tiempo · T4 Gestión de Costos · T5 Gestión de Adquisiciones**. Apuntes de la Esp. Lic. Fabiana María Riva.
+>
+> **Origen del material.** Ingerido completo el 2026-08-19 desde el campus. Se suman la consigna de la Etapa 3 del TPI, las sugerencias de cátedra del 28/07/2026, la ejercitación de U5 y el caso integral resuelto (Centro de Servicios). Está indicado en cada caso cuando algo no sale del apunte.
+>
+> **Ojo — la ejercitación de U5 y la Etapa 3 del TPI no piden lo mismo.** Ver la tabla comparativa en §13. Para entregar el TP se sigue la consigna de la Etapa 3; la ejercitación de U5 cubre la unidad completa y **puede aparecer en evaluación**.
 
 #### Conceptos clave
 
@@ -4121,10 +4263,34 @@ Nota sobre la conversión: el .docx incluye un organigrama del Comité de Seguri
 - **Objetivo ≠ actividad.** "Capacitar al personal" o "desarrollar el sistema" son entregables, no objetivos. El objetivo expresa el **resultado**: "lograr que el 90% de los usuarios apruebe la evaluación posterior a la capacitación".
 - **La EDT es la fuente principal del resto de la planificación.**
 - **RFI** se usa cuando todavía hay que explorar el mercado; **RFP** cuando los requerimientos ya están definidos y se pide una propuesta formal.
+- **CPM**: sobre la red de precedencias se calculan ES / EF / LS / LF por actividad. **Holgura = LS − ES = LF − EF**. Las actividades de holgura 0 forman el **camino crítico**, que fija la duración del proyecto. La duración total **no es la suma de las duraciones** — las ramas paralelas se solapan.
+- **TCO (Total Cost of Ownership)** — costo real de poseer, usar, mantener y retirar un activo o servicio **a lo largo de todo su ciclo de vida**, no solo el precio de compra.
+- **BAC (Budget At Completion)** — presupuesto total del proyecto; sale de asignar presupuesto a cada actividad de la EDT y sumarlos.
+- **Los beneficios se monetizan.** Un beneficio sirve para la factibilidad económica cuando se traduce a horas liberadas × costo hora, o a costos evitados. "Mejora la gestión" no es un beneficio evaluable.
+- **RA3 de la asignatura** (resultado de aprendizaje que esta unidad cubre): *evaluar propuestas de proyectos y emprendimientos de base tecnológica vinculados a los SI y TI **considerando su impacto social y ambiental***.
+- **Proyecto** = trabajo **singular**, con fechas definidas de inicio y fin, alcance claro, presupuesto preestablecido y una organización temporal que se desmantela al terminar. Tres rasgos: **temporal**, **producto/servicio/resultado único**, **elaboración gradual**.
+- **Proyecto vs. proceso**: comparten que los hacen personas, están restringidos por recursos y se planifican, ejecutan y controlan. Difieren en que **los procesos son continuos y repetitivos, y los proyectos temporales y únicos**.
+- **Triple restricción**: alcance, tiempo y costo. La **calidad** se ve afectada por el equilibrio entre los tres — si cambia uno, cambia al menos otro.
+- **Las 9 áreas de conocimiento del PMI**: Integración · Alcance · Tiempos · Costos · Calidad · RRHH · Comunicaciones · Riesgos · Adquisiciones.
+- **Fast tracking** (paralelizar lo que iría en secuencia, sube el riesgo) y **crashing** (agregar recursos, sube el costo) son los dos métodos para acortar la duración **sin reducir el alcance**.
+- **Cuatro técnicas de evaluación de inversiones**: TR (tiempo de recuperación) · TPR (tasa promedio de retorno) · VAN · TIR.
+- **Beneficios = Ingresos + Costos evitados.**
 
 #### Desarrollo
 
 ##### 1. Definición del proyecto
+
+**Qué es un proyecto, según el apunte.** Un trabajo singular con fechas definidas de inicio y finalización, una especificación clara del objetivo o el alcance, un presupuesto preestablecido y, habitualmente, una organización temporal que se desmantela cuando el proyecto termina.
+
+- **Temporal** — tiene comienzo y final definidos. El final llega cuando se lograron los objetivos, cuando queda claro que **no** podrán alcanzarse, o cuando la necesidad desaparece y el proyecto se cancela. *Temporal no significa de corta duración.*
+- **Producto, servicio o resultado único** — un artículo cuantificable, la capacidad de prestar un servicio, o un resultado (salidas o documentos que sirven para determinar una tendencia).
+- **Elaboración gradual** — desarrollar en fases e ir incorporando funcionalidad por incrementos, coordinado con una definición adecuada del alcance (crítico si hay contrato de por medio).
+
+**Jerarquía:** *Portafolio* = conjunto de proyectos, programas y procesos para cumplir los objetivos estratégicos del negocio. *Programa* = agrupación de proyectos. *Subproyecto* = subdivisión de un proyecto para mejorar su gestión.
+
+> **Por qué existen los proyectos:** son una forma de organizar actividades que **no pueden tratarse dentro de los límites operativos normales** de la organización. Por eso se usan como medio para lograr el plan estratégico — el mismo hilo que la Unidad 1.
+
+**Tipos de proyecto**, según qué tan conocidos sean el producto y el método: producto conocido + método conocido → *Producción* · producto nuevo + método conocido → *Construcción* · producto conocido + método desconocido → *Servicios* · producto nuevo + método desconocido → *Ingeniería*.
 
 La descripción del proyecto tiene que responder seis preguntas:
 
@@ -4211,7 +4377,59 @@ Formato de tabla exigido:
 
 ##### 6. Acta de Proyecto (PMI)
 
-La consigna exige confeccionarla **con la plantilla que está en el e-Group**. *(Pendiente: descargar la plantilla — no está en `fuentes/ASI/`.)* Contenido típico PMI *(conocimiento general, no del material de cátedra)*: justificación/caso de negocio, descripción y objetivos, requisitos de alto nivel, riesgos iniciales, hitos, presupuesto preliminar, interesados, criterios de aceptación, designación y nivel de autoridad del PM, y firma del patrocinador.
+**Plantilla oficial conseguida** — `fuentes/ASI/Ejercitación/ASI-5-T1-Proyectos_AnexoI_ActaProyecto.doc` (Anexo I de cátedra, 3 páginas). Es un **formulario**, no un documento libre. Campos, en orden:
+
+| Campo | Qué va |
+|---|---|
+| `ACTA DEL PROYECTO:` | Nombre del proyecto |
+| `DE:` | Quién emite el acta — el patrocinador o autoridad que designa |
+| `PARA:` | A quién se dirige — el líder de proyecto designado |
+| `DESIGNACIÓN` | Designación formal del líder de proyecto |
+| `DESCRIPCIÓN DE SU RESPONSABILIDAD` | Qué debe hacer el líder |
+| `DESCRIPCIÓN DE SU AUTORIDAD` | Qué puede decidir por sí mismo y qué debe elevar |
+| **ALCANCE DEL PROYECTO** → `Justificación` | Por qué se hace el proyecto |
+| → `Producto` | Qué queda cuando termina |
+| → `Entregables` | Lista de entregables |
+| → `Objetivos` | Los objetivos cuantificables — **los mismos del punto 2**, no otros |
+| → `Límite` | Qué **no** incluye |
+| `Firma Autorizante` | Nombre y Título del autorizante |
+
+> El campo `Límite` es el que suele quedar vacío y es justamente donde se demuestra que el alcance está acotado. Se completa con el "qué NO incluye" ya redactado.
+
+**Instrucciones de la cátedra, campo por campo** (Anexo I del apunte T2, con ejemplo del proyecto *Redefinición de la arquitectura tecnológica para servicios de base de datos de ESABAL S.A.*):
+
+| Campo | Qué pide la cátedra | Ejemplo del apunte |
+|---|---|---|
+| `DE` | Nombre y rol dentro de la organización del **patrocinador** | *Miguel Fernández, Gerente General de ESABAL S.A.* |
+| `PARA` | **Todos los stakeholders** que deben tener conocimiento del proyecto | *Integrantes de los Departamentos de Sistemas, Compras, Financiera y RRHH, y el equipo del proyecto* |
+| `DESIGNACIÓN` | Lista de personas designadas por el patrocinador **y sus roles** | *Juan Pérez – Director de Proyecto · María Rodríguez – Administradora de Bases de Datos* |
+| `RESPONSABILIDAD` | Para cada persona de la lista, qué le **encomienda** el patrocinador | *Juan Pérez dirigirá el proyecto y nombrará al equipo. María Rodríguez será el nexo con la organización* |
+| `AUTORIDAD` | Para cada persona, qué le **delega** el patrocinador | *María Rodríguez puede aprobar compras hasta el monto fijado; para excederlo debe pedir autorización a Gerencia Financiera* |
+| `Justificación` | Debilidades, amenazas, mejora de competencias que justifican el proyecto | — |
+| `Producto` | Nombre del producto, puede relacionarse con el nombre del proyecto | — |
+| `Entregables` | **Una primera aproximación de la EDT**, con los entregables más importantes | — |
+| `Objetivos` | Lista de objetivos que permitan **medir después** si el proyecto tuvo éxito | — |
+| `Límite` | Qué queda **fuera** del alcance | — |
+| `Firma Autorizante` | La del **patrocinador** | — |
+
+> Fijate en el ejemplo de autoridad: no dice "tiene autoridad sobre el proyecto", dice **hasta qué monto puede aprobar y a quién debe elevar por encima de eso**. Ese nivel de concreción es el que espera la cátedra.
+
+**Contenido que el PMI atribuye al Acta de Constitución** (apunte T2, para redactar la justificación y el encuadre): requisitos que satisfacen necesidades y expectativas del cliente, patrocinador e interesados · necesidades de negocio y descripción de alto nivel · **finalidad o justificación** · director designado y **nivel de autoridad** · resumen del cronograma de **hitos** · influencias de los interesados · organizaciones funcionales y su participación · **asunciones** y **restricciones** (de la organización, ambientales y externas) · oportunidades de negocio que lo justifican, incluido el ROI · **presupuesto resumido**.
+
+> **El Acta autoriza formalmente el proyecto y confiere al Director la autoridad para aplicar recursos de la organización.** Ese es su rol, no ser un resumen del proyecto.
+
+**Ejemplo resuelto de cátedra** (caso Centro de Servicios), para calibrar el nivel de detalle:
+
+| Campo | Resolución modelo |
+|---|---|
+| Justificación | Centralizar y profesionalizar la Gestión de Incidentes, mejorando trazabilidad, priorización, cumplimiento de SLA y capacidad de gestión |
+| Producto | Centro de Servicios operativo soportado por una herramienta ITSM configurada e integrada |
+| Entregables | Requerimientos; solución seleccionada; herramienta configurada; taxonomías y SLA; integraciones; reportes; documentación; capacitación; puesta en producción |
+| Objetivos | Los tres objetivos cuantificables definidos en el punto de objetivos |
+| Límites | No incluye la implementación completa de Gestión de Problemas, Cambios ni el rediseño integral de la infraestructura de TI |
+| Designación | Director/Líder de Proyecto designado por la organización |
+| Responsabilidad | Coordinar equipo, cronograma, recursos, proveedor, riesgos, comunicaciones y cumplimiento de entregables |
+| Autoridad | Asignar trabajo dentro del equipo, coordinar con áreas y proveedor, validar entregables intermedios y **elevar cambios que afecten alcance, costo o plazo** |
 
 ##### 7. Del EDT al diagrama de Red y al Gantt
 
@@ -4227,6 +4445,59 @@ Flujo que exige la cátedra:
 **Qué hay que informar sí o sí:** fecha o período estimado de inicio; duración total; camino crítico; actividades con holgura; cantidad de personas por perfil; conflictos de recursos detectados; ajustes realizados al cronograma.
 
 > Consecuencia práctica: si el cronograma se planifica 100% secuencial no hay conflicto que aplanar y ese punto de la consigna se responde con "no se detectaron conflictos", que es la peor respuesta posible. **Hay que diseñar paralelismo real** para que aparezca sobreasignación genuina y se pueda mostrar el aplanamiento.
+
+**Cómo se calcula el camino crítico (CPM).** Cuatro valores por actividad:
+
+| Sigla | Nombre | Cálculo |
+|---|---|---|
+| ES | Early Start | Recorrido **hacia adelante**: el mayor EF de sus predecesoras (0 si no tiene) |
+| EF | Early Finish | ES + duración |
+| LF | Late Finish | Recorrido **hacia atrás**: el menor LS de sus sucesoras (= duración total si no tiene) |
+| LS | Late Start | LF − duración |
+
+`Holgura = LS − ES = LF − EF`. Holgura 0 → actividad **crítica**. El camino crítico es la cadena de actividades con holgura 0, y su longitud es la duración del proyecto.
+
+> **La duración total no se obtiene sumando duraciones.** En el caso de cátedra las nueve actividades suman 62 h, pero el proyecto dura **39 h**, porque varias ramas corren en paralelo. Confundir esto es el error clásico.
+
+**El aplanamiento va después del CPM, no antes.** La red y el Gantt se arman **sin restricción de recursos**; recién cuando se asignan personas concretas se detecta si un mismo recurso está al 100% en dos actividades simultáneas. Ahí se reordena, se extiende, se reasigna o se reduce dedicación — y **la duración real puede cambiar**. Las actividades con holgura son las primeras candidatas a correr, porque moverlas no estira el proyecto.
+
+**Formas de diagramar la red** (apunte T3):
+
+- **AON — Activity On Node** (diagramación por precedencias): actividades en cuadros, conectadas por flechas. Es la que usa la cátedra.
+- **AOA — Activity On Arrow**: actividades en flechas, conectadas por nodos. Usa solo relaciones fin-inicio y puede requerir tareas **dummy** (sin duración) para poder controlar.
+
+**Esquema del nodo que usa la cátedra** — seis casilleros:
+
+```
+┌─────────────────────────────────────────────┐
+│ Inicio Temprano │ Duración │ Fin Temprano   │
+│         Denominación de la tarea            │
+│ Inicio Tardío │ Holgura Total │ Holgura     │
+│               │               │ Libre │ Fin │
+│                                       │Tardío│
+└─────────────────────────────────────────────┘
+```
+
+> El apunte remite explícitamente al **apunte de Investigación Operativa — CPM/PERT** como anexo. Si hace falta profundizar el cálculo, está en IO.
+
+**El camino crítico** es: la secuencia de actividades críticas · el **más largo** de todos los caminos · el camino con holgura total cero (o mínima). **Puede haber más de uno**, lo que aumenta el riesgo de demora. Para acortar el proyecto hay que tocar las actividades del camino crítico; puede ser útil **reasignar recursos de una actividad no crítica a una crítica**.
+
+**Cómo se aplana, paso a paso** (método del apunte, con su ejemplo de 15 tareas y 23 días):
+
+1. Del diagrama de Red se deriva el **Gantt**.
+2. Debajo de cada barra se anota, día por día, **cuánto recurso de cada tipo** consume esa tarea (el ejemplo usa fracciones: 0,25 · 0,5 · 1 · 2).
+3. Se suma cada columna → fila de **totales por día**.
+4. Se grafica el **histograma de recursos** y se marca la línea de **disponibilidad**.
+5. Donde el total supera la disponibilidad hay **sobreutilización**. Se nivela **ajustando la holgura de las tareas no críticas**, tratando de no modificar la duración del proyecto.
+
+> **Advertencia del apunte:** *"el camino crítico no está definido solamente por los tiempos sino también por los recursos"*. Aplanar puede obligar a rearmar la red y **cambiar el camino crítico**.
+
+**Si aun así no entra: reducir la duración sin reducir el alcance.** Los proyectos pueden estar limitados por tiempo (fechas prefijadas) o por recursos (recursos escasos); **cuando ambos están limitados, el proyecto no es factible**. Dos métodos:
+
+| Método | Qué hace | Qué cuesta |
+|---|---|---|
+| **Fast tracking** | Actividades que normalmente irían en secuencia se realizan en paralelo | **Incrementa el riesgo** |
+| **Crashing** | Análisis costo-tiempo para obtener la mayor reducción al menor costo, agregando recursos | **Incrementa el costo** |
 
 ##### 8. Recursos Humanos
 
@@ -4278,6 +4549,21 @@ Formato de tabla sugerido por la cátedra:
 
 > No alcanza con definir las siglas: hay que explicar **en qué adquisición concreta del propio proyecto se usaría cada uno**.
 
+**Qué se evalúa de un proveedor en un RFP** (caso integral de cátedra):
+
+| Criterio | Qué evaluar |
+|---|---|
+| Capacidad técnica | Cobertura de requerimientos, integraciones, escalabilidad y seguridad |
+| Experiencia | Implementaciones similares y referencias |
+| Soporte | Horarios, tiempos de respuesta, canales, SLA y escalamiento |
+| Implementación | Metodología, plazo, migración, configuración y pruebas |
+| Capacitación | Plan de formación para administradores, operadores y usuarios |
+| Costo total | Licencias, servicios, infraestructura, soporte, renovaciones y costos asociados |
+
+**Variables del TCO** — licencias o suscripciones · servicios de implementación y parametrización · integraciones y migración de datos · infraestructura o consumo cloud · capacitación · soporte y mantenimiento · actualizaciones y renovaciones · administración interna de la herramienta · escalabilidad y crecimiento · **costos de salida o cambio de proveedor**.
+
+> El TCO **no** lo exige la Etapa 3 (pide "variables de costo" y "forma de adquisición"), pero la propia cátedra dice que puede enriquecerla. Para comparar desarrollo interno contra SaaS es la herramienta correcta.
+
 ##### 11. Costos
 
 Variables mínimas a considerar: horas por perfil; valor hora; licencias; hardware; servicios cloud; proveedores; capacitación; implementación; mantenimiento inicial; viáticos; costos indirectos; reserva de contingencia.
@@ -4287,6 +4573,41 @@ Costo RRHH  = cantidad de horas × valor hora por perfil
 Costo total = RRHH + adquisiciones + servicios + indirectos + contingencia
 ```
 
+**BAC (Budget At Completion).** El presupuesto total sale de asignar presupuesto a **cada actividad de la EDT** y sumarlos. En el caso de cátedra las nueve actividades dan **BAC = $3.700**.
+
+**Los beneficios hay que monetizarlos.** Se conectan con los objetivos y se traducen a plata o a costos evitados.
+
+| Beneficio | Cómo se mide |
+|---|---|
+| Menor FRT (First Response Time) y MTTR | Horas de soporte ahorradas, menor indisponibilidad, menor costo por incidente |
+| Mayor cumplimiento de SLA | Menos penalizaciones, reclamos y escalaciones |
+| Mayor trazabilidad | Menos tiempo administrativo, mejor capacidad de auditoría |
+| Menos incidentes perdidos o repetidos | Reducción de reprocesos y duplicaciones |
+| Mejor información de gestión | Decisiones basadas en tendencias, categorías y volumen |
+
+> **Monetización — ejemplo de cátedra:** si el seguimiento manual consume 150 horas mensuales y con la solución baja a 80, se liberan **70 horas mensuales**. Esas horas se valorizan al costo/hora y se comparan contra la inversión y los costos recurrentes. Ese es el formato que espera la factibilidad económica.
+
+**La fórmula de base del apunte T4:** `Beneficios = Ingresos + Costos evitados`. El procedimiento: determinar y calcular los costos · determinar, listar y definir los beneficios · identificar las fuentes de información · **determinar un indicador de costo-beneficio**.
+
+##### 11 bis. Técnicas de evaluación de inversiones
+
+| # | Técnica | Qué mide | Ventajas | Desventajas |
+|---|---|---|---|---|
+| 1 | **TR** — Tiempo de Recuperación | Cuántos años hasta que `Beneficios = Inversión` | Fácil de calcular y comprender | No considera beneficios posteriores al recupero, ni el momento en que se producen los flujos, ni el rendimiento de la inversión |
+| 2 | **TPR** — Tasa Promedio de Retorno | `Beneficio Promedio Anual ÷ Inversión Total`, con BPA = Beneficio Total ÷ Vida Útil | Fácil, y **sí considera la vida útil** | No considera el momento de los flujos ni el valor del dinero en el tiempo |
+| 3 | **VAN** — Valor Actual Neto | Valor neto de dinero que se espera obtener. **La inversión conviene si VAN > 0** | Considera el valor del dinero en el tiempo y la vida útil | Depende de elegir bien la **tasa de descuento**, y del costo de capital variable |
+| 4 | **TIR** — Tasa Interna de Retorno | La tasa a la que el VAN se hace cero | — | — |
+
+**Valor del dinero en el tiempo** — el dinero vale más hoy que el mismo monto en el futuro, por su potencial de inversión, la inflación y el riesgo.
+
+- **Valor Futuro (VF)**: cuánto valdrá en el futuro una suma que tenemos hoy, *capitalizando* a una tasa de interés.
+- **Valor Actual (VA)**: cuánto vale hoy una suma que recibiremos en el futuro, *descontando* a una tasa.
+- Ejemplo del apunte: al 10% anual, **$1 dentro de 4 años representa $0,68 hoy**. Con tasa 0%, VF = VA.
+
+> El apunte aclara: **no confundir la tasa de descuento con la tasa de inflación**.
+
+> **Para la Etapa 3.** La consigna pide "variables para calcular los costos" y factibilidad económica — no exige VAN ni TIR. Pero con desarrollo interno (inversión alta adelante, ahorro después) el **TR** y el **VAN** son los que muestran de verdad si conviene contra SaaS. Es el lugar natural para el TCO a 3 años.
+
 ##### 12. Análisis de Factibilidad
 
 **Técnica** — disponibilidad de tecnología, compatibilidad, infraestructura existente, conocimientos del equipo, capacidad, seguridad, integración, soporte, riesgos técnicos.
@@ -4295,23 +4616,147 @@ Costo total = RRHH + adquisiciones + servicios + indirectos + contingencia
 
 > **No sirve escribir** "es económicamente factible porque traerá beneficios". Hay que mostrar, aunque sea estimado: *el proyecto cuesta X; reduce Y horas mensuales; el valor de esas horas es Z; además evita determinados costos o pérdidas.*
 
-**Legal** — la consigna la pide explícitamente (punto 11) aunque el documento de sugerencias no la desarrolla. Para el caso Personal: Ley 25.326 (datos personales), Ley 27.078 Argentina Digital, normativa ENACOM de calidad de servicio, Ley 24.240 de Defensa del Consumidor, y marco contractual con contratistas. *(La lista sale del punto 7 de la Etapa 1.)*
+Según el nivel de la ejercitación pueden usarse indicadores: **plazo de recuperación (TPR), VAN o TIR**.
+
+**Legal** — qué revisar, según el caso integral de cátedra: protección de datos, confidencialidad, licenciamiento, condiciones contractuales, responsabilidades del proveedor, **ubicación y almacenamiento de la información** cuando corresponda, y políticas internas de seguridad y auditoría.
+
+Para el caso Personal: Ley 25.326 (datos personales), Ley 27.078 Argentina Digital, normativa ENACOM de calidad de servicio, Ley 24.240 de Defensa del Consumidor, y marco contractual con contratistas. *(La lista sale del punto 7 de la Etapa 1.)*
+
+> **Cómo cierra la conclusión (modelo de cátedra):** *"La alternativa X resulta viable si el RFI/RFP confirma que existe una solución que satisface los requerimientos técnicos y de seguridad dentro del presupuesto y plazo disponibles. La aprobación definitiva depende del análisis de TCO, beneficios, restricciones y condiciones contractuales."* — **no se declara factible antes de verificar esas condiciones.**
+
+##### 13. La ejercitación de U5 vs. la Etapa 3 del TPI
+
+La cátedra tiene **dos consignas distintas** sobre esta unidad, y no piden lo mismo.
+
+**La ejercitación de U5** (`ASI-5_Ejercitacion1 - Proyectos de TI.docx`) está organizada por **áreas de conocimiento del PMI**:
+
+1. **Gestión del Alcance** — objetivos cuantificables · alternativas y selección · ciclo de vida, fases, actividades y EDT/WBS · Acta de Proyecto.
+2. **Gestión de Adquisiciones** — lista de requerimientos · **ejecutar un RFI** sobre las soluciones existentes · descripción de una propuesta de implementación y su impacto en el proceso · características a evaluar de proveedores en un RFP y **consulta de presupuesto a al menos 3 proveedores** · variables del **TCO**.
+3. **Gestión de Tiempos y asignación de recursos** — a partir de la EDT y **con una herramienta de planificación**, estimar la duración · Red de Tareas y Gantt · perfiles y competencias.
+4. **Gestión de Costos** — costos del proyecto e identificación de los que no se detectaron antes (alquileres, viajes, conectividad) · **Presupuesto del Proyecto** · **estudio de beneficios** y sus variables · factibilidad técnica, económica y legal.
+
+**Capacidades del RA3** que declara la ejercitación: identificar objetivos · analizar y justificar soluciones (desarrollo propio o contratación externa) · **investigar mecanismos de financiación** · analizar viabilidad y factibilidad económica, técnica y legal **y evaluar el impacto social y ambiental** · realizar el plan de proyecto.
+
+**Qué pide cada una** — tabla de la propia cátedra:
+
+| Tema | Ejercitación U5 | TP Integrador Etapa 3 |
+|---|---|---|
+| Proyecto TI, objetivos, alternativas y selección | Sí | Sí |
+| Ciclo de vida, fases y EDT/WBS | Sí | Sí |
+| Acta de Proyecto | Sí | Sí |
+| **RFI completo y relevamiento de soluciones** | Sí | **No** — solo explicar RFI vs. RFP y cuándo usar cada uno |
+| **RFP y 3 cotizaciones** | Sí | **No** |
+| **TCO detallado** | Sí | Pide variables de costo y forma de adquisición; el TCO **puede enriquecer** |
+| Red de tareas y Gantt | Sí | Sí |
+| Perfiles y competencias | Sí | Sí |
+| Aplanamiento de recursos | Relacionado con gestión de tiempos | **Sí, expresamente** |
+| **Higiene y Seguridad / Layout** | **No** | **Sí** |
+| Factibilidad técnica, económica y legal | Sí | Sí |
+
+> **Para entregar el TP se sigue la consigna de la Etapa 3.** La ejercitación de U5 es más ancha y cubre la unidad completa: la cátedra avisa explícitamente que **puede aparecer en evaluación**. Los tres temas que están en U5 y no en la Etapa 3 — RFI ejecutado, 3 cotizaciones y TCO — son los candidatos naturales a pregunta de parcial.
 
 #### Ejercicios resueltos tipo
 
-- *(Pendiente: no hay ejemplo resuelto de cátedra para la Etapa 3 en el material disponible.)*
+**Caso integral de cátedra — Centro de Servicios y Gestión de Incidentes.** Única resolución completa de la unidad. Recorre la cadena entera: problema → proyecto → objetivos → alternativas → ciclo de vida → EDT → adquisiciones → tiempos → costos → beneficios → factibilidad.
+
+**Problema.** La organización gestiona incidentes con canales y herramientas dispersas: no hay trazabilidad, priorización, seguimiento de SLA ni escalamiento. *El problema no es la falta de una herramienta, es la falta de un proceso centralizado, medible y controlable.*
+
+**Proyecto.** Implementar un Centro de Servicios soportado por una herramienta centralizada de Gestión de Incidentes que permita registrar, categorizar, priorizar, asignar, escalar y hacer seguimiento, con indicadores de desempeño y trazabilidad. *(Ejemplo de la cátedra: compañía de 3.000 empleados donde hoy cada usuario manda WhatsApp o llama directo a "Fulano de Sistemas"; el proyecto crea un **único punto de contacto**.)*
+
+> La formulación **no arranca por una marca ni un producto**. Primero qué problema se resuelve y qué resultado se espera; después cómo implementarlo.
+
+**Objetivos** — resultado + métrica + meta + plazo + criterio de verificación:
+
+| # | Objetivo | Criterio de verificación |
+|---|---|---|
+| 1 | Reducir 30% el tiempo promedio de primera respuesta en los primeros 6 meses post-producción | Tiempo promedio antes vs. después |
+| 2 | Resolver ≥90% de los incidentes dentro del SLA acordado en los primeros 6 meses de operación | % de incidentes resueltos dentro del SLA |
+| 3 | Alcanzar 95% de incidentes registrados y trazables en la herramienta dentro de los primeros 3 meses | Incidentes registrados / incidentes totales estimados |
+
+> "Mejorar la Gestión de Incidentes" no sirve como objetivo porque no permite saber cuándo se alcanzó.
+
+**Ciclo de vida: híbrido con implementación incremental.** La primera parte es predecible (relevamiento, requerimientos, consulta al mercado, RFP, selección de proveedor); la configuración y puesta en marcha conviene validarla de a poco con soporte y usuarios antes del despliegue completo. *No alcanza con decir "es incremental porque trabaja por incrementos": hay que explicar qué característica del proyecto lo hace conveniente.*
+
+**Fases (6):** 1. Inicio y definición · 2. Selección de solución · 3. Diseño y configuración · 4. Integración · 5. Piloto y validación · 6. Despliegue y cierre.
+
+**EDT (7 paquetes):** 1. Inicio y requerimientos · 2. Selección de solución · 3. Diseño del proceso · 4. Configuración e integración · 5. Validación · 6. Implementación · 7. Cierre.
+
+> **Relación clave que enuncia la cátedra:** `EDT → actividades → perfiles y recursos → duraciones → dependencias → Red/Gantt → esfuerzo/horas → costos`. **Si la EDT es pobre, todo lo que viene después queda débil.**
+
+**Tiempos y costos — el ejercicio numérico completo.** Unidad: horas. Valores didácticos, no de mercado.
+
+| ID | Actividad | Pred. | Dur. (h) | Ppto. ($) | ES | EF | LS | LF | Holgura | Crítica |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | Análisis de requisitos según la infraestructura de servicios | — | 12 | 600 | 0 | 12 | 0 | 12 | 0 | **Sí** |
+| 2 | Relevamiento de propuestas y soluciones del mercado | 1 | 4 | 200 | 12 | 16 | 12 | 16 | 0 | **Sí** |
+| 3 | Desarrollo de los RFP para selección de proveedores | 1 | 8 | 400 | 12 | 20 | 13 | 21 | 1 | No |
+| 4 | Selección de proveedor según la matriz de comparación | 2 | 5 | 300 | 16 | 21 | 16 | 21 | 0 | **Sí** |
+| 5 | Implementación del Centro de Servicios / mejora de procesos | 3, 4 | 7 | 600 | 21 | 28 | 21 | 28 | 0 | **Sí** |
+| 6 | Definición de taxonomías para la Gestión de Incidentes | 1 | 8 | 500 | 12 | 20 | 18 | 26 | 6 | No |
+| 7 | Relevamiento de infraestructura y definición de herramientas | 5, 6 | 5 | 400 | 28 | 33 | 28 | 33 | 0 | **Sí** |
+| 8 | Definición de políticas de seguridad y auditoría de datos | 6 | 7 | 400 | 20 | 27 | 26 | 33 | 6 | No |
+| 9 | Implementación y alineación de las herramientas | 7, 8 | 6 | 300 | 33 | 39 | 33 | 39 | 0 | **Sí** |
+
+**Red de precedencias.** Inicio → 1. Desde la actividad 1 se abren tres ramas: `1→2→4`, `1→3` y `1→6`. Las actividades 3 y 4 habilitan la 5; las 5 y 6 habilitan la 7; la 6 habilita también la 8; finalmente 7 y 8 habilitan la 9.
+
+**Resultados:**
+
+```
+Duración del proyecto : 39 h   (la suma de las duraciones da 62 h — no es eso)
+Camino crítico        : 1 → 2 → 4 → 5 → 7 → 9
+Holguras              : act. 3 = 1 h · act. 6 = 6 h · act. 8 = 6 h
+BAC                   : $3.700
+```
+
+En el Gantt: **rojo** = actividad crítica (holgura 0), **azul** = no crítica.
+
+**Perfiles del caso (7):** Líder/Director de Proyecto · Analista ITSM/funcional · Administrador-configurador de la herramienta · Especialista de infraestructura · Especialista de seguridad · Responsable de Service Desk · Capacitador / gestión del cambio.
+
+> **Advertencia sobre el Gantt del caso:** representa la lógica de precedencias **sin restricciones de recursos**. Al asignar personas concretas hay que verificar sobreasignaciones y aplanar — y la duración real puede cambiar.
+
+> **Aviso de la propia cátedra sobre este caso:** *"No reemplaza la consigna específica del TP Integrador Etapa 3: para el TP, se deben seguir exactamente los puntos exigidos en la consigna."* Sirve para entender la unidad y para evaluación.
 
 #### Dudas / pendientes
 
-- **Falta la plantilla del Acta de Proyecto del e-Group.** Es entregable obligatorio (punto 4.b de la consigna).
-- **Falta apunte/PPT de cátedra de esta unidad.** Todo lo de arriba sale de la consigna y de las sugerencias de clase.
+- ~~Falta la plantilla del Acta de Proyecto.~~ **Conseguida el 2026-08-19** — `fuentes/ASI/Ejercitación/ASI-5-T1-Proyectos_AnexoI_ActaProyecto.doc`. Detalle menor: la consigna del TPI dice que está en el **e-Group** y la ejercitación de U5 dice **campus**; es el mismo Anexo I.
+- ~~Falta el apunte teórico de cátedra de la unidad.~~ **Conseguidos los cinco capítulos el 2026-08-19** (T1 a T5). T1, T2 y T3 tienen apunte en texto; T4 y T5 solo diapositivas.
+- ~~La cátedra llama Unidad 5 a esta unidad.~~ **Renumerada el 2026-08-19** según el Programa Analítico: esta es la Unidad 5. La wiki ahora sigue la numeración oficial.
+- **T5 Adquisiciones está poco desarrollado acá.** Las diapositivas cubren el proceso de abastecimiento, definición de requerimientos, consulta a pares/expertos/proveedores y etapas del proceso; se ingirió pero no se volcó en detalle. Si el punto 8 y 9 de la Etapa 3 lo piden, hay que volver ahí.
+- El apunte T3 remite a un **anexo de Investigación Operativa (CPM-PERT)** para el cálculo detallado de la red. Está en `fuentes/4º AÑO/Investigación Operativa/`, no se copió.
+- La ejercitación de U5 declara dos temas del RA3 que **no aparecen en la consigna de la Etapa 3**: **mecanismos de financiación** de proyectos de base tecnológica e **impacto social y ambiental** de la solución. Pueden entrar en evaluación.
 - La consigna numera los puntos de forma irregular: la sección "Higiene y Seguridad Laboral" reinicia en 1 y 2, y luego "Adquisiciones" sigue en 6. **Al armar el índice del documento, mantener el orden de la consigna pero numerar corrido.**
 - El punto 3 dice **"Validar con el docente"** la alternativa seleccionada. Hay que hacerlo antes de desarrollar el resto.
 
 #### Fuentes
 
-- `fuentes/ASI/ASI26_TPIntegrador_Etapa3 - Proyecto de TI.md` — consigna oficial.
+- `fuentes/ASI/ASI26_TPIntegrador_Etapa3 - Proyecto de TI.md` — consigna oficial del TPI.
 - `fuentes/ASI/TPIntegrador - Etapa 3 - Practica Sugerencias.md` — sugerencias de cátedra, clase 28/07/2026.
+- `fuentes/ASI/Ejercitación/ASI-5_Ejercitacion1 - Proyectos de TI.docx` — ejercitación de la Unidad 5 (RA3 y las 4 áreas PMI).
+- `fuentes/ASI/Ejercitación/ASI-5-T1-Proyectos_AnexoI_ActaProyecto.doc` — **plantilla oficial del Acta de Proyecto**. Formato `.doc` legacy: markitdown no lo soporta, se convirtió con `textutil -convert txt`.
+- `fuentes/ASI/Ejercitación/ASI26_U5_Caso_Integral_Resolucion_Centro_Servicios.docx` — caso integral resuelto.
+- `fuentes/ASI/Ejercitación/ASI26_U5_Caso_Integral_Gantt_Centro_Servicios.xlsx` — Gantt + CPM + presupuestos del caso.
+- `fuentes/ASI/Campus/ASI-Unidad5_Adm_Recursos_en_ProyectosIT/` — los cinco capítulos de la unidad (19/08/2026):
+  - `ASI-5-T1-Proyectos_APUNTE.V1.0.pdf` + `_DIAP.V2.2.pdf` — qué es un proyecto, tipos, objetivos, ciclos de vida, organización, PMI.
+  - `ASI-5-T2-Integración_Alcance_Cierre_APUNTE.V1.0.pdf` + `_DIAP.V2.0.pdf` — grupos de procesos, Acta de Constitución, enunciado del alcance, control de cambios, cierre, EDT. **Trae el Anexo I con la plantilla del Acta anotada y el ejemplo ESABAL.**
+  - `ASI-5-T3-Tiempos_APUNTE.V1.0.pdf` + `_DIAP.V2.0.pdf` — estimación de esfuerzo (modelos, juicio de expertos, Delphi), diagrama de Red, CPM, histograma de recursos, fast tracking y crashing, control y seguimiento.
+  - `ASI-5-T4-Costos_DIAP.V2.2.pdf` — justificación económica, TR, TPR, VAN, TIR. *(Solo diapositivas, no hay apunte.)*
+  - `ASI-5-T5-Adquisiciones_DIAP.V2.0.pdf` — proceso de abastecimiento y definición de requerimientos. *(Solo diapositivas.)*
+  - `ASI-5-T3-Ejemplo Costos_GANTT.xlsx` · `ASI-5-T4-Método del valor ganado - EJERCICIO.docx` y `- RESOLUCION.xlsx` · `ASI-5-T1-Proyectos_Ejemplo.docx`.
+
+---
+
+### Unidad 6 — Emprendedorismo
+
+> **Unidad no desarrollada.** No toca la Etapa 3 del TPI. Material identificado en el campus pero **no copiado a `fuentes/ASI/`** — se copia cuando haga falta.
+
+#### Conceptos clave
+
+Contenidos según el Programa Analítico: proyectos innovadores y emprendimientos de base científica y tecnológica · tendencias actuales y transformación digital · ecosistemas emprendedores · herramientas de desarrollo y modelado de proyectos innovadores (**Design Thinking**, **Canvas**) · gestión de emprendimientos tecnológicos, **método Lean Start-up**.
+
+#### Dudas / pendientes
+
+- Sin desarrollar. Material disponible en el campus: cinco diapositivas (`ASI-6-C1 Desarrollo Emprendedor` · `C2 Gestión del Negocio` · `C3 Producto y Clientes` · `C4 Funcionamiento del Emprendimiento` · `C5 Rentabilidad`) más `Business Model Canvas` en dos versiones (español y Strategyzer).
+- Bibliografía del programa para esta unidad: Ries, *El método Lean Startup* · Osterwalder y Pigneur, *Business Model Generation* · Lockwood, *Design Thinking* · Orzen y Paider, *The Lean IT field guide*.
 
 ---
 
@@ -4329,7 +4774,7 @@ Costo total = RRHH + adquisiciones + servicios + indirectos + contingencia
 | Proceso crítico elegido | **Instalación de internet con fibra óptica** |
 | Etapa 1 | Entregada 23/04/2026 · corregida por cátedra 19/05/2026 · ajustada por el grupo 21/05/2026 (v3) |
 | Etapa 2 | Entregada 18/05/2026 (v1). **La tabla de versiones no registra corrección posterior — corregir antes de la Etapa 3.** |
-| Etapa 3 | Pendiente. Consigna y sugerencias recibidas 28–29/07/2026 |
+| Etapa 3 | En curso. Consigna y sugerencias recibidas 28–29/07/2026. Proyecto y alternativa cerrados por el grupo el 10/08/2026 (candidato B, alcance B medio, desarrollo interno). Validación con el docente: 11/08/2026 |
 
 ##### Formato del documento de entrega (usar el mismo en la Etapa 3)
 
@@ -4605,19 +5050,13 @@ Encontradas al revisar los documentos el 2026-07-29. Ninguna es de contenido: to
 
 ##### Etapa 3 — Proyecto de TI (en curso)
 
-**Estado al 2026-07-29:** consigna y sugerencias de cátedra recibidas. Se evaluaron tres candidatos de proyecto. **Preferencia declarada: candidato B**, pendiente de discusión con el grupo y de validación con el docente. Nada cerrado todavía.
+**Estado al 2026-08-10:** proyecto y alternativa **cerrados por el grupo**. Candidato **B** (gestión de OT + app de campo), alcance **B medio**, alternativa de construcción **A1 — desarrollo interno con componentes de mercado acotados**. Cerradas D1, D2, D4 y D5. Queda **D3** (líneas base), a consultar con el docente el 2026-08-11 junto con la validación del punto 3.
 
 ###### ▶ Por dónde retomar
 
-Todo el análisis está más abajo en esta sección. Para la próxima sesión, el orden es este:
+**Paso 1 — Clase del 2026-08-11: validar el punto 3 con el docente.** La consigna lo exige explícitamente. Llevar: nombre del proyecto, problema, alcance incluye/no incluye, la matriz re-ponderada y la selección de desarrollo interno con la desventaja de plazo admitida. Ver *Paquete de validación* más abajo.
 
-**Paso 1 — Cerrar D1 (bloquea todo lo demás).** ¿La app móvil de campo entra en el alcance? Es la única pregunta que hay que contestar antes que cualquier otra cosa, porque de ella dependen el layout de higiene y seguridad, las adquisiciones y la factibilidad económica. Recomendación: **B medio** (despacho + priorización + motor de asignación + app móvil + integraciones + seguridad). Ver tabla de D1.
-
-**Paso 2 — Cerrar D4 y llevarlo a validar con el docente.** La consigna lo exige explícitamente en el punto 3. A esa clase hay que llevar: nombre del proyecto, problema, alcance (incluye / no incluye) y las tres alternativas con la matriz ponderada. Todo eso ya está redactado abajo; solo hay que decidir si se acepta.
-
-**Paso 3 — Cerrar D2 y D3** (calendario y líneas base). Son decisiones de redacción, no de contenido, pero tienen que quedar coherentes entre el Acta, el Gantt, los objetivos y la factibilidad.
-
-**Paso 4 — Recién ahí producir, en este orden de dependencia:**
+**Paso 2 — Producir, en este orden de dependencia:**
 
 ```
 EDT ──┬─→ perfiles y competencias (punto 5)
@@ -4627,9 +5066,17 @@ EDT ──┬─→ perfiles y competencias (punto 5)
 En paralelo, sin depender de la EDT: Acta de Proyecto (punto 4.b) y layout de H&S (punto 6).
 ```
 
-**Ojo con D5 al armar la EDT**, no después: hay que meter paralelismo real y hacer que dos o tres tareas compitan por el mismo perfil, o el punto de aplanamiento sale vacío.
+**Ojo con D5 al armar la EDT**, no después: hay que meter paralelismo real y hacer que dos o tres tareas compitan por el mismo perfil. Con desarrollo interno esto aparece casi solo (ver D5), pero hay que diseñarlo, no esperarlo.
 
-**Lo que falta conseguir antes del paso 4:** plantilla del Acta del e-Group, fecha de entrega, y si la cátedra acepta cronograma en meses relativos.
+**El punto más pesado ahora es la factibilidad económica (punto 12).** Con desarrollo interno el argumento ya no es corto: hace falta un **TCO a 3 años comparado contra SaaS** — horas × valor hora por perfil + hardware + infraestructura, contra licencia recurrente por usuario × N técnicos × 3 años.
+
+**Acta de Proyecto (punto 4.b) — BORRADOR ESCRITO al 2026-08-19.** Fuente de verdad: `materias/ASI/etapa3-acta-proyecto.md`; el `.docx` se regenera con `npm run docx -- <in.md> <out.docx>` (`scripts/build-docx.js`), no se edita a mano. Sigue el Anexo I de cátedra y las instrucciones campo por campo del apunte T2 (ver Unidad 5 §6).
+
+Pendiente de resolver en el Acta: los **nombres propios** (van inventados, marcados con ⚠ y en rojo en el `.docx`) y el **monto de autoridad de compra** del Director de Proyecto, que hoy quedó genérico — es el campo donde el ejemplo de cátedra es más concreto.
+
+> **Dependencia con D4.** El Acta se apoya en A1 desarrollo interno. Si el docente objeta la alternativa, cambian `Producto` y `Entregables` (pasan a "solución configurada") y cae la autoridad de compra de infraestructura. `Justificación`, `Objetivos` y `Límite` no se tocan en ningún escenario.
+
+**Lo que falta conseguir:** fecha de entrega, y si la cátedra acepta cronograma en meses relativos.
 
 **Entregables exigidos por la consigna**, en orden:
 
@@ -4667,7 +5114,7 @@ En paralelo, sin depender de la EDT: Acta de Proyecto (punto 4.b) y layout de H&
 *A favor:* máxima reutilización de lo ya escrito en la Etapa 2 — umbrales de evento, SLA, ficha de CI, relaciones, KPI de 10.2 y 11.3, procesos de 11.2. Buena parte del contenido técnico ya está redactado. El mejor caso de RFI/RFP de los tres: hay mercado real, diverso y comparable. Factibilidad legal jugosa (datos personales en nube de proveedor extranjero → transferencia internacional, encargado de tratamiento, notificación de brecha).
 *En contra:* **el layout de higiene y seguridad es el punto débil** — es un proyecto de oficina y el layout se derrumba a "silla ergonómica y pausas activas", justo lo que la cátedra marca como insuficiente. Además, con olas secuenciales no hay conflicto de recursos que aplanar.
 
-###### Candidato B — desarrollo (preferido, sin cerrar)
+###### Candidato B — desarrollo (ELEGIDO, 2026-08-10)
 
 **Nombre.** *Implementar una plataforma de gestión de órdenes de trabajo con aplicación móvil de campo, para resolver la falta de trazabilidad, priorización y control de competencias técnicas en el proceso de instalación de fibra óptica.*
 
@@ -4711,23 +5158,53 @@ En paralelo, sin depender de la EDT: Acta de Proyecto (punto 4.b) y layout de H&
 | O3 | Visitas fallidas por causa evitable | OT reprogramadas por "técnico sin competencia" o "kit incompleto" ÷ OT despachadas | 12% *(supuesto)* | ≤6% | 6 meses desde go-live |
 | O4 | Cumplimiento de la priorización de la cola | % de OT despachadas según el orden del motor; % de cumplimiento de SLA de primera respuesta | No medible hoy (esa **es** la definición de R07) | ≥95% / ≥90% | Mes 3 desde go-live |
 
-**Alternativas y matriz de selección** (pesos a validar con el docente):
+**Alternativas y matriz de selección — DECIDIDA (D4): A1, desarrollo interno.**
+
+Regla de la cátedra (Bloque 4 de las sugerencias): *"las alternativas deben resolver **el mismo problema**, pero de maneras diferentes"*. Las tres construyen el mismo alcance **B medio** — cambia el modo de construcción, no lo que se construye. La distinción con D1 es esa: D1 define **qué** se construye (alcance), D4 define **cómo** (modo de construcción). Presentar alcances distintos como alternativas es el error que marca la cátedra.
+
+| | Qué significa |
+|---|---|
+| **A1 — Desarrollo interno** | El área de sistemas de Personal diseña y desarrolla la plataforma, con componentes de mercado acotados (ver abajo) |
+| A2 — SaaS FSM configurable | Se contrata una plataforma de *Field Service Management* de mercado y se configura |
+| A3 — Desarrollo tercerizado | Una consultora la desarrolla a medida, con hosting en infraestructura de Personal |
+
+**Criterios.** La cátedra lista diez: costo, tiempo, calidad, riesgo, conocimientos disponibles, dependencia de proveedores, seguridad, escalabilidad, mantenimiento e integración. La matriz usa ocho de ellos (calidad y riesgo quedan absorbidos en integración, seguridad y mantenimiento; declararlo en el documento).
+
+**Justificación de los pesos** — este es el argumento que sostiene toda la elección, y sale del propio trabajo del grupo:
+
+> Los pesos reflejan el análisis de riesgos de la Etapa 2. Allí se identificaron **R03** (firewall sin reglas segmentadas) y **R05** (credenciales de contratistas sin baja) **ambos en severidad 15**, los dos más altos del trabajo: para este proceso, el control de accesos y el perímetro dominan. Además, cinco de los seis componentes de la solución dependen de integrarse con SGOT, CRM, BD y NMS — la integración no es un criterio más, es el núcleo técnico. Y por tratarse de un proceso operativo central (no una herramienta de soporte), la dependencia de un proveedor externo compromete la continuidad del negocio.
 
 | Criterio | Peso | A1 Interno | A2 SaaS FSM | A3 Tercerizado |
 |---|---|---|---|---|
-| Costo total de propiedad a 3 años | 20% | 2 | 4 | 3 |
-| Tiempo hasta el go-live | 20% | 2 | 5 | 4 |
-| Integración con SGOT / CRM / BD | 20% | 5 | 3 | 4 |
-| Seguridad y cumplimiento (Ley 25.326, R05) | 15% | 5 | 3 | 4 |
-| Mantenimiento y evolución | 15% | 4 | 5 | 3 |
-| Conocimiento disponible en el equipo | 10% | 3 | 4 | 3 |
-| **Ponderado** | **100%** | **3,45** | **4,00** | **3,55** |
+| Seguridad y cumplimiento (Ley 25.326, R03, R05) | 20% | 5 | 3 | 4 |
+| Integración con SGOT / CRM / BD / NMS | 20% | 5 | 3 | 4 |
+| Dependencia del proveedor | 15% | 5 | 2 | 3 |
+| Costo total de propiedad a 3 años | 10% | 2 | 4 | 3 |
+| Tiempo hasta el go-live | 10% | 2 | 5 | 4 |
+| Mantenimiento y evolución | 10% | 4 | 5 | 3 |
+| Escalabilidad | 10% | 3 | 5 | 3 |
+| Conocimiento disponible en el equipo | 5% | 3 | 4 | 3 |
+| **Ponderado** | **100%** | **4,00** | **3,60** | **3,50** |
 
-Redacción sugerida de la selección: *se selecciona la alternativa SaaS porque obtiene el mayor resultado ponderado (4,00), reduce el plazo de implementación e incorpora de fábrica las funcionalidades que el propio grupo enumeró como necesarias en el punto 9.2 de la Etapa 2, aunque genera dependencia del proveedor y costos recurrentes por usuario.* Compensación obligatoria del punto flojo (seguridad, 3): exigir por contrato hosting en región habilitada, cifrado en tránsito y reposo, SSO + MFA, mínimo privilegio, notificación de bajas en menos de 24 h y derecho de auditoría. **Repliegue preparado:** A3 tercerizado con hosting propio (3,55) si el docente objeta la salida de datos personales del perímetro.
+> **Cómo se llegó acá.** La primera versión de la matriz usaba 6 criterios y pesos parejos, y daba SaaS 4,00 · Tercerizado 3,55 · Interno 3,45. Al completar los criterios que pide la cátedra (se sumaron dependencia del proveedor y escalabilidad) quedó SaaS 3,85 · Interno 3,60 · Tercerizado 3,45. La versión final **no cambia ningún puntaje** — solo los pesos, con el fundamento de arriba. Dejar constancia de esto en el documento es preferible a que parezca que los números se acomodaron al resultado.
 
-**Ciclo de vida: híbrido.** Predictivo para selección de proveedor, contratación, arquitectura de integración, seguridad y cumplimiento (requerimientos estables, compras corporativas, RFI/RFP, evaluación legal). Incremental/iterativo para configuración funcional, UX de la app, reglas de priorización y asignación, y despliegue territorial (la usabilidad con guantes, bajo sol y con conectividad intermitente no se especifica por adelantado; los pesos del motor se calibran con datos de operación). No cascada pura: se entregaría una app que los técnicos no usan y falsean, destruyendo la medición de O1 y O2. No ágil puro: hay contrato con proveedor, plazos de entrega, marco regulatorio y presupuesto a aprobar.
+**Redacción de la selección** (sigue el modelo de la cátedra: mayor ponderado + razones concretas + desventaja admitida):
 
-**Fases propuestas (base de la EDT):** 1. Inicio (Acta aprobada) · 2. Relevamiento y análisis (**incluye la medición de líneas base como entregable propio**) · 3. Selección de proveedor (RFI → lista corta → RFP → evaluación → contrato) · 4. Diseño y configuración · 5. Integración y seguridad · 6. Migración de datos · 7. Pruebas · 8. Piloto en zona acotada · 9. Capacitación · 10. Despliegue por olas · 11. Estabilización y cierre.
+> *Se selecciona el desarrollo interno porque obtiene el mayor resultado ponderado (4,00) bajo criterios que priorizan la seguridad, la integración con los sistemas existentes y la independencia de proveedores, coherentes con los riesgos R03 y R05 identificados en la Etapa 2 en severidad 15. Los datos personales de clientes no salen del perímetro de la organización y la integración con SGOT, CRM y NMS se resuelve sin intermediarios. **Como contrapartida, es la alternativa de mayor plazo hasta el go-live y de mayor inversión inicial**, lo que se compensa por la ausencia de licenciamiento recurrente por usuario a partir del segundo año.*
+
+**No es 100% interno.** Desarrollar la app de campo y el motor de asignación es creíble; desarrollar un motor de mapas y geocodificación desde cero, no. Se compran: servicio de mapas/geolocalización, MDM para los dispositivos, dispositivos rugerizados, infraestructura (cloud propio u on-premise) y licencias de software base. Esto además sostiene los puntos 7, 8 y 9 — sin nada que adquirir, el RFI/RFP se queda sin caso concreto y la consigna exige indicar en qué adquisición puntual se usaría cada uno.
+
+**Repliegue.** Ya no hace falta el de datos personales: con desarrollo interno no salen del perímetro. Si la objeción es el **plazo**, el repliegue es **A3 tercerizado con hosting propio** (3,50) — mantiene los datos adentro y acorta el go-live.
+
+**Objeción previsible del docente:** *"¿por qué desarrollar si hay producto de mercado?"*. La respuesta no es preferencia del grupo: es que el proceso maneja datos personales de clientes, que el propio análisis de riesgos puso el control de accesos y el perímetro como los dos riesgos de mayor severidad, y que es un proceso operativo central donde la dependencia de un proveedor compromete la continuidad.
+
+**Ciclo de vida: híbrido.** Predictivo para arquitectura, integraciones, seguridad, cumplimiento y adquisición de hardware e infraestructura (requerimientos estables, compras corporativas, RFI/RFP, evaluación legal). Incremental/iterativo para la app de campo, las reglas de priorización y del motor de asignación, y el despliegue territorial: la usabilidad con guantes, bajo sol y con conectividad intermitente no se especifica por adelantado, y los pesos del motor se calibran con datos de operación. No cascada pura: se entregaría una app que los técnicos no usan y falsean, destruyendo la medición de O1 y O2. No ágil puro: hay compras corporativas, plazos de entrega, marco regulatorio y presupuesto a aprobar.
+
+> Con **A1 desarrollo interno** el tramo iterativo queda mejor justificado que con SaaS: no se configura un producto cerrado, se construye la app y el motor, que es exactamente donde la incertidumbre de uso es alta.
+
+**Fases propuestas (base de la EDT) — 12 fases:** 1. Inicio (Acta aprobada) · 2. Relevamiento y análisis (**incluye la medición de líneas base como entregable propio**, ver D3) · 3. Arquitectura y diseño técnico · 4. Adquisiciones (dispositivos, infraestructura, servicio de mapas, MDM — RFI → RFP → contrato) · 5. Desarrollo por módulos · 6. Integración y seguridad · 7. Migración de datos · 8. Pruebas · 9. Piloto en zona acotada · 10. Capacitación · 11. Despliegue por olas · 12. Estabilización y cierre.
+
+> **Las fases 4 y 5 corren en paralelo** — las compras no bloquean el desarrollo. Ahí nace buena parte del conflicto de recursos que exige D5.
 
 > La fase 11 cierra el circuito con la Etapa 2: el nuevo sistema es un CI nuevo en la CMDB (clase Software/Aplicación) y su puesta en producción es un **cambio normal que pasa por el CAB**, tal como se definió en el punto 11.2. Es un punto fácil de sumar.
 
@@ -4747,38 +5224,91 @@ Redacción sugerida de la selección: *se selecciona la alternativa SaaS porque 
 
 Presentación sugerida: **dos planos, no nueve.** (1) Base operativa en una planta: depósito, playa de carga, mesa de despacho, NOC y sala técnica, con circulación peatonal/vehicular, matafuegos, salidas y punto de encuentro. (2) Croquis tipo de trabajo en campo con la escena de tendido aéreo y vallado; domicilio y cámara subterránea como esquemas complementarios.
 
-###### Decisiones abiertas antes de escribir la Etapa 3
+###### Decisiones — estado al 2026-08-10
 
-**D1 — Dónde se corta el alcance de B.**
+| | Decisión | Estado |
+|---|---|---|
+| D1 | Alcance: **B medio** | **Cerrada** por el grupo |
+| D2 | Cronograma en **meses relativos** + plazo de O1 desde el go-live | **Cerrada** por el grupo |
+| D3 | Líneas base | **Abierta** — se consulta al docente el 2026-08-11 |
+| D4 | Alternativa: **A1 desarrollo interno** (con componentes de mercado acotados) | **Cerrada** por el grupo, **falta validar con el docente** (lo exige el punto 3) |
+| D5 | Paralelismo obligatorio en la EDT | **Cerrada** por el grupo |
+
+**D1 — Dónde se corta el alcance de B. → CERRADA: B medio.**
 
 | Opción | Qué incluye | Problema |
 |---|---|---|
 | B chico | Solo la app móvil | EDT pobre, adquisiciones de dos filas, costos triviales |
-| **B medio** | Despacho + priorización + motor de asignación + app móvil + integraciones + seguridad | **Recomendado** |
+| **B medio** | Despacho + priorización + motor de asignación + app móvil + integraciones + seguridad | **ELEGIDA** |
 | B grande | B medio + correlación de eventos del NMS + CMDB | Se come el candidato C entero. Paraguas |
 
 > **Acoplamiento crítico:** si se recorta la app móvil, se cae el punto de higiene y seguridad — sin trabajo de campo el layout queda en una oficina. La decisión de alcance y el punto 6 de la consigna están atados.
 
-**D2 — El calendario.** El objetivo dice "para el año 2026" y estamos a fines de julio. Tres salidas: (a) fechar el inicio en enero 2026 y que el Gantt cierre en el año — cómodo pero es ficción; (b) arrancar en agosto 2026 y reformular el plazo a "6 meses posteriores al go-live", declarándolo como ajuste; (c) cronograma en **meses relativos** (Mes 1, Mes 2…) desde la aprobación del Acta, sin fechas absolutas. Recomendación: **(c) + (b)** — Gantt en meses relativos y el plazo de O1 medido desde el go-live, con nota de ajuste. Lo que no puede pasar es que el Gantt diga una cosa y el objetivo otra.
+**D2 — El calendario. → CERRADA: meses relativos + plazo desde el go-live.** El objetivo dice "para el año 2026". Se descartaron: fechar el inicio en enero 2026 para que el Gantt cierre en el año (es ficción), y usar fechas de calendario absolutas. Se adopta **Gantt en meses relativos** (Mes 1, Mes 2…) desde la aprobación del Acta, y el plazo de O1 medido **desde el go-live**, declarado como ajuste. Lo que no puede pasar es que el Gantt diga una cosa y el objetivo otra.
 
-**D3 — Las líneas base.** No hay ningún dato medido en las Etapas 1 y 2. Declararlos como supuestos y poner **la medición de la línea base como actividad con entregable propio en la fase 2 de la EDT**. Inventar un número y presentarlo como dato es lo más fácil de detectar.
+> **Consecuencia con A1.** El desarrollo interno de seis componentes, app offline-first y cuatro integraciones no son 6 meses: son del orden de 12 a 18. D2 lo absorbe, pero **el Gantt tiene que decir la verdad** — no comprimirlo para que cierre con el año. Falta confirmar con el docente si acepta meses relativos.
 
-**D4 — La alternativa.** La matriz da SaaS. Hay que llevarla a validar con el docente (la consigna lo pide explícitamente en el punto 3) con el repliegue a tercerizado preparado, por la objeción de datos personales en nube externa contra R05 severidad 15.
+**D3 — Las líneas base. → ABIERTA, se consulta al docente el 2026-08-11.** No hay ningún dato medido en las Etapas 1 y 2, así que los valores van a ser estimados. Eso no es el problema; el problema es cómo se presentan. Un número estimado presentado como dato medido es lo más fácil de detectar. Un número estimado **declarado como supuesto** es metodológicamente correcto — así se planifica cuando todavía no se mide.
 
-**D5 — Paralelismo en el cronograma.** El punto 10 pide aplanar recursos. Si el cronograma sale secuencial no hay conflicto que aplanar y ese punto se responde con "no se detectaron conflictos", que es la peor respuesta posible. Hay que meter paralelismo desde el diseño de la EDT — compra de dispositivos y EPP en paralelo a la configuración, material de capacitación en paralelo a las pruebas, carga de la matriz de competencias en paralelo a la integración — y que dos o tres compitan por **el mismo perfil**, para que aparezca sobreasignación genuina.
+Lo que lo blinda: **la medición de la línea base es una actividad con entregable propio en la fase 2 de la EDT**. El proyecto mismo se hace cargo de medirla. Redacción a usar en el documento:
+
+> *Línea base estimada: 0,50 instalaciones/hora-técnico. **Valor supuesto**, no medido: las Etapas 1 y 2 no relevaron indicadores de operación. Su medición formal es el entregable 2.4 de la fase de Relevamiento y Análisis, y la meta de O1 se recalibrará sobre el valor real.*
+
+No pedir permiso para estimar: preguntar si **este tratamiento** le sirve.
+
+**D4 — La alternativa. → CERRADA por el grupo: A1, desarrollo interno.** Falta la validación con el docente, que la consigna exige en el punto 3. Matriz re-ponderada, justificación y repliegue: ver *Alternativas y matriz de selección* más arriba.
+
+> **Por qué, y por qué no por lo que parece.** El disparador del grupo fue "si contratamos SaaS esquivamos el laburo". Eso no se puede escribir en el documento y además es sólo medio cierto: acá no se construye nada, se planifica, así que SaaS no ahorra trabajo de TP — produce un plan más pobre. Lo que sí sostiene la elección: con desarrollo interno el punto 5 (perfiles) pasa de un equipo flaco a uno real (arquitecto, backend, mobile, UX, DBA, seguridad, QA); el punto 10 resuelve **D5 casi solo**, porque la sobreasignación entre módulos paralelos aparece sin forzarla; y el punto 12 se vuelve fuerte en factibilidad legal — los datos no salen del perímetro, no hay transferencia internacional ni encargado de tratamiento externo.
+>
+> **Lo que cuesta:** el plazo (ver D2) y la factibilidad económica, que ahora exige el TCO a 3 años contra SaaS. Y hay que sostener por escrito, en la factibilidad técnica, que Personal tiene capacidad interna de desarrollo — es creíble en una telco con área de sistemas propia, pero no se da por obvio.
+
+**D5 — Paralelismo en el cronograma. → CERRADA: paralelismo obligatorio, diseñado desde la EDT.** El punto 10 pide aplanar recursos. Si el cronograma sale secuencial no hay conflicto que aplanar y ese punto se responde con "no se detectaron conflictos", que es la peor respuesta posible. Hay que meterlo desde el diseño de la EDT y que dos o tres actividades compitan por **el mismo perfil**, para que aparezca sobreasignación genuina.
+
+Fuentes de paralelismo con A1: adquisiciones (fase 4) en paralelo al desarrollo (fase 5) · módulo de despacho e integraciones compitiendo por el mismo desarrollador backend · el especialista en seguridad partido entre SSO/MFA y la revisión de la app · material de capacitación en paralelo a las pruebas · carga de la matriz de competencias en paralelo a la integración.
+
+> Con desarrollo interno esto aparece casi solo — pero *casi*. Hay que diseñarlo en la EDT, no esperar que salga.
+
+###### Documento de validación del punto 3
+
+**Escrito el 2026-08-19** — `materias/ASI/etapa3-validacion-punto3.md`, con su `.docx` y su `.pdf` generados. Es lo que se le manda al docente: contiene **solo los puntos 1, 2 y 3** de la consigna (proyecto, objetivos, alternativas y selección), más las cuatro consultas al final. 4 páginas.
+
+> **El Acta y la EDT quedan retenidas hasta que valide.** El Acta ya está escrita, pero es el punto 4.b y se apoya en la alternativa elegida; si la objeta, cambia. Mandarla ahora invita a la pregunta de por qué se hizo el 4 antes de validar el 3.
+
+Se dejó fuera a propósito la consulta por la plantilla del Acta y por el apunte teórico: ambos se consiguieron del campus el 19/08.
+
+###### Paquete de validación — contenido (referencia)
+
+**Lo que se presenta** (punto 3 de la consigna, "Validar con el docente"):
+
+1. Nombre del proyecto.
+2. Problema y necesidad, con el argumento de que **R04 y R07 quedaron en severidad 12 y sin planilla de tratamiento** en la Etapa 2 — este proyecto es el tratamiento de ambos.
+3. Alcance: qué incluye y qué no incluye (B medio).
+4. Las tres alternativas, la matriz re-ponderada y la selección de **desarrollo interno**, con la desventaja de plazo admitida.
+5. La justificación de los pesos: salen del análisis de riesgos de la propia Etapa 2 (R03 y R05, severidad 15).
+
+**Lo que se pregunta:**
+
+1. **D3** — ¿sirve declarar las líneas base como supuestos y poner su medición como entregable de la fase 2 de la EDT?
+2. **Pesos de la matriz** — ¿acepta que se justifiquen con el análisis de riesgos de la Etapa 2? Si dice que sí, la elección de D4 queda blindada.
+3. **Cronograma** — ¿meses relativos (Mes 1, Mes 2…) o fechas de calendario? (cierra D2 definitivamente)
+4. ~~Plantilla del Acta de Proyecto~~ — **ya la tenemos** (llegó el 19/08). En su lugar, preguntar por el **apunte teórico de la unidad**: el caso integral cita `ASI-5-T1` a `T5` y no están en el campus que vemos.
+5. **Fecha de entrega** de la Etapa 3.
+6. **I3** — R04 y R07 sin planilla de tratamiento en la Etapa 2: ¿alcanza con que el proyecto sea el tratamiento, o hay que agregar las planillas faltantes como anexo?
+
+**Objeción a tener preparada:** *"¿por qué desarrollar si hay producto de mercado?"* → ver la respuesta en D4.
 
 #### Dudas / pendientes
 
 **Para el grupo:**
 
-- **D1 a D5** de la sección anterior. La que bloquea todo lo demás es D1.
-- ¿La app móvil de campo entra sí o sí, o el grupo la ve como demasiado?
+- **D3** es la única decisión abierta, y depende de la respuesta del docente del 2026-08-11.
+- **D4 está cerrada por el grupo pero no validada por el docente.** Hasta que se valide, no conviene invertir tiempo en la EDT ni en el Acta: si voltea la alternativa, ese trabajo se tira.
 
 **Datos que faltan:**
 
-- **Fecha de entrega** de la Etapa 3, y fecha de la clase donde se valida la alternativa con el docente.
-- **Plantilla del Acta de Proyecto** del e-Group — entregable obligatorio (punto 4.b), no está en el material.
-- ¿La cátedra acepta cronograma en **meses relativos** o pide fechas de calendario? (define D2)
+- **Fecha de entrega** de la Etapa 3.
+- ~~Plantilla del Acta de Proyecto~~ — **conseguida el 2026-08-19**. Campos y ejemplo resuelto en Unidad 5 §6.
+- ¿La cátedra acepta cronograma en **meses relativos** o pide fechas de calendario? (cierra D2)
 - Fechas de corrección de la Etapa 2 para completar la tabla de versiones (inconsistencia I4).
 - Archivo del **organigrama** de Personal (inconsistencia I6).
 
@@ -4790,6 +5320,7 @@ Presentación sugerida: **dos planos, no nueve.** (1) Base operativa en una plan
 - `fuentes/ASI/procesoInstacionFibraOptica.bpm` — archivo fuente Bizagi del BPMN.
 - `fuentes/ASI/ASI26_TPIntegrador_Etapa3 - Proyecto de TI.md` — consigna Etapa 3.
 - `fuentes/ASI/TPIntegrador - Etapa 3 - Practica Sugerencias.md` — sugerencias de cátedra 28/07/2026.
+- `fuentes/ASI/Ejercitación/` — ejercitación de U5, plantilla del Acta de Proyecto y caso integral resuelto (Centro de Servicios), 19/08/2026. Desarrollado en Unidad 5.
 
 Derivados que generamos (en esta misma carpeta, `materias/ASI/`):
 
@@ -4802,3 +5333,7 @@ Derivados que generamos (en esta misma carpeta, `materias/ASI/`):
 - 2026-07-29: corregidas I1, I2 e I5 sobre copias nuevas (`ASI26_310_UNIDAD1_corregido.docx`, `ASI26_310_UNIDAD2_corregido.docx`). Verificado por reconversión y diff: solo cambiaron las 8 celdas previstas. Quedan pendientes I3 (decisión), I4 (falta dato de fechas) e I6 (falta archivo).
 - 2026-07-29: documentada la Etapa 3 — comparación de los tres candidatos, desarrollo completo del candidato B (trazabilidad con Etapas 1 y 2, solución, alcance, 4 objetivos cuantificables, matriz de alternativas, ciclo de vida, 11 fases y 9 sectores de H&S), y las cinco decisiones abiertas D1–D5. **Preferencia por B declarada, sin cerrar.** Discusión con el grupo pendiente. Punto de retomada marcado al inicio de la sección Etapa 3.
 - 2026-07-29: los dos `.docx` corregidos pasan a `materias/ASI/` como derivados, para que los tenga el grupo. Se subieron también las fuentes crudas a `fuentes/ASI/` (23 archivos).
+- 2026-08-10: **cerradas D1, D2, D4 y D5.** Alcance = B medio · cronograma en meses relativos con plazo de O1 desde el go-live · alternativa = **A1 desarrollo interno** (con componentes de mercado acotados: mapas, MDM, dispositivos, infraestructura) · paralelismo obligatorio diseñado desde la EDT. La matriz de selección se rehízo contra los diez criterios que lista la cátedra en el Bloque 4 de las sugerencias: se sumaron *dependencia del proveedor* y *escalabilidad*, y se re-ponderaron los pesos justificándolos con R03 y R05 (severidad 15) de la Etapa 2 — sin tocar ningún puntaje. Resultado: Interno 4,00 · SaaS 3,60 · Tercerizado 3,50. En consecuencia se reformularon el ciclo de vida (el tramo iterativo queda mejor justificado), las fases (de 11 a 12: se parte "selección de proveedor" en *arquitectura y diseño técnico* + *adquisiciones*, y "diseño y configuración" pasa a *desarrollo por módulos*) y las adquisiciones (de licencias SaaS a hardware, infraestructura, mapas y MDM). Agregado el paquete de validación para la clase del 11/08. **Queda abierta D3** (líneas base), a consultar con el docente ese día.
+- 2026-08-19: ingerida la carpeta `Ejercitación` (4 archivos) → `fuentes/ASI/Ejercitación/`. Aporta tres cosas que faltaban: **(1) la plantilla oficial del Acta de Proyecto** — desbloquea el punto 4.b de la Etapa 3, que estaba trabado desde el 29/07; **(2) el caso integral resuelto** (Centro de Servicios) — primer y único ejemplo resuelto de la unidad, con CPM completo (ES/EF/LS/LF, holguras, camino crítico `1→2→4→5→7→9`, duración 39 h, BAC $3.700); **(3) la ejercitación de U5**, que es más ancha que la Etapa 3 e incluye RFI ejecutado, RFP con 3 cotizaciones y TCO. Se agregaron a la Unidad 3: CPM y aplanamiento en §7, criterios de evaluación de proveedores y variables de TCO en §10, BAC y monetización de beneficios en §11, checklist legal e indicadores VAN/TIR/TPR en §12, la plantilla del Acta con ejemplo en §6, y el nuevo §13 con la tabla comparativa U5 vs. Etapa 3. La sección "Ejercicios resueltos tipo", que estaba vacía, ahora tiene el caso completo. **Dos hallazgos:** la cátedra numera esta unidad como **Unidad 5** (la wiki la llama Unidad 3), y falta el apunte teórico — el caso cita `ASI-5-T1` a `ASI-5-T5`, ninguno en nuestras fuentes.
+- 2026-08-19: redactado el **borrador del Acta de Proyecto** (punto 4.b de la Etapa 3) en `materias/ASI/etapa3-acta-proyecto.md`, con su `.docx` generado por `scripts/build-docx.js` (conversor md→docx reutilizable: A4, Arial 11, justificado con partición es-AR, tablas con anchos por directiva `<!-- cols: … -->`, pie con numeración). Se instaló LibreOffice y `scripts/preview-docx.sh` para **ver el render** antes de dar por bueno un entregable — revisando a ciegas se habían colado listas con numeración encadenada, celdas justificadas con ríos y partición de palabras en inglés. El Acta quedó en 5 páginas. Trazabilidad completa hacia atrás: la justificación cita R04 y R07 sin tratamiento de la Etapa 2 y el objetivo de TI del 5% de la Etapa 1; los objetivos son O1–O4 con las líneas base declaradas como supuestos y su medición como entregable de la fase 2; el límite reproduce el "qué no incluye" acordado. Quedan por definir los nombres propios y el monto de autoridad de compra.
+- 2026-08-19: ingerido el **campus completo** (`ASI_Apuntes_Campus`, 93 archivos). Se copiaron 28 a `fuentes/ASI/Campus/` — Unidades 3, 4 y 5 completas más Normas de Cátedra; se dejaron fuera los complementarios de U2 (NIST, MAGERIT, SEI), la U6, los exámenes finales y los duplicados de U1/U2 que ya estaban. **Reestructuración mayor de la wiki**: el Programa Analítico (Plan 2023) define **6 unidades**, no 3. La vieja "Unidad 3 — Proyectos de TI" pasó a ser **Unidad 5**, y se crearon **Unidad 3 (Dirección de Talento y Capital Humano)** y **Unidad 4 (Higiene y Seguridad Laboral)** — las dos que sostienen los puntos 5 y 6 de la Etapa 3 y que hasta ahora se venían respondiendo con conocimiento general. Se agregó también un stub de **Unidad 6 (Emprendedorismo)**. En la Unidad 5 se volcaron los cinco capítulos del apunte: definición formal de proyecto, tipos, portafolio/programa/subproyecto y triple restricción (T1); la **plantilla del Acta anotada campo por campo con el ejemplo ESABAL** y el contenido PMI del Acta de Constitución (T2); el esquema de nodo de la red, AON/AOA, el método completo de **histograma de recursos y aplanamiento**, y fast tracking vs. crashing (T3); y las **cuatro técnicas de evaluación de inversiones** TR/TPR/VAN/TIR con el valor del dinero en el tiempo (T4). **Hallazgo para el punto 6 de la Etapa 3:** los tres niveles de prevención de la Unidad 4 explican por qué la cátedra rechaza "silla ergonómica y pausas activas" — son prevención sobre la persona, el escalón más débil; el layout tiene que mostrar **prevención en el diseño**. Se sumó además la legislación laboral (Leyes 19.587, 24.557, 20.744 y 27.555), que le faltaba a la factibilidad legal.

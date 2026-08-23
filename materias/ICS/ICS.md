@@ -1460,3 +1460,6 @@ informe de pruebas unitarias: no le sirven a un usuario para usar el sistema.)
   Tarea 1 de CMMI (contrastes y similitudes entre nivel 1 y nivel 5), integrada en la
   Unidad 1. Pendientes principales: confirmar la numeración de la Unidad 4, el nivel de
   madurez de OT, y la fórmula del factor de ajuste de APF.
+- 2026-08-20: tarea de la Clase 2 (Brozo) — casos de prueba por valores límite
+  para la aplicación bancaria (punto 3). Fuente: página de Notion "Clase 2
+  Brozo". Derivado en `tarea-casos-prueba-valores-limite.md` (+ .docx/.pdf).
