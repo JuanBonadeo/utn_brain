@@ -54,7 +54,7 @@ Administración de Sistemas de Información — 4º Año Ingeniería en Sistemas
 
 ### VERSIÓN DEL DOCUMENTO
 
-<!-- cols: 10,18,22,50 -->
+<!-- cols: 6,13,13,68 -->
 
 | Mod | Fecha | Autor | Descripción |
 |---|---|---|---|
@@ -99,7 +99,7 @@ El proyecto es el tratamiento de R04 y R07, y aporta además a la mitigación de
 
 ### Trazabilidad con las etapas anteriores
 
-<!-- cols: 22,48,30 -->
+<!-- cols: 16,52,32 -->
 
 | Origen | Texto ya comprometido | Cómo lo ataca |
 |---|---|---|
@@ -132,7 +132,7 @@ Módulo de despacho y priorización con cola única · motor de asignación por 
 
 ## 2. OBJETIVOS
 
-<!-- cols: 5,22,27,16,13,17 -->
+<!-- cols: 5,17,25,23,14,16 -->
 
 | # | Objetivo | Indicador | Línea base | Meta | Plazo |
 |---|---|---|---|---|---|
@@ -149,7 +149,7 @@ Módulo de despacho y priorización con cola única · motor de asignación por 
 
 Se identifican tres proyectos de TI alternativos. Cada uno ataca un problema distinto de la organización, detectado en el análisis de riesgos de la Etapa 2. Se desarrolla el primero; los otros dos se mencionan como opciones evaluadas y no seleccionadas para esta etapa.
 
-<!-- cols: 6,30,42,22 -->
+<!-- cols: 4,31,50,15 -->
 
 | | Alternativa | Problema que ataca | Estado |
 |---|---|---|---|
@@ -190,7 +190,7 @@ Se adopta un **ciclo de vida híbrido**.
 
 ### 4.2 Fases del proyecto
 
-<!-- cols: 8,32,60 -->
+<!-- cols: 5,35,60 -->
 
 | # | Fase | Entregable principal |
 |---|---|---|
@@ -230,7 +230,7 @@ La estructura se descompone en once paquetes de primer nivel, correspondientes a
 
 **Estructura de desglose.** Las duraciones se expresan en días hábiles.
 
-<!-- cols: 7,36,11,9,12,25 -->
+<!-- cols: 7,30,16,7,16,24 -->
 
 | ID | Paquete de trabajo | Pred. | Dur. | Perfil | Entregable |
 |---|---|---|---|---|---|
@@ -318,7 +318,7 @@ Los perfiles que se presentan no constituyen un listado de puestos que podrían 
 
 Se destaca que *perfil requerido* no equivale a persona exclusiva. Ninguno de los nueve perfiles alcanza dedicación completa, de modo que todos se afectan parcialmente al proyecto y conservan sus responsabilidades de línea, con la disponibilidad comprometida formalmente en el paquete 1.2.
 
-<!-- cols: 6,14,26,26,8,20 -->
+<!-- cols: 8,16,27,25,8,16 -->
 
 | Sigla | Perfil | Responsabilidades | Competencias | Pers. | Dedicación |
 |---|---|---|---|---|---|
@@ -392,7 +392,7 @@ Este punto asume de manera explícita que **la prevención sobre la persona es e
 
 ### Medidas preventivas por sector
 
-<!-- cols: 12,12,15,27,9,25 -->
+<!-- cols: -10,22,22,22,22,22 -->
 
 | Sector | Personas expuestas | Riesgo | Medida preventiva | Nivel | Representación en el plano |
 |---|---|---|---|---|---|
@@ -403,7 +403,7 @@ Este punto asume de manera explícita que **la prevención sobre la persona es e
 | Sala técnica o nodo de distribución | Personal de infraestructura, NOC, técnicos autorizados | Riesgo eléctrico y arco eléctrico, temperatura elevada, ruido de equipos, acceso no autorizado | Acceso restringido con control de identidad; distancia libre de trabajo frente a tableros; procedimiento de bloqueo y etiquetado de energía; matafuego apto para equipos energizados; herramientas y calzado dieléctricos | 1 · Diseño y 3 · Medio | Recinto delimitado con puerta controlada, cotas de distancia libre frente a tableros, señal de riesgo eléctrico y matafuego clase C |
 | Aula de capacitación | Técnicos, supervisores y despachantes en formación | Aforo excedido, evacuación dificultada, fatiga en jornadas extensas | Aforo declarado y verificado; puertas con apertura hacia el sentido de evacuación; recorrido libre hacia la salida; pausas programadas; prácticas de altura solo con supervisión | 1 · Diseño | Aforo indicado, ancho y sentido de apertura de puertas, luces de emergencia y recorrido señalizado hasta la salida |
 
-<!-- cols: 12,12,15,27,9,25 -->
+<!-- cols: -10,22,22,22,22,22 -->
 
 | Sector | Personas expuestas | Riesgo | Medida preventiva | Nivel | Representación en el croquis |
 |---|---|---|---|---|---|
@@ -456,7 +456,7 @@ El modo de construcción adoptado —plataforma de *Field Service Management* co
 
 ### 7.1 Activos y servicios requeridos
 
-<!-- cols: 20,10,45,25 -->
+<!-- cols: 18,16,50,16 -->
 
 | Activo o servicio | Cantidad | Características mínimas exigibles | Paquetes EDT |
 |---|---|---|---|
@@ -478,7 +478,7 @@ Los umbrales indicados son exigencias del pliego, no mediciones: se confirman co
 
 ### 7.2 Dimensionamiento del licenciamiento
 
-<!-- cols: 22,12,20,46 -->
+<!-- cols: 23,13,16,48 -->
 
 | Tipo de usuario | Cantidad *(supuesto)* | Tipo de licencia | Fundamento del dimensionamiento |
 |---|---|---|---|
@@ -508,7 +508,7 @@ Los criterios se fijan antes de emitir el RFP y se aplican en la evaluación de 
 
 ### 8.1 Modalidad por activo
 
-<!-- cols: 24,18,58 -->
+<!-- cols: 18,17,65 -->
 
 | Activo o servicio | Modalidad | Justificación de la modalidad elegida |
 |---|---|---|
@@ -545,7 +545,7 @@ La selección del proveedor de la plataforma de Field Service Management se resu
 
 ### Diferencia entre ambos instrumentos
 
-<!-- cols: 16,42,42 -->
+<!-- cols: 17,40,43 -->
 
 | Dimensión | RFI | RFP |
 |---|---|---|
@@ -598,7 +598,7 @@ La cadena de la fase 3 es: **3.1** emisión del RFI (5 días) → **3.2** análi
 
 La evaluación del paquete 3.4 se realiza con criterios ponderados definidos antes de abrir las propuestas. Los pesos se declaran como **propuesta del grupo**, sujeta a validación del área de Compras y Abastecimiento:
 
-<!-- cols: 34,12,54 -->
+<!-- cols: 33,7,60 -->
 
 | Criterio | Peso | Fundamento |
 |---|---|---|
@@ -644,7 +644,7 @@ El diagrama en formato gráfico, con los nodos y las flechas de precedencia dibu
 
 Todos los valores están expresados en días hábiles contados desde el día 0.
 
-<!-- cols: 12,22,10,20,20,16 -->
+<!-- cols: 8,22,8,25,26,11 -->
 
 | ID | Predecesoras | Dur. | Temprano ES–EF | Tardío LS–LF | Holgura |
 |---|---|---|---|---|---|
@@ -735,7 +735,7 @@ El recorrido atraviesa ocho tramos con características distintas.
 
 Las veinte actividades no críticas se presentan ordenadas por holgura total descendente. La holgura total indica cuántos días hábiles puede demorarse el inicio de la actividad sin afectar la fecha de finalización del proyecto, y es la reserva de maniobra sobre la que opera el aplanamiento de recursos del apartado siguiente.
 
-<!-- cols: 8,42,10,15,25 -->
+<!-- cols: 7,67,7,10,9 -->
 
 | ID | Actividad | Dur. | Holgura | Perfil |
 |---|---|---|---|---|
@@ -778,7 +778,7 @@ En el extremo opuesto, la migración de órdenes de trabajo abiertas (6.1) tiene
 
 Construido el cronograma a fechas tempranas, se elabora el histograma de carga por perfil, que representa para cada día hábil la cantidad de personas requeridas de cada perfil. La condición de dotación de partida es de **una persona por perfil**, dado que el tamaño del proyecto no justifica equipos por especialidad. El histograma revela **seis conflictos de sobreasignación**, todos ellos de pico 2, es decir, ventanas en las que un mismo perfil resulta requerido simultáneamente por dos actividades.
 
-<!-- cols: 12,14,24,8,42 -->
+<!-- cols: 9,10,14,7,60 -->
 
 | Perfil | Ventana | Actividades | Pico | Naturaleza del conflicto |
 |---|---|---|---|---|
@@ -811,7 +811,7 @@ Consiste en incorporar **una segunda persona en los dos perfiles que concentran 
 
 El resultado es una duración total de **192 días hábiles**, apenas **5 días** por encima del óptimo teórico de 187.
 
-<!-- cols: 26,14,14,20,26 -->
+<!-- cols: 29,11,16,16,28 -->
 
 | Estrategia | Duración | Diferencia | Dotación | Valoración |
 |---|---|---|---|---|
@@ -835,7 +835,7 @@ La comparación es concluyente: **el sobrecosto de dos incorporaciones parciales
 
 La tabla siguiente registra los desplazamientos efectuados sobre el cronograma a fechas tempranas para obtener el cronograma aplanado adoptado. Los días se expresan en días hábiles desde el día 0.
 
-<!-- cols: 8,34,14,14,14,16 -->
+<!-- cols: 7,51,9,9,14,10 -->
 
 | ID | Actividad | Inicio orig. | Inicio nivel. | Corrimiento | Holgura |
 |---|---|---|---|---|---|
@@ -880,7 +880,7 @@ El diagrama de Gantt en formato gráfico —barras horizontales por actividad so
 
 La tabla siguiente presenta el cronograma aplanado agregado por fase, con el inicio y el fin expresados en días hábiles relativos al día 0 y su conversión a meses de 21 días hábiles, junto con la dotación simultánea máxima por perfil activa en cada fase. Las fases se solapan entre sí: el proyecto no es una secuencia de bloques estancos, y varias fases conviven en la misma ventana temporal.
 
-<!-- cols: 26,16,14,44 -->
+<!-- cols: 33,14,12,41 -->
 
 | Fase | Días | Meses | Personas por perfil |
 |---|---|---|---|
@@ -898,7 +898,7 @@ La tabla siguiente presenta el cronograma aplanado agregado por fase, con el ini
 
 **Dotación total y carga por perfil.** El proyecto se ejecuta con **once personas** distribuidas en nueve perfiles, ninguna de ellas con dedicación exclusiva. La tabla siguiente consolida la carga resultante del cronograma aplanado. La columna de días-persona expresa el esfuerzo total de cada perfil; la ventana indica el intervalo entre su primera y su última intervención; la dedicación media es el cociente entre el esfuerzo y la ventana, e informa qué proporción del tiempo la persona está efectivamente afectada al proyecto.
 
-<!-- cols: 26,12,16,12,18,16 -->
+<!-- cols: 38,11,15,8,19,9 -->
 
 | Perfil | Personas | Días-persona | Horas | Ventana | Ded. media |
 |---|---|---|---|---|---|
@@ -923,7 +923,7 @@ Del histograma consolidado se desprenden tres observaciones de gestión. El **co
 
 La duración estimada del proyecto es de **192 días hábiles**, equivalentes a **aproximadamente 9,1 meses** de 21 días hábiles cada uno, contados desde la aprobación del Acta de Proyecto.
 
-<!-- cols: 42,20,38 -->
+<!-- cols: 28,19,53 -->
 
 | Concepto | Valor | Observación |
 |---|---|---|
@@ -951,7 +951,7 @@ Este punto identifica las variables que intervienen en el cálculo del costo del
 
 ### Variables consideradas
 
-<!-- cols: 28,26,46 -->
+<!-- cols: 19,24,57 -->
 
 | Variable de costo | Unidad de medida | Fuente del dato |
 |---|---|---|
@@ -972,7 +972,7 @@ Este punto identifica las variables que intervienen en el cálculo del costo del
 
 Las horas provienen de la tabla de carga por perfil del punto 10, sobre jornada de ocho horas. El valor hora es un supuesto, coherente entre perfiles: se escalona según especialización y escasez del perfil en el mercado local.
 
-<!-- cols: 30,12,12,21,25 -->
+<!-- cols: 44,11,8,19,18 -->
 
 | Perfil | Personas | Horas | Valor hora (USD) | Subtotal (USD) |
 |---|---|---|---|---|
@@ -992,7 +992,7 @@ Las horas provienen de la tabla de carga por perfil del punto 10, sobre jornada 
 
 Corresponde al primer año, contado desde la aprobación del Acta. El licenciamiento se computa desde la firma del contrato (mes 3) con dotación reducida durante configuración, pruebas y piloto, y con dotación plena a partir de la tercera ola de despliegue.
 
-<!-- cols: 34,20,21,25 -->
+<!-- cols: 46,23,19,12 -->
 
 | Concepto | Cantidad | Costo unitario (USD) | Subtotal año 1 (USD) |
 |---|---|---|---|
@@ -1013,7 +1013,7 @@ Corresponde al primer año, contado desde la aprobación del Acta. El licenciami
 
 Se aplica la expresión indicada por la cátedra: **Costo total = recursos humanos + adquisiciones + servicios + costos indirectos + reserva de contingencia.** Los dispositivos rugerizados constituyen la única adquisición de bienes; el resto de la tabla anterior es servicio.
 
-<!-- cols: 38,37,25 -->
+<!-- cols: 35,54,11 -->
 
 | Componente | Cálculo | Importe (USD) |
 |---|---|---|
@@ -1034,7 +1034,7 @@ Se aplica la expresión indicada por la cátedra: **Costo total = recursos human
 
 La tabla separa la inversión inicial, que ocurre una sola vez, del costo recurrente propio del modelo de contratación como servicio. La contingencia se reduce al 5% en los años 2 y 3, porque los riesgos de ejecución del proyecto ya no aplican en régimen de operación. El licenciamiento del año 3 incorpora una indexación contractual supuesta del 5%.
 
-<!-- cols: 28,18,18,18,18 -->
+<!-- cols: 60,10,10,10,10 -->
 
 | Concepto | Año 1 | Año 2 | Año 3 | Total |
 |---|---|---|---|---|
@@ -1063,7 +1063,7 @@ La conclusión operativa es que, con una dotación de este tamaño, **ambas vari
 
 ### Supuestos
 
-<!-- cols: 30,24,46 -->
+<!-- cols: 23,17,60 -->
 
 | Supuesto | Valor asumido | Base y validación pendiente |
 |---|---|---|
@@ -1099,7 +1099,7 @@ El análisis se realiza sobre las tres dimensiones exigidas —técnica, económ
 
 **Capacidad de la organización.** La organización cuenta con Centro de Operaciones de Red propio en régimen continuo (A4), áreas de Tecnología y de Seguridad de la Información, y un inventario de activos ya relevado y valorado en la Etapa 2, lo que permite conocer de antemano sobre qué componentes se apoya la solución. El equipo del proyecto aporta 4.240 horas-persona en 192 días hábiles, con el conocimiento del producto cubierto por el consultor de la plataforma provisto por el proveedor. Dos riesgos de infraestructura, ajenos al alcance, condicionan la operación: **R03** —firewall sin soporte del fabricante, severidad 15— y **R09** —balanceador sin redundancia, severidad 10— afectan el canal por el cual la aplicación de campo alcanza los sistemas internos. El proyecto no los trata, pero los declara como dependencia externa.
 
-<!-- cols: 6,30,7,7,8,42 -->
+<!-- cols: 6,40,4,4,6,40 -->
 
 | ID | Riesgo técnico | P | I | Sev | Respuesta |
 |---|---|---|---|---|---|
@@ -1116,7 +1116,7 @@ El análisis se realiza sobre las tres dimensiones exigidas —técnica, económ
 
 **Base de cálculo.** Se adopta la estructura de conceptos del punto 11. Los importes se expresan en dólares estadounidenses constantes, para independizar el análisis de la variación del poder adquisitivo de la moneda local. Los valores unitarios y volumétricos que no surgen de las etapas anteriores se declaran como **supuestos a validar** contra las cotizaciones que se obtengan del RFP y contra la medición de líneas base del paquete 2.4.
 
-<!-- cols: 34,20,46 -->
+<!-- cols: 24,16,60 -->
 
 | Supuesto | Valor | Observación |
 |---|---|---|
@@ -1131,7 +1131,7 @@ El análisis se realiza sobre las tres dimensiones exigidas —técnica, económ
 
 **Costos.** Se toman del punto 11 sin recalcularlos. Corresponde una distinción metodológica: el **presupuesto** del proyecto asciende a USD 328.226 e incluye la reserva de contingencia, porque es el monto que debe autorizarse; la **inversión que se descuenta** en la evaluación es de USD 285.414, es decir el costo directo más los indirectos, sin la reserva, porque una reserva de contingencia es una previsión ante riesgo y no una erogación esperada. Si los riesgos se materializan, el resultado se deteriora en la proporción en que la reserva se consuma.
 
-<!-- cols: 42,32,26 -->
+<!-- cols: 49,41,10 -->
 
 | Concepto | Origen | Importe (USD) |
 |---|---|---|
@@ -1142,7 +1142,7 @@ El análisis se realiza sobre las tres dimensiones exigidas —técnica, económ
 | **Presupuesto total a autorizar** | | **328.226** |
 | Costo operativo anual en régimen | Punto 11, costo total del año 2 | 100.379 |
 
-<!-- cols: 14,61,25 -->
+<!-- cols: 16,74,10 -->
 
 | Origen | Cuantificación | Importe anual |
 |---|---|---|
@@ -1192,7 +1192,7 @@ En consecuencia, la decisión de avance posterior al piloto (paquete 8.4) debe a
 
 **Geolocalización de los técnicos.** La ubicación del trabajador es dato personal en los términos del artículo 2 de la Ley 25.326, y su tratamiento debe conciliar la facultad de organización y dirección del empleador (artículos 64 y 65 de la Ley 20.744) con la exigencia de que los sistemas de control se practiquen con discreción y salvaguarden la dignidad del trabajador (artículo 70). El régimen que se adopta es: finalidad declarada y limitada a la asignación y verificación de órdenes; captura restringida a la jornada laboral, con desactivación fuera de ella; consentimiento informado con notificación previa e individualizada; minimización —se registra la ubicación en los hitos de la orden, no un rastreo continuo—; plazo de conservación acotado; prohibición de uso disciplinario no declarado; y comunicación previa a la representación gremial. Este punto debe cerrarse antes del piloto, no después.
 
-<!-- cols: 22,38,40 -->
+<!-- cols: 16,32,52 -->
 
 | Norma | Exigencia concreta | Cómo la satisface el proyecto |
 |---|---|---|
@@ -1407,7 +1407,7 @@ la infraestructura de la organización.
 Primera aproximación de la Estructura de Desglose de Trabajo, con los
 entregables principales por fase:
 
-<!-- cols: 30,70 -->
+<!-- cols: 25,75 -->
 
 | Fase | Entregable principal |
 |---|---|
@@ -1425,7 +1425,7 @@ entregables principales por fase:
 
 #### Objetivos
 
-<!-- cols: 5,22,27,16,13,17 -->
+<!-- cols: 5,18,24,23,14,16 -->
 
 | # | Objetivo | Indicador | Línea base | Meta | Plazo |
 |---|---|---|---|---|---|

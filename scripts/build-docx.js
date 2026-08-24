@@ -30,7 +30,7 @@ const [, , inPath, outPath] = process.argv;
 if (!inPath || !outPath) { console.error('Uso: build-docx.js <in.md> <out.docx>'); process.exit(1); }
 
 /* ---------- constantes de página y estilo ---------- */
-const FONT = 'Arial';
+const FONT = 'Lexend';   // la que usa el grupo en las entregas de ASI
 const A4 = { width: 11906, height: 16838 };
 const MARGIN = 1134;                              // 2 cm
 const CONTENT_W = A4.width - MARGIN * 2;          // 9638 twips
@@ -38,9 +38,10 @@ const BODY = 22;                                  // 11 pt
 const TBL = 18;                                   // 9 pt
 const INK = '1A1A1A';
 const RED = 'B00020';
-const GRID_H = 'C7CBCF';   // horizontales de tabla
-const GRID_V = 'E2E5E8';   // verticales de tabla, más tenues
-const HEAD_FILL = 'F4F5F6';
+const GRID_H = 'BFD3E6';   // horizontales de tabla, celeste apagado
+const GRID_V = 'DCE7F2';   // verticales de tabla, más tenues
+const HEAD_FILL = 'DCE9F7';  // celeste claro de la fila de encabezado
+const HEAD_INK = '15406B';   // azul oscuro del texto de encabezado, para contraste
 
 const LANG = { value: 'es-AR' };
 
@@ -114,6 +115,7 @@ function buildTable(rows, colPct) {
         children: runs(c, {
           size: TBL,
           ...((head || (headless && idx === firstCol)) ? { bold: true } : {}),
+          ...(head ? { color: HEAD_INK } : {}),
           ...warn(c),
         }),
         alignment: AlignmentType.LEFT,
