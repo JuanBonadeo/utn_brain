@@ -398,8 +398,227 @@ entre ciudades.
 
 ---
 
+## Ejercicio 4 — Inversión a tres años (multiperíodo)
+
+$100.000 iniciales. **A**: por cada $ invertido se obtienen $0,7 al cabo de **1 año**.
+**B**: por cada $ invertido se obtienen $2 al cabo de **2 años** (solo puede reinvertirse
+al cabo de 2 años). Maximizar el beneficio al cabo de **3 años**.
+
+```
+1) VARIABLES
+
+   x  : cantidad de dinero invertida en la alternativa i al inicio del año j
+    ij     i = A, B
+           j = 0 (inicio año 1), 1 (inicio año 2), 2 (inicio año 3)
+
+   B solo puede colocarse en j = 0 y j = 1: invertida en j = 2 venceria en
+   j = 4, fuera del horizonte de tres años.
+
+   Variables efectivas:   xA0,  xA1,  xA2,  xB0,  xB1        (5)
+
+2) COEFICIENTES
+
+   A retribuye una utilidad de $0,7 al cabo de 1 año   ->  factor 1 + 0,7 = 1,7
+   B retribuye una utilidad de $2   al cabo de 2 años  ->  factor 1 + 2   = 3
+
+3) MODELO
+
+   Max z = 1,7 xA2 + 3 xB1 - 100.000
+
+   SA
+   1)   xA0 + xB0                    =  100.000     (balance instante 0)
+   2)   1,7 xA0 - xA1 - xB1          =        0     (balance instante 1)
+   3)   1,7 xA1 + 3 xB0 - xA2        =        0     (balance instante 2)
+   4)   x   >= 0
+         ij
+```
+
+**Lo que enseña:**
+
+**1. Balance ≠ capacidad.** Es el salto conceptual del ejercicio. En todo lo anterior
+las restricciones eran `uso <= disponible`, con un **número** a la derecha. Acá:
+
+```
+lo que ENTRA en el instante j  =  lo que SALE en el instante j
+```
+
+y lo que entra **son otras variables** (lo que venció). Los $100.000 aparecen **una sola
+vez en todo el modelo**, en el instante 0, porque es la única plata que viene de afuera.
+Por eso las restricciones de balance tienen **término independiente cero**.
+
+> **Error típico:** escribir `xA0 + xB0 <= 100.000`, `xA1 + xB0 + xB1 <= 100.000`, … Nada
+> conecta un instante con el siguiente, y el modelo permite invertir 200.000 partiendo de
+> 100.000. La plata se duplica sola.
+
+**2. Qué vence en cada instante.** Una inversión de duración `d` colocada en `j-d` vence
+en `j`. Por eso `xB0` **no** aparece en el balance del instante 1 —sigue adentro, le falta
+un año— y sí aparece en el del instante 2.
+
+**3. En la FO van solo las inversiones que vencen EXACTAMENTE en el horizonte.**
+
+```
+   xA0  vence en 1  ->  se reinvierte     xB1  vence en 3  ->  FO
+   xB0  vence en 2  ->  se reinvierte     xA2  vence en 3  ->  FO
+   xA1  vence en 2  ->  se reinvierte
+```
+
+> **Error típico:** escribir `Max z = 1,7(xA0 + xA1 + xA2) + 3(xB0 + xB1)`. Eso cuenta la
+> misma plata varias veces. Con el plan "todo en A reinvirtiendo siempre" (`xA0 = 100.000`,
+> `xA1 = 170.000`, `xA2 = 289.000`), esa fórmula da **950.300** cuando la persona realmente
+> tiene **491.300**. `xA1` no es plata nueva: **es** el resultado de `xA0`.
+>
+> El rendimiento de las que se reinvierten no se pierde: entra por los **balances**. Cada
+> rendimiento se cuenta exactamente una vez — o alimenta un balance, o llega a la FO.
+
+**4. Los coeficientes son capital + retorno** (1,7 y 3), no solo el retorno.
+
+**5. La variable `y_j` de dinero ocioso.** Escribir el balance con `=` y sin `y_j` equivale
+a **afirmar** que nunca conviene dejar capital quieto. Acá es cierto (A rinde 1,7 contra 1
+de quedarse quieto) y alcanza con justificarlo en una línea. Pero hay que declararlo: es una
+suposición, no un resultado. `y_j` se vuelve **imprescindible** cuando (a) hay un instante
+sin ninguna alternativa disponible, o (b) el dinero ocioso rinde algo — como en el Ejemplo
+1-7 del apunte, donde los depósitos bancarios pagan 3% y `y` entra en la FO con coeficiente.
+
+**6. Control:** cada variable aparece **dos veces** en el modelo.
+
+```
+   xA0 -> R1 (sale)  R2 (entra)        xB1 -> R2 (sale)  FO
+   xB0 -> R1 (sale)  R3 (entra)        xA2 -> R3 (sale)  FO
+   xA1 -> R2 (sale)  R3 (entra)
+```
+
+> Validación (no se entrega): `z* = 510.000` de capital final, o **410.000 de beneficio**.
+> **Hay infinitas soluciones óptimas**: todas las que usan B exactamente una vez.
+> Todo-B-y-después-A, todo-A-y-después-B, y cualquier mezcla, dan lo mismo. Lo único
+> subóptimo es no usar B: A tres veces da 491.300.
+>
+> Y `xA1 = 0` en **todos** los óptimos. Razón: en el instante 1 quedan 2 años, y ahí
+> `A -> A` rinde `1,7 × 1,7 = 2,89` contra `3,00` de B. Con dos años por delante B siempre
+> gana. Ese *por qué* es lo que se pide en una defensa, no el "dio cero".
+
+## Ejercicio 5 — Aviones e itinerarios (variable de pérdida)
+
+Tres itinerarios con demanda (en cientos de pasajeros) y ganancia cada 100 pasajeros.
+Tres tipos de avión con capacidad por itinerario, gasto por avión y año, y flota disponible.
+El costo de un pasajero perdido es la ganancia no percibida. Minimizar el costo total.
+
+| Itinerario | Pasajeros | Ganancia c/100 |
+|---|---|---|
+| 1 | 320 | 15 |
+| 2 | 165 | 15 |
+| 3 | 190 | 8 |
+
+| Capacidad | T1 | T2 | T3 | | Gastos | T1 | T2 | T3 |
+|---|---|---|---|---|---|---|---|---|
+| It. 1 | 20 | 15 | – | | It. 1 | 12 | 13 | – |
+| It. 2 | 18 | 13 | 10 | | It. 2 | 12 | 13 | 10 |
+| It. 3 | – | 14 | 8 | | It. 3 | – | 11 | 14 |
+| **Flota** | **15** | **14** | **18** | | | | | |
+
+```
+1) VARIABLES
+
+   x  : cantidad de aviones del tipo j afectados al itinerario i;
+    ij   i = 1, 2, 3 (itinerarios);   j = 1, 2, 3 (tipos de avion)
+
+        No existen x13 ni x31: el tipo 3 no vuela el itinerario 1 y el
+        tipo 1 no vuela el itinerario 3.
+        Variables efectivas: x11, x12, x21, x22, x23, x32, x33     (7)
+
+   s : cantidad (en cientos) de pasajeros no transportados en el
+    i   itinerario i;   i = 1, 2, 3                                 (3)
+
+2) MODELO
+
+   Min w = 12 x11 + 13 x12 + 12 x21 + 13 x22 + 10 x23 + 11 x32 + 14 x33
+                                          + 15 s1 + 15 s2 + 8 s3
+
+   SA
+   Demanda de pasajeros (los transportados mas los perdidos dan el total):
+   1)   20 x11 + 15 x12                  + s1  =  320
+   2)   18 x21 + 13 x22 + 10 x23         + s2  =  165
+   3)            14 x32 +  8 x33         + s3  =  190
+
+   Disponibilidad de flota:
+   4)   x11 + x21                             <=   15      (tipo 1)
+   5)   x12 + x22 + x32                       <=   14      (tipo 2)
+   6)   x23 + x33                             <=   18      (tipo 3)
+
+   7)   x  , s   >=  0
+         ij   i
+```
+
+**Lo que enseña:**
+
+**1. La variable de pérdida.** *"El costo de un pasajero perdido es igual a la ganancia no
+percibida"* significa que **dejar gente en tierra es una decisión válida, con precio**. Toda
+opción del enunciado necesita su propia variable: sin `s_i` el modelo estaría obligado a
+transportar a todos, y quizás ni siquiera sea posible con la flota disponible. Es el mismo
+truco que la `y_j` del ejercicio 4.
+
+Y su coeficiente en la FO es el **costo de oportunidad**: la ganancia cada 100 pasajeros.
+Las unidades cierran solas porque `s_i` también está en cientos.
+
+**2. La variable va sobre la palanca, no sobre el efecto.** Se podría definir
+`x_ij = pasajeros transportados`, y el modelo sería lineal. Pero el enunciado dice *"afectar
+los aviones"*, y **dos de las tres tablas están en unidades de avión** (gastos por avión,
+flota disponible). Con variable en pasajeros los coeficientes salen fraccionarios
+(`12/20 = 0,6`, `12/18 = 0,666…`) y la restricción de flota se llena de divisiones.
+
+> **Regla:** definí la variable en la unidad en la que están tus datos, sobre todo los de
+> la función objetivo.
+
+**3. Tres tablas, tres destinos distintos.** Es lo que más se confunde:
+
+```
+tabla de GASTOS       ->  coeficientes de la FUNCION OBJETIVO
+tabla de CAPACIDAD    ->  coeficientes de las restricciones de ITINERARIO (por FILA)
+tabla de GANANCIAS    ->  coeficientes de los s_i en la FO, y los terminos
+                          independientes de las restricciones de itinerario
+flota disponible      ->  terminos independientes de las restricciones por TIPO
+```
+
+Las restricciones de flota **no usan ninguna tabla**: todos sus coeficientes son 1, porque
+cuentan aviones.
+
+**4. Los subíndices son coordenadas.** `x_ij` → `i` es la **fila** (itinerario), `j` la
+**columna** (tipo). El error clásico es transponer justo en los pares espejo `x12` y `x21`:
+como las tablas **no son simétricas**, dan distinto (`x12` cuesta 13, `x21` cuesta 12).
+En la diagonal (`x11`, `x22`) no se nota, así que hay que chequear los cruzados aparte.
+
+**5. Signos.** Demanda con `=`: con `<=` los pasajeros que no viajan ni figuran como
+perdidos **desaparecerían sin costo**, y el modelo minimizador lo aprovecharía dando todo
+en cero. Flota con `<=`: nadie obliga a usar todos los aviones.
+
+**6. Control:** cada `x_ij` aparece **tres** veces (FO + su fila + su columna); cada `s_i`
+aparece **dos** (FO + su itinerario, nunca en las de flota).
+
+> Validación (no se entrega): `w* = 528`. Las **tres flotas quedan agotadas**, `s1 = s2 = 0`
+> y `s3 = 2/3` — el único itinerario que pierde pasajeros es el de **menor ganancia por
+> pasajero** (8 contra 15 y 15). Cuando la flota no alcanza, el modelo sacrifica al de
+> menor margen.
+>
+> **Pero el óptimo da aviones fraccionarios** (`4/3`, `33/2`, `38/3`, `3/2`). Es la
+> situación que advierte la **sección 1.9 del apunte**: redondear solo es aceptable cuando
+> los valores son grandes, y con `x12 = 1,33` redondear puede dar una solución **no
+> factible**. La formulación correcta sería **programación entera** (Unidad 8) declarando
+> `x_ij` entera y dejando las `s_i` continuas. El planteo lineal es correcto, pero la
+> naturaleza del problema es entera.
+
+---
+
+# Los cinco patrones, en una tabla
+
+| Ej | Patrón | La idea que hay que tener | Ejemplo apunte |
+|---|---|---|---|
+| 1 | Producción con descuentos | Coeficientes precalculados; cotas por **ambos** lados sobre la misma variable | 1-4 / 1-5 |
+| 2 | **Cobertura cíclica** | La variable es quién **ingresa**, no quién está. Una restricción **por período**, nunca agrupadas | 1-6 |
+| 3 | **Transporte** | Un índice se agrega **solo si algún coeficiente distingue** según ese índice | 1-9 |
+| 4 | **Multiperíodo** | Restricciones de **balance**: lo que entra = lo que sale. En la FO, solo lo que vence en el horizonte | 1-8 |
+| 5 | **Asignación con pérdida** | "No hacer algo" es una decisión, y lleva **variable propia** con su costo de oportunidad | 1-11 |
+
+---
+
 # Parte 3 — Pendientes
 
-- **Ejercicio 4 — Inversión a 3 años.** Patrón multiperíodo (Ejemplo 1-8 del apunte). Atención a que la alternativa B *"sólo puede reinvertirse al cabo de 2 años"*. Tiene resolución oficial.
-- **Ejercicio 5 — Aviones e itinerarios.** Asignación con variable de pérdida (Ejemplo 1-11). Tiene resolución oficial.
 - Los dos ejercicios exclusivos de la versión nueva de la guía (`PL2 y modelizacion.pdf`): **plantas / artículos del hogar** y **frutos secos**. Sin resolución oficial, y sus tablas se perdieron en la conversión del PDF — hay que leerlas del original.
