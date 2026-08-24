@@ -6,12 +6,14 @@ Dos fuerzas distintas gobiernan el ancho de una columna:
   - el VOLUMEN de texto, que determina cuanto conviene darle para que no se
     parta en demasiadas lineas. Se mide con un percentil alto del largo de
     celda, no con el maximo, para que un solo outlier no distorsione.
-  - la PALABRA MAS LARGA que no se puede partir. Aunque la columna lleve poco
-    texto, si contiene "2.2, 2.3, 2.5" o "JP, AF, EI, ES" necesita ese ancho
-    minimo o queda con una palabra por renglon.
+  - el ANCHO MINIMO PRACTICABLE, que sale de lo mas largo que la columna no
+    puede partir: la palabra mas larga, y ademas la celda mas larga cuando la
+    columna es corta en terminos absolutos.
 
-El reparto va por volumen, pero con un piso por columna derivado de la palabra
-mas larga. Sin ese piso, las columnas de identificadores quedan impracticables.
+El reparto va por volumen, pero respetando ese piso por columna. Sin el, las
+columnas de identificadores quedan impracticables: "4.6, 4.7, 7.1" se apila en
+tres renglones porque el reparto por volumen la ve como una columna de tres
+caracteres.
 """
 import io, re, sys, math
 
@@ -49,14 +51,13 @@ def metricas(col, MAX_PCT):
     for c in [limpio(x) for x in col]:
         for w in c.split():
             tok = max(tok, len(w))
-    # Piso por palabra impartible. Pero ademas: una columna corta deberia
-    # entrar entera en su renglon. Sin esto, "4.6, 4.7, 7.1" se apila en tres
-    # lineas aunque sobre lugar en la tabla. Se limita a 18 caracteres para no
-    # reservarle media pagina a una columna de prosa.
-    # Se usa el MAXIMO de la columna, no un percentil: las celdas largas suelen
-    # ser minoria (solo 3 de 50 actividades tienen tres predecesoras) y un
-    # percentil no las ve. Se acota a 13 caracteres para que una columna de
-    # prosa no reclame un piso enorme; ahi manda el volumen, no el piso.
+    # Piso de la columna. Ademas de la palabra impartible, una columna de
+    # contenido corto deberia entrar entera en su renglon: sin esto,
+    # "4.6, 4.7, 7.1" se apila en tres lineas aunque sobre lugar en la tabla.
+    # Se toma el MAXIMO de la columna y no un percentil, porque las celdas
+    # largas suelen ser minoria (solo 3 de 50 actividades tienen tres
+    # predecesoras) y un percentil no las ve. Se acota a 13 caracteres para que
+    # una columna de prosa no reclame un piso enorme: ahi manda el volumen.
     ancho_util = max(tok, min(max(largos), 13))
     piso = min(MAX_PCT, ancho_util * 100.0 / CHARS_ANCHO + MARGEN_PCT)
     return volumen, piso
@@ -89,12 +90,22 @@ def reparte(cols):
         for i in libres:
             pct[i] -= exceso * ((pct[i] - piso[i]) / base)
 
-    ent = [int(round(v)) for v in pct]
-    d = 100 - sum(ent)
-    if d:
-        # el resto se le da (o se le saca) a la columna con mas aire
-        i = max(range(len(ent)), key=lambda k: ent[k] - piso[k])
-        ent[i] += d
+    MIN_ENT = 4
+    ent = [max(MIN_ENT, int(round(v))) for v in pct]
+    # Ajuste final del redondeo. Se reparte de a un punto por vez sobre las
+    # columnas con mas aire sobre su piso, en vez de descargarlo todo en una:
+    # volcar el resto entero en una sola columna es lo que llegaba a dejarla
+    # en negativo cuando los pisos no cerraban.
+    guarda = 0
+    while sum(ent) != 100 and guarda < 500:
+        guarda += 1
+        if sum(ent) > 100:
+            cand = [k for k in range(len(ent)) if ent[k] > MIN_ENT]
+            if not cand: break
+            ent[max(cand, key=lambda k: ent[k] - piso[k])] -= 1
+        else:
+            ent[min(range(len(ent)), key=lambda k: ent[k] - piso[k])] += 1
+    assert sum(ent) == 100 and min(ent) >= MIN_ENT, ent
     return ent
 
 
@@ -114,8 +125,8 @@ def main(path, escribir=False):
             filas = [f for f in filas if len(f) == n]
             nuevo = reparte(list(zip(*filas)))
             j = ini - 1; dj = None; viejo = None
-            while j >= 0 and j > ini - 5:
-                mm = re.match(r'^<!-- cols:\s*([\d,\s]+?)\s*-->$', L[j].strip())
+            while j >= 0 and j > ini - 9:
+                mm = re.match(r'^<!-- cols:\s*([-\d,\s]+?)\s*-->$', L[j].strip())
                 if mm:
                     dj = j; viejo = [int(x) for x in mm.group(1).split(',') if x.strip()]
                     break
@@ -126,6 +137,8 @@ def main(path, escribir=False):
                 print('        %s  ->  %s' % (viejo, nuevo))
                 if dj is not None:
                     out[dj] = '<!-- cols: %s -->' % ','.join(map(str, nuevo))
+                else:
+                    out[ini] = '<!-- cols: ' + ','.join(map(str, nuevo)) + ' -->' + chr(10) + chr(10) + out[ini]
                 cambios += 1
             i -= 0
             continue

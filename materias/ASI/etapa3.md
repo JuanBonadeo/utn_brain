@@ -392,7 +392,7 @@ Este punto asume de manera explícita que **la prevención sobre la persona es e
 
 ### Medidas preventivas por sector
 
-<!-- cols: -10,22,22,22,22,22 -->
+<!-- cols: 16,17,17,20,14,16 -->
 
 | Sector | Personas expuestas | Riesgo | Medida preventiva | Nivel | Representación en el plano |
 |---|---|---|---|---|---|
@@ -403,7 +403,7 @@ Este punto asume de manera explícita que **la prevención sobre la persona es e
 | Sala técnica o nodo de distribución | Personal de infraestructura, NOC, técnicos autorizados | Riesgo eléctrico y arco eléctrico, temperatura elevada, ruido de equipos, acceso no autorizado | Acceso restringido con control de identidad; distancia libre de trabajo frente a tableros; procedimiento de bloqueo y etiquetado de energía; matafuego apto para equipos energizados; herramientas y calzado dieléctricos | 1 · Diseño y 3 · Medio | Recinto delimitado con puerta controlada, cotas de distancia libre frente a tableros, señal de riesgo eléctrico y matafuego clase C |
 | Aula de capacitación | Técnicos, supervisores y despachantes en formación | Aforo excedido, evacuación dificultada, fatiga en jornadas extensas | Aforo declarado y verificado; puertas con apertura hacia el sentido de evacuación; recorrido libre hacia la salida; pausas programadas; prácticas de altura solo con supervisión | 1 · Diseño | Aforo indicado, ancho y sentido de apertura de puertas, luces de emergencia y recorrido señalizado hasta la salida |
 
-<!-- cols: -10,22,22,22,22,22 -->
+<!-- cols: 16,16,16,19,16,17 -->
 
 | Sector | Personas expuestas | Riesgo | Medida preventiva | Nivel | Representación en el croquis |
 |---|---|---|---|---|---|
