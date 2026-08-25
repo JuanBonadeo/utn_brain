@@ -1470,6 +1470,27 @@ $$z = \frac{\sum_{i=1}^{K} r_i - K/2}{\sqrt{K/12}}$$
 
 es aproximadamente normal estándar, y despejando $x$ de $z = (x-\mu_x)/\sigma_x$ queda la fórmula de la tabla.
 
+**Alternativa exacta — el "procedimiento directo" (Box-Muller)**: Naylor da un segundo método que, a
+diferencia del anterior, **no es una aproximación**. Con dos uniformes independientes $r_1$ y $r_2$ en
+$(0,1)$ se obtienen **dos** valores normales estándar de una sola vez:
+
+$$x_1 = \sqrt{-2\ln r_1}\ \cos(2\pi r_2) \qquad\qquad x_2 = \sqrt{-2\ln r_1}\ \operatorname{sen}(2\pi r_2)$$
+
+> Su velocidad es comparable a la del método del límite central, y **da resultados exactos**. Si te
+> piden generar normales y querés lucirte, mencioná los dos: el del TCL (aproximado, simple) y este
+> (exacto).
+
+**Distribuciones derivadas de la normal** (por si aparecen en el análisis de salidas):
+
+| Distribución | Definición | $E[X]$ | $\mathrm{Var}(X)$ |
+|---|---|---|---|
+| **Ji cuadrada** $\chi^2_m$ | $\sum_{i=1}^{m} z_i^2$ con $z_i$ normales estándar; es una gamma con $k=m/2$ y $\alpha=1/2$ | $m$ | $2m$ |
+| **t de Student** | $t = \dfrac{z}{\sqrt{\chi^2_m/m}}$ | 0 | $\dfrac{m}{m-2}$ |
+| **F** | $F_{m,n} = \dfrac{\chi^2_m/m}{\chi^2_n/n}$ | $\dfrac{n}{n-2}$, $n>2$ | $\dfrac{2n^2(m+n-2)}{m(n-2)^2(n-4)}$, $n>4$ |
+
+> La **t** es la que se usa para los intervalos de confianza de la Unidad 9, y la **Ji cuadrada** es la
+> de los tests de aleatoriedad de la §7.5. Para $m > 30$ ambas se aproximan bien con la normal.
+
 ### Ejercicio resuelto tipo — generador para una distribución triangular
 
 > Este ejercicio salió en el final 2016-07-05 (P1) y en el final 2019-07-02 (P4). Es el caso testigo
