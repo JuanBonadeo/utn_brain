@@ -744,6 +744,70 @@ $$\text{Costo total promedio mensual} = \frac{\text{costo de pedido acumulado}}{
 > arriba y la del parcial 2021-10-23: **$h$ va con $I^+$** (lo que tenés guardado) y **$\pi$ va con
 > $I^-$** (lo que debés). Y en $K + iZ$, $i$ es el costo unitario y $Z$ la cantidad.
 
+### Los cuatro tipos de evento (y por qué el orden importa)
+
+> Detalle fino del apunte de Weitz (Law §1.5.2) que se presta para pregunta de parcial.
+
+| Evento | Tipo |
+|---|---|
+| Arribo de un pedido del proveedor a la empresa | **1** |
+| Demanda del producto por parte de un cliente | **2** |
+| **Fin de la simulación** después de $n$ meses | **3** |
+| Evaluación de inventario (y posible pedido) al comienzo del mes | **4** |
+
+**Por qué el fin de simulación es el tipo 3 y no el 4**: en el instante $t = n$ quedan programados
+**los dos** eventos —"fin de simulación" y "evaluación de inventario"— y se quiere que se ejecute
+primero el fin. Como la simulación ya terminó, **no tiene sentido evaluar el inventario y
+eventualmente pedir**, incurriendo en un costo de pedido por una orden que nunca va a llegar. La
+rutina de temporización, ante un empate de tiempos, **le da preferencia al evento de número más
+bajo** — por eso se le asigna el 3.
+
+> **Regla general que vale la pena recordar**: un modelo de simulación debe diseñarse para procesar
+> los eventos en el orden apropiado cuando hay empates de tiempo.
+
+**Variables de estado del modelo**: el nivel de inventario $I(t)$, la **cantidad de un pedido
+pendiente** de la empresa al proveedor, y el **tiempo del último evento** (necesario para computar las
+áreas bajo $I^+(t)$ e $I^-(t)$).
+
+**Diagrama de eventos** (event graph, fig. 1.55 de Law): cuatro nodos — *Order arrival*, *Demand*,
+*Evaluate*, *End simulation*. **Demand** y **Evaluate** se auto-programan (arco que vuelve sobre sí
+mismos). De **Evaluate** sale un arco hacia **Order arrival**. **End simulation** se programa una sola
+vez al inicio.
+
+### Los tres generadores que hace falta programar
+
+1. **Tiempos entre demandas** → exponencial, mismo algoritmo que en la cola simple: $t = -E[X]\ln r$.
+2. **Tamaño de la demanda $D$** → discreta, por transformada inversa: se divide el intervalo unitario en subintervalos **contiguos** definidos por las **probabilidades acumuladas**, y se devuelve el $D$ del subintervalo en el que cae $U$. Con los valores canónicos de Law ($D=1,2,3,4$ con $p = 1/6, 1/3, 1/3, 1/6$): $C_1 = [0,\frac{1}{6})$, $C_2 = [\frac{1}{6},\frac{1}{2})$, $C_3 = [\frac{1}{2},\frac{5}{6})$, $C_4 = [\frac{5}{6},1]$. El ancho de cada subintervalo **es** la probabilidad buscada — de ahí que el método funcione.
+3. **Demora del proveedor** → uniforme en $[a,b]$: $a + U(b-a)$.
+
+### Parámetros del caso canónico de Law
+
+Por si te dan el ejercicio "como se vio en clase" sin datos:
+
+| Parámetro | Valor |
+|---|---|
+| Media del tiempo entre demandas | 0,1 mes |
+| $D$ | 1 ($p=1/6$), 2 ($p=1/3$), 3 ($p=1/3$), 4 ($p=1/6$) |
+| Lead time | Uniforme en $[0{,}5;\ 1]$ mes |
+| $K$ (setup cost) | \$32 |
+| $i$ (incremental cost) | \$3 |
+| $h$ (holding cost) | \$1 por ítem por mes |
+| $\pi$ (backlog cost) | \$5 por ítem por mes |
+| $I(0)$ | 60, sin pedidos pendientes |
+| $n$ | 120 meses |
+
+Y se comparan **nueve políticas** $(s,S)$:
+
+| $s$ | 20 | 20 | 20 | 20 | 40 | 40 | 40 | 60 | 60 |
+|---|---|---|---|---|---|---|---|---|---|
+| $S$ | 40 | 60 | 80 | 100 | 60 | 80 | 100 | 80 | 100 |
+
+usando el **costo total promedio por mes** (suma de los tres costos promedio) como criterio.
+
+> **Nota de Law que se puede citar**: se ignora que sigue habiendo costos de almacenamiento cuando
+> $I^+(t) = 0$. Como el objetivo es **comparar** políticas y ese costo es independiente de la política
+> usada, ignorarlo no afecta la decisión de cuál es la mejor.
+
 ### Lógica de las rutinas
 
 **Evento de llegada de pedido**
