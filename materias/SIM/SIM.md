@@ -1645,9 +1645,11 @@ donde $s\omega$ es la tasa de servicio del sistema cuando **todos** los servidor
 > **Por qué** (pregunta 2021-12 P9): si $\lambda \ge \mu$, siempre llegarían más clientes de los que se
 > puede atender, la cola crecería indefinidamente y el sistema **nunca alcanzaría un estado estable**.
 >
-> ⚠️ El resumen que vas a usar dice "Población de clientes **finita**" para M/M/1 — **es un error de
-> tipeo del resumen**. Es **infinita**, como dice el propio resumen dos líneas más abajo para M/M/c, y
-> como figura en todos los parciales resueltos y en el apunte de Weitz.
+> ⚠️ **El resumen que vas a usar dice "Población de clientes finita" para M/M/1 — es un error.** Es
+> **infinita**. El error viene del propio libro de Weitz: en la pág. 723 del apunte de cátedra está
+> impreso "1. Una población de clientes finita", y **alguien lo corrigió a mano** intercalando un "in"
+> para que diga "infinita". La versión correcta figura en todos los parciales resueltos, en el final
+> 2020-08 y en el resumen mismo dos líneas más abajo cuando describe el M/M/c.
 
 **Fórmulas de estado estacionario:**
 
@@ -1703,13 +1705,31 @@ $\lambda = 60$ camiones por hora y la báscula pesa $\mu = 66$ camiones por hora
 3. Proceso de colas con **una sola línea** con disciplina **FIFO**.
 4. **$c$ servidores idénticos**, cada uno atendiendo con distribución exponencial con promedio $\mu$ clientes por unidad de tiempo.
 
-**Condición de estado estable**: $\rho = \dfrac{\lambda}{c\,\mu} < 1$.
+**Condición de estado estable**: $c\,\mu > \lambda$, es decir $\dfrac{\lambda}{c\,\mu} < 1$.
 
 > **La diferencia con M/M/1 que hay que entender**: en M/M/1 la capacidad de servicio del sistema es
 > $\mu$; en M/M/c es $c\mu$ cuando todos los servidores están ocupados. Por eso la condición de estado
 > estable pasa de $\lambda < \mu$ a $\lambda < c\mu$. Con una **sola cola** que alimenta a los $c$
 > servidores, el sistema rinde mejor que $c$ colas M/M/1 independientes con $\lambda/c$ cada una —
 > porque ningún servidor queda ocioso mientras haya alguien esperando.
+>
+> ⚠️ **Ojo con $\rho$ en M/M/c**: en el apunte de Weitz, $\rho = \lambda/\mu$ **sin dividir por $c$**
+> (por eso en el ejemplo de OTC con $c=2$ da $\rho = 1{,}75 > 1$ y el sistema igual es estable). La
+> condición se escribe entonces $\rho < c$. En el resumen y en Law, en cambio, $\rho = \lambda/(c\mu)$
+> y la condición es $\rho < 1$. **Son la misma cosa escrita distinto** — fijate qué convención usa el
+> enunciado antes de reemplazar en las fórmulas.
+
+**Fórmulas** (tabla 13.2 de Weitz). Según la clase pre-examen **no hay que saberlas de memoria**, pero conviene reconocerlas:
+
+| Medida | Fórmula |
+|---|---|
+| $P_0$ | $\dfrac{1}{\left(\sum_{n=0}^{c-1}\dfrac{\rho^n}{n!}\right) + \dfrac{\rho^c}{c!}\cdot\dfrac{c}{c-\rho}}$ |
+| $L_q$ | $\dfrac{\rho^{c+1}}{(c-1)!\,(c-\rho)^2}\,P_0$ |
+| $p_w$ | $\dfrac{\rho^c}{c!}\cdot\dfrac{c}{c-\rho}\cdot P_0$ |
+| $P_n$ | $\dfrac{\rho^n}{n!}P_0$ si $n \le c$ ; $\dfrac{\rho^n}{c!\,c^{\,n-c}}P_0$ si $n > c$ |
+| $U$ | $1 - \left[P_0 + \frac{c-1}{c}P_1 + \frac{c-2}{c}P_2 + \dots + \frac{1}{c}P_{c-1}\right]$ |
+
+$W_q$, $W$ y $L$ salen igual que en M/M/1, con las relaciones de Little: $W_q = L_q/\lambda$, $W = W_q + 1/\mu$, $L = \lambda W$.
 
 ### 8.9 Denegación de servicio (cola finita)
 
@@ -1755,6 +1775,42 @@ donde $c_d$ es el costo por negación (asociado a la **pérdida de un cliente**)
 > **Cómo se usa**: se calcula el costo total para $c = 1, 2, 3, \dots$ y se elige el $c$ que lo minimiza.
 > A medida que $c$ crece, el primer término crece linealmente y el segundo (y el tercero) decrecen —
 > la curva de costo total tiene forma de U.
+
+#### Ejercicio resuelto tipo — American Weavers (ejemplo 13.2 de Weitz)
+
+**Planteo**: una planta textil tiene muchas máquinas tejedoras que se atascan. Las repara **uno de
+siete** operarios, con disciplina FIFO. La gerente observa que hay entre 10 y 12 máquinas paradas en
+cualquier momento y quiere saber **cuántos reparadores más contratar**.
+
+**Modelado**: los "clientes" son las máquinas que se atascan. Como hay muchas, la población se supone
+**infinita**. Siete servidores independientes e idénticos, una sola fila → **M/M/7** con
+$\lambda = 25$ atascos/hora y $\mu = 4$ máquinas/hora por reparador (15 min de reparación promedio).
+
+**Resultados con distinto tamaño de personal** (tabla 13.3):
+
+| | 7 | 8 | 9 | 10 | 11 |
+|---|---|---|---|---|---|
+| Utilización (%) | 89,29 | 78,13 | 69,44 | 62,50 | 56,82 |
+| $L_q$ (esperando) | 5,847 | 1,494 | 0,536 | 0,209 | 0,083 |
+| $L$ (en el sistema) | **12,097** | 7,744 | 6,786 | 6,459 | 6,333 |
+| $p_w$ | 0,702 | 0,418 | 0,236 | 0,126 | 0,063 |
+| $W_q$ (horas) | 0,234 | 0,060 | 0,022 | 0,008 | 0,003 |
+| $W$ (horas) | **0,484** | 0,310 | 0,272 | 0,258 | 0,253 |
+
+> La estimación de la gerente ("10 a 12 máquinas paradas") era buena: el modelo da $L = 12{,}10$. Y
+> cada máquina está parada $W = 0{,}484$ h ≈ 29 minutos.
+
+**Análisis de costos**: se identifican dos componentes por hora —
+
+$$\text{Costo total} = \underbrace{c_s \cdot c}_{\substack{\text{costo por hora de cada}\\ \text{reparador} \times \text{nº de reparadores}}} + \underbrace{c_w \cdot L}_{\substack{\text{costo por hora de cada máquina}\\ \text{parada} \times \text{nº promedio de máquinas paradas}}}$$
+
+Se evalúa para $c = 7, 8, 9, 10, 11$ y se elige el mínimo. En el ejemplo del libro el óptimo son
+**9 reparadores**, con un costo total de **$1.128,63 por hora**.
+
+> **El razonamiento a reproducir en el parcial**: pasar de 7 a 8 reparadores baja $L$ de 12,10 a 7,74
+> — una mejora enorme. De 9 a 10 baja de 6,79 a 6,46 — casi nada, y encima cuesta un sueldo más. La
+> curva de costo total tiene forma de U y el mínimo está donde el ahorro marginal por espera se iguala
+> al costo marginal del servidor.
 
 ### Fuentes
 
