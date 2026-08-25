@@ -2399,8 +2399,8 @@ Formulario con integrantes (nombre y legajo) + **tres temas candidatos**, cada u
 Prioridad **por fecha de entrega del formulario** (conviene mandarlo temprano). El docente confirma viabilidad o pide reformulación; **no arrancar el modelado antes de esa confirmación**.
 
 **Estado**: entregable armado —
-- Fuente en markdown: [`TPI/formulario-eleccion-tema.md`](TPI/formulario-eleccion-tema.md)
-- Documento Word: [`TPI/TPI_Simulacion_Propuesta_de_Tema.docx`](TPI/TPI_Simulacion_Propuesta_de_Tema.docx), con la carátula, estilos, header/footer y logo heredados de los informes de RD (ver `rd-informe-formato` en memoria).
+- Fuente en markdown: [`entregables/TPI/formulario-eleccion-tema.md`](entregables/TPI/formulario-eleccion-tema.md)
+- Documento Word: [`entregables/TPI/TPI_Simulacion_Propuesta_de_Tema.docx`](entregables/TPI/TPI_Simulacion_Propuesta_de_Tema.docx), con la carátula, estilos, header/footer y logo heredados de los informes de RD (ver `rd-informe-formato` en memoria).
 
 Se presentan **2 temas** (el enunciado pide 3 — decisión del grupo, con el riesgo de reformulación anotado en el propio documento).
 
@@ -2428,7 +2428,7 @@ Hallazgo que sostiene el Tema 1: el desbalance de Ecobici **no es anual sino int
 ### Fuentes
 
 - `fuentes/TPI Simulación - Enunciado.md`
-- Perfilado de datos propio (2026-07-29), ver anexo de `TPI/formulario-eleccion-tema.md`
+- Perfilado de datos propio (2026-07-29), ver anexo de `entregables/TPI/formulario-eleccion-tema.md`
 
 ---
 
@@ -2439,7 +2439,7 @@ Hallazgo que sostiene el Tema 1: el desbalance de Ecobici **no es anual sino int
 
 - **2026-08-25**: ingesta masiva de todo el material de `archivo/`. Se copiaron a `fuentes/` los tres apuntes oficiales de cátedra (Weitz, Naylor cap. 4, Números pseudoaleatorios), la teoría de Flamini, los apuntes extra, los 13 resúmenes viejos, los 6 ejercicios resueltos de práctica, los modelos de AnyLogic y Mathematica, los 5 TPs y **todos los exámenes** (7 parciales, 6 finales, 1 globalizador). Todo convertido a markdown en `fuentes/txt/`, incluyendo la transcripción por visión de los PDFs y fotos escaneados (Weitz 79 pág., Naylor 29 pág., Flamini 24 pág., 7 exámenes en imagen). Wiki **reescrita completa**: de 3 secciones a 10 unidades más un mapa del parcial. Unidades nuevas: 4 (inventarios), 5 (10 pasos, las dos listas), 6 (probabilidad), 7 (generación de números y variables aleatorias), 8 (colas analíticas), 9 (análisis de salidas), 10 (comparación de sistemas). Hallazgos: el resumen del parcial **no cubre** generación de variables aleatorias, análisis de salidas ni comparación de sistemas; las preguntas 8/9/10 se repiten casi textuales en 2022-2023-2024; y el parcial **2025 cambió a multiple choice** con preguntas de AnyLogic y LaTeX.
 
-- **2026-07-31**: armado el entregable en Word (`TPI/TPI_Simulacion_Propuesta_de_Tema.docx`) reutilizando carátula, estilos, header/footer y logo del informe de RD. Grupo actualizado a Bonadeo + Estevez (sale Casermeiro) y la propuesta reducida a 2 temas (Ecobici y emergencias); molinetes queda como reserva documentada.
-- **2026-07-29**: redactado el formulario de elección de tema (`TPI/formulario-eleccion-tema.md`) con los 3 candidatos: Ecobici (prioritario), despacho de emergencias SF y molinetes de subte. Perfilados y verificados los datasets: Ecobici 2024 (3.559.284 viajes, 395 estaciones) + capacidad por GBFS, y DataSF `nuek-vuh3` (7,39 M registros, muestra semanal). Detectado el desbalance intradiario reversible de Ecobici, que es el fenómeno que justifica el escenario de rebalanceo. Documentadas las limitaciones a declarar (solo viajes exitosos, 9,11% de viajes <1 min, 13,47% origen=destino).
-- **2026-07-29**: ingerido el enunciado del TP Integrador (`fuentes/SIM/TPI Simulación - Enunciado.md`). Se creó la sección 3 (TPI) con consigna, entregables, causales de recuperatorio, criterios de selección de tema y primera actividad. Pendiente: elegir los 3 temas candidatos.
+- **2026-07-31**: armado el entregable en Word (`entregables/TPI/TPI_Simulacion_Propuesta_de_Tema.docx`) reutilizando carátula, estilos, header/footer y logo del informe de RD. Grupo actualizado a Bonadeo + Estevez (sale Casermeiro) y la propuesta reducida a 2 temas (Ecobici y emergencias); molinetes queda como reserva documentada.
+- **2026-07-29**: redactado el formulario de elección de tema (`entregables/TPI/formulario-eleccion-tema.md`) con los 3 candidatos: Ecobici (prioritario), despacho de emergencias SF y molinetes de subte. Perfilados y verificados los datasets: Ecobici 2024 (3.559.284 viajes, 395 estaciones) + capacidad por GBFS, y DataSF `nuek-vuh3` (7,39 M registros, muestra semanal). Detectado el desbalance intradiario reversible de Ecobici, que es el fenómeno que justifica el escenario de rebalanceo. Documentadas las limitaciones a declarar (solo viajes exitosos, 9,11% de viajes <1 min, 13,47% origen=destino).
+- **2026-07-29**: ingerido el enunciado del TP Integrador (`fuentes/TPI Simulación - Enunciado.md`). Se creó la sección 3 (TPI) con consigna, entregables, causales de recuperatorio, criterios de selección de tema y primera actividad. Pendiente: elegir los 3 temas candidatos.
 - **2026-07-08**: ingerido el contenido de la wiki anterior de SIM (construida a partir de `Simulación_clase_2_2026.pdf`, `Simulacion_Intro_Completa.pdf`, `Resumen_de_Simulación.pdf`). Se creó el índice (Unidades 1 y 2) y se desarrollaron ambas unidades. Falta cargar el programa completo de la materia para completar el índice (Unidades 3+).
