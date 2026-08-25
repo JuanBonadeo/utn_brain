@@ -1666,6 +1666,32 @@ donde $s\omega$ es la tasa de servicio del sistema cuando **todos** los servidor
 
 **Qué se quiere predecir analíticamente** (del final 2020-08 resuelto): (1) el número promedio esperado en cola / la probabilidad de varios números de clientes en cola; (2) el tiempo esperado que pasará un cliente en las instalaciones del servicio; (3) la probabilidad de que las instalaciones estén ociosas (factor de utilización).
 
+#### Ejercicio resuelto tipo — la estación de pesado (ejemplo canónico de Weitz)
+
+> Ejemplo 13.1 del apunte de cátedra. Es **el** ejemplo de M/M/1 de la materia — vale la pena tenerlo
+> hecho porque muestra el orden de cálculo y, sobre todo, **cómo se interpreta cada número**.
+
+**Planteo**: la Ohio Turnpike Commission (OTC) tiene una estación de pesado de camiones. Llegan
+$\lambda = 60$ camiones por hora y la báscula pesa $\mu = 66$ camiones por hora.
+
+| Paso | Medida | Cálculo | Resultado | Interpretación |
+|---|---|---|---|---|
+| 0 | Intensidad de tráfico | $\rho = \lambda/\mu = 60/66$ | **0,9091** | Sistema muy cargado (cerca de 1) |
+| 1 | $P_0$ | $1 - \rho = 1 - 0{,}9091$ | **0,0909** | El 9% del tiempo un camión que llega **no** espera (báscula vacía) |
+| 2 | $L_q$ | $\dfrac{\rho^2}{1-\rho} = \dfrac{0{,}9091^2}{0{,}0909}$ | **9,0909** | En estado estable hay ~9 camiones esperando (sin contar el que se está pesando) |
+| 3 | $W_q$ | $L_q/\lambda = 9{,}0909/60$ | **0,1515 h** | ~9 minutos de espera en la fila |
+| 4 | $W$ | $W_q + 1/\mu = 0{,}1515 + 1/66$ | **0,1667 h** | ~10 minutos desde que llega hasta que sale |
+| 5 | $L$ | $\lambda W = 60 \times 0{,}1667$ | **10** | 10 camiones en total en la estación (en báscula + esperando) |
+| 6 | $p_w$ | $1 - P_0 = \rho$ | **0,9091** | El 91% del tiempo un camión que llega tiene que esperar |
+| 7 | $P_n$ | $\rho^n P_0$ | $P_0=0{,}0909$; $P_1=0{,}0826$; $P_2=0{,}0751$; $P_3=0{,}0683$ | $P(\text{no más de 3}) = 0{,}3169$ (suma de las cuatro) |
+| 8 | $U$ | $\rho$ | **0,9091** | La báscula está en uso el 91% del tiempo; ociosa el 9% |
+
+> **La conexión con denegación de servicio** (§8.9): la rampa de salida tiene capacidad para 15
+> camiones. La gerencia quiere saber con qué probabilidad la cola llega hasta la autopista, o sea que
+> haya **17 o más camiones en el sistema** (1 en la báscula + 16 o más esperando). Se calcula
+> $\sum_{n\ge 17} P_n = 0{,}20$: el **20% del tiempo** los camiones sobrepasan la rampa. Como no es
+> aceptable, ahí se plantea el M/M/2 (agregar una segunda báscula).
+
 ### 8.8 Modelo M/M/c
 
 > Según la clase pre-examen: **entra el entendimiento general, NO las fórmulas.**
