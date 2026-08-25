@@ -4,7 +4,7 @@
  *
  * Uso (desde la raíz del repo):
  *   NODE_PATH=<scratchpad>/docxbuild/node_modules \
- *     node scripts/build-docx.js materias/ASI/entregable.md materias/ASI/entregable.docx
+ *     node scripts/build-docx.js materias/ASI/entregables/entregable.md materias/ASI/entregables/entregable.docx
  *
  * Soporta:
  *   #  título del documento (centrado)

@@ -22,26 +22,37 @@ tiempo repitiendo cosas que ya deberían estar escritas en algún lado.
 | ICS | Ingeniería y Calidad de Software |
 
 ## ESTRUCTURA
-- `materias/[CÓDIGO]/` → una carpeta por materia. Adentro:
-  - `materias/[CÓDIGO]/[CÓDIGO].md` → la wiki (única fuente de verdad).
-  - derivados de estudio que generamos: `resumen.md`, `banco-preguntas.md`,
-    sus exportaciones a `.docx`, y `figs/` (imágenes usadas en esos docs).
-- `fuentes/[CÓDIGO]/` → originales crudos que subo (PDF, apuntes, etc.).
-  Inmutables, nunca los edites.
-- `fuentes/4º AÑO/` → **pozo de material**, no es una materia. Es un dump
-  heredado (drive de la facu) con carpetas por nombre largo de materia:
-  `Investigación Operativa`, `Redes de Datos`, `Simulación`, `Legislación`,
-  `Ingeniería y Calidad de Software`, `Administración de Sistemas de
-  Información`, `Tecnologías para la Automatización`. Adentro suele haber
-  `Material de cursado/`, `Resúmenes/` y `Examenes/` (parciales y finales
-  viejos, muchos como foto `.jpg`).
-  - Es la reserva de la que sacamos material cuando una materia lo necesita:
-    se **copia** lo que se va a usar a `fuentes/[CÓDIGO]/` y recién ahí se
-    ingiere. Nunca ingieras directo desde acá.
+Todo lo de una materia vive dentro de `materias/[CÓDIGO]/`. No hay carpetas
+de materia fuera de ahí.
+
+    materias/[CÓDIGO]/
+    ├── [CÓDIGO].md      ← la wiki (única fuente de verdad)
+    ├── fuentes/         ← originales crudos que subo. Inmutables.
+    ├── archivo/         ← dump heredado del drive de la facu (ver abajo)
+    ├── estudio/         ← derivados que generamos: resumen.md,
+    │                      banco-preguntas.md, machetes + sus .docx/.pdf
+    ├── entregables/     ← TPs, informes, ensayos, prototipos + sus exports
+    └── figs/            ← imágenes usadas por [CÓDIGO].md y por estudio/
+
+- `fuentes/` → lo que subo yo para ingerir (PDF, apuntes, enunciados).
+  Inmutable: nunca lo edites, solo leelo.
+- `archivo/` → **reserva heredada**, no curada: es el drive viejo de la facu
+  volcado tal cual, con `Material de Cursado/`, `Resúmenes/` y `Examenes/`
+  (parciales y finales viejos, muchos como foto `.jpg`). Está gitignorado
+  (1.4 GB) y solo existe en local.
+  - Es de donde sacamos material cuando una materia lo necesita: se **copia**
+    lo que se va a usar a `fuentes/` de esa misma materia y recién ahí se
+    ingiere. Nunca ingieras directo desde `archivo/`.
   - También es inmutable: no muevas ni borres nada de adentro, aunque quede
-    duplicado con `fuentes/[CÓDIGO]/`.
-  - Si te pido material de una materia y su `fuentes/[CÓDIGO]/` está flaca,
-    fijate acá antes de decir que no hay nada.
+    duplicado con `fuentes/`.
+  - Si te pido material de una materia y su `fuentes/` está flaca, fijate en
+    `archivo/` antes de decir que no hay nada.
+- Ojo: los archivos de `estudio/` y `entregables/` están un nivel más abajo
+  que `figs/`. Las imágenes se referencian como `../figs/x.png` desde ahí, y
+  como `figs/x.png` solo desde `[CÓDIGO].md`.
+- Fuera de `materias/` solo hay: `CLAUDE.md`, `scripts/`, el toolchain de
+  node (`package.json`, `node_modules/`) y `_drive/` (dos PDFs sueltos del
+  drive, gitignorados, no son de ninguna materia).
 - `scripts/ingest.py` → wrapper de markitdown para convertir fuentes no-md.
   Corre con el venv del proyecto: `.venv/bin/python scripts/ingest.py <archivo>`.
   Ojo con los zips de Google Drive: `unzip` rompe los acentos de los nombres
@@ -67,7 +78,7 @@ Estructura interna de cada `materias/[CÓDIGO]/[CÓDIGO].md`:
 Las unidades son bloques amplios, no páginas atómicas por tema puntual.
 
 ## OPERACIÓN: INGEST
-Cuando te paso o guardo un archivo nuevo en `fuentes/[CÓDIGO]/`:
+Cuando te paso o guardo un archivo nuevo en `materias/[CÓDIGO]/fuentes/`:
 1. Si no es texto/markdown (PDF, PPTX, DOCX, imagen, audio), convertilo
    con `scripts/ingest.py` (markitdown) antes de leerlo. Nunca trabajes
    sobre el binario original.
@@ -91,10 +102,10 @@ Cuando te pregunto algo para estudiar o resolver un ejercicio:
 ## OPERACIÓN: LINT
 Cuando pido "revisá [MATERIA]" o "revisá todo":
 - Temas del índice sin desarrollo real
-- Unidades desactualizadas (hay fuentes en fuentes/[CÓDIGO]/ más nuevas
-  que el Log)
-- Material sin aprovechar: hay algo en `fuentes/4º AÑO/[nombre largo]/` que
-  cubre una unidad floja y todavía no se copió a `fuentes/[CÓDIGO]/`
+- Unidades desactualizadas (hay fuentes en materias/[CÓDIGO]/fuentes/
+  más nuevas que el Log)
+- Material sin aprovechar: hay algo en `materias/[CÓDIGO]/archivo/` que
+  cubre una unidad floja y todavía no se copió a `materias/[CÓDIGO]/fuentes/`
 - Contradicciones entre fuentes distintas dentro de la misma unidad
 - Reportá en lista corta. No reescribas nada sin que lo confirme.
 

@@ -6,9 +6,9 @@ __pycache__/
 # macOS
 .DS_Store
 
-# Fuentes crudas pesadas (1.4GB de PDFs/imágenes) — quedan solo local
-# glob por "4*" para evitar problemas de normalización Unicode (NFD) de macOS
-fuentes/4*/
+# Archivo heredado del Drive de la facu (1.4GB de PDFs/imágenes) — queda solo local
+materias/*/archivo/
+_drive/
 
 # Claude local (settings personales, no compartir)
 .claude/settings.local.json

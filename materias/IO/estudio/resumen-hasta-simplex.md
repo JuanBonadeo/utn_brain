@@ -156,7 +156,7 @@ x1 + 2 x2 = 40
        x2 = 15      ->   x1 = 10,  x2 = 15,  z = 20(10) + 45(15) = 875
 ```
 
-![Región factible y óptimo](figs/grafico-region-factible.png)
+![Región factible y óptimo](../figs/grafico-region-factible.png)
 
 **Dos métodos, mismo resultado:**
 
@@ -242,7 +242,7 @@ Max z = 20 x1 + 45 x2 + 0 x3 + 0 x4 + 0 x5
    xj >= 0,  j = 1...5
 ```
 
-![Forma estándar](figs/forma-estandar.png)
+![Forma estándar](../figs/forma-estandar.png)
 
 Las holguras y excesos entran en la función objetivo con **coeficiente cero** y son
 **no negativas**, igual que las de decisión.
@@ -287,7 +287,7 @@ PASIVA (o no obligatoria)
                                         restricciones que pasan por ese vertice
 ```
 
-![Tipos de restricciones](figs/tipos-de-restricciones.png)
+![Tipos de restricciones](../figs/tipos-de-restricciones.png)
 
 Por qué no se eliminan las redundantes aunque se podría: son difíciles de detectar, y
 **una restricción redundante hoy puede dejar de serlo mañana** si cambian los parámetros.
@@ -364,7 +364,7 @@ xN   variables NO BASICAS
 haciendo xN = 0:   B·xB = b   ->   xB = B^-1 · b
 ```
 
-![Partición base / no base](figs/particion-base-nobase.png)
+![Partición base / no base](../figs/particion-base-nobase.png)
 
 Esa es la solución básica: las `m` componentes de `xB` más `n-m` ceros.
 
@@ -385,7 +385,7 @@ T4  La funcion objetivo alcanza su optimo en AL MENOS UN punto extremo.
     combinacion convexa de ellos.
 ```
 
-![Óptimo en punto extremo](figs/teorema-punto-extremo.png)
+![Óptimo en punto extremo](../figs/teorema-punto-extremo.png)
 
 > **T3 es el teorema bisagra de toda la materia.** Conecta lo geométrico (vértice) con lo
 > algebraico (SBF). Es lo que hace que el Simplex, que solo hace álgebra con matrices,

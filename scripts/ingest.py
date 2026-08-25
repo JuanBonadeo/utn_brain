@@ -11,11 +11,11 @@ Si hay que recrear el entorno:
 
 Uso:
     from ingest import ingest
-    texto = ingest("fuentes/TPA/apunte-unidad1.pdf")
+    texto = ingest("materias/TPA/fuentes/apunte-unidad1.pdf")
 
 Desde la terminal (usar el python del venv):
-    .venv/bin/python scripts/ingest.py fuentes/TPA/apunte-unidad1.pdf
-    .venv/bin/python scripts/ingest.py fuentes/TPA/apunte.pdf salida.md
+    .venv/bin/python scripts/ingest.py materias/TPA/fuentes/apunte-unidad1.pdf
+    .venv/bin/python scripts/ingest.py materias/TPA/fuentes/apunte.pdf salida.md
 """
 
 import sys

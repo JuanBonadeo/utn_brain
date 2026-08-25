@@ -1,6 +1,6 @@
 # TPI Simulación — Propuesta de tema
 
-> Primera actividad del TP Integrador (ver [SIM.md](../SIM.md) §3 — Unidad 3).
+> Primera actividad del TP Integrador (ver [SIM.md](../../SIM.md) §3 — Unidad 3).
 > Versión entregable en Word: [`TPI_Simulacion_Propuesta_de_Tema.docx`](TPI_Simulacion_Propuesta_de_Tema.docx) (carátula y estilos heredados de los informes de RD).
 > La prioridad se asigna **por fecha de entrega del formulario**: conviene mandarlo temprano.
 > El docente confirma la viabilidad o pide reformulación. **No arrancar el modelado antes de esa confirmación.**
