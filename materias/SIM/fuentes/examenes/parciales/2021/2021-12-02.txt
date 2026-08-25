@@ -1,0 +1,112 @@
+Pregunta 1
+
+Dada la fórmula de generación de números aleatorios xn = axn−1 modulo m, explique cuáles son las condiciones deseables para a y m
+
+Las condiciones deseables para las constantes a y m son:
+
+1. Para cualquier semilla inicial, la sucesion resultante tiene la "apariencia" de ser una sucesion de variables aleatorias independientes y uniformes en (0,1).
+
+2. Para cualquier semilla inicial, la cantidad de variables generadas antes de que comience la repeticion es grande.
+
+3. Los valores pueden calcularse eficientemente en una computadora digital.
+
+Para las condiciones deseables suele elegirse para m un numero primo grande, aproximado al tamaño de la palabra del sistema. Por ejemplo para un sistema con palabras de 32 bits: m=2^(31)-1 y a=7^5=1608.
+
+Pregunta 2
+
+Describa las fórmulas y explique cómo se modela el arribo de clientes a una simulación de un sistema de colas
+
+Para un sistema de colas, los tiempos entre arribos pueden ser de 3 tipos:
+
+D: deterministicos. Los tiempos de arribos estan determinados al comenzar la simulacion.
+
+G: general. Los tiempos entre arribos siguen una distribucion general, distinta a la exponencial.
+
+M:exponencial. Los tiempos entre arribos independientes se vinculan con la distribucion de Poisson mediante el parametro lambda.
+
+El que utilizamos para el modelo M/M/1 con llegadas exponenciales es aquel en el que el tiempo entre arribos es independiente y sigue una distribucion de Poisson con parametro lambda.
+
+Este parametro lambda representa el promedio de arribos por unidad de tiempo.
+
+La funcion de densidad para esta ditribucion es:
+
+pi=e^(-lambda). lambda^(i)/i!   ,  i=0,1,2...
+
+
+Pregunta 3
+
+Enuncie la fórmula y explique bajo qué condiciones hablamos de una variable aleatoria de Poisson. Cite algún ejemplo
+
+Cuando X toma uno de los valores 0,1,2... es una variable Poisson con parametro lambda, lambda<0, si su funcion de masa de probabilidad es
+
+
+                                 pi=P{X=i}=e^(-lambda) . lambda^i/ i!   ,  i=0,1,....
+
+
+Ejemplo: los tiempos entre arribos en un sistema M/M/1 siguen esta distribucion, en los cuales el parametro lambda representa el promedio arribos por unidad de tiempo.
+
+Pregunta 4
+
+Cuáles son las condiciones para un modelo M/M/1?
+
+Las condiciones para un modelo M/M/1 son:
+
+1. Una poblacion de tamaño infinita.
+
+2. Una cola de una linea, con area de espera infinita
+
+3. Un proceso de llegadas independientes que siguen una distribucion de Poisson con parametro lambda.
+
+4. Un servidor de un canal que sirve siguendo una distribucion exponencial dando servicio con un promedio de u clientes por unidad de tiempo.
+
+Pregunta 5
+
+Describa los costos asociados a un modelo de simulación de inventarios
+
+Estos costos son:
+
+- Costo de la orden: K+Z.i , donde K es el costo fijo, Z es el costo por unidad pedida e i es la cantidad de unidades pedidas.
+
+- Costo por items almacenados: I^(+).Π , donde I^(+) es el valor de los items fisicos en inventario y Π es el costo por items almacenados por mes.
+
+- Costo por items adeudados: I^(-).h, donde I^(-) es la cantidad de items faltantes y h es el costo por items adeudados por mes.
+
+Pregunta 6
+
+Desarrolle los siguientes pasos a) y b), en la realización de un estudio de simulación: a) la determinación de los escenarios para el análisis, b) la documentación del modelo, sugerencias y conclusiones
+
+a) Luego de la validacion del modelo se deben elegir los escenarios que se realizaran en la simulacion. Para esto se suele elegir un escenario pesimista, uno intermedio y uno optimista para la variable de rendimiento importante. El analista tambien puede sugerir un escenario alternativo.
+
+b) Una vez realizado el estudio estadistico de los resultados, se debe realizar la documentacion del sistema como guia para el usuario y para posibles modificaciones futuras. Tambien el analista debe poner sus conclusiones sobre el sistema simulado y sus resultados, para poder luego generar un reporte ejecutivo.
+
+Pregunta 7
+
+Defina y explique los axiomas básicos de la probabilidad
+
+Pregunta 8
+
+Explique y aplique el Método de la Transformada Inversa para generar el valor de una variable aleatoria discreta X con la siguiente función de masa de probabilidad: P(X=1) = 1/6, P(X=2) = 1/3, P(X=3) = 1/3, P(X=4) = 1/6 (observe que 1/6 + 1/3 + 1/3 + 1/6 = 1)
+
+Generamos un numero aleatorio U con distribucion uniforme entre (0,1) y luego:
+
+Si U<1/6 hacer X=1 y terminar
+
+Si U<1/2 hacer X=2 y terminar
+
+Si U<5/6 hacer X=3 y terminar
+
+Si lo anterior no se cumple hacer X=4 y terminar.
+
+Asi, luego de generar U determinamos el valor de
+
+x hallando el intervalo al que pertenece U.
+
+Pregunta 9
+
+Cómo debe ser la relación entre los parámetros lambda y mu para que un sistema de colas funcione?
+
+En un sistema de colas, el parametro mu, cantidad promedio de servicios por unidad de tiempo, debe ser mayor que el parametro lambda, cantidad promedio de arribos por unidad de tiempo. De lo contrario el sistema no podria alcanzar un estado estable ya que siempre llegarian mas clientes de los que se les puede dar servicio, haciendo que la cola sea cada vez mas larga.
+
+Pregunta 10
+
+Enuncie y demuestre el Algoritmo de la Transformada Inversa para la generación de variables aleatorias continuas y aplíquelo para generar una variable aleatoria con distribución exponencial.

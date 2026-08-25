@@ -1,0 +1,13 @@
+Recuperatorio 2019
+Weitz (2do parcial teoría):
+
+1 Analisis de resultados MAS DE DOS SISTEMAS. Formulas.
+
+2 Definir en no mas de 10 renglones:
+ * Números Aleatorios Comunes
+
+ * Procedimientos de precision relativa y absoluta. Las dos       formulas.
+
+ * Simulacion NO Terminal.
+
+ * 3 Medidas utilizadas para describir sistemas de    colas. (Letras, definiciones y relaciones).

@@ -1,0 +1,23 @@
+Sí, la clase preexamen fue creo que 3 días antes... No recuerdo bien bien los temas, pero trato de transcribir mis notas de mientras lo iban diciendo:
+
+--> Va el capitulo 4 de Naylor para lo que son las distribuciones
+
+APUNTE DE WEITZ
+***************
+* Cap 1 va todo: conceptos, modelos, gráfico de sistema vs modelo vs modelo matemático vs simulación y etc, medidas de rendimientos, algoritmos y rutinas.
+* Simulación de inventario va. Rutinas, salida, discusión.
+10 pasos de la simulación (en español) va. (De hecho me lo tomaron a mi).
+* Cap 13, modelos de colas: Generalidades, fórmulas, 13.3 MM1. De MMC (13.4) sólo un entendimiento general, no piden las fómulas.
+Leer análisis económico
+* La página 67 del doc (escrita 62 en lapiz) no va.
+* Cap 9 (en inglés) que es de análisis de salidas sí.
+* Pag 76 sí. Precisión absoluta/relativa.
+* Pag 77 no.
+* Cap 10 (comparando sistemas alternativos) sí.
+* Pag 86 sí, 10.2.2 no.
+* De ahí en adelante, NADA.
+* Para generación de números aleatorios, cap 4 de Naylor. (Me había olvidado de esto!! Tengo el 4 del Naylor, lo subo en la misma carpeta donde está el resto)
+
+Nota: Todo lo que tomaron o casi está en mi resumen, y si no está en mi resumen es porque seguramente no lo tomaban. Así que pueden sacar los temas de ese resumen y ampliarlos en el libro.
+
+Nota 2: Ojo, por ahí cambian los temas!

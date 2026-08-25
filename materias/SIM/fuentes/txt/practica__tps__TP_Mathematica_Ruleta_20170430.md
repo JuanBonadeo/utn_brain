@@ -1,0 +1,9 @@
+**SIMULACION DE LA TIRADA DE UNA RULETA CON SOFTWARE MATHEMATICA**
+
+Joel Arnold, Alexis Castaño, Damián Ciancio, Luciano Guadagnoli, Rodrigo Ponce
+
+UTN Facultad Regional Rosario - Zeballos 1341, Rosario, Santa Fe, Argentina - 30/04/2017
+
+|  |  |
+| --- | --- |
+| **OBJETIVO**  Desarrollar un algoritmo con el software Mathematica que simule las tiradas de una ruleta utilizando funciones de generación de números aleatorios y sacar conclusiones analizando los gráficos generados con el aplicativo.  **DESARROLLO**  Consideremos el experimento aleatorio que consiste en hacer girar la ruleta n veces. Supongamos que se registra la proporción de salida de un elemento de los 37 elementos de la ruleta. Un resultado conocido es que esta proporción estará cerca de 1/37 (casos favorables sobre casos posibles).  X: n° de salidas que se observan, X ~ Bi (n, 1/37) que describe el número de aciertos en una serie de n experimentos independientes con posibles resultados "sí" o "no" ([ensayos de Bernoulli](https://es.wikipedia.org/wiki/Ensayo_de_Bernoulli), todos ellos con probabilidad de acierto p y probabilidad de fallo q = 1 – p).  Se espera que a medida que n crece la frecuencia relativa de salida de un elemento se acerque a 1/37 = μ (media poblacional).  μ = $1/n\sum\_{i=1}^{n}xi$ = $\overbar{x}$  Para este experimento se utiliza el nº 2 y se realizan 50000 tiradas.  **GRAFICOS** | ![](data:image/png;base64...)  **Fig. 1.** Frecuencia relativa del nº 2  ![](data:image/png;base64...)  **Fig. 2.** Histograma de frecuencias relativas de los 37 elementos de la ruleta  **CONCLUSION**  En base a la observación de los gráficos y el análisis de los mismos podemos concluir que, a medida que crece la cantidad de tiradas, la frecuencia relativa de salida de un número (en este caso el nº 2) tiende a estabilizarse hacia un valor cercano a 0,027 (1/37) = μ (media poblacional). |

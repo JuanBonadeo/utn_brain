@@ -1,0 +1,124 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      3944,        116]
+NotebookOptionsPosition[      3432,         96]
+NotebookOutlinePosition[      3975,        115]
+CellTagsIndexPosition[      3932,        112]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Generador", ":", " ", 
+    RowBox[{
+    "M\[EAcute]todo", " ", "de", " ", "los", " ", "medios", " ", 
+     "cuadrados"}]}], "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"semilla", " ", "=", " ", "1009"}], ";"}], " ", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "Uso", " ", "la", " ", "misma", " ", "semilla", " ", "que", " ", "usamos",
+      " ", "al", " ", "principio", " ", "en", " ", "clase", " ", "para", " ", 
+     "comprobar", " ", "que", " ", "funciona", " ", "bien"}], " ", "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"iteraciones", " ", "=", " ", "10"}], ";"}], " ", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Ac\[AAcute]", " ", "se", " ", "completa", " ", "la", " ", "cantidad", 
+     " ", "de", " ", "n\[UAcute]meros", " ", "aleatorios", " ", "a", " ", 
+     "generar"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"aleatorio", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"calcCuad", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"z", "=", "semilla"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"z2con8", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"For", "[", 
+    RowBox[{
+     RowBox[{"i", "=", "0"}], ",", 
+     RowBox[{"i", "<", "iteraciones"}], ",", 
+     RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"calcCuad", " ", "=", " ", 
+        RowBox[{"z", "^", "2"}]}], ",", "\[IndentingNewLine]", 
+       "\[IndentingNewLine]", 
+       RowBox[{"z2con8", "=", 
+        RowBox[{"PadLeft", "[", 
+         RowBox[{
+          RowBox[{"IntegerDigits", "[", "calcCuad", "]"}], " ", ",", " ", 
+          "8"}], "]"}]}], ",", "\[IndentingNewLine]", 
+       RowBox[{"z", " ", "=", 
+        RowBox[{"FromDigits", "[", 
+         RowBox[{"z2con8", "[", 
+          RowBox[{"[", 
+           RowBox[{"3", ";;", "6"}], "]"}], "]"}], "]"}]}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"aleatorio", ",", 
+         RowBox[{"z", "/", 
+          SuperscriptBox["10", "4"]}]}], "]"}]}], "\[IndentingNewLine]", 
+      "}"}]}], "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"N", "[", "aleatorio", "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.7014421040179005`*^9, 3.7014421086183*^9}, {
+  3.7014421739771323`*^9, 3.701442253182107*^9}, {3.7014423338746376`*^9, 
+  3.7014423477263966`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "0.018`", ",", "0.0324`", ",", "0.1049`", ",", "0.1004`", ",", "0.008`", 
+   ",", "0.0064`", ",", "0.004`", ",", "0.0016`", ",", "0.0002`", ",", 
+   "0.`"}], "}"}]], "Output",
+ CellChangeTimes->{3.701540566447229*^9}]
+}, Open  ]]
+},
+WindowSize->{1366, 685},
+WindowMargins->{{-8, Automatic}, {Automatic, -8}},
+DockedCells->FEPrivate`FrontEndResource[
+ "NotebookTemplatingExpressions", "AuthoringDockedCell"],
+TaggingRules->{"NotebookTemplateVersion" -> 1., "NotebookTemplate" -> True},
+CellContext->Notebook,
+FrontEndVersion->"11.0 para Microsoft Windows (64-bit) (July 28, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 2574, 63, 493, "Input"],
+Cell[3157, 87, 259, 6, 30, "Output"]
+}, Open  ]]
+}
+]
+*)
+

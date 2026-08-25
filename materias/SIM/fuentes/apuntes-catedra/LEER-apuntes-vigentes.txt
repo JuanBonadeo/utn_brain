@@ -1,0 +1,7 @@
+Estos son los 3 apuntes oficiales de la cátedra que hoy (febrero 2021) están en vigencia con Leale como jefe de cátedra:
+
+* Apunte Weitz con hojas rotadas y acotado
+* Números pseudoaleatorios
+* (Naylor) Tecnicas de Simulación en Computadoras - Cap. 4
+
+En la carpeta extra se encuentra otros que se usaban antes con Lara y otros profesores y algunas cosas extras que pueden servir de apoyo al estudio pero NO son necesarios ni obligatorios.

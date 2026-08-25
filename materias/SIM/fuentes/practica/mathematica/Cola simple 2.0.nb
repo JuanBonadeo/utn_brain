@@ -1,0 +1,447 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     17894,        439]
+NotebookOptionsPosition[     17619,        425]
+NotebookOutlinePosition[     17993,        441]
+CellTagsIndexPosition[     17950,        438]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{"Quit", ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ClearAll", ";"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"**", " ", "DEFINICION"}], " ", "DE", " ", "FUNCIONES"}], " ", 
+   "***)"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Rutina", " ", "de", " ", "tiempos"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"tiempos", "[", "]"}], ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"menor", ",", " ", "eme"}], "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{"Guarda", " ", "en", " ", "\"\<menor\>\"", " ", 
+        RowBox[{"la", "/", "s"}], " ", 
+        RowBox[{"posici\[OAcute]n", "/", "es"}], " ", "del", " ", "menor", 
+        " ", "de", " ", "\"\<listaDeEventos\>\""}], "*)"}], 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"menor", "=", 
+        RowBox[{"Position", "[", 
+         RowBox[{"listaDeEventos", ",", " ", 
+          RowBox[{"Min", "[", "listaDeEventos", "]"}]}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{
+        "Guarda", " ", "en", " ", "\"\<eme\>\"", " ", "la", " ", "primer", 
+         " ", "posici\[OAcute]n", " ", "del", " ", "menor", " ", "elemento", 
+         " ", "de", " ", "\"\<listaDeEventos\>\""}], "*)"}], 
+       "\[IndentingNewLine]", 
+       RowBox[{"eme", "=", 
+        RowBox[{"First", "[", 
+         RowBox[{"First", "[", "menor", "]"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"tiempoUltimoEvento", " ", "=", " ", "reloj"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"reloj", " ", "=", " ", 
+        RowBox[{"listaDeEventos", "[", 
+         RowBox[{"[", "eme", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"proximoEvento", "=", 
+        RowBox[{"tiposEventos", "[", 
+         RowBox[{"[", "eme", "]"}], "]"}]}]}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Rutina", " ", "de", " ", "arribos"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"arribos", "[", "]"}], ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", "tserv", "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"tserv", "=", 
+        RowBox[{"RandomVariate", "[", 
+         RowBox[{"ExponentialDistribution", "[", 
+          RowBox[{"1", "/", "tmEntreArribos"}], "]"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{"listaDeEventos", "=", 
+        RowBox[{"ReplacePart", "[", 
+         RowBox[{"listaDeEventos", ",", 
+          RowBox[{"1", "\[Rule]", 
+           RowBox[{"(", 
+            RowBox[{"reloj", "+", "tserv"}], ")"}]}]}], "]"}]}], ";", 
+       "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"listaDeEventos", "[", 
+         RowBox[{"[", "1", "]"}], "]"}], "=", 
+        RowBox[{"reloj", "+", "tserv"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"estadoServidor", "\[Equal]", "\"\<D\>\""}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"estadoServidor", "=", "\"\<O\>\""}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"tserv", "=", 
+           RowBox[{"RandomVariate", "[", 
+            RowBox[{"ExponentialDistribution", "[", 
+             RowBox[{"1", "/", "tmDeServicio"}], "]"}], "]"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"listaDeEventos", "=", 
+           RowBox[{"ReplacePart", "[", 
+            RowBox[{"listaDeEventos", ",", 
+             RowBox[{"2", "\[Rule]", 
+              RowBox[{"(", 
+               RowBox[{"reloj", "+", "tserv"}], ")"}]}]}], "]"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"tsAcumulado", "=", 
+           RowBox[{"tsAcumulado", "+", "tserv"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"completaronDemora", "=", 
+           RowBox[{"completaronDemora", "+", "1"}]}]}], "\[IndentingNewLine]",
+          ",", 
+         RowBox[{"(*", " ", "sino", " ", "*)"}], "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"areaQDeT", "=", 
+           RowBox[{"areaQDeT", "+", 
+            RowBox[{"(", 
+             RowBox[{"nroDeClientesEnCola", "*", 
+              RowBox[{"(", 
+               RowBox[{"reloj", "-", "tiempoUltimoEvento"}], ")"}]}], 
+             ")"}]}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"nroDeClientesEnCola", "=", 
+           RowBox[{"nroDeClientesEnCola", "+", "1"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"cola", "=", 
+           RowBox[{"Prepend", "[", 
+            RowBox[{"cola", ",", "reloj"}], "]"}]}], ";"}]}], 
+        "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+       "\[IndentingNewLine]", "tserv"}]}], "\[IndentingNewLine]", "]"}]}], 
+   ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Rutina", " ", "de", " ", "partidas"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"partidas", "[", "]"}], ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"tserv", ",", "tdem"}], "}"}], ",", 
+      RowBox[{
+       RowBox[{"paso2", "=", "200"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"nroDeClientesEnCola", ">", "0"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"tserv", "=", 
+           RowBox[{"RandomVariate", "[", 
+            RowBox[{"ExponentialDistribution", "[", 
+             RowBox[{"1", "/", "tmDeServicio"}], "]"}], "]"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"listaDeEventos", "=", 
+           RowBox[{"ReplacePart", "[", 
+            RowBox[{"listaDeEventos", ",", 
+             RowBox[{"2", "\[Rule]", 
+              RowBox[{"(", 
+               RowBox[{"reloj", "+", "tserv"}], ")"}]}]}], "]"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"tdem", "=", 
+           RowBox[{"reloj", "-", 
+            RowBox[{"cola", "[", 
+             RowBox[{"[", "1", "]"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"demoraAcumulada", "=", 
+           RowBox[{"demoraAcumulada", "+", "tdem"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"completaronDemora", "=", 
+           RowBox[{"completaronDemora", "+", "1"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"tsAcumulado", "=", 
+           RowBox[{"tsAcumulado", "+", "tserv"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"areaQDeT", "=", 
+           RowBox[{"areaQDeT", "+", 
+            RowBox[{"(", 
+             RowBox[{"nroDeClientesEnCola", "*", 
+              RowBox[{"(", 
+               RowBox[{"reloj", "-", "tiempoUltimoEvento"}], ")"}]}], 
+             ")"}]}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"nroDeClientesEnCola", "=", 
+           RowBox[{"nroDeClientesEnCola", "-", "1"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"cola", "=", 
+           RowBox[{"Delete", "[", 
+            RowBox[{"cola", ",", "1"}], "]"}]}]}], ",", 
+         RowBox[{
+          RowBox[{"estadoServidor", "=", "\"\<D\>\""}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"listaDeEventos", "=", 
+           RowBox[{"ReplacePart", "[", 
+            RowBox[{"listaDeEventos", ",", 
+             RowBox[{"2", "\[Rule]", "999999"}]}], "]"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"y", "=", "x"}], ";", "\[IndentingNewLine]", 
+          RowBox[{"paso", "=", "2"}]}]}], "]"}], ";", "\[IndentingNewLine]", 
+       "tdem"}]}], "\[IndentingNewLine]", "]"}]}], ";"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Calculo", " ", "de", " ", "variables", " ", "de", " ", "respuesta"}], " ",
+    "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"calculaVR", "[", "]"}], ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", "}"}], ",", 
+      RowBox[{
+       RowBox[{"paso2", "=", "200"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"nroPromCliCola", "=", 
+        RowBox[{"areaQDeT", "/", "reloj"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"demPromPorCli", "=", 
+        RowBox[{"demoraAcumulada", "/", "completaronDemora"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"utilizServ", "=", 
+        RowBox[{"tsAcumulado", "/", "reloj"}]}], ";", "\[IndentingNewLine]", 
+       "\[IndentingNewLine]", "tdem"}]}], "\[IndentingNewLine]", "]"}]}], 
+   ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"reloj", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"estadoServidor", "=", "\"\<D\>\""}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"proximoEvento", "=", "\"\<null\>\""}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"tiposEventos", "=", 
+   RowBox[{"{", 
+    RowBox[{"\"\<Arribo\>\"", ",", "\"\<Partida\>\""}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"listaDeEventos", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"cola", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"tsAcumulado", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"demoraAcumulada", "=", "0.0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"nroDeClientesEnCola", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"areaQDeT", "=", "0.0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"tiempoUltimoEvento", "=", "0.0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"completaronDemora", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"paso", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"tmEntreArribos", "=", "7.0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"tmDeServicio", "=", "9.0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"iniciado", "=", "False"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"tmax", "=", 
+   RowBox[{"8", "*", "60"}]}], ";", " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"8", " ", "horas", " ", "en", " ", "minutos"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"valor", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"finSimulacion", "=", "False"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"vRespuesta", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"listaDeEventos", "=", 
+   RowBox[{"Append", "[", 
+    RowBox[{"listaDeEventos", ",", "\[IndentingNewLine]", 
+     RowBox[{"RandomVariate", "[", 
+      RowBox[{"ExponentialDistribution", "[", 
+       RowBox[{"1", "/", "tmEntreArribos"}], "]"}], "]"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"listaDeEventos", "=", 
+   RowBox[{"Append", "[", 
+    RowBox[{"listaDeEventos", ",", " ", "999999"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"tabla", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "\"\<Reloj\>\"", ",", " ", "\"\<Tipo_Ev\>\"", ",", " ", 
+       "\"\<t_Arribos\>\"", ",", " ", "\"\<t_Partidas\>\"", ",", " ", 
+       "\"\<estado_serv\>\"", ",", "\[IndentingNewLine]", "\"\<nro_CC\>\"", 
+       ",", "\"\<nro_CCD\>\"", ",", "\"\<area_Qt\>\"", ",", " ", 
+       "\"\<ts_acum\>\"", ",", "\"\<dem_Acum\>\""}], "}"}], ",", "1"}], "]"}]}
+   ], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"tabla", "=", 
+   RowBox[{"Append", "[", 
+    RowBox[{"tabla", ",", 
+     RowBox[{"{", 
+      RowBox[{"reloj", ",", "proximoEvento", ",", 
+       RowBox[{"listaDeEventos", "[", 
+        RowBox[{"[", "1", "]"}], "]"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"listaDeEventos", "[", 
+        RowBox[{"[", "2", "]"}], "]"}], ",", "estadoServidor", ",", 
+       "nroDeClientesEnCola", ",", "\[IndentingNewLine]", "completaronDemora",
+        ",", "areaQDeT", ",", "tsAcumulado", ",", "demoraAcumulada"}], 
+      "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"vRespuesta", "=", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "\"\<Reloj\>\"", ",", "\"\<Nro_PTCC\>\"", ",", "\"\<Dem_PPC\>\"", ",", 
+        "\"\<uti_PS\>\""}], "}"}], ",", "1"}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Programa", " ", "principal"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"While", "[", 
+   RowBox[{
+    RowBox[{"reloj", "\[LessEqual]", "tmax"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"a", "=", 
+      RowBox[{"tiempos", "[", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"proximoEvento", "\[Equal]", "\"\<Arribo\>\""}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"a", "=", 
+         RowBox[{"arribos", "[", "]"}]}], ";"}], "\[IndentingNewLine]", ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"a", "=", 
+         RowBox[{"partidas", "[", "]"}]}], ";"}]}], "\[IndentingNewLine]", 
+      "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"tabla", "=", 
+      RowBox[{"Append", "[", 
+       RowBox[{"tabla", ",", 
+        RowBox[{"{", 
+         RowBox[{"reloj", ",", "proximoEvento", ",", 
+          RowBox[{"listaDeEventos", "[", 
+           RowBox[{"[", "1", "]"}], "]"}], ",", "\[IndentingNewLine]", 
+          RowBox[{"listaDeEventos", "[", 
+           RowBox[{"[", "2", "]"}], "]"}], ",", "estadoServidor", ",", 
+          "nroDeClientesEnCola", ",", "\[IndentingNewLine]", 
+          "completaronDemora", ",", "areaQDeT", ",", "tsAcumulado", ",", 
+          "demoraAcumulada"}], "}"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"a", "=", 
+      RowBox[{"calculaVR", "[", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"vRespuesta", "=", "\[IndentingNewLine]", 
+      RowBox[{"Append", "[", 
+       RowBox[{"vRespuesta", ",", 
+        RowBox[{"{", 
+         RowBox[{
+         "reloj", ",", "nroPromCliCola", ",", "demPromPorCli", ",", 
+          "utilizServ"}], "}"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"finSimulacion", "=", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"reloj", ">=", "tmax"}], ",", "True", ",", "False"}], "]"}]}],
+      ";"}]}], "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"nroPromCliCola", "=", 
+   RowBox[{"areaQDeT", "/", "reloj"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"demPromPorCli", "=", 
+   RowBox[{"demoraAcumulada", "/", "completaronDemora"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"utilizServ", "=", 
+   RowBox[{"tsAcumulado", "/", "reloj"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Print", "[", 
+   RowBox[{
+   "\"\<Nro promedio en el tiempo de clientes en cola: \>\"", ",", 
+    "\[IndentingNewLine]", "nroPromCliCola", ",", "\"\< clientes\>\""}], 
+   "]"}], " "}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Print", "[", 
+   RowBox[{
+   "\"\<Demora promedio por cliente: \>\"", ",", "demPromPorCli", ",", " ", 
+    "\"\< minutos\>\""}], "]"}], " "}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", 
+  RowBox[{"\"\<Utilizaci\[OAcute]n promedio de los servidores: \>\"", ",", 
+   RowBox[{"utilizServ", "*", "100"}], ",", " ", "\"\<%\>\""}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Grid", "[", "tabla", "]"}]}], "Input",
+ CellChangeTimes->{{3.7062132069853773`*^9, 3.7062134345129933`*^9}, {
+   3.7062134748546424`*^9, 3.7062134858464403`*^9}, {3.706213528328621*^9, 
+   3.7062136039373283`*^9}, {3.7062136641130705`*^9, 
+   3.7062137436565647`*^9}, {3.7062137839461813`*^9, 
+   3.7062137954183292`*^9}, {3.706213833471343*^9, 3.706213902102096*^9}, {
+   3.7062176267764263`*^9, 3.7062177062478714`*^9}, {3.706217808115223*^9, 
+   3.706217873008325*^9}, {3.7062179259609356`*^9, 3.706217992670307*^9}, {
+   3.706218056345542*^9, 3.706218618885087*^9}, {3.7062190461405497`*^9, 
+   3.706219064362485*^9}, 3.7062195844591427`*^9, {3.7062196577782245`*^9, 
+   3.7062198935606904`*^9}, {3.70621992413239*^9, 3.7062199687901106`*^9}, {
+   3.706220125050108*^9, 3.7062201445259266`*^9}, {3.7062202113133636`*^9, 
+   3.7062202622585535`*^9}, {3.7062203037880526`*^9, 
+   3.7062204864417863`*^9}, {3.706220555078516*^9, 3.7062205664876137`*^9}, {
+   3.7062206936449285`*^9, 3.7062208119239445`*^9}, {3.7062208978283176`*^9, 
+   3.706220978179969*^9}, {3.7062210386037827`*^9, 3.706221112372173*^9}, {
+   3.706221153053069*^9, 3.706221524504899*^9}, {3.7062215898843207`*^9, 
+   3.706221798191286*^9}, {3.7062218764858937`*^9, 3.706221877153369*^9}, 
+   3.706221920855402*^9, {3.7067224140123215`*^9, 3.706722419562666*^9}, {
+   3.7067225559367833`*^9, 3.7067226293919244`*^9}, {3.7067227990242543`*^9, 
+   3.706722814249592*^9}, {3.7067229474529057`*^9, 3.706722948562296*^9}, {
+   3.706722993032029*^9, 3.7067230207863073`*^9}, {3.7067230669380093`*^9, 
+   3.7067231087776685`*^9}, {3.706723485840908*^9, 3.706723487606553*^9}}]
+},
+WindowSize->{1680, 967},
+WindowMargins->{{-8, Automatic}, {Automatic, -8}},
+Magnification:>2.1 Inherited,
+FrontEndVersion->"11.0 para Microsoft Windows (64-bit) (July 28, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 17057, 403, 5947, "Input"]
+}
+]
+*)
+

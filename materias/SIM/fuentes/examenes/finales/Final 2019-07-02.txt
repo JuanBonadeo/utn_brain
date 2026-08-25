@@ -1,0 +1,17 @@
+1- Que estrategias utilizar para realizar el análisis de resultados para comparación de 2 sistemas
+
+2- Describir los estados estacionario y transitorio de una experiencia de simulación
+
+3- Definiciones y descripciones. Incluir gráficas, ecuaciones de ser posible 
+- Disciplina de cola
+- Simulación a eventos discretos 
+- Política de pedido de Sistemas de inventario 
+- Validación y verificación 
+- Determinación de condiciones iniciales en simulaciones terminales 
+- Me falta una pero no me acuerdo 
+
+4- Función triangular 
+- f(t) = 0 si t<0 o t>1
+- f(t) = f0(1-t) si 0<=t<=1
+- Encontrar f0
+- Armar un generador de números aleatorios con la función

@@ -1,0 +1,11 @@
+Final 05/07/2016
+1) Desarrollar el algoritmo para generar números aleatorios con la siguiente función de densidad triangular: 
+f(t) = 0 si 0>t
+f(t) = 2(1-t) si 0<t<1
+f(t) = 0 si t>1
+2) En el estado estacionario la longitud media de la cola es constante, por lo que las demoras individuales también son constantes. ¿Es correcto? Justificar.
+3) a) Definir simulación de eventos discretos.
+b) ¿Dónde se usa y para qué?
+c) ¿Se puede dar un modelo de simulación con eventos discretos y continuos al mismo tiempo? Justificar.
+4) a) ¿Cómo realizaría el análisis de resultados en un sistema de estado estacionario (simulación no terminal)? 
+b) Todos los sistemas se estabilizan cuando transcurre una gran cantidad de tiempo. ¿Es correcta esa afirmación? Justificar.

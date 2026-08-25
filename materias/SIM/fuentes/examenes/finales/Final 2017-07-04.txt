@@ -1,0 +1,14 @@
+[Simulación Final 4-7-17]
+Era una guardia de hospital a los que llegaban los pacientes entre las 22 y las 7 hs. Había 4 consultorios. En los consultorios analizaban a los pacientes y con cierta probabilidad (no decía) los derivaban a internación, cuidados ambulatorios (que dejaban el consultorio y el hospital) o laboratorios para análisis o rayos X. (Esa info de que los derivaban era al pedo porque no era parte del modelo)
+No daba ninguna distribución de probabilidad ni números de medias.
+A) Modelo a eventos (era un arribo simple y partida con doble círculo, para considerar los 4 consultorios, bien básico. Los desencadenamientos de siempre)
+B) Datos faltantes
+C) Medidas de rendimiento para hacer el estudio (también, las de siempre)
+D) Hacer una rutina (pseudocódigo) en la que se pueda ver el cálculo de al menos una medida de rendimiento
+E) Análisis de resultados (pedía que fuera específico al ejercicio, no general teórico. Yo puse lo del procedimiento de la muestra de tamaño fijo para calcular el número de réplicas)
+F) De las técnicas de Probabilidad y Estadística usadas en Simulación, describir al menos dos (así bien general era. Yo desarrollé cómo se generan valores de variables aleatorias distribuidas uniformemente a partir de números aleatorios, y desarrollé el procedimiento de la muestra de tamaño incremental por error relativo)
+
+NOTAS:
+Un ejercicio de practica que te la re volaba pero en fin nada importaba para el objetivo en estudio. Terminaba SIENDO a un arribo y a una partida con 4 consultorios. osea doble circulo con i de uno a 4 para la partida. Que variables faltaban (como siempre), medidas de rendimiento. Analisis de Resultados para ese problema, que era terminal, y la ultima preguntaba que describas algo probabilistico o estadisitico que hayamos usado, yo hice la exponencial y la uniforme (Generadores de variables)
+
+Algoritmo en donde se viera que acumulas los estadisticos para las medidas que planteaste. (Yo hice arribo de un paciente - basicamente el arribo clasico que esta en el resumen ese de teoria)
