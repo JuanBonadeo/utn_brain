@@ -907,10 +907,10 @@ Todo lo de esta subsección es inferencia a partir de la forma del documento, no
 
 #### Fuentes
 
-- `fuentes/ASI/Material de Cursado/Unidad 1/1 - Apunte - Planeamiento Estratégico (V1.1).pdf`
-- `fuentes/ASI/Material de Cursado/Unidad 1/2 - PPT - Planeamiento Estratégico (V2.1).pdf`
-- `fuentes/ASI/Material de Cursado/Unidad 1/3 - Ejemplo (ProcesoExamenesUTN)/1 - Contexto - UTN_ProcesoExamenes.pdf`
-- `fuentes/ASI/Material de Cursado/Unidad 1/3 - Ejemplo (ProcesoExamenesUTN)/2 - BPMN - ProcesoExamenes.pdf` — **el PDF no tiene capa de texto, la conversión salió vacía. Sin leer.**
+- `materias/ASI/fuentes/Material de Cursado/Unidad 1/1 - Apunte - Planeamiento Estratégico (V1.1).pdf`
+- `materias/ASI/fuentes/Material de Cursado/Unidad 1/2 - PPT - Planeamiento Estratégico (V2.1).pdf`
+- `materias/ASI/fuentes/Material de Cursado/Unidad 1/3 - Ejemplo (ProcesoExamenesUTN)/1 - Contexto - UTN_ProcesoExamenes.pdf`
+- `materias/ASI/fuentes/Material de Cursado/Unidad 1/3 - Ejemplo (ProcesoExamenesUTN)/2 - BPMN - ProcesoExamenes.pdf` — **el PDF no tiene capa de texto, la conversión salió vacía. Sin leer.**
 
 ---
 
@@ -4086,8 +4086,8 @@ Errores conceptuales que el ejemplo evita y conviene imitar:
 
 ###### Fuentes
 
-- `fuentes/ASI/Material de Cursado/Unidad 2/5 - Ejemplo (ProcesoExamenesUTN)/ASI-2-InventarioActivos_ProcesoExamenes.xlsx` — inventario de activos (8 hojas) + hoja RiesgosInherentes (6 riesgos).
-- `fuentes/ASI/Material de Cursado/Unidad 2/5 - Ejemplo (ProcesoExamenesUTN)/ASI_2_GestiónDeRiesgos-ProcesoExamenes.docx` — metodología, escalas C/I/D, comunidades de amenaza, y fichas completas de Identificación / Tratamiento / Planes para los riesgos 1 y 6.
+- `materias/ASI/fuentes/Material de Cursado/Unidad 2/5 - Ejemplo (ProcesoExamenesUTN)/ASI-2-InventarioActivos_ProcesoExamenes.xlsx` — inventario de activos (8 hojas) + hoja RiesgosInherentes (6 riesgos).
+- `materias/ASI/fuentes/Material de Cursado/Unidad 2/5 - Ejemplo (ProcesoExamenesUTN)/ASI_2_GestiónDeRiesgos-ProcesoExamenes.docx` — metodología, escalas C/I/D, comunidades de amenaza, y fichas completas de Identificación / Tratamiento / Planes para los riesgos 1 y 6.
 
 Nota sobre la conversión: el .docx incluye un organigrama del Comité de Seguridad de la Información como imagen embebida (base64) que markitdown no convirtió a texto — su contenido no está disponible. Las tablas del .docx vienen con celdas combinadas mal reconstruidas (columnas vacías sobrantes), pero el contenido es legible. La planilla vino con celdas fusionadas convertidas en filas con `NaN`, que corresponden a contenedores adicionales del activo de la fila superior.
 
@@ -4103,13 +4103,13 @@ Nota sobre la conversión: el .docx incluye un organigrama del Comité de Seguri
 
 #### Fuentes
 
-- `fuentes/ASI/Material de Cursado/Unidad 2/1 - Apunte - AreasTI (V1.0).pdf`
-- `fuentes/ASI/Material de Cursado/Unidad 2/2 - PPT - AreasTI Riesgos (V2.5).pdf`
-- `fuentes/ASI/Material de Cursado/Unidad 2/3 - Definición de Riesgo.docx`
-- `fuentes/ASI/Material de Cursado/Unidad 2/4 - Taxonomia FAIR.pdf`
-- `fuentes/ASI/Material de Cursado/Unidad 2/6 - PPT - AreasTI Servicios (V2.1).pdf`
-- `fuentes/ASI/Material de Cursado/Unidad 2/Planillas utiles/` (Estructura de la Tabla de Activos, Planillas de Riesgo, ISO 27002 Controles, Taxonomías para la Identificación de Riesgos)
-- `fuentes/ASI/Material de Cursado/Unidad 2/5 - Ejemplo (ProcesoExamenesUTN)/` (Inventario de Activos + Gestión de Riesgos)
+- `materias/ASI/fuentes/Material de Cursado/Unidad 2/1 - Apunte - AreasTI (V1.0).pdf`
+- `materias/ASI/fuentes/Material de Cursado/Unidad 2/2 - PPT - AreasTI Riesgos (V2.5).pdf`
+- `materias/ASI/fuentes/Material de Cursado/Unidad 2/3 - Definición de Riesgo.docx`
+- `materias/ASI/fuentes/Material de Cursado/Unidad 2/4 - Taxonomia FAIR.pdf`
+- `materias/ASI/fuentes/Material de Cursado/Unidad 2/6 - PPT - AreasTI Servicios (V2.1).pdf`
+- `materias/ASI/fuentes/Material de Cursado/Unidad 2/Planillas utiles/` (Estructura de la Tabla de Activos, Planillas de Riesgo, ISO 27002 Controles, Taxonomías para la Identificación de Riesgos)
+- `materias/ASI/fuentes/Material de Cursado/Unidad 2/5 - Ejemplo (ProcesoExamenesUTN)/` (Inventario de Activos + Gestión de Riesgos)
 
 ---
 
@@ -4158,10 +4158,10 @@ La cátedra da un ejemplo completo (`3-Evaluacion de desempeño - Encargado de S
 
 #### Fuentes
 
-- `fuentes/ASI/Campus/ASI-Unidad3_DireccionTalento_CapitalHumano/ASI-3-Direccion de Talento y Capital Humano_DIAP.v2.3.pdf` y `otros/…v2.4.pdf`
-- `fuentes/ASI/Campus/ASI-Unidad3_DireccionTalento_CapitalHumano/ASI-3_Ejercitacion1- Talento y Capital Humano.docx`
-- `fuentes/ASI/Campus/ASI-Unidad3_DireccionTalento_CapitalHumano/EjemploPuestoTrabajo/` (4 archivos, `.doc` legacy → `textutil`)
-- `fuentes/ASI/Campus/ASI-Unidad3_DireccionTalento_CapitalHumano/ASI-3-…_EjemploEvaluaciónCompetencias.pdf`
+- `materias/ASI/fuentes/Campus/ASI-Unidad3_DireccionTalento_CapitalHumano/ASI-3-Direccion de Talento y Capital Humano_DIAP.v2.3.pdf` y `otros/…v2.4.pdf`
+- `materias/ASI/fuentes/Campus/ASI-Unidad3_DireccionTalento_CapitalHumano/ASI-3_Ejercitacion1- Talento y Capital Humano.docx`
+- `materias/ASI/fuentes/Campus/ASI-Unidad3_DireccionTalento_CapitalHumano/EjemploPuestoTrabajo/` (4 archivos, `.doc` legacy → `textutil`)
+- `materias/ASI/fuentes/Campus/ASI-Unidad3_DireccionTalento_CapitalHumano/ASI-3-…_EjemploEvaluaciónCompetencias.pdf`
 
 ---
 
@@ -4240,8 +4240,8 @@ Certificación: **OHSAS 18001** (*Occupational Health and Safety Assessment Seri
 
 #### Fuentes
 
-- `fuentes/ASI/Campus/ASI-Unidad4_Higiene_y_Seguridad_Laboral/ASI-4-Higiene y Seguridad_APUNTE.V1.2.pdf` — 64 páginas, Lic. Sergio J. Gasparroni.
-- `fuentes/ASI/Campus/ASI-Unidad4_Higiene_y_Seguridad_Laboral/ASI-4-Higiene y Seguridad_DIAP.V2.0.pdf` — **casi todo imágenes, la conversión rescató muy poco**.
+- `materias/ASI/fuentes/Campus/ASI-Unidad4_Higiene_y_Seguridad_Laboral/ASI-4-Higiene y Seguridad_APUNTE.V1.2.pdf` — 64 páginas, Lic. Sergio J. Gasparroni.
+- `materias/ASI/fuentes/Campus/ASI-Unidad4_Higiene_y_Seguridad_Laboral/ASI-4-Higiene y Seguridad_DIAP.V2.0.pdf` — **casi todo imágenes, la conversión rescató muy poco**.
 
 ---
 
@@ -4377,7 +4377,7 @@ Formato de tabla exigido:
 
 ##### 6. Acta de Proyecto (PMI)
 
-**Plantilla oficial conseguida** — `fuentes/ASI/Ejercitación/ASI-5-T1-Proyectos_AnexoI_ActaProyecto.doc` (Anexo I de cátedra, 3 páginas). Es un **formulario**, no un documento libre. Campos, en orden:
+**Plantilla oficial conseguida** — `materias/ASI/fuentes/Ejercitación/ASI-5-T1-Proyectos_AnexoI_ActaProyecto.doc` (Anexo I de cátedra, 3 páginas). Es un **formulario**, no un documento libre. Campos, en orden:
 
 | Campo | Qué va |
 |---|---|
@@ -4718,7 +4718,7 @@ En el Gantt: **rojo** = actividad crítica (holgura 0), **azul** = no crítica.
 
 #### Dudas / pendientes
 
-- ~~Falta la plantilla del Acta de Proyecto.~~ **Conseguida el 2026-08-19** — `fuentes/ASI/Ejercitación/ASI-5-T1-Proyectos_AnexoI_ActaProyecto.doc`. Detalle menor: la consigna del TPI dice que está en el **e-Group** y la ejercitación de U5 dice **campus**; es el mismo Anexo I.
+- ~~Falta la plantilla del Acta de Proyecto.~~ **Conseguida el 2026-08-19** — `materias/ASI/fuentes/Ejercitación/ASI-5-T1-Proyectos_AnexoI_ActaProyecto.doc`. Detalle menor: la consigna del TPI dice que está en el **e-Group** y la ejercitación de U5 dice **campus**; es el mismo Anexo I.
 - ~~Falta el apunte teórico de cátedra de la unidad.~~ **Conseguidos los cinco capítulos el 2026-08-19** (T1 a T5). T1, T2 y T3 tienen apunte en texto; T4 y T5 solo diapositivas.
 - ~~La cátedra llama Unidad 5 a esta unidad.~~ **Renumerada el 2026-08-19** según el Programa Analítico: esta es la Unidad 5. La wiki ahora sigue la numeración oficial.
 - **T5 Adquisiciones está poco desarrollado acá.** Las diapositivas cubren el proceso de abastecimiento, definición de requerimientos, consulta a pares/expertos/proveedores y etapas del proceso; se ingirió pero no se volcó en detalle. Si el punto 8 y 9 de la Etapa 3 lo piden, hay que volver ahí.
@@ -4729,13 +4729,13 @@ En el Gantt: **rojo** = actividad crítica (holgura 0), **azul** = no crítica.
 
 #### Fuentes
 
-- `fuentes/ASI/ASI26_TPIntegrador_Etapa3 - Proyecto de TI.md` — consigna oficial del TPI.
-- `fuentes/ASI/TPIntegrador - Etapa 3 - Practica Sugerencias.md` — sugerencias de cátedra, clase 28/07/2026.
-- `fuentes/ASI/Ejercitación/ASI-5_Ejercitacion1 - Proyectos de TI.docx` — ejercitación de la Unidad 5 (RA3 y las 4 áreas PMI).
-- `fuentes/ASI/Ejercitación/ASI-5-T1-Proyectos_AnexoI_ActaProyecto.doc` — **plantilla oficial del Acta de Proyecto**. Formato `.doc` legacy: markitdown no lo soporta, se convirtió con `textutil -convert txt`.
-- `fuentes/ASI/Ejercitación/ASI26_U5_Caso_Integral_Resolucion_Centro_Servicios.docx` — caso integral resuelto.
-- `fuentes/ASI/Ejercitación/ASI26_U5_Caso_Integral_Gantt_Centro_Servicios.xlsx` — Gantt + CPM + presupuestos del caso.
-- `fuentes/ASI/Campus/ASI-Unidad5_Adm_Recursos_en_ProyectosIT/` — los cinco capítulos de la unidad (19/08/2026):
+- `materias/ASI/fuentes/ASI26_TPIntegrador_Etapa3 - Proyecto de TI.md` — consigna oficial del TPI.
+- `materias/ASI/fuentes/TPIntegrador - Etapa 3 - Practica Sugerencias.md` — sugerencias de cátedra, clase 28/07/2026.
+- `materias/ASI/fuentes/Ejercitación/ASI-5_Ejercitacion1 - Proyectos de TI.docx` — ejercitación de la Unidad 5 (RA3 y las 4 áreas PMI).
+- `materias/ASI/fuentes/Ejercitación/ASI-5-T1-Proyectos_AnexoI_ActaProyecto.doc` — **plantilla oficial del Acta de Proyecto**. Formato `.doc` legacy: markitdown no lo soporta, se convirtió con `textutil -convert txt`.
+- `materias/ASI/fuentes/Ejercitación/ASI26_U5_Caso_Integral_Resolucion_Centro_Servicios.docx` — caso integral resuelto.
+- `materias/ASI/fuentes/Ejercitación/ASI26_U5_Caso_Integral_Gantt_Centro_Servicios.xlsx` — Gantt + CPM + presupuestos del caso.
+- `materias/ASI/fuentes/Campus/ASI-Unidad5_Adm_Recursos_en_ProyectosIT/` — los cinco capítulos de la unidad (19/08/2026):
   - `ASI-5-T1-Proyectos_APUNTE.V1.0.pdf` + `_DIAP.V2.2.pdf` — qué es un proyecto, tipos, objetivos, ciclos de vida, organización, PMI.
   - `ASI-5-T2-Integración_Alcance_Cierre_APUNTE.V1.0.pdf` + `_DIAP.V2.0.pdf` — grupos de procesos, Acta de Constitución, enunciado del alcance, control de cambios, cierre, EDT. **Trae el Anexo I con la plantilla del Acta anotada y el ejemplo ESABAL.**
   - `ASI-5-T3-Tiempos_APUNTE.V1.0.pdf` + `_DIAP.V2.0.pdf` — estimación de esfuerzo (modelos, juicio de expertos, Delphi), diagrama de Red, CPM, histograma de recursos, fast tracking y crashing, control y seguimiento.
@@ -4747,7 +4747,7 @@ En el Gantt: **rojo** = actividad crítica (holgura 0), **azul** = no crítica.
 
 ### Unidad 6 — Emprendedorismo
 
-> **Unidad no desarrollada.** No toca la Etapa 3 del TPI. Material identificado en el campus pero **no copiado a `fuentes/ASI/`** — se copia cuando haga falta.
+> **Unidad no desarrollada.** No toca la Etapa 3 del TPI. Material identificado en el campus pero **no copiado a `materias/ASI/fuentes/`** — se copia cuando haga falta.
 
 #### Conceptos clave
 
@@ -4838,8 +4838,8 @@ Encabezado fijo, en este orden:
 
 | Archivo | Contenido real | Coincide con lo esperado |
 |---|---|---|
-| `fuentes/ASI/modeloPersonal.png` | Diagrama BPMN del proceso **"Instalación de Fibra Óptica"** (pool único, 3 lanes), renderizado en Bizagi Modeler. **NO es un organigrama.** | No |
-| `fuentes/ASI/fibraOpticaBPMN.png` | Diagrama BPMN del proceso **"Instalación de Fibra Óptica"**, misma estructura que el anterior con nombres de tareas corregidos. | Sí |
+| `materias/ASI/fuentes/modeloPersonal.png` | Diagrama BPMN del proceso **"Instalación de Fibra Óptica"** (pool único, 3 lanes), renderizado en Bizagi Modeler. **NO es un organigrama.** | No |
+| `materias/ASI/fuentes/fibraOpticaBPMN.png` | Diagrama BPMN del proceso **"Instalación de Fibra Óptica"**, misma estructura que el anterior con nombres de tareas corregidos. | Sí |
 
 Ambos archivos son **el mismo diagrama en dos versiones**, no un organigrama y un BPMN. Los llamo **Versión A** (`modeloPersonal.png`) y **Versión B** (`fibraOpticaBPMN.png`). Por el estilo de los nombres de tarea, B es posterior a A *(inferencia)*.
 
@@ -4847,7 +4847,7 @@ Ambos archivos son **el mismo diagrama en dos versiones**, no un organigrama y u
 
 No hay ningún organigrama en los archivos provistos. No hay jerarquía, gerencias ni áreas que transcribir: **ninguna de las dos imágenes contiene cajas de estructura organizacional, ni líneas de dependencia, ni nombres de gerencias**. Lo único parecido a "estructura organizacional" en el material son los tres lanes del BPMN (Cliente, Sistema IT, Técnico), que son roles de proceso, no unidades del organigrama.
 
-Acción requerida: subir el archivo correcto a `fuentes/ASI/`. El nombre `modeloPersonal.png` sugiere que se pisó o se exportó mal desde Bizagi (probablemente se exportó dos veces el mismo diagrama) *(inferencia)*.
+Acción requerida: subir el archivo correcto a `materias/ASI/fuentes/`. El nombre `modeloPersonal.png` sugiere que se pisó o se exportó mal desde Bizagi (probablemente se exportó dos veces el mismo diagrama) *(inferencia)*.
 
 ##### 2. BPMN "Instalación de Fibra Óptica" — Pools, lanes y actores
 
@@ -5032,7 +5032,7 @@ B corrige la convención de nombres (verbo en infinitivo) pero **pierde el nombr
 
 Encontradas al revisar los documentos el 2026-07-29. Ninguna es de contenido: todas son de trazabilidad, y la Etapa 3 se apoya en esos números.
 
-**Corregidas** — en `materias/ASI/ASI26_310_UNIDAD1_corregido.docx` y `materias/ASI/ASI26_310_UNIDAD2_corregido.docx`. Los originales entregados quedaron intactos en `fuentes/ASI/`, que es inmutable.
+**Corregidas** — en `materias/ASI/estudio/ASI26_310_UNIDAD1_corregido.docx` y `materias/ASI/estudio/ASI26_310_UNIDAD2_corregido.docx`. Los originales entregados quedaron intactos en `materias/ASI/fuentes/`, que es inmutable.
 
 | # | Dónde | Problema | Qué se hizo |
 |---|---|---|---|
@@ -5046,7 +5046,7 @@ Encontradas al revisar los documentos el 2026-07-29. Ninguna es de contenido: to
 |---|---|---|---|
 | I3 | Etapa 2, punto 5 | **R09 es prioridad 3 (severidad 10) y quedó sin planilla de tratamiento.** Es el riesgo de mayor severidad no tratado del documento. También quedaron sin planilla R04, R07, R01 y R10 | Decisión: si la Etapa 3 toma alguno de ellos como problema del proyecto, agregar la planilla faltante como anexo o justificar la selección |
 | I4 | Etapa 2, encabezado | La tabla `VERSIÓN DEL DOCUMENTO` tiene una sola fila (Entrega Inicial, 18/05/2026) y una fila vacía, pese a que la entrega ya fue corregida | Dato: fecha de la corrección de cátedra y fecha del ajuste del grupo, para agregar las filas `CC` y `Grupo N310` como en la Etapa 1 |
-| I6 | `fuentes/ASI/` | **Falta el organigrama.** `modeloPersonal.png` no es un organigrama: es una segunda versión del mismo BPMN. El organigrama del punto 6 de la Etapa 1 no está entre los archivos | Archivo: recuperar el organigrama y subirlo a `fuentes/ASI/` |
+| I6 | `materias/ASI/fuentes/` | **Falta el organigrama.** `modeloPersonal.png` no es un organigrama: es una segunda versión del mismo BPMN. El organigrama del punto 6 de la Etapa 1 no está entre los archivos | Archivo: recuperar el organigrama y subirlo a `materias/ASI/fuentes/` |
 
 ##### Etapa 3 — Proyecto de TI (en curso)
 
@@ -5072,7 +5072,7 @@ En paralelo, sin depender de la EDT: Acta de Proyecto (punto 4.b) y layout de H&
 
 **El punto más pesado ahora es la factibilidad legal (punto 12).** Con SaaS los datos personales de clientes salen del perímetro, lo que agrava R05 (severidad 15) y activa de lleno la Ley 25.326: transferencia internacional, encargado de tratamiento, región de alojamiento, cláusulas contractuales y notificación de brecha. Es un apartado ganador si se escribe bien y una masacre si se omite. La factibilidad económica se resuelve con el TCO a 3 años de la licencia por usuario acumulada contra las horas y los costos evitados.
 
-**Acta de Proyecto (punto 4.b) — BORRADOR ESCRITO al 2026-08-19.** Fuente de verdad: `materias/ASI/etapa3-acta-proyecto.md`; el `.docx` se regenera con `npm run docx -- <in.md> <out.docx>` (`scripts/build-docx.js`), no se edita a mano. Sigue el Anexo I de cátedra y las instrucciones campo por campo del apunte T2 (ver Unidad 5 §6).
+**Acta de Proyecto (punto 4.b) — BORRADOR ESCRITO al 2026-08-19.** Fuente de verdad: `materias/ASI/entregables/etapa3-acta-proyecto.md`; el `.docx` se regenera con `npm run docx -- <in.md> <out.docx>` (`scripts/build-docx.js`), no se edita a mano. Sigue el Anexo I de cátedra y las instrucciones campo por campo del apunte T2 (ver Unidad 5 §6).
 
 Pendiente de resolver en el Acta: los **nombres propios** (van inventados, marcados con ⚠ y en rojo en el `.docx`) y el **monto de autoridad de compra** del Director de Proyecto, que hoy quedó genérico — es el campo donde el ejemplo de cátedra es más concreto.
 
@@ -5310,7 +5310,7 @@ Fuentes de paralelismo con A1: adquisiciones (fase 4) en paralelo al desarrollo 
 
 ###### Validación del punto 3 — respuesta del docente (2026-08-23)
 
-El documento `materias/ASI/etapa3-validacion-punto3.md` se le envió el 2026-08-19 con los puntos 1, 2 y 3 y cuatro consultas al final. Respondió el 2026-08-23.
+El documento `materias/ASI/entregables/etapa3-validacion-punto3.md` se le envió el 2026-08-19 con los puntos 1, 2 y 3 y cuatro consultas al final. Respondió el 2026-08-23.
 
 **Respondió la consulta 1.** Validó el proyecto, dio la formulación del nombre, indicó dejar solo SaaS FSM configurable como modo de construcción, y pidió agregar una o dos alternativas de TI que ataquen **otro problema**, solo mencionadas. Texto completo y consecuencias: ver *Alternativas y selección* más arriba.
 
@@ -5350,13 +5350,13 @@ El documento `materias/ASI/etapa3-validacion-punto3.md` se le envió el 2026-08-
 
 #### Fuentes
 
-- `fuentes/ASI/ASI26_310_UNIDAD1.docx` — resolución Etapa 1 (v3, corregida).
-- `fuentes/ASI/ASI26_310_UNIDAD2.docx` — resolución Etapa 2 (v1).
-- `fuentes/ASI/fibraOpticaBPMN.png` y `fuentes/ASI/modeloPersonal.png` — BPMN del proceso (dos versiones).
-- `fuentes/ASI/procesoInstacionFibraOptica.bpm` — archivo fuente Bizagi del BPMN.
-- `fuentes/ASI/ASI26_TPIntegrador_Etapa3 - Proyecto de TI.md` — consigna Etapa 3.
-- `fuentes/ASI/TPIntegrador - Etapa 3 - Practica Sugerencias.md` — sugerencias de cátedra 28/07/2026.
-- `fuentes/ASI/Ejercitación/` — ejercitación de U5, plantilla del Acta de Proyecto y caso integral resuelto (Centro de Servicios), 19/08/2026. Desarrollado en Unidad 5.
+- `materias/ASI/fuentes/ASI26_310_UNIDAD1.docx` — resolución Etapa 1 (v3, corregida).
+- `materias/ASI/fuentes/ASI26_310_UNIDAD2.docx` — resolución Etapa 2 (v1).
+- `materias/ASI/fuentes/fibraOpticaBPMN.png` y `materias/ASI/fuentes/modeloPersonal.png` — BPMN del proceso (dos versiones).
+- `materias/ASI/fuentes/procesoInstacionFibraOptica.bpm` — archivo fuente Bizagi del BPMN.
+- `materias/ASI/fuentes/ASI26_TPIntegrador_Etapa3 - Proyecto de TI.md` — consigna Etapa 3.
+- `materias/ASI/fuentes/TPIntegrador - Etapa 3 - Practica Sugerencias.md` — sugerencias de cátedra 28/07/2026.
+- `materias/ASI/fuentes/Ejercitación/` — ejercitación de U5, plantilla del Acta de Proyecto y caso integral resuelto (Centro de Servicios), 19/08/2026. Desarrollado en Unidad 5.
 
 Derivados que generamos (en esta misma carpeta, `materias/ASI/`):
 
@@ -5368,15 +5368,16 @@ Derivados que generamos (en esta misma carpeta, `materias/ASI/`):
 - 2026-07-29: primer ingest completo de la materia. Se incorporó todo el Material de Cursado (Unidad 1 y Unidad 2), las resoluciones de las Etapas 1 y 2 del TPI, el BPMN del proceso, y la consigna + sugerencias de la Etapa 3. Se crearon las cuatro unidades del índice. Se detectaron 6 inconsistencias en lo ya entregado (ver sección TP Integrador) y se dejaron 3 candidatos de proyecto para la Etapa 3 a decidir.
 - 2026-07-29: corregidas I1, I2 e I5 sobre copias nuevas (`ASI26_310_UNIDAD1_corregido.docx`, `ASI26_310_UNIDAD2_corregido.docx`). Verificado por reconversión y diff: solo cambiaron las 8 celdas previstas. Quedan pendientes I3 (decisión), I4 (falta dato de fechas) e I6 (falta archivo).
 - 2026-07-29: documentada la Etapa 3 — comparación de los tres candidatos, desarrollo completo del candidato B (trazabilidad con Etapas 1 y 2, solución, alcance, 4 objetivos cuantificables, matriz de alternativas, ciclo de vida, 11 fases y 9 sectores de H&S), y las cinco decisiones abiertas D1–D5. **Preferencia por B declarada, sin cerrar.** Discusión con el grupo pendiente. Punto de retomada marcado al inicio de la sección Etapa 3.
-- 2026-07-29: los dos `.docx` corregidos pasan a `materias/ASI/` como derivados, para que los tenga el grupo. Se subieron también las fuentes crudas a `fuentes/ASI/` (23 archivos).
+- 2026-07-29: los dos `.docx` corregidos pasan a `materias/ASI/` como derivados, para que los tenga el grupo. Se subieron también las fuentes crudas a `materias/ASI/fuentes/` (23 archivos).
 - 2026-08-10: **cerradas D1, D2, D4 y D5.** Alcance = B medio · cronograma en meses relativos con plazo de O1 desde el go-live · alternativa = **A1 desarrollo interno** (con componentes de mercado acotados: mapas, MDM, dispositivos, infraestructura) · paralelismo obligatorio diseñado desde la EDT. La matriz de selección se rehízo contra los diez criterios que lista la cátedra en el Bloque 4 de las sugerencias: se sumaron *dependencia del proveedor* y *escalabilidad*, y se re-ponderaron los pesos justificándolos con R03 y R05 (severidad 15) de la Etapa 2 — sin tocar ningún puntaje. Resultado: Interno 4,00 · SaaS 3,60 · Tercerizado 3,50. En consecuencia se reformularon el ciclo de vida (el tramo iterativo queda mejor justificado), las fases (de 11 a 12: se parte "selección de proveedor" en *arquitectura y diseño técnico* + *adquisiciones*, y "diseño y configuración" pasa a *desarrollo por módulos*) y las adquisiciones (de licencias SaaS a hardware, infraestructura, mapas y MDM). Agregado el paquete de validación para la clase del 11/08. **Queda abierta D3** (líneas base), a consultar con el docente ese día.
-- 2026-08-19: ingerida la carpeta `Ejercitación` (4 archivos) → `fuentes/ASI/Ejercitación/`. Aporta tres cosas que faltaban: **(1) la plantilla oficial del Acta de Proyecto** — desbloquea el punto 4.b de la Etapa 3, que estaba trabado desde el 29/07; **(2) el caso integral resuelto** (Centro de Servicios) — primer y único ejemplo resuelto de la unidad, con CPM completo (ES/EF/LS/LF, holguras, camino crítico `1→2→4→5→7→9`, duración 39 h, BAC $3.700); **(3) la ejercitación de U5**, que es más ancha que la Etapa 3 e incluye RFI ejecutado, RFP con 3 cotizaciones y TCO. Se agregaron a la Unidad 3: CPM y aplanamiento en §7, criterios de evaluación de proveedores y variables de TCO en §10, BAC y monetización de beneficios en §11, checklist legal e indicadores VAN/TIR/TPR en §12, la plantilla del Acta con ejemplo en §6, y el nuevo §13 con la tabla comparativa U5 vs. Etapa 3. La sección "Ejercicios resueltos tipo", que estaba vacía, ahora tiene el caso completo. **Dos hallazgos:** la cátedra numera esta unidad como **Unidad 5** (la wiki la llama Unidad 3), y falta el apunte teórico — el caso cita `ASI-5-T1` a `ASI-5-T5`, ninguno en nuestras fuentes.
-- 2026-08-19: redactado el **borrador del Acta de Proyecto** (punto 4.b de la Etapa 3) en `materias/ASI/etapa3-acta-proyecto.md`, con su `.docx` generado por `scripts/build-docx.js` (conversor md→docx reutilizable: A4, Arial 11, justificado con partición es-AR, tablas con anchos por directiva `<!-- cols: … -->`, pie con numeración). Se instaló LibreOffice y `scripts/preview-docx.sh` para **ver el render** antes de dar por bueno un entregable — revisando a ciegas se habían colado listas con numeración encadenada, celdas justificadas con ríos y partición de palabras en inglés. El Acta quedó en 5 páginas. Trazabilidad completa hacia atrás: la justificación cita R04 y R07 sin tratamiento de la Etapa 2 y el objetivo de TI del 5% de la Etapa 1; los objetivos son O1–O4 con las líneas base declaradas como supuestos y su medición como entregable de la fase 2; el límite reproduce el "qué no incluye" acordado. Quedan por definir los nombres propios y el monto de autoridad de compra.
-- 2026-08-19: ingerido el **campus completo** (`ASI_Apuntes_Campus`, 93 archivos). Se copiaron 28 a `fuentes/ASI/Campus/` — Unidades 3, 4 y 5 completas más Normas de Cátedra; se dejaron fuera los complementarios de U2 (NIST, MAGERIT, SEI), la U6, los exámenes finales y los duplicados de U1/U2 que ya estaban. **Reestructuración mayor de la wiki**: el Programa Analítico (Plan 2023) define **6 unidades**, no 3. La vieja "Unidad 3 — Proyectos de TI" pasó a ser **Unidad 5**, y se crearon **Unidad 3 (Dirección de Talento y Capital Humano)** y **Unidad 4 (Higiene y Seguridad Laboral)** — las dos que sostienen los puntos 5 y 6 de la Etapa 3 y que hasta ahora se venían respondiendo con conocimiento general. Se agregó también un stub de **Unidad 6 (Emprendedorismo)**. En la Unidad 5 se volcaron los cinco capítulos del apunte: definición formal de proyecto, tipos, portafolio/programa/subproyecto y triple restricción (T1); la **plantilla del Acta anotada campo por campo con el ejemplo ESABAL** y el contenido PMI del Acta de Constitución (T2); el esquema de nodo de la red, AON/AOA, el método completo de **histograma de recursos y aplanamiento**, y fast tracking vs. crashing (T3); y las **cuatro técnicas de evaluación de inversiones** TR/TPR/VAN/TIR con el valor del dinero en el tiempo (T4). **Hallazgo para el punto 6 de la Etapa 3:** los tres niveles de prevención de la Unidad 4 explican por qué la cátedra rechaza "silla ergonómica y pausas activas" — son prevención sobre la persona, el escalón más débil; el layout tiene que mostrar **prevención en el diseño**. Se sumó además la legislación laboral (Leyes 19.587, 24.557, 20.744 y 27.555), que le faltaba a la factibilidad legal.
-- 2026-08-23: **el docente validó el punto 3** y redefinió el encuadre de las alternativas. Aprobó el proyecto y dio su formulación del nombre; indicó dejar **SaaS FSM configurable** como único modo de construcción —lo que revierte D4, cerrada por el grupo en desarrollo interno el 10/08— y pidió sumar una o dos **alternativas de TI que ataquen otro problema**, solo mencionadas. En consecuencia se reescribió el punto 3 con las alternativas como *proyectos distintos* (OT-Campo seleccionada · seguridad perimetral e identidades · capacidad y mantenimiento de planta externa), la matriz de construcción quedó archivada como respaldo, el ciclo de vida volvió a justificarse por configuración y adopción, las fases volvieron de 12 a 11 y las adquisiciones al perfil SaaS. Se actualizó el **Acta** (`Producto`, `Entregables`, autoridad de compra) y se creó **`materias/ASI/etapa3.md`**, el entregable consolidado que se sube a Drive a medida que se completa. **No respondió las consultas 2, 3 ni 4** (líneas base, meses relativos, fecha de entrega): D2 y D3 siguen abiertas y quedó redactado el mensaje de seguimiento.
-- 2026-08-23: entregable consolidado generado. Se instaló **Node 24 LTS en la máquina Windows** y se corrió el conversor: `materias/ASI/etapa3.docx` (8 páginas) y `materias/ASI/etapa3-acta-proyecto.docx` (5 páginas), con sus PDF. El encabezado de `etapa3.md` se alineó al formato de las entregas de las Etapas 1 y 2 (UTN / CÁTEDRA / título / comisión y grupo / integrantes con legajo y email / tabla de versiones / índice). Se agregó `scripts/preview-docx.ps1`, equivalente Windows de `preview-docx.sh`: convierte con Word en vez de LibreOffice y rasteriza con pymupdf. **Fecha de entrega confirmada: 28/08/2026.** Ante las tres consultas sin responder, el grupo decidió: líneas base como supuestos con medición como entregable de la fase 2, cronograma en meses relativos, y justificación de la selección cualitativa sin matriz ponderada.
+- 2026-08-19: ingerida la carpeta `Ejercitación` (4 archivos) → `materias/ASI/fuentes/Ejercitación/`. Aporta tres cosas que faltaban: **(1) la plantilla oficial del Acta de Proyecto** — desbloquea el punto 4.b de la Etapa 3, que estaba trabado desde el 29/07; **(2) el caso integral resuelto** (Centro de Servicios) — primer y único ejemplo resuelto de la unidad, con CPM completo (ES/EF/LS/LF, holguras, camino crítico `1→2→4→5→7→9`, duración 39 h, BAC $3.700); **(3) la ejercitación de U5**, que es más ancha que la Etapa 3 e incluye RFI ejecutado, RFP con 3 cotizaciones y TCO. Se agregaron a la Unidad 3: CPM y aplanamiento en §7, criterios de evaluación de proveedores y variables de TCO en §10, BAC y monetización de beneficios en §11, checklist legal e indicadores VAN/TIR/TPR en §12, la plantilla del Acta con ejemplo en §6, y el nuevo §13 con la tabla comparativa U5 vs. Etapa 3. La sección "Ejercicios resueltos tipo", que estaba vacía, ahora tiene el caso completo. **Dos hallazgos:** la cátedra numera esta unidad como **Unidad 5** (la wiki la llama Unidad 3), y falta el apunte teórico — el caso cita `ASI-5-T1` a `ASI-5-T5`, ninguno en nuestras fuentes.
+- 2026-08-19: redactado el **borrador del Acta de Proyecto** (punto 4.b de la Etapa 3) en `materias/ASI/entregables/etapa3-acta-proyecto.md`, con su `.docx` generado por `scripts/build-docx.js` (conversor md→docx reutilizable: A4, Arial 11, justificado con partición es-AR, tablas con anchos por directiva `<!-- cols: … -->`, pie con numeración). Se instaló LibreOffice y `scripts/preview-docx.sh` para **ver el render** antes de dar por bueno un entregable — revisando a ciegas se habían colado listas con numeración encadenada, celdas justificadas con ríos y partición de palabras en inglés. El Acta quedó en 5 páginas. Trazabilidad completa hacia atrás: la justificación cita R04 y R07 sin tratamiento de la Etapa 2 y el objetivo de TI del 5% de la Etapa 1; los objetivos son O1–O4 con las líneas base declaradas como supuestos y su medición como entregable de la fase 2; el límite reproduce el "qué no incluye" acordado. Quedan por definir los nombres propios y el monto de autoridad de compra.
+- 2026-08-19: ingerido el **campus completo** (`ASI_Apuntes_Campus`, 93 archivos). Se copiaron 28 a `materias/ASI/fuentes/Campus/` — Unidades 3, 4 y 5 completas más Normas de Cátedra; se dejaron fuera los complementarios de U2 (NIST, MAGERIT, SEI), la U6, los exámenes finales y los duplicados de U1/U2 que ya estaban. **Reestructuración mayor de la wiki**: el Programa Analítico (Plan 2023) define **6 unidades**, no 3. La vieja "Unidad 3 — Proyectos de TI" pasó a ser **Unidad 5**, y se crearon **Unidad 3 (Dirección de Talento y Capital Humano)** y **Unidad 4 (Higiene y Seguridad Laboral)** — las dos que sostienen los puntos 5 y 6 de la Etapa 3 y que hasta ahora se venían respondiendo con conocimiento general. Se agregó también un stub de **Unidad 6 (Emprendedorismo)**. En la Unidad 5 se volcaron los cinco capítulos del apunte: definición formal de proyecto, tipos, portafolio/programa/subproyecto y triple restricción (T1); la **plantilla del Acta anotada campo por campo con el ejemplo ESABAL** y el contenido PMI del Acta de Constitución (T2); el esquema de nodo de la red, AON/AOA, el método completo de **histograma de recursos y aplanamiento**, y fast tracking vs. crashing (T3); y las **cuatro técnicas de evaluación de inversiones** TR/TPR/VAN/TIR con el valor del dinero en el tiempo (T4). **Hallazgo para el punto 6 de la Etapa 3:** los tres niveles de prevención de la Unidad 4 explican por qué la cátedra rechaza "silla ergonómica y pausas activas" — son prevención sobre la persona, el escalón más débil; el layout tiene que mostrar **prevención en el diseño**. Se sumó además la legislación laboral (Leyes 19.587, 24.557, 20.744 y 27.555), que le faltaba a la factibilidad legal.
+- 2026-08-23: **el docente validó el punto 3** y redefinió el encuadre de las alternativas. Aprobó el proyecto y dio su formulación del nombre; indicó dejar **SaaS FSM configurable** como único modo de construcción —lo que revierte D4, cerrada por el grupo en desarrollo interno el 10/08— y pidió sumar una o dos **alternativas de TI que ataquen otro problema**, solo mencionadas. En consecuencia se reescribió el punto 3 con las alternativas como *proyectos distintos* (OT-Campo seleccionada · seguridad perimetral e identidades · capacidad y mantenimiento de planta externa), la matriz de construcción quedó archivada como respaldo, el ciclo de vida volvió a justificarse por configuración y adopción, las fases volvieron de 12 a 11 y las adquisiciones al perfil SaaS. Se actualizó el **Acta** (`Producto`, `Entregables`, autoridad de compra) y se creó **`materias/ASI/entregables/etapa3.md`**, el entregable consolidado que se sube a Drive a medida que se completa. **No respondió las consultas 2, 3 ni 4** (líneas base, meses relativos, fecha de entrega): D2 y D3 siguen abiertas y quedó redactado el mensaje de seguimiento.
+- 2026-08-23: entregable consolidado generado. Se instaló **Node 24 LTS en la máquina Windows** y se corrió el conversor: `materias/ASI/entregables/etapa3.docx` (8 páginas) y `materias/ASI/entregables/etapa3-acta-proyecto.docx` (5 páginas), con sus PDF. El encabezado de `etapa3.md` se alineó al formato de las entregas de las Etapas 1 y 2 (UTN / CÁTEDRA / título / comisión y grupo / integrantes con legajo y email / tabla de versiones / índice). Se agregó `scripts/preview-docx.ps1`, equivalente Windows de `preview-docx.sh`: convierte con Word en vez de LibreOffice y rasteriza con pymupdf. **Fecha de entrega confirmada: 28/08/2026.** Ante las tres consultas sin responder, el grupo decidió: líneas base como supuestos con medición como entregable de la fase 2, cronograma en meses relativos, y justificación de la selección cualitativa sin matriz ponderada.
 - 2026-08-23: **EDT completa** (punto 4.3). Once paquetes de primer nivel y **46 paquetes de trabajo**, cada uno con predecesora, duración en días hábiles, perfil y entregable verificable, en el formato que exige la cátedra. Se definieron los **nueve perfiles** (JP, AF, EI, ES, CP, UX, QA, CA, RO), que son el insumo directo del punto 5. El paralelismo de D5 quedó **diseñado dentro de la estructura, no agregado después**: cinco focos de solapamiento documentados —el analista funcional entre 2.2 y 2.4, el especialista de integraciones encadenado en 5.1 a 5.4 mientras 5.6 y 6.1 lo reclaman, el de seguridad entre el cierre de la fase 3 y 5.5/5.6, el consultor de plataforma en 4.6/4.7/5.1 y después en 8.3/10.1/11.1, y el referente de operaciones entre relevamiento, configuración y despliegue—. Son el insumo del análisis de sobreasignación del punto 10. El **Acta se embebió como Anexo I** dentro de `etapa3.md`: a la carpeta compartida sube un solo archivo y el Acta es entregable obligatorio del punto 4.b. Se corrigió también el título del Acta, que conservaba la formulación vieja, a la que dio el docente. Documento en **16 páginas**. Se arregló `scripts/preview-docx.ps1`, que fallaba porque `Join-Path` devuelve un PSObject y `SaveAs` de Word no lo acepta.
 - 2026-08-23: **Etapa 3 completa, puntos 5 a 12.** Antes de redactar se calculó el **CPM real** sobre las 51 actividades de la EDT (pasada adelante y atrás, holguras, camino crítico): **187 días hábiles** a fechas tempranas, camino crítico de 30 actividades, y seis conflictos de sobreasignación. Se corrigieron dos fallas de modelado de la EDT: `2.4 medir líneas base` y `9.4 evaluar la capacitación` quedaban sin sucesor, con holguras irreales de 158 y 28 días; se les asignaron las dependencias que corresponden. El **aplanamiento** se resolvió comparando dos estrategias: nivelar con una persona por perfil lleva el proyecto a 215 días (+28), y reforzar con un segundo especialista de integraciones y un segundo responsable de pruebas lo deja en **192 días hábiles (~9,1 meses)**, que es la adoptada — un tercer refuerzo en RO solo bajaría a 189 y no se justifica. Esos números fijos alimentaron la redacción de los puntos 5 a 12.
 - 2026-08-23: **detectada y corregida una inconsistencia grave entre los puntos 11 y 12.** El punto 11 había estimado sobre 220 técnicos, 260 usuarios licenciados y 240 dispositivos, y el punto 12 sobre 60 técnicos y 78 usuarios: cuatro veces de diferencia dentro del mismo documento. Se unificó sobre la cifra menor, que es la ya documentada para el alcance Gran Rosario, y se recalculó **todo** lo que colgaba de ella. Modelo único resultante: RRHH 3.456 h por USD 112.624 · adquisiciones y servicios año 1 USD 142.210 · costo directo USD 254.834 · **presupuesto año 1 USD 328.226** · **TCO a 3 años USD 531.460**. La evaluación económica se rehízo distinguiendo el presupuesto a autorizar (con contingencia) de la inversión que se descuenta (sin ella, por ser una previsión ante riesgo y no una erogación esperada): **VAN a 5 años al 15% = +USD 31.515 · TIR 19,0% · repago 3,14 años · umbral de indiferencia en el 85% de realización de beneficios**. El resultado es viable pero de margen estrecho, y así quedó escrito: a tres años el proyecto todavía no se repaga. Se corrigió también la sensibilidad, que con la dotación menor pasa de "los usuarios pesan 2,5 veces más que el valor hora" a que ambas variables pesan casi igual.
 - 2026-08-23: **pasada de formato al entregable.** Tres cambios en `scripts/build-docx.js`: la fuente pasa de Arial a **Lexend**, que es la que el grupo viene usando en las entregas de las Etapas 1 y 2; la fila de encabezado de las tablas lleva **fondo celeste** (`DCE9F7`) con texto en azul oscuro (`15406B`); y las líneas de la grilla se tiñeron de celeste apagado para que acompañen. Se agregó `scripts/fix-cols-md.py`, que **audita y recalcula los anchos de columna** de todas las tablas de un `.md`: reparte el 100% en proporción al volumen de texto de cada columna, pero con un piso por columna derivado del contenido más largo que no se puede partir. Sin ese piso, columnas como `Pred.` de la EDT apilaban `4.6, 4.7, 7.1` en tres renglones aunque sobrara espacio en la tabla. Se ajustaron 33 de las 39 tablas de `etapa3.md`. **Pendiente:** Lexend no está instalada en la máquina Windows, así que el render local sustituye por una serif y no refleja el resultado real; en Google Docs, que trae Lexend, se ve como corresponde.
 - 2026-08-23: **bug en `fix-cols-md.py` y dos tablas rotas.** Al preguntar si estaba todo pusheado se revisó la herramienta y no era idempotente: corrida dos veces sobre el mismo archivo seguía proponiendo cambios. La causa era que el ajuste final de redondeo volcaba el resto entero en una sola columna, y cuando los pisos no cerraban en 100 la dejaba en **ancho negativo**. Dos tablas del punto 6 habían quedado con `<!-- cols: -10,22,22,22,22,22 -->`, y como el regex no aceptaba el signo menos, las corridas siguientes ni siquiera reconocían la directiva y nunca las reparaban. Se corrigieron tres cosas: el ajuste ahora reparte de a un punto por vez sobre las columnas con más aire y nunca baja de 4; el regex acepta directivas rotas para poder repararlas; y la ventana de búsqueda de la directiva pasó de 4 a 8 líneas, que era la otra razón por la que esas dos tablas quedaban fuera. Verificado: segunda corrida da cero cambios, y las 57 directivas del repo suman 100 sin negativos.
+- 2026-08-23: **reproducibilidad y traspaso.** Se bajaron los 5 commits del compañero, entre ellos la reorganización a `materias/[CÓDIGO]/{fuentes,entregables,estudio}`, y se corrigieron las 49 líneas de esta wiki que citaban rutas viejas. Se versionaron los dos scripts que hasta ahora vivían solo en el scratchpad temporal y que producen **todos** los números de la Etapa 3: `scripts/cpm-edt.py` (CPM sobre las 51 actividades, holguras, camino crítico, detección de sobreasignación, aplanamiento y búsqueda del refuerzo mínimo) y `scripts/costos-etapa3.py` (estructura de costos, TCO a 3 años, VAN, TIR, repago, umbral de indiferencia y sensibilidad). Ambos verificados contra el entregable: reproducen 187/215/192 días, 4.240 horas-persona, USD 328.226 de presupuesto, USD 531.460 de TCO y VAN +31.515. Sin esto, cambiar una duración de la EDT obligaba a rehacer 51 actividades a mano. Se agregó además `materias/ASI/HANDOFF.md`, documento de traspaso con el contexto, lo pendiente, los números y las convenciones del conversor.
