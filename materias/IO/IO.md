@@ -773,6 +773,10 @@ Este capítulo es fundamentalmente teórico y su práctica está integrada en la
 - **$z_j$:** $z_j = \sum_i c_i\,y_{ij} = c_B\,Y_j$.
 - **$c_j - z_j$ (costo reducido):** criterio de entrada. En **maximización**, el óptimo se alcanza cuando **todos** los $c_j - z_j \leq 0$.
 - **$\theta_j$ (razón mínima):** criterio de salida.
+- **Variables ficticias:** las que se agregan en restricciones $\geq$ y $=$ para completar $B = I$, porque ahí no hay base inicial inmediata. No tienen significado físico y en el óptimo deben ser **nulas**.
+- **Penalización (M grande):** se resuelve el modelo aumentado castigando cada ficticia con $-M$ (máx) o $+M$ (mín), $M$ positivo y enorme.
+- **Dos fases:** Fase I minimiza la suma de las ficticias; si $f^* = 0$ hay solución factible y la Fase II recicla esa tabla con los $c_j$ originales.
+- **Efecto espejo:** en una $\geq$ con $b \geq 0$, la columna del exceso es la de la ficticia por $-1$, y lo mismo con sus $z_j$.
 
 > **Convención de la cátedra:** se trabaja con la fila $c_j - z_j$, y en **maximización** el óptimo es cuando todos son $\leq 0$. Si en algún material ves $z_j - c_j \geq 0$, es la misma condición con el signo invertido.
 
@@ -880,25 +884,160 @@ Tres lecturas que hay que tener automatizadas:
 2. **$c_j - z_j$ de las variables básicas es siempre 0.**
 3. **La $B^{-1}$ está debajo de las columnas de las variables que formaban la base inicial** (las holguras). Acá: $B^{-1} = \begin{pmatrix} 1 & 0 & -2 \\ -3 & 1 & 9/2 \\ 0 & 0 & 1\end{pmatrix}$, leyendo las columnas $A_3$, $A_4$, $A_5$.
 
-> Si el problema tiene restricciones $\geq$, la base inicial usa variables **artificiales**. **No borres la columna de la artificial** aunque salga de la base: es la única forma de leer esa columna de $B^{-1}$.
+> Si el problema tiene restricciones $\geq$ o $=$, la base inicial usa variables **ficticias**. **No borres la columna de la ficticia** aunque salga de la base si después vas a hacer sensibilidad o dualidad: es la única forma de leer esa columna de $B^{-1}$.
+
+##### Reglas de desempate
+
+| Empate en… | Regla del apunte (3.2) | Consecuencia |
+|---|---|---|
+| **entrada** (dos $c_j - z_j$ iguales y máximos) | entra el de **menor** subíndice | ninguna, es convención |
+| **salida** (dos $\theta_j$ iguales y mínimos) | sale el de **mayor** subíndice | **la próxima solución será degenerada** |
+
+Con degeneración puede darse $\theta_j = 0$: entra una variable pero $z$ **no cambia**. Si eso se repite, el programa puede **ciclar** (repetir la misma sucesión de bases indefinidamente). El apunte aclara que el ciclado no se observa en la práctica: los ejemplos cíclicos se construyen a propósito.
+
+> **Simplex para minimización.** No hace falta convertir. El óptimo en `Min` es cuando **todos** los $c_j - z_j \geq 0$, y entra el **más negativo**; el resto de los pasos es idéntico. Si igual convertís con $\text{Máx } z = -w$, el criterio vuelve a ser $\leq 0$ y al final se reporta $W^* = -z^*$. La cátedra escribe las dos formas al lado.
+
+##### Las variables ficticias
+
+El Simplex arranca de una SBF, y la mejor base inicial es la identidad. Con restricciones $\leq$ y $b \geq 0$ las holguras la dan sola. Pero cuando hay **ecuaciones** o desigualdades **$\geq$**, la identidad no aparece: el exceso entra con $-1$, no con $+1$.
+
+Para eso se agregan las **variables ficticias** (así las llama la cátedra; *artificiales* es el nombre del resto de la bibliografía) hasta completar $B = I$. Eso es la **técnica de la base artificial**.
+
+```
+QUE HAY EN LA RESTRICCION      QUE SE AGREGA              SIRVE DE BASE INICIAL?
+
+  a x  <=  b   (b >= 0)        + 1 holgura   (+1)         SI   -> columna de I
+  a x  >=  b   (b >= 0)        - 1 exceso    (-1)         NO
+                               + 1 ficticia  (+1)         SI
+  a x   =  b   (b >= 0)        + 1 ficticia  (+1)         SI
+
+  b < 0                        multiplicar la fila por -1 PRIMERO
+```
+
+Las ficticias **carecen de significado físico**. Si el problema original tiene solución, en el óptimo tienen que ser **nulas**. Hay dos formas de forzarlo: **penalización** y **dos fases**.
+
+##### Método de penalización (M grande)
+
+Se resuelve el modelo aumentado de una sola pasada, castigando cada ficticia en el funcional con un coeficiente $M$ positivo y, conceptualmente, **mucho mayor que el mayor valor absoluto de los coeficientes económicos reales**:
+
+$$\text{Maximizar} \;\Rightarrow\; -M x_f \qquad\qquad \text{Minimizar} \;\Rightarrow\; +M x_f$$
+
+Así el Simplex, buscando mejores soluciones, expulsa las ficticias de la base. Toda la aritmética queda en binomios del tipo $-6M + 24$: para comparar manda el término en $M$.
+
+Al alcanzar la condición de optimización puede pasar:
+
+| Situación | Conclusión |
+|---|---|
+| ninguna ficticia en base | óptimo del problema original |
+| alguna ficticia en base con valor **nulo** | óptimo del original, **degenerado** |
+| alguna ficticia en base con valor **estrictamente positivo** | el original es **no factible** |
+| se concluye no acotada, con todas las ficticias nulas | el original es **no acotado** |
+| se concluye no acotada, con alguna ficticia $\neq 0$ | el original es **no factible** |
+
+> **Una ficticia que sale de la base no vuelve a entrar nunca**, porque para ella $c_j - z_j = -M - z_j < 0$ siempre. Por eso, si no se necesita $B^{-1}$ después, se puede borrar su columna al salir.
+
+##### Efecto espejo
+
+En toda restricción $\geq$ con $b \geq 0$, la columna del **exceso** es la columna de la **ficticia** multiplicada por $-1$, y lo mismo pasa con sus $z_j$. Se mantiene en todas las iteraciones:
+
+$$A_{\text{exceso}} = -\,A_{\text{ficticia}} \qquad z_{\text{exceso}} = -\,z_{\text{ficticia}}$$
+
+Sirve para chequear que la tabla está bien y para ahorrarse las columnas de las ficticias.
+
+##### Método de las dos fases
+
+El problema del M grande es computacional: con $M$ enorme los $c_j$ reales quedan insignificantes frente a los $z_j$ y, con los errores de redondeo, la solución puede volverse insensible a los coeficientes económicos originales. Las dos fases lo evita partiendo el problema:
+
+```
+FASE I    Se reemplaza el funcional original por la SUMA DE LAS FICTICIAS,
+          y SIEMPRE se minimiza:      Min f = x_f1 + x_f2 + ...
+          (equivalente: Max zeta = -x_f1 - x_f2 - ...)
+          Los cj de TODAS las variables reales pasan a valer 0.
+
+          f* = 0  ->  las ficticias son nulas. Hay solucion factible. Sigue Fase II.
+          f* > 0  ->  NO HAY SOLUCION FACTIBLE. Se termina aca.
+
+FASE II   Se toma la tabla optima de la Fase I y se la recicla:
+            - se ELIMINAN las columnas de las ficticias
+            - se REEMPLAZAN los cj por los del funcional ORIGINAL
+            - se RECALCULAN zj, cj - zj y z
+          Y se sigue el Simplex normal desde ahi.
+```
+
+**Atajo del apunte:** apenas se ve que la última ficticia abandona la base, ya se puede asegurar que la próxima tabla es la de óptimo de la Fase I. Se puede saltear esa tabla y arrancar la Fase II directamente.
+
+**El caso raro:** Fase I termina con $f^* = 0$ pero **una ficticia sigue en base con valor cero**.
+
+- Si existe una no básica **no ficticia** $x_j$ con $y_{fj} \neq 0$, se pivotea sobre $y_{fj}$ para sacarla. Acá $y_{fj}$ **puede ser negativo**: como $x_f = 0$, la razón da 0 igual. Queda una SBF inicial **degenerada** y se sigue normal.
+- Si **todos** los $y_{fj}$ de las no básicas no ficticias son nulos, esa restricción es **analíticamente redundante** (es combinación lineal de las otras): se borran su fila y su columna, y se sigue con la Fase II.
+
+##### Tipos de solución: cómo se diagnostica en la tabla
+
+```
+UNICA
+   Todos los (cj - zj) son NULOS para las basicas y ESTRICTAMENTE NEGATIVOS (max)
+   para las no basicas. Ninguna ficticia en base.
+
+ALTERNATIVAS / MULTIPLES
+   Optimo alcanzado y hay una columna NO BASICA con (cj - zj) = 0.
+   Se hace entrar esa columna: sale otra SBF optima con el MISMO z.
+   La familia completa es la combinacion convexa de las dos SBF optimas:
+       x* = lambda * S*_1 + (1 - lambda) * S*_2 ,  0 <= lambda <= 1
+
+DEGENERADA
+   Optimo alcanzado y alguna variable BASICA vale CERO.
+   Sintoma previo: empate en el criterio de salida en alguna iteracion.
+   No cambia el valor optimo; cambia como se lo escribe.
+
+NO ACOTADA
+   Hay un (cj - zj) que mejora, pero TODOS los yij de esa columna son <= 0.
+   Ninguna variable puede salir.   z = infinito
+
+NO FACTIBLE
+   Optimo alcanzado (penalizacion) con una FICTICIA EN BASE Y VALOR > 0.
+   O Fase I termina con f* distinto de 0.
+```
+
+**Degenerada no es lo mismo que alternativas.** Degenerada = una variable **básica** vale 0. Alternativas = una **no básica** tiene $c_j - z_j = 0$. Son cosas distintas y pueden darse juntas.
+
+> Las frases hechas con las que se escribe cada uno de estos diagnósticos están en la sección **Formato de respuesta de la cátedra**, arriba.
 
 #### Ejercicios resueltos tipo
 
-La Práctica 3 (`PL3UTN.pdf`) es la de Simplex: pide resolver aplicando el algoritmo **matricial** y el algoritmo de **tablas** sobre el mismo problema, para ver que son lo mismo. Ejercicio 1: Max $z = 2x_1 + 3x_2$ s.a. $4x_1+4x_2 \leq 320$, $2x_1+4x_2 \leq 240$, $8x_1+4x_2 \leq 560$ — el mismo del Ejercicio 1 de la Práctica 1, para contrastar el resultado gráfico ($x^* = (40;40)$, $z^* = 200$) con el del Simplex.
+La **Práctica 3** (`PL3UTN.pdf`) es la de Simplex y está resuelta entera, con verificación por enumeración exacta, en [[practica-3-simplex]]. Cubre los seis finales posibles del método, uno por ejercicio:
+
+| Ejercicio | Qué entrena | Resultado |
+|---|---|---|
+| **1** — Max $z = 2x_1+3x_2$, tres $\leq$ | algoritmo **matricial** y de **tablas** sobre el mismo problema | $S^* = (40; 40; 0; 0; 80)$, $z^* = 200$ — **única** |
+| **2.a** — Max $z = 3x_1+9x_2$, dos $\leq$ | empate en la salida | $S^* = (0; 2; 0; 0)$, $z^* = 18$ — **degenerada** |
+| **2.b** — Mín $W$, una $\geq$, una $\leq$, una $=$ | **penalización** y **dos fases** sobre el mismo problema | $S^* = (0; 15/4; 5/4; 0; 30)$, $W^* = 55/4$ — **única** |
+| **2.c** — Max, una $\leq$ y una $\geq$ incompatibles | detección de infactibilidad | Fase I cierra con $\zeta^* = -4 \neq 0$ — **no factible**, $\text{RF} = \emptyset$ |
+| **2.d** — Max, región no acotada | detección de no acotación | $c_1-z_1 = 53 > 0$ con toda la columna $\leq 0$ — **no acotada**, $z = \infty$ |
+| **2.e** — Mín, dos $=$ desacopladas | **óptimos alternativos** | $W^* = 688$ en $(100/6; 0; 0; 8)$ **y** $(100/6; 0; 12; 0)$ |
+| **3** | $\binom{n}{m}$ sobre la forma estándar de cada uno | 10, 6, 10, 6, 10, 6 |
+| **4** | LINDO / Solver | pendiente |
+
+**El ejercicio 1 es el mismo problema del Ejercicio 1 de la Práctica 1**, a propósito: el método gráfico daba $x^* = (40; 40)$, $z^* = 200$, y el Simplex tiene que dar lo mismo. Además, en su tabla óptima se lee
+
+$$B^{-1} = \begin{pmatrix} 1/2 & -1/2 & 0\\ -1/4 & 1/2 & 0\\ -3 & 2 & 1\end{pmatrix}$$
+
+bajo las columnas $A_3$, $A_4$, $A_5$ — que es lo que después se usa en las Unidades 4 y 5.
+
+> **Tres errores detectados en la resolución oficial** (`PL3UTNresol.pdf`), listados en la Parte 5 de [[practica-3-simplex]]. El más grave: el cuadro final del 2.a da el vector **dado vuelta** ($x_1^*=2$, $x_2^*=0$; lo correcto es $x_1^*=0$, $x_2^*=2$).
 
 #### Dudas / pendientes
 
-- **El resumen no cubre las variables artificiales.** No aparecen ni el método de la **M grande** ni el de las **dos fases**, y son imprescindibles apenas hay una restricción $\geq$ o $=$. Está en el apunte (PLC3) — falta ingerirlo.
-- Tampoco cubre los **casos especiales durante la iteración**: empate en la entrada, empate en la salida (degeneración), ciclado, cómo se detecta la infactibilidad con una artificial en base con valor positivo, ni cómo se reconocen los **óptimos alternativos** en la tabla ($c_j - z_j = 0$ en una columna no básica).
-- Falta el **Simplex para minimización** (si se invierte el criterio o si se convierte a máximo).
+- **Ejercicio 4 de la Práctica 3 sin hacer**: no hay corridas de LINDO ni de Solver. Es la Unidad 6, todavía sin desarrollar.
+- El apunte (PLC3, 3.6) trae dos casos que la práctica **no** ejercita: **redundancia analítica** (Fase I termina con $f^* = 0$ y una ficticia básica con valor nulo cuyos $y_{fj}$ son todos cero → se borra fila y columna) y **ciclado**. Están descriptos arriba pero sin ejercicio resuelto.
 - El desarrollo del resumen para la condición de factibilidad tiene el paso algebraico intermedio con notación confusa (mezcla $N_j$ y $A_j$). Está reescrito acá con $A_j$, que es la notación del apunte.
 
 #### Fuentes
 
-- `Material de cursado (2023)/Teoría/PLC3.pdf` — **pendiente de ingerir**
-- `Material de cursado (2023)/Teoría/Método Simplex.pdf` — **pendiente de ingerir**
-- `Material de cursado (2023)/Práctica/PL3UTN.pdf`
+- `Material de cursado (2023)/Teoría/PLC3.pdf` — **ingerido** (secciones 3.1 a 3.6)
+- `Material de cursado (2023)/Teoría/Método Simplex.pdf` — mismo contenido en PPT, sin agregados
+- `Material de cursado (2023)/Práctica/PL3UTN.pdf` y sus resoluciones `Resuelta/PL3UTNresol.pdf` (8 pág.) y `Resuelta/PL3UTNresol (1).pdf` (27 pág., incluye el algoritmo matricial)
 - `resumen-primer-parcial.docx`
+- Derivado: [[practica-3-simplex]]
 
 ---
 
@@ -1124,3 +1263,4 @@ Práctica 4 (`PL4UTN.pdf`), que integra sensibilidad, dualidad y parametrizació
 - 2026-08-13: Se generó el machete [[machete-metodo-grafico]] (una carilla: procedimiento de 10 pasos, tipos de solución, clasificación de restricciones, formato de cátedra y las cuatro trampas).
 - 2026-08-13: Se generó el derivado de estudio [[resumen-hasta-simplex]] (Unidades 1 y 2 en formato machete, con checklist de parcial y banco de 10 preguntas de teoría).
 - 2026-08-13: Se ingirió `resumen-primer-parcial.docx`. Las fórmulas venían como ecuaciones OMML y se perdían con markitdown; se extrajeron del XML del `.docx` (183 ecuaciones) y las 12 figuras se volcaron a `figs/`. Se creó el índice de 12 unidades y se desarrollaron las **Unidades 1 a 5** (alcance del primer parcial), fusionando el resumen con los capítulos 1 y 2 del apunte. Quedaron marcados tres errores del resumen en la Unidad 4.
+- 2026-08-25: Se ingirió el **capítulo 3 del apunte** (`PLC3.pdf`, secciones 3.1 a 3.6) y se resolvió la **Práctica 3** entera. Se completó la **Unidad 3** con lo que faltaba: variables ficticias, **penalización** y **dos fases** (con el caso de la ficticia básica nula y la redundancia analítica), **efecto espejo**, reglas de desempate, ciclado, criterio de óptimo para minimización y el diagnóstico de los **cinco tipos de solución** en la tabla. Se generó [[practica-3-simplex]] con los seis ejercicios resueltos —tablas y matricial— verificados por enumeración exacta de las $\binom{n}{m}$ bases. Se detectaron **tres errores en la resolución oficial** (`PL3UTNresol.pdf`), el principal en el cuadro final del 2.a.
