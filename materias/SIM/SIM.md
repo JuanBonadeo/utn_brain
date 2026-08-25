@@ -4,6 +4,33 @@
 > Cátedra: jefe **Leale**. Docentes que aparecen en exámenes viejos: Weitz, Lara, Flamini, De Federico.
 > Software: **AnyLogic** (y, en años anteriores, Wolfram Mathematica).
 
+### Bibliografía de la cátedra
+
+Los tres apuntes **oficiales** vigentes desde que Leale es jefe de cátedra (nota de febrero 2021 en
+`fuentes/apuntes-catedra/LEER-apuntes-vigentes.txt`):
+
+| Apunte | Contenido | De dónde sale |
+|---|---|---|
+| **Apunte Weitz** (`Apunte Weitz con hojas rotadas y acotado.pdf`) | Cap. 1 (simulación básica), inventario, 10 pasos, cap. 13 (modelos de colas), caps. 9 y 10 en inglés (análisis de salidas y comparación de sistemas) | Fotocopias de Law & Kelton, *Simulation Modeling and Analysis*, y de un libro de modelos de colas |
+| **Naylor, cap. 4** (`Tecnicas de Simulación en Computadoras - Naylor Cap. 4.pdf`) | Generación de valores de variables aleatorias: transformada inversa, rechazo, composición, y las distribuciones una por una | Naylor et al., *Técnicas de simulación en computadoras* |
+| **Números pseudoaleatorios** | Generadores: cuadrados centrales, congruenciales, período, en R | Capítulo de bookdown |
+
+Lo que está en `fuentes/apuntes-extra/` (Gordon, teoría de colas, Law & Kelton completo, números
+aleatorios de Lascano) **son apoyos, no material obligatorio** — se usaban antes con Lara y otros
+profesores. Aun así, `Números aleatorios.pdf` de Lascano es la mejor fuente para los tests de
+Chi-cuadrado y corridas, que sí se toman.
+
+El libro de texto principal es **Ross, *Simulación*** (2ª ed. 1997 en español; 5ª ed. 2013 en inglés,
+fotocopiada en 2019). El cap. 2 de Ross es la base de la Unidad 6.
+
+### Régimen de cursado
+
+> De los apuntes manuscritos de clase de 2022 (`fuentes/teoria-flamini/`). **Verificá si sigue igual
+> este año** — es información de hace cuatro años.
+
+- **Regularizar**: TPs individuales con 75% aprobados + 1 o 2 parciales con 60% de aprobación (hay recuperatorio y globalizador) + entregar el TP integrador grupal (máximo 3 integrantes) a fin de año.
+- **Aprobación directa**: aprobar el TP integrador, regularizar **antes** del globalizador, y asistencia.
+
 ## Índice
 
 0. **[Mapa del parcial 1](#mapa-del-parcial-1--qué-entra-y-de-dónde-sale)** — qué entra, de dónde sale, y qué falta en el resumen
