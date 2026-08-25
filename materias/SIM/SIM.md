@@ -45,6 +45,7 @@ fotocopiada en 2019). El cap. 2 de Ross es la base de la Unidad 6.
 9. [Unidad 9 — Análisis de los datos de salida](#unidad-9--análisis-de-los-datos-de-salida)
 10. [Unidad 10 — Comparación de sistemas alternativos](#unidad-10--comparación-de-sistemas-alternativos)
 11. [TPI — consigna y estado](#tpi--trabajo-práctico-integrador)
+12. [Dudas / pendientes](#dudas--pendientes)
 
 ---
 
@@ -2125,18 +2126,97 @@ Por lo anterior, se usa un procedimiento **secuencial**: se agregan réplicas **
 > desarrolle el procedimiento para calcular la cantidad extra de repeticiones de tal forma de obtener
 > un error relativo máximo de $\gamma\%$").
 
+**Cuándo usar cada procedimiento** (recomendaciones de Law, §9.4.1):
+
+| Situación | Qué usar |
+|---|---|
+| Experimento **exploratorio**, donde la precisión del intervalo no es determinante | **Tamaño fijo** |
+| Se quiere un error relativo **chico** ($\gamma \le 0{,}15$) | **Secuencial**, con $n_0 \ge 10$ |
+| Se quiere un error relativo **mayor** a 0,15, o un error absoluto $\beta$ | **Aplicaciones sucesivas del de tamaño fijo**: estimar $n_r^*(\gamma)$, tomar $[n_r^*(\gamma)-n]/2$ réplicas más, reconstruir el intervalo, y repetir si todavía no alcanza |
+
+> ⚠️ **La regla de oro, textual de Law**: sin importar el costo por réplica, se recomienda hacer
+> **siempre al menos tres a cinco réplicas** de una simulación estocástica para evaluar la variabilidad
+> de los $X_j$. Si eso no es posible por tiempo o costo, **el estudio de simulación probablemente no
+> debería hacerse en absoluto**.
+>
+> Y una advertencia: si los $X_j$ son **muy no-normales** y $n$ es muy chico, la cobertura real del
+> intervalo puede ser bastante menor a la deseada.
+
+### 9.5-bis Estimar otras medidas además de la media
+
+> Sección 9.4.2 de Law. **Comparar sistemas solo por la media puede llevar a conclusiones erróneas.**
+
+**El ejemplo del banco** (Law 9.20) — se comparan dos políticas con $\rho = 0{,}8$: **una cola por
+cajero** (con jockeying, es decir con clientes que se cambian de fila) versus **una sola cola que
+alimenta a todos los cajeros**.
+
+| Medida | Cinco colas | Una cola |
+|---|---|---|
+| Tiempo de operación esperado (horas) | 8,14 | 8,14 |
+| **Demora promedio esperada (minutos)** | **5,57** | **5,57** |
+| **Número promedio en cola** | **5,52** | **5,52** |
+
+Por el promedio, **las dos políticas parecen equivalentes**. Pero no lo son: con múltiples colas los
+clientes no se atienden en orden de llegada, así que la **variabilidad** de la demora es mayor.
+Mirando las proporciones:
+
+| Demora (min) | Cinco colas | Una cola |
+|---|---|---|
+| [0, 5) | 0,626 | 0,597 |
+| [5, 10) | 0,182 | 0,188 |
+| [10, 15) | 0,076 | 0,107 |
+| [15, 20) | 0,047 | 0,095 |
+| [20, 25) | 0,031 | 0,013 |
+| [25, 30) | 0,020 | 0 |
+| [30, 35) | 0,015 | 0 |
+| [35, 40) | 0,003 | 0 |
+
+> Con 480 clientes por día, **33** tendrían demoras de 20 minutos o más con cinco colas, contra **6**
+> con una sola cola. Eso —más la mayor equidad de la cola única— es la razón por la que bancos y
+> aerolíneas adoptaron la fila única. **Las medias son idénticas; las colas de la distribución no.**
+
+**Estimar una probabilidad**: para $p = P(X \in B)$, se hacen $n$ réplicas y se cuenta $S$ = cuántos $X_j$ caen en $B$. Como $S \sim Bi(n,p)$, el estimador insesgado es
+
+$$\hat{p} = \frac{S}{n}$$
+
+*Ejemplo*: $p = P(X \le 15)$ con $X = \max_{0\le t\le T} Q(t)$. Con 100 réplicas se obtuvo $\hat{p} = 0{,}77$ → en ~77 de cada 100 días la cola máxima del día no supera los 15 clientes.
+
+**Estimar un cuantil**: si $X_{(1)}, \dots, X_{(n)}$ son los estadísticos de orden,
+
+$$\hat{x}_q = \begin{cases} X_{(nq)} & \text{si } nq \text{ es entero} \\ X_{(\lfloor nq \rfloor + 1)} & \text{si no} \end{cases}$$
+
+*Ejemplo*: para dimensionar el hall del banco se busca $x_{0{,}95}$ del máximo de cola. Con 100 réplicas, $\hat{x}_{0{,}95} = X_{(95)} = 20$ → un hall para 20 personas alcanza ~95 de cada 100 días. ($\hat{x}_{0{,}99} = 23$.)
+
+> **Es un buen argumento para el TPI**: además del test de medias, mostrar proporciones o cuantiles
+> refuerza mucho las conclusiones — y es exactamente el tipo de cosa que diferencia un análisis
+> hecho de uno hecho a las apuradas.
+
 ### 9.7 Elección de condiciones iniciales
 
 Las medidas de rendimiento de una **simulación terminal** dependen explícitamente del estado del
 sistema en el tiempo 0, así que hay que **elegir con cuidado las condiciones iniciales** para que sean
 representativas del sistema real.
 
-> Ejemplo: si simulás una guardia de hospital arrancando **vacía**, vas a subestimar las demoras si en
-> la realidad el turno arranca con pacientes del turno anterior.
+**El ejemplo de Law (§9.4.3)**: se quiere estimar la demora promedio de los clientes que llegan y
+completan su demora **entre las 12 y la 1 del mediodía** (el período más congestionado) en un banco.
+Como a las 12 el banco ya está congestionado, arrancar la simulación en ese momento **sin clientes**
+(las condiciones iniciales habituales de una simulación de colas) haría que la estimación de la demora
+promedio quede **sesgada hacia abajo**.
 
-En una simulación **no terminal**, el problema se resuelve al revés: se descarta un **período de
-calentamiento (warm-up)** al principio de la corrida para eliminar el efecto de las condiciones
-iniciales, y solo se estadística lo que viene después.
+Hay **dos enfoques heurísticos**:
+
+| Enfoque | Cómo | Ventaja / desventaja |
+|---|---|---|
+| **1. Período de calentamiento** (el más usado) | El banco abre a las 9 sin clientes. Se arranca la simulación a las 9, se corre 4 horas simuladas, y **solo se usan las demoras de los clientes que llegan y completan su demora entre las 12 y la 1**. La evolución entre las 9 y las 12 (el *warm-up*) determina por sí sola las condiciones apropiadas al mediodía | 3 horas de tiempo simulado no se usan directamente en la estimación. Se puede acortar (arrancar a las 11), pero **no hay garantía** de que las condiciones a las 12 sean representativas |
+| **2. Muestrear las condiciones iniciales** | Se recolectan datos reales de cuántos clientes hay en el banco a las 12 durante varios días. Sea $\hat{p}_i$ la proporción de esos días con $i$ clientes presentes. Se simula de 12 a 1 con el número inicial de clientes **sorteado de la distribución $\{\hat{p}_i\}$** | Más fiel, pero exige datos reales. Se asume que los clientes en servicio a las 12 recién empiezan su servicio — es una aproximación, despreciable en una corrida de 1 hora |
+
+> **Detalle importante del enfoque 2**: si se quiere más de una corrida, se **sortea una muestra
+> distinta de $\{\hat{p}_i\}$ para cada corrida**. Los $X_j$ resultantes siguen siendo IID, porque las
+> condiciones iniciales de cada corrida se eligen **independientemente de la misma distribución**.
+
+En una simulación **no terminal** el problema se resuelve al revés: se descarta un **período de
+calentamiento** al principio de la corrida para eliminar el efecto de las condiciones iniciales, y solo
+se hace estadística sobre lo que viene después.
 
 ### 9.8 Medidas múltiples de rendimiento — desigualdad de Bonferroni
 
@@ -2205,6 +2285,21 @@ $$\xi = \mu_1 - \mu_2$$
 > Esto es exactamente lo que pide el TPI: *"no hay diferencia significativa" es un resultado válido si
 > está bien fundamentado*.
 
+**Por qué intervalo de confianza y no test de hipótesis** (Law §10.2, vale citarlo en el TPI): un test
+da solamente un "rechazo" o "no rechazo". Un intervalo de confianza da **esa misma información**
+—según el intervalo contenga o no al cero— **y además cuantifica cuánto difieren** las medidas, si es
+que difieren.
+
+> **Un punto que se presta a error**: los $X_{ij}$ son variables aleatorias definidas sobre una
+> **réplica entera** — por ejemplo, el promedio de las 100 demoras de la $j$-ésima réplica. **No** son
+> la demora de un cliente individual.
+
+⚠️ **Alcance según la clase pre-examen**: *"Cap 10 (comparando sistemas alternativos) sí. Pag 86 sí,
+10.2.2 no."* La página 86 del apunte corresponde a **10.2 + 10.2.1 (paired-t)**, y la 87 a **10.2.2
+(Welch)**. Es decir: **entra el paired-t, no entra Welch**. Igual dejo Welch acá porque está en el
+resumen de Pagliaro, porque los criterios cambian de año a año, y sobre todo porque **para el TPI vas
+a necesitar saber cuál de los dos aplica** a tus corridas.
+
 ### 10.2 Intervalo de confianza t-apareado (paired-t)
 
 > Es el **"método de muestras apareadas"** de la pregunta frecuente #1. Es el que conviene usar en el TPI.
@@ -2225,6 +2320,49 @@ $$\boxed{\bar{Z}(n) \ \pm\ t_{n-1,\,1-\alpha/2}\sqrt{\widehat{\mathrm{Var}}\left
 > **Por qué funciona**: al restar de a pares, cualquier fuente de variabilidad **común** a las dos
 > corridas se cancela. Queda solo la diferencia que le interesa al analista, con menos varianza →
 > intervalo más angosto → más chance de detectar una diferencia real.
+>
+> **Qué NO hay que asumir** (esto es lo que lo hace tan robusto): no hace falta que $X_{1j}$ y
+> $X_{2j}$ sean independientes, **ni que tengan la misma varianza**. Si los $Z_j$ son normales el
+> intervalo es **exacto**; si no, el TCL garantiza que la cobertura sea cercana a $1-\alpha$ para $n$
+> grande.
+>
+> Además: como el paired-$t$ reduce el problema de dos sistemas a **una sola muestra** (los $Z_j$),
+> se le pueden aplicar directamente **los procedimientos secuenciales de la Unidad 9** para acotar el
+> error del intervalo.
+
+#### Ejercicio resuelto tipo — comparar dos políticas de inventario (Law, ejemplo 10.3)
+
+> Cierra el círculo con la Unidad 4: es el modelo de inventario de §1.5 evaluado con el test de medias.
+
+**Planteo**: comparar dos políticas $(s,S)$ por su efecto sobre el **costo total promedio por mes** en
+los primeros 120 meses, con $I(0) = 60$. Política 1: $(20, 40)$. Política 2: $(20, 80)$. Se hicieron
+$n = 5$ réplicas independientes de cada una. $X_{ij}$ = costo total promedio por mes de la política
+$i$ en la réplica $j$.
+
+| $j$ | $X_{1j}$ | $X_{2j}$ | $Z_j = X_{1j} - X_{2j}$ |
+|---|---|---|---|
+| 1 | 126,97 | 118,21 | 8,76 |
+| 2 | 124,31 | 120,22 | 4,09 |
+| 3 | 126,68 | 122,45 | 4,23 |
+| 4 | 122,66 | 122,68 | −0,02 |
+| 5 | 127,23 | 119,40 | 7,83 |
+
+**Con paired-$t$**: $\bar{Z}(5) = 4{,}98$ y $\widehat{\mathrm{Var}}[\bar{Z}(5)] = 2{,}44$, de donde el
+intervalo de confianza al 90% es **[1,65 ; 8,31]**.
+
+**Conclusión**: como el intervalo **no contiene al 0**, con ~90% de confianza $\mu_1 \ne \mu_2$, y
+**la política 2 es superior** porque tiene menor costo operativo — entre 1,65 y 8,31 unidades menos.
+Ese "entre 1,65 y 8,31" es justamente lo que **un test de hipótesis no habría dado**.
+
+> **Con Welch, sobre los mismos datos**: $\bar{X}_1(5) = 125{,}57$, $\bar{X}_2(5) = 120{,}59$,
+> $S_1^2 = 4{,}00$, $S_2^2 = 3{,}76$, $\hat{f} = 7{,}99$, $t_{7{,}99;\,0{,}95} = 1{,}860$ (interpolando
+> en la tabla) → intervalo **[2,66 ; 7,30]**. Misma conclusión, intervalo distinto.
+>
+> Se puede aplicar Welch acá **solo porque las corridas de las dos políticas se hicieron
+> independientemente** y con $n_1 = n_2$.
+>
+> **Ojo con el "aproximado"**: con $n = 5$ no está garantizado que el TCL haya hecho efecto, así que
+> el nivel de confianza del 90% es aproximado, no exacto.
 
 ### 10.3 Intervalo de confianza de Welch
 
@@ -2241,13 +2379,27 @@ donde $\hat{f} = g(S_1, S_2, n_1, n_2)$ son los **grados de libertad de Welch**:
 
 $$\hat{f} = \frac{\left(\dfrac{S_1^2}{n_1} + \dfrac{S_2^2}{n_2}\right)^2}{\dfrac{(S_1^2/n_1)^2}{n_1-1} + \dfrac{(S_2^2/n_2)^2}{n_2-1}}$$
 
+> **Por qué Welch y no el "two-sample-$t$ clásico"**: el clásico **exige** que
+> $\mathrm{Var}(X_{1j}) = \mathrm{Var}(X_{2j})$, y si las varianzas no son iguales su cobertura se
+> degrada seriamente. Como la igualdad de varianzas **no es un supuesto seguro** al simular sistemas
+> reales, Law **recomienda no usar el two-sample-$t$ clásico** y usar en su lugar la solución
+> aproximada de Welch (1938) al llamado *problema de Behrens-Fisher*. (Si $n_1 = n_2$, el clásico es
+> bastante seguro incluso con varianzas distintas.)
+>
+> **Otro uso de Welch**: sirve también para **validar** un modelo de simulación contra un sistema real
+> — "sistema 1" son los datos recolectados físicamente y "sistema 2" la salida del modelo. En ese caso
+> es normal que $n_1 \ll n_2$, y por eso hace falta un método que no exija aparear.
+
 | | **t-apareado** | **Welch** |
 |---|---|---|
-| Independencia entre sistemas | **No** la requiere | **Sí** la requiere |
-| $n_1 = n_2$ | **Sí**, obligatorio | No, pueden diferir |
-| Varianza | Menor si hay correlación positiva | Mayor |
-| Grados de libertad | $n-1$ | $\hat{f}$ (fórmula de Welch) |
-| Cuándo usarlo | Podés controlar las semillas → **usalo** | No podés aparear (distinto nº de réplicas, corridas de origen distinto) |
+| Independencia entre sistemas | **No** la requiere (y conviene que haya correlación positiva) | **Sí** la requiere |
+| Igualdad de varianzas | **No** la requiere | **No** la requiere (a diferencia del two-sample-$t$ clásico) |
+| $n_1 = n_2$ | **Sí**, obligatorio (o descartar observaciones del que tenga más) | No, pueden diferir |
+| Varianza del estimador | Menor si hay correlación positiva | Mayor |
+| Grados de libertad | $n-1$ | $\hat{f}$ (no entero → hay que interpolar en la tabla $t$) |
+| Procedimiento secuencial | Se le puede aplicar el de la Unidad 9 | Existe uno propio (Robbins, Simons y Starr) |
+| Cuándo usarlo | Podés controlar las semillas → **usalo** | No podés aparear: distinto nº de réplicas, corridas independientes, o validación contra datos reales |
+| ¿Entra al parcial? | **Sí** (pág. 86 del apunte) | **No** según la clase pre-examen (§10.2.2) |
 
 ### 10.4 Más de dos sistemas — ranking y selección
 
@@ -2322,12 +2474,11 @@ En el paso 9 de Weitz, la comparación de escenarios se plantea así:
 
 ### Fuentes
 
-- `fuentes/resumenes/Resumen 1.pdf` (Pagliaro) — secciones 9 y 11. **Fuente principal.**
-- `fuentes/apuntes-catedra/Apunte Weitz con hojas rotadas y acotado.pdf` — cap. 10 hasta pág. 86
+- `fuentes/apuntes-catedra/Apunte Weitz con hojas rotadas y acotado.pdf`, cap. 10 (Law & Kelton) — transcripción en `fuentes/txt/apuntes-catedra__Weitz__p71-79.md`. **Fuente principal.**
+- `fuentes/resumenes/Resumen 1.pdf` (Pagliaro) — secciones 9 y 11
 - `fuentes/clase-preexamen/Preguntas frecuentes.docx` — pregunta 1
 - `fuentes/examenes/parciales/2019/2019 - Parcial 2 - Weitz.txt`
 
----
 ## TPI — Trabajo Práctico Integrador
 
 > Fuente: `fuentes/TPI Simulación - Enunciado.md`. Modalidad grupal, software **AnyLogic**.
@@ -2433,6 +2584,30 @@ Hallazgo que sostiene el Tema 1: el desbalance de Ecobici **no es anual sino int
 ---
 
 
+---
+
+## Dudas / pendientes
+
+**Para confirmar con la cátedra:**
+
+- [ ] **Formato del parcial de este año**: ¿a desarrollar (como 2019-2024) o multiple choice (como 2025)? Cambia bastante cómo conviene estudiar.
+- [ ] Si el formato es el de 2025, ¿entra material de **AnyLogic** (paradigmas, GIS) y de **LaTeX**? En 2025 sí.
+- [ ] **Alcance exacto**: la lista de "qué no entra" de esta wiki sale de una clase pre-examen de un año anterior. Puede haber cambiado.
+- [ ] **Protocolo del ejercicio numérico de inventario**: cuántos meses hay que simular y en qué orden se consumen los números aleatorios provistos (ver Unidad 4).
+- [ ] ¿Sigue vigente el **régimen de cursado** de 2022 (75% de TPs, 60% de parciales, TP integrador grupal de máximo 3)?
+
+**Huecos del material ingerido:**
+
+- Del apunte de Weitz quedaron **sin transcribir las páginas 1-20, 31-40 y 61-70** del PDF: la transcripción por visión falla sistemáticamente en esos bloques por un filtro del proveedor de la API. **No es una pérdida real de contenido**: p1-20 y p31-40 son el cap. 1 de Law (simulación básica, cola simple, inventario), que el resumen del parcial cubre íntegramente, y p61-70 es el arranque del cap. 9, que cubre `Resumen 1.pdf` de Pagliaro. Si en algún momento hace falta el original textual de esas páginas, se pueden leer directo del PDF.
+- `fuentes/teoria-flamini/TeoriaSimulacion_Flamini_PARTE2_2022.pdf` son apuntes manuscritos de probabilidad con muy mala calidad de escaneo; no se transcribieron. El contenido está cubierto por la Unidad 6.
+- Los modelos de **AnyLogic** (`fuentes/practica/anylogic/*.alp`) y **Mathematica** (`fuentes/practica/mathematica/*.nb`) están copiados pero **no analizados**. Si el parcial toma AnyLogic, hay que abrirlos.
+
+**Dudas de contenido:**
+
+- La notación $c_i$ en la línea de tiempo de eventos aparece definida en el resumen como $c_i = t_i + D_i + S_i$ (instante en que el cliente $i$ completa su servicio). Confirmado contra el resumen; consistente con el apunte de Flamini, que lo escribe $S_i = C_i - t_i - D_i$.
+- El resumen dice que M/M/1 tiene población **finita** — es un error heredado del libro de Weitz (ver Unidad 8). Ya está anotado, pero vale reconfirmarlo si aparece en un multiple choice.
+
+---
 ---
 
 ## Log
