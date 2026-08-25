@@ -1221,6 +1221,19 @@ $$\lim_{n\to\infty} \frac{X_1 + \dots + X_n}{n} = \mu$$
   De ahí sale $E[X] = np = \lambda$ y $\mathrm{Var}(X) = np(1-p) \approx \lambda$ para $p$ chica, es decir **$E[X] = \mathrm{Var}(X) = \lambda$**, la propiedad característica de la Poisson.
 - **Diferencia binomial vs. hipergeométrica**: la binomial es **con** reemplazo (o población infinita), la hipergeométrica **sin** reemplazo.
 
+> ⚠️ **Cuidado con la geométrica: hay dos convenciones y las dos aparecen en el material.**
+>
+> | | **Ross** (el resumen, y el parcial 2025) | **Naylor** (el apunte de generación) |
+> |---|---|---|
+> | Qué cuenta $X$ | El **número del ensayo** en que ocurre el primer éxito ($X \ge 1$) | El número de **fracasos antes** del primer éxito ($X \ge 0$) |
+> | Masa | $P(X=n) = p(1-p)^{n-1}$ | $f(x) = p\,q^x$ |
+> | $E[X]$ | $1/p$ | $q/p$ |
+> | $\mathrm{Var}(X)$ | $(1-p)/p^2$ | $q/p^2$ |
+>
+> Las dos difieren en 1: $X_{\text{Ross}} = X_{\text{Naylor}} + 1$. El parcial 2025 (pregunta 1.1) usa
+> la de **Ross** — la define como "número de ensayos necesarios para obtener el primer éxito" con
+> media $1/p$ y varianza $(1-p)/p^2$. Usá esa salvo que el enunciado diga otra cosa.
+
 ### 6.9 Variables aleatorias continuas
 
 #### Uniforme en $(a,b)$
@@ -1630,7 +1643,11 @@ $$\boxed{x = 1 - \sqrt{1-r}}$$
 
 Y como $r$ y $1-r$ son ambas $U(0,1)$, se puede simplificar a $x = 1 - \sqrt{r}$.
 
-**Verificación de coherencia**: $f(t)=2(1-t)$ es decreciente, así que debería producir más valores cerca de 0 que de 1. Con $r=0{,}5$ da $x = 1-\sqrt{0{,}5} = 0{,}293$ — efectivamente por debajo de la mediana geométrica, consistente.
+**Verificación de coherencia**: $f(t)=2(1-t)$ es decreciente, así que debería producir más valores
+cerca de 0 que de 1. Con $r = 0{,}5$ da $x = 1-\sqrt{0{,}5} = 0{,}293$: **la mediana de la distribución
+es 0,293**, bastante por debajo del punto medio del intervalo (0,5). Justo lo que se espera de una
+densidad decreciente. Otro chequeo: $r \to 0$ da $x \to 0$ y $r \to 1$ da $x \to 1$, o sea que el
+generador cubre todo el soporte.
 
 > **Método alternativo** si la inversa no sale: usar el **método de rechazo**. Acá $f$ es acotada
 > ($\max f = f(0) = 2$) y de rango finito $[0,1]$, así que con $c = 1/2$ queda $c\,f(x) \le 1$ y se
