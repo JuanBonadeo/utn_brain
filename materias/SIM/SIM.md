@@ -672,6 +672,53 @@ Diagrama de desencadenamiento:
 Todas las variables de estado se duplican: $n_1, n_2$, $S_1, S_2$, $A_{q1}, A_{q2}$, $d_1, d_2$,
 $cli\_at_1, cli\_at_2$, $VTA_1, VTA_2$, $TUE_1, TUE_2$.
 
+### La familia completa de ejercicios de práctica
+
+> De `fuentes/practica/ejercicios-resueltos/` (Sara De Federico). Todos son variaciones sobre la cola
+> simple, y **es de acá que salen los ejercicios de los finales**. Vale la pena tener claro qué cambia
+> en cada uno, porque el enunciado del examen siempre es una variante nueva de esta familia.
+
+| Ejercicio | Sistema | Qué cambia respecto de la cola simple |
+|---|---|---|
+| **Base 2016** | Cola simple **sin medidas de rendimiento** | Es el esqueleto mínimo para que la simulación corra. Sirve de base para construir cualquier otro |
+| **1** | Cola simple completa | Agrega los acumuladores $q$, $b$, $d$ y las tres medidas de rendimiento |
+| **2** | **Dos servidores en serie** | Dos colas; el evento `P1/A2` es **doble**; no hay variable exógena "arribo 2" |
+| **3** | **$k$ servidores en paralelo** | Un solo arribo, **$k$ eventos de partida $P_i$** ($i = 1..k$). En el diagrama se representan con un **nodo de doble línea** (doble círculo). Todos los servidores tienen la misma distribución de servicio |
+| **6** | **$k$ operarios reparando 5 máquinas** | **Población finita** (5 máquinas) → la población finita **delimita también el tamaño de la cola**. Cada cliente es individual y su arribo es exclusivo: una máquina en cola **no puede volver a romperse**. La cola **no es FIFO**: hay prioridad por tiempo de reparación (la cola se vuelve un vector ordenado de menor a mayor). La medida de rendimiento es un **costo** |
+| **7.1** | **Dos secciones en serie, la segunda con $k$ servidores** | Se pide **identificar el objetivo de optimización** antes de modelar, y elegir las medidas apropiadas según qué problema se detecte (servidores ociosos vs. cola colapsada) |
+
+**El nodo de doble círculo** (ejercicio 3) es notación de la cátedra y aparece en el final 2017: *"era
+un arribo simple y partida con doble círculo, para considerar los 4 consultorios"*. Significa **$k$
+instancias del mismo evento**:
+
+```
+      ┌───────────┐                      ╔═══════════╗
+   ┌─>│  A        │─── si Sᵢ = 'D' ─────>║  Pᵢ       ║──┐
+   └──│  (Arribo) │                      ║ i = 1..k  ║<─┘
+      └───────────┘                      ╚═══════════╝
+                                          si n > 0
+```
+
+**Detalle del ejercicio 6 que se puede preguntar** — en población finita, la máquina no sale
+físicamente del sistema al ser reparada: queda **inutilizada para trabajar** mientras espera y se
+repara, y recién cuando termina la reparación se puede determinar cuándo se volverá a descomponer.
+Por eso en el diagrama la flecha va **desde el evento de reparación $R_k$ hacia el de descompostura
+$D_i$**, y no al revés. La medida de rendimiento es el costo por hora:
+
+$$\text{Costo promedio por hora} = \frac{50 \times A_{hd} + 10 \times k}{800}$$
+
+donde $A_{hd}$ es la acumulada de horas de máquina detenida y $k$ la cantidad de operarios. Se hace
+**una corrida por cada $k$** y se compara.
+
+> **Lo que suelen pedir en el examen** (final 2017, final 2015): (a) el diagrama de desencadenamiento
+> de eventos, (b) **qué información falta** en el enunciado, (c) las medidas de rendimiento
+> apropiadas, (d) una rutina en pseudocódigo donde se vea el cálculo de al menos una medida, y (e) el
+> análisis de resultados **específico para ese ejercicio**, no la teoría general. La consigna suele
+> traer datos de contexto que **no forman parte del modelo** — hay que identificarlos y descartarlos.
+>
+> Y "en los ejercicios se suele pedir **un esquema del sistema real**", que es un dibujo aparte del
+> diagrama de eventos.
+
 ### Fuentes
 
 - `fuentes/Resumen Simulación.pdf` — Law cap. 1, secciones 1.4, 1.4.1, 1.4.3
