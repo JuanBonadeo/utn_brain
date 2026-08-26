@@ -1155,19 +1155,19 @@ Una restricción nueva puede afectar la factibilidad del óptimo actual **solo s
 
 #### Ejercicios resueltos tipo
 
-La práctica de esta unidad es `PL4UTN.pdf` (Análisis de sensibilidad – Dualidad – Parametrización), que combina las Unidades 4 y 5.
+La práctica de esta unidad es `PL4UTN.pdf` (Análisis de sensibilidad – Dualidad – Parametrización), que combina las Unidades 4 y 5. Ver [[practica-4-sensibilidad-dualidad]] (ejercicios resueltos) y [[teoria-sensibilidad-dualidad]] (fundamentos: por qué la tabla óptima **es** $B^{-1}$, de dónde salen las cinco fórmulas, parametrización y Simplex dual, con el taller de alfarería como hilo conductor).
 
 #### Dudas / pendientes
 
 - **Error en el resumen (Caso 2):** la fórmula del rango de $b_k$ figura con `max` en **los dos** extremos. El extremo superior es un **mínimo**: de $x_i^* + \Delta b_k\,r_{ik} \geq 0$, cuando $r_{ik} < 0$ se despeja $\Delta b_k \leq -x_i^*/r_{ik}$, y hay que tomar el más restrictivo, es decir el **mínimo**. En el ejemplo no se nota porque hay un solo $r_{ik}$ negativo.
 - **Error en el resumen (Caso 4):** concluye "$c_{\text{nueva}} - z_{\text{nueva}} = 30 - 30 = 0 \geq 0 \Rightarrow$ entra en la base". Con $c_j - z_j = 0$ la variable **no mejora** el funcional: la solución actual sigue siendo óptima y lo que existe es un **óptimo alternativo**. El criterio de entrada es estrictamente $> 0$.
 - **Error en la figura del resumen (Caso 4):** la $B^{-1}$ dibujada a mano aparece como $\begin{pmatrix}1&0&2\\3&1&3/2\\0&0&1\end{pmatrix}$, sin los signos negativos. La correcta, leída de la tabla óptima, es $\begin{pmatrix}1&0&-2\\-3&1&9/2\\0&0&1\end{pmatrix}$, y da $Y_{\text{nueva}} = (3/2;\ -5/2;\ 0)$, no $(3/2;\ 13/3;\ 0)$. El resultado final ($z_{\text{nueva}} = 30$) no se ve afectado **solo porque** el $c_i$ de esa fila es 0.
-- Falta la **parametrización** de $c$ y de $b$, que el título de la Práctica 4 menciona explícitamente y el resumen no cubre.
-- Falta el **Simplex dual** (cómo recuperar la factibilidad tras un cambio en $b$ que saque una básica fuera de rango).
+- ~~Falta la **parametrización** de $c$ y de $b$~~ → cubierta en [[teoria-sensibilidad-dualidad]] (Parte 4), desde `PLC4.pdf` §4.10.
+- ~~Falta el **Simplex dual**~~ → cubierto en [[teoria-sensibilidad-dualidad]] (Parte 5), desde `PLC5.pdf` §5.8.
 
 #### Fuentes
 
-- `Material de cursado (2023)/Teoría/PLC4.pdf` — **pendiente de ingerir**
+- `Material de cursado (2023)/Teoría/PLC4.pdf` — ingerido 2026-08-26 (§4.1 a 4.3, 4.7 valores implícitos, 4.10 análisis paramétrico)
 - `Material de cursado (2023)/Práctica/PL4UTN.pdf`
 - `resumen-primer-parcial.docx`
 
@@ -1240,18 +1240,18 @@ Si el funcional dual no da igual al primal, el dual está mal planteado. Es el c
 
 #### Ejercicios resueltos tipo
 
-Práctica 4 (`PL4UTN.pdf`), que integra sensibilidad, dualidad y parametrización.
+Práctica 4 (`PL4UTN.pdf`), que integra sensibilidad, dualidad y parametrización. Ver [[practica-4-sensibilidad-dualidad]] y [[teoria-sensibilidad-dualidad]] (Parte 2: el dual como "problema del seguro", teorema fundamental, holguras complementarias, interpretación económica).
 
 #### Dudas / pendientes
 
-- **El resumen cubre dualidad muy por encima.** Falta prácticamente todo: la construcción formal del dual a partir del primal con la tabla completa de reglas de transformación (lo de arriba está reconstruido, en parte, desde el apunte y desde trabajo hecho sobre el TPI, no desde el resumen), los **teoremas de dualidad** (débil, fuerte, fundamental), las **condiciones de holguras complementarias** formalizadas, y el **método Simplex dual**.
+- **El resumen cubre dualidad muy por encima.** Lo que faltaba (construcción formal del dual, teorema fundamental, holguras complementarias, interpretación económica, Simplex dual) quedó cubierto en [[teoria-sensibilidad-dualidad]] desde `PLC5.pdf`. Sigue pendiente volcarlo acá, a la wiki.
 - Las dos últimas imágenes del resumen (`dualidad-lectura-tabla`, `dualidad-correspondencia`) contienen material que no está transcripto en el texto. Habría que leerlas y volcarlas.
 - Falta ingerir PLC5, que es el capítulo de dualidad del apunte.
 - Verificar si el **primer parcial** llega hasta dualidad completa o solo hasta la interpretación de precios sombra.
 
 #### Fuentes
 
-- `Material de cursado (2023)/Teoría/PLC5.pdf` — **pendiente de ingerir**
+- `Material de cursado (2023)/Teoría/PLC5.pdf` — ingerido 2026-08-26 (§5.1 a 5.8: construcción del dual, teorema fundamental, holguras complementarias, interpretación económica, paramétrico, Simplex dual)
 - `Material de cursado (2023)/Práctica/PL4UTN.pdf`
 - `resumen-primer-parcial.docx`
 
@@ -1270,3 +1270,4 @@ Práctica 4 (`PL4UTN.pdf`), que integra sensibilidad, dualidad y parametrizació
 - 2026-08-25: Se ingirió el **capítulo 3 del apunte** (`PLC3.pdf`, secciones 3.1 a 3.6) y se resolvió la **Práctica 3** entera. Se completó la **Unidad 3** con lo que faltaba: variables ficticias, **penalización** y **dos fases** (con el caso de la ficticia básica nula y la redundancia analítica), **efecto espejo**, reglas de desempate, ciclado, criterio de óptimo para minimización y el diagnóstico de los **cinco tipos de solución** en la tabla. Se generó [[practica-3-simplex]] con los seis ejercicios resueltos —tablas y matricial— verificados por enumeración exacta de las $\binom{n}{m}$ bases. Se detectaron **tres errores en la resolución oficial** (`PL3UTNresol.pdf`), el principal en el cuadro final del 2.a.
 - 2026-08-26: **Cambio de régimen 2026: un solo parcial.** Se corrigió la nota de alcance del índice, que decía "entra de la Unidad 1 a la 5" (régimen 2025). Alcance presunto: todo el programa, a confirmar con la cátedra. Inicio de las sesiones de estudio guiado por la Unidad 1.
 - 2026-08-26: Se arrancó la **Práctica 4** (`PL4UTN.pdf` — análisis de sensibilidad, dualidad y parametrización). Se generó [[practica-4-sensibilidad-dualidad]] con el herramental completo (las cinco fórmulas sobre $B^{-1}$, la tabla de qué-cambia-qué-se-revisa, regla del 100%, lectura de la numeración de filas de LINDO) y el **Ejercicio 1** resuelto entero (incisos a–g del enunciado más h e i de reglas 100% que agrega la cátedra). Verificado por cálculo exacto con fracciones y coincidente con `PL4UTNresol.pdf`. Ejercicios 2 a 9 pendientes.
+- 2026-08-26: Se ingirieron los **capítulos 4 y 5 del apunte** (`PLC4.pdf`, `PLC5.pdf`) y se generó [[teoria-sensibilidad-dualidad]] — los fundamentos de la Práctica 4 explicados desde cero con el **taller de alfarería (Ejemplo 1-1)** como hilo conductor: por qué toda la tabla óptima **es** $B^{-1}$ aplicada a los datos originales, la asimetría $c_j\to$optimalidad / $b_i\to$factibilidad, dualidad (construcción, teorema fundamental, la interpretación del **seguro** de §5.6, holguras complementarias, costo reducido vs. costo marginal), los cinco casos de sensibilidad derivados, regla del 100%, **parametrización** (§4.10) y **Simplex dual** (§5.8), más el mapa de qué ejercicio de la práctica usa qué. Números verificados por cálculo exacto.
