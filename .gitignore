@@ -15,3 +15,6 @@ _drive/
 
 # Node (toolchain de docx) — se restaura con `npm install`
 node_modules/
+
+# HTML intermedio de md-to-pdf (referencia fuentes de KaTeX por ruta local, no es portable)
+materias/*/estudio/*.html

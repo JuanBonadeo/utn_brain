@@ -8,8 +8,8 @@
 > resumen de Pagliaro (`fuentes/resumenes/Resumen 1.pdf`) y las consignas de los nueve exámenes
 > viejos de `fuentes/examenes/`.
 >
-> Lo que agregué respecto del resumen propio está marcado con **➕**. Las correcciones a errores
-> del resumen, con **⚠️**.
+> Lo que **agregué** respecto del resumen propio, y las **correcciones** a los errores que tiene,
+> van señaladas como tales a lo largo del texto.
 
 ---
 
@@ -261,8 +261,8 @@ $$\rho = \frac{\lambda}{\mu}$$
 | **Weitz** (apunte de cátedra) | $\rho = \dfrac{\lambda}{\mu}$ | **Solo si c = 1.** Con c > 1 puede ser mayor que 1 |
 | **Law** (Apéndice 1B) | $\rho = \dfrac{\lambda}{s\,\omega} = \dfrac{\lambda}{c\,\mu}$ | **Sí, siempre.** Es el "factor de utilización del sistema" |
 
-En el ejemplo de M/M/c del propio apunte, con λ=70, μ=40, c=2: Weitz calcula **ρ = 1.75** (mayor que
-1) y sin embargo el sistema es estable, porque la utilización real es $U = \rho/c = 0.875$.
+En el ejemplo de M/M/c del propio apunte, con λ=70, μ=40, c=2: Weitz calcula **ρ = 1.75** —mayor
+que 1— y sin embargo el sistema es estable, porque la utilización real es $U = \rho/c = 0.875$.
 
 **Regla práctica**: en M/M/1 las dos definiciones coinciden y $\rho = U$. En M/M/c, con la notación
 de Weitz, $U = \rho/c$. Si en el parcial te preguntan por "el factor de utilización", aclará con qué

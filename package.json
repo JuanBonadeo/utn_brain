@@ -1,11 +1,15 @@
 {
   "name": "utn-wiki",
   "private": true,
-  "description": "Toolchain de la wiki de materias: conversores md -> docx.",
+  "description": "Toolchain de la wiki de materias: conversores md -> docx y md -> pdf.",
   "scripts": {
-    "docx": "node scripts/build-docx.js"
+    "docx": "node scripts/build-docx.js",
+    "pdf": "node scripts/md-to-pdf.js"
   },
   "dependencies": {
-    "docx": "^9.5.1"
+    "docx": "^9.5.1",
+    "katex": "^0.18.4",
+    "marked": "^18.0.11",
+    "puppeteer-core": "^25.9.0"
   }
 }
