@@ -1361,11 +1361,13 @@ Esta decisión solo puede ser revertida por la Gerencia de Tecnología y Sistema
 equipo del proyecto a las zonas operativas y para definir, junto con Supervisión
 de Instalaciones, la zona y el momento del piloto.
 
-**Autoridad de compra.** El Director de Proyecto puede aprobar por sí adquisiciones
-y contrataciones hasta un monto de **USD _______________ por operación**, dentro del
-presupuesto aprobado en este Acta. Toda erogación que supere ese monto, y cualquier
-compromiso que exceda el presupuesto total, requiere autorización previa de la Gerencia
-de Administración y Finanzas.
+**Autoridad de compra.** El Director de Proyecto puede aprobar por sí adquisiciones y
+contrataciones hasta el monto que se consigna a continuación, dentro del presupuesto
+aprobado en este Acta. Toda erogación que supere ese monto, y cualquier compromiso que
+exceda el presupuesto total, requiere autorización previa de la Gerencia de Administración
+y Finanzas.
+
+Monto máximo por operación: USD _______________
 
 > **Campo a completar por el grupo.** El monto se deja en blanco porque no surge de las
 > Etapas 1 y 2 ni de la política de compras de la organización, a la que este trabajo no
