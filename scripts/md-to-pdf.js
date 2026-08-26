@@ -445,8 +445,11 @@ tbody td:last-child{ padding-right:0; }
 tbody tr:last-child td{ border-bottom:.9pt solid var(--rule); }
 tbody td:first-child{ color:var(--ink); }
 table strong{ font-weight:600; }
-/* primera columna angosta cuando es un símbolo o un número */
 tbody td .katex{ font-size:1em; }
+/* el uppercase del thead no debe tocar la matemática: f(x) no es F(X) */
+thead th .katex{ text-transform:none; }
+/* que las fórmulas de una celda no se partan: el navegador le da más ancho */
+td .katex:not(.katex-display .katex){ white-space:nowrap; }
 
 /* ─── citas y callouts ───────────────────────────────── */
 blockquote{
