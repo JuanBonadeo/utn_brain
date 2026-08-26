@@ -15,8 +15,12 @@
 11. Unidad 11 — Gestión de stocks _(sin desarrollar)_
 12. Unidad 12 — Programación no lineal _(sin desarrollar)_
 
-> **Primer parcial:** entra de la Unidad 1 a la 5 inclusive. Confirmado contra el
-> parcial del **26/07/2025** (`fuentes/IO/parciales/2025-07-26/`), cuyos puntos fueron:
+> **Régimen 2026 — un solo parcial.** A diferencia de 2025 (donde había un primer parcial
+> acotado a las Unidades 1–5), en 2026 hay **un único parcial**, por lo que el alcance
+> presunto es **todo el programa**. *A confirmar con la cátedra.*
+>
+> **Referencia del parcial 2025-07-26** (`fuentes/parciales/2025-07-26/`) — sigue siendo la
+> mejor muestra del **estilo de evaluación**, aunque ya no del alcance. Sus puntos fueron:
 > método gráfico y tipos de solución · restricciones activas/pasivas · modelización y
 > forma estándar **con M grande** · lectura de tabla óptima (no factible por ficticia en
 > base / no acotada) · Simplex matricial ($B^{-1}$, $Y_j$, $z_j$, $c_j-z_j$) · planteo del
@@ -1264,3 +1268,4 @@ Práctica 4 (`PL4UTN.pdf`), que integra sensibilidad, dualidad y parametrizació
 - 2026-08-13: Se generó el derivado de estudio [[resumen-hasta-simplex]] (Unidades 1 y 2 en formato machete, con checklist de parcial y banco de 10 preguntas de teoría).
 - 2026-08-13: Se ingirió `resumen-primer-parcial.docx`. Las fórmulas venían como ecuaciones OMML y se perdían con markitdown; se extrajeron del XML del `.docx` (183 ecuaciones) y las 12 figuras se volcaron a `figs/`. Se creó el índice de 12 unidades y se desarrollaron las **Unidades 1 a 5** (alcance del primer parcial), fusionando el resumen con los capítulos 1 y 2 del apunte. Quedaron marcados tres errores del resumen en la Unidad 4.
 - 2026-08-25: Se ingirió el **capítulo 3 del apunte** (`PLC3.pdf`, secciones 3.1 a 3.6) y se resolvió la **Práctica 3** entera. Se completó la **Unidad 3** con lo que faltaba: variables ficticias, **penalización** y **dos fases** (con el caso de la ficticia básica nula y la redundancia analítica), **efecto espejo**, reglas de desempate, ciclado, criterio de óptimo para minimización y el diagnóstico de los **cinco tipos de solución** en la tabla. Se generó [[practica-3-simplex]] con los seis ejercicios resueltos —tablas y matricial— verificados por enumeración exacta de las $\binom{n}{m}$ bases. Se detectaron **tres errores en la resolución oficial** (`PL3UTNresol.pdf`), el principal en el cuadro final del 2.a.
+- 2026-08-26: **Cambio de régimen 2026: un solo parcial.** Se corrigió la nota de alcance del índice, que decía "entra de la Unidad 1 a la 5" (régimen 2025). Alcance presunto: todo el programa, a confirmar con la cátedra. Inicio de las sesiones de estudio guiado por la Unidad 1.
