@@ -1,7 +1,7 @@
 # Handoff — ASI, TP Integrador Etapa 3
 
 > Documento de traspaso. Pegalo entero como contexto en un asistente, o leelo vos.
-> Actualizado al 2026-08-23. Entrega: **28/08/2026**.
+> Actualizado al 2026-08-26. Entrega: **28/08/2026**.
 
 ## Contexto
 
@@ -33,9 +33,10 @@ Repo `github.com/JuanBonadeo/utn_brain`. Se trabaja y pushea **directo a main**,
 |---|---|
 | `materias/ASI/ASI.md` | Wiki de la materia, ~5400 líneas. Fuente de verdad conceptual. Buscá con grep. La sección *TP Integrador → Etapa 3* tiene el estado, las decisiones D1–D5 y el historial completo en el Log del final |
 | `materias/ASI/entregables/etapa3.md` | **EL ENTREGABLE.** Los 12 puntos + Acta como Anexo I. Fuente de verdad: el `.docx` y el `.pdf` se generan desde acá, no se editan a mano |
-| `materias/ASI/entregables/etapa3.docx` | Generado. 53 páginas |
+| `materias/ASI/entregables/etapa3.docx` | Generado. 44 páginas |
 | `materias/ASI/entregables/etapa3-acta-proyecto.md` | El Acta suelta, para control interno. Va embebida en el entregable |
 | `materias/ASI/entregables/etapa3-validacion-punto3.md` | Lo que se le mandó al docente el 19/08. Registro histórico |
+| `materias/ASI/entregables/etapa3-anexo-graficos.html` | **Anexo II**, seis láminas A3. El `.pdf` se imprime desde el navegador |
 | `materias/ASI/estudio/` | Los `.docx` corregidos de las Etapas 1 y 2 |
 | `materias/ASI/fuentes/` | Material de cátedra, consigna, sugerencias, entregas anteriores, BPMN |
 
@@ -43,20 +44,13 @@ Repo `github.com/JuanBonadeo/utn_brain`. Se trabaja y pushea **directo a main**,
 
 Falta solo lo de abajo.
 
-### Pendiente 1 — cuatro dibujos (es lo único que bloquea la entrega)
+### ~~Pendiente 1 — cuatro dibujos~~ · RESUELTO el 2026-08-26
 
-El documento los promete como adjuntos y no existen. El conversor a `.docx` no admite imágenes,
-así que van en archivo aparte.
-
-| Qué | De dónde salen los datos |
-|---|---|
-| Diagrama de Red | Tabla del punto 10: predecesoras, duración, ES/EF/LS/LF y holgura de las 51 actividades, con las críticas en negrita. Es transcribir, no diseñar |
-| Diagrama de Gantt | Misma tabla, más la tabla de fases. Barras por actividad, camino crítico destacado, holguras en trazo discontinuo, histograma de recursos al pie |
-| Plano de la base operativa | Punto 6, sección *Especificación de los planos*. Depósito y pañol, playa de carga, mesa de despacho, oficina del NOC y sala técnica |
-| Croquis de trabajo en campo | Ídem. Escena de tendido aéreo con vallado |
-
-Los dos planos tienen su especificación escrita elemento por elemento. Seguila, sirve de
-instructivo.
+Las cuatro láminas existen: son el **Anexo II — Documentación gráfica**, archivo
+`materias/ASI/entregables/etapa3-anexo-graficos.pdf`, seis figuras en A3 apaisado. Figura 1,
+diagrama de Red en dos bandas; figura 2.a, Gantt; figura 2.b, histograma de recursos; figura 3,
+plano de la base operativa; figura 4, croquis de trabajo en campo. Se regeneran con
+`python scripts/anexo-graficos/build.py` y se imprimen a PDF desde el navegador.
 
 ### Pendiente 2 — dos datos del Acta (punto 4.4 / Anexo I)
 

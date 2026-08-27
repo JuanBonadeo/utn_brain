@@ -1,19 +1,33 @@
 # Etapa 3 — Planificación de un Proyecto de TI
 
 > **Fuente de verdad de este entregable.** El `.docx` y el `.pdf` se generan desde acá con
-> `npm run docx -- materias/ASI/etapa3.md materias/ASI/etapa3.docx` y después
-> `scripts/preview-docx.sh`. No editar los generados a mano.
+> `npm run docx -- materias/ASI/entregables/etapa3.md materias/ASI/entregables/etapa3.docx`
+> y después `scripts/preview-docx.ps1`. No editar los generados a mano.
 >
 > **Para qué es.** Es el documento completo de la Etapa 3, que se va subiendo a Drive a
-> medida que se completa, porque el docente lo revisa antes de la entrega final. Los
-> apartados marcados *En elaboración* todavía no se escribieron; se dejan enunciados para
-> que se vea el plan.
+> medida que se completa, porque el docente lo revisa antes de la entrega final.
 >
-> **Estado al 2026-08-23.** Los doce puntos de la consigna están desarrollados. El Acta va
-> como Anexo I dentro de este mismo documento. **Fecha de entrega: 28/08/2026.**
+> **Estado al 2026-08-26.** Los doce puntos de la consigna están desarrollados. El Acta va
+> como Anexo I dentro de este mismo documento y la documentación gráfica como **Anexo II**,
+> en archivo independiente, porque el conversor no admite imágenes.
+> **Fecha de entrega: 28/08/2026.**
 >
-> Pendiente de definición del grupo: los nombres propios y el monto de autoridad de compra
-> del Acta, y el dibujo de los dos planos del punto 6, cuya especificación está escrita.
+> **Extensión.** Revisado contra la guía de cátedra: el Bloque 6 pide *informar* siete ítems
+> del cronograma, no narrarlos, y los Bloques 7 y 9 muestran los formatos de tabla esperados.
+> Se unificaron las tablas que repetían datos de la EDT, se fusionaron los puntos 7 y 8 en la
+> tabla única del Bloque 9, y se suprimió la prosa que describía lo que las tablas ya dicen.
+> Ningún dato numérico cambió.
+>
+> **Anexo II — Documentación gráfica.** Archivo `etapa3-anexo-graficos.pdf`, seis láminas en
+> A3 apaisado: Figura 1, Diagrama de Red; Figura 2.a, Diagrama de Gantt; Figura 2.b,
+> histograma de recursos por perfil; Figura 3, plano de la base operativa; Figura 4, croquis
+> tipo de trabajo en campo. Se regenera con
+> `python scripts/anexo-graficos/build.py materias/ASI/entregables/etapa3-anexo-graficos.html`
+> y se imprime a PDF desde el navegador.
+>
+> Pendiente de definición del grupo: los nombres propios del patrocinador y del director de
+> proyecto, y el monto de la autoridad de compra del Acta. Están marcados en el punto 4.4 y
+> en el Anexo I. No se completan por decisión propia.
 >
 > **Decisiones tomadas por el grupo ante consultas que el docente no respondió:**
 > líneas base declaradas como supuestos con su medición como entregable de la fase 2
@@ -61,6 +75,7 @@ Administración de Sistemas de Información — 4º Año Ingeniería en Sistemas
 | 1 | 19/08/2026 | Grupo N310 | Envío de los puntos 1 a 3 para validación del docente |
 | 2 | 23/08/2026 | CC | Validación del punto 3 y redefinición de las alternativas |
 | 3 | 23/08/2026 | Grupo N310 | Reformulación del punto 3 y avance de los puntos 4.1 y 4.2 |
+| 4 | 26/08/2026 | Grupo N310 | Incorporación del Anexo II con las cuatro láminas comprometidas en los puntos 6 y 10 |
 
 ### ÍNDICE
 
@@ -71,13 +86,15 @@ Administración de Sistemas de Información — 4º Año Ingeniería en Sistemas
 5. Recursos humanos — perfiles y competencias
 6. Higiene y seguridad laboral
 7. Activos a adquirir
-8. Forma de adquisición
+8. Forma de adquisición *(desarrollados en conjunto)*
 9. RFI y RFP
 10. Tiempos del proyecto
 11. Variables de costo
 12. Análisis de factibilidad
 
 Anexo I — Acta de Proyecto
+
+Anexo II — Documentación gráfica (archivo independiente)
 
 ---
 
@@ -332,53 +349,29 @@ Se destaca que *perfil requerido* no equivale a persona exclusiva. Ninguno de lo
 | CA | Capacitador | Material de capacitación, dictado a gestión y a técnicos por olas, y evaluación | Didáctica de adultos, formación en campo, evaluación de aprendizaje | 1 | d105–d164 · 200 h · 42% |
 | RO | Referente de operaciones | Conocimiento del proceso, matriz de competencias, datos maestros, piloto y acompañamiento del despliegue | Dominio del proceso de instalación, autoridad operativa, vínculo con supervisión y técnicos | 1 | d6–d184 · 704 h · 49% |
 
-### JP — Jefe de proyecto
+Los paquetes en los que interviene cada perfil surgen directamente de la EDT del punto 4.3:
 
-Interviene en 1.1, 1.2, 1.3, 3.1 a 3.5, 8.1, 8.4, 11.3 y 11.4. Requiere dirección de proyectos, conducción de un proceso de compras con RFI y RFP, y negociación contractual con el proveedor de la plataforma. En lo blando, capacidad de decisión ante el patrocinador y manejo de interesados con intereses contrapuestos. Recurso **interno**, de la Gerencia de Tecnología y Sistemas, según la designación del Acta.
+<!-- cols: 22,40,38 -->
 
-### AF — Analista funcional
+| Perfil | Paquetes de la EDT en que interviene | Origen del recurso |
+|---|---|---|
+| Analista funcional (AF) | 2.1, 2.2, 2.4, 2.6, 3.1, 3.2, 3.3, 3.4, 4.1, 4.2, 4.3, 7.2, 9.1, 11.3 | Interno |
+| Capacitador (CA) | 9.1, 9.2, 9.3, 9.4 | Interno — Recursos Humanos con Supervisión de Instalaciones |
+| Consultor de la plataforma (CP) | 4.1, 4.2, 4.3, 4.6, 4.7, 7.6, 8.2, 8.3, 10.1, 10.2, 10.3, 11.1 | Provisto por el proveedor, dentro del servicio de implantación |
+| Especialista de integraciones (EI) | 2.3, 3.4, 5.1, 5.2, 5.3, 5.4, 5.6, 6.1, 7.3, 7.6, 11.2 | Uno interno y uno contratado por bolsa de horas |
+| Especialista de seguridad (ES) | 2.5, 3.3, 3.4, 5.5, 5.6, 7.5 | Interno — Seguridad de la Información |
+| Jefe de proyecto (JP) | 1.1, 1.2, 1.3, 3.1, 3.2, 3.3, 3.4, 3.5, 8.1, 8.4, 11.3, 11.4 | Interno — Gerencia de Tecnología y Sistemas |
+| Responsable de pruebas (QA) | 7.1, 7.2, 7.3, 7.4, 7.5 | Interno |
+| Referente de operaciones (RO) | 2.1, 2.4, 2.6, 4.4, 6.2, 8.1, 8.2, 10.1, 10.2, 10.3, 11.1 | Interno — Gerencia de Operaciones |
+| Diseñador de experiencia de uso (UX) | 4.5, 4.6, 8.3 | Interno; si no existe el rol, se contrata por obra |
 
-Es el perfil de mayor carga individual: 106 días-persona en catorce paquetes, desde 2.1 hasta 11.3. Requiere modelado de procesos, elicitación y especificación de requerimientos, y definición operativa de indicadores para el paquete 2.4. En lo blando, escucha activa y capacidad de traducir la lógica de campo a reglas configurables. Recurso **interno**.
+### Justificación del refuerzo en integraciones y pruebas
 
-### EI — Especialista de integraciones
-
-Interviene en 2.3, 3.4, 5.1 a 5.4, 5.6, 6.1, 7.3, 7.6 y 11.2. Requiere dominio de interfaces y servicios web, mapeo y migración de datos, y conocimiento de los sistemas heredados de la organización. Se prevé **una persona interna** de la Gerencia de Tecnología y Sistemas y **una segunda contratada** por bolsa de horas al integrador, dado que el pico es transitorio y no justifica una incorporación permanente.
-
-### ES — Especialista de seguridad
-
-Interviene en 2.5, 3.3, 3.4, 5.5, 5.6 y 7.5. Requiere gestión de identidades y accesos, dominio de la Ley 25.326 y criterio para evaluar la exposición que introduce el modelo SaaS sobre el riesgo R05. En lo blando, firmeza para ejercer la facultad de bloqueo de puesta en producción que el Acta le confiere. Recurso **interno** de Seguridad de la Información.
-
-### CP — Consultor de la plataforma
-
-Interviene en 4.1 a 4.3, 4.6, 4.7, 7.6, 8.2, 8.3, 10.1 a 10.3 y 11.1. Es el perfil de mayor dedicación media (78%) y el único **provisto por el proveedor** como parte del servicio de implantación contratado. Requiere dominio de la plataforma FSM adjudicada y competencia para transferir ese conocimiento al equipo interno antes del cierre.
-
-### UX — Diseñador de experiencia de uso
-
-Interviene en 4.5, 4.6 y 8.3. Requiere diseño centrado en el usuario y, sobre todo, capacidad de ensayo en contexto real: uso con guantes, bajo sol directo y con conectividad intermitente. Se prevé **interno**; si la organización no dispusiera del rol, se contrata por obra dado el volumen acotado de 24 días-persona (*supuesto, a validar*).
-
-### QA — Responsable de pruebas
-
-Interviene en 7.1 a 7.5. Requiere diseño de casos, pruebas de carga y gestión de defectos, e independencia respecto de quien configura e integra. Recurso **interno**, con dos personas afectadas parcialmente.
-
-### CA — Capacitador
-
-Interviene en 9.1 a 9.4. Requiere didáctica de adultos y formación en campo, con material diferenciado para supervisión, despacho, NOC y técnicos. Recurso **interno**, aportado por Recursos Humanos junto con Supervisión de Instalaciones.
-
-### RO — Referente de operaciones
-
-Interviene en 2.1, 2.4, 2.6, 4.4, 6.2, 8.1, 8.2, 10.1 a 10.3 y 11.1. Es el perfil que aporta el conocimiento del proceso y la autoridad operativa para habilitar el piloto. Recurso **interno** de la Gerencia de Operaciones, con dedicación del 49% que debe acordarse con su supervisión por tratarse de personal de línea.
-
-### Justificación del refuerzo en EI y QA
-
-La duplicación de personas en estos dos perfiles no responde a una estimación de volumen sino al **aplanamiento de recursos del punto 10**. El análisis de sobreasignación detecta picos de dos personas en EI entre d68–d72 (paquetes 5.1 y 5.6) y entre d92–d96 (5.4 y 6.1), y en QA entre d97–d98 (7.2 y 7.3). Como 5.1 a 5.4 y 7.3 pertenecen al camino crítico, y 6.1 dispone de un solo día de holgura, esos conflictos no pueden resolverse corriendo actividades sin extender el proyecto. Con una sola persona por perfil, la programación aplanada arroja **215 días hábiles**; con el refuerzo de un EI y un QA adicionales, **192 días hábiles**, frente a los 187 días de la duración teórica a fechas tempranas. El refuerzo evita, entonces, 23 días hábiles de atraso. Un tercer refuerzo en RO solo reduciría la duración a 189 días, por lo que no se incorpora.
+La duplicación de personas en estos dos perfiles no responde a una estimación de volumen sino al aplanamiento de recursos del punto 10. El análisis de sobreasignación detecta picos de dos personas en el especialista de integraciones entre los días 68 y 72 —paquetes 5.1 y 5.6— y entre los días 92 y 96 —paquetes 5.4 y 6.1—, y en el responsable de pruebas entre los días 97 y 98 —paquetes 7.2 y 7.3—. Como los paquetes 5.1 a 5.4 y 7.3 pertenecen al camino crítico, y el 6.1 dispone de un solo día de holgura, esos conflictos no pueden resolverse corriendo actividades sin extender el proyecto. Con una sola persona por perfil la programación aplanada arroja 215 días hábiles; con el refuerzo, 192. Evita, entonces, veintitrés días hábiles de atraso.
 
 ### Acumulación de roles
 
-Con dedicaciones medias de entre 18% y 78%, la acumulación es posible pero acotada. **UX y CA admiten fusión en una misma persona**: sus ventanas se solapan entre d105 y d145, pero sus paquetes no coinciden en ningún día —9.1 finaliza en d113 y 8.3 comienza en d137—, y la carga conjunta alcanza 49 días-persona. Exige, eso sí, una persona con ambas competencias, lo que se declara como *supuesto a validar*. **CA es también compatible con JP** en términos de calendario, pero se descarta: la dedicación del 27% del jefe de proyecto surge únicamente de los paquetes en que es responsable, mientras que su función de seguimiento es continua y no está reflejada en la EDT.
-
-No admiten acumulación: **ES con QA**, porque el paquete 7.5 los requiere simultáneamente y porque comprometería la independencia de la prueba respecto de quien implementó los controles; **ES con EI**, por el mismo motivo en 5.6; **AF**, por ser el perfil de mayor carga y estar presente en nueve de las once fases; **CP**, por su dedicación del 78% y su condición de recurso externo; y **RO**, porque es personal de la operación, cuya afectación al 49% ya representa el límite negociable con su área.
-
----
+*Perfil requerido* no equivale a persona exclusiva: ninguno de los nueve alcanza dedicación completa, de modo que todos se afectan parcialmente al proyecto y conservan sus responsabilidades de línea. La acumulación es posible pero acotada. El diseñador de experiencia de uso y el capacitador admiten fusión en una misma persona: sus ventanas se solapan pero sus paquetes no coinciden en ningún día, y la carga conjunta alcanza cuarenta y nueve días-persona. Exige, eso sí, una persona con ambas competencias, lo que se declara como supuesto a validar. En cambio, el responsable de pruebas no puede acumularse con el especialista de integraciones ni con el consultor de la plataforma, porque debe conservar independencia respecto de quien configura e integra.
 
 ## 6. HIGIENE Y SEGURIDAD LABORAL
 
@@ -388,7 +381,7 @@ El análisis se ordena según los **tres niveles de prevención**: la **prevenci
 
 Este punto asume de manera explícita que **la prevención sobre la persona es el escalón más débil** de esa jerarquía, porque su eficacia depende de una conducta individual que debe sostenerse en cada jornada y en cada trabajador. Por esa razón, cada medida se declara acompañada del nivel al que pertenece, y el layout se utiliza como el instrumento que materializa la prevención en el diseño: separación de circulaciones de peatones y vehículos, distancias mínimas, zonas de acceso restringido, ubicación de salidas, de elementos de extinción y del punto de encuentro. El equipo de protección personal se consigna como complemento y nunca como respuesta principal a un riesgo.
 
-**Alcance.** Se analizan los sectores del **proceso crítico** —la instalación de internet con fibra óptica—, y no los sectores donde se ejecuta el proyecto. Esa lectura incorpora el trabajo de campo, que es donde se concentran los riesgos de mayor severidad. Se presentan **dos planos**: el de la **base operativa** y un **croquis tipo de trabajo en campo**.
+**Alcance.** Se analizan los sectores del **proceso crítico** —la instalación de internet con fibra óptica—, y no los sectores donde se ejecuta el proyecto. Esa lectura incorpora el trabajo de campo, que es donde se concentran los riesgos de mayor severidad. Se presentan **dos planos**: el de la **base operativa** y un **croquis tipo de trabajo en campo**, que constituyen las figuras 3 y 4 del Anexo II.
 
 ### Medidas preventivas por sector
 
@@ -413,21 +406,15 @@ Este punto asume de manera explícita que **la prevención sobre la persona es e
 
 > La lista de verificación previa al inicio de la orden es el caso donde el sistema del proyecto actúa como medida de prevención en el diseño: el control deja de depender de la memoria del técnico y pasa a ser una condición del flujo de trabajo configurado en la plataforma.
 
-### Especificación de los planos
+### Los planos
 
-Los planos se confeccionan en planta, con escala uniforme y norte indicado, y comparten una misma simbología. Las cotas se expresan como **mínimos de diseño supuestos, a validar con el Servicio de Higiene y Seguridad de la organización**, dado que este trabajo no relevó medidas reales de las instalaciones.
+Ambos planos constituyen el **Anexo II — Documentación gráfica**, archivo independiente `etapa3-anexo-graficos.pdf`, por no admitir el presente documento la inclusión de imágenes: el **plano de la base operativa** es la figura 3 y el **croquis tipo de trabajo en campo**, la figura 4. Están confeccionados en planta, a escala uniforme, con el norte indicado y con una simbología común cuyo detalle acompaña a la figura 3.
 
-#### Plano 1 — Base operativa
+La **figura 3** representa el perímetro del predio con accesos vehicular y peatonal diferenciados, la playa de carga y el estacionamiento de vehículos técnicos, el depósito con estanterías, zona de bobinas y mesa de armado de kits, la oficina del NOC, la mesa de despacho, la sala técnica y el aula de capacitación. Sobre esa planta se representan las circulaciones peatonal y vehicular en trazos diferenciados y sin cruces no señalizados, la señalización de cada sector, los matafuegos identificados por clase —ABC en depósito, playa y aula; agente limpio en sala técnica y NOC—, las luces y salidas de emergencia con su recorrido de evacuación, y el punto de encuentro fuera del edificio.
 
-Debe contener el perímetro del predio con el acceso vehicular controlado y el acceso peatonal diferenciado; la playa de carga con sus dársenas y el estacionamiento de vehículos técnicos; el depósito con el trazado de estanterías, la zona de bobinas, la mesa de armado de kits y el pañol de herramientas; la oficina del NOC; la mesa de despacho y supervisión; la sala técnica o nodo; el aula de capacitación; y los sanitarios y vestuarios.
+La **figura 4** representa la escena de tendido aéreo en vía pública, con el poste y la línea de energía en el nivel superior, el vehículo técnico con balizas ubicado aguas arriba como barrera física, el perímetro de conos y vallas que encierra la proyección de caída de objetos, el desvío peatonal, y las posiciones del operario en altura y del vigía a nivel de piso. Se incorporan como esquemas complementarios la cámara subterránea y el domicilio del cliente.
 
-Sobre esa planta deben representarse: **circulaciones**, con la senda peatonal en trazo continuo y la circulación vehicular en trazo distinto y sentido único indicado por flechas, sin cruces no señalizados entre ambas; **cotas relativas** de ancho de senda peatonal, ancho de pasillo de circulación de vehículos y equipos de elevación, distancia libre frente a tableros eléctricos y distancia entre puestos de videoterminal; **señalización** de velocidad máxima, riesgo eléctrico, acceso restringido, carga máxima de estantería y aforo del aula; **matafuegos identificados por clase**, con clase ABC en depósito, playa de carga y aula, y clase C o agente limpio en la sala técnica y en la sala del NOC; **luces de emergencia y salidas de emergencia** con su sentido de apertura y el recorrido de evacuación señalizado desde cada sector; y el **punto de encuentro**, ubicado fuera del edificio, sobre superficie despejada y sin interferir la circulación vehicular. Se agregan la ubicación del botiquín y el recorrido de acceso de una ambulancia hasta el ingreso principal.
-
-#### Plano 2 — Croquis tipo de trabajo en campo
-
-Representa la escena de tendido aéreo en vía pública, en vista de planta con una vista lateral auxiliar. Debe incluir: calzada, vereda y sentido del tránsito; el poste con la línea de energía en el nivel superior y el tendido de fibra en el nivel inferior, acotando la distancia mínima de aproximación; el vehículo técnico con balizas ubicado aguas arriba del punto de trabajo, actuando como barrera física; el perímetro de conos y vallas que encierra tanto la zona de trabajo como la proyección de caída de objetos; el desvío peatonal señalizado; la posición del operario en altura con arnés y la del segundo operario a nivel de piso en función de vigía. Como esquemas complementarios se incorporan la cámara subterránea —boca vallada en sus cuatro lados, ventilación forzada, trípode de rescate y vigía en el exterior— y el domicilio del cliente.
-
-> **Nota.** Ambos planos se adjuntan aparte, en archivo independiente, por su formato gráfico.
+> **Sobre las cotas.** Las que figuran en ambas láminas —ancho de senda peatonal, ancho de pasillo de circulación, distancia libre frente a tableros eléctricos, distancia entre puestos de videoterminal y distancia mínima de aproximación a línea energizada— son **mínimos de diseño supuestos, a validar con el Servicio de Higiene y Seguridad de la organización**, dado que este trabajo no relevó medidas reales de las instalaciones.
 
 ### Marco legal aplicable
 
@@ -450,33 +437,27 @@ Lo que cambia con la plataforma es el modo de exigirla. Hoy la verificación dep
 
 ---
 
-## 7. ACTIVOS A ADQUIRIR
+## 7 Y 8. ACTIVOS A ADQUIRIR Y FORMA DE ADQUISICIÓN
 
-El modo de construcción adoptado —plataforma de *Field Service Management* contratada como servicio y configurada por la organización— determina la naturaleza de los activos: predominan las suscripciones y los servicios profesionales por sobre los bienes de capital. El único activo físico relevante son los dispositivos de campo. Cada activo se referencia contra el paquete de la EDT que lo requiere y contra el momento del cronograma en que debe estar disponible. Los valores de cantidad que dependen de la dotación real se declaran como supuestos y se validan en el relevamiento (paquete 2.1) y en la carga del padrón de técnicos (paquete 6.2).
+Los activos surgen de la solución seleccionada y de los paquetes de trabajo de la EDT. Se consignan en una única tabla las características mínimas exigibles —que son las que se trasladan al pliego del RFP— y la modalidad de adquisición de cada uno, con su fundamento.
 
-### 7.1 Activos y servicios requeridos
+<!-- cols: 19,16,28,17,20 -->
 
-<!-- cols: 18,16,50,16 -->
+| Activo o servicio | Cantidad | Características mínimas exigibles | Forma de adquisición | Justificación |
+|---|---|---|---|---|
+| Licencias de la plataforma FSM, nominativas, en tres tipos (campo, gestión y consulta) | 229 *(supuesto)* | Modo desconectado real —alta, edición y cierre de orden sin cobertura— con sincronización diferida y resolución de conflictos; motor de asignación por competencia certificada, zona, carga y ventana horaria, parametrizable sin programación; matriz impacto/urgencia con cronómetro de SLA; API REST documentada, versionada y con límites de consumo publicados; inicio de sesión único SAML 2.0 u OIDC y doble factor; registro de auditoría inalterable y exportable; región de alojamiento de datos declarada por contrato; disponibilidad mensual mínima del 99,5% con penalidad | Suscripción anual | En el modelo de servicio no existe licencia perpetua. Frente a la suscripción mensual, la anual reduce el precio unitario y fija su valor durante la implantación y los seis meses de medición de O1 a O3. Se descarta el compromiso plurianual inicial porque consolidaría la dependencia del proveedor antes de conocer el resultado del piloto |
+| Servicio de implantación y configuración, prestado por partner certificado | 784 horas del perfil CP | Certificación vigente del fabricante de la plataforma; referencias comprobables en operaciones de servicio en campo; equipo nominado, con reemplazo sujeto a aprobación; configuración entregada versionada y documentada, con transferencia de conocimiento al equipo interno | Contrato de servicios por hora, con bolsa de 784 horas y tope | El precio cerrado exigiría congelar el alcance de configuración antes del piloto, cuando 8.3 prevé ajustar reglas y experiencia de uso con datos reales. La bolsa con tope acota el riesgo económico y permite reasignar horas entre paquetes sin adenda |
+| Horas de consultoría de integración | 560 horas del perfil EI, de las cuales 232 corresponden a las cuatro interfaces | Experiencia comprobable en integración con sistemas heredados; entrega del contrato de interfaz documentado por sistema; manejo de reintentos, idempotencia, registro de errores y plan de reproceso; verificación previa en ambiente no productivo | Contrato de servicios por hora, con tope | El esfuerzo depende del estado real de los sistemas heredados, que se conoce recién en 2.3. Un precio cerrado se cotizaría con sobreprecio por incertidumbre y trasladaría a la organización un costo que no se va a consumir |
+| Dispositivos móviles rugerizados | 190 *(supuesto: 180 en servicio y 10 de reposición)* | Grado de protección IP68; resistencia a caída de 1,5 m sobre hormigón; autonomía mínima de 12 horas con batería reemplazable por el usuario; pantalla de 600 nits o superior, legible bajo sol directo; operación con guantes y con pantalla mojada; receptor GPS, cámara con enfoque a corta distancia para lectura de números de serie, y lector de código de barras; cifrado del almacenamiento y administración remota | Compra directa | Su vida útil supera el horizonte del proyecto y el uso es permanente, no estacional. El alquiler encarece el costo total en ese plazo. Quedan como activo de la organización, se amortizan y se incorporan a la CMDB junto con el elemento de configuración dado de alta en 11.2 |
+| Unidades de evaluación de dispositivos para prueba en campo | 6 *(supuesto)* | Al menos dos modelos de fabricantes distintos, para validar legibilidad, operación con guantes y autonomía en jornada completa antes de comprometer la compra | Comodato | Se necesitan antes de decidir la compra y se devuelven. Adquirir modelos que luego se descartan sería un gasto perdido; el comodato traslada el costo de la prueba al oferente, sin obligación de compra y con devolución documentada |
+| Solución de administración de dispositivos móviles (MDM) | 190 suscripciones | Inventario, bloqueo y borrado remoto; contenedor de aplicaciones corporativas; política de contraseña y cifrado forzadas; modo quiosco; distribución y actualización centralizada de la aplicación de campo; baja del dispositivo sincronizada con la baja de la credencial | Suscripción anual por dispositivo | El parque varía con la dotación y el producto requiere actualización continua frente a nuevas versiones del sistema operativo, condición que una licencia perpetua no garantiza. La renovación anual permite ajustar la cantidad |
+| Servicio de mapas y geolocalización | Por transacción; volumen a validar | Geocodificación de domicilios, cálculo de ruta y matriz de distancias; cobertura verificada en el área de servicio; límite de consultas y disponibilidad declarados; prohibición contractual de reutilización comercial de los domicilios consultados | Pago por uso | El volumen de consultas es proporcional a las órdenes despachadas y no es estimable antes de la medición de líneas base (2.4). Un abono fijo se pagaría igual en meses de baja demanda. Se contrata con tope de gasto mensual y alerta de consumo |
+| Ambiente de pruebas no productivo | 1 ambiente | Paridad de versión y de configuración con producción; datos enmascarados; independiente de la instancia productiva; disponible desde el inicio de la configuración y sostenido después del cierre del proyecto | Suscripción anual, exigida como ítem del mismo contrato de licenciamiento | Contratado por separado y por plazo corto, se pierde al cerrar el proyecto; la operación lo necesita de forma permanente para probar cada cambio antes de presentarlo al Comité Asesor de Cambios |
+| Ampliación del servicio corporativo de identidad (inicio de sesión único y doble factor) | 229 identidades *(supuesto)* | Federación SAML 2.0 u OIDC contra el directorio corporativo; segundo factor por aplicación o token físico; aprovisionamiento y desaprovisionamiento automático integrado con Recursos Humanos | Suscripción anual, como ampliación del acuerdo corporativo vigente | Se amplía el contrato existente en lugar de incorporar un proveedor nuevo: duplicar directorios de identidad reabriría el riesgo R05 en vez de tratarlo |
+| Servicio de capacitación | 200 horas del perfil CA | Material construido sobre el proceso y la configuración propios, no material genérico de producto; dictado por olas; evaluación con registro nominal por participante; derecho de reproducción interna del material | Contrato de servicios por hora, liquidado por comisión dictada | La cantidad de comisiones depende de la dotación real de técnicos, conocida recién en 6.2. Una suma fija obligaría a comprometer ese número por anticipado |
+| Soporte premium de estabilización | 12 meses desde la ola 1 | Mesa de ayuda en español; primera respuesta en menos de 1 hora para incidente crítico; escalamiento con responsable nominado; informe mensual de incidentes y de disponibilidad | Suscripción anual con plazo acotado a doce meses | Cubre la estabilización y el período de medición de los objetivos, y luego se revisa contra el nivel de incidentes observado. Se descarta el pago por incidente porque incentiva a no reportar y distorsiona el indicador |
 
-| Activo o servicio | Cantidad | Características mínimas exigibles | Paquetes EDT |
-|---|---|---|---|
-| Licencias de la plataforma FSM, nominativas, en tres tipos (campo, gestión y consulta) | 229 *(supuesto)* | Modo desconectado real —alta, edición y cierre de orden sin cobertura— con sincronización diferida y resolución de conflictos; motor de asignación por competencia certificada, zona, carga y ventana horaria, parametrizable sin programación; matriz impacto/urgencia con cronómetro de SLA; API REST documentada, versionada y con límites de consumo publicados; inicio de sesión único SAML 2.0 u OIDC y doble factor; registro de auditoría inalterable y exportable; región de alojamiento de datos declarada por contrato; disponibilidad mensual mínima del 99,5% con penalidad | 4.1 a 4.7, 5.1 a 5.6, 8.2, 10.1 a 10.3 |
-| Servicio de implantación y configuración, prestado por partner certificado | 784 horas del perfil CP | Certificación vigente del fabricante de la plataforma; referencias comprobables en operaciones de servicio en campo; equipo nominado, con reemplazo sujeto a aprobación; configuración entregada versionada y documentada, con transferencia de conocimiento al equipo interno | 4.1 a 4.7, 7.6, 8.2, 8.3, 10.1 a 10.3, 11.1 |
-| Horas de consultoría de integración | 560 horas del perfil EI, de las cuales 232 corresponden a las cuatro interfaces | Experiencia comprobable en integración con sistemas heredados; entrega del contrato de interfaz documentado por sistema; manejo de reintentos, idempotencia, registro de errores y plan de reproceso; verificación previa en ambiente no productivo | 2.3, 5.1 a 5.4, 5.6, 6.1, 7.3 |
-| Dispositivos móviles rugerizados | 190 *(supuesto: 180 en servicio y 10 de reposición)* | Grado de protección IP68; resistencia a caída de 1,5 m sobre hormigón; autonomía mínima de 12 horas con batería reemplazable por el usuario; pantalla de 600 nits o superior, legible bajo sol directo; operación con guantes y con pantalla mojada; receptor GPS, cámara con enfoque a corta distancia para lectura de números de serie, y lector de código de barras; cifrado del almacenamiento y administración remota | 8.1, 9.3, 10.1 a 10.3 |
-| Unidades de evaluación de dispositivos para prueba en campo | 6 *(supuesto)* | Al menos dos modelos de fabricantes distintos, para validar legibilidad, operación con guantes y autonomía en jornada completa antes de comprometer la compra | 4.5, 8.1 |
-| Solución de administración de dispositivos móviles (MDM) | 190 suscripciones | Inventario, bloqueo y borrado remoto; contenedor de aplicaciones corporativas; política de contraseña y cifrado forzadas; modo quiosco; distribución y actualización centralizada de la aplicación de campo; baja del dispositivo sincronizada con la baja de la credencial | 5.6, 8.1, 10.1 a 10.3 |
-| Servicio de mapas y geolocalización | Por transacción; volumen a validar | Geocodificación de domicilios, cálculo de ruta y matriz de distancias; cobertura verificada en el área de servicio; límite de consultas y disponibilidad declarados; prohibición contractual de reutilización comercial de los domicilios consultados | 4.3, 4.6 |
-| Ambiente de pruebas no productivo | 1 ambiente | Paridad de versión y de configuración con producción; datos enmascarados; independiente de la instancia productiva; disponible desde el inicio de la configuración y sostenido después del cierre del proyecto | 4.1, 7.1 a 7.6 |
-| Ampliación del servicio corporativo de identidad (inicio de sesión único y doble factor) | 229 identidades *(supuesto)* | Federación SAML 2.0 u OIDC contra el directorio corporativo; segundo factor por aplicación o token físico; aprovisionamiento y desaprovisionamiento automático integrado con Recursos Humanos | 5.5, 5.6, 7.5 |
-| Servicio de capacitación | 200 horas del perfil CA | Material construido sobre el proceso y la configuración propios, no material genérico de producto; dictado por olas; evaluación con registro nominal por participante; derecho de reproducción interna del material | 9.1 a 9.4 |
-| Soporte premium de estabilización | 12 meses desde la ola 1 | Mesa de ayuda en español; primera respuesta en menos de 1 hora para incidente crítico; escalamiento con responsable nominado; informe mensual de incidentes y de disponibilidad | 11.1, 11.2 |
-
-Los umbrales indicados son exigencias del pliego, no mediciones: se confirman contra la oferta efectiva del mercado durante el análisis del RFI (paquete 3.2). Las líneas de datos móviles de los dispositivos no constituyen una adquisición externa, dado que la organización es operador móvil y la provisión se resuelve por autoconsumo interno con cargo por transferencia entre áreas.
-
-**Momento de disponibilidad.** Las licencias y el ambiente de pruebas deben estar operativos al inicio del paquete 4.1, es decir el día 58 del cronograma, inmediatamente después de la firma del contrato (3.5). Los dispositivos del piloto se requieren antes del día 115, inicio de 8.1, y el parque completo antes del día 151, inicio de 10.1. El soporte premium se activa con la ola 1.
-
-### 7.2 Dimensionamiento del licenciamiento
+### Dimensionamiento del licenciamiento
 
 <!-- cols: 23,13,16,48 -->
 
@@ -489,9 +470,7 @@ Los umbrales indicados son exigencias del pliego, no mediciones: se confirman co
 | Consulta comercial | 15 | Consulta | Solo lectura del estado de la orden, sin acceso a la configuración |
 | Administración de la plataforma | 4 | Gestión | Configuración de reglas, roles y tableros tras el traspaso a operación |
 
-La cantidad exacta depende de la dotación real, que no fue relevada en las etapas anteriores: los valores anteriores son supuestos y se validan en el relevamiento del proceso. Por esa razón se exige que el contrato admita una banda de variación de más o menos veinte por ciento sobre la cantidad contratada sin renegociar el precio unitario, y que las licencias sean nominativas pero reasignables, condición indispensable frente a la rotación del personal contratista, que es la causa raíz del riesgo R05.
-
-### 7.3 Criterios de evaluación de proveedores
+### Criterios de evaluación de proveedores
 
 Los criterios se fijan antes de emitir el RFP y se aplican en la evaluación de propuestas (paquete 3.4), con participación del jefe de proyecto, el analista funcional, el especialista de integraciones y el especialista de seguridad:
 
@@ -504,27 +483,7 @@ Los criterios se fijan antes de emitir el RFP y se aplican en la evaluación de 
 
 ---
 
-## 8. FORMA DE ADQUISICIÓN
-
-### 8.1 Modalidad por activo
-
-<!-- cols: 18,17,65 -->
-
-| Activo o servicio | Modalidad | Justificación de la modalidad elegida |
-|---|---|---|
-| Licencias de la plataforma FSM | Suscripción anual | En el modelo de servicio no existe licencia perpetua. Frente a la suscripción mensual, la anual reduce el precio unitario y fija su valor durante la implantación y los seis meses de medición de O1 a O3. Se descarta el compromiso plurianual inicial porque consolidaría la dependencia del proveedor antes de conocer el resultado del piloto |
-| Servicio de implantación y configuración | Contrato de servicios por hora, con bolsa de 784 horas y tope | El precio cerrado exigiría congelar el alcance de configuración antes del piloto, cuando 8.3 prevé ajustar reglas y experiencia de uso con datos reales. La bolsa con tope acota el riesgo económico y permite reasignar horas entre paquetes sin adenda |
-| Horas de consultoría de integración | Contrato de servicios por hora, con tope | El esfuerzo depende del estado real de los sistemas heredados, que se conoce recién en 2.3. Un precio cerrado se cotizaría con sobreprecio por incertidumbre y trasladaría a la organización un costo que no se va a consumir |
-| Dispositivos móviles rugerizados | Compra directa | Su vida útil supera el horizonte del proyecto y el uso es permanente, no estacional. El alquiler encarece el costo total en ese plazo. Quedan como activo de la organización, se amortizan y se incorporan a la CMDB junto con el elemento de configuración dado de alta en 11.2 |
-| Unidades de evaluación de dispositivos | Comodato | Se necesitan antes de decidir la compra y se devuelven. Adquirir modelos que luego se descartan sería un gasto perdido; el comodato traslada el costo de la prueba al oferente, sin obligación de compra y con devolución documentada |
-| Solución de administración de dispositivos móviles | Suscripción anual por dispositivo | El parque varía con la dotación y el producto requiere actualización continua frente a nuevas versiones del sistema operativo, condición que una licencia perpetua no garantiza. La renovación anual permite ajustar la cantidad |
-| Servicio de mapas y geolocalización | Pago por uso | El volumen de consultas es proporcional a las órdenes despachadas y no es estimable antes de la medición de líneas base (2.4). Un abono fijo se pagaría igual en meses de baja demanda. Se contrata con tope de gasto mensual y alerta de consumo |
-| Ambiente de pruebas no productivo | Suscripción anual, exigida como ítem del mismo contrato de licenciamiento | Contratado por separado y por plazo corto, se pierde al cerrar el proyecto; la operación lo necesita de forma permanente para probar cada cambio antes de presentarlo al Comité Asesor de Cambios |
-| Ampliación del servicio de identidad | Suscripción anual, como ampliación del acuerdo corporativo vigente | Se amplía el contrato existente en lugar de incorporar un proveedor nuevo: duplicar directorios de identidad reabriría el riesgo R05 en vez de tratarlo |
-| Servicio de capacitación | Contrato de servicios por hora, liquidado por comisión dictada | La cantidad de comisiones depende de la dotación real de técnicos, conocida recién en 6.2. Una suma fija obligaría a comprometer ese número por anticipado |
-| Soporte premium de estabilización | Suscripción anual con plazo acotado a doce meses | Cubre la estabilización y el período de medición de los objetivos, y luego se revisa contra el nivel de incidentes observado. Se descarta el pago por incidente porque incentiva a no reportar y distorsiona el indicador |
-
-### 8.2 Cláusulas contractuales exigibles por tratamiento de datos personales
+### Cláusulas contractuales exigibles por tratamiento de datos personales
 
 La alternativa contratada como servicio traslada fuera del perímetro de la organización datos personales de clientes: domicilio, teléfono, geolocalización de la visita, fotografía de la instalación y firma de conformidad. Ese traslado agrava el riesgo R05, valorado en severidad 15 en la Etapa 2, y constituye el flanco principal de la modalidad elegida. Su compensación es contractual, no técnica. Las cláusulas siguientes se especifican en el paquete 2.5, se incorporan al pliego en 3.3 y se negocian en 3.5 como condiciones no negociables; su cumplimiento efectivo se verifica en las pruebas de seguridad del paquete 7.5.
 
@@ -615,170 +574,65 @@ Los tres primeros criterios concentran el 65% de la ponderación y se correspond
 
 ## 10. TIEMPOS DEL PROYECTO
 
-### Método y supuestos
+La estimación es determinística y se realiza por el método del camino crítico sobre los cincuenta paquetes de trabajo de la EDT del punto 4.3. Las duraciones se expresan en **días hábiles**, sobre una jornada de ocho horas y un mes de veintiún días hábiles. El cronograma se expresa en **meses relativos** contados desde la aprobación del Acta de Proyecto —día cero—, y no en fechas de calendario, para no atar la planificación a una fecha de inicio que todavía no está definida. Cada actividad consume una unidad de cada perfil que tiene asignado.
 
-La estimación de tiempos se construye sobre la Estructura de Desglose de Trabajo del punto 4.3 mediante el **método del camino crítico (CPM)** con estimación **determinística**: a cada paquete de trabajo se le asigna una duración de valor único, obtenida por juicio experto y analogía con implantaciones de plataformas de servicio contratadas de alcance comparable. No se aplica estimación por tres valores (PERT), porque el objetivo del análisis es determinar la secuencia condicionante y las holguras, y no la distribución de probabilidad de la fecha de fin.
+### Síntesis
 
-Los supuestos que sostienen el cálculo se declaran de manera explícita:
+<!-- cols: 33,29,38 -->
 
-- **Unidad de medida.** Todas las duraciones se expresan en **días hábiles**. La jornada de trabajo es de **8 horas**; el mes se computa en **21 días hábiles**, criterio que se aplica de manera uniforme para convertir días a meses.
-- **Tipo de dependencia.** Todas las relaciones de precedencia son **fin a comienzo con demora nula**. No se emplean adelantos ni superposiciones parciales entre actividades, de modo que el cálculo de fechas tempranas y tardías sea directamente verificable a partir de la tabla de precedencias.
-- **Disponibilidad de recursos.** En la primera pasada de CPM se supone disponibilidad ilimitada de recursos, condición necesaria para que el camino crítico quede determinado únicamente por la lógica de precedencias. La restricción real de dotación se introduce después, en el aplanamiento.
-- **Disponibilidad del proveedor.** Se supone que el consultor de la plataforma se incorpora sin demora una vez firmado el contrato (paquete 3.5). *Valor supuesto, a validar contra el plazo de movilización que el proveedor comprometa en la respuesta al RFP.*
-- **Ausencias y calendario.** No se descuentan licencias, feriados ni recesos, por trabajarse en días hábiles netos y en escala relativa.
-- **Dos precedencias adicionales respecto de la EDT.** El análisis de red incorpora dos dependencias que la descomposición del punto 4.3 no explicitaba: el paquete 8.1 (preparación del piloto) requiere además el informe de línea base (2.4), porque el piloto es la primera instancia en que se contrasta la operación contra los valores de partida de O1 a O4; y el paquete 11.3 (transferencia a operación) requiere además la evaluación de la capacitación (9.4), porque no puede transferirse la operación a un plantel cuya competencia sobre la herramienta no está evaluada.
+| Concepto | Valor | Observación |
+|---|---|---|
+| Período estimado de inicio | Día 0 = aprobación del Acta | El paquete 1.1 no tiene predecesoras |
+| Duración a fechas tempranas | 187 días hábiles | Sin restricción de recursos |
+| **Duración estimada del proyecto** | **192 días hábiles (≈ 9,1 meses)** | Programación aplanada, la comprometida |
+| Camino crítico | 30 de 50 actividades | Detalle en el apartado siguiente |
+| Actividades con holgura | 20 | Holgura entre 1 y 84 días |
+| Cantidad de personas por perfil | 11 personas sobre 9 perfiles | Dos en integraciones y dos en pruebas |
+| Conflictos de recursos detectados | 6 tramos de sobreasignación | Perfiles AF, CP, EI, QA y RO |
+| Ajustes realizados al cronograma | 24 actividades corridas | Ninguna crítica se corrió sin causa |
 
-**Por qué el cronograma se expresa en meses relativos.** El día 0 de la planificación es la **aprobación del Acta de Proyecto** por parte de la Gerencia de Operaciones, y todas las fechas se cuentan desde ese origen. Se adopta este criterio por tres razones. Primero, la fecha de aprobación depende del ciclo presupuestario de la organización y no está definida al momento de esta planificación: fijar una fecha de calendario obligaría a inventar un dato que ninguna de las etapas anteriores respalda. Segundo, si esa fecha se corriera, un cronograma anclado a calendario quedaría íntegramente invalidado, mientras que uno relativo conserva su validez y solo requiere trasladar el origen. Tercero, la escala relativa aísla la duración del proyecto —que es la variable que el análisis debe determinar— de las particularidades del calendario laboral argentino, que corresponde incorporar recién en la programación operativa, una vez conocida la fecha real de arranque.
+### Diagrama de Red y camino crítico
 
-En consecuencia, el **período estimado de inicio** es el mes inmediatamente posterior a la aprobación del Acta y del presupuesto asociado. Toda fecha de calendario que se derive de este cronograma es una proyección condicionada a ese hito.
+El diagrama en formato gráfico es la **figura 1 del Anexo II**. Las actividades, sus predecesoras y sus duraciones —que son los datos que definen los nodos y las flechas— figuran en la tabla de la EDT del punto 4.3 y no se repiten aquí.
 
----
-
-### Diagrama de Red
-
-El diagrama de red se construye con la notación de **actividad en el nodo** (*Activity on Node*, o diagrama de precedencias). Cada actividad es un nodo rectangular dividido en seis casillas: la fila superior contiene, de izquierda a derecha, el **inicio temprano (ES)**, la **duración (D)** y el **fin temprano (EF)**; la fila inferior contiene el **inicio tardío (LS)**, la **holgura total (HT)** y el **fin tardío (LF)**. El identificador y el nombre del paquete se ubican en la franja central del nodo. Las flechas representan relaciones de precedencia fin a comienzo y no consumen tiempo.
-
-El cálculo se resuelve en dos pasadas. La **pasada hacia adelante** propaga las fechas tempranas desde el nodo inicial, tomando en cada nodo `ES = máx(EF de las predecesoras)` y `EF = ES + D`. La **pasada hacia atrás** propaga las fechas tardías desde el nodo final, tomando `LF = mín(LS de las sucesoras)` y `LS = LF − D`. La **holgura total** resulta de `HT = LS − ES = LF − EF`, y las actividades con holgura total nula constituyen el camino crítico.
-
-El diagrama en formato gráfico, con los nodos y las flechas de precedencia dibujados, **se adjunta aparte** por no admitir el presente documento la inclusión de imágenes. La tabla que sigue contiene la totalidad de la información del diagrama y permite reconstruirlo íntegramente: las columnas de precedencia definen las flechas, y las columnas de fechas definen el contenido de cada nodo. Los identificadores en **negrita** corresponden a actividades críticas. Las denominaciones completas de cada paquete se encuentran en la tabla de la EDT del punto 4.3.
-
-Todos los valores están expresados en días hábiles contados desde el día 0.
-
-<!-- cols: 8,22,8,25,26,11 -->
-
-| ID | Predecesoras | Dur. | Temprano ES–EF | Tardío LS–LF | Holgura |
-|---|---|---|---|---|---|
-| **1.1** | — | 3 | 0 – 3 | 0 – 3 | 0 |
-| **1.2** | 1.1 | 2 | 3 – 5 | 3 – 5 | 0 |
-| **1.3** | 1.2 | 1 | 5 – 6 | 5 – 6 | 0 |
-| **2.1** | 1.3 | 8 | 6 – 14 | 6 – 14 | 0 |
-| **2.2** | 2.1 | 10 | 14 – 24 | 14 – 24 | 0 |
-| 2.3 | 2.1 | 6 | 14 – 20 | 18 – 24 | 4 |
-| 2.4 | 2.1 | 15 | 14 – 29 | 98 – 113 | 84 |
-| 2.5 | 2.1 | 5 | 14 – 19 | 19 – 24 | 5 |
-| **2.6** | 2.2, 2.3, 2.5 | 3 | 24 – 27 | 24 – 27 | 0 |
-| **3.1** | 2.6 | 5 | 27 – 32 | 27 – 32 | 0 |
-| **3.2** | 3.1 | 5 | 32 – 37 | 32 – 37 | 0 |
-| **3.3** | 3.2 | 7 | 37 – 44 | 37 – 44 | 0 |
-| **3.4** | 3.3 | 8 | 44 – 52 | 44 – 52 | 0 |
-| **3.5** | 3.4 | 6 | 52 – 58 | 52 – 58 | 0 |
-| **4.1** | 3.5 | 10 | 58 – 68 | 58 – 68 | 0 |
-| 4.2 | 4.1 | 6 | 68 – 74 | 77 – 83 | 9 |
-| 4.3 | 4.2 | 8 | 74 – 82 | 83 – 91 | 9 |
-| 4.4 | 3.5 | 7 | 58 – 65 | 107 – 114 | 49 |
-| 4.5 | 3.5 | 8 | 58 – 66 | 83 – 91 | 25 |
-| 4.6 | 4.3, 4.5 | 8 | 82 – 90 | 91 – 99 | 9 |
-| 4.7 | 4.2 | 4 | 74 – 78 | 95 – 99 | 21 |
-| **5.1** | 4.1 | 10 | 68 – 78 | 68 – 78 | 0 |
-| **5.2** | 5.1 | 8 | 78 – 86 | 78 – 86 | 0 |
-| **5.3** | 5.2 | 6 | 86 – 92 | 86 – 92 | 0 |
-| **5.4** | 5.3 | 5 | 92 – 97 | 92 – 97 | 0 |
-| 5.5 | 3.5 | 6 | 58 – 64 | 88 – 94 | 30 |
-| 5.6 | 5.5 | 8 | 64 – 72 | 94 – 102 | 30 |
-| 6.1 | 5.3 | 4 | 92 – 96 | 93 – 97 | 1 |
-| 6.2 | 4.4 | 3 | 65 – 68 | 114 – 117 | 49 |
-| 7.1 | 2.6 | 6 | 27 – 33 | 91 – 97 | 64 |
-| 7.2 | 4.6, 4.7, 7.1 | 8 | 90 – 98 | 99 – 107 | 9 |
-| **7.3** | 5.4, 6.1, 7.1 | 6 | 97 – 103 | 97 – 103 | 0 |
-| **7.4** | 7.3 | 4 | 103 – 107 | 103 – 107 | 0 |
-| 7.5 | 5.6, 7.1 | 5 | 72 – 77 | 102 – 107 | 30 |
-| **7.6** | 7.2, 7.4, 7.5 | 6 | 107 – 113 | 107 – 113 | 0 |
-| **8.1** | 7.6, 2.4 | 4 | 113 – 117 | 113 – 117 | 0 |
-| **8.2** | 8.1, 6.2 | 15 | 117 – 132 | 117 – 132 | 0 |
-| **8.3** | 8.2 | 8 | 132 – 140 | 132 – 140 | 0 |
-| **8.4** | 8.3 | 2 | 140 – 142 | 140 – 142 | 0 |
-| 9.1 | 7.2 | 8 | 98 – 106 | 134 – 142 | 36 |
-| **9.2** | 8.4, 9.1 | 4 | 142 – 146 | 142 – 146 | 0 |
-| 9.3 | 9.2 | 10 | 146 – 156 | 166 – 176 | 20 |
-| 9.4 | 9.3 | 3 | 156 – 159 | 176 – 179 | 20 |
-| **10.1** | 9.2 | 6 | 146 – 152 | 146 – 152 | 0 |
-| **10.2** | 10.1 | 6 | 152 – 158 | 152 – 158 | 0 |
-| **10.3** | 10.2 | 6 | 158 – 164 | 158 – 164 | 0 |
-| **11.1** | 10.3 | 15 | 164 – 179 | 164 – 179 | 0 |
-| 11.2 | 10.3 | 3 | 164 – 167 | 181 – 184 | 17 |
-| **11.3** | 11.1, 9.4 | 5 | 179 – 184 | 179 – 184 | 0 |
-| **11.4** | 11.2, 11.3 | 3 | 184 – 187 | 184 – 187 | 0 |
-
-La red resultante contiene **treinta actividades críticas** y **veinte actividades con holgura**. El fin temprano del nodo terminal (11.4) se produce en el **día 187**, que es la duración del proyecto a fechas tempranas y con disponibilidad ilimitada de recursos.
-
----
-
-### Camino crítico
-
-El camino crítico está constituido por las treinta actividades con holgura total nula, encadenadas en la siguiente secuencia:
+El camino crítico recorre **treinta de las cincuenta actividades** y determina los 187 días hábiles de la duración teórica:
 
 > 1.1 → 1.2 → 1.3 → 2.1 → 2.2 → 2.6 → 3.1 → 3.2 → 3.3 → 3.4 → 3.5 → 4.1 → 5.1 → 5.2 → 5.3 → 5.4 → 7.3 → 7.4 → 7.6 → 8.1 → 8.2 → 8.3 → 8.4 → 9.2 → 10.1 → 10.2 → 10.3 → 11.1 → 11.3 → 11.4
 
-La suma de sus duraciones asciende a **187 días hábiles**, equivalentes a aproximadamente **8,9 meses** de 21 días hábiles. Cualquier demora en cualquiera de estas treinta actividades traslada la fecha de finalización del proyecto en igual magnitud.
+Atraviesa el arranque y el relevamiento, la selección del proveedor —treinta y un días hábiles, el tramo más largo y menos comprimible, porque depende de plazos de mercado y de la firma del contrato—, la cadena de las cuatro integraciones encadenadas sobre un mismo especialista, las pruebas, el piloto, la capacitación del personal de gestión, las tres olas de despliegue y la estabilización.
 
-El recorrido atraviesa ocho tramos con características distintas.
+Las **veinte actividades restantes tienen holgura**, entre uno y ochenta y cuatro días hábiles:
 
-**Arranque y relevamiento (días 0 a 27).** Las tres actividades de inicio son cortas pero estrictamente secuenciales y ninguna admite paralelización: no se conforma el equipo antes de tener el Acta aprobada, ni se ejecuta la reunión de arranque antes de tener el equipo. El tramo de relevamiento entra al camino crítico por la vía de la especificación funcional (2.2, diez días), que es la más extensa de las tres especificaciones que confluyen en la validación con usuarios clave (2.6). Las especificaciones de integración y de seguridad, más breves, quedan absorbidas por esa ventana y conservan holguras de 4 y 5 días respectivamente.
+<!-- cols: 7,12,12,10,59 -->
 
-**Selección del proveedor (días 27 a 58): el tramo más largo y menos comprimible.** Los cinco paquetes de la fase 3 —RFI, análisis de respuestas, RFP, evaluación de propuestas y negociación del contrato— suman **31 días hábiles**, es decir, casi el 17% de la duración total del proyecto, sin que se produzca en ese lapso ningún avance sobre el producto. Es el tramo crítico más resistente a la compresión, y por una razón estructural: sus duraciones no dependen de la capacidad del equipo del proyecto sino de **plazos externos y de terceros** —el tiempo que los proveedores del mercado toman para responder un RFI y un RFP, y el tiempo que consumen las instancias internas de compras y legales para cerrar un contrato de servicio con tratamiento de datos personales—. Añadir personas a esta fase no la acorta. Es, además, un tramo con un condicionante duro adicional: la fase 4 completa y las integraciones no pueden comenzar antes de la firma, porque el objeto que se configura y se integra todavía no está determinado. Toda la crítica del proyecto está represada detrás del paquete 3.5.
-
-**Configuración de base e integraciones encadenadas (días 58 a 97).** Tras la firma, el camino crítico pasa por la configuración de flujos, estados y roles (4.1), que es la actividad de la que dependen tanto el resto de la configuración funcional como la primera integración. A partir de ahí, la criticidad se traslada íntegramente a la **cadena de integraciones 5.1 → 5.2 → 5.3 → 5.4**, veintinueve días hábiles consecutivos de SGOT, CRM, base de datos de clientes y órdenes, y sistema de monitoreo de red. Esta cadena es crítica por dos motivos simultáneos: existe una dependencia técnica real —la integración con el CRM presupone resuelto el modelo de orden de trabajo que aporta la integración con el SGOT, y la integración con el NMS presupone la base de datos ya sincronizada—, y las cuatro recaen sobre un **único perfil especialista de integraciones**. Es el punto donde la lógica de precedencias y la restricción de recursos se refuerzan mutuamente, y por eso constituye el objetivo principal del aplanamiento que se desarrolla más adelante.
-
-**Pruebas (días 97 a 113).** El camino crítico entra a la fase 7 no por las pruebas funcionales sino por las **pruebas de integración** (7.3), que es la única que espera el cierre de la cadena 5.1–5.4 y la migración de órdenes abiertas. De ahí pasa a las pruebas de carga (7.4), que dependen de un ambiente ya integrado y estable, y desemboca en la corrección de observaciones y la reprueba (7.6), que actúa como punto de convergencia de las tres campañas de prueba —funcional, de carga y de seguridad— y como compuerta de calidad antes del piloto. Las pruebas funcionales y las de seguridad no son críticas: disponen de 9 y 30 días de holgura.
-
-**Piloto (días 113 a 142).** Los cuatro paquetes de la fase 8 son íntegramente críticos y suman veintinueve días hábiles, de los cuales quince corresponden a la ejecución del piloto en zona acotada (8.2). Esa duración no es comprimible por asignación de recursos: el piloto necesita **transcurrir** un volumen suficiente de instalaciones reales para que los pesos del motor de asignación y la usabilidad de la aplicación de campo puedan calibrarse sobre datos de operación y no sobre supuestos. Es tiempo de calendario, no esfuerzo. El tramo cierra con el ajuste de reglas y experiencia de uso (8.3) y con el informe de piloto y la decisión de avance (8.4), que es el hito de aprobación más relevante del proyecto.
-
-**Capacitación del personal de gestión (días 142 a 146).** El camino crítico atraviesa la capacitación de supervisores, despacho y NOC (9.2) y no la de los técnicos de campo (9.3). La razón es que el despliegue de la primera ola requiere que la mesa de despacho y el NOC estén operando sobre la nueva plataforma —son quienes reciben, priorizan y escalan—, mientras que los técnicos se capacitan por olas, en paralelo con el propio despliegue, y por eso 9.3 conserva 20 días de holgura.
-
-**Tres olas de despliegue (días 146 a 164).** Las tres olas son secuenciales por decisión de diseño del ciclo de vida, no por dependencia técnica: cada ola es una entrega con valor propio y con decisión de avance o retroceso, y se despliega la siguiente solo cuando la anterior está estabilizada. Suman dieciocho días hábiles críticos y son, junto con el piloto, el tramo donde una decisión de gestión —no una restricción física— sostiene la criticidad. Comprimirlas es posible, pero implicaría renunciar al control de riesgo que el despliegue escalonado aporta.
-
-**Estabilización y cierre (días 164 a 187).** El acompañamiento de la operación en período de estabilización (11.1) aporta quince días críticos, otra vez tiempo de transcurso más que de esfuerzo, seguido de la transferencia a operación (11.3) y del acta de cierre y lecciones aprendidas (11.4). El alta del elemento de configuración en la CMDB y el cierre del cambio ante el Comité Asesor de Cambios (11.2) corre en paralelo con 17 días de holgura.
-
----
-
-### Actividades con holgura
-
-Las veinte actividades no críticas se presentan ordenadas por holgura total descendente. La holgura total indica cuántos días hábiles puede demorarse el inicio de la actividad sin afectar la fecha de finalización del proyecto, y es la reserva de maniobra sobre la que opera el aplanamiento de recursos del apartado siguiente.
-
-<!-- cols: 7,67,7,10,9 -->
-
-| ID | Actividad | Dur. | Holgura | Perfil |
+| ID | Temprano ES–EF | Tardío LS–LF | Holgura | Lectura |
 |---|---|---|---|---|
-| 2.4 | Medir las líneas base de los objetivos O1 a O4 | 15 | 84 | AF, RO |
-| 7.1 | Diseñar el plan y los casos de prueba | 6 | 64 | QA |
-| 4.4 | Relevar y cargar la matriz de competencias por técnico | 7 | 49 | RO |
-| 6.2 | Cargar el padrón de técnicos y los datos maestros | 3 | 49 | RO |
-| 9.1 | Elaborar el material de capacitación | 8 | 36 | CA, AF |
-| 5.5 | Implementar el inicio de sesión único y el doble factor | 6 | 30 | ES |
-| 5.6 | Implementar el mínimo privilegio y la baja automática de credenciales | 8 | 30 | ES, EI |
-| 7.5 | Ejecutar las pruebas de seguridad | 5 | 30 | ES, QA |
-| 4.5 | Diseñar y validar la experiencia de uso de la aplicación de campo | 8 | 25 | UX |
-| 4.7 | Configurar los tableros de indicadores | 4 | 21 | CP |
-| 9.3 | Capacitar a los técnicos de campo por olas | 10 | 20 | CA |
-| 9.4 | Evaluar la capacitación | 3 | 20 | CA |
-| 11.2 | Dar de alta el elemento de configuración en la CMDB y cerrar el cambio ante el CAB | 3 | 17 | EI |
-| 4.2 | Parametrizar la matriz impacto/urgencia y los acuerdos de nivel de servicio | 6 | 9 | CP, AF |
-| 4.3 | Configurar el motor de asignación | 8 | 9 | CP, AF |
-| 4.6 | Configurar la aplicación de campo según el diseño validado | 8 | 9 | CP, UX |
-| 7.2 | Ejecutar las pruebas funcionales | 8 | 9 | QA, AF |
-| 2.5 | Especificar los requerimientos de seguridad y cumplimiento | 5 | 5 | ES |
-| 2.3 | Especificar los requerimientos de integración | 6 | 4 | EI |
-| 6.1 | Migrar las órdenes de trabajo abiertas | 4 | 1 | EI |
+| 2.4 | 14 – 29 | 98 – 113 | 84 | Sólo debe estar terminada antes de que el piloto modifique el proceso |
+| 7.1 | 27 – 33 | 91 – 97 | 64 | Puede prepararse apenas se validan los requerimientos |
+| 4.4 | 58 – 65 | 107 – 114 | 49 | Independiente de la configuración de la plataforma |
+| 6.2 | 65 – 68 | 114 – 117 | 49 | Depende de 4.4, no del camino principal |
+| 9.1 | 98 – 106 | 134 – 142 | 36 | Se elabora en paralelo a las pruebas |
+| 5.5 | 58 – 64 | 88 – 94 | 30 | Rama de seguridad, paralela a las integraciones |
+| 5.6 | 64 – 72 | 94 – 102 | 30 | Rama de seguridad, paralela a las integraciones |
+| 7.5 | 72 – 77 | 102 – 107 | 30 | Rama de seguridad, paralela a las integraciones |
+| 4.5 | 58 – 66 | 83 – 91 | 25 | Diseño de experiencia, previo a la configuración de la aplicación |
+| 4.7 | 74 – 78 | 95 – 99 | 21 |  |
+| 9.3 | 146 – 156 | 166 – 176 | 20 | Se solapa con las olas de despliegue |
+| 9.4 | 156 – 159 | 176 – 179 | 20 | Se solapa con las olas de despliegue |
+| 11.2 | 164 – 167 | 181 – 184 | 17 | Cierre administrativo, no condiciona el traspaso |
+| 4.2 | 68 – 74 | 77 – 83 | 9 |  |
+| 4.3 | 74 – 82 | 83 – 91 | 9 |  |
+| 4.6 | 82 – 90 | 91 – 99 | 9 |  |
+| 7.2 | 90 – 98 | 99 – 107 | 9 |  |
+| 2.5 | 14 – 19 | 19 – 24 | 5 |  |
+| 2.3 | 14 – 20 | 18 – 24 | 4 |  |
+| 6.1 | 92 – 96 | 93 – 97 | 1 |  |
 
-**Lectura de las holguras mayores.** Las cuatro holguras más grandes no son un margen de comodidad sino una consecuencia estructural de la red, y conviene interpretarlas.
+### Conflictos de recursos detectados
 
-La medición de las líneas base (2.4) concentra la mayor holgura del proyecto, **84 días hábiles**. Puede iniciarse en cuanto termina el relevamiento del proceso actual, pero su único sucesor es la preparación del piloto, en el día 113. Esa distancia le otorga una libertad de posicionamiento que ninguna otra actividad tiene y la convierte en la primera candidata a ser desplazada en el aplanamiento. Ahora bien, esa holgura es de posición, no de omisión: la medición es el entregable que convierte los valores declarados como supuestos en los objetivos O1 a O4 en cifras verificables, y debe estar cerrada antes del piloto porque el piloto es la primera instancia de contraste contra ella. Postergarla es admisible; suprimirla o dejarla correr sobre el piloto destruiría la evidencia de resultado del proyecto.
+La programación a fechas tempranas supone recursos ilimitados. Contrastada contra una dotación de una persona por perfil, arroja seis tramos en los que un mismo perfil tendría dos actividades simultáneas:
 
-El diseño del plan y los casos de prueba (7.1) dispone de **64 días**, porque puede elaborarse desde la aprobación de los requerimientos y sus sucesores recién se activan cuando hay configuración e integraciones que probar. Es holgura genuina y explica que el responsable de pruebas registre la dedicación media más baja del equipo.
-
-Las dos actividades del referente de operaciones vinculadas a datos maestros —matriz de competencias (4.4) y padrón de técnicos (6.2)— comparten **49 días** de holgura. Ambas pueden ejecutarse en cuanto se firma el contrato, pero solo son exigidas por el piloto. Esta holgura es la que permite liberar al referente de operaciones durante la fase de relevamiento, donde su participación sí es crítica.
-
-La cadena de seguridad 5.5 → 5.6 → 7.5 comparte **30 días** de holgura por tratarse de un ramal paralelo completo: nace en la firma del contrato y desemboca en la corrección de observaciones. Es el ramal no crítico más largo de la red y, como se verá, el único cuyo desplazamiento en el aplanamiento excede la holgura disponible y produce impacto real sobre la duración total.
-
-En el extremo opuesto, la migración de órdenes de trabajo abiertas (6.1) tiene **un solo día** de holgura: es una actividad prácticamente crítica, y cualquier dificultad en la calidad de los datos migrados la incorpora de inmediato al camino crítico. Las cuatro actividades con 9 días —la parametrización, el motor de asignación, la aplicación de campo y las pruebas funcionales— forman un ramal de holgura compartida: consumida por una, desaparece para las restantes.
-
----
-
-### Histograma de recursos y conflictos detectados
-
-Construido el cronograma a fechas tempranas, se elabora el histograma de carga por perfil, que representa para cada día hábil la cantidad de personas requeridas de cada perfil. La condición de dotación de partida es de **una persona por perfil**, dado que el tamaño del proyecto no justifica equipos por especialidad. El histograma revela **seis conflictos de sobreasignación**, todos ellos de pico 2, es decir, ventanas en las que un mismo perfil resulta requerido simultáneamente por dos actividades.
-
-<!-- cols: 9,10,14,7,60 -->
+<!-- cols: 9,12,16,7,56 -->
 
 | Perfil | Ventana | Actividades | Pico | Naturaleza del conflicto |
 |---|---|---|---|---|
@@ -789,29 +643,11 @@ Construido el cronograma a fechas tempranas, se elabora el histograma de carga p
 | CP | d74 – d78 | 4.3, 4.7 | 2 | El consultor de la plataforma debe configurar el motor de asignación y los tableros de indicadores en la misma ventana, ambos derivados de la parametrización de SLA |
 | QA | d97 – d98 | 7.2, 7.3 | 2 | Las pruebas funcionales y las de integración se superponen dos días sobre el único responsable de pruebas |
 
-El histograma muestra además que los conflictos no están distribuidos de manera uniforme. Se concentran en dos zonas: la **fase de relevamiento**, donde el analista funcional y el referente de operaciones son requeridos por todas las actividades a la vez, y la **franja de integración y pruebas** entre los días 68 y 103, donde el especialista de integraciones registra dos conflictos separados y el responsable de pruebas uno. Esta segunda zona coincide exactamente con el tramo del camino crítico en el que la lógica de precedencias es más rígida, lo que anticipa que resolver esos conflictos únicamente por corrimiento tendrá costo en duración.
-
----
-
 ### Aplanamiento de recursos
 
-El objetivo del aplanamiento es eliminar las sobreasignaciones y obtener un perfil de carga sostenible, sin exceder para ningún perfil el límite de una persona por día. Se evaluaron dos estrategias.
+Se evaluaron dos estrategias para resolverlos:
 
-#### Estrategia (a): nivelación pura, una sola persona por perfil
-
-Consiste en resolver los seis conflictos exclusivamente por **corrimiento de actividades dentro de su holgura**, sin incorporar personal. La estrategia es viable para los conflictos del analista funcional, del referente de operaciones y del consultor de la plataforma, cuyas actividades en conflicto disponen de holgura suficiente. No lo es para los dos perfiles restantes.
-
-En el caso del **especialista de integraciones**, los dos conflictos no pueden resolverse por corrimiento porque las actividades implicadas pertenecen a la cadena crítica 5.1–5.4 o dependen de ella con holgura casi nula: correr la implementación del mínimo privilegio agota su holgura de 30 días y empuja las pruebas de seguridad, y correr la migración de órdenes abiertas —que tiene un solo día de holgura— traslada de inmediato las pruebas de integración, que son críticas. En el caso del **responsable de pruebas**, la superposición de las pruebas funcionales y de integración solo se resuelve serializándolas, y como las de integración son críticas, la serialización empuja las pruebas de carga, la corrección de observaciones y, con ellas, todo el piloto.
-
-El resultado es una duración total de **215 días hábiles**, frente a los 187 del cálculo a fechas tempranas: un incremento de **28 días hábiles**, equivalente a un **15%** de la duración del proyecto. El proyecto pasaría de aproximadamente 8,9 a 10,2 meses.
-
-#### Estrategia (b): refuerzo selectivo de los dos perfiles cuello de botella
-
-Consiste en incorporar **una segunda persona en los dos perfiles que concentran los conflictos irresolubles por corrimiento** —especialista de integraciones y responsable de pruebas—, y resolver los cuatro conflictos restantes por corrimiento dentro de la holgura disponible. Ambas incorporaciones son de **dedicación parcial**: el histograma resultante muestra para el especialista de integraciones una dedicación media del 22% sobre dos personas, y para el responsable de pruebas del 18%, de modo que en ningún caso se trata de sumar dos recursos de tiempo completo, sino de disponer de un segundo par de manos en las ventanas de solapamiento.
-
-El resultado es una duración total de **192 días hábiles**, apenas **5 días** por encima del óptimo teórico de 187.
-
-<!-- cols: 29,11,16,16,28 -->
+<!-- cols: 28,11,17,16,28 -->
 
 | Estrategia | Duración | Diferencia | Dotación | Valoración |
 |---|---|---|---|---|
@@ -819,66 +655,44 @@ El resultado es una duración total de **192 días hábiles**, apenas **5 días*
 | (a) Nivelación pura, una persona por perfil | 215 días | +28 días (+15%) | 9 personas | Ejecutable, pero traslada el cierre casi un mes y medio |
 | (b) Refuerzo de EI y QA con una persona parcial cada uno | 192 días | +5 días (+2,7%) | 11 personas | **Adoptada** |
 
-#### Justificación de la estrategia adoptada
+**Se adopta la segunda.** El fundamento es económico: dos personas con dedicación parcial durante ventanas acotadas cuestan menos que veintitrés días hábiles adicionales de proyecto, que arrastran licenciamiento, estructura y el diferimiento de todos los beneficios. Incorporar además un segundo referente de operaciones sólo reduciría la duración a 189 días, mejora que no justifica una tercera incorporación.
 
-Se adopta la estrategia (b). La diferencia entre ambas es de **23 días hábiles** de duración del proyecto, poco más de un mes calendario, y el criterio de decisión es la comparación entre el sobrecosto de las dos personas adicionales y el costo de esos 23 días.
+Los conflictos que el refuerzo no elimina se resuelven corriendo actividades dentro de su holgura. Se corrieron veinticuatro; los nombres de cada paquete figuran en la EDT del punto 4.3:
 
-El sobrecosto de la incorporación es acotado y controlable, porque las dos personas se suman con dedicación parcial y en ventanas delimitadas: el segundo especialista de integraciones interviene esencialmente en dos tramos —la implementación de la capa de seguridad y la migración de órdenes abiertas— y el segundo responsable de pruebas, en la superposición de las campañas funcional y de integración y en la superposición de las pruebas de carga y de seguridad. Se trata de esfuerzo incremental medido en días-persona, no de dos posiciones de tiempo completo a lo largo de nueve meses.
+<!-- cols: 14,24,26,22,14 -->
 
-El costo de los 23 días hábiles adicionales, en cambio, es de naturaleza distinta y de mayor alcance. Extender el proyecto un mes implica sostener durante ese mes **la totalidad de la estructura del proyecto**, no solo los dos perfiles en conflicto: la jefatura de proyecto, el consultor de la plataforma provisto por el proveedor, el referente de operaciones y los costos indirectos de gestión permanecen activos. A ello se suman tres efectos que no se expresan en el presupuesto del proyecto pero sí en el resultado de la organización. Primero, el licenciamiento recurrente de la plataforma comienza a devengarse desde la firma del contrato, de modo que cada día de demora en llegar a producción es un día de costo sin beneficio operativo. Segundo, los objetivos O1 a O4 tienen plazos contados desde la puesta en producción, y su verificación se desplaza en la misma medida. Tercero, el proyecto es el tratamiento comprometido de los riesgos R04 —técnico sin capacitación en el nuevo modelo de ONT— y R07 —ausencia de criterio de priorización en la cola de órdenes—, ambos valorados en severidad 12 y sin plan de tratamiento vigente: cada mes adicional de proyecto es un mes adicional de exposición a esos riesgos.
+| ID | Inicio orig. | Inicio nivel. | Corrimiento | Holgura |
+|---|---|---|---|---|
+| 2.4 | d14 | d82 | 68 | 84 |
+| 4.7 | d74 | d90 | 16 | 21 |
+| 5.6 | d64 | d96 | 32 | 30 |
+| 4.4 | d58 | d97 | 39 | 49 |
+| 7.2 | d90 | d97 | 7 | 9 |
+| 7.5 | d72 | d104 | 32 | 30 |
+| 7.4 | d103 | d105 | 2 | 0 |
+| 9.1 | d98 | d105 | 7 | 36 |
+| 7.6 | d107 | d109 | 2 | 0 |
+| 8.1 | d113 | d115 | 2 | 0 |
+| 6.2 | d65 | d119 | 54 | 49 |
+| 8.2 | d117 | d122 | 5 | 0 |
+| 8.3 | d132 | d137 | 5 | 0 |
+| 8.4 | d140 | d145 | 5 | 0 |
+| 9.2 | d142 | d147 | 5 | 0 |
+| 9.3 | d146 | d151 | 5 | 20 |
+| 10.1 | d146 | d151 | 5 | 0 |
+| 10.2 | d152 | d157 | 5 | 0 |
+| 9.4 | d156 | d161 | 5 | 20 |
+| 10.3 | d158 | d163 | 5 | 0 |
+| 11.1 | d164 | d169 | 5 | 0 |
+| 11.2 | d164 | d169 | 5 | 17 |
+| 11.3 | d179 | d184 | 5 | 0 |
+| 11.4 | d184 | d189 | 5 | 0 |
 
-La comparación es concluyente: **el sobrecosto de dos incorporaciones parciales es menor que el costo de 23 días hábiles adicionales de proyecto**, y adicionalmente reduce el riesgo de cronograma, porque un plan que consume íntegramente las holguras para nivelar recursos deja al proyecto sin reservas frente a cualquier desvío.
+Las actividades críticas que aparecen corridas cinco días no absorben holgura propia —no la tienen—, sino que arrastran el corrimiento aguas arriba de la cadena de integraciones, que es el conflicto determinante.
 
-**Sobre un tercer refuerzo evaluado y descartado.** Se analizó incorporar además un **segundo referente de operaciones**, con el fin de eliminar el corrimiento de la carga del padrón de técnicos y los datos maestros, que es el que retrasa cinco días el arranque del piloto. La duración total bajaría de 192 a **189 días hábiles**, es decir, apenas dos días por encima del óptimo teórico. La mejora de **3 días hábiles** no justifica la incorporación de una persona más: la relación entre el costo marginal y el beneficio marginal se deteriora abruptamente respecto de los dos refuerzos adoptados, que aportaron 23 días. Se descarta, en aplicación del criterio de rendimiento decreciente sobre la compresión del cronograma.
+### Diagrama de Gantt y dotación
 
-#### Corrimientos aplicados
-
-La tabla siguiente registra los desplazamientos efectuados sobre el cronograma a fechas tempranas para obtener el cronograma aplanado adoptado. Los días se expresan en días hábiles desde el día 0.
-
-<!-- cols: 7,51,9,9,14,10 -->
-
-| ID | Actividad | Inicio orig. | Inicio nivel. | Corrimiento | Holgura |
-|---|---|---|---|---|---|
-| 2.4 | Medir las líneas base de los objetivos O1 a O4 | d14 | d82 | 68 | 84 |
-| 4.7 | Configurar los tableros de indicadores | d74 | d90 | 16 | 21 |
-| 5.6 | Implementar el mínimo privilegio y la baja automática | d64 | d96 | 32 | 30 |
-| 4.4 | Relevar y cargar la matriz de competencias | d58 | d97 | 39 | 49 |
-| 7.2 | Ejecutar las pruebas funcionales | d90 | d97 | 7 | 9 |
-| 7.5 | Ejecutar las pruebas de seguridad | d72 | d104 | 32 | 30 |
-| 7.4 | Ejecutar las pruebas de carga | d103 | d105 | 2 | 0 |
-| 9.1 | Elaborar el material de capacitación | d98 | d105 | 7 | 36 |
-| 7.6 | Corregir las observaciones y volver a probar | d107 | d109 | 2 | 0 |
-| 8.1 | Preparar el piloto | d113 | d115 | 2 | 0 |
-| 6.2 | Cargar el padrón de técnicos y los datos maestros | d65 | d119 | 54 | 49 |
-| 8.2 | Ejecutar el piloto en zona acotada | d117 | d122 | 5 | 0 |
-| 8.3 | Ajustar las reglas y la experiencia de uso | d132 | d137 | 5 | 0 |
-| 8.4 | Elaborar el informe de piloto y decidir el avance | d140 | d145 | 5 | 0 |
-| 9.2 | Capacitar a supervisores, despacho y NOC | d142 | d147 | 5 | 0 |
-| 9.3 | Capacitar a los técnicos de campo por olas | d146 | d151 | 5 | 20 |
-| 10.1 | Desplegar la ola 1 | d146 | d151 | 5 | 0 |
-| 10.2 | Desplegar la ola 2 | d152 | d157 | 5 | 0 |
-| 9.4 | Evaluar la capacitación | d156 | d161 | 5 | 20 |
-| 10.3 | Desplegar la ola 3 | d158 | d163 | 5 | 0 |
-| 11.1 | Acompañar la operación en estabilización | d164 | d169 | 5 | 0 |
-| 11.2 | Alta del elemento de configuración en la CMDB y cierre ante el CAB | d164 | d169 | 5 | 17 |
-| 11.3 | Transferir a operación y documentar | d179 | d184 | 5 | 0 |
-| 11.4 | Elaborar el acta de cierre y las lecciones aprendidas | d184 | d189 | 5 | 0 |
-
-**Descomposición de los 5 días de desvío.** Los 5 días hábiles que separan el cronograma aplanado de los 187 teóricos tienen dos orígenes identificables, y ninguno es arbitrario.
-
-Los **primeros 2 días** provienen del ramal de seguridad. Los paquetes 5.6 y 7.5 debieron desplazarse 32 días cada uno para liberar al especialista de integraciones y al responsable de pruebas en sus ventanas de conflicto, mientras que su holgura disponible era de 30. El exceso de 2 días se propaga a las pruebas de carga (7.4), a la corrección de observaciones (7.6) y a la preparación del piloto (8.1), las tres críticas.
-
-Los **3 días restantes** provienen de la carga del padrón de técnicos y datos maestros (6.2), que debió desplazarse 54 días —contra una holgura de 49— para escalonar la carga del referente de operaciones, y que es predecesora directa de la ejecución del piloto. El piloto no puede arrancar antes del día 122 aunque su preparación esté lista en el 119. Este es exactamente el desvío que un segundo referente de operaciones eliminaría, y el motivo por el cual esa alternativa llevaría el proyecto a 189 días.
-
-A partir de la ejecución del piloto, el desvío acumulado de 5 días se traslada sin amplificarse a todas las actividades críticas subsiguientes, hasta el acta de cierre.
-
----
-
-### Diagrama de Gantt
-
-El diagrama de Gantt en formato gráfico —barras horizontales por actividad sobre el eje de tiempo, con el camino crítico destacado, las holguras representadas en trazo discontinuo y el histograma de recursos por perfil al pie— **se adjunta aparte**, por no admitir el presente documento la inclusión de imágenes.
-
-La tabla siguiente presenta el cronograma aplanado agregado por fase, con el inicio y el fin expresados en días hábiles relativos al día 0 y su conversión a meses de 21 días hábiles, junto con la dotación simultánea máxima por perfil activa en cada fase. Las fases se solapan entre sí: el proyecto no es una secuencia de bloques estancos, y varias fases conviven en la misma ventana temporal.
+El diagrama de Gantt es la **figura 2.a del Anexo II** y el histograma de recursos por perfil, la **figura 2.b**. La distribución por fase de la programación aplanada es la siguiente:
 
 <!-- cols: 33,14,12,41 -->
 
@@ -896,9 +710,9 @@ La tabla siguiente presenta el cronograma aplanado agregado por fase, con el ini
 | 10. Despliegue por olas | d151 – d169 | 7,2 – 8,0 | CP 1 · RO 1 |
 | 11. Estabilización y cierre | d169 – d192 | 8,0 – 9,1 | CP 1 · RO 1 · EI 1 · JP 1 · AF 1 |
 
-**Dotación total y carga por perfil.** El proyecto se ejecuta con **once personas** distribuidas en nueve perfiles, ninguna de ellas con dedicación exclusiva. La tabla siguiente consolida la carga resultante del cronograma aplanado. La columna de días-persona expresa el esfuerzo total de cada perfil; la ventana indica el intervalo entre su primera y su última intervención; la dedicación media es el cociente entre el esfuerzo y la ventana, e informa qué proporción del tiempo la persona está efectivamente afectada al proyecto.
+La dotación total asciende a once personas sobre nueve perfiles, con un esfuerzo de 4.240 horas-persona:
 
-<!-- cols: 38,11,15,8,19,9 -->
+<!-- cols: 38,11,15,8,18,10 -->
 
 | Perfil | Personas | Días-persona | Horas | Ventana | Ded. media |
 |---|---|---|---|---|---|
@@ -913,35 +727,7 @@ La tabla siguiente presenta el cronograma aplanado agregado por fase, con el ini
 | Diseñador de experiencia de uso (UX) | 1 | 24 | 192 | d58 – d145 | 28% |
 | **Total** | **11** | **530** | **4.240** | **d0 – d192** | — |
 
-El esfuerzo total del proyecto asciende a **4.240 horas-persona**, cifra que constituye el insumo directo del cálculo de costos de recursos humanos del punto 11.
-
-Del histograma consolidado se desprenden tres observaciones de gestión. El **consultor de la plataforma** es el perfil de mayor dedicación media, 78%, y prácticamente no admite ser compartido con otras iniciativas: su ventana cubre desde la configuración inicial hasta la estabilización. El **jefe de proyecto** presenta la ventana más extensa —los 192 días completos— pero la dedicación media más baja entre los perfiles de conducción, 27%, distribución característica de un rol de coordinación con picos en el inicio, la contratación, el informe de piloto y el cierre. Los dos perfiles **reforzados**, con dedicaciones medias del 22% y del 18% sobre dos personas, confirman cuantitativamente el argumento del apartado anterior: el refuerzo no consiste en duplicar equipos, sino en disponer de una segunda persona en las ventanas de solapamiento.
-
----
-
-### Duración estimada del proyecto
-
-La duración estimada del proyecto es de **192 días hábiles**, equivalentes a **aproximadamente 9,1 meses** de 21 días hábiles cada uno, contados desde la aprobación del Acta de Proyecto.
-
-<!-- cols: 28,19,53 -->
-
-| Concepto | Valor | Observación |
-|---|---|---|
-| Duración CPM a fechas tempranas | 187 días hábiles | Óptimo teórico, con recursos ilimitados |
-| Duración con nivelación pura | 215 días hábiles | Alternativa evaluada y descartada |
-| **Duración aplanada adoptada** | **192 días hábiles** | **≈ 9,1 meses · 11 personas · 4.240 horas** |
-| Desvío sobre el óptimo teórico | 5 días hábiles (2,7%) | 2 días por el ramal de seguridad, 3 por los datos maestros |
-| Longitud del camino crítico | 30 actividades | 187 días de encadenamiento crítico |
-
-**Sobre la fecha de inicio y el período de ejecución.** El día 0 del cronograma es la **aprobación del Acta de Proyecto** por parte de la Gerencia de Operaciones, hito que no está fechado y que depende de la aprobación presupuestaria correspondiente. En consecuencia, la duración de 192 días hábiles es firme, pero su ubicación en el calendario es condicional.
-
-A título ilustrativo, y declarado expresamente como **supuesto de encuadre presupuestario**: si el Acta se aprobara dentro del **primer mes del ejercicio siguiente**, la ejecución se extendería desde ese mes hasta **alrededor del décimo mes** del mismo ejercicio, con el acta de cierre y las lecciones aprendidas emitidas en ese período. Bajo ese supuesto, la puesta en producción de la última ola de despliegue se alcanzaría hacia el **octavo mes** —día 169— y el período de estabilización ocuparía el tramo final. Este dato es relevante porque los plazos comprometidos en los objetivos O1 a O4 se cuentan desde la puesta en producción y no desde el cierre del proyecto: la verificación de O4 —cumplimiento de la priorización de la cola y del acuerdo de nivel de servicio de primera respuesta— vencería tres meses después de esa fecha, y las de O1 y O3, seis meses después, es decir, ya dentro del ejercicio siguiente al de ejecución.
-
-**Condicionantes de la estimación.** Tres factores concentran el riesgo de cronograma y deben ser objeto de seguimiento específico. El **tramo de selección del proveedor**, con 31 días hábiles críticos gobernados por plazos de terceros, es el que menos admite compresión y el que más probabilidad tiene de desviarse; toda demora en la respuesta al RFI o al RFP, o en el cierre contractual, se traslada íntegramente a la fecha de finalización. La **cadena de integraciones 5.1–5.4**, con 29 días hábiles críticos consecutivos, depende de la disponibilidad y la calidad de las interfaces de los sistemas existentes —SGOT, CRM, base de datos de clientes y órdenes, y NMS—, que son activos de terceras áreas de la organización. Y el **piloto**, cuyos 15 días son tiempo de transcurso y no de esfuerzo, no puede acortarse sin degradar la calidad de la calibración del motor de asignación, que es precisamente el componente que trata el riesgo R04.
-
-Finalmente, corresponde señalar que el cronograma aplanado **consume casi por completo las holguras de los ramales de seguridad y de datos maestros**. Esa es la contrapartida asumida al optar por una duración de 192 días en lugar de 215: el plan es más corto pero menos elástico en esas dos zonas, y cualquier desvío en ellas se traduce de manera inmediata en desplazamiento de la fecha de cierre. La reserva de contingencia que se dimensiona en el punto 11 debe cubrir explícitamente ese riesgo.
-
----
+Ningún perfil alcanza dedicación completa, de modo que todos se afectan parcialmente al proyecto y conservan sus responsabilidades de línea. La disponibilidad se compromete formalmente en el paquete 1.2.
 
 ## 11. VARIABLES DE COSTO
 
@@ -1051,15 +837,7 @@ La tabla separa la inversión inicial, que ocurre una sola vez, del costo recurr
 
 El año de ejecución del proyecto concentra el 62% del costo total de propiedad a tres años, y el 38% restante es recurrente. Ese 38% es el rasgo económico distintivo del modelo contratado como servicio: el compromiso presupuestario no termina con la puesta en producción, sino que se sostiene mientras la plataforma esté en operación y crece con la dotación licenciada. Un desarrollo propio habría invertido la proporción, concentrando el esfuerzo al inicio. Este dato es el insumo central del análisis de factibilidad económica del punto 12.
 
-### Sensibilidad
-
-Dos variables concentran la incertidumbre del cálculo.
-
-**Cantidad de usuarios licenciados.** Es la variable recurrente y arrastra además el hardware de campo. Una desviación del 20% sobre los 78 usuarios supuestos —es decir, 62 o 94 usuarios— mueve el licenciamiento de los tres años en USD 25.693, la dotación de dispositivos en USD 7.812 en el año 1 y su reposición en USD 3.125 adicionales. Incorporando indirectos y contingencia, el efecto sobre el costo total de propiedad se aproxima a **USD 44.000, un ±8,3%**.
-
-**Valor hora.** Una desviación del 20% sobre los valores supuestos afecta USD 22.525 del costo de recursos humanos propios, USD 11.752 del servicio de implantación y USD 3.840 de la administración funcional posterior. Con indirectos y contingencia, el impacto sobre el costo total de propiedad es de aproximadamente **USD 46.000, un ±8,6%**.
-
-La conclusión operativa es que, con una dotación de este tamaño, **ambas variables pesan prácticamente lo mismo**: el mayor volumen de horas compensa el carácter recurrente de la licencia. Esa paridad se rompe si la dotación crece, porque el licenciamiento escala con los usuarios mientras el esfuerzo de implantación se paga una sola vez: por encima de unos 150 usuarios, el precio por usuario pasa a dominar. En consecuencia, la negociación del RFP debe atender por igual el valor hora del servicio de implantación y el tramo de precio por usuario, y en este último exigir la definición contractual de qué constituye un usuario licenciado —en particular si el técnico contratista consume licencia plena o de tipo restringido— y un mecanismo de reducción de usuarios ante bajas de dotación.
+> **Variables de mayor incidencia.** Con la dotación supuesta, la cantidad de usuarios licenciados y el valor hora pesan prácticamente lo mismo: una desviación del 20% en cualquiera de las dos mueve el costo total de propiedad alrededor de un 8%. Esa paridad se rompe si la dotación crece, porque el licenciamiento escala con los usuarios mientras el esfuerzo de implantación se paga una sola vez.
 
 ### Supuestos
 
@@ -1208,15 +986,13 @@ En consecuencia, la decisión de avance posterior al piloto (paquete 8.4) debe a
 
 ### Conclusión del análisis de factibilidad
 
-**Técnica.** El proyecto es técnicamente factible, con una condición que no admite postergación: la existencia y la capacidad de las interfaces del SGOT, del CRM y del NMS deben confirmarse en el paquete 2.3, antes de emitir el RFP. Es el riesgo de mayor severidad del análisis (RT1, severidad 20) y el único capaz de alterar el alcance, el costo y la duración a la vez. Declararlo abierto, con tres planes alternativos cotizables, es preferible a suponerlo resuelto. El resto de los riesgos técnicos tiene severidad igual o menor a 12 y respuesta definida dentro de la propia planificación.
+El proyecto es **técnicamente factible**, con un supuesto crítico declarado: que el SGOT, el CRM y el NMS expongan interfaces de programación. No está documentado, y de no verificarse la integración debe resolverse por vías alternativas de mayor costo y plazo. Su comprobación es la primera tarea del paquete 2.3.
 
-**Económica.** El proyecto es económicamente viable en el escenario base —valor actual neto de +USD 31.515 a cinco años, tasa interna de retorno del 19,0% frente a una tasa de corte del 15% y repago a los 3,14 años—, pero el margen es estrecho y el resultado descansa sobre líneas base que hoy son supuestos y no mediciones. El umbral de indiferencia se ubica en el 85% de realización de los beneficios estimados, y un escenario de realización sostenida del 60% arroja valor actual neto marcadamente negativo. A tres años el proyecto todavía no se repaga: necesita el cuarto y el quinto año de operación. La conclusión honesta es de **factibilidad económica condicionada**: el proyecto se justifica, pero la decisión de despliegue masivo debe adoptarse recién en el paquete 8.4, con las líneas base ya medidas en el paquete 2.4 y los precios ya cerrados en el contrato del paquete 3.5.
+Es **económicamente viable pero de margen estrecho**: valor actual neto de +USD 31.515 a cinco años, tasa interna de retorno del 19,0% frente a una tasa de corte del 15% y repago a los 3,14 años. A tres años el proyecto todavía no se repaga. El umbral de indiferencia se ubica en el 85% de realización de los beneficios estimados, y esos beneficios descansan sobre líneas base que hoy son supuestos y no mediciones.
 
-**Legal.** Es la dimensión de mayor peso y también la más exigente. No hay impedimento legal para ejecutar el proyecto, pero sí un conjunto de obligaciones que deben quedar satisfechas por vía contractual y de configuración antes de que la plataforma reciba el primer dato real: región de alojamiento y cláusulas de transferencia internacional cerradas antes de la firma del contrato; baja automática de credenciales operativa antes del piloto, por su vínculo directo con R05; régimen de geolocalización notificado y consentido antes de que el primer técnico use la aplicación; y asunción expresa de que la conformidad del cliente es firma electrónica y no digital.
+Es **legalmente factible bajo condición contractual**: el tratamiento de datos personales de clientes en una plataforma contratada como servicio exige las cláusulas del punto 8, sin las cuales el proyecto agravaría el riesgo R05 en lugar de contenerlo.
 
-**Veredicto global.** El proyecto se declara **factible con condiciones**. Las tres condiciones habilitantes, en orden cronológico, son: confirmar las interfaces de integración en el paquete 2.3; cerrar las cláusulas de protección de datos y transferencia internacional en el paquete 3.5; y validar las líneas base medidas en el paquete 2.4 antes de la decisión de avance del paquete 8.4. Ninguna de las tres agrega actividades a la planificación: las tres ya están en la EDT, y este análisis fija el momento en que cada una deja de ser un supuesto para convertirse en un hecho verificado.
-
----
+De ahí que la decisión de despliegue masivo no deba adoptarse con la aprobación del Acta sino en el **paquete 8.4**, una vez medidas las líneas base en el 2.4, verificadas las interfaces en el 2.3 y cerrados los precios en el contrato del 3.5. Hasta ese punto el compromiso económico es acotado; a partir de ahí se compromete el grueso del licenciamiento y de los dispositivos.
 
 ## ANEXO I — ACTA DE PROYECTO
 
@@ -1266,6 +1042,17 @@ El patrocinador designa los siguientes roles para la ejecución del proyecto:
 El resto del equipo —desarrollo, experiencia de usuario, datos, pruebas,
 infraestructura y capacitación— es conformado por el Director de Proyecto según
 los perfiles y competencias descriptos en el punto 5 de esta etapa.
+
+**Campos a completar al momento de la firma.** El nombre propio del titular de la
+Gerencia de Operaciones, que patrocina el proyecto, y el del Director de Proyecto
+designado, se consignan a continuación:
+
+- Patrocinador del proyecto: _______________________________________________
+- Director de Proyecto designado: __________________________________________
+
+> Estos dos campos quedan deliberadamente en blanco. Los nombres propios corresponden a
+> personas reales de la organización analizada y no se desprenden de las Etapas 1 y 2, de
+> modo que consignarlos sería un dato inventado. Su definición es del grupo.
 
 #### DESCRIPCIÓN DE SU RESPONSABILIDAD
 
@@ -1328,11 +1115,19 @@ Esta decisión solo puede ser revertida por la Gerencia de Tecnología y Sistema
 equipo del proyecto a las zonas operativas y para definir, junto con Supervisión
 de Instalaciones, la zona y el momento del piloto.
 
-⚠ *Autoridad de compra: el Director de Proyecto puede aprobar adquisiciones
-hasta el monto fijado por la política de compras vigente de la organización;
-para excederlo debe solicitar autorización a la Gerencia de Administración y
-Finanzas.* **(Completar con el monto real si el grupo lo define. Este es el
-campo donde el ejemplo de cátedra es más concreto — conviene no dejarlo genérico.)**
+**Autoridad de compra.** El Director de Proyecto puede aprobar por sí adquisiciones y
+contrataciones hasta el monto que se consigna a continuación, dentro del presupuesto
+aprobado en este Acta. Toda erogación que supere ese monto, y cualquier compromiso que
+exceda el presupuesto total, requiere autorización previa de la Gerencia de Administración
+y Finanzas.
+
+Monto máximo por operación: USD _______________
+
+> **Campo a completar por el grupo.** El monto se deja en blanco porque no surge de las
+> Etapas 1 y 2 ni de la política de compras de la organización, a la que este trabajo no
+> tuvo acceso. Como referencia para fijarlo: el presupuesto del primer año asciende a
+> USD 328.226 y la partida más significativa de una sola operación es el servicio de
+> implantación y configuración del punto 8.
 
 ---
 
@@ -1466,3 +1261,37 @@ El proyecto **no incluye**:
 Nombre: _______________________________________________
 
 Título: _______________________________________________
+
+---
+
+## ANEXO II — DOCUMENTACIÓN GRÁFICA
+
+Las cuatro representaciones gráficas que este documento compromete en los puntos 6 y 10 se
+entregan en el archivo independiente `etapa3-anexo-graficos.pdf`, seis láminas en formato
+A3 apaisado. Se presentan por separado porque el conversor con el que se genera este
+documento no admite la inclusión de imágenes, y no como material accesorio: cada lámina
+integra el desarrollo del punto que la invoca y debe leerse junto con él.
+
+<!-- cols: 12,50,20,18 -->
+
+| Lámina | Contenido | Punto | Escala |
+|---|---|---|---|
+| Figura 1 | Diagrama de Red en notación de actividad en el nodo. Las 50 actividades de la EDT con sus predecesoras, duración, fechas tempranas y tardías y holgura total, con el camino crítico destacado. Se despliega en dos bandas, con etiquetas de continuidad para las ocho precedencias que cruzan de una a la otra | 10 · Diagrama de Red | Sin escala |
+| Figura 2.a | Diagrama de Gantt del cronograma aplanado adoptado: barra por actividad, camino crítico destacado, holgura remanente en trazo discontinuo, hitos de control y escala superior en meses de 21 días hábiles | 10 · Diagrama de Gantt | 1 día hábil por división |
+| Figura 2.b | Histograma de recursos por perfil sobre el mismo eje de tiempo y a la misma escala que la figura 2.a, con la dotación asignada a cada perfil trazada como límite | 10 · Histograma de recursos | 1 día hábil por división |
+| Figura 3 | Plano de la base operativa en planta: depósito y pañol, playa de carga, mesa de despacho, oficina del NOC, sala técnica, aula, sanitarios y estacionamiento, con circulaciones, cotas, señalización, protección contra incendio, salidas y recorridos de evacuación. Incluye el bloque de simbología común a las figuras 3 y 4 | 6 · Plano 1 | 1:125 |
+| Figura 4 | Croquis tipo de trabajo en campo: escena de tendido aéreo en vía pública, en planta y en vista lateral auxiliar, con los esquemas complementarios de cámara subterránea y de domicilio del cliente | 6 · Plano 2 | Sin escala |
+
+**Trazabilidad de los datos.** Las figuras 1, 2.a y 2.b no incorporan información nueva:
+reproducen íntegramente las tablas del punto 10. El cálculo se rehízo sobre la Estructura de
+Desglose de Trabajo del punto 4.3 y arroja los mismos valores publicados —187 días hábiles a
+fechas tempranas, treinta actividades críticas, 192 días hábiles de duración aplanada
+adoptada, 530 días-persona equivalentes a 4.240 horas-persona—, de modo que lámina y tabla
+son verificables una contra la otra. Todas las fechas se expresan en días hábiles relativos
+al día 0, que es la aprobación del Acta de Proyecto.
+
+**Alcance de lo representado en las figuras 3 y 4.** Ambas siguen elemento por elemento la
+*Especificación de los planos* del punto 6. Las cotas y la distribución de sectores son
+**supuestos de diseño, a validar con el Servicio de Higiene y Seguridad de la
+organización**: representan la base operativa tipo del proceso crítico y no un relevamiento
+del predio, que este trabajo no realizó. Así se declara en la propia lámina.

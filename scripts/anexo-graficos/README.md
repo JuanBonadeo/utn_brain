@@ -1,6 +1,6 @@
 # Anexo II — Documentación gráfica de la Etapa 3 de ASI
 
-Genera las seis láminas A3 apaisadas que el entregable `materias/ASI/entregables/etapa3-v2.md`
+Genera las seis láminas A3 apaisadas que el entregable `materias/ASI/entregables/etapa3.md`
 promete como adjuntos: Diagrama de Red, Gantt, histograma de recursos, plano de la base
 operativa y croquis de trabajo en campo.
 
