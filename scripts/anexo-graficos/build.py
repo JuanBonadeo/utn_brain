@@ -109,7 +109,7 @@ def hoja(svg_body, ancho, alto, titulo, n, total):
 
 def portada(total):
     filas = [
-        ("Figura 1", "Diagrama de Red del proyecto, en notacion de actividad en el nodo. Las 51 actividades de la EDT con predecesoras, duracion, fechas tempranas y tardias y holgura total; camino critico destacado.", "Punto 10 &#183; Diagrama de Red"),
+        ("Figura 1", "Diagrama de Red del proyecto, en notacion de actividad en el nodo. Las 50 actividades de la EDT con predecesoras, duracion, fechas tempranas y tardias y holgura total; camino critico destacado.", "Punto 10 &#183; Diagrama de Red"),
         ("Figura 2.a", "Diagrama de Gantt del cronograma aplanado adoptado, con barras por actividad, camino critico destacado, holguras en trazo discontinuo e hitos de control.", "Punto 10 &#183; Diagrama de Gantt"),
         ("Figura 2.b", "Histograma de recursos por perfil sobre el mismo eje de tiempo, con la dotacion asignada a cada perfil.", "Punto 10 &#183; Histograma de recursos"),
         ("Figura 3", "Plano de la base operativa, en planta: deposito y panol, playa de carga, mesa de despacho, oficina del NOC, sala tecnica, aula, circulaciones, senalizacion y evacuacion.", "Punto 6 &#183; Plano 1"),

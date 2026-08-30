@@ -227,7 +227,7 @@ Se adopta un **ciclo de vida híbrido**.
 
 ### 4.3 Estructura de Desglose de Trabajo (EDT)
 
-La estructura se descompone en once paquetes de primer nivel, correspondientes a las fases, y cuarenta y seis paquetes de trabajo. Cada paquete se define hasta el nivel que permite asignar un responsable, estimar una duración y verificar un entregable, según el criterio fijado por la cátedra.
+La estructura se descompone en once paquetes de primer nivel, correspondientes a las fases, y cincuenta paquetes de trabajo. Cada paquete se define hasta el nivel que permite asignar un responsable, estimar una duración y verificar un entregable, según el criterio fijado por la cátedra.
 
 **Perfiles asignados.** Se identifican con la sigla que se utiliza en la columna correspondiente:
 
@@ -445,17 +445,28 @@ Los activos surgen de la solución seleccionada y de los paquetes de trabajo de 
 
 | Activo o servicio | Cantidad | Características mínimas exigibles | Forma de adquisición | Justificación |
 |---|---|---|---|---|
-| Licencias de la plataforma FSM, nominativas, en tres tipos (campo, gestión y consulta) | 229 *(supuesto)* | Modo desconectado real —alta, edición y cierre de orden sin cobertura— con sincronización diferida y resolución de conflictos; motor de asignación por competencia certificada, zona, carga y ventana horaria, parametrizable sin programación; matriz impacto/urgencia con cronómetro de SLA; API REST documentada, versionada y con límites de consumo publicados; inicio de sesión único SAML 2.0 u OIDC y doble factor; registro de auditoría inalterable y exportable; región de alojamiento de datos declarada por contrato; disponibilidad mensual mínima del 99,5% con penalidad | Suscripción anual | En el modelo de servicio no existe licencia perpetua. Frente a la suscripción mensual, la anual reduce el precio unitario y fija su valor durante la implantación y los seis meses de medición de O1 a O3. Se descarta el compromiso plurianual inicial porque consolidaría la dependencia del proveedor antes de conocer el resultado del piloto |
+| Licencias de la plataforma FSM, nominativas, en tres tipos (campo, gestión y consulta) | 78 *(supuesto)* | Modo desconectado real —alta, edición y cierre de orden sin cobertura— con sincronización diferida y resolución de conflictos; motor de asignación por competencia certificada, zona, carga y ventana horaria, parametrizable sin programación; matriz impacto/urgencia con cronómetro de SLA; API REST documentada, versionada y con límites de consumo publicados; inicio de sesión único SAML 2.0 u OIDC y doble factor; registro de auditoría inalterable y exportable; región de alojamiento de datos declarada por contrato; disponibilidad mensual mínima del 99,5% con penalidad | Suscripción anual | En el modelo de servicio no existe licencia perpetua. Frente a la suscripción mensual, la anual reduce el precio unitario y fija su valor durante la implantación y los seis meses de medición de O1 a O3. Se descarta el compromiso plurianual inicial porque consolidaría la dependencia del proveedor antes de conocer el resultado del piloto |
 | Servicio de implantación y configuración, prestado por partner certificado | 784 horas del perfil CP | Certificación vigente del fabricante de la plataforma; referencias comprobables en operaciones de servicio en campo; equipo nominado, con reemplazo sujeto a aprobación; configuración entregada versionada y documentada, con transferencia de conocimiento al equipo interno | Contrato de servicios por hora, con bolsa de 784 horas y tope | El precio cerrado exigiría congelar el alcance de configuración antes del piloto, cuando 8.3 prevé ajustar reglas y experiencia de uso con datos reales. La bolsa con tope acota el riesgo económico y permite reasignar horas entre paquetes sin adenda |
 | Horas de consultoría de integración | 560 horas del perfil EI, de las cuales 232 corresponden a las cuatro interfaces | Experiencia comprobable en integración con sistemas heredados; entrega del contrato de interfaz documentado por sistema; manejo de reintentos, idempotencia, registro de errores y plan de reproceso; verificación previa en ambiente no productivo | Contrato de servicios por hora, con tope | El esfuerzo depende del estado real de los sistemas heredados, que se conoce recién en 2.3. Un precio cerrado se cotizaría con sobreprecio por incertidumbre y trasladaría a la organización un costo que no se va a consumir |
-| Dispositivos móviles rugerizados | 190 *(supuesto: 180 en servicio y 10 de reposición)* | Grado de protección IP68; resistencia a caída de 1,5 m sobre hormigón; autonomía mínima de 12 horas con batería reemplazable por el usuario; pantalla de 600 nits o superior, legible bajo sol directo; operación con guantes y con pantalla mojada; receptor GPS, cámara con enfoque a corta distancia para lectura de números de serie, y lector de código de barras; cifrado del almacenamiento y administración remota | Compra directa | Su vida útil supera el horizonte del proyecto y el uso es permanente, no estacional. El alquiler encarece el costo total en ese plazo. Quedan como activo de la organización, se amortizan y se incorporan a la CMDB junto con el elemento de configuración dado de alta en 11.2 |
+| Dispositivos móviles rugerizados | 63 *(supuesto: 60 en servicio y 3 de reposición)* | Grado de protección IP68; resistencia a caída de 1,5 m sobre hormigón; autonomía mínima de 12 horas con batería reemplazable por el usuario; pantalla de 600 nits o superior, legible bajo sol directo; operación con guantes y con pantalla mojada; receptor GPS, cámara con enfoque a corta distancia para lectura de números de serie, y lector de código de barras; cifrado del almacenamiento y administración remota | Compra directa | Su vida útil supera el horizonte del proyecto y el uso es permanente, no estacional. El alquiler encarece el costo total en ese plazo. Quedan como activo de la organización, se amortizan y se incorporan a la CMDB junto con el elemento de configuración dado de alta en 11.2 |
 | Unidades de evaluación de dispositivos para prueba en campo | 6 *(supuesto)* | Al menos dos modelos de fabricantes distintos, para validar legibilidad, operación con guantes y autonomía en jornada completa antes de comprometer la compra | Comodato | Se necesitan antes de decidir la compra y se devuelven. Adquirir modelos que luego se descartan sería un gasto perdido; el comodato traslada el costo de la prueba al oferente, sin obligación de compra y con devolución documentada |
-| Solución de administración de dispositivos móviles (MDM) | 190 suscripciones | Inventario, bloqueo y borrado remoto; contenedor de aplicaciones corporativas; política de contraseña y cifrado forzadas; modo quiosco; distribución y actualización centralizada de la aplicación de campo; baja del dispositivo sincronizada con la baja de la credencial | Suscripción anual por dispositivo | El parque varía con la dotación y el producto requiere actualización continua frente a nuevas versiones del sistema operativo, condición que una licencia perpetua no garantiza. La renovación anual permite ajustar la cantidad |
+| Solución de administración de dispositivos móviles (MDM) | 63 suscripciones | Inventario, bloqueo y borrado remoto; contenedor de aplicaciones corporativas; política de contraseña y cifrado forzadas; modo quiosco; distribución y actualización centralizada de la aplicación de campo; baja del dispositivo sincronizada con la baja de la credencial | Suscripción anual por dispositivo | El parque varía con la dotación y el producto requiere actualización continua frente a nuevas versiones del sistema operativo, condición que una licencia perpetua no garantiza. La renovación anual permite ajustar la cantidad |
 | Servicio de mapas y geolocalización | Por transacción; volumen a validar | Geocodificación de domicilios, cálculo de ruta y matriz de distancias; cobertura verificada en el área de servicio; límite de consultas y disponibilidad declarados; prohibición contractual de reutilización comercial de los domicilios consultados | Pago por uso | El volumen de consultas es proporcional a las órdenes despachadas y no es estimable antes de la medición de líneas base (2.4). Un abono fijo se pagaría igual en meses de baja demanda. Se contrata con tope de gasto mensual y alerta de consumo |
 | Ambiente de pruebas no productivo | 1 ambiente | Paridad de versión y de configuración con producción; datos enmascarados; independiente de la instancia productiva; disponible desde el inicio de la configuración y sostenido después del cierre del proyecto | Suscripción anual, exigida como ítem del mismo contrato de licenciamiento | Contratado por separado y por plazo corto, se pierde al cerrar el proyecto; la operación lo necesita de forma permanente para probar cada cambio antes de presentarlo al Comité Asesor de Cambios |
-| Ampliación del servicio corporativo de identidad (inicio de sesión único y doble factor) | 229 identidades *(supuesto)* | Federación SAML 2.0 u OIDC contra el directorio corporativo; segundo factor por aplicación o token físico; aprovisionamiento y desaprovisionamiento automático integrado con Recursos Humanos | Suscripción anual, como ampliación del acuerdo corporativo vigente | Se amplía el contrato existente en lugar de incorporar un proveedor nuevo: duplicar directorios de identidad reabriría el riesgo R05 en vez de tratarlo |
+| Ampliación del servicio corporativo de identidad (inicio de sesión único y doble factor) | 78 identidades *(supuesto)* | Federación SAML 2.0 u OIDC contra el directorio corporativo; segundo factor por aplicación o token físico; aprovisionamiento y desaprovisionamiento automático integrado con Recursos Humanos | Suscripción anual, como ampliación del acuerdo corporativo vigente | Se amplía el contrato existente en lugar de incorporar un proveedor nuevo: duplicar directorios de identidad reabriría el riesgo R05 en vez de tratarlo |
 | Servicio de capacitación | 200 horas del perfil CA | Material construido sobre el proceso y la configuración propios, no material genérico de producto; dictado por olas; evaluación con registro nominal por participante; derecho de reproducción interna del material | Contrato de servicios por hora, liquidado por comisión dictada | La cantidad de comisiones depende de la dotación real de técnicos, conocida recién en 6.2. Una suma fija obligaría a comprometer ese número por anticipado |
 | Soporte premium de estabilización | 12 meses desde la ola 1 | Mesa de ayuda en español; primera respuesta en menos de 1 hora para incidente crítico; escalamiento con responsable nominado; informe mensual de incidentes y de disponibilidad | Suscripción anual con plazo acotado a doce meses | Cubre la estabilización y el período de medición de los objetivos, y luego se revisa contra el nivel de incidentes observado. Se descarta el pago por incidente porque incentiva a no reportar y distorsiona el indicador |
+
+### Alcance dimensionado
+
+Todas las cantidades de este punto, y en consecuencia las del punto 11, corresponden al
+**alcance del proyecto: la operación de instalación de fibra óptica en el Gran Rosario**, con
+una dotación supuesta de sesenta técnicos instaladores entre propios y contratistas. No
+comprenden la totalidad de la operación nacional de la organización. La extensión posterior a
+otras regiones se resuelve por ampliación del contrato de licenciamiento y por compra
+incremental de dispositivos, sin modificar la configuración ni las integraciones ya
+construidas, que es una de las razones por las que se seleccionó una plataforma contratada
+como servicio. Ese crecimiento no está presupuestado en este documento.
 
 ### Dimensionamiento del licenciamiento
 
@@ -463,12 +474,12 @@ Los activos surgen de la solución seleccionada y de los paquetes de trabajo de 
 
 | Tipo de usuario | Cantidad *(supuesto)* | Tipo de licencia | Fundamento del dimensionamiento |
 |---|---|---|---|
-| Técnico instalador de campo, propio y contratista | 180 | Campo (móvil) | Una licencia nominativa por técnico habilitado; es el volumen que gobierna el costo recurrente y el que más varía con la dotación tercerizada |
-| Supervisor de instalaciones | 12 | Gestión | Requiere despacho, reasignación y tablero de su zona |
-| Mesa de despacho | 10 | Gestión | Opera la cola única y el escalamiento de SLA |
-| Centro de Operaciones de Red (NOC) | 8 | Gestión | Genera órdenes por excepción del NMS y sigue su estado |
-| Consulta comercial | 15 | Consulta | Solo lectura del estado de la orden, sin acceso a la configuración |
-| Administración de la plataforma | 4 | Gestión | Configuración de reglas, roles y tableros tras el traspaso a operación |
+| Técnico instalador de campo, propio y contratista | 60 | Campo (móvil) | Una licencia nominativa por técnico habilitado; es el volumen que gobierna el costo recurrente y el que más varía con la dotación tercerizada |
+| Supervisor de instalaciones | 4 | Gestión | Requiere despacho, reasignación y tablero de su zona |
+| Mesa de despacho | 4 | Gestión | Opera la cola única y el escalamiento de SLA |
+| Centro de Operaciones de Red (NOC) | 6 | Gestión | Genera órdenes por excepción del NMS y sigue su estado |
+| Consulta comercial | 2 | Consulta | Solo lectura del estado de la orden, sin acceso a la configuración |
+| Administración de la plataforma | 2 | Gestión | Configuración de reglas, roles y tableros tras el traspaso a operación |
 
 ### Criterios de evaluación de proveedores
 
@@ -659,36 +670,36 @@ Se evaluaron dos estrategias para resolverlos:
 
 Los conflictos que el refuerzo no elimina se resuelven corriendo actividades dentro de su holgura. Se corrieron veinticuatro; los nombres de cada paquete figuran en la EDT del punto 4.3:
 
-<!-- cols: 14,24,26,22,14 -->
+<!-- cols: 10,17,19,16,19,19 -->
 
-| ID | Inicio orig. | Inicio nivel. | Corrimiento | Holgura |
-|---|---|---|---|---|
-| 2.4 | d14 | d82 | 68 | 84 |
-| 4.7 | d74 | d90 | 16 | 21 |
-| 5.6 | d64 | d96 | 32 | 30 |
-| 4.4 | d58 | d97 | 39 | 49 |
-| 7.2 | d90 | d97 | 7 | 9 |
-| 7.5 | d72 | d104 | 32 | 30 |
-| 7.4 | d103 | d105 | 2 | 0 |
-| 9.1 | d98 | d105 | 7 | 36 |
-| 7.6 | d107 | d109 | 2 | 0 |
-| 8.1 | d113 | d115 | 2 | 0 |
-| 6.2 | d65 | d119 | 54 | 49 |
-| 8.2 | d117 | d122 | 5 | 0 |
-| 8.3 | d132 | d137 | 5 | 0 |
-| 8.4 | d140 | d145 | 5 | 0 |
-| 9.2 | d142 | d147 | 5 | 0 |
-| 9.3 | d146 | d151 | 5 | 20 |
-| 10.1 | d146 | d151 | 5 | 0 |
-| 10.2 | d152 | d157 | 5 | 0 |
-| 9.4 | d156 | d161 | 5 | 20 |
-| 10.3 | d158 | d163 | 5 | 0 |
-| 11.1 | d164 | d169 | 5 | 0 |
-| 11.2 | d164 | d169 | 5 | 17 |
-| 11.3 | d179 | d184 | 5 | 0 |
-| 11.4 | d184 | d189 | 5 | 0 |
+| ID | Inicio orig. | Inicio nivel. | Corrimiento | Holgura a 187 | Holgura a 192 |
+|---|---|---|---|---|---|
+| 2.4 | 14 | 82 | 68 | 84 | 89 |
+| 4.7 | 74 | 90 | 16 | 21 | 26 |
+| 5.6 | 64 | 96 | 32 | 30 | 35 |
+| 4.4 | 58 | 97 | 39 | 49 | 54 |
+| 7.2 | 90 | 97 | 7 | 9 | 14 |
+| 7.5 | 72 | 104 | 32 | 30 | 35 |
+| 7.4 | 103 | 105 | 2 | 0 | 5 |
+| 9.1 | 98 | 105 | 7 | 36 | 41 |
+| 7.6 | 107 | 109 | 2 | 0 | 5 |
+| 8.1 | 113 | 115 | 2 | 0 | 5 |
+| 6.2 | 65 | 119 | 54 | 49 | 54 |
+| 8.2 | 117 | 122 | 5 | 0 | 5 |
+| 8.3 | 132 | 137 | 5 | 0 | 5 |
+| 8.4 | 140 | 145 | 5 | 0 | 5 |
+| 9.2 | 142 | 147 | 5 | 0 | 5 |
+| 9.3 | 146 | 151 | 5 | 20 | 25 |
+| 10.1 | 146 | 151 | 5 | 0 | 5 |
+| 10.2 | 152 | 157 | 5 | 0 | 5 |
+| 9.4 | 156 | 161 | 5 | 20 | 25 |
+| 10.3 | 158 | 163 | 5 | 0 | 5 |
+| 11.1 | 164 | 169 | 5 | 0 | 5 |
+| 11.2 | 164 | 169 | 5 | 17 | 22 |
+| 11.3 | 179 | 184 | 5 | 0 | 5 |
+| 11.4 | 184 | 189 | 5 | 0 | 5 |
 
-Las actividades críticas que aparecen corridas cinco días no absorben holgura propia —no la tienen—, sino que arrastran el corrimiento aguas arriba de la cadena de integraciones, que es el conflicto determinante.
+> **Por qué algunos corrimientos superan la holgura original.** El aplanamiento no conserva el horizonte de 187 días: al resolver los conflictos de recurso el proyecto termina en 192, cinco días más tarde. Las fechas tardías se recalculan sobre ese horizonte nuevo y, en consecuencia, **toda cadena no crítica gana cinco días de holgura**. Por eso la tabla informa las dos columnas: la holgura calculada sobre la red original, de 187 días, y la recalculada sobre la red aplanada, de 192. Los paquetes 5.6 y 7.5 se corren 32 días contra una holgura original de 30, pero contra una holgura recalculada de 35; el paquete 6.2 se corre 54 días y su holgura recalculada es exactamente 54, de modo que queda en el límite y sin margen. **Ninguna actividad consume más holgura de la disponible en la red aplanada**, que es la que rige el cronograma comprometido. Las actividades críticas corridas cinco días no absorben holgura propia —no la tienen en la red original— sino que arrastran el corrimiento aguas arriba de la cadena de integraciones, que es el conflicto determinante.
 
 ### Diagrama de Gantt y dotación
 
