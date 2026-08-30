@@ -18,3 +18,7 @@ node_modules/
 
 # HTML intermedio de md-to-pdf (referencia fuentes de KaTeX por ruta local, no es portable)
 materias/*/estudio/*.html
+
+# Figuras rasterizadas para el .pptx — derivadas del anexo gráfico, se regeneran
+# con scripts/pptx-asi-etapa3/render-figs.py + Chrome headless
+materias/*/figs/presentacion/
