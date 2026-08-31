@@ -856,6 +856,53 @@ $$C_{20,10} = 184.756$$
 
 puntos extremos. Resolver 184.756 sistemas de ecuaciones es inadmisible incluso con computadoras modernas. Por eso Dantzig desarrolla en 1947 el **Simplex**, que llega al óptimo **sin** evaluar todos los puntos extremos.
 
+##### El puente entre el gráfico y el álgebra
+
+El teorema de equivalencia (vértice ⇔ SBF) se vuelve operativo con una sola
+observación, y conviene tenerla presente porque es lo que hace que el Simplex deje de
+parecer magia:
+
+$$	ext{“estoy parado sobre la recta } i	ext{”} \quad\Longleftrightarrow\quad 	ext{“su holgura o exceso vale } 0	ext{”}$$
+
+Si estuvieras del lado holgado de la restricción $i$, sobraría recurso y su holgura sería
+positiva. Justo **sobre** la recta, vale cero. De ahí se sigue que **elegir qué dos rectas
+cruzar es exactamente elegir qué dos variables poner en cero**:
+
+| Gráfico | Álgebra |
+|---|---|
+| cruzar dos rectas para hallar un vértice | anular dos variables y resolver el sistema restante |
+| el vértice resultante | la solución básica |
+| el vértice cae dentro de la RF | todas las básicas dan $\geq 0$ → es **factible** |
+| el cruce cae fuera de la RF (se descarta) | alguna básica da **negativa** → básica **no factible** |
+| deslizar la recta de nivel al vértice contiguo | cambiar **una** variable de la base |
+
+Verificado sobre el Ejercicio 6 (extra) de la Unidad 1, con $m = 3$ y $n = 5$:
+
+| Vértice | Rectas que se cruzan | Variables que se anulan |
+|---|---|---|
+| $A\,(2;8)$ — el óptimo | 1) ∩ 2) | $x_3 = 0$, $x_4 = 0$ |
+| $B\,(0;12)$ | 2) ∩ eje $x_2$ | $x_4 = 0$, $x_1 = 0$ |
+| $C\,(8;2)$ | 1) ∩ 3) | $x_3 = 0$, $x_5 = 0$ |
+| $(0;10)$ — fuera de la RF | 1) ∩ eje $x_2$ | $x_1 = 0$, $x_3 = 0$ → da $x_4 = -2$ |
+
+Tres cosas que salen de esta tabla:
+
+1. **Los ejes cuentan como restricciones.** El eje $x_2$ es la recta $x_1 = 0$, y la variable
+   que se anula ahí es $x_1$ **misma**, no una holgura. Por eso la condición de no
+   negatividad no es un formalismo: aporta vértices.
+2. **Siempre se anulan exactamente $n - m$ variables**, y en el plano hacen falta
+   exactamente dos rectas para definir un punto. Con $n - m = 2$ las dos cosas coinciden;
+   no es casualidad, es el teorema.
+3. **Una variable de exceso negativa cuantifica la infactibilidad.** En $(0;10)$ da
+   $x_4 = -2$: no solo avisa que el punto está fuera de la RF, sino que faltan
+   **2 unidades** de vitaminas para entrar. El álgebra detecta y mide lo que en el gráfico
+   se veía como “ese cruce queda del lado de afuera”.
+
+Corolario práctico: la forma estándar **no se usa para hallar** el óptimo por método
+gráfico — las rectas, los semiplanos y el sistema del vértice salen de las desigualdades
+originales. Se usa para **describirlo completo**: el vector $S^*$ (bloque 7), la
+interpretación de los sobrantes (bloque 8) y la clasificación activa/pasiva (bloque 10).
+
 #### Ejercicios resueltos tipo
 
 Este capítulo es fundamentalmente teórico y su práctica está integrada en la Práctica 1 (formas canónica y estándar) y en la Práctica 3 (Simplex). El ejercicio tipo es el de la tabla de arriba: llevar a forma estándar, enumerar bases, descartar las no factibles y quedarse con el mejor $z$.
@@ -1380,3 +1427,4 @@ Práctica 4 (`PL4UTN.pdf`), que integra sensibilidad, dualidad y parametrizació
 - 2026-08-26: Se arrancó la **Práctica 4** (`PL4UTN.pdf` — análisis de sensibilidad, dualidad y parametrización). Se generó [[practica-4-sensibilidad-dualidad]] con el herramental completo (las cinco fórmulas sobre $B^{-1}$, la tabla de qué-cambia-qué-se-revisa, regla del 100%, lectura de la numeración de filas de LINDO) y el **Ejercicio 1** resuelto entero (incisos a–g del enunciado más h e i de reglas 100% que agrega la cátedra). Verificado por cálculo exacto con fracciones y coincidente con `PL4UTNresol.pdf`. Ejercicios 2 a 9 pendientes.
 - 2026-08-26: Se ingirieron los **capítulos 4 y 5 del apunte** (`PLC4.pdf`, `PLC5.pdf`) y se generó [[teoria-sensibilidad-dualidad]] — los fundamentos de la Práctica 4 explicados desde cero con el **taller de alfarería (Ejemplo 1-1)** como hilo conductor: por qué toda la tabla óptima **es** $B^{-1}$ aplicada a los datos originales, la asimetría $c_j\to$optimalidad / $b_i\to$factibilidad, dualidad (construcción, teorema fundamental, la interpretación del **seguro** de §5.6, holguras complementarias, costo reducido vs. costo marginal), los cinco casos de sensibilidad derivados, regla del 100%, **parametrización** (§4.10) y **Simplex dual** (§5.8), más el mapa de qué ejercicio de la práctica usa qué. Números verificados por cálculo exacto.
 - 2026-08-26: Se agregó a la Unidad 1 el **Ejercicio 6 (extra, elaboración propia)**: minimización con restricciones $\geq$, excesos, semiplano que no contiene al origen y **RF no acotada con óptimo finito** — caso que la Práctica 1 no cubre y el parcial sí toma. Resuelto en los 10 bloques del formato de cátedra, con el puente hacia la Unidad 2 (la solución óptima como SBF).
+- 2026-08-26: Se agregó a la Unidad 2 la sección **El puente entre el gráfico y el álgebra**: la equivalencia “estar sobre la recta $i$” ⇔ “su holgura/exceso vale 0”, la tabla de correspondencia gráfico↔álgebra, y su verificación sobre los cuatro cruces del Ejercicio 6 de la Unidad 1 (incluido uno infactible, donde el exceso negativo cuantifica el déficit).
