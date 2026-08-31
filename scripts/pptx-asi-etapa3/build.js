@@ -115,11 +115,11 @@ function parrafo(s, t, o) {
   });
 }
 
-// lamina de figura a pantalla completa
-function figura(s, archivo, ratio) {
-  const h = 7.12, w = h * ratio;
+// lamina de figura a sangre: las figuras se generan en 16:9 nativo
+// (scripts/pptx-asi-etapa3/figs16x9.py), asi que llenan la diapositiva entera.
+function figura(s, archivo) {
   s.background = { color: WHITE };
-  s.addImage({ path: path.join(FIGS, archivo), x: (W - w) / 2, y: 0.19, w, h });
+  s.addImage({ path: path.join(FIGS, archivo), x: 0, y: 0, w: W, h: H });
 }
 
 const TB = { color: NAVY, fill: ICE, bold: true, fontFace: F, fontSize: 11.5, valign: "middle" };
@@ -489,12 +489,12 @@ function celda(t, o = {}) {
 // ================= 11 y 12 · PLANOS =================
 {
   const s = pres.addSlide();
-  figura(s, "fig3-plano.png", 2336 / 1920);
+  figura(s, "fig3-plano.png");
   s.addNotes("Lezcano. Punto 6, figura 3 del Anexo II. Escala 1:125, norte indicado. Señalar: circulaciones peatonal y vehicular separadas y sin cruces, matafuegos identificados por clase, recorridos de evacuación y punto de encuentro fuera del edificio. Las cotas son mínimos de diseño supuestos, a validar con el Servicio de Higiene y Seguridad.");
 }
 {
   const s = pres.addSlide();
-  figura(s, "fig4-campo.png", 2800 / 1888);
+  figura(s, "fig4-campo.png");
   s.addNotes("Lezcano. Punto 6, figura 4 del Anexo II. Cuatro escenas: planta y vista lateral del tendido aéreo, cámara subterránea y domicilio del cliente. El vehículo aguas arriba es barrera física —prevención en el medio—; el checklist bloqueante en la app es prevención en el diseño.");
 }
 
@@ -591,12 +591,25 @@ function celda(t, o = {}) {
     "Selección del proveedor — 31 días hábiles consecutivos, el tramo más largo y menos comprimible: depende de plazos de mercado y de la firma del contrato",
     "Las cuatro integraciones encadenadas sobre un mismo especialista",
     "Pruebas, piloto, capacitación de gestión, tres olas de despliegue y estabilización",
-  ], { x: ML + 0.3, y: yb + 0.6, w: cw - 0.6, h: 2.5, fs: 12.5, gap: 11 });
+    "Las otras 20 actividades tienen holgura, entre 1 y 84 días hábiles: corriendo 24 de ellas dentro de esa holgura se resuelven los conflictos que el refuerzo no elimina",
+  ], { x: ML + 0.3, y: yb + 0.58, w: cw - 0.6, h: 2.55, fs: 12, gap: 8 });
 
-  card(s, { x: ML + cw + 0.3, y: yb, w: cw, h: 3.2, fill: ICE, line: MID });
-  rotulo(s, "LAS 20 ACTIVIDADES CON HOLGURA", { x: ML + cw + 0.6, y: yb + 0.18, w: cw - 0.6 });
-  parrafo(s, "Entre 1 y 84 días hábiles. Las de mayor margen son la medición de líneas base (2.4, 84 días) y el diseño del plan de pruebas (7.1, 64 días); la más ajustada es la migración de órdenes abiertas (6.1, 1 día).", { x: ML + cw + 0.6, y: yb + 0.6, w: cw - 0.6, h: 1.15, fs: 13 });
-  parrafo(s, "Esa holgura es exactamente lo que el aplanamiento consume para resolver los conflictos de recurso sin extender el proyecto.", { x: ML + cw + 0.6, y: yb + 1.95, w: cw - 0.6, h: 1.05, fs: 13, color: MUTED });
+  const xr = ML + cw + 0.3;
+  card(s, { x: xr, y: yb, w: cw, h: 3.2, fill: ICE, line: MID });
+  rotulo(s, "APLANAMIENTO DE RECURSOS", { x: xr + 0.3, y: yb + 0.18, w: cw - 0.6 });
+  const estrategias = [
+    ["CPM a fechas tempranas", "187 días", "recursos ilimitados · no ejecutable", false],
+    ["(a) Nivelación pura, una persona por perfil", "215 días", "+28 días (+15%) · 9 personas", false],
+    ["(b) Refuerzo de EI y QA con una persona parcial", "192 días", "+5 días (+2,7%) · 11 personas", true],
+  ];
+  let ye = yb + 0.56;
+  estrategias.forEach(([t, d, obs, sel]) => {
+    s.addText(t, { x: xr + 0.3, y: ye, w: cw - 2.05, h: 0.38, isTextBox: true, margin: 0, fontFace: F, fontSize: 12, bold: sel, color: NAVY, valign: "middle" });
+    s.addText(d, { x: xr + cw - 1.72, y: ye, w: 1.42, h: 0.38, isTextBox: true, margin: 0, fontFace: F, fontSize: 16, bold: true, color: sel ? RED : MUTED, align: "right", valign: "middle" });
+    s.addText(obs, { x: xr + 0.3, y: ye + 0.34, w: cw - 0.6, h: 0.28, isTextBox: true, margin: 0, fontFace: F, fontSize: 10.5, color: sel ? RED : MUTED, valign: "middle" });
+    ye += 0.64;
+  });
+  parrafo(s, "Se adopta la segunda: dos personas parciales cuestan menos que 23 días hábiles adicionales de proyecto, que arrastran licenciamiento, estructura y el diferimiento de los beneficios.", { x: xr + 0.3, y: ye + 0.04, w: cw - 0.6, h: 0.62, fs: 11.5 });
 
   s.addNotes("Lurati. Punto 10. Insistir en que el cronograma va en meses relativos al día 0 y no en fechas de calendario: la fecha de inicio real no está definida. Fue una decisión del grupo (D2) ante una consulta que el docente no respondió.");
 }
@@ -604,48 +617,25 @@ function celda(t, o = {}) {
 // ================= 16, 17 · RED y GANTT =================
 {
   const s = pres.addSlide();
-  figura(s, "fig1-red.png", 2800 / 1702);
+  figura(s, "fig1-red.png");
   s.addNotes("Lurati. Punto 10, figura 1 del Anexo II. Actividad en el nodo, en dos bandas. En rojo las 30 críticas con holgura total nula; en azul las 20 con holgura. Cada nodo lleva ES-D-EF arriba y LS-HT-LF abajo. Las etiquetas amarillas son las 8 precedencias que cruzan de una banda a la otra.");
 }
 {
   const s = pres.addSlide();
-  figura(s, "fig2a-gantt.png", 2800 / 2032);
+  figura(s, "fig2a-gantt.png");
   s.addNotes("Lurati. Punto 10, figura 2.a del Anexo II. Cronograma aplanado adoptado, 192 días. En rojo el camino crítico, en azul las no críticas, en línea de puntos la holgura remanente. Los cuatro hitos verticales: contrato firmado (d58), inicio del piloto (d122), ola 3 en producción (d169) y cierre (d192).");
 }
 
-// ================= 18 · APLANAMIENTO =================
+// ================= 18 · HISTOGRAMA =================
 {
   const s = pres.addSlide();
-  const y0 = head(s, "10", "Aplanamiento de recursos", "Seis tramos con dos actividades simultáneas sobre un mismo perfil, detectados contra una dotación de una persona por perfil");
-
-  const lw = 4.35;
-  const estrategias = [
-    ["CPM a fechas tempranas — recursos ilimitados", "187 días", "Teórica, no ejecutable", false],
-    ["(a) Nivelación pura — una persona por perfil", "215 días", "+28 días (+15%) · 9 personas", false],
-    ["(b) Refuerzo de EI y QA con una persona parcial", "192 días", "+5 días · 11 personas", true],
-  ];
-  let y = y0;
-  estrategias.forEach(([t, d, obs, sel]) => {
-    card(s, { x: ML, y, w: lw, h: 1.24, fill: sel ? ICE : PAPER, line: sel ? MID : ICE });
-    s.addText(t, { x: ML + 0.26, y: y + 0.12, w: lw - 0.52, h: 0.4, isTextBox: true, margin: 0, fontFace: F, fontSize: 12.5, bold: true, color: NAVY, valign: "middle" });
-    s.addText(d, { x: ML + 0.26, y: y + 0.55, w: 1.55, h: 0.56, isTextBox: true, margin: 0, fontFace: F, fontSize: 23, bold: true, color: sel ? RED : MUTED, valign: "middle" });
-    s.addText(obs, { x: ML + 1.86, y: y + 0.55, w: lw - 2.12 - (sel ? 1.05 : 0), h: 0.56, isTextBox: true, margin: 0, fontFace: F, fontSize: 11, color: MUTED, valign: "middle" });
-    if (sel) s.addText("ADOPTADA", { x: ML + lw - 1.25, y: y + 0.55, w: 1.0, h: 0.56, isTextBox: true, margin: 0, fontFace: F, fontSize: 10.5, bold: true, color: RED, align: "right", valign: "middle" });
-    y += 1.38;
-  });
-
-  parrafo(s, "El fundamento es económico: dos personas parciales durante ventanas acotadas cuestan menos que 23 días hábiles adicionales de proyecto, que arrastran licenciamiento, estructura y el diferimiento de todos los beneficios. Los conflictos que el refuerzo no elimina se resuelven corriendo 24 actividades dentro de su holgura.", {
-    x: ML, y: y + 0.1, w: lw, h: 1.9, fs: 12.5,
-  });
-
-  const iw = CW - lw - 0.34;
-  s.addImage({ path: path.join(FIGS, "fig2b-histo.png"), x: ML + lw + 0.34, y: y0 - 0.06, w: iw, h: iw * (1952 / 2800) });
-  s.addText("Figura 2.b del Anexo II — histograma de recursos por perfil, sobre el mismo eje de tiempo y a la misma escala que el Gantt", {
-    x: ML + lw + 0.34, y: y0 + iw * (1952 / 2800) + 0.04, w: iw, h: 0.3, isTextBox: true, margin: 0,
-    fontFace: F, fontSize: 10.5, italic: true, color: MUTED,
-  });
-
-  s.addNotes("Lurati. Punto 10. En el histograma, las barras celestes claras son los picos de dos personas: son exactamente las ventanas que motivaron el refuerzo de EI y QA. La línea de puntos es la dotación asignada, y no se supera ningún día. Sumar un segundo referente de operaciones solo bajaría a 189 días: no justifica una tercera incorporación.");
+  figura(s, "fig2b-histo.png");
+  s.addNotes("Lurati. Punto 10, figura 2.b del Anexo II. Mismo eje de tiempo y misma escala que el Gantt.\n" +
+    "Las barras celestes claras son los picos de dos personas: son exactamente las seis ventanas de " +
+    "sobreasignación que motivaron el refuerzo de EI y QA, y la comparación de estrategias está en la lámina 15. " +
+    "La línea de puntos es la dotación asignada, y no se supera ningún día.\n" +
+    "Si preguntan por qué no un tercer refuerzo: sumar un segundo referente de operaciones solo bajaría de 192 a " +
+    "189 días, mejora que no justifica una tercera incorporación.");
 }
 
 // ================= 19 · COSTOS =================

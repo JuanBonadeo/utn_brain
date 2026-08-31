@@ -8,26 +8,34 @@ hay que actualizar `build.js` a mano: no lo lee, lo transcribe.
 
 ## Cómo se regenera
 
-Las cinco figuras del Anexo II se rasterizan primero desde los mismos scripts que
-producen el anexo A3, así lámina y figura no se pueden desincronizar:
+Las cinco figuras del Anexo II son A3 apaisado, con relaciones de 1,22 a 1,65 a 1.
+En una diapositiva 16:9 (1,78) entran limitadas por la altura y dejan hasta un 35%
+del ancho en blanco: se ven chicas. Por eso **no se reutilizan las láminas A3**: se
+recomponen en 16:9 nativo con `figs16x9.py`, que separa el dibujo de su chrome
+—título, bajada, referencias—, lo escala para llenar el lienzo y vuelve a componer
+el chrome como riel lateral, agrandando además los cuerpos tipográficos. No se saca
+información: se reubica. El detalle está en el encabezado de ese archivo.
 
 ```
-.venv/bin/python scripts/pptx-asi-etapa3/render-figs.py
+.venv/bin/python scripts/pptx-asi-etapa3/figs16x9.py
 ```
 
-Escribe cinco `.html` en `materias/ASI/figs/presentacion/`. Se pasan a PNG con Chrome
-headless (los tamaños salen del propio script, escala 1,6×):
+Escribe cinco `.svg` de 1920×1080 en `materias/ASI/figs/presentacion/`. Se pasan a PNG
+de 3840×2160 con Chrome headless:
 
 ```
-for f in fig1-red:2800,1702 fig2a-gantt:2800,2032 fig2b-histo:2800,1952 \
-         fig3-plano:2336,1920 fig4-campo:2800,1888; do
-  n="${f%%:*}"; s="${f##*:}"
+cd materias/ASI/figs/presentacion
+for n in fig1-red fig2a-gantt fig2b-histo fig3-plano fig4-campo; do
+  printf '<!doctype html><meta charset="utf-8"><style>html,body{margin:0;padding:0;background:#fff}svg{display:block;width:3840px;height:2160px}</style>' > "$n.html"
+  cat "$n.svg" >> "$n.html"
   "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless --disable-gpu \
     --hide-scrollbars --default-background-color=FFFFFFFF \
-    --screenshot="materias/ASI/figs/presentacion/$n.png" --window-size="$s" \
-    "file://$PWD/materias/ASI/figs/presentacion/$n.html"
+    --screenshot="$n.png" --window-size=3840,2160 "file://$PWD/$n.html"
 done
 ```
+
+`render-figs.py` es el rasterizador viejo, que sacaba las láminas A3 tal cual. Se
+conserva para regenerar el anexo impreso, no para el deck.
 
 Y después el deck:
 
@@ -71,6 +79,8 @@ casi todas las láminas. Nada de eso se ve leyendo el `.js`.
   invalida la revisión de desbordes.
 - Motivo visual: insignia circular con el número de punto del entregable, en todas
   las láminas de contenido. Sin barras ni filetes decorativos.
-- Las cinco láminas de figura van a sangre, sin título propio: la figura ya lo trae.
+- Las cinco láminas de figura van **a sangre**, de borde a borde: las imágenes son
+  16:9 nativas, así que `figura()` las coloca en 0,0 a 13,333 × 7,5. No llevan
+  título propio en la lámina porque la figura ya lo trae en su riel.
 - El reparto de la exposición entre los cuatro integrantes está en las **notas del
   orador**, no impreso en la lámina.
