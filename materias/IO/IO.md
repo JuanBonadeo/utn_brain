@@ -596,6 +596,114 @@ la ganancia máxima semanal es de 900 u.m.
 2. **Redundancia geométrica, demostrada con un número.** Grasas equivale a $x_1 + x_2 \leq 450$, pero el máximo de $x_1+x_2$ sobre la RF es 350, en $(200;150)$. La recta **nunca toca la RF**. No alcanza con decir "se ve en el gráfico".
 3. **Comparar con el Ejercicio 1.** Ahí pintado era pasiva pero **necesaria**; acá grasas es pasiva **y prescindible**. Es el contraste que buscan cuando piden clasificar restricciones.
 
+##### Ejercicio 6 (extra) — Minimización, restricciones $\geq$ y RF no acotada
+
+> **Elaboración propia**, no está en la Práctica 1. La guía no tiene ningún caso de
+> **minimización con restricciones $\geq$**, que es justamente el que hace aparecer los
+> **excesos**, el semiplano que **no** contiene al origen y la combinación
+> **RF no acotada + óptimo finito**. El parcial sí lo toma.
+
+Mezcla de alimento balanceado a partir de dos insumos que se compran por kg: $M_1$ a
+3 u.m./kg y $M_2$ a 2 u.m./kg. Por lote la mezcla debe tener **al menos 10 unidades de
+fibra** ($M_1$ aporta 1 por kg, $M_2$ aporta 1) y **al menos 12 de vitaminas** ($M_1$
+aporta 2, $M_2$ aporta 1). El proveedor **no entrega más de 8 kg de $M_1$** por lote.
+Minimizar el costo del lote.
+
+$$	ext{Min } z = 3x_1 + 2x_2$$
+$$
+egin{aligned}
+1)\quad x_1 + x_2 &\geq 10 &&	ext{(fibra)}\
+2)\quad 2x_1 + x_2 &\geq 12 &&	ext{(vitaminas)}\
+3)\quad x_1 &\leq 8 &&	ext{(entrega máxima de } M_1)\
+x_1, x_2 &\geq 0
+\end{aligned}
+$$
+
+**Forma estándar.** Las dos primeras son $\geq$ → se **restan** excesos; la tercera es
+$\leq$ → se **suma** holgura:
+
+$$
+egin{aligned}
+x_1 + x_2 - x_3 &= 10\
+2x_1 + x_2 - x_4 &= 12\
+x_1 + x_5 &= 8
+\end{aligned}
+$$
+
+**Cortes:** $x_1/10 + x_2/10 = 1 	o (10;0)$ y $(0;10)$ · $x_1/6 + x_2/12 = 1 	o (6;0)$
+y $(0;12)$ · la 3) es **recta vertical**, sin segmentaria.
+
+**Semiplanos.** En $(0;0)$: $0 \geq 10$ ✗ y $0 \geq 12$ ✗ → para 1) y 2) vale el lado que
+**no** contiene al origen. $0 \leq 8$ ✓ → para 3) vale el lado del origen. **El origen no
+pertenece a la RF**: con cero insumo no se llega a los mínimos.
+
+**Vértices.** Solo tres: los dos bordes verticales se van al infinito y un lado infinito
+no aporta vértice.
+
+| Vértice | Intersección | $z = 3x_1+2x_2$ |
+|---|---|---|
+| $(0;12)$ | 2) ∩ eje $x_2$ | 24 |
+| $\mathbf{(2;8)}$ | 1) ∩ 2) | **22** |
+| $(8;2)$ | 1) ∩ 3) | 28 |
+
+Verificación por pendientes: isocosto $-3/2 = -1{,}5$, restricción 1) $-1$, restricción 2)
+$-2$. Queda **encajada entre las dos**, así que el óptimo es el vértice donde 1) y 2) se
+cruzan.
+
+$$x_3 = 2+8-10 = 0 \qquad x_4 = 2(2)+8-12 = 0 \qquad x_5 = 8-2 = 6$$
+
+```
+          2
+          8
+   S*  =  0
+          0
+          6
+
+   W* = 3(2) + 2(8) = 22
+```
+
+```
+8) INTERPRETACION
+
+   Se utilizan 2 kg del insumo M1 y 8 kg del insumo M2 por lote.
+   Se cumple exactamente con el minimo de 10 unidades de fibra, sin exceso.
+   Se cumple exactamente con el minimo de 12 unidades de vitaminas, sin exceso.
+   Del cupo de entrega de M1 quedan 6 kg sin utilizar.
+   El costo minimo por lote es de $ 22.
+
+9) TIPO DE SOLUCION
+
+   El optimo se da en un solo punto y no en un segmento, por lo tanto la
+   solucion es UNICA. La RF es NO ACOTADA (abierta hacia arriba), pero la
+   solucion si es acotada, porque al minimizar se desplaza la recta de
+   isocosto en sentido contrario a n y el primer contacto se produce en
+   un vertice.
+
+10) CLASIFICACION DE LAS RESTRICCIONES
+
+   1) fibra      : ACTIVA, porque su exceso es cero (x3 = 0).
+   2) vitaminas  : ACTIVA, porque su exceso es cero (x4 = 0).
+   3) entrega M1 : PASIVA, ya que se cumple con holgura (x5 = 6).
+                   Es pasiva NECESARIA: si se suprimiera, la RF se
+                   extenderia indefinidamente hacia la derecha y cambiaria.
+```
+
+**Lo que enseña:**
+
+1. **RF no acotada con óptimo finito.** La región es infinita **en la dirección en que el
+   costo crece**, que es justo la que no interesa. Con el mismo modelo pero
+   $	ext{Max } z$, la solución **sí** sería no acotada. Por eso en el bloque 9 nunca
+   alcanza con decir "la RF es no acotada": hay que decir qué le pasa a **la solución**, y
+   eso depende del sentido de optimización.
+2. **Los dos excesos dan cero.** No es casualidad: en un mínimo de costo con requisitos
+   $\geq$, lo racional es cumplir los mínimos **justo**. Si en un problema así dan los dos
+   excesos positivos, hay que sospechar del punto.
+3. **El origen fuera de la RF.** Con todas las restricciones $\leq$ el origen siempre es
+   factible; con $\geq$ deja de serlo. Cambia la intuición de por dónde buscar.
+4. **La solución óptima es una SBF con la estructura esperada.** Hay $m = 3$ restricciones
+   y $n = 5$ variables: $S^*$ tiene exactamente **3 componentes no nulas** ($x_1, x_2, x_5$)
+   y **2 nulas** ($x_3, x_4$). Es el objeto que el Simplex va a buscar en la Unidad 3.
+
 ##### Trampas prácticas de la Práctica 1
 
 Los cuatro errores que efectivamente aparecieron al resolverla:
@@ -1271,3 +1379,4 @@ Práctica 4 (`PL4UTN.pdf`), que integra sensibilidad, dualidad y parametrizació
 - 2026-08-26: **Cambio de régimen 2026: un solo parcial.** Se corrigió la nota de alcance del índice, que decía "entra de la Unidad 1 a la 5" (régimen 2025). Alcance presunto: todo el programa, a confirmar con la cátedra. Inicio de las sesiones de estudio guiado por la Unidad 1.
 - 2026-08-26: Se arrancó la **Práctica 4** (`PL4UTN.pdf` — análisis de sensibilidad, dualidad y parametrización). Se generó [[practica-4-sensibilidad-dualidad]] con el herramental completo (las cinco fórmulas sobre $B^{-1}$, la tabla de qué-cambia-qué-se-revisa, regla del 100%, lectura de la numeración de filas de LINDO) y el **Ejercicio 1** resuelto entero (incisos a–g del enunciado más h e i de reglas 100% que agrega la cátedra). Verificado por cálculo exacto con fracciones y coincidente con `PL4UTNresol.pdf`. Ejercicios 2 a 9 pendientes.
 - 2026-08-26: Se ingirieron los **capítulos 4 y 5 del apunte** (`PLC4.pdf`, `PLC5.pdf`) y se generó [[teoria-sensibilidad-dualidad]] — los fundamentos de la Práctica 4 explicados desde cero con el **taller de alfarería (Ejemplo 1-1)** como hilo conductor: por qué toda la tabla óptima **es** $B^{-1}$ aplicada a los datos originales, la asimetría $c_j\to$optimalidad / $b_i\to$factibilidad, dualidad (construcción, teorema fundamental, la interpretación del **seguro** de §5.6, holguras complementarias, costo reducido vs. costo marginal), los cinco casos de sensibilidad derivados, regla del 100%, **parametrización** (§4.10) y **Simplex dual** (§5.8), más el mapa de qué ejercicio de la práctica usa qué. Números verificados por cálculo exacto.
+- 2026-08-26: Se agregó a la Unidad 1 el **Ejercicio 6 (extra, elaboración propia)**: minimización con restricciones $\geq$, excesos, semiplano que no contiene al origen y **RF no acotada con óptimo finito** — caso que la Práctica 1 no cubre y el parcial sí toma. Resuelto en los 10 bloques del formato de cátedra, con el puente hacia la Unidad 2 (la solución óptima como SBF).
