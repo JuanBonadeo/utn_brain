@@ -1,0 +1,835 @@
+<title>Etapa 3 en diez minutos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap">
+
+<style>
+  :root {
+    --ground:   #FAFBFC;
+    --surface:  #FFFFFF;
+    --sunken:   #F1F5F8;
+    --ink:      #16222E;
+    --muted:    #5C6E7E;
+    --faint:    #8B9AA7;
+    --accent:   #15406B;
+    --accent-s: #E7EFF7;
+    --clock:    #B23A2E;
+    --clock-s:  #FBEDEB;
+    --rule:     #DDE5EC;
+    --rule-2:   #EDF1F5;
+    --shadow:   0 1px 2px rgba(22, 34, 46, .05), 0 8px 24px -12px rgba(22, 34, 46, .12);
+
+    --serif: "Newsreader", Georgia, "Times New Roman", serif;
+    --sans:  "Archivo", "Helvetica Neue", Arial, sans-serif;
+    --mono:  "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:   #0D1319;
+      --surface:  #141D26;
+      --sunken:   #101922;
+      --ink:      #E4ECF3;
+      --muted:    #93A5B5;
+      --faint:    #6D8090;
+      --accent:   #8CB8E2;
+      --accent-s: #17293A;
+      --clock:    #E5796A;
+      --clock-s:  #2C1B19;
+      --rule:     #23323F;
+      --rule-2:   #1B2733;
+      --shadow:   0 1px 2px rgba(0, 0, 0, .4), 0 8px 24px -12px rgba(0, 0, 0, .6);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground:   #0D1319;
+    --surface:  #141D26;
+    --sunken:   #101922;
+    --ink:      #E4ECF3;
+    --muted:    #93A5B5;
+    --faint:    #6D8090;
+    --accent:   #8CB8E2;
+    --accent-s: #17293A;
+    --clock:    #E5796A;
+    --clock-s:  #2C1B19;
+    --rule:     #23323F;
+    --rule-2:   #1B2733;
+    --shadow:   0 1px 2px rgba(0, 0, 0, .4), 0 8px 24px -12px rgba(0, 0, 0, .6);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 24px 96px; }
+
+  /* ---------------------------------------------------------- cabecera */
+
+  header.top { padding: 64px 0 40px; }
+
+  .eyebrow {
+    font-family: var(--sans);
+    font-size: 11.5px; font-weight: 600;
+    letter-spacing: .13em; text-transform: uppercase;
+    color: var(--faint);
+    margin: 0 0 18px;
+  }
+
+  h1 {
+    font-family: var(--serif);
+    font-size: clamp(38px, 6.4vw, 56px);
+    font-weight: 500; line-height: 1.02;
+    letter-spacing: -.018em;
+    text-wrap: balance;
+    margin: 0 0 22px;
+  }
+
+  .lede {
+    font-family: var(--serif);
+    font-size: 19px; line-height: 1.6;
+    color: var(--muted);
+    max-width: 60ch;
+    margin: 0 0 32px;
+  }
+
+  .clocks {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    margin: 0 0 28px;
+  }
+  .clockcard {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 13px 17px;
+    min-width: 148px;
+  }
+  .clockcard .v {
+    font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 25px; font-weight: 500;
+    letter-spacing: -.02em;
+    color: var(--ink);
+    display: block;
+  }
+  .clockcard.hot .v { color: var(--clock); }
+  .clockcard .k {
+    font-size: 11.5px; font-weight: 500;
+    color: var(--muted);
+    display: block; margin-top: 3px;
+  }
+
+  .rule-note {
+    background: var(--clock-s);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 15px 18px;
+    font-size: 14.5px;
+    color: var(--ink);
+    max-width: 66ch;
+  }
+  .rule-note b { font-weight: 600; }
+
+  /* ---------------------------------------------------------- filtro */
+
+  .filter {
+    position: sticky; top: 0; z-index: 20;
+    background: color-mix(in srgb, var(--ground) 92%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--rule);
+    margin: 0 -24px 8px;
+    padding: 11px 24px;
+    display: flex; align-items: center; gap: 8px;
+    flex-wrap: wrap;
+  }
+  .filter .lbl {
+    font-size: 11.5px; font-weight: 600;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: var(--faint);
+    margin-right: 4px;
+  }
+  .filter button {
+    font-family: var(--sans);
+    font-size: 13.5px; font-weight: 500;
+    color: var(--muted);
+    background: transparent;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    padding: 5px 13px;
+    cursor: pointer;
+    transition: background .12s, color .12s, border-color .12s;
+  }
+  .filter button:hover { border-color: var(--accent); color: var(--accent); }
+  .filter button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .filter button[aria-pressed="true"] {
+    background: var(--accent); border-color: var(--accent);
+    color: var(--surface); font-weight: 600;
+  }
+
+  /* ---------------------------------------------------------- bloques */
+
+  .block { padding-top: 40px; }
+  body[data-only="bonadeo"]  .block:not([data-speaker="bonadeo"]),
+  body[data-only="caser"]    .block:not([data-speaker="caser"]),
+  body[data-only="lezcano"]  .block:not([data-speaker="lezcano"]),
+  body[data-only="lurati"]   .block:not([data-speaker="lurati"]) { display: none; }
+
+  .band {
+    display: flex; align-items: baseline; flex-wrap: wrap;
+    gap: 6px 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--accent);
+    margin-bottom: 8px;
+  }
+  .band h2 {
+    font-family: var(--sans);
+    font-size: 21px; font-weight: 700;
+    letter-spacing: .04em; text-transform: uppercase;
+    color: var(--accent);
+    margin: 0; flex: 1 1 auto;
+  }
+  .band .range { font-size: 14px; color: var(--muted); }
+  .band .cume {
+    font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 14px; font-weight: 500;
+    color: var(--clock);
+  }
+
+  /* ---------------------------------------------------------- laminas */
+
+  .slide {
+    display: grid;
+    grid-template-columns: 62px 1fr;
+    gap: 0 22px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--rule-2);
+  }
+  .slide:last-of-type { border-bottom: none; }
+
+  .gutter { padding-top: 3px; }
+  .num {
+    font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 20px; font-weight: 600;
+    color: var(--accent);
+    line-height: 1.1;
+  }
+  .dur {
+    font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 12.5px;
+    color: var(--faint);
+    margin-top: 3px;
+  }
+
+  .slide h3 {
+    font-family: var(--sans);
+    font-size: 15px; font-weight: 600;
+    letter-spacing: .02em;
+    color: var(--ink);
+    margin: 0 0 10px;
+  }
+
+  .say p {
+    font-family: var(--serif);
+    font-size: 19.5px; line-height: 1.58;
+    color: var(--ink);
+    margin: 0 0 13px;
+    max-width: 62ch;
+  }
+  .say p:last-child { margin-bottom: 0; }
+  .say strong { font-weight: 600; color: var(--accent); }
+  .say em { font-style: italic; }
+
+  /* ---------------------------------------------------------- acotaciones */
+
+  .cues { grid-column: 2; display: flex; flex-direction: column; gap: 10px; margin-top: 6px; }
+  .cue {
+    background: var(--sunken);
+    border: 1px solid var(--rule);
+    border-radius: 9px;
+    padding: 12px 15px;
+    font-size: 14px; line-height: 1.5;
+    color: var(--muted);
+    max-width: 62ch;
+  }
+  .cue .tag {
+    display: block;
+    font-size: 10.5px; font-weight: 700;
+    letter-spacing: .12em; text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+  .cue.cut .tag  { color: var(--clock); }
+  .cue.pass .tag { color: var(--accent); }
+  .cue em { font-style: italic; color: var(--ink); }
+  .cue b { font-weight: 600; color: var(--ink); }
+
+  /* ---------------------------------------------------------- cierre */
+
+  .closing { padding-top: 56px; }
+  .closing h2 {
+    font-family: var(--serif);
+    font-size: 30px; font-weight: 500;
+    letter-spacing: -.012em;
+    margin: 0 0 16px;
+  }
+
+  .tablewrap { overflow-x: auto; margin-bottom: 18px; }
+  table { border-collapse: collapse; width: 100%; min-width: 420px; }
+  th, td {
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--rule-2);
+    font-size: 14.5px;
+  }
+  th {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: var(--faint);
+    border-bottom: 1px solid var(--rule);
+  }
+  td.t {
+    font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+  }
+  td.t.cume { color: var(--clock); font-weight: 500; }
+  tr:last-child td { border-bottom: none; }
+
+  .qa { display: flex; flex-direction: column; gap: 14px; margin-top: 10px; }
+  .qa .q {
+    font-family: var(--sans);
+    font-size: 15px; font-weight: 600;
+    color: var(--ink);
+    margin: 0 0 4px;
+  }
+  .qa .a {
+    font-family: var(--serif);
+    font-size: 17px; line-height: 1.55;
+    color: var(--muted);
+    margin: 0; max-width: 64ch;
+  }
+
+  footer.foot {
+    margin-top: 56px; padding-top: 20px;
+    border-top: 1px solid var(--rule);
+    font-size: 13px; color: var(--faint);
+  }
+  footer.foot code {
+    font-family: var(--mono); font-size: 12.5px;
+    background: var(--sunken); padding: 1px 5px; border-radius: 4px;
+  }
+
+  @media (max-width: 620px) {
+    .wrap { padding: 0 18px 72px; }
+    .filter { margin: 0 -18px 8px; padding: 10px 18px; }
+    .slide { grid-template-columns: 1fr; gap: 0; }
+    .gutter { display: flex; align-items: baseline; gap: 10px; padding-bottom: 8px; }
+    .dur { margin-top: 0; }
+    .cues { grid-column: 1; }
+    .say p { font-size: 18.5px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="top">
+    <p class="eyebrow">ASI · TP Integrador Etapa 3 · Comisión 403 · Grupo 310</p>
+    <h1>Etapa&nbsp;3 en diez minutos</h1>
+    <p class="lede">Guion cronometrado de la exposición, repartido entre los cuatro. Está escrito para
+      <em>decir</em>, no para leer en silencio: calibrado a 145 palabras por minuto.</p>
+
+    <div class="clocks">
+      <div class="clockcard"><span class="v">9:17</span><span class="k">de habla</span></div>
+      <div class="clockcard hot"><span class="v">9:49</span><span class="k">con los cambios de expositor</span></div>
+      <div class="clockcard"><span class="v">22</span><span class="k">láminas · 4 expositores</span></div>
+    </div>
+
+    <p class="rule-note"><b>Regla del tiempo.</b> Ninguna tabla se lee en voz alta. Las láminas 4, 9, 13 y 19
+      son de consulta: se enuncia lo que significan y se sigue. Cierra al filo de los diez minutos, así que
+      los recortes marcados no son opcionales si un bloque se pasa de su corte.</p>
+  </header>
+
+  <nav class="filter" aria-label="Filtrar por expositor">
+    <span class="lbl">Ver</span>
+    <button type="button" data-f="all" aria-pressed="true">Todo</button>
+    <button type="button" data-f="bonadeo" aria-pressed="false">Bonadeo</button>
+    <button type="button" data-f="caser" aria-pressed="false">Casermeiro</button>
+    <button type="button" data-f="lezcano" aria-pressed="false">Lezcano</button>
+    <button type="button" data-f="lurati" aria-pressed="false">Lurati</button>
+  </nav>
+
+  <!-- ============================================ BONADEO -->
+  <section class="block" data-speaker="bonadeo">
+    <div class="band">
+      <h2>Bonadeo</h2>
+      <span class="range">Láminas 1 a 6 · dura 2:20</span>
+      <span class="cume">cierra en 2:20</span>
+    </div>
+
+    <article class="slide">
+      <div class="gutter"><div class="num">01</div><div class="dur">13 s</div></div>
+      <div>
+        <h3>Portada</h3>
+        <div class="say">
+          <p>Buenas. Grupo 310, comisión 403. Presentamos la Etapa 3 del Trabajo Práctico Integrador:
+            la planificación de un proyecto de TI para Personal, sobre el proceso de instalación de
+            internet con fibra óptica.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="slide">
+      <div class="gutter"><div class="num">02</div><div class="dur">26 s</div></div>
+      <div>
+        <h3>El problema</h3>
+        <div class="say">
+          <p>El proceso tiene tres debilidades: no hay trazabilidad de la orden, la cola no tiene
+            criterio de priorización, y no se controla la competencia del técnico al asignarle una orden.</p>
+          <p>Las dos últimas son los riesgos <strong>R07 y R04</strong> de la Etapa 2, severidad 12, y son
+            los únicos que quedaron sin plan de tratamiento. Este proyecto es el tratamiento de los dos.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="slide">
+      <div class="gutter"><div class="num">03</div><div class="dur">23 s</div></div>
+      <div>
+        <h3>El proyecto</h3>
+        <div class="say">
+          <p>El proyecto es una plataforma de gestión de órdenes de trabajo con aplicación móvil de campo:
+            motor de asignación por competencia certificada, aplicación <em>offline-first</em> con checklist
+            y conformidad del cliente, cuatro integraciones y capa de seguridad.</p>
+          <p>Interviene las actividades 3 a 9 del proceso, y lo que queda afuera es lo que ya tiene
+            tratamiento propio.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="slide">
+      <div class="gutter"><div class="num">04</div><div class="dur">20 s</div></div>
+      <div>
+        <h3>Objetivos</h3>
+        <div class="say">
+          <p>Cuatro objetivos, con indicador, línea base, meta y plazo. Dos cosas. Las líneas base son
+            <strong>supuestos declarados</strong>, porque las etapas anteriores no relevaron indicadores, y
+            medirlas es un entregable de la fase 2. Y O4 no tiene línea base: esa imposibilidad de medir es
+            la definición del riesgo R07.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="slide">
+      <div class="gutter"><div class="num">05</div><div class="dur">28 s</div></div>
+      <div>
+        <h3>Alternativas</h3>
+        <div class="say">
+          <p>Tres alternativas. No son tres formas de construir lo mismo: son <strong>tres proyectos
+            distintos</strong>. Elegimos el primero porque trata riesgos sin tratamiento, ejecuta un objetivo
+            ya comprometido en la Etapa 1 y es el único que interviene el proceso crítico.</p>
+          <p>Se construye como <strong>SaaS</strong>: no desarrollamos el producto, lo configuramos. La
+            contrapartida: los datos de clientes salen del perímetro y eso agrava el R05. Se compensa por
+            contrato.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="slide">
+      <div class="gutter"><div class="num">06</div><div class="dur">30 s</div></div>
+      <div>
+        <h3>Ciclo de vida</h3>
+        <div class="say">
+          <p>El ciclo de vida es híbrido, y no por compromiso.</p>
+          <p><strong>Predictivo</strong> para la selección del proveedor, la contratación y el cumplimiento
+            normativo: requerimientos cerrables por anticipado. <strong>Incremental</strong> para la
+            configuración, la experiencia de uso y el despliegue: la usabilidad con guantes y sin
+            conectividad no se especifica de antemano, se calibra con un piloto.</p>
+          <p>No es cascada porque entregarla recién al final arriesga que los técnicos no la adopten.
+            No es ágil porque hay contratos, plazos de entrega y un presupuesto aprobado por anticipado.</p>
+        </div>
+      </div>
+      <div class="cues">
+        <div class="cue cut"><span class="tag">Si vas corto</span>En la 5, decí solo <em>«tres proyectos
+          distintos, elegimos el primero por R04 y R07»</em> y pasá a SaaS.</div>
+        <div class="cue pass"><span class="tag">Paso a Casermeiro</span><em>«Con el ciclo de vida definido,
+          así se organiza el trabajo.»</em></div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============================================ CASERMEIRO -->
+  <section class="block" data-speaker="caser">
+    <div class="band">
+      <h2>Casermeiro</h2>
+      <span class="range">Láminas 7 a 10 · dura 1:39</span>
+      <span class="cume">cierra en 4:07</span>
+    </div>
+
+    <article class="slide">
+      <div class="gutter"><div class="num">07</div><div class="dur">22 s</div></div>
+      <div>
+        <h3>Las once fases</h3>
+        <div class="say">
+          <p>Once fases, cada una con un entregable verificable. Señalo tres: la fase 2 mide las líneas base,
+            que es lo que habilita evaluar los objetivos; la fase 3 es el proceso formal de compras; y la
+            fase 11 cierra el circuito con la Etapa 2, dando de alta el sistema en la CMDB.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="slide">
+      <div class="gutter"><div class="num">08</div><div class="dur">27 s</div></div>
+      <div>
+        <h3>EDT</h3>
+        <div class="say">
+          <p>De ahí sale la EDT: once paquetes de primer nivel y <strong>cincuenta paquetes de trabajo</strong>,
+            cada uno con predecesora, duración, perfil y entregable. No descomponemos por debajo del nivel en
+            que un paquete tiene un entregable verificable y un responsable.</p>
+          <p>Y los solapamientos están puestos <strong>a propósito</strong>: varias actividades comparten
+            perfil en la misma ventana. Es el insumo del análisis de sobreasignación que viene después.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="slide">
+      <div class="gutter"><div class="num">09</div><div class="dur">25 s</div></div>
+      <div>
+        <h3>Recursos humanos</h3>
+        <div class="say">
+          <p>Nueve perfiles, once personas, <strong>4.240 horas-persona</strong>. Ningún perfil figura acá sin
+            ser responsable de al menos un paquete de la EDT: la carga sale de sumar esas duraciones.</p>
+          <p>Ninguno alcanza dedicación completa, así que todos conservan sus tareas de línea. Hay dos personas
+            en integraciones y dos en pruebas: no es volumen, es aplanamiento, y evita veintitrés días de atraso.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="slide">
+      <div class="gutter"><div class="num">10</div><div class="dur">25 s</div></div>
+      <div>
+        <h3>Higiene y seguridad</h3>
+        <div class="say">
+          <p>Analizamos los sectores del proceso crítico, incluido el campo, que es donde están los riesgos
+            graves. Ordenamos las medidas por los cuatro niveles de prevención primaria: diseño, origen, medio
+            y persona. Asumimos que el equipo de protección personal es el <strong>escalón más débil</strong>,
+            porque depende de una conducta diaria.</p>
+          <p>Y hay un caso donde el propio sistema es la medida preventiva: la habilitación vigente pasa a ser
+            condición de despacho.</p>
+        </div>
+      </div>
+      <div class="cues">
+        <div class="cue cut"><span class="tag">Si vas corto</span>La 7 se resuelve en una frase — <em>«once
+          fases, cada una con entregable verificable; la 11 cierra el circuito con la CMDB de la Etapa 2»</em>.</div>
+        <div class="cue pass"><span class="tag">Paso a Lezcano</span><em>«Esas medidas se materializan en dos
+          planos.»</em></div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============================================ LEZCANO -->
+  <section class="block" data-speaker="lezcano">
+    <div class="band">
+      <h2>Lezcano</h2>
+      <span class="range">Láminas 11 a 16 · dura 2:15</span>
+      <span class="cume">cierra en 6:30</span>
+    </div>
+
+    <article class="slide">
+      <div class="gutter"><div class="num">11</div><div class="dur">18 s</div></div>
+      <div>
+        <h3>Plano de la base operativa</h3>
+        <div class="say">
+          <p>Plano de la base operativa, escala 1:125. Lo que hay que ver: circulaciones peatonal y vehicular
+            separadas, matafuegos identificados por clase, y recorridos de evacuación hasta el punto de encuentro.</p>
+          <p>Las cotas son mínimos de diseño supuestos, a validar con Higiene y Seguridad.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="slide">
+      <div class="gutter"><div class="num">12</div><div class="dur">27 s</div></div>
+      <div>
+        <h3>Croquis de trabajo en campo</h3>
+        <div class="say">
+          <p>El trabajo en campo es donde están los riesgos graves: altura, riesgo eléctrico y espacio confinado.</p>
+          <p>Dos cosas. El vehículo se ubica aguas arriba y actúa como <strong>barrera física</strong>: es
+            prevención en el medio, no sobre la persona. Y en el domicilio, la lista de verificación
+            <strong>bloquea el inicio de la orden</strong> si no se completa: el control deja de depender de la
+            memoria del técnico.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="slide">
+      <div class="gutter"><div class="num">13</div><div class="dur">21 s</div></div>
+      <div>
+        <h3>Activos y forma de adquisición</h3>
+        <div class="say">
+          <p>No voy a leer la tabla: importa la última columna. Cada modalidad se elige por una razón de riesgo.
+            Suscripción anual porque en SaaS no hay licencia perpetua. Bolsa de horas con tope porque un precio
+            cerrado obligaría a congelar la configuración antes del piloto, que es cuando está previsto ajustarla.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="slide">
+      <div class="gutter"><div class="num">14</div><div class="dur">28 s</div></div>
+      <div>
+        <h3>RFI y RFP</h3>
+        <div class="say">
+          <p>La selección usa dos instrumentos sucesivos. El <strong>RFI</strong> reduce la incertidumbre sobre
+            el mercado: qué plataformas existen, qué integran de forma nativa, dónde alojan los datos. El
+            <strong>RFP</strong> reduce la incertidumbre sobre la oferta: propuesta comparable y vinculante.</p>
+          <p>Los criterios se ponderan antes de abrir las propuestas y los tres primeros suman el 65%. Hay un
+            umbral excluyente: sin alojamiento en la región, la propuesta queda afuera.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="slide">
+      <div class="gutter"><div class="num">15</div><div class="dur">25 s</div></div>
+      <div>
+        <h3>Tiempos</h3>
+        <div class="say">
+          <p>Sobre los cincuenta paquetes calculamos el camino crítico: <strong>187 días hábiles</strong> a
+            fechas tempranas, con treinta actividades críticas.</p>
+          <p>Pero eso supone recursos ilimitados. Contra una persona por perfil aparecen seis tramos de
+            sobreasignación: con nivelación pura el proyecto se va a 215 días; reforzando integraciones y pruebas
+            queda en <strong>192 días</strong>, unos 9,1 meses. Adoptamos esa, y el fundamento es económico.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="slide">
+      <div class="gutter"><div class="num">16</div><div class="dur">16 s</div></div>
+      <div>
+        <h3>Diagrama de red</h3>
+        <div class="say">
+          <p>En rojo, las treinta actividades críticas. La cadena pasa por el arranque, por los treinta y un días
+            de selección del proveedor —el tramo más largo y menos comprimible— y por las cuatro integraciones
+            encadenadas sobre un mismo especialista.</p>
+        </div>
+      </div>
+      <div class="cues">
+        <div class="cue cut"><span class="tag">Si vas corto</span>La 13 se resuelve con un solo ejemplo, el de la
+          bolsa de horas. Y la 16 con una frase: <em>«en rojo el camino crítico; el cuello de botella es la
+          selección del proveedor y la cadena de integraciones»</em>.</div>
+        <div class="cue pass"><span class="tag">Paso a Lurati</span><em>«Ese cronograma, en el tiempo, se ve
+          así.»</em></div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============================================ LURATI -->
+  <section class="block" data-speaker="lurati">
+    <div class="band">
+      <h2>Lurati</h2>
+      <span class="range">Láminas 17 a 21 · dura 2:13</span>
+      <span class="cume">cierra en 8:51</span>
+    </div>
+
+    <article class="slide">
+      <div class="gutter"><div class="num">17</div><div class="dur">22 s</div></div>
+      <div>
+        <h3>Gantt</h3>
+        <div class="say">
+          <p>Cronograma aplanado, en <strong>meses relativos al día cero</strong>, que es la aprobación del Acta:
+            no lo fechamos en calendario porque la fecha de inicio real no está definida.</p>
+          <p>Relevamiento y selección hasta el mes 3, configuración e integración hasta el 5, pruebas y piloto
+            hasta el 7, despliegue y estabilización hasta el 9.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="slide">
+      <div class="gutter"><div class="num">18</div><div class="dur">18 s</div></div>
+      <div>
+        <h3>Histograma de recursos</h3>
+        <div class="say">
+          <p>Mismo eje de tiempo, perfil por perfil. Las barras celestes claras son los picos de dos personas:
+            son exactamente las ventanas que justificaron el refuerzo en integraciones y pruebas. La línea de
+            puntos es la dotación asignada, y no se supera ningún día.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="slide">
+      <div class="gutter"><div class="num">19</div><div class="dur">32 s</div></div>
+      <div>
+        <h3>Costos</h3>
+        <div class="say">
+          <p>El costo del año 1: recursos humanos propios 112.624 dólares, dispositivos 39.060, servicios
+            103.150. Da 254.834 de costo directo. Con 12% de indirectos y 15% de contingencia, el presupuesto
+            del año 1 es de <strong>328.226 dólares</strong>.</p>
+          <p>La contingencia no es un porcentaje de estilo: se justifica con R03, R04, R05 y R07.</p>
+          <p>A tres años el costo total de propiedad es de 531.460, y el <strong>38% es recurrente</strong>: ese
+            es el rasgo económico del modelo contratado como servicio.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="slide">
+      <div class="gutter"><div class="num">20</div><div class="dur">29 s</div></div>
+      <div>
+        <h3>Factibilidad técnica</h3>
+        <div class="say">
+          <p>Técnicamente no requerimos tecnología por desarrollar: las plataformas de Field Service Management
+            son un producto maduro.</p>
+          <p>El problema está en otro lado, y lo declaramos como <strong>riesgo abierto</strong>, no como
+            hipótesis favorable: no está documentado si el SGOT, el CRM y el NMS exponen interfaces de
+            programación, y de eso dependen cuatro paquetes del camino crítico. Se verifica en el paquete 2.3
+            y dejamos un plan alternativo cotizado en el RFP.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="slide">
+      <div class="gutter"><div class="num">21</div><div class="dur">32 s</div></div>
+      <div>
+        <h3>Factibilidad económica</h3>
+        <div class="say">
+          <p>Económicamente: valor actual neto de <strong>más 31.515 dólares</strong> a cinco años, tasa interna
+            de retorno del 19% contra una tasa de corte del 15%, y repago a los 3,14 años.</p>
+          <p>Es viable, pero el margen es estrecho y conviene decirlo: a tres años todavía no se repaga. El
+            umbral de indiferencia está en el 85% de realización de los beneficios.</p>
+          <p>La sensibilidad no está en los costos sino en los beneficios, y el más frágil es O1.</p>
+        </div>
+      </div>
+      <div class="cues">
+        <div class="cue cut"><span class="tag">Si vas corto</span>En la 19 basta con <em>«328.226 el año 1,
+          531.460 a tres años, y el 38% es recurrente porque es SaaS»</em>. <b>La 21 no se recorta:</b> es el
+          remate del trabajo.</div>
+        <div class="cue pass"><span class="tag">Paso a Casermeiro</span><em>«Queda la dimensión legal, y con eso
+          la conclusión.»</em></div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============================================ CASERMEIRO · cierre -->
+  <section class="block" data-speaker="caser">
+    <div class="band">
+      <h2>Casermeiro · cierre</h2>
+      <span class="range">Lámina 22 · dura 0:50</span>
+      <span class="cume">cierra en 9:49</span>
+    </div>
+
+    <article class="slide">
+      <div class="gutter"><div class="num">22</div><div class="dur">50 s</div></div>
+      <div>
+        <h3>Factibilidad legal y conclusión</h3>
+        <div class="say">
+          <p>Alojar datos personales en una plataforma contratada como servicio los saca del perímetro: el
+            proveedor pasa a ser encargado del tratamiento, el alojamiento fuera del país configura transferencia
+            internacional, y el deber de seguridad sigue siendo nuestro.</p>
+          <p>La conclusión es en tres partes. <strong>Técnicamente factible</strong>, con un supuesto crítico
+            declarado: las interfaces. <strong>Económicamente viable pero de margen estrecho</strong>: a tres años
+            no se repaga. Y <strong>legalmente factible bajo condición contractual</strong>: sin las cláusulas del
+            punto 8 el proyecto agravaría el R05 en lugar de contenerlo.</p>
+          <p>Por eso la decisión de despliegue masivo no se toma con la aprobación del Acta, sino en el
+            <strong>paquete 8.4</strong>: una vez medidas las líneas base, verificadas las interfaces y cerrados
+            los precios. Muchas gracias.</p>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============================================ cierre -->
+  <section class="closing">
+    <h2>Reloj de control</h2>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th>Corte</th><th>Quién termina</th><th style="text-align:right">Dura</th><th style="text-align:right">Reloj</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Lámina 6</td><td>Bonadeo</td><td class="t">2:20</td><td class="t cume">2:20</td></tr>
+          <tr><td>Lámina 10</td><td>Casermeiro</td><td class="t">1:39</td><td class="t cume">4:07</td></tr>
+          <tr><td>Lámina 16</td><td>Lezcano</td><td class="t">2:15</td><td class="t cume">6:30</td></tr>
+          <tr><td>Lámina 21</td><td>Lurati</td><td class="t">2:13</td><td class="t cume">8:51</td></tr>
+          <tr><td>Lámina 22</td><td>Casermeiro</td><td class="t">0:50</td><td class="t cume">9:49</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="rule-note">El reloj ya incluye 8 segundos por cambio de expositor. Si un bloque se pasa de su corte,
+      el siguiente aplica sus recortes marcados: <b>no se recupera tiempo acelerando la lectura</b>, se recupera
+      sacando contenido.</p>
+  </section>
+
+  <section class="closing">
+    <h2>Preguntas probables</h2>
+    <div class="qa">
+      <div>
+        <p class="q">¿Por qué SaaS y no desarrollo propio?</p>
+        <p class="a">Reduce plazo y riesgo técnico, a cambio de costo recurrente y de sacar los datos del
+          perímetro, que es lo que se compensa por contrato.</p>
+      </div>
+      <div>
+        <p class="q">¿Por qué dos personas en integraciones y en pruebas?</p>
+        <p class="a">Con una por perfil el proyecto pasa de 192 a 215 días. Los conflictos caen sobre actividades
+          críticas, así que no se resuelven corriendo tareas dentro de la holgura.</p>
+      </div>
+      <div>
+        <p class="q">¿Por qué el VAN es tan ajustado?</p>
+        <p class="a">Porque los beneficios descansan sobre líneas base que hoy son supuestos. Está dicho a
+          propósito, y por eso la decisión de despliegue se difiere al paquete 8.4.</p>
+      </div>
+      <div>
+        <p class="q">¿Por qué el cronograma no tiene fechas?</p>
+        <p class="a">Porque la fecha de inicio real no está definida. Va en meses relativos al día cero.</p>
+      </div>
+      <div>
+        <p class="q">¿Qué pasa si el SGOT no tiene API?</p>
+        <p class="a">Hay plan alternativo en tres vías: base de datos intermedia, intercambio por lotes o
+          automatización de interfaz. Cada una se cotiza en el RFP; las tres cuestan más horas del especialista
+          de integraciones.</p>
+      </div>
+    </div>
+
+    <footer class="foot">
+      Fuente: <code>materias/ASI/entregables/etapa3-guion.md</code>. Los tiempos se recalculan con
+      <code>scripts/guion-timing.py</code> a 145 palabras por minuto.
+    </footer>
+  </section>
+
+</div>
+
+<script>
+  (function () {
+    var buttons = Array.prototype.slice.call(document.querySelectorAll('.filter button'));
+    var KEY = 'asi-guion-filtro';
+
+    function apply(value, save) {
+      document.body.setAttribute('data-only', value === 'all' ? '' : value);
+      buttons.forEach(function (b) {
+        b.setAttribute('aria-pressed', String(b.dataset.f === value));
+      });
+      if (save) {
+        try { localStorage.setItem(KEY, value); } catch (e) { /* sin almacenamiento */ }
+      }
+    }
+
+    buttons.forEach(function (b) {
+      b.addEventListener('click', function () {
+        apply(b.dataset.f, true);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+
+    var saved = 'all';
+    try { saved = localStorage.getItem(KEY) || 'all'; } catch (e) { /* sin almacenamiento */ }
+    if (buttons.some(function (b) { return b.dataset.f === saved; })) { apply(saved, false); }
+  })();
+</script>
