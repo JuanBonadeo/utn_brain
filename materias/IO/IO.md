@@ -609,12 +609,13 @@ fibra** ($M_1$ aporta 1 por kg, $M_2$ aporta 1) y **al menos 12 de vitaminas** (
 aporta 2, $M_2$ aporta 1). El proveedor **no entrega más de 8 kg de $M_1$** por lote.
 Minimizar el costo del lote.
 
-$$	ext{Min } z = 3x_1 + 2x_2$$
+$$\text{Min } z = 3x_1 + 2x_2$$
+
 $$
-egin{aligned}
-1)\quad x_1 + x_2 &\geq 10 &&	ext{(fibra)}\
-2)\quad 2x_1 + x_2 &\geq 12 &&	ext{(vitaminas)}\
-3)\quad x_1 &\leq 8 &&	ext{(entrega máxima de } M_1)\
+\begin{aligned}
+1)\quad x_1 + x_2 &\geq 10 &&\text{(fibra)}\\
+2)\quad 2x_1 + x_2 &\geq 12 &&\text{(vitaminas)}\\
+3)\quad x_1 &\leq 8 &&\text{(entrega máxima de } M_1)\\
 x_1, x_2 &\geq 0
 \end{aligned}
 $$
@@ -623,14 +624,14 @@ $$
 $\leq$ → se **suma** holgura:
 
 $$
-egin{aligned}
-x_1 + x_2 - x_3 &= 10\
-2x_1 + x_2 - x_4 &= 12\
+\begin{aligned}
+x_1 + x_2 - x_3 &= 10\\
+2x_1 + x_2 - x_4 &= 12\\
 x_1 + x_5 &= 8
 \end{aligned}
 $$
 
-**Cortes:** $x_1/10 + x_2/10 = 1 	o (10;0)$ y $(0;10)$ · $x_1/6 + x_2/12 = 1 	o (6;0)$
+**Cortes:** $x_1/10 + x_2/10 = 1 \to (10;0)$ y $(0;10)$ · $x_1/6 + x_2/12 = 1 \to (6;0)$
 y $(0;12)$ · la 3) es **recta vertical**, sin segmentaria.
 
 **Semiplanos.** En $(0;0)$: $0 \geq 10$ ✗ y $0 \geq 12$ ✗ → para 1) y 2) vale el lado que
@@ -692,7 +693,7 @@ $$x_3 = 2+8-10 = 0 \qquad x_4 = 2(2)+8-12 = 0 \qquad x_5 = 8-2 = 6$$
 
 1. **RF no acotada con óptimo finito.** La región es infinita **en la dirección en que el
    costo crece**, que es justo la que no interesa. Con el mismo modelo pero
-   $	ext{Max } z$, la solución **sí** sería no acotada. Por eso en el bloque 9 nunca
+   $\text{Max } z$, la solución **sí** sería no acotada. Por eso en el bloque 9 nunca
    alcanza con decir "la RF es no acotada": hay que decir qué le pasa a **la solución**, y
    eso depende del sentido de optimización.
 2. **Los dos excesos dan cero.** No es casualidad: en un mínimo de costo con requisitos
@@ -862,7 +863,7 @@ El teorema de equivalencia (vértice ⇔ SBF) se vuelve operativo con una sola
 observación, y conviene tenerla presente porque es lo que hace que el Simplex deje de
 parecer magia:
 
-$$	ext{“estoy parado sobre la recta } i	ext{”} \quad\Longleftrightarrow\quad 	ext{“su holgura o exceso vale } 0	ext{”}$$
+$$\text{“estoy parado sobre la recta } i\text{”} \quad\Longleftrightarrow\quad \text{“su holgura o exceso vale } 0\text{”}$$
 
 Si estuvieras del lado holgado de la restricción $i$, sobraría recurso y su holgura sería
 positiva. Justo **sobre** la recta, vale cero. De ahí se sigue que **elegir qué dos rectas
@@ -896,7 +897,7 @@ Tres cosas que salen de esta tabla:
 3. **Una variable de exceso negativa cuantifica la infactibilidad.** En $(0;10)$ da
    $x_4 = -2$: no solo avisa que el punto está fuera de la RF, sino que faltan
    **2 unidades** de vitaminas para entrar. El álgebra detecta y mide lo que en el gráfico
-   se veía como “ese cruce queda del lado de afuera”.
+   se veía como "ese cruce queda del lado de afuera".
 
 Corolario práctico: la forma estándar **no se usa para hallar** el óptimo por método
 gráfico — las rectas, los semiplanos y el sistema del vértice salen de las desigualdades
