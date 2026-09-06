@@ -22,3 +22,6 @@ materias/*/estudio/*.html
 # Figuras rasterizadas para el .pptx — derivadas del anexo gráfico, se regeneran
 # con scripts/pptx-asi-etapa3/render-figs.py + Chrome headless
 materias/*/figs/presentacion/
+
+# IPP: instaladores de Bizagi (389MB de .exe, se bajan de bizagi.com)
+materias/IPP/fuentes/**/*.exe
