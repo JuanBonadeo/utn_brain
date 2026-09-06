@@ -85,12 +85,21 @@ variantes del mismo proceso, y cada una pide un gateway distinto:
 - **A**: redacción y diseño **en paralelo**, diagramación cuando ambas terminan
   → gateway **paralelo** (+) para abrir y otro (+) para cerrar.
 - **B**: diseño solo si el artículo tiene ilustración, redacción siempre
-  → gateway **inclusivo** (O).
-- **C**: revisado puede salir rechazado / aprobado / con correcciones
-  → gateway **exclusivo** (X) de tres salidas, con loop al autor en la tercera.
+  → **paralelo (+) para abrir**, y sobre la rama de diseño un **exclusivo (X)**
+  "¿Tiene ilustraciones?" con by-pass por el "No"; cierra con **paralelo (+)**.
+- **C**: lo mismo que B, precedido de un **exclusivo (X) de tres salidas**
+  (Rechazado → fin / Aprobado → sigue / Correcciones necesarias → "Realizar
+  correcciones" y vuelve a "Revisar artículo").
 
-Si entra este caso, la trampa es resolver B con un exclusivo. No es exclusivo:
-redacción va siempre y diseño a veces, o sea **una o más** ramas.
+⚠️ **Corrección.** Una versión anterior de esta wiki decía que B se resolvía con
+un gateway **inclusivo** y que usar un exclusivo era la trampa. **Es al revés.**
+La solución oficial de la cátedra
+(`fuentes/Introducción a la Práctica Profesional/Trabajo Práctico/Ejercicio 3 Caso Articulos/Caso_Articulos.pdf`,
+fechada 11/05/2026) resuelve B y C con **paralelo + exclusivo**, no con inclusivo.
+
+El inclusivo también sería semánticamente válido, pero no es lo que responde la
+cátedra. El join paralelo funciona igual porque las dos ramas del exclusivo
+desembocan en él: llegan dos tokens en cualquiera de los dos casos.
 
 **4. Quejas y reclamos** — *el más completo.* Combina:
 - **Paralelo**: el envío del formulario al cliente y la evaluación del director
