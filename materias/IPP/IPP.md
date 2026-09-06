@@ -8,6 +8,10 @@
 > [`estudio/repaso-parcial.md`](estudio/repaso-parcial.md) — banco de teoría BPMN
 > con respuestas verificadas, los distractores que la cátedra recicla, la
 > corrección del caso de junio 2026 y el plan cronometrado de Axure.
+> Y en [`estudio/repaso-parcial-cursada.md`](estudio/repaso-parcial-cursada.md)
+> lo que agrega el material de cursada: lo que dijo el docente en clase, la
+> teoría del PPT de la cátedra, y **tus cinco errores recurrentes** sacados de
+> auditar tus propios TP.
 
 ## Desarrollo
 
@@ -435,3 +439,13 @@ cuando el comprobante sale vacío.
   contradicciones aparentes entre años analizadas, auditoría adversarial de la
   resolución práctica de 2026 (16 hallazgos → 2 confirmados, 14 refutados por
   verificación a tres lentes) y plan de ataque para el CU "Pedir un libro".
+- 2026-09-06: ingerido el material de cursada (`fuentes/Introducción a la
+  Práctica Profesional/`): PPT de teoría BPMN (48 láminas), transcripciones de
+  las clases del 13 y 20 de abril, y los TP 1-6 resueltos. Generado
+  `estudio/repaso-parcial-cursada.md`: 28 preguntas construidas desde el PPT, 46
+  definiciones literales de la cátedra, 16 puntos de contraste con lo que ya
+  teníamos, y auditoría adversarial de sus propias entregas (8 errores
+  confirmados, 7 refutados, 5 patrones recurrentes). Agregado
+  `scripts/bpm-dump.py` para leer la estructura de un `.bpm` sin abrir Bizagi.
+  **Corregido el caso 3B de la unidad 1**: la solución oficial usa paralelo +
+  exclusivo, no inclusivo.
