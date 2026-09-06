@@ -144,81 +144,264 @@ cualquier momento.
 
 #### Conceptos clave
 
-La cátedra trabaja con **Axure RP 9** (v9.0.0.3727, feb 2021), con licencia UTN
-provista y una VM preparada. Ojo: el entregable
-`entregables/prototipoRegistrarPrestamo.rp` está guardado con **Axure RP 11** —
-RP 9 no abre archivos de RP 11. Verificar con qué versión se rinde.
+La cátedra trabaja con **Axure RP 9** (v9.0.0.3727, feb 2021), con licencia UTN y
+una VM preparada. Ojo: `entregables/prototipoRegistrarPrestamo.rp` está guardado
+con **Axure RP 11** — RP 9 no abre archivos de RP 11.
 
-Un prototipo sin navegación es un dibujo. Lo que lo vuelve prototipo:
-seleccionar el widget → panel **Interactions** → *Click or Tap* → *Open Link* →
-página destino. Probar siempre con **Preview** antes de entregar.
+Un prototipo sin interacciones es un dibujo. El TP se construye sobre cuatro
+mecanismos, y todo el parcial sale de combinarlos:
 
-Piezas que usa la cátedra:
-- **Repeater**: la grilla con dataset propio. Es el corazón del CU Reservar
-  habitación.
-- **Dynamic Panel**: estados múltiples (mostrar/ocultar, modales, tabs).
-- **Masters**: elementos repetidos entre páginas (header, nav).
-- **Bootstrap 3 Library** (`bootstrap_3-v0.1.1.rplib`): librería de widgets
-  provista por la cátedra.
+1. **Variables globales** (`Project → Global Variables`) — la memoria entre
+   páginas. Sin esto no se puede pasar un dato de una pantalla a otra.
+2. **Eventos**: `Page Loaded` (al cargar la página), `Click or Tap`,
+   `Text Changed`, `Lost Focus`, `Selection Changed` (droplist), `Selected`
+   (radiobutton), `Item Loaded` (repeater).
+3. **Acciones**: `Set Variable Value`, `Set Text`, `Set Image`, `Open Link`,
+   `Add Sort` / `Remove Sort`, `Add Filter`.
+4. **Expresiones** entre dobles corchetes: `[[Var_X]]`, `[[Item.Campo]]`,
+   `[[This.text]]`.
 
 #### Desarrollo — CU 001 Reservar habitación
 
-Fuente: `TP_Repeater_CU_Reservar_habitacion_v1_02.pdf` (Enrique Porta, v1.02,
-13-05-2019).
+Enunciado: `TP_Repeater_CU_Reservar_habitacion_v1_02.pdf`. Paso a paso resuelto:
+`Axure_RP9_CU_Reservar_Habitacion_v1_02.pdf` (36 pág., Enrique Porta, v1.02,
+24-05-2022). Ambos ingeridos.
 
-- **Actor** primario e iniciador: Cliente. **Precondición**: cliente logueado.
-- **Postcondición (éxito)**: la reserva de la estadía quedó registrada.
-- Nivel: usuario. Alcance: sistema. Caja: negra. Interacción: dialogal.
+**El CU.** Actor primario e iniciador: Cliente. Precondición: cliente logueado.
+Postcondición de éxito: la reserva quedó registrada. Nivel usuario, alcance
+sistema, caja negra, interacción dialogal.
 
-**Paso 1.** El cliente ingresa ciudad, fecha de entrada, fecha de salida y
-cantidad de personas. El sistema muestra los hoteles disponibles para ese
-período **con capacidad ≥ cantidad de personas**, mostrando por cada uno: foto,
-denominación, dirección, estrellas y precio por noche.
+- **Paso 1** — el cliente ingresa ciudad, fecha entrada, fecha salida y cantidad
+  de personas. El sistema lista los hoteles disponibles con capacidad ≥ personas,
+  mostrando foto, denominación, dirección, estrellas y precio por noche. Muestra
+  la ciudad ingresada, el filtro Estrellas en "Todas las estrellas" y Ordenado
+  por en "Más estrellas".
+  - **1.a** ordenar por: Precio más bajo / más alto, Menos / Más estrellas.
+  - **1.b** filtrar por cantidad de estrellas.
+- **Paso 2** — el cliente selecciona un hotel. El sistema registra la estadía y
+  muestra el comprobante (cliente, hotel, ciudad, fecha ingreso, fecha salida,
+  costo estadía).
 
-Además muestra la ciudad ingresada, el filtro **Estrellas** con "Todas las
-estrellas" por defecto, y **Ordenado por** con "Más estrellas" por defecto.
+##### Las 4 páginas
 
-- **1.a** — el cliente ordena por: Precio más bajo, Precio más alto, Menos
-  estrellas o Más estrellas.
-- **1.b** — el cliente filtra por cantidad de estrellas.
+`Inicio` → `DatosBusqueda` → `MostrarDatosHoteles` → `Comprobante`
 
-**Paso 2.** El cliente selecciona un hotel. El sistema **registra la estadía** y
-muestra el comprobante: apellido y nombre del cliente, denominación del hotel,
-ciudad, fecha de ingreso, fecha de salida y costo de la estadía.
+##### Las 9 variables globales
 
-Ejemplo del enunciado:
-`Cliente: Pérez, Juan | Hotel: Holiday Inn | Ciudad: Rosario |
-Fecha ingreso: 4/12/2017 | Fecha salida: 5/12/2017 | Costo estadía: 1630`
+`Var_Ciudad`, `Var_FechaEntrada`, `Var_FechaSalida`, `Var_CantPersonas`
+(default **2**), `Var_DenominacionHotel`, `Var_PrecioHotel`, `Var_Cliente`
+(default **Juan Perez**), `Var_CantidadDias`. Más `OnLoadVariable`, que ya viene.
 
-**Lo que el repeater tiene que soportar**: ordenar por dos campos numéricos
-(Precio, Estrellas) en ambas direcciones, y filtrar por Estrellas. Por eso
-Precio y Estrellas se cargan como **número sin formato** — sin `$` ni separador
-de miles. El formato visual se aplica en el widget, no en el dato.
+Cargar los defaults es parte del TP: si `Var_Cliente` está vacía, el comprobante
+sale sin nombre.
 
-**Dataset**: `entregables/hoteles-repeater.csv` — los 4 hoteles que tienen foto
-en `fuentes/Axure_RP9/Caso_Reservar_Habitacion/`. Tres en Rosario y uno en
-Córdoba, para que el filtro por ciudad tenga sentido.
+##### Página Inicio
 
-La columna **Foto** del repeater es de tipo imagen: guarda una referencia interna
-de Axure, no texto. **El CSV no la puede llenar** — las imágenes se arrastran a
-mano celda por celda.
+Botón "Reservar Habitación" → `Click or Tap` → `Open Link` → `DatosBusqueda`.
+
+##### Página DatosBusqueda
+
+Cuatro `Text Field` nombrados **Ciudad, Entrada, Salida, CantPersonas**, más los
+botones `-`, `+` y `Buscar`.
+
+| Widget | Evento | Acción |
+|---|---|---|
+| (página) | `Page Loaded` | `Set Text` CantPers ← value of `Var_CantPersonas` |
+| Ciudad | `Text Changed` | `Set Variable Value` `Var_Ciudad` ← text on Ciudad |
+| Entrada | `Lost Focus` | `Set Variable Value` `Var_FechaEntrada` ← `"[[This.text]]"` |
+| Salida | `Lost Focus` | `Set Variable Value` `Var_FechaSalida` ← `"[[This.text]]"` |
+
+**Entrada y Salida se definen como `Input Type → Date`** (panel Interactions).
+Eso hace que el navegador muestre el almanaque. Al asignar `"[[This.text]]"` la
+fecha se guarda en formato **YYYY-MM-DD**, que es lo que después necesita
+`Date.parse()`.
+
+**Botón `-`** — `Click or Tap`, con condición:
+- Si `value of Var_CantPersonas is greater than "1"`:
+  - `Set Variable Value` `Var_CantPersonas` ← `"[[Var_CantPersonas - 1]]"`
+  - `Set Text` CantPers ← value of `Var_CantPersonas`
+
+**Botón `+`** — igual pero `is less than "5"` y `"[[Var_CantPersonas + 1]]"`.
+
+**Botón Buscar** — `Click or Tap` → `Add Case` → Condition Builder, **Match All**
+con cuatro filas:
+
+    [[Var_Ciudad]]        does not equal        (vacío)
+    [[Var_FechaEntrada]]  does not equal        (vacío)
+    [[Var_FechaSalida]]   does not equal        (vacío)
+    [[Var_CantPersonas]]  is greater than or equals   1
+
+Si se cumple → `Open Link` → `MostrarDatosHoteles`. Esa condición **es** la
+validación del CU: sin ella el TP está incompleto.
+
+##### Página MostrarDatosHoteles — el Repeater
+
+Arrastrar el widget **Repeater** desde Libraries. Nombrarlo **Hoteles** en el
+panel Style, y tildar **Fit to Content in HTML**.
+
+Columnas del DATA: `Ciudad, Denominacion, Direccion, Foto, Estrellas, Precio`.
+La primera se renombra desde `Column0`; el resto con `Add Column`.
+
+**Dataset de la cátedra** (`entregables/hoteles-repeater.csv`):
+
+| Ciudad | Denominacion | Direccion | Estrellas | Precio |
+|---|---|---|---|---|
+| Rosario | Holiday Inn Express Rosario | Salta 1950 | 3 | 9000 |
+| Rosario | Apart Hotel Alvear | Alvear 555 | 2 | 7000 |
+| Rosario | Amérian Puerto Rosario Hotel | Mitre 1319 | 4 | 10000 |
+| Córdoba | Holiday Inn Córdoba | Fray Luis Beltran Y Cardenosa | 3 | 8000 |
+
+La columna **Foto** es de tipo imagen: botón derecho sobre la celda →
+**Import Image** → elegir el `.jpg`. **No se puede cargar por CSV** — el CSV solo
+sirve para las columnas de texto y número.
+
+**Item Loaded del repeater.** Doble click en el repeater abre la ventana de
+diseño del ítem. Ahí se arma la maqueta de una fila y se nombra cada widget en
+Interactions. Después, en `Item Loaded`:
+
+    Set Text
+      Ciudad       to "[[Item.Ciudad]]"
+      Denominacion to "[[Item.Denominacion]]"
+      Direccion    to "[[Item.Direccion]]"
+      Estrellas    to "[[Item.Estrellas]]"
+      Precio       to "[[Item.Precio]]"
+    Set Image
+      Foto         to [[Item.Foto]]
+
+Ojo: el repeater arranca mostrando **solo el primer atributo**. Si ves solo la
+ciudad, es porque falta agregar los `Add Target` al `Set Text`.
+
+La ciudad se termina **ocultando** (panel Style → ícono del ojo) junto con su
+etiqueta "Alojado en:", porque ya se muestra arriba, fuera del repeater. Se
+oculta, no se borra: el dato sigue haciendo falta para filtrar.
+
+**Botón Reservar** (dentro del ítem del repeater) — `Click or Tap`:
+
+    Set Variable Value
+      Var_DenominacionHotel to "[[Item.Denominacion]]"
+      Var_PrecioHotel       to "[[Item.Precio]]"
+    Open Link
+      Comprobante
+
+Está **adentro** del repeater, por eso puede leer `[[Item.…]]` y sabe qué hotel
+se eligió. Es el punto donde el paso 2 del CU se vuelve prototipo.
+
+##### Ordenar — Droplist "OrdenadoPor"
+
+Botón derecho sobre el droplist → **Edit List Items**: Más estrellas (tildado
+por defecto), Menos estrellas, Precio más alto, Precio más bajo.
+
+Evento `Selection Changed` → **Enable Cases**, cuatro casos encadenados con
+`Else If`. Cada uno con la misma estructura:
+
+    Case "Más estrellas"
+      If selected option of This equals Más estrellas
+        Remove Sort → Hoteles, Sort: All
+        Add Sort    → Hoteles | Name: Más estrellas | Column: Estrellas
+                      Sort as: Number | Order: Descending
+
+Los otros tres cambian solo columna y orden: Menos estrellas (Estrellas, Number,
+Ascending), Precio más alto (Precio, Number, Descending), Precio más bajo
+(Precio, Number, Ascending).
+
+**El `Remove Sort → All` antes de cada `Add Sort` no es opcional.** Sin él los
+órdenes se acumulan y el resultado deja de tener sentido. Es el error clásico.
+
+`Sort as: Number` es lo que obliga a cargar Precio y Estrellas sin `$` ni
+separador de miles: como texto, 9000 ordena antes que 10000.
+
+##### Filtrar — Page Loaded y los RadioButtons
+
+**`Page Loaded` de MostrarDatosHoteles**, en este orden:
+
+    Add Sort    → Hoteles add Estrellas as Number desc
+    Add Filter  → Name: Ciudad
+                  Rule: [[Item.Ciudad ==Var_Ciudad]]
+                  ☑ Remove other filters
+    Set Text    → CiudadIngresada to "[[Var_Ciudad]]"
+
+Cuatro **RadioButton** fuera del repeater, todos con
+`Assign Radio Group: GrupoFiltroEstrellas` (se seleccionan los 4 juntos y se
+asigna el grupo de una). "Todas las estrellas" con la propiedad **Selected**
+tildada, para que sea el default.
+
+Cada uno lleva el evento **`Selected`** (no `Click`):
+
+- **Todas las estrellas**: un solo `Add Filter` — el de Ciudad, con
+  ☑ *Remove other filters*. No lleva filtro por estrellas, justamente porque las
+  muestra todas.
+- **4 / 3 / 2 estrellas**: **dos** `Add Filter` en este orden:
+  1. Ciudad → `[[Item.Ciudad ==Var_Ciudad]]` con ☑ *Remove other filters*
+  2. `N estrellas` → `[[Item.Estrellas =="4"]]` con ☐ *Remove other filters*
+     **destildado**
+
+**Ese tilde es la trampa del TP.** El primer filtro limpia lo anterior; el
+segundo se suma. Si dejás tildado el segundo, borra el filtro de ciudad y te
+aparecen hoteles de todas las ciudades. Si destildás el primero, se acumulan los
+filtros de estrellas entre clicks y no queda nada.
+
+##### Página Comprobante
+
+Seis `Text Field`: `Cbte_Cliente`, `Cbte_Hotel`, `Cbte_Ciudad`, `Cbte_Entrada`,
+`Cbte_Salida`, `Cbte_Costo`.
+
+`Page Loaded`, **en este orden**:
+
+    Set Text  Cbte_Ciudad  to value of Var_Ciudad
+    Set Text  Cbte_Cliente to value of Var_Cliente
+    Set Text  Cbte_Hotel   to value of Var_DenominacionHotel
+    Set Text  Cbte_Entrada to value of Var_FechaEntrada
+    Set Text  Cbte_Salida  to value of Var_FechaSalida
+    Set Variable Value  Var_CantidadDias to
+      [[Math.floor( (Date.parse(Var_FechaSalida).valueOf() -
+        Date.parse(Var_FechaEntrada).valueOf()) / 1000 / 60 / 60 / 24 )]]
+    Set Text  Cbte_Costo   to [[Var_CantidadDias * Var_PrecioHotel]]
+
+**El `Set Text` de Cbte_Costo tiene que ir después del `Set Variable Value` de
+Var_CantidadDias.** Lo aclara el propio apunte. Si lo ponés antes, el costo sale
+en 0 o vacío, porque la variable todavía no se calculó.
+
+**La fórmula de días**, desarmada: `Date.parse()` devuelve milisegundos desde
+1970. La resta da los milisegundos entre ambas fechas, y las divisiones sucesivas
+los llevan a días: `/1000` → segundos, `/60` → minutos, `/60` → horas, `/24` →
+días. `Math.floor()` trunca. Para calcular una **edad** es la misma expresión con
+un `/365` más al final.
+
+Verificación: con el `Console` del Preview (ícono de Axure arriba a la derecha)
+se ven todas las variables globales con su valor actual. Es la forma de depurar
+cuando el comprobante sale vacío.
+
+#### Machete de expresiones
+
+| Expresión | Qué hace |
+|---|---|
+| `[[Var_X]]` | valor de una variable global |
+| `[[Item.Campo]]` | valor de una columna del repeater, en la fila actual |
+| `[[This.text]]` | texto del widget que disparó el evento |
+| `[[Var_CantPersonas + 1]]` | aritmética dentro de la expresión |
+| `[[Item.Ciudad ==Var_Ciudad]]` | regla de filtro del repeater |
+| `[[Item.Estrellas =="4"]]` | filtro por valor literal (entre comillas) |
+| `Math.floor(x)` | trunca hacia abajo |
+| `Date.parse("2018-11-14")` | fecha → milisegundos desde 1970 |
+| `Now.getFullYear()` | año actual |
+| `"Hello, world!".slice(3, 10)` | → `lo, wor` |
 
 #### Dudas / pendientes
-- `Axure_RP9_CU_Reservar_Habitacion_v1_02.pdf` (1 MB, capturas de las pantallas):
-  el PDF no da texto en la conversión, hay que leerlo con visión. **Es el diseño
-  de pantallas esperado** — pendiente y de alto valor.
-- `Caso_Registrar_Prestamo/` (docx + 2 PDFs): sin ingerir. Es el CU que ya
-  prototipaste.
-- `Consejos/`: búsqueda predictiva y cálculos con fechas, con sus `.rp` de
-  ejemplo. Los cálculos con fechas son directamente aplicables al costo de la
-  estadía (noches × precio). Sin ingerir.
+- `Caso_Registrar_Prestamo/` (docx + 2 PDFs): sin ingerir. El paso a paso del
+  repeater lo da por sabido ("se supone que ya se hizo el TP CU Registrar
+  Préstamo"), así que ahí están las funcionalidades básicas que este apunte no
+  vuelve a explicar.
+- `Consejos/`: búsqueda predictiva y cálculos con fechas, con sus `.rp`. Sin
+  ingerir.
 - `Enlaces_en_Axure_RP_9_y_Axure_RP_10.pdf`: sin ingerir.
+- Páginas 13-16 del paso a paso (armado fino de la maqueta del ítem): sin leer.
+  Es disposición visual, no lógica.
 
 #### Fuentes
-- `fuentes/Axure_RP9/Caso_Reservar_Habitacion/TP_Repeater_CU_Reservar_habitacion_v1_02.pdf` ✅ ingerido
-- `fuentes/Axure_RP9/` — resto pendiente
+- `fuentes/Axure_RP9/Caso_Reservar_Habitacion/TP_Repeater_CU_Reservar_habitacion_v1_02.pdf` ✅
+- `fuentes/Axure_RP9/Caso_Reservar_Habitacion/Axure_RP9_CU_Reservar_Habitacion_v1_02.pdf` ✅ (leído con visión)
+- `entregables/hoteles-repeater.csv` — dataset real de la cátedra
 - `entregables/prototipoRegistrarPrestamo.rp` (Axure RP 11)
-- `entregables/hoteles-repeater.csv`
 
 ## Log
 - Archivo creado.
@@ -227,3 +410,8 @@ mano celda por celda.
   los enunciados de los 7 casos BPMN y el TP del repeater del CU Reservar
   habitación. Corregido `hoteles-repeater.csv` al dataset real de la cátedra.
   Instaladores `.exe` de Bizagi gitignorados (389 MB).
+- 2026-09-06: unidad 2 completa. Leído con visión el paso a paso de 36 páginas
+  del CU Reservar habitación (las 4 páginas, las 9 variables globales, Item
+  Loaded, botón Reservar, ordenar con Add/Remove Sort, filtrar con el tilde de
+  Remove other filters, y el cálculo de días del comprobante). Corregido
+  `hoteles-repeater.csv` con el dataset real de la cátedra.
