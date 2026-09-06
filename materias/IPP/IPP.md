@@ -4,6 +4,11 @@
 1. Unidad 1 — Modelado de procesos con BPMN (Bizagi Modeler)
 2. Unidad 2 — Prototipado con Axure RP 9
 
+> **Parcial**: el repaso consolidado está en
+> [`estudio/repaso-parcial.md`](estudio/repaso-parcial.md) — banco de teoría BPMN
+> con respuestas verificadas, los distractores que la cátedra recicla, la
+> corrección del caso de junio 2026 y el plan cronometrado de Axure.
+
 ## Desarrollo
 
 ### Unidad 1 — Modelado de procesos con BPMN (Bizagi Modeler)
@@ -415,3 +420,9 @@ cuando el comprobante sale vacío.
   Loaded, botón Reservar, ordenar con Add/Remove Sort, filtrar con el tilde de
   Remove other filters, y el cálculo de días del comprobante). Corregido
   `hoteles-repeater.csv` con el dataset real de la cátedra.
+- 2026-09-06: ingeridos los parciales 2022 y 2026 (`fuentes/Parciales/`). Generado
+  `estudio/repaso-parcial.md` a partir de ellos: 15 preguntas de teoría BPMN con
+  respuesta verificada (el PDF de 2022 es el formulario corregido 10/10), 6
+  contradicciones aparentes entre años analizadas, auditoría adversarial de la
+  resolución práctica de 2026 (16 hallazgos → 2 confirmados, 14 refutados por
+  verificación a tres lentes) y plan de ataque para el CU "Pedir un libro".
