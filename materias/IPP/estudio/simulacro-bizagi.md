@@ -111,3 +111,56 @@ es lo que hizo la resolución de junio 2026. Una u otra, no las dos.
 ⚠️ La mercadería llegando **no** se dibuja como flujo de mensaje: *"no es flujo de
 información, esto es flujo de mercadería"* (docente, clase 13-04). El mensaje entrante es
 el aviso o remito.
+
+---
+
+## Corrección — intento 2 (07-09-2026)
+
+### Arreglado
+Inicio en ambos diagramas · rama sin presupuesto cerrada en fin · **compuerta basada en
+eventos correcta** (`<Route ExclusiveType="Event"/>` en el XPDL) con 3 salidas sin
+etiquetar · "Plazo pactado vencido" con `<TriggerTimer/>` y nombre en hecho narrado ·
+"Informar al empleado" movido al lane Finanzas · compuerta redundante "¿Llegó mercadería?"
+eliminada · pool Proveedor creado.
+
+### Pendiente
+
+| # | Qué | Detalle |
+|---|---|---|
+| 1 | **Cero flujos de mensaje** | El pool Proveedor está pero sin conectar. Faltan 4 en el principal y 2 en el subproceso. |
+| 2 | `Mercadería recibida` es **THROW** | `<TriggerResultMessage CatchThrow="THROW">`. Sobre relleno. Una event-based solo apunta a eventos de **captura**. |
+| 3 | `Anulación recibida` es **None** | Sin tipo. Debe ser mensaje de captura. Mismo error que el TP grupal del Caso Hotel. |
+| 4 | **Sin apellido** | Cero artifacts en los dos diagramas. |
+| 5 | Subproceso sin pool Proveedor | Inconsistente con el principal. **Patrón 2.** |
+| 6 | Menores | Dos "Informar al empleado" homónimos; "¿Es Suficiente?" con mayúscula. |
+
+### El pool externo: cómo se conecta
+
+**El pool vacío ES la caja negra.** En Bizagi los pools no se colapsan como los subprocesos:
+un pool sin lanes ni elementos ya representa al participante como caja negra. No lleva
+actividades.
+
+El flujo de mensaje va **de un objeto del pool propio al borde del pool externo** (o al
+revés). No necesita un elemento del otro lado. En la paleta, grupo de conectores →
+**Message Flow** (punteada). Atajo: arrastrar un conector hasta otro pool lo convierte solo,
+porque un flujo de secuencia no puede cruzar pools.
+
+Verificación visual: **punteada, círculo hueco en el origen, punta de flecha hueca.**
+
+Los que van:
+
+| Desde | Hacia | Qué viaja |
+|---|---|---|
+| Emitir orden de compra a proveedor | pool Proveedor | la orden |
+| pool Proveedor | Mercadería recibida | el **aviso de entrega**, no la mercadería |
+| Notificar empleado y proveedor | pool Proveedor | la cancelación por vencimiento |
+| Notificar anulación al proveedor | pool Proveedor | la anulación |
+| *(subproceso)* Pedir y registrar cotizaciones | pool Proveedor | el pedido de cotización |
+| *(subproceso)* pool Proveedor | Pedir y registrar cotizaciones | las cotizaciones |
+
+`Anulación recibida` **no** lleva mensaje entrante: el emisor es el área solicitante, interna
+(lane Empleado), y un flujo de mensaje solo cruza entre pools distintos. Evento de captura
+sin emisor dibujado = aceptable (`repaso-parcial.md` 4.3).
+
+**Regla visual:** sobre **blanco** = espero algo. Sobre **negro** = mando algo. Todo lo que
+cuelga de una compuerta basada en eventos es blanco, siempre.
