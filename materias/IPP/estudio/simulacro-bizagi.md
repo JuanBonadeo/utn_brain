@@ -48,6 +48,66 @@ exportá `Apellido_pp.jpg` y `Apellido_sub.jpg`, más el archivo `.bpm`.
 
 ---
 
-## Corrección
+## Corrección — intento 1 (07-09-2026, `practica.bpm`)
 
-Se completa después de la entrega, contrastando el `.bpm` con `scripts/bpm-dump.py`.
+**[NUESTRO]** Leído del XPDL con `scripts/bpm-dump.py` + parser de transiciones y grados.
+Los dos diagramas se guardaron en el mismo `.bpm` (Diagrama 1 = principal,
+Diagrama 2 = subproceso "Seleccionar Proveedor"). Punto 6 sin modelar.
+
+### Sintaxis
+
+| # | Dónde | Qué pasa | Patrón |
+|---|---|---|---|
+| 1 | Principal | **No hay evento de inicio.** "Registrar pedido de materiales" tiene grado de entrada 0. | 1 |
+| 2 | Subproceso | **Tampoco hay evento de inicio.** "Pedir y registrar cotizaciones" solo recibe la flecha del loop. | 1 |
+| 3 | Principal | **Rama colgada:** el 2º "Informar al empleado" (rama sin presupuesto) tiene grado de salida 0. Falta el fin. | 1 |
+| 4 | Principal | **Evento intermedio múltiple con 2 flujos de secuencia salientes** = split incontrolado. Se disparan las dos ramas a la vez y "Controlar orden…" recibe 2 tokens: la cola corre dos veces. Mismo error que el EJ 6 (paralela cerrada con exclusiva). | — |
+| 5 | Principal | "Cuando llega la mercadería" tipado como **Temporizador**. | — |
+| 6 | Ambos | **No existe el pool Proveedor y hay cero flujos de mensaje.** El enunciado lo pide 4 veces. Criterio explícito del docente: otra organización = pool aparte. | 2 |
+
+### Fidelidad y estilo
+- Falta el punto 6 completo.
+- Eventos nombrados con subordinada ("Cuando se cumple el plazo pactado") en vez de hecho
+  narrado ("Plazo pactado vencido"). **Patrón 5.**
+- Dos tareas homónimas "Informar al empleado".
+- "Informar al empleado" de la rama de presupuesto quedó en el lane **Empleado** (y=677,
+  lane 546-681); lo ejecuta Finanzas.
+- **Sin objeto de texto con el apellido** en ninguno de los dos diagramas (cero artifacts).
+- Tildes: "¿Llego mercaderia?", "¿Es Suficiente?".
+
+### Bien resuelto
+- Las 3 compuertas exclusivas con **todas** las salidas etiquetadas (Si/No).
+- Ninguna compuerta hace trabajo: tarea → rombo nombrado como pregunta, las tres.
+- Subproceso como SubFlow, con pool y lanes propios, y el loop bien cerrado.
+- Cero flujos de secuencia cruzando pools.
+- Asignación de lanes correcta salvo el caso de arriba.
+
+### El punto 6: qué evento va
+
+**Mensaje, no condicional.** Regla de elección:
+
+| Tipo | Cuándo | Test |
+|---|---|---|
+| Mensaje | alguien manda algo | ¿hay emisor identificable? |
+| Condicional | una condición del negocio se vuelve verdadera sola | "el stock baja de 10" — nadie lo manda |
+| Temporizador | pasa el tiempo | |
+| Señal | broadcast | lo escucha cualquiera que esté atento |
+
+El **múltiple no sirve para bifurcar**: significa "cualquiera de varios disparadores prende
+este evento" y tiene una sola salida. Va **compuerta basada en eventos** (rombo con
+pentágono), tres ramas sin etiquetar apuntando a eventos de captura:
+
+    Emitir orden de compra ──► ◈ basada en eventos
+      ══► [Proveedor]           ├─ ◯ Mercadería recibida (mensaje) ──► Controlar orden y
+      						  │                                       registrar recepción ──► Pagar factura ──► ◉
+                                ├─ ◯ Plazo pactado vencido (timer) ─► Cancelar orden ──►
+                                │                                     Notificar al empleado ══►[Proveedor] ──► ◉
+                                └─ ◯ Anulación recibida (mensaje) ──► Notificar al proveedor ══►[Proveedor] ──► ◉
+
+Desaparece la compuerta "¿Llegó mercadería?", hoy redundante. Alternativa válida: tarea
+"Esperar recepción de mercadería" con dos eventos adjuntos al borde (timer + mensaje), que
+es lo que hizo la resolución de junio 2026. Una u otra, no las dos.
+
+⚠️ La mercadería llegando **no** se dibuja como flujo de mensaje: *"no es flujo de
+información, esto es flujo de mercadería"* (docente, clase 13-04). El mensaje entrante es
+el aviso o remito.
