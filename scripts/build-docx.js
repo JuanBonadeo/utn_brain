@@ -24,10 +24,17 @@ const {
   Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType,
   Table, TableRow, TableCell, WidthType, BorderStyle, ShadingType,
   TableLayoutType, VerticalAlign, Footer, PageNumber,
+  ExternalHyperlink, LineRuleType,
 } = require('docx');
 
-const [, , inPath, outPath] = process.argv;
-if (!inPath || !outPath) { console.error('Uso: build-docx.js <in.md> <out.docx>'); process.exit(1); }
+const [, , inPath, outPath, ...flags] = process.argv;
+if (!inPath || !outPath) {
+  console.error('Uso: build-docx.js <in.md> <out.docx> [--title]');
+  console.error('  --title  renderiza el "# H1" del .md como titulo del documento');
+  console.error('           (por defecto se descarta todo lo anterior al primer "## ")');
+  process.exit(1);
+}
+const withTitle = flags.includes('--title');
 
 /* ---------- constantes de página y estilo ---------- */
 const FONT = 'Lexend';   // la que usa el grupo en las entregas de ASI
@@ -36,6 +43,9 @@ const MARGIN = 1134;                              // 2 cm
 const CONTENT_W = A4.width - MARGIN * 2;          // 9638 twips
 const BODY = 22;                                  // 11 pt
 const TBL = 18;                                   // 9 pt
+const MONO = 'Consolas';
+const CODE = 18;                                  // 9 pt: 80 columnas entran en el ancho util
+const CODE_LEAD = 210;                            // interlineado exacto, para que los diagramas peguen
 const INK = '1A1A1A';
 const RED = 'B00020';
 const GRID_H = 'BFD3E6';   // horizontales de tabla, celeste apagado
@@ -50,7 +60,7 @@ const line = (color, size) => ({ style: BorderStyle.SINGLE, size, color });
 /* ---------- inline ---------- */
 function runs(text, base = {}) {
   const out = [];
-  const re = /(\*\*[^*]+\*\*|\*[^*]+\*|`[^`]+`)/g;
+  const re = /(\[[^\]]+\]\([^)\s]+\)|\*\*[^*]+\*\*|\*[^*]+\*|`[^`]+`)/g;
   let last = 0, m;
   const push = (t, extra) => {
     if (!t) return;
@@ -59,8 +69,26 @@ function runs(text, base = {}) {
   while ((m = re.exec(text)) !== null) {
     push(text.slice(last, m.index));
     const tok = m[0];
-    if (tok.startsWith('**')) push(tok.slice(2, -2), { bold: true });
-    else if (tok.startsWith('`')) push(tok.slice(1, -1), { font: 'Consolas', size: (base.size || BODY) - 2 });
+    if (tok.startsWith('[')) {
+      // [texto](url) -> hipervinculo real, clickeable en Word.
+      // Solo http(s) y mailto: una ruta relativa del repo no significa nada
+      // dentro del .docx, asi que de esas se conserva unicamente el texto.
+      const cut = tok.indexOf('](');
+      const label = tok.slice(1, cut);
+      const href = tok.slice(cut + 2, -1);
+      if (/^(https?:|mailto:)/i.test(href)) {
+        out.push(new ExternalHyperlink({
+          link: href,
+          children: [new TextRun({
+            text: label, font: FONT, size: base.size || BODY, color: '1155CC',
+            underline: {}, language: LANG,
+          })],
+        }));
+      } else {
+        push(label);
+      }
+    } else if (tok.startsWith('**')) push(tok.slice(2, -2), { bold: true });
+    else if (tok.startsWith('`')) push(tok.slice(1, -1), { font: MONO, size: (base.size || BODY) - 2 });
     else push(tok.slice(1, -1), { italics: true });
     last = m.index + tok.length;
   }
@@ -183,6 +211,10 @@ const start = src.indexOf('\n## ');
 const lines = (start >= 0 ? src.slice(start + 1) : src).split('\n');
 
 const children = [];
+if (withTitle) {
+  const h1 = src.match(/^#\s+(.+)$/m);
+  if (h1) children.push(heading(1, h1[1].trim()));
+}
 let pendingCols = null;
 let olInstance = 0;    // una instancia por lista, si no la numeración se encadena
 let lastWasOl = false;
@@ -203,6 +235,33 @@ while (i < lines.length) {
   if (trimmed === '---') {
     children.push(new Paragraph({ text: '', spacing: { before: 0, after: 160 } }));
     i++; continue;
+  }
+
+  // bloque cercado ``` : diagramas ASCII y codigo. Se respetan espacios y saltos.
+  if (trimmed.startsWith('```')) {
+    i++;
+    const buf = [];
+    while (i < lines.length && !lines[i].trim().startsWith('```')) {
+      buf.push(lines[i].replace(/\t/g, '    ').replace(/\s+$/, ''));
+      i++;
+    }
+    i++;                                     // saltea el cierre
+    while (buf.length && !buf[0]) buf.shift();
+    while (buf.length && !buf[buf.length - 1]) buf.pop();
+    const last = buf.length - 1;
+    buf.forEach((l, k) => children.push(new Paragraph({
+      children: [new TextRun({ text: l || ' ', font: MONO, size: CODE, color: INK, language: LANG })],
+      alignment: AlignmentType.LEFT,
+      indent: { left: 227 },
+      keepNext: k < last,
+      keepLines: true,
+      spacing: {
+        before: k === 0 ? 140 : 0,
+        after: k === last ? 200 : 0,
+        line: CODE_LEAD, lineRule: LineRuleType.EXACT,
+      },
+    })));
+    continue;
   }
 
   if (trimmed.startsWith('|')) {
@@ -263,7 +322,7 @@ while (i < lines.length) {
 
   const buf = [trimmed]; i++;
   while (i < lines.length && lines[i].trim()
-         && !/^([-*]\s|>|#{1,4}\s|\||\d+\.\s|---$|<!--)/.test(lines[i].trim())) {
+         && !/^([-*]\s|>|#{1,4}\s|\||\d+\.\s|---$|<!--|```)/.test(lines[i].trim())) {
     buf.push(lines[i].trim()); i++;
   }
   const txt = buf.join(' ');
