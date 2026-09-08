@@ -2,8 +2,8 @@
 
 > Diez minutos, 22 láminas, cuatro expositores. Es un guion para **decir**, no un
 > resumen para leer: está calibrado a 145 palabras por minuto y verificado con
-> `scripts/guion-timing.py`. Son **9:17 de habla**; con los cambios de expositor
-> cierra cerca de **9:49**, o sea al filo. Los recortes marcados no son opcionales
+> `scripts/guion-timing.py`. Son **9:23 de habla**; con los cambios de expositor
+> cierra cerca de **9:55**, o sea al filo. Los recortes marcados no son opcionales
 > si un bloque se pasa.
 >
 > **Reparto.** Bonadeo 1–6 · Casermeiro 7–10 · Lezcano 11–16 · Lurati 17–21 ·
@@ -17,64 +17,62 @@
 
 ## BONADEO · láminas 1 a 6 · cierra en 2:20
 
-### Lámina 1 — Portada · 13 s
+### Lámina 1 — Portada · 12 s
 
-Buenas. Grupo 310, comisión 403. Presentamos la Etapa 3 del Trabajo Práctico
-Integrador: la planificación de un proyecto de TI para Personal, sobre el proceso de
-instalación de internet con fibra óptica.
+Buenas. Grupo 310, comisión 403. Presentamos la Etapa 3 del Integrador: la
+planificación de un proyecto de TI para Personal, sobre el proceso de instalación de
+fibra óptica.
 
-### Lámina 2 — El problema · 26 s
+### Lámina 2 — El problema · 33 s
 
-El proceso tiene tres debilidades: no hay trazabilidad de la orden, la cola no tiene
-criterio de priorización, y no se controla la competencia del técnico al asignarle
-una orden.
+El proceso tiene tres debilidades. No hay trazabilidad de la orden. La cola de órdenes
+no tiene criterio de priorización, que es el riesgo **R07** de la Etapa 2. Y no se
+controla la competencia del técnico al asignarle una orden: el técnico que llega sin
+capacitación en el nuevo modelo de ONT, que es el **R04**.
 
-Las dos últimas son los riesgos **R07 y R04** de la Etapa 2, severidad 12, y son los
-únicos que quedaron sin plan de tratamiento. Este proyecto es el tratamiento de los
-dos.
+Los dos tienen severidad 12 y son los únicos que quedaron sin plan de tratamiento.
+Este proyecto es el tratamiento de ambos.
 
-### Lámina 3 — El proyecto · 23 s
+### Lámina 3 — El proyecto · 18 s
 
 El proyecto es una plataforma de gestión de órdenes de trabajo con aplicación móvil
 de campo: motor de asignación por competencia certificada, aplicación *offline-first*
 con checklist y conformidad del cliente, cuatro integraciones y capa de seguridad.
 
-Interviene las actividades 3 a 9 del proceso, y lo que queda afuera es lo que ya tiene
-tratamiento propio.
+Interviene las actividades 3 a 9 del proceso.
 
-### Lámina 4 — Objetivos · 20 s
+### Lámina 4 — Objetivos · 15 s
 
-Cuatro objetivos, con indicador, línea base, meta y plazo. Dos cosas. Las líneas base
-son **supuestos declarados**, porque las etapas anteriores no relevaron indicadores, y
-medirlas es un entregable de la fase 2. Y O4 no tiene línea base: esa imposibilidad de
-medir es la definición del riesgo R07.
+Cuatro objetivos, con indicador, línea base, meta y plazo. Las líneas base son
+**supuestos declarados** —las etapas anteriores no relevaron indicadores— y medirlas es
+un entregable de la fase 2. Y O4 no tiene línea base: no poder medir la priorización
+es, justamente, la definición del **R07**.
 
-### Lámina 5 — Alternativas · 28 s
+### Lámina 5 — Alternativas · 26 s
 
 Tres alternativas. No son tres formas de construir lo mismo: son **tres proyectos
-distintos**. Elegimos el primero porque trata riesgos sin tratamiento, ejecuta un
-objetivo ya comprometido en la Etapa 1 y es el único que interviene el proceso
-crítico.
+distintos**. Elegimos el primero porque trata esos dos riesgos que quedaron sueltos y
+es el único que interviene el proceso crítico.
 
 Se construye como **SaaS**: no desarrollamos el producto, lo configuramos. La
-contrapartida: los datos de clientes salen del perímetro y eso agrava el R05. Se
-compensa por contrato.
+contrapartida: los datos personales de clientes salen del perímetro, y eso agrava el
+**R05**, las credenciales de contratistas que siguen activas cuando termina el
+contrato. Se compensa por contrato.
 
-### Lámina 6 — Ciclo de vida · 30 s
+### Lámina 6 — Ciclo de vida · 36 s
 
-El ciclo de vida es híbrido, y no por compromiso.
+El ciclo de vida es híbrido: el proyecto tiene dos mitades.
 
-**Predictivo** para la selección del proveedor, la contratación y el cumplimiento
-normativo: requerimientos cerrables por anticipado. **Incremental** para la
-configuración, la experiencia de uso y el despliegue: la usabilidad con guantes y sin
-conectividad no se especifica de antemano, se calibra con un piloto.
+Comprar la plataforma —el RFI, el RFP, el contrato— se planifica entero desde el
+principio: eso va **predictivo**. Cómo se usa la aplicación en la calle, con guantes y
+sin señal, no se puede planificar en papel: se prueba en un piloto y se ajusta. Eso va
+**incremental**.
 
-No es cascada porque entregarla recién al final arriesga que los técnicos no la
-adopten. No es ágil porque hay contratos, plazos de entrega y un presupuesto aprobado
-por anticipado.
+No es cascada porque si la entregamos recién al final los técnicos no la adoptan. Y no
+es ágil porque el contrato y el presupuesto se cierran antes de empezar.
 
 > **Si vas corto:** en la 5, decí solo *«tres proyectos distintos, elegimos el primero
-> por R04 y R07»* y pasá a SaaS.
+> por los dos riesgos que quedaron sin tratamiento»* y pasá a SaaS.
 >
 > **Paso a Casermeiro:** «Con el ciclo de vida definido, así se organiza el trabajo.»
 
@@ -187,30 +185,30 @@ comprimible— y por las cuatro integraciones encadenadas sobre un mismo especia
 
 ---
 
-## LURATI · láminas 17 a 21 · cierra en 8:51
+## LURATI · láminas 17 a 21 · cierra en 8:55
 
-### Lámina 17 — Gantt · 22 s
+### Lámina 17 — Gantt · 21 s
 
-Cronograma aplanado, en **meses relativos al día cero**, que es la aprobación del
-Acta: no lo fechamos en calendario porque la fecha de inicio real no está definida.
+Cronograma aplanado, en **meses relativos al día cero**, la aprobación del Acta: no lo
+fechamos en calendario porque la fecha de inicio no está definida.
 
 Relevamiento y selección hasta el mes 3, configuración e integración hasta el 5,
 pruebas y piloto hasta el 7, despliegue y estabilización hasta el 9.
 
-### Lámina 18 — Histograma de recursos · 18 s
+### Lámina 18 — Histograma de recursos · 17 s
 
 Mismo eje de tiempo, perfil por perfil. Las barras celestes claras son los picos de
-dos personas: son exactamente las ventanas que justificaron el refuerzo en
-integraciones y pruebas. La línea de puntos es la dotación asignada, y no se supera
-ningún día.
+dos personas: las ventanas que justificaron el refuerzo en integraciones y pruebas. La
+línea de puntos es la dotación asignada, y no se supera ningún día.
 
-### Lámina 19 — Costos · 32 s
+### Lámina 19 — Costos · 38 s
 
 El costo del año 1: recursos humanos propios 112.624 dólares, dispositivos 39.060,
 servicios 103.150. Da 254.834 de costo directo. Con 12% de indirectos y 15% de
 contingencia, el presupuesto del año 1 es de **328.226 dólares**.
 
-La contingencia no es un porcentaje de estilo: se justifica con R03, R04, R05 y R07.
+La contingencia no es un porcentaje de estilo: se justifica riesgo por riesgo con el
+firewall sin soporte, las credenciales de contratistas y los dos que el proyecto trata.
 
 A tres años el costo total de propiedad es de 531.460, y el **38% es recurrente**: ese
 es el rasgo económico del modelo contratado como servicio.
@@ -223,7 +221,7 @@ Service Management son un producto maduro.
 El problema está en otro lado, y lo declaramos como **riesgo abierto**, no como
 hipótesis favorable: no está documentado si el SGOT, el CRM y el NMS exponen
 interfaces de programación, y de eso dependen cuatro paquetes del camino crítico. Se
-verifica en el paquete 2.3 y dejamos un plan alternativo cotizado en el RFP.
+verifica en el paquete 2.3, con plan alternativo cotizado en el RFP.
 
 ### Lámina 21 — Factibilidad económica · 32 s
 
@@ -243,9 +241,9 @@ La sensibilidad no está en los costos sino en los beneficios, y el más frágil
 
 ---
 
-## CASERMEIRO · lámina 22 · cierra en 9:49
+## CASERMEIRO · lámina 22 · cierra en 9:55
 
-### Lámina 22 — Factibilidad legal y conclusión · 50 s
+### Lámina 22 — Factibilidad legal y conclusión · 52 s
 
 Alojar datos personales en una plataforma contratada como servicio los saca del
 perímetro: el proveedor pasa a ser encargado del tratamiento, el alojamiento fuera del
@@ -255,7 +253,8 @@ nuestro.
 La conclusión es en tres partes. **Técnicamente factible**, con un supuesto crítico
 declarado: las interfaces. **Económicamente viable pero de margen estrecho**: a tres
 años no se repaga. Y **legalmente factible bajo condición contractual**: sin las
-cláusulas del punto 8 el proyecto agravaría el R05 en lugar de contenerlo.
+cláusulas del punto 8 el proyecto agravaría el riesgo de las credenciales de
+contratistas en lugar de contenerlo.
 
 Por eso la decisión de despliegue masivo no se toma con la aprobación del Acta, sino
 en el **paquete 8.4**: una vez medidas las líneas base, verificadas las interfaces y
@@ -270,8 +269,8 @@ cerrados los precios. Muchas gracias.
 | Lámina 6 | Bonadeo | 2:20 | 2:20 |
 | Lámina 10 | Casermeiro | 1:39 | 4:07 |
 | Lámina 16 | Lezcano | 2:15 | 6:30 |
-| Lámina 21 | Lurati | 2:13 | 8:51 |
-| Lámina 22 | Casermeiro | 0:50 | 9:49 |
+| Lámina 21 | Lurati | 2:17 | 8:55 |
+| Lámina 22 | Casermeiro | 0:52 | 9:55 |
 
 El reloj ya incluye 8 segundos por cambio de expositor. Queda poco más de un cuarto
 de minuto de colchón: si un bloque se pasa de su corte, el siguiente aplica sus
