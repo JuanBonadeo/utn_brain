@@ -16,6 +16,7 @@
 5. Unidad 5 — Administración de Recursos en Proyectos de Sistemas y Tecnologías de Información
 6. Unidad 6 — Emprendedorismo
 7. TP Integrador — Personal (Telecom) / Proceso de instalación de fibra óptica
+8. Segundo parcial — qué se toma (clase de consulta 2026-09-08)
 
 ## Desarrollo
 
@@ -5363,8 +5364,54 @@ Derivados que generamos (en esta misma carpeta, `materias/ASI/`):
 - `ASI26_310_UNIDAD1_corregido.docx` — Etapa 1 con la corrección I5 aplicada.
 - `ASI26_310_UNIDAD2_corregido.docx` — Etapa 2 con las correcciones I1 e I2 aplicadas.
 
+### Segundo parcial — qué se toma (clase de consulta, 2026-09-08)
+
+> Fuente: **transcripción de la clase de consulta previa al 2º parcial** (Riva). No es material escrito de cátedra: son las indicaciones del docente, transcritas. El docente remitió además a **un documento compartido con la lista de temas** ("búsquenlo, no lo editen") — **ese archivo todavía no está en `fuentes/`**: conseguirlo y contrastarlo con lo de acá.
+
+#### Formato y alcance
+
+- **Un solo parcial para todas las comisiones.** Cambian las preguntas entre comisiones para que no se pasen las respuestas; **los temas son los mismos**.
+- Mismo formato que el primer parcial: **práctico**, con la teoría exigida *dentro* de la resolución. "Cuando vos me justificás algo, me vas a tener que definir el concepto teórico."
+  - Ej.: si pide *definí un perfil de puesto*, la parte teórica es **saber las partes que lo componen** y aplicarlas — no listarlas y clasificarlas aparte.
+  - Ídem *anuncio / aviso de reclutamiento*: las partes que lo componen, aplicadas en la resolución.
+- **Tres temas** (los de las unidades 2, 3 y 4 de esta wiki):
+  1. **Gestión de servicios de TI** — incidentes, protocolo, escalado, herramientas, KPI (ver Unidad 2, ITIL).
+  2. **Dirección de talento y capital humano** — perfil de puesto, reclutamiento, selección (Unidad 3).
+  3. **Higiene y seguridad laboral** — riesgos y medidas de prevención (Unidad 4).
+
+#### Cómo va a venir cada tema
+
+**Gestión de servicios / incidentes.** El caso es **Bancorp** (el mismo del cursado). Se plantea un **incidente** ya materializado y hay que resolverlo:
+
+- No se pide *identificar* el riesgo: el incidente viene dado (o se toma el riesgo ya definido en el primer parcial y se lo hace ocurrir). Ejemplo del docente: **caída de conexión de la red del banco** — el responsable de créditos no puede conectarse al sistema de gestión de clientes.
+- Lo que hay que producir:
+  - **Protocolo** = paso a paso de resolución.
+  - **Al menos dos niveles de escalado**, con derivación explícita: a quién paso cuando no puedo resolverlo. Ej.: infraestructura revisa redes → si no resuelve, desarrollo verifica la API / redes verifica los servicios de conectividad.
+  - **Las áreas tienen que salir del organigrama de Bancorp. No inventar áreas.**
+  - **Herramientas del proceso**: base de conocimiento (cómo se resolvió antes), registro del cambio en gestión de cambios / configuración, versionado.
+  - **Al menos un KPI** para medir cómo funcionó la resolución.
+
+**Talento humano.** Definir un **perfil de puesto** y/o un **anuncio de reclutamiento**, con sus partes componentes aplicadas.
+
+**Higiene y seguridad.** Sobre lo anterior: **qué riesgos laborales aparecen y qué medidas de prevención** corresponden. Aclaración del docente: **no se ata a un puesto puntual, sino a un área de trabajo** (ej. *el área de desarrollo del banco Bancorp*).
+
+#### Recomendaciones del docente
+
+- **Practicar de a dos** (tres como mucho; cinco ya es demasiado): el punto es discutir y razonar la resolución, no memorizarla.
+- El criterio evaluado es **sentido común formado**: no se espera un gerente de sistemas formado en un año, sí las pistas — organizar servicios (ITIL como marco, aunque su certificación real lleve años), saber qué considerar para manejar personal, y **exigir hacia arriba** en higiene y seguridad porque el gerente de sistemas es quien cuida a su gente.
+- Sobre RRHH: el reclutamiento puede delegarse, pero **la decisión final del ingreso es del gerente de sistemas** — delegar todo a RRHH trae "el genio que pudre el grupo" y el costo lo paga el área.
+- **Consultas:** viernes, online. Hay que **llenar el formulario** (al menos una persona) o el docente no se conecta. También se lo puede contactar por mail o por el WhatsApp del grupo — **un mensaje por grupo**, no diez.
+
+#### Pendientes
+
+- [ ] Conseguir el **documento con la lista de temas** que el docente compartió y subirlo a `fuentes/`.
+- [ ] Armar una **resolución tipo** del incidente de Bancorp (protocolo + 2 escalados + herramientas + KPI) contra el organigrama real de Bancorp, para practicar.
+
+---
+
 ## Log
 
+- 2026-09-08: anotada la **clase de consulta previa al 2º parcial**. Nueva sección al final de la wiki con el formato del examen (un parcial único para todas las comisiones, práctico con teoría exigida dentro de la resolución), los **tres temas** (gestión de servicios/incidentes sobre Bancorp, perfil de puesto y aviso de reclutamiento, riesgos y prevención de H&S sobre un área de trabajo) y lo que exige la consigna de incidentes: protocolo paso a paso, **dos niveles de escalado con áreas del organigrama real**, herramientas (base de conocimiento, gestión de cambios/configuración) y al menos un KPI. Quedan dos pendientes: conseguir el documento con la lista de temas que compartió el docente, y armar una resolución tipo del incidente para practicar.
 - 2026-07-29: primer ingest completo de la materia. Se incorporó todo el Material de Cursado (Unidad 1 y Unidad 2), las resoluciones de las Etapas 1 y 2 del TPI, el BPMN del proceso, y la consigna + sugerencias de la Etapa 3. Se crearon las cuatro unidades del índice. Se detectaron 6 inconsistencias en lo ya entregado (ver sección TP Integrador) y se dejaron 3 candidatos de proyecto para la Etapa 3 a decidir.
 - 2026-07-29: corregidas I1, I2 e I5 sobre copias nuevas (`ASI26_310_UNIDAD1_corregido.docx`, `ASI26_310_UNIDAD2_corregido.docx`). Verificado por reconversión y diff: solo cambiaron las 8 celdas previstas. Quedan pendientes I3 (decisión), I4 (falta dato de fechas) e I6 (falta archivo).
 - 2026-07-29: documentada la Etapa 3 — comparación de los tres candidatos, desarrollo completo del candidato B (trazabilidad con Etapas 1 y 2, solución, alcance, 4 objetivos cuantificables, matriz de alternativas, ciclo de vida, 11 fases y 9 sectores de H&S), y las cinco decisiones abiertas D1–D5. **Preferencia por B declarada, sin cerrar.** Discusión con el grupo pendiente. Punto de retomada marcado al inicio de la sección Etapa 3.
