@@ -5549,6 +5549,81 @@ Derivados que generamos (en esta misma carpeta, `materias/ASI/`):
   2. **Dirección de talento y capital humano** — perfil de puesto, reclutamiento, selección (Unidad 3).
   3. **Higiene y seguridad laboral** — riesgos y medidas de prevención (Unidad 4).
 
+#### El caso Bancorp — contexto y organigrama
+
+> Fuente: `materias/ASI/fuentes/Parcial2/Contexto de Bancorp (V1.0).pdf` (8 págs., material de cátedra). Es **el mismo contexto del 1º parcial**, y el docente confirmó que el 2º se toma sobre él. Estaba en `archivo/Examenes/Parciales/1º Parcial/2026/`; se copió a `fuentes/` el 2026-09-14.
+
+**Bancorp S.A.** — entidad financiera de capitales 100 % nacionales. Cuatro líneas de negocio: **banca minorista** (personas físicas: cuentas, préstamos, tarjetas, hipotecarios), **banca comercial y corporativa** (financiamiento, comercio exterior, tesorería para PyMEs y grandes empresas), **banca institucional** (organismos públicos, municipios, universidades nacionales) y **servicios de inversión** (FCI, plazos fijos, mercado de capitales).
+
+**Red:** 45 sucursales + Casa Central (CABA). 15 Región Pampeana (agroindustrial), 12 Región Centro (corporativo y consumo), 10 NOA/NEA (inclusión financiera), 7 Patagónica (energético, turístico).
+
+**Valores** (sirven para justificar prioridad e impacto): Confianza y Solidez · Innovación Financiera · Inclusión y Accesibilidad · Cercanía · Integridad · **Agilidad**.
+
+##### Organigrama — de acá salen las áreas, no se inventan
+
+```
+                          DIRECTORIO
+                              │
+                       GERENCIA GENERAL ····· Auditoría y Cumplimiento (staff)
+                              │
+  ┌───────────┬───────────┬───┴───────┬────────────┬─────────────┐
+ GER. TI E   GER. BANCA  GER. BANCA  GER. ADM.   GER. CAPITAL  GER. OPS.
+ INNOVACIÓN  MINORISTA   EMPRESAS    Y FINANZAS  HUMANO        BANCARIAS
+   (GTI)         │           │           │           │            │
+     │      Red de Suc.  Oficiales   Tesorería   Gestión del   Clearing
+     │      Cajas y       de Negocio  Central     Cambio        Bancario
+     │      Plataforma                Gestión de               Logística
+     │                                Riesgos                  de Caudales
+     │
+     ├── [01] Infraestructura y Redes
+     ├── [02] Ciberseguridad y Fraude
+     ├── [03] Ingeniería de Software
+     ├── [04] Ops. TI y Core Bancario
+     ├── [05] Oficina de Proyectos (PMO)
+     └── [06] Mesa de Ayuda (Help Desk)
+```
+
+**Nivel ejecutivo completo** (7 gerencias): Banca Minorista · Banca Mayorista y Empresas · Administración y Finanzas · Capital Humano · Operaciones Bancarias · **Tecnología e Innovación (TI)** · Cumplimiento Normativo y Riesgos.
+
+**Nivel operativo:** Gerentes de Sucursal · Oficiales de Negocios (minoristas, PyMEs, corporativos) · Líderes de Operaciones de Sucursal (cajas, tesoro local, plataforma) · Cajeros y Personal de Plataforma.
+
+##### Estructura del Departamento de TI — el detalle que hay que usar en el escalado
+
+Al tope: **Gerente de TI (CIO / CTO)** — estrategia tecnológica, alineación del área con el negocio bancario y transformación digital.
+
+| # | Área | Puestos que la componen |
+|---|---|---|
+| **01** | **Infraestructura, Redes y Telecomunicaciones** | Coordinador de Infraestructura Bancaria · Especialistas en **Datacenter y Conectividad de Sucursales** · Administradores de Servidores y Almacenamiento (on-premise y cloud) |
+| **02** | **Ciberseguridad y Prevención del Fraude** | Responsable de Seguridad de la Información (**CISO**) · Analistas de **SOC** y monitoreo de eventos · Especialistas en seguridad de canales digitales y criptografía |
+| **03** | **Ingeniería de Software y Canales Digitales** | Coordinador de Desarrollo de Software · Células de desarrollo de canales (Home Banking, Mobile, **APIs**) · Arquitectos de software y especialistas en integración (**Middleware / ESB**) · Administradores de **Base de Datos Core y Data Warehouse** |
+| **04** | **Operaciones de TI y Soporte de Aplicaciones** | Coordinador de **Sistemas Core** (soporte al core bancario, clearing y sistemas centrales) · Especialistas en **monitoreo de sistemas operativos 24×7** |
+| **05** | **Oficina de Gestión de Proyectos (PMO) y Procesos** | Líder de PMO Bancaria (Scrum Masters y Project Managers) · Analistas de procesos e integración digital |
+| **06** | **Mesa de Ayuda Tecnológica (Help Desk)** | Coordinador de Soporte Interno · Técnicos de soporte a usuarios de sucursales (hardware bancario, **pinpads**, ticketeadoras) |
+
+> **Mapeo directo con ITIL (Unidad 2 §7.1):** la **Mesa de Ayuda [06]** es la **1ª línea** y el único punto de contacto del usuario. Las áreas **[01] a [04]** son la **2ª línea** (escalado funcional), cada una según la naturaleza del incidente. El **Gerente de TI (CIO)** y los coordinadores de área son el **eje jerárquico** (escalado jerárquico: asignar más recursos, decidir un cambio de emergencia). El **SOC [02]** es el que hace **Gestión y Monitorización de Eventos**, que el material dice explícitamente que **no puede hacer el Centro de Servicios**.
+
+##### Los 7 proyectos de TI del contexto
+
+El parcial asigna uno (en el 1º parcial, Tema 1, fue la Billetera Virtual). Los del **1er año**:
+
+1. **Generación de Billetera Virtual Propia** — app móvil independiente para no bancarizados y jóvenes; caja de ahorro 100 % digital, onboarding con validación biométrica (RENAPER), QR interoperable, transferencias inmediatas, recargas, inversión automatizada de saldos vía FCI propio.
+2. **Modernización e Integración de Canales Electrónicos (Omnicanalidad)** — homogeneizar Home Banking web y App Móvil; plataforma interconectada con la misma lógica de negocios, operación iniciada en web y concluida en móvil, **token unificado**.
+3. **Asistente Interno con IA Generativa (Copiloto Operativo)** — LLM privado en entorno seguro entrenado con la base de conocimiento del banco (circulares BCRA, manuales de prevención de fraude, políticas de riesgo crediticio, procedimientos de la Mesa de Ayuda), para reducir la carga cognitiva del personal de sucursales.
+4. **Plataforma Integral de Employee Experience (EX) y Autogestión** — reemplazo de la intranet por un Portal del Empleado; digitalización de los flujos de Capital Humano (firma digital de recibos, licencias, evaluaciones de desempeño) y e-learning de normativas. Foco en usabilidad interna.
+
+A **5 años**: **5.** Core Bancario Inteligente con IA y Big Data (Data Lake, ML para créditos preaprobados, detección temprana de fraude) · **6.** **RPA** en Operaciones y Cumplimiento (conciliación bancaria diaria contra Banelco/Link, reportes PLA/FT al BCRA, oficios y embargos judiciales) · **7.** Ecosistema de **Open Banking** e integración vía APIs.
+
+##### Formato del enunciado — evidencia del 1º parcial
+
+`materias/ASI/fuentes/Parcial2/2026-06-08 - Enunciado.jpeg` — *EXAMEN PARCIAL #1 – BANCORP S.A. | TEMA 1, 08.06.26*. Estructura:
+
+> **Proyecto asignado: Generación de Billetera Virtual Propia.** "La organización BANCORP S.A., cuyo contexto puede leerse en el material provisto por la cátedra, ha decidido activar uno de sus proyectos de TI del primer año."
+>
+> **1. ESTRATEGIA** — 1.1 Análisis organizacional (COBIT): clasificar la empresa por *tamaño de la organización* y *rol de las TI*, justificando cada uno. 1.2 Objetivos del proyecto: objetivos de negocio y objetivos de TI.
+> **2. RIESGOS** — definir un riesgo de TI vinculado al proyecto, relacionado a su funcionamiento en producción, y desarrollar: 2.1 Identificación (especificación y clasificación según **taxonomía SEI**; activos involucrados y dimensión de valor de su criticidad; **valoración FAIR** con factores de probabilidad e impacto y cálculo de severidad). 2.2 Tratamiento (estrategias evitar/transferir/mitigar; riesgo residual). 2.3 Planes (disparadores de la materialización; plan de contingencia).
+
+**Lo que esto confirma para el 2º parcial:** el enunciado **asigna un proyecto concreto** y se numera por bloques temáticos, cada bloque con sub-puntos que nombran explícitamente el marco a usar. Hay que esperar la misma forma: *tema asignado → bloque 1 (incidente) → bloque 2 (talento) → bloque 3 (H&S)*, con el marco exigido nombrado en cada sub-punto. El **disparador de la materialización del riesgo** del punto 2.3 del 1º parcial es, con toda probabilidad, la **bisagra** con el 2º: ese riesgo se materializa y se convierte en el incidente a resolver.
+
 #### Cómo va a venir cada tema
 
 **Gestión de servicios / incidentes.** El caso es **Bancorp** (el mismo del cursado). Se plantea un **incidente** ya materializado y hay que resolverlo:
@@ -5576,11 +5651,15 @@ Derivados que generamos (en esta misma carpeta, `materias/ASI/`):
 
 - [ ] Conseguir el **documento con la lista de temas** que el docente compartió y subirlo a `fuentes/`.
 - [ ] Armar una **resolución tipo** del incidente de Bancorp (protocolo + 2 escalados + herramientas + KPI) contra el organigrama real de Bancorp, para practicar.
+- [x] ~~Conseguir el contexto y el organigrama de Bancorp~~ — estaba en `archivo/`, copiado a `fuentes/Parcial2/` el 2026-09-14 y volcado arriba.
+- [ ] Recuperar el **enunciado del 1º parcial que rindió el grupo** (el que está en `fuentes/Parcial2/` es el Tema 1; verificar si al grupo le tocó otro tema y qué riesgo definió, porque ese riesgo es el candidato natural a materializarse en el 2º).
+- [ ] Leer con visión las **láminas 24–29 del DIAP v2.4 de la Unidad 3** (ejemplo de aviso para Arquitecto de Soluciones Cloud): son imágenes y tienen el modelo literal de anuncio AIDA.
 
 ---
 
 ## Log
 
+- 2026-09-14: **ingerido el contexto de Bancorp**, que estaba sin aprovechar en `archivo/Examenes/Parciales/1º Parcial/2026/`. Se copió a `materias/ASI/fuentes/Parcial2/` junto con la foto del enunciado del 1º parcial y se volcó a la sección del 2º parcial: perfil de la empresa y sus cuatro líneas de negocio, red de 45 sucursales, valores, **organigrama completo** (Directorio → Gerencia General → 6 gerencias + Auditoría de staff), las 7 gerencias del nivel ejecutivo, el nivel operativo, y sobre todo las **seis áreas del Departamento de TI con sus puestos** — que es de donde el docente exige que salgan las áreas del escalado, sin inventar. Se agregó el **mapeo explícito con las líneas de soporte de ITIL** de la Unidad 2: Mesa de Ayuda [06] = 1ª línea, áreas [01]–[04] = 2ª línea (escalado funcional), CIO y coordinadores = eje jerárquico, SOC [02] = gestión de eventos. Se volcaron también los **7 proyectos de TI** (4 del primer año, 3 a cinco años) y la transcripción del **enunciado del 1º parcial**, que confirma la forma del examen: proyecto asignado + bloques numerados que nombran el marco exigido en cada sub-punto. **Hipótesis a confirmar:** el "disparador de la materialización del riesgo" del punto 2.3 del 1º parcial es la bisagra con el 2º — ese riesgo se materializa y es el incidente a resolver.
 - 2026-09-14: **reingerida la Unidad 3 completa** para el 2º parcial. La unidad estaba marcada como "desarrollo parcial" porque los DIAP "eran casi todo imágenes" — **era falso**: el problema era markitdown, y `pymupdf` extrae 20.084 caracteres del DIAP v2.4 (50 láminas). Se incorporó todo lo que faltaba y que **es contenido directo del parcial**: los cinco procesos clave de RRHH, la definición de reclutamiento de cátedra (atraer + seleccionar + incorporar), el proceso numerado de 20 pasos en tres etapas, la planificación de la búsqueda, las fuentes de aprovisionamiento internas/externas con su tabla de ventajas y desventajas, el *job posting*, la búsqueda por consultor externo, **las cinco partes componentes del anuncio y el modelo AIDA de redacción** (lo que el docente pidió explícitamente), la estructura del CV, la conducción de la entrevista con sus tipos de preguntas y sus listas de "evitar" y "no olvidar", y la evaluación de desempeño por competencias con los tres tipos (básicas, genéricas, específicas) y la 360°. Se sumó también la consigna completa de la Ejercitación 1 con el ejemplo de escala acumulativa de 5 niveles. La unidad pasó de 51 a 219 líneas. **Erratas detectadas en el material:** la lámina 24 rotula la primera etapa AIDA como "1- Acción" cuando corresponde "Atención".
 - 2026-09-08: anotada la **clase de consulta previa al 2º parcial**. Nueva sección al final de la wiki con el formato del examen (un parcial único para todas las comisiones, práctico con teoría exigida dentro de la resolución), los **tres temas** (gestión de servicios/incidentes sobre Bancorp, perfil de puesto y aviso de reclutamiento, riesgos y prevención de H&S sobre un área de trabajo) y lo que exige la consigna de incidentes: protocolo paso a paso, **dos niveles de escalado con áreas del organigrama real**, herramientas (base de conocimiento, gestión de cambios/configuración) y al menos un KPI. Quedan dos pendientes: conseguir el documento con la lista de temas que compartió el docente, y armar una resolución tipo del incidente para practicar.
 - 2026-07-29: primer ingest completo de la materia. Se incorporó todo el Material de Cursado (Unidad 1 y Unidad 2), las resoluciones de las Etapas 1 y 2 del TPI, el BPMN del proceso, y la consigna + sugerencias de la Etapa 3. Se crearon las cuatro unidades del índice. Se detectaron 6 inconsistencias en lo ya entregado (ver sección TP Integrador) y se dejaron 3 candidatos de proyecto para la Etapa 3 a decidir.
