@@ -4116,21 +4116,25 @@ Nota sobre la conversión: el .docx incluye un organigrama del Comité de Seguri
 
 ### Unidad 3 — Dirección de Talento y Capital Humano
 
-> Unidad ingerida el 2026-08-19 desde el campus. **Desarrollo parcial**: los DIAP de cátedra son mayormente imágenes y la conversión rescató poco texto. Lo que sigue es lo que sí se extrajo, más el ejemplo de puesto de trabajo, que es lo que la Etapa 3 necesita.
+> Unidad ingerida el 2026-08-19 desde el campus y **reingerida el 2026-09-14** para el 2º parcial.
+> Corrección: el aviso anterior decía que los DIAP eran "casi todo imágenes". **Era un problema de la herramienta, no del material**: markitdown rescataba poco, pero `pymupdf` extrae ~20.000 caracteres del DIAP v2.4. Todo el proceso de reclutamiento, el anuncio, el CV, la entrevista y la evaluación por competencias **sí están en el material** y están volcados abajo.
 
 #### Conceptos clave
 
 - **De "recursos humanos" a "talento humano"** — el cambio de paradigma que plantea la cátedra: la persona deja de ser un recurso intercambiable y pasa a ser portadora de competencias.
-- **El planeamiento del capital humano se deriva del planeamiento estratégico de la organización**, no al revés. Es el mismo encadenamiento de la Unidad 1.
-- **Tres familias de procesos de RRHH**: *atraer y captar* (reclutamiento y selección) · *retener* (remuneración, ambiente seguro, higiene laboral, relaciones laborales) · *desarrollar* (capacitación, evaluación de desempeño, desarrollo de personal).
+- **El planeamiento del capital humano se deriva del planeamiento estratégico de la organización**, no al revés. Es el mismo encadenamiento de la Unidad 1: *"El planeamiento del Capital Humano es un aspecto más del Planeamiento Estratégico de la Organización"*.
+- **Cinco procesos clave de RRHH** (DIAP pág. 6): *Organización* (¿qué perfiles hay?) · *Reclutamiento* (¿quiénes van a trabajar con nosotros?) · *Retención* (¿cómo logramos que se quieran quedar?) · *Desarrollo* (¿cómo los ayudamos a crecer?) · *Evaluación* (¿cómo sabemos si lo hacemos bien?).
 - **Perfil ≠ descripción de puesto.** La descripción dice qué se hace en el puesto; el perfil dice qué tiene que tener la persona para hacerlo.
+- **Reclutamiento** (definición de cátedra): *"el proceso de **atraer, seleccionar e incorporar** personal"*. Ojo: para la cátedra reclutamiento es el proceso completo, no solo la convocatoria.
+- **Las dos perspectivas en tensión** que plantea la cátedra: la del individuo, que pretende satisfacer sus necesidades a través de la organización, y la del administrador, que quiere usar el RRHH para resolver las necesidades de la organización. *"¿Es posible mantener las dos perspectivas?"*
+- **Competencia** (Guy Le Boterf, citado por la cátedra): las **capacidades, conocimientos, habilidades, actitudes y experiencias** que una persona es capaz de poner en juego para desempeñarse en una actividad en un entorno determinado. Son **conductas observables, cuantificables y evaluables**.
 - **Gestión por competencias** (Alles) — bibliografía obligatoria de la cátedra para esta unidad.
 
 #### Desarrollo
 
 ##### 1. Descripción de puesto y perfil — la plantilla de cátedra
 
-Este es el aporte concreto de la unidad para el **punto 5 de la Etapa 3**. La cátedra tiene un ejemplo real (`EjemploPuestoTrabajo/`) con esta estructura:
+La cátedra tiene un ejemplo real (`EjemploPuestoTrabajo/`) con esta estructura. **Ésta es la plantilla que hay que reproducir cuando el examen pide "definí un perfil de puesto"**: la parte teórica exigida son justamente sus bloques y campos, aplicados.
 
 | Bloque | Campos |
 |---|---|
@@ -4140,26 +4144,192 @@ Este es el aporte concreto de la unidad para el **punto 5 de la Etapa 3**. La c�
 
 > Ejemplo de cátedra: *Encargado de Sistemas* del Instituto de Bioquímica Clínica. Objetivo del puesto: "gestionar y coordinar los recursos necesarios relacionados con el desarrollo e implementación de Sistemas de Información". Reporta a Dirección, con soporte técnico y desarrollador a cargo. En *capacidades y habilidades* lista: liderazgo, habilidad analítica, iniciativa, flexibilidad, orientación al cliente, manejo de personal, trabajo en equipo, responsabilidad, disciplina, toma de decisiones.
 
-**Para la Etapa 3**: la consigna pide "perfiles y competencias". Esta plantilla es más rica que la tabla de cinco columnas que sugieren las prácticas — conviene usar la tabla resumen para la vista general y esta ficha para dos o tres perfiles clave.
+**Qué es fácil y qué es difícil de definir en un perfil** (DIAP pág. 11):
 
-##### 2. Evaluación de desempeño
+| Sencillos de detectar / definir | Más difíciles de detectar / definir |
+|---|---|
+| Estudios / conocimientos | Competencias y características personales (proactividad, trabajo en grupo, *saber / saber hacer*) |
+| Datos objetivos: edad, sexo, educación, experiencia laboral | Relaciones dentro de la organización: informales o formales (**organigrama**) |
+| | Plan de carrera del candidato a seleccionar |
 
-La cátedra da un ejemplo completo (`3-Evaluacion de desempeño - Encargado de Sistemas.doc`) y una planilla modelo. No lo pide la Etapa 3, pero es contenido de unidad evaluable.
+**Para qué se define el perfil** (DIAP pág. 12): la definición del perfil debe considerar cómo se van a realizar los tres procesos que vienen después — **búsqueda, entrevista y selección**. *"El objetivo fundamental es cubrir la posición (puesto) con quien más se adecue a los requerimientos del mismo."*
+
+**Competencias de la persona** (DIAP pág. 10): **genéricas** (proactivo, diálogo fluido con personas, trabajo en equipo) y **específicas** (propias del puesto).
+
+##### 2. Reclutamiento — el proceso completo
+
+La cátedra numera el proceso de punta a punta. Los pasos 1–7 son "hasta el anuncio", 8–15 la selección, 16–20 el cierre.
+
+**Etapa A — hasta la convocatoria** (DIAP pág. 21, "Resumiendo"):
+
+1. Posición a cubrir (puesto)
+2. Descripción del puesto
+3. Información sobre el perfil
+4. Posibles candidatos internos
+5. Cómo realizar la búsqueda
+6. Fuentes de reclutamiento
+7. *(Anuncio — ver §3)*
+
+**Etapa B — selección** (DIAP pág. 33, "Próximos pasos"):
+
+8. Recepción de las candidaturas
+9. Primera revisión de antecedentes
+10. Entrevistas, 1 o 2 rondas
+11. Evaluaciones específicas y psicológicas
+12. Formulación de candidaturas
+13. Confección de informes sobre finalistas
+14. Presentación de finalistas al **cliente interno**
+15. **Selección del finalista por parte del cliente interno**
+
+**Etapa C — cierre** (DIAP pág. 41, "Y luego…"):
+
+16. Negociación
+17. Oferta por escrito
+18. Comunicación a postulantes fuera del proceso
+19. Proceso de admisión
+20. **Inducción**
+
+> El paso 15 es el que el docente subrayó en la clase de consulta: el reclutamiento se puede delegar en Capital Humano, pero **la decisión final del ingreso es del gerente de sistemas** (el cliente interno), porque el costo de una mala incorporación lo paga el área.
+
+**2.1 Planificación de la búsqueda**
+
+*Análisis previo* (DIAP pág. 15): necesidades de personal · nómina actual de empleados incluyendo capacidades y competencias · nuevas incorporaciones.
+
+*Decisiones que tiene que tomar la organización* (DIAP pág. 14):
+
+- ¿Cuáles serán las fuentes para la búsqueda?
+- ¿Quiénes participarán del proceso de selección?
+- ¿Qué cantidad de entrevistas se realizarán?
+- ¿Se realizará una evaluación psicológica / física (ART)?
+- ¿Cómo se presentarán los seleccionados al cliente interno para la selección final?
+
+**2.2 La búsqueda.** *"Se pondrán en marcha procedimientos orientados a atraer e identificar candidatos potencialmente calificados y capaces de ocupar cargos dentro de la organización, de los cuales se seleccionará alguno para efectuarle el ofrecimiento de empleo."* Es la **actividad de divulgación para la convocatoria de candidatos**.
+
+**2.3 Fuentes de aprovisionamiento** (DIAP pág. 17)
+
+| Internas | Externas |
+|---|---|
+| Ascensos / descensos<br>Transferencias | **Canales digitales:** portales de empleo, redes sociales, bolsas de universidades (convenios)<br>**Intermediarios y especialistas:** agencias de reclutamiento, asociaciones profesionales, sindicatos<br>**Métodos tradicionales y directos:** ferias de empleo, referencias externas, **avisos** |
+
+**Ventajas y desventajas** (DIAP pág. 18) — tabla que puede caer textual:
+
+| | Ventajas | Desventajas |
+|---|---|---|
+| **Reclutamiento INTERNO** | Más económico · Más rápido · Más seguro en cuanto a resultados · Motivación · Retorno de la inversión en capacitación | Exige potencial de los empleados · Exige oportunidades de progreso por parte de la organización · Conflictos de intereses · Mantiene el *status quo* · Problemas con las políticas salariales |
+| **Reclutamiento EXTERNO** | Renueva los RRHH · Aprovecha inversiones de capacitación de los propios postulantes | Más lento · Más costoso · Menos seguro · Percibido como desleal (por los de adentro) |
+
+**2.4 La propia organización como fuente — auto-postulación (*Job Posting*)** (DIAP pág. 19). Para usarla hay que:
+
+- Dar aviso de oportunidades permanentes de transferencia y promoción
+- Indicar la metodología de selección
+- **Notificar antes de comenzar una búsqueda externa**
+- Aclarar reglas de selección (antigüedad, tiempo de servicio en el puesto actual, requisitos en el mismo nivel)
+- Especificar puesto y perfil
+
+**2.5 Búsqueda por consultor externo** (DIAP pág. 20): se justifica por **confidencialidad**, por búsquedas **complejas**, cuando se requiere **visión imparcial**, o como *outsourcing* para bajar costos de la compañía.
+
+##### 3. El Anuncio (aviso de reclutamiento) — partes componentes
+
+> **Esto es lo que el docente pidió expresamente para el 2º parcial**: no listar las partes aparte, sino **aplicarlas** dentro del aviso redactado.
+
+Fórmula de la cátedra (DIAP pág. 22): **Perfil + Puesto + Fuente → Anuncio**. Las partes componentes son cinco:
+
+| # | Parte | Qué va adentro |
+|---|---|---|
+| 1 | **Definir la organización** | Quién es la empresa que busca |
+| 2 | **Describir la posición o puesto** | Responsabilidades, **lugar de trabajo**, viajes y cualquier otro dato relevante |
+| 3 | **Requisitos excluyentes y no excluyentes** | Conocimientos, competencias, experiencia — separados en las dos categorías |
+| 4 | **Frase que indique qué ofrece la empresa** | Desarrollo de carrera, auto, vivienda (beneficios) |
+| 5 | **Otras cuestiones** | A quién escribir para postularse, **plazo de recepción del CV**, si hay que indicar pretensiones económicas, foto, etc. |
+
+**3.1 Redacción de la convocatoria — modelo AIDA** (DIAP pág. 23). Es el esqueleto retórico con el que la cátedra quiere que se redacte el aviso, *"para que el llamado sea efectivo y los mejores perfiles se interesen en nosotros"*:
+
+| Paso | Qué hace | Cómo se materializa en el aviso |
+|---|---|---|
+| **1. Atención** | El anuncio debe ser llamativo y destacar entre los demás | Un **título potente** que destaque entre las ofertas cercanas |
+| **2. Interés** | Motivar al candidato a seguir leyendo, **describiendo los desafíos técnicos y no solo una lista de requisitos** | Descripción del proyecto y de los desafíos técnicos |
+| **3. Deseo** | Ser selectivos: generar deseo en quienes cumplen el perfil y **descartar suavemente a los que no** | Los requisitos (excluyentes / no excluyentes) y la **propuesta de valor** |
+| **4. Acción** | Dejar muy claros los medios de contacto para que el candidato se postule sin vueltas | Instrucciones de postulación claras, atractivas y motivadoras |
+
+> La cátedra desarrolla un ejemplo completo de las cuatro etapas sobre el puesto de **Arquitecto de Soluciones Cloud** (DIAP págs. 24–29). Las láminas del ejemplo son capturas de imagen: el texto del aviso modelo no se extrae, solo los rótulos de cada etapa.
+>
+> **Ojo con la numeración del DIAP:** la lámina 24 rotula la primera etapa como *"1- Acción"* cuando por el modelo corresponde *Atención*. Es una errata de la diapositiva; el orden correcto es Atención → Interés → Deseo → Acción, como lo define la lámina 23.
+
+##### 4. El Currículum Vitae (del lado del aspirante)
+
+**Estructura y contenido** (DIAP pág. 31):
+
+- **Datos personales y de contacto:** nombre, edad, dirección, teléfono y email.
+- **Formación académica:** títulos, instituciones y años de graduación, estudios de posgrado / especializaciones.
+- **Calificación profesional:** dominios específicos (redes, sistemas operativos, lenguajes de programación, etc.).
+- **Experiencia profesional:** empresas donde trabajó, con fecha de inicio, cargo y período de permanencia — **primero las más recientes**.
+- **Otros datos de interés:** pasantías, cursos adicionales y certificaciones técnicas que validen el dominio de herramientas específicas.
+
+**Consejos de presentación:** *claridad y brevedad* (en preselección un evaluador dedica **10 segundos** por CV, solo para verificar requisitos excluyentes) · *adaptación al medio digital* (perfil actualizado en redes profesionales) · *veracidad* (todo lo declarado se valida después en entrevistas por competencias o pruebas situacionales).
+
+##### 5. La entrevista
+
+**Cómo conducirla** (DIAP pág. 34): preparar la entrevista · considerar cómo se siente el candidato · terminar un tema antes de pasar a otro · alentar al postulante a variar ejemplos para cubrir distintos aspectos (actividades sociales, hobbies, trabajo, universidad) · escuchar atentamente · evitar la dispersión · **repetir lo que el candidato dice** como técnica para confirmar comprensión · tomar nota de lo relevante · cerrar la entrevista.
+
+**Tipos de preguntas** (DIAP pág. 35): cerradas · de sondeo · **hipotéticas** (útiles para indagar sobre conocimientos) · **intencionadas** (*no son útiles ni aconsejables*) · **provocadoras** (útiles para evaluar la reacción) · con respuesta esperada · abiertas.
+
+**Qué evitar** (DIAP págs. 37–38): hablar demasiado (más del 30 % del tiempo) · demostrar acuerdo o desacuerdo · distraerse · interrumpir · intimidar · demostrar superioridad · usar terminología que el candidato pueda no entender · gesticular de modo que distraiga · sentarse absolutamente quieto · hablar de uno mismo · completar listas complicadas durante la entrevista · comparar al candidato con otro entrevistado o con el actual ocupante · interrupciones en persona o telefónicas · ser demasiado intenso.
+
+**Qué no olvidar** (DIAP pág. 39): detectar las situaciones difíciles · despejar los "baches" de tiempo entre un trabajo y otro · conocer las razones por las que se fue de cada trabajo · las motivaciones del cambio · la remuneración · **las expectativas del postulante, las que expresa y las que no**.
+
+**Evaluaciones** (DIAP pág. 40): técnicas · psicológicas · **por competencias** · *assessment*.
+
+##### 6. Evaluación de desempeño
+
+**Tres actividades** (DIAP pág. 43): definición del puesto (responsabilidades y criterios de desempeño) → evaluar el desempeño con algún tipo de calificación → **retroalimentación**.
+
+**Para qué sirve** (DIAP pág. 44): tomar decisiones sobre promociones o remuneración · analizar comportamientos · **detectar necesidades de capacitación** · motivar e involucrar con los objetivos de la organización · dar oportunidad formal de expresar expectativas de desarrollo y de desempeño · dar reconocimiento y evitar renuncias.
+
+**Evaluar por competencias** (DIAP pág. 45): identificar competencias para la empresa o para el área → **estandarizar competencias definiendo niveles** → capacitar en base a competencias → evaluar por competencias. *"La evaluación de desempeño tomará en cuenta las competencias para el puesto y en el nivel requerido."*
+
+**Tipos de competencias** (DIAP págs. 47–48):
+
+| Tipo | Dónde se forma | Definición |
+|---|---|---|
+| **Básicas** | Educación inicial / nivel medio | Requisitos mínimos para desenvolverse adecuadamente en los espacios sociales y ciudadanos. Son el fundamento de competencias más complejas que se desarrollan a lo largo de la formación profesional |
+| **Genéricas o transversales** | Educación técnica / educación superior | Requeridas en un amplio campo de profesiones. Se enfocan en analizar problemas, evaluar estrategias y aportar soluciones en situaciones nuevas. Presentes en la mayoría de las labores |
+| **Específicas** | Ejercicio profesional (experiencia) / específico del ambiente laboral | Requeridas para el desempeño de una ocupación concreta; se relacionan con funciones o puestos de trabajo. Aportan conocimientos, actitudes, habilidades y valores propios de cada profesión |
+
+Los cuatro saberes que integra una competencia: **saber conocer · saber hacer · saber convivir · saber ser**.
+
+**Retroalimentación / evaluación 360°**: sistema que recopila información aportada por **diferentes personas del entorno laboral** del evaluado, para obtener una visión más pormenorizada de cómo trabaja, sus fortalezas y sus aspectos a mejorar.
+
+##### 7. Teoría de la motivación
+
+El DIAP incluye la **pirámide de Maslow** (pág. 5) como marco de motivación, en la lámina de "De los Recursos Humanos al Talento Humano". La lámina es una imagen: el contenido de la pirámide no está en el texto del material.
 
 #### Ejercicios resueltos tipo
 
-- `ASI-3_Ejercitacion1- Talento y Capital Humano.docx` — ejercitación de la unidad. *(Ingerida, sin desarrollar en detalle.)*
+**Ejercitación 1 — Talento y Capital Humano** (`ASI-3_Ejercitacion1`). Cumple el **RA2**: *"Especificar el Plan de Recursos Humanos para cumplir con las responsabilidades de los puestos de trabajo en áreas y proyectos de Sistemas y Tecnologías de la Información, considerando los requisitos de higiene y seguridad laboral."* Los siete puntos, sobre la organización que se viene analizando:
+
+1. **Puestos – roles – responsabilidades.** De la estructura del Departamento de Sistemas, seleccionar **al menos 3 áreas** y describir puestos, roles y responsabilidades a cubrir.
+2. **Perfiles de jefatura.** Para gerente del Departamento de Sistemas y subgerentes/jefes de cada área, definir las características que deberá cumplir el profesional asignado.
+3. **Líder de proyecto.** Elegir uno de los proyectos de la empresa y definir las características del líder.
+4. **Personal de soporte.** Definir las características del encargado del soporte técnico, se haya decidido estructurarlo internamente o tercerizarlo.
+5. **Selección de personal – aviso clasificado.** Elegir uno de los puestos del punto 1 y **redactar un aviso** para distribuir internamente y publicar en medios. Indicar características, **horarios** y otras cuestiones necesarias para la mejor selección.
+6. **Currículum vitae.** Redactar una **nota de presentación** y un CV para postularse al puesto del punto 5.
+7. **Evaluación de desempeño** para el puesto de **Mesa de Ayuda**, con el modelo de competencias: determinar competencias (al menos 2 genéricas y 2 específicas), **al menos dos factores por competencia**, y la **escala** de medición.
+
+> El ejemplo que da la cátedra para el punto 7: competencia **Trabajo en Equipo** → factores *Participación* y *Colaboración* → escala de **5 niveles acumulativos**, donde cada nivel incluye al anterior y agrega algo ("*además de las consideraciones del punto 3, es organizado y distribuye las tareas con eficacia*"). Ese formato acumulativo es la clave: no son cinco frases sueltas.
+
 - `EjemploPuestoTrabajo/` — 4 archivos: consigna del trabajo final de Adm. RRHH, descripción de puesto y perfil, planilla modelo y evaluación de desempeño.
 
 #### Dudas / pendientes
 
-- **Desarrollo incompleto.** Los DIAP v2.3 y v2.4 son casi todo imágenes; la conversión rescató los títulos pero no el contenido de las láminas. Hay que leerlos a mano o pedir el apunte en texto.
-- **No hay apunte de texto** de esta unidad, solo diapositivas.
+- Las láminas del **ejemplo de aviso** (Arquitecto de Soluciones Cloud, págs. 24–29 del DIAP v2.4) son capturas de imagen: está el rótulo de cada etapa AIDA pero no el texto del aviso. Si hace falta el modelo literal, hay que leerlas con visión.
+- Ídem la **pirámide de Maslow** (pág. 5) y las láminas 4, 7, 36.
 - No se copió `CompetenciasIngSistemas/` del campus (CONFEDI, Res. 1254-2018, Competencias del Ingeniero Iberoamericano) — son 4 PDF grandes de estándares de carrera. Están en el campus si hacen falta.
+- La cátedra usa **"reclutamiento"** como nombre del proceso completo (atraer + seleccionar + incorporar), no solo de la convocatoria. Si el enunciado del parcial dice "reclutamiento y selección" por separado, conviene aclarar el encuadre al responder.
 
 #### Fuentes
 
-- `materias/ASI/fuentes/Campus/ASI-Unidad3_DireccionTalento_CapitalHumano/ASI-3-Direccion de Talento y Capital Humano_DIAP.v2.3.pdf` y `otros/…v2.4.pdf`
+- `materias/ASI/fuentes/Campus/ASI-Unidad3_DireccionTalento_CapitalHumano/otros/ASI-3-Direccion de Talento y Capital Humano_DIAP.v2.4.pdf` — **50 láminas, es la fuente principal de esta unidad** (extraída con `pymupdf`, no con markitdown).
+- `materias/ASI/fuentes/Campus/ASI-Unidad3_DireccionTalento_CapitalHumano/ASI-3-Direccion de Talento y Capital Humano_DIAP.v2.3.pdf` — versión anterior, 42 láminas.
 - `materias/ASI/fuentes/Campus/ASI-Unidad3_DireccionTalento_CapitalHumano/ASI-3_Ejercitacion1- Talento y Capital Humano.docx`
 - `materias/ASI/fuentes/Campus/ASI-Unidad3_DireccionTalento_CapitalHumano/EjemploPuestoTrabajo/` (4 archivos, `.doc` legacy → `textutil`)
 - `materias/ASI/fuentes/Campus/ASI-Unidad3_DireccionTalento_CapitalHumano/ASI-3-…_EjemploEvaluaciónCompetencias.pdf`
@@ -5411,6 +5581,7 @@ Derivados que generamos (en esta misma carpeta, `materias/ASI/`):
 
 ## Log
 
+- 2026-09-14: **reingerida la Unidad 3 completa** para el 2º parcial. La unidad estaba marcada como "desarrollo parcial" porque los DIAP "eran casi todo imágenes" — **era falso**: el problema era markitdown, y `pymupdf` extrae 20.084 caracteres del DIAP v2.4 (50 láminas). Se incorporó todo lo que faltaba y que **es contenido directo del parcial**: los cinco procesos clave de RRHH, la definición de reclutamiento de cátedra (atraer + seleccionar + incorporar), el proceso numerado de 20 pasos en tres etapas, la planificación de la búsqueda, las fuentes de aprovisionamiento internas/externas con su tabla de ventajas y desventajas, el *job posting*, la búsqueda por consultor externo, **las cinco partes componentes del anuncio y el modelo AIDA de redacción** (lo que el docente pidió explícitamente), la estructura del CV, la conducción de la entrevista con sus tipos de preguntas y sus listas de "evitar" y "no olvidar", y la evaluación de desempeño por competencias con los tres tipos (básicas, genéricas, específicas) y la 360°. Se sumó también la consigna completa de la Ejercitación 1 con el ejemplo de escala acumulativa de 5 niveles. La unidad pasó de 51 a 219 líneas. **Erratas detectadas en el material:** la lámina 24 rotula la primera etapa AIDA como "1- Acción" cuando corresponde "Atención".
 - 2026-09-08: anotada la **clase de consulta previa al 2º parcial**. Nueva sección al final de la wiki con el formato del examen (un parcial único para todas las comisiones, práctico con teoría exigida dentro de la resolución), los **tres temas** (gestión de servicios/incidentes sobre Bancorp, perfil de puesto y aviso de reclutamiento, riesgos y prevención de H&S sobre un área de trabajo) y lo que exige la consigna de incidentes: protocolo paso a paso, **dos niveles de escalado con áreas del organigrama real**, herramientas (base de conocimiento, gestión de cambios/configuración) y al menos un KPI. Quedan dos pendientes: conseguir el documento con la lista de temas que compartió el docente, y armar una resolución tipo del incidente para practicar.
 - 2026-07-29: primer ingest completo de la materia. Se incorporó todo el Material de Cursado (Unidad 1 y Unidad 2), las resoluciones de las Etapas 1 y 2 del TPI, el BPMN del proceso, y la consigna + sugerencias de la Etapa 3. Se crearon las cuatro unidades del índice. Se detectaron 6 inconsistencias en lo ya entregado (ver sección TP Integrador) y se dejaron 3 candidatos de proyecto para la Etapa 3 a decidir.
 - 2026-07-29: corregidas I1, I2 e I5 sobre copias nuevas (`ASI26_310_UNIDAD1_corregido.docx`, `ASI26_310_UNIDAD2_corregido.docx`). Verificado por reconversión y diff: solo cambiaron las 8 celdas previstas. Quedan pendientes I3 (decisión), I4 (falta dato de fechas) e I6 (falta archivo).
