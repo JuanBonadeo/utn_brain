@@ -2557,6 +2557,18 @@ Se presentan **2 temas** (el enunciado pide 3 — decisión del grupo, con el ri
 
 **Integrantes**: Juan Cruz Bonadeo (53533) y Matias Estevez (53528).
 
+### Grupo 2 — caso Casermeiro SRL (Gonzalo)
+
+Grupo distinto al de Bonadeo + Estevez. Caso real: fábrica de tornillos de la familia (Alvear, Santa Fe), con
+acceso directo al ABM y a las planillas. El profe rechazó un tema tipo "Mi Bici Tu Bici" y pidió algo con
+información real y utilidad concreta. Todo el material está en [`entregables/TPI/caser/`](entregables/TPI/caser/):
+
+- `01-contexto-empresa.md` — datos confirmados, proceso productivo, supuestos, pendientes y preguntas.
+- `02-opciones-de-estudio.md` — cuatro problemas de decisión posibles (stock vs. contra pedido, fabricar vs. importar, regla de carga del horno, agrupar setups), con escenarios, salidas, datos a buscar y ejemplo de AnyLogic de referencia para cada uno. Recomendación: 1 principal, 2 como extensión, 3 como tercer tema.
+- `03-pedido-de-datos.md` — pedido de exportaciones del ABM (base común + específico por opción) y guion de entrevista.
+
+Estado: falta que la empresa elija la opción y mande la base común de datos; después se redacta el formulario.
+
 ### Temas candidatos y datasets verificados
 
 | # | Tema | Dataset | Estado |
@@ -2612,6 +2624,7 @@ Hallazgo que sostiene el Tema 1: el desbalance de Ecobici **no es anual sino int
 
 ## Log
 
+- **2026-09-13**: TPI, grupo 2 (Casermeiro). Creada `entregables/TPI/caser/` con contexto de la empresa, cuatro opciones de estudio mapeadas a bloques y ejemplos oficiales de AnyLogic (verificados en AnyLogic Cloud: Job Shop, Supply Chain, Flexible Manufacturing Supply Chain, Maintenance), y pedido de datos para el ABM. Agregado puntero en la sección TPI.
 - **2026-08-25**: ingesta masiva de todo el material de `archivo/`. Se copiaron a `fuentes/` los tres apuntes oficiales de cátedra (Weitz, Naylor cap. 4, Números pseudoaleatorios), la teoría de Flamini, los apuntes extra, los 13 resúmenes viejos, los 6 ejercicios resueltos de práctica, los modelos de AnyLogic y Mathematica, los 5 TPs y **todos los exámenes** (7 parciales, 6 finales, 1 globalizador). Todo convertido a markdown en `fuentes/txt/`, incluyendo la transcripción por visión de los PDFs y fotos escaneados (Weitz 79 pág., Naylor 29 pág., Flamini 24 pág., 7 exámenes en imagen). Wiki **reescrita completa**: de 3 secciones a 10 unidades más un mapa del parcial. Unidades nuevas: 4 (inventarios), 5 (10 pasos, las dos listas), 6 (probabilidad), 7 (generación de números y variables aleatorias), 8 (colas analíticas), 9 (análisis de salidas), 10 (comparación de sistemas). Hallazgos: el resumen del parcial **no cubre** generación de variables aleatorias, análisis de salidas ni comparación de sistemas; las preguntas 8/9/10 se repiten casi textuales en 2022-2023-2024; y el parcial **2025 cambió a multiple choice** con preguntas de AnyLogic y LaTeX.
 
 - **2026-07-31**: armado el entregable en Word (`entregables/TPI/TPI_Simulacion_Propuesta_de_Tema.docx`) reutilizando carátula, estilos, header/footer y logo del informe de RD. Grupo actualizado a Bonadeo + Estevez (sale Casermeiro) y la propuesta reducida a 2 temas (Ecobici y emergencias); molinetes queda como reserva documentada.
