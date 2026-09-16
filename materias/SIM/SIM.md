@@ -2566,8 +2566,23 @@ información real y utilidad concreta. Todo el material está en [`entregables/T
 - `01-contexto-empresa.md` — datos confirmados, proceso productivo, supuestos, pendientes y preguntas.
 - `02-opciones-de-estudio.md` — cuatro problemas de decisión posibles (stock vs. contra pedido, fabricar vs. importar, regla de carga del horno, agrupar setups), con escenarios, salidas, datos a buscar y ejemplo de AnyLogic de referencia para cada uno. Recomendación: 1 principal, 2 como extensión, 3 como tercer tema.
 - `03-pedido-de-datos.md` — pedido de exportaciones del ABM (base común + específico por opción) y guion de entrevista.
+- `04-formulario-eleccion-tema.md` — propuesta de tema con tres candidatos, alcance, medidas de salida, validación y supuestos.
 
-Estado: falta que la empresa elija la opción y mande la base común de datos; después se redacta el formulario.
+**Tema principal propuesto**: régimen de campañas del horno de cementación y temple, con la política de stock
+acoplada. El horno tiene ~36 h de calentamiento y ~48 h de enfriamiento y se enciende recién con 70-80 ULI
+acumuladas (15 ULI por turno, campaña de ~1 semana): son ~84 h de preparación por ~40 h de proceso efectivo.
+Con la planta subutilizada, la espera para juntar el lote puede ser de semanas, y es esa espera la que fija
+el lead time y, por lo tanto, cuánto stock hace falta y cuánto capital queda inmovilizado. El horno está
+aguas arriba de todo lo demás.
+
+Descartado explícitamente del alcance: flujo de caja y tiempo de supervivencia de la empresa. La caja dada
+una política es aritmética, no simulación; las salidas del modelo (compras, inventario, campañas, ventas por
+período) alimentan una proyección externa en planilla. Queda como trabajo futuro.
+
+Estado: falta la exportación del ABM y el relevamiento del horno (ver `04-formulario-eleccion-tema.md` §Estado
+de los datos). El dato que más cambia el análisis: si el sistema conserva y exporta los presupuestos no
+concretados y las notas de venta canceladas, hay medición retroactiva de venta perdida; si no, la venta
+perdida solo puede ser salida del modelo.
 
 ### Temas candidatos y datasets verificados
 
@@ -2624,6 +2639,7 @@ Hallazgo que sostiene el Tema 1: el desbalance de Ecobici **no es anual sino int
 
 ## Log
 
+- **2026-09-15**: TPI, grupo 2 (Casermeiro). Relevamiento nuevo de la empresa (horno con números: 27 resistencias, 36 h de calentamiento, 48 h de enfriamiento, 70-80 ULI por campaña, 15 ULI por turno; tres proveedores de alambre con precio, plazo y condición de pago; estructura consulta → PV → NV). Se reordenaron las opciones: el horno pasa de tercer tema a tema principal, acoplado a la política de stock. Escrito `entregables/TPI/caser/04-formulario-eleccion-tema.md` con tres temas candidatos, alcance, medidas de salida, validación y supuestos. Descartados del alcance el flujo de caja y el tiempo de supervivencia.
 - **2026-09-13**: TPI, grupo 2 (Casermeiro). Creada `entregables/TPI/caser/` con contexto de la empresa, cuatro opciones de estudio mapeadas a bloques y ejemplos oficiales de AnyLogic (verificados en AnyLogic Cloud: Job Shop, Supply Chain, Flexible Manufacturing Supply Chain, Maintenance), y pedido de datos para el ABM. Agregado puntero en la sección TPI.
 - **2026-08-25**: ingesta masiva de todo el material de `archivo/`. Se copiaron a `fuentes/` los tres apuntes oficiales de cátedra (Weitz, Naylor cap. 4, Números pseudoaleatorios), la teoría de Flamini, los apuntes extra, los 13 resúmenes viejos, los 6 ejercicios resueltos de práctica, los modelos de AnyLogic y Mathematica, los 5 TPs y **todos los exámenes** (7 parciales, 6 finales, 1 globalizador). Todo convertido a markdown en `fuentes/txt/`, incluyendo la transcripción por visión de los PDFs y fotos escaneados (Weitz 79 pág., Naylor 29 pág., Flamini 24 pág., 7 exámenes en imagen). Wiki **reescrita completa**: de 3 secciones a 10 unidades más un mapa del parcial. Unidades nuevas: 4 (inventarios), 5 (10 pasos, las dos listas), 6 (probabilidad), 7 (generación de números y variables aleatorias), 8 (colas analíticas), 9 (análisis de salidas), 10 (comparación de sistemas). Hallazgos: el resumen del parcial **no cubre** generación de variables aleatorias, análisis de salidas ni comparación de sistemas; las preguntas 8/9/10 se repiten casi textuales en 2022-2023-2024; y el parcial **2025 cambió a multiple choice** con preguntas de AnyLogic y LaTeX.
 
