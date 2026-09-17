@@ -20,7 +20,18 @@ Fuente: brief armado por la familia (2026-09-13) + respuestas de Gonzalo en la m
 - Nave Central (~1.000 m²): envasado, almacenamiento, comercial, logística.
 - Entrepiso (~600 m²): oficinas y almacenes.
 - Nave Sur (~900 m²): tratamientos térmicos y materia prima.
-- Horno propio de cementación y temple, **reactivado en 01/2026**.
+- Horno propio de cementación y temple, **reactivado en 01/2026**. Relevado 2026-09-15/16:
+  - Eléctrico, 27 resistencias. ~36 h de calentamiento, ~48 h de enfriamiento.
+  - **Cinta continua**: las ULI (unidad de transporte interno) pasan de a una; ~15 ULI por turno.
+    Se enciende con ~70-80 ULI acumuladas; campaña de ~1 semana.
+  - Tiene **generador de gases endotérmicos** (atmósfera de cementación): consume gas mientras el
+    horno está caliente y tiene su propio arranque. Es un costo más por encendido y por hora caliente.
+  - Cada encendido/apagado **desgasta** el horno (resistencias, cinta, mufla): costo fijo por encendido
+    a estimar del registro de mantenimiento.
+  - Cuando había mucha producción **convenía dejarlo encendido** entre campañas. Es el escenario
+    "mantener caliente" cruzado con el nivel de demanda.
+  - La empresa preguntó si se puede estudiar **cuántas ULI conviene esperar antes de encender**: es
+    la variable de decisión del Tema 1 (barrido del umbral con réplicas e intervalos de confianza).
 - Línea de cincado electrolítico propia, **desinstalada / no operativa**.
 
 **Proceso productivo** (confirmado por Gonzalo; casi todo interno)
@@ -52,6 +63,16 @@ Fuente: brief armado por la familia (2026-09-13) + respuestas de Gonzalo en la m
 - Capacidad agregada por familia de producto, no máquina por máquina.
 - Precios y costos constantes en el horizonte (en índices).
 - Zincado tercerizado con plazo aleatorio; no se modela al tercero por dentro.
+
+## Datos que la empresa entrega (confirmado 2026-09-16, exportación prevista 2026-09-17)
+
+- ABM: ventas, maestro de artículos, órdenes de fabricación, compras, stock valorizado, clientes y proveedores.
+- ISO: órdenes de fabricación, cargas de horno, rechazos, trazabilidad.
+- Energía: consumo con y sin campaña, potencia contratada, tarifa.
+- Demanda no atendida.
+- Familias de productos con artículos representativos de buen movimiento.
+
+Lo que falta pedir además de esto está en `03-pedido-de-datos.md` §Pedido para el Tema 1 (horno).
 
 ## Pendiente de relevar
 

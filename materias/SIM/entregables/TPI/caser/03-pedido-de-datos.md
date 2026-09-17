@@ -48,3 +48,62 @@ Con esto se hace el ABC, se ve qué se vende, qué se fabrica, qué se importa y
 5. ¿Cuánto tarda el zincado en volver? ¿Cuál es el peor caso?
 6. ¿Qué nivel de servicio consideran aceptable? ¿Pierden ventas por falta de stock?
 7. ¿Qué importan hoy, a quién, con qué plazo y mínimo?
+
+---
+
+## Pedido para el Tema 1 (horno) — 2026-09-16
+
+> Complemento de la base común, armado después de que la empresa confirmó que entrega ventas, maestro, OF,
+> compras, stock valorizado, clientes/proveedores, cargas de horno, rechazos, trazabilidad, energía (consumo
+> con y sin campaña, potencia contratada, tarifa) y demanda no atendida. Para mandar tal cual.
+
+### A. Datos que no estaban en la lista
+
+- **Zincado tercerizado**: remitos de ida y vuelta (fecha de salida, fecha de regreso, artículo, kg), 24 meses,
+  y costo por kg.
+- **Gas del generador endotérmico**: facturas o consumo mensual, 24 meses; consumo por hora en arranque y en
+  régimen; si arranca junto con el horno o tiene su propio tiempo de arranque.
+- **Ficha técnica del horno**: potencia total y por resistencia (kW); cuántas ULI viajan en la cinta a la vez y
+  tiempo de residencia (largo / velocidad); si la velocidad de cinta o la temperatura cambian por artículo; si
+  las 36 h de calentamiento son a plena potencia.
+- **Mantenimiento del horno**: reemplazos (resistencias, cinta, mufla, retorta del generador) con costo y fecha,
+  y cuántos encendidos hubo en ese lapso.
+- **Capacidades aguas arriba**: piezas/hora por máquina o familia en estampado y laminado, tiempo de cambio de
+  matrices, máquinas operativas.
+- **Calendario de planta** en los 24 meses: horario del turno, feriados, vacaciones, paradas.
+- **Estado actual**: ULI esperando el horno hoy y estado del horno (apagado / campaña en curso).
+- **Tasa de costo del capital** que usan (costo financiero mensual), en índice.
+
+### B. Preguntas para el encargado (15 minutos)
+
+1. Regla de encendido: ¿solo "cuando hay 70-80 ULI"? ¿Adelantan por pedidos comprometidos o clientes grandes?
+   ¿Quién decide y mirando qué?
+2. Fin de campaña: ¿las ULI que se producen con el horno caliente se meten en la misma campaña? ¿Cuánto esperan
+   con la cinta vacía antes de apagar? ¿Alguna vez lo dejaron encendido entre campañas?
+3. Turnos de carga por día durante la campaña (1, 2 o 3) y horario. ¿Queda supervisado de noche?
+4. Qué es una ULI: kg y piezas por ULI por artículo, o rango. ¿Varía mucho?
+5. ¿El ciclo varía por artículo o familia (profundidad de capa, temperatura)? ¿Se pierde tiempo al cambiar de
+   artículo dentro de la campaña?
+6. ¿Cómo deciden cuándo y cuánto fabricar de cada artículo de stock (punto de pedido, lote mínimo, a ojo)?
+7. Plazo comprometido con el cliente: stock (inmediato) vs. contra pedido (X días). ¿Qué nivel de servicio
+   consideran aceptable? ¿Pierden ventas por falta de stock?
+8. Registro de cargas: ¿desde cuándo? ¿Hay de antes de la parada? ¿Enero-febrero 2026 fue puesta a punto?
+
+### C. Cómo pedir lo que ya van a mandar
+
+- Excel/CSV, un archivo por tabla, 24 meses, con un diccionario mínimo de campos (estados de OF, códigos de
+  familia, unidades).
+- **Ventas**: fecha, cliente codificado, artículo, cantidad, precio y **fecha de entrega/remito**. Presupuestos
+  con estado (convertido o no) y NV canceladas.
+- **OF**: artículo, cantidad, fecha de emisión, inicio, fin, máquina; si se ve cuándo quedó lista para el horno
+  y cuándo se cargó, mejor.
+- **Cargas del horno**: por ULI o por carga: fecha y hora, artículo, kg, piezas, ciclo, campaña a la que
+  pertenece, y encendido/apagado de cada campaña. Si es papel, foto de todo.
+- **Rechazos**: por etapa (horno, zincado, otro), cantidad y motivo.
+- **Energía**: factura completa de cada mes (kWh por franja horaria si la tarifa la tiene, potencia contratada,
+  potencia máxima registrada, penalidades), y si tienen lectura de medidor por campaña.
+- **Maestro**: por artículo: familia, ruta (pasa por horno sí/no, zincado sí/no), stock / contra pedido /
+  importado, piezas y kg por ULI, costo estándar en índice.
+- **Artículos representativos**: qué porcentaje del volumen del horno (kg o ULI) representan los elegidos, o
+  que el registro de cargas identifique el artículo por ULI. El horno tiene que ver el volumen completo: los
+  elegidos se modelan uno por uno y el resto como flujo agregado.

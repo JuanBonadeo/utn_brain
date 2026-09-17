@@ -196,6 +196,16 @@ horno. Lo que se estima son dos potencias medias, P_cal (durante las 36 h de cal
 Si la tarifa penaliza el exceso de potencia y una campaña lo dispara, se agrega como costo fijo por
 campaña. La potencia contratada no entra: es costo hundido para esta decisión.
 
+**Gas y desgaste.** El horno es de cinta continua con generador de gases endotérmicos para la atmósfera de
+cementación, y cada encendido desgasta resistencias, cinta y mufla. Ninguno de los dos cambia la lógica del
+modelo: ambos entran en los dos coeficientes que ya existen, **costo fijo por encendido** (energía de
+calentamiento + gas de arranque + desgaste por ciclo, este último estimado del registro de mantenimiento
+dividido por la cantidad de encendidos) y **costo por hora caliente** (energía + gas de régimen). El gas se
+estima con la misma regresión que la electricidad sobre sus facturas. Si algún término no se consigue, se
+excluye, se declara, y se hace sensibilidad (desgaste = 0 %, 25 % y 50 % del costo energético de arranque);
+como los dos empujan el costo fijo hacia arriba, el umbral óptimo real es al menos el que dé el modelo sin
+ellos.
+
 ### 2.4 Lo que falta o es débil, y qué se hace
 
 | Dato débil | Supuesto declarado | Sensibilidad |
@@ -265,7 +275,9 @@ dependa de la tarifa.
 
 ### 3.5 Costo energético incremental por kg
 
-Por campaña: `kWh = P_cal · 36 h + P_mant · (duración de Procesando)`; el enfriamiento no consume.
+Por campaña: `kWh = P_cal · 36 h + P_mant · (duración de Procesando)`; el enfriamiento no consume. El gas
+del generador y el desgaste por encendido (§2.3) se suman con la misma estructura: un término fijo por
+campaña y uno por hora caliente.
 Por réplica: `kWh/kg = Σ kWh / Σ kg` sobre todas las campañas del horizonte, cociente de totales y no
 promedio de cocientes, para que cada campaña pese por lo que trató. Costo = kWh/kg × tarifa en índice.
 Con umbral bajo el término fijo se reparte entre menos kg: esa pendiente es la que se compara con la
@@ -406,7 +418,8 @@ informe se reconstruye desde ahí.
 
 ## Notas internas (no van al docente)
 
-**Lo que hay que cerrar con la empresa antes de mandar esto** (los `[confirmar]` del texto):
+**Lo que hay que cerrar con la empresa antes de mandar esto** (los `[confirmar]` del texto; la lista completa
+para mandar a fábrica está en `03-pedido-de-datos.md` §Pedido para el Tema 1):
 
 1. ¿Las ULI que llegan mientras el horno está caliente se suman a la campaña en curso? ¿Cuánto se
    mantiene caliente con la cola vacía antes de apagar (`horasEnVacio`)?
