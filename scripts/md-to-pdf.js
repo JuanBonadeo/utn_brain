@@ -45,6 +45,28 @@ const withToc = !flags.includes('--no-toc');
 const subtitleFlag = flags.find((f) => f.startsWith('--subtitle='));
 const subtitleArg = subtitleFlag ? subtitleFlag.split('=').slice(1).join('=') : null;
 
+// El encabezado se deduce de la ruta: materias/<CODIGO>/...
+const MATERIAS = {
+  IO: 'Investigación Operativa',
+  TPA: 'Tecnologías para la Automatización',
+  LEG: 'Legislación',
+  SIM: 'Simulación',
+  IYS: 'Ingeniería y Sociedad',
+  RD: 'Redes de Datos',
+  SGD: 'Soporte a la Gestión de Datos',
+  ASI: 'Administración de Sistemas de Información',
+  IPP: 'Intro a la Práctica Profesional',
+  ICS: 'Ingeniería y Calidad de Software',
+};
+
+function eyebrowFor(file) {
+  const m = file.split(path.sep).join('/').match(/\/materias\/([A-Z]+)\//);
+  const materia = m && MATERIAS[m[1]];
+  return materia
+    ? `UTN \u00b7 Ingenier\u00eda en Sistemas \u00b7 ${materia}`
+    : 'UTN \u00b7 Ingenier\u00eda en Sistemas';
+}
+
 const ROOT = path.resolve(__dirname, '..');
 const KATEX_CSS = path.join(ROOT, 'node_modules', 'katex', 'dist', 'katex.min.css');
 const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
@@ -380,6 +402,22 @@ hr{
 }
 
 /* ─── listas ─────────────────────────────────────────── */
+/* Las figuras nunca deben desbordar la caja de texto */
+figure{ margin:12pt 0; break-inside:avoid; text-align:center; }
+img{
+  display:block;
+  max-width:100%;
+  height:auto;
+  margin:12pt auto;
+  break-inside:avoid;
+}
+img + em, figcaption{
+  display:block;
+  text-align:center;
+  font-size:8.4pt;
+  color:var(--ink-soft);
+  margin-top:-6pt;
+}
 ul,ol{ margin:0 0 8pt; padding-left:16pt; }
 li{ margin:0 0 3.4pt; }
 li>ul, li>ol{ margin-top:3.4pt; }
@@ -539,7 +577,7 @@ td .katex-display > .katex{ font-size:1em; }
 </head>
 <body>
 <header class="masthead">
-  <p class="eyebrow">UTN · Ingeniería en Sistemas · Simulación</p>
+  <p class="eyebrow">${eyebrowFor(inputPath)}</p>
   <h1 class="doc">${docTitle}</h1>
 </header>
 ${subtitle ? `<div class="lead">${renderMath(marked.parse(stashMath(subtitle))).replace(/^<p>|<\/p>\s*$/g, '')}</div>` : ''}
