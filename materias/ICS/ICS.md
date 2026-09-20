@@ -1638,3 +1638,9 @@ partición, sobre todo en las válidas.
   (TriMaster) y 19 (recargo de cuota). La clase 1 de Brozo vino **vacía** en el export.
   Errores detectados y corregidos en las notas: caso (1,2,6) marcado como escaleno, y partición
   inválida `X ≥ 31` pisando la válida `21 ≤ X ≤ 31`.
+- 2026-09-20: se copiaron los 9 parciales de regularización de `archivo/` a
+  `fuentes/parciales-regularizacion/` (2012, 2013, 2015, 2016, 2020, 2021, 2022, 2024, 2025) y
+  se armó `estudio/banco-preguntas.md`: ~45 preguntas agrupadas por tema, con las respuestas
+  leídas de los formularios corregidos y de las marcas del profesor en los de papel. Las que el
+  alumno erró quedan marcadas como deducidas. Los de 2012-2016 no tienen texto extraíble (son
+  fotos): se leyeron como imagen.
