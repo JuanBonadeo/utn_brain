@@ -1,0 +1,19 @@
+{
+  "_comentario": "Datos fijos de carátula. Los toma scripts/monografia-pdf.js como valores por defecto; cualquier campo se puede pisar desde el frontmatter del .md del trabajo.",
+
+  "institucion": "Universidad Tecnológica Nacional",
+  "facultad": "Facultad Regional Rosario",
+  "carrera": "Ingeniería en Sistemas de Información",
+
+  "logo": "scripts/templates/logo-utn.png",
+
+  "alumnos": [
+    "Bonadeo, Juan Cruz | juancruzbonadeo04@gmail.com | 53533"
+  ],
+
+  "comisiones": {
+    "_comentario": "Comisión por materia, para no tipearla en cada TP. IO confirmada desde el TPI grupal; el resto hay que verificarlas.",
+    "IO": "402",
+    "IYS": "IC 01"
+  }
+}

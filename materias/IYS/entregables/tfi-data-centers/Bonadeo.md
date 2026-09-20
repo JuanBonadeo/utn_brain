@@ -1,15 +1,14 @@
 ---
-institucion: Universidad Tecnológica Nacional
-facultad: Facultad Regional [COMPLETAR]
-carrera: Ingeniería en Sistemas de Información
-materia: Ingeniería y Sociedad — IC 01
-docente: "[COMPLETAR]"
+codigo: IYS
+materia: Ingeniería y Sociedad
+tipo: Trabajo Final Integrador
 titulo: La nube tiene territorio
 subtitulo: Infraestructura de cómputo para inteligencia artificial en la Patagonia argentina — análisis crítico de un proceso ingenieril en curso (2024-2026)
-alumnos: "Bonadeo, Juan Cruz"
-anio: 2026
-comision: "[COMPLETAR]"
+comision: IC 01
 fecha: "[COMPLETAR]"
+
+profesores:
+  - "[COMPLETAR]"
 ---
 
 ## 1. Introducción

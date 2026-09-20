@@ -53,6 +53,13 @@ de materia fuera de ahí.
 - Fuera de `materias/` solo hay: `CLAUDE.md`, `scripts/`, el toolchain de
   node (`package.json`, `node_modules/`) y `_drive/` (dos PDFs sueltos del
   drive, gitignorados, no son de ninguna materia).
+- `scripts/templates/tp.md` → plantilla para arrancar cualquier TP. Se copia a
+  `materias/[CÓDIGO]/entregables/`, se completa el frontmatter y se genera el
+  PDF con `node scripts/monografia-pdf.js <archivo.md>`: sale con carátula,
+  índice, A4, Arial 10, interlineado 1.5, justificado y numeración de páginas.
+  Los datos fijos (facultad, legajo, correo, comisión por materia) viven en
+  `scripts/datos-alumno.json`, no se retipean en cada trabajo. Ver
+  `scripts/templates/README.md`.
 - `scripts/ingest.py` → wrapper de markitdown para convertir fuentes no-md.
   Corre con el venv del proyecto: `.venv/bin/python scripts/ingest.py <archivo>`.
   Ojo con los zips de Google Drive: `unzip` rompe los acentos de los nombres
