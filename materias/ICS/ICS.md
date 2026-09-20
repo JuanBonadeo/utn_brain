@@ -1797,3 +1797,6 @@ partición, sobre todo en las válidas.
   por fase, hitos) y el artefacto Plan de Proyecto + informe de avance. Erratas de numeración
   de la fuente corregidas y marcadas (PP SG1, PPQA SG2, MA SP1.1). Contradicción anotada: la
   fuente agrega "procedimientos" a los componentes del software.
+- 2026-09-20: `estudio/resumen.md` (+ .pdf) — resumen de estudio para el parcial de
+  regularización, ordenado por peso en el examen según `estudio/banco-preguntas.md` y no por el
+  orden del programa. Cierra con una lista de los 12 errores que se repiten en los parciales.
