@@ -2549,13 +2549,18 @@ Formulario con integrantes (nombre y legajo) + **tres temas candidatos**, cada u
 
 Prioridad **por fecha de entrega del formulario** (conviene mandarlo temprano). El docente confirma viabilidad o pide reformulación; **no arrancar el modelado antes de esa confirmación**.
 
-**Estado**: entregable armado —
-- Fuente en markdown: [`entregables/TPI/formulario-eleccion-tema.md`](entregables/TPI/formulario-eleccion-tema.md)
-- Documento Word: [`entregables/TPI/TPI_Simulacion_Propuesta_de_Tema.docx`](entregables/TPI/TPI_Simulacion_Propuesta_de_Tema.docx), con la carátula, estilos, header/footer y logo heredados de los informes de RD (ver `rd-informe-formato` en memoria).
+**Estado (2026-09-20): tema aprobado.** El docente (Guillermo Leale) confirmó por mail el tema de los
+molinetes de subte y pidió editar el envío anterior del formulario con ese tema. Ecobici quedó descartado
+porque otro grupo lo tomó primero.
 
-Se presentan **2 temas** (el enunciado pide 3 — decisión del grupo, con el riesgo de reformulación anotado en el propio documento).
+- Formulario v2: [`entregables/TPI/formulario-eleccion-tema.md`](entregables/TPI/formulario-eleccion-tema.md)
+- Definición del caso: [`entregables/TPI/subte/01-definicion-del-caso.md`](entregables/TPI/subte/01-definicion-del-caso.md)
+- Documento Word: [`entregables/TPI/TPI_Simulacion_Propuesta_de_Tema.docx`](entregables/TPI/TPI_Simulacion_Propuesta_de_Tema.docx) — **desactualizado**, hay que regenerarlo con el contenido v2. Carátula, estilos, header/footer y logo heredados de los informes de RD (ver `rd-informe-formato` en memoria).
 
-**Integrantes**: Juan Cruz Bonadeo (53533) y Matias Estevez (53528).
+**Compromiso con el docente: miércoles 2026-09-23**, con el caso definido (línea, franja, días, medidas de
+rendimiento) y, si se llega, el modelo empezado en AnyLogic.
+
+**Integrantes**: Juan Cruz Bonadeo (53533) y Matias Estevez (53528). **Comisión 401.**
 
 ### Grupo 2 — caso Casermeiro SRL (Gonzalo)
 
@@ -2590,24 +2595,71 @@ La empresa confirmó que toda la información existe; falta ejecutar la exportac
 concretados y las notas de venta canceladas, hay medición retroactiva de venta perdida; si no, la venta
 perdida solo puede ser salida del modelo.
 
-### Temas candidatos y datasets verificados
+### Tema aprobado — molinetes de Constitución (Línea C)
 
-| # | Tema | Dataset | Estado |
-|---|---|---|---|
-| 1 | **Ecobici** — rebalanceo en el corredor Constitución/Retiro–Catalinas/Puerto Madero | [BA Data — Bicicletas Públicas](https://data.buenosaires.gob.ar/dataset/bicicletas-publicas) (3.559.284 viajes 2024) + capacidad de 394 estaciones vía feed GBFS del operador | ✅ Descargado y perfilado |
-| 2 | **Despacho de emergencias** (San Francisco) — unidad adicional / política de despacho | [DataSF `nuek-vuh3`](https://data.sfgov.org/Public-Safety/Fire-Department-and-Emergency-Medical-Services-Dis/nuek-vuh3) (7.386.640 registros) | ✅ Muestra semanal perfilada |
-| — | *Reserva*: **molinetes de subte** — dimensionamiento en hora pico | [BA Data — Subte Viajes Molinetes](https://data.buenosaires.gob.ar/dataset/subte-viajes-molinetes) (hasta 2025) | ⚠️ Cobertura verificada, columnas no. Fuera de la entrega |
+**Línea C, estación Constitución, vestíbulo Principal, días hábiles, franja 07:00–09:30** (pico 08:15–08:45).
 
-Hallazgo que sostiene el Tema 1: el desbalance de Ecobici **no es anual sino intradiario y se revierte**. En días hábiles, Constitución pierde ~19,7 bicicletas netas entre 7 y 10 h (sobre 54 anclajes) y recupera ~15,1 entre 17 y 20 h; Madero Office hace el espejo, recibiendo ~14,5 netas a la mañana sobre 28 anclajes. Es el patrón commuter terminal ferroviaria → área de oficinas.
+| Dataset | Origen | Estado |
+|---|---|---|
+| Subte — Viajes Molinetes 2026 (ene-jun), **por molinete individual** y ventana de 15 min | [BA Data](https://data.buenosaires.gob.ar/dataset/subte-viajes-molinetes) | ✅ Descargado (45 MB zip → 548 MB CSV) y perfilado, 117 días hábiles |
+| Tiempo de servicio del molinete | no existe en ningún dataset | ⏳ medición en campo |
+| Estructura de las tandas (arribos del Roca) | el agregado de 15 min la borra | ⏳ medición en campo, o GTFS de Trenes Argentinos |
+
+Perfilado reproducible con [`scripts/sbase-perfil.py`](../../scripts/sbase-perfil.py). Los CSV no se commitean.
+
+**El hallazgo que sostiene el caso**: en el pico cada molinete recibe un pasajero cada 8,5 s contra un tiempo
+de validación de 2-3 s, o sea ρ ≈ 0,3. Un modelo analítico M/M/c concluiría que **no hay cola**, y sin embargo
+la hay: Constitución es la terminal del Roca y los pasajeros llegan **en tandas**, no distribuidos. Es
+congestión transitoria por arribos en lote sobre un sistema subutilizado en promedio — justo donde la fórmula
+falla y la simulación es la herramienta correcta. Es el argumento central del trabajo.
+
+Evidencia del perfilado (ene-jun 2026, vestíbulo Principal, n = 117 días hábiles depurados):
+
+| | valor |
+|---|---|
+| Ventanas de 15 min más cargadas de todo el subte | las **14 primeras** son de Constitución |
+| Pico 08:30 | 2.066 pax/15 min (CV 0,24) |
+| Franja 07:00–09:30 | 17.482 pax/día hábil |
+| Molinetes: instalados / con tráfico real / activos promedio | 28 / 21 / 19,5 |
+| Desbalance entre molinetes | Turn14 = 1.485 pax/día vs Turn23 = 129 → factor 11 |
+| Vestíbulos | Principal 84,7 % · Plaza 15,3 % |
+| Día más cargado | miércoles (2.510 en la ventana 08:30) vs lunes (1.976) |
+
+**Escenarios**: E0 base (~19,5 molinetes) · E1 abrir los 28 · E2 redistribuir al vestíbulo Plaza · E3
+validación contactless EMV/QR (la estación ya tiene un molinete así).
+
+**Medidas de rendimiento**: espera en cola (media y **percentil 90**), **proporción con espera > 30 s**,
+**tiempo de disipación de la tanda**; secundarias Lq, utilización por molinete y throughput.
+
+**Trampas del dataset, ya detectadas**: el campo de hora cambia de formato según el mes (03 y 04/2026 usan
+`HH:MM`, el resto `HH:MM:SS`) y agregar sin normalizar parte cada hora en dos, en silencio; los feriados se
+detectan solos por caída del flujo diario bajo el 50 % de la mediana (11 días de 128, todos feriados reales);
+`Turn07` registra 3 pasajeros en seis meses y se excluye.
+
+### Temas descartados
+
+| # | Tema | Por qué se cayó |
+|---|---|---|
+| 1 | **Ecobici** — rebalanceo Constitución/Retiro–Catalinas/Puerto Madero ([BA Data](https://data.buenosaires.gob.ar/dataset/bicicletas-publicas), 3.559.284 viajes 2024 + GBFS) | Lo tomó otro grupo primero. Estaba descargado y perfilado |
+| 2 | **Despacho de emergencias** (San Francisco), [DataSF `nuek-vuh3`](https://data.sfgov.org/Public-Safety/Fire-Department-and-Emergency-Medical-Services-Dis/nuek-vuh3) | Reserva; no se usó |
+
+Hallazgo de Ecobici que quedó documentado por si sirve: el desbalance **no es anual sino intradiario y se
+revierte**. En días hábiles, Constitución pierde ~19,7 bicicletas netas entre 7 y 10 h (sobre 54 anclajes) y
+recupera ~15,1 entre 17 y 20 h; Madero Office hace el espejo. Mismo patrón commuter que sostiene el tema del
+subte, y sobre la misma estación.
 
 ### Dudas / pendientes
 
+- **Salida a campo** (lunes 21 o martes 22, 07:30-09:00, Constitución): cronometrar 100-150 validaciones
+  separando SUBE por apoyo de EMV/QR, y contar intervalo entre tandas y largo de cola. Sin esos dos datos el
+  modelo no cierra, y el largo de cola medido es además el único punto de validación posible.
+- **Regenerar el `.docx`** del formulario con el contenido v2 antes de reenviarlo.
+- Conseguir los horarios de arribo del Roca a Constitución (GTFS de Trenes Argentinos). El buscador del
+  portal de BA Data está bloqueado por WAF; el endpoint `package_show` sí responde con user-agent de navegador.
 - Fechas de entrega y presentación: se publican en Classroom (no están en el enunciado).
-- Confirmar que la **Comisión 403** (heredada del formato de RD) aplique también a Simulación, y si hay que consignar los profesores de la cátedra en la carátula.
-- Decidir si se suma un tercer tema: el enunciado pide 3 y se entregan 2.
-- Enviar el formulario (prioridad por fecha de entrega).
+- Confirmar si hay que consignar los profesores de la cátedra en la carátula.
 - Confirmar si la plantilla LaTeX de las entregas parciales se reutiliza tal cual.
-- Los archivos de datos (765 MB) no van al repo — mantenerlos afuera o en `.gitignore`.
+- Los archivos de datos (548 MB) no van al repo — se regeneran con el script y el link del portal.
 
 ### Fuentes
 
@@ -2645,6 +2697,7 @@ Hallazgo que sostiene el Tema 1: el desbalance de Ecobici **no es anual sino int
 
 ## Log
 
+- **2026-09-20**: TPI, grupo 1 (Bonadeo + Estevez). **Tema aprobado por el docente: molinetes de subte.** Ecobici se cayó porque lo tomó otro grupo. Descargado y perfilado el dataset de SBASE 2026 (ene-jun, por molinete individual cada 15 min): Constitución Línea C se lleva las 14 ventanas más cargadas del sistema, pico de 2.066 pax/15 min a las 08:30 sobre 19,5 molinetes activos de 28 instalados, y 17.482 pax en la franja 07:00-09:30 por día hábil. Hallazgo central: ρ ≈ 0,3 por molinete, o sea que M/M/c diría que no hay cola — la cola existe porque los arribos vienen en tandas desde la terminal del Roca, que es el argumento de por qué el caso necesita simulación. Escrito `entregables/TPI/subte/01-definicion-del-caso.md` (entregable para la reunión del 23/09), reescrito el formulario como v2 con el tema del subte, y agregado `scripts/sbase-perfil.py`. Detectadas dos trampas del dataset: el formato de hora cambia según el mes y los feriados se identifican solos por caída del flujo. Pendiente: medición en campo del tiempo de servicio y de la estructura de tandas, y regenerar el `.docx`.
 - **2026-09-16** (2): TPI, grupo 2 (Casermeiro). La empresa confirmó que entrega ventas, maestro, OF, compras, stock valorizado, cargas de horno, rechazos, trazabilidad, energía y demanda no atendida (exportación prevista 2026-09-17) y preguntó si se puede estudiar el umbral óptimo de ULI. Datos nuevos del horno: cinta continua, generador de gases endotérmicos, desgaste por encendido, y que con mucha producción convenía dejarlo encendido. Actualizados `01-contexto-empresa.md` (horno), `03-pedido-de-datos.md` (pedido para el Tema 1: datos faltantes, entrevista al encargado, formato de las exportaciones) y `05-respuestas-al-docente.md` (gas y desgaste como costo fijo por encendido y costo por hora caliente).
 - **2026-09-16**: TPI, grupo 2 (Casermeiro). El docente respondió la propuesta con cinco preguntas sobre el Tema 1 (horno). Escrito `entregables/TPI/caser/05-respuestas-al-docente.md`: diseño del horno como servidor con preparación y política de encendido por umbral (statechart Apagado → Acumulando → Calentando → Procesando → Enfriando; Queue + Hold + Seize/Delay/Release; disparo por condición al entrar a la cola, espera máxima por timeout), construcción en dos etapas (arribos exógenos → demanda y stock), tabla de datos y método de ajuste, estimación de P_cal/P_mant por regresión sobre facturas, escenarios E0-E3 parametrizados, medida de decisión (costo relevante por kg sujeto a nivel de servicio), validación con tolerancias + Welch + juicio del encargado, experimento Parameters Variation con semilla como parámetro y un `Random` por fuente de aleatoriedad (verificado contra el Big Book de AnyLogic caps. 8 y 15), paired-t con Bonferroni. Sin cambios en las unidades.
 - **2026-09-15**: TPI, grupo 2 (Casermeiro). Relevamiento nuevo de la empresa (horno con números: 27 resistencias, 36 h de calentamiento, 48 h de enfriamiento, 70-80 ULI por campaña, 15 ULI por turno; tres proveedores de alambre con precio, plazo y condición de pago; estructura consulta → PV → NV). Se reordenaron las opciones: el horno pasa de tercer tema a tema principal, acoplado a la política de stock. Escrito `entregables/TPI/caser/04-formulario-eleccion-tema.md` con tres temas candidatos, alcance, medidas de salida, validación y supuestos. Descartados del alcance el flujo de caja y el tiempo de supervivencia.
