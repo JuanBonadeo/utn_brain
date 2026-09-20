@@ -182,6 +182,34 @@ desregulación del consumidor · felicidad paradójica · sociedad de la decepci
   situación personal o de la industria:
   [`lipovetsky-felicidad-paradojica.md`](entregables/lipovetsky-felicidad-paradojica.md)
   (+ `.docx`). Categoría elegida: el turboconsumidor.
+- **Trabajo Final Integrador** — *La nube tiene territorio: infraestructura de
+  cómputo para IA en la Patagonia argentina (2024-2026)*:
+  [`tfi-data-centers/Bonadeo.md`](entregables/tfi-data-centers/Bonadeo.md)
+  (+ `.pdf`, 15 págs.). Integra las dos unidades: Toffler para la estructura
+  productiva, Lipovetsky para la demanda que la sostiene. **Pendiente: la
+  entrevista del punto 6** (guion listo en el Anexo I, desgrabación sin hacer).
+
+##### Argumento del TFI (reutilizable en final)
+- **Tesis**: el proceso tiene el discurso de la Tercera Ola y la estructura de un
+  enclave de Segunda. El centro de datos cumple los **seis principios del código
+  de la Segunda Ola** uno por uno (estandarización, especialización,
+  sincronización, concentración, maximización, centralización) aplicados a
+  información en vez de bienes. La Tercera Ola no disolvió la fábrica: la
+  rebautizó y la construyó lejos.
+- **Toffler + Lipovetsky combinados**: Toffler explica la estructura productiva;
+  Lipovetsky explica **por qué existe la demanda** que la vuelve rentable. La
+  infraestructura es invisible por diseño — la fricción cero *es* el producto.
+- **Datos clave**: Argentina tiene 13 data centers y 32 MW (71 % en CABA);
+  Stargate propone 500 MW solo. Empleo permanente real: 25-150 por centro
+  (Microsoft prometió 20.000 empleos indirectos en México → 17 personas).
+  62 % de la inversión es hardware importado; solo 15 % es obra y terreno.
+  RIGI: 30 años de estabilidad para activos que se renuevan cada 5.
+- **Dos matices que dan rigor** (y que casi nadie hace): (1) la crítica por
+  consumo de agua **es más débil** en la Patagonia por el *free cooling* —el
+  costo real es el de oportunidad de la renovable asignada, no el agua—; (2) la
+  crítica de soberanía **es más grave** de lo que se plantea: la Cloud Act hace
+  que alojar datos acá no produzca soberanía jurídica, y la Ley 25.326 es del
+  año 2000.
 
 #### Dudas / pendientes
 - ⚠ **No hay fuente en `fuentes/`**: la unidad se desarrolló desde conocimiento
@@ -212,3 +240,10 @@ desregulación del consumidor · felicidad paradójica · sociedad de la decepci
   + reflexión sobre el turboconsumidor) en
   `entregables/lipovetsky-felicidad-paradojica.md` + `.docx`. Sin fuentes crudas:
   citas pendientes de verificación contra el material de la cátedra.
+- 2026-09-20: se resolvió el **Trabajo Final Integrador** sobre data centers de
+  IA en la Patagonia (`entregables/tfi-data-centers/Bonadeo.md` + `.pdf`, 15
+  págs. con carátula, índice, 3 tablas, bibliografía APA y anexos). Investigación
+  con fuentes web 2024-2026 (AgendAR, Chequeado, El Economista, normativa).
+  Se agregó `scripts/monografia-pdf.js` (md → PDF con formato de cátedra: A4,
+  Arial 10, interlineado 1.5, justificado, numeración). **Pendiente**: la
+  entrevista del punto 6 y los datos de carátula.
