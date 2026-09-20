@@ -98,6 +98,29 @@ arquitectura → Programación → Prueba → Mantenimiento.
 
 ---
 
+##### Tipos de calidad de un producto
+
+Distinción de las anotaciones de clase (Rozas) que no aparece en los resúmenes largos:
+
+| Tipo | Qué es | Ejemplos |
+|---|---|---|
+| **Interna** | La que **el cliente no percibe** | Facilidad de mantenimiento · claridad del código · respeto de estándares · reusabilidad |
+| **Externa** | La que se ve desde afuera | Cumplimiento de los requerimientos · accesibilidad |
+| **De uso** | "Calidad futura": la que **no se tuvo en cuenta** y aparece recién cuando el software se usa de verdad | El sistema anda, pero a la media hora de uso real se nota el problema |
+
+**Proceso vs. proyecto** (definiciones de clase):
+
+- **Proyecto:** conjunto de tareas diseñadas y organizadas para cumplir un objetivo **bajo
+  ciertas restricciones**. Tipos: **desarrollo · mantenimiento · implementación (despliegue)**.
+- **Proceso:** conjunto de tareas diseñadas y organizadas para cumplir un objetivo. Es
+  **repetitivo y reiterativo, y produce siempre el mismo producto**. Esa repetibilidad es la
+  diferencia con el proyecto, que es único y tiene inicio y fin.
+
+> ⚠️ **Contradicción entre fuentes.** El resumen largo define
+> **software = programas + datos + documentos**, y las anotaciones de clase agregan un cuarto
+> componente: **procedimientos**. En los parciales viejos (2012) la respuesta esperada fue
+> **programas, datos y documentos**. Usar esa, y tener presente la variante de clase.
+
 ##### CMMI — Niveles de madurez
 
 Un **nivel de madurez** es una meseta evolutiva definida para la mejora de procesos: consta de
@@ -197,6 +220,79 @@ satisfacen un conjunto de objetivos importantes para la mejora en esa área.
 > completa en las fuentes**: sólo confirman explícitamente PP/PMC/REQM/PPQA/CM/MA = 2 y
 > OPD/OPF/VER/VAL/RD = 3. El resto lo completé con CMMI-DEV v1.2 (que es la versión del
 > apunte: 22 áreas, con OID e IPPD). Verificar contra el PDF de cátedra.
+
+##### Metas y prácticas por área de proceso (tabla de consulta)
+
+Consolidada del resumen del alumno 2025. Sirve para las preguntas del tipo *"son metas
+específicas del área X"* o *"son prácticas específicas del área Y"*, que aparecen todos los años.
+
+**REQM — Gestión de requerimientos (nivel 2)**
+`SG1 Gestionar los requerimientos`: SP1.1 Obtener una comprensión de los requerimientos ·
+SP1.2 Obtener el compromiso sobre los requerimientos · SP1.3 Gestionar los cambios ·
+SP1.4 Mantener la trazabilidad bidireccional · SP1.5 Identificar las inconsistencias entre el
+trabajo del proyecto y los requerimientos.
+
+**PP — Planificación de proyecto (nivel 2)**
+`SG1 Establecer estimaciones`: SP1.1 Estimar el alcance · SP1.2 Establecer las estimaciones de
+los atributos de los productos de trabajo y de las tareas · SP1.3 Definir el ciclo de vida del
+proyecto · SP1.4 Determinar las estimaciones de esfuerzo y coste.
+`SG2 Desarrollar un plan de proyecto`: SP2.1 Establecer el presupuesto y el calendario ·
+SP2.2 Identificar los riesgos · SP2.3 Planificar la gestión de los datos · SP2.4 Planificar los
+recursos · SP2.5 Planificar el conocimiento y las habilidades necesarias · SP2.6 Planificar la
+involucración de las partes interesadas · SP2.7 Establecer el plan de proyecto.
+`SG3 Obtener el compromiso con el plan`: SP3.1 Revisar los planes que afectan al proyecto ·
+SP3.2 Reconciliar los niveles de trabajo y de recursos · SP3.3 Obtener el compromiso con el plan.
+
+**PMC — Monitorización y control del proyecto (nivel 2)**
+`SG1 Monitorizar el proyecto frente al plan`: SP1.1 Monitorizar los parámetros de planificación ·
+SP1.2 Monitorizar los compromisos · SP1.3 Monitorizar los riesgos · SP1.4 Monitorizar la gestión
+de datos · SP1.5 Monitorizar la involucración de las partes interesadas · SP1.6 Llevar a cabo
+revisiones de progreso · SP1.7 Llevar a cabo revisiones de hitos.
+`SG2 Gestionar las acciones correctivas hasta su cierre`: SP2.1 Analizar problemas ·
+SP2.2 Llevar a cabo las acciones correctivas · SP2.3 Gestionar las acciones correctivas.
+
+**MA — Medición y análisis (nivel 2)**
+`SG1 Alinear las actividades de medición y análisis`: SP1.1 Establecer los objetivos de medición ·
+SP1.2 Especificar las medidas · SP1.3 Especificar los procedimientos de recogida y almacenamiento
+de datos · SP1.4 Especificar los procedimientos de análisis.
+`SG2 Proporcionar los resultados de medición`: SP2.1 Recoger los datos · SP2.2 Analizar los datos ·
+SP2.3 Almacenar los datos y los resultados · SP2.4 Comunicar los resultados.
+
+**PPQA — Aseguramiento de la calidad de proceso y producto (nivel 2)**
+`SG1 Evaluar objetivamente los procesos y los productos de trabajo`: SP1.1 Evaluar objetivamente
+los procesos · SP1.2 Evaluar objetivamente los productos de trabajo y los servicios.
+`SG2 Proporcionar una visión objetiva`: SP2.1 Comunicar y asegurar la resolución de las no
+conformidades · SP2.2 Establecer registros.
+
+**CM — Gestión de configuración (nivel 2)**
+`SG1 Establecer líneas base`: SP1.1 Identificar los elementos de configuración · SP1.2 Establecer
+un sistema de gestión de configuración · SP1.3 Crear o liberar líneas base.
+`SG2 Seguir y controlar los cambios`: SP2.1 Seguir las peticiones de cambio · SP2.2 Controlar los
+elementos de configuración.
+`SG3 Establecer la integridad`: SP3.1 Establecer registros de gestión de configuración ·
+SP3.2 Realizar auditorías de configuración.
+
+**RD — Desarrollo de requerimientos (nivel 3)**
+`SG1 Desarrollar los requerimientos de cliente`: SP1.1 Obtener las necesidades · SP1.2 Desarrollar
+los requerimientos de cliente.
+`SG2 Desarrollar los requerimientos de producto`: SP2.1 Establecer los requerimientos de producto
+y de componentes · SP2.2 Asignar los requerimientos de componentes · SP2.3 Identificar los
+requerimientos de interfaz.
+`SG3 Analizar y validar los requerimientos`: SP3.1 Establecer los conceptos operativos y los
+escenarios · SP3.2 Establecer una definición de la funcionalidad requerida · SP3.3 Analizar los
+requerimientos · SP3.4 Analizar los requerimientos para alcanzar el equilibrio · SP3.5 Validar
+los requerimientos.
+
+**VER y VAL (nivel 3)** — ver la tabla completa en
+[Unidad 5 → VER vs VAL](#ver-vs-val--metas-y-prácticas-específicas).
+
+**OPF, OPD y OT (nivel 3)** — ver [Unidad 2](#unidad-2--gestión-de-procesos-opf-opd-ot-rup-spem).
+
+> ⚠️ **Erratas corregidas de la fuente.** El resumen del alumno numera mal dos bloques: en PP
+> pone `SP2.2` y `SP3.3` dentro de SG1 (van `SP1.2` y `SP1.3`), y en PPQA repite `SP2.2` dos
+> veces (la primera es `SP2.1`). Arriba está corregido. Además, en MA la fuente escribe
+> "SP1.1 Proporcionar los resultados de la medición", que es el nombre de **SG2**: la SP1.1 real
+> es **Establecer los objetivos de medición**.
 
 ##### Guía de discriminación entre áreas (el ejercicio estrella del parcial)
 
@@ -324,6 +420,9 @@ sabe por qué salió como salió y si el próximo va a salir mejor**.
   proceso.
 - `fuentes/clases-2026/clase-2-rosas.md` — madurez vs. capacidad, niveles 4 y 5, elementos de
   CMMI.
+- `fuentes/resumen-isw-alumno-2025.docx` — resumen de un alumno de la cursada 2025 (merge de
+  todo el material): tipos de calidad de producto, anotaciones de clase de Rozas, tabla de metas
+  y prácticas por área.
 - Pendiente: PDF del apunte de CMMI de cátedra (referenciado por número de página en ambas
   fuentes).
 
@@ -651,6 +750,23 @@ requerimientos de producto y de componentes.
 - **SP 1.1** Evaluar objetivamente los procesos · **SP 1.2** Evaluar objetivamente los
   productos de trabajo y los servicios · **SP 2.1** Comunicar y asegurar la resolución de las
   no conformidades · **SP 2.2** Establecer registros.
+- **Cómo se ejecuta en la práctica (unidad 7 del resumen del alumno).** Se conforma un **equipo
+  de calidad** y se designa, antes del inicio del proyecto, a una persona en el rol de **SQA
+  (Software Quality Assurance)**. Las actividades de QA se despliegan en las cuatro fases:
+
+  | Fase | Qué hace el SQA |
+  |---|---|
+  | **Inicio / planificación** | Colabora con el jefe de proyecto para planificar las actividades de QA, que se **documentan en la WBS y en el calendario**. Aporta buenas prácticas y lecciones de proyectos similares |
+  | **Ejecución** | Realiza **auditorías periódicas** al proyecto y a las configuraciones. Lo que encuentra se clasifica en **no conformidades** y **mejoras**, y arma un informe. **Escala** al responsable de QA y al gerente las no conformidades que no se resolvieron dentro del proyecto |
+  | **Cierre** | Asegura que se genere el **informe retrospectivo** y se envíe al histórico de la organización, y que las mejoras propuestas se tengan en cuenta |
+
+- **Reuniones de SQA:** el responsable de QA se reúne con los SQA **al menos una vez por mes**
+  para revisar mejores prácticas implementadas, problemas en la implementación de los procesos
+  definidos y posibles mejoras.
+- **Criterios para establecer los hitos de auditoría:** al **final de cada fase** del ciclo de
+  vida · revisión **bimensual** si el paso entre dos fases se alarga mucho · en mantenimiento
+  evolutivo pequeño, una revisión **a mitad** y otra **antes de finalizar** · revisión
+  **aleatoria mensual** para pequeñas peticiones de mantenimiento correctivo.
 
 **CM — Gestión de configuración (nivel 2).** Importa porque: asegura la correcta configuración
 del software · da **capacidad de controlar los cambios** · **reduce los sobreesfuerzos por
@@ -775,6 +891,33 @@ estimación. Es lo que después permite explicar un desvío en PMC.
 
 La lectura que importa: **codificar es la quinta parte del proyecto**. Se prueba tanto como se
 analiza y diseña.
+
+##### El artefacto Plan de Proyecto y el informe de avance
+
+De las anotaciones de clase. Todo artefacto de la software factory arranca con las mismas
+secciones **1.1 a 1.5**: propósito del documento · alcance · definiciones, abreviaturas y
+acrónimos · documentos relacionados · visión general. Recién desde la sección 2 viene lo
+específico.
+
+| Sección | Contenido |
+|---|---|
+| **2** Alcance | Propósito, alcance y objetivos · **supuestos y restricciones** (vacaciones de los usuarios, trabajo remoto, cantidad de visitas al cliente) · lista de artefactos a entregar · condiciones bajo las cuales la planificación podría modificarse |
+| **3** Organización | Roles del equipo **y del cliente**, con nombre y contacto · **fuentes externas de consulta** (estudios impositivos o legales, típico en negocios regulados: bancos, aseguradoras, alimenticia) · responsabilidades de cada rol —más útil del lado del cliente que de la SF |
+| **4** Proceso de gestión | **Estimaciones** (horas → costo; horas + personas → duración) · planificación de fases según el ciclo de vida · iteraciones y versiones (**una iteración no siempre genera una versión**) · cronograma/Gantt con responsable por tarea · **incorporación escalonada de personas** · compras (licencias, servidores) · presupuesto al cliente con margen · monitoreo (PMC), control de horas gastadas vs. previstas, **aplicación de PPQA**, plan de comunicación, **métricas** · gestión de riesgos · **lecciones aprendidas** |
+
+> **Duración vs. esfuerzo:** la **duración** se expresa en días o meses; el **esfuerzo**, en
+> horas de trabajo. Es la misma distinción que decide el ejercicio de esfuerzo del parcial 2022.
+
+**Informe de avance (PMC).** Se produce en cada evaluación y contiene: proyecto y período ·
+**desvíos** de cronograma o presupuesto · **tareas realizadas** hasta ese avance · **tareas a
+realizar** hasta el próximo. Las tareas atrasadas van explicitadas. Si una tarea se atrasa se
+intenta **compensar** (otra tarea, horas extras); si el desfasaje se descontrola, hay que
+**replanificar**.
+
+**Lecciones aprendidas y criterio de aceptación.** Al cierre se reflexiona sobre lo bien y lo
+mal hecho, y queda un **listado de pendientes** que se negocia con el sponsor. Según la gravedad
+de lo no resuelto se decide si se sale a producción o no (no es lo mismo un cálculo de IVA mal
+hecho que una equivalencia de códigos).
 
 ##### APF — Análisis de Puntos Función
 
@@ -918,6 +1061,8 @@ respecto de la anterior."**
 - `fuentes/clases-2026/clase-3-rosas.md` — tipos de proyecto (DES/MANT/DESPL), EDT y órdenes de
   precedencia, métodos de estimación (valor esperado, Delphi, puntos de función, puntos de
   historia), distribución 40-20-40.
+- `fuentes/resumen-isw-alumno-2025.docx` — "U7 Aseguramiento de calidad" (rol SQA, auditorías,
+  hitos) y anotaciones de clase sobre el artefacto Plan de Proyecto y el informe de avance.
 - Referenciados pero no ingeridos: `IS-TEOR-PP01_Guia_practica_de_Gestion_de_Proyectos_v1_01.pdf`,
   `IS-TEOR-PP02_Guia_avanzada_de_Gestion_de_Proyectos_v1_01.pdf`,
   `U6-IS-TEOR-CM02_Guia_practica_Gestion_Configuracion_v1_01.pdf`.
@@ -1644,3 +1789,11 @@ partición, sobre todo en las válidas.
   leídas de los formularios corregidos y de las marcas del profesor en los de papel. Las que el
   alumno erró quedan marcadas como deducidas. Los de 2012-2016 no tienen texto extraíble (son
   fotos): se leyeron como imagen.
+- 2026-09-20: ingesta de `fuentes/resumen-isw-alumno-2025.docx` (resumen de un alumno de la
+  cursada 2025, 3973 líneas convertidas). La mayor parte ya estaba cubierta por la wiki (RUP,
+  SPEM, técnicas de prueba, ciclos de vida). Se incorporó lo que faltaba: **U1** tipos de calidad
+  de producto (interna/externa/de uso), proceso vs. proyecto, y la **tabla de metas y prácticas
+  por área** (REQM, PP, PMC, MA, PPQA, CM, RD) · **U3** el PPQA operativo (rol SQA, auditorías
+  por fase, hitos) y el artefacto Plan de Proyecto + informe de avance. Erratas de numeración
+  de la fuente corregidas y marcadas (PP SG1, PPQA SG2, MA SP1.1). Contradicción anotada: la
+  fuente agrega "procedimientos" a los componentes del software.
