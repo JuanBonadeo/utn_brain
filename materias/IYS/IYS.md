@@ -2,6 +2,7 @@
 
 ## Índice
 1. Unidad 1 — Tecnología, Ciencia y Sociedad
+2. Unidad 2 — Sociedad de consumo e hiperconsumo
 
 ## Desarrollo
 
@@ -119,6 +120,84 @@ es Franck, el que diseña el instrumento.
 - Cantet, L. (dir.), *Recursos Humanos* (*Ressources humaines*), Francia, 1999.
   Consigna con enlace a Vimeo.
 
+### Unidad 2 — Sociedad de consumo e hiperconsumo
+
+#### Conceptos clave
+
+**Gilles Lipovetsky, *La felicidad paradójica. Ensayo sobre la sociedad de
+hiperconsumo*** (Anagrama, 2007; orig. *Le bonheur paradoxal*, Gallimard, 2006).
+
+Tesis central: el capitalismo de consumo no es un bloque homogéneo sino **tres
+fases sucesivas que se solapan** (cada una reabsorbe a la anterior, no la borra).
+La *felicidad paradójica* es el resultado de la tercera: nunca hubo tanta
+abundancia, tanta elección y tanto confort, y nunca hubo tanta ansiedad,
+decepción y fragilidad subjetiva.
+
+| | Fase I (≈1880-1945) | Fase II (≈1950-'70) | Fase III (desde los '80) |
+|---|---|---|---|
+| Nombre | Nacimiento de los mercados de masas | Sociedad de consumo de masas / de la abundancia | Sociedad de **hiperconsumo** |
+| Base técnica | Producción en serie, envase, precio fijo (fin del regateo) | Fordismo maduro, «treinta gloriosos», crédito al consumo | Servicios e información, globalización, personalización |
+| Qué democratiza | La **tentación** (mirar sin comprar); bienes no duraderos | La **posesión** de bienes duraderos (auto, TV, heladera) | El **acceso y la experiencia** (ocio, salud, bienestar, servicios) |
+| Escenario | El gran almacén: compra como paseo y espectáculo | El hogar equipado, el supermercado, el *american way of life* | Shopping, pantalla, suscripción; mercado 24/7 |
+| Consumidor | En formación: hay que educarlo a desear lo nuevo | De masas, integrado a clase y grupo | **Turboconsumidor / homo consumericus III**: desregulado, nómade, infiel |
+| Motor del deseo | Novedad + precio bajo; la marca reemplaza al almacenero | **Distinción social**: el objeto como signo de estatus | **Sensación**: emoción, experiencia, bienestar, autenticidad |
+| Moral | Aún en tensión con la ética del ahorro | Ruptura: se legitima el gasto, el placer, el endeudamiento | Hedonismo ansioso y culpable (salud, riesgo, ecología) |
+| Alcance | Esfera comercial de los bienes | Hogar, auto, ocio, cultura de masas | **Todas las esferas**: cuerpo, salud, educación, tiempo, religión, política |
+| Felicidad | Acceso a lo antes vedado | **Confort material** y bienestar doméstico | Proyecto privado, permanente, siempre postergado |
+| Tensión propia | Se democratiza el deseo antes que el consumo | Conformismo: libera del orden tradicional, encierra en el grupo | **La paradoja**: más abundancia ⇄ más malestar |
+
+**El desplazamiento decisivo** es de la Fase II a la III: el consumo deja de ser
+un lenguaje dirigido a los otros (estatus, distinción, pertenencia) y pasa a ser
+una relación del individuo consigo mismo. Al desanclarse de la mirada ajena, el
+consumo pierde el punto de llegada social donde detenerse — de ahí que la
+felicidad quede como tarea privada infinita.
+
+**Categorías utilizables en parcial/TP**: turboconsumidor · homo consumericus de
+tercera generación · consumo emocional/experiencial · consumo «para sí» vs.
+consumo «para el otro» · mercantilización de todas las esferas de la vida ·
+desregulación del consumidor · felicidad paradójica · sociedad de la decepción.
+
+#### Desarrollo
+
+**Cruce con la industria del software** (línea argumental del TP entregado):
+- Licencia perpetua → suscripción = pasaje del **objeto poseído** (Fase II) al
+  **acceso a un flujo** (Fase III). El producto deja de ser una cosa y pasa a ser
+  una experiencia que hay que volver a hacer deseable todos los meses.
+- El ***churn*** es la métrica de la infidelidad del turboconsumidor. Retención,
+  *engagement*, DAU/MAU: el diseño de producto de los últimos quince años es una
+  respuesta defensiva a la figura que describe Lipovetsky.
+- ***Delight*** como objetivo de diseño explícito = desplazamiento del valor de
+  uso al valor emocional. No se vende lo que la app hace, se vende cómo se siente.
+- **Posición ambigua del ingeniero**: no solo consume el dispositivo, lo fabrica.
+  Mismo lugar que Franck con el cuestionario en *Recursos Humanos* (Unidad 1).
+- **Reparo propio al autor** (no está en Lipovetsky): sobreestima la soberanía
+  del hiperconsumidor. La desregulación del consumidor convive con una regulación
+  algorítmica del consumo cada vez más fina (A/B testing, telemetría, embudos).
+  Elige mucho, pero dentro de un espacio de opciones optimizado para que siga
+  eligiendo.
+
+#### Ejercicios resueltos tipo
+- **TP «La felicidad paradójica»** — (a) cuadro comparativo de las tres fases del
+  consumismo + (b) reflexión de 1-2 págs. sobre una categoría vinculada a una
+  situación personal o de la industria:
+  [`lipovetsky-felicidad-paradojica.md`](entregables/lipovetsky-felicidad-paradojica.md)
+  (+ `.docx`). Categoría elegida: el turboconsumidor.
+
+#### Dudas / pendientes
+- ⚠ **No hay fuente en `fuentes/`**: la unidad se desarrolló desde conocimiento
+  general de la obra, no desde el cuadernillo de la cátedra. Las **citas del TP
+  están reconstruidas, sin número de página** — verificar literalidad contra la
+  edición que dio la cátedra antes de entregar.
+- Confirmar si la cátedra pide las fases con los años exactos de Lipovetsky o
+  admite los cortes aproximados.
+- Chequear si el programa cruza a Lipovetsky con Bauman (consumo líquido) o
+  Baudrillard (el objeto como signo), que serían los contrapuntos obvios.
+
+#### Fuentes
+- Lipovetsky, G., *La felicidad paradójica. Ensayo sobre la sociedad de
+  hiperconsumo*, Anagrama, Barcelona, 2007 (orig. *Le bonheur paradoxal*,
+  Gallimard, 2006). **No ingerido.**
+
 ## Log
 - Archivo creado.
 - 2026-08-11: se creó la Unidad 1 (Tecnología, Ciencia y Sociedad) con el
@@ -127,3 +206,9 @@ es Franck, el que diseña el instrumento.
   `ensayo-recursos-humanos-toffler.md`. Sin fuentes crudas en `fuentes/IYS/`:
   Toffler se desarrolló desde conocimiento general de *La tercera ola*, no desde
   el cuadernillo de la cátedra.
+- 2026-09-20: se creó la Unidad 2 (Sociedad de consumo e hiperconsumo) con las
+  tres fases del capitalismo de consumo de Lipovetsky y el cruce con la industria
+  del software. Se resolvió el TP de *La felicidad paradójica* (cuadro comparativo
+  + reflexión sobre el turboconsumidor) en
+  `entregables/lipovetsky-felicidad-paradojica.md` + `.docx`. Sin fuentes crudas:
+  citas pendientes de verificación contra el material de la cátedra.
