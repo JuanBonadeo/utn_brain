@@ -135,6 +135,16 @@ miden por el **logro de las metas específicas y genéricas** de ese conjunto.
   justifica, pero se corre el riesgo de intentar prácticas **sin la base institucional que las
   soporte** — funciona hasta que aparece el estrés, que es justo cuando más se la necesita.
 
+**Madurez vs. capacidad.** El profesor las separó explícitamente en clase. La **madurez** es
+de la **organización entera** y se razona **por etapas**: para estar en un nivel hay que cumplir
+las metas de *todas* las áreas de proceso de ese nivel y de los anteriores. La **capacidad** se
+mide **por área de proceso individual**, independientemente del resto.
+
+> La representación **continua** (capacidad por área, niveles 0–3) es **conocimiento mío, no de
+> las fuentes**: la nota de clase sólo deja el título "Capacidad" seguido de los elementos de
+> CMMI (metas, prácticas, productos típicos de trabajo). Los ejercicios del parcial razonan
+> siempre **por etapas**.
+
 ---
 
 ##### CMMI — Componentes de un área de proceso
@@ -312,6 +322,8 @@ sabe por qué salió como salió y si el próximo va a salir mejor**.
   "Comprender los niveles de madurez", "Componentes del área de proceso".
 - `fuentes/ICS/Preguntas de Cuestionario.md` — sección "CMMI" y las secciones por área de
   proceso.
+- `fuentes/clases-2026/clase-2-rosas.md` — madurez vs. capacidad, niveles 4 y 5, elementos de
+  CMMI.
 - Pendiente: PDF del apunte de CMMI de cátedra (referenciado por número de página en ambas
   fuentes).
 
@@ -725,6 +737,45 @@ negativamente).
   de gestión de personal (organigramas + descripciones de responsabilidades). **No** incluye
   estimar el esfuerzo por rol ni controlar el cronograma.
 
+##### Estimación del esfuerzo (clase 3 — Rosas)
+
+**Tipos de proyecto.** Se clasifican en **DES** (desarrollo), **MANT** (mantenimiento) y
+**DESPL** (despliegue/implantación). La clasificación importa porque cambia qué tareas típicas
+entran en la EDT y cómo se estima.
+
+**De la EDT al cronograma.** La secuencia es: **EDT** → **tareas típicas** del ciclo de vida o
+proceso genérico de desarrollo → **órdenes de precedencia** entre esas tareas. Sobre la
+estructura se trabaja con **descomposición modular** (partir el sistema en módulos) y
+**composición modular** (agruparlos de nuevo para asignar esfuerzo y recursos).
+
+**Aproximación a la estimación.** Se estima primero un proyecto *ideal* (sin contingencias) y
+después se ajusta. Cuatro métodos vistos:
+
+| Método | Cómo funciona | Cuándo conviene |
+|---|---|---|
+| **Valor esperado** ("técnica de 3 puntos") | Se estima cada tarea en tres escenarios: **optimista, normal y pesimista**, y se combinan en un único valor | Tareas con incertidumbre acotada; es rápido |
+| **Delphi** | Estimación **grupal e independiente de expertos**, que vuelcan su perspectiva en números. Es **iterativo**: en cada vuelta se suma información y se busca la **convergencia** | Cuando no hay datos históricos y sí gente con experiencia |
+| **Puntos de función** | Se parte de la **lista de requerimientos**, se categoriza la funcionalidad (entradas, salidas, consultas) y los ficheros, se evalúa la complejidad (baja/media/alta) **según la diversidad de atributos en tipo y cantidad**, se aplica la fórmula → **puntos de función sin ajustar**, y después el ajuste **no funcional** → PF del software. Es una **medida indirecta del tamaño** | Cuando hay requerimientos escritos. Ver el detalle completo abajo en APF |
+| **Puntos de historia** | *(No quedó registrado en la nota de clase.)* | — |
+
+> **Fórmula del valor esperado.** La nota de clase sólo enumera los tres escenarios. La fórmula
+> estándar es **VE = (Optimista + 4 × Normal + Pesimista) / 6** — **conocimiento mío, no de las
+> fuentes**. Confirmar si la cátedra usa esa ponderación o el promedio simple.
+
+**Consejo de cátedra:** *tomar nota de las decisiones tomadas*, especialmente en la etapa de
+estimación. Es lo que después permite explicar un desvío en PMC.
+
+**Distribución 40-20-40.** Regla de reparto del esfuerzo total del proyecto:
+
+| Bloque | % | Detalle |
+|---|:---:|---|
+| Análisis y diseño | **40 %** | 10-15 % análisis · 25-30 % diseño |
+| Codificación | **20 %** | — |
+| Pruebas | **40 %** | — |
+
+La lectura que importa: **codificar es la quinta parte del proyecto**. Se prueba tanto como se
+analiza y diseña.
+
 ##### APF — Análisis de Puntos Función
 
 Mide el tamaño del software desde una perspectiva **funcional**, independiente de la
@@ -864,6 +915,9 @@ respecto de la anterior."**
 - `fuentes/ICS/Resumen Unidad 1,2y3.md` — "U3 – Gestión de Proyectos de Software": Áreas CMMi PP
   y PMC, Guía práctica de gestión de proyectos, Guías avanzadas de puntos de función.
 - `fuentes/ICS/Preguntas de Cuestionario.md` — secciones PMC, REQM, PP, PPQA, CM, RSKM, MA, RD.
+- `fuentes/clases-2026/clase-3-rosas.md` — tipos de proyecto (DES/MANT/DESPL), EDT y órdenes de
+  precedencia, métodos de estimación (valor esperado, Delphi, puntos de función, puntos de
+  historia), distribución 40-20-40.
 - Referenciados pero no ingeridos: `IS-TEOR-PP01_Guia_practica_de_Gestion_de_Proyectos_v1_01.pdf`,
   `IS-TEOR-PP02_Guia_avanzada_de_Gestion_de_Proyectos_v1_01.pdf`,
   `U6-IS-TEOR-CM02_Guia_practica_Gestion_Configuracion_v1_01.pdf`.
@@ -987,6 +1041,16 @@ métricas de proyecto vs producto — ver [Unidad 3 → MA](#unidad-3--gestión-
 
 #### Desarrollo
 
+##### Inyección y remoción de defectos
+
+![Inyección y remoción de defectos a lo largo del ciclo de vida](figs/vyv-inyeccion-remocion-defectos.png)
+
+Los defectos **se inyectan en todas las fases** —Plan, Análisis, Diseño, Construcción e
+Implantación—, no sólo al programar. V&V es el conjunto de actividades de **remoción**, y se
+reparte en dos franjas que se solapan: las **revisiones** (estáticas) cubren desde el plan hasta
+la construcción, y las **pruebas** (dinámicas) cubren desde la construcción hasta la
+implantación. De ahí que cuanto antes empiece V&V, más barato sale el defecto.
+
 ##### VER vs VAL — metas y prácticas específicas
 
 | **Verificación (VER)** | **Validación (VAL)** |
@@ -1091,6 +1155,40 @@ Se mide su calidad con **ISO 9126**: debe ser funcional (cubrir los riesgos crí
 (mismos resultados ante la misma prueba), robusto, flexible (ejecutar en distinto orden), útil
 (curva de aprendizaje corta), consistente en el registro de resultados si es automatizado,
 portable, eficiente y mantenible.
+
+##### Los 10 principios de prueba (Myers)
+
+1. Una parte **necesaria** de un caso de prueba es la definición de la **salida prevista** o
+   resultado esperado. Sin resultado esperado no hay caso de prueba.
+2. Un **desarrollador debe evitar probar su propio programa**.
+3. El **personal de prueba no debería depender del área de desarrollo**.
+4. **Inspeccionar los resultados** de la prueba (no alcanza con ejecutarla).
+5. Los casos de prueba deben escribirse **tanto para las condiciones de entrada esperadas como
+   para las no esperadas**.
+6. Examinar un programa para comprobar **que no hace lo que *no* se supone que haga**, no sólo
+   que hace lo que debe.
+7. Evitar casos de prueba **desechables y sin documentar** → hay que guardarlos para poder
+   **reejecutarlos** (pruebas de regresión).
+8. **No planificar** el esfuerzo de pruebas **suponiendo que no se encontrarán errores**.
+9. La probabilidad de encontrar **errores adicionales** en una sección de un programa es
+   **proporcional al número de errores ya encontrados** en esa misma sección.
+10. Las pruebas son una tarea **altamente creativa** y un desafío intelectual.
+
+**Por qué el que desarrolla no debe ser quien prueba** (principios 2 y 3):
+
+- **Desarrollar es un proceso creativo; probar es un proceso destructivo.** Son mentalidades
+  opuestas y cuesta cambiar de una a la otra sobre el propio trabajo.
+- **Tunnel vision:** quien desarrolló tiene una visión muy clara y de raíz de su propio
+  desarrollo, y por eso prueba lo que ya sabe que anda.
+- Si el error está en el **planteamiento o el entendimiento de un requerimiento**, quien lo
+  entendió mal va a probar según su propio malentendido. Por eso se prueba **con el cliente**
+  (pruebas estáticas con el cliente).
+
+**Corolario del principio 9 — dónde conviene concentrar el arreglo:** en los **módulos donde
+más defectos aparecieron**, porque es donde es más probable que sigan apareciendo.
+
+**El ciclo completo:** se ejecutan los casos → los que detectan error **se mandan a corregir** →
+una vez corregidos **se vuelven a ejecutar los mismos casos** = **pruebas de regresión**.
 
 ##### Estrategias de prueba
 
@@ -1206,6 +1304,10 @@ verifica que **el arreglo no rompió otra cosa**. Se usan juntas.
   ahí se agrupan los errores. Rango 10–100 → probar **9, 10, 100 y 101**. Conjuntos ordenados →
   primer y último elemento. Valores especiales: en minutos siempre probar **0 y 59**, y en
   fechas incluir meses, **años bisiestos y no bisiestos**.
+  **Criterio para no numéricos** (dado en clase): si el campo admite **una letra cualquiera**,
+  alcanza **un caso**; si admite **un conjunto cerrado de valores** (p. ej. tres opciones),
+  va **un caso por valor**; si es una **cadena de longitud fija**, se prueba con esa longitud
+  exacta; si es de **hasta N caracteres**, va un caso por cada longitud relevante (N-1, N, N+1).
 - **Tablas de decisión.** Para cuando **múltiples combinaciones de entradas** generan
   resultados distintos. Se centra en la **lógica y las reglas de negocio**: filas de condición +
   filas de acción; **cada columna es una regla de negocio**.
@@ -1420,6 +1522,59 @@ informe de pruebas unitarias: no le sirven a un usuario para usar el sistema.)
 - **Tablas de decisión** es la técnica **más apropiada** para este caso: hay **múltiples
   condiciones** (edad Y peso) que combinadas llevan a distintas acciones (la calificación).
 
+**18. TriMaster — clasificar un triángulo a partir de tres lados** (tarea de la clase 2, Brozo).
+Formato del caso de prueba: **(valor de entrada → resultado esperado)**.
+
+| # | Entrada | Resultado esperado | Qué cubre |
+|---|---|---|---|
+| 1 | (10, 10, 10) | Equilátero | Partición válida: tres lados iguales |
+| 2 | (8, 8, 6) | Isósceles | Partición válida: dos lados iguales |
+| 3 | (1, 2, 6) | Escaleno | ⚠️ ver nota |
+| 4 | (10, 1, 2) | "No es un triángulo. La suma de dos lados tiene que ser mayor al tercero" | Desigualdad triangular |
+| 5 | (0, 0, 0) | "Ingrese números mayores a 0" | Cero |
+| 6 | (-10, 6, -7) | "Ingrese números mayores a 0" | Negativos |
+| 7 | (12345678, 98765432, 12345678) | "Ingrese números entre (0, 10000)" | Fuera del rango soportado |
+| 8 | (peke, arbol, tata) | "Ingrese únicamente números" | Tipo de dato inválido |
+
+> ⚠️ **El caso 3 de la nota de clase está mal.** (1, 2, 6) **no es un escaleno**: 1 + 2 = 3 < 6,
+> o sea que viola la desigualdad triangular igual que el caso 4. Para probar escaleno hay que
+> usar algo como **(3, 4, 5)**. Corregirlo si sale en el parcial.
+
+**19. Recargo a pagar por retraso en la cuota de la escuela** (tarea de la clase 2, Brozo).
+Entrada: **día del mes** en que se paga. Salida: el recargo. Formato de tabla que pide la
+cátedra — **atributo / dominio / particiones válidas / particiones inválidas**:
+
+| Atributo | Dominio | Válidas | Inválidas |
+|---|---|---|---|
+| Día del mes | Entero positivo entre 1 y 31 | **PV1)** 1 ≤ X ≤ 10 · **PV2)** 11 ≤ X ≤ 20 · **PV3)** 21 ≤ X ≤ 31 | **PI1)** letras · **PI2)** X ≤ 0 · **PI3)** X > 31 · **PI4)** vacío · **PI5)** imagen · **PI6)** carácter especial · **PI7)** cadena de caracteres |
+
+Y la tabla de casos de prueba, un representante por partición:
+
+| Caso | Partición | Entrada | Salida esperada |
+|---|---|---|---|
+| 1 | PV1 | 1 | 0 |
+| 2 | PV2 | 12 | 2 |
+| 3 | PV3 | 30 | 4 |
+| 4 | PI1 | a | error |
+| 5 | PI2 | -1 | error |
+| 6 | PI3 | 32 | error |
+| 7 | PI4 | *(vacío)* | error |
+| 8 | PI5 | foto | error |
+| 9 | PI6 | * | error |
+| 10 | PI7 | pepe | error |
+
+> ⚠️ **Dos errores en la nota de clase, corregidos arriba.** (a) La partición inválida estaba
+> escrita como **PI3) X ≥ 31**, que **se pisa con PV3** (que incluye el 31): lo correcto es
+> **X > 31**. (b) En el listado previo a la tabla, el caso (21, 4) aparece bajo PV1 (1 a 10)
+> cuando corresponde a PV3.
+
+**Y lo que le falta al ejercicio:** tal como está resuelto es **particionamiento de
+equivalencia**, un representante por partición. Para que sea **análisis de valores límite** —que
+es lo que pedía la consigna— hay que agregar los **extremos de cada partición**:
+**0, 1, 10, 11, 20, 21, 31, 32**. Es exactamente la diferencia que se pregunta en el parcial:
+la partición por valores límite **mejora** a la de equivalencia agregando más de un caso por
+partición, sobre todo en las válidas.
+
 #### Dudas / pendientes
 
 - El cuestionario titula esta sección "**Validación y Verificación (Nivel de Madurez 3)**", lo
@@ -1446,6 +1601,17 @@ informe de pruebas unitarias: no le sirven a un usuario para usar el sistema.)
   resumida del mismo contenido).
 - `fuentes/ICS/Preguntas de Cuestionario.md` — secciones "Ciclo de vida - Incrementos",
   "Validación y Verificación", "Particiones de equivalencia".
+- `fuentes/clases-2026/clase-2-brozo.md` — V&V, estática vs dinámica, formalidad de las
+  revisiones, los 10 principios de prueba, particionamiento de equivalencia y por valores
+  límite, tareas TriMaster / recargo de cuota / aplicación bancaria.
+- `fuentes/clases-2026/clase-3-brozo.md` — tablas de decisión, transición de estados, casos de
+  prueba derivados de casos de uso, pruebas de carga, estrés, acceso/seguridad y configuración.
+- `fuentes/clases-2026/clase-4-brozo.md` — caja negra vs caja blanca, máquinas de estado,
+  derivación de casos de uso, revisiones y tipos, inspección y sus roles.
+- `figs/vyv-inyeccion-remocion-defectos.png` — diagrama de inyección/remoción de defectos
+  (clase 2, Brozo).
+- `fuentes/clases-2026/enunciado-aplicacion-bancaria.png` y
+  `fuentes/clases-2026/tarea-recargo-cuota-escuela.pdf` — enunciados originales.
 - Referenciado pero no ingerido: "Guía de validación y verificación" (PDF de la UNECO), citado
   por número de página en el cuestionario.
 
@@ -1463,3 +1629,12 @@ informe de pruebas unitarias: no le sirven a un usuario para usar el sistema.)
 - 2026-08-20: tarea de la Clase 2 (Brozo) — casos de prueba por valores límite
   para la aplicación bancaria (punto 3). Fuente: página de Notion "Clase 2
   Brozo". Derivado en `tarea-casos-prueba-valores-limite.md` (+ .docx/.pdf).
+- 2026-09-20: ingesta del export de Notion `ISWclases.zip` → `fuentes/clases-2026/`
+  (clases 1 a 4 de Brozo y 2 y 3 de Rosas, + PDF e imágenes de enunciados). Se fusionó en:
+  **U1** madurez vs. capacidad · **U3** nueva sección "Estimación del esfuerzo" (tipos de
+  proyecto DES/MANT/DESPL, EDT y precedencias, valor esperado, Delphi, puntos de función y de
+  historia, 40-20-40) · **U5** figura de inyección/remoción de defectos, los 10 principios de
+  prueba de Myers, criterio de valores límite para campos no numéricos, y ejercicios 18
+  (TriMaster) y 19 (recargo de cuota). La clase 1 de Brozo vino **vacía** en el export.
+  Errores detectados y corregidos en las notas: caso (1,2,6) marcado como escaleno, y partición
+  inválida `X ≥ 31` pisando la válida `21 ≤ X ≤ 31`.
