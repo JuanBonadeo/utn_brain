@@ -1948,3 +1948,7 @@ partición, sobre todo en las válidas.
   las metas y prácticas específicas oficiales de **OPF** y **OT** (no estaban) y se completó **OPD**
   (faltaba SP 1.5, biblioteca de activos). PP, PMC, VER y VAL ya coincidían con el texto oficial.
   **U1:** documentada la errata de la edición castellana que rotula OT como nivel 4.
+- 2026-09-21: `estudio/resumen-agregados.md` (+ .pdf, 6 págs.) — agregados para intercalar en la
+  versión impresa anterior del resumen (22 págs.), con su numeración: una hoja para el frente
+  (temario + instrucciones) y cinco que reemplazan la pág. 6 (5.4, capítulo 6 nuevo, 6 bis SPEM y
+  RUP, agregados a 8.3 y 9.2). Instrucciones para simple y doble faz.
