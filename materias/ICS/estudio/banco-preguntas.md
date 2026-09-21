@@ -13,6 +13,18 @@ Organizado **por tema**, no por año, porque las preguntas se repiten entre año
 
 ---
 
+## Alcance 2026: qué preguntas siguen vigentes
+
+El temario oficial del parcial 2026 (`fuentes/temario-parcial-regularizacion.md`) incluye las
+**unidades 1, 2, 3 y 5**. La unidad 4 —gestión de requerimientos— **no entra**, y tampoco las áreas
+REQM, RD, PPQA, CM y MA más allá de su nivel de madurez. Las preguntas de parciales viejos sobre
+esos temas quedan marcadas con **⛔ Fuera del temario 2026**: sirven como cultura general, no para
+este parcial.
+
+El parcial 2026 es **presencial** y **no es a libro abierto**.
+
+---
+
 ## Formato del examen
 
 | Año | Formato | Puntaje | Se aprueba con |
@@ -186,7 +198,7 @@ Opciones: OPD · OPF · **OT** · RD
 
 ### 2.9 Área donde se trata la captura de necesidades, expectativas y restricciones del cliente ✅
 
-*(2015)*
+*(2015)* — **⛔ Fuera del temario 2026** (RD no está en el temario).
 
 Opciones: PP · **RD** · OPD · OPF
 
@@ -195,7 +207,7 @@ confundir con **REQM**, que **gestiona** requerimientos ya capturados (cambios, 
 
 ### 2.10 La identificación de inconsistencias entre los requerimientos, los planes y los productos de trabajo es propósito de ✅
 
-*(2013)*
+*(2013)* — **⛔ Fuera del temario 2026** (REQM es de la unidad 4).
 
 Opciones: RD · **REQM** · PP · OPD
 
@@ -677,6 +689,8 @@ Aparece en 2013 (evolutivo), 2015 (a desarrollar) y 2016 (adaptativo).
 
 ### 8.5 Mejores prácticas en la gestión de requisitos ✅
 
+**⛔ Fuera del temario 2026** (gestión de requisitos es la unidad 4).
+
 *(2012 — respuesta marcada: A y D)*
 
 - **A) Usar herramientas para la gestión de requisitos** ✅
@@ -685,6 +699,8 @@ Aparece en 2013 (evolutivo), 2015 (a desarrollar) y 2016 (adaptativo).
 - **D) Priorizar los requisitos** ✅
 
 ### 8.6 Prácticas recomendadas para el desarrollo de requisitos
+
+**⛔ Fuera del temario 2026** (gestión de requisitos es la unidad 4).
 
 *(2013 ✅ — el alumno la erró y el profesor marcó **H**)*
 
@@ -698,6 +714,8 @@ puso H, pero ahí ese "H" es **A, D y E** = líneas base + validar + verificar. 
 corrección en 2015.
 
 ### 8.7 La línea base de los requisitos ✅
+
+**⛔ Fuera del temario 2026** (gestión de requisitos es la unidad 4).
 
 *(2012 — respuesta marcada: E, Todas las anteriores)*
 
@@ -719,7 +737,7 @@ Ya no se toman en este formato, pero marcan qué considera la cátedra el núcle
 |---|---|
 | Enumere tres actividades involucradas en la monitorización de un proyecto | 2012 |
 | Explique las diferencias entre los niveles de madurez **2 y 3** del CMMI | 2012 |
-| Por qué es importante mantener la **trazabilidad** entre requisitos | 2012 · 2013 |
+| Por qué es importante mantener la **trazabilidad** entre requisitos ⛔ *fuera del temario 2026* | 2012 · 2013 |
 | Defina cuáles son los componentes que constituyen el software | 2012 |
 | Una vez evaluados los procesos de la organización, ¿cuáles deberían ser los próximos pasos? | 2013 |
 | ¿Es correcto afirmar que una organización que implementa CMMI genera **siempre** productos en tiempo y forma? | 2013 |
@@ -732,9 +750,11 @@ Ya no se toman en este formato, pero marcan qué considera la cátedra el núcle
 | ¿Qué es un **desvío significativo** dentro de PMC? | 2016 |
 | ¿Cuáles son las **dimensiones críticas** sobre las que las organizaciones se centran para mejorar su actividad? | 2016 |
 
-> Dos de estas tienen respuesta corta y conviene tenerla lista:
+> Tres de estas tienen respuesta corta y conviene tenerla lista:
 > **desvío significativo** = el que, sin resolver, impide al proyecto cumplir sus objetivos ·
-> **dimensiones críticas** = personas · métodos y procedimientos · herramientas y equipamiento.
+> **dimensiones críticas** = personas · métodos y procedimientos · herramientas y equipamiento ·
+> **representación de un proceso según SPEM** = **rol** (quién) · **producto de trabajo** (qué) ·
+> **tarea** (cómo).
 
 ---
 
