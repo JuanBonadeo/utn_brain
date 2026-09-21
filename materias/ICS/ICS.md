@@ -8,10 +8,30 @@
 4. Unidad 4 — Gestión efectiva de la calidad del producto (economía de las pruebas)
 5. Unidad 5 — Verificación y Validación
 
-> **Nota sobre la numeración:** las unidades 1, 2, 3 y 5 vienen rotuladas así en las fuentes.
-> La unidad 4 es una inferencia mía: el bloque "Gestión efectiva calidad producto"
-> (`Resumen de ISW.md`) no trae número en ninguna fuente. Confirmar contra el programa
-> de cátedra. Ver [Dudas / pendientes](#dudas--pendientes-3) de esa unidad.
+> **Numeración del programa de cátedra** (resuelto el 2026-09-21 con el temario oficial y la
+> bibliografía obligatoria de `archivo/`). El programa tiene **9 unidades**: U1 Modelos de calidad ·
+> U2 Gestión de procesos · U3 Gestión de proyectos · **U4 Gestión de requerimientos y de
+> solicitudes de cambio** · U5 Verificación y validación · U6 Gestión de configuración · U7
+> Aseguramiento de calidad (PPQA) · U8 Medición y análisis · U9 Pericias informáticas.
+> Esta wiki conserva la numeración 1-5 de las primeras fuentes: su **"Unidad 4" no es la U4 del
+> programa** sino material complementario de V&V (ver la nota en esa unidad), y REQM, PPQA, CM y MA
+> están resumidas dentro de la Unidad 3 como "áreas de soporte".
+
+> **Alcance del parcial de Regularización** (`fuentes/temario-parcial-regularizacion.md`):
+> entran **U1, U2, U3 y U5**, sólo de los documentos y páginas que lista el temario. En concreto:
+> - **U1:** Introducción a la Calidad (págs. 1-8) · Guía de Ingeniería del Software (págs. 8-23) ·
+>   CMMI: niveles de madurez (págs. 52-57 y 63) y componentes de un área de proceso (págs. 31-42).
+> - **U2:** OPD, OPF y OT **sin subprácticas ni IPPD** · PPT de Proceso y RUP, **págs. 1 a 46**
+>   (SPEM y elementos del proceso; **no** entran los objetivos de las fases ni los propósitos de
+>   las disciplinas, que están en las págs. 52-74).
+> - **U3:** PP y PMC (2 págs. cada una: propósito y metas/prácticas) · Guía práctica de Gestión de
+>   Proyectos (págs. 1-24) · APF: metodología y glosario (págs. 19-25). **No** entra la Guía
+>   avanzada de Gestión de Proyectos.
+> - **U5:** VAL y VER (3 págs. cada una) · Guía de V&V de INTECO (págs. 16-67) · PPT de Myers ·
+>   derivar casos de prueba de casos de uso y directriz de caso de prueba (sólo para ejercicios).
+>   **No** entra la Guía de mejores prácticas de calidad de producto.
+> - **No entran:** la "Unidad 4" de esta wiki, y las áreas REQM, PPQA, CM, MA, RSKM y RD más allá
+>   de saber a qué nivel de madurez pertenecen.
 
 ---
 
@@ -406,7 +426,9 @@ sabe por qué salió como salió y si el próximo va a salir mejor**.
   Eso **se contradice con la propia fuente**, que dos páginas después lista OT entre las "áreas
   de gestión de procesos **básicas**" junto a OPF y OPD (ambas nivel 3), y separa OPP y OID
   como "avanzadas". En CMMI-DEV **OT es nivel 3**. Tratarlo como nivel 3 y confirmar con la
-  cátedra — si en el parcial aparece "OT nivel 4", es un error del resumen, no del modelo.
+  cátedra — si en el parcial aparece "OT nivel 4", es un error del resumen, no del modelo.  **Confirmado (2026-09-21):** la PPT oficial de Proceso y RUP (pág. 8) lista OT entre las áreas
+  de gestión de procesos **básicas**, junto a OPF y OPD, y deja OPP y OID como **avanzadas**.
+  OT es **nivel 3**.
 - La tabla de nivel por área para los niveles **4 y 5** (OPP/QPM y OID/CAR) la completé yo;
   no está explícita en las fuentes.
 - El resumen remite a "ver ejemplo página 62 y 63 del PDF del apunte de CMMI"
@@ -543,10 +565,41 @@ tecnologías o cambios organizativos importantes.
 
 ##### RUP y SPEM
 
-**SPEM (Software Process Engineering Meta-Model)** — meta-modelo para representar métodos,
-ciclos de vida, roles, actividades y procesos, sin atarse a ninguna disciplina. Facilita la
-comprensión y comunicación humana, la reutilización, y da soporte a la gestión y mejora de
-procesos.
+> **Alcance en el parcial:** entran las **págs. 1 a 46** de la PPT oficial
+> (`IS-PRES-PROC01_PPT_Introduccion_a_Proceso_y_RUP_v1_03.pdf`): gestión de procesos, SPEM y los
+> elementos del proceso según RUP, hasta "Informe". Las tablas de **objetivos de las fases** y
+> **propósitos de las disciplinas** de más abajo vienen de las págs. 52-74 y **no entran**.
+
+**Por qué procesos (págs. 4-8).** Las organizaciones mejoran sobre **tres dimensiones críticas**
+—personas · métodos y procedimientos · herramientas y equipamiento— y **los procesos sustentan
+el conjunto**: permiten alinear el modo de operar, incorporar el conocimiento de cómo hacer
+mejor las cosas, explotar mejor los recursos y comprender las tendencias de la actividad. Las
+áreas de gestión de procesos de CMMI contienen las **actividades transversales a los
+proyectos**: definición, planificación, despliegue, implementación, monitorización, control,
+evaluación, medición y mejora de los procesos. Se dividen en **básicas** (OPF, OPD + IPPD, OT) y
+**avanzadas** (OPP, OID).
+
+**SPEM (Software Process Engineering Meta-Model)** — estándar de la **OMG** (el mismo consorcio de
+UML) que establece los elementos clave para representar métodos, ciclos de vida, técnicas, roles,
+actividades, procesos, metodologías y plantillas. Sirve para definir procesos de desarrollo de
+software y sistemas; su alcance se limita a los **elementos mínimos** necesarios, sin agregar
+características de un dominio o disciplina particular, y sirve para procesos de distintos estilos,
+culturas, niveles de formalismo y ciclos de vida. **No es un lenguaje de modelado de procesos en
+general**: está orientado a procesos de software.
+
+Capacidades que proporciona: facilitar la **comprensión y comunicación humana** · facilitar la
+**reutilización** · dar soporte a la **mejora** y a la **gestión** de procesos · guiar la
+**automatización** de procesos · dar soporte para la **ejecución automática**.
+
+**Representación del proceso según SPEM: quién, qué y cómo** (pregunta del parcial 2015):
+
+| Elemento | Responde | Representa |
+|---|---|---|
+| **Rol** | **Quién** | Quién hace el trabajo |
+| **Producto de trabajo** | **Qué** | Las entradas que usan las tareas y las salidas que producen |
+| **Tarea** | **Cómo** | El esfuerzo a realizar |
+
+**Niveles de detalle para representar el esfuerzo:**
 
 | Elemento SPEM | Qué es |
 |---|---|
@@ -555,15 +608,53 @@ procesos.
 | **Activity** | Elemento central para organizar los elementos básicos de proceso |
 | **Task** | **Unidad elemental de trabajo** del modelo |
 
-**Jerarquía RUP:** Fase → (iteraciones) → Disciplina → **Actividad** → **Tarea** (la lleva a
-cabo un **rol**; granularidad de **horas a días**; puede desglosarse en pasos).
+Ejemplo de los cuatro niveles en RUP (pág. 17): ciclo vital de RUP típico → disciplina
+**Entorno** → actividad **Preparar el entorno para el proyecto** → tarea **Personalizar el
+proceso de desarrollo para el proyecto**.
 
-**Productos de trabajo:** **artefacto** (tangible) · **resultado** (intangible: un estado o
-consecuencia) · **entregable** (empaquetado de otros productos, se entrega a una parte interna
-o externa).
+**Elementos del proceso según RUP (págs. 20-46).** RUP está basado en SPEM.
 
-**Guías (tipos):** plantilla · directriz · lista de comprobación · ejemplo · concepto · guías
-de herramientas · documentación · informe.
+- **Fase:** el ciclo de vida se descompone en fases; cada una es un **período de tiempo entre dos
+  objetivos importantes**. Son cuatro: **Concepción (Inicial)**, **Elaboración**,
+  **Construcción** y **Transición**.
+- **Disciplina:** **categorización de tareas** basada en la similitud de las preocupaciones y la
+  cooperación del esfuerzo de trabajo. Son nueve: modelado de negocio · requisitos · análisis y
+  diseño · implementación · prueba · despliegue · configuración y gestión de cambios · gestión de
+  proyectos · entorno. **Una disciplina tiene una o más actividades.**
+- **Actividad:** da soporte al anidado y la **agrupación lógica** de elementos de proceso
+  relacionados (elementos de desglose); puede contener referencias a tareas, roles y productos de
+  trabajo. **Una actividad tiene una o más tareas.**
+- **Tarea:** describe una **unidad de trabajo**. La llevan a cabo **roles específicos**, su
+  granularidad oscila entre **unas horas y unos días**, suele afectar a uno o pocos productos de
+  trabajo, y puede desglosarse en **pasos**. Elementos de una tarea (pág. 32): **rol responsable**
+  · **productos de trabajo de entrada y de salida** · **listas de comprobación** · **directriz** ·
+  **plantilla**. Ejemplo: *Desarrollar la visión* — rol analista de sistemas, entrada solicitudes
+  del interesado, salida visión.
+- **Rol:** conjunto de **habilidades, competencias y responsabilidades** relacionadas. Ej.:
+  analista de sistemas, arquitecto de software, diseñador, revisor técnico.
+- **Producto de trabajo:** **resultado significativo de un proceso**: los roles los usan para
+  realizar tareas y los producen al realizarlas.
+
+**Tipos de producto de trabajo:** **artefacto** (producto **tangible**, no trivial) ·
+**resultado** (producto **intangible**: un resultado o un estado) · **entregable** (empaquetado
+de otros productos de trabajo, que puede entregarse a una parte interna o externa).
+
+**Guías.** La guía es un concepto abstracto que generaliza todo contenido cuyo objetivo principal
+es **explicar otros elementos**. Tipos:
+
+| Guía | Qué es |
+|---|---|
+| **Plantilla** | Especifica la **estructura** de un producto de trabajo: tabla de contenidos, secciones, formato estandarizado y cómo completarlas |
+| **Directriz** | Datos adicionales sobre **cómo manejar** un elemento concreto; suele aplicarse a tareas y productos de trabajo (ej.: directriz *Entrevista*) |
+| **Lista de comprobación** | Serie de elementos que deben **completarse o verificarse**; se usa en **revisiones** (ensayos, inspecciones) |
+| **Ejemplo** | Instancia de muestra, **parcialmente completa**, de uno o más elementos; suele darse para productos de trabajo |
+| **Concepto** | Esboza una **idea fundamental**; más general que una directriz, abarca varios productos, tareas o actividades |
+| **Guía de herramientas** | Cómo usar una **herramienta específica** para crear parte de un producto de trabajo |
+| **Documentación** | Documentos publicados **externamente** a los que RUP hace referencia |
+| **Informe** | Plantilla predefinida de un resultado **generado automáticamente** por una herramienta a partir de otros productos |
+
+*El material que sigue (objetivos de fases, propósitos de disciplinas, cascada vs RUP) está en las
+págs. 47-79 de la PPT: **fuera del temario del parcial**.*
 
 **Las 4 fases y sus objetivos:**
 
@@ -645,6 +736,9 @@ publicado, para encontrar y eliminar inconsistencias, redactado por otro PM."**
 
 #### Fuentes
 
+- `fuentes/IS-PRES-PROC01_PPT_Introduccion_a_Proceso_y_RUP_v1_03.pdf` — **PPT oficial** del
+  temario (págs. 1-46): gestión de procesos, SPEM, elementos del proceso según RUP.
+- `fuentes/temario-parcial-regularizacion.md` — alcance del parcial por unidad.
 - `fuentes/ICS/Resumen Unidad 1,2y3.md` — "U2: Gestión de procesos", "Enfoque de procesos de la
   organización (OPF)", "Formación Organizativa (OT)", "Introducción a procesos y RUP".
 - `fuentes/ICS/Resumen de ISW.md` — "U2: Introducción a procesos y RUP" (elementos del proceso
@@ -1071,8 +1165,11 @@ respecto de la anterior."**
 
 ### Unidad 4 — Gestión efectiva de la calidad del producto (economía de las pruebas)
 
-> ⚠️ **Numeración inferida.** Ninguna fuente rotula este bloque con un número de unidad.
-> Ver [Dudas / pendientes](#dudas--pendientes-3).
+> ⚠️ **No es la U4 del programa y no entra en el parcial de Regularización.** La U4 de la cátedra
+> es Gestión de requerimientos. Este bloque viene de la presentación suelta
+> `Gestion_efectiva_calidad_producto.pdf`, que no figura en la bibliografía obligatoria; su tema
+> coincide con el de la *Guía de mejores prácticas de calidad de producto* (VyV03), que el temario
+> marca como **complementaria de U5, fuera del parcial**. Se conserva como material de consulta.
 
 #### Conceptos clave
 
@@ -1145,11 +1242,8 @@ métricas de proyecto vs producto — ver [Unidad 3 → MA](#unidad-3--gestión-
 
 #### Dudas / pendientes
 
-- **Numeración de la unidad.** El bloque aparece en `Resumen de ISW.md` bajo el título
-  "Gestión efectiva calidad producto", después de "U2: Introducción a procesos y RUP" y sin
-  rótulo de unidad. Puede ser U4, o parte de U5, o un tema transversal del programa. **Definir
-  contra el programa de cátedra** — si resulta que pertenece a U5, hay que fusionarlo con la
-  sección "Estrategia de pruebas" de esa unidad, que trata lo mismo desde otro ángulo.
+- ~~**Numeración de la unidad.**~~ **Resuelto (2026-09-21):** no es una unidad del programa. Ver
+  la nota al comienzo de esta unidad y la del índice.
 - La fuente referencia una imagen para el balance automatización/manual
   (`Resumen de ISW.md:143`) que no está transcrita.
 - La sección de **KPIs** está apenas esbozada: dos párrafos, sin ejemplos de KPIs concretos de
@@ -1801,3 +1895,11 @@ partición, sobre todo en las válidas.
   como bibliografía y no como machete: 17 capítulos en orden temático, cada uno abriendo con el
   porqué del tema antes de las definiciones, prosa corrida y tablas sólo donde hay algo que
   comparar. Cierra con las 12 confusiones conceptuales más frecuentes. 22 páginas.
+- 2026-09-21: ingesta del **temario oficial del parcial de Regularización** (documento de cátedra
+  IS-CAT-GRAL15, pág. 2) → `fuentes/temario-parcial-regularizacion.md`, con los datos del parcial
+  (26/09, 9:30, presencial, no a libro abierto). Se copió de `archivo/` la **PPT oficial de Proceso
+  y RUP** y se reescribió el bloque RUP/SPEM de la **U2** sobre ella (quién/qué/cómo, niveles de
+  detalle, elementos de una tarea, los ocho tipos de guía). Resueltos dos pendientes: la
+  **numeración de unidades** (el programa tiene 9; la "Unidad 4" de esta wiki no es la del programa
+  y no entra) y el **nivel de OT** (3, confirmado por la PPT). Marcado en el índice qué entra y qué
+  no de cada unidad.
