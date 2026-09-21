@@ -429,6 +429,12 @@ sabe por qué salió como salió y si el próximo va a salir mejor**.
   cátedra — si en el parcial aparece "OT nivel 4", es un error del resumen, no del modelo.  **Confirmado (2026-09-21):** la PPT oficial de Proceso y RUP (pág. 8) lista OT entre las áreas
   de gestión de procesos **básicas**, junto a OPF y OPD, y deja OPP y OID como **avanzadas**.
   OT es **nivel 3**.
+  **De dónde sale el "nivel 4":** es una **errata de la traducción castellana del propio CMMI**
+  (`fuentes/cmmi-dev-v12-spanish.pdf`). La carátula del área (pág. 342 del PDF) dice "un área de
+  proceso de gestión del proceso en el nivel de madurez 4", pero las dos tablas de áreas por nivel
+  del mismo libro (págs. 85 y 90 del PDF) ponen **OT = 3**. La misma edición tiene otras dos
+  carátulas mal: **OID** figura como nivel 3 (es 5) y **RSKM** como nivel 2 (es 3). Ante la duda,
+  valen las tablas.
 - La tabla de nivel por área para los niveles **4 y 5** (OPP/QPM y OID/CAR) la completé yo;
   no está explícita en las fuentes.
 - El resumen remite a "ver ejemplo página 62 y 63 del PDF del apunte de CMMI"
@@ -507,6 +513,22 @@ para **solicitar y aprobar excepciones**.
 
 ##### OPF — Enfoque en procesos de la organización (nivel 3)
 
+> **Propósito (CMMI-DEV v1.2):** planificar, implementar y desplegar las mejoras de procesos de la
+> organización, basadas en una comprensión completa de las **fortalezas y debilidades actuales**
+> de los procesos y de los activos de proceso de la organización.
+
+**Metas y prácticas específicas** (texto oficial; las subprácticas no entran en el parcial):
+
+- **SG 1 Determinar las oportunidades de mejora de procesos** — SP 1.1 Establecer las necesidades
+  de procesos de la organización · SP 1.2 **Evaluar los procesos** de la organización · SP 1.3
+  Identificar las mejoras de procesos de la organización.
+- **SG 2 Planificar e implementar las mejoras de procesos** — SP 2.1 **Establecer planes de acción
+  de procesos** · SP 2.2 Implementar los planes de acción de procesos.
+- **SG 3 Desplegar los activos de proceso de la organización e incorporar las lecciones
+  aprendidas** — SP 3.1 Desplegar los activos de proceso · SP 3.2 Desplegar los procesos estándar ·
+  SP 3.3 Monitorizar la implementación · SP 3.4 **Incorporar las experiencias relativas al proceso
+  en los activos de proceso** de la organización.
+
 Trata la **planificación, implementación y despliegue de las mejoras** de procesos, basadas en
 la comprensión de las fortalezas y debilidades actuales.
 
@@ -535,19 +557,33 @@ iniciativas.
 
 ##### OPD — Definición de procesos de la organización (nivel 3)
 
-Establece y mantiene el **conjunto de activos de proceso** y los **estándares del entorno de
-trabajo**. Prácticas que aparecen en los ejercicios:
+> **Propósito (CMMI-DEV v1.2):** establecer y mantener un conjunto **usable** de **activos de
+> proceso** de la organización y de **estándares del entorno de trabajo**.
 
-- **SP 1.1** Establecer los procesos estándar
-- **SP 1.2** Establecer las descripciones de los modelos de ciclo de vida
-- **SP 1.3** Establecer los **criterios y guías de adaptación** ← la de las "excepciones"
-- **SP 1.4** Establecer el **repositorio de medición** de la organización
-- **SP 1.6** Establecer los estándares del entorno de trabajo
+**Metas y prácticas específicas** (texto oficial):
+
+- **SG 1 Establecer los activos de proceso de la organización** — SP 1.1 Establecer los procesos
+  estándar · SP 1.2 Establecer las descripciones de los **modelos de ciclo de vida** · SP 1.3
+  Establecer los **criterios y las guías de adaptación** ← la de las "excepciones" · SP 1.4
+  Establecer el **repositorio de medición** de la organización · SP 1.5 Establecer la **biblioteca
+  de activos de proceso** de la organización · SP 1.6 Establecer los **estándares del entorno de
+  trabajo**.
+- *SG 2 Facilitar la gestión IPPD* (SP 2.1 a 2.3) — es la extensión IPPD: **no entra en el
+  parcial**.
 
 ##### OT — Formación organizativa (nivel 3)
 
-Desarrollar las habilidades y el conocimiento de las personas para que desempeñen sus roles
-eficaz y eficientemente.
+> **Propósito (CMMI-DEV v1.2):** desarrollar las **habilidades y el conocimiento** de las personas
+> para que puedan realizar sus **roles** eficaz y eficientemente.
+
+**Metas y prácticas específicas** (texto oficial):
+
+- **SG 1 Establecer una capacidad de formación organizativa** — SP 1.1 Establecer las necesidades
+  de formación **estratégicas** · SP 1.2 Determinar qué necesidades de formación son
+  **responsabilidad de la organización** · SP 1.3 Establecer un **plan táctico** de formación
+  organizativa · SP 1.4 Establecer la capacidad de formación.
+- **SG 2 Proporcionar la formación necesaria** — SP 2.1 Impartir la formación · SP 2.2 Establecer
+  los **registros** de formación · SP 2.3 Evaluar la **eficacia** de la formación.
 
 **Reparto de responsabilidades (se pregunta):** la organización trata las necesidades de
 formación **comunes** a proyectos y grupos de soporte; los **proyectos y grupos de soporte**
@@ -739,6 +775,10 @@ publicado, para encontrar y eliminar inconsistencias, redactado por otro PM."**
 - `fuentes/IS-PRES-PROC01_PPT_Introduccion_a_Proceso_y_RUP_v1_03.pdf` — **PPT oficial** del
   temario (págs. 1-46): gestión de procesos, SPEM, elementos del proceso según RUP.
 - `fuentes/temario-parcial-regularizacion.md` — alcance del parcial por unidad.
+- `fuentes/cmmi-dev-v12-spanish.pdf` — **CMMI-DEV v1.2 en castellano**, el libro que cita el
+  temario. De acá salen los propósitos y las metas/prácticas oficiales de OPF, OPD y OT. Ojo: las
+  páginas del temario son las **impresas**; en este PDF, las áreas están 7 páginas antes
+  (OPD 286, OPF 308, OT 342, PMC 380, PP 394, VAL 558, VER 572).
 - `fuentes/ICS/Resumen Unidad 1,2y3.md` — "U2: Gestión de procesos", "Enfoque de procesos de la
   organización (OPF)", "Formación Organizativa (OT)", "Introducción a procesos y RUP".
 - `fuentes/ICS/Resumen de ISW.md` — "U2: Introducción a procesos y RUP" (elementos del proceso
@@ -1903,3 +1943,8 @@ partición, sobre todo en las válidas.
   **numeración de unidades** (el programa tiene 9; la "Unidad 4" de esta wiki no es la del programa
   y no entra) y el **nivel de OT** (3, confirmado por la PPT). Marcado en el índice qué entra y qué
   no de cada unidad.
+- 2026-09-21: se copió de `archivo/` el **CMMI-DEV v1.2 en castellano** (`fuentes/cmmi-dev-v12-spanish.pdf`)
+  y se contrastaron contra él las siete áreas del temario. **U2:** se agregaron los propósitos y
+  las metas y prácticas específicas oficiales de **OPF** y **OT** (no estaban) y se completó **OPD**
+  (faltaba SP 1.5, biblioteca de activos). PP, PMC, VER y VAL ya coincidían con el texto oficial.
+  **U1:** documentada la errata de la edición castellana que rotula OT como nivel 4.
