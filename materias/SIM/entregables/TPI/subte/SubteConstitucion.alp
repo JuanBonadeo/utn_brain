@@ -1,0 +1,2832 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.9.9.202607020844" AlpVersion="8.9.9">
+  <Model>
+    <Id>1790000000001</Id>
+    <Name>SubteConstitucion</Name>
+    <EngineVersion>6</EngineVersion>
+    <JavaPackageName>subteconstitucion</JavaPackageName>
+    <ModelTimeUnit>Second</ModelTimeUnit>
+    <Folders>
+	</Folders>
+    <ActiveObjectClasses>
+      <ActiveObjectClass>
+        <Id>1783514567437</Id>
+        <Name>Main</Name>
+        <Generic>false</Generic>
+        <GenericParameter>
+          <Id>1783514567442</Id>
+          <Name>1783514567442</Name>
+          <GenericParameterValue Class="CodeValue">
+            <Code>T extends Agent</Code>
+          </GenericParameterValue>
+          <GenericParameterLabel>Generic parameter:</GenericParameterLabel>
+        </GenericParameter>
+        <FlowChartsUsage>ENTITY</FlowChartsUsage>
+        <SamplesToKeep>100</SamplesToKeep>
+        <LimitNumberOfArrayElements>false</LimitNumberOfArrayElements>
+        <ElementsLimitValue>100</ElementsLimitValue>
+        <MakeDefaultViewArea>true</MakeDefaultViewArea>
+        <SceneGridColor />
+        <SceneBackgroundColor>-4144960</SceneBackgroundColor>
+        <EnvironmentResourceRef />
+        <EnvironmentType>NONE</EnvironmentType>
+        <EnvironmentRotationX>0</EnvironmentRotationX>
+        <EnvironmentRotationY>0</EnvironmentRotationY>
+        <EnvironmentRotationZ>0</EnvironmentRotationZ>
+        <EnvironmentIntensity>1</EnvironmentIntensity>
+        <AgentProperties>
+          <EnvironmentDefinesInitialLocation>true</EnvironmentDefinesInitialLocation>
+          <RotateAnimationTowardsMovement>true</RotateAnimationTowardsMovement>
+          <RotateAnimationVertically>false</RotateAnimationVertically>
+          <VelocityCode Class="CodeUnitValue">
+            <Code>10</Code>
+            <Unit Class="SpeedUnits">MPS</Unit>
+          </VelocityCode>
+          <PhysicalLength Class="CodeUnitValue">
+            <Code>1</Code>
+            <Unit Class="LengthUnits">METER</Unit>
+          </PhysicalLength>
+          <PhysicalWidth Class="CodeUnitValue">
+            <Code>1</Code>
+            <Unit Class="LengthUnits">METER</Unit>
+          </PhysicalWidth>
+          <PhysicalHeight Class="CodeUnitValue">
+            <Code>1</Code>
+            <Unit Class="LengthUnits">METER</Unit>
+          </PhysicalHeight>
+        </AgentProperties>
+        <EnvironmentProperties>
+          <EnableSteps>false</EnableSteps>
+          <StepDurationCode Class="CodeUnitValue">
+            <Code>1.0</Code>
+            <Unit Class="TimeUnits">SECOND</Unit>
+          </StepDurationCode>
+          <SpaceType>CONTINUOUS</SpaceType>
+          <WidthCode>500</WidthCode>
+          <HeightCode>500</HeightCode>
+          <ZHeightCode>0</ZHeightCode>
+          <ColumnsCountCode>100</ColumnsCountCode>
+          <RowsCountCode>100</RowsCountCode>
+          <NeigborhoodType>MOORE</NeigborhoodType>
+          <LayoutType>USER_DEF</LayoutType>
+          <NetworkType>USER_DEF</NetworkType>
+          <ConnectionsPerAgentCode>2</ConnectionsPerAgentCode>
+          <ConnectionsRangeCode>50</ConnectionsRangeCode>
+          <NeighborLinkFractionCode>0.95</NeighborLinkFractionCode>
+          <MCode>10</MCode>
+        </EnvironmentProperties>
+        <DatasetsCreationProperties>
+          <AutoCreate>true</AutoCreate>
+          <Id>1783514567436</Id>
+          <OccurrenceAtTime>true</OccurrenceAtTime>
+          <OccurrenceDate>1783584000000</OccurrenceDate>
+          <OccurrenceTime Class="CodeUnitValue">
+            <Code>0</Code>
+            <Unit Class="TimeUnits">MINUTE</Unit>
+          </OccurrenceTime>
+          <RecurrenceCode Class="CodeUnitValue">
+            <Code>1</Code>
+            <Unit Class="TimeUnits">MINUTE</Unit>
+          </RecurrenceCode>
+        </DatasetsCreationProperties>
+        <ScaleRuler>
+          <Id>1783514567440</Id>
+          <Name>scale</Name>
+          <X>0</X>
+          <Y>-150</Y>
+          <PublicFlag>false</PublicFlag>
+          <PresentationFlag>false</PresentationFlag>
+          <ShowLabel>false</ShowLabel>
+          <DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+          <Length>100</Length>
+          <Rotation>0</Rotation>
+          <ScaleType>BASED_ON_LENGTH</ScaleType>
+          <ModelLength>10</ModelLength>
+          <LengthUnits>METER</LengthUnits>
+          <Scale>10</Scale>
+          <InheritedFromParentAgentType>true</InheritedFromParentAgentType>
+        </ScaleRuler>
+        <CurrentLevel>1783514567443</CurrentLevel>
+        <ConnectionsId>1783514567438</ConnectionsId>
+        <Variables>
+          <Variable Class="Parameter">
+            <Id>1790000000002</Id>
+            <Name>escenario</Name>
+            <X>40</X>
+            <Y>360</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties SaveInSnapshot="true" ModificatorType="STATIC">
+              <Type>int</Type>
+              <UnitType>NONE</UnitType>
+              <SdArray>false</SdArray>
+              <DefaultValue Class="CodeValue">
+                <Code>0</Code>
+              </DefaultValue>
+              <ParameterEditor>
+                <Id>1790000000003</Id>
+                <EditorContolType>TEXT_BOX</EditorContolType>
+                <MinSliderValue>0</MinSliderValue>
+                <MaxSliderValue>100</MaxSliderValue>
+                <DelimeterType>NO_DELIMETER</DelimeterType>
+              </ParameterEditor>
+            </Properties>
+            <Description>0=E0, 1=E1, 2=E2, 3=E3.</Description>
+          </Variable>
+          <Variable Class="Parameter">
+            <Id>1790000000004</Id>
+            <Name>modoDemo</Name>
+            <X>40</X>
+            <Y>385</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties SaveInSnapshot="true" ModificatorType="STATIC">
+              <Type>boolean</Type>
+              <UnitType>NONE</UnitType>
+              <SdArray>false</SdArray>
+              <DefaultValue Class="CodeValue">
+                <Code>true</Code>
+              </DefaultValue>
+              <ParameterEditor>
+                <Id>1790000000005</Id>
+                <EditorContolType>TEXT_BOX</EditorContolType>
+                <MinSliderValue>0</MinSliderValue>
+                <MaxSliderValue>100</MaxSliderValue>
+                <DelimeterType>NO_DELIMETER</DelimeterType>
+              </ParameterEditor>
+            </Properties>
+            <Description>Valores sinteticos exclusivamente para verificar el circuito.</Description>
+          </Variable>
+          <Variable Class="Parameter">
+            <Id>1790000000006</Id>
+            <Name>molinetesBase</Name>
+            <X>40</X>
+            <Y>410</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties SaveInSnapshot="true" ModificatorType="STATIC">
+              <Type>int</Type>
+              <UnitType>NONE</UnitType>
+              <SdArray>false</SdArray>
+              <DefaultValue Class="CodeValue">
+                <Code>20</Code>
+              </DefaultValue>
+              <ParameterEditor>
+                <Id>1790000000007</Id>
+                <EditorContolType>TEXT_BOX</EditorContolType>
+                <MinSliderValue>0</MinSliderValue>
+                <MaxSliderValue>100</MaxSliderValue>
+                <DelimeterType>NO_DELIMETER</DelimeterType>
+              </ParameterEditor>
+            </Properties>
+            <Description>Aproximacion entera provisional de 19,5 activos; contrastar 19 y 20.</Description>
+          </Variable>
+          <Variable Class="Parameter">
+            <Id>1790000000008</Id>
+            <Name>molinetesE1</Name>
+            <X>40</X>
+            <Y>435</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties SaveInSnapshot="true" ModificatorType="STATIC">
+              <Type>int</Type>
+              <UnitType>NONE</UnitType>
+              <SdArray>false</SdArray>
+              <DefaultValue Class="CodeValue">
+                <Code>28</Code>
+              </DefaultValue>
+              <ParameterEditor>
+                <Id>1790000000009</Id>
+                <EditorContolType>TEXT_BOX</EditorContolType>
+                <MinSliderValue>0</MinSliderValue>
+                <MaxSliderValue>100</MaxSliderValue>
+                <DelimeterType>NO_DELIMETER</DelimeterType>
+              </ParameterEditor>
+            </Properties>
+            <Description>Hipotesis E1 del caso; verificar disponibilidad fisica en Principal.</Description>
+          </Variable>
+          <Variable Class="Parameter">
+            <Id>1790000000010</Id>
+            <Name>fraccionDesvioE2</Name>
+            <X>40</X>
+            <Y>460</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties SaveInSnapshot="true" ModificatorType="STATIC">
+              <Type>double</Type>
+              <UnitType>NONE</UnitType>
+              <SdArray>false</SdArray>
+              <DefaultValue Class="CodeValue">
+                <Code>0.15</Code>
+              </DefaultValue>
+              <ParameterEditor>
+                <Id>1790000000011</Id>
+                <EditorContolType>TEXT_BOX</EditorContolType>
+                <MinSliderValue>0</MinSliderValue>
+                <MaxSliderValue>100</MaxSliderValue>
+                <DelimeterType>NO_DELIMETER</DelimeterType>
+              </ParameterEditor>
+            </Properties>
+            <Description>Variable de decision de prueba, no estimacion del desvio factible.</Description>
+          </Variable>
+          <Variable Class="Parameter">
+            <Id>1790000000012</Id>
+            <Name>servicioSUBESeg</Name>
+            <X>40</X>
+            <Y>485</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties SaveInSnapshot="true" ModificatorType="STATIC">
+              <Type>double</Type>
+              <UnitType>NONE</UnitType>
+              <SdArray>false</SdArray>
+              <DefaultValue Class="CodeValue">
+                <Code>-1</Code>
+              </DefaultValue>
+              <ParameterEditor>
+                <Id>1790000000013</Id>
+                <EditorContolType>TEXT_BOX</EditorContolType>
+                <MinSliderValue>0</MinSliderValue>
+                <MaxSliderValue>100</MaxSliderValue>
+                <DelimeterType>NO_DELIMETER</DelimeterType>
+              </ParameterEditor>
+            </Properties>
+            <Description>PENDIENTE: duracion constante preliminar medida en segundos.</Description>
+          </Variable>
+          <Variable Class="Parameter">
+            <Id>1790000000014</Id>
+            <Name>servicioEMVSeg</Name>
+            <X>40</X>
+            <Y>510</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties SaveInSnapshot="true" ModificatorType="STATIC">
+              <Type>double</Type>
+              <UnitType>NONE</UnitType>
+              <SdArray>false</SdArray>
+              <DefaultValue Class="CodeValue">
+                <Code>-1</Code>
+              </DefaultValue>
+              <ParameterEditor>
+                <Id>1790000000015</Id>
+                <EditorContolType>TEXT_BOX</EditorContolType>
+                <MinSliderValue>0</MinSliderValue>
+                <MaxSliderValue>100</MaxSliderValue>
+                <DelimeterType>NO_DELIMETER</DelimeterType>
+              </ParameterEditor>
+            </Properties>
+            <Description>PENDIENTE: duracion EMV/QR; solo requerida en E3.</Description>
+          </Variable>
+          <Variable Class="Parameter">
+            <Id>1790000000016</Id>
+            <Name>tamanoTanda</Name>
+            <X>40</X>
+            <Y>535</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties SaveInSnapshot="true" ModificatorType="STATIC">
+              <Type>int</Type>
+              <UnitType>NONE</UnitType>
+              <SdArray>false</SdArray>
+              <DefaultValue Class="CodeValue">
+                <Code>-1</Code>
+              </DefaultValue>
+              <ParameterEditor>
+                <Id>1790000000017</Id>
+                <EditorContolType>TEXT_BOX</EditorContolType>
+                <MinSliderValue>0</MinSliderValue>
+                <MaxSliderValue>100</MaxSliderValue>
+                <DelimeterType>NO_DELIMETER</DelimeterType>
+              </ParameterEditor>
+            </Properties>
+            <Description>PENDIENTE: pasajeros por tanda a la intensidad de referencia.</Description>
+          </Variable>
+          <Variable Class="Parameter">
+            <Id>1790000000018</Id>
+            <Name>intervaloTandaSeg</Name>
+            <X>40</X>
+            <Y>560</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties SaveInSnapshot="true" ModificatorType="STATIC">
+              <Type>double</Type>
+              <UnitType>NONE</UnitType>
+              <SdArray>false</SdArray>
+              <DefaultValue Class="CodeValue">
+                <Code>-1</Code>
+              </DefaultValue>
+              <ParameterEditor>
+                <Id>1790000000019</Id>
+                <EditorContolType>TEXT_BOX</EditorContolType>
+                <MinSliderValue>0</MinSliderValue>
+                <MaxSliderValue>100</MaxSliderValue>
+                <DelimeterType>NO_DELIMETER</DelimeterType>
+              </ParameterEditor>
+            </Properties>
+            <Description>PENDIENTE: segundos entre tandas.</Description>
+          </Variable>
+          <Variable Class="Parameter">
+            <Id>1790000000020</Id>
+            <Name>primeraTandaSeg</Name>
+            <X>40</X>
+            <Y>585</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties SaveInSnapshot="true" ModificatorType="STATIC">
+              <Type>double</Type>
+              <UnitType>NONE</UnitType>
+              <SdArray>false</SdArray>
+              <DefaultValue Class="CodeValue">
+                <Code>0</Code>
+              </DefaultValue>
+              <ParameterEditor>
+                <Id>1790000000021</Id>
+                <EditorContolType>TEXT_BOX</EditorContolType>
+                <MinSliderValue>0</MinSliderValue>
+                <MaxSliderValue>100</MaxSliderValue>
+                <DelimeterType>NO_DELIMETER</DelimeterType>
+              </ParameterEditor>
+            </Properties>
+            <Description>Desfase inicial desde las 07:00; supuesto editable.</Description>
+          </Variable>
+          <Variable Class="Parameter">
+            <Id>1790000000022</Id>
+            <Name>usarPerfilSBASE</Name>
+            <X>40</X>
+            <Y>610</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties SaveInSnapshot="true" ModificatorType="STATIC">
+              <Type>boolean</Type>
+              <UnitType>NONE</UnitType>
+              <SdArray>false</SdArray>
+              <DefaultValue Class="CodeValue">
+                <Code>true</Code>
+              </DefaultValue>
+              <ParameterEditor>
+                <Id>1790000000023</Id>
+                <EditorContolType>TEXT_BOX</EditorContolType>
+                <MinSliderValue>0</MinSliderValue>
+                <MaxSliderValue>100</MaxSliderValue>
+                <DelimeterType>NO_DELIMETER</DelimeterType>
+              </ParameterEditor>
+            </Properties>
+            <Description>Escala el tamano de la tanda segun el perfil de validaciones, como proxy provisional.</Description>
+          </Variable>
+          <Variable Class="Parameter">
+            <Id>1790000000024</Id>
+            <Name>semilla</Name>
+            <X>40</X>
+            <Y>635</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties SaveInSnapshot="true" ModificatorType="STATIC">
+              <Type>long</Type>
+              <UnitType>NONE</UnitType>
+              <SdArray>false</SdArray>
+              <DefaultValue Class="CodeValue">
+                <Code>1</Code>
+              </DefaultValue>
+              <ParameterEditor>
+                <Id>1790000000025</Id>
+                <EditorContolType>TEXT_BOX</EditorContolType>
+                <MinSliderValue>0</MinSliderValue>
+                <MaxSliderValue>100</MaxSliderValue>
+                <DelimeterType>NO_DELIMETER</DelimeterType>
+              </ParameterEditor>
+            </Properties>
+            <Description>Fuente de aleatoriedad para el desvio a Plaza.</Description>
+          </Variable>
+          <Variable Class="Parameter">
+            <Id>1790000000026</Id>
+            <Name>horizonteSeg</Name>
+            <X>40</X>
+            <Y>660</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties SaveInSnapshot="true" ModificatorType="STATIC">
+              <Type>double</Type>
+              <UnitType>NONE</UnitType>
+              <SdArray>false</SdArray>
+              <DefaultValue Class="CodeValue">
+                <Code>9000</Code>
+              </DefaultValue>
+              <ParameterEditor>
+                <Id>1790000000027</Id>
+                <EditorContolType>TEXT_BOX</EditorContolType>
+                <MinSliderValue>0</MinSliderValue>
+                <MaxSliderValue>100</MaxSliderValue>
+                <DelimeterType>NO_DELIMETER</DelimeterType>
+              </ParameterEditor>
+            </Properties>
+            <Description>07:00-09:30; los arribos cesan, luego se drena el sistema.</Description>
+          </Variable>
+          <Variable Class="Parameter">
+            <Id>1790000000028</Id>
+            <Name>perfil15min</Name>
+            <X>40</X>
+            <Y>685</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties SaveInSnapshot="true" ModificatorType="STATIC">
+              <Type>double[]</Type>
+              <UnitType>NONE</UnitType>
+              <SdArray>false</SdArray>
+              <DefaultValue Class="CodeValue">
+                <Code>new double[] {1437,1578,1765,1824,1799,2054,2066,1742,1581,1636}</Code>
+              </DefaultValue>
+              <ParameterEditor>
+                <Id>1790000000029</Id>
+                <EditorContolType>TEXT_BOX</EditorContolType>
+                <MinSliderValue>0</MinSliderValue>
+                <MaxSliderValue>100</MaxSliderValue>
+                <DelimeterType>NO_DELIMETER</DelimeterType>
+              </ParameterEditor>
+            </Properties>
+            <Description>Validaciones promedio observadas, no arribos medidos.</Description>
+          </Variable>
+          <Variable Class="PlainVariable">
+            <Id>1790000000030</Id>
+            <Name>iniciado</Name>
+            <X>40</X>
+            <Y>710</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+              <Type>boolean</Type>
+              <InitialValue Class="CodeValue">
+                <Code>false</Code>
+              </InitialValue>
+            </Properties>
+          </Variable>
+          <Variable Class="PlainVariable">
+            <Id>1790000000032</Id>
+            <Name>cerrado</Name>
+            <X>40</X>
+            <Y>735</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+              <Type>boolean</Type>
+              <InitialValue Class="CodeValue">
+                <Code>false</Code>
+              </InitialValue>
+            </Properties>
+          </Variable>
+          <Variable Class="PlainVariable">
+            <Id>1790000000034</Id>
+            <Name>finalizado</Name>
+            <X>40</X>
+            <Y>760</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+              <Type>boolean</Type>
+              <InitialValue Class="CodeValue">
+                <Code>false</Code>
+              </InitialValue>
+            </Properties>
+          </Variable>
+          <Variable Class="PlainVariable">
+            <Id>1790000000036</Id>
+            <Name>rngDesvio</Name>
+            <X>40</X>
+            <Y>785</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+              <Type>java.util.Random</Type>
+              <InitialValue Class="CodeValue">
+                <Code>null</Code>
+              </InitialValue>
+            </Properties>
+          </Variable>
+          <Variable Class="PlainVariable">
+            <Id>1790000000038</Id>
+            <Name>nGenerados</Name>
+            <X>310</X>
+            <Y>360</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+              <Type>int</Type>
+              <InitialValue Class="CodeValue">
+                <Code>0</Code>
+              </InitialValue>
+            </Properties>
+          </Variable>
+          <Variable Class="PlainVariable">
+            <Id>1790000000040</Id>
+            <Name>nPrincipal</Name>
+            <X>310</X>
+            <Y>385</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+              <Type>int</Type>
+              <InitialValue Class="CodeValue">
+                <Code>0</Code>
+              </InitialValue>
+            </Properties>
+          </Variable>
+          <Variable Class="PlainVariable">
+            <Id>1790000000042</Id>
+            <Name>nDesviados</Name>
+            <X>310</X>
+            <Y>410</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+              <Type>int</Type>
+              <InitialValue Class="CodeValue">
+                <Code>0</Code>
+              </InitialValue>
+            </Properties>
+          </Variable>
+          <Variable Class="PlainVariable">
+            <Id>1790000000044</Id>
+            <Name>nProcesados</Name>
+            <X>310</X>
+            <Y>435</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+              <Type>int</Type>
+              <InitialValue Class="CodeValue">
+                <Code>0</Code>
+              </InitialValue>
+            </Properties>
+          </Variable>
+          <Variable Class="PlainVariable">
+            <Id>1790000000046</Id>
+            <Name>nProcesadosFranja</Name>
+            <X>310</X>
+            <Y>460</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+              <Type>int</Type>
+              <InitialValue Class="CodeValue">
+                <Code>0</Code>
+              </InitialValue>
+            </Properties>
+          </Variable>
+          <Variable Class="PlainVariable">
+            <Id>1790000000048</Id>
+            <Name>nEsperando</Name>
+            <X>310</X>
+            <Y>485</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+              <Type>int</Type>
+              <InitialValue Class="CodeValue">
+                <Code>0</Code>
+              </InitialValue>
+            </Properties>
+          </Variable>
+          <Variable Class="PlainVariable">
+            <Id>1790000000050</Id>
+            <Name>nOcupados</Name>
+            <X>310</X>
+            <Y>510</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+              <Type>int</Type>
+              <InitialValue Class="CodeValue">
+                <Code>0</Code>
+              </InitialValue>
+            </Properties>
+          </Variable>
+          <Variable Class="PlainVariable">
+            <Id>1790000000052</Id>
+            <Name>qMax</Name>
+            <X>310</X>
+            <Y>535</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+              <Type>int</Type>
+              <InitialValue Class="CodeValue">
+                <Code>0</Code>
+              </InitialValue>
+            </Properties>
+          </Variable>
+          <Variable Class="PlainVariable">
+            <Id>1790000000054</Id>
+            <Name>tArea</Name>
+            <X>310</X>
+            <Y>560</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+              <Type>double</Type>
+              <InitialValue Class="CodeValue">
+                <Code>0</Code>
+              </InitialValue>
+            </Properties>
+          </Variable>
+          <Variable Class="PlainVariable">
+            <Id>1790000000056</Id>
+            <Name>areaCola</Name>
+            <X>310</X>
+            <Y>585</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+              <Type>double</Type>
+              <InitialValue Class="CodeValue">
+                <Code>0</Code>
+              </InitialValue>
+            </Properties>
+          </Variable>
+          <Variable Class="PlainVariable">
+            <Id>1790000000058</Id>
+            <Name>areaOcupados</Name>
+            <X>310</X>
+            <Y>610</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+              <Type>double</Type>
+              <InitialValue Class="CodeValue">
+                <Code>0</Code>
+              </InitialValue>
+            </Properties>
+          </Variable>
+          <Variable Class="PlainVariable">
+            <Id>1790000000060</Id>
+            <Name>ultimaCola</Name>
+            <X>310</X>
+            <Y>635</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+              <Type>double</Type>
+              <InitialValue Class="CodeValue">
+                <Code>0</Code>
+              </InitialValue>
+            </Properties>
+          </Variable>
+          <Variable Class="PlainVariable">
+            <Id>1790000000062</Id>
+            <Name>pendientesAlCierre</Name>
+            <X>310</X>
+            <Y>660</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+              <Type>int</Type>
+              <InitialValue Class="CodeValue">
+                <Code>0</Code>
+              </InitialValue>
+            </Properties>
+          </Variable>
+          <Variable Class="PlainVariable">
+            <Id>1790000000064</Id>
+            <Name>colaAlCierre</Name>
+            <X>310</X>
+            <Y>685</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+              <Type>int</Type>
+              <InitialValue Class="CodeValue">
+                <Code>0</Code>
+              </InitialValue>
+            </Properties>
+          </Variable>
+          <Variable Class="PlainVariable">
+            <Id>1790000000066</Id>
+            <Name>sumaEspera</Name>
+            <X>310</X>
+            <Y>710</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+              <Type>double</Type>
+              <InitialValue Class="CodeValue">
+                <Code>0</Code>
+              </InitialValue>
+            </Properties>
+          </Variable>
+          <Variable Class="PlainVariable">
+            <Id>1790000000068</Id>
+            <Name>nMas30</Name>
+            <X>310</X>
+            <Y>735</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+              <Type>int</Type>
+              <InitialValue Class="CodeValue">
+                <Code>0</Code>
+              </InitialValue>
+            </Properties>
+          </Variable>
+          <Variable Class="PlainVariable">
+            <Id>1790000000070</Id>
+            <Name>llegadas</Name>
+            <X>310</X>
+            <Y>760</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+              <Type>java.util.Map&lt;Agent, Double&gt;</Type>
+              <InitialValue Class="CodeValue">
+                <Code>new java.util.HashMap&lt;Agent, Double&gt;()</Code>
+              </InitialValue>
+            </Properties>
+          </Variable>
+          <Variable Class="PlainVariable">
+            <Id>1790000000072</Id>
+            <Name>esperas</Name>
+            <X>310</X>
+            <Y>785</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+              <Type>java.util.ArrayList&lt;Double&gt;</Type>
+              <InitialValue Class="CodeValue">
+                <Code>new java.util.ArrayList&lt;Double&gt;()</Code>
+              </InitialValue>
+            </Properties>
+          </Variable>
+          <Variable Class="PlainVariable">
+            <Id>1790000000074</Id>
+            <Name>tandasAbiertas</Name>
+            <X>580</X>
+            <Y>360</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+              <Type>java.util.ArrayList&lt;Double&gt;</Type>
+              <InitialValue Class="CodeValue">
+                <Code>new java.util.ArrayList&lt;Double&gt;()</Code>
+              </InitialValue>
+            </Properties>
+          </Variable>
+          <Variable Class="PlainVariable">
+            <Id>1790000000076</Id>
+            <Name>disipaciones</Name>
+            <X>580</X>
+            <Y>385</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+              <Type>java.util.ArrayList&lt;Double&gt;</Type>
+              <InitialValue Class="CodeValue">
+                <Code>new java.util.ArrayList&lt;Double&gt;()</Code>
+              </InitialValue>
+            </Properties>
+          </Variable>
+          <Variable Class="PlainVariable">
+            <Id>1790000000078</Id>
+            <Name>ocupacionPorUnidad</Name>
+            <X>580</X>
+            <Y>410</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+              <Type>java.util.Map&lt;Agent, Double&gt;</Type>
+              <InitialValue Class="CodeValue">
+                <Code>new java.util.HashMap&lt;Agent, Double&gt;()</Code>
+              </InitialValue>
+            </Properties>
+          </Variable>
+          <Variable Class="PlainVariable">
+            <Id>1790000000080</Id>
+            <Name>inicioPorUnidad</Name>
+            <X>580</X>
+            <Y>435</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+              <Type>java.util.Map&lt;Agent, Double&gt;</Type>
+              <InitialValue Class="CodeValue">
+                <Code>new java.util.HashMap&lt;Agent, Double&gt;()</Code>
+              </InitialValue>
+            </Properties>
+          </Variable>
+        </Variables>
+        <Connectors>
+          <Connector>
+            <Id>1790000000118</Id>
+            <Name>conexion0</Name>
+            <X>110</X>
+            <Y>220</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>false</ShowLabel>
+            <SourceEmbeddedObjectReference>
+              <PackageName>subteconstitucion</PackageName>
+              <ClassName>Main</ClassName>
+              <ItemName>source</ItemName>
+            </SourceEmbeddedObjectReference>
+            <SourceConnectableItemReference>
+              <PackageName>com.anylogic.libraries.processmodeling</PackageName>
+              <ClassName>Source</ClassName>
+              <ItemName>out</ItemName>
+            </SourceConnectableItemReference>
+            <TargetEmbeddedObjectReference>
+              <PackageName>subteconstitucion</PackageName>
+              <ClassName>Main</ClassName>
+              <ItemName>queue</ItemName>
+            </TargetEmbeddedObjectReference>
+            <TargetConnectableItemReference>
+              <PackageName>com.anylogic.libraries.processmodeling</PackageName>
+              <ClassName>Queue</ClassName>
+              <ItemName>in</ItemName>
+            </TargetConnectableItemReference>
+            <Points>
+              <Point>
+                <X>0</X>
+                <Y>0</Y>
+              </Point>
+              <Point>
+                <X>120</X>
+                <Y>0</Y>
+              </Point>
+            </Points>
+          </Connector>
+          <Connector>
+            <Id>1790000000119</Id>
+            <Name>conexion1</Name>
+            <X>260</X>
+            <Y>220</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>false</ShowLabel>
+            <SourceEmbeddedObjectReference>
+              <PackageName>subteconstitucion</PackageName>
+              <ClassName>Main</ClassName>
+              <ItemName>queue</ItemName>
+            </SourceEmbeddedObjectReference>
+            <SourceConnectableItemReference>
+              <PackageName>com.anylogic.libraries.processmodeling</PackageName>
+              <ClassName>Queue</ClassName>
+              <ItemName>out</ItemName>
+            </SourceConnectableItemReference>
+            <TargetEmbeddedObjectReference>
+              <PackageName>subteconstitucion</PackageName>
+              <ClassName>Main</ClassName>
+              <ItemName>seize</ItemName>
+            </TargetEmbeddedObjectReference>
+            <TargetConnectableItemReference>
+              <PackageName>com.anylogic.libraries.processmodeling</PackageName>
+              <ClassName>Seize</ClassName>
+              <ItemName>in</ItemName>
+            </TargetConnectableItemReference>
+            <Points>
+              <Point>
+                <X>0</X>
+                <Y>0</Y>
+              </Point>
+              <Point>
+                <X>120</X>
+                <Y>0</Y>
+              </Point>
+            </Points>
+          </Connector>
+          <Connector>
+            <Id>1790000000120</Id>
+            <Name>conexion2</Name>
+            <X>410</X>
+            <Y>220</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>false</ShowLabel>
+            <SourceEmbeddedObjectReference>
+              <PackageName>subteconstitucion</PackageName>
+              <ClassName>Main</ClassName>
+              <ItemName>seize</ItemName>
+            </SourceEmbeddedObjectReference>
+            <SourceConnectableItemReference>
+              <PackageName>com.anylogic.libraries.processmodeling</PackageName>
+              <ClassName>Seize</ClassName>
+              <ItemName>out</ItemName>
+            </SourceConnectableItemReference>
+            <TargetEmbeddedObjectReference>
+              <PackageName>subteconstitucion</PackageName>
+              <ClassName>Main</ClassName>
+              <ItemName>delay</ItemName>
+            </TargetEmbeddedObjectReference>
+            <TargetConnectableItemReference>
+              <PackageName>com.anylogic.libraries.processmodeling</PackageName>
+              <ClassName>Delay</ClassName>
+              <ItemName>in</ItemName>
+            </TargetConnectableItemReference>
+            <Points>
+              <Point>
+                <X>0</X>
+                <Y>0</Y>
+              </Point>
+              <Point>
+                <X>120</X>
+                <Y>0</Y>
+              </Point>
+            </Points>
+          </Connector>
+          <Connector>
+            <Id>1790000000121</Id>
+            <Name>conexion3</Name>
+            <X>560</X>
+            <Y>220</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>false</ShowLabel>
+            <SourceEmbeddedObjectReference>
+              <PackageName>subteconstitucion</PackageName>
+              <ClassName>Main</ClassName>
+              <ItemName>delay</ItemName>
+            </SourceEmbeddedObjectReference>
+            <SourceConnectableItemReference>
+              <PackageName>com.anylogic.libraries.processmodeling</PackageName>
+              <ClassName>Delay</ClassName>
+              <ItemName>out</ItemName>
+            </SourceConnectableItemReference>
+            <TargetEmbeddedObjectReference>
+              <PackageName>subteconstitucion</PackageName>
+              <ClassName>Main</ClassName>
+              <ItemName>release</ItemName>
+            </TargetEmbeddedObjectReference>
+            <TargetConnectableItemReference>
+              <PackageName>com.anylogic.libraries.processmodeling</PackageName>
+              <ClassName>Release</ClassName>
+              <ItemName>in</ItemName>
+            </TargetConnectableItemReference>
+            <Points>
+              <Point>
+                <X>0</X>
+                <Y>0</Y>
+              </Point>
+              <Point>
+                <X>120</X>
+                <Y>0</Y>
+              </Point>
+            </Points>
+          </Connector>
+          <Connector>
+            <Id>1790000000122</Id>
+            <Name>conexion4</Name>
+            <X>710</X>
+            <Y>220</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>false</ShowLabel>
+            <SourceEmbeddedObjectReference>
+              <PackageName>subteconstitucion</PackageName>
+              <ClassName>Main</ClassName>
+              <ItemName>release</ItemName>
+            </SourceEmbeddedObjectReference>
+            <SourceConnectableItemReference>
+              <PackageName>com.anylogic.libraries.processmodeling</PackageName>
+              <ClassName>Release</ClassName>
+              <ItemName>out</ItemName>
+            </SourceConnectableItemReference>
+            <TargetEmbeddedObjectReference>
+              <PackageName>subteconstitucion</PackageName>
+              <ClassName>Main</ClassName>
+              <ItemName>sink</ItemName>
+            </TargetEmbeddedObjectReference>
+            <TargetConnectableItemReference>
+              <PackageName>com.anylogic.libraries.processmodeling</PackageName>
+              <ClassName>Sink</ClassName>
+              <ItemName>in</ItemName>
+            </TargetConnectableItemReference>
+            <Points>
+              <Point>
+                <X>0</X>
+                <Y>0</Y>
+              </Point>
+              <Point>
+                <X>120</X>
+                <Y>0</Y>
+              </Point>
+            </Points>
+          </Connector>
+        </Connectors>
+        <AgentLinks />
+        <EmbeddedObjects>
+          <EmbeddedObject>
+            <Id>1790000000104</Id>
+            <Name>source</Name>
+            <X>80</X>
+            <Y>210</Y>
+            <Label>
+              <X>-5</X>
+              <Y>-20</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <ActiveObjectClass>
+              <PackageName>com.anylogic.libraries.processmodeling</PackageName>
+              <ClassName>Source</ClassName>
+            </ActiveObjectClass>
+            <GenericParameterSubstitute>
+              <GenericParameterSubstituteReference>
+                <PackageName>com.anylogic.libraries.processmodeling</PackageName>
+                <ClassName>Source</ClassName>
+                <ItemName>1412336242928</ItemName>
+              </GenericParameterSubstituteReference>
+            </GenericParameterSubstitute>
+            <Parameters>
+              <Parameter>
+                <Name>arrivalType</Name>
+                <Value Class="CodeValue">
+                  <Code>self.MANUAL</Code>
+                </Value>
+              </Parameter>
+            </Parameters>
+            <ReplicationFlag>false</ReplicationFlag>
+            <Replication Class="CodeValue">
+              <Code>100</Code>
+            </Replication>
+            <CollectionType>ARRAY_LIST_BASED</CollectionType>
+            <InitialLocationType>XYZ</InitialLocationType>
+            <ColumnCode Class="CodeValue">
+              <Code>0</Code>
+            </ColumnCode>
+            <RowCode Class="CodeValue">
+              <Code>0</Code>
+            </RowCode>
+            <LocationNameCode Class="CodeValue">
+              <Code>""</Code>
+            </LocationNameCode>
+            <InitializationType>SPECIFIED_NUMBER</InitializationType>
+            <InitializationDatabaseTableQuery>
+              <Id>1790000000105</Id>
+              <TableReference>
+						</TableReference>
+            </InitializationDatabaseTableQuery>
+            <InitializationDatabaseType>ONE_AGENT_PER_DATABASE_RECORD</InitializationDatabaseType>
+            <QuantityColumn>
+					</QuantityColumn>
+          </EmbeddedObject>
+          <EmbeddedObject>
+            <Id>1790000000106</Id>
+            <Name>queue</Name>
+            <X>230</X>
+            <Y>210</Y>
+            <Label>
+              <X>-5</X>
+              <Y>-20</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <ActiveObjectClass>
+              <PackageName>com.anylogic.libraries.processmodeling</PackageName>
+              <ClassName>Queue</ClassName>
+            </ActiveObjectClass>
+            <GenericParameterSubstitute>
+              <GenericParameterSubstituteReference>
+                <PackageName>com.anylogic.libraries.processmodeling</PackageName>
+                <ClassName>Queue</ClassName>
+                <ItemName>1412336242932</ItemName>
+              </GenericParameterSubstituteReference>
+            </GenericParameterSubstitute>
+            <Parameters>
+              <Parameter>
+                <Name>maximumCapacity</Name>
+                <Value Class="CodeValue">
+                  <Code>true</Code>
+                </Value>
+              </Parameter>
+              <Parameter>
+                <Name>onEnter</Name>
+                <Value Class="CodeValue">
+                  <Code>entraCola(agent);</Code>
+                </Value>
+              </Parameter>
+              <Parameter>
+                <Name>forceStatisticsCollection</Name>
+                <Value Class="CodeValue">
+                  <Code>true</Code>
+                </Value>
+              </Parameter>
+            </Parameters>
+            <ReplicationFlag>false</ReplicationFlag>
+            <Replication Class="CodeValue">
+              <Code>100</Code>
+            </Replication>
+            <CollectionType>ARRAY_LIST_BASED</CollectionType>
+            <InitialLocationType>XYZ</InitialLocationType>
+            <ColumnCode Class="CodeValue">
+              <Code>0</Code>
+            </ColumnCode>
+            <RowCode Class="CodeValue">
+              <Code>0</Code>
+            </RowCode>
+            <LocationNameCode Class="CodeValue">
+              <Code>""</Code>
+            </LocationNameCode>
+            <InitializationType>SPECIFIED_NUMBER</InitializationType>
+            <InitializationDatabaseTableQuery>
+              <Id>1790000000107</Id>
+              <TableReference>
+						</TableReference>
+            </InitializationDatabaseTableQuery>
+            <InitializationDatabaseType>ONE_AGENT_PER_DATABASE_RECORD</InitializationDatabaseType>
+            <QuantityColumn>
+					</QuantityColumn>
+          </EmbeddedObject>
+          <EmbeddedObject>
+            <Id>1790000000108</Id>
+            <Name>seize</Name>
+            <X>380</X>
+            <Y>210</Y>
+            <Label>
+              <X>-5</X>
+              <Y>-20</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <ActiveObjectClass>
+              <PackageName>com.anylogic.libraries.processmodeling</PackageName>
+              <ClassName>Seize</ClassName>
+            </ActiveObjectClass>
+            <GenericParameterSubstitute>
+              <GenericParameterSubstituteReference>
+                <PackageName>com.anylogic.libraries.processmodeling</PackageName>
+                <ClassName>Seize</ClassName>
+                <ItemName>1412336243147</ItemName>
+              </GenericParameterSubstituteReference>
+            </GenericParameterSubstitute>
+            <Parameters>
+              <Parameter>
+                <Name>seizeFromOnePool</Name>
+                <Value Class="CodeValue">
+                  <Code>true</Code>
+                </Value>
+              </Parameter>
+              <Parameter>
+                <Name>resourcePool</Name>
+                <Value Class="CodeValue">
+                  <Code>molinetes</Code>
+                </Value>
+              </Parameter>
+              <Parameter>
+                <Name>resourceQuantity</Name>
+                <Value Class="CodeValue">
+                  <Code>1</Code>
+                </Value>
+              </Parameter>
+              <Parameter>
+                <Name>capacity</Name>
+                <Value Class="CodeValue">
+                  <Code>1</Code>
+                </Value>
+              </Parameter>
+              <Parameter>
+                <Name>maximumCapacity</Name>
+                <Value Class="CodeValue">
+                  <Code>false</Code>
+                </Value>
+              </Parameter>
+              <Parameter>
+                <Name>onSeizeUnit</Name>
+                <Value Class="CodeValue">
+                  <Code>iniciaServicio(agent, unit);</Code>
+                </Value>
+              </Parameter>
+              <Parameter>
+                <Name>forceStatisticsCollection</Name>
+                <Value Class="CodeValue">
+                  <Code>true</Code>
+                </Value>
+              </Parameter>
+            </Parameters>
+            <ReplicationFlag>false</ReplicationFlag>
+            <Replication Class="CodeValue">
+              <Code>100</Code>
+            </Replication>
+            <CollectionType>ARRAY_LIST_BASED</CollectionType>
+            <InitialLocationType>XYZ</InitialLocationType>
+            <ColumnCode Class="CodeValue">
+              <Code>0</Code>
+            </ColumnCode>
+            <RowCode Class="CodeValue">
+              <Code>0</Code>
+            </RowCode>
+            <LocationNameCode Class="CodeValue">
+              <Code>""</Code>
+            </LocationNameCode>
+            <InitializationType>SPECIFIED_NUMBER</InitializationType>
+            <InitializationDatabaseTableQuery>
+              <Id>1790000000109</Id>
+              <TableReference>
+						</TableReference>
+            </InitializationDatabaseTableQuery>
+            <InitializationDatabaseType>ONE_AGENT_PER_DATABASE_RECORD</InitializationDatabaseType>
+            <QuantityColumn>
+					</QuantityColumn>
+          </EmbeddedObject>
+          <EmbeddedObject>
+            <Id>1790000000110</Id>
+            <Name>delay</Name>
+            <X>530</X>
+            <Y>210</Y>
+            <Label>
+              <X>-5</X>
+              <Y>-20</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <ActiveObjectClass>
+              <PackageName>com.anylogic.libraries.processmodeling</PackageName>
+              <ClassName>Delay</ClassName>
+            </ActiveObjectClass>
+            <GenericParameterSubstitute>
+              <GenericParameterSubstituteReference>
+                <PackageName>com.anylogic.libraries.processmodeling</PackageName>
+                <ClassName>Delay</ClassName>
+                <ItemName>1412336242930</ItemName>
+              </GenericParameterSubstituteReference>
+            </GenericParameterSubstitute>
+            <Parameters>
+              <Parameter>
+                <Name>delayTime</Name>
+                <Value Class="CodeUnitValue">
+                  <Code>servicioSeg()</Code>
+                  <Unit Class="TimeUnits">SECOND</Unit>
+                </Value>
+              </Parameter>
+              <Parameter>
+                <Name>maximumCapacity</Name>
+                <Value Class="CodeValue">
+                  <Code>true</Code>
+                </Value>
+              </Parameter>
+              <Parameter>
+                <Name>forceStatisticsCollection</Name>
+                <Value Class="CodeValue">
+                  <Code>true</Code>
+                </Value>
+              </Parameter>
+            </Parameters>
+            <ReplicationFlag>false</ReplicationFlag>
+            <Replication Class="CodeValue">
+              <Code>100</Code>
+            </Replication>
+            <CollectionType>ARRAY_LIST_BASED</CollectionType>
+            <InitialLocationType>XYZ</InitialLocationType>
+            <ColumnCode Class="CodeValue">
+              <Code>0</Code>
+            </ColumnCode>
+            <RowCode Class="CodeValue">
+              <Code>0</Code>
+            </RowCode>
+            <LocationNameCode Class="CodeValue">
+              <Code>""</Code>
+            </LocationNameCode>
+            <InitializationType>SPECIFIED_NUMBER</InitializationType>
+            <InitializationDatabaseTableQuery>
+              <Id>1790000000111</Id>
+              <TableReference>
+						</TableReference>
+            </InitializationDatabaseTableQuery>
+            <InitializationDatabaseType>ONE_AGENT_PER_DATABASE_RECORD</InitializationDatabaseType>
+            <QuantityColumn>
+					</QuantityColumn>
+          </EmbeddedObject>
+          <EmbeddedObject>
+            <Id>1790000000112</Id>
+            <Name>release</Name>
+            <X>680</X>
+            <Y>210</Y>
+            <Label>
+              <X>-5</X>
+              <Y>-20</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <ActiveObjectClass>
+              <PackageName>com.anylogic.libraries.processmodeling</PackageName>
+              <ClassName>Release</ClassName>
+            </ActiveObjectClass>
+            <GenericParameterSubstitute>
+              <GenericParameterSubstituteReference>
+                <PackageName>com.anylogic.libraries.processmodeling</PackageName>
+                <ClassName>Release</ClassName>
+                <ItemName>1412336243154</ItemName>
+              </GenericParameterSubstituteReference>
+            </GenericParameterSubstitute>
+            <Parameters>
+              <Parameter>
+                <Name>releaseMode</Name>
+                <Value Class="CodeValue">
+                  <Code>self.ALL</Code>
+                </Value>
+              </Parameter>
+              <Parameter>
+                <Name>movingGoHome</Name>
+                <Value Class="CodeValue">
+                  <Code>false</Code>
+                </Value>
+              </Parameter>
+              <Parameter>
+                <Name>onReleaseUnit</Name>
+                <Value Class="CodeValue">
+                  <Code>liberaMolinete(unit);</Code>
+                </Value>
+              </Parameter>
+            </Parameters>
+            <ReplicationFlag>false</ReplicationFlag>
+            <Replication Class="CodeValue">
+              <Code>100</Code>
+            </Replication>
+            <CollectionType>ARRAY_LIST_BASED</CollectionType>
+            <InitialLocationType>XYZ</InitialLocationType>
+            <ColumnCode Class="CodeValue">
+              <Code>0</Code>
+            </ColumnCode>
+            <RowCode Class="CodeValue">
+              <Code>0</Code>
+            </RowCode>
+            <LocationNameCode Class="CodeValue">
+              <Code>""</Code>
+            </LocationNameCode>
+            <InitializationType>SPECIFIED_NUMBER</InitializationType>
+            <InitializationDatabaseTableQuery>
+              <Id>1790000000113</Id>
+              <TableReference>
+						</TableReference>
+            </InitializationDatabaseTableQuery>
+            <InitializationDatabaseType>ONE_AGENT_PER_DATABASE_RECORD</InitializationDatabaseType>
+            <QuantityColumn>
+					</QuantityColumn>
+          </EmbeddedObject>
+          <EmbeddedObject>
+            <Id>1790000000114</Id>
+            <Name>sink</Name>
+            <X>830</X>
+            <Y>210</Y>
+            <Label>
+              <X>-5</X>
+              <Y>-20</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <ActiveObjectClass>
+              <PackageName>com.anylogic.libraries.processmodeling</PackageName>
+              <ClassName>Sink</ClassName>
+            </ActiveObjectClass>
+            <GenericParameterSubstitute>
+              <GenericParameterSubstituteReference>
+                <PackageName>com.anylogic.libraries.processmodeling</PackageName>
+                <ClassName>Sink</ClassName>
+                <ItemName>1412336242929</ItemName>
+              </GenericParameterSubstituteReference>
+            </GenericParameterSubstitute>
+            <Parameters>
+              <Parameter>
+                <Name>onEnter</Name>
+                <Value Class="CodeValue">
+                  <Code>salePasajero();</Code>
+                </Value>
+              </Parameter>
+            </Parameters>
+            <ReplicationFlag>false</ReplicationFlag>
+            <Replication Class="CodeValue">
+              <Code>100</Code>
+            </Replication>
+            <CollectionType>ARRAY_LIST_BASED</CollectionType>
+            <InitialLocationType>XYZ</InitialLocationType>
+            <ColumnCode Class="CodeValue">
+              <Code>0</Code>
+            </ColumnCode>
+            <RowCode Class="CodeValue">
+              <Code>0</Code>
+            </RowCode>
+            <LocationNameCode Class="CodeValue">
+              <Code>""</Code>
+            </LocationNameCode>
+            <InitializationType>SPECIFIED_NUMBER</InitializationType>
+            <InitializationDatabaseTableQuery>
+              <Id>1790000000115</Id>
+              <TableReference>
+						</TableReference>
+            </InitializationDatabaseTableQuery>
+            <InitializationDatabaseType>ONE_AGENT_PER_DATABASE_RECORD</InitializationDatabaseType>
+            <QuantityColumn>
+					</QuantityColumn>
+          </EmbeddedObject>
+          <EmbeddedObject>
+            <Id>1790000000116</Id>
+            <Name>molinetes</Name>
+            <X>380</X>
+            <Y>110</Y>
+            <Label>
+              <X>-5</X>
+              <Y>-20</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <ActiveObjectClass>
+              <PackageName>com.anylogic.libraries.processmodeling</PackageName>
+              <ClassName>ResourcePool</ClassName>
+            </ActiveObjectClass>
+            <GenericParameterSubstitute>
+              <GenericParameterSubstituteReference>
+                <PackageName>com.anylogic.libraries.processmodeling</PackageName>
+                <ClassName>ResourcePool</ClassName>
+                <ItemName>1412336243135</ItemName>
+              </GenericParameterSubstituteReference>
+            </GenericParameterSubstitute>
+            <Parameters>
+              <Parameter>
+                <Name>type</Name>
+                <Value Class="CodeValue">
+                  <Code>self.RESOURCE_STATIC</Code>
+                </Value>
+              </Parameter>
+              <Parameter>
+                <Name>capacity</Name>
+                <Value Class="CodeValue">
+                  <Code>capacidadMolinetes()</Code>
+                </Value>
+              </Parameter>
+              <Parameter>
+                <Name>forceStatisticsCollection</Name>
+                <Value Class="CodeValue">
+                  <Code>true</Code>
+                </Value>
+              </Parameter>
+              <Parameter>
+                <Name>onNewUnit</Name>
+                <Value Class="CodeValue">
+                  <Code>ocupacionPorUnidad.put(unit, 0.0);</Code>
+                </Value>
+              </Parameter>
+            </Parameters>
+            <ReplicationFlag>false</ReplicationFlag>
+            <Replication Class="CodeValue">
+              <Code>100</Code>
+            </Replication>
+            <CollectionType>ARRAY_LIST_BASED</CollectionType>
+            <InitialLocationType>XYZ</InitialLocationType>
+            <ColumnCode Class="CodeValue">
+              <Code>0</Code>
+            </ColumnCode>
+            <RowCode Class="CodeValue">
+              <Code>0</Code>
+            </RowCode>
+            <LocationNameCode Class="CodeValue">
+              <Code>""</Code>
+            </LocationNameCode>
+            <InitializationType>SPECIFIED_NUMBER</InitializationType>
+            <InitializationDatabaseTableQuery>
+              <Id>1790000000117</Id>
+              <TableReference>
+						</TableReference>
+            </InitializationDatabaseTableQuery>
+            <InitializationDatabaseType>ONE_AGENT_PER_DATABASE_RECORD</InitializationDatabaseType>
+            <QuantityColumn>
+					</QuantityColumn>
+          </EmbeddedObject>
+        </EmbeddedObjects>
+        <Presentation>
+          <Text>
+            <Id>1790000000123</Id>
+            <Name>texto1790000000124</Name>
+            <X>40</X>
+            <Y>25</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>true</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>false</ShowLabel>
+            <DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+            <EmbeddedIcon>false</EmbeddedIcon>
+            <Z>0</Z>
+            <Rotation>0.0</Rotation>
+            <Color>-12490271</Color>
+            <Text>Constitución · Línea C · vestíbulo Principal</Text>
+            <Font>
+              <Name>SansSerif</Name>
+              <Size>24</Size>
+              <Style>0</Style>
+            </Font>
+            <Alignment>LEFT</Alignment>
+          </Text>
+          <Text>
+            <Id>1790000000125</Id>
+            <Name>texto1790000000126</Name>
+            <X>40</X>
+            <Y>62</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>true</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>false</ShowLabel>
+            <DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+            <EmbeddedIcon>false</EmbeddedIcon>
+            <Z>0</Z>
+            <Rotation>0.0</Rotation>
+            <Color>-12490271</Color>
+            <Text>PROTOTIPO SIN CALIBRAR | 07:00–09:30 | E0–E3</Text>
+            <Font>
+              <Name>SansSerif</Name>
+              <Size>16</Size>
+              <Style>0</Style>
+            </Font>
+            <Alignment>LEFT</Alignment>
+          </Text>
+          <Text>
+            <Id>1790000000127</Id>
+            <Name>texto1790000000128</Name>
+            <X>40</X>
+            <Y>285</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>true</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>false</ShowLabel>
+            <DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+            <EmbeddedIcon>false</EmbeddedIcon>
+            <Z>0</Z>
+            <Rotation>0.0</Rotation>
+            <Color>-12490271</Color>
+            <Text>Source: tandas → Queue → Seize → Delay → Release → Sink</Text>
+            <Font>
+              <Name>SansSerif</Name>
+              <Size>16</Size>
+              <Style>0</Style>
+            </Font>
+            <Alignment>LEFT</Alignment>
+          </Text>
+          <Text>
+            <Id>1790000000129</Id>
+            <Name>texto1790000000130</Name>
+            <X>40</X>
+            <Y>315</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>true</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>false</ShowLabel>
+            <DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+            <EmbeddedIcon>false</EmbeddedIcon>
+            <Z>0</Z>
+            <Rotation>0.0</Rotation>
+            <Color>-12490271</Color>
+            <Text>E2 registra desvíos a Plaza fuera del sistema. Resultados en consola al terminar.</Text>
+            <Font>
+              <Name>SansSerif</Name>
+              <Size>14</Size>
+              <Style>0</Style>
+            </Font>
+            <Alignment>LEFT</Alignment>
+          </Text>
+        </Presentation>
+        <StartupCode>inicializar();</StartupCode>
+        <Functions>
+          <Function AccessType="public" StaticFunction="false">
+            <ReturnModificator>RETURNS_VALUE</ReturnModificator>
+            <ReturnType>int</ReturnType>
+            <Id>1790000000082</Id>
+            <Name>capacidadMolinetes</Name>
+            <X>980</X>
+            <Y>65</Y>
+            <PublicFlag>true</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <Body>return escenario == 1 ? molinetesE1 : molinetesBase;</Body>
+          </Function>
+          <Function AccessType="public" StaticFunction="false">
+            <ReturnModificator>RETURNS_VALUE</ReturnModificator>
+            <ReturnType>double</ReturnType>
+            <Id>1790000000083</Id>
+            <Name>servicioSeg</Name>
+            <X>980</X>
+            <Y>90</Y>
+            <PublicFlag>true</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <Body>return modoDemo ? (escenario == 3 ? 2.5 : 3.0) : (escenario == 3 ? servicioEMVSeg : servicioSUBESeg);</Body>
+          </Function>
+          <Function AccessType="public" StaticFunction="false">
+            <ReturnModificator>RETURNS_VALUE</ReturnModificator>
+            <ReturnType>double</ReturnType>
+            <Id>1790000000084</Id>
+            <Name>intervaloSeg</Name>
+            <X>980</X>
+            <Y>115</Y>
+            <PublicFlag>true</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <Body>return modoDemo ? 150.0 : intervaloTandaSeg;</Body>
+          </Function>
+          <Function AccessType="public" StaticFunction="false">
+            <ReturnModificator>RETURNS_VALUE</ReturnModificator>
+            <ReturnType>int</ReturnType>
+            <Id>1790000000085</Id>
+            <Name>tamanoActual</Name>
+            <X>980</X>
+            <Y>140</Y>
+            <PublicFlag>true</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <Body>double base = modoDemo ? 300 : tamanoTanda;
+int w = Math.min(9, (int)(time()/900));
+double factor = usarPerfilSBASE ? perfil15min[w]/1748.2 : 1.0;
+return Math.max(0, (int)Math.round(base*factor));</Body>
+          </Function>
+          <Function AccessType="public" StaticFunction="false">
+            <ReturnModificator>VOID</ReturnModificator>
+            <ReturnType>void</ReturnType>
+            <Id>1790000000086</Id>
+            <Name>inicializar</Name>
+            <X>980</X>
+            <Y>165</Y>
+            <PublicFlag>true</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <Body>if (escenario &lt; 0 || escenario &gt; 3 || molinetesBase &lt; 1 || molinetesE1 &lt; 1)
+    throw new IllegalArgumentException("Escenario o cantidad de molinetes invalida");
+if (!Double.isFinite(horizonteSeg) || horizonteSeg &lt;= 0 || horizonteSeg &gt; 9000 ||
+    !Double.isFinite(primeraTandaSeg) || primeraTandaSeg &lt; 0 || primeraTandaSeg &gt;= horizonteSeg ||
+    !Double.isFinite(fraccionDesvioE2) || fraccionDesvioE2 &lt; 0 || fraccionDesvioE2 &gt; 1)
+    throw new IllegalArgumentException("Revisar horizonte, primera tanda y fraccion de desvio");
+if (!modoDemo &amp;&amp; (tamanoTanda &lt;= 0 || !Double.isFinite(intervaloTandaSeg) || intervaloTandaSeg &lt;= 0 ||
+    !Double.isFinite(servicioSUBESeg) || servicioSUBESeg &lt;= 0 ||
+    (escenario == 3 &amp;&amp; (!Double.isFinite(servicioEMVSeg) || servicioEMVSeg &lt;= 0))))
+    throw new IllegalArgumentException("Completar medicion: tamanoTanda, intervaloTandaSeg, servicioSUBESeg y servicioEMVSeg para E3");
+if (perfil15min == null || perfil15min.length != 10) throw new IllegalArgumentException("Perfil: diez ventanas");
+for (double v : perfil15min) if (!Double.isFinite(v) || v &lt; 0) throw new IllegalArgumentException("Perfil invalido");
+rngDesvio = new java.util.Random(semilla);
+iniciado = true;
+traceln((modoDemo ? "DEMO SINTETICA - NO CALIBRADA" : "PARAMETROS CARGADOS - PENDIENTE VALIDACION") + " E" + escenario);
+proximaTanda.restart(primeraTandaSeg);
+cierreFranja.restart(horizonteSeg);</Body>
+          </Function>
+          <Function AccessType="public" StaticFunction="false">
+            <ReturnModificator>VOID</ReturnModificator>
+            <ReturnType>void</ReturnType>
+            <Id>1790000000087</Id>
+            <Name>generarTanda</Name>
+            <X>980</X>
+            <Y>190</Y>
+            <PublicFlag>true</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <Body>if (time() &gt;= horizonteSeg) return;
+int total = tamanoActual();
+int principal = 0;
+for (int i=0; i&lt;total; i++) {
+    double u = rngDesvio.nextDouble(); // Se consume en todos los escenarios.
+    if (escenario == 2 &amp;&amp; u &lt; fraccionDesvioE2) nDesviados++;
+    else principal++;
+}
+nGenerados += total;
+nPrincipal += principal;
+if (principal &gt; 0) {
+    tandasAbiertas.add(time());
+    source.inject(principal);
+}
+observarCola.restart(0.000001);
+double siguiente = time() + intervaloSeg();
+if (siguiente &lt; horizonteSeg) proximaTanda.restart(intervaloSeg());</Body>
+          </Function>
+          <Function AccessType="public" StaticFunction="false">
+            <ReturnModificator>VOID</ReturnModificator>
+            <ReturnType>void</ReturnType>
+            <Id>1790000000088</Id>
+            <Name>actualizarAreas</Name>
+            <X>980</X>
+            <Y>215</Y>
+            <PublicFlag>true</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <Body>double hasta = Math.min(time(), horizonteSeg);
+double dt = Math.max(0, hasta - tArea);
+areaCola += nEsperando * dt;
+areaOcupados += nOcupados * dt;
+tArea = hasta;</Body>
+          </Function>
+          <Function AccessType="public" StaticFunction="false">
+            <ReturnModificator>VOID</ReturnModificator>
+            <ReturnType>void</ReturnType>
+            <Id>1790000000089</Id>
+            <Name>entraCola</Name>
+            <X>980</X>
+            <Y>240</Y>
+            <PublicFlag>true</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <Parameter>
+              <Name>agent</Name>
+              <Type>Agent</Type>
+            </Parameter>
+            <Body>actualizarAreas();
+llegadas.put(agent, time());
+nEsperando++;
+ultimaCola = time();
+// Excluir transferencias instantaneas hacia molinetes libres del maximo fisico.
+qMax = Math.max(qMax, Math.max(0, nEsperando - Math.max(0, capacidadMolinetes()-nOcupados)));
+observarCola.restart(0.000001);</Body>
+          </Function>
+          <Function AccessType="public" StaticFunction="false">
+            <ReturnModificator>VOID</ReturnModificator>
+            <ReturnType>void</ReturnType>
+            <Id>1790000000090</Id>
+            <Name>iniciaServicio</Name>
+            <X>980</X>
+            <Y>265</Y>
+            <PublicFlag>true</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <Parameter>
+              <Name>agent</Name>
+              <Type>Agent</Type>
+            </Parameter>
+            <Parameter>
+              <Name>unit</Name>
+              <Type>Agent</Type>
+            </Parameter>
+            <Body>actualizarAreas();
+double w = time() - llegadas.remove(agent);
+esperas.add(w); sumaEspera += w;
+if (w &gt; 30) nMas30++;
+nEsperando--; nOcupados++;
+ultimaCola = time();
+inicioPorUnidad.put(unit, time());
+if (!ocupacionPorUnidad.containsKey(unit)) ocupacionPorUnidad.put(unit, 0.0);
+observarCola.restart(0.000001);</Body>
+          </Function>
+          <Function AccessType="public" StaticFunction="false">
+            <ReturnModificator>VOID</ReturnModificator>
+            <ReturnType>void</ReturnType>
+            <Id>1790000000091</Id>
+            <Name>liberaMolinete</Name>
+            <X>980</X>
+            <Y>290</Y>
+            <PublicFlag>true</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <Parameter>
+              <Name>unit</Name>
+              <Type>Agent</Type>
+            </Parameter>
+            <Body>actualizarAreas();
+nOcupados--;
+double inicio = inicioPorUnidad.remove(unit);
+double duracion = Math.max(0, Math.min(time(), horizonteSeg)-Math.min(inicio, horizonteSeg));
+ocupacionPorUnidad.put(unit, ocupacionPorUnidad.get(unit)+duracion);</Body>
+          </Function>
+          <Function AccessType="public" StaticFunction="false">
+            <ReturnModificator>VOID</ReturnModificator>
+            <ReturnType>void</ReturnType>
+            <Id>1790000000092</Id>
+            <Name>salePasajero</Name>
+            <X>980</X>
+            <Y>315</Y>
+            <PublicFlag>true</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <Body>nProcesados++;
+if (time() &lt; horizonteSeg) nProcesadosFranja++;
+observarCola.restart(0.000001);</Body>
+          </Function>
+          <Function AccessType="public" StaticFunction="false">
+            <ReturnModificator>VOID</ReturnModificator>
+            <ReturnType>void</ReturnType>
+            <Id>1790000000093</Id>
+            <Name>observar</Name>
+            <X>980</X>
+            <Y>340</Y>
+            <PublicFlag>true</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <Body>if (nEsperando == 0 &amp;&amp; !tandasAbiertas.isEmpty()) {
+    for (double t : tandasAbiertas) disipaciones.add(Math.max(0, ultimaCola-t));
+    tandasAbiertas.clear();
+}
+if (cerrado &amp;&amp; nProcesados == nPrincipal &amp;&amp; !finalizado) {
+    finalizado = true;
+    if (nGenerados != nDesviados + nProcesados) throw new IllegalStateException("Balance de pasajeros");
+    traceln(resumen());
+    getEngine().finish();
+}</Body>
+          </Function>
+          <Function AccessType="public" StaticFunction="false">
+            <ReturnModificator>VOID</ReturnModificator>
+            <ReturnType>void</ReturnType>
+            <Id>1790000000094</Id>
+            <Name>cerrarFranja</Name>
+            <X>980</X>
+            <Y>365</Y>
+            <PublicFlag>true</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <Body>actualizarAreas();
+cerrado = true;
+pendientesAlCierre = nPrincipal - nProcesadosFranja;
+colaAlCierre = nEsperando;
+observarCola.restart(0.000001);</Body>
+          </Function>
+          <Function AccessType="public" StaticFunction="false">
+            <ReturnModificator>RETURNS_VALUE</ReturnModificator>
+            <ReturnType>double</ReturnType>
+            <Id>1790000000095</Id>
+            <Name>percentil90</Name>
+            <X>980</X>
+            <Y>390</Y>
+            <PublicFlag>true</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <Body>if (esperas.isEmpty()) return Double.NaN;
+java.util.ArrayList&lt;Double&gt; ordenadas = new java.util.ArrayList&lt;Double&gt;(esperas);
+java.util.Collections.sort(ordenadas);
+return ordenadas.get((int)Math.ceil(0.9*ordenadas.size())-1);</Body>
+          </Function>
+          <Function AccessType="public" StaticFunction="false">
+            <ReturnModificator>RETURNS_VALUE</ReturnModificator>
+            <ReturnType>double</ReturnType>
+            <Id>1790000000096</Id>
+            <Name>dispersionUtilizacion</Name>
+            <X>980</X>
+            <Y>415</Y>
+            <PublicFlag>true</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <Body>double suma=0, suma2=0;
+for (double ocupado : ocupacionPorUnidad.values()) {
+    double u=ocupado/horizonteSeg; suma+=u; suma2+=u*u;
+}
+int c=capacidadMolinetes();
+return Math.sqrt(Math.max(0, suma2/c-(suma/c)*(suma/c)));</Body>
+          </Function>
+          <Function AccessType="public" StaticFunction="false">
+            <ReturnModificator>RETURNS_VALUE</ReturnModificator>
+            <ReturnType>String</ReturnType>
+            <Id>1790000000097</Id>
+            <Name>resumen</Name>
+            <X>980</X>
+            <Y>440</Y>
+            <PublicFlag>true</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <Body>int n = esperas.size();
+double d = 0; for (double v : disipaciones) d += v;
+return (modoDemo ? "DEMO; " : "SIN VALIDAR; ") + "E" + escenario
+ + "; generados=" + nGenerados + "; desviadosPlaza=" + nDesviados
+ + "; procesadosFranja=" + nProcesadosFranja + "; procesadosConDrenaje=" + nProcesados
+ + "; pendientes0930=" + pendientesAlCierre + "; cola0930=" + colaAlCierre
+ + "; esperaMediaSeg=" + (n == 0 ? Double.NaN : sumaEspera/n)
+ + "; p90Seg=" + percentil90() + "; propMas30=" + (n == 0 ? Double.NaN : (double)nMas30/n)
+ + "; Lq=" + areaCola/horizonteSeg + "; qMax=" + qMax
+ + "; utilizacion=" + areaOcupados/(horizonteSeg*capacidadMolinetes())
+ + "; disipacionMediaSeg=" + (disipaciones.isEmpty() ? Double.NaN : d/disipaciones.size())
+ + "; tandasDisipadas=" + disipaciones.size()
+ + "; desvioUtilizacionMolinetes=" + dispersionUtilizacion();</Body>
+          </Function>
+        </Functions>
+        <Events>
+          <Event>
+            <Id>1790000000098</Id>
+            <Name>proximaTanda</Name>
+            <X>700</X>
+            <Y>380</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties TriggerType="timeout" Mode="occuresOnce">
+              <Timeout Class="CodeUnitValue">
+                <Code>1e12</Code>
+                <Unit Class="TimeUnits">SECOND</Unit>
+              </Timeout>
+              <Rate Class="CodeUnitValue">
+                <Code>tasaDemanda</Code>
+                <Unit Class="RateUnits">PER_MINUTE</Unit>
+              </Rate>
+              <Id>1790000000099</Id>
+              <OccurrenceAtTime>true</OccurrenceAtTime>
+              <OccurrenceDate>1783584000000</OccurrenceDate>
+              <OccurrenceTime Class="CodeUnitValue">
+                <Code>1e12</Code>
+                <Unit Class="TimeUnits">SECOND</Unit>
+              </OccurrenceTime>
+              <RecurrenceCode Class="CodeUnitValue">
+                <Code>1e12</Code>
+                <Unit Class="TimeUnits">SECOND</Unit>
+              </RecurrenceCode>
+              <Condition>false</Condition>
+            </Properties>
+            <Action>generarTanda();</Action>
+          </Event>
+          <Event>
+            <Id>1790000000100</Id>
+            <Name>cierreFranja</Name>
+            <X>700</X>
+            <Y>425</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties TriggerType="timeout" Mode="occuresOnce">
+              <Timeout Class="CodeUnitValue">
+                <Code>1e12</Code>
+                <Unit Class="TimeUnits">SECOND</Unit>
+              </Timeout>
+              <Rate Class="CodeUnitValue">
+                <Code>tasaDemanda</Code>
+                <Unit Class="RateUnits">PER_MINUTE</Unit>
+              </Rate>
+              <Id>1790000000101</Id>
+              <OccurrenceAtTime>true</OccurrenceAtTime>
+              <OccurrenceDate>1783584000000</OccurrenceDate>
+              <OccurrenceTime Class="CodeUnitValue">
+                <Code>1e12</Code>
+                <Unit Class="TimeUnits">SECOND</Unit>
+              </OccurrenceTime>
+              <RecurrenceCode Class="CodeUnitValue">
+                <Code>1e12</Code>
+                <Unit Class="TimeUnits">SECOND</Unit>
+              </RecurrenceCode>
+              <Condition>false</Condition>
+            </Properties>
+            <Action>cerrarFranja();</Action>
+          </Event>
+          <Event>
+            <Id>1790000000102</Id>
+            <Name>observarCola</Name>
+            <X>700</X>
+            <Y>470</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties TriggerType="timeout" Mode="occuresOnce">
+              <Timeout Class="CodeUnitValue">
+                <Code>1e12</Code>
+                <Unit Class="TimeUnits">SECOND</Unit>
+              </Timeout>
+              <Rate Class="CodeUnitValue">
+                <Code>tasaDemanda</Code>
+                <Unit Class="RateUnits">PER_MINUTE</Unit>
+              </Rate>
+              <Id>1790000000103</Id>
+              <OccurrenceAtTime>true</OccurrenceAtTime>
+              <OccurrenceDate>1783584000000</OccurrenceDate>
+              <OccurrenceTime Class="CodeUnitValue">
+                <Code>1e12</Code>
+                <Unit Class="TimeUnits">SECOND</Unit>
+              </OccurrenceTime>
+              <RecurrenceCode Class="CodeUnitValue">
+                <Code>1e12</Code>
+                <Unit Class="TimeUnits">SECOND</Unit>
+              </RecurrenceCode>
+              <Condition>false</Condition>
+            </Properties>
+            <Action>observar();</Action>
+          </Event>
+        </Events>
+      </ActiveObjectClass>
+    </ActiveObjectClasses>
+    <DifferentialEquationsMethod>EULER</DifferentialEquationsMethod>
+    <MixedEquationsMethod>RK45_NEWTON</MixedEquationsMethod>
+    <AlgebraicEquationsMethod>MODIFIED_NEWTON</AlgebraicEquationsMethod>
+    <AbsoluteAccuracy>1.0E-5</AbsoluteAccuracy>
+    <FixedTimeStep>0.001</FixedTimeStep>
+    <RelativeAccuracy>1.0E-5</RelativeAccuracy>
+    <TimeAccuracy>1.0E-9</TimeAccuracy>
+    <Frame>
+      <Id>1783514567434</Id>
+      <Width>1000</Width>
+      <Height>600</Height>
+    </Frame>
+    <Database>
+      <Id>1783514567433</Id>
+      <Logging>false</Logging>
+      <AutoExport>false</AutoExport>
+      <ShutdownCompact>false</ShutdownCompact>
+      <ImportSettings>
+		</ImportSettings>
+      <ExportSettings>
+		</ExportSettings>
+    </Database>
+    <RunConfiguration ActiveObjectClassId="1783514567437">
+      <Id>1783514567448</Id>
+      <Name>RunConfiguration</Name>
+      <MaximumMemory>512</MaximumMemory>
+      <ModelTimeProperties>
+        <StopOption>Stop at specified time</StopOption>
+        <InitialDate>1789984800000</InitialDate>
+        <InitialTime>0.0</InitialTime>
+        <FinalDate>1786147200000</FinalDate>
+        <FinalTime>1e12</FinalTime>
+      </ModelTimeProperties>
+      <AnimationProperties>
+        <StopNever>true</StopNever>
+        <ExecutionMode>virtualTime</ExecutionMode>
+        <RealTimeScale>1.0</RealTimeScale>
+        <EnableZoomAndPanning>true</EnableZoomAndPanning>
+        <EnableDeveloperPanel>false</EnableDeveloperPanel>
+        <ShowDeveloperPanelOnStart>false</ShowDeveloperPanelOnStart>
+      </AnimationProperties>
+      <Inputs>		
+		</Inputs>
+      <Outputs>
+		</Outputs>
+    </RunConfiguration>
+    <Experiments>
+      <SimulationExperiment ActiveObjectClassId="1783514567437">
+        <Id>1790000000131</Id>
+        <Name>E0</Name>
+        <CommandLineArguments />
+        <MaximumMemory>512</MaximumMemory>
+        <RandomNumberGenerationType>randomSeed</RandomNumberGenerationType>
+        <CustomGeneratorCode>new Random()</CustomGeneratorCode>
+        <SeedValue>1</SeedValue>
+        <SelectionModeForSimultaneousEvents>LIFO</SelectionModeForSimultaneousEvents>
+        <VmArgs />
+        <LoadRootFromSnapshot>false</LoadRootFromSnapshot>
+        <Presentation>
+          <Text>
+            <Id>1790000000132</Id>
+            <Name>text</Name>
+            <X>50</X>
+            <Y>30</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>true</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>false</ShowLabel>
+            <DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+            <EmbeddedIcon>false</EmbeddedIcon>
+            <Z>0</Z>
+            <Rotation>0.0</Rotation>
+            <Color>-12490271</Color>
+            <Text>Subte Constitución - E0</Text>
+            <Font>
+              <Name>SansSerif</Name>
+              <Size>24</Size>
+              <Style>0</Style>
+            </Font>
+            <Alignment>LEFT</Alignment>
+          </Text>
+        </Presentation>
+        <Parameters>
+          <Parameter>
+            <ParameterName>escenario</ParameterName>
+            <ParameterValue Class="CodeValue">
+              <Code>0</Code>
+            </ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>modoDemo</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>molinetesBase</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>molinetesE1</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>fraccionDesvioE2</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>servicioSUBESeg</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>servicioEMVSeg</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>tamanoTanda</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>intervaloTandaSeg</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>primeraTandaSeg</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>usarPerfilSBASE</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>semilla</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>horizonteSeg</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>perfil15min</ParameterName>
+          </Parameter>
+        </Parameters>
+        <PresentationProperties>
+          <EnableZoomAndPanning>true</EnableZoomAndPanning>
+          <ExecutionMode>virtualTime</ExecutionMode>
+          <Title>Subte Constitución - E0</Title>
+          <EnableDeveloperPanel>true</EnableDeveloperPanel>
+          <ShowDeveloperPanelOnStart>false</ShowDeveloperPanelOnStart>
+          <RealTimeScale>1.0</RealTimeScale>
+        </PresentationProperties>
+        <ModelTimeProperties>
+          <StopOption>Stop at specified time</StopOption>
+          <InitialDate>1789984800000</InitialDate>
+          <InitialTime>0.0</InitialTime>
+          <FinalDate>1784668800000</FinalDate>
+          <FinalTime>1e12</FinalTime>
+        </ModelTimeProperties>
+        <BypassInitialScreen>true</BypassInitialScreen>
+      </SimulationExperiment>
+      <SimulationExperiment ActiveObjectClassId="1783514567437">
+        <Id>1790000000133</Id>
+        <Name>E1</Name>
+        <CommandLineArguments />
+        <MaximumMemory>512</MaximumMemory>
+        <RandomNumberGenerationType>randomSeed</RandomNumberGenerationType>
+        <CustomGeneratorCode>new Random()</CustomGeneratorCode>
+        <SeedValue>1</SeedValue>
+        <SelectionModeForSimultaneousEvents>LIFO</SelectionModeForSimultaneousEvents>
+        <VmArgs />
+        <LoadRootFromSnapshot>false</LoadRootFromSnapshot>
+        <Presentation>
+          <Text>
+            <Id>1790000000134</Id>
+            <Name>text</Name>
+            <X>50</X>
+            <Y>30</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>true</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>false</ShowLabel>
+            <DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+            <EmbeddedIcon>false</EmbeddedIcon>
+            <Z>0</Z>
+            <Rotation>0.0</Rotation>
+            <Color>-12490271</Color>
+            <Text>Subte Constitución - E1</Text>
+            <Font>
+              <Name>SansSerif</Name>
+              <Size>24</Size>
+              <Style>0</Style>
+            </Font>
+            <Alignment>LEFT</Alignment>
+          </Text>
+        </Presentation>
+        <Parameters>
+          <Parameter>
+            <ParameterName>escenario</ParameterName>
+            <ParameterValue Class="CodeValue">
+              <Code>1</Code>
+            </ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>modoDemo</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>molinetesBase</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>molinetesE1</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>fraccionDesvioE2</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>servicioSUBESeg</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>servicioEMVSeg</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>tamanoTanda</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>intervaloTandaSeg</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>primeraTandaSeg</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>usarPerfilSBASE</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>semilla</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>horizonteSeg</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>perfil15min</ParameterName>
+          </Parameter>
+        </Parameters>
+        <PresentationProperties>
+          <EnableZoomAndPanning>true</EnableZoomAndPanning>
+          <ExecutionMode>virtualTime</ExecutionMode>
+          <Title>Subte Constitución - E1</Title>
+          <EnableDeveloperPanel>true</EnableDeveloperPanel>
+          <ShowDeveloperPanelOnStart>false</ShowDeveloperPanelOnStart>
+          <RealTimeScale>1.0</RealTimeScale>
+        </PresentationProperties>
+        <ModelTimeProperties>
+          <StopOption>Stop at specified time</StopOption>
+          <InitialDate>1789984800000</InitialDate>
+          <InitialTime>0.0</InitialTime>
+          <FinalDate>1784668800000</FinalDate>
+          <FinalTime>1e12</FinalTime>
+        </ModelTimeProperties>
+        <BypassInitialScreen>true</BypassInitialScreen>
+      </SimulationExperiment>
+      <SimulationExperiment ActiveObjectClassId="1783514567437">
+        <Id>1790000000135</Id>
+        <Name>E2</Name>
+        <CommandLineArguments />
+        <MaximumMemory>512</MaximumMemory>
+        <RandomNumberGenerationType>randomSeed</RandomNumberGenerationType>
+        <CustomGeneratorCode>new Random()</CustomGeneratorCode>
+        <SeedValue>1</SeedValue>
+        <SelectionModeForSimultaneousEvents>LIFO</SelectionModeForSimultaneousEvents>
+        <VmArgs />
+        <LoadRootFromSnapshot>false</LoadRootFromSnapshot>
+        <Presentation>
+          <Text>
+            <Id>1790000000136</Id>
+            <Name>text</Name>
+            <X>50</X>
+            <Y>30</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>true</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>false</ShowLabel>
+            <DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+            <EmbeddedIcon>false</EmbeddedIcon>
+            <Z>0</Z>
+            <Rotation>0.0</Rotation>
+            <Color>-12490271</Color>
+            <Text>Subte Constitución - E2</Text>
+            <Font>
+              <Name>SansSerif</Name>
+              <Size>24</Size>
+              <Style>0</Style>
+            </Font>
+            <Alignment>LEFT</Alignment>
+          </Text>
+        </Presentation>
+        <Parameters>
+          <Parameter>
+            <ParameterName>escenario</ParameterName>
+            <ParameterValue Class="CodeValue">
+              <Code>2</Code>
+            </ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>modoDemo</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>molinetesBase</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>molinetesE1</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>fraccionDesvioE2</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>servicioSUBESeg</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>servicioEMVSeg</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>tamanoTanda</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>intervaloTandaSeg</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>primeraTandaSeg</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>usarPerfilSBASE</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>semilla</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>horizonteSeg</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>perfil15min</ParameterName>
+          </Parameter>
+        </Parameters>
+        <PresentationProperties>
+          <EnableZoomAndPanning>true</EnableZoomAndPanning>
+          <ExecutionMode>virtualTime</ExecutionMode>
+          <Title>Subte Constitución - E2</Title>
+          <EnableDeveloperPanel>true</EnableDeveloperPanel>
+          <ShowDeveloperPanelOnStart>false</ShowDeveloperPanelOnStart>
+          <RealTimeScale>1.0</RealTimeScale>
+        </PresentationProperties>
+        <ModelTimeProperties>
+          <StopOption>Stop at specified time</StopOption>
+          <InitialDate>1789984800000</InitialDate>
+          <InitialTime>0.0</InitialTime>
+          <FinalDate>1784668800000</FinalDate>
+          <FinalTime>1e12</FinalTime>
+        </ModelTimeProperties>
+        <BypassInitialScreen>true</BypassInitialScreen>
+      </SimulationExperiment>
+      <SimulationExperiment ActiveObjectClassId="1783514567437">
+        <Id>1790000000137</Id>
+        <Name>E3</Name>
+        <CommandLineArguments />
+        <MaximumMemory>512</MaximumMemory>
+        <RandomNumberGenerationType>randomSeed</RandomNumberGenerationType>
+        <CustomGeneratorCode>new Random()</CustomGeneratorCode>
+        <SeedValue>1</SeedValue>
+        <SelectionModeForSimultaneousEvents>LIFO</SelectionModeForSimultaneousEvents>
+        <VmArgs />
+        <LoadRootFromSnapshot>false</LoadRootFromSnapshot>
+        <Presentation>
+          <Text>
+            <Id>1790000000138</Id>
+            <Name>text</Name>
+            <X>50</X>
+            <Y>30</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>true</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>false</ShowLabel>
+            <DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+            <EmbeddedIcon>false</EmbeddedIcon>
+            <Z>0</Z>
+            <Rotation>0.0</Rotation>
+            <Color>-12490271</Color>
+            <Text>Subte Constitución - E3</Text>
+            <Font>
+              <Name>SansSerif</Name>
+              <Size>24</Size>
+              <Style>0</Style>
+            </Font>
+            <Alignment>LEFT</Alignment>
+          </Text>
+        </Presentation>
+        <Parameters>
+          <Parameter>
+            <ParameterName>escenario</ParameterName>
+            <ParameterValue Class="CodeValue">
+              <Code>3</Code>
+            </ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>modoDemo</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>molinetesBase</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>molinetesE1</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>fraccionDesvioE2</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>servicioSUBESeg</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>servicioEMVSeg</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>tamanoTanda</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>intervaloTandaSeg</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>primeraTandaSeg</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>usarPerfilSBASE</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>semilla</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>horizonteSeg</ParameterName>
+          </Parameter>
+          <Parameter>
+            <ParameterName>perfil15min</ParameterName>
+          </Parameter>
+        </Parameters>
+        <PresentationProperties>
+          <EnableZoomAndPanning>true</EnableZoomAndPanning>
+          <ExecutionMode>virtualTime</ExecutionMode>
+          <Title>Subte Constitución - E3</Title>
+          <EnableDeveloperPanel>true</EnableDeveloperPanel>
+          <ShowDeveloperPanelOnStart>false</ShowDeveloperPanelOnStart>
+          <RealTimeScale>1.0</RealTimeScale>
+        </PresentationProperties>
+        <ModelTimeProperties>
+          <StopOption>Stop at specified time</StopOption>
+          <InitialDate>1789984800000</InitialDate>
+          <InitialTime>0.0</InitialTime>
+          <FinalDate>1784668800000</FinalDate>
+          <FinalTime>1e12</FinalTime>
+        </ModelTimeProperties>
+        <BypassInitialScreen>true</BypassInitialScreen>
+      </SimulationExperiment>
+    </Experiments>
+    <RequiredLibraryReference>
+      <LibraryName>com.anylogic.libraries.modules.markup_descriptors</LibraryName>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <VersionBuild>0</VersionBuild>
+    </RequiredLibraryReference>
+    <RequiredLibraryReference>
+      <LibraryName>com.anylogic.libraries.processmodeling</LibraryName>
+      <VersionMajor>8</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <VersionBuild>5</VersionBuild>
+    </RequiredLibraryReference>
+  </Model>
+  <ConvertersApplied>
+    <Uuid>9f7858c9-b2c8-4ead-9244-fd08833f642b</Uuid>
+    <Uuid>404652e6-561a-404c-aab2-ab7415f40ef5</Uuid>
+    <Uuid>6fd6cd57-6dfe-4fc6-be0b-c74065351957</Uuid>
+    <Uuid>3325dc48-3ad4-41e3-836f-dfd0e98fe1ed</Uuid>
+    <Uuid>bb27038a-0f3a-48bb-b235-4a44066a14aa</Uuid>
+    <Uuid>3f69ef3d-706e-41a6-8af0-11658c5eef68</Uuid>
+    <Uuid>3f6fe405-e047-4304-91d6-6eee206d1106</Uuid>
+    <Uuid>820d2b51-5b4a-48e7-b0b6-e46418e3c0f2</Uuid>
+    <Uuid>630818fa-8975-4b70-976f-03180dce01db</Uuid>
+    <Uuid>7c7e471c-004e-495e-a4ad-d840620ab38e</Uuid>
+    <Uuid>3e38ff63-1f70-4ec0-b42c-e879b146785d</Uuid>
+    <Uuid>b1eb86e4-14b3-405c-8257-56b80f1b485d</Uuid>
+    <Uuid>d55f9fb6-86bb-45ea-9db1-79cecfa0ce91</Uuid>
+    <Uuid>ab77aafd-8f02-4354-b789-928d45b1f73c</Uuid>
+    <Uuid>e4f14fd7-1c4a-42e9-b91d-db2415f475db</Uuid>
+    <Uuid>6d208120-6c7a-45a6-b411-402f18890d9b</Uuid>
+    <Uuid>1816cdd0-177c-4973-9e88-dd8b95318556</Uuid>
+    <Uuid>5c23f62f-06dc-46ad-8ead-688ec434e3e5</Uuid>
+    <Uuid>5c7d7990-3f35-41eb-ae16-d0c16098acc6</Uuid>
+    <Uuid>02a16c52-a834-4f30-b6af-a6aee51a294e</Uuid>
+    <Uuid>f0988929-2718-4984-a1b6-c1f2ce152f1f</Uuid>
+    <Uuid>1c9d9cfe-ea2b-43f9-8f62-dc31d8ed3ae1</Uuid>
+    <Uuid>34cb742a-8ba4-47a7-87e6-f2685fe69e97</Uuid>
+    <Uuid>4fe10751-c399-4752-94b7-30113ad45070</Uuid>
+    <Uuid>c13fe5ac-6466-446e-886a-12df1431b1eb</Uuid>
+    <Uuid>714f9ca2-426e-4bff-8569-2d18f58fdcf8</Uuid>
+    <Uuid>045aeb5f-1087-4ac7-9702-a49404e7f7e8</Uuid>
+    <Uuid>840e9a0a-de98-4b7d-a172-f9bbda2d6b98</Uuid>
+    <Uuid>e342358b-75ed-4812-9376-6043fb6cb473</Uuid>
+    <Uuid>f3d5ccdc-1bb3-466f-871d-f6b92a26cbb4</Uuid>
+    <Uuid>59acb6fb-561c-4038-b722-a596a748b3c7</Uuid>
+    <Uuid>be7e6726-05c0-4228-821d-a8df91aeb5bc</Uuid>
+    <Uuid>df4a6a60-9ce8-4c6c-91c0-ad5a5d732259</Uuid>
+    <Uuid>47491eb9-4606-42bd-8399-125a2b95fded</Uuid>
+    <Uuid>9b2d1306-5d19-439a-8f2c-b144dd7e22fa</Uuid>
+    <Uuid>ef421152-8732-4f97-9acb-c8e9a6890d5e</Uuid>
+    <Uuid>d48f8080-25b1-44f5-8322-7bf2712ff974</Uuid>
+    <Uuid>6c4de826-daad-4cd4-b703-51dfe803e822</Uuid>
+    <Uuid>01af22d6-6889-4e98-a3df-e6eddc40fc92</Uuid>
+    <Uuid>ea3b3dbe-cca2-4bde-957b-feaef7e18789</Uuid>
+    <Uuid>e737c8c6-b526-4f88-b89e-554e205b0614</Uuid>
+    <Uuid>efd24e87-d7f7-425f-9cb0-3ee17c7b2116</Uuid>
+    <Uuid>a62607e6-047e-4910-a1ec-5426bf9283b5</Uuid>
+    <Uuid>64dceb5b-de05-47c7-8e40-e9b293e80d75</Uuid>
+    <Uuid>8d51c652-6aee-4de8-ba03-47b289a13ec5</Uuid>
+    <Uuid>51d7b5ce-5664-4750-b1a0-fabcdc31e49a</Uuid>
+    <Uuid>6522e3af-aa9e-421c-b667-e11db73cd8ca</Uuid>
+    <Uuid>9ac073a0-7abf-4dff-826f-9c44d4780590</Uuid>
+    <Uuid>2da9c21c-adc7-405a-a36e-46fbd9dfcd42</Uuid>
+    <Uuid>fe4d1053-9c84-4221-bac7-cb489a7064ff</Uuid>
+    <Uuid>1f005f88-e6d7-4bdc-81fa-3acf4c89cf64</Uuid>
+    <Uuid>42dc5a7c-d7b1-4653-92b9-9359b46cc2d4</Uuid>
+    <Uuid>e25721a9-34f9-479c-a4c3-31f5ec9e117d</Uuid>
+    <Uuid>506d1de3-06df-4131-9e88-e43f1768e3d8</Uuid>
+    <Uuid>e6625695-25a2-43d0-9056-1e9a1a594b1e</Uuid>
+    <Uuid>91990287-4edf-4e38-aa6c-66d0e906807b</Uuid>
+    <Uuid>2216cdd0-177c-5678-9e88-dd8b95312234</Uuid>
+    <Uuid>1737c8c6-b526-4dd8-589e-ee4e205b06f4</Uuid>
+    <Uuid>6a43bef6-8b70-4253-a828-82c3ab399655</Uuid>
+    <Uuid>0a27038a-0f3a-48bb-b235-4a44066a1402</Uuid>
+    <Uuid>0a9ec2c3-5e18-4c0a-a183-fd86d9d9a08b</Uuid>
+    <Uuid>2216cdd0-177c-5678-9e88-dd8b95313334</Uuid>
+    <Uuid>2216cdd0-177c-5678-9e88-dd8b95313335</Uuid>
+    <Uuid>5b8ebeed-6b58-4c3a-8d5f-0958b1a90ce6</Uuid>
+  </ConvertersApplied>
+</AnyLogicWorkspace>

@@ -2541,6 +2541,16 @@ Casos de años anteriores: transporte y logística, salud y emergencias, producc
 
 Se evalúa: claridad del problema, rigor de modelado e implementación, calidad del análisis y las conclusiones, efectividad de la exposición, **originalidad y aplicabilidad del caso**.
 
+### Mapa de los TPI
+
+| TPI | Integrantes | Caso | Carpeta |
+|---|---|---|---|
+| **Bonadeo y Estevez** | Juan Cruz Bonadeo · Matias Estevez | Molinetes de Constitución, Línea C | [`entregables/TPI/subte/`](entregables/TPI/subte/) |
+| **Casermeiro** | Gonzalo y su grupo | Campañas del horno de cementación y temple | [`entregables/TPI/caser/`](entregables/TPI/caser/) |
+
+Las consignas y los entregables generales de la cátedra aplican a ambos. El estado, los datos, los archivos y
+los pendientes de cada trabajo se documentan por separado en las secciones siguientes.
+
 ### Primera actividad — elección del tema
 
 Formulario con integrantes (nombre y legajo) + **tres temas candidatos**, cada uno con:
@@ -2549,20 +2559,7 @@ Formulario con integrantes (nombre y legajo) + **tres temas candidatos**, cada u
 
 Prioridad **por fecha de entrega del formulario** (conviene mandarlo temprano). El docente confirma viabilidad o pide reformulación; **no arrancar el modelado antes de esa confirmación**.
 
-**Estado (2026-09-20): tema aprobado.** El docente (Guillermo Leale) confirmó por mail el tema de los
-molinetes de subte y pidió editar el envío anterior del formulario con ese tema. Ecobici quedó descartado
-porque otro grupo lo tomó primero.
-
-- Formulario v2: [`entregables/TPI/formulario-eleccion-tema.md`](entregables/TPI/formulario-eleccion-tema.md)
-- Definición del caso: [`entregables/TPI/subte/01-definicion-del-caso.md`](entregables/TPI/subte/01-definicion-del-caso.md)
-- Documento Word: [`entregables/TPI/TPI_Simulacion_Propuesta_de_Tema.docx`](entregables/TPI/TPI_Simulacion_Propuesta_de_Tema.docx) — **desactualizado**, hay que regenerarlo con el contenido v2. Carátula, estilos, header/footer y logo heredados de los informes de RD (ver `rd-informe-formato` en memoria).
-
-**Compromiso con el docente: miércoles 2026-09-23**, con el caso definido (línea, franja, días, medidas de
-rendimiento) y, si se llega, el modelo empezado en AnyLogic.
-
-**Integrantes**: Juan Cruz Bonadeo (53533) y Matias Estevez (53528). **Comisión 401.**
-
-### Grupo 2 — caso Casermeiro SRL (Gonzalo)
+### TPI Casermeiro — campañas del horno
 
 Grupo distinto al de Bonadeo + Estevez. Caso real: fábrica de tornillos de la familia (Alvear, Santa Fe), con
 acceso directo al ABM y a las planillas. El profe rechazó un tema tipo "Mi Bici Tu Bici" y pidió algo con
@@ -2595,7 +2592,30 @@ La empresa confirmó que toda la información existe; falta ejecutar la exportac
 concretados y las notas de venta canceladas, hay medición retroactiva de venta perdida; si no, la venta
 perdida solo puede ser salida del modelo.
 
-### Tema aprobado — molinetes de Constitución (Línea C)
+### TPI Bonadeo y Estevez — molinetes de Constitución
+
+| | Definición |
+|---|---|
+| **Integrantes** | Juan Cruz Bonadeo (53533) · Matias Estevez (53528) |
+| **Comisión** | 401 |
+| **Tema** | Molinetes del vestíbulo Principal de Constitución, Línea C |
+| **Estado** | Aprobado por Guillermo Leale el 2026-09-20 |
+| **Próximo hito** | Miércoles 2026-09-23: caso definido y modelo inicial en AnyLogic |
+
+El docente pidió definir la línea, la franja horaria, los días y las medidas de rendimiento, y editar el
+último envío del formulario con el tema del subte. El caso y el modelo inicial ya están preparados. Falta
+actualizar el formulario enviado y completar los parámetros que requieren medición en campo.
+
+**Archivos de trabajo:**
+
+- Formulario v2: [`entregables/TPI/formulario-eleccion-tema.md`](entregables/TPI/formulario-eleccion-tema.md)
+- Definición del caso: [`entregables/TPI/subte/01-definicion-del-caso.md`](entregables/TPI/subte/01-definicion-del-caso.md)
+- Modelo inicial: [`entregables/TPI/subte/SubteConstitucion.alp`](entregables/TPI/subte/SubteConstitucion.alp)
+- Guía del modelo: [`entregables/TPI/subte/02-modelo-anylogic.md`](entregables/TPI/subte/02-modelo-anylogic.md)
+- Ficha para la reunión: [`entregables/TPI/subte/TPI_Subte_Definicion_y_Modelo_Inicial.docx`](entregables/TPI/subte/TPI_Subte_Definicion_y_Modelo_Inicial.docx)
+- Versión PDF: [`../../../../output/pdf/TPI_Subte_Definicion_y_Modelo_Inicial.pdf`](../../../../output/pdf/TPI_Subte_Definicion_y_Modelo_Inicial.pdf)
+
+#### Caso y evidencia
 
 **Línea C, estación Constitución, vestíbulo Principal, días hábiles, franja 07:00–09:30** (pico 08:15–08:45).
 
@@ -2636,7 +2656,7 @@ validación contactless EMV/QR (la estación ya tiene un molinete así).
 detectan solos por caída del flujo diario bajo el 50 % de la mediana (11 días de 128, todos feriados reales);
 `Turn07` registra 3 pasajeros en seis meses y se excluye.
 
-### Temas descartados
+#### Temas descartados por Bonadeo y Estevez
 
 | # | Tema | Por qué se cayó |
 |---|---|---|
@@ -2648,12 +2668,14 @@ revierte**. En días hábiles, Constitución pierde ~19,7 bicicletas netas entre
 recupera ~15,1 entre 17 y 20 h; Madero Office hace el espejo. Mismo patrón commuter que sostiene el tema del
 subte, y sobre la misma estación.
 
-### Dudas / pendientes
+#### Pendientes del TPI de subte
 
 - **Salida a campo** (lunes 21 o martes 22, 07:30-09:00, Constitución): cronometrar 100-150 validaciones
   separando SUBE por apoyo de EMV/QR, y contar intervalo entre tandas y largo de cola. Sin esos dos datos el
   modelo no cierra, y el largo de cola medido es además el único punto de validación posible.
-- **Regenerar el `.docx`** del formulario con el contenido v2 antes de reenviarlo.
+- **Modelo AnyLogic**: ejecutar los checks del motor de la [guía](entregables/TPI/subte/02-modelo-anylogic.md), completar parámetros de campo y ajustar distribuciones. E0 usa 20 servidores como aproximación provisional; E2 cuenta el desvío pero todavía no simula la cola de Plaza.
+- **Formulario**: editar el último envío con el tema del subte. La ficha Word para la reunión ya está actualizada;
+  el documento anterior de propuesta general queda como antecedente.
 - Conseguir los horarios de arribo del Roca a Constitución (GTFS de Trenes Argentinos). El buscador del
   portal de BA Data está bloqueado por WAF; el endpoint `package_show` sí responde con user-agent de navegador.
 - Fechas de entrega y presentación: se publican en Classroom (no están en el enunciado).
@@ -2697,7 +2719,7 @@ subte, y sobre la misma estación.
 
 ## Log
 
-- **2026-09-20**: TPI, grupo 1 (Bonadeo + Estevez). **Tema aprobado por el docente: molinetes de subte.** Ecobici se cayó porque lo tomó otro grupo. Descargado y perfilado el dataset de SBASE 2026 (ene-jun, por molinete individual cada 15 min): Constitución Línea C se lleva las 14 ventanas más cargadas del sistema, pico de 2.066 pax/15 min a las 08:30 sobre 19,5 molinetes activos de 28 instalados, y 17.482 pax en la franja 07:00-09:30 por día hábil. Hallazgo central: ρ ≈ 0,3 por molinete, o sea que M/M/c diría que no hay cola — la cola existe porque los arribos vienen en tandas desde la terminal del Roca, que es el argumento de por qué el caso necesita simulación. Escrito `entregables/TPI/subte/01-definicion-del-caso.md` (entregable para la reunión del 23/09), reescrito el formulario como v2 con el tema del subte, y agregado `scripts/sbase-perfil.py`. Detectadas dos trampas del dataset: el formato de hora cambia según el mes y los feriados se identifican solos por caída del flujo. Pendiente: medición en campo del tiempo de servicio y de la estructura de tandas, y regenerar el `.docx`.
+- **2026-09-20**: TPI, grupo 1 (Bonadeo + Estevez). **Tema aprobado por el docente: molinetes de subte.** Ecobici se cayó porque lo tomó otro grupo. Descargado y perfilado el dataset de SBASE 2026 (ene-jun, por molinete individual cada 15 min): Constitución Línea C se lleva las 14 ventanas más cargadas del sistema, pico de 2.066 pax/15 min a las 08:30 sobre 19,5 molinetes activos de 28 instalados, y 17.482 pax en la franja 07:00-09:30 por día hábil. Hallazgo central: ρ ≈ 0,3 por molinete, o sea que M/M/c diría que no hay cola — la cola existe porque los arribos vienen en tandas desde la terminal del Roca, que es el argumento de por qué el caso necesita simulación. Escrito `entregables/TPI/subte/01-definicion-del-caso.md`, armado el modelo inicial `SubteConstitucion.alp`, creado el Word breve para la reunión del 23/09 y reorganizada la sección TPI para separar este trabajo del caso Casermeiro. Pendiente: medición en campo del tiempo de servicio y de la estructura de tandas, ejecución completa del modelo en el IDE y edición del formulario enviado.
 - **2026-09-16** (2): TPI, grupo 2 (Casermeiro). La empresa confirmó que entrega ventas, maestro, OF, compras, stock valorizado, cargas de horno, rechazos, trazabilidad, energía y demanda no atendida (exportación prevista 2026-09-17) y preguntó si se puede estudiar el umbral óptimo de ULI. Datos nuevos del horno: cinta continua, generador de gases endotérmicos, desgaste por encendido, y que con mucha producción convenía dejarlo encendido. Actualizados `01-contexto-empresa.md` (horno), `03-pedido-de-datos.md` (pedido para el Tema 1: datos faltantes, entrevista al encargado, formato de las exportaciones) y `05-respuestas-al-docente.md` (gas y desgaste como costo fijo por encendido y costo por hora caliente).
 - **2026-09-16**: TPI, grupo 2 (Casermeiro). El docente respondió la propuesta con cinco preguntas sobre el Tema 1 (horno). Escrito `entregables/TPI/caser/05-respuestas-al-docente.md`: diseño del horno como servidor con preparación y política de encendido por umbral (statechart Apagado → Acumulando → Calentando → Procesando → Enfriando; Queue + Hold + Seize/Delay/Release; disparo por condición al entrar a la cola, espera máxima por timeout), construcción en dos etapas (arribos exógenos → demanda y stock), tabla de datos y método de ajuste, estimación de P_cal/P_mant por regresión sobre facturas, escenarios E0-E3 parametrizados, medida de decisión (costo relevante por kg sujeto a nivel de servicio), validación con tolerancias + Welch + juicio del encargado, experimento Parameters Variation con semilla como parámetro y un `Random` por fuente de aleatoriedad (verificado contra el Big Book de AnyLogic caps. 8 y 15), paired-t con Bonferroni. Sin cambios en las unidades.
 - **2026-09-15**: TPI, grupo 2 (Casermeiro). Relevamiento nuevo de la empresa (horno con números: 27 resistencias, 36 h de calentamiento, 48 h de enfriamiento, 70-80 ULI por campaña, 15 ULI por turno; tres proveedores de alambre con precio, plazo y condición de pago; estructura consulta → PV → NV). Se reordenaron las opciones: el horno pasa de tercer tema a tema principal, acoplado a la política de stock. Escrito `entregables/TPI/caser/04-formulario-eleccion-tema.md` con tres temas candidatos, alcance, medidas de salida, validación y supuestos. Descartados del alcance el flujo de caja y el tiempo de supervivencia.
