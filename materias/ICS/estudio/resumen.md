@@ -1,12 +1,34 @@
 # Ingeniería y Calidad de Software
 
-> Resumen de estudio de las cinco unidades de la materia. Está pensado para leerse de corrido:
+> Resumen de estudio de las unidades 1, 2, 3 y 5, que son las que entran en el parcial de
+> Regularización, recortado a los documentos y páginas del temario de la cátedra. Está pensado para
+> leerse de corrido:
 > cada capítulo abre explicando por qué el tema existe antes de entrar en las definiciones, y las
 > tablas aparecen sólo donde hay algo que comparar. El orden es temático, no el del examen.
 > Para el detalle completo de cada tema está la wiki (`ICS.md`); para practicar, el banco de
 > preguntas (`banco-preguntas.md`).
+## 1. El parcial y su temario
 
-## 1. Qué significa calidad en software
+El parcial de Regularización es el **sábado 26 de septiembre a las 9:30**, es **presencial** y **no
+es a libro abierto**. Se aprueba con el **60 % del total de puntos**. En los años anteriores fue un
+cuestionario de opciones múltiples.
+
+Entran las unidades **1, 2, 3 y 5**, y de cada una sólo los documentos y páginas que lista el
+temario de la cátedra. Este resumen sigue exactamente ese recorte:
+
+| Unidad | Qué entra | Capítulos |
+|---|---|---|
+| **1 — Modelos de calidad** | Introducción a la calidad · Guía de ingeniería del software · CMMI: componentes de un área de proceso y niveles de madurez | 2 a 6 |
+| **2 — Gestión de procesos** | Áreas OPF, OPD y OT, **sin subprácticas** · Presentación de Proceso y RUP, págs. 1 a 46 | 7 a 9 |
+| **3 — Gestión de proyectos** | Áreas PP y PMC · Guía práctica de gestión de proyectos · Análisis de puntos función (metodología y glosario) | 10 y 11 |
+| **5 — Verificación y validación** | Áreas VER y VAL · Guía de verificación y validación · Principios de Myers · Derivación de casos de prueba desde casos de uso | 12 a 16 |
+
+Quedan **afuera** la unidad 4 (gestión de requerimientos), la Guía avanzada de gestión de
+proyectos, la Guía de mejores prácticas de calidad de producto y, dentro de RUP, los objetivos de
+cada fase y los propósitos de cada disciplina. De las áreas de proceso que no están en el temario
+—REQM, PPQA, CM, MA, RSKM, RD— alcanza con saber a qué nivel de madurez pertenecen.
+
+## 2. Qué significa calidad en software
 
 La palabra calidad arrastra un problema: todos creen saber qué quiere decir, y cada uno entiende
 algo distinto. En la materia se trabaja con una idea central —**calidad es idoneidad de uso**— y
@@ -24,14 +46,14 @@ es que incluye al proceso: para CMMI, un proceso también tiene calidad.
 satisfacer necesidades **explícitas o implícitas**. La palabra que aporta es *implícitas*: hay
 expectativas que el cliente nunca escribió y que igual espera que se cumplan.
 
-### 1.1 De qué depende la calidad
+### 2.1 De qué depende la calidad
 
 Cuatro elementos la determinan: los **procesos y buenas prácticas** que se siguen, las
 **herramientas** disponibles, las **personas** que hacen el trabajo, y las **medidas y métricas**
 con las que se controla. Ninguno alcanza por sí solo. Un equipo excelente con un proceso caótico
 produce resultados irrepetibles, y un proceso impecable no compensa a un equipo sin formación.
 
-### 1.2 Tres tipos de calidad de producto
+### 2.2 Tres tipos de calidad de producto
 
 No toda la calidad se ve desde afuera, y esa distinción explica por qué a veces un sistema que
 "anda bien" es un problema.
@@ -46,7 +68,7 @@ La **calidad de uso** es la que algunos llaman *calidad futura*. Es la que no se
 aparece recién cuando el software se usa de verdad: el sistema pasa todas las pruebas, se entrega,
 y a la media hora de operación real se nota el problema que nadie había previsto.
 
-### 1.3 Los tres niveles de gestión de la calidad
+### 2.3 Los tres niveles de gestión de la calidad
 
 La calidad se puede gestionar en tres escalas distintas, y cada una tiene sus herramientas.
 
@@ -60,7 +82,7 @@ de fondo es que **la calidad de un producto está muy influenciada por la calida
 empleado para desarrollarlo y mantenerlo**: si el proceso es bueno, los productos buenos dejan de
 ser casualidad.
 
-## 2. El software como objeto de ingeniería
+## 3. El software como objeto de ingeniería
 
 Antes de hablar de procesos conviene entender por qué el software necesita una ingeniería propia
 y no le sirven las de otras disciplinas.
@@ -85,7 +107,7 @@ de introducir defectos nuevos, y con los años el producto acumula complejidad y
 **La reutilización está lejos de su potencial.** Identificar componentes reutilizables es difícil
 justamente porque cada producto se construye para requisitos únicos.
 
-### 2.1 Qué es la ingeniería del software
+### 3.1 Qué es la ingeniería del software
 
 > **Ingeniería del software (IEEE):** aplicación de un enfoque **sistemático, disciplinado y
 > cuantificable** al desarrollo, operación y mantenimiento del software.
@@ -97,7 +119,7 @@ Se suele representar como una **tecnología multicapa**: sobre una base de **com
 calidad** se apoyan los **procesos**, sobre ellos los **métodos**, y encima las **herramientas**.
 El orden no es decorativo: comprar herramientas sin proceso debajo no produce calidad.
 
-### 2.2 Las etapas y el mantenimiento
+### 3.2 Las etapas y el mantenimiento
 
 Las etapas clásicas son: análisis de requisitos, especificación, diseño y arquitectura,
 programación, **prueba** y mantenimiento. La etapa que comprueba que el software realiza
@@ -113,7 +135,7 @@ recurrentes de la materia:
 | **Adaptativo** | Modificaciones que responden a cambios del **entorno** donde opera el sistema: hardware, software de base, gestores de base de datos, comunicaciones |
 | **Preventivo** | Mejorar la calidad interna y la mantenibilidad, sin cambio funcional visible |
 
-### 2.3 Los principios de la disciplina
+### 3.3 Los principios de la disciplina
 
 De la lista de principios que circula en la materia, dos aparecen una y otra vez como correctos:
 **haz de la calidad la razón de trabajar** y **probar, probar y probar**. Y tres aparecen como
@@ -121,7 +143,7 @@ distractores porque enuncian exactamente lo contrario de lo que sostiene la disc
 personas y el tiempo son intercambiables, que conviene hacerlo rápido primero y correcto después,
 y que hay que forzar el mismo modelo de ciclo de vida en todos los proyectos.
 
-## 3. CMMI: qué es y para qué sirve
+## 4. CMMI: qué es y para qué sirve
 
 **CMMI** son las siglas de *Capability Maturity Model Integration*: modelo de madurez de
 capacidades integrado. No es una metodología ni un manual de procedimientos. Es una **guía de
@@ -137,7 +159,7 @@ organización, y un **punto de partida** para no inventar desde cero. Los result
 atribuyen son menos defectos, menos tiempo de entrega, menor costo, más satisfacción del cliente y
 más beneficios.
 
-### 3.1 Área de proceso
+### 4.1 Área de proceso
 
 > **Área de proceso:** grupo de prácticas relacionadas que, implementadas conjuntamente,
 > satisfacen un conjunto de objetivos importantes para la mejora en esa área.
@@ -146,7 +168,7 @@ CMMI define **22 áreas de proceso**, repartidas en los niveles de madurez 2 a 5
 aspecto del trabajo: planificar proyectos, gestionar requerimientos, verificar productos, formar
 gente.
 
-## 4. Anatomía de un área de proceso
+## 5. Anatomía de un área de proceso
 
 Toda área de proceso está construida con las mismas piezas, y esas piezas tienen distinto peso.
 Entender cuál es obligatoria y cuál no es probablemente el concepto más preguntado de la materia.
@@ -161,7 +183,7 @@ Entender cuál es obligatoria y cuál no es probablemente el concepto más pregu
 > explique— son **esperadas**, no obligatorias. Una organización puede sustituir una práctica por
 > otra si con ella alcanza la misma meta.
 
-### 4.1 Qué significa "genérico"
+### 5.1 Qué significa "genérico"
 
 Un componente es **genérico** cuando la misma declaración se aplica a **múltiples áreas de
 proceso**. Las metas y prácticas específicas son propias de un área; las genéricas se repiten en
@@ -171,7 +193,7 @@ El papel de las genéricas es tratar la **institucionalización**: que el proces
 buena voluntad de quien lo ejecuta, sino que esté incorporado a la manera de trabajar de la
 organización. Esa es la respuesta cuando preguntan qué componentes tratan la institucionalización.
 
-### 4.2 La numeración
+### 5.2 La numeración
 
 Las metas se numeran secuencialmente: `SG1`, `SG2`, `GG1`. Las prácticas llevan dos números,
 `SP x.y`, donde **x es el número de la meta** a la que pertenecen e **y el número de secuencia**
@@ -180,7 +202,7 @@ dentro de esa meta. Así, `SP 2.3` es la tercera práctica de la segunda meta es
 Saber leer la numeración sirve para descartar opciones: si un área tiene dos metas específicas,
 una opción que diga `SP 3.1` es imposible.
 
-## 5. Los niveles de madurez
+## 6. Los niveles de madurez
 
 CMMI organiza la mejora en cinco escalones. Cada uno describe un estado de la organización, no una
 lista de tareas cumplidas.
@@ -193,7 +215,7 @@ lista de tareas cumplidas.
 | **4** | Gestionado cuantitativamente | Se gestiona con **datos históricos y estadística**. Se tratan las **causas especiales** de variación. El rendimiento pasa a ser predecible **cuantitativamente** |
 | **5** | En optimización | **Mejora continua**. Se atacan las **causas comunes** de variación y se **cambia el proceso** para mejorar su rendimiento |
 
-### 5.1 Las dos comparaciones que hay que poder explicar
+### 6.1 Las dos comparaciones que hay que poder explicar
 
 **Nivel 2 frente a nivel 3: el alcance de los estándares.** En nivel 2 cada proyecto puede tener
 sus propios procedimientos; lo que se exige es que los tenga, los siga y los sostenga. En nivel 3
@@ -207,7 +229,7 @@ especiales** —las anomalías puntuales— y logra predictibilidad estadística
 **causas comunes**, las que están incorporadas al proceso mismo, y para eliminarlas **cambia el
 proceso**.
 
-### 5.2 Cómo se avanza: las reglas del modelo escalonado
+### 6.2 Cómo se avanza: las reglas del modelo escalonado
 
 De estas tres reglas salen casi todos los ejercicios de niveles.
 
@@ -224,7 +246,7 @@ Si dejara de hacerlo, se caería hasta nivel 1.
 justifica, pero se corre el riesgo de intentar prácticas **sin la base institucional que las
 soporte**. Eso funciona hasta que aparece el estrés, que es justamente cuando más se las necesita.
 
-### 5.3 Madurez y capacidad
+### 6.3 Madurez y capacidad
 
 CMMI admite dos formas de mirar el progreso.
 
@@ -236,7 +258,26 @@ La **capacidad**, que es la representación **continua**, mide el nivel alcanzad
 proceso puntual**, con independencia del resto. Sirve para que la organización elija en qué área
 quiere crecer primero, según lo que le duela al negocio.
 
-## 6. La gestión de procesos de la organización
+### 6.4 Qué áreas hay en cada nivel
+
+Las 22 áreas se reparten así entre los niveles 2 a 5:
+
+| Nivel | Áreas de proceso |
+|---|---|
+| **2** | **PP** Planificación de proyecto · **PMC** Monitorización y control del proyecto · REQM Gestión de requerimientos · MA Medición y análisis · PPQA Aseguramiento de la calidad de proceso y de producto · CM Gestión de configuración · SAM Gestión de acuerdos con proveedores |
+| **3** | **OPF** Enfoque en procesos · **OPD** Definición de procesos · **OT** Formación organizativa · **VER** Verificación · **VAL** Validación · RD Desarrollo de requerimientos · TS Solución técnica · PI Integración de producto · RSKM Gestión de riesgos · IPM Gestión integrada de proyecto · DAR Análisis de decisiones y resolución |
+| **4** | OPP Rendimiento de procesos de la organización · QPM Gestión cuantitativa de proyecto |
+| **5** | OID Innovación y despliegue en la organización · CAR Análisis causal y resolución |
+
+En negrita, las siete que el temario desarrolla. Del resto alcanza con el nivel: es lo que hace
+falta para resolver un caso como "cumple todo el nivel 3 pero le falta MA", que deja a la
+organización en nivel 1 porque MA es de nivel 2.
+
+> ⚠️ La traducción castellana del CMMI que usa la cátedra tiene una errata: la carátula del área
+> de **OT** dice "nivel de madurez 4". Las tablas del mismo libro y la presentación de la cátedra
+> la ponen en **nivel 3**, que es lo correcto.
+
+## 7. La gestión de procesos de la organización
 
 Tres áreas de nivel 3 se ocupan de los procesos de la organización como un todo, y son las que más
 se confunden entre sí porque sus nombres se parecen. La forma más rápida de separarlas es por el
@@ -244,39 +285,75 @@ verbo que las define.
 
 > **OPF diagnostica y despliega. OPD define y guarda. OT capacita.**
 
-### 6.1 OPF — Enfoque en procesos de la organización
+El temario incluye las tres áreas completas **salvo las subprácticas y la extensión IPPD**. Lo que
+hay que dominar de cada una es el **propósito** y sus **metas y prácticas específicas**, que se
+listan a continuación con el texto oficial.
 
-Su propósito se basa en la **comprensión de las fortalezas y debilidades actuales** de los
-procesos de la organización. Es el área del **diagnóstico y la planificación de la mejora**:
-evalúa dónde está parada la organización, incluso comparándose con otras, y arma el plan para
-moverse.
+### 7.1 OPF — Enfoque en procesos de la organización
 
-Sus prácticas características son establecer las necesidades de procesos de la organización,
-**evaluar los procesos**, **establecer planes de acción de procesos**, desplegar los activos y los
-procesos estándar, monitorizar la implementación, e **incorporar las experiencias relativas al
-proceso en los activos de proceso de la organización**.
+> **Propósito:** planificar, implementar y desplegar las mejoras de procesos de la organización,
+> basadas en una comprensión completa de las **fortalezas y debilidades actuales** de los procesos
+> y de los activos de proceso.
 
-### 6.2 OPD — Definición de procesos de la organización
+Es el área del **diagnóstico y la mejora**. Evalúa dónde está parada la organización —incluso
+comparándose con otras organizaciones—, arma los planes de acción para corregir las debilidades
+que encuentra, y después despliega los cambios e incorpora lo aprendido. Sus tres metas siguen
+exactamente ese recorrido:
 
-Es el área que **define y mantiene los activos**: el conjunto de procesos estándar, la
-arquitectura de proceso, los **modelos de ciclo de vida**, los **criterios y guías de adaptación**,
-el **repositorio de medición de la organización**, la **biblioteca de activos** y los estándares
-del entorno de trabajo.
+- **SG 1 Determinar las oportunidades de mejora de procesos.** SP 1.1 Establecer las necesidades
+  de procesos de la organización · SP 1.2 **Evaluar los procesos** de la organización · SP 1.3
+  Identificar las mejoras de procesos.
+- **SG 2 Planificar e implementar las mejoras de procesos.** SP 2.1 **Establecer planes de acción
+  de procesos** · SP 2.2 Implementar los planes de acción de procesos.
+- **SG 3 Desplegar los activos de proceso e incorporar las lecciones aprendidas.** SP 3.1
+  Desplegar los activos de proceso · SP 3.2 Desplegar los procesos estándar · SP 3.3 Monitorizar la
+  implementación · SP 3.4 **Incorporar las experiencias relativas al proceso en los activos de
+  proceso** de la organización.
+
+### 7.2 OPD — Definición de procesos de la organización
+
+> **Propósito:** establecer y mantener un conjunto **usable** de **activos de proceso** de la
+> organización y de **estándares del entorno de trabajo**.
+
+Es el área que **define y guarda**. Todo lo que la organización tiene para que sus proyectos lo
+reutilicen —el proceso estándar, los modelos de ciclo de vida, las reglas para adaptarlos, el
+repositorio de mediciones, la biblioteca de documentos— lo establece OPD. Tiene una sola meta
+dentro del temario, y cada práctica crea uno de esos activos:
+
+- **SG 1 Establecer los activos de proceso de la organización.** SP 1.1 Establecer los **procesos
+  estándar** · SP 1.2 Establecer las descripciones de los **modelos de ciclo de vida** · SP 1.3
+  Establecer los **criterios y las guías de adaptación** · SP 1.4 Establecer el **repositorio de
+  medición** de la organización · SP 1.5 Establecer la **biblioteca de activos de proceso** · SP 1.6
+  Establecer los **estándares del entorno de trabajo**.
+
+La segunda meta, *facilitar la gestión IPPD*, pertenece a la extensión IPPD y no entra.
 
 > ⚠️ Cuando un enunciado menciona un **repositorio de medidas ligado a los procesos estándar de la
-> organización**, la respuesta es **OPD**, no MA. MA es nivel 2 y mide **el proyecto**; el
-> repositorio organizacional es un **activo**, y los activos son de OPD.
+> organización**, la respuesta es **OPD** (SP 1.4), no MA. MA es de nivel 2 y mide **el proyecto**;
+> el repositorio de la organización es un **activo**, y los activos son de OPD.
 
-### 6.3 OT — Formación organizativa
+### 7.3 OT — Formación organizativa
 
-Su propósito es que **las personas puedan desempeñar sus roles de manera eficaz y eficiente**.
-Trabaja sobre las necesidades estratégicas de formación, el plan táctico de formación y la
-evaluación de la eficacia de lo que se enseñó.
+> **Propósito:** desarrollar las **habilidades y el conocimiento** de las personas para que puedan
+> realizar sus **roles** eficaz y eficientemente.
 
-### 6.4 El par de prácticas que se cruza
+Primero se construye la capacidad de formar y después se forma. Un punto que suele preguntarse es
+el reparto de responsabilidades: la organización cubre las necesidades de formación **comunes** a
+los proyectos, y cada proyecto cubre las **específicas** suyas. Las necesidades **estratégicas**
+miran varios años hacia adelante; el **plan táctico** baja eso a cursos concretos.
+
+- **SG 1 Establecer una capacidad de formación organizativa.** SP 1.1 Establecer las necesidades de
+  formación **estratégicas** · SP 1.2 Determinar qué necesidades de formación son
+  **responsabilidad de la organización** · SP 1.3 Establecer un **plan táctico** de formación ·
+  SP 1.4 Establecer la capacidad de formación.
+- **SG 2 Proporcionar la formación necesaria.** SP 2.1 Impartir la formación · SP 2.2 Establecer
+  los **registros** de formación · SP 2.3 Evaluar la **eficacia** de la formación.
+
+### 7.4 Las prácticas que se cruzan entre OPF y OPD
 
 En los exámenes aparece la misma lista de prácticas preguntada dos veces, una pidiendo las de OPF
-y otra las de OPD. Conviene tenerlas separadas:
+y otra las de OPD. La regla para no mezclarlas: si la práctica **crea** un activo, es OPD; si
+**evalúa, planifica, despliega o actualiza** lo que ya existe, es OPF.
 
 | Práctica | Área |
 |---|---|
@@ -287,7 +364,7 @@ y otra las de OPD. Conviene tenerlas separadas:
 | Establecer planes de acción de procesos | **OPF** |
 | Incorporar las experiencias relativas al proceso en los activos de proceso | **OPF** |
 
-## 7. Activos de proceso y productos de trabajo
+## 8. Activos de proceso y productos de trabajo
 
 Esta distinción es corta de explicar y sorprendentemente fácil de errar, porque los dos conceptos
 se refieren a documentos que a veces tienen nombres casi idénticos.
@@ -311,9 +388,130 @@ El par que fija el criterio es este: la **plantilla de manual de instalación** 
 molde, y pertenece a la organización—, mientras que el **manual de instalación del sistema
 desarrollado para el cliente** es un producto de trabajo —es lo moldeado, y pertenece al proyecto.
 
-## 8. El proyecto y su planificación
+## 9. El proceso de desarrollo: SPEM y RUP
 
-### 8.1 Qué es un proyecto
+Los capítulos anteriores hablaron de procesos en abstracto: que hay que definirlos, guardarlos y
+mejorarlos. Este capítulo baja a cómo se **escribe** un proceso concreto: con qué elementos se
+describe, quién hace qué, y qué material de apoyo lo acompaña.
+
+### 9.1 Por qué gestionar procesos
+
+Las organizaciones concentran su mejora en tres **dimensiones críticas**: las **personas**, los
+**métodos y procedimientos**, y las **herramientas y el equipamiento**. Los procesos son lo que
+sostiene a las tres: permiten alinear el modo de operar de la organización, incorporar el
+conocimiento sobre cómo hacer mejor las cosas, aprovechar mejor los recursos y entender las
+tendencias de la propia actividad.
+
+Las áreas de **gestión de procesos** de CMMI contienen las actividades **transversales a los
+proyectos**: definir, planificar, desplegar, implementar, monitorizar, controlar, evaluar, medir y
+mejorar los procesos. Se dividen en **básicas** —OPF, OPD y OT, las del capítulo 7— y **avanzadas**
+—OPP y OID—.
+
+### 9.2 SPEM
+
+> **SPEM** (*Software Process Engineering Meta-Model*): estándar de la OMG —el mismo consorcio que
+> mantiene UML— que establece los elementos clave para representar métodos, ciclos de vida,
+> técnicas, roles, actividades, procesos, metodologías y plantillas de la ingeniería del software.
+
+Es un **meta-modelo**: no describe un proceso en particular, sino el vocabulario con el que se
+describe cualquier proceso. Por eso su alcance se limita a los **elementos mínimos** necesarios, sin
+características de un dominio o disciplina en particular, y sirve para procesos de distintos
+estilos, culturas, niveles de formalismo y ciclos de vida. No es un lenguaje de modelado de procesos
+en general: está orientado al software.
+
+Lo que aporta es facilitar la **comprensión y la comunicación** entre personas, facilitar la
+**reutilización**, dar soporte a la **mejora** y a la **gestión** de procesos, y guiar su
+**automatización**.
+
+La idea central es que todo proceso se representa respondiendo tres preguntas:
+
+| Pregunta | Elemento | Qué representa |
+|---|---|---|
+| **¿Quién?** | **Rol** | Quién hace el trabajo |
+| **¿Qué?** | **Producto de trabajo** | Las entradas que usan las tareas y las salidas que producen |
+| **¿Cómo?** | **Tarea** | El esfuerzo a realizar |
+
+Además, SPEM define cuatro **niveles de detalle** para representar ese esfuerzo, de mayor a menor.
+El **delivery process** es un proceso completo, tan complejo como se necesite, que sirve de base
+para un tipo de proyecto. El **capability pattern** es un fragmento de proceso **reutilizable** más
+de una vez dentro de un delivery process. La **actividad** es el elemento central, que organiza
+roles, productos de trabajo y tareas. Y la **tarea** es la porción **más pequeña** de trabajo del
+modelo.
+
+Un ejemplo recorre los cuatro niveles: el ciclo de vida típico de RUP contiene la disciplina
+*Entorno*, que contiene la actividad *Preparar el entorno para el proyecto*, que contiene la tarea
+*Personalizar el proceso de desarrollo para el proyecto*.
+
+### 9.3 Los elementos del proceso en RUP
+
+**RUP** (*Rational Unified Process*) es un proceso iterativo e incremental construido sobre SPEM.
+Sus elementos son los siguientes.
+
+**Fase.** El ciclo de vida se descompone en fases, y cada fase es un **período de tiempo entre dos
+objetivos importantes**. RUP tiene cuatro: **Concepción** (o Inicial), **Elaboración**,
+**Construcción** y **Transición**.
+
+**Disciplina.** Una **categorización de tareas** según la similitud de sus preocupaciones y la
+cooperación del esfuerzo. RUP tiene nueve: modelado de negocio, requisitos, análisis y diseño,
+implementación, prueba, despliegue, configuración y gestión de cambios, gestión de proyectos, y
+entorno.
+
+Las fases y las disciplinas son dos ejes distintos: las fases **ordenan el tiempo**, las
+disciplinas **agrupan el tipo de trabajo**. Por eso se cruzan, y a lo largo de las fases se trabaja
+en varias disciplinas a la vez.
+
+**Actividad.** Agrupa lógicamente elementos de proceso relacionados. **Una disciplina tiene una o
+más actividades, y una actividad tiene una o más tareas.**
+
+**Tarea.** Describe una **unidad de trabajo**. La llevan a cabo **roles específicos**, dura entre
+**unas horas y unos días**, suele afectar a uno o pocos productos de trabajo y puede desglosarse en
+**pasos**. Una tarea bien descripta reúne el **rol responsable**, los **productos de trabajo de
+entrada y de salida**, y las guías que la apoyan: **directrices, plantillas y listas de
+comprobación**.
+
+> Ejemplo: la tarea *Desarrollar la visión* la ejecuta el **analista de sistemas**; toma como
+> entrada las **solicitudes del interesado** y produce como salida la **visión**. Sus pasos son
+> acordar el problema, identificar a los interesados, definir los límites del sistema, identificar
+> las restricciones, formular el problema y definir las características del sistema. La apoyan la
+> directriz *Entrevista*, la plantilla *Visión* y la lista de comprobación *Visión*.
+
+**Rol.** Un conjunto de **habilidades, competencias y responsabilidades** relacionadas: analista de
+sistemas, arquitecto de software, diseñador, revisor técnico.
+
+**Producto de trabajo.** Un **resultado significativo del proceso**: los roles los usan para
+realizar tareas y los producen al realizarlas. Hay tres tipos:
+
+| Tipo | Qué es |
+|---|---|
+| **Artefacto** | Un producto **tangible**, no trivial: un documento, un modelo, el código |
+| **Resultado** | Un producto **intangible**: un estado o una consecuencia del trabajo |
+| **Entregable** | Un **empaquetado** de otros productos de trabajo, que se entrega a una parte interna o externa |
+
+### 9.4 Las guías
+
+Una **guía** es todo contenido cuyo objetivo principal es **explicar otros elementos** del proceso.
+RUP enumera nueve tipos —conceptos, directrices, materiales de soporte, documentación, plantillas,
+listas de comprobación, ejemplos, informes y guías de herramientas— y la presentación de la cátedra
+desarrolla ocho:
+
+| Guía | Qué es |
+|---|---|
+| **Plantilla** | La **estructura** de un producto de trabajo: secciones, formato y cómo completarlas |
+| **Directriz** | Indicaciones sobre **cómo hacer** algo concreto; se aplica a tareas y productos de trabajo |
+| **Lista de comprobación** | Elementos que deben **completarse o verificarse**; se usa en revisiones e inspecciones |
+| **Ejemplo** | Una instancia **parcialmente completa** de un producto, para mostrar cómo queda |
+| **Concepto** | Una **idea fundamental**, más general que una directriz |
+| **Guía de herramientas** | Cómo usar una **herramienta específica** para producir parte de un producto |
+| **Documentación** | Documentos publicados **fuera** de RUP a los que el proceso hace referencia |
+| **Informe** | Un resultado **generado automáticamente** por una herramienta a partir de otros productos |
+
+Las guías se conectan con el capítulo anterior: una plantilla, una directriz o una lista de
+comprobación de la organización son **activos**, y el documento que se produce al usarlas en un
+proyecto es un **producto de trabajo**.
+
+## 10. El proyecto y su planificación
+
+### 10.1 Qué es un proyecto
 
 > **Proyecto:** conjunto de actividades coordinadas y controladas, con **inicio y fin definidos**,
 > que crea un producto o servicio **único** conforme a requisitos específicos, dentro de límites de
@@ -329,7 +527,7 @@ estimaciones, recursos, riesgos, calidad y comunicación.
 La contracara del proyecto es el **proceso**, que es **repetitivo y reiterativo y produce siempre
 el mismo producto**. Esa repetibilidad es exactamente lo que el proyecto no tiene.
 
-### 8.2 PP — Planificación de proyecto
+### 10.2 PP — Planificación de proyecto
 
 Es un área de **nivel 2** y se encarga de cuatro cosas: desarrollar el plan, interactuar con las
 partes interesadas, **obtener el compromiso** con el plan, y mantenerlo.
@@ -352,7 +550,7 @@ obtener el compromiso).
 > riesgos. **No incluye** el pago a los recursos ni la especificación detallada de la arquitectura
 > del software, que corresponde a **TS** (Solución técnica).
 
-### 8.3 PMC — Monitorización y control del proyecto
+### 10.3 PMC — Monitorización y control del proyecto
 
 También es de **nivel 2**, y su propósito es proporcionar una comprensión del progreso del
 proyecto para poder tomar **acciones correctivas apropiadas** cuando el rendimiento se desvía
@@ -368,6 +566,11 @@ actual.
 > objetivos**. Por eso es falso que cualquier desvío deba resolverse: el modelo pide criterio, no
 > reacción automática.
 
+Sus dos metas son **monitorizar el proyecto frente al plan** —parámetros de planificación,
+compromisos, riesgos, gestión de datos, involucración de los interesados, revisiones de progreso y
+revisiones de hitos— y **gestionar las acciones correctivas hasta su cierre**: analizar problemas,
+llevar a cabo las acciones correctivas y gestionarlas.
+
 Los **puntos de control y monitoreo se definen durante la planificación**, no durante la
 ejecución. En ejecución se usan.
 
@@ -376,7 +579,7 @@ ejecución. En ejecución se usan.
 > primera vez todo el equipo"— todavía se está planificando: es **PP**. Si la reunión **ya
 > ocurrió** —"en la última reunión de avance…"— se está monitorizando: es **PMC**.
 
-### 8.4 Los diez grupos de procesos de gestión
+### 10.4 Los diez grupos de procesos de gestión
 
 La guía práctica de gestión de proyectos organiza el trabajo en diez grupos. Vale la pena tener
 presente a cuál pertenece cada proceso, porque los ejercicios juegan con procesos que suenan a un
@@ -401,7 +604,7 @@ aunque suene a cronograma. **Desarrollar el cronograma** debe identificar explí
 actividades críticas y los hitos. Y **definir el equipo del proyecto** consiste en determinar
 **roles y responsabilidades**; no incluye estimar el esfuerzo por rol ni controlar el cronograma.
 
-### 8.5 La EDT, las precedencias y el esfuerzo
+### 10.5 La EDT, las precedencias y el esfuerzo
 
 La secuencia de trabajo es siempre la misma: se arma la **EDT**, se identifican las **tareas
 típicas** del ciclo de vida elegido, y se establecen las **órdenes de precedencia** entre ellas.
@@ -422,7 +625,7 @@ Y y analizar Z.
 > ejercicio pide esfuerzo, hay que leer la columna de esfuerzo y convertir: 1 día-persona = 8
 > horas.
 
-## 9. La estimación del esfuerzo
+## 11. La estimación del esfuerzo
 
 Estimar es decidir cuánto va a costar algo que todavía no existe. La materia presenta cuatro
 métodos, que no compiten entre sí: se usan en momentos distintos y con información distinta.
@@ -448,7 +651,7 @@ Un consejo que la cátedra repite: **tomar nota de las decisiones tomadas**, sob
 de estimación. Es lo que después permite explicar un desvío en PMC en lugar de improvisar una
 justificación.
 
-### 9.1 La distribución 40-20-40
+### 11.1 La distribución 40-20-40
 
 Es una regla de reparto del esfuerzo total de un proyecto: **40 % análisis y diseño** —de los
 cuales 10 a 15 puntos van al análisis y 25 a 30 al diseño—, **20 % codificación** y **40 %
@@ -457,7 +660,7 @@ pruebas**.
 La lectura que importa no es el número exacto sino su consecuencia: **codificar es apenas la
 quinta parte del proyecto**, y se prueba tanto como se analiza y diseña junto.
 
-### 9.2 Análisis de puntos función
+### 11.2 Análisis de puntos función
 
 El método tiene tres etapas.
 
@@ -497,7 +700,14 @@ PF ajustados     = PFD × Factor de ajuste
 Con el TDI entre 0 y 70, el factor va de **0,65 a 1,35**: el ajuste puede mover el tamaño estimado
 hasta un 35 % para cada lado.
 
-## 10. Los ciclos de vida
+El temario incluye también el **glosario** de la guía de puntos función. Los términos que conviene
+reconocer son: **PFD**, puntos función sin ajustar; **PFM**, puntos función de la mejora (cuando se
+mide un cambio sobre una aplicación existente); **PFDM**, puntos función sin ajustar de la mejora;
+**PFP**, puntos función de las pruebas; **fichero referenciado**, un fichero lógico interno leído o
+modificado por una transacción, o un fichero de interfaz externo leído por ella; y **factor de
+impacto**, el grado de cambio que sufre una función.
+
+## 12. Los ciclos de vida
 
 Elegir un ciclo de vida es decidir **cuándo** se hace cada cosa, y esa decisión determina cuándo
 se detectan los defectos y cuánto cuesta corregirlos.
@@ -519,9 +729,9 @@ En un ciclo **incremental** vale la pena subrayar algo que se pregunta seguido: 
 incremento es una cascada completa, **el análisis se hace en todos los incrementos** y **las
 pruebas de sistema también**, no solamente en el último.
 
-## 11. Verificación y validación
+## 13. Verificación y validación
 
-### 11.1 La distinción
+### 13.1 La distinción
 
 Es la pareja de conceptos más importante de la unidad y la más fácil de confundir, porque ambos
 son procesos de evaluación de productos, se ejecutan frecuentemente **de forma concurrente** y
@@ -541,7 +751,7 @@ pueden compartir parte del entorno.
 > aceptación con clientes reales son **validación**. Las inspecciones y revisiones son
 > **verificación**.
 
-### 11.2 Qué se valida y cómo
+### 13.2 Qué se valida y cómo
 
 La validación se aplica a los productos de trabajo —requerimientos, diseños, prototipos— y al
 producto y sus componentes. Se hace **temprana e incrementalmente**, no al final.
@@ -559,7 +769,7 @@ La **verificación es incremental**: empieza por la verificación de los requeri
 los productos de trabajo a medida que evolucionan, y culmina con la verificación del producto
 terminado.
 
-### 11.3 Metas y prácticas
+### 13.3 Metas y prácticas
 
 | Verificación (VER) | Validación (VAL) |
 |---|---|
@@ -570,7 +780,7 @@ terminado.
 > ⚠️ Las **revisiones entre pares existen sólo en VER**. Si una opción atribuye a VAL la práctica
 > "preparar las revisiones entre pares", esa opción es falsa aunque todo lo demás encaje.
 
-### 11.4 El grado de confianza
+### 13.4 El grado de confianza
 
 Verificar y validar no busca la ausencia total de defectos —que es inalcanzable— sino que el
 software sea **suficientemente bueno para su uso previsto**. Cuánta confianza hace falta depende
@@ -584,7 +794,7 @@ completamente probada para llegar primero, y con un precio bajo los clientes tol
 Conviene recordar que V&V son **procesos costosos**: en ciertos sistemas superan **la mitad del
 presupuesto total** de desarrollo. Por eso se planifican desde etapas tempranas.
 
-### 11.5 Inyección y remoción de defectos
+### 13.5 Inyección y remoción de defectos
 
 ![Inyección y remoción de defectos a lo largo del ciclo de vida](../figs/vyv-inyeccion-remocion-defectos.png)
 
@@ -598,9 +808,9 @@ De ahí la regla económica que ordena toda la unidad: **corregir un defecto en 
 alrededor de cien veces más que corregirlo en la etapa de requisitos**. Cuanto antes empiece V&V,
 más barato sale cada defecto.
 
-## 12. La organización de las pruebas
+## 14. La organización de las pruebas
 
-### 12.1 Qué es un caso de prueba
+### 14.1 Qué es un caso de prueba
 
 > **Caso de prueba:** conjunto de **entradas, condiciones de ejecución y resultados esperados**,
 > desarrollado para un objetivo o condición particular.
@@ -611,7 +821,7 @@ Sin resultado esperado no hay caso de prueba, porque no habría forma de saber s
 Nunca se prueba en producción: el entorno de pruebas debe estar **físicamente separado** y recrear
 las condiciones de producción.
 
-### 12.2 Los cuatro niveles de prueba
+### 14.2 Los cuatro niveles de prueba
 
 | Nivel | Qué prueba | Quién y cómo |
 |---|---|---|
@@ -634,7 +844,7 @@ Las pruebas de aceptación admiten tres modalidades: **alfa**, con un conjunto a
 preseleccionados en un entorno controlado; **beta**, con un conjunto más amplio; y **piloto**, con
 un conjunto reducido de departamentos del cliente y en **ambiente de producción**.
 
-### 12.3 Tipos de prueba
+### 14.3 Tipos de prueba
 
 El **nivel** indica cuándo y sobre qué parte se prueba; el **tipo** indica con qué objetivo. Los
 tipos que se nombran en la materia son las pruebas funcionales, las de prestaciones, las de
@@ -648,7 +858,7 @@ hasta la saturación. Las de **estrés** estudian el comportamiento **en sobreca
 los límites, con foco en la integridad. Las de **estabilidad** miran el comportamiento **en el
 tiempo** bajo carga normal, para detectar mala liberación de recursos.
 
-### 12.4 Regresión y confirmación
+### 14.4 Regresión y confirmación
 
 Son dos actividades distintas que se ejecutan juntas después de cada corrección.
 
@@ -660,7 +870,7 @@ local), que el cambio **reveló errores que ya existían** (de exposición), o q
 área **rompió otra área** del sistema (remota). La estrategia más simple es la **fuerza bruta**,
 repetir todas las pruebas, y por eso la regresión es el mejor candidato a automatizarse.
 
-### 12.5 Los diez principios de Myers
+### 14.5 Los diez principios de Myers
 
 Son el marco de actitud con el que se encara el testing, y condensan buena parte de lo anterior.
 
@@ -688,7 +898,7 @@ El principio 9 tiene una consecuencia práctica directa: conviene concentrar el 
 corrección **en los módulos donde más defectos aparecieron**, porque es donde es más probable que
 sigan apareciendo.
 
-## 13. Las técnicas dinámicas
+## 15. Las técnicas dinámicas
 
 Las técnicas dinámicas ejecutan el código y buscan **fallos**. Existen porque **no se puede probar
 exhaustivamente**: las combinaciones de entradas posibles son inabarcables. Cada técnica es una
@@ -706,7 +916,7 @@ describir la situación y pedir la técnica:
 | Se dispone del código, cobertura de sentencias o decisiones | **Caja blanca** |
 | Volver a probar lo que ya funcionaba después de un cambio | **Regresión** |
 
-### 13.1 Particionamiento de equivalencia
+### 15.1 Particionamiento de equivalencia
 
 La idea es agrupar las condiciones de entrada que **el sistema trata igual**. Si el programa
 funciona para un valor de la partición, se asume que funciona para todos; si falla para uno, se
@@ -738,7 +948,7 @@ tres válidos (1, 12, 30) y siete inválidos, uno por cada forma de entrada rech
 > particiones se pisen**: si la válida llega hasta 31, la inválida empieza en 32, o sea `X > 31`,
 > no `X ≥ 31`.
 
-### 13.2 Análisis de valor de frontera
+### 15.2 Análisis de valor de frontera
 
 Es una **mejora** del particionamiento, no una alternativa. En vez de un solo representante por
 partición, prueba **más de un caso en cada una**, concentrados en los **extremos**, porque es
@@ -757,7 +967,7 @@ para las longitudes relevantes alrededor de N.
 > bordes. Cuando pide valores límite, pide los **extremos**. Es la diferencia entre las dos
 > técnicas y es lo que se evalúa.
 
-### 13.3 Tablas de decisión
+### 15.3 Tablas de decisión
 
 Se usan cuando **múltiples combinaciones de entradas** producen resultados distintos. A diferencia
 de las anteriores, que miran un campo por vez, esta técnica se centra en **la lógica y las reglas
@@ -782,7 +992,7 @@ son **cuatro**: aplicar 0 %, 10 %, 15 % y el 5 % adicional.
 > **condiciones incompatibles** —si el usuario no existe, la contraseña es irrelevante—, las
 > combinaciones se colapsan y quedan menos casos de los que sugiere la potencia de dos.
 
-### 13.4 Transición de estados
+### 15.4 Transición de estados
 
 Se aplica a sistemas modelables como **máquina de estados finitos**, donde la salida ante la misma
 entrada **depende del estado anterior**. El ejemplo canónico es un trámite que pasa de Inscripto a
@@ -795,7 +1005,7 @@ puede salir.
 Una prueba completa no se limita al camino feliz: debe incluir las **transiciones no válidas**
 —intentos fallidos, timeouts— y los **eventos no especificados**, como cancelar a mitad de camino.
 
-### 13.5 Pruebas de casos de uso
+### 15.5 Pruebas de casos de uso
 
 Ejercitan el sistema **de punta a punta**, siguiendo el recorrido real de un usuario.
 
@@ -809,7 +1019,7 @@ Estos casos son de **mejor calidad** que los armados campo por campo, porque eje
 como se usa de verdad: validar una tarjeta en un cajero contempla muchas más cosas que probar tres
 números sueltos en un formulario.
 
-### 13.6 Caja negra y caja blanca
+### 15.6 Caja negra y caja blanca
 
 La distinción es qué información tiene quien prueba.
 
@@ -831,16 +1041,16 @@ Conviene notar que un defecto puede manifestarse **aunque todas las sentencias s
 al menos una vez**, porque el problema aparece recién al **combinarse** ciertos caminos. La
 cobertura del 100 % de sentencias no garantiza ausencia de defectos.
 
-### 13.7 Técnicas basadas en la experiencia
+### 15.7 Técnicas basadas en la experiencia
 
 Se usan cuando **no hay una especificación adecuada** o **no hay tiempo**. La **adivinación de
 errores** complementa a las técnicas formales y depende de la habilidad e intuición del técnico.
 Las **pruebas exploratorias** consisten en recorrer el software para entender qué hace, qué no
 hace y dónde está débil, diseñando las pruebas mientras se ejecutan.
 
-## 14. Las técnicas estáticas: revisiones
+## 16. Las técnicas estáticas: revisiones
 
-### 14.1 Por qué existen
+### 16.1 Por qué existen
 
 Las técnicas dinámicas necesitan el sistema andando, y eso limita cuándo se pueden aplicar. Las
 **estáticas** analizan documentos —requisitos, diseños, código, historias de usuario— **sin
@@ -860,7 +1070,7 @@ la **verificación**.
 
 Son **complementarias**: ninguna reemplaza a la otra.
 
-### 14.2 Beneficios y costo
+### 16.2 Beneficios y costo
 
 Las revisiones mejoran la calidad y la comprensión de los entregables, validan que soportan la
 solución final, gestionan las expectativas del negocio, identifican tareas de alto riesgo y forman
@@ -870,7 +1080,7 @@ prueba y bajan sus costos**.
 Aun así, muchas organizaciones no las implementan, y la explicación que da la materia es que
 tienden a **sobreestimar su costo y subestimar sus beneficios**.
 
-### 14.3 Formalidad
+### 16.3 Formalidad
 
 Una revisión puede ser informal o formal, y la diferencia está en si hay proceso.
 
@@ -885,7 +1095,7 @@ del proceso.
 La formalidad importa porque deja **trazabilidad documentada** de las acciones y decisiones, lo
 que permite demostrar después que los procedimientos se cumplieron.
 
-### 14.4 El proceso y los tipos
+### 16.4 El proceso y los tipos
 
 El proceso básico es común a todas: se identifican los entregables a revisar, se arma la lista de
 participantes, los revisores **estudian** el documento por su cuenta, identifican problemas y se
@@ -899,7 +1109,7 @@ los **comunican al autor**, y el autor **responde y actualiza**.
 | **Revisión entre pares** | Colegas del mismo proyecto | Identificar y eliminar defectos **temprano**, de forma incremental | Media |
 | **Inspección** | **Un moderador formado, nunca el autor** | **Registrar defectos** eficientemente: las discusiones se posponen. Seguimiento formal con criterios de salida | **Máxima** |
 
-### 14.5 Los cinco roles
+### 16.5 Los cinco roles
 
 El **moderador** dirige el proceso, determina junto con el autor el tipo de revisión y la
 composición del equipo, y hace el seguimiento. El **autor** creó el documento y busca mejorar su
@@ -912,7 +1122,7 @@ amenazante**, capacitar al personal en sus roles, **documentar los defectos** co
 descripción, **enfocarse en el producto y no en la persona**, y **incluir las revisiones en la
 planificación del proyecto** para que tengan tiempo asignado.
 
-### 14.6 Análisis estático
+### 16.6 Análisis estático
 
 Es la variante automatizada: busca defectos **sin ejecutar** el programa, pero **una vez escrito
 el código**, con herramientas llamadas analizadores estáticos.
@@ -926,99 +1136,21 @@ Entre las métricas de código que produce, la más usada es la **complejidad ci
 calcula como el número de sentencias de decisión binarias más uno y sirve para **estimar cuántas
 pruebas** necesita un componente.
 
-## 15. El aseguramiento de la calidad en la práctica
-
-PPQA es el área de **nivel 2** que evalúa **objetivamente** los procesos y los productos de
-trabajo contra las descripciones de proceso, **los estándares y los procedimientos de la
-organización**.
-
-La palabra clave es **objetivamente**, y la objetividad se logra con **independencia**.
-Tradicionalmente con un grupo de QA independiente del proyecto; en organizaciones con cultura
-abierta orientada a la calidad, puede hacerse parcial o totalmente **por pares**. En todos los
-casos se **excluye** de evaluar un producto de trabajo a quien participó en armarlo.
-
-> **No conformidad:** problema identificado en la evaluación que refleja falta de adherencia a los
-> estándares, descripciones de proceso o procedimientos.
-
-Una no conformidad se trata **primero dentro del proyecto**. Si no puede resolverse ahí, se
-**escala** al nivel de gerencia apropiado. Se sigue hasta su resolución y se **establecen
-registros**. Hay tres formas de resolverla: corregir el producto, **cambiar la descripción de
-proceso o el estándar incumplido**, u **obtener una excepción**.
-
-En la operación diaria, esto se organiza alrededor del rol de **SQA** (Software Quality
-Assurance). Antes del inicio del proyecto se designa a la persona que lo ocupará, que colabora con
-el jefe de proyecto para planificar las actividades de QA y **documentarlas en la EDT y el
-calendario**. Durante la ejecución hace **auditorías periódicas** al proyecto y a las
-configuraciones, clasifica lo que encuentra en **no conformidades** y **mejoras**, arma un informe
-y escala lo que no se resolvió. Al cierre asegura que se genere el **informe retrospectivo** y que
-se envíe al histórico de la organización.
-
-> ⚠️ PPQA y VER se confunden porque ambos "controlan". La diferencia es contra qué: si se contrasta
-> contra un **estándar o procedimiento de la organización**, es PPQA; si se contrasta contra **la
-> especificación del producto**, es VER. Que el control lo haga el equipo de QA no lo convierte en
-> PPQA.
-
-## 16. Las áreas de soporte del proyecto
-
-Además de PP y PMC, hay cuatro áreas que acompañan a la gestión de proyectos y que se preguntan
-junto con ellas.
-
-**REQM — Gestión de requerimientos (nivel 2).** Gestiona requerimientos **ya capturados**:
-documenta los cambios y su razón, y mantiene la **trazabilidad bidireccional** entre los
-requerimientos fuente y todos los requerimientos de producto y de componentes. Sus prácticas son
-obtener una comprensión de los requerimientos, obtener el compromiso sobre ellos, **gestionar los
-cambios**, **mantener la trazabilidad bidireccional** e **identificar las inconsistencias** entre
-el trabajo del proyecto y los requerimientos.
-
-Conviene no confundirla con **RD — Desarrollo de requerimientos (nivel 3)**, que es la que
-**captura**: la elicitación de las necesidades, expectativas y restricciones del cliente pertenece
-a RD. REQM gestiona lo que RD ya obtuvo.
-
-> ⚠️ Ante un cambio pedido por el cliente, el área depende del momento. Si todavía **se está
-> evaluando cómo afecta**, es **REQM**. Si **ya se decidió aceptarlo** y ahora se tramita, es
-> **CM**, en la práctica de seguir las peticiones de cambio.
-
-**CM — Gestión de configuración (nivel 2).** Asegura que todo el equipo trabaje sobre la **misma
-línea base**, da capacidad de **controlar los cambios**, reduce los sobreesfuerzos por problemas
-de integridad y permite saber **qué versión se entregó al cliente**. Sus tres metas son establecer
-líneas base, seguir y controlar los cambios, y establecer la integridad mediante registros y
-**auditorías de configuración**.
-
-Desde la perspectiva del testing, CM sirve para controlar **la versión de los casos de prueba**,
-**identificar qué versión del software se está probando** y seguir los cambios a los casos. No
-sirve para desarrollar casos nuevos ni para detectar que hacen falta.
-
-**MA — Medición y análisis (nivel 2).** Mide **el proyecto**. La distinción que se pregunta es
-entre las **métricas de proyecto**, que evalúan progreso, esfuerzo, costo y planificación —por
-ejemplo el porcentaje de cumplimiento de hitos o el costo de horas por iteración—, y las
-**métricas de producto**, que evalúan calidad o desempeño del software —por ejemplo la tasa de
-defectos encontrados en producción o la cobertura de pruebas unitarias—.
-
-**RSKM — Gestión de riesgos.** El orden correcto de las actividades es **identificar, analizar y
-priorizar**, en ese orden; es falso que el análisis preceda a la identificación. Los riesgos se
-identifican **desde la planificación**. Sus parámetros son la **probabilidad** de ocurrencia, la
-**consecuencia** y los **umbrales** que disparan las actividades de gestión. Un riesgo puede ser
-**aceptado**, cuando es demasiado bajo para una mitigación formal o no hay forma viable de
-reducirlo —documentando la razón—, o **vigilado**, cuando hay límites objetivos que activan el
-plan de mitigación. Por eso no es cierto que cualquier variación en un riesgo dispare tratamiento:
-depende del umbral.
-
 ## 17. Confusiones frecuentes
 
-Para cerrar, las doce confusiones que más se repiten. No son trucos de examen: cada una es un
+Para cerrar, las confusiones que más se repiten. No son trucos de examen: cada una es un
 concepto mal entendido.
 
 **Sobre CMMI.** Creer que las prácticas son obligatorias, cuando lo requerido son **sólo las
 metas**. Creer que alcanzar un nivel superior exime de las metas de los niveles anteriores, cuando
 los niveles son **acumulativos**. Atribuir a MA el repositorio de medidas de la organización, que
 es de **OPD** porque es un activo organizacional. Confundir OPF con OPD: **OPF diagnostica y
-despliega, OPD define y guarda**.
+despliega, OPD define y guarda**. Y creer que OT es de nivel 4 por la errata de la traducción: es de
+**nivel 3**.
 
 **Sobre verificación y validación.** Clasificar como validación todo lo que se hace sobre el
 producto terminado: unas pruebas de sistema son **verificación**, porque se contrastan contra la
-especificación. Atribuir a VAL las **revisiones entre pares**, que existen sólo en VER. Confundir
-PPQA con VER: PPQA contrasta contra **estándares de la organización**, VER contra **la
-especificación del producto**.
+especificación. Atribuir a VAL las **revisiones entre pares**, que existen sólo en VER.
 
 **Sobre las pruebas.** Olvidar las **particiones intermedias**, la zona donde el sistema no hace
 nada. Confundir partición de equivalencia con valores límite: la primera pide **un representante
