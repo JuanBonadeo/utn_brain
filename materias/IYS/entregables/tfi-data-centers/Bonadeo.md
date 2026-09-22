@@ -8,7 +8,7 @@ comision: IC 01
 fecha: 22/09/2026
 
 profesores:
-  - "[COMPLETAR]"
+  - Vanina López
 ---
 
 ## 1. Introducción

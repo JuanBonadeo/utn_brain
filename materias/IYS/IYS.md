@@ -253,5 +253,5 @@ desregulación del consumidor · felicidad paradójica · sociedad de la decepci
   entrevista del punto 6 y los datos de carátula.
 - 2026-09-22: TFI cerrado con la entrevista a Mateo (desgrabación del audio en
   Anexo II, versión breve del guion en Anexo I, sección 7 reescrita, conclusión
-  sexta nueva). Fecha de entrega 22/09/2026. Solo falta el nombre de la docente
-  en la carátula.
+  sexta nueva). Fecha de entrega 22/09/2026. Docente: Vanina López.
+  Listo para entregar.
