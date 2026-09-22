@@ -185,9 +185,13 @@ desregulación del consumidor · felicidad paradójica · sociedad de la decepci
 - **Trabajo Final Integrador** — *La nube tiene territorio: infraestructura de
   cómputo para IA en la Patagonia argentina (2024-2026)*:
   [`tfi-data-centers/Bonadeo.md`](entregables/tfi-data-centers/Bonadeo.md)
-  (+ `.pdf`, 15 págs.). Integra las dos unidades: Toffler para la estructura
-  productiva, Lipovetsky para la demanda que la sostiene. **Pendiente: la
-  entrevista del punto 6** (guion listo en el Anexo I, desgrabación sin hacer).
+  (+ `.pdf`, 20 págs.). Integra las dos unidades: Toffler para la estructura
+  productiva, Lipovetsky para la demanda que la sostiene. Entrevista a Mateo
+  (dev backend, Rosario), grabada y desgrabada en el Anexo II; sección 7 con sus
+  pasajes. Aporte clave de la entrevista: la organización del trabajo (sprint,
+  factura de la nube como única señal) *produce* la separación técnico/político;
+  y el caso *serverless* = modernización como lenguaje de un recorte de personal
+  (crítica a la naturalización en Toffler, a escala de empresa).
 
 ##### Argumento del TFI (reutilizable en final)
 - **Tesis**: el proceso tiene el discurso de la Tercera Ola y la estructura de un
@@ -247,3 +251,7 @@ desregulación del consumidor · felicidad paradójica · sociedad de la decepci
   Se agregó `scripts/monografia-pdf.js` (md → PDF con formato de cátedra: A4,
   Arial 10, interlineado 1.5, justificado, numeración). **Pendiente**: la
   entrevista del punto 6 y los datos de carátula.
+- 2026-09-22: TFI cerrado con la entrevista a Mateo (desgrabación del audio en
+  Anexo II, versión breve del guion en Anexo I, sección 7 reescrita, conclusión
+  sexta nueva). Fecha de entrega 22/09/2026. Solo falta el nombre de la docente
+  en la carátula.

@@ -5,7 +5,7 @@ tipo: Trabajo Final Integrador
 titulo: La nube tiene territorio
 subtitulo: Infraestructura de cómputo para inteligencia artificial en la Patagonia argentina — análisis crítico de un proceso ingenieril en curso (2024-2026)
 comision: IC 01
-fecha: "[COMPLETAR]"
+fecha: 22/09/2026
 
 profesores:
   - "[COMPLETAR]"
@@ -226,11 +226,65 @@ Cada una de esas decisiones es una decisión de ingeniería con consecuencias am
 
 Esto no supone que el profesional deba asumir responsabilidades que corresponden al Estado o a la empresa. Supone algo más acotado y más exigible: que la formación profesional incluya la capacidad de identificar cuándo una decisión presentada como técnica está resolviendo, de hecho, un problema distributivo.
 
-## 7. Aportes de la entrevista al campo profesional
+## 7. Aportes de la entrevista
 
-*[Sección a completar tras la realización de la entrevista. El guion figura en el Anexo I y la desgrabación completa en el Anexo II. Se incorporan aquí los pasajes relevantes para el análisis, articulados con las secciones 5 y 6.]*
+### 7.1 El entrevistado y la modalidad
 
-Los ejes sobre los que se buscó indagar fueron cuatro: (a) el grado de visibilidad que la infraestructura física tiene en la práctica cotidiana del desarrollo de software; (b) los criterios efectivos con que se toman decisiones de emplazamiento y proveedor de nube en proyectos reales; (c) la percepción profesional sobre la relación entre decisión técnica y consecuencia social; y (d) la valoración del proceso argentino de radicación de centros de datos desde la perspectiva de quien trabaja en el sector.
+Se entrevistó a **Mateo**, ingeniero de software que se desempeña como desarrollador *backend* en una empresa de software de la ciudad de Rosario, con cuatro a cinco años de experiencia profesional. Su trabajo actual se centra en integraciones complejas entre sistemas, diseño de arquitecturas, automatización de procesos y bases de datos. A pedido del entrevistado, se omite el nombre de la empresa.
+
+La entrevista se realizó en forma oral y fue grabada con su autorización. El entrevistado recibió previamente las preguntas de la versión breve del guion (Anexo I) y las respondió en una intervención continua. La transcripción se obtuvo con una herramienta de reconocimiento de voz y fue revisada contra el audio. Figura completa en el Anexo II.
+
+Corresponde explicitar el alcance del material. Se trata de **una sola entrevista**, a un profesional de desarrollo y no de infraestructura física, por lo que no es representativa del sector: funciona como testimonio de la práctica cotidiana, no como evidencia estadística. Por otra parte, algunas afirmaciones —en particular el ejemplo de la sección 7.5— son de segunda mano según el propio entrevistado («rascando un poco en los pasillos te enterás») y se consignan como tales.
+
+### 7.2 «Para mí es una IP»: la infraestructura invisible en la práctica
+
+La primera respuesta confirma de manera casi literal la hipótesis de la sección 6.2. Consultado sobre si piensa dónde está físicamente el servidor cuando despliega una aplicación, el entrevistado respondió:
+
+> «La verdad que uno casi nunca piensa dónde carajo está el servidor. [...] Para mí es una IP, ¿entendés? O un servicio en un desplegable. [...] Pero la imagen así del galpón gigante en el medio de la nada, lleno de cables y ventiladores... no, ni se te cruza por la cabeza.»
+
+El pasaje muestra que la desmaterialización no es solo un rasgo de la experiencia del consumidor final que describe Lipovetsky: se extiende a quienes construyen el software. La geografía reaparece únicamente cuando se vuelve un problema operativo —latencia— o jurídico —el entrevistado menciona la normativa europea de protección de datos, que obliga a alojar datos en Europa—. Fuera de esos casos, la decisión se reduce a «guita y latencia» o a «lo que ya estaba configurado en el proyecto».
+
+La respuesta sobre el impacto ambiental es todavía más tajante:
+
+> «Del impacto ambiental... nah, cero. Pero literal, eh, cero. Jamás se habla de eso en una planning. La única vez que se habla de “consumo”, ponele, es cuando llega el resumen de la tarjeta con los costos de la nube a fin de mes [...]. Como no ves el humo salir de la notebook... parece que la nube es mágica.»
+
+Esta observación se conecta con la sección 5.2. El costo energético no está ausente del trabajo del desarrollador: **está presente, pero traducido a dólares y mezclado en una factura**. La única señal material que llega al equipo es monetaria, y por lo tanto la única pregunta que se hace es cómo pagar menos, no qué se consume.
+
+### 7.3 El precio como anestesia: IA y costo de cómputo
+
+La respuesta sobre las herramientas de inteligencia artificial resulta especialmente útil para el cruce con Lipovetsky de la sección 6.2:
+
+> «Yo sé, porque leés por ahí, que entrenar esos modelos gasta una guita y una energía infernal, pero como a mí en la API me cobran... qué sé yo, dos centavos por un par de miles de tokens, mi cerebro no hace la conexión con el gasto energético que hay atrás de la preguntita boluda que le acabo de hacer.»
+
+El entrevistado identifica con precisión el mecanismo que el trabajo describe en términos teóricos. La información existe —«leés por ahí»—, pero el precio unitario ínfimo y la fricción nula desconectan el acto de consumo de su soporte material. Es la lógica del hiperconsumo aplicada al cómputo: un servicio experimentado como inmaterial, disponible a cualquier hora, cuyo costo real queda fuera de la percepción de quien lo usa. En este caso, además, quien lo usa es un profesional que sabe perfectamente que ese costo existe.
+
+### 7.4 El proyecto patagónico visto desde el sector
+
+Sobre el proyecto Stargate Argentina, el entrevistado expresó una ambivalencia que reproduce el eje de la sección 6.3:
+
+> «Como ingeniero, obvio, te re manija que pongan infraestructura de ese calibre acá. Pero [...] te entra la duda. ¿Vienen porque les interesa desarrollar la región, buscar talento, o vienen nomás porque hace un frío de cagarse y se ahorran millones en aire acondicionado para enfriar las máquinas?»
+
+Y sobre las condiciones para que la inversión signifique algo para quienes hacen software en el país:
+
+> «Si vienen, ponen los servidores, los encierran con alambre de púas y el mantenimiento lo hacen remoto unos vagos desde Silicon Valley... a nosotros nos da exactamente igual. Tendría que venir con convenios con las facultades, puestos de infraestructura pesada a nivel local... si no, es humo.»
+
+La imagen del alambre de púas y el mantenimiento remoto describe, en lenguaje coloquial, lo que la literatura denomina **economía de enclave**: una instalación desconectada de la trama productiva que la rodea. La coincidencia con la evidencia de la Tabla 2 —pocos empleos permanentes, operación monitoreada a distancia— es completa. La propuesta del entrevistado —convenios con universidades y puestos técnicos locales— coincide también con la tercera objeción de la sección 6.4: el valor de la infraestructura depende de las condiciones de acceso que se negocien, no del edificio en sí.
+
+### 7.5 La responsabilidad, entre la teoría y la trinchera
+
+La respuesta sobre la responsabilidad profesional es la que más tensiona el argumento del trabajo, y por eso es la más valiosa:
+
+> «En la teoría te digo que sí, obvio, deberíamos hacernos cargo. Pero en la trinchera... en el día a día vos estás corriendo, tenés que cerrar el sprint, te están apurando para que no se caiga producción... ¿qué vas a estar pensando en la huella de carbono de un `while`, me entendés? Eso se decide en otro nivel, más arriba.»
+
+La sección 6.5 sostiene que el ingeniero no es un observador del proceso sino uno de sus agentes. El testimonio no refuta esa afirmación, pero le agrega una condición que el trabajo no había considerado con suficiente peso: **la organización del trabajo produce activamente la separación entre lo técnico y lo político**. El sprint, la urgencia de producción y las métricas de entrega no dejan espacio para la pregunta por las consecuencias. La responsabilidad existe, pero se ejerce dentro de condiciones que no la favorecen.
+
+El entrevistado agrega un matiz revelador: el código más eficiente consume menos recursos, pero «no es que lo hacés por el planeta, lo hacés para que no explote el servidor». Cuando la eficiencia energética ocurre, ocurre como efecto colateral de un incentivo económico, no como objetivo.
+
+Finalmente, ante la pregunta por decisiones presentadas como técnicas que escondían otra cosa, relató un caso que ilustra con precisión la crítica a Toffler planteada en la sección 4.1:
+
+> «Te la venden como “che, vamos a migrar todo a una arquitectura serverless porque es la vanguardia técnica, súper moderno, escala solo”. [...] Y después rascando un poco en los pasillos te enterás que en realidad querían rajar a dos pibes de infraestructura para achicar sueldos y necesitaban que la nube se maneje sola. [...] Muchas veces disfrazamos de “modernización” o “buenas prácticas” lo que es puramente recortar gastos operativos.»
+
+El ejemplo es, a escala de una empresa, el mismo mecanismo que el trabajo identifica a escala nacional. El vocabulario de la vanguardia tecnológica —la «ola» que llega, lo moderno, lo que «escala solo»— presenta como necesidad técnica lo que es una decisión con costo humano y con responsables concretos. La crítica a la metáfora toffleriana, según la cual una ola no tiene autor, encuentra aquí un caso de la práctica profesional: la modernización tampoco despide a nadie; alguien decide despedir y la modernización le da el lenguaje. Cabe reiterar que el propio entrevistado presenta este caso como información obtenida de manera informal, por lo que se lo toma como ilustración del mecanismo y no como un hecho verificado.
 
 ## 8. Conclusiones
 
@@ -243,6 +297,8 @@ Los ejes sobre los que se buscó indagar fueron cuatro: (a) el grado de visibili
 **Cuarta.** El análisis crítico obliga a matizar dos argumentos habituales. El ambiental, porque el *free cooling* patagónico debilita efectivamente la objeción por consumo de agua —el costo relevante es el de oportunidad de la energía renovable asignada—. Y el de soberanía, que no se refuta por débil sino al revés: es **más grave** de lo que suele plantearse, porque la localización física de los datos no produce soberanía jurídica mientras rijan marcos extraterritoriales como la Cloud Act y siga vigente una ley de datos de 2000.
 
 **Quinta y principal.** La diferencia entre que este proceso sea un enclave o el punto de partida de una capacidad tecnológica nacional no se juega en el terreno técnico. Se juega en el contenido del marco normativo que se estaba discutiendo mientras se escribía este trabajo. Esa constatación, lejos de excluir a la ingeniería, la interpela: porque los pliegos, los dimensionamientos y las arquitecturas que traducen una ley en una obra los escriben ingenieros. Sostener que se trata de decisiones meramente técnicas es, en este proceso, la manera más eficaz de no hacerse cargo de ellas.
+
+**Sexta.** La entrevista realizada agrega una condición que el análisis documental no alcanzaba a ver: la separación entre lo técnico y lo político no es solo un error conceptual de los ingenieros, sino un producto de la organización del trabajo. Donde la única señal material que llega a un equipo es la factura mensual de la nube, y donde el tiempo se mide en *sprints*, la pregunta por las consecuencias no tiene lugar en la agenda. Hacerse cargo de las decisiones técnicas exige, por lo tanto, algo más que voluntad individual: exige que esas consecuencias entren en las métricas con las que se evalúa el trabajo.
 
 ## 9. Referencias bibliográficas
 
@@ -276,7 +332,7 @@ Toffler, A. (1980). *La tercera ola*. Barcelona: Plaza & Janés.
 
 **Perfil buscado:** profesional del desarrollo de software con experiencia en despliegue de aplicaciones en infraestructura de nube.
 
-**Modalidad:** entrevista semiestructurada, presencial o remota, con registro de audio previa autorización expresa del entrevistado. Duración estimada: 35 a 45 minutos.
+**Modalidad:** entrevista semiestructurada, con registro de audio previa autorización expresa del entrevistado.
 
 **Consentimiento (leer antes de iniciar el registro):** *«Esta entrevista forma parte de un trabajo final de la materia Ingeniería y Sociedad de la carrera de Ingeniería en Sistemas de Información (UTN). El audio será transcripto e incorporado como anexo del trabajo, de uso exclusivamente académico. ¿Autorizás la grabación? ¿Preferís que tu nombre o el de tu empresa figuren, o que se consignen de forma anónima?»*
 
@@ -313,20 +369,71 @@ Toffler, A. (1980). *La tercera ola*. Barcelona: Plaza & Janés.
 17. ¿Qué le dirías a un estudiante de cuarto año sobre lo que la facultad no enseña de este oficio?
 18. ¿Querés agregar algo que no te haya preguntado?
 
+### Versión breve aplicada
+
+Para facilitar la participación del entrevistado, el guion completo se condensó en ocho preguntas, que se le enviaron por escrito antes de la grabación junto con una presentación del tema del trabajo:
+
+1. Cuando desplegás una aplicación, ¿en algún momento pensás dónde está físicamente el servidor? ¿O es algo que nunca te planteaste?
+2. ¿Quién decide en la práctica en qué región o proveedor se despliega, y con qué criterio? ¿Costo, latencia, alguna norma, o lo que ya venía configurado?
+3. ¿Se habla en tu trabajo del consumo de energía o del impacto ambiental de lo que se despliega? Si no se habla, ¿por qué te parece que no aparece?
+4. ¿Cómo cambió tu trabajo con las herramientas de IA en estos años? ¿Tenés idea del costo de cómputo que hay detrás cada vez que las usás?
+5. ¿Viste algo del anuncio del data center de IA en la Patagonia? ¿Qué te parece?
+6. ¿Qué tendría que pasar para que una inversión así signifique algo concreto para alguien que hace software acá?
+7. ¿Te parece que alguien que hace software tiene responsabilidad por las consecuencias sociales o ambientales de lo que construye, o eso se decide en otro nivel?
+8. ¿Te acordás de alguna decisión en el trabajo que se presentó como «puramente técnica» y que en realidad escondía otra cosa, como costos, personas afectadas o prioridades del negocio?
+
+Se le solicitó además una breve presentación profesional y su preferencia sobre la identificación en el trabajo.
+
 **Notas para el entrevistador:** no inducir la respuesta en las preguntas 11 a 13, que son las de mayor riesgo de sesgo; repreguntar siempre por casos concretos cuando la respuesta sea general («¿te acordás de alguna situación puntual?»); registrar silencios y dudas, que suelen ser informativos; y anotar la hora de los pasajes salientes para facilitar la desgrabación.
 
 ## 11. Anexo II — Desgrabación de la entrevista
 
-**Entrevistado/a:** [nombre o identificación anonimizada]
-**Cargo y organización:** [completar]
-**Fecha y lugar:** [completar]
-**Duración del audio:** [completar]
-**Autorización de registro:** [otorgada / otorgada con anonimato]
+**Entrevistado:** Mateo, ingeniero de software (desarrollador *backend*) en una empresa de software de Rosario. Se omite el nombre de la empresa a pedido del entrevistado.
+**Experiencia:** cuatro a cinco años de trabajo profesional.
+**Modalidad:** oral, grabada con autorización del entrevistado.
+**Fecha:** 22 de septiembre de 2026.
+**Nota sobre la transcripción:** el entrevistado recibió previamente las ocho preguntas de la versión breve del guion (Anexo I) y las respondió en una intervención continua. La transcripción se obtuvo con una herramienta de reconocimiento de voz y fue revisada contra el audio. Los encabezados entre corchetes, que indican a qué pregunta corresponde cada tramo, se agregaron para facilitar la lectura y no forman parte de la grabación. Se conserva el registro oral del entrevistado.
 
 ---
 
-*[Transcripción completa del audio. Se recomienda consignar la identificación del hablante en cada intervención (E: entrevistador / P: profesional) y las marcas de tiempo cada cinco minutos aproximadamente.]*
+*[Se escucha el ruido de una silla moviéndose y alguien acomodándose.]*
 
-**E:** …
+Eh... bueno, a ver, ¿ahí está grabando? Sí, joya. Qué hacés, todo bien.
 
-**P:** …
+**[Presentación e identificación]**
+
+Che, mirá, sobre lo que me preguntabas para presentarlo ahí en el trabajo... poneme como Mateo, sí, total no pasa nada, pero la empresa... la verdad preferiría que no. Poné, qué sé yo, «desarrollador backend de una empresa de software de Rosario» o algo así. Viste cómo es, después los de recursos humanos te rompen las bolas si andás nombrando a la empresa sin pedir permiso y es para quilombo. Y para la presentación... yo hoy por hoy estoy más que nada como ingeniero de software metiéndole a todo lo que es integraciones complejas, armando arquitecturas, automatizando procesos y bases de datos. Y laburando de esto, así cobrando y en serio... y, hará unos cuatro o cinco años ya, más o menos.
+
+**[Pregunta 1 — Ubicación física del servidor]**
+
+Yendo a lo de las preguntas... a ver. Y sobre lo de la nube... mirá, te soy sincero, ehhh... la verdad que uno casi nunca piensa dónde carajo está el servidor. O sea, vos cuando... cuando levantás algo, no sé, tirás un deploy o armás un flujo de la san puta para integrar un CRM, para mí es una IP, ¿entendés? O un servicio en un desplegable. Qué sé yo, elegís `us-east` en Virginia o `sa-east` allá en San Pablo, pero más que nada por un tema de... de latencia, para que la request responda más rápido. Pero la imagen así del galpón gigante en el medio de la nada, lleno de cables y ventiladores... no, ni se te cruza por la cabeza.
+
+**[Pregunta 2 — Quién decide y con qué criterio]**
+
+Y... lo de quién decide, medio que viene atado a eso. O sea, en la práctica es guita y latencia. Lo define el arquitecto o el líder técnico con los de negocios. Si AWS o Google Cloud te fajan menos en un lado, vas ahí de cabeza, olvidate. Salvo, bueno... salvo que tengas clientes en Europa que ahí sí, por la GDPR o esas leyes de protección de datos, te obligan a tener los fierros físicamente allá. Pero si no hay un bardo legal de por medio... vamos a lo más barato o a lo que ya estaba configurado en el proyecto.
+
+**[Pregunta 3 — Impacto ambiental en el trabajo]**
+
+Del impacto ambiental... nah, cero. Pero literal, eh, cero. Jamás se habla de eso en una planning. La única vez que se habla de «consumo», ponele, es cuando llega el resumen de la tarjeta con los costos de la nube a fin de mes y se quieren matar, o... o si un proceso choto te comió toda la memoria y se te cae todo a pedazos. Como no ves el humo salir de la notebook... parece que la nube es mágica. No, no existe esa charla en el laburo diario.
+
+**[Pregunta 4 — Herramientas de IA y costo de cómputo]**
+
+Con lo de las herramientas de IA... puf, me cambió la vida, 100 %. O sea, hoy... hoy yo le tiro un JSON de, no sé, tres mil líneas que no me parsea y le digo «flaco, encontrame dónde rompe», o la uso de pato de goma cuando estoy quemadísimo a las 3 de la mañana tratando de arreglar un bug. Pero... del costo de cómputo real de hacer eso... no, ni idea. O sea, yo sé, porque leés por ahí, que entrenar esos modelos gasta una guita y una energía infernal, pero como a mí en la API me cobran... qué sé yo, dos centavos por un par de miles de tokens, mi cerebro no hace la conexión con el gasto energético que hay atrás de la preguntita boluda que le acabo de hacer.
+
+**[Pregunta 5 — El data center en la Patagonia]**
+
+Lo del data center este en la Patagonia... sí, vi algo en las noticias, lo leí por arriba. A ver, como ingeniero, obvio, te re manija que pongan infraestructura de ese calibre acá. Pero, y esto lo hablaba el otro día... nada que ver, pero estaba en el club después de jugar un partido de pádel y hablábamos justo de eso... te entra la duda. ¿Vienen porque les interesa desarrollar la región, buscar talento, o vienen nomás porque hace un frío de cagarse y se ahorran millones en aire acondicionado para enfriar las máquinas? Y... y la energía acá seguramente la negocian por dos mangos.
+
+**[Pregunta 6 — Qué haría falta para que impacte localmente]**
+
+Para que a nosotros nos sirva, a los que hacemos software acá... y, tendrían que armar ecosistema, transferir conocimiento. Si vienen, ponen los servidores, los encierran con alambre de púas y el mantenimiento lo hacen remoto unos vagos desde Silicon Valley... a nosotros nos da exactamente igual. Tendría que venir con convenios con las facultades, puestos de infraestructura pesada a nivel local... si no, es humo.
+
+**[Pregunta 7 — Responsabilidad del desarrollador]**
+
+Sobre la responsabilidad nuestra... ehhh... a ver, en la teoría te digo que sí, obvio, deberíamos hacernos cargo. Pero en la trinchera... en el día a día vos estás corriendo, tenés que cerrar el sprint, te están apurando para que no se caiga producción... ¿qué vas a estar pensando en la huella de carbono de un `while`, me entendés? Eso se decide en otro nivel, más arriba. Igual, ojo, como somos medios enfermos de la optimización, si hacés un código más limpio y más performante, de rebote estás consumiendo menos CPU y menos energía. Pero seamos buenos, no es que lo hacés por el planeta, lo hacés para que no explote el servidor.
+
+**[Pregunta 8 — Decisiones técnicas que esconden otra cosa]**
+
+Y... ¿decisiones técnicas que escondían otra cosa? Uff... sí, mil. Mil veces. Me acuerdo una... te bajan la línea, te la venden como «che, vamos a migrar todo a una arquitectura *serverless* porque es la vanguardia técnica, súper moderno, escala solo». Y vos decís, guau, qué visión. Y después rascando un poco en los pasillos te enterás que en realidad querían rajar a dos pibes de infraestructura para achicar sueldos y necesitaban que la nube se maneje sola. O que, no sé, cerraron un arreglo comercial por atrás con el proveedor de cloud y les daban créditos gratis. Muchas veces disfrazamos de «modernización» o «buenas prácticas» lo que es puramente recortar gastos operativos. Es así.
+
+*[Fin de la grabación.]*
