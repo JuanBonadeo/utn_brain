@@ -146,20 +146,22 @@ intervalo de confianza del 95 % de la diferencia apareada contra E0 no contiene 
 conclusión es que no hay evidencia de mejora, y se informa así — que el enunciado lo admite explícitamente
 como resultado válido.
 
-## 7. Lo que falta, y cómo se consigue
+## 7. Lo que falta y estrategia remota
 
-Dos parámetros no están en ningún dataset y son los que definen el modelo. Los dos se resuelven con una
-salida a campo, que es lo que hay que hacer **antes del miércoles o inmediatamente después**.
+Dos parámetros no están en ningún dataset y son los que definen el modelo. El grupo reside en Rosario,
+por lo que no puede realizar un relevamiento presencial propio en Constitución. No corresponde completar
+estos parámetros con estimaciones presentadas como mediciones.
 
 | Falta | Por qué no está | Cómo se consigue |
 |---|---|---|
-| **Tiempo de servicio del molinete** | SBASE publica conteos, no duraciones | Medición con cronómetro en la estación: 100-150 validaciones en la franja pico, distinguiendo SUBE por apoyo vs. EMV/QR. Da media, desvío y forma de la distribución |
-| **Estructura de las tandas** (cuántas, de qué tamaño, cada cuánto) | El dato es agregado a 15 minutos y borra la tanda | Dos vías: (a) conteo en campo del intervalo entre oleadas y del largo de cola; (b) horarios de arribo del Roca a Constitución. La vía (a) es la segura; la (b) requiere el GTFS de Trenes Argentinos, que todavía no conseguimos |
+| **Tiempo de servicio del molinete** | SBASE publica conteos, no duraciones | Solicitar información a SBASE/Emova. Si no se obtiene, tratarlo como factor experimental dentro de rangos explícitos aprobados por el docente |
+| **Estructura de las tandas** (cuántas, de qué tamaño, cada cuánto) | El dato es agregado a 15 minutos y borra la tanda | Usar los horarios oficiales de llegada del Roca para aproximar intervalos y distribuir el total SBASE entre oleadas mediante supuestos explícitos; analizar sensibilidad sobre tamaños y proporción de transferencia |
 
-Una salida de campo de dos mañanas (lunes 21 y martes 22, 07:30-09:00) cubre las dos cosas a la vez y
-además da el **punto de validación** que al modelo le falta: el largo de cola observado. Eso es importante
-porque, igual que pasaba con Ecobici, **los molinetes registran a quien pasó, no a quien esperó**: la cola
-es salida del modelo y no hay forma de validarla contra el dataset. Medirla en campo resuelve el problema.
+La estrategia remota permite validar el **caudal agregado** contra ventanas de SBASE no utilizadas para
+parametrizar el modelo, pero no valida la espera ni el largo de cola reales. Los molinetes registran a quien
+pasó, no a quien esperó. Por eso las conclusiones sobre espera deberán ser condicionales a los rangos de
+entrada y esta reformulación requiere conformidad del docente. Si se exige validación empírica de la cola,
+será necesario conseguir un observador local o revisar el caso.
 
 ## 8. Riesgos declarados
 

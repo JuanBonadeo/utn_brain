@@ -2603,8 +2603,11 @@ perdida solo puede ser salida del modelo.
 | **Próximo hito** | Miércoles 2026-09-23: caso definido y modelo inicial en AnyLogic |
 
 El docente pidió definir la línea, la franja horaria, los días y las medidas de rendimiento, y editar el
-último envío del formulario con el tema del subte. El caso y el modelo inicial ya están preparados. Falta
-actualizar el formulario enviado y completar los parámetros que requieren medición en campo.
+último envío del formulario con el tema del subte. El caso y el modelo inicial ya están preparados. Como
+los integrantes residen en Rosario, no pueden realizar un relevamiento presencial propio en Constitución.
+Los parámetros no publicados se propondrán como factores de un análisis de sensibilidad, apoyados en
+horarios oficiales del Roca y solicitudes de datos, sujeto a la conformidad del docente. Con la información
+actual puede validarse el caudal agregado, pero no la espera ni la cola real.
 
 **Archivos de trabajo:**
 
@@ -2670,15 +2673,18 @@ subte, y sobre la misma estación.
 
 #### Pendientes del TPI de subte
 
-- **Salida a campo** (lunes 21 o martes 22, 07:30-09:00, Constitución): cronometrar 100-150 validaciones
-  separando SUBE por apoyo de EMV/QR, y contar intervalo entre tandas y largo de cola. Sin esos dos datos el
-  modelo no cierra, y el largo de cola medido es además el único punto de validación posible.
-- **Modelo AnyLogic**: ejecutar los checks del motor de la [guía](entregables/TPI/subte/02-modelo-anylogic.md), completar parámetros de campo y ajustar distribuciones. E0 usa 20 servidores como aproximación provisional; E2 cuenta el desvío pero todavía no simula la cola de Plaza.
+- **Parámetros no observados**: acordar con el docente si se acepta tratarlos mediante rangos y análisis de
+  sensibilidad. El grupo reside en Rosario y no puede hacer un relevamiento presencial propio en Constitución.
+- **Modelo AnyLogic**: ejecutar los checks del motor de la [guía](entregables/TPI/subte/02-modelo-anylogic.md),
+  incorporar los rangos aprobados y ajustar las fuentes aleatorias. E0 usa 20 servidores como aproximación
+  provisional; E2 cuenta el desvío pero todavía no simula la cola de Plaza.
 - ~~**Formulario**: editar el último envío con el tema del subte.~~ Hecho el 2026-09-22: `formulario-eleccion-tema.md`
   reescrito v2 y `TPI_Simulacion_Propuesta_de_Tema.docx` regenerado con ese contenido
   (`scripts/build-tpi-formulario-docx.py`). Falta reenviarlo en el envío real (Classroom/mail al docente).
-- Conseguir los horarios de arribo del Roca a Constitución (GTFS de Trenes Argentinos). El buscador del
-  portal de BA Data está bloqueado por WAF; el endpoint `package_show` sí responde con user-agent de navegador.
+- Conseguir los horarios oficiales de arribo del Roca a Constitución y solicitar a SBASE/Emova y Trenes
+  Argentinos datos de mayor granularidad sobre servicio y arribos.
+- La validación remota puede contrastar caudales agregados contra SBASE, pero no la espera ni el largo de cola
+  reales. No presentar resultados condicionales como mediciones del sistema actual.
 - Fechas de entrega y presentación: se publican en Classroom (no están en el enunciado).
 - Confirmar si hay que consignar los profesores de la cátedra en la carátula.
 - Confirmar si la plantilla LaTeX de las entregas parciales se reutiliza tal cual.
@@ -2724,8 +2730,13 @@ subte, y sobre la misma estación.
   `entregables/TPI/formulario-eleccion-tema.md` v2 (tema del subte) y su `.docx` correspondiente
   (`TPI_Simulacion_Propuesta_de_Tema.docx`), con script nuevo `scripts/build-tpi-formulario-docx.py`
   (mismo estilo que la ficha de reunión de `subte/`). Falta reenviar el formulario en el canal real
-  (Classroom/mail). Sigue pendiente la salida a campo (tiempo de servicio y estructura de tandas) antes
-  de la reunión del 23/09.
+  (Classroom/mail).
+- **2026-09-22** (2): TPI, grupo Bonadeo + Estevez. Corregida la estrategia de datos para el avance del 23/09:
+  el grupo reside en Rosario y no puede realizar la medición de campo prevista en Constitución. Actualizadas
+  la definición del caso, la guía del modelo y la ficha Word para declarar la limitación, proponer horarios
+  oficiales del Roca y solicitudes de información como fuentes remotas, y tratar tiempos de servicio y tamaños
+  de tanda como factores de sensibilidad sujetos a aprobación docente. La espera real no puede validarse con
+  el dataset SBASE; solo el caudal agregado.
 - **2026-09-20**: TPI, grupo 1 (Bonadeo + Estevez). **Tema aprobado por el docente: molinetes de subte.** Ecobici se cayó porque lo tomó otro grupo. Descargado y perfilado el dataset de SBASE 2026 (ene-jun, por molinete individual cada 15 min): Constitución Línea C se lleva las 14 ventanas más cargadas del sistema, pico de 2.066 pax/15 min a las 08:30 sobre 19,5 molinetes activos de 28 instalados, y 17.482 pax en la franja 07:00-09:30 por día hábil. Hallazgo central: ρ ≈ 0,3 por molinete, o sea que M/M/c diría que no hay cola — la cola existe porque los arribos vienen en tandas desde la terminal del Roca, que es el argumento de por qué el caso necesita simulación. Escrito `entregables/TPI/subte/01-definicion-del-caso.md`, armado el modelo inicial `SubteConstitucion.alp`, creado el Word breve para la reunión del 23/09 y reorganizada la sección TPI para separar este trabajo del caso Casermeiro. Pendiente: medición en campo del tiempo de servicio y de la estructura de tandas, ejecución completa del modelo en el IDE y edición del formulario enviado.
 - **2026-09-16** (2): TPI, grupo 2 (Casermeiro). La empresa confirmó que entrega ventas, maestro, OF, compras, stock valorizado, cargas de horno, rechazos, trazabilidad, energía y demanda no atendida (exportación prevista 2026-09-17) y preguntó si se puede estudiar el umbral óptimo de ULI. Datos nuevos del horno: cinta continua, generador de gases endotérmicos, desgaste por encendido, y que con mucha producción convenía dejarlo encendido. Actualizados `01-contexto-empresa.md` (horno), `03-pedido-de-datos.md` (pedido para el Tema 1: datos faltantes, entrevista al encargado, formato de las exportaciones) y `05-respuestas-al-docente.md` (gas y desgaste como costo fijo por encendido y costo por hora caliente).
 - **2026-09-16**: TPI, grupo 2 (Casermeiro). El docente respondió la propuesta con cinco preguntas sobre el Tema 1 (horno). Escrito `entregables/TPI/caser/05-respuestas-al-docente.md`: diseño del horno como servidor con preparación y política de encendido por umbral (statechart Apagado → Acumulando → Calentando → Procesando → Enfriando; Queue + Hold + Seize/Delay/Release; disparo por condición al entrar a la cola, espera máxima por timeout), construcción en dos etapas (arribos exógenos → demanda y stock), tabla de datos y método de ajuste, estimación de P_cal/P_mant por regresión sobre facturas, escenarios E0-E3 parametrizados, medida de decisión (costo relevante por kg sujeto a nivel de servicio), validación con tolerancias + Welch + juicio del encargado, experimento Parameters Variation con semilla como parámetro y un `Random` por fuente de aleatoriedad (verificado contra el Big Book de AnyLogic caps. 8 y 15), paired-t con Bonferroni. Sin cambios en las unidades.

@@ -178,7 +178,7 @@ La cola inicial es vacía, un supuesto pendiente de verificar a las 07:00; no se
 arbitrario a este sistema de horizonte finito. Las salidas actuales agregan toda la franja: un reporte
 separado de la cohorte del pico `[4500, 6300)` queda para la siguiente iteración.
 
-## 6. Verificación y próximo paso con campo
+## 6. Verificación y estrategia de calibración remota
 
 El verificador reproduce una tanda de **5 pasajeros, 2 molinetes y servicio de 3 s** mediante trazas
 explícitas: esperas `0, 0, 3, 3, 6`, media **2,4 s**, P90 **6 s**, cola máxima **3**, área de cola
@@ -190,13 +190,15 @@ En la primera ejecución del IDE, verificar esa misma tanda (`modoDemo=false`, p
 `tamanoTanda=5`, `intervaloTandaSeg=150`, `servicioSUBESeg=3`, `molinetesBase=2`, `horizonteSeg=10`).
 Después ejecutar los cuatro demos completos. Estos checks del motor siguen pendientes.
 
-Para completar la calibración:
+El grupo reside en Rosario y no puede realizar una medición presencial propia en Constitución. Para avanzar
+sin presentar supuestos como observaciones:
 
-- Registrar inicio y fin de cada validación, distinguiendo SUBE y EMV/QR; medir el servicio completo
-  que ocupa el molinete, no solamente el contacto de la tarjeta.
-- Registrar hora y tamaño de cada oleada, molinetes habilitados, cola al inicio y cola máxima,
-  indicando cuándo se superponen tandas.
-- Ajustar las entradas estocásticas y validar colas y caudales contra una jornada independiente.
+- usar horarios oficiales del Ferrocarril Roca para aproximar los intervalos entre oleadas;
+- solicitar a SBASE/Emova y Trenes Argentinos datos operativos de mayor granularidad;
+- tratar los tiempos de servicio, tamaños de tanda y proporción de transferencia como factores
+  experimentales dentro de rangos explícitos, sujetos a la conformidad del docente;
+- validar el caudal agregado contra ventanas SBASE no usadas para parametrizar el modelo, dejando claro
+  que el dataset disponible no permite validar la espera ni la cola real;
 - Incorporar semillas independientes por fuente aleatoria y entradas comunes por réplica entre
   escenarios antes de calcular diferencias apareadas e intervalos de confianza.
 

@@ -115,7 +115,7 @@ def bullet(text, *, bold_lead=None):
 
 
 body = []
-body.append(paragraph(run("TPI Simulación de molinetes de subte", bold=True, size=34),
+body.append(paragraph(run("Avance del TPI Simulación de molinetes de subte", bold=True, size=34),
                       style="Title", after=70, line=360, keep=True))
 body.append(paragraph(run("Definición del caso y modelo inicial en AnyLogic", size=23, color="404040"),
                       style="Subtitle", after=210, line=280, keep=True))
@@ -132,7 +132,7 @@ body.append(table(
 ))
 body.append(paragraph(rich(
     ("Resultado actual. ", True),
-    "El caso ya está definido y cuenta con evidencia de SBASE. También se preparó un modelo inicial en AnyLogic con los escenarios E0 a E3. Para calibrarlo faltan las mediciones de tiempo de servicio y estructura de las tandas, además de ejecutar el proyecto completo en el IDE.",
+    "El caso está definido con datos oficiales de SBASE y se preparó un modelo inicial en AnyLogic con los escenarios E0 a E3. Se verificaron la estructura del archivo, las funciones Java y las métricas mediante trazas controladas. Todavía falta ejecutar el proyecto completo en el IDE y resolver la estimación de los parámetros que no aparecen en los datos públicos.",
 ), after=180))
 
 body.append(paragraph(run("Definición del caso", bold=True, size=27), style="Heading1", before=140, after=90, keep=True))
@@ -154,7 +154,7 @@ body.append(paragraph(rich(
 )))
 body.append(paragraph(rich(
     ("Por qué requiere simulación. ", True),
-    "En promedio, cada molinete recibe un pasajero cada 8,5 segundos, mientras una validación demora aproximadamente 2 a 3 segundos. Un modelo de colas basado solo en promedios anticiparía poca congestión. La cola aparece porque los pasajeros llegan en tandas desde la terminal del Ferrocarril Roca; la simulación representa esa congestión transitoria.",
+    "En promedio, cada molinete procesa un pasajero cada 8,5 segundos durante el pico. Sin embargo, el promedio de quince minutos puede ocultar congestión transitoria: los pasajeros que combinan desde la terminal del Ferrocarril Roca llegan en oleadas. El modelo permite estudiar cómo el tamaño de esas oleadas y el tiempo de validación afectan la espera.",
 ), after=150))
 
 body.append(paragraph(run("Evidencia disponible", bold=True, size=27), style="Heading1", before=120, after=90, keep=True))
@@ -187,10 +187,10 @@ body.append(table(
     [
         ["Cantidad base de molinetes", "20 como aproximación entera provisional de 19,5"],
         ["Cantidad en E1", "28, sujeto a confirmar su disponibilidad para ingreso"],
-        ["Tiempo de servicio SUBE", "Pendiente de medición en campo"],
-        ["Tiempo de servicio EMV y QR", "Pendiente de medición en campo"],
-        ["Tamaño de tanda", "Pendiente de medición en campo"],
-        ["Intervalo entre tandas", "Pendiente de medición en campo"],
+        ["Tiempo de servicio SUBE", "No publicado; se tratará como parámetro incierto"],
+        ["Tiempo de servicio EMV y QR", "No publicado; se tratará como parámetro incierto"],
+        ["Tamaño de tanda", "A estimar con horarios ferroviarios y análisis de sensibilidad"],
+        ["Intervalo entre tandas", "A aproximar con los horarios oficiales de la Línea Roca"],
     ],
     [3600, 5450],
 ))
@@ -202,7 +202,7 @@ body.append(table(
         ["E0 Base", "Configuración actual con aproximadamente 20 molinetes activos"],
         ["E1 Capacidad", "Habilitar los 28 molinetes instalados"],
         ["E2 Redistribución", "Desviar una fracción del flujo hacia el vestíbulo Plaza"],
-        ["E3 Contactless", "Cambiar el tiempo de servicio por el medido para EMV y QR"],
+        ["E3 Contactless", "Evaluar distintos tiempos de validación para EMV y QR"],
     ],
     [2450, 6600],
 ))
@@ -210,6 +210,16 @@ body.append(paragraph(
     "E2 mide por ahora el alivio sobre el vestíbulo Principal y contabiliza a los pasajeros desviados. Para recomendar una mejora sobre toda la estación será necesario incorporar la capacidad, el flujo propio y la cola de Plaza.",
     after=150,
 ))
+
+body.append(paragraph(run("Limitaciones y estrategia de datos", bold=True, size=27), style="Heading1", before=120, after=90, keep=True))
+body.append(paragraph(
+    "SBASE publica validaciones por molinete en intervalos de quince minutos, pero no informa tiempos de servicio, colas observadas ni la composición de las oleadas. Como los integrantes residen en Rosario, no es posible realizar una medición presencial propia en Constitución. Esta limitación se declara para no presentar valores supuestos como datos observados.",
+    after=100,
+))
+body.append(bullet("Usar los horarios oficiales de llegada de la Línea Roca para aproximar los intervalos entre oleadas."))
+body.append(bullet("Solicitar a SBASE y Trenes Argentinos información con mayor granularidad, si estuviera disponible."))
+body.append(bullet("Tratar el tamaño de tanda y los tiempos de servicio como factores experimentales y analizar rangos, sujetos a la conformidad del docente."))
+body.append(bullet("Validar el caudal agregado del modelo contra ventanas de SBASE no utilizadas para parametrizarlo y declarar que la espera real no puede validarse con el dataset disponible."))
 
 body.append(paragraph(run("Medidas de rendimiento", bold=True, size=27), style="Heading1", before=120, after=90, keep=True))
 body.append(paragraph(run("Medidas principales", bold=True, size=22), style="Heading2", after=60, keep=True))
@@ -233,16 +243,16 @@ body.append(table(
         ["Listo", "Datos SBASE perfilados y fundamento del uso de simulación"],
         ["Listo", "Escenarios E0 a E3 y medidas de rendimiento"],
         ["Listo", "Modelo inicial y parámetros expuestos en AnyLogic"],
-        ["Pendiente", "Medición de servicio, tandas, molinetes habilitados y cola observada"],
+        ["Pendiente", "Definir con el docente el tratamiento de los parámetros no observados"],
+        ["Pendiente", "Relevar horarios oficiales del Roca y solicitar datos adicionales"],
         ["Pendiente", "Compilación y ejecución completa del proyecto en el IDE"],
-        ["Pendiente", "Edición del último envío del formulario con el tema del subte"],
     ],
     [2100, 6950],
     centers=(0,),
 ))
 body.append(paragraph(rich(
     ("Próximo paso. ", True),
-    "Realizar la medición en campo, cargar los parámetros en el modelo y validar sus colas y caudales contra una jornada independiente.",
+    "Acordar con el docente la estrategia para los parámetros no observados. Si acepta un análisis condicional, se definirán rangos para tiempos de servicio y tamaños de tanda, se ejecutarán múltiples réplicas y se informarán resultados de sensibilidad sin atribuirlos a mediciones inexistentes.",
 ), before=30, after=0))
 
 sect = (
@@ -283,7 +293,7 @@ numbering_xml = f'''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 header_xml = f'''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <w:hdr xmlns:w="{W}">{paragraph(run("SIM  |  TPI  |  MOLINETES DE CONSTITUCIÓN", bold=True, color="606060", size=16), after=0)}</w:hdr>'''
 footer_xml = f'''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<w:ftr xmlns:w="{W}">{paragraph(run("Comisión 401  |  Bonadeo y Estevez  |  20 de septiembre de 2026", color="707070", size=16), after=0, align="center")}</w:ftr>'''
+<w:ftr xmlns:w="{W}">{paragraph(run("Comisión 401  |  Bonadeo y Estevez  |  23 de septiembre de 2026", color="707070", size=16), after=0, align="center")}</w:ftr>'''
 
 content_types = '''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
