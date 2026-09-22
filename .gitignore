@@ -25,3 +25,8 @@ materias/*/figs/presentacion/
 
 # IPP: instaladores de Bizagi (389MB de .exe, se bajan de bizagi.com)
 materias/IPP/fuentes/**/*.exe
+
+# SIM TPI (caso CASER): planillas reales de producción de la empresa (Casermeiro
+# SRL, en concurso preventivo). El repo es público (github.com/JuanBonadeo/utn_brain),
+# así que estos datos quedan solo en local — nunca se suben. Ver decisión 2026-09-22.
+materias/SIM/entregables/TPI/caser/datos-locales/
