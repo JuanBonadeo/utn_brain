@@ -232,21 +232,21 @@ Esto no supone que el profesional deba asumir responsabilidades que corresponden
 
 Se entrevistó a **Mateo**, ingeniero de software que se desempeña como desarrollador *backend* en una empresa de software de la ciudad de Rosario, con cuatro a cinco años de experiencia profesional. Su trabajo actual se centra en integraciones complejas entre sistemas, diseño de arquitecturas, automatización de procesos y bases de datos. A pedido del entrevistado, se omite el nombre de la empresa.
 
-La entrevista se realizó en forma oral y fue grabada con su autorización. El entrevistado recibió previamente las preguntas de la versión breve del guion (Anexo I) y las respondió en una intervención continua. La transcripción se obtuvo con una herramienta de reconocimiento de voz y fue revisada contra el audio. Figura completa en el Anexo II.
+La entrevista se realizó en forma oral y fue grabada con su autorización. El entrevistado recibió previamente las preguntas de la versión breve del guion (Anexo I) y las respondió en una intervención continua. La transcripción se obtuvo con una herramienta de reconocimiento de voz, fue revisada contra el audio y editada para su lectura. Figura completa en el Anexo II.
 
-Corresponde explicitar el alcance del material. Se trata de **una sola entrevista**, a un profesional de desarrollo y no de infraestructura física, por lo que no es representativa del sector: funciona como testimonio de la práctica cotidiana, no como evidencia estadística. Por otra parte, algunas afirmaciones —en particular el ejemplo de la sección 7.5— son de segunda mano según el propio entrevistado («rascando un poco en los pasillos te enterás») y se consignan como tales.
+Corresponde explicitar el alcance del material. Se trata de **una sola entrevista**, a un profesional de desarrollo y no de infraestructura física, por lo que no es representativa del sector: funciona como testimonio de la práctica cotidiana, no como evidencia estadística. Por otra parte, algunas afirmaciones —en particular el ejemplo de la sección 7.5— son de segunda mano según el propio entrevistado («rascando un poco en los pasillos») y se consignan como tales.
 
 ### 7.2 «Para mí es una IP»: la infraestructura invisible en la práctica
 
 La primera respuesta confirma de manera casi literal la hipótesis de la sección 6.2. Consultado sobre si piensa dónde está físicamente el servidor cuando despliega una aplicación, el entrevistado respondió:
 
-> «La verdad que uno casi nunca piensa dónde carajo está el servidor. [...] Para mí es una IP, ¿entendés? O un servicio en un desplegable. [...] Pero la imagen así del galpón gigante en el medio de la nada, lleno de cables y ventiladores... no, ni se te cruza por la cabeza.»
+> «Uno casi nunca piensa dónde está el servidor. [...] Para mí es una IP, o un servicio en un desplegable. [...] Pero la imagen del galpón gigante en el medio de la nada, lleno de cables y ventiladores, ni se te cruza por la cabeza.»
 
-El pasaje muestra que la desmaterialización no es solo un rasgo de la experiencia del consumidor final que describe Lipovetsky: se extiende a quienes construyen el software. La geografía reaparece únicamente cuando se vuelve un problema operativo —latencia— o jurídico —el entrevistado menciona la normativa europea de protección de datos, que obliga a alojar datos en Europa—. Fuera de esos casos, la decisión se reduce a «guita y latencia» o a «lo que ya estaba configurado en el proyecto».
+El pasaje muestra que la desmaterialización no es solo un rasgo de la experiencia del consumidor final que describe Lipovetsky: se extiende a quienes construyen el software. La geografía reaparece únicamente cuando se vuelve un problema operativo —latencia— o jurídico —el entrevistado menciona la normativa europea de protección de datos, que obliga a alojar datos en Europa—. Fuera de esos casos, la decisión se reduce a «plata y latencia» o a «lo que ya estaba configurado en el proyecto».
 
 La respuesta sobre el impacto ambiental es todavía más tajante:
 
-> «Del impacto ambiental... nah, cero. Pero literal, eh, cero. Jamás se habla de eso en una planning. La única vez que se habla de “consumo”, ponele, es cuando llega el resumen de la tarjeta con los costos de la nube a fin de mes [...]. Como no ves el humo salir de la notebook... parece que la nube es mágica.»
+> «Del impacto ambiental, nada. Literalmente nada. Jamás se habla de eso en una planning. La única vez que se habla de “consumo” es cuando llega el resumen de la tarjeta con los costos de la nube a fin de mes [...]. Como no ves el humo salir de la notebook, parece que la nube es mágica.»
 
 Esta observación se conecta con la sección 5.2. El costo energético no está ausente del trabajo del desarrollador: **está presente, pero traducido a dólares y mezclado en una factura**. La única señal material que llega al equipo es monetaria, y por lo tanto la única pregunta que se hace es cómo pagar menos, no qué se consume.
 
@@ -254,19 +254,19 @@ Esta observación se conecta con la sección 5.2. El costo energético no está 
 
 La respuesta sobre las herramientas de inteligencia artificial resulta especialmente útil para el cruce con Lipovetsky de la sección 6.2:
 
-> «Yo sé, porque leés por ahí, que entrenar esos modelos gasta una guita y una energía infernal, pero como a mí en la API me cobran... qué sé yo, dos centavos por un par de miles de tokens, mi cerebro no hace la conexión con el gasto energético que hay atrás de la preguntita boluda que le acabo de hacer.»
+> «Yo sé, porque lo leés por ahí, que entrenar esos modelos gasta muchísima plata y muchísima energía, pero como a mí en la API me cobran un par de centavos por unos miles de tokens, mi cerebro no hace la conexión con el gasto energético que hay detrás de la preguntita más tonta que le acabo de hacer.»
 
-El entrevistado identifica con precisión el mecanismo que el trabajo describe en términos teóricos. La información existe —«leés por ahí»—, pero el precio unitario ínfimo y la fricción nula desconectan el acto de consumo de su soporte material. Es la lógica del hiperconsumo aplicada al cómputo: un servicio experimentado como inmaterial, disponible a cualquier hora, cuyo costo real queda fuera de la percepción de quien lo usa. En este caso, además, quien lo usa es un profesional que sabe perfectamente que ese costo existe.
+El entrevistado identifica con precisión el mecanismo que el trabajo describe en términos teóricos. La información existe —«lo leés por ahí»—, pero el precio unitario ínfimo y la fricción nula desconectan el acto de consumo de su soporte material. Es la lógica del hiperconsumo aplicada al cómputo: un servicio experimentado como inmaterial, disponible a cualquier hora, cuyo costo real queda fuera de la percepción de quien lo usa. En este caso, además, quien lo usa es un profesional que sabe perfectamente que ese costo existe.
 
 ### 7.4 El proyecto patagónico visto desde el sector
 
 Sobre el proyecto Stargate Argentina, el entrevistado expresó una ambivalencia que reproduce el eje de la sección 6.3:
 
-> «Como ingeniero, obvio, te re manija que pongan infraestructura de ese calibre acá. Pero [...] te entra la duda. ¿Vienen porque les interesa desarrollar la región, buscar talento, o vienen nomás porque hace un frío de cagarse y se ahorran millones en aire acondicionado para enfriar las máquinas?»
+> «Como ingeniero, obviamente te entusiasma que pongan infraestructura de ese calibre acá. Pero te entra la duda [...]: ¿vienen porque les interesa desarrollar la región y buscar talento, o vienen solamente porque hace muchísimo frío y se ahorran millones en aire acondicionado para enfriar las máquinas?»
 
 Y sobre las condiciones para que la inversión signifique algo para quienes hacen software en el país:
 
-> «Si vienen, ponen los servidores, los encierran con alambre de púas y el mantenimiento lo hacen remoto unos vagos desde Silicon Valley... a nosotros nos da exactamente igual. Tendría que venir con convenios con las facultades, puestos de infraestructura pesada a nivel local... si no, es humo.»
+> «Si vienen, ponen los servidores, los encierran con alambre de púas y el mantenimiento lo hacen de forma remota desde Silicon Valley, a nosotros nos da exactamente igual. Tendría que venir con convenios con las facultades y puestos de infraestructura pesada a nivel local. Si no, es humo.»
 
 La imagen del alambre de púas y el mantenimiento remoto describe, en lenguaje coloquial, lo que la literatura denomina **economía de enclave**: una instalación desconectada de la trama productiva que la rodea. La coincidencia con la evidencia de la Tabla 2 —pocos empleos permanentes, operación monitoreada a distancia— es completa. La propuesta del entrevistado —convenios con universidades y puestos técnicos locales— coincide también con la tercera objeción de la sección 6.4: el valor de la infraestructura depende de las condiciones de acceso que se negocien, no del edificio en sí.
 
@@ -274,15 +274,15 @@ La imagen del alambre de púas y el mantenimiento remoto describe, en lenguaje c
 
 La respuesta sobre la responsabilidad profesional es la que más tensiona el argumento del trabajo, y por eso es la más valiosa:
 
-> «En la teoría te digo que sí, obvio, deberíamos hacernos cargo. Pero en la trinchera... en el día a día vos estás corriendo, tenés que cerrar el sprint, te están apurando para que no se caiga producción... ¿qué vas a estar pensando en la huella de carbono de un `while`, me entendés? Eso se decide en otro nivel, más arriba.»
+> «En la teoría te digo que sí, obviamente deberíamos hacernos cargo. Pero en la trinchera, en el día a día, estás corriendo, tenés que cerrar el sprint, te apuran para que no se caiga producción... ¿qué vas a estar pensando en la huella de carbono de un `while`? Eso se decide en otro nivel, más arriba.»
 
 La sección 6.5 sostiene que el ingeniero no es un observador del proceso sino uno de sus agentes. El testimonio no refuta esa afirmación, pero le agrega una condición que el trabajo no había considerado con suficiente peso: **la organización del trabajo produce activamente la separación entre lo técnico y lo político**. El sprint, la urgencia de producción y las métricas de entrega no dejan espacio para la pregunta por las consecuencias. La responsabilidad existe, pero se ejerce dentro de condiciones que no la favorecen.
 
-El entrevistado agrega un matiz revelador: el código más eficiente consume menos recursos, pero «no es que lo hacés por el planeta, lo hacés para que no explote el servidor». Cuando la eficiencia energética ocurre, ocurre como efecto colateral de un incentivo económico, no como objetivo.
+El entrevistado agrega un matiz revelador: el código más eficiente consume menos recursos, pero «no lo hacés por el planeta, lo hacés para que no explote el servidor». Cuando la eficiencia energética ocurre, ocurre como efecto colateral de un incentivo económico, no como objetivo.
 
 Finalmente, ante la pregunta por decisiones presentadas como técnicas que escondían otra cosa, relató un caso que ilustra con precisión la crítica a Toffler planteada en la sección 4.1:
 
-> «Te la venden como “che, vamos a migrar todo a una arquitectura serverless porque es la vanguardia técnica, súper moderno, escala solo”. [...] Y después rascando un poco en los pasillos te enterás que en realidad querían rajar a dos pibes de infraestructura para achicar sueldos y necesitaban que la nube se maneje sola. [...] Muchas veces disfrazamos de “modernización” o “buenas prácticas” lo que es puramente recortar gastos operativos.»
+> «Te la venden como “vamos a migrar todo a una arquitectura serverless porque es la vanguardia técnica, súper moderno, escala solo”. [...] Después, rascando un poco en los pasillos, te enterás de que en realidad querían despedir a dos chicos de infraestructura para achicar sueldos y necesitaban que la nube se manejara sola. [...] Muchas veces disfrazamos de “modernización” o “buenas prácticas” lo que es puramente recortar gastos operativos.»
 
 El ejemplo es, a escala de una empresa, el mismo mecanismo que el trabajo identifica a escala nacional. El vocabulario de la vanguardia tecnológica —la «ola» que llega, lo moderno, lo que «escala solo»— presenta como necesidad técnica lo que es una decisión con costo humano y con responsables concretos. La crítica a la metáfora toffleriana, según la cual una ola no tiene autor, encuentra aquí un caso de la práctica profesional: la modernización tampoco despide a nadie; alguien decide despedir y la modernización le da el lenguaje. Cabe reiterar que el propio entrevistado presenta este caso como información obtenida de manera informal, por lo que se lo toma como ilustración del mecanismo y no como un hecho verificado.
 
@@ -392,48 +392,42 @@ Se le solicitó además una breve presentación profesional y su preferencia sob
 **Experiencia:** cuatro a cinco años de trabajo profesional.
 **Modalidad:** oral, grabada con autorización del entrevistado.
 **Fecha:** 22 de septiembre de 2026.
-**Nota sobre la transcripción:** el entrevistado recibió previamente las ocho preguntas de la versión breve del guion (Anexo I) y las respondió en una intervención continua. La transcripción se obtuvo con una herramienta de reconocimiento de voz y fue revisada contra el audio. Los encabezados entre corchetes, que indican a qué pregunta corresponde cada tramo, se agregaron para facilitar la lectura y no forman parte de la grabación. Se conserva el registro oral del entrevistado.
+**Nota sobre la transcripción:** el entrevistado recibió previamente las ocho preguntas de la versión breve del guion (Anexo I) y las respondió en una intervención continua. La transcripción se obtuvo con una herramienta de reconocimiento de voz y fue revisada contra el audio. Se presenta una **transcripción editada**: se suprimieron muletillas, repeticiones y expresiones malsonantes, y se ajustó la puntuación, sin agregar ni modificar el contenido de lo dicho. Los encabezados entre corchetes, que indican a qué pregunta corresponde cada tramo, se agregaron para facilitar la lectura y no forman parte de la grabación.
 
 ---
 
-*[Se escucha el ruido de una silla moviéndose y alguien acomodándose.]*
-
-Eh... bueno, a ver, ¿ahí está grabando? Sí, joya. Qué hacés, todo bien.
-
 **[Presentación e identificación]**
 
-Che, mirá, sobre lo que me preguntabas para presentarlo ahí en el trabajo... poneme como Mateo, sí, total no pasa nada, pero la empresa... la verdad preferiría que no. Poné, qué sé yo, «desarrollador backend de una empresa de software de Rosario» o algo así. Viste cómo es, después los de recursos humanos te rompen las bolas si andás nombrando a la empresa sin pedir permiso y es para quilombo. Y para la presentación... yo hoy por hoy estoy más que nada como ingeniero de software metiéndole a todo lo que es integraciones complejas, armando arquitecturas, automatizando procesos y bases de datos. Y laburando de esto, así cobrando y en serio... y, hará unos cuatro o cinco años ya, más o menos.
+Para la presentación en el trabajo, podés ponerme como Mateo, no hay problema, pero preferiría que no figure la empresa. Poné «desarrollador backend de una empresa de software de Rosario» o algo así; después recursos humanos se complica si nombrás a la empresa sin pedir permiso. Hoy estoy trabajando como ingeniero de software, sobre todo en integraciones complejas, armando arquitecturas, automatizando procesos y con bases de datos. Trabajando de esto de manera profesional, hace unos cuatro o cinco años.
 
 **[Pregunta 1 — Ubicación física del servidor]**
 
-Yendo a lo de las preguntas... a ver. Y sobre lo de la nube... mirá, te soy sincero, ehhh... la verdad que uno casi nunca piensa dónde carajo está el servidor. O sea, vos cuando... cuando levantás algo, no sé, tirás un deploy o armás un flujo de la san puta para integrar un CRM, para mí es una IP, ¿entendés? O un servicio en un desplegable. Qué sé yo, elegís `us-east` en Virginia o `sa-east` allá en San Pablo, pero más que nada por un tema de... de latencia, para que la request responda más rápido. Pero la imagen así del galpón gigante en el medio de la nada, lleno de cables y ventiladores... no, ni se te cruza por la cabeza.
+Te soy sincero: uno casi nunca piensa dónde está el servidor. Cuando levantás algo, hacés un deploy o armás un flujo enorme para integrar un CRM, para mí es una IP, o un servicio en un desplegable. Elegís `us-east`, en Virginia, o `sa-east`, en San Pablo, pero más que nada por un tema de latencia, para que la request responda más rápido. Pero la imagen del galpón gigante en el medio de la nada, lleno de cables y ventiladores, ni se te cruza por la cabeza.
 
 **[Pregunta 2 — Quién decide y con qué criterio]**
 
-Y... lo de quién decide, medio que viene atado a eso. O sea, en la práctica es guita y latencia. Lo define el arquitecto o el líder técnico con los de negocios. Si AWS o Google Cloud te fajan menos en un lado, vas ahí de cabeza, olvidate. Salvo, bueno... salvo que tengas clientes en Europa que ahí sí, por la GDPR o esas leyes de protección de datos, te obligan a tener los fierros físicamente allá. Pero si no hay un bardo legal de por medio... vamos a lo más barato o a lo que ya estaba configurado en el proyecto.
+Lo de quién decide viene atado a eso. En la práctica es plata y latencia. Lo define el arquitecto o el líder técnico junto con la gente de negocio. Si AWS o Google Cloud te cobran menos en un lado, vas ahí directo. Salvo que tengas clientes en Europa: ahí sí, por la GDPR o esas leyes de protección de datos, te obligan a tener los servidores físicamente allá. Pero si no hay un tema legal de por medio, vamos a lo más barato o a lo que ya estaba configurado en el proyecto.
 
 **[Pregunta 3 — Impacto ambiental en el trabajo]**
 
-Del impacto ambiental... nah, cero. Pero literal, eh, cero. Jamás se habla de eso en una planning. La única vez que se habla de «consumo», ponele, es cuando llega el resumen de la tarjeta con los costos de la nube a fin de mes y se quieren matar, o... o si un proceso choto te comió toda la memoria y se te cae todo a pedazos. Como no ves el humo salir de la notebook... parece que la nube es mágica. No, no existe esa charla en el laburo diario.
+Del impacto ambiental, nada. Literalmente nada. Jamás se habla de eso en una planning. La única vez que se habla de «consumo» es cuando llega el resumen de la tarjeta con los costos de la nube a fin de mes y se quieren matar, o si un proceso te comió toda la memoria y se te cae todo. Como no ves el humo salir de la notebook, parece que la nube es mágica. Esa charla no existe en el trabajo diario.
 
 **[Pregunta 4 — Herramientas de IA y costo de cómputo]**
 
-Con lo de las herramientas de IA... puf, me cambió la vida, 100 %. O sea, hoy... hoy yo le tiro un JSON de, no sé, tres mil líneas que no me parsea y le digo «flaco, encontrame dónde rompe», o la uso de pato de goma cuando estoy quemadísimo a las 3 de la mañana tratando de arreglar un bug. Pero... del costo de cómputo real de hacer eso... no, ni idea. O sea, yo sé, porque leés por ahí, que entrenar esos modelos gasta una guita y una energía infernal, pero como a mí en la API me cobran... qué sé yo, dos centavos por un par de miles de tokens, mi cerebro no hace la conexión con el gasto energético que hay atrás de la preguntita boluda que le acabo de hacer.
+Las herramientas de IA me cambiaron la vida, cien por ciento. Hoy le paso un JSON de tres mil líneas que no me parsea y le digo «encontrame dónde rompe», o la uso de pato de goma cuando estoy quemado a las tres de la mañana tratando de arreglar un bug. Pero del costo de cómputo real de hacer eso, ni idea. Yo sé, porque lo leés por ahí, que entrenar esos modelos gasta muchísima plata y muchísima energía, pero como a mí en la API me cobran un par de centavos por unos miles de tokens, mi cerebro no hace la conexión con el gasto energético que hay detrás de la preguntita más tonta que le acabo de hacer.
 
 **[Pregunta 5 — El data center en la Patagonia]**
 
-Lo del data center este en la Patagonia... sí, vi algo en las noticias, lo leí por arriba. A ver, como ingeniero, obvio, te re manija que pongan infraestructura de ese calibre acá. Pero, y esto lo hablaba el otro día... nada que ver, pero estaba en el club después de jugar un partido de pádel y hablábamos justo de eso... te entra la duda. ¿Vienen porque les interesa desarrollar la región, buscar talento, o vienen nomás porque hace un frío de cagarse y se ahorran millones en aire acondicionado para enfriar las máquinas? Y... y la energía acá seguramente la negocian por dos mangos.
+Lo del data center en la Patagonia lo vi en las noticias, lo leí por arriba. Como ingeniero, obviamente te entusiasma que pongan infraestructura de ese calibre acá. Pero te entra la duda —justo lo hablábamos el otro día en el club, después de jugar un partido de pádel—: ¿vienen porque les interesa desarrollar la región y buscar talento, o vienen solamente porque hace muchísimo frío y se ahorran millones en aire acondicionado para enfriar las máquinas? Y la energía acá seguramente la negocian muy barata.
 
 **[Pregunta 6 — Qué haría falta para que impacte localmente]**
 
-Para que a nosotros nos sirva, a los que hacemos software acá... y, tendrían que armar ecosistema, transferir conocimiento. Si vienen, ponen los servidores, los encierran con alambre de púas y el mantenimiento lo hacen remoto unos vagos desde Silicon Valley... a nosotros nos da exactamente igual. Tendría que venir con convenios con las facultades, puestos de infraestructura pesada a nivel local... si no, es humo.
+Para que nos sirva a los que hacemos software acá, tendrían que armar ecosistema y transferir conocimiento. Si vienen, ponen los servidores, los encierran con alambre de púas y el mantenimiento lo hacen de forma remota desde Silicon Valley, a nosotros nos da exactamente igual. Tendría que venir con convenios con las facultades y puestos de infraestructura pesada a nivel local. Si no, es humo.
 
 **[Pregunta 7 — Responsabilidad del desarrollador]**
 
-Sobre la responsabilidad nuestra... ehhh... a ver, en la teoría te digo que sí, obvio, deberíamos hacernos cargo. Pero en la trinchera... en el día a día vos estás corriendo, tenés que cerrar el sprint, te están apurando para que no se caiga producción... ¿qué vas a estar pensando en la huella de carbono de un `while`, me entendés? Eso se decide en otro nivel, más arriba. Igual, ojo, como somos medios enfermos de la optimización, si hacés un código más limpio y más performante, de rebote estás consumiendo menos CPU y menos energía. Pero seamos buenos, no es que lo hacés por el planeta, lo hacés para que no explote el servidor.
+Sobre nuestra responsabilidad: en la teoría te digo que sí, obviamente deberíamos hacernos cargo. Pero en la trinchera, en el día a día, estás corriendo, tenés que cerrar el sprint, te apuran para que no se caiga producción... ¿qué vas a estar pensando en la huella de carbono de un `while`? Eso se decide en otro nivel, más arriba. Igual, como somos medio obsesivos con la optimización, si hacés un código más limpio y más performante, de rebote consumís menos CPU y menos energía. Pero seamos honestos: no lo hacés por el planeta, lo hacés para que no explote el servidor.
 
 **[Pregunta 8 — Decisiones técnicas que esconden otra cosa]**
 
-Y... ¿decisiones técnicas que escondían otra cosa? Uff... sí, mil. Mil veces. Me acuerdo una... te bajan la línea, te la venden como «che, vamos a migrar todo a una arquitectura *serverless* porque es la vanguardia técnica, súper moderno, escala solo». Y vos decís, guau, qué visión. Y después rascando un poco en los pasillos te enterás que en realidad querían rajar a dos pibes de infraestructura para achicar sueldos y necesitaban que la nube se maneje sola. O que, no sé, cerraron un arreglo comercial por atrás con el proveedor de cloud y les daban créditos gratis. Muchas veces disfrazamos de «modernización» o «buenas prácticas» lo que es puramente recortar gastos operativos. Es así.
-
-*[Fin de la grabación.]*
+¿Decisiones técnicas que escondían otra cosa? Sí, mil veces. Me acuerdo de una: te la venden como «vamos a migrar todo a una arquitectura *serverless* porque es la vanguardia técnica, súper moderno, escala solo». Y vos decís: qué visión. Después, rascando un poco en los pasillos, te enterás de que en realidad querían despedir a dos chicos de infraestructura para achicar sueldos y necesitaban que la nube se manejara sola. O que habían cerrado un acuerdo comercial con el proveedor de cloud y les daban créditos gratis. Muchas veces disfrazamos de «modernización» o «buenas prácticas» lo que es puramente recortar gastos operativos. Es así.
