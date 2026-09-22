@@ -6,7 +6,7 @@
 > El respaldo completo, con el perfilado del dataset, está en
 > [`subte/01-definicion-del-caso.md`](subte/01-definicion-del-caso.md).
 > Versión entregable en Word: [`TPI_Simulacion_Propuesta_de_Tema.docx`](TPI_Simulacion_Propuesta_de_Tema.docx)
-> — **pendiente de regenerar con este contenido.**
+> — regenerado con este contenido (script [`scripts/build-tpi-formulario-docx.py`](../../../../scripts/build-tpi-formulario-docx.py)).
 
 ---
 
