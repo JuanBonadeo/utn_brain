@@ -32,6 +32,11 @@ Fuente: brief armado por la familia (2026-09-13) + respuestas de Gonzalo en la m
     "mantener caliente" cruzado con el nivel de demanda.
   - La empresa preguntó si se puede estudiar **cuántas ULI conviene esperar antes de encender**: es
     la variable de decisión del Tema 1 (barrido del umbral con réplicas e intervalos de confianza).
+  - **Revenido es un equipo y un proceso aparte** (confirmado con las planillas 2026-09-22: horno grande
+    "TKN + generador endotérmico", 145 kW, hace cementación + temple en un solo ciclo; el revenido se hace
+    en un horno chico separado, "POTE", 15 kW) y **no se le hace a todos los productos**. Con muchos menos
+    registros que el de cementación (192 completos contra 1032), no entra en la cola/lote del modelo — ver
+    Supuestos.
 - Línea de cincado electrolítico propia, **desinstalada / no operativa**.
 
 **Proceso productivo** (confirmado por Gonzalo; casi todo interno)
@@ -63,6 +68,11 @@ Fuente: brief armado por la familia (2026-09-13) + respuestas de Gonzalo en la m
 - Capacidad agregada por familia de producto, no máquina por máquina.
 - Precios y costos constantes en el horizonte (en índices).
 - Zincado tercerizado con plazo aleatorio; no se modela al tercero por dentro.
+- **Revenido fuera del alcance del modelo de eventos discretos**: es un proceso aparte, en otro equipo, que
+  no se aplica a todos los artículos. Para los artículos donde aplica se trata como una demora fija adicional
+  (estimada de la mediana histórica), no como una cola/lote simulado. Los artículos representativos del Tema 1
+  se eligen priorizando los que no pasan por revenido, para no ensuciar el modelo con un segundo régimen de
+  campaña.
 
 ## Datos que la empresa entrega (confirmado 2026-09-16, exportación prevista 2026-09-17)
 

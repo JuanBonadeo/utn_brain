@@ -2726,6 +2726,16 @@ subte, y sobre la misma estación.
 
 ## Log
 
+- **2026-09-22** (3): TPI, grupo 2 (Casermeiro). Perfiladas a fondo las 9 planillas reales de producción que
+  mandó la oficina técnica (locales, no versionadas — el repo es público — en
+  `entregables/TPI/caser/datos-locales/`, gitignoreada). Confirmado con datos que hay **dos hornos
+  distintos**: cementación + temple en uno grande (145 kW, con generador endotérmico), revenido aparte en
+  uno chico (15 kW), que además no se aplica a todo el catálogo (192 registros completos contra 1032 de
+  cementación en 2026). Decisión de alcance: el revenido queda fuera de la cola/lote simulada, tratado como
+  demora fija donde aplica. Actualizados `01-`, `02-`, `04-` y `05-respuestas-al-docente.md` con esto. De
+  paso, costo energético del horno con cifra real (Master Plan, hoja "Costo de Energía": 0,665 $/min, 145 kW
+  instalados) en vez de estimado, y confirmado el plazo del zincado tercerizado con dos fuentes cruzables
+  (`Seguimiento TR ulis` y `ENVASADO 2022`/LATAS).
 - **2026-09-22**: TPI, grupo 1 (Bonadeo + Estevez). Regenerado el formulario de propuesta de tema:
   `entregables/TPI/formulario-eleccion-tema.md` v2 (tema del subte) y su `.docx` correspondiente
   (`TPI_Simulacion_Propuesta_de_Tema.docx`), con script nuevo `scripts/build-tpi-formulario-docx.py`

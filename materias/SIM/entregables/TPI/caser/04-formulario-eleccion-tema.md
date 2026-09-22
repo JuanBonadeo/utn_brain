@@ -26,7 +26,8 @@ Comisión: *(completar)*
 > Simulación de la cadena interna de producción y abastecimiento de stock de una PyME metalúrgica fabricante
 > de elementos de fijación, para evaluar el efecto de la regla de lanzamiento de campañas del horno de
 > cementación y temple sobre el nivel de servicio, el tiempo de entrega, el capital inmovilizado en inventario
-> y el costo energético por kilogramo tratado.
+> y el costo energético por kilogramo tratado. El revenido, un tratamiento posterior que solo se aplica a
+> parte del catálogo y se realiza en un equipo distinto, queda fuera del alcance del modelo.
 
 **Observaciones:**
 
@@ -107,14 +108,16 @@ Comisión: *(completar)*
 | Fuente | Contenido | Estado |
 |---|---|---|
 | Sistema de gestión (servidor local) | Ventas, maestro de artículos, órdenes de fabricación, compras, stock valorizado, clientes y proveedores | Exportable a planilla de cálculo. Confirmado por la empresa |
-| Registros de proceso ISO 9001:2015 | Órdenes de fabricación, cargas de horno, rechazos, trazabilidad | Existen por requisito de la norma. Pendiente de relevamiento |
-| Facturación de energía | Consumo con y sin campaña, potencia contratada, tarifa | Pendiente de relevamiento |
+| Registros de proceso ISO 9001:2015 | Órdenes de fabricación, cargas de horno, rechazos, trazabilidad | ✅ Relevado (9 planillas locales, no versionadas — ver `datos-locales/`) |
+| Costo energético del horno | $/min de máquina, potencia instalada, consumo de gas/aceite/aire | ✅ Relevado (Master Plan, hoja "Costo de Energía") |
+| Facturación de energía | Comparar mes con campaña vs. sin campaña | Pendiente — sigue sirviendo como control cruzado del dato de arriba |
 | Presupuestos y notas de venta canceladas | Demanda no atendida | **Pendiente de confirmar** si el sistema las conserva y exporta |
 
 ### Alcance propuesto para el Tema 1
 
 - 3 a 5 familias de productos, 10 a 30 artículos representativos, incluyendo artículos de alta rotación,
-  de alto margen, especiales, y artículos que atraviesan y que no atraviesan el horno.
+  de alto margen, especiales, y artículos que atraviesan y que no atraviesan el horno. Se priorizan artículos
+  que **no** requieren revenido, para no mezclar dos regímenes de campaña distintos en el mismo modelo.
 - Horizonte simulado: 12 meses. Historia para el ajuste de distribuciones: 24 meses.
 - Escenario base (regla actual) más dos o tres escenarios alternativos de regla de lanzamiento.
 - 30 réplicas por escenario y test de medias sobre las medidas de salida.
@@ -139,6 +142,9 @@ con las fechas de inicio y fin de las órdenes de fabricación.
 - Un solo turno de trabajo, salvo durante las campañas del horno.
 - Capacidad agregada por familia de producto, no máquina por máquina.
 - Zincado tercerizado modelado como un retardo aleatorio; no se modela al tercero por dentro.
+- El "horno" simulado es cementación + temple (un solo ciclo, un solo equipo). El revenido —proceso aparte,
+  en otro equipo, que no se aplica a todo el catálogo— queda fuera de la cola/lote simulada; donde aplica se
+  estima como una demora fija adicional a partir de la mediana histórica.
 - El costo de la potencia eléctrica contratada es un costo fijo hundido para la decisión de corto plazo: la
   comparación entre escenarios se hace sobre el **consumo incremental** de encender y operar el horno.
 - El histórico de ventas refleja **demanda atendida**, no demanda real de mercado. La venta perdida por

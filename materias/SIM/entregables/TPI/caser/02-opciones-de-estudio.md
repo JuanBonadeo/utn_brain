@@ -5,6 +5,11 @@
 > base + alternativo(s), 30 réplicas por escenario y test de medias. Elegir **una** como principal; las otras
 > pueden ir como segundo y tercer tema del formulario.
 
+> **Nota de estado (2026-09-22)**: tras relevar las planillas reales de producción, el horno (Opción 3 acá
+> abajo) pasó a ser el **tema principal** — ver `04-formulario-eleccion-tema.md`, que tiene la versión vigente
+> y ya acoplada con stock. Esta numeración (1-4) se conserva como catálogo de opciones consideradas; no
+> refleja la prioridad final.
+
 ## Criterio para elegir
 
 Como la capacidad no es el cuello de botella (la planta está subutilizada), los estudios que sirven son los
@@ -96,6 +101,12 @@ grande y una decisión que hoy alguien toma todos los días a criterio.
 - Criterio actual de lanzamiento (entrevista).
 
 **AnyLogic**: `Source` → `Queue` → `Batch` (con condición de umbral / timeout) → `Seize` horno → `Delay` ciclo → `Unbatch` → `Sink`. Es una cola con servidor por lotes (Unidad 3/8, versión batch). No hay ejemplo oficial calcado; los bloques están todos en la Process Modeling Library.
+
+**Alcance del "horno" en el modelo**: cementación + temple, que la empresa hace en un solo ciclo en el horno
+grande (confirmado en planillas: máquina "TKN + generador endotérmico", 145 kW). El revenido es un proceso
+aparte, en un horno chico separado ("POTE", 15 kW), que no se aplica a todos los artículos y tiene muchos
+menos registros — queda fuera de la cola/lote simulada; para los artículos donde aplica se estima como una
+demora fija adicional, no como un segundo régimen de campaña.
 
 **Riesgo**: medio-bajo. Muy acotado y original (el profe valora originalidad). Depende de que el consumo energético por carga sea conocido o estimable.
 

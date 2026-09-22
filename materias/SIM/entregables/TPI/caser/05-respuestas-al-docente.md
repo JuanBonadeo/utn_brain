@@ -119,6 +119,14 @@ vienen las ULI y adónde va lo tratado. Tres subsistemas, deliberadamente agrega
 - **Aguas abajo**: lavado, zincado tercerizado (`Delay` con plazo ajustado de los remitos), envasado,
   ingreso a stock.
 
+No incluye **revenido**: es un tratamiento posterior a la cementación, en un horno distinto ("POTE", de
+mucha menor potencia que el de cementación) y que no se aplica a todo el catálogo — el registro de 2026
+tiene menos de un quinto de los casos completos que el de cementación. Agregarlo exigiría un segundo
+régimen de campaña (otro umbral, otro statechart) sobre datos bastante más finos, para una fracción del
+flujo. Los artículos elegidos para el modelo se priorizan entre los que no lo requieren; donde un
+artículo seleccionado sí lo requiera, el revenido se suma como una demora fija adicional (mediana
+histórica), no como un servidor con cola propia.
+
 Las entidades son el **pedido** y la **ULI**, nunca la pieza: no aporta al análisis y la edición PLE
 limita a 50.000 agentes creados por corrida.
 
@@ -433,10 +441,15 @@ para mandar a fábrica está en `03-pedido-de-datos.md` §Pedido para el Tema 1)
    puede validar o solo es salida.
 6. ¿Un turno adicional de carga durante la campaña es operable? Define si existe el E4.
 7. Facturas de energía: 24 meses, con potencia contratada y si hay penalización por exceso.
+8. De los 10-30 artículos elegidos, ¿cuáles requieren revenido? Para esos, la mediana histórica de
+   `Termico 2026`/hoja Revenido (o de la columna "Revenido" de `Seguimiento TR ulis`) da la demora fija
+   a sumar.
 
 **Supuestos que quedaron escritos en la respuesta** (si alguno está mal, corregir ahí):
 un turno de carga por día; horno de una ULI a la vez (32 min); las ULI que llegan durante la campaña
-se procesan; sin recalentamiento parcial desde tibio en la base; campaña actual sin límite de espera.
+se procesan; sin recalentamiento parcial desde tibio en la base; campaña actual sin límite de espera;
+revenido fuera del modelo (otro equipo, no aplica a todo el catálogo, se estima como demora fija donde
+corresponda).
 
 **Qué sale de la wiki y qué no**: la parte estadística (réplicas, precisión, procedimiento secuencial,
 paired-t, Welch, números aleatorios comunes, Bonferroni, cuantiles) y los 10 pasos salen de SIM.md,
