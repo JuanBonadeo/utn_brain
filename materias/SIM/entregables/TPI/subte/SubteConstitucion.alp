@@ -1009,6 +1009,83 @@
               </InitialValue>
             </Properties>
           </Variable>
+          <Variable Class="PlainVariable">
+            <Id>1790000000139</Id>
+            <Name>nPico</Name>
+            <X>580</X>
+            <Y>460</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+              <Type>int</Type>
+              <InitialValue Class="CodeValue">
+                <Code>0</Code>
+              </InitialValue>
+            </Properties>
+            <Description>Pasajeros cuya llegada a la cola ocurrio entre 08:15 y 08:45.</Description>
+          </Variable>
+          <Variable Class="PlainVariable">
+            <Id>1790000000140</Id>
+            <Name>sumaEsperaPico</Name>
+            <X>580</X>
+            <Y>485</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+              <Type>double</Type>
+              <InitialValue Class="CodeValue">
+                <Code>0</Code>
+              </InitialValue>
+            </Properties>
+          </Variable>
+          <Variable Class="PlainVariable">
+            <Id>1790000000141</Id>
+            <Name>nMas30Pico</Name>
+            <X>580</X>
+            <Y>510</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+              <Type>int</Type>
+              <InitialValue Class="CodeValue">
+                <Code>0</Code>
+              </InitialValue>
+            </Properties>
+          </Variable>
+          <Variable Class="PlainVariable">
+            <Id>1790000000142</Id>
+            <Name>esperasPico</Name>
+            <X>580</X>
+            <Y>535</Y>
+            <Label>
+              <X>10</X>
+              <Y>0</Y>
+            </Label>
+            <PublicFlag>false</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+              <Type>java.util.ArrayList&lt;Double&gt;</Type>
+              <InitialValue Class="CodeValue">
+                <Code>new java.util.ArrayList&lt;Double&gt;()</Code>
+              </InitialValue>
+            </Properties>
+          </Variable>
         </Variables>
         <Connectors>
           <Connector>
@@ -2017,9 +2094,15 @@ observarCola.restart(0.000001);</Body>
               <Type>Agent</Type>
             </Parameter>
             <Body>actualizarAreas();
-double w = time() - llegadas.remove(agent);
+Double llegada = llegadas.remove(agent);
+if (llegada == null) throw new IllegalStateException("Pasajero sin instante de llegada");
+double w = time() - llegada;
 esperas.add(w); sumaEspera += w;
 if (w &gt; 30) nMas30++;
+if (llegada &gt;= 4500 &amp;&amp; llegada &lt; 6300) {
+    esperasPico.add(w); sumaEsperaPico += w; nPico++;
+    if (w &gt; 30) nMas30Pico++;
+}
 nEsperando--; nOcupados++;
 ultimaCola = time();
 inicioPorUnidad.put(unit, time());
@@ -2135,10 +2218,105 @@ return ordenadas.get((int)Math.ceil(0.9*ordenadas.size())-1);</Body>
           <Function AccessType="public" StaticFunction="false">
             <ReturnModificator>RETURNS_VALUE</ReturnModificator>
             <ReturnType>double</ReturnType>
+            <Id>1790000000143</Id>
+            <Name>percentil90Pico</Name>
+            <X>980</X>
+            <Y>415</Y>
+            <PublicFlag>true</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Label><X>10</X><Y>0</Y></Label>
+            <Body>if (esperasPico.isEmpty()) return Double.NaN;
+java.util.ArrayList&lt;Double&gt; ordenadas = new java.util.ArrayList&lt;Double&gt;(esperasPico);
+java.util.Collections.sort(ordenadas);
+return ordenadas.get((int)Math.ceil(0.9*ordenadas.size())-1);</Body>
+          </Function>
+          <Function AccessType="public" StaticFunction="false">
+            <ReturnModificator>RETURNS_VALUE</ReturnModificator>
+            <ReturnType>String</ReturnType>
+            <Id>1790000000144</Id>
+            <Name>nombreEscenario</Name>
+            <X>980</X>
+            <Y>440</Y>
+            <PublicFlag>true</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Label><X>10</X><Y>0</Y></Label>
+            <Body>switch (escenario) {
+    case 0: return "Base: 20 molinetes";
+    case 1: return "Capacidad: 28 molinetes";
+    case 2: return "Desvio parcial a Plaza";
+    case 3: return "Validacion EMV/QR";
+    default: return "Escenario invalido";
+}</Body>
+          </Function>
+          <Function AccessType="public" StaticFunction="false">
+            <ReturnModificator>RETURNS_VALUE</ReturnModificator>
+            <ReturnType>String</ReturnType>
+            <Id>1790000000145</Id>
+            <Name>horaSimulada</Name>
+            <X>980</X>
+            <Y>465</Y>
+            <PublicFlag>true</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Label><X>10</X><Y>0</Y></Label>
+            <Body>int s = (int)Math.max(0, Math.min(time(), horizonteSeg));
+int total = 7*3600 + s;
+return String.format("%02d:%02d:%02d", total/3600, (total%3600)/60, total%60);</Body>
+          </Function>
+          <Function AccessType="public" StaticFunction="false">
+            <ReturnModificator>RETURNS_VALUE</ReturnModificator>
+            <ReturnType>String</ReturnType>
+            <Id>1790000000146</Id>
+            <Name>estadoModelo</Name>
+            <X>980</X>
+            <Y>490</Y>
+            <PublicFlag>true</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Label><X>10</X><Y>0</Y></Label>
+            <Body>if (finalizado) return "FINALIZADO";
+if (cerrado) return "DRENAJE DESPUES DE 09:30";
+if (time() &gt;= 4500 &amp;&amp; time() &lt; 6300) return "VENTANA PICO";
+return "SIMULANDO";</Body>
+          </Function>
+          <Function AccessType="public" StaticFunction="false">
+            <ReturnModificator>RETURNS_VALUE</ReturnModificator>
+            <ReturnType>double</ReturnType>
+            <Id>1790000000147</Id>
+            <Name>esperaMediaActual</Name>
+            <X>980</X>
+            <Y>515</Y>
+            <PublicFlag>true</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Label><X>10</X><Y>0</Y></Label>
+            <Body>return esperas.isEmpty() ? 0 : sumaEspera/esperas.size();</Body>
+          </Function>
+          <Function AccessType="public" StaticFunction="false">
+            <ReturnModificator>RETURNS_VALUE</ReturnModificator>
+            <ReturnType>double</ReturnType>
+            <Id>1790000000148</Id>
+            <Name>utilizacionActual</Name>
+            <X>980</X>
+            <Y>540</Y>
+            <PublicFlag>true</PublicFlag>
+            <PresentationFlag>true</PresentationFlag>
+            <ShowLabel>true</ShowLabel>
+            <Label><X>10</X><Y>0</Y></Label>
+            <Body>double hasta = Math.min(time(), horizonteSeg);
+if (hasta &lt;= 0) return 0;
+double acumulada = areaOcupados + nOcupados*Math.max(0, hasta-tArea);
+return acumulada/(hasta*capacidadMolinetes());</Body>
+          </Function>
+          <Function AccessType="public" StaticFunction="false">
+            <ReturnModificator>RETURNS_VALUE</ReturnModificator>
+            <ReturnType>double</ReturnType>
             <Id>1790000000096</Id>
             <Name>dispersionUtilizacion</Name>
             <X>980</X>
-            <Y>415</Y>
+            <Y>565</Y>
             <PublicFlag>true</PublicFlag>
             <PresentationFlag>true</PresentationFlag>
             <ShowLabel>true</ShowLabel>
@@ -2159,7 +2337,7 @@ return Math.sqrt(Math.max(0, suma2/c-(suma/c)*(suma/c)));</Body>
             <Id>1790000000097</Id>
             <Name>resumen</Name>
             <X>980</X>
-            <Y>440</Y>
+            <Y>590</Y>
             <PublicFlag>true</PublicFlag>
             <PresentationFlag>true</PresentationFlag>
             <ShowLabel>true</ShowLabel>
@@ -2175,6 +2353,10 @@ return (modoDemo ? "DEMO; " : "SIN VALIDAR; ") + "E" + escenario
  + "; pendientes0930=" + pendientesAlCierre + "; cola0930=" + colaAlCierre
  + "; esperaMediaSeg=" + (n == 0 ? Double.NaN : sumaEspera/n)
  + "; p90Seg=" + percentil90() + "; propMas30=" + (n == 0 ? Double.NaN : (double)nMas30/n)
+ + "; nPico0815a0845=" + nPico
+ + "; esperaMediaPicoSeg=" + (nPico == 0 ? Double.NaN : sumaEsperaPico/nPico)
+ + "; p90PicoSeg=" + percentil90Pico()
+ + "; propMas30Pico=" + (nPico == 0 ? Double.NaN : (double)nMas30Pico/nPico)
  + "; Lq=" + areaCola/horizonteSeg + "; qMax=" + qMax
  + "; utilizacion=" + areaOcupados/(horizonteSeg*capacidadMolinetes())
  + "; disipacionMediaSeg=" + (disipaciones.isEmpty() ? Double.NaN : d/disipaciones.size())
