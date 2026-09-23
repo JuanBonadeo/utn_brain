@@ -142,6 +142,11 @@ for e in [x for x in experiments if x.findtext('Name') in {'E0','E1','E2','E3'}]
  assert ps['escenario']==e.findtext('Name')[1:]
 agents={x.findtext('Name'):x for x in r.findall('Model/ActiveObjectClasses/ActiveObjectClass')}
 ped=agents['MainPeatonal']
+for agent, min_x in ((a,1100),(ped,1000)):
+ for section in ('Variables','Functions','Events'):
+  technical=agent.findall(f'{section}/*')
+  assert all(x.findtext('PresentationFlag')=='false' for x in technical)
+  assert all(int(x.findtext('X'))>=min_x for x in technical)
 ped_blocks={x.findtext('Name'):x.findtext('ActiveObjectClass/ClassName') for x in ped.findall('EmbeddedObjects/EmbeddedObject')}
 assert ped_blocks=={'pedSource':'PedSource','pedMolinetes':'PedService','pedSalida':'PedGoTo','pedSink':'PedSink'}
 assert agents['Pasajero'] is not None
@@ -157,6 +162,7 @@ assert len(service_points)==28
 assert {x.findtext('Name') for x in service_points}=={f'molinetePed{i:02d}' for i in range(1,29)}
 assert ped.find(".//TargetLine[Name='salidaPeatonal']") is not None
 assert 'configurarMolinetesPed()' in ped.findtext('StartupCode')
+assert ped.find(".//Text[Name='etiquetaMolinetes']").findtext('TextCode')=='"Molinetes activos: " + molinetesOperativosPed + "/28"'
 libs={x.findtext('LibraryName') for x in r.findall('Model/RequiredLibraryReference')}
 assert 'com.anylogic.libraries.pedestrian' in libs
-print('OK: XML, unique IDs, E0-E3, pedestrian exit, 28 service points and 20/28 experiments')
+print('OK: XML, unique IDs, clean presentations, pedestrian exit, 28 service points and 20/28 experiments')

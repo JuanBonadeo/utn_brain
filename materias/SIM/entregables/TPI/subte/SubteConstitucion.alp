@@ -112,14 +112,14 @@
           <Variable Class="Parameter">
             <Id>1790000000002</Id>
             <Name>escenario</Name>
-            <X>40</X>
-            <Y>360</Y>
+            <X>1150</X>
+            <Y>60</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" ModificatorType="STATIC">
               <Type>int</Type>
@@ -141,14 +141,14 @@
           <Variable Class="Parameter">
             <Id>1790000000004</Id>
             <Name>modoDemo</Name>
-            <X>40</X>
-            <Y>385</Y>
+            <X>1150</X>
+            <Y>85</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" ModificatorType="STATIC">
               <Type>boolean</Type>
@@ -170,14 +170,14 @@
           <Variable Class="Parameter">
             <Id>1790000000006</Id>
             <Name>molinetesBase</Name>
-            <X>40</X>
-            <Y>410</Y>
+            <X>1150</X>
+            <Y>110</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" ModificatorType="STATIC">
               <Type>int</Type>
@@ -199,14 +199,14 @@
           <Variable Class="Parameter">
             <Id>1790000000008</Id>
             <Name>molinetesE1</Name>
-            <X>40</X>
-            <Y>435</Y>
+            <X>1150</X>
+            <Y>135</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" ModificatorType="STATIC">
               <Type>int</Type>
@@ -228,14 +228,14 @@
           <Variable Class="Parameter">
             <Id>1790000000010</Id>
             <Name>fraccionDesvioE2</Name>
-            <X>40</X>
-            <Y>460</Y>
+            <X>1150</X>
+            <Y>160</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" ModificatorType="STATIC">
               <Type>double</Type>
@@ -257,14 +257,14 @@
           <Variable Class="Parameter">
             <Id>1790000000012</Id>
             <Name>servicioSUBESeg</Name>
-            <X>40</X>
-            <Y>485</Y>
+            <X>1150</X>
+            <Y>185</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" ModificatorType="STATIC">
               <Type>double</Type>
@@ -286,14 +286,14 @@
           <Variable Class="Parameter">
             <Id>1790000000014</Id>
             <Name>servicioEMVSeg</Name>
-            <X>40</X>
-            <Y>510</Y>
+            <X>1150</X>
+            <Y>210</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" ModificatorType="STATIC">
               <Type>double</Type>
@@ -315,14 +315,14 @@
           <Variable Class="Parameter">
             <Id>1790000000016</Id>
             <Name>tamanoTanda</Name>
-            <X>40</X>
-            <Y>535</Y>
+            <X>1150</X>
+            <Y>235</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" ModificatorType="STATIC">
               <Type>int</Type>
@@ -344,14 +344,14 @@
           <Variable Class="Parameter">
             <Id>1790000000018</Id>
             <Name>intervaloTandaSeg</Name>
-            <X>40</X>
-            <Y>560</Y>
+            <X>1150</X>
+            <Y>260</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" ModificatorType="STATIC">
               <Type>double</Type>
@@ -373,14 +373,14 @@
           <Variable Class="Parameter">
             <Id>1790000000020</Id>
             <Name>primeraTandaSeg</Name>
-            <X>40</X>
-            <Y>585</Y>
+            <X>1150</X>
+            <Y>285</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" ModificatorType="STATIC">
               <Type>double</Type>
@@ -402,14 +402,14 @@
           <Variable Class="Parameter">
             <Id>1790000000022</Id>
             <Name>usarPerfilSBASE</Name>
-            <X>40</X>
-            <Y>610</Y>
+            <X>1150</X>
+            <Y>310</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" ModificatorType="STATIC">
               <Type>boolean</Type>
@@ -431,14 +431,14 @@
           <Variable Class="Parameter">
             <Id>1790000000024</Id>
             <Name>semilla</Name>
-            <X>40</X>
-            <Y>635</Y>
+            <X>1150</X>
+            <Y>335</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" ModificatorType="STATIC">
               <Type>long</Type>
@@ -460,14 +460,14 @@
           <Variable Class="Parameter">
             <Id>1790000000026</Id>
             <Name>horizonteSeg</Name>
-            <X>40</X>
-            <Y>660</Y>
+            <X>1150</X>
+            <Y>360</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" ModificatorType="STATIC">
               <Type>double</Type>
@@ -489,14 +489,14 @@
           <Variable Class="Parameter">
             <Id>1790000000028</Id>
             <Name>perfil15min</Name>
-            <X>40</X>
-            <Y>685</Y>
+            <X>1150</X>
+            <Y>385</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" ModificatorType="STATIC">
               <Type>double[]</Type>
@@ -518,14 +518,14 @@
           <Variable Class="PlainVariable">
             <Id>1790000000030</Id>
             <Name>iniciado</Name>
-            <X>40</X>
-            <Y>710</Y>
+            <X>1150</X>
+            <Y>410</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
               <Type>boolean</Type>
@@ -537,14 +537,14 @@
           <Variable Class="PlainVariable">
             <Id>1790000000032</Id>
             <Name>cerrado</Name>
-            <X>40</X>
-            <Y>735</Y>
+            <X>1150</X>
+            <Y>435</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
               <Type>boolean</Type>
@@ -556,14 +556,14 @@
           <Variable Class="PlainVariable">
             <Id>1790000000034</Id>
             <Name>finalizado</Name>
-            <X>40</X>
-            <Y>760</Y>
+            <X>1150</X>
+            <Y>460</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
               <Type>boolean</Type>
@@ -575,14 +575,14 @@
           <Variable Class="PlainVariable">
             <Id>1790000000036</Id>
             <Name>rngDesvio</Name>
-            <X>40</X>
-            <Y>785</Y>
+            <X>1150</X>
+            <Y>485</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
               <Type>java.util.Random</Type>
@@ -594,14 +594,14 @@
           <Variable Class="PlainVariable">
             <Id>1790000000038</Id>
             <Name>nGenerados</Name>
-            <X>310</X>
-            <Y>360</Y>
+            <X>1400</X>
+            <Y>60</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
               <Type>int</Type>
@@ -613,14 +613,14 @@
           <Variable Class="PlainVariable">
             <Id>1790000000040</Id>
             <Name>nPrincipal</Name>
-            <X>310</X>
-            <Y>385</Y>
+            <X>1400</X>
+            <Y>85</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
               <Type>int</Type>
@@ -632,14 +632,14 @@
           <Variable Class="PlainVariable">
             <Id>1790000000042</Id>
             <Name>nDesviados</Name>
-            <X>310</X>
-            <Y>410</Y>
+            <X>1400</X>
+            <Y>110</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
               <Type>int</Type>
@@ -651,14 +651,14 @@
           <Variable Class="PlainVariable">
             <Id>1790000000044</Id>
             <Name>nProcesados</Name>
-            <X>310</X>
-            <Y>435</Y>
+            <X>1400</X>
+            <Y>135</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
               <Type>int</Type>
@@ -670,14 +670,14 @@
           <Variable Class="PlainVariable">
             <Id>1790000000046</Id>
             <Name>nProcesadosFranja</Name>
-            <X>310</X>
-            <Y>460</Y>
+            <X>1400</X>
+            <Y>160</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
               <Type>int</Type>
@@ -689,14 +689,14 @@
           <Variable Class="PlainVariable">
             <Id>1790000000048</Id>
             <Name>nEsperando</Name>
-            <X>310</X>
-            <Y>485</Y>
+            <X>1400</X>
+            <Y>185</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
               <Type>int</Type>
@@ -708,14 +708,14 @@
           <Variable Class="PlainVariable">
             <Id>1790000000050</Id>
             <Name>nOcupados</Name>
-            <X>310</X>
-            <Y>510</Y>
+            <X>1400</X>
+            <Y>210</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
               <Type>int</Type>
@@ -727,14 +727,14 @@
           <Variable Class="PlainVariable">
             <Id>1790000000052</Id>
             <Name>qMax</Name>
-            <X>310</X>
-            <Y>535</Y>
+            <X>1400</X>
+            <Y>235</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
               <Type>int</Type>
@@ -746,14 +746,14 @@
           <Variable Class="PlainVariable">
             <Id>1790000000054</Id>
             <Name>tArea</Name>
-            <X>310</X>
-            <Y>560</Y>
+            <X>1400</X>
+            <Y>260</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
               <Type>double</Type>
@@ -765,14 +765,14 @@
           <Variable Class="PlainVariable">
             <Id>1790000000056</Id>
             <Name>areaCola</Name>
-            <X>310</X>
-            <Y>585</Y>
+            <X>1400</X>
+            <Y>285</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
               <Type>double</Type>
@@ -784,14 +784,14 @@
           <Variable Class="PlainVariable">
             <Id>1790000000058</Id>
             <Name>areaOcupados</Name>
-            <X>310</X>
-            <Y>610</Y>
+            <X>1400</X>
+            <Y>310</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
               <Type>double</Type>
@@ -803,14 +803,14 @@
           <Variable Class="PlainVariable">
             <Id>1790000000060</Id>
             <Name>ultimaCola</Name>
-            <X>310</X>
-            <Y>635</Y>
+            <X>1400</X>
+            <Y>335</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
               <Type>double</Type>
@@ -822,14 +822,14 @@
           <Variable Class="PlainVariable">
             <Id>1790000000062</Id>
             <Name>pendientesAlCierre</Name>
-            <X>310</X>
-            <Y>660</Y>
+            <X>1400</X>
+            <Y>360</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
               <Type>int</Type>
@@ -841,14 +841,14 @@
           <Variable Class="PlainVariable">
             <Id>1790000000064</Id>
             <Name>colaAlCierre</Name>
-            <X>310</X>
-            <Y>685</Y>
+            <X>1400</X>
+            <Y>385</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
               <Type>int</Type>
@@ -860,14 +860,14 @@
           <Variable Class="PlainVariable">
             <Id>1790000000066</Id>
             <Name>sumaEspera</Name>
-            <X>310</X>
-            <Y>710</Y>
+            <X>1400</X>
+            <Y>410</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
               <Type>double</Type>
@@ -879,14 +879,14 @@
           <Variable Class="PlainVariable">
             <Id>1790000000068</Id>
             <Name>nMas30</Name>
-            <X>310</X>
-            <Y>735</Y>
+            <X>1400</X>
+            <Y>435</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
               <Type>int</Type>
@@ -898,14 +898,14 @@
           <Variable Class="PlainVariable">
             <Id>1790000000070</Id>
             <Name>llegadas</Name>
-            <X>310</X>
-            <Y>760</Y>
+            <X>1400</X>
+            <Y>460</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
               <Type>java.util.Map&lt;Agent, Double&gt;</Type>
@@ -917,14 +917,14 @@
           <Variable Class="PlainVariable">
             <Id>1790000000072</Id>
             <Name>esperas</Name>
-            <X>310</X>
-            <Y>785</Y>
+            <X>1400</X>
+            <Y>485</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
               <Type>java.util.ArrayList&lt;Double&gt;</Type>
@@ -936,14 +936,14 @@
           <Variable Class="PlainVariable">
             <Id>1790000000074</Id>
             <Name>tandasAbiertas</Name>
-            <X>580</X>
-            <Y>360</Y>
+            <X>1650</X>
+            <Y>60</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
               <Type>java.util.ArrayList&lt;Double&gt;</Type>
@@ -955,14 +955,14 @@
           <Variable Class="PlainVariable">
             <Id>1790000000076</Id>
             <Name>disipaciones</Name>
-            <X>580</X>
-            <Y>385</Y>
+            <X>1650</X>
+            <Y>85</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
               <Type>java.util.ArrayList&lt;Double&gt;</Type>
@@ -974,14 +974,14 @@
           <Variable Class="PlainVariable">
             <Id>1790000000078</Id>
             <Name>ocupacionPorUnidad</Name>
-            <X>580</X>
-            <Y>410</Y>
+            <X>1650</X>
+            <Y>110</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
               <Type>java.util.Map&lt;Agent, Double&gt;</Type>
@@ -993,14 +993,14 @@
           <Variable Class="PlainVariable">
             <Id>1790000000080</Id>
             <Name>inicioPorUnidad</Name>
-            <X>580</X>
-            <Y>435</Y>
+            <X>1650</X>
+            <Y>135</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
               <Type>java.util.Map&lt;Agent, Double&gt;</Type>
@@ -1012,14 +1012,14 @@
           <Variable Class="PlainVariable">
             <Id>1790000000139</Id>
             <Name>nPico</Name>
-            <X>580</X>
-            <Y>460</Y>
+            <X>1650</X>
+            <Y>160</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
               <Type>int</Type>
@@ -1032,14 +1032,14 @@
           <Variable Class="PlainVariable">
             <Id>1790000000140</Id>
             <Name>sumaEsperaPico</Name>
-            <X>580</X>
-            <Y>485</Y>
+            <X>1650</X>
+            <Y>185</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
               <Type>double</Type>
@@ -1051,14 +1051,14 @@
           <Variable Class="PlainVariable">
             <Id>1790000000141</Id>
             <Name>nMas30Pico</Name>
-            <X>580</X>
-            <Y>510</Y>
+            <X>1650</X>
+            <Y>210</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
               <Type>int</Type>
@@ -1070,14 +1070,14 @@
           <Variable Class="PlainVariable">
             <Id>1790000000142</Id>
             <Name>esperasPico</Name>
-            <X>580</X>
-            <Y>535</Y>
+            <X>1650</X>
+            <Y>235</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
               <Type>java.util.ArrayList&lt;Double&gt;</Type>
@@ -1954,10 +1954,10 @@
             <ReturnType>int</ReturnType>
             <Id>1790000000082</Id>
             <Name>capacidadMolinetes</Name>
-            <X>980</X>
-            <Y>65</Y>
+            <X>1900</X>
+            <Y>60</Y>
             <PublicFlag>true</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Label>
               <X>10</X>
@@ -1970,10 +1970,10 @@
             <ReturnType>double</ReturnType>
             <Id>1790000000083</Id>
             <Name>servicioSeg</Name>
-            <X>980</X>
-            <Y>90</Y>
+            <X>1900</X>
+            <Y>85</Y>
             <PublicFlag>true</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Label>
               <X>10</X>
@@ -1986,10 +1986,10 @@
             <ReturnType>double</ReturnType>
             <Id>1790000000084</Id>
             <Name>intervaloSeg</Name>
-            <X>980</X>
-            <Y>115</Y>
+            <X>1900</X>
+            <Y>110</Y>
             <PublicFlag>true</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Label>
               <X>10</X>
@@ -2002,10 +2002,10 @@
             <ReturnType>int</ReturnType>
             <Id>1790000000085</Id>
             <Name>tamanoActual</Name>
-            <X>980</X>
-            <Y>140</Y>
+            <X>1900</X>
+            <Y>135</Y>
             <PublicFlag>true</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Label>
               <X>10</X>
@@ -2021,10 +2021,10 @@ return Math.max(0, (int)Math.round(base*factor));</Body>
             <ReturnType>void</ReturnType>
             <Id>1790000000086</Id>
             <Name>inicializar</Name>
-            <X>980</X>
-            <Y>165</Y>
+            <X>1900</X>
+            <Y>160</Y>
             <PublicFlag>true</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Label>
               <X>10</X>
@@ -2053,10 +2053,10 @@ cierreFranja.restart(horizonteSeg);</Body>
             <ReturnType>void</ReturnType>
             <Id>1790000000087</Id>
             <Name>generarTanda</Name>
-            <X>980</X>
-            <Y>190</Y>
+            <X>1900</X>
+            <Y>185</Y>
             <PublicFlag>true</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Label>
               <X>10</X>
@@ -2085,10 +2085,10 @@ if (siguiente &lt; horizonteSeg) proximaTanda.restart(intervaloSeg());</Body>
             <ReturnType>void</ReturnType>
             <Id>1790000000088</Id>
             <Name>actualizarAreas</Name>
-            <X>980</X>
-            <Y>215</Y>
+            <X>1900</X>
+            <Y>210</Y>
             <PublicFlag>true</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Label>
               <X>10</X>
@@ -2105,10 +2105,10 @@ tArea = hasta;</Body>
             <ReturnType>void</ReturnType>
             <Id>1790000000089</Id>
             <Name>entraCola</Name>
-            <X>980</X>
-            <Y>240</Y>
+            <X>1900</X>
+            <Y>235</Y>
             <PublicFlag>true</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Label>
               <X>10</X>
@@ -2131,10 +2131,10 @@ observarCola.restart(0.000001);</Body>
             <ReturnType>void</ReturnType>
             <Id>1790000000090</Id>
             <Name>iniciaServicio</Name>
-            <X>980</X>
-            <Y>265</Y>
+            <X>1900</X>
+            <Y>260</Y>
             <PublicFlag>true</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Label>
               <X>10</X>
@@ -2169,10 +2169,10 @@ observarCola.restart(0.000001);</Body>
             <ReturnType>void</ReturnType>
             <Id>1790000000091</Id>
             <Name>liberaMolinete</Name>
-            <X>980</X>
-            <Y>290</Y>
+            <X>1900</X>
+            <Y>285</Y>
             <PublicFlag>true</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Label>
               <X>10</X>
@@ -2193,10 +2193,10 @@ ocupacionPorUnidad.put(unit, ocupacionPorUnidad.get(unit)+duracion);</Body>
             <ReturnType>void</ReturnType>
             <Id>1790000000092</Id>
             <Name>salePasajero</Name>
-            <X>980</X>
-            <Y>315</Y>
+            <X>1900</X>
+            <Y>310</Y>
             <PublicFlag>true</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Label>
               <X>10</X>
@@ -2211,10 +2211,10 @@ observarCola.restart(0.000001);</Body>
             <ReturnType>void</ReturnType>
             <Id>1790000000093</Id>
             <Name>observar</Name>
-            <X>980</X>
-            <Y>340</Y>
+            <X>1900</X>
+            <Y>335</Y>
             <PublicFlag>true</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Label>
               <X>10</X>
@@ -2236,10 +2236,10 @@ if (cerrado &amp;&amp; nProcesados == nPrincipal &amp;&amp; !finalizado) {
             <ReturnType>void</ReturnType>
             <Id>1790000000094</Id>
             <Name>cerrarFranja</Name>
-            <X>980</X>
-            <Y>365</Y>
+            <X>1900</X>
+            <Y>360</Y>
             <PublicFlag>true</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Label>
               <X>10</X>
@@ -2256,10 +2256,10 @@ observarCola.restart(0.000001);</Body>
             <ReturnType>double</ReturnType>
             <Id>1790000000095</Id>
             <Name>percentil90</Name>
-            <X>980</X>
-            <Y>390</Y>
+            <X>1900</X>
+            <Y>385</Y>
             <PublicFlag>true</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Label>
               <X>10</X>
@@ -2275,10 +2275,10 @@ return ordenadas.get((int)Math.ceil(0.9*ordenadas.size())-1);</Body>
             <ReturnType>double</ReturnType>
             <Id>1790000000143</Id>
             <Name>percentil90Pico</Name>
-            <X>980</X>
-            <Y>415</Y>
+            <X>1900</X>
+            <Y>410</Y>
             <PublicFlag>true</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Label><X>10</X><Y>0</Y></Label>
             <Body>if (esperasPico.isEmpty()) return Double.NaN;
@@ -2291,10 +2291,10 @@ return ordenadas.get((int)Math.ceil(0.9*ordenadas.size())-1);</Body>
             <ReturnType>String</ReturnType>
             <Id>1790000000144</Id>
             <Name>nombreEscenario</Name>
-            <X>980</X>
-            <Y>440</Y>
+            <X>1900</X>
+            <Y>435</Y>
             <PublicFlag>true</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Label><X>10</X><Y>0</Y></Label>
             <Body>switch (escenario) {
@@ -2310,10 +2310,10 @@ return ordenadas.get((int)Math.ceil(0.9*ordenadas.size())-1);</Body>
             <ReturnType>String</ReturnType>
             <Id>1790000000145</Id>
             <Name>horaSimulada</Name>
-            <X>980</X>
-            <Y>465</Y>
+            <X>1900</X>
+            <Y>460</Y>
             <PublicFlag>true</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Label><X>10</X><Y>0</Y></Label>
             <Body>int s = (int)Math.max(0, Math.min(time(), horizonteSeg));
@@ -2325,10 +2325,10 @@ return String.format("%02d:%02d:%02d", total/3600, (total%3600)/60, total%60);</
             <ReturnType>String</ReturnType>
             <Id>1790000000146</Id>
             <Name>estadoModelo</Name>
-            <X>980</X>
-            <Y>490</Y>
+            <X>1900</X>
+            <Y>485</Y>
             <PublicFlag>true</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Label><X>10</X><Y>0</Y></Label>
             <Body>if (finalizado) return "FINALIZADO";
@@ -2341,10 +2341,10 @@ return "SIMULANDO";</Body>
             <ReturnType>double</ReturnType>
             <Id>1790000000147</Id>
             <Name>esperaMediaActual</Name>
-            <X>980</X>
-            <Y>515</Y>
+            <X>1900</X>
+            <Y>510</Y>
             <PublicFlag>true</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Label><X>10</X><Y>0</Y></Label>
             <Body>return esperas.isEmpty() ? 0 : sumaEspera/esperas.size();</Body>
@@ -2354,10 +2354,10 @@ return "SIMULANDO";</Body>
             <ReturnType>double</ReturnType>
             <Id>1790000000148</Id>
             <Name>utilizacionActual</Name>
-            <X>980</X>
-            <Y>540</Y>
+            <X>1900</X>
+            <Y>535</Y>
             <PublicFlag>true</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Label><X>10</X><Y>0</Y></Label>
             <Body>double hasta = Math.min(time(), horizonteSeg);
@@ -2370,10 +2370,10 @@ return acumulada/(hasta*capacidadMolinetes());</Body>
             <ReturnType>double</ReturnType>
             <Id>1790000000096</Id>
             <Name>dispersionUtilizacion</Name>
-            <X>980</X>
-            <Y>565</Y>
+            <X>1900</X>
+            <Y>560</Y>
             <PublicFlag>true</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Label>
               <X>10</X>
@@ -2391,10 +2391,10 @@ return Math.sqrt(Math.max(0, suma2/c-(suma/c)*(suma/c)));</Body>
             <ReturnType>String</ReturnType>
             <Id>1790000000097</Id>
             <Name>resumen</Name>
-            <X>980</X>
-            <Y>590</Y>
+            <X>1900</X>
+            <Y>585</Y>
             <PublicFlag>true</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Label>
               <X>10</X>
@@ -2423,14 +2423,14 @@ return (modoDemo ? "DEMO; " : "SIN VALIDAR; ") + "E" + escenario
           <Event>
             <Id>1790000000098</Id>
             <Name>proximaTanda</Name>
-            <X>700</X>
-            <Y>380</Y>
+            <X>1650</X>
+            <Y>300</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties TriggerType="timeout" Mode="occuresOnce">
               <Timeout Class="CodeUnitValue">
@@ -2459,14 +2459,14 @@ return (modoDemo ? "DEMO; " : "SIN VALIDAR; ") + "E" + escenario
           <Event>
             <Id>1790000000100</Id>
             <Name>cierreFranja</Name>
-            <X>700</X>
-            <Y>425</Y>
+            <X>1650</X>
+            <Y>345</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties TriggerType="timeout" Mode="occuresOnce">
               <Timeout Class="CodeUnitValue">
@@ -2495,14 +2495,14 @@ return (modoDemo ? "DEMO; " : "SIN VALIDAR; ") + "E" + escenario
           <Event>
             <Id>1790000000102</Id>
             <Name>observarCola</Name>
-            <X>700</X>
-            <Y>470</Y>
+            <X>1650</X>
+            <Y>390</Y>
             <Label>
               <X>10</X>
               <Y>0</Y>
             </Label>
             <PublicFlag>false</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
+            <PresentationFlag>false</PresentationFlag>
             <ShowLabel>true</ShowLabel>
             <Properties TriggerType="timeout" Mode="occuresOnce">
               <Timeout Class="CodeUnitValue">
@@ -2591,8 +2591,8 @@ return (modoDemo ? "DEMO; " : "SIN VALIDAR; ") + "E" + escenario
         <ConnectionsId>1791000000006</ConnectionsId>
         <Variables>
           <Variable Class="Parameter">
-            <Id>1791000000007</Id><Name>tamanoTandaDemo</Name><X>40</X><Y>40</Y>
-            <Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel>
+            <Id>1791000000007</Id><Name>tamanoTandaDemo</Name><X>1050</X><Y>60</Y>
+            <Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" ModificatorType="STATIC"><Type>int</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
               <DefaultValue Class="CodeValue"><Code>80</Code></DefaultValue>
               <ParameterEditor><Id>1791000000008</Id><EditorContolType>TEXT_BOX</EditorContolType><MinSliderValue>0</MinSliderValue><MaxSliderValue>500</MaxSliderValue><DelimeterType>NO_DELIMETER</DelimeterType></ParameterEditor>
@@ -2600,8 +2600,8 @@ return (modoDemo ? "DEMO; " : "SIN VALIDAR; ") + "E" + escenario
             <Description>Tanda sintetica para verificar movimiento espacial; no es una medicion.</Description>
           </Variable>
           <Variable Class="Parameter">
-            <Id>1791000000009</Id><Name>servicioDemoSeg</Name><X>40</X><Y>65</Y>
-            <Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel>
+            <Id>1791000000009</Id><Name>servicioDemoSeg</Name><X>1050</X><Y>85</Y>
+            <Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" ModificatorType="STATIC"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
               <DefaultValue Class="CodeValue"><Code>3.0</Code></DefaultValue>
               <ParameterEditor><Id>1791000000010</Id><EditorContolType>TEXT_BOX</EditorContolType><MinSliderValue>0</MinSliderValue><MaxSliderValue>30</MaxSliderValue><DelimeterType>NO_DELIMETER</DelimeterType></ParameterEditor>
@@ -2609,28 +2609,28 @@ return (modoDemo ? "DEMO; " : "SIN VALIDAR; ") + "E" + escenario
             <Description>Duracion sintetica del servicio, en segundos.</Description>
           </Variable>
           <Variable Class="Parameter">
-            <Id>1791000000100</Id><Name>molinetesOperativosPed</Name><X>40</X><Y>90</Y>
-            <Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel>
+            <Id>1791000000100</Id><Name>molinetesOperativosPed</Name><X>1050</X><Y>110</Y>
+            <Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
             <Properties SaveInSnapshot="true" ModificatorType="STATIC"><Type>int</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
               <DefaultValue Class="CodeValue"><Code>20</Code></DefaultValue>
               <ParameterEditor><Id>1791000000101</Id><EditorContolType>TEXT_BOX</EditorContolType><MinSliderValue>20</MinSliderValue><MaxSliderValue>28</MaxSliderValue><DelimeterType>NO_DELIMETER</DelimeterType></ParameterEditor>
             </Properties>
             <Description>Cantidad de molinetes habilitados en la capa peatonal: 20 para E0 y 28 para E1.</Description>
           </Variable>
-          <Variable Class="PlainVariable"><Id>1791000000011</Id><Name>nGeneradosPed</Name><X>40</X><Y>100</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true"><Type>int</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable>
-          <Variable Class="PlainVariable"><Id>1791000000012</Id><Name>nProcesadosPed</Name><X>40</X><Y>125</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true"><Type>int</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable>
-          <Variable Class="Parameter"><Id>1791000000070</Id><Name>intervaloTandaDemoSeg</Name><X>40</X><Y>90</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true" ModificatorType="STATIC"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><DefaultValue Class="CodeValue"><Code>30.0</Code></DefaultValue><ParameterEditor><Id>1791000000071</Id><EditorContolType>TEXT_BOX</EditorContolType><MinSliderValue>1</MinSliderValue><MaxSliderValue>600</MaxSliderValue><DelimeterType>NO_DELIMETER</DelimeterType></ParameterEditor></Properties><Description>Intervalo sintetico entre tandas.</Description></Variable>
-          <Variable Class="Parameter"><Id>1791000000072</Id><Name>cantidadTandasDemo</Name><X>40</X><Y>115</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true" ModificatorType="STATIC"><Type>int</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><DefaultValue Class="CodeValue"><Code>6</Code></DefaultValue><ParameterEditor><Id>1791000000073</Id><EditorContolType>TEXT_BOX</EditorContolType><MinSliderValue>1</MinSliderValue><MaxSliderValue>100</MaxSliderValue><DelimeterType>NO_DELIMETER</DelimeterType></ParameterEditor></Properties><Description>Cantidad sintetica de tandas.</Description></Variable>
-          <Variable Class="PlainVariable"><Id>1791000000074</Id><Name>nTandasPed</Name><X>40</X><Y>150</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true"><Type>int</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable>
-          <Variable Class="PlainVariable"><Id>1791000000075</Id><Name>nEsperandoPed</Name><X>40</X><Y>175</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true"><Type>int</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable>
-          <Variable Class="PlainVariable"><Id>1791000000076</Id><Name>qMaxPed</Name><X>40</X><Y>200</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true"><Type>int</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable>
-          <Variable Class="PlainVariable"><Id>1791000000077</Id><Name>sumaEsperaPed</Name><X>40</X><Y>225</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable>
-          <Variable Class="PlainVariable"><Id>1791000000078</Id><Name>nEsperasPed</Name><X>40</X><Y>250</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true"><Type>int</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable>
-          <Variable Class="PlainVariable"><Id>1791000000079</Id><Name>esperaMaxPed</Name><X>40</X><Y>275</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable>
-          <Variable Class="PlainVariable"><Id>1791000000080</Id><Name>areaColaPed</Name><X>40</X><Y>300</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable>
-          <Variable Class="PlainVariable"><Id>1791000000081</Id><Name>tAreaColaPed</Name><X>40</X><Y>325</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable>
-          <Variable Class="PlainVariable"><Id>1791000000082</Id><Name>tiempoUltimaTandaPed</Name><X>40</X><Y>350</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable>
-          <Variable Class="PlainVariable"><Id>1791000000083</Id><Name>ultimaDisipacionPed</Name><X>40</X><Y>375</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><InitialValue Class="CodeValue"><Code>Double.NaN</Code></InitialValue></Properties></Variable>
+          <Variable Class="PlainVariable"><Id>1791000000011</Id><Name>nGeneradosPed</Name><X>1250</X><Y>60</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true"><Type>int</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable>
+          <Variable Class="PlainVariable"><Id>1791000000012</Id><Name>nProcesadosPed</Name><X>1250</X><Y>85</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true"><Type>int</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable>
+          <Variable Class="Parameter"><Id>1791000000070</Id><Name>intervaloTandaDemoSeg</Name><X>1050</X><Y>135</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true" ModificatorType="STATIC"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><DefaultValue Class="CodeValue"><Code>30.0</Code></DefaultValue><ParameterEditor><Id>1791000000071</Id><EditorContolType>TEXT_BOX</EditorContolType><MinSliderValue>1</MinSliderValue><MaxSliderValue>600</MaxSliderValue><DelimeterType>NO_DELIMETER</DelimeterType></ParameterEditor></Properties><Description>Intervalo sintetico entre tandas.</Description></Variable>
+          <Variable Class="Parameter"><Id>1791000000072</Id><Name>cantidadTandasDemo</Name><X>1050</X><Y>160</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true" ModificatorType="STATIC"><Type>int</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><DefaultValue Class="CodeValue"><Code>6</Code></DefaultValue><ParameterEditor><Id>1791000000073</Id><EditorContolType>TEXT_BOX</EditorContolType><MinSliderValue>1</MinSliderValue><MaxSliderValue>100</MaxSliderValue><DelimeterType>NO_DELIMETER</DelimeterType></ParameterEditor></Properties><Description>Cantidad sintetica de tandas.</Description></Variable>
+          <Variable Class="PlainVariable"><Id>1791000000074</Id><Name>nTandasPed</Name><X>1250</X><Y>110</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true"><Type>int</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable>
+          <Variable Class="PlainVariable"><Id>1791000000075</Id><Name>nEsperandoPed</Name><X>1250</X><Y>135</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true"><Type>int</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable>
+          <Variable Class="PlainVariable"><Id>1791000000076</Id><Name>qMaxPed</Name><X>1250</X><Y>160</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true"><Type>int</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable>
+          <Variable Class="PlainVariable"><Id>1791000000077</Id><Name>sumaEsperaPed</Name><X>1250</X><Y>185</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable>
+          <Variable Class="PlainVariable"><Id>1791000000078</Id><Name>nEsperasPed</Name><X>1250</X><Y>210</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true"><Type>int</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable>
+          <Variable Class="PlainVariable"><Id>1791000000079</Id><Name>esperaMaxPed</Name><X>1250</X><Y>235</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable>
+          <Variable Class="PlainVariable"><Id>1791000000080</Id><Name>areaColaPed</Name><X>1250</X><Y>260</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable>
+          <Variable Class="PlainVariable"><Id>1791000000081</Id><Name>tAreaColaPed</Name><X>1250</X><Y>285</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable>
+          <Variable Class="PlainVariable"><Id>1791000000082</Id><Name>tiempoUltimaTandaPed</Name><X>1250</X><Y>310</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable>
+          <Variable Class="PlainVariable"><Id>1791000000083</Id><Name>ultimaDisipacionPed</Name><X>1250</X><Y>335</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><InitialValue Class="CodeValue"><Code>Double.NaN</Code></InitialValue></Properties></Variable>
         </Variables>
         <Connectors>
           <Connector>
@@ -2723,14 +2723,14 @@ return (modoDemo ? "DEMO; " : "SIN VALIDAR; ") + "E" + escenario
           </EmbeddedObject>
         </EmbeddedObjects>
         <Functions>
-          <Function AccessType="public" StaticFunction="false"><ReturnModificator>VOID</ReturnModificator><ReturnType>void</ReturnType><Id>1791000000084</Id><Name>actualizarAreaColaPed</Name><X>190</X><Y>40</Y><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Body>double ahora = time();
+          <Function AccessType="public" StaticFunction="false"><ReturnModificator>VOID</ReturnModificator><ReturnType>void</ReturnType><Id>1791000000084</Id><Name>actualizarAreaColaPed</Name><X>1500</X><Y>60</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Body>double ahora = time();
 areaColaPed += nEsperandoPed * Math.max(0, ahora - tAreaColaPed);
 tAreaColaPed = ahora;</Body></Function>
-          <Function AccessType="public" StaticFunction="false"><ReturnModificator>VOID</ReturnModificator><ReturnType>void</ReturnType><Id>1791000000085</Id><Name>entraColaPed</Name><X>190</X><Y>70</Y><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Parameter><Name>ped</Name><Type>Pasajero</Type></Parameter><Body>actualizarAreaColaPed();
+          <Function AccessType="public" StaticFunction="false"><ReturnModificator>VOID</ReturnModificator><ReturnType>void</ReturnType><Id>1791000000085</Id><Name>entraColaPed</Name><X>1500</X><Y>95</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Parameter><Name>ped</Name><Type>Pasajero</Type></Parameter><Body>actualizarAreaColaPed();
 ped.enColaPed = true;
 nEsperandoPed++;
 qMaxPed = Math.max(qMaxPed, nEsperandoPed);</Body></Function>
-          <Function AccessType="public" StaticFunction="false"><ReturnModificator>VOID</ReturnModificator><ReturnType>void</ReturnType><Id>1791000000086</Id><Name>comienzaServicioPed</Name><X>190</X><Y>100</Y><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Parameter><Name>ped</Name><Type>Pasajero</Type></Parameter><Body>if (ped.enColaPed) {
+          <Function AccessType="public" StaticFunction="false"><ReturnModificator>VOID</ReturnModificator><ReturnType>void</ReturnType><Id>1791000000086</Id><Name>comienzaServicioPed</Name><X>1500</X><Y>130</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Parameter><Name>ped</Name><Type>Pasajero</Type></Parameter><Body>if (ped.enColaPed) {
     actualizarAreaColaPed();
     nEsperandoPed--;
     ped.enColaPed = false;
@@ -2739,28 +2739,28 @@ double espera = Math.max(0, time() - ped.tEntradaColaPed);
 sumaEsperaPed += espera;
 nEsperasPed++;
 esperaMaxPed = Math.max(esperaMaxPed, espera);</Body></Function>
-          <Function AccessType="public" StaticFunction="false"><ReturnModificator>VOID</ReturnModificator><ReturnType>void</ReturnType><Id>1791000000087</Id><Name>generarTandaPed</Name><X>190</X><Y>130</Y><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Body>if (nTandasPed &gt;= cantidadTandasDemo) return;
+          <Function AccessType="public" StaticFunction="false"><ReturnModificator>VOID</ReturnModificator><ReturnType>void</ReturnType><Id>1791000000087</Id><Name>generarTandaPed</Name><X>1500</X><Y>165</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Body>if (nTandasPed &gt;= cantidadTandasDemo) return;
 nTandasPed++;
 tiempoUltimaTandaPed = time();
 pedSource.inject(tamanoTandaDemo);
 if (nTandasPed &lt; cantidadTandasDemo) proximaTandaPed.restart(intervaloTandaDemoSeg);</Body></Function>
-          <Function AccessType="public" StaticFunction="false"><ReturnModificator>VOID</ReturnModificator><ReturnType>void</ReturnType><Id>1791000000088</Id><Name>salePed</Name><X>190</X><Y>160</Y><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Body>nProcesadosPed++;
+          <Function AccessType="public" StaticFunction="false"><ReturnModificator>VOID</ReturnModificator><ReturnType>void</ReturnType><Id>1791000000088</Id><Name>salePed</Name><X>1500</X><Y>200</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Body>nProcesadosPed++;
 if (nTandasPed == cantidadTandasDemo &amp;&amp; nProcesadosPed == nGeneradosPed) {
     actualizarAreaColaPed();
     ultimaDisipacionPed = time() - tiempoUltimaTandaPed;
     traceln(resumenPeatonal());
 }</Body></Function>
-          <Function AccessType="public" StaticFunction="false"><ReturnModificator>RETURNS_VALUE</ReturnModificator><ReturnType>double</ReturnType><Id>1791000000089</Id><Name>esperaMediaPed</Name><X>190</X><Y>190</Y><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Body>return nEsperasPed == 0 ? 0 : sumaEsperaPed/nEsperasPed;</Body></Function>
-          <Function AccessType="public" StaticFunction="false"><ReturnModificator>RETURNS_VALUE</ReturnModificator><ReturnType>double</ReturnType><Id>1791000000090</Id><Name>lqPed</Name><X>190</X><Y>220</Y><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Body>if (time() &lt;= 0) return 0;
+          <Function AccessType="public" StaticFunction="false"><ReturnModificator>RETURNS_VALUE</ReturnModificator><ReturnType>double</ReturnType><Id>1791000000089</Id><Name>esperaMediaPed</Name><X>1500</X><Y>235</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Body>return nEsperasPed == 0 ? 0 : sumaEsperaPed/nEsperasPed;</Body></Function>
+          <Function AccessType="public" StaticFunction="false"><ReturnModificator>RETURNS_VALUE</ReturnModificator><ReturnType>double</ReturnType><Id>1791000000090</Id><Name>lqPed</Name><X>1500</X><Y>270</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Body>if (time() &lt;= 0) return 0;
 double acumulada = areaColaPed + nEsperandoPed*Math.max(0, time()-tAreaColaPed);
 return acumulada/time();</Body></Function>
-          <Function AccessType="public" StaticFunction="false"><ReturnModificator>RETURNS_VALUE</ReturnModificator><ReturnType>String</ReturnType><Id>1791000000091</Id><Name>resumenPeatonal</Name><X>190</X><Y>250</Y><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Body>return "DEMO PEATONAL SINTETICA; tandas=" + nTandasPed
+          <Function AccessType="public" StaticFunction="false"><ReturnModificator>RETURNS_VALUE</ReturnModificator><ReturnType>String</ReturnType><Id>1791000000091</Id><Name>resumenPeatonal</Name><X>1500</X><Y>305</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Body>return "DEMO PEATONAL SINTETICA; tandas=" + nTandasPed
  + "; generados=" + nGeneradosPed + "; procesados=" + nProcesadosPed
  + "; molinetesOperativos=" + molinetesOperativosPed
  + "; esperaMediaSeg=" + esperaMediaPed() + "; esperaMaxSeg=" + esperaMaxPed
  + "; qMax=" + qMaxPed + "; Lq=" + lqPed()
  + "; disipacionUltimaTandaSeg=" + ultimaDisipacionPed;</Body></Function>
-          <Function AccessType="public" StaticFunction="false"><ReturnModificator>VOID</ReturnModificator><ReturnType>void</ReturnType><Id>1791000000102</Id><Name>configurarMolinetesPed</Name><X>190</X><Y>280</Y><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Body>if (molinetesOperativosPed != 20 &amp;&amp; molinetesOperativosPed != 28)
+          <Function AccessType="public" StaticFunction="false"><ReturnModificator>VOID</ReturnModificator><ReturnType>void</ReturnType><Id>1791000000102</Id><Name>configurarMolinetesPed</Name><X>1500</X><Y>340</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Body>if (molinetesOperativosPed != 20 &amp;&amp; molinetesOperativosPed != 28)
     throw new IllegalArgumentException("La demo peatonal admite 20 o 28 molinetes");
 molinetesPeatonales.setServiceSuspended(molinetePed21, molinetesOperativosPed &lt; 21);
 molinetesPeatonales.setServiceSuspended(molinetePed22, molinetesOperativosPed &lt; 22);
@@ -2772,7 +2772,7 @@ molinetesPeatonales.setServiceSuspended(molinetePed27, molinetesOperativosPed &l
 molinetesPeatonales.setServiceSuspended(molinetePed28, molinetesOperativosPed &lt; 28);</Body></Function>
         </Functions>
         <Events>
-          <Event><Id>1791000000092</Id><Name>proximaTandaPed</Name><X>380</X><Y>130</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Properties TriggerType="timeout" Mode="occuresOnce"><Timeout Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">SECOND</Unit></Timeout><Rate Class="CodeUnitValue"><Code>1</Code><Unit Class="RateUnits">PER_MINUTE</Unit></Rate><Id>1791000000093</Id><OccurrenceAtTime>true</OccurrenceAtTime><OccurrenceDate>1789984800000</OccurrenceDate><OccurrenceTime Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">SECOND</Unit></OccurrenceTime><RecurrenceCode Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">SECOND</Unit></RecurrenceCode><Condition>false</Condition></Properties><Action>generarTandaPed();</Action></Event>
+          <Event><Id>1791000000092</Id><Name>proximaTandaPed</Name><X>1750</X><Y>60</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Properties TriggerType="timeout" Mode="occuresOnce"><Timeout Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">SECOND</Unit></Timeout><Rate Class="CodeUnitValue"><Code>1</Code><Unit Class="RateUnits">PER_MINUTE</Unit></Rate><Id>1791000000093</Id><OccurrenceAtTime>true</OccurrenceAtTime><OccurrenceDate>1789984800000</OccurrenceDate><OccurrenceTime Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">SECOND</Unit></OccurrenceTime><RecurrenceCode Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">SECOND</Unit></RecurrenceCode><Condition>false</Condition></Properties><Action>generarTandaPed();</Action></Event>
         </Events>
         <Presentation>
           <Level>
@@ -2784,8 +2784,8 @@ molinetesPeatonales.setServiceSuspended(molinetePed28, molinetesOperativosPed &l
               <Text><Id>1791000000026</Id><Name>kpiPeatonal</Name><X>80</X><Y>570</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel><DrawMode>SHAPE_DRAW_2D3D</DrawMode><EmbeddedIcon>false</EmbeddedIcon><Z>0</Z><Rotation>0.0</Rotation><Color>-16777216</Color><Text>Molinetes 20 - Tandas 0/6 - Generados 0 - Procesados 0 - En cola 0</Text><TextCode>"Molinetes " + molinetesOperativosPed + " - Tandas " + nTandasPed + "/" + cantidadTandasDemo + " - Generados " + nGeneradosPed + " - Procesados " + nProcesadosPed + " - En cola " + nEsperandoPed</TextCode><Font><Name>SansSerif</Name><Size>14</Size><Style>1</Style></Font><Alignment>LEFT</Alignment></Text>
               <Text><Id>1791000000096</Id><Name>kpiEsperaPeatonal</Name><X>80</X><Y>600</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel><DrawMode>SHAPE_DRAW_2D3D</DrawMode><EmbeddedIcon>false</EmbeddedIcon><Z>0</Z><Rotation>0.0</Rotation><Color>-16777216</Color><Text>Espera media 0,0 s - Cola máxima 0 - Lq 0,0</Text><TextCode>String.format("Espera media %.1f s - máxima %.1f s - cola máxima %d - Lq %.1f", esperaMediaPed(), esperaMaxPed, qMaxPed, lqPed())</TextCode><Font><Name>SansSerif</Name><Size>14</Size><Style>0</Style></Font><Alignment>LEFT</Alignment></Text>
               <Text><Id>1791000000027</Id><Name>etiquetaOrigen</Name><X>95</X><Y>305</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel><DrawMode>SHAPE_DRAW_2D3D</DrawMode><EmbeddedIcon>false</EmbeddedIcon><Z>0</Z><Rotation>0.0</Rotation><Color>-12490271</Color><Text>Llegada desde Línea Roca</Text><Font><Name>SansSerif</Name><Size>13</Size><Style>0</Style></Font><Alignment>LEFT</Alignment></Text>
-              <Text><Id>1791000000028</Id><Name>etiquetaMolinetes</Name><X>625</X><Y>245</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel><DrawMode>SHAPE_DRAW_2D3D</DrawMode><EmbeddedIcon>false</EmbeddedIcon><Z>0</Z><Rotation>0.0</Rotation><Color>-12490271</Color><Text>20 de 28 molinetes habilitados</Text><TextCode>molinetesOperativosPed + " de 28 molinetes habilitados"</TextCode><Font><Name>SansSerif</Name><Size>13</Size><Style>0</Style></Font><Alignment>LEFT</Alignment></Text>
-              <Text><Id>1791000000106</Id><Name>etiquetaSalida</Name><X>785</X><Y>245</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel><DrawMode>SHAPE_DRAW_2D3D</DrawMode><EmbeddedIcon>false</EmbeddedIcon><Z>0</Z><Rotation>0.0</Rotation><Color>-12490271</Color><Text>Salida hacia Línea C</Text><Font><Name>SansSerif</Name><Size>13</Size><Style>0</Style></Font><Alignment>LEFT</Alignment></Text>
+              <Text><Id>1791000000028</Id><Name>etiquetaMolinetes</Name><X>625</X><Y>250</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel><DrawMode>SHAPE_DRAW_2D3D</DrawMode><EmbeddedIcon>false</EmbeddedIcon><Z>0</Z><Rotation>0.0</Rotation><Color>-12490271</Color><Text>Molinetes activos: 20/28</Text><TextCode>"Molinetes activos: " + molinetesOperativosPed + "/28"</TextCode><Font><Name>SansSerif</Name><Size>13</Size><Style>0</Style></Font><Alignment>LEFT</Alignment></Text>
+              <Text><Id>1791000000106</Id><Name>etiquetaSalida</Name><X>790</X><Y>250</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel><DrawMode>SHAPE_DRAW_2D3D</DrawMode><EmbeddedIcon>false</EmbeddedIcon><Z>0</Z><Rotation>0.0</Rotation><Color>-12490271</Color><Text>Salida Línea C</Text><Font><Name>SansSerif</Name><Size>13</Size><Style>0</Style></Font><Alignment>LEFT</Alignment></Text>
               <TargetLine><Id>1791000000029</Id><Name>entradaPeatonal</Name><X>180</X><Y>340</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel><DrawMode>SHAPE_DRAW_2D3D</DrawMode><Z>0</Z><LineColor>-14774017</LineColor><Points><Point><X>0</X><Y>0</Y></Point><Point><X>0</X><Y>100</Y></Point></Points></TargetLine>
               <TargetLine><Id>1791000000107</Id><Name>salidaPeatonal</Name><X>825</X><Y>280</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel><DrawMode>SHAPE_DRAW_2D3D</DrawMode><Z>0</Z><LineColor>-16744448</LineColor><Points><Point><X>0</X><Y>0</Y></Point><Point><X>0</X><Y>216</Y></Point></Points></TargetLine>
               <ServiceWithLine>

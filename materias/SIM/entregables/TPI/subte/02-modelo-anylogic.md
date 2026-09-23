@@ -280,6 +280,14 @@ estimación del beneficio real de habilitar ocho molinetes adicionales, porque l
 tiempo de validación siguen siendo supuestos sintéticos. Tampoco se calculan todavía el percentil 90, la
 utilización por molinete ni la cohorte 08:15-08:45.
 
+### Organización visual del modelo
+
+Las presentaciones operativas de `Main` y `MainPeatonal` ocupan la zona izquierda del lienzo. Los
+parámetros, variables, funciones y eventos se ordenaron en columnas técnicas a la derecha y se excluyeron
+de la presentación en ejecución. Esta separación no cambia la lógica: evita que los iconos del editor se
+superpongan al tablero, al vestíbulo o a los KPI. En la vista peatonal también se abreviaron las etiquetas a
+`Molinetes activos: 20/28` y `Salida Línea C` para mantenerlas separadas.
+
 ### Próximas extensiones
 
 1. Sustituir la geometría esquemática por el plano o croquis de SBASE.

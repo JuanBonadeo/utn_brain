@@ -2749,6 +2749,10 @@ subte, y sobre la misma estación.
   `PeatonalE0` suspende los últimos ocho y `PeatonalE1` habilita los 28, con igual semilla, demanda y tiempo
   de servicio para aislar el efecto de capacidad. Actualizados el verificador y la documentación del futuro
   informe. Validaciones XML y Java aprobadas; resta Build/Run de ambos experimentos en AnyLogic.
+- **2026-09-23** (5): TPI, grupo Bonadeo + Estevez. Reorganizadas las vistas `Main` y `MainPeatonal`: los
+  elementos técnicos se movieron a columnas fuera del área operativa y se excluyeron de la animación, para
+  que no tapen el tablero ni el vestíbulo. También se separaron y abreviaron las etiquetas de molinetes y
+  salida. El verificador controla desde ahora esta separación visual.
 - **2026-09-22** (3): TPI, grupo 2 (Casermeiro). Perfiladas a fondo las 9 planillas reales de producción que
   mandó la oficina técnica (locales, no versionadas — el repo es público — en
   `entregables/TPI/caser/datos-locales/`, gitignoreada). Confirmado con datos que hay **dos hornos
