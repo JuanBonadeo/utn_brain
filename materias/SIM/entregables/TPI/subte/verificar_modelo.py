@@ -133,6 +133,8 @@ public class SubtePedApiCheck {
 (d/'SubtePedApiCheck.java').write_text(ped_api)
 subprocess.run([javac,'-cp',':'.join(map(str,jars)),str(d/'SubtePedApiCheck.java')],check=True)
 ids=[x.text for x in r.iter('Id')];assert len(ids)==len(set(ids)), 'Duplicate IDs'
+return_modifiers={x.text for x in r.iter('ReturnModificator')}
+assert return_modifiers <= {'VOID','RETURNS_VALUE'}, f'Invalid function return modifier: {return_modifiers}'
 assert len(a.findall('EmbeddedObjects/EmbeddedObject'))==7
 experiments=r.findall('Model/Experiments/SimulationExperiment')
 for e in [x for x in experiments if x.findtext('Name') in {'E0','E1','E2','E3'}]:

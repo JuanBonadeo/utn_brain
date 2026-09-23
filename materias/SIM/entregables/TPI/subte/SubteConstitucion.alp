@@ -2723,14 +2723,14 @@ return (modoDemo ? "DEMO; " : "SIN VALIDAR; ") + "E" + escenario
           </EmbeddedObject>
         </EmbeddedObjects>
         <Functions>
-          <Function AccessType="public" StaticFunction="false"><ReturnModificator>NO_RETURN</ReturnModificator><ReturnType>void</ReturnType><Id>1791000000084</Id><Name>actualizarAreaColaPed</Name><X>190</X><Y>40</Y><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Body>double ahora = time();
+          <Function AccessType="public" StaticFunction="false"><ReturnModificator>VOID</ReturnModificator><ReturnType>void</ReturnType><Id>1791000000084</Id><Name>actualizarAreaColaPed</Name><X>190</X><Y>40</Y><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Body>double ahora = time();
 areaColaPed += nEsperandoPed * Math.max(0, ahora - tAreaColaPed);
 tAreaColaPed = ahora;</Body></Function>
-          <Function AccessType="public" StaticFunction="false"><ReturnModificator>NO_RETURN</ReturnModificator><ReturnType>void</ReturnType><Id>1791000000085</Id><Name>entraColaPed</Name><X>190</X><Y>70</Y><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Parameter><Name>ped</Name><Type>Pasajero</Type></Parameter><Body>actualizarAreaColaPed();
+          <Function AccessType="public" StaticFunction="false"><ReturnModificator>VOID</ReturnModificator><ReturnType>void</ReturnType><Id>1791000000085</Id><Name>entraColaPed</Name><X>190</X><Y>70</Y><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Parameter><Name>ped</Name><Type>Pasajero</Type></Parameter><Body>actualizarAreaColaPed();
 ped.enColaPed = true;
 nEsperandoPed++;
 qMaxPed = Math.max(qMaxPed, nEsperandoPed);</Body></Function>
-          <Function AccessType="public" StaticFunction="false"><ReturnModificator>NO_RETURN</ReturnModificator><ReturnType>void</ReturnType><Id>1791000000086</Id><Name>comienzaServicioPed</Name><X>190</X><Y>100</Y><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Parameter><Name>ped</Name><Type>Pasajero</Type></Parameter><Body>if (ped.enColaPed) {
+          <Function AccessType="public" StaticFunction="false"><ReturnModificator>VOID</ReturnModificator><ReturnType>void</ReturnType><Id>1791000000086</Id><Name>comienzaServicioPed</Name><X>190</X><Y>100</Y><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Parameter><Name>ped</Name><Type>Pasajero</Type></Parameter><Body>if (ped.enColaPed) {
     actualizarAreaColaPed();
     nEsperandoPed--;
     ped.enColaPed = false;
@@ -2739,12 +2739,12 @@ double espera = Math.max(0, time() - ped.tEntradaColaPed);
 sumaEsperaPed += espera;
 nEsperasPed++;
 esperaMaxPed = Math.max(esperaMaxPed, espera);</Body></Function>
-          <Function AccessType="public" StaticFunction="false"><ReturnModificator>NO_RETURN</ReturnModificator><ReturnType>void</ReturnType><Id>1791000000087</Id><Name>generarTandaPed</Name><X>190</X><Y>130</Y><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Body>if (nTandasPed &gt;= cantidadTandasDemo) return;
+          <Function AccessType="public" StaticFunction="false"><ReturnModificator>VOID</ReturnModificator><ReturnType>void</ReturnType><Id>1791000000087</Id><Name>generarTandaPed</Name><X>190</X><Y>130</Y><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Body>if (nTandasPed &gt;= cantidadTandasDemo) return;
 nTandasPed++;
 tiempoUltimaTandaPed = time();
 pedSource.inject(tamanoTandaDemo);
 if (nTandasPed &lt; cantidadTandasDemo) proximaTandaPed.restart(intervaloTandaDemoSeg);</Body></Function>
-          <Function AccessType="public" StaticFunction="false"><ReturnModificator>NO_RETURN</ReturnModificator><ReturnType>void</ReturnType><Id>1791000000088</Id><Name>salePed</Name><X>190</X><Y>160</Y><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Body>nProcesadosPed++;
+          <Function AccessType="public" StaticFunction="false"><ReturnModificator>VOID</ReturnModificator><ReturnType>void</ReturnType><Id>1791000000088</Id><Name>salePed</Name><X>190</X><Y>160</Y><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Body>nProcesadosPed++;
 if (nTandasPed == cantidadTandasDemo &amp;&amp; nProcesadosPed == nGeneradosPed) {
     actualizarAreaColaPed();
     ultimaDisipacionPed = time() - tiempoUltimaTandaPed;
@@ -2760,7 +2760,7 @@ return acumulada/time();</Body></Function>
  + "; esperaMediaSeg=" + esperaMediaPed() + "; esperaMaxSeg=" + esperaMaxPed
  + "; qMax=" + qMaxPed + "; Lq=" + lqPed()
  + "; disipacionUltimaTandaSeg=" + ultimaDisipacionPed;</Body></Function>
-          <Function AccessType="public" StaticFunction="false"><ReturnModificator>NO_RETURN</ReturnModificator><ReturnType>void</ReturnType><Id>1791000000102</Id><Name>configurarMolinetesPed</Name><X>190</X><Y>280</Y><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Body>if (molinetesOperativosPed != 20 &amp;&amp; molinetesOperativosPed != 28)
+          <Function AccessType="public" StaticFunction="false"><ReturnModificator>VOID</ReturnModificator><ReturnType>void</ReturnType><Id>1791000000102</Id><Name>configurarMolinetesPed</Name><X>190</X><Y>280</Y><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Body>if (molinetesOperativosPed != 20 &amp;&amp; molinetesOperativosPed != 28)
     throw new IllegalArgumentException("La demo peatonal admite 20 o 28 molinetes");
 molinetesPeatonales.setServiceSuspended(molinetePed21, molinetesOperativosPed &lt; 21);
 molinetesPeatonales.setServiceSuspended(molinetePed22, molinetesOperativosPed &lt; 22);
