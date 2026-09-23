@@ -29,7 +29,7 @@ sale la fila con el MENOR theta >= 0
 ```
 
 - $y_{ij}=0$ o $y_{ij}<0$: esa fila **no limita** el crecimiento; no se divide.
-- $	heta=0$ es válido: produce una solución degenerada.
+- $\theta=0$ es válido: produce una solución degenerada.
 - Si ningún $y_{ij}>0$, ninguna variable puede salir: la solución es **no acotada** en la
   dirección de mejora (o **no factible** si todavía queda una ficticia positiva).
 
