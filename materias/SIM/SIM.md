@@ -2615,6 +2615,7 @@ actual puede validarse el caudal agregado, pero no la espera ni la cola real.
 - Definición del caso: [`entregables/TPI/subte/01-definicion-del-caso.md`](entregables/TPI/subte/01-definicion-del-caso.md)
 - Modelo inicial: [`entregables/TPI/subte/SubteConstitucion.alp`](entregables/TPI/subte/SubteConstitucion.alp)
 - Guía del modelo: [`entregables/TPI/subte/02-modelo-anylogic.md`](entregables/TPI/subte/02-modelo-anylogic.md)
+- Informe técnico en construcción: [`entregables/TPI/subte/03-informe-tpi.md`](entregables/TPI/subte/03-informe-tpi.md)
 - Ficha para la reunión: [`entregables/TPI/subte/TPI_Subte_Definicion_y_Modelo_Inicial.docx`](entregables/TPI/subte/TPI_Subte_Definicion_y_Modelo_Inicial.docx)
 - Versión PDF: [`../../../../output/pdf/TPI_Subte_Definicion_y_Modelo_Inicial.pdf`](../../../../output/pdf/TPI_Subte_Definicion_y_Modelo_Inicial.pdf)
 
@@ -2693,9 +2694,10 @@ subte, y sobre la misma estación.
 - **Modelo AnyLogic**: compilación y arranque de `E0` en modo demo verificados en AnyLogic 8.9.9 el
   2026-09-23. La capa espacial de `MainPeatonal` ahora recorre `PedSource → PedService → PedGoTo → PedSink`,
   con salida física, 28 posiciones de molinete y experimentos comparables `PeatonalE0` (20 habilitadas) y
-  `PeatonalE1` (28 habilitadas), además de tandas repetidas y métricas de cola. Las verificaciones XML y Java
-  pasan; falta compilar y ejecutar esta extensión en el IDE, incorporar los rangos aprobados y reemplazar la
-  geometría provisoria por el plano. E2 cuenta el desvío pero todavía no simula la cola de Plaza.
+  `PeatonalE1` (28 habilitadas), además de tandas repetidas, P90, proporción sobre 30 s, cohorte pico y
+  utilización por puesto. Las verificaciones XML y Java pasan; falta recargar, compilar y ejecutar esta
+  extensión en el IDE, incorporar los rangos aprobados y reemplazar la geometría provisoria por el plano.
+  E2 cuenta el desvío pero todavía no simula la cola de Plaza.
 - ~~**Formulario**: editar el último envío con el tema del subte.~~ Hecho el 2026-09-22: `formulario-eleccion-tema.md`
   reescrito v2 y `TPI_Simulacion_Propuesta_de_Tema.docx` regenerado con ese contenido
   (`scripts/build-tpi-formulario-docx.py`). Falta reenviarlo en el envío real (Classroom/mail al docente).
@@ -2772,6 +2774,11 @@ subte, y sobre la misma estación.
   `model-reader`, con sus repositorios de origen, rutas locales, usos y restricciones. Las dos primeras se
   probaron contra AnyLogic 8.9.9 PLE; `model-reader` ejecuta correctamente pero requiere proyectos
   descomprimidos `_alp/` y todavía no procesa el `.alp` monolítico del TPI.
+- **2026-09-23** (7): completadas en la capa peatonal las medidas P90, proporción con espera mayor a 30 s,
+  cohorte 08:15-08:45 y utilización por cada molinete, con callbacks de comienzo y fin de servicio y pruebas
+  Java/XML reproducibles. Creado `03-informe-tpi.md`, borrador estructurado por los diez pasos exigidos, sin
+  presentar la demo sintética como resultado real. Queda pendiente recargar el modelo abierto en AnyLogic,
+  compilar y ejecutar PeatonalE0/E1; la recarga se postergó para no descartar posibles cambios del IDE.
 - **2026-09-22** (3): TPI, grupo 2 (Casermeiro). Perfiladas a fondo las 9 planillas reales de producción que
   mandó la oficina técnica (locales, no versionadas — el repo es público — en
   `entregables/TPI/caser/datos-locales/`, gitignoreada). Confirmado con datos que hay **dos hornos

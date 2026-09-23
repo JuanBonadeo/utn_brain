@@ -237,6 +237,8 @@ m/s y el diámetro se fijó en 0,5 m únicamente para comprobar la dinámica pea
 | `cantidadTandasDemo` | 6 | Limita el experimento a 480 pasajeros |
 | `servicioDemoSeg` | 3 s | Ejercita el servicio; no es una medición |
 | `molinetesOperativosPed` | 20 o 28 | Única diferencia entre los experimentos espaciales E0 y E1 |
+| `inicioPicoPedSeg`, `finPicoPedSeg` | 4500, 6300 s | Cohorte 08:15-08:45; queda vacía en la demo corta de 600 s |
+| `horizonteMetricasPedSeg` | 600 s | Denominador común para la utilización de la demostración |
 
 La geometría contiene 28 `ServicePoint`. En E0 se suspenden los puntos 21 a 28 mediante la API de
 `ServiceWithLine`, de modo que quedan 20 disponibles; en E1 los 28 permanecen activos. No se duplican
@@ -256,14 +258,24 @@ cantidad y ubicación de molinetes, los tiempos de servicio y la estructura de t
 
 - peatones generados y procesados;
 - cantidad actual en cola y máximo observado;
-- espera media y máxima desde el ingreso a `PedService` hasta el comienzo de la validación;
+- espera media, máxima y percentil 90 desde el ingreso a `PedService` hasta el comienzo de la validación;
+- proporción de peatones con espera superior a 30 s;
 - $L_q$ temporal, integrando el número de peatones en cola;
+- ocupación y utilización por cada posición de servicio, utilización media y dispersión poblacional;
+- espera media y P90 de la cohorte que ingresa en `[4500, 6300)` cuando el horizonte incluya el pico;
 - tiempo desde la última tanda hasta el drenaje completo del sistema.
 
 La espera se guarda en cada `Pasajero` mediante `tEntradaColaPed`. Los callbacks `onEnterQueue` y
 `onBeginService` actualizan la cola sin confundir peatones atendidos inmediatamente con peatones que sí
-esperaron. Cuando sale el último pasajero, `resumenPeatonal()` imprime también la cantidad de molinetes
-operativos junto con las medidas.
+esperaron. `PedSource.onExit` fija el instante de ingreso y la pertenencia a la cohorte pico. Los callbacks
+`onBeginService` y `onEndService` identifican el `ServiceUnit` concreto y acumulan sus segundos ocupados.
+Cuando sale el último pasajero, `resumenPeatonal()` imprime también la cantidad de molinetes operativos,
+la utilización de cada puesto y las medidas de espera.
+
+La utilización de la demo se define como segundos ocupados divididos por
+`horizonteMetricasPedSeg × molinetesOperativosPed`. Los puestos habilitados que no atienden a nadie se
+incluyen con utilización cero. La cohorte pico usa el instante de salida de `PedSource`, no el instante de
+inicio de servicio, para evitar seleccionar pasajeros según la propia congestión.
 
 ### Comparación espacial E0-E1
 
@@ -277,8 +289,8 @@ operativos junto con las medidas.
 
 La comparación es estructural y sirve para verificar la lógica de escenarios. No constituye todavía una
 estimación del beneficio real de habilitar ocho molinetes adicionales, porque la demanda en tandas y el
-tiempo de validación siguen siendo supuestos sintéticos. Tampoco se calculan todavía el percentil 90, la
-utilización por molinete ni la cohorte 08:15-08:45.
+tiempo de validación siguen siendo supuestos sintéticos. El P90 y la utilización ya están implementados;
+la cohorte 08:15-08:45 queda sin observaciones en la demo corta porque su horizonte termina en 600 s.
 
 ### Organización visual del modelo
 
@@ -293,8 +305,9 @@ superpongan al tablero, al vestíbulo o a los KPI. En la vista peatonal también
 1. Sustituir la geometría esquemática por el plano o croquis de SBASE.
 2. Reemplazar los 20/28 puestos provisionales por la cantidad, ubicación y disponibilidad real.
 3. Validar en el IDE el drenaje de `PeatonalE0` y `PeatonalE1` y exportar los resultados.
-4. Incorporar percentil 90, utilización por molinete y métricas de la cohorte 08:15-08:45.
+4. Extender la capa espacial a la franja completa para poblar la cohorte 08:15-08:45 con entradas calibradas.
 5. Modelar Plaza como segundo circuito antes de interpretar E2 para toda la estación.
+6. Exportar una fila por réplica y ejecutar al menos 30 pares E0-E1 con números aleatorios comunes.
 
 ## 8. Referencias técnicas
 

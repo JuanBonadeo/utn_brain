@@ -97,7 +97,11 @@ for f in ped_agent.findall('Functions/Function'):
  args=', '.join(x.findtext('Type')+' '+x.findtext('Name') for x in f.findall('Parameter'))
  ped_functions.append(f'public {f.findtext("ReturnType")} {f.findtext("Name")}({args}) {{\n{f.findtext("Body")}\n}}')
 ped_check='''public class SubtePedLogicCheck {
-static class Pasajero { double tEntradaColaPed; boolean enColaPed; }
+static class Pasajero {
+ double tEntradaColaPed, tIngresoSistemaPed, tInicioServicioPed;
+ boolean enColaPed, enPicoPed;
+ String nombreMolinetePed="";
+}
 static class PedSourceStub { void inject(int n) {} }
 static class EventStub { void restart(double t) {} }
 static class ServiceStub { int calls, suspended; void setServiceSuspended(Object p, boolean value) { calls++; if(value)suspended++; } }
@@ -113,11 +117,17 @@ public static void main(String[] args){
  if(m.molinetesPeatonales.calls!=8 || m.molinetesPeatonales.suspended!=8)throw new AssertionError();
  SubtePedLogicCheck e1=new SubtePedLogicCheck();e1.molinetesOperativosPed=28;e1.configurarMolinetesPed();
  if(e1.molinetesPeatonales.calls!=8 || e1.molinetesPeatonales.suspended!=0)throw new AssertionError();
- Pasajero p=new Pasajero();m.clock=2;p.tEntradaColaPed=m.time();m.entraColaPed(p);m.clock=5;m.comienzaServicioPed(p);
+ m.inicioPicoPedSeg=0;m.finPicoPedSeg=10;
+ Pasajero p=new Pasajero();m.clock=2;m.registraIngresoPed(p);p.tEntradaColaPed=m.time();m.entraColaPed(p);
+ m.clock=5;p.nombreMolinetePed="molinetePed01";m.comienzaServicioPed(p);
+ m.clock=8;m.terminaServicioPed(p);
  if(m.nEsperandoPed!=0 || m.nEsperasPed!=1 || Math.abs(m.esperaMediaPed()-3)>1e-9)throw new AssertionError();
- m.generarTandaPed();m.nGeneradosPed=1;m.nProcesadosPed=0;m.salePed();
+ if(m.percentil90Ped()!=3 || m.proporcionMas30Ped()!=0 || m.esperasPicoPed.size()!=1 || m.p90PicoPed()!=3)throw new AssertionError();
+ if(Math.abs(m.utilizacionMediaPed()-3.0/(600*20))>1e-12)throw new AssertionError();
+ if(!m.utilizacionPorMolinetePed().contains("molinetePed01=0.005"))throw new AssertionError();
+ m.generarTandaPed();m.nProcesadosPed=0;m.salePed();
  if(m.nProcesadosPed!=1)throw new AssertionError();
- System.out.println("OK: pedestrian callbacks and metrics compile");
+ System.out.println("OK: pedestrian callbacks, P90, peak cohort and per-turnstile utilization compile");
 }
 }'''
 (d/'SubtePedLogicCheck.java').write_text(ped_check)
@@ -128,7 +138,7 @@ ped_api='''import com.anylogic.engine.markup.*;
 public class SubtePedApiCheck {
  ServiceWLine<ServicePoint<QueuePath>> services;
  ServicePoint<QueuePath> point;
- void configure(){ services.setServiceSuspended(point, true); }
+ void configure(){ services.setServiceSuspended(point, true); point.getName(); }
 }'''
 (d/'SubtePedApiCheck.java').write_text(ped_api)
 subprocess.run([javac,'-cp',':'.join(map(str,jars)),str(d/'SubtePedApiCheck.java')],check=True)
@@ -163,6 +173,14 @@ assert {x.findtext('Name') for x in service_points}=={f'molinetePed{i:02d}' for 
 assert ped.find(".//TargetLine[Name='salidaPeatonal']") is not None
 assert 'configurarMolinetesPed()' in ped.findtext('StartupCode')
 assert ped.find(".//Text[Name='etiquetaMolinetes']").findtext('TextCode')=='"Molinetes activos: " + molinetesOperativosPed + "/28"'
+ped_service=next(x for x in ped.findall('EmbeddedObjects/EmbeddedObject') if x.findtext('Name')=='pedMolinetes')
+callbacks={x.findtext('Name'):x.findtext('Value/Code') for x in ped_service.findall('Parameters/Parameter')}
+assert callbacks['onBeginService']=='ped.nombreMolinetePed = service.getName(); comienzaServicioPed(ped);'
+assert callbacks['onEndService']=='terminaServicioPed(ped);'
+ped_variable_names={x.findtext('Name') for x in ped.findall('Variables/Variable')}
+assert {'esperasPed','esperasPicoPed','ocupacionPorMolinetePed'} <= ped_variable_names
+pasajero_variable_names={x.findtext('Name') for x in agents['Pasajero'].findall('Variables/Variable')}
+assert {'tIngresoSistemaPed','enPicoPed','tInicioServicioPed','nombreMolinetePed'} <= pasajero_variable_names
 libs={x.findtext('LibraryName') for x in r.findall('Model/RequiredLibraryReference')}
 assert 'com.anylogic.libraries.pedestrian' in libs
-print('OK: XML, unique IDs, clean presentations, pedestrian exit, 28 service points and 20/28 experiments')
+print('OK: XML, unique IDs, clean presentations, pedestrian KPIs, 28 service points and 20/28 experiments')
