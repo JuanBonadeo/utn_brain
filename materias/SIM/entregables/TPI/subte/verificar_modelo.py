@@ -86,9 +86,47 @@ public static void main(String[] args){
 (d/'SubteLogicCheck.java').write_text(harness)
 subprocess.run([javac,str(d/'SubteLogicCheck.java')],check=True)
 subprocess.run(['/Applications/AnyLogic 8 PLE.app/Contents/jre/bin/java','-cp',str(d),'SubteLogicCheck'],check=True)
+# Compile the Java bodies of the incremental pedestrian root with small API stubs.
+ped_agent=next(x for x in r.findall('Model/ActiveObjectClasses/ActiveObjectClass') if x.findtext('Name')=='MainPeatonal')
+ped_fields=[]
+for v in ped_agent.findall('Variables/Variable'):
+ prop=v.find('Properties'); val=prop.findtext('DefaultValue/Code') if v.get('Class')=='Parameter' else prop.findtext('InitialValue/Code')
+ ped_fields.append(f'{prop.findtext("Type")} {v.findtext("Name")} = {val};')
+ped_functions=[]
+for f in ped_agent.findall('Functions/Function'):
+ args=', '.join(x.findtext('Type')+' '+x.findtext('Name') for x in f.findall('Parameter'))
+ ped_functions.append(f'public {f.findtext("ReturnType")} {f.findtext("Name")}({args}) {{\n{f.findtext("Body")}\n}}')
+ped_check='''public class SubtePedLogicCheck {
+static class Pasajero { double tEntradaColaPed; boolean enColaPed; }
+static class PedSourceStub { void inject(int n) {} }
+static class EventStub { void restart(double t) {} }
+PedSourceStub pedSource=new PedSourceStub(); EventStub proximaTandaPed=new EventStub();
+double clock; double time(){return clock;} void traceln(String s){}
+'''+ '\n'.join(ped_fields+ped_functions) + '''
+public static void main(String[] args){
+ SubtePedLogicCheck m=new SubtePedLogicCheck();
+ Pasajero p=new Pasajero();m.clock=2;p.tEntradaColaPed=m.time();m.entraColaPed(p);m.clock=5;m.comienzaServicioPed(p);
+ if(m.nEsperandoPed!=0 || m.nEsperasPed!=1 || Math.abs(m.esperaMediaPed()-3)>1e-9)throw new AssertionError();
+ m.generarTandaPed();m.nGeneradosPed=1;m.nProcesadosPed=0;m.salePed();
+ if(m.nProcesadosPed!=1)throw new AssertionError();
+ System.out.println("OK: pedestrian callbacks and metrics compile");
+}
+}'''
+(d/'SubtePedLogicCheck.java').write_text(ped_check)
+subprocess.run([javac,str(d/'SubtePedLogicCheck.java')],check=True)
+subprocess.run(['/Applications/AnyLogic 8 PLE.app/Contents/jre/bin/java','-cp',str(d),'SubtePedLogicCheck'],check=True)
 ids=[x.text for x in r.iter('Id')];assert len(ids)==len(set(ids)), 'Duplicate IDs'
 assert len(a.findall('EmbeddedObjects/EmbeddedObject'))==7
-for e in r.findall('Model/Experiments/SimulationExperiment'):
+experiments=r.findall('Model/Experiments/SimulationExperiment')
+for e in [x for x in experiments if x.findtext('Name') in {'E0','E1','E2','E3'}]:
  ps={p.findtext('ParameterName'):p.findtext('ParameterValue/Code') for p in e.findall('Parameters/Parameter')}
  assert ps['escenario']==e.findtext('Name')[1:]
-print('OK: XML, unique IDs, seven blocks, four scenario overrides')
+agents={x.findtext('Name'):x for x in r.findall('Model/ActiveObjectClasses/ActiveObjectClass')}
+ped=agents['MainPeatonal']
+ped_blocks={x.findtext('Name'):x.findtext('ActiveObjectClass/ClassName') for x in ped.findall('EmbeddedObjects/EmbeddedObject')}
+assert ped_blocks=={'pedSource':'PedSource','pedMolinetes':'PedService','pedSink':'PedSink'}
+assert agents['Pasajero'] is not None
+assert any(e.findtext('Name')=='PeatonalDemo' and e.get('ActiveObjectClassId')==ped.findtext('Id') for e in experiments)
+libs={x.findtext('LibraryName') for x in r.findall('Model/RequiredLibraryReference')}
+assert 'com.anylogic.libraries.pedestrian' in libs
+print('OK: XML, unique IDs, seven process blocks, four scenario overrides and pedestrian skeleton')

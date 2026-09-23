@@ -2530,6 +2530,253 @@ return (modoDemo ? "DEMO; " : "SIN VALIDAR; ") + "E" + escenario
           </Event>
         </Events>
       </ActiveObjectClass>
+      <!-- Etapa espacial incremental: se mantiene Main como modelo logico validado y
+           se agrega MainPeatonal para verificar Pedestrian Library sin mezclar resultados. -->
+      <ActiveObjectClass>
+        <Id>1791000000001</Id>
+        <Name>MainPeatonal</Name>
+        <Generic>false</Generic>
+        <GenericParameter>
+          <Id>1791000000002</Id>
+          <Name>1791000000002</Name>
+          <GenericParameterValue Class="CodeValue"><Code>T extends Agent</Code></GenericParameterValue>
+          <GenericParameterLabel>Generic parameter:</GenericParameterLabel>
+        </GenericParameter>
+        <FlowChartsUsage>PED</FlowChartsUsage>
+        <SamplesToKeep>100</SamplesToKeep>
+        <LimitNumberOfArrayElements>false</LimitNumberOfArrayElements>
+        <ElementsLimitValue>100</ElementsLimitValue>
+        <MakeDefaultViewArea>true</MakeDefaultViewArea>
+        <SceneGridColor />
+        <SceneBackgroundColor>-1</SceneBackgroundColor>
+        <EnvironmentResourceRef />
+        <EnvironmentType>NONE</EnvironmentType>
+        <EnvironmentRotationX>0</EnvironmentRotationX>
+        <EnvironmentRotationY>0</EnvironmentRotationY>
+        <EnvironmentRotationZ>0</EnvironmentRotationZ>
+        <EnvironmentIntensity>1</EnvironmentIntensity>
+        <AgentProperties>
+          <EnvironmentDefinesInitialLocation>true</EnvironmentDefinesInitialLocation>
+          <RotateAnimationTowardsMovement>true</RotateAnimationTowardsMovement>
+          <RotateAnimationVertically>false</RotateAnimationVertically>
+          <VelocityCode Class="CodeUnitValue"><Code>10</Code><Unit Class="SpeedUnits">MPS</Unit></VelocityCode>
+          <PhysicalLength Class="CodeUnitValue"><Code>1</Code><Unit Class="LengthUnits">METER</Unit></PhysicalLength>
+          <PhysicalWidth Class="CodeUnitValue"><Code>1</Code><Unit Class="LengthUnits">METER</Unit></PhysicalWidth>
+          <PhysicalHeight Class="CodeUnitValue"><Code>1</Code><Unit Class="LengthUnits">METER</Unit></PhysicalHeight>
+        </AgentProperties>
+        <EnvironmentProperties>
+          <EnableSteps>false</EnableSteps>
+          <StepDurationCode Class="CodeUnitValue"><Code>1.0</Code><Unit Class="TimeUnits">SECOND</Unit></StepDurationCode>
+          <SpaceType>CONTINUOUS</SpaceType>
+          <WidthCode>1000</WidthCode><HeightCode>650</HeightCode><ZHeightCode>0</ZHeightCode>
+          <ColumnsCountCode>100</ColumnsCountCode><RowsCountCode>100</RowsCountCode>
+          <NeigborhoodType>MOORE</NeigborhoodType><LayoutType>USER_DEF</LayoutType><NetworkType>USER_DEF</NetworkType>
+          <ConnectionsPerAgentCode>2</ConnectionsPerAgentCode><ConnectionsRangeCode>50</ConnectionsRangeCode>
+          <NeighborLinkFractionCode>0.95</NeighborLinkFractionCode><MCode>10</MCode>
+        </EnvironmentProperties>
+        <DatasetsCreationProperties>
+          <AutoCreate>true</AutoCreate><Id>1791000000003</Id><OccurrenceAtTime>true</OccurrenceAtTime>
+          <OccurrenceDate>1789984800000</OccurrenceDate>
+          <OccurrenceTime Class="CodeUnitValue"><Code>0</Code><Unit Class="TimeUnits">SECOND</Unit></OccurrenceTime>
+          <RecurrenceCode Class="CodeUnitValue"><Code>1</Code><Unit Class="TimeUnits">SECOND</Unit></RecurrenceCode>
+        </DatasetsCreationProperties>
+        <ScaleRuler>
+          <Id>1791000000004</Id><Name>scale</Name><X>0</X><Y>-150</Y>
+          <PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>false</ShowLabel>
+          <DrawMode>SHAPE_DRAW_2D3D</DrawMode><Length>100</Length><Rotation>0</Rotation>
+          <ScaleType>BASED_ON_LENGTH</ScaleType><ModelLength>10</ModelLength><LengthUnits>METER</LengthUnits>
+          <Scale>10</Scale><InheritedFromParentAgentType>true</InheritedFromParentAgentType>
+        </ScaleRuler>
+        <CurrentLevel>1791000000005</CurrentLevel>
+        <ConnectionsId>1791000000006</ConnectionsId>
+        <Variables>
+          <Variable Class="Parameter">
+            <Id>1791000000007</Id><Name>tamanoTandaDemo</Name><X>40</X><Y>40</Y>
+            <Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel>
+            <Properties SaveInSnapshot="true" ModificatorType="STATIC"><Type>int</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+              <DefaultValue Class="CodeValue"><Code>80</Code></DefaultValue>
+              <ParameterEditor><Id>1791000000008</Id><EditorContolType>TEXT_BOX</EditorContolType><MinSliderValue>0</MinSliderValue><MaxSliderValue>500</MaxSliderValue><DelimeterType>NO_DELIMETER</DelimeterType></ParameterEditor>
+            </Properties>
+            <Description>Tanda sintetica para verificar movimiento espacial; no es una medicion.</Description>
+          </Variable>
+          <Variable Class="Parameter">
+            <Id>1791000000009</Id><Name>servicioDemoSeg</Name><X>40</X><Y>65</Y>
+            <Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel>
+            <Properties SaveInSnapshot="true" ModificatorType="STATIC"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+              <DefaultValue Class="CodeValue"><Code>3.0</Code></DefaultValue>
+              <ParameterEditor><Id>1791000000010</Id><EditorContolType>TEXT_BOX</EditorContolType><MinSliderValue>0</MinSliderValue><MaxSliderValue>30</MaxSliderValue><DelimeterType>NO_DELIMETER</DelimeterType></ParameterEditor>
+            </Properties>
+            <Description>Duracion sintetica del servicio, en segundos.</Description>
+          </Variable>
+          <Variable Class="PlainVariable"><Id>1791000000011</Id><Name>nGeneradosPed</Name><X>40</X><Y>100</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true"><Type>int</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable>
+          <Variable Class="PlainVariable"><Id>1791000000012</Id><Name>nProcesadosPed</Name><X>40</X><Y>125</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true"><Type>int</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable>
+          <Variable Class="Parameter"><Id>1791000000070</Id><Name>intervaloTandaDemoSeg</Name><X>40</X><Y>90</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true" ModificatorType="STATIC"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><DefaultValue Class="CodeValue"><Code>30.0</Code></DefaultValue><ParameterEditor><Id>1791000000071</Id><EditorContolType>TEXT_BOX</EditorContolType><MinSliderValue>1</MinSliderValue><MaxSliderValue>600</MaxSliderValue><DelimeterType>NO_DELIMETER</DelimeterType></ParameterEditor></Properties><Description>Intervalo sintetico entre tandas.</Description></Variable>
+          <Variable Class="Parameter"><Id>1791000000072</Id><Name>cantidadTandasDemo</Name><X>40</X><Y>115</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true" ModificatorType="STATIC"><Type>int</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><DefaultValue Class="CodeValue"><Code>6</Code></DefaultValue><ParameterEditor><Id>1791000000073</Id><EditorContolType>TEXT_BOX</EditorContolType><MinSliderValue>1</MinSliderValue><MaxSliderValue>100</MaxSliderValue><DelimeterType>NO_DELIMETER</DelimeterType></ParameterEditor></Properties><Description>Cantidad sintetica de tandas.</Description></Variable>
+          <Variable Class="PlainVariable"><Id>1791000000074</Id><Name>nTandasPed</Name><X>40</X><Y>150</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true"><Type>int</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable>
+          <Variable Class="PlainVariable"><Id>1791000000075</Id><Name>nEsperandoPed</Name><X>40</X><Y>175</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true"><Type>int</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable>
+          <Variable Class="PlainVariable"><Id>1791000000076</Id><Name>qMaxPed</Name><X>40</X><Y>200</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true"><Type>int</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable>
+          <Variable Class="PlainVariable"><Id>1791000000077</Id><Name>sumaEsperaPed</Name><X>40</X><Y>225</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable>
+          <Variable Class="PlainVariable"><Id>1791000000078</Id><Name>nEsperasPed</Name><X>40</X><Y>250</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true"><Type>int</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable>
+          <Variable Class="PlainVariable"><Id>1791000000079</Id><Name>esperaMaxPed</Name><X>40</X><Y>275</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable>
+          <Variable Class="PlainVariable"><Id>1791000000080</Id><Name>areaColaPed</Name><X>40</X><Y>300</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable>
+          <Variable Class="PlainVariable"><Id>1791000000081</Id><Name>tAreaColaPed</Name><X>40</X><Y>325</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable>
+          <Variable Class="PlainVariable"><Id>1791000000082</Id><Name>tiempoUltimaTandaPed</Name><X>40</X><Y>350</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable>
+          <Variable Class="PlainVariable"><Id>1791000000083</Id><Name>ultimaDisipacionPed</Name><X>40</X><Y>375</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><InitialValue Class="CodeValue"><Code>Double.NaN</Code></InitialValue></Properties></Variable>
+        </Variables>
+        <Connectors>
+          <Connector>
+            <Id>1791000000013</Id><Name>conPedSourceServicio</Name><X>0</X><Y>0</Y><Label><X>10</X><Y>0</Y></Label>
+            <PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel>
+            <SourceEmbeddedObjectReference><PackageName>subteconstitucion</PackageName><ClassName>MainPeatonal</ClassName><ItemName>pedSource</ItemName></SourceEmbeddedObjectReference>
+            <SourceConnectableItemReference><PackageName>com.anylogic.libraries.pedestrian</PackageName><ClassName>PedSource</ClassName><ItemName>out</ItemName></SourceConnectableItemReference>
+            <TargetEmbeddedObjectReference><PackageName>subteconstitucion</PackageName><ClassName>MainPeatonal</ClassName><ItemName>pedMolinetes</ItemName></TargetEmbeddedObjectReference>
+            <TargetConnectableItemReference><PackageName>com.anylogic.libraries.pedestrian</PackageName><ClassName>PedService</ClassName><ItemName>in</ItemName></TargetConnectableItemReference>
+            <Points><Point><X>300</X><Y>80</Y></Point><Point><X>450</X><Y>80</Y></Point></Points>
+          </Connector>
+          <Connector>
+            <Id>1791000000014</Id><Name>conPedServicioSink</Name><X>0</X><Y>0</Y><Label><X>10</X><Y>0</Y></Label>
+            <PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel>
+            <SourceEmbeddedObjectReference><PackageName>subteconstitucion</PackageName><ClassName>MainPeatonal</ClassName><ItemName>pedMolinetes</ItemName></SourceEmbeddedObjectReference>
+            <SourceConnectableItemReference><PackageName>com.anylogic.libraries.pedestrian</PackageName><ClassName>PedService</ClassName><ItemName>out</ItemName></SourceConnectableItemReference>
+            <TargetEmbeddedObjectReference><PackageName>subteconstitucion</PackageName><ClassName>MainPeatonal</ClassName><ItemName>pedSink</ItemName></TargetEmbeddedObjectReference>
+            <TargetConnectableItemReference><PackageName>com.anylogic.libraries.pedestrian</PackageName><ClassName>PedSink</ClassName><ItemName>in</ItemName></TargetConnectableItemReference>
+            <Points><Point><X>490</X><Y>80</Y></Point><Point><X>640</X><Y>80</Y></Point></Points>
+          </Connector>
+        </Connectors>
+        <AgentLinks>
+          <AgentLink><Id>1791000000006</Id><Name>connections</Name><X>50</X><Y>-50</Y><Label><X>15</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><HandleReceiveInConnections>false</HandleReceiveInConnections><AgentLinkType>COLLECTION_OF_LINKS</AgentLinkType><AgentLinkBidirectional>true</AgentLinkBidirectional><MessageType>Object</MessageType><LineStyle>SOLID</LineStyle><LineWidth>1</LineWidth><LineColor>-16777216</LineColor><LineZOrder>UNDER_AGENTS</LineZOrder><LineArrow>NONE</LineArrow><LineArrowPosition>END</LineArrowPosition></AgentLink>
+        </AgentLinks>
+        <EmbeddedObjects>
+          <EmbeddedObject>
+            <Id>1791000000015</Id><Name>pedSource</Name><X>300</X><Y>80</Y><Label><X>-15</X><Y>-30</Y></Label>
+            <PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel>
+            <ActiveObjectClass><PackageName>com.anylogic.libraries.pedestrian</PackageName><ClassName>PedSource</ClassName></ActiveObjectClass>
+            <GenericParameterSubstitute><GenericParameterSubstituteReference><PackageName>com.anylogic.libraries.pedestrian</PackageName><ClassName>PedSource</ClassName><ItemName>1412464601074</ItemName></GenericParameterSubstituteReference></GenericParameterSubstitute>
+            <Parameters>
+              <Parameter><Name>locationType</Name></Parameter>
+              <Parameter><Name>locationLine</Name><Value Class="CodeValue"><Code>entradaPeatonal</Code></Value></Parameter>
+              <Parameter><Name>level</Name></Parameter><Parameter><Name>locationX</Name></Parameter><Parameter><Name>locationY</Name></Parameter><Parameter><Name>locationNode</Name></Parameter>
+              <Parameter><Name>arrivalType</Name><Value Class="CodeValue"><Code>self.MANUAL</Code></Value></Parameter>
+              <Parameter><Name>rate</Name></Parameter><Parameter><Name>interarrivalTime</Name></Parameter><Parameter><Name>rateSchedule</Name></Parameter><Parameter><Name>modifyRate</Name></Parameter><Parameter><Name>rateExpression</Name></Parameter><Parameter><Name>arrivalSchedule</Name></Parameter><Parameter><Name>limitArrivals</Name></Parameter><Parameter><Name>maxArrivals</Name></Parameter>
+              <Parameter><Name>newPed</Name><Value Class="EntityCodeValue"><IsAgentEntity>true</IsAgentEntity><EntityEmbeddedObject><Id>1791000000016</Id><ActiveObjectClass><PackageName>subteconstitucion</PackageName><ClassName>Pasajero</ClassName></ActiveObjectClass><GenericParameterSubstitute><GenericParameterSubstituteReference><PackageName>subteconstitucion</PackageName><ClassName>Pasajero</ClassName><ItemName>1791000000051</ItemName></GenericParameterSubstituteReference></GenericParameterSubstitute><Parameters></Parameters><ReplicationFlag>true</ReplicationFlag><Replication Class="CodeValue"><Code>100</Code></Replication><CollectionType>ARRAY_LIST_BASED</CollectionType><InitialLocationType>XYZ</InitialLocationType><ColumnCode Class="CodeValue"><Code>0</Code></ColumnCode><RowCode Class="CodeValue"><Code>0</Code></RowCode><LocationNameCode Class="CodeValue"><Code>""</Code></LocationNameCode><InitializationType>LOAD_FROM_DATABASE</InitializationType><InitializationDatabaseTableQuery><Id>1791000000017</Id><TableReference></TableReference></InitializationDatabaseTableQuery><InitializationDatabaseType>ONE_AGENT_PER_DATABASE_RECORD</InitializationDatabaseType><QuantityColumn></QuantityColumn></EntityEmbeddedObject></Value></Parameter>
+              <Parameter><Name>comfortableSpeed</Name><Value Class="CodeUnitValue"><Code>uniform(1.1, 1.5)</Code><Unit Class="SpeedUnits">MPS</Unit></Value></Parameter>
+              <Parameter><Name>initialSpeed</Name></Parameter><Parameter><Name>diameter</Name><Value Class="CodeUnitValue"><Code>0.5</Code><Unit Class="LengthUnits">METER</Unit></Value></Parameter>
+              <Parameter><Name>createGroups</Name></Parameter><Parameter><Name>groupSize</Name></Parameter><Parameter><Name>groupMemberInterarrivalTime</Name></Parameter><Parameter><Name>groupFormation</Name></Parameter><Parameter><Name>serviceGroupBehavior</Name></Parameter><Parameter><Name>solidCancelling</Name></Parameter><Parameter><Name>addToCustomPopulation</Name></Parameter><Parameter><Name>population</Name></Parameter>
+              <Parameter><Name>onExit</Name><Value Class="CodeValue"><Code>nGeneradosPed++;</Code></Value></Parameter><Parameter><Name>onBeginGrouping</Name></Parameter><Parameter><Name>onEndGrouping</Name></Parameter>
+            </Parameters>
+            <ReplicationFlag>false</ReplicationFlag><Replication Class="CodeValue"><Code>100</Code></Replication><CollectionType>ARRAY_LIST_BASED</CollectionType><InitialLocationType>XYZ</InitialLocationType><ColumnCode Class="CodeValue"><Code>0</Code></ColumnCode><RowCode Class="CodeValue"><Code>0</Code></RowCode><LocationNameCode Class="CodeValue"><Code>""</Code></LocationNameCode><InitializationType>SPECIFIED_NUMBER</InitializationType><InitializationDatabaseTableQuery><Id>1791000000018</Id><TableReference></TableReference></InitializationDatabaseTableQuery><InitializationDatabaseType>ONE_AGENT_PER_DATABASE_RECORD</InitializationDatabaseType><QuantityColumn></QuantityColumn>
+          </EmbeddedObject>
+          <EmbeddedObject>
+            <Id>1791000000019</Id><Name>pedMolinetes</Name><X>450</X><Y>80</Y><Label><X>-20</X><Y>-25</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel>
+            <ActiveObjectClass><PackageName>com.anylogic.libraries.pedestrian</PackageName><ClassName>PedService</ClassName></ActiveObjectClass>
+            <GenericParameterSubstitute><GenericParameterSubstituteReference><PackageName>com.anylogic.libraries.pedestrian</PackageName><ClassName>PedService</ClassName><ItemName>1416228850252</ItemName></GenericParameterSubstituteReference></GenericParameterSubstitute>
+            <Parameters>
+              <Parameter><Name>services</Name><Value Class="CodeValue"><Code>molinetesPeatonales</Code></Value></Parameter>
+              <Parameter><Name>queueChoicePolicy</Name></Parameter><Parameter><Name>chooseQueue</Name></Parameter>
+              <Parameter><Name>delayTime</Name><Value Class="CodeUnitValue"><Code>servicioDemoSeg</Code><Unit Class="TimeUnits">SECOND</Unit></Value></Parameter>
+              <Parameter><Name>recoveryDelay</Name></Parameter><Parameter><Name>reverseQueue</Name></Parameter>
+              <Parameter><Name>onEnter</Name><Value Class="CodeValue"><Code>ped.tEntradaColaPed = time();</Code></Value></Parameter>
+              <Parameter><Name>onEnterQueue</Name><Value Class="CodeValue"><Code>entraColaPed(ped);</Code></Value></Parameter>
+              <Parameter><Name>onAtExitQueue</Name></Parameter><Parameter><Name>onExitQueue</Name></Parameter>
+              <Parameter><Name>onBeginService</Name><Value Class="CodeValue"><Code>comienzaServicioPed(ped);</Code></Value></Parameter>
+              <Parameter><Name>onEndService</Name></Parameter><Parameter><Name>onExit</Name></Parameter><Parameter><Name>onCancel</Name></Parameter>
+            </Parameters>
+            <ReplicationFlag>false</ReplicationFlag><Replication Class="CodeValue"><Code>100</Code></Replication><CollectionType>ARRAY_LIST_BASED</CollectionType><InitialLocationType>XYZ</InitialLocationType><ColumnCode Class="CodeValue"><Code>0</Code></ColumnCode><RowCode Class="CodeValue"><Code>0</Code></RowCode><LocationNameCode Class="CodeValue"><Code>""</Code></LocationNameCode><InitializationType>SPECIFIED_NUMBER</InitializationType><InitializationDatabaseTableQuery><Id>1791000000020</Id><TableReference></TableReference></InitializationDatabaseTableQuery><InitializationDatabaseType>ONE_AGENT_PER_DATABASE_RECORD</InitializationDatabaseType><QuantityColumn></QuantityColumn>
+          </EmbeddedObject>
+          <EmbeddedObject>
+            <Id>1791000000021</Id><Name>pedSink</Name><X>640</X><Y>80</Y><Label><X>-20</X><Y>-30</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel>
+            <ActiveObjectClass><PackageName>com.anylogic.libraries.pedestrian</PackageName><ClassName>PedSink</ClassName></ActiveObjectClass>
+            <GenericParameterSubstitute><GenericParameterSubstituteReference><PackageName>com.anylogic.libraries.pedestrian</PackageName><ClassName>PedSink</ClassName><ItemName>1412464601104</ItemName></GenericParameterSubstituteReference></GenericParameterSubstitute>
+            <Parameters><Parameter><Name>onEnter</Name><Value Class="CodeValue"><Code>salePed();</Code></Value></Parameter></Parameters>
+            <ReplicationFlag>false</ReplicationFlag><Replication Class="CodeValue"><Code>100</Code></Replication><CollectionType>ARRAY_LIST_BASED</CollectionType><InitialLocationType>XYZ</InitialLocationType><ColumnCode Class="CodeValue"><Code>0</Code></ColumnCode><RowCode Class="CodeValue"><Code>0</Code></RowCode><LocationNameCode Class="CodeValue"><Code>""</Code></LocationNameCode><InitializationType>SPECIFIED_NUMBER</InitializationType><InitializationDatabaseTableQuery><Id>1791000000022</Id><TableReference></TableReference></InitializationDatabaseTableQuery><InitializationDatabaseType>ONE_AGENT_PER_DATABASE_RECORD</InitializationDatabaseType><QuantityColumn></QuantityColumn>
+          </EmbeddedObject>
+        </EmbeddedObjects>
+        <Functions>
+          <Function AccessType="public" StaticFunction="false"><ReturnModificator>NO_RETURN</ReturnModificator><ReturnType>void</ReturnType><Id>1791000000084</Id><Name>actualizarAreaColaPed</Name><X>190</X><Y>40</Y><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Body>double ahora = time();
+areaColaPed += nEsperandoPed * Math.max(0, ahora - tAreaColaPed);
+tAreaColaPed = ahora;</Body></Function>
+          <Function AccessType="public" StaticFunction="false"><ReturnModificator>NO_RETURN</ReturnModificator><ReturnType>void</ReturnType><Id>1791000000085</Id><Name>entraColaPed</Name><X>190</X><Y>70</Y><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Parameter><Name>ped</Name><Type>Pasajero</Type></Parameter><Body>actualizarAreaColaPed();
+ped.enColaPed = true;
+nEsperandoPed++;
+qMaxPed = Math.max(qMaxPed, nEsperandoPed);</Body></Function>
+          <Function AccessType="public" StaticFunction="false"><ReturnModificator>NO_RETURN</ReturnModificator><ReturnType>void</ReturnType><Id>1791000000086</Id><Name>comienzaServicioPed</Name><X>190</X><Y>100</Y><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Parameter><Name>ped</Name><Type>Pasajero</Type></Parameter><Body>if (ped.enColaPed) {
+    actualizarAreaColaPed();
+    nEsperandoPed--;
+    ped.enColaPed = false;
+}
+double espera = Math.max(0, time() - ped.tEntradaColaPed);
+sumaEsperaPed += espera;
+nEsperasPed++;
+esperaMaxPed = Math.max(esperaMaxPed, espera);</Body></Function>
+          <Function AccessType="public" StaticFunction="false"><ReturnModificator>NO_RETURN</ReturnModificator><ReturnType>void</ReturnType><Id>1791000000087</Id><Name>generarTandaPed</Name><X>190</X><Y>130</Y><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Body>if (nTandasPed &gt;= cantidadTandasDemo) return;
+nTandasPed++;
+tiempoUltimaTandaPed = time();
+pedSource.inject(tamanoTandaDemo);
+if (nTandasPed &lt; cantidadTandasDemo) proximaTandaPed.restart(intervaloTandaDemoSeg);</Body></Function>
+          <Function AccessType="public" StaticFunction="false"><ReturnModificator>NO_RETURN</ReturnModificator><ReturnType>void</ReturnType><Id>1791000000088</Id><Name>salePed</Name><X>190</X><Y>160</Y><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Body>nProcesadosPed++;
+if (nTandasPed == cantidadTandasDemo &amp;&amp; nProcesadosPed == nGeneradosPed) {
+    actualizarAreaColaPed();
+    ultimaDisipacionPed = time() - tiempoUltimaTandaPed;
+    traceln(resumenPeatonal());
+}</Body></Function>
+          <Function AccessType="public" StaticFunction="false"><ReturnModificator>RETURNS_VALUE</ReturnModificator><ReturnType>double</ReturnType><Id>1791000000089</Id><Name>esperaMediaPed</Name><X>190</X><Y>190</Y><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Body>return nEsperasPed == 0 ? 0 : sumaEsperaPed/nEsperasPed;</Body></Function>
+          <Function AccessType="public" StaticFunction="false"><ReturnModificator>RETURNS_VALUE</ReturnModificator><ReturnType>double</ReturnType><Id>1791000000090</Id><Name>lqPed</Name><X>190</X><Y>220</Y><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Body>if (time() &lt;= 0) return 0;
+double acumulada = areaColaPed + nEsperandoPed*Math.max(0, time()-tAreaColaPed);
+return acumulada/time();</Body></Function>
+          <Function AccessType="public" StaticFunction="false"><ReturnModificator>RETURNS_VALUE</ReturnModificator><ReturnType>String</ReturnType><Id>1791000000091</Id><Name>resumenPeatonal</Name><X>190</X><Y>250</Y><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Body>return "DEMO PEATONAL SINTETICA; tandas=" + nTandasPed
+ + "; generados=" + nGeneradosPed + "; procesados=" + nProcesadosPed
+ + "; esperaMediaSeg=" + esperaMediaPed() + "; esperaMaxSeg=" + esperaMaxPed
+ + "; qMax=" + qMaxPed + "; Lq=" + lqPed()
+ + "; disipacionUltimaTandaSeg=" + ultimaDisipacionPed;</Body></Function>
+        </Functions>
+        <Events>
+          <Event><Id>1791000000092</Id><Name>proximaTandaPed</Name><X>380</X><Y>130</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Properties TriggerType="timeout" Mode="occuresOnce"><Timeout Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">SECOND</Unit></Timeout><Rate Class="CodeUnitValue"><Code>1</Code><Unit Class="RateUnits">PER_MINUTE</Unit></Rate><Id>1791000000093</Id><OccurrenceAtTime>true</OccurrenceAtTime><OccurrenceDate>1789984800000</OccurrenceDate><OccurrenceTime Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">SECOND</Unit></OccurrenceTime><RecurrenceCode Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">SECOND</Unit></RecurrenceCode><Condition>false</Condition></Properties><Action>generarTandaPed();</Action></Event>
+        </Events>
+        <Presentation>
+          <Level>
+            <Id>1791000000005</Id><Name>nivelVestibulo</Name><X>0</X><Y>0</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel><DrawMode>SHAPE_DRAW_2D3D</DrawMode><Z>0</Z><LevelVisibility>DIM_NON_CURRENT</LevelVisibility>
+            <Presentation>
+              <Rectangle><Id>1791000000023</Id><Name>areaVestibulo</Name><X>80</X><Y>190</Y><Label><X>10</X><Y>10</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel><DrawMode>SHAPE_DRAW_2D3D</DrawMode><EmbeddedIcon>false</EmbeddedIcon><Z>0</Z><ZHeight>10</ZHeight><LineWidth>2</LineWidth><LineColor>-12490271</LineColor><LineMaterial>null</LineMaterial><LineStyle>SOLID</LineStyle><Width>800</Width><Height>350</Height><Rotation>0.0</Rotation><FillColor>-328966</FillColor><FillMaterial>null</FillMaterial></Rectangle>
+              <Text><Id>1791000000024</Id><Name>tituloPeatonal</Name><X>80</X><Y>135</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel><DrawMode>SHAPE_DRAW_2D3D</DrawMode><EmbeddedIcon>false</EmbeddedIcon><Z>0</Z><Rotation>0.0</Rotation><Color>-12490271</Color><Text>Constitución - prototipo espacial peatonal</Text><Font><Name>SansSerif</Name><Size>24</Size><Style>1</Style></Font><Alignment>LEFT</Alignment></Text>
+              <Text><Id>1791000000025</Id><Name>avisoPeatonal</Name><X>80</X><Y>168</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel><DrawMode>SHAPE_DRAW_2D3D</DrawMode><EmbeddedIcon>false</EmbeddedIcon><Z>0</Z><Rotation>0.0</Rotation><Color>-65536</Color><Text>GEOMETRÍA Y DATOS SINTÉTICOS - NO REPRESENTA EL PLANO REAL</Text><Font><Name>SansSerif</Name><Size>13</Size><Style>1</Style></Font><Alignment>LEFT</Alignment></Text>
+              <Text><Id>1791000000026</Id><Name>kpiPeatonal</Name><X>80</X><Y>570</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel><DrawMode>SHAPE_DRAW_2D3D</DrawMode><EmbeddedIcon>false</EmbeddedIcon><Z>0</Z><Rotation>0.0</Rotation><Color>-16777216</Color><Text>Tandas 0/6 - Generados 0 - Procesados 0 - En cola 0</Text><TextCode>"Tandas " + nTandasPed + "/" + cantidadTandasDemo + " - Generados " + nGeneradosPed + " - Procesados " + nProcesadosPed + " - En cola " + nEsperandoPed</TextCode><Font><Name>SansSerif</Name><Size>14</Size><Style>1</Style></Font><Alignment>LEFT</Alignment></Text>
+              <Text><Id>1791000000096</Id><Name>kpiEsperaPeatonal</Name><X>80</X><Y>600</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel><DrawMode>SHAPE_DRAW_2D3D</DrawMode><EmbeddedIcon>false</EmbeddedIcon><Z>0</Z><Rotation>0.0</Rotation><Color>-16777216</Color><Text>Espera media 0,0 s - Cola máxima 0 - Lq 0,0</Text><TextCode>String.format("Espera media %.1f s - máxima %.1f s - cola máxima %d - Lq %.1f", esperaMediaPed(), esperaMaxPed, qMaxPed, lqPed())</TextCode><Font><Name>SansSerif</Name><Size>14</Size><Style>0</Style></Font><Alignment>LEFT</Alignment></Text>
+              <Text><Id>1791000000027</Id><Name>etiquetaOrigen</Name><X>95</X><Y>305</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel><DrawMode>SHAPE_DRAW_2D3D</DrawMode><EmbeddedIcon>false</EmbeddedIcon><Z>0</Z><Rotation>0.0</Rotation><Color>-12490271</Color><Text>Llegada desde Línea Roca</Text><Font><Name>SansSerif</Name><Size>13</Size><Style>0</Style></Font><Alignment>LEFT</Alignment></Text>
+              <Text><Id>1791000000028</Id><Name>etiquetaMolinetes</Name><X>650</X><Y>305</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel><DrawMode>SHAPE_DRAW_2D3D</DrawMode><EmbeddedIcon>false</EmbeddedIcon><Z>0</Z><Rotation>0.0</Rotation><Color>-12490271</Color><Text>4 molinetes demo</Text><Font><Name>SansSerif</Name><Size>13</Size><Style>0</Style></Font><Alignment>LEFT</Alignment></Text>
+              <TargetLine><Id>1791000000029</Id><Name>entradaPeatonal</Name><X>180</X><Y>340</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel><DrawMode>SHAPE_DRAW_2D3D</DrawMode><Z>0</Z><LineColor>-14774017</LineColor><Points><Point><X>0</X><Y>0</Y></Point><Point><X>0</X><Y>100</Y></Point></Points></TargetLine>
+              <ServiceWithLine>
+                <ServiceColor>-16744448</ServiceColor><Id>1791000000030</Id><Name>molinetesPeatonales</Name><X>700</X><Y>390</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel><DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+                <Presentation>
+                  <PolygonNode><Id>1791000000031</Id><Name>areaEsperaMolinetes</Name><X>0</X><Y>0</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel><DrawMode>SHAPE_DRAW_2D3D</DrawMode><Z>0</Z><EmbeddedObject><Id>1791000000032</Id><ActiveObjectClass><PackageName>com.anylogic.libraries.modules.markup_descriptors</PackageName><ClassName>AreaNodeDescriptor</ClassName></ActiveObjectClass><Parameters></Parameters><ReplicationFlag>false</ReplicationFlag><Replication Class="CodeValue"><Code>100</Code></Replication><CollectionType>ARRAY_LIST_BASED</CollectionType><InitialLocationType>XYZ</InitialLocationType><ColumnCode Class="CodeValue"><Code>0</Code></ColumnCode><RowCode Class="CodeValue"><Code>0</Code></RowCode><LocationNameCode Class="CodeValue"><Code>""</Code></LocationNameCode><InitializationType>SPECIFIED_NUMBER</InitializationType><InitializationDatabaseTableQuery><Id>1791000000033</Id><TableReference></TableReference></InitializationDatabaseTableQuery><InitializationDatabaseType>ONE_AGENT_PER_DATABASE_RECORD</InitializationDatabaseType><QuantityColumn></QuantityColumn></EmbeddedObject><LineColor>-16744448</LineColor><FillColor /><LineWidth>2</LineWidth><LineMaterial>null</LineMaterial><FillMaterial>null</FillMaterial><LineStyle>DASHED</LineStyle><AttractorsLayout>random</AttractorsLayout><Sloped>false</Sloped><Slope><Id>1791000000034</Id><Name>areaEsperaMolinetes</Name><X>0</X><Y>10</Y><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Dx>20</Dx><Dy>0</Dy><Dz>0</Dz><AngleX>30</AngleX><AngleZ>0</AngleZ><SlopeType>angle</SlopeType></Slope><Points><Point><X>0</X><Y>0</Y></Point><Point><X>0</X><Y>100</Y></Point><Point><X>80</X><Y>100</Y></Point><Point><X>80</X><Y>0</Y></Point></Points></PolygonNode>
+                  <ServicePoint><Id>1791000000035</Id><Name>molineteDemo1</Name><X>720</X><Y>335</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel><DrawMode>SHAPE_DRAW_2D3D</DrawMode><Z>0</Z><OverrideQueueChoicePolicy>false</OverrideQueueChoicePolicy><QueueChoicePolicy>CLOSEST_QUEUE_STRICT</QueueChoicePolicy><Rotation>180</Rotation></ServicePoint>
+                  <ServicePoint><Id>1791000000036</Id><Name>molineteDemo2</Name><X>720</X><Y>375</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel><DrawMode>SHAPE_DRAW_2D3D</DrawMode><Z>0</Z><OverrideQueueChoicePolicy>false</OverrideQueueChoicePolicy><QueueChoicePolicy>CLOSEST_QUEUE_STRICT</QueueChoicePolicy><Rotation>180</Rotation></ServicePoint>
+                  <ServicePoint><Id>1791000000037</Id><Name>molineteDemo3</Name><X>720</X><Y>415</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel><DrawMode>SHAPE_DRAW_2D3D</DrawMode><Z>0</Z><OverrideQueueChoicePolicy>false</OverrideQueueChoicePolicy><QueueChoicePolicy>CLOSEST_QUEUE_STRICT</QueueChoicePolicy><Rotation>180</Rotation></ServicePoint>
+                  <ServicePoint><Id>1791000000038</Id><Name>molineteDemo4</Name><X>720</X><Y>455</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel><DrawMode>SHAPE_DRAW_2D3D</DrawMode><Z>0</Z><OverrideQueueChoicePolicy>false</OverrideQueueChoicePolicy><QueueChoicePolicy>CLOSEST_QUEUE_STRICT</QueueChoicePolicy><Rotation>180</Rotation></ServicePoint>
+                  <QueueLine><Id>1791000000039</Id><Name>colaMolinetesDemo</Name><X>610</X><Y>395</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel><DrawMode>SHAPE_DRAW_2D3D</DrawMode><Z>0</Z><Reversed>false</Reversed><LimitedCapacity>false</LimitedCapacity><Capacity>100</Capacity><Points><Point><X>0</X><Y>0</Y></Point><Point><X>-25</X><Y>0</Y></Point><Point><X>25</X><Y>0</Y></Point><Point><X>20</X><Y>0</Y></Point><Point><X>-5</X><Y>0</Y></Point><Point><X>20</X><Y>-25</Y></Point><Point><X>20</X><Y>-50</Y></Point><Point><X>20</X><Y>-25</Y></Point><Point><X>45</X><Y>-50</Y></Point><Point><X>110</X><Y>-50</Y></Point><Point><X>85</X><Y>-50</Y></Point><Point><X>50</X><Y>-50</Y></Point></Points><ExceededQueuePolicy>EXTEND_QUEUE_TO_THE_FREE_SPACE</ExceededQueuePolicy></QueueLine>
+                </Presentation>
+                <Z>0</Z><Type>POINT</Type><QueueType>LINE</QueueType><Bidirectional>false</Bidirectional><WaitingAreaEnabled>false</WaitingAreaEnabled><QueueColor>-16744448</QueueColor><ReverseQueueColor>-65281</ReverseQueueColor><GroupBehaviorMode>SAME_FOR_ALL_GROUPS</GroupBehaviorMode><GroupBehavior>ALL_MEMBERS_INDIVIDUALLY</GroupBehavior><WaitForExit>false</WaitForExit><QueueChoicePolicy>CLOSEST_QUEUE_STRICT</QueueChoicePolicy>
+              </ServiceWithLine>
+            </Presentation>
+          </Level>
+        </Presentation>
+        <StartupCode>traceln("DEMO PEATONAL - GEOMETRIA Y DATOS SINTETICOS"); proximaTandaPed.restart(0);</StartupCode>
+      </ActiveObjectClass>
+      <ActiveObjectClass>
+        <Id>1791000000050</Id><Name>Pasajero</Name><Generic>false</Generic>
+        <GenericParameter><Id>1791000000051</Id><Name>1791000000051</Name><GenericParameterValue Class="CodeValue"><Code>T extends Agent</Code></GenericParameterValue><GenericParameterLabel>Generic parameter:</GenericParameterLabel></GenericParameter>
+        <FlowChartsUsage>ENTITY</FlowChartsUsage><SamplesToKeep>100</SamplesToKeep><LimitNumberOfArrayElements>false</LimitNumberOfArrayElements><ElementsLimitValue>100</ElementsLimitValue><MakeDefaultViewArea>true</MakeDefaultViewArea><SceneGridColor /><SceneBackgroundColor>-4144960</SceneBackgroundColor><EnvironmentResourceRef /><EnvironmentType>NONE</EnvironmentType><EnvironmentRotationX>0</EnvironmentRotationX><EnvironmentRotationY>0</EnvironmentRotationY><EnvironmentRotationZ>0</EnvironmentRotationZ><EnvironmentIntensity>1</EnvironmentIntensity>
+        <AgentProperties><EnvironmentDefinesInitialLocation>true</EnvironmentDefinesInitialLocation><RotateAnimationTowardsMovement>true</RotateAnimationTowardsMovement><RotateAnimationVertically>false</RotateAnimationVertically><VelocityCode Class="CodeUnitValue"><Code>1.34</Code><Unit Class="SpeedUnits">MPS</Unit></VelocityCode><PhysicalLength Class="CodeUnitValue"><Code>0.5</Code><Unit Class="LengthUnits">METER</Unit></PhysicalLength><PhysicalWidth Class="CodeUnitValue"><Code>0.5</Code><Unit Class="LengthUnits">METER</Unit></PhysicalWidth><PhysicalHeight Class="CodeUnitValue"><Code>1.7</Code><Unit Class="LengthUnits">METER</Unit></PhysicalHeight></AgentProperties>
+        <EnvironmentProperties><EnableSteps>false</EnableSteps><StepDurationCode Class="CodeUnitValue"><Code>1.0</Code><Unit Class="TimeUnits">SECOND</Unit></StepDurationCode><SpaceType>CONTINUOUS</SpaceType><WidthCode>500</WidthCode><HeightCode>500</HeightCode><ZHeightCode>0</ZHeightCode><ColumnsCountCode>100</ColumnsCountCode><RowsCountCode>100</RowsCountCode><NeigborhoodType>MOORE</NeigborhoodType><LayoutType>USER_DEF</LayoutType><NetworkType>USER_DEF</NetworkType><ConnectionsPerAgentCode>2</ConnectionsPerAgentCode><ConnectionsRangeCode>50</ConnectionsRangeCode><NeighborLinkFractionCode>0.95</NeighborLinkFractionCode><MCode>10</MCode></EnvironmentProperties>
+        <DatasetsCreationProperties><AutoCreate>true</AutoCreate><Id>1791000000052</Id><OccurrenceAtTime>true</OccurrenceAtTime><OccurrenceDate>1789984800000</OccurrenceDate><OccurrenceTime Class="CodeUnitValue"><Code>0</Code><Unit Class="TimeUnits">SECOND</Unit></OccurrenceTime><RecurrenceCode Class="CodeUnitValue"><Code>1</Code><Unit Class="TimeUnits">SECOND</Unit></RecurrenceCode></DatasetsCreationProperties>
+        <ScaleRuler><Id>1791000000053</Id><Name>scale</Name><X>0</X><Y>-150</Y><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>false</ShowLabel><DrawMode>SHAPE_DRAW_2D3D</DrawMode><Length>100</Length><Rotation>0</Rotation><ScaleType>BASED_ON_LENGTH</ScaleType><ModelLength>10</ModelLength><LengthUnits>METER</LengthUnits><Scale>10</Scale><InheritedFromParentAgentType>true</InheritedFromParentAgentType></ScaleRuler>
+        <CurrentLevel>1791000000054</CurrentLevel><ConnectionsId>1791000000055</ConnectionsId>
+        <Variables>
+          <Variable Class="PlainVariable"><Id>1791000000094</Id><Name>tEntradaColaPed</Name><X>40</X><Y>40</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable>
+          <Variable Class="PlainVariable"><Id>1791000000095</Id><Name>enColaPed</Name><X>40</X><Y>65</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true"><Type>boolean</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><InitialValue Class="CodeValue"><Code>false</Code></InitialValue></Properties></Variable>
+        </Variables>
+        <AgentLinks><AgentLink><Id>1791000000055</Id><Name>connections</Name><X>50</X><Y>-50</Y><Label><X>15</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><HandleReceiveInConnections>false</HandleReceiveInConnections><AgentLinkType>COLLECTION_OF_LINKS</AgentLinkType><AgentLinkBidirectional>true</AgentLinkBidirectional><MessageType>Object</MessageType><LineStyle>SOLID</LineStyle><LineWidth>1</LineWidth><LineColor>-16777216</LineColor><LineZOrder>UNDER_AGENTS</LineZOrder><LineArrow>NONE</LineArrow><LineArrowPosition>END</LineArrowPosition></AgentLink></AgentLinks>
+        <Presentation><Level><Id>1791000000054</Id><Name>level</Name><X>0</X><Y>0</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel><DrawMode>SHAPE_DRAW_2D3D</DrawMode><Z>0</Z><LevelVisibility>DIM_NON_CURRENT</LevelVisibility><Presentation><Rectangle><Id>1791000000056</Id><Name>cuerpoPasajero</Name><X>-4</X><Y>-4</Y><Label><X>0</X><Y>-10</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel><DrawMode>SHAPE_DRAW_2D3D</DrawMode><EmbeddedIcon>false</EmbeddedIcon><Z>0</Z><ZHeight>10</ZHeight><LineWidth>1</LineWidth><LineColor>-14774017</LineColor><LineMaterial>null</LineMaterial><LineStyle>SOLID</LineStyle><Width>8</Width><Height>8</Height><Rotation>0.0</Rotation><FillColor>-14774017</FillColor><FillMaterial>null</FillMaterial></Rectangle></Presentation></Level></Presentation>
+      </ActiveObjectClass>
     </ActiveObjectClasses>
     <DifferentialEquationsMethod>EULER</DifferentialEquationsMethod>
     <MixedEquationsMethod>RK45_NEWTON</MixedEquationsMethod>
@@ -2986,12 +3233,42 @@ return (modoDemo ? "DEMO; " : "SIN VALIDAR; ") + "E" + escenario
         </ModelTimeProperties>
         <BypassInitialScreen>true</BypassInitialScreen>
       </SimulationExperiment>
+      <SimulationExperiment ActiveObjectClassId="1791000000001">
+        <Id>1791000000060</Id>
+        <Name>PeatonalDemo</Name>
+        <CommandLineArguments />
+        <MaximumMemory>512</MaximumMemory>
+        <RandomNumberGenerationType>randomSeed</RandomNumberGenerationType>
+        <CustomGeneratorCode>new Random()</CustomGeneratorCode>
+        <SeedValue>1</SeedValue>
+        <SelectionModeForSimultaneousEvents>LIFO</SelectionModeForSimultaneousEvents>
+        <VmArgs />
+        <LoadRootFromSnapshot>false</LoadRootFromSnapshot>
+        <Presentation>
+          <Text><Id>1791000000061</Id><Name>text</Name><X>50</X><Y>30</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel><DrawMode>SHAPE_DRAW_2D3D</DrawMode><EmbeddedIcon>false</EmbeddedIcon><Z>0</Z><Rotation>0.0</Rotation><Color>-12490271</Color><Text>Subte Constitución - Demo peatonal</Text><Font><Name>SansSerif</Name><Size>24</Size><Style>0</Style></Font><Alignment>LEFT</Alignment></Text>
+        </Presentation>
+        <Parameters>
+          <Parameter><ParameterName>tamanoTandaDemo</ParameterName></Parameter>
+          <Parameter><ParameterName>servicioDemoSeg</ParameterName></Parameter>
+          <Parameter><ParameterName>intervaloTandaDemoSeg</ParameterName></Parameter>
+          <Parameter><ParameterName>cantidadTandasDemo</ParameterName></Parameter>
+        </Parameters>
+        <PresentationProperties><EnableZoomAndPanning>true</EnableZoomAndPanning><ExecutionMode>realTimeScaled</ExecutionMode><Title>Subte Constitución - Demo peatonal</Title><EnableDeveloperPanel>true</EnableDeveloperPanel><ShowDeveloperPanelOnStart>false</ShowDeveloperPanelOnStart><RealTimeScale>2.0</RealTimeScale></PresentationProperties>
+        <ModelTimeProperties><StopOption>Stop at specified time</StopOption><InitialDate>1789984800000</InitialDate><InitialTime>0.0</InitialTime><FinalDate>1789984800000</FinalDate><FinalTime>300</FinalTime></ModelTimeProperties>
+        <BypassInitialScreen>true</BypassInitialScreen>
+      </SimulationExperiment>
     </Experiments>
     <RequiredLibraryReference>
       <LibraryName>com.anylogic.libraries.modules.markup_descriptors</LibraryName>
       <VersionMajor>1</VersionMajor>
       <VersionMinor>0</VersionMinor>
       <VersionBuild>0</VersionBuild>
+    </RequiredLibraryReference>
+    <RequiredLibraryReference>
+      <LibraryName>com.anylogic.libraries.pedestrian</LibraryName>
+      <VersionMajor>8</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <VersionBuild>5</VersionBuild>
     </RequiredLibraryReference>
     <RequiredLibraryReference>
       <LibraryName>com.anylogic.libraries.processmodeling</LibraryName>

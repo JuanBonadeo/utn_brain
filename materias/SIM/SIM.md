@@ -2676,8 +2676,10 @@ subte, y sobre la misma estación.
 - **Parámetros no observados**: acordar con el docente si se acepta tratarlos mediante rangos y análisis de
   sensibilidad. El grupo reside en Rosario y no puede hacer un relevamiento presencial propio en Constitución.
 - **Modelo AnyLogic**: compilación y arranque de `E0` en modo demo verificados en AnyLogic 8.9.9 el
-  2026-09-23. Falta incorporar los rangos aprobados, ajustar las fuentes aleatorias y construir la capa
-  espacial con la Pedestrian Library. E0 usa 20 servidores como aproximación provisional; E2 cuenta el
+  2026-09-23. La primera capa espacial con Pedestrian Library también está incorporada en `MainPeatonal` y
+  `PeatonalDemo`: `PedSource → PedService → PedSink`, geometría esquemática, tandas repetidas y métricas de
+  cola. Falta validar en el IDE la última extensión de métricas, incorporar los rangos aprobados y reemplazar
+  la geometría provisoria por el plano. E0 usa 20 servidores como aproximación provisional; E2 cuenta el
   desvío pero todavía no simula la cola de Plaza.
 - ~~**Formulario**: editar el último envío con el tema del subte.~~ Hecho el 2026-09-22: `formulario-eleccion-tema.md`
   reescrito v2 y `TPI_Simulacion_Propuesta_de_Tema.docx` regenerado con ese contenido
@@ -2736,6 +2738,12 @@ subte, y sobre la misma estación.
 - **2026-09-23** (2): TPI, grupo Bonadeo + Estevez. Verificados en AnyLogic 8.9.9 la compilación completa y
   el arranque del escenario E0 en modo demo. El tablero actual queda documentado como interfaz técnica
   provisoria; el siguiente desarrollo es la representación espacial con la Pedestrian Library.
+- **2026-09-23** (3): TPI, grupo Bonadeo + Estevez. Agregados al mismo `.alp` una raíz `MainPeatonal`, el
+  agente `Pasajero` y el experimento separado `PeatonalDemo`, sin alterar E0-E3. La primera geometría es
+  deliberadamente esquemática y usa cuatro servicios visuales. Se incorporaron seis tandas sintéticas,
+  cola espacial y métricas de espera media/máxima, cola máxima, Lq y disipación de la última tanda. La
+  arquitectura, parámetros, limitaciones y extensiones quedaron documentados en `02-modelo-anylogic.md`;
+  las verificaciones XML y Java pasan y resta recompilar esta última extensión en el IDE.
 - **2026-09-22** (3): TPI, grupo 2 (Casermeiro). Perfiladas a fondo las 9 planillas reales de producción que
   mandó la oficina técnica (locales, no versionadas — el repo es público — en
   `entregables/TPI/caser/datos-locales/`, gitignoreada). Confirmado con datos que hay **dos hornos

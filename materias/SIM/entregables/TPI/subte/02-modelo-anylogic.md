@@ -204,10 +204,70 @@ sin presentar supuestos como observaciones:
 - Incorporar semillas independientes por fuente aleatoria y entradas comunes por réplica entre
   escenarios antes de calcular diferencias apareadas e intervalos de confianza.
 
-## 7. Referencias técnicas
+## 7. Etapa peatonal incremental
+
+El archivo incorpora una segunda raíz, `MainPeatonal`, y el experimento `PeatonalDemo`. Esta capa se
+mantiene separada de `Main` para conservar como referencia el modelo lógico ya verificado y evitar que un
+error gráfico altere las métricas E0-E3. El tipo de agente espacial es `Pasajero`.
+
+```mermaid
+flowchart LR
+    E[Evento proximaTandaPed] -. "inject(n)" .-> PS[PedSource]
+    PS --> SV[PedService: molinetes]
+    SV --> SK[PedSink]
+    M[ServiceWithLine: 4 puntos demo] -.-> SV
+```
+
+`PedSource` crea tandas completas sobre una línea de entrada que representa, de forma esquemática, la
+llegada desde el Ferrocarril Roca. Los peatones se desplazan físicamente hasta `PedService`, eligen una de
+cuatro posiciones de servicio y esperan en una cola espacial. Después de la validación ingresan en
+`PedSink`. La velocidad confortable se genera entre 1,1 y 1,5 m/s y el diámetro se fijó en 0,5 m únicamente
+para comprobar la dinámica peatonal.
+
+### Parámetros sintéticos de la demostración
+
+| Parámetro | Valor inicial | Uso |
+|---|---:|---|
+| `tamanoTandaDemo` | 80 pasajeros | Fuerza una cola visible |
+| `intervaloTandaDemoSeg` | 30 s | Separa las tandas de prueba |
+| `cantidadTandasDemo` | 6 | Limita el experimento a 480 pasajeros |
+| `servicioDemoSeg` | 3 s | Ejercita el servicio; no es una medición |
+| posiciones de servicio | 4 | Verificación visual; no representa E0 ni E1 |
+
+La geometría es deliberadamente esquemática y el experimento muestra el aviso **GEOMETRÍA Y DATOS
+SINTÉTICOS - NO REPRESENTA EL PLANO REAL**. No deben utilizarse sus valores para describir el desempeño
+actual de Constitución. Cuando se reciban planos y datos operativos se reemplazarán las dimensiones, la
+cantidad y ubicación de molinetes, los tiempos de servicio y la estructura de tandas.
+
+### Métricas implementadas en la capa espacial
+
+- peatones generados y procesados;
+- cantidad actual en cola y máximo observado;
+- espera media y máxima desde el ingreso a `PedService` hasta el comienzo de la validación;
+- $L_q$ temporal, integrando el número de peatones en cola;
+- tiempo desde la última tanda hasta el drenaje completo del sistema.
+
+La espera se guarda en cada `Pasajero` mediante `tEntradaColaPed`. Los callbacks `onEnterQueue` y
+`onBeginService` actualizan la cola sin confundir peatones atendidos inmediatamente con peatones que sí
+esperaron. Cuando sale el último pasajero, `resumenPeatonal()` imprime las medidas en la consola. Esta
+primera versión todavía no calcula percentil 90, utilización por molinete ni la cohorte 08:15-08:45; esas
+salidas se incorporarán después de validar el circuito espacial básico.
+
+### Próximas extensiones
+
+1. Sustituir la geometría esquemática por el plano o croquis de SBASE.
+2. Representar E0 y E1 con la cantidad y disponibilidad real de molinetes.
+3. Agregar el recorrido posterior al molinete y una salida espacial, en vez de eliminar al peatón allí.
+4. Modelar Plaza como segundo circuito antes de interpretar E2 para toda la estación.
+5. Compartir las mismas entradas y semillas entre escenarios para la comparación estadística.
+
+## 8. Referencias técnicas
 
 Propiedades contrastadas con `library.xml` de **ProcessModelingLibrary.jar 8.9.9**, instalado
 localmente, y estructura del `.alp` basada en el modelo local `TP_Colas.alp`.
+
+La etapa espacial también se contrastó con `PedestrianLibrary.jar 8.9.9` y con el tutorial local
+`fuentes/Tutoriales/Airport/Airport.alp` de la cátedra.
 
 - [Source — documentación oficial](https://anylogic.help/9/libraries/process-modeling/source.html): generación por llamadas a `inject(n)`.
 - [Seize — documentación oficial](https://anylogic.help/9/libraries/process-modeling/seize.html): captura de recursos y cola interna.
