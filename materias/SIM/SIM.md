@@ -2618,6 +2618,21 @@ actual puede validarse el caudal agregado, pero no la espera ni la cola real.
 - Ficha para la reunión: [`entregables/TPI/subte/TPI_Subte_Definicion_y_Modelo_Inicial.docx`](entregables/TPI/subte/TPI_Subte_Definicion_y_Modelo_Inicial.docx)
 - Versión PDF: [`../../../../output/pdf/TPI_Subte_Definicion_y_Modelo_Inicial.pdf`](../../../../output/pdf/TPI_Subte_Definicion_y_Modelo_Inicial.pdf)
 
+#### Skills disponibles para trabajar con AnyLogic
+
+Las tres skills están instaladas para Codex en `~/.codex/skills/` y también se conservan las copias
+originales de Claude Code. Se verificaron localmente contra AnyLogic 8.9.9 PLE.
+
+| Skill | Uso en el TPI | Instalación local de Codex | Descarga / origen |
+|---|---|---|---|
+| `anylogic` | Detectar la instalación, inspeccionar y modificar de forma controlada modelos `.alp`/`.alpx`, y comprobar las superficies locales de ejecución o exportación | `~/.codex/skills/anylogic/` | [`jander99/skills`, carpeta `skills/anylogic`](https://github.com/jander99/skills/tree/main/skills/anylogic) |
+| `anylogic-help` | Consultar offline la ayuda conceptual y la API Java de AnyLogic; sirve para verificar bloques, propiedades, callbacks y clases de la Pedestrian Library | `~/.codex/skills/anylogic-help/` | [`Jamlet-T/anylogic-help-skill`](https://github.com/Jamlet-T/anylogic-help-skill). El repositorio no incluye la documentación propietaria: hay que copiarla desde la instalación local de AnyLogic y construir los índices |
+| `model-reader` | Convertir el XML de un proyecto descomprimido en Markdown semántico, eliminando ruido de IDs y coordenadas | `~/.codex/skills/model-reader/` | [`Jamlet-T/model-reader-skill`](https://github.com/Jamlet-T/model-reader-skill). Actualmente exige la estructura `_alp/Agents/AOC.*.xml`; no interpreta directamente nuestro `SubteConstitucion.alp` monolítico |
+
+En el estado actual del proyecto, `anylogic` y `anylogic-help` son operativas. `model-reader` está instalada
+y su ejecutable funciona, pero requiere adaptar el parser o exportar/descomprimir el modelo antes de aplicarla
+al TPI.
+
 #### Caso y evidencia
 
 **Línea C, estación Constitución, vestíbulo Principal, días hábiles, franja 07:00–09:30** (pico 08:15–08:45).
@@ -2753,6 +2768,10 @@ subte, y sobre la misma estación.
   elementos técnicos se movieron a columnas fuera del área operativa y se excluyeron de la animación, para
   que no tapen el tablero ni el vestíbulo. También se separaron y abreviaron las etiquetas de molinetes y
   salida. El verificador controla desde ahora esta separación visual.
+- **2026-09-23** (6): documentadas e instaladas para Codex las skills `anylogic`, `anylogic-help` y
+  `model-reader`, con sus repositorios de origen, rutas locales, usos y restricciones. Las dos primeras se
+  probaron contra AnyLogic 8.9.9 PLE; `model-reader` ejecuta correctamente pero requiere proyectos
+  descomprimidos `_alp/` y todavía no procesa el `.alp` monolítico del TPI.
 - **2026-09-22** (3): TPI, grupo 2 (Casermeiro). Perfiladas a fondo las 9 planillas reales de producción que
   mandó la oficina técnica (locales, no versionadas — el repo es público — en
   `entregables/TPI/caser/datos-locales/`, gitignoreada). Confirmado con datos que hay **dos hornos
