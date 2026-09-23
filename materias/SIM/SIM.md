@@ -2675,9 +2675,10 @@ subte, y sobre la misma estación.
 
 - **Parámetros no observados**: acordar con el docente si se acepta tratarlos mediante rangos y análisis de
   sensibilidad. El grupo reside en Rosario y no puede hacer un relevamiento presencial propio en Constitución.
-- **Modelo AnyLogic**: ejecutar los checks del motor de la [guía](entregables/TPI/subte/02-modelo-anylogic.md),
-  incorporar los rangos aprobados y ajustar las fuentes aleatorias. E0 usa 20 servidores como aproximación
-  provisional; E2 cuenta el desvío pero todavía no simula la cola de Plaza.
+- **Modelo AnyLogic**: compilación y arranque de `E0` en modo demo verificados en AnyLogic 8.9.9 el
+  2026-09-23. Falta incorporar los rangos aprobados, ajustar las fuentes aleatorias y construir la capa
+  espacial con la Pedestrian Library. E0 usa 20 servidores como aproximación provisional; E2 cuenta el
+  desvío pero todavía no simula la cola de Plaza.
 - ~~**Formulario**: editar el último envío con el tema del subte.~~ Hecho el 2026-09-22: `formulario-eleccion-tema.md`
   reescrito v2 y `TPI_Simulacion_Propuesta_de_Tema.docx` regenerado con ese contenido
   (`scripts/build-tpi-formulario-docx.py`). Falta reenviarlo en el envío real (Classroom/mail al docente).
@@ -2732,6 +2733,9 @@ subte, y sobre la misma estación.
 - **2026-09-23**: TPI, grupo Bonadeo + Estevez. Enviados los pedidos de datos por correo a SBASE, Emova y
   Trenes Argentinos. Registrados como pendientes los formularios web oficiales, los comprobantes de trámite
   y el seguimiento de respuestas antes de calibrar el modelo.
+- **2026-09-23** (2): TPI, grupo Bonadeo + Estevez. Verificados en AnyLogic 8.9.9 la compilación completa y
+  el arranque del escenario E0 en modo demo. El tablero actual queda documentado como interfaz técnica
+  provisoria; el siguiente desarrollo es la representación espacial con la Pedestrian Library.
 - **2026-09-22** (3): TPI, grupo 2 (Casermeiro). Perfiladas a fondo las 9 planillas reales de producción que
   mandó la oficina técnica (locales, no versionadas — el repo es público — en
   `entregables/TPI/caser/datos-locales/`, gitignoreada). Confirmado con datos que hay **dos hornos

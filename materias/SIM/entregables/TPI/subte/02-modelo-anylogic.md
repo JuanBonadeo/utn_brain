@@ -20,8 +20,10 @@ El modo de demostración usa valores sintéticos explícitos; sus salidas no son
 
 **Verificación realizada:** XML, referencias de escenarios e identificadores; compilación de las
 funciones Java contra la API local de AnyLogic 8.9.9; pruebas de lógica con trazas controladas.
-**Pendiente:** abrir, compilar y ejecutar el `.alp` completo en el IDE. Las pruebas de funciones no
-comprueban la generación de código del proyecto ni el orden de callbacks del motor de procesos.
+**Verificado en el IDE el 2026-09-23:** el `.alp` completo compila correctamente en AnyLogic 8.9.9 y el
+experimento `E0` inicia en modo demo, mostrando el aviso `DEMO SINTETICA - NO CALIBRADA E0`. La interfaz
+actual es un tablero técnico provisorio; todavía no representa la geometría de la estación ni el movimiento
+espacial de peatones.
 
 Para repetir las verificaciones realizadas, desde la raíz del repositorio:
 
