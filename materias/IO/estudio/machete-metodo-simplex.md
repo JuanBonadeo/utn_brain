@@ -2,6 +2,40 @@
 
 Una carilla. El desarrollo completo y los ejercicios están en [[practica-3-simplex]].
 
+## Las dos condiciones del Simplex
+
+El método hace dos preguntas distintas en cada iteración y en este orden:
+
+```text
+1. CONDICION DE OPTIMALIDAD   ¿la solucion actual ya es optima? Si no, ¿que ENTRA?
+2. CONDICION DE FACTIBILIDAD  ¿cuanto puede crecer la que entra sin romper x >= 0?
+                              La respuesta determina que variable SALE.
+```
+
+**Condición de optimalidad — fila $C_j-Z_j$.**
+
+```text
+MAX   todos Cj-Zj <= 0 -> OPTIMO     | si no: entra el MAYOR POSITIVO
+MIN   todos Cj-Zj >= 0 -> OPTIMO     | si no: entra el MENOR NEGATIVO
+```
+
+**Condición de factibilidad — columna entrante.** Mantiene no negativas las variables
+básicas mientras aumenta la variable que entra:
+
+```text
+theta_i = xi/yij     SOLO para yij > 0
+
+sale la fila con el MENOR theta >= 0
+```
+
+- $y_{ij}=0$ o $y_{ij}<0$: esa fila **no limita** el crecimiento; no se divide.
+- $	heta=0$ es válido: produce una solución degenerada.
+- Si ningún $y_{ij}>0$, ninguna variable puede salir: la solución es **no acotada** en la
+  dirección de mejora (o **no factible** si todavía queda una ficticia positiva).
+
+> Machete verbal: **optimalidad mira la fila y elige quién entra; factibilidad mira esa
+> columna y elige quién sale**.
+
 ## El procedimiento por tablas
 
 ```text
