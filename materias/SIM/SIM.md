@@ -2683,6 +2683,9 @@ subte, y sobre la misma estación.
   (`scripts/build-tpi-formulario-docx.py`). Falta reenviarlo en el envío real (Classroom/mail al docente).
 - Conseguir los horarios oficiales de arribo del Roca a Constitución y solicitar a SBASE/Emova y Trenes
   Argentinos datos de mayor granularidad sobre servicio y arribos.
+- **Solicitudes de datos**: correos enviados el 2026-09-23 a SBASE, Emova y Trenes Argentinos. Queda como
+  TODO completar los formularios web oficiales de SBASE/GCBA (Ley 104), Emova y Trenes Argentinos, guardar
+  los números de trámite o capturas y hacer seguimiento de las respuestas.
 - La validación remota puede contrastar caudales agregados contra SBASE, pero no la espera ni el largo de cola
   reales. No presentar resultados condicionales como mediciones del sistema actual.
 - Fechas de entrega y presentación: se publican en Classroom (no están en el enunciado).
@@ -2726,6 +2729,9 @@ subte, y sobre la misma estación.
 
 ## Log
 
+- **2026-09-23**: TPI, grupo Bonadeo + Estevez. Enviados los pedidos de datos por correo a SBASE, Emova y
+  Trenes Argentinos. Registrados como pendientes los formularios web oficiales, los comprobantes de trámite
+  y el seguimiento de respuestas antes de calibrar el modelo.
 - **2026-09-22** (3): TPI, grupo 2 (Casermeiro). Perfiladas a fondo las 9 planillas reales de producción que
   mandó la oficina técnica (locales, no versionadas — el repo es público — en
   `entregables/TPI/caser/datos-locales/`, gitignoreada). Confirmado con datos que hay **dos hornos
