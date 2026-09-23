@@ -20,6 +20,7 @@ node_modules/
 /output/
 /tmp/
 *.original.alp
+*.alp.autosave
 
 # HTML intermedio de md-to-pdf (referencia fuentes de KaTeX por ruta local, no es portable)
 materias/*/estudio/*.html

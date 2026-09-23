@@ -2676,11 +2676,11 @@ subte, y sobre la misma estación.
 - **Parámetros no observados**: acordar con el docente si se acepta tratarlos mediante rangos y análisis de
   sensibilidad. El grupo reside en Rosario y no puede hacer un relevamiento presencial propio en Constitución.
 - **Modelo AnyLogic**: compilación y arranque de `E0` en modo demo verificados en AnyLogic 8.9.9 el
-  2026-09-23. La primera capa espacial con Pedestrian Library también está incorporada en `MainPeatonal` y
-  `PeatonalDemo`: `PedSource → PedService → PedSink`, geometría esquemática, tandas repetidas y métricas de
-  cola. Falta validar en el IDE la última extensión de métricas, incorporar los rangos aprobados y reemplazar
-  la geometría provisoria por el plano. E0 usa 20 servidores como aproximación provisional; E2 cuenta el
-  desvío pero todavía no simula la cola de Plaza.
+  2026-09-23. La capa espacial de `MainPeatonal` ahora recorre `PedSource → PedService → PedGoTo → PedSink`,
+  con salida física, 28 posiciones de molinete y experimentos comparables `PeatonalE0` (20 habilitadas) y
+  `PeatonalE1` (28 habilitadas), además de tandas repetidas y métricas de cola. Las verificaciones XML y Java
+  pasan; falta compilar y ejecutar esta extensión en el IDE, incorporar los rangos aprobados y reemplazar la
+  geometría provisoria por el plano. E2 cuenta el desvío pero todavía no simula la cola de Plaza.
 - ~~**Formulario**: editar el último envío con el tema del subte.~~ Hecho el 2026-09-22: `formulario-eleccion-tema.md`
   reescrito v2 y `TPI_Simulacion_Propuesta_de_Tema.docx` regenerado con ese contenido
   (`scripts/build-tpi-formulario-docx.py`). Falta reenviarlo en el envío real (Classroom/mail al docente).
@@ -2744,6 +2744,11 @@ subte, y sobre la misma estación.
   cola espacial y métricas de espera media/máxima, cola máxima, Lq y disipación de la última tanda. La
   arquitectura, parámetros, limitaciones y extensiones quedaron documentados en `02-modelo-anylogic.md`;
   las verificaciones XML y Java pasan y resta recompilar esta última extensión en el IDE.
+- **2026-09-23** (4): TPI, grupo Bonadeo + Estevez. Extendida la capa peatonal con `PedGoTo` y una línea de
+  salida física posterior a los molinetes. La geometría sintética contiene 28 `ServicePoint`; el experimento
+  `PeatonalE0` suspende los últimos ocho y `PeatonalE1` habilita los 28, con igual semilla, demanda y tiempo
+  de servicio para aislar el efecto de capacidad. Actualizados el verificador y la documentación del futuro
+  informe. Validaciones XML y Java aprobadas; resta Build/Run de ambos experimentos en AnyLogic.
 - **2026-09-22** (3): TPI, grupo 2 (Casermeiro). Perfiladas a fondo las 9 planillas reales de producción que
   mandó la oficina técnica (locales, no versionadas — el repo es público — en
   `entregables/TPI/caser/datos-locales/`, gitignoreada). Confirmado con datos que hay **dos hornos

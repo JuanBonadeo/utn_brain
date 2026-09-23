@@ -206,23 +206,27 @@ sin presentar supuestos como observaciones:
 
 ## 7. Etapa peatonal incremental
 
-El archivo incorpora una segunda raíz, `MainPeatonal`, y el experimento `PeatonalDemo`. Esta capa se
-mantiene separada de `Main` para conservar como referencia el modelo lógico ya verificado y evitar que un
-error gráfico altere las métricas E0-E3. El tipo de agente espacial es `Pasajero`.
+El archivo incorpora una segunda raíz, `MainPeatonal`, y tres experimentos espaciales: `PeatonalDemo`,
+`PeatonalE0` y `PeatonalE1`. Esta capa se mantiene separada de `Main` para conservar como referencia el
+modelo lógico ya verificado y evitar que un error gráfico altere las métricas E0-E3. El tipo de agente
+espacial es `Pasajero`.
 
 ```mermaid
 flowchart LR
     E[Evento proximaTandaPed] -. "inject(n)" .-> PS[PedSource]
     PS --> SV[PedService: molinetes]
-    SV --> SK[PedSink]
-    M[ServiceWithLine: 4 puntos demo] -.-> SV
+    SV --> GT[PedGoTo: salida física]
+    GT --> SK[PedSink]
+    M[ServiceWithLine: 28 puntos] -.-> SV
+    TL[TargetLine: salidaPeatonal] -.-> GT
 ```
 
 `PedSource` crea tandas completas sobre una línea de entrada que representa, de forma esquemática, la
-llegada desde el Ferrocarril Roca. Los peatones se desplazan físicamente hasta `PedService`, eligen una de
-cuatro posiciones de servicio y esperan en una cola espacial. Después de la validación ingresan en
-`PedSink`. La velocidad confortable se genera entre 1,1 y 1,5 m/s y el diámetro se fijó en 0,5 m únicamente
-para comprobar la dinámica peatonal.
+llegada desde el Ferrocarril Roca. Los peatones se desplazan hasta `PedService`, eligen una posición de
+servicio y esperan en una cola espacial. Después de validar, `PedGoTo` los conduce hasta
+`salidaPeatonal`, al otro lado de los molinetes; recién allí `PedSink` los elimina del sistema. Así no se
+cuenta como salida a quien sólo terminó el servicio. La velocidad confortable se genera entre 1,1 y 1,5
+m/s y el diámetro se fijó en 0,5 m únicamente para comprobar la dinámica peatonal.
 
 ### Parámetros sintéticos de la demostración
 
@@ -232,12 +236,18 @@ para comprobar la dinámica peatonal.
 | `intervaloTandaDemoSeg` | 30 s | Separa las tandas de prueba |
 | `cantidadTandasDemo` | 6 | Limita el experimento a 480 pasajeros |
 | `servicioDemoSeg` | 3 s | Ejercita el servicio; no es una medición |
-| posiciones de servicio | 4 | Verificación visual; no representa E0 ni E1 |
+| `molinetesOperativosPed` | 20 o 28 | Única diferencia entre los experimentos espaciales E0 y E1 |
 
-`PeatonalDemo` tiene un horizonte de 600 s y velocidad de animación 10x, suficiente para observar el
-drenaje de las seis tandas sin prolongar innecesariamente la prueba visual.
+La geometría contiene 28 `ServicePoint`. En E0 se suspenden los puntos 21 a 28 mediante la API de
+`ServiceWithLine`, de modo que quedan 20 disponibles; en E1 los 28 permanecen activos. No se duplican
+colas ni geometrías: ambos escenarios atraviesan el mismo hall y el mismo bloque `PedService`.
 
-La geometría es deliberadamente esquemática y el experimento muestra el aviso **GEOMETRÍA Y DATOS
+Los tres experimentos tienen un horizonte de 600 s y velocidad de animación 10x. `PeatonalE0` y
+`PeatonalE1` usan la misma semilla fija (`20260923`) y los mismos parámetros de demanda y servicio. Por lo
+tanto, cualquier diferencia entre ellos proviene de la cantidad de molinetes habilitados dentro de esta
+demostración controlada.
+
+La geometría es deliberadamente esquemática y los experimentos muestran el aviso **GEOMETRÍA Y DATOS
 SINTÉTICOS - NO REPRESENTA EL PLANO REAL**. No deben utilizarse sus valores para describir el desempeño
 actual de Constitución. Cuando se reciban planos y datos operativos se reemplazarán las dimensiones, la
 cantidad y ubicación de molinetes, los tiempos de servicio y la estructura de tandas.
@@ -252,25 +262,41 @@ cantidad y ubicación de molinetes, los tiempos de servicio y la estructura de t
 
 La espera se guarda en cada `Pasajero` mediante `tEntradaColaPed`. Los callbacks `onEnterQueue` y
 `onBeginService` actualizan la cola sin confundir peatones atendidos inmediatamente con peatones que sí
-esperaron. Cuando sale el último pasajero, `resumenPeatonal()` imprime las medidas en la consola. Esta
-primera versión todavía no calcula percentil 90, utilización por molinete ni la cohorte 08:15-08:45; esas
-salidas se incorporarán después de validar el circuito espacial básico.
+esperaron. Cuando sale el último pasajero, `resumenPeatonal()` imprime también la cantidad de molinetes
+operativos junto con las medidas.
+
+### Comparación espacial E0-E1
+
+| Elemento controlado | `PeatonalE0` | `PeatonalE1` |
+|---|---:|---:|
+| Molinetes habilitados | 20 | 28 |
+| Molinetes suspendidos | 8 | 0 |
+| Semilla | 20260923 | 20260923 |
+| Tandas, tamaño y servicio | iguales | iguales |
+| Recorrido y salida | iguales | iguales |
+
+La comparación es estructural y sirve para verificar la lógica de escenarios. No constituye todavía una
+estimación del beneficio real de habilitar ocho molinetes adicionales, porque la demanda en tandas y el
+tiempo de validación siguen siendo supuestos sintéticos. Tampoco se calculan todavía el percentil 90, la
+utilización por molinete ni la cohorte 08:15-08:45.
 
 ### Próximas extensiones
 
 1. Sustituir la geometría esquemática por el plano o croquis de SBASE.
-2. Representar E0 y E1 con la cantidad y disponibilidad real de molinetes.
-3. Agregar el recorrido posterior al molinete y una salida espacial, en vez de eliminar al peatón allí.
-4. Modelar Plaza como segundo circuito antes de interpretar E2 para toda la estación.
-5. Compartir las mismas entradas y semillas entre escenarios para la comparación estadística.
+2. Reemplazar los 20/28 puestos provisionales por la cantidad, ubicación y disponibilidad real.
+3. Validar en el IDE el drenaje de `PeatonalE0` y `PeatonalE1` y exportar los resultados.
+4. Incorporar percentil 90, utilización por molinete y métricas de la cohorte 08:15-08:45.
+5. Modelar Plaza como segundo circuito antes de interpretar E2 para toda la estación.
 
 ## 8. Referencias técnicas
 
 Propiedades contrastadas con `library.xml` de **ProcessModelingLibrary.jar 8.9.9**, instalado
 localmente, y estructura del `.alp` basada en el modelo local `TP_Colas.alp`.
 
-La etapa espacial también se contrastó con `PedestrianLibrary.jar 8.9.9` y con el tutorial local
-`fuentes/Tutoriales/Airport/Airport.alp` de la cátedra.
+La etapa espacial también se contrastó con `PedestrianLibrary.jar 8.9.9`, con el tutorial local
+`fuentes/Tutoriales/Airport/Airport.alp` de la cátedra y con el ejemplo instalado
+`Subway Entrance Hall.alp`. La activación 20/28 usa `ServiceBase.setServiceSuspended(...)`, cuya firma se
+verifica contra las bibliotecas instaladas antes de abrir el IDE.
 
 - [Source — documentación oficial](https://anylogic.help/9/libraries/process-modeling/source.html): generación por llamadas a `inject(n)`.
 - [Seize — documentación oficial](https://anylogic.help/9/libraries/process-modeling/seize.html): captura de recursos y cola interna.

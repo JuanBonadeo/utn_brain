@@ -100,11 +100,19 @@ ped_check='''public class SubtePedLogicCheck {
 static class Pasajero { double tEntradaColaPed; boolean enColaPed; }
 static class PedSourceStub { void inject(int n) {} }
 static class EventStub { void restart(double t) {} }
+static class ServiceStub { int calls, suspended; void setServiceSuspended(Object p, boolean value) { calls++; if(value)suspended++; } }
 PedSourceStub pedSource=new PedSourceStub(); EventStub proximaTandaPed=new EventStub();
+ServiceStub molinetesPeatonales=new ServiceStub();
+Object molinetePed21=new Object(), molinetePed22=new Object(), molinetePed23=new Object(), molinetePed24=new Object();
+Object molinetePed25=new Object(), molinetePed26=new Object(), molinetePed27=new Object(), molinetePed28=new Object();
 double clock; double time(){return clock;} void traceln(String s){}
 '''+ '\n'.join(ped_fields+ped_functions) + '''
 public static void main(String[] args){
  SubtePedLogicCheck m=new SubtePedLogicCheck();
+ m.configurarMolinetesPed();
+ if(m.molinetesPeatonales.calls!=8 || m.molinetesPeatonales.suspended!=8)throw new AssertionError();
+ SubtePedLogicCheck e1=new SubtePedLogicCheck();e1.molinetesOperativosPed=28;e1.configurarMolinetesPed();
+ if(e1.molinetesPeatonales.calls!=8 || e1.molinetesPeatonales.suspended!=0)throw new AssertionError();
  Pasajero p=new Pasajero();m.clock=2;p.tEntradaColaPed=m.time();m.entraColaPed(p);m.clock=5;m.comienzaServicioPed(p);
  if(m.nEsperandoPed!=0 || m.nEsperasPed!=1 || Math.abs(m.esperaMediaPed()-3)>1e-9)throw new AssertionError();
  m.generarTandaPed();m.nGeneradosPed=1;m.nProcesadosPed=0;m.salePed();
@@ -115,6 +123,15 @@ public static void main(String[] args){
 (d/'SubtePedLogicCheck.java').write_text(ped_check)
 subprocess.run([javac,str(d/'SubtePedLogicCheck.java')],check=True)
 subprocess.run(['/Applications/AnyLogic 8 PLE.app/Contents/jre/bin/java','-cp',str(d),'SubtePedLogicCheck'],check=True)
+# Compile the real AnyLogic API call used to suspend the last eight physical service points.
+ped_api='''import com.anylogic.engine.markup.*;
+public class SubtePedApiCheck {
+ ServiceWLine<ServicePoint<QueuePath>> services;
+ ServicePoint<QueuePath> point;
+ void configure(){ services.setServiceSuspended(point, true); }
+}'''
+(d/'SubtePedApiCheck.java').write_text(ped_api)
+subprocess.run([javac,'-cp',':'.join(map(str,jars)),str(d/'SubtePedApiCheck.java')],check=True)
 ids=[x.text for x in r.iter('Id')];assert len(ids)==len(set(ids)), 'Duplicate IDs'
 assert len(a.findall('EmbeddedObjects/EmbeddedObject'))==7
 experiments=r.findall('Model/Experiments/SimulationExperiment')
@@ -124,9 +141,20 @@ for e in [x for x in experiments if x.findtext('Name') in {'E0','E1','E2','E3'}]
 agents={x.findtext('Name'):x for x in r.findall('Model/ActiveObjectClasses/ActiveObjectClass')}
 ped=agents['MainPeatonal']
 ped_blocks={x.findtext('Name'):x.findtext('ActiveObjectClass/ClassName') for x in ped.findall('EmbeddedObjects/EmbeddedObject')}
-assert ped_blocks=={'pedSource':'PedSource','pedMolinetes':'PedService','pedSink':'PedSink'}
+assert ped_blocks=={'pedSource':'PedSource','pedMolinetes':'PedService','pedSalida':'PedGoTo','pedSink':'PedSink'}
 assert agents['Pasajero'] is not None
 assert any(e.findtext('Name')=='PeatonalDemo' and e.get('ActiveObjectClassId')==ped.findtext('Id') for e in experiments)
+ped_experiments={e.findtext('Name'):e for e in experiments if e.findtext('Name') in {'PeatonalE0','PeatonalE1'}}
+assert set(ped_experiments)=={'PeatonalE0','PeatonalE1'}
+for name, expected in {'PeatonalE0':'20','PeatonalE1':'28'}.items():
+ ps={p.findtext('ParameterName'):p.findtext('ParameterValue/Code') for p in ped_experiments[name].findall('Parameters/Parameter')}
+ assert ps['molinetesOperativosPed']==expected
+ assert ped_experiments[name].findtext('SeedValue')=='20260923'
+service_points=ped.findall('.//ServicePoint')
+assert len(service_points)==28
+assert {x.findtext('Name') for x in service_points}=={f'molinetePed{i:02d}' for i in range(1,29)}
+assert ped.find(".//TargetLine[Name='salidaPeatonal']") is not None
+assert 'configurarMolinetesPed()' in ped.findtext('StartupCode')
 libs={x.findtext('LibraryName') for x in r.findall('Model/RequiredLibraryReference')}
 assert 'com.anylogic.libraries.pedestrian' in libs
-print('OK: XML, unique IDs, seven process blocks, four scenario overrides and pedestrian skeleton')
+print('OK: XML, unique IDs, E0-E3, pedestrian exit, 28 service points and 20/28 experiments')
