@@ -1197,7 +1197,7 @@ bajo las columnas $A_3$, $A_4$, $A_5$ — que es lo que después se usa en las U
 - `Material de cursado (2023)/Teoría/Método Simplex.pdf` — mismo contenido en PPT, sin agregados
 - `Material de cursado (2023)/Práctica/PL3UTN.pdf` y sus resoluciones `Resuelta/PL3UTNresol.pdf` (8 pág.) y `Resuelta/PL3UTNresol (1).pdf` (27 pág., incluye el algoritmo matricial)
 - `resumen-primer-parcial.docx`
-- Derivado: [[practica-3-simplex]]
+- Derivados: [[practica-3-simplex]] y [[machete-metodo-simplex]]
 
 ---
 
@@ -1429,3 +1429,4 @@ Práctica 4 (`PL4UTN.pdf`), que integra sensibilidad, dualidad y parametrizació
 - 2026-08-26: Se ingirieron los **capítulos 4 y 5 del apunte** (`PLC4.pdf`, `PLC5.pdf`) y se generó [[teoria-sensibilidad-dualidad]] — los fundamentos de la Práctica 4 explicados desde cero con el **taller de alfarería (Ejemplo 1-1)** como hilo conductor: por qué toda la tabla óptima **es** $B^{-1}$ aplicada a los datos originales, la asimetría $c_j\to$optimalidad / $b_i\to$factibilidad, dualidad (construcción, teorema fundamental, la interpretación del **seguro** de §5.6, holguras complementarias, costo reducido vs. costo marginal), los cinco casos de sensibilidad derivados, regla del 100%, **parametrización** (§4.10) y **Simplex dual** (§5.8), más el mapa de qué ejercicio de la práctica usa qué. Números verificados por cálculo exacto.
 - 2026-08-26: Se agregó a la Unidad 1 el **Ejercicio 6 (extra, elaboración propia)**: minimización con restricciones $\geq$, excesos, semiplano que no contiene al origen y **RF no acotada con óptimo finito** — caso que la Práctica 1 no cubre y el parcial sí toma. Resuelto en los 10 bloques del formato de cátedra, con el puente hacia la Unidad 2 (la solución óptima como SBF).
 - 2026-08-26: Se agregó a la Unidad 2 la sección **El puente entre el gráfico y el álgebra**: la equivalencia “estar sobre la recta $i$” ⇔ “su holgura/exceso vale 0”, la tabla de correspondencia gráfico↔álgebra, y su verificación sobre los cuatro cruces del Ejercicio 6 de la Unidad 1 (incluido uno infactible, donde el exceso negativo cuantifica el déficit).
+- 2026-09-23: Se generó [[machete-metodo-simplex]] — una carilla operativa con armado y lectura de tablas, criterios de entrada/salida, pivoteo, base artificial, penalización y dos fases, mapa de diagnóstico, formato de respuesta, trampas y controles finales.
