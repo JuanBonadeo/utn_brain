@@ -1791,107 +1791,162 @@
           </EmbeddedObject>
         </EmbeddedObjects>
         <Presentation>
-          <Text>
-            <Id>1790000000123</Id>
-            <Name>texto1790000000124</Name>
-            <X>40</X>
-            <Y>25</Y>
-            <Label>
-              <X>10</X>
-              <Y>0</Y>
-            </Label>
+          <Rectangle>
+            <Id>1790000000149</Id>
+            <Name>panelTablero</Name>
+            <X>20</X><Y>330</Y>
+            <Label><X>10</X><Y>10</Y></Label>
             <PublicFlag>true</PublicFlag>
             <PresentationFlag>true</PresentationFlag>
             <ShowLabel>false</ShowLabel>
             <DrawMode>SHAPE_DRAW_2D3D</DrawMode>
             <EmbeddedIcon>false</EmbeddedIcon>
-            <Z>0</Z>
+            <Z>0</Z><ZHeight>10</ZHeight>
+            <LineWidth>1</LineWidth>
+            <LineColor>-12490271</LineColor>
+            <LineMaterial>null</LineMaterial>
+            <LineStyle>SOLID</LineStyle>
+            <Width>1140</Width><Height>390</Height>
             <Rotation>0.0</Rotation>
+            <FillColor>-1</FillColor>
+            <FillMaterial>null</FillMaterial>
+          </Rectangle>
+          <Text>
+            <Id>1790000000123</Id>
+            <Name>tituloModelo</Name>
+            <X>40</X><Y>25</Y>
+            <Label><X>10</X><Y>0</Y></Label>
+            <PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel>
+            <DrawMode>SHAPE_DRAW_2D3D</DrawMode><EmbeddedIcon>false</EmbeddedIcon><Z>0</Z><Rotation>0.0</Rotation>
             <Color>-12490271</Color>
             <Text>Constitución · Línea C · vestíbulo Principal</Text>
-            <Font>
-              <Name>SansSerif</Name>
-              <Size>24</Size>
-              <Style>0</Style>
-            </Font>
+            <Font><Name>SansSerif</Name><Size>24</Size><Style>1</Style></Font>
             <Alignment>LEFT</Alignment>
           </Text>
           <Text>
             <Id>1790000000125</Id>
-            <Name>texto1790000000126</Name>
-            <X>40</X>
-            <Y>62</Y>
-            <Label>
-              <X>10</X>
-              <Y>0</Y>
-            </Label>
-            <PublicFlag>true</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
-            <ShowLabel>false</ShowLabel>
-            <DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-            <EmbeddedIcon>false</EmbeddedIcon>
-            <Z>0</Z>
-            <Rotation>0.0</Rotation>
-            <Color>-12490271</Color>
-            <Text>PROTOTIPO SIN CALIBRAR | 07:00–09:30 | E0–E3</Text>
-            <Font>
-              <Name>SansSerif</Name>
-              <Size>16</Size>
-              <Style>0</Style>
-            </Font>
+            <Name>estadoEscenario</Name>
+            <X>40</X><Y>62</Y>
+            <Label><X>10</X><Y>0</Y></Label>
+            <PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel>
+            <DrawMode>SHAPE_DRAW_2D3D</DrawMode><EmbeddedIcon>false</EmbeddedIcon><Z>0</Z><Rotation>0.0</Rotation>
+            <Color>-14774017</Color>
+            <Text>E0 · Base · SIMULANDO · 07:00:00</Text>
+            <TextCode>"E" + escenario + " · " + nombreEscenario() + " · " + estadoModelo() + " · " + horaSimulada()</TextCode>
+            <Font><Name>SansSerif</Name><Size>16</Size><Style>1</Style></Font>
             <Alignment>LEFT</Alignment>
           </Text>
           <Text>
             <Id>1790000000127</Id>
-            <Name>texto1790000000128</Name>
-            <X>40</X>
-            <Y>285</Y>
-            <Label>
-              <X>10</X>
-              <Y>0</Y>
-            </Label>
-            <PublicFlag>true</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
-            <ShowLabel>false</ShowLabel>
-            <DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-            <EmbeddedIcon>false</EmbeddedIcon>
-            <Z>0</Z>
-            <Rotation>0.0</Rotation>
-            <Color>-12490271</Color>
-            <Text>Source: tandas → Queue → Seize → Delay → Release → Sink</Text>
-            <Font>
-              <Name>SansSerif</Name>
-              <Size>16</Size>
-              <Style>0</Style>
-            </Font>
+            <Name>advertenciaDemo</Name>
+            <X>40</X><Y>95</Y>
+            <Label><X>10</X><Y>0</Y></Label>
+            <PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel>
+            <DrawMode>SHAPE_DRAW_2D3D</DrawMode><EmbeddedIcon>false</EmbeddedIcon><Z>0</Z><Rotation>0.0</Rotation>
+            <Color>-65536</Color>
+            <Text>DEMO SINTÉTICA — modelo implementado, todavía no calibrado ni validado</Text>
+            <TextCode>modoDemo ? "DEMO SINTÉTICA — modelo implementado, todavía no calibrado ni validado" : "PARÁMETROS CARGADOS — resultados pendientes de validación"</TextCode>
+            <Font><Name>SansSerif</Name><Size>14</Size><Style>1</Style></Font>
             <Alignment>LEFT</Alignment>
           </Text>
           <Text>
             <Id>1790000000129</Id>
-            <Name>texto1790000000130</Name>
-            <X>40</X>
-            <Y>315</Y>
-            <Label>
-              <X>10</X>
-              <Y>0</Y>
-            </Label>
-            <PublicFlag>true</PublicFlag>
-            <PresentationFlag>true</PresentationFlag>
-            <ShowLabel>false</ShowLabel>
-            <DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-            <EmbeddedIcon>false</EmbeddedIcon>
-            <Z>0</Z>
-            <Rotation>0.0</Rotation>
+            <Name>flujoModelo</Name>
+            <X>40</X><Y>285</Y>
+            <Label><X>10</X><Y>0</Y></Label>
+            <PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel>
+            <DrawMode>SHAPE_DRAW_2D3D</DrawMode><EmbeddedIcon>false</EmbeddedIcon><Z>0</Z><Rotation>0.0</Rotation>
             <Color>-12490271</Color>
-            <Text>E2 registra desvíos a Plaza fuera del sistema. Resultados en consola al terminar.</Text>
-            <Font>
-              <Name>SansSerif</Name>
-              <Size>14</Size>
-              <Style>0</Style>
-            </Font>
+            <Text>Tandas del Roca → cola FIFO → molinetes → validación → salida · E2 desvía pasajeros a Plaza</Text>
+            <Font><Name>SansSerif</Name><Size>14</Size><Style>0</Style></Font>
             <Alignment>LEFT</Alignment>
           </Text>
+          <Text>
+            <Id>1790000000150</Id><Name>tituloDinamica</Name><X>40</X><Y>350</Y>
+            <Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel>
+            <DrawMode>SHAPE_DRAW_2D3D</DrawMode><EmbeddedIcon>false</EmbeddedIcon><Z>0</Z><Rotation>0.0</Rotation><Color>-12490271</Color>
+            <Text>Dinámica del vestíbulo</Text><Font><Name>SansSerif</Name><Size>17</Size><Style>1</Style></Font><Alignment>LEFT</Alignment>
+          </Text>
+          <Text>
+            <Id>1790000000151</Id><Name>kpiCola</Name><X>805</X><Y>355</Y>
+            <Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel>
+            <DrawMode>SHAPE_DRAW_2D3D</DrawMode><EmbeddedIcon>false</EmbeddedIcon><Z>0</Z><Rotation>0.0</Rotation><Color>-16777216</Color>
+            <Text>Cola actual: 0 pasajeros</Text><TextCode>"Cola actual: " + nEsperando + " pasajeros"</TextCode>
+            <Font><Name>SansSerif</Name><Size>16</Size><Style>1</Style></Font><Alignment>LEFT</Alignment>
+          </Text>
+          <Text>
+            <Id>1790000000152</Id><Name>kpiMolinetes</Name><X>805</X><Y>395</Y>
+            <Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel>
+            <DrawMode>SHAPE_DRAW_2D3D</DrawMode><EmbeddedIcon>false</EmbeddedIcon><Z>0</Z><Rotation>0.0</Rotation><Color>-16777216</Color>
+            <Text>Molinetes ocupados: 0 / 20</Text><TextCode>"Molinetes ocupados: " + nOcupados + " / " + capacidadMolinetes()</TextCode>
+            <Font><Name>SansSerif</Name><Size>15</Size><Style>0</Style></Font><Alignment>LEFT</Alignment>
+          </Text>
+          <Text>
+            <Id>1790000000153</Id><Name>kpiAtendidos</Name><X>805</X><Y>430</Y>
+            <Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel>
+            <DrawMode>SHAPE_DRAW_2D3D</DrawMode><EmbeddedIcon>false</EmbeddedIcon><Z>0</Z><Rotation>0.0</Rotation><Color>-16777216</Color>
+            <Text>Atendidos: 0 · Desviados: 0</Text><TextCode>"Atendidos: " + nProcesados + " · Desviados: " + nDesviados</TextCode>
+            <Font><Name>SansSerif</Name><Size>15</Size><Style>0</Style></Font><Alignment>LEFT</Alignment>
+          </Text>
+          <Text>
+            <Id>1790000000154</Id><Name>kpiEspera</Name><X>805</X><Y>465</Y>
+            <Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel>
+            <DrawMode>SHAPE_DRAW_2D3D</DrawMode><EmbeddedIcon>false</EmbeddedIcon><Z>0</Z><Rotation>0.0</Rotation><Color>-16777216</Color>
+            <Text>Espera media: 0,0 s</Text><TextCode>String.format("Espera media: %.1f s", esperaMediaActual())</TextCode>
+            <Font><Name>SansSerif</Name><Size>15</Size><Style>0</Style></Font><Alignment>LEFT</Alignment>
+          </Text>
+          <Text>
+            <Id>1790000000155</Id><Name>kpiMaximo</Name><X>805</X><Y>500</Y>
+            <Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel>
+            <DrawMode>SHAPE_DRAW_2D3D</DrawMode><EmbeddedIcon>false</EmbeddedIcon><Z>0</Z><Rotation>0.0</Rotation><Color>-16777216</Color>
+            <Text>Cola máxima: 0 · Utilización: 0 %</Text><TextCode>String.format("Cola máxima: %d · Utilización: %.1f %%", qMax, 100*utilizacionActual())</TextCode>
+            <Font><Name>SansSerif</Name><Size>15</Size><Style>0</Style></Font><Alignment>LEFT</Alignment>
+          </Text>
+          <Text>
+            <Id>1790000000156</Id><Name>tituloPico</Name><X>805</X><Y>555</Y>
+            <Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel>
+            <DrawMode>SHAPE_DRAW_2D3D</DrawMode><EmbeddedIcon>false</EmbeddedIcon><Z>0</Z><Rotation>0.0</Rotation><Color>-14774017</Color>
+            <Text>Cohorte pico 08:15–08:45</Text><Font><Name>SansSerif</Name><Size>16</Size><Style>1</Style></Font><Alignment>LEFT</Alignment>
+          </Text>
+          <Text>
+            <Id>1790000000157</Id><Name>kpiPico</Name><X>805</X><Y>590</Y>
+            <Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel>
+            <DrawMode>SHAPE_DRAW_2D3D</DrawMode><EmbeddedIcon>false</EmbeddedIcon><Z>0</Z><Rotation>0.0</Rotation><Color>-16777216</Color>
+            <Text>Sin observaciones todavía</Text><TextCode>nPico == 0 ? "Sin observaciones todavía" : String.format("n=%d · media %.1f s · P90 %.1f s", nPico, sumaEsperaPico/nPico, percentil90Pico())</TextCode>
+            <Font><Name>SansSerif</Name><Size>15</Size><Style>0</Style></Font><Alignment>LEFT</Alignment>
+          </Text>
+          <Text>
+            <Id>1790000000158</Id><Name>kpiPico30</Name><X>805</X><Y>625</Y>
+            <Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel>
+            <DrawMode>SHAPE_DRAW_2D3D</DrawMode><EmbeddedIcon>false</EmbeddedIcon><Z>0</Z><Rotation>0.0</Rotation><Color>-16777216</Color>
+            <Text>Espera &gt; 30 s: 0,0 %</Text><TextCode>String.format("Espera &gt; 30 s: %.1f %%", nPico == 0 ? 0 : 100.0*nMas30Pico/nPico)</TextCode>
+            <Font><Name>SansSerif</Name><Size>15</Size><Style>0</Style></Font><Alignment>LEFT</Alignment>
+          </Text>
+          <Text>
+            <Id>1790000000159</Id><Name>notaResultados</Name><X>805</X><Y>680</Y>
+            <Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel>
+            <DrawMode>SHAPE_DRAW_2D3D</DrawMode><EmbeddedIcon>false</EmbeddedIcon><Z>0</Z><Rotation>0.0</Rotation><Color>-12490271</Color>
+            <Text>Resultados completos también quedan en la consola.</Text><Font><Name>SansSerif</Name><Size>12</Size><Style>0</Style></Font><Alignment>LEFT</Alignment>
+          </Text>
         </Presentation>
+        <Charts>
+          <TimePlot>
+            <Id>1790000000160</Id><Name>evolucionSistema</Name><X>40</X><Y>380</Y>
+            <Label><X>0</X><Y>-10</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel>
+            <AutoUpdate>true</AutoUpdate><OccurrenceAtTime>true</OccurrenceAtTime><OccurrenceDate>1783584000000</OccurrenceDate>
+            <OccurrenceTime Class="CodeUnitValue"><Code>0</Code><Unit Class="TimeUnits">SECOND</Unit></OccurrenceTime>
+            <RecurrenceCode Class="CodeUnitValue"><Code>10</Code><Unit Class="TimeUnits">SECOND</Unit></RecurrenceCode>
+            <EmbeddedIcon>false</EmbeddedIcon><Width>720</Width><Height>315</Height><BackgroundColor>-1</BackgroundColor><BorderColor>-12490271</BorderColor>
+            <ChartArea><XOffset>55</XOffset><YOffset>25</YOffset><Width>640</Width><Height>225</Height><BackgroundColor>-1</BackgroundColor><BorderColor>-12490271</BorderColor><GridColor>-4144960</GridColor></ChartArea>
+            <Legend><Place>SOUTH</Place><TextColor>-16777216</TextColor><Size>45</Size></Legend>
+            <Labels><HorLabelsPosition>DEFAULT</HorLabelsPosition><VerLabelsPosition>DEFAULT</VerLabelsPosition><TextColor>-12490271</TextColor></Labels>
+            <Persistent>true</Persistent><ShowLegend>true</ShowLegend><TimeWindowsMovementType>MOVEMENT_WITH_TIME</TimeWindowsMovementType><TimeWindowUnits>MODEL_TIME_UNIT</TimeWindowUnits>
+            <VerScaleFromExpression>0</VerScaleFromExpression><VerScaleToExpression>100</VerScaleToExpression><VerScaleType>AUTO</VerScaleType><DrawLine>true</DrawLine><Interpolation>LINEAR</Interpolation>
+            <DatasetExpression><Title>Pasajeros esperando</Title><Expression>null</Expression><Color>-65536</Color><Expression2>nEsperando</Expression2><Expression2Flag>true</Expression2Flag><PointStyle>NONE</PointStyle><LineWidth>2.0</LineWidth></DatasetExpression>
+            <DatasetExpression><Title>Molinetes ocupados</Title><Expression>null</Expression><Color>-14774017</Color><Expression2>nOcupados</Expression2><Expression2Flag>true</Expression2Flag><PointStyle>NONE</PointStyle><LineWidth>2.0</LineWidth></DatasetExpression>
+            <SamplesToKeep>1000</SamplesToKeep><TimeWindowExpression>9000</TimeWindowExpression><LabelFormat>MODEL_TIME_UNITS</LabelFormat>
+          </TimePlot>
+        </Charts>
         <StartupCode>inicializar();</StartupCode>
         <Functions>
           <Function AccessType="public" StaticFunction="false">
@@ -2485,8 +2540,8 @@ return (modoDemo ? "DEMO; " : "SIN VALIDAR; ") + "E" + escenario
     <TimeAccuracy>1.0E-9</TimeAccuracy>
     <Frame>
       <Id>1783514567434</Id>
-      <Width>1000</Width>
-      <Height>600</Height>
+      <Width>1200</Width>
+      <Height>760</Height>
     </Frame>
     <Database>
       <Id>1783514567433</Id>
@@ -2511,8 +2566,8 @@ return (modoDemo ? "DEMO; " : "SIN VALIDAR; ") + "E" + escenario
       </ModelTimeProperties>
       <AnimationProperties>
         <StopNever>true</StopNever>
-        <ExecutionMode>virtualTime</ExecutionMode>
-        <RealTimeScale>1.0</RealTimeScale>
+        <ExecutionMode>realTimeScaled</ExecutionMode>
+        <RealTimeScale>300.0</RealTimeScale>
         <EnableZoomAndPanning>true</EnableZoomAndPanning>
         <EnableDeveloperPanel>false</EnableDeveloperPanel>
         <ShowDeveloperPanelOnStart>false</ShowDeveloperPanelOnStart>
@@ -2610,11 +2665,11 @@ return (modoDemo ? "DEMO; " : "SIN VALIDAR; ") + "E" + escenario
         </Parameters>
         <PresentationProperties>
           <EnableZoomAndPanning>true</EnableZoomAndPanning>
-          <ExecutionMode>virtualTime</ExecutionMode>
+          <ExecutionMode>realTimeScaled</ExecutionMode>
           <Title>Subte Constitución - E0</Title>
           <EnableDeveloperPanel>true</EnableDeveloperPanel>
           <ShowDeveloperPanelOnStart>false</ShowDeveloperPanelOnStart>
-          <RealTimeScale>1.0</RealTimeScale>
+          <RealTimeScale>300.0</RealTimeScale>
         </PresentationProperties>
         <ModelTimeProperties>
           <StopOption>Stop at specified time</StopOption>
@@ -2712,11 +2767,11 @@ return (modoDemo ? "DEMO; " : "SIN VALIDAR; ") + "E" + escenario
         </Parameters>
         <PresentationProperties>
           <EnableZoomAndPanning>true</EnableZoomAndPanning>
-          <ExecutionMode>virtualTime</ExecutionMode>
+          <ExecutionMode>realTimeScaled</ExecutionMode>
           <Title>Subte Constitución - E1</Title>
           <EnableDeveloperPanel>true</EnableDeveloperPanel>
           <ShowDeveloperPanelOnStart>false</ShowDeveloperPanelOnStart>
-          <RealTimeScale>1.0</RealTimeScale>
+          <RealTimeScale>300.0</RealTimeScale>
         </PresentationProperties>
         <ModelTimeProperties>
           <StopOption>Stop at specified time</StopOption>
@@ -2814,11 +2869,11 @@ return (modoDemo ? "DEMO; " : "SIN VALIDAR; ") + "E" + escenario
         </Parameters>
         <PresentationProperties>
           <EnableZoomAndPanning>true</EnableZoomAndPanning>
-          <ExecutionMode>virtualTime</ExecutionMode>
+          <ExecutionMode>realTimeScaled</ExecutionMode>
           <Title>Subte Constitución - E2</Title>
           <EnableDeveloperPanel>true</EnableDeveloperPanel>
           <ShowDeveloperPanelOnStart>false</ShowDeveloperPanelOnStart>
-          <RealTimeScale>1.0</RealTimeScale>
+          <RealTimeScale>300.0</RealTimeScale>
         </PresentationProperties>
         <ModelTimeProperties>
           <StopOption>Stop at specified time</StopOption>
@@ -2916,11 +2971,11 @@ return (modoDemo ? "DEMO; " : "SIN VALIDAR; ") + "E" + escenario
         </Parameters>
         <PresentationProperties>
           <EnableZoomAndPanning>true</EnableZoomAndPanning>
-          <ExecutionMode>virtualTime</ExecutionMode>
+          <ExecutionMode>realTimeScaled</ExecutionMode>
           <Title>Subte Constitución - E3</Title>
           <EnableDeveloperPanel>true</EnableDeveloperPanel>
           <ShowDeveloperPanelOnStart>false</ShowDeveloperPanelOnStart>
-          <RealTimeScale>1.0</RealTimeScale>
+          <RealTimeScale>300.0</RealTimeScale>
         </PresentationProperties>
         <ModelTimeProperties>
           <StopOption>Stop at specified time</StopOption>
