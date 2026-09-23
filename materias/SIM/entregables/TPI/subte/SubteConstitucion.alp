@@ -3253,8 +3253,8 @@ return acumulada/time();</Body></Function>
           <Parameter><ParameterName>intervaloTandaDemoSeg</ParameterName></Parameter>
           <Parameter><ParameterName>cantidadTandasDemo</ParameterName></Parameter>
         </Parameters>
-        <PresentationProperties><EnableZoomAndPanning>true</EnableZoomAndPanning><ExecutionMode>realTimeScaled</ExecutionMode><Title>Subte Constitución - Demo peatonal</Title><EnableDeveloperPanel>true</EnableDeveloperPanel><ShowDeveloperPanelOnStart>false</ShowDeveloperPanelOnStart><RealTimeScale>2.0</RealTimeScale></PresentationProperties>
-        <ModelTimeProperties><StopOption>Stop at specified time</StopOption><InitialDate>1789984800000</InitialDate><InitialTime>0.0</InitialTime><FinalDate>1789984800000</FinalDate><FinalTime>300</FinalTime></ModelTimeProperties>
+        <PresentationProperties><EnableZoomAndPanning>true</EnableZoomAndPanning><ExecutionMode>realTimeScaled</ExecutionMode><Title>Subte Constitución - Demo peatonal</Title><EnableDeveloperPanel>true</EnableDeveloperPanel><ShowDeveloperPanelOnStart>false</ShowDeveloperPanelOnStart><RealTimeScale>10.0</RealTimeScale></PresentationProperties>
+        <ModelTimeProperties><StopOption>Stop at specified time</StopOption><InitialDate>1789984800000</InitialDate><InitialTime>0.0</InitialTime><FinalDate>1789984800000</FinalDate><FinalTime>600</FinalTime></ModelTimeProperties>
         <BypassInitialScreen>true</BypassInitialScreen>
       </SimulationExperiment>
     </Experiments>

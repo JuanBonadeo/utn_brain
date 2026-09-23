@@ -234,6 +234,9 @@ para comprobar la dinámica peatonal.
 | `servicioDemoSeg` | 3 s | Ejercita el servicio; no es una medición |
 | posiciones de servicio | 4 | Verificación visual; no representa E0 ni E1 |
 
+`PeatonalDemo` tiene un horizonte de 600 s y velocidad de animación 10x, suficiente para observar el
+drenaje de las seis tandas sin prolongar innecesariamente la prueba visual.
+
 La geometría es deliberadamente esquemática y el experimento muestra el aviso **GEOMETRÍA Y DATOS
 SINTÉTICOS - NO REPRESENTA EL PLANO REAL**. No deben utilizarse sus valores para describir el desempeño
 actual de Constitución. Cuando se reciban planos y datos operativos se reemplazarán las dimensiones, la
