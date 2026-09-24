@@ -2845,6 +2845,12 @@ subte, y sobre la misma estación.
   servicio triangular opcional, generadores propios para números aleatorios comunes, control de caudal por
   ventana y el experimento `PeatonalFranjaPrueba` (un par con valores de prueba, filas demo). Se descartó
   la Rail Library: no agrega medidas y obliga a inventar la terminal. Plaza (E2) sigue fuera del alcance.
+- **2026-09-24**: TPI, grupo 2 (Casermeiro). Recibidos dos reportes del ABM (estadística anual por artículo/mes
+  y estadística de venta por cliente/artículo, grupo 94-96, 12-13 meses) — útiles para ABC y estacionalidad,
+  pero **no** son el listado transaccional que necesita el modelo (sin fecha de operación ni precio); sigue
+  pendiente pedirlo aparte. La empresa contestó que código/familia/precio salen de una "Lista CASER" separada
+  (todavía no enviada) y dio la fórmula de costo estándar: precio de lista × 0,335. Actualizado
+  `03-pedido-de-datos.md` con el estado de cada pedido.
 - **2026-09-22** (3): TPI, grupo 2 (Casermeiro). Perfiladas a fondo las 9 planillas reales de producción que
   mandó la oficina técnica (locales, no versionadas — el repo es público — en
   `entregables/TPI/caser/datos-locales/`, gitignoreada). Confirmado con datos que hay **dos hornos

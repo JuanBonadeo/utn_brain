@@ -107,3 +107,28 @@ Con esto se hace el ABC, se ve qué se vende, qué se fabrica, qué se importa y
 - **Artículos representativos**: qué porcentaje del volumen del horno (kg o ULI) representan los elegidos, o
   que el registro de cargas identifique el artículo por ULI. El horno tiene que ver el volumen completo: los
   elegidos se modelan uno por uno y el resto como flujo agregado.
+
+## Recibido y estado (2026-09-24)
+
+- **Maestro comercial**: pendiente. Se pidió código, familia, precio de lista, costo estándar, origen,
+  stock/contra pedido. La empresa contestó que código/familia/precio salen de la **"Lista CASER"**
+  (archivo aparte, todavía no enviado) y que el costo estándar se calcula como índice: **precio de lista ×
+  0,335** (50% de bonificación máxima, 33% de rentabilidad bruta sobre el precio bonificado). Fórmula
+  aceptada; falta que llegue la Lista CASER para aplicarla.
+- **Stock valorizado**: pendiente, sin novedad.
+- **Compras**: pendiente, sin novedad. Baja prioridad para el Tema 1.
+- **Ventas — recibidos dos reportes del ABM, pero NO son el listado transaccional pedido**:
+  `REPORTE_0000001603.XLS` ("Estadística Anual De Venta", grupo 94-96, desde 09/2025, en unidades):
+  cantidad vendida por artículo **por mes** (13 meses, 782 artículos, con total anual). Sirve para ABC y
+  estacionalidad mensual, no da fecha de operación ni precio.
+  `REPORTE_0000001604.XLS` ("Estadística De Venta Por Artículo", mismo período y grupo): cantidad total
+  por **cliente × artículo** en todo el período (869 clientes), no por operación individual. Sirve para ver
+  concentración de clientes, no da fecha ni precio.
+  Ninguno de los dos alcanza para ajustar tiempo entre pedidos y tamaño de pedido por operación (lo que
+  necesita `Source pedidos` en `05-respuestas-al-docente.md` §1.5). **Sigue pendiente pedir el listado
+  transaccional línea por línea** (fecha, cliente, artículo, cantidad, precio), aclarando que no es una
+  "Estadística" sino un listado o libro de ventas — puede que exista en el sistema aparte de los reportes
+  ya recibidos. Si no existe, el respaldo es modelar demanda mensual agregada en vez de pedidos
+  individuales, declarado como supuesto más débil (afecta la varianza de la cola del horno).
+  **A confirmar**: si el grupo 94-96 incluye los artículos importados o solo los fabricados.
+  Archivos guardados en `datos-locales/abm/` (gitignoreados, no versionados).
