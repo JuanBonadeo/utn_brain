@@ -1791,6 +1791,11 @@
           </EmbeddedObject>
         </EmbeddedObjects>
         <Presentation>
+          <Level>
+            <Id>1783514567443</Id><Name>level</Name><X>0</X><Y>0</Y>
+            <Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel>
+            <DrawMode>SHAPE_DRAW_2D3D</DrawMode><Z>0</Z><LevelVisibility>DIM_NON_CURRENT</LevelVisibility>
+            <Presentation>
           <Rectangle>
             <Id>1790000000149</Id>
             <Name>panelTablero</Name>
@@ -1928,6 +1933,8 @@
             <DrawMode>SHAPE_DRAW_2D3D</DrawMode><EmbeddedIcon>false</EmbeddedIcon><Z>0</Z><Rotation>0.0</Rotation><Color>-12490271</Color>
             <Text>Resultados completos también quedan en la consola.</Text><Font><Name>SansSerif</Name><Size>12</Size><Style>0</Style></Font><Alignment>LEFT</Alignment>
           </Text>
+            </Presentation>
+          </Level>
         </Presentation>
         <Charts>
           <TimePlot>
@@ -2634,10 +2641,13 @@ return (modoDemo ? "DEMO; " : "SIN VALIDAR; ") + "E" + escenario
           <Variable Class="Parameter"><Id>1791000000150</Id><Name>inicioPicoPedSeg</Name><X>1050</X><Y>185</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true" ModificatorType="STATIC"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><DefaultValue Class="CodeValue"><Code>4500.0</Code></DefaultValue><ParameterEditor><Id>1791000000151</Id><EditorContolType>TEXT_BOX</EditorContolType><MinSliderValue>0</MinSliderValue><MaxSliderValue>9000</MaxSliderValue><DelimeterType>NO_DELIMETER</DelimeterType></ParameterEditor></Properties><Description>Inicio de la cohorte pico 08:15, en segundos desde las 07:00.</Description></Variable>
           <Variable Class="Parameter"><Id>1791000000152</Id><Name>finPicoPedSeg</Name><X>1050</X><Y>210</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true" ModificatorType="STATIC"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><DefaultValue Class="CodeValue"><Code>6300.0</Code></DefaultValue><ParameterEditor><Id>1791000000153</Id><EditorContolType>TEXT_BOX</EditorContolType><MinSliderValue>0</MinSliderValue><MaxSliderValue>9000</MaxSliderValue><DelimeterType>NO_DELIMETER</DelimeterType></ParameterEditor></Properties><Description>Fin exclusivo de la cohorte pico 08:45.</Description></Variable>
           <Variable Class="Parameter"><Id>1791000000154</Id><Name>horizonteMetricasPedSeg</Name><X>1050</X><Y>235</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true" ModificatorType="STATIC"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><DefaultValue Class="CodeValue"><Code>600.0</Code></DefaultValue><ParameterEditor><Id>1791000000155</Id><EditorContolType>TEXT_BOX</EditorContolType><MinSliderValue>1</MinSliderValue><MaxSliderValue>9000</MaxSliderValue><DelimeterType>NO_DELIMETER</DelimeterType></ParameterEditor></Properties><Description>Horizonte usado como denominador de utilizacion en la demo.</Description></Variable>
+          <Variable Class="Parameter"><Id>1791000000179</Id><Name>semillaPed</Name><X>1050</X><Y>260</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true" ModificatorType="STATIC"><Type>long</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><DefaultValue Class="CodeValue"><Code>20260923L</Code></DefaultValue><ParameterEditor><Id>1791000000180</Id><EditorContolType>TEXT_BOX</EditorContolType><MinSliderValue>1</MinSliderValue><MaxSliderValue>2147483647</MaxSliderValue><DelimeterType>NO_DELIMETER</DelimeterType></ParameterEditor></Properties><Description>Semilla declarada para identificar y aparear la corrida; debe coincidir con la del experimento.</Description></Variable>
           <Variable Class="PlainVariable"><Id>1791000000156</Id><Name>esperasPed</Name><X>1250</X><Y>360</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true"><Type>java.util.ArrayList&lt;Double&gt;</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><InitialValue Class="CodeValue"><Code>new java.util.ArrayList&lt;Double&gt;()</Code></InitialValue></Properties></Variable>
           <Variable Class="PlainVariable"><Id>1791000000157</Id><Name>nMas30Ped</Name><X>1250</X><Y>385</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true"><Type>int</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable>
           <Variable Class="PlainVariable"><Id>1791000000158</Id><Name>esperasPicoPed</Name><X>1250</X><Y>410</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true"><Type>java.util.ArrayList&lt;Double&gt;</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><InitialValue Class="CodeValue"><Code>new java.util.ArrayList&lt;Double&gt;()</Code></InitialValue></Properties></Variable>
           <Variable Class="PlainVariable"><Id>1791000000159</Id><Name>ocupacionPorMolinetePed</Name><X>1250</X><Y>435</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true"><Type>java.util.HashMap&lt;String,Double&gt;</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><InitialValue Class="CodeValue"><Code>new java.util.HashMap&lt;String,Double&gt;()</Code></InitialValue></Properties></Variable>
+          <Variable Class="PlainVariable"><Id>1791000000178</Id><Name>nProcesadosHorizontePed</Name><X>1250</X><Y>460</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true"><Type>int</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable>
+          <Variable Class="PlainVariable"><Id>1791000000185</Id><Name>resultadoEmitidoPed</Name><X>1250</X><Y>485</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Properties SaveInSnapshot="true"><Type>boolean</Type><UnitType>NONE</UnitType><SdArray>false</SdArray><InitialValue Class="CodeValue"><Code>false</Code></InitialValue></Properties></Variable>
         </Variables>
         <Connectors>
           <Connector>
@@ -2730,7 +2740,7 @@ return (modoDemo ? "DEMO; " : "SIN VALIDAR; ") + "E" + escenario
           </EmbeddedObject>
         </EmbeddedObjects>
         <Functions>
-          <Function AccessType="public" StaticFunction="false"><ReturnModificator>VOID</ReturnModificator><ReturnType>void</ReturnType><Id>1791000000084</Id><Name>actualizarAreaColaPed</Name><X>1500</X><Y>60</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Body>double ahora = time();
+          <Function AccessType="public" StaticFunction="false"><ReturnModificator>VOID</ReturnModificator><ReturnType>void</ReturnType><Id>1791000000084</Id><Name>actualizarAreaColaPed</Name><X>1500</X><Y>60</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Body>double ahora = Math.min(time(), horizonteMetricasPedSeg);
 areaColaPed += nEsperandoPed * Math.max(0, ahora - tAreaColaPed);
 tAreaColaPed = ahora;</Body></Function>
           <Function AccessType="public" StaticFunction="false"><ReturnModificator>VOID</ReturnModificator><ReturnType>void</ReturnType><Id>1791000000085</Id><Name>entraColaPed</Name><X>1500</X><Y>95</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Parameter><Name>ped</Name><Type>Pasajero</Type></Parameter><Body>actualizarAreaColaPed();
@@ -2753,7 +2763,9 @@ esperasPed.add(espera);
 if (espera &gt; 30) nMas30Ped++;
 if (ped.enPicoPed) esperasPicoPed.add(espera);
 ped.tInicioServicioPed = time();</Body></Function>
-          <Function AccessType="public" StaticFunction="false"><ReturnModificator>VOID</ReturnModificator><ReturnType>void</ReturnType><Id>1791000000161</Id><Name>terminaServicioPed</Name><X>1500</X><Y>147</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Parameter><Name>ped</Name><Type>Pasajero</Type></Parameter><Body>double ocupado = Math.max(0, time() - ped.tInicioServicioPed);
+          <Function AccessType="public" StaticFunction="false"><ReturnModificator>VOID</ReturnModificator><ReturnType>void</ReturnType><Id>1791000000161</Id><Name>terminaServicioPed</Name><X>1500</X><Y>147</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Parameter><Name>ped</Name><Type>Pasajero</Type></Parameter><Body>double inicio = Math.min(ped.tInicioServicioPed, horizonteMetricasPedSeg);
+double fin = Math.min(time(), horizonteMetricasPedSeg);
+double ocupado = Math.max(0, fin - inicio);
 Double previo = ocupacionPorMolinetePed.get(ped.nombreMolinetePed);
 ocupacionPorMolinetePed.put(ped.nombreMolinetePed, (previo == null ? 0 : previo) + ocupado);</Body></Function>
           <Function AccessType="public" StaticFunction="false"><ReturnModificator>VOID</ReturnModificator><ReturnType>void</ReturnType><Id>1791000000087</Id><Name>generarTandaPed</Name><X>1500</X><Y>165</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Body>if (nTandasPed &gt;= cantidadTandasDemo) return;
@@ -2765,7 +2777,7 @@ if (nTandasPed &lt; cantidadTandasDemo) proximaTandaPed.restart(intervaloTandaDe
 if (nTandasPed == cantidadTandasDemo &amp;&amp; nProcesadosPed == nGeneradosPed) {
     actualizarAreaColaPed();
     ultimaDisipacionPed = time() - tiempoUltimaTandaPed;
-    traceln(resumenPeatonal());
+    if (time() &gt;= horizonteMetricasPedSeg) emitirResultadoPed();
 }</Body></Function>
           <Function AccessType="public" StaticFunction="false"><ReturnModificator>RETURNS_VALUE</ReturnModificator><ReturnType>double</ReturnType><Id>1791000000089</Id><Name>esperaMediaPed</Name><X>1500</X><Y>235</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Body>return nEsperasPed == 0 ? 0 : sumaEsperaPed/nEsperasPed;</Body></Function>
           <Function AccessType="public" StaticFunction="false"><ReturnModificator>RETURNS_VALUE</ReturnModificator><ReturnType>double</ReturnType><Id>1791000000162</Id><Name>percentil90Ped</Name><X>1750</X><Y>95</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Body>if (esperasPed.isEmpty()) return 0;
@@ -2800,12 +2812,13 @@ return Math.sqrt(suma/molinetesOperativosPed);</Body></Function>
 for (int i=1; i&lt;=molinetesOperativosPed; i++) {
     String nombre = String.format("molinetePed%02d", i);
     double ocupado = ocupacionPorMolinetePed.containsKey(nombre) ? ocupacionPorMolinetePed.get(nombre) : 0;
-    partes.add(nombre + "=" + String.format("%.3f", ocupado/horizonteMetricasPedSeg));
+    partes.add(nombre + "=" + String.format(java.util.Locale.US, "%.3f", ocupado/horizonteMetricasPedSeg));
 }
 return String.join(",", partes);</Body></Function>
-          <Function AccessType="public" StaticFunction="false"><ReturnModificator>RETURNS_VALUE</ReturnModificator><ReturnType>double</ReturnType><Id>1791000000090</Id><Name>lqPed</Name><X>1500</X><Y>270</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Body>if (time() &lt;= 0) return 0;
-double acumulada = areaColaPed + nEsperandoPed*Math.max(0, time()-tAreaColaPed);
-return acumulada/time();</Body></Function>
+          <Function AccessType="public" StaticFunction="false"><ReturnModificator>RETURNS_VALUE</ReturnModificator><ReturnType>double</ReturnType><Id>1791000000090</Id><Name>lqPed</Name><X>1500</X><Y>270</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Body>double fin = Math.min(time(), horizonteMetricasPedSeg);
+if (fin &lt;= 0) return 0;
+double acumulada = areaColaPed + nEsperandoPed*Math.max(0, fin-tAreaColaPed);
+return acumulada/fin;</Body></Function>
           <Function AccessType="public" StaticFunction="false"><ReturnModificator>RETURNS_VALUE</ReturnModificator><ReturnType>String</ReturnType><Id>1791000000091</Id><Name>resumenPeatonal</Name><X>1500</X><Y>305</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Body>return "DEMO PEATONAL SINTETICA; tandas=" + nTandasPed
  + "; generados=" + nGeneradosPed + "; procesados=" + nProcesadosPed
  + "; molinetesOperativos=" + molinetesOperativosPed
@@ -2816,6 +2829,29 @@ return acumulada/time();</Body></Function>
  + "; cohortePicoN=" + esperasPicoPed.size() + "; cohortePicoEsperaMediaSeg=" + esperaMediaPicoPed()
  + "; cohortePicoP90Seg=" + p90PicoPed() + "; disipacionUltimaTandaSeg=" + ultimaDisipacionPed
  + "; utilizacionPorMolinete=" + utilizacionPorMolinetePed();</Body></Function>
+          <Function AccessType="public" StaticFunction="false"><ReturnModificator>RETURNS_VALUE</ReturnModificator><ReturnType>String</ReturnType><Id>1791000000181</Id><Name>filaResultadoPed</Name><X>1750</X><Y>340</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Body>String escenarioPed = molinetesOperativosPed == 20 ? "E0" : (molinetesOperativosPed == 28 ? "E1" : "OTRO");
+return String.join(";",
+    escenarioPed,
+    Long.toString(semillaPed),
+    Integer.toString(nGeneradosPed),
+    "0",
+    Integer.toString(nProcesadosHorizontePed),
+    Integer.toString(nProcesadosPed),
+    String.format(java.util.Locale.US, "%.6f", esperaMediaPed()),
+    String.format(java.util.Locale.US, "%.6f", percentil90Ped()),
+    String.format(java.util.Locale.US, "%.6f", proporcionMas30Ped()),
+    String.format(java.util.Locale.US, "%.6f", lqPed()),
+    Integer.toString(qMaxPed),
+    String.format(java.util.Locale.US, "%.6f", ultimaDisipacionPed),
+    String.format(java.util.Locale.US, "%.6f", utilizacionMediaPed()),
+    String.format(java.util.Locale.US, "%.6f", dispersionUtilizacionPed()),
+    Integer.toString(esperasPicoPed.size()),
+    String.format(java.util.Locale.US, "%.6f", esperaMediaPicoPed()),
+    String.format(java.util.Locale.US, "%.6f", p90PicoPed()));</Body></Function>
+          <Function AccessType="public" StaticFunction="false"><ReturnModificator>VOID</ReturnModificator><ReturnType>void</ReturnType><Id>1791000000184</Id><Name>emitirResultadoPed</Name><X>1750</X><Y>375</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Body>if (resultadoEmitidoPed) return;
+resultadoEmitidoPed = true;
+traceln(resumenPeatonal());
+traceln("CSV_PEATONAL;" + filaResultadoPed());</Body></Function>
           <Function AccessType="public" StaticFunction="false"><ReturnModificator>VOID</ReturnModificator><ReturnType>void</ReturnType><Id>1791000000102</Id><Name>configurarMolinetesPed</Name><X>1500</X><Y>340</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label><Body>if (molinetesOperativosPed != 20 &amp;&amp; molinetesOperativosPed != 28)
     throw new IllegalArgumentException("La demo peatonal admite 20 o 28 molinetes");
 molinetesPeatonales.setServiceSuspended(molinetePed21, molinetesOperativosPed &lt; 21);
@@ -2829,6 +2865,9 @@ molinetesPeatonales.setServiceSuspended(molinetePed28, molinetesOperativosPed &l
         </Functions>
         <Events>
           <Event><Id>1791000000092</Id><Name>proximaTandaPed</Name><X>1750</X><Y>60</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Properties TriggerType="timeout" Mode="occuresOnce"><Timeout Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">SECOND</Unit></Timeout><Rate Class="CodeUnitValue"><Code>1</Code><Unit Class="RateUnits">PER_MINUTE</Unit></Rate><Id>1791000000093</Id><OccurrenceAtTime>true</OccurrenceAtTime><OccurrenceDate>1789984800000</OccurrenceDate><OccurrenceTime Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">SECOND</Unit></OccurrenceTime><RecurrenceCode Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">SECOND</Unit></RecurrenceCode><Condition>false</Condition></Properties><Action>generarTandaPed();</Action></Event>
+          <Event><Id>1791000000182</Id><Name>cierreMetricasPed</Name><X>1750</X><Y>80</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Properties TriggerType="timeout" Mode="occuresOnce"><Timeout Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">SECOND</Unit></Timeout><Rate Class="CodeUnitValue"><Code>1</Code><Unit Class="RateUnits">PER_MINUTE</Unit></Rate><Id>1791000000183</Id><OccurrenceAtTime>true</OccurrenceAtTime><OccurrenceDate>1789984800000</OccurrenceDate><OccurrenceTime Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">SECOND</Unit></OccurrenceTime><RecurrenceCode Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">SECOND</Unit></RecurrenceCode><Condition>false</Condition></Properties><Action>actualizarAreaColaPed();
+nProcesadosHorizontePed = nProcesadosPed;
+if (nTandasPed == cantidadTandasDemo &amp;&amp; nProcesadosPed == nGeneradosPed) emitirResultadoPed();</Action></Event>
         </Events>
         <Presentation>
           <Level>
@@ -2884,7 +2923,7 @@ molinetesPeatonales.setServiceSuspended(molinetePed28, molinetesOperativosPed &l
             </Presentation>
           </Level>
         </Presentation>
-        <StartupCode>traceln("DEMO PEATONAL - GEOMETRIA Y DATOS SINTETICOS"); configurarMolinetesPed(); proximaTandaPed.restart(0);</StartupCode>
+        <StartupCode>traceln("DEMO PEATONAL - GEOMETRIA Y DATOS SINTETICOS"); configurarMolinetesPed(); proximaTandaPed.restart(0); cierreMetricasPed.restart(horizonteMetricasPedSeg);</StartupCode>
       </ActiveObjectClass>
       <ActiveObjectClass>
         <Id>1791000000050</Id><Name>Pasajero</Name><Generic>false</Generic>
@@ -3385,6 +3424,7 @@ molinetesPeatonales.setServiceSuspended(molinetePed28, molinetesOperativosPed &l
           <Parameter><ParameterName>inicioPicoPedSeg</ParameterName></Parameter>
           <Parameter><ParameterName>finPicoPedSeg</ParameterName></Parameter>
           <Parameter><ParameterName>horizonteMetricasPedSeg</ParameterName></Parameter>
+          <Parameter><ParameterName>semillaPed</ParameterName><ParameterValue Class="CodeValue"><Code>1L</Code></ParameterValue></Parameter>
         </Parameters>
         <PresentationProperties><EnableZoomAndPanning>true</EnableZoomAndPanning><ExecutionMode>realTimeScaled</ExecutionMode><Title>Subte Constitución - Demo peatonal</Title><EnableDeveloperPanel>true</EnableDeveloperPanel><ShowDeveloperPanelOnStart>false</ShowDeveloperPanelOnStart><RealTimeScale>10.0</RealTimeScale></PresentationProperties>
         <ModelTimeProperties><StopOption>Stop at specified time</StopOption><InitialDate>1789984800000</InitialDate><InitialTime>0.0</InitialTime><FinalDate>1789984800000</FinalDate><FinalTime>600</FinalTime></ModelTimeProperties>
@@ -3395,17 +3435,17 @@ molinetesPeatonales.setServiceSuspended(molinetePed28, molinetesOperativosPed &l
         <Id>1791000000140</Id><Name>PeatonalE0</Name><CommandLineArguments /><MaximumMemory>512</MaximumMemory>
         <RandomNumberGenerationType>fixedSeed</RandomNumberGenerationType><CustomGeneratorCode>new Random()</CustomGeneratorCode><SeedValue>20260923</SeedValue><SelectionModeForSimultaneousEvents>LIFO</SelectionModeForSimultaneousEvents><VmArgs /><LoadRootFromSnapshot>false</LoadRootFromSnapshot>
         <Presentation><Text><Id>1791000000141</Id><Name>text</Name><X>50</X><Y>30</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel><DrawMode>SHAPE_DRAW_2D3D</DrawMode><EmbeddedIcon>false</EmbeddedIcon><Z>0</Z><Rotation>0.0</Rotation><Color>-12490271</Color><Text>Subte Constitución - Peatonal E0 (20 molinetes)</Text><Font><Name>SansSerif</Name><Size>24</Size><Style>0</Style></Font><Alignment>LEFT</Alignment></Text></Presentation>
-        <Parameters><Parameter><ParameterName>tamanoTandaDemo</ParameterName></Parameter><Parameter><ParameterName>servicioDemoSeg</ParameterName></Parameter><Parameter><ParameterName>molinetesOperativosPed</ParameterName><ParameterValue Class="CodeValue"><Code>20</Code></ParameterValue></Parameter><Parameter><ParameterName>intervaloTandaDemoSeg</ParameterName></Parameter><Parameter><ParameterName>cantidadTandasDemo</ParameterName></Parameter><Parameter><ParameterName>inicioPicoPedSeg</ParameterName></Parameter><Parameter><ParameterName>finPicoPedSeg</ParameterName></Parameter><Parameter><ParameterName>horizonteMetricasPedSeg</ParameterName></Parameter></Parameters>
+        <Parameters><Parameter><ParameterName>tamanoTandaDemo</ParameterName></Parameter><Parameter><ParameterName>servicioDemoSeg</ParameterName></Parameter><Parameter><ParameterName>molinetesOperativosPed</ParameterName><ParameterValue Class="CodeValue"><Code>20</Code></ParameterValue></Parameter><Parameter><ParameterName>intervaloTandaDemoSeg</ParameterName></Parameter><Parameter><ParameterName>cantidadTandasDemo</ParameterName></Parameter><Parameter><ParameterName>inicioPicoPedSeg</ParameterName></Parameter><Parameter><ParameterName>finPicoPedSeg</ParameterName></Parameter><Parameter><ParameterName>horizonteMetricasPedSeg</ParameterName></Parameter><Parameter><ParameterName>semillaPed</ParameterName><ParameterValue Class="CodeValue"><Code>20260923L</Code></ParameterValue></Parameter></Parameters>
         <PresentationProperties><EnableZoomAndPanning>true</EnableZoomAndPanning><ExecutionMode>realTimeScaled</ExecutionMode><Title>Subte Constitución - Peatonal E0</Title><EnableDeveloperPanel>true</EnableDeveloperPanel><ShowDeveloperPanelOnStart>false</ShowDeveloperPanelOnStart><RealTimeScale>10.0</RealTimeScale></PresentationProperties>
-        <ModelTimeProperties><StopOption>Stop at specified time</StopOption><InitialDate>1789984800000</InitialDate><InitialTime>0.0</InitialTime><FinalDate>1789984800000</FinalDate><FinalTime>600</FinalTime></ModelTimeProperties><BypassInitialScreen>true</BypassInitialScreen>
+        <ModelTimeProperties><StopOption>Stop at specified time</StopOption><InitialDate>1789984800000</InitialDate><InitialTime>0.0</InitialTime><FinalDate>1789984800000</FinalDate><FinalTime>900</FinalTime></ModelTimeProperties><BypassInitialScreen>true</BypassInitialScreen>
       </SimulationExperiment>
       <SimulationExperiment ActiveObjectClassId="1791000000001">
         <Id>1791000000142</Id><Name>PeatonalE1</Name><CommandLineArguments /><MaximumMemory>512</MaximumMemory>
         <RandomNumberGenerationType>fixedSeed</RandomNumberGenerationType><CustomGeneratorCode>new Random()</CustomGeneratorCode><SeedValue>20260923</SeedValue><SelectionModeForSimultaneousEvents>LIFO</SelectionModeForSimultaneousEvents><VmArgs /><LoadRootFromSnapshot>false</LoadRootFromSnapshot>
         <Presentation><Text><Id>1791000000143</Id><Name>text</Name><X>50</X><Y>30</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel><DrawMode>SHAPE_DRAW_2D3D</DrawMode><EmbeddedIcon>false</EmbeddedIcon><Z>0</Z><Rotation>0.0</Rotation><Color>-12490271</Color><Text>Subte Constitución - Peatonal E1 (28 molinetes)</Text><Font><Name>SansSerif</Name><Size>24</Size><Style>0</Style></Font><Alignment>LEFT</Alignment></Text></Presentation>
-        <Parameters><Parameter><ParameterName>tamanoTandaDemo</ParameterName></Parameter><Parameter><ParameterName>servicioDemoSeg</ParameterName></Parameter><Parameter><ParameterName>molinetesOperativosPed</ParameterName><ParameterValue Class="CodeValue"><Code>28</Code></ParameterValue></Parameter><Parameter><ParameterName>intervaloTandaDemoSeg</ParameterName></Parameter><Parameter><ParameterName>cantidadTandasDemo</ParameterName></Parameter><Parameter><ParameterName>inicioPicoPedSeg</ParameterName></Parameter><Parameter><ParameterName>finPicoPedSeg</ParameterName></Parameter><Parameter><ParameterName>horizonteMetricasPedSeg</ParameterName></Parameter></Parameters>
+        <Parameters><Parameter><ParameterName>tamanoTandaDemo</ParameterName></Parameter><Parameter><ParameterName>servicioDemoSeg</ParameterName></Parameter><Parameter><ParameterName>molinetesOperativosPed</ParameterName><ParameterValue Class="CodeValue"><Code>28</Code></ParameterValue></Parameter><Parameter><ParameterName>intervaloTandaDemoSeg</ParameterName></Parameter><Parameter><ParameterName>cantidadTandasDemo</ParameterName></Parameter><Parameter><ParameterName>inicioPicoPedSeg</ParameterName></Parameter><Parameter><ParameterName>finPicoPedSeg</ParameterName></Parameter><Parameter><ParameterName>horizonteMetricasPedSeg</ParameterName></Parameter><Parameter><ParameterName>semillaPed</ParameterName><ParameterValue Class="CodeValue"><Code>20260923L</Code></ParameterValue></Parameter></Parameters>
         <PresentationProperties><EnableZoomAndPanning>true</EnableZoomAndPanning><ExecutionMode>realTimeScaled</ExecutionMode><Title>Subte Constitución - Peatonal E1</Title><EnableDeveloperPanel>true</EnableDeveloperPanel><ShowDeveloperPanelOnStart>false</ShowDeveloperPanelOnStart><RealTimeScale>10.0</RealTimeScale></PresentationProperties>
-        <ModelTimeProperties><StopOption>Stop at specified time</StopOption><InitialDate>1789984800000</InitialDate><InitialTime>0.0</InitialTime><FinalDate>1789984800000</FinalDate><FinalTime>600</FinalTime></ModelTimeProperties><BypassInitialScreen>true</BypassInitialScreen>
+        <ModelTimeProperties><StopOption>Stop at specified time</StopOption><InitialDate>1789984800000</InitialDate><InitialTime>0.0</InitialTime><FinalDate>1789984800000</FinalDate><FinalTime>900</FinalTime></ModelTimeProperties><BypassInitialScreen>true</BypassInitialScreen>
       </SimulationExperiment>
     </Experiments>
     <RequiredLibraryReference>

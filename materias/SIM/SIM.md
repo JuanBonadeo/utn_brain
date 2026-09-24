@@ -2673,7 +2673,8 @@ validación contactless EMV/QR (la estación ya tiene un molinete así).
 **Archivos de trabajo**: [`03-informe-tpi.md`](entregables/TPI/subte/03-informe-tpi.md) contiene el borrador
 del informe y [`04-resultados-corridas.xlsx`](entregables/TPI/subte/04-resultados-corridas.xlsx) registra los
 30 pares E0-E1 y calcula el análisis apareado. La planilla está deliberadamente vacía hasta contar con
-corridas calibradas.
+corridas calibradas. [`05-guion-video.md`](entregables/TPI/subte/05-guion-video.md) organiza una exposición
+de 2 min 45 s, con participación de ambos integrantes y un tramo en vivo de AnyLogic.
 
 **Trampas del dataset, ya detectadas**: el campo de hora cambia de formato según el mes (03 y 04/2026 usan
 `HH:MM`, el resto `HH:MM:SS`) y agregar sin normalizar parte cada hora en dos, en silencio; los feriados se
@@ -2700,8 +2701,10 @@ subte, y sobre la misma estación.
   2026-09-23. La capa espacial de `MainPeatonal` ahora recorre `PedSource → PedService → PedGoTo → PedSink`,
   con salida física, 28 posiciones de molinete y experimentos comparables `PeatonalE0` (20 habilitadas) y
   `PeatonalE1` (28 habilitadas), además de tandas repetidas, P90, proporción sobre 30 s, cohorte pico y
-  utilización por puesto. Las verificaciones XML y Java pasan; falta recargar, compilar y ejecutar esta
-  extensión en el IDE, incorporar los rangos aprobados y reemplazar la geometría provisoria por el plano.
+  utilización por puesto. Las verificaciones XML y Java pasan; el 2026-09-24 se compiló y ejecutó la
+  extensión en el IDE y ambos escenarios drenaron 480 de 480 peatones. Falta incorporar los rangos
+  aprobados, reemplazar la geometría provisoria por el plano e integrar las filas de consola con la planilla
+  de producción.
   E2 cuenta el desvío pero todavía no simula la cola de Plaza.
 - ~~**Formulario**: editar el último envío con el tema del subte.~~ Hecho el 2026-09-22: `formulario-eleccion-tema.md`
   reescrito v2 y `TPI_Simulacion_Propuesta_de_Tema.docx` regenerado con ese contenido
@@ -2789,6 +2792,19 @@ subte, y sobre la misma estación.
   estándar e intervalos t; aplica Bonferroni a throughput con drenaje, P90 y proporción sobre 30 s. Se
   verificó el recálculo con datos transitorios y se restituyeron todas las entradas a vacío para no publicar
   resultados sintéticos como evidencia.
+- **2026-09-24** (2): creado `05-guion-video.md`, guion de toma única para 2 min 45 s que cubre problema,
+  evidencia, modelo, escenarios, ejecución en AnyLogic, resultados y conclusión. Los números y la
+  recomendación permanecen como campos pendientes hasta completar las corridas calibradas.
+- **2026-09-24** (3): recompilados y ejecutados en AnyLogic 8.9.9 `PeatonalE0` y `PeatonalE1`. La prueba
+  detectó que el corte a 600 s dejaba peatones dentro del circuito; se extendió el cierre técnico a 900 s
+  y se separaron las métricas al corte del total después del drenaje. Ambos escenarios finalizaron con 480
+  generados, 480 procesados y cola cero. El modelo emite además una fila `CSV_PEATONAL` con escenario,
+  semilla y métricas para transferir las corridas sin transcripción manual. Los valores de espera siguen
+  siendo solo de verificación sintética.
+- **2026-09-24** (4): reparada la estructura gráfica de `Main`: el `CurrentLevel` ahora referencia un nivel
+  real que contiene el tablero. El modelo vuelve a recargar y compilar sin el error interno `null argument`
+  del editor. Se alineó también la salida `CSV_PEATONAL` con las columnas de la planilla, incluido el cero
+  explícito de pasajeros desviados en E0-E1.
 - **2026-09-22** (3): TPI, grupo 2 (Casermeiro). Perfiladas a fondo las 9 planillas reales de producción que
   mandó la oficina técnica (locales, no versionadas — el repo es público — en
   `entregables/TPI/caser/datos-locales/`, gitignoreada). Confirmado con datos que hay **dos hornos

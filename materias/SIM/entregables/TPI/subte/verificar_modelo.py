@@ -125,6 +125,13 @@ public static void main(String[] args){
  if(m.percentil90Ped()!=3 || m.proporcionMas30Ped()!=0 || m.esperasPicoPed.size()!=1 || m.p90PicoPed()!=3)throw new AssertionError();
  if(Math.abs(m.utilizacionMediaPed()-3.0/(600*20))>1e-12)throw new AssertionError();
  if(!m.utilizacionPorMolinetePed().contains("molinetePed01=0.005"))throw new AssertionError();
+ m.nProcesadosHorizontePed=1;
+ if(!m.filaResultadoPed().startsWith("E0;20260923;1;0;1;"))throw new AssertionError();
+ m.emitirResultadoPed();m.emitirResultadoPed();
+ if(!m.resultadoEmitidoPed)throw new AssertionError();
+ Pasajero tarde=new Pasajero();tarde.nombreMolinetePed="molinetePed01";tarde.tInicioServicioPed=599;
+ m.clock=605;m.terminaServicioPed(tarde);
+ if(Math.abs(m.ocupacionPorMolinetePed.get("molinetePed01")-4)>1e-12)throw new AssertionError();
  m.generarTandaPed();m.nProcesadosPed=0;m.salePed();
  if(m.nProcesadosPed!=1)throw new AssertionError();
  System.out.println("OK: pedestrian callbacks, P90, peak cohort and per-turnstile utilization compile");
@@ -152,6 +159,11 @@ for e in [x for x in experiments if x.findtext('Name') in {'E0','E1','E2','E3'}]
  assert ps['escenario']==e.findtext('Name')[1:]
 agents={x.findtext('Name'):x for x in r.findall('Model/ActiveObjectClasses/ActiveObjectClass')}
 ped=agents['MainPeatonal']
+main=agents['Main']
+assert main.findtext('CurrentLevel')=='1783514567443'
+main_level=main.find('Presentation/Level')
+assert main_level is not None and main_level.findtext('Id')=='1783514567443'
+assert main_level.find("Presentation/Rectangle[Name='panelTablero']") is not None
 for agent, min_x in ((a,1100),(ped,1000)):
  for section in ('Variables','Functions','Events'):
   technical=agent.findall(f'{section}/*')
@@ -166,19 +178,26 @@ assert set(ped_experiments)=={'PeatonalE0','PeatonalE1'}
 for name, expected in {'PeatonalE0':'20','PeatonalE1':'28'}.items():
  ps={p.findtext('ParameterName'):p.findtext('ParameterValue/Code') for p in ped_experiments[name].findall('Parameters/Parameter')}
  assert ps['molinetesOperativosPed']==expected
+ assert ps['semillaPed']=='20260923L'
  assert ped_experiments[name].findtext('SeedValue')=='20260923'
+ assert ped_experiments[name].findtext('ModelTimeProperties/FinalTime')=='900'
 service_points=ped.findall('.//ServicePoint')
 assert len(service_points)==28
 assert {x.findtext('Name') for x in service_points}=={f'molinetePed{i:02d}' for i in range(1,29)}
 assert ped.find(".//TargetLine[Name='salidaPeatonal']") is not None
 assert 'configurarMolinetesPed()' in ped.findtext('StartupCode')
+assert 'cierreMetricasPed.restart(horizonteMetricasPedSeg)' in ped.findtext('StartupCode')
 assert ped.find(".//Text[Name='etiquetaMolinetes']").findtext('TextCode')=='"Molinetes activos: " + molinetesOperativosPed + "/28"'
 ped_service=next(x for x in ped.findall('EmbeddedObjects/EmbeddedObject') if x.findtext('Name')=='pedMolinetes')
 callbacks={x.findtext('Name'):x.findtext('Value/Code') for x in ped_service.findall('Parameters/Parameter')}
 assert callbacks['onBeginService']=='ped.nombreMolinetePed = service.getName(); comienzaServicioPed(ped);'
 assert callbacks['onEndService']=='terminaServicioPed(ped);'
 ped_variable_names={x.findtext('Name') for x in ped.findall('Variables/Variable')}
-assert {'esperasPed','esperasPicoPed','ocupacionPorMolinetePed'} <= ped_variable_names
+assert {'esperasPed','esperasPicoPed','ocupacionPorMolinetePed','nProcesadosHorizontePed','semillaPed','resultadoEmitidoPed'} <= ped_variable_names
+ped_events={x.findtext('Name'):x for x in ped.findall('Events/Event')}
+assert 'cierreMetricasPed' in ped_events
+assert 'nProcesadosHorizontePed = nProcesadosPed' in ped_events['cierreMetricasPed'].findtext('Action')
+assert 'emitirResultadoPed()' in ped_events['cierreMetricasPed'].findtext('Action')
 pasajero_variable_names={x.findtext('Name') for x in agents['Pasajero'].findall('Variables/Variable')}
 assert {'tIngresoSistemaPed','enPicoPed','tInicioServicioPed','nombreMolinetePed'} <= pasajero_variable_names
 libs={x.findtext('LibraryName') for x in r.findall('Model/RequiredLibraryReference')}

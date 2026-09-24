@@ -134,16 +134,25 @@ La capa peatonal registra las esperas individuales, P90, proporción sobre 30 s,
 por puesto. Los callbacks de inicio y fin de servicio identifican el molinete utilizado; las ocho
 posiciones finales se suspenden en PeatonalE0 y se habilitan en PeatonalE1.
 
+El 2026-09-24 se recompiló el modelo completo en AnyLogic 8.9.9 y se ejecutaron `PeatonalE0` y
+`PeatonalE1`. La primera prueba mostró que el corte fijo de 600 s dejaba peatones dentro del circuito. Se
+amplió el final de ambos experimentos a 900 s. La implementación final separa el corte de métricas a 600 s
+del cierre técnico a 900 s: congela throughput, $L_q$ y ocupación dentro de la ventana, pero mantiene el
+conteo total hasta vaciar el circuito.
+La repetición terminó en ambos casos con 480 generados, 480 procesados y cola cero. Los valores de espera
+de esta prueba no se usan como resultados por provenir de datos y geometría sintéticos.
+
 ## 6. Paso 5 - Ejecuciones piloto
 
 El modo demostración utiliza seis tandas de 80 pasajeros, separadas por 30 s, con 3 s de servicio. Estos
 valores fuerzan una cola visible y permiten revisar el movimiento, pero no son estimaciones de
 Constitución. Cada salida debe conservar el rótulo `DEMO PEATONAL SINTETICA`.
 
-Antes de las corridas de producción se ejecutarán los siguientes pilotos:
+Antes de las corridas de producción se consideran los siguientes pilotos:
 
 1. Traza determinística de cinco pasajeros y dos molinetes, comparada con el cálculo manual.
-2. PeatonalE0 y PeatonalE1 con igual semilla, comprobando 20 y 28 puestos habilitados.
+2. PeatonalE0 y PeatonalE1 con igual semilla, comprobando 20 y 28 puestos habilitados. **Completado:** ambos
+   drenan los 480 peatones sin pérdida al extender el cierre técnico a 900 s.
 3. E2 con desvio 0 y 1, comprobando los extremos de conservación.
 4. Servicio que cruza las 09:30, verificando que quede pendiente al cierre y atendido en el drenaje.
 
@@ -219,7 +228,8 @@ reproducible. La presentación final incluirá un extracto del modelo peatonal e
 visual E0-E1 y una conclusión limitada a la evidencia estadística obtenida.
 
 El video tendrá una duración máxima de tres minutos y mostrará a ambos integrantes. No se utilizará la
-animación como evidencia cuantitativa: los resultados provendrán de las corridas exportadas.
+animación como evidencia cuantitativa: los resultados provendrán de las corridas exportadas. El guion
+cronometrado y sus campos pendientes están en [`05-guion-video.md`](05-guion-video.md).
 
 ## 12. Conclusiones preliminares y trabajo pendiente
 
