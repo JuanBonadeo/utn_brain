@@ -36,3 +36,6 @@ materias/IPP/fuentes/**/*.exe
 # SRL, en concurso preventivo). El repo es público (github.com/JuanBonadeo/utn_brain),
 # así que estos datos quedan solo en local — nunca se suben. Ver decisión 2026-09-22.
 materias/SIM/entregables/TPI/caser/datos-locales/
+
+# SIM TPI (subte): filas de la demo sintética escritas por PeatonalCorridasDemo; no son resultados
+materias/SIM/entregables/TPI/subte/corridas_peatonales_demo.csv

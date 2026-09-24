@@ -142,6 +142,16 @@ conteo total hasta vaciar el circuito.
 La repetición terminó en ambos casos con 480 generados, 480 procesados y cola cero. Los valores de espera
 de esta prueba no se usan como resultados por provenir de datos y geometría sintéticos.
 
+La capa peatonal quedó además preparada para el horizonte completo. En el modo franja, las tandas se generan
+entre las 07:00 y las 09:30 con el tamaño modulado por el perfil SBASE, las métricas se congelan a las
+09:30 y la corrida continúa hasta que abandona el sistema el último pasajero ingresado antes del cierre. El
+tamaño, el intervalo y el desfase de las tandas, junto con el tiempo de servicio, permanecen sin valor: si
+no se completan, el modelo se detiene con un error explícito en lugar de usar supuestos ocultos. Antes de
+exportar cada réplica se controla que los pasajeros inyectados, generados y procesados coincidan. El
+2026-09-24 el entorno de AnyLogic regeneró y compiló el modelo con esta extensión, y el experimento de
+producción terminó en `t = 0` sin generar pasajeros, lo que es consistente con el bloqueo por falta de
+calibración.
+
 ## 6. Paso 5 - Ejecuciones piloto
 
 El modo demostración utiliza seis tandas de 80 pasajeros, separadas por 30 s, con 3 s de servicio. Estos
@@ -153,8 +163,11 @@ Antes de las corridas de producción se consideran los siguientes pilotos:
 1. Traza determinística de cinco pasajeros y dos molinetes, comparada con el cálculo manual.
 2. PeatonalE0 y PeatonalE1 con igual semilla, comprobando 20 y 28 puestos habilitados. **Completado:** ambos
    drenan los 480 peatones sin pérdida al extender el cierre técnico a 900 s.
-3. E2 con desvio 0 y 1, comprobando los extremos de conservación.
+3. E2 con desvío 0 y 1, comprobando los extremos de conservación.
 4. Servicio que cruza las 09:30, verificando que quede pendiente al cierre y atendido en el drenaje.
+5. Tres pares de la demostración mediante el experimento automatizado, para comprobar la escritura del
+   archivo de corridas y su transferencia a una copia de la planilla. Pendiente de ejecución en el IDE.
+6. Un par E0-E1 en modo franja con los parámetros aprobados, antes de lanzar las 30 réplicas.
 
 ## 7. Paso 6 - Validación del modelo programado
 
@@ -191,6 +204,12 @@ operativos y se desactive `modoDemo`. Por cada réplica se exportarán:
 - las mismas medidas restringidas a la cohorte 08:15-08:45.
 
 No se completará esta sección con resultados de la demostración sintética.
+
+El experimento `PeatonalCorridasApareadas` ejecuta en secuencia los 30 pares, con las semillas
+20260923 a 20260952, y agrega una fila por réplica a `corridas_peatonales.csv`. El script
+`cargar_corridas.py` valida esas filas (pares completos, igual demanda en E0 y E1, conservación, corridas
+drenadas y ausencia de filas de demostración) y recién entonces las transfiere a la planilla, sin
+transcripción manual.
 
 La planilla [`04-resultados-corridas.xlsx`](04-resultados-corridas.xlsx) deja preparado el registro de los
 30 pares iniciales. Cada fila conserva una semilla común para E0 y E1, calcula la diferencia `E1 - E0` y
@@ -260,6 +279,7 @@ técnicas de simulación a un caso real*. Consigna de cátedra.
 - Guía técnica y supuestos del modelo: `02-modelo-anylogic.md`.
 - Modelo: `SubteConstitucion.alp`.
 - Verificador: `verificar_modelo.py`.
+- Cargador de corridas: `cargar_corridas.py`.
 - Script de perfilado: `scripts/sbase-perfil.py`.
 - Checklist operativo y esquema de salida: `06-checklist-cierre.md`.
 - Presentación editable del video: `TPI_Subte_Presentacion.pptx`.

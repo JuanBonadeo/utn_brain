@@ -19,6 +19,10 @@ como completa por haber funcionado con la demostración sintética.
 | Capa peatonal E0-E1 | Hecho como prototipo | 28 puestos, configuración 20/28, misma semilla y salida `CSV_PEATONAL` |
 | Compilación AnyLogic 8.9.9 | Hecho | Build correcto el 2026-09-24 |
 | Piloto espacial E0-E1 | Hecho | Ambos escenarios drenaron 480 de 480 peatones y terminaron con cola cero |
+| Extensión peatonal a 07:00-09:30 | Preparada | `modoFranjaPed`, corte a 09:30, drenaje, cohorte pico y conservación; entradas en `-1` bloquean la corrida |
+| Automatización de 30 pares | Preparada | `PeatonalCorridasApareadas` escribe `corridas_peatonales.csv`; `cargar_corridas.py` valida y carga la planilla |
+| Build con la extensión | Hecho | El IDE regeneró y compiló el modelo el 2026-09-24; `PeatonalCorridasApareadas` terminó en t = 0 sin pasajeros, consistente con el bloqueo por calibración |
+| Piloto demo de la cadena automatizada | Pendiente | Ejecutar `PeatonalCorridasDemo` y validar `corridas_peatonales_demo.csv` con `cargar_corridas.py --demo` |
 | Planilla estadística | Hecho | 30 pares, diferencias E1-E0, intervalos y Bonferroni; entradas reales todavía vacías |
 | Guion de video | Hecho como plantilla | Duración objetivo 2:45; faltan resultados y conclusión |
 | Presentación del video | Hecha como plantilla | Seis diapositivas editables; faltan resultados y conclusión |
@@ -34,10 +38,14 @@ como completa por haber funcionado con la demostración sintética.
 1. Guardar el original recibido sin modificar y registrar fecha, organismo y alcance.
 2. Confirmar con la cátedra qué valores son mediciones y cuáles serán rangos de sensibilidad.
 3. Reemplazar la geometría provisoria y los parámetros sintéticos; mantener visible la versión y la fuente.
-4. Extender la demanda peatonal a los 9000 s de arribos y conservar el drenaje posterior.
-5. Ejecutar pilotos de balance, extremos y cruce del cierre antes de producir resultados.
-6. Ejecutar al menos 30 pares E0-E1 con una semilla común dentro de cada par y distinta entre pares.
-7. Cargar únicamente esas corridas en `04-resultados-corridas.xlsx` y revisar la hoja `Resumen`.
+4. Completar en `MainPeatonal` `tamanoTandaPed`, `intervaloTandaPedSeg`, `primeraTandaPedSeg` y
+   `servicioPedSeg`; la extensión a los 9000 s de arribos y el drenaje ya están implementados.
+5. Ejecutar un piloto `PeatonalE0`/`PeatonalE1` con `modoFranjaPed = true` y controlar balance, cierre a las
+   09:30, cohorte pico y drenaje antes de producir resultados.
+6. Ejecutar `PeatonalCorridasApareadas`: 30 pares E0-E1, semilla común dentro de cada par y distinta entre
+   pares (20260923-20260952).
+7. Validar y cargar con `python3 cargar_corridas.py corridas_peatonales.csv` y luego `--escribir`; revisar
+   la hoja `Resumen`.
 8. Completar resultados, discusión y conclusión de `03-informe-tpi.md`.
 9. Reemplazar los campos entre corchetes de `05-guion-video.md` y `TPI_Subte_Presentacion.pptx`, y ensayar.
 
@@ -47,12 +55,15 @@ como completa por haber funcionado con la demostración sintética.
 - La única diferencia del par es `molinetesOperativosPed`: 20 en E0 y 28 en E1.
 - `generados = procesados con drenaje + desviados`; para E0-E1, desviados debe ser cero.
 - El experimento continúa hasta que la cohorte generada antes del corte abandona el sistema.
-- La consola contiene exactamente una fila `CSV_PEATONAL` por escenario.
-- No se mezclan resultados de `PeatonalDemo` con las corridas de producción.
+- Cada corrida produce exactamente una fila `CSV_PEATONAL`; ninguna queda como `CSV_PEATONAL_INCOMPLETO`.
+- No se mezclan filas `CSV_PEATONAL_DEMO` con las corridas de producción (el cargador lo impide).
 
 ## Esquema de `CSV_PEATONAL`
 
-La línea tiene el prefijo `CSV_PEATONAL;` y luego estos campos:
+La línea tiene uno de tres prefijos: `CSV_PEATONAL;` (franja, cargable), `CSV_PEATONAL_DEMO;`
+(demostración sintética, nunca va a la planilla oficial) o `CSV_PEATONAL_INCOMPLETO;` (corrida sin drenar,
+bloquea la carga). Después siguen estos campos, en el orden que `cargar_corridas.py` comprueba contra los
+encabezados de la hoja `Corridas`:
 
 | Posición | Campo | Columna correspondiente de la planilla |
 |---:|---|---|
@@ -75,7 +86,8 @@ La línea tiene el prefijo `CSV_PEATONAL;` y luego estos campos:
 | 17 | P90 de cohorte pico | P90 de la cohorte pico |
 
 En la demostración, el campo 5 corresponde al segundo 600. Solo puede llamarse “procesados a las 09:30”
-cuando la corrida calibrada utiliza un horizonte de arribos de 9000 s.
+cuando la corrida usa `modoFranjaPed = true` con un horizonte de arribos de 9000 s. Las proporciones y
+utilizaciones se exportan como fracción entre 0 y 1; la planilla las muestra con formato de porcentaje.
 
 ## Verificación reproducible
 

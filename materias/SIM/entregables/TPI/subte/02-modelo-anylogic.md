@@ -206,8 +206,9 @@ sin presentar supuestos como observaciones:
 
 ## 7. Etapa peatonal incremental
 
-El archivo incorpora una segunda raíz, `MainPeatonal`, y tres experimentos espaciales: `PeatonalDemo`,
-`PeatonalE0` y `PeatonalE1`. Esta capa se mantiene separada de `Main` para conservar como referencia el
+El archivo incorpora una segunda raíz, `MainPeatonal`, tres experimentos espaciales de simulación
+(`PeatonalDemo`, `PeatonalE0` y `PeatonalE1`) y dos de variación de parámetros para corridas apareadas
+(`PeatonalCorridasDemo` y `PeatonalCorridasApareadas`, ver más abajo). Esta capa se mantiene separada de `Main` para conservar como referencia el
 modelo lógico ya verificado y evitar que un error gráfico altere las métricas E0-E3. El tipo de agente
 espacial es `Pasajero`.
 
@@ -238,16 +239,20 @@ m/s y el diámetro se fijó en 0,5 m únicamente para comprobar la dinámica pea
 | `servicioDemoSeg` | 3 s | Ejercita el servicio; no es una medición |
 | `molinetesOperativosPed` | 20 o 28 | Única diferencia entre los experimentos espaciales E0 y E1 |
 | `inicioPicoPedSeg`, `finPicoPedSeg` | 4500, 6300 s | Cohorte 08:15-08:45; queda vacía en la demo corta |
-| `horizonteMetricasPedSeg` | 600 s | Horizonte mínimo para la utilización de la demostración |
-| `semillaPed` | 20260923 | Identificador de la semilla común que también configura el experimento |
+| `horizonteMetricasPedSeg` | 600 s | Corte de métricas de la demostración (en la franja se usa 9000 s) |
+| `semillaPed` | 20260923 | Semilla efectiva: `inicializarPed()` reinicia con ella el generador del modelo |
 
 La geometría contiene 28 `ServicePoint`. En E0 se suspenden los puntos 21 a 28 mediante la API de
 `ServiceWithLine`, de modo que quedan 20 disponibles; en E1 los 28 permanecen activos. No se duplican
 colas ni geometrías: ambos escenarios atraviesan el mismo hall y el mismo bloque `PedService`.
 
-Las tandas de demostración se generan dentro de los primeros 600 s. `PeatonalE0` y `PeatonalE1` detienen
-el experimento a los 900 s para permitir el drenaje espacial y usan velocidad de animación 10x. Ambos usan
-la misma semilla fija (`20260923`) y los mismos parámetros de demanda y servicio. Por lo tanto, cualquier
+Las tandas de demostración se generan dentro de los primeros 600 s. `PeatonalDemo`, `PeatonalE0` y
+`PeatonalE1` detienen el experimento a los 900 s para permitir el drenaje espacial (la demo general cortaba
+antes a 600 s y quedaba sin drenar); E0 y E1 usan velocidad de animación 10x. Ambos usan la misma semilla
+(`semillaPed = 20260923`) y los mismos parámetros de demanda y servicio. Desde el 2026-09-24 la semilla
+efectiva es `semillaPed`: al arrancar, `inicializarPed()` ejecuta
+`getDefaultRandomGenerator().setSeed(semillaPed)`, de modo que el valor escrito en la fila CSV es el que
+realmente generó la corrida, cualquiera sea la configuración de aleatoriedad del experimento. Por lo tanto, cualquier
 diferencia entre ellos proviene de la cantidad de molinetes habilitados dentro de esta demostración
 controlada.
 
@@ -259,7 +264,7 @@ cantidad y ubicación de molinetes, los tiempos de servicio y la estructura de t
 ### Métricas implementadas en la capa espacial
 
 - peatones generados y procesados;
-- procesados al horizonte de 600 s y procesados después del drenaje;
+- procesados al corte (600 s en la demo, 09:30 en la franja) y procesados después del drenaje;
 - cantidad actual en cola y máximo observado;
 - espera media, máxima y percentil 90 desde el ingreso a `PedService` hasta el comienzo de la validación;
 - proporción de peatones con espera superior a 30 s;
@@ -274,17 +279,104 @@ esperaron. `PedSource.onExit` fija el instante de ingreso y la pertenencia a la 
 `onBeginService` y `onEndService` identifican el `ServiceUnit` concreto y acumulan sus segundos ocupados.
 Al completar el horizonte, o al salir el último pasajero cuando el drenaje lo supera,
 `resumenPeatonal()` imprime la cantidad de molinetes operativos, la utilización de cada puesto y las
-medidas de espera. `filaResultadoPed()` agrega una única línea
-`CSV_PEATONAL` separada por punto y coma, con escenario, semilla y las métricas en el orden usado por la
-planilla de corridas. La capa E0-E1 escribe cero en pasajeros desviados porque el desvío corresponde a E2.
+medidas de espera. `filaResultadoPed()` arma una única línea separada por punto y coma, con escenario,
+semilla y las métricas en el orden usado por la planilla de corridas. La capa E0-E1 escribe cero en
+pasajeros desviados porque el desvío corresponde a E2.
 
-La utilización de la demo se define como segundos ocupados dentro de los primeros
-`horizonteMetricasPedSeg` divididos por ese horizonte y por `molinetesOperativosPed`. Los servicios que
-cruzan el corte se contabilizan solamente hasta el segundo 600 y los iniciados después no alteran esta
-medida. Los puestos habilitados que no atienden a nadie se incluyen con utilización cero. $L_q$ y el
+El prefijo de la línea indica su origen y evita mezclar demostración con producción:
+
+| Prefijo | Cuándo se emite | ¿Se carga en la planilla? |
+|---|---|---|
+| `CSV_PEATONAL_DEMO` | Demo sintética, al drenar la cohorte | No; solo en una copia de prueba con `--demo --salida` |
+| `CSV_PEATONAL` | Modo franja, al drenar la cohorte | Sí, con `cargar_corridas.py` |
+| `CSV_PEATONAL_INCOMPLETO` | La corrida terminó (tiempo final o cierre del IDE) sin drenar | No; bloquea la carga |
+
+Antes de emitir se exige `inyectados = generados = procesados`; si no se cumple, la corrida se detiene con
+un error de conservación en lugar de producir una fila. Si la inicialización falla (por ejemplo, franja sin
+datos), no se escribe ninguna fila.
+
+La utilización se define como segundos ocupados dentro de los primeros `horizonteCortePed` segundos
+divididos por ese horizonte y por `molinetesOperativosPed`. `horizonteCortePed` vale
+`horizonteMetricasPedSeg` (600 s) en la demo y `horizonteArribosPedSeg` (9000 s, 09:30) en la franja. Los
+servicios que cruzan el corte se contabilizan solamente hasta ese instante y los iniciados después no
+alteran esta medida. Los puestos habilitados que no atienden a nadie se incluyen con utilización cero. $L_q$ y el
 throughput al corte se congelan con el mismo criterio; el total procesado se vuelve a leer al terminar el
 drenaje. La cohorte pico usa el instante de salida de `PedSource`, no el instante de inicio de servicio,
 para evitar seleccionar pasajeros según la propia congestión.
+
+### Extensión a la franja 07:00-09:30 (preparada, pendiente de calibración)
+
+`MainPeatonal` admite un segundo modo de demanda, `modoFranjaPed = true`, que reproduce el horizonte del
+modelo lógico sin inventar la estructura de oleadas. Todos sus datos de campo arrancan en `-1` y la
+inicialización lanza `IllegalArgumentException` si alguno sigue sin completar:
+
+| Parámetro | Inicial | Contenido |
+|---|---:|---|
+| `modoFranjaPed` | `false` | `false` conserva la demo de seis tandas; `true` activa la franja |
+| `horizonteArribosPedSeg` | 9000 | Cierre de arribos (09:30); admite `(0, 9000]` para pilotos |
+| `tamanoTandaPed` | **-1** | Pasajeros por tanda a la intensidad media del perfil |
+| `intervaloTandaPedSeg` | **-1** | Segundos entre tandas del Roca |
+| `primeraTandaPedSeg` | **-1** | Desfase de la primera tanda desde las 07:00 |
+| `servicioPedSeg` | **-1** | Tiempo de validación, segundos |
+| `usarPerfilPed` | `true` | Modula el tamaño con el perfil SBASE |
+| `perfilPed15min` | Diez medias SBASE | Igual a `perfil15min` de `Main`; el verificador controla que coincidan |
+| `archivoSalidaPed` | `""` | Si no está vacío, agrega cada fila `CSV_PEATONAL*` a ese archivo |
+
+La lógica de la franja es la misma que la del modelo lógico:
+
+- las tandas se generan cada `intervaloTandaPedSeg` desde `primeraTandaPedSeg` mientras el instante sea
+  menor que 9000 s; con el perfil activo, el tamaño es
+  `round(tamanoTandaPed × perfil[ventana] / media(perfil))`, con `ventana = floor(t / 900)`;
+- el corte de métricas coincide con el cierre de arribos: Lq, utilización, ocupación y procesados a las
+  09:30 se congelan en `t = 9000`;
+- el experimento sigue hasta que sale el último pasajero inyectado antes de las 09:30; entonces emite
+  `CSV_PEATONAL`, escribe el archivo si corresponde y termina con `getEngine().finish()`;
+- la cohorte pico 08:15-08:45 se define por el instante de ingreso (`PedSource.onExit`) y queda poblada
+  cuando la franja incluye esa ventana;
+- el tiempo de servicio se asigna a cada pasajero al ingresar (`servicioAsignadoPed`) y es el `delayTime`
+  de `PedService`. Hoy es constante; si se incorpora una distribución, debe muestrearse en ese punto con un
+  generador propio y en orden de llegada, para que E0 y E1 reciban los mismos valores.
+
+La geometría sigue siendo esquemática en este modo y la vista lo indica con el aviso
+**GEOMETRÍA SINTÉTICA - ENTRADAS PENDIENTES DE CALIBRACIÓN**. Los perfiles SBASE son validaciones, no
+arribos: la franja hereda los supuestos y controles de calibración de la sección 3.
+
+Restricciones de AnyLogic PLE que condicionan la producción: la Pedestrian Library admite como máximo
+**5 horas de tiempo de modelo** (por eso el experimento de producción termina a los 18.000 s: 9000 s de
+arribos más hasta 9000 s de drenaje) y el modelo puede crear hasta **50.000 agentes dinámicos**. Una franja
+de unos 17.500 pasajeros cabe en ese límite por corrida; debe confirmarse en la primera ejecución de
+producción que el límite no se acumula entre las 60 corridas del experimento.
+
+### Corridas apareadas automatizadas
+
+`PeatonalCorridasApareadas` es un experimento de variación de parámetros en modo *freeform* con 60
+corridas secuenciales. La corrida `index` usa `semillaPed = 20260923 + index / 2` y
+`molinetesOperativosPed = index % 2 == 0 ? 20 : 28`: cada par consecutivo comparte semilla y difiere solo
+en la cantidad de molinetes, con semillas 20260923-20260952 iguales a las de la planilla. Fija
+`modoFranjaPed = true` y `archivoSalidaPed = "corridas_peatonales.csv"`. Mientras los cuatro parámetros de
+campo sigan en `-1`, el experimento se detiene en la primera corrida con el error de calibración: es el
+comportamiento esperado.
+
+`PeatonalCorridasDemo` repite el circuito con tres pares de la demo sintética y escribe
+`corridas_peatonales_demo.csv` (ignorado por Git). Sirve para comprobar la cadena completa sin producir
+resultados.
+
+El archivo se crea en el directorio de ejecución del modelo, que al lanzar desde el IDE es la carpeta del
+`.alp`. Las filas se agregan al final: antes de relanzar un experimento completo hay que borrar o renombrar
+el archivo anterior. El cargador rechaza una misma semilla y escenario con valores distintos y avisa si
+encuentra filas idénticas repetidas. La transferencia a la planilla se hace con:
+
+```sh
+python3 materias/SIM/entregables/TPI/subte/cargar_corridas.py \
+  materias/SIM/entregables/TPI/subte/corridas_peatonales.csv          # solo valida
+python3 materias/SIM/entregables/TPI/subte/cargar_corridas.py \
+  materias/SIM/entregables/TPI/subte/corridas_peatonales.csv --escribir
+```
+
+El cargador acepta también texto copiado de la consola. Rechaza filas demo en la planilla oficial, filas
+incompletas, pares sin E0 o E1, pares con distinta cantidad de generados, semillas ajenas a la planilla,
+violaciones de conservación y celdas ya cargadas con otro valor (salvo `--sobrescribir`). Antes de escribir
+comprueba que los encabezados de la hoja `Corridas` sigan el orden de los 17 campos.
 
 ### Comparación espacial E0-E1
 
@@ -316,13 +408,14 @@ del editor de AnyLogic al recargar externamente un modelo cuyo `CurrentLevel` no
 
 1. Sustituir la geometría esquemática por el plano o croquis de SBASE.
 2. Reemplazar los 20/28 puestos provisionales por la cantidad, ubicación y disponibilidad real.
-3. ~~Validar en el IDE el drenaje de `PeatonalE0` y `PeatonalE1`.~~ Hecho el 2026-09-24; resta automatizar
-   la exportación de las corridas de producción.
-4. Extender la capa espacial a la franja completa para poblar la cohorte 08:15-08:45 con entradas calibradas.
+3. ~~Validar en el IDE el drenaje de `PeatonalE0` y `PeatonalE1`.~~ Hecho el 2026-09-24. La exportación de
+   las corridas quedó automatizada el mismo día (`PeatonalCorridasApareadas` + `cargar_corridas.py`).
+4. ~~Extender la capa espacial a la franja completa.~~ Preparado el 2026-09-24 (`modoFranjaPed`); resta cargar
+   entradas calibradas o rangos aprobados y ejecutar un piloto de franja en el IDE.
 5. Modelar Plaza como segundo circuito antes de interpretar E2 para toda la estación.
-6. Ejecutar al menos 30 pares E0-E1 con números aleatorios comunes y cargar una fila por par en
-   `04-resultados-corridas.xlsx`. La plantilla ya calcula diferencias, intervalos y conclusiones; permanece
-   vacía para no mezclar la demostración sintética con las corridas de producción.
+6. Ejecutar `PeatonalCorridasApareadas` (30 pares E0-E1 con semilla común) y cargar
+   `corridas_peatonales.csv` con `cargar_corridas.py`. La plantilla ya calcula diferencias, intervalos y
+   conclusiones; permanece vacía para no mezclar la demostración sintética con las corridas de producción.
 
 ## 8. Referencias técnicas
 

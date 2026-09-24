@@ -2706,9 +2706,12 @@ subte, y sobre la misma estación.
   con salida física, 28 posiciones de molinete y experimentos comparables `PeatonalE0` (20 habilitadas) y
   `PeatonalE1` (28 habilitadas), además de tandas repetidas, P90, proporción sobre 30 s, cohorte pico y
   utilización por puesto. Las verificaciones XML y Java pasan; el 2026-09-24 se compiló y ejecutó la
-  extensión en el IDE y ambos escenarios drenaron 480 de 480 peatones. Falta incorporar los rangos
-  aprobados, reemplazar la geometría provisoria por el plano e integrar las filas de consola con la planilla
-  de producción.
+  extensión en el IDE y ambos escenarios drenaron 480 de 480 peatones. La capa peatonal quedó preparada
+  para la franja 07:00-09:30 (`modoFranjaPed`, cierre y métricas a las 09:30, drenaje, cohorte pico,
+  conservación), con sus cuatro entradas de campo en `-1` para que no corra sin calibrar. Los 30 pares se
+  lanzan con `PeatonalCorridasApareadas` y `cargar_corridas.py` transfiere `corridas_peatonales.csv` a la
+  planilla con validaciones. Falta incorporar los rangos aprobados, reemplazar la geometría provisoria por
+  el plano y ejecutar en el IDE el piloto `PeatonalCorridasDemo`.
   E2 cuenta el desvío pero todavía no simula la cola de Plaza.
 - ~~**Formulario**: editar el último envío con el tema del subte.~~ Hecho el 2026-09-22: `formulario-eleccion-tema.md`
   reescrito v2 y `TPI_Simulacion_Propuesta_de_Tema.docx` regenerado con ese contenido
@@ -2816,6 +2819,14 @@ subte, y sobre la misma estación.
 - **2026-09-24** (6): creada y validada `TPI_Subte_Presentacion.pptx`, presentación editable de seis
   diapositivas alineada con el guion de 2 min 45 s. Incluye el perfil observado, el modelo conceptual, E0-E1,
   marcadores para las corridas calibradas y la regla de conclusión sin anticipar resultados.
+- **2026-09-24** (7): TPI subte, capa peatonal preparada para producción. `MainPeatonal` suma un modo
+  franja 07:00-09:30 parametrizado (tamaño, intervalo, desfase y servicio en `-1`, bloqueados hasta
+  calibrar), corte de métricas a las 09:30, drenaje con cierre automático, control de conservación y
+  semilla efectiva `semillaPed`. Las filas se separan en `CSV_PEATONAL`, `CSV_PEATONAL_DEMO` e
+  `INCOMPLETO`. Nuevos experimentos `PeatonalCorridasApareadas` (60 corridas = 30 pares, archivo CSV) y
+  `PeatonalCorridasDemo`; nuevo `cargar_corridas.py` que valida pares, demanda común y encabezados antes de
+  escribir `04-resultados-corridas.xlsx`, cuya dispersión ahora se muestra en %. Build del IDE correcto;
+  verificador ampliado. Queda pendiente el piloto demo de la cadena en el IDE.
 - **2026-09-22** (3): TPI, grupo 2 (Casermeiro). Perfiladas a fondo las 9 planillas reales de producción que
   mandó la oficina técnica (locales, no versionadas — el repo es público — en
   `entregables/TPI/caser/datos-locales/`, gitignoreada). Confirmado con datos que hay **dos hornos
