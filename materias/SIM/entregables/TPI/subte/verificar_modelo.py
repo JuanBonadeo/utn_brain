@@ -294,8 +294,10 @@ for g,q in zip(gates,queues):
  assert float(g.findtext('Dx'))>0 and float(g.findtext('Dy'))==0 and g.findtext('Bidirectional')=='false', 'el paso va del hall a la zona paga'
  pts=[(float(x.findtext('X')),float(x.findtext('Y'))) for x in q.find('Points')][::3]
  qx,qy=float(q.findtext('X')),float(q.findtext('Y'))
- head=(qx+pts[-1][0],qy+pts[-1][1])
- assert entry_x < qx < head[0] < gx < gx+float(g.findtext('Dx')) < exit_x and abs(head[1]-gy)<1e-9, g.findtext('Name')
+ # En AnyLogic la cabeza de la cola es el punto inicial y el desborde sigue la dirección del último tramo:
+ # la cola arranca junto al molinete y crece hacia el hall.
+ tail=(qx+pts[-1][0],qy+pts[-1][1])
+ assert entry_x < tail[0] < qx < gx < gx+float(g.findtext('Dx')) < exit_x and abs(qy-gy)<1e-9 and gx-qx<10, g.findtext('Name')
 assert len(ped.findall('.//Wall'))>=40
 aviso=ped.find(".//Text[Name='avisoPeatonal']")
 assert 'PLANO HIPOTÉTICO' in aviso.findtext('Text') and 'NO ES EL PLANO OFICIAL' in aviso.findtext('TextCode')
@@ -338,6 +340,7 @@ assert set(pvs)=={'PeatonalCorridasApareadas','PeatonalCorridasDemo','PeatonalFr
 prueba={ped_param_ids[x.findtext('Id')]:x.findtext('Expression/Code') for x in pvs['PeatonalFranjaPrueba'].findall('FreeformParamValue')}
 assert prueba['modoFranjaPed']=='true' and prueba['pruebaSinteticaPed']=='true' and prueba['archivoSalidaPed']=='"corridas_peatonales_demo.csv"'
 assert pvs['PeatonalFranjaPrueba'].findtext('NumberOfRuns')=='2' and float(pvs['PeatonalFranjaPrueba'].findtext('ModelTimeProperties/FinalTime'))<=18000
+assert prueba['horizonteArribosPedSeg']=='1800'
 assert ped_defaults_early['pruebaSinteticaPed']=='false'
 pvs={k:v for k,v in pvs.items() if k!='PeatonalFranjaPrueba'}
 for name,(runs,modo,archivo,final) in {'PeatonalCorridasApareadas':('60','true','"corridas_peatonales.csv"','18000'),

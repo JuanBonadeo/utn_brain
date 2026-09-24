@@ -23,6 +23,8 @@ como completa por haber funcionado con la demostración sintética.
 | Demanda por horario del Roca | Hecha | 50 trenes hábiles 07:00-09:30 extraídos de los PDF oficiales; descarga escalonada, acceso de calle Poisson, servicio triangular y control de caudal por ventana |
 | Automatización de 30 pares | Preparada | `PeatonalCorridasApareadas` escribe `corridas_peatonales.csv`; `cargar_corridas.py` valida y carga la planilla |
 | Build con la extensión | Hecho | El IDE regeneró y compiló el modelo el 2026-09-24; `PeatonalCorridasApareadas` terminó en t = 0 sin pasajeros, consistente con el bloqueo por calibración |
+| Piloto de franja completa (valores de prueba) | Ejecutado con hallazgos | E0 no drenó por un atasco de colas (corregido: colas invertidas); una corrida tardó ~43 min; E1 se cortó a 787 s |
+| Piloto corto `PeatonalFranjaPrueba` (07:00-07:30) | Pendiente | Confirmar drenaje, esperas razonables y tiempo de cómputo tras invertir las colas |
 | Piloto demo de la cadena automatizada | Pendiente | Ejecutar `PeatonalCorridasDemo` y validar `corridas_peatonales_demo.csv` con `cargar_corridas.py --demo` |
 | Planilla estadística | Hecho | 30 pares, diferencias E1-E0, intervalos y Bonferroni; entradas reales todavía vacías |
 | Guion de video | Hecho como plantilla | Duración objetivo 2:45; faltan resultados y conclusión |

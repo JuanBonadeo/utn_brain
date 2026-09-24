@@ -2845,6 +2845,10 @@ subte, y sobre la misma estación.
   servicio triangular opcional, generadores propios para números aleatorios comunes, control de caudal por
   ventana y el experimento `PeatonalFranjaPrueba` (un par con valores de prueba, filas demo). Se descartó
   la Rail Library: no agrega medidas y obliga a inventar la terminal. Plaza (E2) sigue fuera del alcance.
+- **2026-09-24** (10): TPI subte, primer piloto de la franja completa con valores de prueba. E0 generó 17.430
+  peatones pero no drenó en 5 h (23 % de utilización con 497 en cola): las colas estaban orientadas al revés
+  y el desborde crecía hacia los molinetes. Invertidas las 28 colas; `PeatonalFranjaPrueba` reducida a
+  07:00-07:30. Una corrida completa tardó ~43 min: riesgo de cómputo para las 60 corridas de producción.
 - **2026-09-24**: TPI, grupo 2 (Casermeiro). Recibidos dos reportes del ABM (estadística anual por artículo/mes
   y estadística de venta por cliente/artículo, grupo 94-96, 12-13 meses) — útiles para ABC y estacionalidad,
   pero **no** son el listado transaccional que necesita el modelo (sin fecha de operación ni precio); sigue

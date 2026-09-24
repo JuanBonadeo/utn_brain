@@ -191,6 +191,14 @@ Antes de las corridas de producción se consideran los siguientes pilotos:
    archivo de corridas y su transferencia a una copia de la planilla. Pendiente de ejecución en el IDE.
 6. Un par E0-E1 en modo franja con los parámetros aprobados, antes de lanzar las 30 réplicas.
 
+El 2026-09-24 se ejecutó un primer par de la franja completa con valores de prueba explícitos. La corrida
+E0 generó 17.430 peatones, pero no logró vaciar el sistema antes del límite de cinco horas: la utilización de
+los molinetes fue de 23 % mientras la cola llegaba a 497 personas. El cuello de botella era la circulación
+y no la validación. La revisión encontró que las colas estaban orientadas al revés respecto de la convención
+de AnyLogic y crecían hacia los molinetes. Se corrigieron, y el piloto se repetirá sobre la primera media
+hora. La corrida también mostró que cada réplica completa demanda del orden de 40 minutos de cómputo, un
+dato a considerar al planificar las 30 réplicas.
+
 ## 7. Paso 6 - Validación del modelo programado
 
 La validación posible con los datos actuales se limita al caudal agregado por ventana de 15 minutos y a la

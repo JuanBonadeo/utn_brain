@@ -402,10 +402,29 @@ ingresó antes de las 09:30; entonces emite la fila, escribe el archivo si corre
 `getEngine().finish()`. La cohorte pico se define por el instante de ingreso. El tiempo de disipación se
 mide desde el último ingreso al vestíbulo.
 
-**Prueba sintética.** `PeatonalFranjaPrueba` corre un par E0-E1 de la franja completa con valores de
-prueba explícitos: 80 % Roca, 60 s de demora, 120 s de descarga y servicio triangular 2/3/5 s. Esas filas
-salen como `CSV_PEATONAL_DEMO` en `corridas_peatonales_demo.csv`: sirven para verificar la mecánica y el
-tiempo de cómputo, no como resultado.
+**Prueba sintética.** `PeatonalFranjaPrueba` corre un par E0-E1 con valores de prueba explícitos: 80 %
+Roca, 60 s de demora, 120 s de descarga y servicio triangular 2/3/5 s. Sus filas salen como
+`CSV_PEATONAL_DEMO` en `corridas_peatonales_demo.csv`: sirven para verificar la mecánica y el tiempo de
+cómputo, no como resultado. Desde el primer piloto se limita a 07:00-07:30 (`horizonteArribosPedSeg = 1800`)
+para que tarde minutos y no una hora.
+
+**Primer piloto de la franja completa (2026-09-24, valores de prueba).** La corrida E0 generó 17.430
+peatones, el volumen que implica el perfil SBASE. Mostró dos problemas:
+
+- **Atasco.** A las 09:30 habían salido 12.600, y al llegar al límite de 5 h solo 14.232: el sistema no
+  drenó. La utilización media de los molinetes fue de apenas 23 %, con 497 personas en cola. El cuello de
+  botella no era la capacidad de validación, sino el movimiento de los peatones. Causa probable: las colas
+  estaban dibujadas con la cabeza en el extremo lejano. En AnyLogic la cabeza es el punto inicial y el
+  desborde sigue la dirección del último tramo, así que la cola crecía hacia los molinetes. Se invirtieron
+  las 28 colas: ahora arrancan junto al molinete y crecen hacia el hall. El verificador controla esa
+  orientación. Falta confirmarlo con el piloto corto.
+- **Tiempo de cómputo.** Una corrida completa tardó unos 43 minutos. A ese ritmo, las 60 corridas de
+  producción llevarían más de 40 horas. Con el atasco corregido, las corridas deberían drenar antes, pero el
+  tiempo real se mide en el próximo piloto y puede obligar a reducir el número de pares o a correrlos por
+  tandas.
+
+La corrida E1 del mismo par se cortó a los 787 s, sin causa identificada. Esas filas no se cargan: se
+emitieron como `INCOMPLETO` y además son de prueba.
 
 El plano sigue siendo hipotético en este modo y la vista lo indica con el aviso
 **PLANO HIPOTÉTICO - ENTRADAS PENDIENTES DE CALIBRACIÓN - NO ES EL PLANO OFICIAL**. Los perfiles SBASE son validaciones, no
