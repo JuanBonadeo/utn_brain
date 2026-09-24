@@ -130,5 +130,7 @@ Con esto se hace el ABC, se ve qué se vende, qué se fabrica, qué se importa y
   "Estadística" sino un listado o libro de ventas — puede que exista en el sistema aparte de los reportes
   ya recibidos. Si no existe, el respaldo es modelar demanda mensual agregada en vez de pedidos
   individuales, declarado como supuesto más débil (afecta la varianza de la cola del horno).
-  **A confirmar**: si el grupo 94-96 incluye los artículos importados o solo los fabricados.
+  Confirmado (2026-09-24): el grupo 94-96 es **todo el catálogo CASER, solo fabricados**; no incluye
+  importados (que no se tratan térmicamente y quedan fuera del Tema 1 igual). `1603`/`1604` son entonces el
+  universo completo de artículos relevantes para este tema, sin necesidad de filtrar nada más.
   Archivos guardados en `datos-locales/abm/` (gitignoreados, no versionados).

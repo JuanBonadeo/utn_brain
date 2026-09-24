@@ -2851,6 +2851,9 @@ subte, y sobre la misma estación.
   pendiente pedirlo aparte. La empresa contestó que código/familia/precio salen de una "Lista CASER" separada
   (todavía no enviada) y dio la fórmula de costo estándar: precio de lista × 0,335. Actualizado
   `03-pedido-de-datos.md` con el estado de cada pedido.
+- **2026-09-24** (2): TPI, grupo 2 (Casermeiro). Confirmado que el grupo 94-96 es todo el catálogo CASER,
+  solo fabricados — no incluye importados (no se tratan térmicamente, quedan fuera del Tema 1 de cualquier
+  forma). `1603`/`1604` son entonces el universo completo de artículos relevantes para este tema.
 - **2026-09-22** (3): TPI, grupo 2 (Casermeiro). Perfiladas a fondo las 9 planillas reales de producción que
   mandó la oficina técnica (locales, no versionadas — el repo es público — en
   `entregables/TPI/caser/datos-locales/`, gitignoreada). Confirmado con datos que hay **dos hornos
