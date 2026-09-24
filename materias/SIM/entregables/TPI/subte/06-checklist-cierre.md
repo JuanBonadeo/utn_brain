@@ -26,6 +26,8 @@ como completa por haber funcionado con la demostración sintética.
 | Planilla estadística | Hecho | 30 pares, diferencias E1-E0, intervalos y Bonferroni; entradas reales todavía vacías |
 | Guion de video | Hecho como plantilla | Duración objetivo 2:45; faltan resultados y conclusión |
 | Presentación del video | Hecha como plantilla | Seis diapositivas editables; faltan resultados y conclusión |
+| Plano hipotético | Hecho como supuesto | Vestíbulo 70 × 34 m con paredes, 28 molinetes lineales orientados hacia la zona paga, una cola por molinete; el IDE lo carga sin errores |
+| Piloto visual del plano hipotético | Pendiente | Build y `PeatonalE0`/`PeatonalE1` en el IDE: comprobar sentido de paso, colas y drenaje de 480 peatones |
 | Plano y geometría real | Bloqueado | Esperar respuesta de SBASE/Emova o conseguir un croquis verificable |
 | Tiempo de servicio | Bloqueado | Esperar medición o rango aprobado por la cátedra |
 | Oleadas del Roca | Bloqueado | Esperar datos de arribos/transferencia o rango aprobado por la cátedra |
@@ -37,7 +39,7 @@ como completa por haber funcionado con la demostración sintética.
 
 1. Guardar el original recibido sin modificar y registrar fecha, organismo y alcance.
 2. Confirmar con la cátedra qué valores son mediciones y cuáles serán rangos de sensibilidad.
-3. Reemplazar la geometría provisoria y los parámetros sintéticos; mantener visible la versión y la fuente.
+3. Reemplazar el plano hipotético y los parámetros sintéticos; mantener visible la versión y la fuente.
 4. Completar en `MainPeatonal` `tamanoTandaPed`, `intervaloTandaPedSeg`, `primeraTandaPedSeg` y
    `servicioPedSeg`; la extensión a los 9000 s de arribos y el drenaje ya están implementados.
 5. Ejecutar un piloto `PeatonalE0`/`PeatonalE1` con `modoFranjaPed = true` y controlar balance, cierre a las

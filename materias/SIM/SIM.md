@@ -2711,7 +2711,8 @@ subte, y sobre la misma estación.
   conservación), con sus cuatro entradas de campo en `-1` para que no corra sin calibrar. Los 30 pares se
   lanzan con `PeatonalCorridasApareadas` y `cargar_corridas.py` transfiere `corridas_peatonales.csv` a la
   planilla con validaciones. Falta incorporar los rangos aprobados, reemplazar la geometría provisoria por
-  el plano y ejecutar en el IDE el piloto `PeatonalCorridasDemo`.
+  el plano y ejecutar en el IDE el piloto `PeatonalCorridasDemo`. Mientras tanto la vista usa un **plano
+  hipotético** (vestíbulo 70 × 34 m, 28 molinetes lineales en dos bancos, una cola por molinete).
   E2 cuenta el desvío pero todavía no simula la cola de Plaza.
 - ~~**Formulario**: editar el último envío con el tema del subte.~~ Hecho el 2026-09-22: `formulario-eleccion-tema.md`
   reescrito v2 y `TPI_Simulacion_Propuesta_de_Tema.docx` regenerado con ese contenido
@@ -2827,6 +2828,13 @@ subte, y sobre la misma estación.
   `PeatonalCorridasDemo`; nuevo `cargar_corridas.py` que valida pares, demanda común y encabezados antes de
   escribir `04-resultados-corridas.xlsx`, cuya dispersión ahora se muestra en %. Build del IDE correcto;
   verificador ampliado. Queda pendiente el piloto demo de la cadena en el IDE.
+- **2026-09-24** (8): TPI subte, plano hipotético del vestíbulo. La geometría anterior tenía los 28 puestos
+  apilados cada 0,8 m, orientados contra el flujo y con una sola cola. Se reemplazó por un vestíbulo
+  inventado de 70 × 34 m con paredes, acceso desde el Roca, boletería, columnas, dos bancos de 14 molinetes
+  lineales de 1 m que se atraviesan hacia la zona paga, una cola por molinete y escaleras a andenes. Regla
+  de elección de cola (desvío + espera estimada, nunca un molinete suspendido) y espera medida desde la
+  entrada a la cola. Aviso visible de plano no oficial. El IDE (actualizado a 8.9.10) carga el modelo sin
+  errores; falta Build y piloto visual.
 - **2026-09-22** (3): TPI, grupo 2 (Casermeiro). Perfiladas a fondo las 9 planillas reales de producción que
   mandó la oficina técnica (locales, no versionadas — el repo es público — en
   `entregables/TPI/caser/datos-locales/`, gitignoreada). Confirmado con datos que hay **dos hornos

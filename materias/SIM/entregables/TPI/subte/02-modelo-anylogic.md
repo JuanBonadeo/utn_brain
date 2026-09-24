@@ -2,7 +2,9 @@
 
 **2026-09-20 · preparación para el miércoles 23/09.**
 
-Archivo: [`SubteConstitucion.alp`](SubteConstitucion.alp), formato **AnyLogic 8.9.9**.
+Archivo: [`SubteConstitucion.alp`](SubteConstitucion.alp), formato **AnyLogic 8.9.9**. El 2026-09-24 el IDE local se
+actualizó a 8.9.10: abre el modelo convirtiéndolo en memoria y deja una copia `*.original.alp` (ignorada
+por Git). Si se guarda desde el IDE, el archivo pasa al formato 8.9.10.
 Implementa el circuito y los escenarios de la [definición del caso](01-definicion-del-caso.md).
 Es un **prototipo sin calibrar**: los parámetros de campo permanecen en `-1`.
 El modo de demostración usa valores sintéticos explícitos; sus salidas no son resultados del TPI.
@@ -218,13 +220,13 @@ flowchart LR
     PS --> SV[PedService: molinetes]
     SV --> GT[PedGoTo: salida física]
     GT --> SK[PedSink]
-    M[ServiceWithLine: 28 puntos] -.-> SV
+    M[ServiceWithLine: 28 molinetes lineales] -.-> SV
     TL[TargetLine: salidaPeatonal] -.-> GT
 ```
 
-`PedSource` crea tandas completas sobre una línea de entrada que representa, de forma esquemática, la
-llegada desde el Ferrocarril Roca. Los peatones se desplazan hasta `PedService`, eligen una posición de
-servicio y esperan en una cola espacial. Después de validar, `PedGoTo` los conduce hasta
+`PedSource` crea tandas completas sobre la línea de acceso desde el hall del Ferrocarril Roca. Los peatones
+se desplazan hasta `PedService`, eligen uno de los molinetes habilitados y esperan en la cola de ese
+molinete. Después de validar, `PedGoTo` los conduce hasta
 `salidaPeatonal`, al otro lado de los molinetes; recién allí `PedSink` los elimina del sistema. Así no se
 cuenta como salida a quien sólo terminó el servicio. La velocidad confortable se genera entre 1,1 y 1,5
 m/s y el diámetro se fijó en 0,5 m únicamente para comprobar la dinámica peatonal.
@@ -242,9 +244,10 @@ m/s y el diámetro se fijó en 0,5 m únicamente para comprobar la dinámica pea
 | `horizonteMetricasPedSeg` | 600 s | Corte de métricas de la demostración (en la franja se usa 9000 s) |
 | `semillaPed` | 20260923 | Semilla efectiva: `inicializarPed()` reinicia con ella el generador del modelo |
 
-La geometría contiene 28 `ServicePoint`. En E0 se suspenden los puntos 21 a 28 mediante la API de
-`ServiceWithLine`, de modo que quedan 20 disponibles; en E1 los 28 permanecen activos. No se duplican
-colas ni geometrías: ambos escenarios atraviesan el mismo hall y el mismo bloque `PedService`.
+El plano contiene 28 molinetes (`molinetePed01` a `molinetePed28`). En E0 se suspenden los molinetes 21 a
+28 mediante la API de `ServiceWithLine`, de modo que quedan 20 disponibles; en E1 los 28 permanecen
+activos. No se duplican colas ni geometrías: ambos escenarios atraviesan el mismo vestíbulo y el mismo
+bloque `PedService`.
 
 Las tandas de demostración se generan dentro de los primeros 600 s. `PeatonalDemo`, `PeatonalE0` y
 `PeatonalE1` detienen el experimento a los 900 s para permitir el drenaje espacial (la demo general cortaba
@@ -256,10 +259,41 @@ realmente generó la corrida, cualquiera sea la configuración de aleatoriedad d
 diferencia entre ellos proviene de la cantidad de molinetes habilitados dentro de esta demostración
 controlada.
 
-La geometría es deliberadamente esquemática y los experimentos muestran el aviso **GEOMETRÍA Y DATOS
-SINTÉTICOS - NO REPRESENTA EL PLANO REAL**. No deben utilizarse sus valores para describir el desempeño
-actual de Constitución. Cuando se reciban planos y datos operativos se reemplazarán las dimensiones, la
-cantidad y ubicación de molinetes, los tiempos de servicio y la estructura de tandas.
+### Plano hipotético del vestíbulo (desde el 2026-09-24)
+
+Mientras no llegue el plano oficial, la capa espacial usa un **plano inventado**, pensado para que el flujo
+sea verosímil y no para reproducir Constitución. La vista lo indica con el aviso **PLANO HIPOTÉTICO Y DATOS
+SINTÉTICOS - NO ES EL PLANO OFICIAL**. La geometría anterior tenía los 28 puestos apilados cada 0,8 m,
+orientados en sentido contrario al flujo y con una sola cola compartida. Se reemplazó por esta disposición
+(escala 10 px = 1 m):
+
+| Elemento | Supuesto de diseño |
+|---|---|
+| Vestíbulo | 70 m × 34 m, con paredes físicas (`Wall`) |
+| Acceso desde el Roca | Abertura de 12 m en la pared oeste (escaleras y rampa desde el hall ferroviario) |
+| Zona no paga | 42 m de profundidad; boletería/carga SUBE, máquinas de carga y cuatro columnas como obstáculos |
+| Línea de molinetes | En x = 42 m, perpendicular al flujo: dos bancos de 14 pasos de 1 m separados por una cabina de 2 m |
+| Molinetes | Servicios **lineales** de 1,6 m que se atraviesan de oeste a este, de la zona no paga a la paga |
+| Colas | Una por molinete, de 7,6 m, con la cabeza junto a la entrada del paso; si se llena, se extiende hacia el espacio libre |
+| Zona paga | 26 m hasta las escaleras a andenes de la Línea C (abertura de 14 m en la pared este), con dos columnas |
+| Molinetes cerrados en E0 | Los 8 del extremo sur (21-28) |
+
+![Plano hipotético: acceso a la izquierda, 28 molinetes en dos bancos y escaleras a la derecha; en rojo, los molinetes cerrados en E0](../../../figs/tpi-subte-plano-hipotetico.png)
+
+**Elección de cola.** `PedService` usa una regla propia (`elegirColaPed`): cada pasajero elige, entre los
+molinetes habilitados, la cola que minimiza el desvío lateral recorrido a 1,3 m/s más la espera estimada por
+las personas que ya están en ella (personas × tiempo de servicio). Es un supuesto de comportamiento: no
+reproduce todavía el desbalance observado entre molinetes (Turn14 frente a Turn23). También evita que alguien
+entre en la cola de un molinete suspendido.
+
+**Medición de la espera.** Con un vestíbulo de 42 m hasta los molinetes, medir desde la entrada al bloque
+`PedService` sumaba la caminata del hall a la espera. Desde ahora el reloj se reinicia en `onEnterQueue`,
+es decir, al incorporarse a la cola de un molinete, y termina al comenzar la validación. El instante de
+`onEnter` se conserva solo como respaldo.
+
+No deben utilizarse sus valores para describir el desempeño actual de Constitución. Cuando se reciban
+planos y datos operativos se reemplazarán las dimensiones, la cantidad y ubicación de molinetes, los tiempos
+de servicio y la estructura de tandas.
 
 ### Métricas implementadas en la capa espacial
 
@@ -337,8 +371,8 @@ La lógica de la franja es la misma que la del modelo lógico:
   de `PedService`. Hoy es constante; si se incorpora una distribución, debe muestrearse en ese punto con un
   generador propio y en orden de llegada, para que E0 y E1 reciban los mismos valores.
 
-La geometría sigue siendo esquemática en este modo y la vista lo indica con el aviso
-**GEOMETRÍA SINTÉTICA - ENTRADAS PENDIENTES DE CALIBRACIÓN**. Los perfiles SBASE son validaciones, no
+El plano sigue siendo hipotético en este modo y la vista lo indica con el aviso
+**PLANO HIPOTÉTICO - ENTRADAS PENDIENTES DE CALIBRACIÓN - NO ES EL PLANO OFICIAL**. Los perfiles SBASE son validaciones, no
 arribos: la franja hereda los supuestos y controles de calibración de la sección 3.
 
 Restricciones de AnyLogic PLE que condicionan la producción: la Pedestrian Library admite como máximo
@@ -406,7 +440,8 @@ del editor de AnyLogic al recargar externamente un modelo cuyo `CurrentLevel` no
 
 ### Próximas extensiones
 
-1. Sustituir la geometría esquemática por el plano o croquis de SBASE.
+1. Sustituir el plano hipotético por el plano o croquis de SBASE (la estructura de colas y molinetes lineales
+   se conserva; cambian coordenadas, cantidad y obstáculos).
 2. Reemplazar los 20/28 puestos provisionales por la cantidad, ubicación y disponibilidad real.
 3. ~~Validar en el IDE el drenaje de `PeatonalE0` y `PeatonalE1`.~~ Hecho el 2026-09-24. La exportación de
    las corridas quedó automatizada el mismo día (`PeatonalCorridasApareadas` + `cargar_corridas.py`).
@@ -422,7 +457,7 @@ del editor de AnyLogic al recargar externamente un modelo cuyo `CurrentLevel` no
 Propiedades contrastadas con `library.xml` de **ProcessModelingLibrary.jar 8.9.9**, instalado
 localmente, y estructura del `.alp` basada en el modelo local `TP_Colas.alp`.
 
-La etapa espacial también se contrastó con `PedestrianLibrary.jar 8.9.9`, con el tutorial local
+La etapa espacial también se contrastó con `PedestrianLibrary.jar` (8.9.9 y, desde el 2026-09-24, 8.9.10), con el tutorial local
 `fuentes/Tutoriales/Airport/Airport.alp` de la cátedra y con el ejemplo instalado
 `Subway Entrance Hall.alp`. La activación 20/28 usa `ServiceBase.setServiceSuspended(...)`, cuya firma se
 verifica contra las bibliotecas instaladas antes de abrir el IDE.

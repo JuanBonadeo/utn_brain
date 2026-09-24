@@ -130,6 +130,12 @@ compilación de las funciones Java contra las bibliotecas instaladas. Una traza 
 servidores y 3 s de servicio produce esperas `0, 0, 3, 3, 6`, espera media 2,4 s, P90 de 6 s, cola máxima
 3, área de cola 12 pasajero-s y ocupación 15 molinete-s.
 
+La capa espacial usa, hasta recibir el plano oficial, un vestíbulo hipotético de 70 m × 34 m: acceso desde el
+hall del Roca, zona no paga con boletería y columnas, una línea de 28 molinetes lineales orientados hacia la
+zona paga, con una cola por molinete, y escaleras a los andenes. Cada pasajero elige, entre los molinetes
+habilitados, la cola que minimiza el desvío lateral más la espera estimada. La espera se mide desde que se
+incorpora a la cola hasta que comienza a validar, sin incluir la caminata por el hall.
+
 La capa peatonal registra las esperas individuales, P90, proporción sobre 30 s, cohorte pico y ocupación
 por puesto. Los callbacks de inicio y fin de servicio identifican el molinete utilizado; las ocho
 posiciones finales se suspenden en PeatonalE0 y se habilitan en PeatonalE1.
