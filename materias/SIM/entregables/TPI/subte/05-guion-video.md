@@ -6,6 +6,9 @@ status: "Borrador condicionado a resultados calibrados"
 
 # Guion de exposición - máximo 3 minutos
 
+Presentación editable asociada: [`TPI_Subte_Presentacion.pptx`](TPI_Subte_Presentacion.pptx). Sus seis
+diapositivas siguen la secuencia de este guion y mantienen marcadores visibles donde faltan resultados.
+
 ## Condiciones de grabación
 
 - Duración objetivo: **2 min 45 s**. Deja 15 s de margen respecto del límite estricto.

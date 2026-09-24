@@ -21,6 +21,7 @@ como completa por haber funcionado con la demostración sintética.
 | Piloto espacial E0-E1 | Hecho | Ambos escenarios drenaron 480 de 480 peatones y terminaron con cola cero |
 | Planilla estadística | Hecho | 30 pares, diferencias E1-E0, intervalos y Bonferroni; entradas reales todavía vacías |
 | Guion de video | Hecho como plantilla | Duración objetivo 2:45; faltan resultados y conclusión |
+| Presentación del video | Hecha como plantilla | Seis diapositivas editables; faltan resultados y conclusión |
 | Plano y geometría real | Bloqueado | Esperar respuesta de SBASE/Emova o conseguir un croquis verificable |
 | Tiempo de servicio | Bloqueado | Esperar medición o rango aprobado por la cátedra |
 | Oleadas del Roca | Bloqueado | Esperar datos de arribos/transferencia o rango aprobado por la cátedra |
@@ -38,7 +39,7 @@ como completa por haber funcionado con la demostración sintética.
 6. Ejecutar al menos 30 pares E0-E1 con una semilla común dentro de cada par y distinta entre pares.
 7. Cargar únicamente esas corridas en `04-resultados-corridas.xlsx` y revisar la hoja `Resumen`.
 8. Completar resultados, discusión y conclusión de `03-informe-tpi.md`.
-9. Reemplazar los campos entre corchetes de `05-guion-video.md`, preparar seis diapositivas y ensayar.
+9. Reemplazar los campos entre corchetes de `05-guion-video.md` y `TPI_Subte_Presentacion.pptx`, y ensayar.
 
 ## Control de cada par de corridas
 

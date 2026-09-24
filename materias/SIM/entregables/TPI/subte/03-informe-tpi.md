@@ -262,3 +262,4 @@ técnicas de simulación a un caso real*. Consigna de cátedra.
 - Verificador: `verificar_modelo.py`.
 - Script de perfilado: `scripts/sbase-perfil.py`.
 - Checklist operativo y esquema de salida: `06-checklist-cierre.md`.
+- Presentación editable del video: `TPI_Subte_Presentacion.pptx`.
