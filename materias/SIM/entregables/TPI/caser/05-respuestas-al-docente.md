@@ -158,7 +158,7 @@ exporta a planilla sin restricción. Lo que falta es ejecutar la exportación.
 
 | Entrada del modelo | Fuente | Cómo se obtiene |
 |---|---|---|
-| Tiempo entre pedidos y tamaño de pedido, por artículo | ABM: notas de venta (NV), 24 meses | Ajuste por artículo o familia (tiempo entre pedidos: exponencial / gamma; tamaño: empírica discreta) |
+| Tiempo entre pedidos y tamaño de pedido, por artículo | ✅ Resuelto (2026-09-25): facturas de venta transaccionales, 12 meses, validadas contra la estadística mensual | Ajuste por artículo o familia (tiempo entre pedidos: exponencial / gamma; tamaño: empírica discreta) |
 | Demanda no atendida histórica | ✅ Resuelto (2026-09-24): reportes "Artículos Presupuestados/facturados" del ABM, por cliente y por artículo, 12 meses | Fill rate histórico global 49-51%, con 20% de artículos en entrega cero. Válido para validar nivel de servicio (§4.1), no distingue motivo de la pérdida |
 | Política de reposición | — | **No aplica**: confirmado que es todo contra pedido (sin (s, Q) reglado), salvo excepciones puntuales a identificar entre los artículos elegidos |
 | Tiempo aguas arriba (estampado + laminado) | ABM / ISO: OF con fecha de inicio y fin, cantidad, familia | Regresión tiempo = preparación + cantidad / tasa por familia; el residuo como distribución |

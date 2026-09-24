@@ -145,12 +145,20 @@ Con esto se hace el ABC, se ve qué se vende, qué se fabrica, qué se importa y
   `REPORTE_0000001604.XLS` ("Estadística De Venta Por Artículo", mismo período y grupo): cantidad total
   por **cliente × artículo** en todo el período (869 clientes), no por operación individual. Sirve para ver
   concentración de clientes, no da fecha ni precio.
-  Ninguno de los dos alcanza para ajustar tiempo entre pedidos y tamaño de pedido por operación (lo que
-  necesita `Source pedidos` en `05-respuestas-al-docente.md` §1.5). **Sigue pendiente pedir el listado
-  transaccional línea por línea** (fecha, cliente, artículo, cantidad, precio), aclarando que no es una
-  "Estadística" sino un listado o libro de ventas — puede que exista en el sistema aparte de los reportes
-  ya recibidos. Si no existe, el respaldo es modelar demanda mensual agregada en vez de pedidos
-  individuales, declarado como supuesto más débil (afecta la varianza de la cola del horno).
+  Ninguno de los dos alcanza para ajustar tiempo entre pedidos y tamaño de pedido por operación.
+
+  **RESUELTO (2026-09-25) con `REPORTE_0000001611.XLS`** ("Facturas De Venta", **todos los productos**,
+  mismo período, por fecha de comprobante). Es el listado transaccional real. Formato incómodo: cada
+  factura es un bloque (comprobante, fecha, cliente, importe) y el detalle de artículos viene empaquetado
+  como texto de ancho fijo en una sola celda — hubo que parsearlo con regex.
+  Parseado y filtrado a los códigos CASER (`datos-locales/_perfil/facturas_caser_transaccional.csv`):
+  **6.027 facturas** en el período, **15.991 líneas** de artículos CASER (de 22.714 totales — 70,4%),
+  **750 artículos** distintos, **1.009 clientes**. Dos campos por línea: `Num1` (importe de la línea, en
+  pesos) y `Num2` (cantidad, en la unidad de venta propia del código — fraccionaria cuando es millar).
+  **Validado exacto** contra `1603`: para `C1003551` en octubre/2025, la suma de `Num2` da 472,5, idéntico
+  al valor de esa celda en la Estadística Anual. Con esto ya se puede ajustar tiempo entre pedidos y tamaño
+  de pedido por artículo — el dato que faltaba para calibrar `Source pedidos` en `05-respuestas-al-docente.md`
+  §1.5 deja de ser un supuesto débil.
   Confirmado (2026-09-24): el grupo 94-96 es **todo el catálogo CASER, solo fabricados**; no incluye
   importados (que no se tratan térmicamente y quedan fuera del Tema 1 igual). `1603`/`1604` son entonces el
   universo completo de artículos relevantes para este tema, sin necesidad de filtrar nada más.

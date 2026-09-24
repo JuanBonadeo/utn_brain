@@ -2768,6 +2768,15 @@ subte, y sobre la misma estación.
 
 ## Log
 
+- **2026-09-25** (2): TPI, grupo 2 (Casermeiro). **Resuelto el pendiente más grande de todos**: listado
+  transaccional de ventas (`REPORTE_0000001611.XLS`, "Facturas De Venta", todos los productos, 12 meses).
+  Formato de ancho fijo empaquetado en una celda, parseado con regex y filtrado a los 750 artículos CASER
+  (`datos-locales/_perfil/facturas_caser_transaccional.csv`): 6.027 facturas, 15.991 líneas CASER, 1.009
+  clientes. Validado exacto contra la Estadística Anual (`1603`): mismo código y mes, mismo total, al
+  decimal. Con esto se puede calibrar tiempo entre pedidos y tamaño de pedido por artículo — ya no hace
+  falta el supuesto de demanda mensual agregada. Actualizados `03-pedido-de-datos.md` y
+  `05-respuestas-al-docente.md` §2.1.
+
 - **2026-09-25**: TPI, grupo 2 (Casermeiro). Dos confirmaciones de la empresa que simplifican el diseño del
   Tema 1: (1) **no hay política de stock (s, Q)** — es todo contra pedido por decantación, salvo excepciones
   puntuales a identificar; se cae la rama `SelectOutput`/`Queue pendientes` del modelo, el pedido dispara
