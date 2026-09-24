@@ -2,14 +2,29 @@
 
 **2026-09-20 · preparación para el miércoles 23/09.**
 
-Archivo: [`SubteConstitucion.alp`](SubteConstitucion.alp), formato **AnyLogic 8.9.9**. El 2026-09-24 el IDE local se
-actualizó a 8.9.10: abre el modelo convirtiéndolo en memoria y deja una copia `*.original.alp` (ignorada
-por Git). Si se guarda desde el IDE, el archivo pasa al formato 8.9.10.
+Archivo: [`SubteConstitucion.alp`](SubteConstitucion.alp), todavía en formato **AnyLogic 8.9.9**. El 2026-09-24 el
+IDE local se actualizó a 8.9.10: abre el modelo convirtiéndolo en memoria y deja una copia `*.original.alp`
+(ignorada por Git). La migración es deliberada (T1.2 del [plan](07-plan-tpi.md)): se guarda una vez desde el
+IDE, se commitea el formato nuevo y se corre el verificador, que ya admite ambos formatos. Matías debe instalar
+exactamente 8.9.10.
 Implementa el circuito y los escenarios de la [definición del caso](01-definicion-del-caso.md).
 Es un **prototipo sin calibrar**: los parámetros de campo permanecen en `-1`.
 El modo de demostración usa valores sintéticos explícitos; sus salidas no son resultados del TPI.
 
 ## 1. Abrir y ejecutar
+
+**Protocolo con el IDE (T1.1).** El `.alp` tiene un solo escritor por vez:
+
+1. Antes de abrir AnyLogic: `git status` limpio para el `.alp` (commit si hay cambios). Si existe
+   `SubteConstitucion.alp.autosave`, renombrarlo a `SubteConstitucion.alp.autosave.bak` (ignorado por Git).
+2. Con el IDE abierto nadie edita el `.alp` desde afuera, ni Claude ni scripts. Claude edita el XML solo con
+   el IDE cerrado.
+3. Si el IDE ofrece restaurar un autosave, responder **No**, salvo que el cambio perdido sea propio y reciente.
+4. Al cerrar: `git diff --stat` del `.alp`, `python3 materias/SIM/entregables/TPI/subte/verificar_modelo.py` y
+   commit con mensaje. Si el diff es inesperado, `git restore` y avisar.
+5. Los CSV de corridas se renombran con fecha antes de relanzar: el experimento agrega filas al final.
+
+Capa lógica (`Main`):
 
 1. Abrir el `.alp` en AnyLogic 8.9.9 o posterior.
 2. En el árbol del proyecto, abrir `Main`: contiene los siete bloques, los parámetros y las funciones.
@@ -21,7 +36,8 @@ El modo de demostración usa valores sintéticos explícitos; sus salidas no son
    `false`. Si falta un dato necesario, la inicialización lanza un error explicativo.
 
 **Verificación realizada:** XML, referencias de escenarios e identificadores; compilación de las
-funciones Java contra la API local de AnyLogic 8.9.9; pruebas de lógica con trazas controladas.
+funciones Java contra la API instalada de AnyLogic (8.9.10 desde el 2026-09-24); pruebas de lógica con trazas
+controladas.
 **Verificado en el IDE el 2026-09-23:** el `.alp` completo compila correctamente en AnyLogic 8.9.9 y el
 experimento `E0` inicia en modo demo, mostrando el aviso `DEMO SINTETICA - NO CALIBRADA E0`. La interfaz
 actual es un tablero técnico provisorio; todavía no representa la geometría de la estación ni el movimiento
@@ -70,7 +86,7 @@ su cola interna tiene capacidad **1**. Por eso la espera se registra desde `queu
 | `escenario` | 0 | E0=0, E1=1, E2=2, E3=3; lo fija cada experimento |
 | `modoDemo` | `true` | Usa valores sintéticos para revisar el funcionamiento |
 | `molinetesBase` | 20 | Aproximación entera provisional; contrastar también 19 |
-| `molinetesE1` | 28 | Hipótesis E1 de la definición del caso |
+| `molinetesE1` | 22 | E1: todos los IDs del vestíbulo Principal en SBASE 2026 (decisión D1, provisoria) |
 | `fraccionDesvioE2` | 0,15 | Fracción del flujo originalmente dirigido a Principal que se desvía; decisión de prueba |
 | `servicioSUBESeg` | **-1** | **Completar en campo**: duración de servicio SUBE, segundos |
 | `servicioEMVSeg` | **-1** | **Completar en campo**: duración EMV/QR, requerida en E3 |
@@ -78,7 +94,7 @@ su cola interna tiene capacidad **1**. Por eso la espera se registra desde `queu
 | `intervaloTandaSeg` | **-1** | **Completar en campo**: intervalo entre tandas, segundos |
 | `primeraTandaSeg` | 0 | Desfase de la primera tanda desde las 07:00 |
 | `usarPerfilSBASE` | `true` | Modula el tamaño de las tandas con el perfil de diez ventanas |
-| `perfil15min` | Diez medias del caso | `{1437,1578,1765,1824,1799,2054,2066,1742,1581,1636}` |
+| `perfil15min` | Diez medias mar-jun 2026 | `{1544,1681,1804,1986,1873,2214,2148,1862,1700,1721}` |
 | `semilla` | 1 | Semilla del generador independiente usado para el desvío E2 |
 | `horizonteSeg` | 9000 | Corte de arribos; para pruebas puede reducirse, hasta un máximo de 9000 |
 
@@ -90,11 +106,14 @@ Con `usarPerfilSBASE = true`, en cada arribo:
 
 ```text
 ventana = floor(t / 900)
-tamaño generado = round(tamanoTanda × perfil15min[ventana] / 1748,2)
+tamaño generado = round(tamanoTanda × perfil15min[ventana] / 1853,2)
 ```
 
-`1748,2 = 17482 / 10` es la intensidad de referencia del día hábil. El intervalo entre tandas sigue
-siendo `intervaloTandaSeg`. **El perfil aporta la forma temporal, no impone 17.482 arribos exactos**:
+`1853,2 = 18532 / 10` es la intensidad de referencia del día hábil: la media de las diez ventanas en los 80
+días hábiles útiles de marzo a junio de 2026 (decisión D3; ver `scripts/sbase-perfil.py --desde 2026-03
+--hasta 2026-06`). Hasta el 2026-09-24 se usaba la media de enero a junio (17.482, 117 días), que incluía las
+vacaciones. El intervalo entre tandas sigue
+siendo `intervaloTandaSeg`. **El perfil aporta la forma temporal, no impone 18.532 arribos exactos**:
 el total depende del tamaño, intervalo, desfase y redondeo. Compararlo con el total observado es un
 control de calibración. Si se mide una tanda solo en el pico, convertir su tamaño a la intensidad de
 referencia antes de cargarlo, o desactivar el perfil para pruebas de una intensidad constante.
@@ -117,14 +136,20 @@ todavía no corresponde realizar el test de medias del TPI.
 | E2 | `molinetesBase` | SUBE | `fraccionDesvioE2` |
 | E3 | `molinetesBase` | EMV/QR | 0 |
 
+**Alcance del informe (decisión D5).** Solo E0 y E1 se evalúan con corridas de producción, en la capa
+peatonal. E2 y E3 quedan implementados en esta capa lógica como extensiones, sin resultados, y se presentan
+como trabajo futuro: E2 exige un segundo circuito para Plaza sin datos de geometría, y E3 no tiene un tiempo
+de validación EMV/QR citable (el único molinete EMV/QR está en Plaza).
+
 **E0:** 19,5 es un promedio de molinetes con tráfico por ventana, no una capacidad fraccionaria.
 La aproximación de 20 permite iniciar el modelo. Se debe verificar la disponibilidad y habilitación
 real, y luego decidir entre capacidad constante o un horario de habilitaciones. La cola común y los
 servidores intercambiables todavía no reproducen el reparto observado Turn14/Turn23.
 
-**E1:** 28 conserva la hipótesis definida. Antes de interpretar la mejora hay que verificar que esos
-28 sean utilizables para ingreso en Principal, respetando la exclusión del Turn07 declarada en el caso.
-El modelo no convierte automáticamente identificadores registrados en capacidad operativa.
+**E1:** 22 = todos los identificadores de molinete del vestíbulo Principal en SBASE 2026 (Turn07 y
+Turn09-Turn29; Turn07 casi sin uso). Los "28 instalados" de la definición original eran el total de la
+estación, con los 8 de Plaza. Es la decisión D1, provisoria hasta el aval de la cátedra. El modelo no convierte
+automáticamente identificadores registrados en capacidad operativa: que los 22 estén habilitables es un supuesto.
 
 **E2:** antes de inyectar la tanda en Principal, se decide el desvío de cada pasajero con una Bernoulli.
 Los desviados se cuentan en `nDesviados`; no entran en el circuito ni se computan como atendidos.
@@ -179,8 +204,8 @@ nProcesados = nPrincipal
 
 No se interpretan pasajeros desviados como perdidos ni se omiten los pendientes a las 09:30.
 La cola inicial es vacía, un supuesto pendiente de verificar a las 07:00; no se aplicó un calentamiento
-arbitrario a este sistema de horizonte finito. Las salidas actuales agregan toda la franja: un reporte
-separado de la cohorte del pico `[4500, 6300)` queda para la siguiente iteración.
+arbitrario a este sistema de horizonte finito. La cohorte del pico `[4500, 6300)` se reporta por separado
+(`nPico`, `percentil90Pico`).
 
 ## 6. Verificación y estrategia de calibración remota
 
@@ -192,7 +217,8 @@ alternativa al motor AnyLogic.
 
 En la primera ejecución del IDE, verificar esa misma tanda (`modoDemo=false`, perfil desactivado,
 `tamanoTanda=5`, `intervaloTandaSeg=150`, `servicioSUBESeg=3`, `molinetesBase=2`, `horizonteSeg=10`).
-Después ejecutar los cuatro demos completos. Estos checks del motor siguen pendientes.
+Después ejecutar los cuatro demos completos. Estos checks están verificados en el harness Java del verificador;
+en el IDE solo se comprobó que `E0` arranca.
 
 El grupo reside en Rosario y no puede realizar una medición presencial propia en Constitución. Para avanzar
 sin presentar supuestos como observaciones:
@@ -208,9 +234,10 @@ sin presentar supuestos como observaciones:
 
 ## 7. Etapa peatonal incremental
 
-El archivo incorpora una segunda raíz, `MainPeatonal`, tres experimentos espaciales de simulación
-(`PeatonalDemo`, `PeatonalE0` y `PeatonalE1`) y dos de variación de parámetros para corridas apareadas
-(`PeatonalCorridasDemo` y `PeatonalCorridasApareadas`, ver más abajo). Esta capa se mantiene separada de `Main` para conservar como referencia el
+El archivo incorpora una segunda raíz, `MainPeatonal`, cinco experimentos espaciales de simulación
+(`PeatonalDemo`, `PeatonalE0`, `PeatonalE1`, `PeatonalFranjaVisualE0` y `PeatonalFranjaVisualE1`) y tres de
+variación de parámetros (`PeatonalCorridasDemo`, `PeatonalCorridasApareadas` y `PeatonalFranjaPrueba`, ver
+más abajo). Esta capa se mantiene separada de `Main` para conservar como referencia el
 modelo lógico ya verificado y evitar que un error gráfico altere las métricas E0-E3. El tipo de agente
 espacial es `Pasajero`.
 
@@ -239,14 +266,15 @@ m/s y el diámetro se fijó en 0,5 m únicamente para comprobar la dinámica pea
 | `intervaloTandaDemoSeg` | 30 s | Separa las tandas de prueba |
 | `cantidadTandasDemo` | 6 | Limita el experimento a 480 pasajeros |
 | `servicioDemoSeg` | 3 s | Ejercita el servicio; no es una medición |
-| `molinetesOperativosPed` | 20 o 28 | Única diferencia entre los experimentos espaciales E0 y E1 |
+| `molinetesOperativosPed` | 20 o 22 | Única diferencia entre E0 y E1; admite de 20 a 28 (28 = ampliación hipotética) |
 | `inicioPicoPedSeg`, `finPicoPedSeg` | 4500, 6300 s | Cohorte 08:15-08:45; queda vacía en la demo corta |
 | `horizonteMetricasPedSeg` | 600 s | Corte de métricas de la demostración (en la franja se usa 9000 s) |
 | `semillaPed` | 20260923 | Semilla efectiva: `inicializarPed()` reinicia con ella el generador del modelo |
 
-El plano contiene 28 molinetes (`molinetePed01` a `molinetePed28`). En E0 se suspenden los molinetes 21 a
-28 mediante la API de `ServiceWithLine`, de modo que quedan 20 disponibles; en E1 los 28 permanecen
-activos. No se duplican colas ni geometrías: ambos escenarios atraviesan el mismo vestíbulo y el mismo
+El plano contiene 28 molinetes (`molinetePed01` a `molinetePed28`): los 22 primeros representan el vestíbulo
+Principal y los 6 restantes una ampliación hipotética (escenario alternativo E1-b, fila `E1B`). En E0 se
+suspenden los molinetes 21 a 28 mediante la API de `ServiceWithLine`, de modo que quedan 20 disponibles; en E1
+se suspenden los 23 a 28 y quedan 22. No se duplican colas ni geometrías: ambos escenarios atraviesan el mismo vestíbulo y el mismo
 bloque `PedService`.
 
 Las tandas de demostración se generan dentro de los primeros 600 s. `PeatonalDemo`, `PeatonalE0` y
@@ -277,6 +305,7 @@ orientados en sentido contrario al flujo y con una sola cola compartida. Se reem
 | Colas | Una por molinete, de 7,6 m, con la cabeza junto a la entrada del paso; si se llena, se extiende hacia el espacio libre |
 | Zona paga | 26 m hasta las escaleras a andenes de la Línea C (abertura de 14 m en la pared este), con dos columnas |
 | Molinetes cerrados en E0 | Los 8 del extremo sur (21-28) |
+| Molinetes cerrados en E1 | Los 6 de la ampliación hipotética (23-28) |
 
 ![Plano hipotético: acceso a la izquierda, 28 molinetes en dos bancos y escaleras a la derecha; en rojo, los molinetes cerrados en E0](../../../figs/tpi-subte-plano-hipotetico.png)
 
@@ -300,7 +329,8 @@ de servicio y la estructura de tandas.
 - peatones generados y procesados;
 - procesados al corte (600 s en la demo, 09:30 en la franja) y procesados después del drenaje;
 - cantidad actual en cola y máximo observado;
-- espera media, máxima y percentil 90 desde el ingreso a `PedService` hasta el comienzo de la validación;
+- espera media, máxima y percentil 90 desde la entrada a la cola del molinete (`onEnterQueue`) hasta el
+  comienzo de la validación;
 - proporción de peatones con espera superior a 30 s;
 - $L_q$ temporal, integrando el número de peatones en cola;
 - ocupación y utilización por cada posición de servicio, utilización media y dispersión poblacional;
@@ -349,7 +379,7 @@ Los cuatro valores que siguen sin dato arrancan en `-1` y la inicialización lan
 |---|---:|---|---|
 | `modoFranjaPed` | `false` | — | `false` conserva la demo de seis tandas; `true` activa la franja |
 | `llegadasRocaSeg` | 61 arribos | Dato oficial | Arribos hábiles a Pza. Constitución entre 06:30 y 09:30, en segundos desde las 07:00 |
-| `perfilPed15min` | Diez medias | Dato SBASE | Validaciones medias del vestíbulo Principal por ventana; igual a `perfil15min` de `Main` |
+| `perfilPed15min` | Diez medias | Dato SBASE | Validaciones medias del vestíbulo Principal por ventana, días hábiles mar-jun 2026 (n = 80); igual a `perfil15min` de `Main` |
 | `factorDemandaPed` | 1,0 | Dato SBASE | Escala del perfil; 1 reproduce las validaciones medias observadas |
 | `proporcionRocaPed` | **-1** | Pendiente | Fracción de la demanda que llega en trenes del Roca; el resto entra desde la calle |
 | `demoraAccesoRocaSeg` | **-1** | Pendiente | Segundos entre el arribo del tren y el ingreso del primer pasajero al vestíbulo |
@@ -426,6 +456,31 @@ peatones, el volumen que implica el perfil SBASE. Mostró dos problemas:
 La corrida E1 del mismo par se cortó a los 787 s, sin causa identificada. Esas filas no se cargan: se
 emitieron como `INCOMPLETO` y además son de prueba.
 
+**Instrumentación del atasco (2026-09-24, T2.2-T2.3).** En el piloto E0, a las 5 h quedaban 3.198 peatones en
+el sistema pero solo 497 en cola: unos 2.700 estaban trabados en el hall, y las métricas no los veían porque
+todo se mide desde `onEnterQueue`. Desde ahora el modelo cuenta:
+
+| Medida | Definición | Dónde aparece |
+|---|---|---|
+| `hallPed()` / `hallMaxPed` | Ingresados que todavía no llegaron a un molinete ni a su cola (`nGeneradosPed − nLlegadosMolinetePed`) y su máximo, con el instante (`tHallMaxPed`) | KPI de la vista, resumen, línea PROGRESO |
+| `hallAlCortePed` | Peatones en el hall a las 09:30 | Resumen |
+| `pagaPed()` / `pagaMaxPed` | Peatones que empezaron a validar y no salieron por las escaleras | KPI, resumen, PROGRESO |
+| `segundosRealesPed()` | Tiempo de pared desde la inicialización (`System.currentTimeMillis()`) | Resumen, PROGRESO |
+
+El evento `progresoPed` imprime una línea `PROGRESO` cada 15 min simulados (5 min en la demo), con hora
+simulada, hall, cola, zona paga, procesados y segundos reales. Si el hall crece sin techo mientras la cola
+está baja, el cuello de botella es el movimiento; si la línea deja de aparecer, la corrida murió y el último
+PROGRESO fecha el corte. Una corrida `INCOMPLETO` ahora también imprime el resumen completo. Nada de esto se
+agrega al CSV oficial (los 17 campos no cambian).
+
+Todos los experimentos pasaron de 512-1024 MB a **4096 MB** de memoria. La escritura de filas al CSV quedó
+sincronizada para que dos corridas en paralelo no intercalen líneas; `AllowParallelEvaluations` sigue en
+`false` hasta comprobar en el IDE que un par en paralelo da las mismas filas que en secuencia (T2.3).
+
+`PeatonalFranjaVisualE0` y `PeatonalFranjaVisualE1` corren la franja completa con animación (escala 30x, hasta
+18.000 s) y los mismos valores de prueba que `PeatonalFranjaPrueba`, sin escribir archivo. Sirven para ver
+dónde se traba el flujo (T2.6) y son la base del experimento de exhibición del video (T6.2).
+
 El plano sigue siendo hipotético en este modo y la vista lo indica con el aviso
 **PLANO HIPOTÉTICO - ENTRADAS PENDIENTES DE CALIBRACIÓN - NO ES EL PLANO OFICIAL**. Los perfiles SBASE son validaciones, no
 arribos: la franja hereda los supuestos y controles de calibración de la sección 3.
@@ -440,8 +495,8 @@ producción que el límite no se acumula entre las 60 corridas del experimento.
 
 `PeatonalCorridasApareadas` es un experimento de variación de parámetros en modo *freeform* con 60
 corridas secuenciales. La corrida `index` usa `semillaPed = 20260923 + index / 2` y
-`molinetesOperativosPed = index % 2 == 0 ? 20 : 28`: cada par consecutivo comparte semilla y difiere solo
-en la cantidad de molinetes, con semillas 20260923-20260952 iguales a las de la planilla. Fija
+`molinetesOperativosPed = index % 2 == 0 ? 20 : 22`: cada par consecutivo comparte semilla y difiere solo
+en la cantidad de molinetes (la fila sale como `E0` con 20, `E1` con 22 y `E1B` con 28), con semillas 20260923-20260952 iguales a las de la planilla. Fija
 `modoFranjaPed = true` y `archivoSalidaPed = "corridas_peatonales.csv"`. Mientras los cuatro parámetros
 pendientes sigan en `-1`, el experimento se detiene en la primera corrida con el error de calibración: es el
 comportamiento esperado.
@@ -471,14 +526,14 @@ comprueba que los encabezados de la hoja `Corridas` sigan el orden de los 17 cam
 
 | Elemento controlado | `PeatonalE0` | `PeatonalE1` |
 |---|---:|---:|
-| Molinetes habilitados | 20 | 28 |
-| Molinetes suspendidos | 8 | 0 |
+| Molinetes habilitados | 20 | 22 |
+| Molinetes suspendidos | 8 | 6 |
 | Semilla | 20260923 | 20260923 |
 | Tandas, tamaño y servicio | iguales | iguales |
 | Recorrido y salida | iguales | iguales |
 
 La comparación es estructural y sirve para verificar la lógica de escenarios. No constituye todavía una
-estimación del beneficio real de habilitar ocho molinetes adicionales, porque la demanda en tandas y el
+estimación del beneficio real de habilitar dos molinetes adicionales, porque la demanda en tandas y el
 tiempo de validación siguen siendo supuestos sintéticos. El P90 y la utilización ya están implementados;
 la cohorte 08:15-08:45 queda sin observaciones porque la demostración termina antes de las 08:15 simuladas.
 
@@ -488,7 +543,7 @@ Las presentaciones operativas de `Main` y `MainPeatonal` ocupan la zona izquierd
 parámetros, variables, funciones y eventos se ordenaron en columnas técnicas a la derecha y se excluyeron
 de la presentación en ejecución. Esta separación no cambia la lógica: evita que los iconos del editor se
 superpongan al tablero, al vestíbulo o a los KPI. En la vista peatonal también se abreviaron las etiquetas a
-`Molinetes activos: 20/28` y `Salida Línea C` para mantenerlas separadas.
+`Molinetes activos: 20 (1-22 Principal; 23-28 hipotéticos)` y `Salida Línea C` para mantenerlas separadas.
 
 `Main` conserva además un `Level` explícito para su presentación. Esto evita el error interno `null argument`
 del editor de AnyLogic al recargar externamente un modelo cuyo `CurrentLevel` no tenía un nivel asociado.
@@ -497,13 +552,14 @@ del editor de AnyLogic al recargar externamente un modelo cuyo `CurrentLevel` no
 
 1. Sustituir el plano hipotético por el plano o croquis de SBASE (la estructura de colas y molinetes lineales
    se conserva; cambian coordenadas, cantidad y obstáculos).
-2. Reemplazar los 20/28 puestos provisionales por la cantidad, ubicación y disponibilidad real.
+2. Reemplazar los 20/22 puestos provisionales por la cantidad, ubicación y disponibilidad real.
 3. ~~Validar en el IDE el drenaje de `PeatonalE0` y `PeatonalE1`.~~ Hecho el 2026-09-24. La exportación de
    las corridas quedó automatizada el mismo día (`PeatonalCorridasApareadas` + `cargar_corridas.py`).
 4. ~~Extender la capa espacial a la franja completa.~~ Preparado el 2026-09-24 (`modoFranjaPed`); resta cargar
    entradas calibradas o rangos aprobados y ejecutar un piloto de franja en el IDE.
 5. Modelar Plaza como segundo circuito antes de interpretar E2 para toda la estación.
-6. Ejecutar `PeatonalCorridasApareadas` (30 pares E0-E1 con semilla común) y cargar
+6. Ejecutar `PeatonalCorridasApareadas` (pares E0-E1 con semilla común; n según el procedimiento secuencial
+   del plan, §7.3) y cargar
    `corridas_peatonales.csv` con `cargar_corridas.py`. La plantilla ya calcula diferencias, intervalos y
    conclusiones; permanece vacía para no mezclar la demostración sintética con las corridas de producción.
 
@@ -514,7 +570,7 @@ localmente, y estructura del `.alp` basada en el modelo local `TP_Colas.alp`.
 
 La etapa espacial también se contrastó con `PedestrianLibrary.jar` (8.9.9 y, desde el 2026-09-24, 8.9.10), con el tutorial local
 `fuentes/Tutoriales/Airport/Airport.alp` de la cátedra y con el ejemplo instalado
-`Subway Entrance Hall.alp`. La activación 20/28 usa `ServiceBase.setServiceSuspended(...)`, cuya firma se
+`Subway Entrance Hall.alp`. La activación 20/22 usa `ServiceBase.setServiceSuspended(...)`, cuya firma se
 verifica contra las bibliotecas instaladas antes de abrir el IDE.
 
 - [Source — documentación oficial](https://anylogic.help/9/libraries/process-modeling/source.html): generación por llamadas a `inject(n)`.

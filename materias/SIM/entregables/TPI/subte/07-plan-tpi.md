@@ -59,6 +59,19 @@ Lo único que bloquea de verdad es **la cadena F2 → F4**. Los organismos exter
 
 ## 3. Decisiones que tenés que tomar (o consultar con la cátedra)
 
+**Registro de decisiones (T0.3, 2026-09-24).**
+
+| D | Opción elegida | Estado |
+|---|---|---|
+| D1 | (a) E0 = 20 contra E1 = 22; 28 queda como ampliación hipotética (E1-b, fila `E1B`) | Provisoria: se avanza así y se consulta a la cátedra (T0.1) |
+| D2 | (a) rangos con fuente de la §5 | Provisoria: se consulta a la cátedra (T0.1) |
+| D3 | (b) marzo-junio 2026: n = 80 días hábiles útiles, total franja 18.532 | Tomada; perfil cargado en el `.alp` |
+| D4 | Recomendación: P90 franja, proporción > 30 s y P90 de la cohorte pico; Bonferroni k = 3 | Tomada por defecto (no se objetó) |
+| D5 | E2 y E3 como trabajo futuro, sin resultados | Provisoria: se consulta a la cátedra (T0.1) |
+| D6 | (b) **Overleaf**: la fuente `.tex` vive en el repo y se compila en Overleaf; no se instala MacTeX. T5.1 queda sin efecto | Tomada |
+| D7 | Recomendación: OBS con dos escenas | Tomada por defecto (no se objetó) |
+| D8 | `.gitignore` | Tomada y aplicada |
+
 **D1 — Qué es E1. Es la más urgente.**
 
 - Datos [VERIF, reprocesado de `molinetes-2026.zip`]:
