@@ -15,6 +15,12 @@ Reglas de seguridad:
 - Una fila CSV_PEATONAL_INCOMPLETO (corrida que no drenó) bloquea la carga.
 - Cada semilla debe tener E0 y E1, con igual cantidad de pasajeros generados.
 - No se sobrescriben celdas cargadas con otro valor salvo con --sobrescribir.
+
+n de pares variable (T1.5): la planilla no tiene un tamaño fijo de 30 pares. El cargador
+acepta semillas contiguas desde SEMILLA_INICIAL hasta la cantidad de filas que la planilla
+ofrezca (se generan con `construir_planilla.py`), y reporta cuántos pares quedaron cargados.
+El t crítico para el intervalo de confianza se calcula en la propia planilla (hoja Resumen)
+con una fórmula T.INV.2T en función del n real y de k (comparaciones primarias), no a mano.
 """
 from __future__ import annotations
 
@@ -27,9 +33,13 @@ from pathlib import Path
 AQUI = Path(__file__).resolve().parent
 PLANILLA_OFICIAL = AQUI / '04-resultados-corridas.xlsx'
 HOJA = 'Corridas'
+HOJA_RESUMEN = 'Resumen'
 FILA_ENCABEZADO = 7
-PRIMERA_FILA, ULTIMA_FILA = 8, 37
+PRIMERA_FILA = 8
+SEMILLA_INICIAL = 20260923
 COLUMNA_SEMILLA = 2
+MIN_PARES = 10       # n mínimo para habilitar el IC en la hoja Resumen (n0, §7.3 del plan)
+OBJETIVO_PARES = 30  # tamaño de diseño de referencia (no es un mínimo fijo)
 
 # Orden exacto de los campos 3..17 de filaResultadoPed() y de los bloques de la hoja Corridas.
 CAMPOS = [
@@ -81,8 +91,11 @@ def convertir(origen: str, campos: list[str]) -> tuple[str, int, list[float]]:
     if len(campos) != 2 + len(CAMPOS):
         raise ErrorCarga(f'{origen}: se esperaban {2 + len(CAMPOS)} campos y hay {len(campos)}')
     escenario = campos[0]
+    if escenario == 'E1B':
+        raise ErrorCarga(f'{origen}: escenario E1B (28 molinetes, ampliación hipotética) no se carga '
+                          f'en esta planilla; solo se cargan E0 (20) y E1 (22)')
     if escenario not in ('E0', 'E1'):
-        raise ErrorCarga(f'{origen}: escenario {escenario!r}; solo se cargan E0 (20) y E1 (28)')
+        raise ErrorCarga(f'{origen}: escenario {escenario!r}; solo se cargan E0 (20) y E1 (22)')
     try:
         semilla = int(campos[1])
         valores = [float(x) for x in campos[2:]]
@@ -143,13 +156,38 @@ def verificar_encabezados(hoja) -> None:
         raise ErrorCarga('La columna B de la planilla no es Semilla')
 
 
+def leer_capacidad(hoja) -> dict[int, int]:
+    """Semilla -> fila, leyendo desde PRIMERA_FILA mientras haya semillas contiguas.
+
+    Reemplaza el ULTIMA_FILA fijo: la planilla puede tener cualquier cantidad de filas
+    (construidas por construir_planilla.py), siempre que las semillas sean contiguas desde
+    SEMILLA_INICIAL. Esto es lo que le permite al cargador aceptar n de pares variable.
+    """
+    fila_por_semilla: dict[int, int] = {}
+    fila = PRIMERA_FILA
+    esperada = SEMILLA_INICIAL
+    while True:
+        valor = hoja.cell(fila, COLUMNA_SEMILLA).value
+        if valor is None:
+            break
+        if valor != esperada:
+            raise ErrorCarga(f'fila {fila}: semilla {valor!r} no es la esperada {esperada} '
+                              f'(deben ser contiguas desde {SEMILLA_INICIAL})')
+        fila_por_semilla[valor] = fila
+        fila += 1
+        esperada += 1
+    if not fila_por_semilla:
+        raise ErrorCarga('la planilla no tiene semillas cargadas en la columna B')
+    return fila_por_semilla
+
+
 def cargar(pares, planilla: Path, salida: Path, sobrescribir: bool) -> int:
     import openpyxl
 
     libro = openpyxl.load_workbook(planilla)
     hoja = libro[HOJA]
     verificar_encabezados(hoja)
-    fila_por_semilla = {hoja.cell(r, COLUMNA_SEMILLA).value: r for r in range(PRIMERA_FILA, ULTIMA_FILA + 1)}
+    fila_por_semilla = leer_capacidad(hoja)
     escritas = 0
     for semilla, par in sorted(pares.items()):
         fila = fila_por_semilla.get(semilla)
@@ -193,8 +231,12 @@ def main(argv=None) -> int:
         pares = armar_pares(filas)
         print(f'{len(filas)} filas {tipo} leídas; {len(pares)} pares E0-E1 completos '
               f'(semillas {min(pares)}..{max(pares)})')
-        if len(pares) < 30:
-            print(f'Aviso: faltan {30 - len(pares)} pares para el diseño inicial de 30.')
+        if len(pares) < MIN_PARES:
+            print(f'Aviso: faltan al menos {MIN_PARES - len(pares)} pares para alcanzar el mínimo '
+                  f'n = {MIN_PARES} (el IC de la hoja Resumen no se habilita antes).')
+        elif len(pares) < OBJETIVO_PARES:
+            print(f'Aviso: {OBJETIVO_PARES - len(pares)} pares más completan el diseño de referencia '
+                  f'de {OBJETIVO_PARES} (el IC ya es válido con n = {len(pares)}).')
         if not args.escribir:
             print('Validación sin escritura. Agregar --escribir para cargar la planilla.')
             return 0
@@ -202,7 +244,7 @@ def main(argv=None) -> int:
         if args.demo and salida == PLANILLA_OFICIAL.resolve():
             raise ErrorCarga('las filas de demostración no se escriben en la planilla oficial; usar --salida')
         n = cargar(pares, args.planilla, salida, args.sobrescribir)
-        print(f'OK: {n} pares escritos en {salida}')
+        print(f'OK: {n} pares cargados en {salida}')
         return 0
     except ErrorCarga as exc:
         print(f'ERROR: {exc}', file=sys.stderr)
