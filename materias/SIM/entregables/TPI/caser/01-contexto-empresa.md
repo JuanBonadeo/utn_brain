@@ -86,7 +86,10 @@ Lo que falta pedir además de esto está en `03-pedido-de-datos.md` §Pedido par
 
 ## Pendiente de relevar
 
-- Qué artículos son hoy stock / contra pedido / importados, y por qué.
+- ~~Qué artículos son hoy stock / contra pedido~~ **Confirmado (2026-09-25)** por la empresa: en la práctica
+  no manejan stock de seguridad reglado — por decantación, es **todo contra pedido**, salvo excepciones
+  puntuales todavía sin identificar. Declarado como supuesto (ver `05-respuestas-al-docente.md` §1.5 y
+  Supuestos). Importados: confirmado que el grupo 94-96 son solo fabricados (ver `03-pedido-de-datos.md`).
 - Tiempos de cambio de matrices por máquina y tiempos de ciclo (piezas/hora) por operación.
 - Plazo ida y vuelta del zincado tercerizado.
 - Registro de cargas del horno: capacidad por carga, duración, consumo, criterio actual para lanzar una carga.

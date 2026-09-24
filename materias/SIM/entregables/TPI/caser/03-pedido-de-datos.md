@@ -120,10 +120,23 @@ Con esto se hace el ABC, se ve qué se vende, qué se fabrica, qué se importa y
   Cruce hecho (`datos-locales/_perfil/maestro_lista_caser.csv`): 995 de 1002 códigos de `Lista Exportable`
   quedaron con familia asignada. Contra `Codigos y Planos.xlsm` (539 códigos), solo **286 cruzan** — quedan
   **253 artículos técnicos sin precio en esta lista** (¿discontinuados? ¿fuera de lista oficial?
-  **a confirmar**). Costo estándar ya aplicable con la fórmula (precio × 0,335) a los que sí cruzan.
-  Sigue faltando: **origen** (fabricado/importado/comprado — aunque ya sabemos que el grupo 94-96 es todo
-  fabricado) y **stock/contra pedido** por artículo.
-- **Stock valorizado**: pendiente, sin novedad.
+  **a confirmar**).
+  **Unidad de venta — aclarado (2026-09-25) por la empresa**: cada código granel/base (p. ej. `C1003551`)
+  se vende por **millar** aunque se entregue en Caja Master de otra cantidad física (ej: se entregan cajas
+  pero se facturan 2,5 millares); el código de **estuche** correspondiente (p. ej. `C10035515`) se vende por
+  **unidad de estuche**, con el contenido de piezas indicado en la propia lista. Esto es exactamente lo que
+  ya codifica la columna `Tipo de Envase` de `Lista Exportable` (Caja Master vs. Estuche), así que no hace
+  falta pedir nada nuevo: se agregó `PrecioPorPieza = Precio / Unidades por Envase` al CSV cruzado, que sí es
+  comparable entre artículos (el `Precio` crudo no lo era — mezclaba escala de millar y de estuche). Costo
+  estándar ahora se aplica sobre `PrecioPorPieza` (× 0,335), no sobre el precio de envase.
+  Sigue faltando: **origen** por artículo (aunque ya sabemos que el grupo 94-96 es todo fabricado, así que
+  es poco crítico).
+  **Stock/contra pedido — confirmado (2026-09-25) por la empresa, sin necesidad de archivo**: no manejan
+  stock de seguridad reglado; por decantación es todo contra pedido, salvo excepciones puntuales todavía sin
+  identificar. Ver la implicación de diseño en `05-respuestas-al-docente.md` §1.5.
+- **Stock valorizado**: pendiente, sin novedad. Con "todo contra pedido" como supuesto, importa menos para
+  la política de reposición (no hay s,Q que inicializar) pero sigue haciendo falta para el estado inicial del
+  modelo (§5.1: material en cola/WIP al arrancar la corrida).
 - **Compras**: pendiente, sin novedad. Baja prioridad para el Tema 1.
 - **Ventas — recibidos dos reportes del ABM, pero NO son el listado transaccional pedido**:
   `REPORTE_0000001603.XLS` ("Estadística Anual De Venta", grupo 94-96, desde 09/2025, en unidades):

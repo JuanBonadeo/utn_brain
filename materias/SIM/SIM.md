@@ -2768,6 +2768,16 @@ subte, y sobre la misma estación.
 
 ## Log
 
+- **2026-09-25**: TPI, grupo 2 (Casermeiro). Dos confirmaciones de la empresa que simplifican el diseño del
+  Tema 1: (1) **no hay política de stock (s, Q)** — es todo contra pedido por decantación, salvo excepciones
+  puntuales a identificar; se cae la rama `SelectOutput`/`Queue pendientes` del modelo, el pedido dispara
+  producción directo, y el tiempo de entrega pasa a ser el lead time de punta a punta (consistente con el
+  fill rate bajo medido el 24/09). (2) **Unidad de venta aclarada**: código granel = por millar, código de
+  estuche = por unidad de estuche — ya codificado en `Tipo de Envase` de la Lista CASER. Se agregó
+  `PrecioPorPieza` al cruce (`datos-locales/_perfil/maestro_lista_caser.csv`), comparable entre artículos, y
+  se corrigió el índice de costo para calcularse sobre esa base y no sobre el precio de envase crudo.
+  Actualizados `01-`, `03-` y `05-respuestas-al-docente.md` (§1.5, §2.1, supuestos, notas internas).
+
 - **2026-09-24** (3): TPI, grupo 2 (Casermeiro). Recibidos y procesados cuatro archivos más del ABM: **Lista
   CASER** (lista de precios con familia comercial real — CASER-Fix/Wall/Drill/Max/Plast/Maq/Rosc — y precio;
   cruzada contra `Codigos y Planos.xlsm`, 286 de 539 códigos matchean, 253 quedan sin precio a confirmar) y

@@ -106,13 +106,18 @@ statechart porque los estados quedan visibles en la animación y en el video.
 El horno es el núcleo, pero el nivel de servicio y el capital inmovilizado exigen modelar de dónde
 vienen las ULI y adónde va lo tratado. Tres subsistemas, deliberadamente agregados:
 
-- **Demanda y stock**, por artículo (10-30 artículos cargados desde una tabla de la base de datos
-  interna de AnyLogic, importada del ABM): `Source pedidos` con tiempo entre pedidos ajustado y
-  artículo/cantidad sorteados de la distribución empírica → `SelectOutput` según haya stock →
-  despacho (`Delay` envasado/expedición + `Sink`) o `Queue pendientes` (se sirven al reponer). Política
-  de reposición por artículo (punto de pedido s, lote Q) reconstruida de las OF históricas; al perforar
-  s se emite una OF (`inject` en `Source OF`). Es el modelo de inventario visto en la materia con plazo
-  de reposición endógeno. `TimeMeasureStart/End` del pedido a la entrega mide el tiempo de entrega.
+- **Demanda y producción contra pedido**, por artículo (10-30 artículos cargados desde una tabla de la
+  base de datos interna de AnyLogic, importada del ABM): `Source pedidos` con tiempo entre pedidos
+  ajustado y artículo/cantidad sorteados de la distribución empírica → cada pedido dispara directo una OF
+  (`inject` en `Source OF`), sin pasar por un chequeo de stock. La empresa confirmó (2026-09-25) que no
+  maneja stock de seguridad reglado: por decantación, es todo contra pedido, salvo excepciones puntuales
+  todavía sin identificar — así que se cae la política (s, Q) que se iba a reconstruir de las OF, y con ella
+  la rama `SelectOutput`/`Queue pendientes` del diseño original. `TimeMeasureStart/End` del pedido a la
+  entrega mide el tiempo de entrega, que ahora es directamente el lead time de producción de punta a punta
+  (aguas arriba + horno + aguas abajo): es la variable que explica el fill rate bajo medido en §2.1 (49-51%
+  histórico) mejor que un modelo con stock intermedio. **Pendiente**: si alguno de los artículos
+  representativos elegidos resulta ser una de las excepciones con stock, se le agrega el chequeo puntual
+  para ese artículo — no para todos.
 - **Aguas arriba** (estampado + laminado, agregado por familia): `Delay` con tiempo = preparación +
   cantidad / tasa, ajustado de las OF históricas → `Split` en ⌈cantidad / piezas por ULI⌉ ULI →
   `colaHorno`, o directo a lavado vía `SelectOutput` si el artículo no lleva tratamiento térmico.
@@ -155,7 +160,7 @@ exporta a planilla sin restricción. Lo que falta es ejecutar la exportación.
 |---|---|---|
 | Tiempo entre pedidos y tamaño de pedido, por artículo | ABM: notas de venta (NV), 24 meses | Ajuste por artículo o familia (tiempo entre pedidos: exponencial / gamma; tamaño: empírica discreta) |
 | Demanda no atendida histórica | ✅ Resuelto (2026-09-24): reportes "Artículos Presupuestados/facturados" del ABM, por cliente y por artículo, 12 meses | Fill rate histórico global 49-51%, con 20% de artículos en entrega cero. Válido para validar nivel de servicio (§4.1), no distingue motivo de la pérdida |
-| Política de reposición actual (s, Q) por artículo | ABM: OF históricas + stock | Se reconstruye del patrón de emisión de OF; donde no hay patrón, la regla declarada por el encargado |
+| Política de reposición | — | **No aplica**: confirmado que es todo contra pedido (sin (s, Q) reglado), salvo excepciones puntuales a identificar entre los artículos elegidos |
 | Tiempo aguas arriba (estampado + laminado) | ABM / ISO: OF con fecha de inicio y fin, cantidad, familia | Regresión tiempo = preparación + cantidad / tasa por familia; el residuo como distribución |
 | Tiempo entre arribos de ULI al horno (Etapa 1) | ISO: registro de cargas + OF | Ajuste sobre las fechas en que cada ULI quedó lista |
 | Tiempo de ciclo por ULI | ISO: registro de cargas | Determinístico (32 min), salvo que el registro muestre diferencias por familia |
@@ -448,12 +453,15 @@ para mandar a fábrica está en `03-pedido-de-datos.md` §Pedido para el Tema 1)
 8. De los 10-30 artículos elegidos, ¿cuáles requieren revenido? Para esos, la mediana histórica de
    `Termico 2026`/hoja Revenido (o de la columna "Revenido" de `Seguimiento TR ulis`) da la demora fija
    a sumar.
+9. De los artículos elegidos, ¿alguno es una de las excepciones que sí se mantienen con stock? (la regla
+   general confirmada es "todo contra pedido" — ver §1.5).
 
 **Supuestos que quedaron escritos en la respuesta** (si alguno está mal, corregir ahí):
 un turno de carga por día; horno de una ULI a la vez (32 min); las ULI que llegan durante la campaña
 se procesan; sin recalentamiento parcial desde tibio en la base; campaña actual sin límite de espera;
 revenido fuera del modelo (otro equipo, no aplica a todo el catálogo, se estima como demora fija donde
-corresponda).
+corresponda); sin política de stock (s, Q) — todo contra pedido, confirmado por la empresa, salvo
+excepciones puntuales a identificar entre los artículos elegidos.
 
 **Qué sale de la wiki y qué no**: la parte estadística (réplicas, precisión, procedimiento secuencial,
 paired-t, Welch, números aleatorios comunes, Bonferroni, cuantiles) y los 10 pasos salen de SIM.md,
