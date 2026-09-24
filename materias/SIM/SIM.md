@@ -2675,6 +2675,8 @@ del informe y [`04-resultados-corridas.xlsx`](entregables/TPI/subte/04-resultado
 30 pares E0-E1 y calcula el análisis apareado. La planilla está deliberadamente vacía hasta contar con
 corridas calibradas. [`05-guion-video.md`](entregables/TPI/subte/05-guion-video.md) organiza una exposición
 de 2 min 45 s, con participación de ambos integrantes y un tramo en vivo de AnyLogic.
+[`06-checklist-cierre.md`](entregables/TPI/subte/06-checklist-cierre.md) separa lo terminado de los bloqueos
+externos y documenta el orden exacto de la salida `CSV_PEATONAL`.
 
 **Trampas del dataset, ya detectadas**: el campo de hora cambia de formato según el mes (03 y 04/2026 usan
 `HH:MM`, el resto `HH:MM:SS`) y agregar sin normalizar parte cada hora en dos, en silencio; los feriados se
@@ -2805,6 +2807,10 @@ subte, y sobre la misma estación.
   real que contiene el tablero. El modelo vuelve a recargar y compilar sin el error interno `null argument`
   del editor. Se alineó también la salida `CSV_PEATONAL` con las columnas de la planilla, incluido el cero
   explícito de pasajeros desviados en E0-E1.
+- **2026-09-24** (5): creado `06-checklist-cierre.md` con la matriz de estado, el circuito de trabajo al
+  recibir datos, los controles de cada par de corridas y el mapeo de los 17 campos `CSV_PEATONAL` a la
+  planilla. Los pendientes administrativos y los bloqueos de calibración quedan separados del prototipo ya
+  verificado.
 - **2026-09-22** (3): TPI, grupo 2 (Casermeiro). Perfiladas a fondo las 9 planillas reales de producción que
   mandó la oficina técnica (locales, no versionadas — el repo es público — en
   `entregables/TPI/caser/datos-locales/`, gitignoreada). Confirmado con datos que hay **dos hornos

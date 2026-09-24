@@ -261,3 +261,4 @@ técnicas de simulación a un caso real*. Consigna de cátedra.
 - Modelo: `SubteConstitucion.alp`.
 - Verificador: `verificar_modelo.py`.
 - Script de perfilado: `scripts/sbase-perfil.py`.
+- Checklist operativo y esquema de salida: `06-checklist-cierre.md`.
