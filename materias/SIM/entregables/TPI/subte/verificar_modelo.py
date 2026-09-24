@@ -100,11 +100,11 @@ ped_check='''public class SubtePedLogicCheck {
 static class Pasajero {
  double tEntradaColaPed, tIngresoSistemaPed, tInicioServicioPed, servicioAsignadoPed, y;
  double getY(){return y;}
- boolean enColaPed, enPicoPed;
+ boolean enColaPed, enPicoPed, desdeRocaPed=true;
  String nombreMolinetePed="";
 }
 static class PedSourceStub { int injected, calls; java.util.ArrayList<Integer> sizes=new java.util.ArrayList<Integer>(); void inject(int n) {injected+=n;calls++;sizes.add(n);} }
-static class EventStub { double next=-1; void restart(double t) {next=t;} }
+class EventStub { double at=-1; void restart(double t) {at=clock+t;} }
 static class Point { double x, y; Point(double x,double y){this.x=x;this.y=y;} }
 static class QueuePath { Point end; int size; QueuePath(double y,int size){end=new Point(496,y);this.size=size;} Point getEndPoint(){return end;} }
 static class ServiceStub { int calls, suspended; java.util.List<QueuePath> colas=new java.util.ArrayList<QueuePath>();
@@ -112,7 +112,12 @@ static class ServiceStub { int calls, suspended; java.util.List<QueuePath> colas
  java.util.List<QueuePath> getQueues(){return colas;} int queueSize(QueuePath q){return q.size;} }
 static class EngineStub { boolean finished; void finish(){finished=true;} }
 static class RandomStub extends java.util.Random { long seed=-1; public synchronized void setSeed(long s){seed=s;super.setSeed(s);} }
-PedSourceStub pedSource=new PedSourceStub(); EventStub proximaTandaPed=new EventStub(), cierreMetricasPed=new EventStub();
+PedSourceStub pedSource=new PedSourceStub(), pedSourceCalle=new PedSourceStub();
+EventStub proximaTandaPed=new EventStub(), cierreMetricasPed=new EventStub(), proximaLiberacionPed=new EventStub(), proximaLlegadaCallePed=new EventStub();
+java.util.ArrayList<String> eventos=new java.util.ArrayList<String>();
+// Bucle de eventos minimo para la demanda de la franja (liberaciones del Roca y llegadas de calle).
+void correrDemanda(){ while(proximaLiberacionPed.at>=0||proximaLlegadaCallePed.at>=0){ boolean roca=proximaLlegadaCallePed.at<0||(proximaLiberacionPed.at>=0&&proximaLiberacionPed.at<=proximaLlegadaCallePed.at); EventStub e=roca?proximaLiberacionPed:proximaLlegadaCallePed; clock=e.at; e.at=-1; int r0=pedSource.injected,c0=pedSourceCalle.injected; if(roca)liberarPendientesPed(); else llegadaCallePed(); eventos.add(String.format(java.util.Locale.US,"%.6f;%d;%d",clock,pedSource.injected-r0,pedSourceCalle.injected-c0)); } }
+static SubtePedLogicCheck franja(int molinetes,double factor){ SubtePedLogicCheck f=new SubtePedLogicCheck(); f.modoFranjaPed=true; f.molinetesOperativosPed=molinetes; f.proporcionRocaPed=0.8; f.demoraAccesoRocaSeg=60; f.duracionDescargaSeg=120; f.servicioPedSeg=3; f.servicioMinPedSeg=2; f.servicioMaxPedSeg=5; f.factorDemandaPed=factor; f.inicializarPed(); f.programarDemandaFranjaPed(); f.correrDemanda(); return f; }
 ServiceStub molinetesPeatonales=new ServiceStub(); EngineStub engine=new EngineStub(); RandomStub rng=new RandomStub();
 Object molinetePed21=new Object(), molinetePed22=new Object(), molinetePed23=new Object(), molinetePed24=new Object();
 Object molinetePed25=new Object(), molinetePed26=new Object(), molinetePed27=new Object(), molinetePed28=new Object();
@@ -156,7 +161,7 @@ public static void main(String[] args) throws Exception {
  // Demo completa: seis tandas, cierre de arribos, drenaje y prefijo DEMO sin finalizar el motor.
  SubtePedLogicCheck d=new SubtePedLogicCheck();d.inicializarPed();
  for(int k=0;k<6;k++){d.clock=30*k;d.generarTandaPed();}
- ok(d.arribosCerradosPed && d.nTandasPed==6 && d.nInyectadosPed==480 && d.pedSource.injected==480,"demo 6x80");
+ ok(d.arribosCerradosPed && d.nTandasPed==6 && d.nInyectadosPed==480 && d.pedSource.injected==480 && d.nDesdeRocaPed==480,"demo 6x80");
  d.clock=700;d.generarTandaPed();ok(d.nInyectadosPed==480,"sin arribos despues del cierre");
  for(int k=0;k<480;k++){Pasajero x=new Pasajero();d.registraIngresoPed(x);}
  for(int k=0;k<479;k++)d.salePed();
@@ -165,36 +170,52 @@ public static void main(String[] args) throws Exception {
  ok(d.trazas.get(d.trazas.size()-1).startsWith("CSV_PEATONAL_DEMO;E0;20260923;480;0;"),"prefijo demo");
  d.emitirIncompletoPed();ok(!d.trazas.get(d.trazas.size()-1).startsWith("CSV_PEATONAL_INCOMPLETO"),"sin fila incompleta tras emitir");
  // Franja: sin datos calibrados se bloquea.
- SubtePedLogicCheck f=new SubtePedLogicCheck();f.modoFranjaPed=true;
- try{f.inicializarPed();throw new AssertionError("Franja sin calibrar aceptada");}catch(IllegalArgumentException expected){}
- f.emitirIncompletoPed();ok(f.trazas.isEmpty() && !f.resultadoEmitidoPed,"sin fila incompleta si la inicializacion fallo");
- // Franja con entradas de prueba: perfil SBASE por ventana, cierre a 9000 s y corte de metricas al cierre.
- f.tamanoTandaPed=100;f.intervaloTandaPedSeg=900;f.primeraTandaPedSeg=0;f.servicioPedSeg=2;f.inicializarPed();
+ SubtePedLogicCheck sd=new SubtePedLogicCheck();sd.modoFranjaPed=true;
+ try{sd.inicializarPed();throw new AssertionError("Franja sin calibrar aceptada");}catch(IllegalArgumentException expected){}
+ sd.emitirIncompletoPed();ok(sd.trazas.isEmpty() && !sd.resultadoEmitidoPed,"sin fila incompleta si la inicializacion fallo");
+ // Franja con entradas de prueba: horario oficial del Roca, descarga pareja, calle Poisson y servicio triangular.
+ SubtePedLogicCheck f=franja(20,1.0), f1=franja(28,1.0);
  eq(f.horizonteCortePed,9000,"corte franja");
- int esperado=0;for(double v:f.perfilPed15min)esperado+=(int)Math.round(100*v/1748.2);
- for(int k=0;k<10;k++){f.clock=900*k;f.generarTandaPed();ok(f.pedSource.sizes.get(k)==(int)Math.round(100*f.perfilPed15min[k]/1748.2),"tanda "+k);}
- ok(f.arribosCerradosPed && f.nTandasPed==10 && f.nInyectadosPed==esperado,"diez ventanas y cierre 09:30");
- f.clock=9000;f.generarTandaPed();ok(f.nInyectadosPed==esperado,"sin arribos a las 09:30");
- SubtePedLogicCheck g=new SubtePedLogicCheck();g.modoFranjaPed=true;g.tamanoTandaPed=10;g.intervaloTandaPedSeg=1000;
- g.primeraTandaPedSeg=500;g.servicioPedSeg=2;g.usarPerfilPed=false;g.inicializarPed();
+ int trenes=0;for(double t:f.llegadasRocaSeg)if(t+60>=0&&t+60<9000)trenes++;
+ ok(f.nTrenesPed==trenes && trenes>=45,"trenes del horario dentro de la franja: "+f.nTrenesPed);
+ ok(f.arribosCerradosPed && f.rocaCerradoPed && f.calleCerradaPed,"arribos cerrados al agotar horario y calle");
+ ok(f.nInyectadosPed==f.nDesdeRocaPed+f.nDesdeCallePed && f.pedSource.injected==f.nDesdeRocaPed && f.pedSourceCalle.injected==f.nDesdeCallePed,"origenes");
+ double total=0;for(double v:f.perfilPed15min)total+=v;
+ ok(f.nDesdeRocaPed>0.97*0.8*total && f.nDesdeRocaPed<=0.8*total+trenes,"Roca ~80% del perfil SBASE: "+f.nDesdeRocaPed);
+ ok(Math.abs(f.nDesdeCallePed-0.2*total)<5*Math.sqrt(0.2*total),"calle ~20% del perfil SBASE: "+f.nDesdeCallePed);
+ double ultimo=0;for(String e:f.eventos){String[] x=e.split(";");ultimo=Math.max(ultimo,Double.parseDouble(x[0])+(Integer.parseInt(x[1])+Integer.parseInt(x[2])>0?0:-1e9));}
+ ok(ultimo<9000,"ningun ingreso a partir de las 09:30: "+ultimo);
+ ok(f.eventos.equals(f1.eventos),"E0 y E1 reciben exactamente los mismos ingresos (numeros aleatorios comunes)");
+ double suma=0;int n=4000;java.util.ArrayList<Double> s0=new java.util.ArrayList<Double>(),s1=new java.util.ArrayList<Double>();
+ for(int k=0;k<n;k++){Pasajero x=new Pasajero(),y=new Pasajero();f.registraIngresoPed(x);f1.registraIngresoPed(y);s0.add(x.servicioAsignadoPed);s1.add(y.servicioAsignadoPed);suma+=x.servicioAsignadoPed;ok(x.servicioAsignadoPed>=2&&x.servicioAsignadoPed<=5,"servicio en [2,5]");}
+ ok(s0.equals(s1),"E0 y E1 sortean los mismos tiempos de servicio");
+ ok(Math.abs(suma/n-10.0/3)<0.05,"media triangular (2+3+5)/3: "+suma/n);
+ SubtePedLogicCheck cte=new SubtePedLogicCheck();cte.modoFranjaPed=true;cte.proporcionRocaPed=1;cte.demoraAccesoRocaSeg=0;cte.duracionDescargaSeg=60;cte.servicioPedSeg=3;cte.inicializarPed();
+ ok(cte.tiempoServicioPed()==3,"servicio constante sin minimo ni maximo");
+ cte.servicioMinPedSeg=4;cte.servicioMaxPedSeg=5;
+ try{cte.inicializarPed();throw new AssertionError("Triangular invalido aceptado");}catch(IllegalArgumentException expected){}
+ SubtePedLogicCheck soloRoca=franja(20,1.0);ok(soloRoca.eventos.equals(f.eventos),"la demanda es reproducible con la misma semilla");
+ ok(f.caudalPorVentanaPed().contains("08:15 sim=0 obs=2054"),"control de caudal por ventana: "+f.caudalPorVentanaPed());
+ // Corrida chica de punta a punta: drenaje, cohorte pico, archivo de salida y fin del motor.
+ SubtePedLogicCheck g=franja(20,0.01);
  java.io.File salida=java.io.File.createTempFile("corridas",".csv");salida.delete();g.archivoSalidaPed=salida.getPath();
- for(int k=0;k<9;k++){g.clock=500+1000*k;g.generarTandaPed();}
- ok(g.arribosCerradosPed && g.nInyectadosPed==90,"perfil constante y ultimo arribo antes de 9000");
- Pasajero[] q=new Pasajero[90];for(int k=0;k<90;k++){q[k]=new Pasajero();g.clock=4600;g.registraIngresoPed(q[k]);}
- ok(g.esperasPicoPed.isEmpty() && q[0].enPicoPed && q[0].servicioAsignadoPed==2,"cohorte pico por ingreso y servicio franja");
- for(int k=0;k<89;k++)g.salePed();
+ int ng=g.nInyectadosPed;ok(ng>100,"corrida chica: "+ng);
+ Pasajero[] q=new Pasajero[ng];for(int k=0;k<ng;k++){q[k]=new Pasajero();g.clock=4600;g.registraIngresoPed(q[k]);}
+ ok(q[0].enPicoPed,"cohorte pico por instante de ingreso");
+ for(int k=0;k<ng-1;k++)g.salePed();
  g.clock=9000;g.actualizarAreaColaPed();g.nProcesadosHorizontePed=g.nProcesadosPed;ok(!g.drenadoPed(),"pendiente al cierre");
  g.clock=9050;g.salePed();
  ok(g.resultadoEmitidoPed && g.engine.finished,"franja emite y finaliza al drenar");
+ g.pruebaSinteticaPed=true;ok(g.prefijoResultadoPed().equals("CSV_PEATONAL_DEMO"),"prueba sintetica de franja sale como demo");g.pruebaSinteticaPed=false;
  java.util.List<String> lineas=java.nio.file.Files.readAllLines(salida.toPath());
- ok(lineas.size()==1 && lineas.get(0).startsWith("CSV_PEATONAL;E0;20260923;90;0;89;90;"),"archivo de salida: "+lineas);
- eq(g.ultimaDisipacionPed,9050-8500,"disipacion desde la ultima tanda");
+ ok(lineas.size()==1 && lineas.get(0).startsWith("CSV_PEATONAL;E0;20260923;"+ng+";0;"+(ng-1)+";"+ng+";"),"archivo de salida: "+lineas);
+ eq(g.ultimaDisipacionPed,9050-g.tiempoUltimaTandaPed,"disipacion desde el ultimo ingreso");
  // Conservacion y corrida incompleta.
  SubtePedLogicCheck h=new SubtePedLogicCheck();h.inicializarPed();h.nInyectadosPed=2;h.nGeneradosPed=1;h.nProcesadosPed=2;
  try{h.emitirResultadoPed();throw new AssertionError("Conservacion violada aceptada");}catch(IllegalStateException expected){}
  h.emitirIncompletoPed();ok(h.trazas.get(h.trazas.size()-1).startsWith("CSV_PEATONAL_INCOMPLETO;E0;"),"fila incompleta");
  salida.delete();
- System.out.println("OK: pedestrian demo/franja generation, 09:30 cut, drain, conservation, CSV prefixes and output file");
+ System.out.println("OK: pedestrian demo, Roca timetable + street demand, triangular service, common random numbers, 09:30 cut, drain and CSV output");
 }
 }'''
 (d/'SubtePedLogicCheck.java').write_text(ped_check)
@@ -234,8 +255,20 @@ for agent, min_x in ((a,1100),(ped,1000)):
   technical=agent.findall(f'{section}/*')
   assert all(x.findtext('PresentationFlag')=='false' for x in technical)
   assert all(int(x.findtext('X'))>=min_x for x in technical)
+ped_defaults_early={v.findtext('Name'):v.findtext('Properties/DefaultValue/Code') for v in ped.findall("Variables/Variable[@Class='Parameter']")}
 ped_blocks={x.findtext('Name'):x.findtext('ActiveObjectClass/ClassName') for x in ped.findall('EmbeddedObjects/EmbeddedObject')}
-assert ped_blocks=={'pedSource':'PedSource','pedMolinetes':'PedService','pedSalida':'PedGoTo','pedSink':'PedSink'}
+assert ped_blocks=={'pedSource':'PedSource','pedSourceCalle':'PedSource','pedMolinetes':'PedService','pedSalida':'PedGoTo','pedSink':'PedSink'}
+sources={x.findtext('Name'):{p.findtext('Name'):p.findtext('Value/Code') for p in x.findall('Parameters/Parameter')} for x in ped.findall('EmbeddedObjects/EmbeddedObject') if x.findtext('Name').startswith('pedSource')}
+assert sources['pedSource']['locationLine']=='entradaPeatonal' and sources['pedSourceCalle']['locationLine']=='entradaCalle'
+assert sources['pedSource']['onExit']=='ped.desdeRocaPed = true; registraIngresoPed(ped);'
+assert sources['pedSourceCalle']['onExit']=='ped.desdeRocaPed = false; registraIngresoPed(ped);'
+conns={(c.findtext('SourceEmbeddedObjectReference/ItemName'),c.findtext('TargetEmbeddedObjectReference/ItemName')) for c in ped.findall('Connectors/Connector')}
+assert {('pedSource','pedMolinetes'),('pedSourceCalle','pedMolinetes'),('pedMolinetes','pedSalida'),('pedSalida','pedSink')}<=conns
+# El horario embebido es exactamente el extraído de los PDFs oficiales del Roca.
+import csv as _csv
+horario=[r['segundos_desde_07'] for r in _csv.DictReader(open(p.parent/'datos'/'arribos_roca_constitucion_habiles.csv',encoding='utf-8'),delimiter=';')]
+assert ped_defaults_early['llegadasRocaSeg']=='new double[] {'+','.join(horario)+'}', 'llegadasRocaSeg no coincide con datos/arribos_roca_constitucion_habiles.csv'
+assert ped_defaults_early['factorDemandaPed']=='1.0'
 assert agents['Pasajero'] is not None
 assert any(e.findtext('Name')=='PeatonalDemo' and e.get('ActiveObjectClassId')==ped.findtext('Id') for e in experiments)
 ped_experiments={e.findtext('Name'):e for e in experiments if e.findtext('Name') in {'PeatonalE0','PeatonalE1'}}
@@ -271,7 +304,7 @@ assert 'configurarMolinetesPed()' in ped.findtext('StartupCode')
 startup=ped.findtext('StartupCode')
 assert startup.index('inicializarPed()') < startup.index('configurarMolinetesPed()')
 assert 'cierreMetricasPed.restart(horizonteCortePed)' in startup
-assert 'proximaTandaPed.restart(modoFranjaPed ? primeraTandaPedSeg : 0)' in startup
+assert 'if (modoFranjaPed) programarDemandaFranjaPed(); else proximaTandaPed.restart(0);' in startup
 assert ped.findtext('DestroyCode')=='emitirIncompletoPed();'
 assert callbacks_delay=='ped.servicioAsignadoPed'
 assert ped.find(".//Text[Name='etiquetaMolinetes']").findtext('TextCode')=='"Molinetes activos: " + molinetesOperativosPed + "/28"'
@@ -289,7 +322,7 @@ assert 'nProcesadosHorizontePed = nProcesadosPed' in ped_events['cierreMetricasP
 assert 'if (drenadoPed()) emitirResultadoPed();' in ped_events['cierreMetricasPed'].findtext('Action')
 # Franja parametrizada: los datos de campo siguen sin valor y la demo no cambia.
 ped_defaults={v.findtext('Name'):v.findtext('Properties/DefaultValue/Code') for v in ped.findall("Variables/Variable[@Class='Parameter']")}
-for name in ('tamanoTandaPed','intervaloTandaPedSeg','primeraTandaPedSeg','servicioPedSeg'):
+for name in ('proporcionRocaPed','demoraAccesoRocaSeg','duracionDescargaSeg','servicioPedSeg','servicioMinPedSeg','servicioMaxPedSeg'):
  assert ped_defaults[name]=='-1', f'{name} debe quedar pendiente de calibración'
 assert ped_defaults['modoFranjaPed']=='false' and ped_defaults['horizonteArribosPedSeg']=='9000'
 main_defaults={v.findtext('Name'):v.findtext('Properties/DefaultValue/Code') for v in a.findall("Variables/Variable[@Class='Parameter']")}
@@ -301,7 +334,12 @@ ped_param_ids={v.findtext('Id'):v.findtext('Name') for v in ped.findall("Variabl
 for e in [x for x in experiments if x.get('ActiveObjectClassId')==ped.findtext('Id')]:
  assert {p.findtext('ParameterName') for p in e.findall('Parameters/Parameter')}==set(ped_param_ids.values()), e.findtext('Name')
 pvs={e.findtext('Name'):e for e in r.findall('Model/Experiments/ParamVariationExperiment')}
-assert set(pvs)=={'PeatonalCorridasApareadas','PeatonalCorridasDemo'}
+assert set(pvs)=={'PeatonalCorridasApareadas','PeatonalCorridasDemo','PeatonalFranjaPrueba'}
+prueba={ped_param_ids[x.findtext('Id')]:x.findtext('Expression/Code') for x in pvs['PeatonalFranjaPrueba'].findall('FreeformParamValue')}
+assert prueba['modoFranjaPed']=='true' and prueba['pruebaSinteticaPed']=='true' and prueba['archivoSalidaPed']=='"corridas_peatonales_demo.csv"'
+assert pvs['PeatonalFranjaPrueba'].findtext('NumberOfRuns')=='2' and float(pvs['PeatonalFranjaPrueba'].findtext('ModelTimeProperties/FinalTime'))<=18000
+assert ped_defaults_early['pruebaSinteticaPed']=='false'
+pvs={k:v for k,v in pvs.items() if k!='PeatonalFranjaPrueba'}
 for name,(runs,modo,archivo,final) in {'PeatonalCorridasApareadas':('60','true','"corridas_peatonales.csv"','18000'),
                                        'PeatonalCorridasDemo':('6','false','"corridas_peatonales_demo.csv"','900')}.items():
  e=pvs[name]
@@ -313,7 +351,7 @@ for name,(runs,modo,archivo,final) in {'PeatonalCorridasApareadas':('60','true',
  assert set(free)==set(ped_param_ids.values())
  assert free['semillaPed']=='20260923L + index / 2' and free['molinetesOperativosPed']=='index % 2 == 0 ? 20 : 28'
  assert free['modoFranjaPed']==modo and free['archivoSalidaPed']==archivo
- assert all(free[k] is None for k in ('tamanoTandaPed','intervaloTandaPedSeg','primeraTandaPedSeg','servicioPedSeg'))
+ assert all(free[k] is None for k in ('proporcionRocaPed','demoraAccesoRocaSeg','duracionDescargaSeg','servicioPedSeg'))
 # Par i -> semilla 20260923+i, E0 en índice par y E1 en el siguiente.
 assert [(20260923+i//2, 20 if i%2==0 else 28) for i in range(4)]==[(20260923,20),(20260923,28),(20260924,20),(20260924,28)]
 pasajero_variable_names={x.findtext('Name') for x in agents['Pasajero'].findall('Variables/Variable')}
