@@ -338,38 +338,74 @@ throughput al corte se congelan con el mismo criterio; el total procesado se vue
 drenaje. La cohorte pico usa el instante de salida de `PedSource`, no el instante de inicio de servicio,
 para evitar seleccionar pasajeros según la propia congestión.
 
-### Extensión a la franja 07:00-09:30 (preparada, pendiente de calibración)
+### Franja 07:00-09:30: demanda por horario del Roca (preparada, pendiente de calibración)
 
-`MainPeatonal` admite un segundo modo de demanda, `modoFranjaPed = true`, que reproduce el horizonte del
-modelo lógico sin inventar la estructura de oleadas. Todos sus datos de campo arrancan en `-1` y la
-inicialización lanza `IllegalArgumentException` si alguno sigue sin completar:
+`MainPeatonal` admite un segundo modo de demanda, `modoFranjaPed = true`. Desde el 2026-09-24 las oleadas
+no se inventan: salen del **horario oficial del Roca** y el total de pasajeros sale del **perfil SBASE**.
+Los cuatro valores que siguen sin dato arrancan en `-1` y la inicialización lanza
+`IllegalArgumentException` si alguno no se completó.
 
-| Parámetro | Inicial | Contenido |
-|---|---:|---|
-| `modoFranjaPed` | `false` | `false` conserva la demo de seis tandas; `true` activa la franja |
-| `horizonteArribosPedSeg` | 9000 | Cierre de arribos (09:30); admite `(0, 9000]` para pilotos |
-| `tamanoTandaPed` | **-1** | Pasajeros por tanda a la intensidad media del perfil |
-| `intervaloTandaPedSeg` | **-1** | Segundos entre tandas del Roca |
-| `primeraTandaPedSeg` | **-1** | Desfase de la primera tanda desde las 07:00 |
-| `servicioPedSeg` | **-1** | Tiempo de validación, segundos |
-| `usarPerfilPed` | `true` | Modula el tamaño con el perfil SBASE |
-| `perfilPed15min` | Diez medias SBASE | Igual a `perfil15min` de `Main`; el verificador controla que coincidan |
-| `archivoSalidaPed` | `""` | Si no está vacío, agrega cada fila `CSV_PEATONAL*` a ese archivo |
+| Parámetro | Inicial | Origen | Contenido |
+|---|---:|---|---|
+| `modoFranjaPed` | `false` | — | `false` conserva la demo de seis tandas; `true` activa la franja |
+| `llegadasRocaSeg` | 61 arribos | Dato oficial | Arribos hábiles a Pza. Constitución entre 06:30 y 09:30, en segundos desde las 07:00 |
+| `perfilPed15min` | Diez medias | Dato SBASE | Validaciones medias del vestíbulo Principal por ventana; igual a `perfil15min` de `Main` |
+| `factorDemandaPed` | 1,0 | Dato SBASE | Escala del perfil; 1 reproduce las validaciones medias observadas |
+| `proporcionRocaPed` | **-1** | Pendiente | Fracción de la demanda que llega en trenes del Roca; el resto entra desde la calle |
+| `demoraAccesoRocaSeg` | **-1** | Pendiente | Segundos entre el arribo del tren y el ingreso del primer pasajero al vestíbulo |
+| `duracionDescargaSeg` | **-1** | Pendiente | Segundos en que termina de ingresar el pasaje de un tren |
+| `servicioPedSeg` | **-1** | Pendiente | Tiempo de validación (moda si el servicio es triangular) |
+| `servicioMinPedSeg`, `servicioMaxPedSeg` | -1 | Opcional | Extremos de un servicio triangular; `-1` = servicio constante |
+| `horizonteArribosPedSeg` | 9000 | — | Cierre de ingresos (09:30); admite `(0, 9000]` para pilotos |
+| `pruebaSinteticaPed` | `false` | — | `true` marca una corrida de prueba: sus filas salen como `CSV_PEATONAL_DEMO` |
+| `archivoSalidaPed` | `""` | — | Si no está vacío, agrega cada fila `CSV_PEATONAL*` a ese archivo |
 
-La lógica de la franja es la misma que la del modelo lógico:
+**Horario del Roca.** Los arribos se extraen de los PDF oficiales de Trenes Argentinos (horarios vigentes
+desde el 03/08/2026), guardados sin modificar en `datos/roca/`. `datos/extraer_arribos_roca.py` toma la
+sección de lunes a viernes, los trenes pares (los que circulan hacia Constitución) y la última columna de
+cada fila. Descarta las lanzaderas Bosques-Gutiérrez y controla que un tren repetido en dos PDF tenga el
+mismo arribo. El resultado, `datos/arribos_roca_constitucion_habiles.csv`, tiene 50 trenes entre las 07:00 y
+las 09:30 (un tren cada 3 minutos en mediana; hasta 8 minutos sin trenes; cuatro pares de trenes llegan en
+el mismo minuto) de los ramales La Plata, Bosques (vía Quilmes y vía Temperley), Glew/A. Korn y
+Ezeiza/Cañuelas. El verificador comprueba que el arreglo del modelo sea exactamente ese archivo. No se
+incluyen los servicios de larga distancia.
 
-- las tandas se generan cada `intervaloTandaPedSeg` desde `primeraTandaPedSeg` mientras el instante sea
-  menor que 9000 s; con el perfil activo, el tamaño es
-  `round(tamanoTandaPed × perfil[ventana] / media(perfil))`, con `ventana = floor(t / 900)`;
-- el corte de métricas coincide con el cierre de arribos: Lq, utilización, ocupación y procesados a las
-  09:30 se congelan en `t = 9000`;
-- el experimento sigue hasta que sale el último pasajero inyectado antes de las 09:30; entonces emite
-  `CSV_PEATONAL`, escribe el archivo si corresponde y termina con `getEngine().finish()`;
-- la cohorte pico 08:15-08:45 se define por el instante de ingreso (`PedSource.onExit`) y queda poblada
-  cuando la franja incluye esa ventana;
-- el tiempo de servicio se asigna a cada pasajero al ingresar (`servicioAsignadoPed`) y es el `delayTime`
-  de `PedService`. Hoy es constante; si se incorpora una distribución, debe muestrearse en ese punto con un
-  generador propio y en orden de llegada, para que E0 y E1 reciban los mismos valores.
+**Cómo se arma la demanda de una corrida:**
+
+1. La demanda de cada ventana de 15 minutos es `factorDemandaPed × perfil[ventana]`.
+2. La parte Roca, `proporcionRocaPed × demanda`, se reparte en partes iguales entre los trenes cuyo
+   pasaje ingresa al vestíbulo en esa ventana (`arribo + demoraAccesoRocaSeg`). Así, los trenes del pico
+   traen más gente que los del borde de la franja, como indica el perfil.
+3. El pasaje de cada tren **no aparece de golpe**: ingresa por el acceso oeste de forma pareja durante
+   `duracionDescargaSeg`, como si lo dosificaran las escaleras y el hall del Roca.
+4. La parte de calle, `(1 − proporcionRocaPed) × demanda`, ingresa por el acceso norte (desde la calle)
+   con llegadas de Poisson no homogéneas, con la tasa de cada ventana. Se generan por adelgazamiento
+   (*thinning*).
+5. Solo cuentan los ingresos anteriores a las 09:30. La cola a las 07:00 se supone vacía, un supuesto
+   pendiente de verificar.
+6. El tiempo de validación se sortea al ingresar cada pasajero (`servicioAsignadoPed`, `delayTime` de
+   `PedService`). Es constante o triangular.
+
+**Números aleatorios comunes.** La calle y el servicio usan generadores propios (`rngCallePed`,
+`rngServicioPed`), sembrados con `semillaPed`, y la descarga del Roca es determinística. Por eso E0 y E1 con
+la misma semilla reciben exactamente los mismos ingresos y los mismos tiempos de validación. El verificador
+lo comprueba corriendo la demanda con 20 y con 28 molinetes.
+
+**Control de calibración.** El modelo cuenta las validaciones simuladas por ventana y
+`resumenPeatonal()` las imprime junto al perfil (`caudalPorVentana`). Si con los molinetes suficientes el
+caudal simulado se aparta del observado, la demanda está mal repartida. Si solo se aparta con pocos
+molinetes, esa ventana tiene congestión.
+
+**Cierre y métricas.** El corte de métricas coincide con el cierre de ingresos: Lq, utilización, ocupación y
+procesados a las 09:30 se congelan en `t = 9000`. El experimento sigue hasta que sale el último pasajero que
+ingresó antes de las 09:30; entonces emite la fila, escribe el archivo si corresponde y termina con
+`getEngine().finish()`. La cohorte pico se define por el instante de ingreso. El tiempo de disipación se
+mide desde el último ingreso al vestíbulo.
+
+**Prueba sintética.** `PeatonalFranjaPrueba` corre un par E0-E1 de la franja completa con valores de
+prueba explícitos: 80 % Roca, 60 s de demora, 120 s de descarga y servicio triangular 2/3/5 s. Esas filas
+salen como `CSV_PEATONAL_DEMO` en `corridas_peatonales_demo.csv`: sirven para verificar la mecánica y el
+tiempo de cómputo, no como resultado.
 
 El plano sigue siendo hipotético en este modo y la vista lo indica con el aviso
 **PLANO HIPOTÉTICO - ENTRADAS PENDIENTES DE CALIBRACIÓN - NO ES EL PLANO OFICIAL**. Los perfiles SBASE son validaciones, no
@@ -387,8 +423,8 @@ producción que el límite no se acumula entre las 60 corridas del experimento.
 corridas secuenciales. La corrida `index` usa `semillaPed = 20260923 + index / 2` y
 `molinetesOperativosPed = index % 2 == 0 ? 20 : 28`: cada par consecutivo comparte semilla y difiere solo
 en la cantidad de molinetes, con semillas 20260923-20260952 iguales a las de la planilla. Fija
-`modoFranjaPed = true` y `archivoSalidaPed = "corridas_peatonales.csv"`. Mientras los cuatro parámetros de
-campo sigan en `-1`, el experimento se detiene en la primera corrida con el error de calibración: es el
+`modoFranjaPed = true` y `archivoSalidaPed = "corridas_peatonales.csv"`. Mientras los cuatro parámetros
+pendientes sigan en `-1`, el experimento se detiene en la primera corrida con el error de calibración: es el
 comportamiento esperado.
 
 `PeatonalCorridasDemo` repite el circuito con tres pares de la demo sintética y escribe

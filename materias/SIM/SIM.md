@@ -2712,7 +2712,10 @@ subte, y sobre la misma estación.
   lanzan con `PeatonalCorridasApareadas` y `cargar_corridas.py` transfiere `corridas_peatonales.csv` a la
   planilla con validaciones. Falta incorporar los rangos aprobados, reemplazar la geometría provisoria por
   el plano y ejecutar en el IDE el piloto `PeatonalCorridasDemo`. Mientras tanto la vista usa un **plano
-  hipotético** (vestíbulo 70 × 34 m, 28 molinetes lineales en dos bancos, una cola por molinete).
+  hipotético** (vestíbulo 70 × 34 m, 28 molinetes lineales en dos bancos, una cola por molinete). La
+  demanda de la franja ya usa el **horario oficial del Roca** (50 trenes hábiles 07:00-09:30) y el perfil
+  SBASE; quedan pendientes la proporción Roca/calle, la demora de acceso, la duración de descarga y el
+  tiempo de servicio.
   E2 cuenta el desvío pero todavía no simula la cola de Plaza.
 - ~~**Formulario**: editar el último envío con el tema del subte.~~ Hecho el 2026-09-22: `formulario-eleccion-tema.md`
   reescrito v2 y `TPI_Simulacion_Propuesta_de_Tema.docx` regenerado con ese contenido
@@ -2835,6 +2838,13 @@ subte, y sobre la misma estación.
   de elección de cola (desvío + espera estimada, nunca un molinete suspendido) y espera medida desde la
   entrada a la cola. Aviso visible de plano no oficial. El IDE (actualizado a 8.9.10) carga el modelo sin
   errores; falta Build y piloto visual.
+- **2026-09-24** (9): TPI subte, demanda realista de la franja. Descargados los horarios oficiales del
+  Roca (vigentes 03/08/2026) a `datos/roca/` y extraídos con script los 50 arribos hábiles a Constitución
+  entre 07:00 y 09:30. Cada tren reparte la parte Roca del perfil SBASE de su ventana y su pasaje ingresa
+  escalonado (ya no aparecen todos de golpe); se agregó un acceso desde la calle con llegadas Poisson,
+  servicio triangular opcional, generadores propios para números aleatorios comunes, control de caudal por
+  ventana y el experimento `PeatonalFranjaPrueba` (un par con valores de prueba, filas demo). Se descartó
+  la Rail Library: no agrega medidas y obliga a inventar la terminal. Plaza (E2) sigue fuera del alcance.
 - **2026-09-22** (3): TPI, grupo 2 (Casermeiro). Perfiladas a fondo las 9 planillas reales de producción que
   mandó la oficina técnica (locales, no versionadas — el repo es público — en
   `entregables/TPI/caser/datos-locales/`, gitignoreada). Confirmado con datos que hay **dos hornos

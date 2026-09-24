@@ -94,6 +94,12 @@ reconstruir por sí solos el tamaño y el intervalo de las tandas. Tampoco conti
 parámetros pendientes se solicitaron a SBASE, Emova y Trenes Argentinos. Hasta obtenerlos, cualquier rango
 utilizado debe declararse como supuesto y someterse a sensibilidad.
 
+La segunda fuente es el horario oficial de la línea Roca publicado por Trenes Argentinos, vigente desde el
+03/08/2026. De los cuatro cuadros horarios que llegan a Plaza Constitución (La Plata, Bosques, Glew/A. Korn
+y Ezeiza/Cañuelas) se extrajeron los arribos de días hábiles: 50 trenes entre las 07:00 y las 09:30, con un
+intervalo mediano de 3 minutos y un máximo de 8. Este dato fija cuándo llegan las oleadas, pero no cuántas
+personas trae cada tren ni qué parte del pasaje se dirige a la Línea C.
+
 ### 3.1 Modelo conceptual
 
 Un agente representa un pasajero. En la capa lógica, un evento genera tandas y las inyecta en el circuito
@@ -129,6 +135,15 @@ La verificación automatizada controla XML, identificadores, conexiones, paráme
 compilación de las funciones Java contra las bibliotecas instaladas. Una traza de cinco pasajeros, dos
 servidores y 3 s de servicio produce esperas `0, 0, 3, 3, 6`, espera media 2,4 s, P90 de 6 s, cola máxima
 3, área de cola 12 pasajero-s y ocupación 15 molinete-s.
+
+La demanda de la franja combina datos y supuestos declarados. Los arribos de los trenes surgen del horario
+oficial del Roca (50 trenes hábiles entre las 07:00 y las 09:30, vigente desde el 03/08/2026) y el total por
+ventana, del perfil de validaciones de SBASE. Una fracción de esa demanda, pendiente de dato, llega en los
+trenes y se reparte entre los que arriban en cada ventana; su pasaje ingresa de forma escalonada durante una
+duración de descarga también pendiente. El resto entra desde la calle con llegadas de Poisson. Los números
+aleatorios de la calle y del servicio usan generadores propios, de modo que E0 y E1 reciben exactamente los
+mismos ingresos y tiempos de validación. El modelo imprime además las validaciones simuladas por ventana
+frente al perfil observado, como control de la calibración.
 
 La capa espacial usa, hasta recibir el plano oficial, un vestíbulo hipotético de 70 m × 34 m: acceso desde el
 hall del Roca, zona no paga con boletería y columnas, una línea de 28 molinetes lineales orientados hacia la
@@ -195,7 +210,7 @@ réplicas para reducir la varianza de la diferencia.
 
 El diseño definitivo tendrá como mínimo 30 pares de réplicas. El número final se ampliará mediante el
 procedimiento secuencial visto en la Unidad 9 hasta alcanzar la precisión relativa acordada. Los factores
-de sensibilidad son el tamaño de tanda, el intervalo entre tandas, el tiempo de servicio, la proporción de
+de sensibilidad son la duración de la descarga de cada tren, la demora de acceso, el tiempo de servicio, la proporción de
 transferencia desde el Roca y la cantidad de molinetes efectivamente disponibles.
 
 ## 9. Paso 8 - Corridas de producción
@@ -269,6 +284,10 @@ para toda la estación hasta modelar Plaza como un segundo circuito con su flujo
 
 ## 13. Referencias bibliográficas
 
+Trenes Argentinos. (2026). *Horarios línea Roca, servicios Pza. Constitución - La Plata, Bosques,
+Glew/A. Korn y Ezeiza/Cañuelas, vigentes desde el 03/08/2026*. Ministerio de Economía de la Nación.
+https://www.argentina.gob.ar/transporte/trenes-argentinos/horarios-tarifas-y-recorridos/areametropolitana/linearoca
+
 Buenos Aires Ciudad. (2026). *Subte - Viajes Molinetes*. BA Data.
 https://data.buenosaires.gob.ar/dataset/subte-viajes-molinetes
 
@@ -287,6 +306,8 @@ técnicas de simulación a un caso real*. Consigna de cátedra.
 - Modelo: `SubteConstitucion.alp`.
 - Verificador: `verificar_modelo.py`.
 - Cargador de corridas: `cargar_corridas.py`.
+- Horarios oficiales del Roca y arribos extraídos: `datos/roca/`, `datos/extraer_arribos_roca.py` y
+  `datos/arribos_roca_constitucion_habiles.csv`.
 - Script de perfilado: `scripts/sbase-perfil.py`.
 - Checklist operativo y esquema de salida: `06-checklist-cierre.md`.
 - Presentación editable del video: `TPI_Subte_Presentacion.pptx`.
