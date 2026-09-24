@@ -307,7 +307,9 @@ superpongan al tablero, al vestíbulo o a los KPI. En la vista peatonal también
 3. Validar en el IDE el drenaje de `PeatonalE0` y `PeatonalE1` y exportar los resultados.
 4. Extender la capa espacial a la franja completa para poblar la cohorte 08:15-08:45 con entradas calibradas.
 5. Modelar Plaza como segundo circuito antes de interpretar E2 para toda la estación.
-6. Exportar una fila por réplica y ejecutar al menos 30 pares E0-E1 con números aleatorios comunes.
+6. Ejecutar al menos 30 pares E0-E1 con números aleatorios comunes y cargar una fila por par en
+   `04-resultados-corridas.xlsx`. La plantilla ya calcula diferencias, intervalos y conclusiones; permanece
+   vacía para no mezclar la demostración sintética con las corridas de producción.
 
 ## 8. Referencias técnicas
 

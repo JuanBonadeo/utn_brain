@@ -183,6 +183,11 @@ operativos y se desactive `modoDemo`. Por cada réplica se exportarán:
 
 No se completará esta sección con resultados de la demostración sintética.
 
+La planilla [`04-resultados-corridas.xlsx`](04-resultados-corridas.xlsx) deja preparado el registro de los
+30 pares iniciales. Cada fila conserva una semilla común para E0 y E1, calcula la diferencia `E1 - E0` y
+separa las entradas de producción de las columnas calculadas. La hoja `Resumen` permanece en estado
+`Sin corridas cargadas` hasta recibir resultados calibrados.
+
 ## 10. Paso 9 - Análisis de los datos de salida
 
 La comparación principal será apareada. Para cada par se calculará
@@ -201,6 +206,11 @@ confianza mediante Bonferroni.
 Las proporciones sobre 30 s se analizarán sobre las estimaciones por réplica. Los percentiles se calcularán
 primero dentro de cada réplica; esas salidas, y no las esperas individuales agrupadas entre réplicas, serán
 las observaciones del test.
+
+Para el diseño inicial de 30 pares, la planilla usa 29 grados de libertad. Aplica el intervalo bilateral del
+95 % a las medidas descriptivas y Bonferroni sobre tres comparaciones primarias: procesados con drenaje,
+P90 de espera y proporción con espera mayor a 30 s. Los valores críticos y las conclusiones se habilitan
+recién al completar los 30 pares, evitando interpretar pilotos incompletos como resultados finales.
 
 ## 11. Paso 10 - Documentación, presentación y uso de resultados
 

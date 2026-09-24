@@ -2670,6 +2670,11 @@ validación contactless EMV/QR (la estación ya tiene un molinete así).
 **Medidas de rendimiento**: espera en cola (media y **percentil 90**), **proporción con espera > 30 s**,
 **tiempo de disipación de la tanda**; secundarias Lq, utilización por molinete y throughput.
 
+**Archivos de trabajo**: [`03-informe-tpi.md`](entregables/TPI/subte/03-informe-tpi.md) contiene el borrador
+del informe y [`04-resultados-corridas.xlsx`](entregables/TPI/subte/04-resultados-corridas.xlsx) registra los
+30 pares E0-E1 y calcula el análisis apareado. La planilla está deliberadamente vacía hasta contar con
+corridas calibradas.
+
 **Trampas del dataset, ya detectadas**: el campo de hora cambia de formato según el mes (03 y 04/2026 usan
 `HH:MM`, el resto `HH:MM:SS`) y agregar sin normalizar parte cada hora en dos, en silencio; los feriados se
 detectan solos por caída del flujo diario bajo el 50 % de la mediana (11 días de 128, todos feriados reales);
@@ -2779,6 +2784,11 @@ subte, y sobre la misma estación.
   Java/XML reproducibles. Creado `03-informe-tpi.md`, borrador estructurado por los diez pasos exigidos, sin
   presentar la demo sintética como resultado real. Queda pendiente recargar el modelo abierto en AnyLogic,
   compilar y ejecutar PeatonalE0/E1; la recarga se postergó para no descartar posibles cambios del IDE.
+- **2026-09-24**: creada `04-resultados-corridas.xlsx`, plantilla reproducible para los 30 pares E0-E1 con
+  semillas comunes. Registra las medidas de cada escenario, calcula `E1 - E0`, medias, desvíos, errores
+  estándar e intervalos t; aplica Bonferroni a throughput con drenaje, P90 y proporción sobre 30 s. Se
+  verificó el recálculo con datos transitorios y se restituyeron todas las entradas a vacío para no publicar
+  resultados sintéticos como evidencia.
 - **2026-09-22** (3): TPI, grupo 2 (Casermeiro). Perfiladas a fondo las 9 planillas reales de producción que
   mandó la oficina técnica (locales, no versionadas — el repo es público — en
   `entregables/TPI/caser/datos-locales/`, gitignoreada). Confirmado con datos que hay **dos hornos
