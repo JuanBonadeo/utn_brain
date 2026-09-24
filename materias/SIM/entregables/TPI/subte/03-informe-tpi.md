@@ -168,7 +168,8 @@ Antes de las corridas de producción se consideran los siguientes pilotos:
 
 1. Traza determinística de cinco pasajeros y dos molinetes, comparada con el cálculo manual.
 2. PeatonalE0 y PeatonalE1 con igual semilla, comprobando 20 y 28 puestos habilitados. **Completado:** ambos
-   drenan los 480 peatones sin pérdida al extender el cierre técnico a 900 s.
+   drenan los 480 peatones sin pérdida al extender el cierre técnico a 900 s. Esa prueba usó la geometría
+   esquemática anterior; debe repetirse con el plano hipotético, que cambió molinetes, colas y recorrido.
 3. E2 con desvío 0 y 1, comprobando los extremos de conservación.
 4. Servicio que cruza las 09:30, verificando que quede pendiente al cierre y atendido en el drenaje.
 5. Tres pares de la demostración mediante el experimento automatizado, para comprobar la escritura del
