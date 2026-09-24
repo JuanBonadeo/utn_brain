@@ -2768,6 +2768,14 @@ subte, y sobre la misma estación.
 
 ## Log
 
+- **2026-09-24** (3): TPI, grupo 2 (Casermeiro). Recibidos y procesados cuatro archivos más del ABM: **Lista
+  CASER** (lista de precios con familia comercial real — CASER-Fix/Wall/Drill/Max/Plast/Maq/Rosc — y precio;
+  cruzada contra `Codigos y Planos.xlsm`, 286 de 539 códigos matchean, 253 quedan sin precio a confirmar) y
+  dos reportes de **presupuestado vs. facturado** (por cliente y por artículo, 12 meses). Hallazgo mayor:
+  **fill rate histórico 49-51%**, con ~20% de artículos en entrega cero — resuelve el punto más importante
+  que quedaba abierto (demanda no atendida, antes solo salida especulada del modelo, ahora dato real de
+  validación). Limitación declarada: no distingue motivo de la pérdida ni corrige censura de fin de período.
+  Actualizados `03-pedido-de-datos.md` y `05-respuestas-al-docente.md` (§2.1 y §4.1).
 - **2026-09-23**: TPI, grupo Bonadeo + Estevez. Enviados los pedidos de datos por correo a SBASE, Emova y
   Trenes Argentinos. Registrados como pendientes los formularios web oficiales, los comprobantes de trámite
   y el seguimiento de respuestas antes de calibrar el modelo.

@@ -110,11 +110,19 @@ Con esto se hace el ABC, se ve qué se vende, qué se fabrica, qué se importa y
 
 ## Recibido y estado (2026-09-24)
 
-- **Maestro comercial**: pendiente. Se pidió código, familia, precio de lista, costo estándar, origen,
-  stock/contra pedido. La empresa contestó que código/familia/precio salen de la **"Lista CASER"**
-  (archivo aparte, todavía no enviado) y que el costo estándar se calcula como índice: **precio de lista ×
-  0,335** (50% de bonificación máxima, 33% de rentabilidad bruta sobre el precio bonificado). Fórmula
-  aceptada; falta que llegue la Lista CASER para aplicarla.
+- **Maestro comercial — parcialmente resuelto con "Casermeiro SRL - Lista CASER.xlsx"** (recibida
+  2026-09-24). Es la lista de precios impresa exportada a Excel (con datos bancarios y todo, al final —
+  no es una tabla plana). Hoja `CASER`: bloques por familia comercial real —
+  **CASER-Fix, CASER-Wall, CASER-Drill, CASER-Max, CASER-Plast, CASER-Maq, CASER-Rosc** — cada uno con
+  sub-bloques por tipo de cabeza/rosca/terminación y su tabla de código × medida × precio (a veces con un
+  segundo código para la versión "estuche"). Hoja `Lista Exportable`: la misma lista pero ya en tabla plana
+  (código, precio, unidades por envase, tipo de envase) — 1002 filas, 956 con código `C...`.
+  Cruce hecho (`datos-locales/_perfil/maestro_lista_caser.csv`): 995 de 1002 códigos de `Lista Exportable`
+  quedaron con familia asignada. Contra `Codigos y Planos.xlsm` (539 códigos), solo **286 cruzan** — quedan
+  **253 artículos técnicos sin precio en esta lista** (¿discontinuados? ¿fuera de lista oficial?
+  **a confirmar**). Costo estándar ya aplicable con la fórmula (precio × 0,335) a los que sí cruzan.
+  Sigue faltando: **origen** (fabricado/importado/comprado — aunque ya sabemos que el grupo 94-96 es todo
+  fabricado) y **stock/contra pedido** por artículo.
 - **Stock valorizado**: pendiente, sin novedad.
 - **Compras**: pendiente, sin novedad. Baja prioridad para el Tema 1.
 - **Ventas — recibidos dos reportes del ABM, pero NO son el listado transaccional pedido**:
@@ -133,4 +141,24 @@ Con esto se hace el ABC, se ve qué se vende, qué se fabrica, qué se importa y
   Confirmado (2026-09-24): el grupo 94-96 es **todo el catálogo CASER, solo fabricados**; no incluye
   importados (que no se tratan térmicamente y quedan fuera del Tema 1 igual). `1603`/`1604` son entonces el
   universo completo de artículos relevantes para este tema, sin necesidad de filtrar nada más.
-  Archivos guardados en `datos-locales/abm/` (gitignoreados, no versionados).
+
+- **Demanda no atendida — RESUELTO, y es el hallazgo más importante de esta tanda.** Dos reportes nuevos,
+  `REPORTE_0000001606.XLS` (presupuestado vs. facturado por cliente y artículo) y `REPORTE_0000001607.XLS`
+  (lo mismo, agregado por artículo — 390 filas, sin desagregar por cliente), mismo período (01/09/2025 a
+  31/08/2026), mismo grupo 94-96. Cada línea trae **Cantidad** (presupuestada) y **Entrega** (facturada).
+  Cruzando ambos (`datos-locales/_perfil/analisis_1606.md` y `analisis_1607.md`):
+  - **Fill rate global por unidades: 49-51%** (51,1% agregando 1606 por mi cuenta; 49,3% con el agregado
+    directo de 1607 — consistentes).
+  - **~20% de los artículos (77 de 386) tuvieron entrega CERO en los 12 meses** — demanda completamente
+    perdida, no solo demorada.
+  - Solo 31% de los artículos tuvo entrega completa.
+  Esto reemplaza lo que hasta ahora era un supuesto ("la venta perdida es solo salida del modelo") por un
+  **dato histórico real para calibrar y validar el nivel de servicio** — es la línea "Demanda no atendida
+  histórica" de `05-respuestas-al-docente.md` §2.1, que estaba marcada `[confirmar]`.
+  **Limitaciones a declarar**: (1) no distingue el motivo de la pérdida (stock, plazo, precio, el cliente
+  compró en otro lado) — solo mide la brecha cantidad-entrega, no la causa; (2) el corte a fin de período
+  censura: un presupuesto de agosto/2026 con entrega en septiembre/2026 cae como "cero" en este reporte
+  aunque se haya cumplido después — puede estar subestimando el fill rate real; (3) hay códigos tipo `KIT`
+  (p. ej. `KIT131`) que son combos, no artículos simples — excluir de la selección de representativos.
+  Archivos: `REPORTE_...1603/1604/1606/1607.XLS`, `lista-caser.xlsx`, guardados en `datos-locales/abm/`
+  (gitignoreados, no versionados).

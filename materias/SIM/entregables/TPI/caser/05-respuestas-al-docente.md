@@ -154,7 +154,7 @@ exporta a planilla sin restricción. Lo que falta es ejecutar la exportación.
 | Entrada del modelo | Fuente | Cómo se obtiene |
 |---|---|---|
 | Tiempo entre pedidos y tamaño de pedido, por artículo | ABM: notas de venta (NV), 24 meses | Ajuste por artículo o familia (tiempo entre pedidos: exponencial / gamma; tamaño: empírica discreta) |
-| Demanda no atendida histórica | ABM: presupuestos (PV) no convertidos en NV y NV canceladas **[confirmar que el ABM los conserva]** | Nivel de servicio histórico para validar; si no se conservan, la venta perdida es solo salida del modelo |
+| Demanda no atendida histórica | ✅ Resuelto (2026-09-24): reportes "Artículos Presupuestados/facturados" del ABM, por cliente y por artículo, 12 meses | Fill rate histórico global 49-51%, con 20% de artículos en entrega cero. Válido para validar nivel de servicio (§4.1), no distingue motivo de la pérdida |
 | Política de reposición actual (s, Q) por artículo | ABM: OF históricas + stock | Se reconstruye del patrón de emisión de OF; donde no hay patrón, la regla declarada por el encargado |
 | Tiempo aguas arriba (estampado + laminado) | ABM / ISO: OF con fecha de inicio y fin, cantidad, familia | Regresión tiempo = preparación + cantidad / tasa por familia; el residuo como distribución |
 | Tiempo entre arribos de ULI al horno (Etapa 1) | ISO: registro de cargas + OF | Ajuste sobre las fechas en que cada ULI quedó lista |
@@ -308,6 +308,7 @@ con el mismo lapso y nivel de demanda que la historia:
 | Duración de campaña | registro de cargas | ≤ 10 % |
 | Espera de una ULI antes del horno | fecha ULI lista (OF) → fecha de carga | ≤ 15 % en la media; percentil 90 dentro del intervalo del modelo |
 | Tiempo de entrega de pedidos (Etapa 2) | NV → remito | ≤ 20 % |
+| Nivel de servicio (Etapa 2) | reportes presupuestado/facturado — 49-51 % histórico | ≤ 15 % (con el motivo de la brecha aún sin separar; ver §2.1) |
 | kWh mensuales | facturas 2026 | ≤ 15 % |
 
 Tres criterios combinados, porque con ~10 campañas ningún test tiene mucha potencia por sí solo:
@@ -437,8 +438,11 @@ para mandar a fábrica está en `03-pedido-de-datos.md` §Pedido para el Tema 1)
 3. ¿El encargado adelanta el encendido por pedidos comprometidos? Cambia la regla base.
 4. Registro ISO de cargas: ¿planilla o papel? ¿Anota consumo o lectura de medidor por campaña?
    ¿Cuántas campañas hay desde 01/2026? ¿Hay registros de antes de la parada del horno?
-5. ¿El ABM conserva presupuestos (PV) no convertidos y NV canceladas? Define si la venta perdida se
-   puede validar o solo es salida.
+5. ~~¿El ABM conserva presupuestos (PV) no convertidos y NV canceladas?~~ **Resuelto (2026-09-24)**: sí,
+   vía los reportes de presupuestado/facturado. Fill rate histórico 49-51%. Falta cerrar con la empresa el
+   **motivo** de cada línea no entregada (¿faltó stock, el plazo no sirvió, precio, se lo llevó otro
+   proveedor?) — el reporte solo da la brecha cantidad-entrega, no la causa, y sin eso no se puede separar
+   lo que el modelo puede explicar (stock/horno) de lo que no.
 6. ¿Un turno adicional de carga durante la campaña es operable? Define si existe el E4.
 7. Facturas de energía: 24 meses, con potencia contratada y si hay penalización por exceso.
 8. De los 10-30 artículos elegidos, ¿cuáles requieren revenido? Para esos, la mediana histórica de
