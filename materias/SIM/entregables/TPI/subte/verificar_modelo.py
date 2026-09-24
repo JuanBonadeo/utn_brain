@@ -363,13 +363,17 @@ libs={x.findtext('LibraryName') for x in r.findall('Model/RequiredLibraryReferen
 assert 'com.anylogic.libraries.pedestrian' in libs
 print('OK: XML, unique IDs, clean presentations, pedestrian KPIs, hypothetical plan with 28 linear gates and 20/28 experiments')
 # The CSV schema, the workbook and the loader share one field order.
+# T1.5: n de pares variable (planilla generada por construir_planilla.py) y primarias D4.
 import sys, shutil
 sys.path.insert(0, str(p.parent))
 import cargar_corridas as cc
 import openpyxl
 book=openpyxl.load_workbook(cc.PLANILLA_OFICIAL)
 cc.verificar_encabezados(book[cc.HOJA])
-assert [book[cc.HOJA].cell(row,2).value for row in range(8,38)]==list(range(20260923,20260953))
+capacidad=cc.leer_capacidad(book[cc.HOJA])
+assert list(capacidad)==list(range(cc.SEMILLA_INICIAL, cc.SEMILLA_INICIAL+len(capacidad))), \
+    'las semillas de la planilla deben ser contiguas desde SEMILLA_INICIAL'
+assert len(capacidad)>=cc.MIN_PARES, f'la planilla oficial debe admitir al menos {cc.MIN_PARES} pares (D4/T1.5)'
 fila_ped=next(f for f in ped.findall('Functions/Function') if f.findtext('Name')=='filaResultadoPed').findtext('Body')
 assert fila_ped.count('Integer.toString')+fila_ped.count('String.format')+fila_ped.count('Long.toString')+2==2+len(cc.CAMPOS), 'escenario + "0" desviados + 15 conversiones'
 import contextlib, io
@@ -378,7 +382,7 @@ with tempfile.TemporaryDirectory(prefix='subte-carga-') as tmp, contextlib.redir
  rows=[]
  for i in range(30):
   for esc,esp in (('E0',40+i),('E1',20+i)):
-   rows.append(f'CSV_PEATONAL_DEMO;{esc};{20260923+i};480;0;470;480;{esp}.5;{esp+10};0.25;3.5;60;120.0;0.4;0.05;0;0;0')
+   rows.append(f'CSV_PEATONAL_DEMO;{esc};{cc.SEMILLA_INICIAL+i};480;0;470;480;{esp}.5;{esp+10};0.25;3.5;60;120.0;0.4;0.05;0;0;0')
  log.write_text('ruido de consola\n'+'\n'.join(rows)+'\n')
  assert cc.main([str(log),'--demo'])==0
  assert cc.main([str(log),'--demo','--escribir'])==1, 'demo no puede escribir la planilla oficial'
@@ -387,11 +391,120 @@ with tempfile.TemporaryDirectory(prefix='subte-carga-') as tmp, contextlib.redir
  hoja=openpyxl.load_workbook(copia)[cc.HOJA]
  assert hoja['C8'].value==480 and hoja['O8'].value==40.5 and hoja['P8'].value==20.5 and hoja['Q8'].value=='=IF(OR(O8="",P8=""),"",P8-O8)'
  assert hoja['AS37'].value==0 and hoja['AG37'].value==0.4
- (tmp/'incompleta.txt').write_text(rows[0]+'\nCSV_PEATONAL_INCOMPLETO;E1;20260923;480;0;470;479\n')
+ (tmp/'incompleta.txt').write_text(rows[0]+f'\nCSV_PEATONAL_INCOMPLETO;E1;{cc.SEMILLA_INICIAL};480;0;470;479\n')
  assert cc.main([str(tmp/'incompleta.txt'),'--demo'])==1
  (tmp/'impar.txt').write_text(rows[0]+'\n')
  assert cc.main([str(tmp/'impar.txt'),'--demo'])==1
  (tmp/'desbalance.txt').write_text(rows[0]+'\n'+rows[1].replace(';480;0;470;480;',';481;0;470;481;')+'\n')
  assert cc.main([str(tmp/'desbalance.txt'),'--demo'])==1
+ # El modelo en main etiqueta 20->E0, 22->E1, 28->E1B (D1): la planilla solo carga E0/E1.
+ (tmp/'e1b.txt').write_text(f'CSV_PEATONAL_DEMO;E1B;{cc.SEMILLA_INICIAL};480;0;470;480;40.5;50;0.25;3.5;60;120.0;0.4;0.05;0;0;0\n')
+ salida_e1b=io.StringIO()
+ with contextlib.redirect_stderr(salida_e1b):
+  assert cc.main([str(tmp/'e1b.txt'),'--demo'])==1, 'E1B no debe cargarse en la planilla'
+ assert 'E1B' in salida_e1b.getvalue(), 'el rechazo de E1B debe explicar el motivo'
 assert openpyxl.load_workbook(cc.PLANILLA_OFICIAL)[cc.HOJA]['C8'].value is None, 'la planilla oficial debe seguir vacía'
-print('OK: CSV_PEATONAL order matches 04-resultados-corridas.xlsx and the loader rejects demo, incomplete or unpaired runs')
+
+# Autoprueba (T1.5, aceptación observable 2): el IC paired-t que calcula la hoja Resumen
+# (T.INV.2T sobre n y k reales) coincide a 1e-6 con el mismo cálculo hecho a mano en Python,
+# para n = 12 y n = 30. Requiere LibreOffice (soffice) para forzar el recálculo de fórmulas;
+# si no está instalado, se avisa y se omite sin marcar el verificador como roto (sigue siendo
+# la 5ta y última línea OK, para no correr un verificador parcial silenciosamente).
+if shutil.which('soffice') is None:
+ autoprueba_ic = 'omitida (soffice no está instalado)'
+else:
+ import math, random, statistics, csv as _csv
+
+ def _betacf(aa, bb, x):
+  MAXIT, EPS, FPMIN = 200, 3e-16, 1e-300
+  qab, qap, qam = aa+bb, aa+1.0, aa-1.0
+  c=1.0; d=1.0-qab*x/qap
+  if abs(d)<FPMIN: d=FPMIN
+  d=1.0/d; h=d
+  for m in range(1, MAXIT+1):
+   m2=2*m
+   delta=m*(bb-m)*x/((qam+m2)*(aa+m2))
+   d=1.0+delta*d
+   if abs(d)<FPMIN: d=FPMIN
+   c=1.0+delta/c
+   if abs(c)<FPMIN: c=FPMIN
+   d=1.0/d; h*=d*c
+   delta=-(aa+m)*(qab+m)*x/((aa+m2)*(qap+m2))
+   d=1.0+delta*d
+   if abs(d)<FPMIN: d=FPMIN
+   c=1.0+delta/c
+   if abs(c)<FPMIN: c=FPMIN
+   d=1.0/d; paso=d*c; h*=paso
+   if abs(paso-1.0)<EPS: break
+  return h
+
+ def _betainc(aa, bb, x):
+  if x<=0: return 0.0
+  if x>=1: return 1.0
+  lbeta=math.lgamma(aa)+math.lgamma(bb)-math.lgamma(aa+bb)
+  front=math.exp(math.log(x)*aa+math.log1p(-x)*bb-lbeta)
+  if x<(aa+1)/(aa+bb+2): return front*_betacf(aa,bb,x)/aa
+  return 1.0-front*_betacf(bb,aa,1-x)/bb
+
+ def t_inv_2t(prob, df):
+  # Inversión por bisección de la función de distribución t de dos colas (verificada contra
+  # LibreOffice TINV/_xlfn.T.INV.2T y tablas estándar: t(29,0.05)=2.0452296..., t(29,0.05/3)=2.5409081...).
+  lo, hi = 0.0, 1000.0
+  for _ in range(200):
+   mid=(lo+hi)/2
+   x=df/(df+mid*mid)
+   if _betainc(df/2.0, 0.5, x) > prob:
+    lo=mid
+   else:
+    hi=mid
+  return (lo+hi)/2
+
+ assert abs(t_inv_2t(0.05,29)-2.0452296421327016)<1e-9
+ assert abs(t_inv_2t(0.05/3,29)-2.540908149498901)<1e-9
+
+ def generar_pares_sinteticos(n, semilla=2026):
+  rnd=random.Random(semilla)
+  filas=[]; z={5:[], 6:[], 14:[]}
+  for j in range(n):
+   e0_p90=30+rnd.uniform(-5,5); e1_p90=e0_p90+rnd.uniform(-8,3)
+   e0_prop=rnd.uniform(0.05,0.25); e1_prop=min(max(e0_prop+rnd.uniform(-0.1,0.05),0),1)
+   e0_pico=32+rnd.uniform(-5,5); e1_pico=e0_pico+rnd.uniform(-9,3)
+   z[5].append(e1_p90-e0_p90); z[6].append(e1_prop-e0_prop); z[14].append(e1_pico-e0_pico)
+   for esc,p90,prop,pico in (('E0',e0_p90,e0_prop,e0_pico), ('E1',e1_p90,e1_prop,e1_pico)):
+    campos=[480,0,470,480,5.0,p90,prop,3.5,60,120.0,0.4,0.05,100,20.0,pico]
+    filas.append(f'CSV_PEATONAL_DEMO;{esc};{cc.SEMILLA_INICIAL+j};'+';'.join(str(x) for x in campos))
+  return filas, z
+
+ def ic_esperado(zvals, primaria=True):
+  n=len(zvals); media=statistics.fmean(zvals); sd=statistics.stdev(zvals); se=sd/math.sqrt(n)
+  alfa=(0.05/3) if primaria else 0.05
+  t=t_inv_2t(alfa, n-1)
+  return n, media, sd, se, t, media-t*se, media+t*se
+
+ def num(texto):
+  texto=texto.strip()
+  return float(texto[:-1])/100.0 if texto.endswith('%') else float(texto)
+
+ for n_prueba in (12, 30):
+  filas, z = generar_pares_sinteticos(n_prueba)
+  with tempfile.TemporaryDirectory(prefix='subte-autoprueba-') as tmp2, \
+       contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
+   tmp2=Path(tmp2); log2=tmp2/'consola.txt'; copia2=tmp2/'copia.xlsx'; salida_csv=tmp2/'csv'
+   log2.write_text('\n'.join(filas)+'\n')
+   assert cc.main([str(log2),'--demo','--escribir','--salida',str(copia2)])==0
+   resultado=subprocess.run(['soffice','--headless','--convert-to','csv',str(copia2),'--outdir',str(salida_csv)],
+                             capture_output=True, text=True, timeout=120)
+   assert resultado.returncode==0, resultado.stderr
+   csvs=list(salida_csv.glob('*.csv')); assert len(csvs)==1, csvs
+   with open(csvs[0], encoding='utf-8') as fh:
+    filas_csv=list(_csv.reader(fh))
+   for idx, fila_hoja in ((5,16), (6,17), (14,25)):
+    fc=filas_csv[fila_hoja-1]
+    n_c,h_c,i_c,j_c,k_c,l_c,m_c=(num(fc[col]) for col in (4,7,8,9,10,11,12))
+    n_e,h_e,i_e,j_e,k_e,l_e,m_e=ic_esperado(z[idx])
+    assert n_c==n_e==n_prueba
+    for calc, esp in ((h_c,h_e),(i_c,i_e),(j_c,j_e),(k_c,k_e),(l_c,l_e),(m_c,m_e)):
+     assert abs(calc-esp)<1e-6, (fila_hoja, calc, esp)
+ autoprueba_ic = 'coincide a 1e-6 con Python (T.INV.2T, n y k reales) para n=12 y n=30 en las tres primarias D4'
+print(f'OK: CSV_PEATONAL order matches 04-resultados-corridas.xlsx, the loader rejects demo, incomplete, '
+      f'unpaired or E1B runs, and the Resumen IC {autoprueba_ic}')
