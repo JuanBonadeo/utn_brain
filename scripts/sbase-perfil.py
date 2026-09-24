@@ -10,6 +10,10 @@ Descarga (el portal rechaza user-agents no-navegador, de ahi el -A):
 
 Uso:
     python3 scripts/sbase-perfil.py <dir-csv> [--linea LineaC] [--estacion Constitucion]
+                                    [--desde 2026-03] [--hasta 2026-06]
+
+--desde/--hasta acotan el periodo por mes (inclusive). El TPI usa marzo-junio 2026 (decision D3,
+2026-09-24): enero y febrero son vacaciones y bajan la media.
 
 Ojo con dos cosas del dataset, las dos ya contempladas acá:
   - Cada fila viene envuelta en comillas y separada por ';'.
@@ -48,7 +52,11 @@ def main():
     ap.add_argument("--linea", default="LineaC")
     ap.add_argument("--estacion", default="Constitucion")
     ap.add_argument("--vestibulo", default="Principal", choices=["Principal", "Plaza", "ambos"])
+    ap.add_argument("--desde", help="primer mes incluido, AAAA-MM")
+    ap.add_argument("--hasta", help="ultimo mes incluido, AAAA-MM")
     a = ap.parse_args()
+    ym = lambda s: tuple(int(x) for x in s.split("-")) if s else None
+    desde, hasta = ym(a.desde), ym(a.hasta)
 
     paths = sorted(glob.glob(os.path.join(a.dir, "*.csv")))
     if not paths:
@@ -75,6 +83,8 @@ def main():
             dt = datetime.date(y, m, d)
             if dt.weekday() >= 5:
                 continue
+            if (desde and (y, m) < desde) or (hasta and (y, m) > hasta):
+                continue
             h = hm(p[1])
             dd[dt][h] += pax
             if h in PICO:
@@ -88,7 +98,8 @@ def main():
     malos = sorted(d for d, v in tot.items() if v < 0.5 * med)
     buenos = sorted(set(dd) - set(malos))
 
-    print(f"{a.linea} / {a.estacion} / vestibulo {a.vestibulo}")
+    print(f"{a.linea} / {a.estacion} / vestibulo {a.vestibulo} / periodo {a.desde or 'inicio'} a {a.hasta or 'fin'}")
+    print(f"primer dia {min(dd)} | ultimo dia {max(dd)}")
     print(f"dias habiles con dato: {len(dd)} | excluidos por feriado: {len(malos)} | utiles: {len(buenos)}")
     for d in malos:
         print(f"   excluido {d} ({DIAS[d.weekday()]}) pax={tot[d]:,.0f}")
