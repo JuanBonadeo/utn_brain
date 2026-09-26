@@ -160,9 +160,11 @@ Materias y un tema corto y específico.
   ni "ingest").
 - Si la sesión toca varias materias, nombrala por la dominante; si no
   hay una clara, usá `VARIAS — [tema]`.
-- Proponé el nombre apenas quede claro de qué va. No podés renombrar el
-  chat vos (no hay herramienta para eso): el título lo aplico yo desde la
-  interfaz. Vos solo sugerilo.
+- Apenas quede claro de qué va, aplicá el nombre vos mismo, sin preguntar.
+  En Orca (existe `$ORCA_TERMINAL_HANDLE`):
+  `orca terminal rename --terminal "$ORCA_TERMINAL_HANDLE" --title "<nombre>"`.
+  Si el tema cambia de forma clara, renombrá de nuevo. Fuera de Orca no hay
+  herramienta para renombrar: sugerí el nombre y lo aplico yo.
 
 ## MODO DE TRABAJO
 - Si traigo un ejercicio, preguntame qué intenté y dónde me trabé antes
