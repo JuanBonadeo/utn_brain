@@ -46,3 +46,8 @@ materias/SIM/entregables/TPI/subte/corridas_peatonales_demo.csv
 # SIM: documento de trabajo del TPI 2025 de otro grupo (hospital). Se consulta en
 # local pero no se publica: el repo es público. Decisión D8, 2026-09-24.
 materias/SIM/fuentes/Trabajo práctico integrador - Simulación de Hospital con Ambulancias.docx
+
+# estado local de Claude Code (sólo se versiona .claude/settings.json)
+.claude/settings.local.json
+.claude/worktrees/
+.claude/scheduled_tasks.lock
