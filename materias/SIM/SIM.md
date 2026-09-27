@@ -2772,6 +2772,18 @@ subte, y sobre la misma estación.
 
 ## Log
 
+- **2026-09-27** (3): TPI, grupo 2 (Casermeiro). Entrega previa (Etapa 1/2): armado
+  `entregables/TPI/caser/EspecificacionModelo_GRUPO_XX.md` + `.pdf`, cubriendo las 17 secciones de la
+  consigna (sistema, problema, límites, entidades, recursos, procesos, colas, variables, parámetros,
+  eventos, estados, relaciones, datos de entrada, indicadores, supuestos, preguntas de simulación,
+  diagrama) más autoevaluación contra el criterio central de la consigna (interpretado: si el documento
+  alcanza para construir el modelo sin preguntar nada más). Empresa presentada con nombre ficticio
+  ("Fijamet SRL") por primera vez en un entregable formal. Creados dos diagramas SVG propios (`figs/`):
+  flujo del sistema y estados del horno con la corrección de prioridad del 27/09. De paso, arreglado
+  `scripts/monografia-pdf.js`, que tenía la ruta de Chrome hardcodeada a macOS y no corría en Windows —
+  ahora detecta Chrome/Edge por SO o toma `CHROME_PATH`; y restaurado `node_modules/` con `npm install`
+  (faltaba `marked`, aunque estaba en `package.json`).
+
 - **2026-09-27** (2): TPI, grupo 2 (Casermeiro). **El docente aprobó la propuesta** — habilita empezar a
   modelar. Entrevista con el encargado del horno cerró casi todos los `[confirmar]` pendientes, con dos
   correcciones reales al diseño (no solo confirmaciones): (1) las ULI que llegan con el horno prendido

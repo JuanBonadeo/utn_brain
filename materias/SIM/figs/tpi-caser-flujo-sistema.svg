@@ -1,0 +1,102 @@
+<svg viewBox="0 0 1300 400" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="Flujo del sistema: un pedido dispara produccion directo (sin stock intermedio), pasa agregado por estampado y laminado, se parte en ULIs que esperan en la cola del horno y se tratan segun la regla de encendido, y sigue por lavado, zincado tercerizado y envasado hasta la entrega, donde se mide el tiempo de entrega contra el plazo comprometido. Los articulos sin tratamiento termico saltan el horno directo a lavado.">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1a1a1a"/>
+    </marker>
+  </defs>
+
+  <style>
+    text { font-family: Arial, Helvetica, sans-serif; fill: #1a1a1a; }
+    .caja { fill: #ffffff; stroke: #1a1a1a; stroke-width: 1.6; }
+    .cola { fill: #ffffff; stroke: #1a1a1a; stroke-width: 1.6; stroke-dasharray: 6 4; }
+    .recurso { fill: #eef4fb; stroke: #15406b; stroke-width: 2.6; }
+    .fuente { fill: #ffffff; stroke: #1a1a1a; stroke-width: 1.6; }
+    .titulo-caja { font-size: 13px; font-weight: bold; text-anchor: middle; }
+    .sub-caja { font-size: 10.5px; text-anchor: middle; }
+    .etiqueta { font-size: 10.5px; text-anchor: middle; }
+    .flecha { stroke: #1a1a1a; stroke-width: 1.4; fill: none; marker-end: url(#arrow); }
+  </style>
+
+  <!-- fila principal y=170..230 -->
+  <!-- 1. Pedido (fuente) -->
+  <rect class="fuente" x="10" y="170" width="110" height="60" rx="18"/>
+  <text class="titulo-caja" x="65" y="196">Pedido</text>
+  <text class="sub-caja" x="65" y="212">(entidad)</text>
+
+  <!-- 2. Aguas arriba -->
+  <rect class="caja" x="160" y="170" width="170" height="60"/>
+  <text class="titulo-caja" x="245" y="194">Aguas arriba</text>
+  <text class="sub-caja" x="245" y="209">estampado + laminado</text>
+  <text class="sub-caja" x="245" y="222">(agregado por familia)</text>
+
+  <!-- 3. Cola horno -->
+  <rect class="cola" x="380" y="170" width="120" height="60"/>
+  <text class="titulo-caja" x="440" y="196">Cola horno</text>
+  <text class="sub-caja" x="440" y="212">(FIFO, ULI)</text>
+
+  <!-- 4. Horno (recurso) -->
+  <rect class="recurso" x="540" y="160" width="150" height="80"/>
+  <text class="titulo-caja" x="615" y="188">Horno</text>
+  <text class="sub-caja" x="615" y="203">cementación + temple</text>
+  <text class="sub-caja" x="615" y="216">estados: Fig. 2</text>
+
+  <!-- 5. Lavado -->
+  <rect class="caja" x="730" y="170" width="100" height="60"/>
+  <text class="titulo-caja" x="780" y="205">Lavado</text>
+
+  <!-- 6. Zincado tercerizado -->
+  <rect class="caja" x="870" y="170" width="170" height="60"/>
+  <text class="titulo-caja" x="955" y="194">Zincado</text>
+  <text class="sub-caja" x="955" y="210">(tercerizado, plazo</text>
+  <text class="sub-caja" x="955" y="222">aleatorio)</text>
+
+  <!-- 7. Envasado -->
+  <rect class="caja" x="1080" y="170" width="100" height="60"/>
+  <text class="titulo-caja" x="1130" y="205">Envasado</text>
+
+  <!-- flechas fila principal -->
+  <line class="flecha" x1="120" y1="200" x2="158" y2="200"/>
+  <line class="flecha" x1="330" y1="200" x2="378" y2="200"/>
+  <line class="flecha" x1="500" y1="200" x2="538" y2="200"/>
+  <line class="flecha" x1="690" y1="200" x2="728" y2="200"/>
+  <line class="flecha" x1="830" y1="200" x2="868" y2="200"/>
+  <line class="flecha" x1="1040" y1="200" x2="1078" y2="200"/>
+
+  <!-- etiquetas de flechas -->
+  <text class="etiqueta" x="139" y="245">dispara producción</text>
+  <text class="etiqueta" x="139" y="257">(sin chequeo de stock)</text>
+  <text class="etiqueta" x="354" y="251">Split en ULIs</text>
+  <text class="etiqueta" x="519" y="251">según regla de</text>
+  <text class="etiqueta" x="519" y="263">encendido</text>
+  <text class="etiqueta" x="709" y="251">ULI tratada</text>
+  <text class="etiqueta" x="849" y="245">remito de</text>
+  <text class="etiqueta" x="849" y="257">ida y vuelta</text>
+  <text class="etiqueta" x="1059" y="251">artículo</text>
+  <text class="etiqueta" x="1059" y="263">zincado</text>
+
+  <!-- bypass: articulos sin tratamiento termico -->
+  <path class="flecha" d="M 245 168 C 245 90, 780 90, 780 168" />
+  <text class="etiqueta" x="512" y="80">si el artículo no lleva tratamiento térmico (bypass del horno)</text>
+
+  <!-- 8. Entrega (sumidero), fuera de la fila para dejar espacio -->
+  <rect class="fuente" x="1080" y="290" width="120" height="70"/>
+  <text class="titulo-caja" x="1140" y="316">Entrega</text>
+  <text class="sub-caja" x="1140" y="331">(sumidero)</text>
+  <text class="sub-caja" x="1140" y="344">mide plazo real</text>
+
+  <line class="flecha" x1="1130" y1="230" x2="1130" y2="288"/>
+  <text class="etiqueta" x="1160" y="255">vs. plazo</text>
+  <text class="etiqueta" x="1160" y="267">comprometido</text>
+  <text class="etiqueta" x="1160" y="279">→ nivel de servicio</text>
+
+  <!-- leyenda -->
+  <rect class="fuente" x="20" y="300" width="26" height="18"/>
+  <text x="54" y="313" font-family="Arial" font-size="10.5px">entidad (fuente / sumidero)</text>
+  <rect class="caja" x="20" y="326" width="26" height="18"/>
+  <text x="54" y="339" font-family="Arial" font-size="10.5px">proceso (delay)</text>
+  <rect class="cola" x="230" y="300" width="26" height="18"/>
+  <text x="264" y="313" font-family="Arial" font-size="10.5px">cola</text>
+  <rect class="recurso" x="230" y="326" width="26" height="18"/>
+  <text x="264" y="339" font-family="Arial" font-size="10.5px">recurso (capacidad limitada)</text>
+</svg>

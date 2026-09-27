@@ -1,0 +1,85 @@
+<svg viewBox="0 0 1200 460" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="Estados del horno: apagado, acumulando ULIs hasta cumplir el umbral o una prioridad por entrega comprometida, calentando 36 horas, procesando (alternando entre cargando y caliente en vacio, donde las ULI sin prioridad que llegan se guardan para la proxima campana), enfriando 48 horas y vuelta a apagado.">
+  <defs>
+    <marker id="arrow2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1a1a1a"/>
+    </marker>
+  </defs>
+  <style>
+    text { font-family: Arial, Helvetica, sans-serif; fill: #1a1a1a; }
+    .estado { fill: #ffffff; stroke: #1a1a1a; stroke-width: 1.6; }
+    .estado-activo { fill: #eef4fb; stroke: #15406b; stroke-width: 2.2; }
+    .contenedor { fill: none; stroke: #666666; stroke-width: 1.2; stroke-dasharray: 4 3; }
+    .titulo { font-size: 14px; font-weight: bold; text-anchor: middle; }
+    .sub { font-size: 10.5px; text-anchor: middle; }
+    .potencia { font-size: 10px; text-anchor: middle; fill: #444444; font-style: italic; }
+    .etiqueta { font-size: 10.5px; text-anchor: middle; }
+    .flecha { stroke: #1a1a1a; stroke-width: 1.4; fill: none; marker-end: url(#arrow2); }
+  </style>
+
+  <!-- Apagado -->
+  <rect class="estado" x="20" y="180" width="140" height="70"/>
+  <text class="titulo" x="90" y="210">Apagado</text>
+  <text class="potencia" x="90" y="226">potencia: 0</text>
+
+  <!-- Acumulando -->
+  <rect class="estado" x="230" y="180" width="150" height="70"/>
+  <text class="titulo" x="305" y="210">Acumulando</text>
+  <text class="potencia" x="305" y="226">potencia: 0</text>
+
+  <!-- Calentando -->
+  <rect class="estado" x="450" y="180" width="140" height="70"/>
+  <text class="titulo" x="520" y="210">Calentando</text>
+  <text class="potencia" x="520" y="226">potencia: P_cal</text>
+
+  <!-- Procesando (contenedor) -->
+  <rect class="contenedor" x="660" y="110" width="300" height="210"/>
+  <text class="sub" x="810" y="130" font-weight="bold">Procesando</text>
+
+  <rect class="estado-activo" x="685" y="160" width="110" height="60"/>
+  <text class="titulo" x="740" y="188" font-size="12.5px">Cargando</text>
+  <text class="potencia" x="740" y="202">P_mant</text>
+
+  <rect class="estado-activo" x="825" y="160" width="110" height="60"/>
+  <text class="titulo" x="880" y="182" font-size="12px">Caliente</text>
+  <text class="titulo" x="880" y="196" font-size="12px">en vacío</text>
+  <text class="potencia" x="880" y="210">P_mant</text>
+
+  <path class="flecha" d="M 795 175 C 810 168, 810 168, 823 175"/>
+  <text class="etiqueta" x="810" y="163">cola de la campaña vacía</text>
+
+  <path class="flecha" d="M 823 205 C 810 212, 810 212, 795 205"/>
+  <text class="etiqueta" x="810" y="242" font-weight="bold">llega ULI con prioridad</text>
+  <text class="etiqueta" x="810" y="254">(entrega comprometida)</text>
+
+  <text class="sub" x="810" y="275" font-style="italic">ULI sin prioridad que llegan acá:</text>
+  <text class="sub" x="810" y="288" font-style="italic">se guardan para la próxima campaña</text>
+
+  <!-- Enfriando -->
+  <rect class="estado" x="1020" y="180" width="140" height="70"/>
+  <text class="titulo" x="1090" y="210">Enfriando</text>
+  <text class="potencia" x="1090" y="226">potencia: 0</text>
+
+  <!-- flechas principales -->
+  <line class="flecha" x1="160" y1="215" x2="228" y2="215"/>
+  <text class="etiqueta" x="194" y="255">llega la 1ª ULI</text>
+
+  <line class="flecha" x1="380" y1="215" x2="448" y2="215"/>
+  <text class="etiqueta" x="414" y="248">cola ≥ umbral</text>
+  <text class="etiqueta" x="414" y="260">O prioridad</text>
+
+  <line class="flecha" x1="590" y1="215" x2="658" y2="215"/>
+  <text class="etiqueta" x="624" y="255">36 h</text>
+  <text class="etiqueta" x="624" y="267">(hCalentamiento)</text>
+
+  <line class="flecha" x1="880" y1="220" x2="880" y2="298"/>
+  <text class="etiqueta" x="960" y="315">horasEnVacio (corto:</text>
+  <text class="etiqueta" x="960" y="327">sin prioridad esperando)</text>
+  <line class="flecha" x1="880" y1="320" x2="1000" y2="320"/>
+  <line class="flecha" x1="1000" y1="320" x2="1000" y2="215"/>
+  <line class="flecha" x1="1000" y1="215" x2="1018" y2="215"/>
+
+  <!-- loop de vuelta a Apagado -->
+  <path class="flecha" d="M 1090 250 C 1090 400, 90 400, 90 252"/>
+  <text class="etiqueta" x="590" y="418">48 h (hEnfriamiento)</text>
+</svg>

@@ -30,7 +30,34 @@ const path = require('path');
 const { marked } = require('marked');
 
 const ROOT = path.resolve(__dirname, '..');
-const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+
+/* ─────────────────────────── chrome (multi-SO) ───────────────────────────
+   El repo lo tocan máquinas Mac y Windows. CHROME_PATH pisa todo; si no,
+   se prueban las ubicaciones típicas de cada SO en orden. */
+function detectChrome() {
+  if (process.env.CHROME_PATH && fs.existsSync(process.env.CHROME_PATH)) {
+    return process.env.CHROME_PATH;
+  }
+  const candidatos = {
+    darwin: [
+      '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+    ],
+    win32: [
+      'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+      'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
+      path.join(process.env.LOCALAPPDATA || '', 'Google\\Chrome\\Application\\chrome.exe'),
+      'C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe',
+      'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',
+    ],
+    linux: [
+      '/usr/bin/google-chrome',
+      '/usr/bin/chromium-browser',
+      '/usr/bin/chromium',
+    ],
+  }[process.platform] || [];
+  return candidatos.find((p) => p && fs.existsSync(p)) || candidatos[0] || null;
+}
+const CHROME = detectChrome();
 
 const argv = process.argv.slice(2);
 const flags = argv.filter((a) => a.startsWith('--'));
@@ -260,8 +287,9 @@ if (htmlOnly) process.exit(0);
 
 /* ─────────────────────────────── pdf ─────────────────────────────── */
 (async () => {
-  if (!fs.existsSync(CHROME)) {
-    console.error(`No encontré Chrome en ${CHROME}. Usá --html-only.`);
+  if (!CHROME || !fs.existsSync(CHROME)) {
+    console.error(`No encontré Chrome/Edge en ninguna ubicación conocida para ${process.platform}.`);
+    console.error('Definí la ruta con la variable de entorno CHROME_PATH, o usá --html-only.');
     process.exit(1);
   }
   const puppeteer = require('puppeteer-core');
