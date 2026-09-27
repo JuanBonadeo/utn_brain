@@ -171,11 +171,12 @@ exporta a planilla sin restricción. Lo que falta es ejecutar la exportación.
 | Tiempo aguas arriba (estampado + laminado) | ABM / ISO: OF con fecha de inicio y fin, cantidad, familia | Regresión tiempo = preparación + cantidad / tasa por familia; el residuo como distribución |
 | Tiempo entre arribos de ULI al horno (Etapa 1) | ISO: registro de cargas + OF | Ajuste sobre las fechas en que cada ULI quedó lista |
 | Tiempo de ciclo por ULI | ISO: registro de cargas | Determinístico (32 min), salvo que el registro muestre diferencias por familia |
+| Piezas y kg por ULI, por artículo | `Seguimiento TR ulis` ("Cant. x U.L.I." × "P. Pieza") | 🟡 La columna existe y la cantidad de piezas por ULI se valida cruzando contra "Total lote" (dividen exacto). El kg resultante da 0,1-0,2 kg/ULI, que no cierra contra los "60-90 t/mes" de capacidad instalada del brief inicial — **[confirmar con la empresa: "P. Pieza" está en gramos por unidad?]** antes de usar el número |
 | Plazo del zincado tercerizado | Remitos de ida y vuelta | Ajuste (lognormal / gamma) o empírica |
-| P_cal y P_mant (potencia media calentando y a temperatura) | Facturas de energía de 24 meses (2025 sin horno, 2026 con horno) + potencia nominal de las 27 resistencias | §2.3 |
-| Costo estándar y precio por artículo | ABM: maestro de artículos | Directo, en números índice |
+| P_cal y P_mant (potencia media calentando y a temperatura) | Corregido (27/09/2026): no hay un antes/después limpio por reactivación — el horno operó intermitente todo el período. Facturas de energía de 24 meses (a cruzar contra el modelo teórico ya calculado) + potencia nominal instalada (145 kW) | §2.3 |
+| Costo estándar y precio por artículo | Lista de precios de la empresa (Lista CASER) | Directo, en números índice. `PrecioPorPieza` ya calculado y comparable entre artículos |
 | Campañas por mes, ULI y kg por campaña, duración, espera | ISO: registro de cargas desde 01/2026 | **No son entradas**: se reservan para la validación (§4) |
-| Tasa de costo del capital inmovilizado | Empresa | Parámetro, con sensibilidad |
+| Tasa de costo del capital inmovilizado | Empresa (quien maneje finanzas, no el encargado de producción) | Parámetro, con sensibilidad. Pregunta sugerida: "si tuvieran esa plata en la cuenta en vez de en producto en proceso, ¿qué tasa mensual le pondrían a tenerla inmovilizada?" — alcanza una estimación gruesa |
 
 Formato del registro ISO de cargas **[confirmar: planilla o papel]**; si es papel se transcribe (del
 orden de 10 campañas × 75 ULI).
@@ -464,8 +465,11 @@ para mandar a fábrica está en `03-pedido-de-datos.md` §Pedido para el Tema 1)
    cuántas campañas hubo, se contaron directo de `Termico 2026` en vez de preguntarle de memoria: **12
    agrupamientos** de fechas de cementado entre enero y agosto 2026 (`datos-locales/_perfil/campanas_termico2026.md`),
    pero varios duran un solo día — no son 12 campañas limpias de "acumular y tratar", varias parecen ser
-   justamente los encendidos por prioridad del punto 1. Falta todavía si el registro es planilla o papel y
-   si anota consumo/lectura de medidor.
+   justamente los encendidos por prioridad del punto 1. **Simplificado (2026-09-27)**: que es planilla ya
+   está probado — es literalmente `Termico 2026.xlsx`. Lo único que falta es una pregunta bien puntual:
+   ¿alguien anota, en esa planilla u otra, el consumo real de gas o luz de una campaña, o una lectura de
+   medidor antes/después? Si no lo anotan, el costo energético queda como estimado (ya calculado, §2.3) en
+   vez de medido, y se declara así.
 5. ~~¿El ABM conserva presupuestos (PV) no convertidos y NV canceladas?~~ **Resuelto (2026-09-24)**: sí,
    vía los reportes de presupuestado/facturado. Fill rate histórico 49-51%. **Motivo, resuelto (2026-09-27)**:
    el encargado lo resume en dos causas — **stock y plazo**. Sin desglose por línea individual, pero

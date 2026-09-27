@@ -2772,6 +2772,18 @@ subte, y sobre la misma estación.
 
 ## Log
 
+- **2026-09-27** (4): TPI, grupo 2 (Casermeiro). Aclaradas varias dudas sobre los pendientes: stock
+  valorizado y tasa de capital explicados en criollo; corregido el registro ISO del horno a una sola
+  pregunta puntual (¿anotan consumo real o lectura de medidor?, ya que "planilla vs. papel" estaba resuelto
+  hace rato — es `Termico 2026.xlsx`). Encontrado un problema real al calcular kg por ULI: "Cant. x U.L.I."
+  × "P. Pieza" da 0,1-0,2 kg/ULI, que no cierra contra los 60-90 t/mes de capacidad instalada del brief
+  inicial — pendiente confirmar si "P. Pieza" está en gramos. **Hallazgo importante para la selección de
+  artículos**: los códigos de venta de mayor volumen son mayormente variantes de estuche, y el seguimiento
+  de producción está anotado contra el código granel — corregido el cruce (por prefijo de código), de 14 a
+  205 de 310 artículos con producción rastreada. Escrito `06-articulos-seleccionados.md` con una propuesta
+  de 15 artículos representativos (7 familias, mezcla de volumen y fill rate, un caso sin horno). Pendiente
+  de confirmar con la empresa si el nombre de fantasía debe ser distinto de "Caser" (que ya es la marca
+  pública) para no exponer la razón social real junto al concurso preventivo.
 - **2026-09-27** (3): TPI, grupo 2 (Casermeiro). Entrega previa (Etapa 1/2): armado
   `entregables/TPI/caser/EspecificacionModelo_GRUPO_XX.md` + `.pdf`, cubriendo las 17 secciones de la
   consigna (sistema, problema, límites, entidades, recursos, procesos, colas, variables, parámetros,
