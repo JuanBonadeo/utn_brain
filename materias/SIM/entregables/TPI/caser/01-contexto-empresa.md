@@ -20,10 +20,16 @@ Fuente: brief armado por la familia (2026-09-13) + respuestas de Gonzalo en la m
 - Nave Central (~1.000 m²): envasado, almacenamiento, comercial, logística.
 - Entrepiso (~600 m²): oficinas y almacenes.
 - Nave Sur (~900 m²): tratamientos térmicos y materia prima.
-- Horno propio de cementación y temple, **reactivado en 01/2026**. Relevado 2026-09-15/16:
+- Horno propio de cementación y temple. ~~Reactivado en 01/2026~~ **corregido (2026-09-27)**: el encargado
+  aclaró que no hubo un reencendido puntual en esa fecha — viene funcionando **de forma intermitente desde
+  antes**. Contando campañas directo de `Termico 2026`, aparecen 12 agrupamientos de fechas de cementado
+  entre enero y agosto 2026, pero varios de un solo día — consistente con "intermitente", no con una
+  reactivación y luego campañas regulares. Relevado 2026-09-15/16:
   - Eléctrico, 27 resistencias. ~36 h de calentamiento, ~48 h de enfriamiento.
-  - **Cinta continua**: las ULI (unidad de transporte interno) pasan de a una; ~15 ULI por turno.
-    Se enciende con ~70-80 ULI acumuladas; campaña de ~1 semana.
+  - **Cinta continua**: las ULI (unidad de transporte interno) pasan de a una. **Corregido (2026-09-27)**:
+    son **3 turnos de 8 h (24 h corridas)**, ~17 ULI/día — no "15 ULI por turno con un turno diario". Se
+    enciende con ~70-80 ULI acumuladas; con ese ritmo, ~4,4 días de procesamiento + 36 h + 48 h ≈ 7,9 días
+    de campaña completa, consistente con el "~1 semana" original.
   - Tiene **generador de gases endotérmicos** (atmósfera de cementación): consume gas mientras el
     horno está caliente y tiene su propio arranque. Es un costo más por encendido y por hora caliente.
   - Cada encendido/apagado **desgasta** el horno (resistencias, cinta, mufla): costo fijo por encendido

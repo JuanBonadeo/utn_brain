@@ -53,13 +53,20 @@ Control del horno: un **statechart** en `Main`, con una variable acumuladora de 
 | `Apagado` | inicio del modelo; fin del enfriamiento | hay ULI en cola → `Acumulando` (inmediato) | 0 |
 | `Acumulando` | primera ULI en cola | por **condición** `colaHorno.size() >= umbralULI`, o por **timeout** de espera máxima cuando la regla lo tiene → `Calentando` | 0 |
 | `Calentando` | regla cumplida | **timeout** `hCalentamiento` = 36 h → `Procesando` | P_cal |
-| `Procesando` (subestados `Cargando` / `CalienteEnVacio`) | fin del calentamiento | `Cargando` ↔ `CalienteEnVacio` según la cola tenga o no ULI; de `CalienteEnVacio`, **timeout** `horasEnVacio` → `Enfriando` | P_mant |
+| `Procesando` (subestados `Cargando` / `CalienteEnVacio`) | fin del calentamiento | `Cargando` ↔ `CalienteEnVacio` según la cola tenga o no ULI; de `CalienteEnVacio`, **timeout** `horasEnVacio` → `Enfriando`, salvo prioridad (ver abajo) | P_mant |
 | `Enfriando` | fin de la campaña | **timeout** `hEnfriamiento` = 48 h → `Apagado` | 0 |
 
-Las ULI que llegan durante `Procesando` se suman a la campaña en curso: la campaña no se limita a las
-que dispararon el encendido **[confirmar con el encargado]**. `horasEnVacio` es cuánto se mantiene el
-horno caliente con la cola vacía antes de apagarlo; en la base vale lo que haga hoy el encargado
-**[confirmar; supuesto: hasta el fin del turno]** y es el parámetro que estira el escenario E3 (§3.2).
+**Confirmado con el encargado (2026-09-27) — corrige el supuesto original**: las ULI que llegan mientras el
+horno está prendido **no** se suman a la campaña en curso por defecto — se guardan para la próxima. Y
+`horasEnVacio` **no** es "hasta el fin del turno": la regla es apagar apenas la cola queda vacía, salvo una
+excepción puntual por **prioridad**: si se sabe que en el corto plazo va a entrar un producto que hay que
+tratar y que tiene una entrega comprometida que no puede esperar a la próxima campaña, ahí sí se mantiene
+caliente para esperarlo (confirmado también que adelantan el encendido por el mismo motivo). En el modelo:
+`horasEnVacio` pasa a ser corto por default (a ajustar con el registro — puede ser casi 0) y solo se
+extiende cuando una ULI marcada `prioridad=true` (producto con entrega comprometida, conocido de antemano
+por una OF o un pedido) está en camino; esa marca también dispara el adelanto de `Acumulando → Calentando`
+antes de llegar al umbral. El escenario E3 ("mantener caliente") pasa a ser esto, no un buffer de tiempo
+fijo.
 Si la regla se cumple durante `Enfriando`, en el modelo base se espera el fin del enfriamiento y se
 recalienta con las 36 h completas (supuesto conservador: a lo sumo 48 h de demora extra); el
 recalentamiento parcial desde tibio queda como sensibilidad.
@@ -74,7 +81,7 @@ modelo; es lo que se compara con el registro ISO de cargas (§4).
 |---|---|
 | 36 h de calentamiento | timeout de `Calentando → Procesando` (parámetro `hCalentamiento`) |
 | 48 h de enfriamiento | timeout de `Enfriando → Apagado` (parámetro `hEnfriamiento`) |
-| 15 ULI por turno | `Delay` de 32 min con capacidad 1, más `operadorHorno` disponible solo en el turno (`Schedule`). Un turno de carga por día **[confirmar: uno o más durante la campaña]** |
+| ~17 ULI/día (corrige "15 por turno") | **Confirmado (2026-09-27)**: son **3 turnos de 8 h** cubriendo las 24 h, no un turno por día. `Delay` de 32 min con capacidad 1, `operadorHorno` con `Schedule` de 3 turnos continuos durante `Procesando` |
 | Umbral de 70-80 ULI | parámetro `umbralULI = 75`; 70 y 80 como sensibilidad |
 | Campaña de ~1 semana | **no es un parámetro, es una salida**: 75 ULI / 15 por turno = 5 turnos de carga. Que el modelo devuelva ~1 semana es una verificación |
 | 84 h de preparación por 40 h de proceso | idem: emerge de los tres puntos anteriores |
@@ -302,9 +309,13 @@ espera.
 
 ### 4.1 Contra qué, y con qué tolerancia
 
-El horno se reactivó en 01/2026, así que la historia útil son ~8 meses de registro ISO **[confirmar
-cuántas campañas: estimamos 8-12, y si hay registros de antes de la parada]**. Escenario base, corrido
-con el mismo lapso y nivel de demanda que la historia:
+**Corregido (2026-09-27)**: no hubo reactivación puntual en 01/2026 — el horno opera intermitente desde
+antes. La historia útil sigue siendo ~8 meses (enero-agosto 2026) porque es lo que cubre `Termico 2026`,
+pero ya no hay que excluir un "transitorio de puesta a punto" post-reactivación: son 12 agrupamientos de
+fechas de cementado en ese lapso (contados directo del registro, no eran 8-12 campañas limpias como se
+estimaba — varias duran un solo día, ver `01-contexto-empresa.md`). Falta todavía confirmar si hay
+registros de antes de enero 2026 y si el formato es planilla o papel. Escenario base, corrido con el mismo
+lapso y nivel de demanda que la historia:
 
 | Métrica histórica | Fuente | Tolerancia |
 |---|---|---|
@@ -435,20 +446,34 @@ informe se reconstruye desde ahí.
 **Lo que hay que cerrar con la empresa antes de mandar esto** (los `[confirmar]` del texto; la lista completa
 para mandar a fábrica está en `03-pedido-de-datos.md` §Pedido para el Tema 1):
 
-1. ¿Las ULI que llegan mientras el horno está caliente se suman a la campaña en curso? ¿Cuánto se
-   mantiene caliente con la cola vacía antes de apagar (`horasEnVacio`)?
-2. ¿Cuántos turnos de carga por día durante la campaña? El formulario dice "un solo turno, salvo
-   durante las campañas"; con 15 ULI/turno y ~1 semana de campaña cierra con **un** turno de carga
-   por día. Si son más turnos, la campaña dura 2-3 días y hay que revisar el "~1 semana".
-3. ¿El encargado adelanta el encendido por pedidos comprometidos? Cambia la regla base.
+1. ~~¿Las ULI que llegan mientras el horno está caliente se suman a la campaña en curso? ¿Cuánto se
+   mantiene caliente con la cola vacía antes de apagar?~~ **Resuelto (2026-09-27)**: no se suman por
+   defecto — se guardan para la próxima campaña. Se mantiene caliente (o se adelanta el encendido) solo por
+   **prioridad**: cuando se sabe que entra pronto un producto con entrega comprometida que no puede esperar
+   a la próxima. Corregido el statechart en §1.2.
+2. ~~¿Cuántos turnos de carga por día?~~ **Resuelto**: son **3 turnos de 8 h (24 h corridas)**, ~17
+   ULI/día, no "15 por turno con un turno diario". Esto además **reconcilia** el "~1 semana" del brief
+   original: 75 ULI / 17 por día ≈ 4,4 días de procesamiento; sumando 36 h de calentamiento y 48 h de
+   enfriamiento da ≈ 7,9 días de campaña completa — consistente con "~1 semana". Corregido en §1.3.
+3. ~~¿El encargado adelanta el encendido por pedidos comprometidos?~~ **Resuelto: sí** (mismo mecanismo
+   de prioridad del punto 1).
 4. Registro ISO de cargas: ¿planilla o papel? ¿Anota consumo o lectura de medidor por campaña?
-   ¿Cuántas campañas hay desde 01/2026? ¿Hay registros de antes de la parada del horno?
+   **Parcialmente resuelto**: el encargado aclaró que **el horno no tuvo un reencendido puntual en 01/2026**
+   — viene funcionando **intermitente desde antes**, lo que contradice el "reactivado en 01/2026" que
+   traíamos del brief inicial de la familia **[a reconciliar — ver `01-contexto-empresa.md`]**. Sobre
+   cuántas campañas hubo, se contaron directo de `Termico 2026` en vez de preguntarle de memoria: **12
+   agrupamientos** de fechas de cementado entre enero y agosto 2026 (`datos-locales/_perfil/campanas_termico2026.md`),
+   pero varios duran un solo día — no son 12 campañas limpias de "acumular y tratar", varias parecen ser
+   justamente los encendidos por prioridad del punto 1. Falta todavía si el registro es planilla o papel y
+   si anota consumo/lectura de medidor.
 5. ~~¿El ABM conserva presupuestos (PV) no convertidos y NV canceladas?~~ **Resuelto (2026-09-24)**: sí,
-   vía los reportes de presupuestado/facturado. Fill rate histórico 49-51%. Falta cerrar con la empresa el
-   **motivo** de cada línea no entregada (¿faltó stock, el plazo no sirvió, precio, se lo llevó otro
-   proveedor?) — el reporte solo da la brecha cantidad-entrega, no la causa, y sin eso no se puede separar
-   lo que el modelo puede explicar (stock/horno) de lo que no.
-6. ¿Un turno adicional de carga durante la campaña es operable? Define si existe el E4.
+   vía los reportes de presupuestado/facturado. Fill rate histórico 49-51%. **Motivo, resuelto (2026-09-27)**:
+   el encargado lo resume en dos causas — **stock y plazo**. Sin desglose por línea individual, pero
+   confirma que las dos causas dominantes son justo las que el modelo captura (disponibilidad y tiempo de
+   entrega vía el horno), no precio ni competencia — valida la relevancia del Tema 1.
+6. ~~¿Un turno adicional de carga durante la campaña es operable?~~ **Ya no aplica**: el punto 2 mostró
+   que ya son 3 turnos (24 h), no queda un turno adicional que agregar. El encargado no entendió la
+   pregunta porque, con la info real, no tenía sentido — se cae el escenario E4.
 7. Facturas de energía: 24 meses, con potencia contratada y si hay penalización por exceso.
 8. De los 10-30 artículos elegidos, ¿cuáles requieren revenido? Para esos, la mediana histórica de
    `Termico 2026`/hoja Revenido (o de la columna "Revenido" de `Seguimiento TR ulis`) da la demora fija
@@ -457,11 +482,14 @@ para mandar a fábrica está en `03-pedido-de-datos.md` §Pedido para el Tema 1)
    general confirmada es "todo contra pedido" — ver §1.5).
 
 **Supuestos que quedaron escritos en la respuesta** (si alguno está mal, corregir ahí):
-un turno de carga por día; horno de una ULI a la vez (32 min); las ULI que llegan durante la campaña
-se procesan; sin recalentamiento parcial desde tibio en la base; campaña actual sin límite de espera;
-revenido fuera del modelo (otro equipo, no aplica a todo el catálogo, se estima como demora fija donde
-corresponda); sin política de stock (s, Q) — todo contra pedido, confirmado por la empresa, salvo
-excepciones puntuales a identificar entre los artículos elegidos.
+**3 turnos de 8 h (24 h), ~17 ULI/día** (corregido 2026-09-27, antes decía "un turno por día"); horno de una
+ULI a la vez (32 min); **las ULI que llegan durante la campaña NO se procesan en ella — se guardan para la
+próxima, salvo prioridad por entrega comprometida** (corregido 2026-09-27, antes era al revés); sin
+recalentamiento parcial desde tibio en la base; campaña actual sin límite de espera fijo, con adelanto de
+encendido y extensión de `horasEnVacio` por prioridad (confirmado); revenido fuera del modelo (otro equipo,
+no aplica a todo el catálogo, se estima como demora fija donde corresponda); sin política de stock (s, Q) —
+todo contra pedido, confirmado por la empresa, salvo excepciones puntuales a identificar entre los
+artículos elegidos.
 
 **Qué sale de la wiki y qué no**: la parte estadística (réplicas, precisión, procedimiento secuencial,
 paired-t, Welch, números aleatorios comunes, Bonferroni, cuantiles) y los 10 pasos salen de SIM.md,

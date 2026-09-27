@@ -2582,11 +2582,15 @@ Descartado explícitamente del alcance: flujo de caja y tiempo de supervivencia 
 una política es aritmética, no simulación; las salidas del modelo (compras, inventario, campañas, ventas por
 período) alimentan una proyección externa en planilla. Queda como trabajo futuro.
 
-Estado (2026-09-16): la propuesta se envió al docente, que respondió con cinco preguntas de fondo (cómo se
+**Estado (2026-09-27): el docente aprobó la propuesta.** Modelado habilitado — ya se puede empezar a
+construir en AnyLogic. Pendiente entregar hoy un documento de avance (a definir formato con el docente).
+Historial: la propuesta se envió el 16/09, el docente respondió con cinco preguntas de fondo (cómo se
 modela el horno en AnyLogic, qué datos hay, cuál es la regla actual y las alternativas, cómo se valida, cómo se
-diseña el experimento). Las respuestas están en `05-respuestas-al-docente.md`; antes de mandarlas hay que cerrar
-los `[confirmar]` con la empresa (turnos de carga durante la campaña, si las ULI que llegan con el horno caliente
-se suman a la campaña, si el encargado adelanta encendidos por pedidos comprometidos, formato del registro ISO).
+diseña el experimento), quedaron respondidas en `05-respuestas-al-docente.md`, y la mayoría de los
+`[confirmar]` con la empresa se cerraron el 27/09 en una entrevista con el encargado — con dos correcciones
+reales al diseño (ver Log): las ULI que llegan con el horno prendido NO se suman a la campaña en curso salvo
+prioridad, y son 3 turnos de 8 h (no un turno por día). También se corrigió que el horno no tuvo una
+reactivación puntual en 01/2026 — opera intermitente desde antes.
 La empresa confirmó que toda la información existe; falta ejecutar la exportación del ABM (ver
 `04-formulario-eleccion-tema.md` §Estado de los datos). El dato que más cambia el análisis: si el sistema conserva y exporta los presupuestos no
 concretados y las notas de venta canceladas, hay medición retroactiva de venta perdida; si no, la venta
@@ -2767,6 +2771,20 @@ subte, y sobre la misma estación.
 ---
 
 ## Log
+
+- **2026-09-27** (2): TPI, grupo 2 (Casermeiro). **El docente aprobó la propuesta** — habilita empezar a
+  modelar. Entrevista con el encargado del horno cerró casi todos los `[confirmar]` pendientes, con dos
+  correcciones reales al diseño (no solo confirmaciones): (1) las ULI que llegan con el horno prendido
+  **no** se suman a la campaña en curso por defecto — se guardan para la próxima, salvo prioridad por
+  entrega comprometida (antes se asumía lo contrario); (2) son **3 turnos de 8 h (24 h), ~17 ULI/día**, no
+  "15 por turno con un turno diario" — esto además reconcilia el "~1 semana" de campaña completa del brief
+  original (4,4 días de proceso + 36h + 48h ≈ 7,9 días). También se corrigió que el horno **no tuvo una
+  reactivación puntual en 01/2026** — opera intermitente desde antes; contadas 12 agrupaciones de campañas
+  en `Termico 2026` directamente (varias de un solo día, consistente con encendidos por prioridad). Motivo
+  de la venta perdida: stock y plazo, confirmado. Se cae el escenario E4 (turno adicional — ya no aplica,
+  son 3 turnos). Actualizados `01-`, `02-` y `05-respuestas-al-docente.md`. Pendiente: doc de avance a
+  entregar hoy (formato por confirmar), y los 5 precios de artículos de alto volumen sin precio en la Lista
+  CASER (aún no llegaron).
 
 - **2026-09-27**: TPI, grupo 2 (Casermeiro). Decisión de alcance: el universo de artículos para elegir los
   10-30 representativos del Tema 1 se restringe a los que tienen precio en la Lista CASER. De los 253

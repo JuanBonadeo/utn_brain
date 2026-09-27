@@ -84,9 +84,11 @@ stock que genera un contenedor y el riesgo de quedarse sin producto durante 90 d
 energía por kilo, más demora) o correr cargas parciales (más rápido, más caro por kilo)? ¿Qué regla de
 lanzamiento minimiza el costo sin disparar el tiempo de entrega?
 
-**Por qué le sirve**: el horno se reactivó en 01/2026 seguramente para dejar de tercerizar el tratamiento.
-Con volumen bajo, la regla de carga define si esa reactivación conviene o no. Es un costo energético
-grande y una decisión que hoy alguien toma todos los días a criterio.
+**Por qué le sirve**: el horno funciona de forma intermitente (no fue una reactivación puntual — corregido
+2026-09-27, ver `01-contexto-empresa.md`), con encendidos y apagados frecuentes. Con volumen bajo, la regla
+de carga es la que define si conviene mantenerlo así o cambiar el criterio. Es un costo energético grande
+y una decisión que hoy alguien toma todos los días con criterio propio (con adelanto/extensión puntual por
+pedidos comprometidos, confirmado por el encargado).
 
 **Escenarios**
 - Base: regla actual (a relevar: "se corre cuando hay X kg" o "cada N días").
