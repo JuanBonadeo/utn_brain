@@ -135,7 +135,7 @@ dispara su propia orden de producción.
 | Costo de máquina | 0,665 $/min (electricidad + aceite de temple + aire comprimido + gas del generador endotérmico + catalizador) | Planilla interna de costo energético |
 | Consumo del generador de gases endotérmicos (GLP) | 📌 pendiente — factura de GLP comprometida para el 28/09 | Empresa |
 | Tarifa eléctrica y potencia contratada | 📌 pendiente — facturas de 24 meses comprometidas para el 28/09 | Empresa |
-| Piezas y kg por ULI, por artículo | Parcial — depende de la relación lata↔ULI, no confirmada todavía | Planillas de oficina técnica |
+| Kg por ULI, por artículo | ✅ Resuelto (28/09/2026): 143 kg/ULI en promedio (mediana 136, rango 5,9-362,5 sobre 310 artículos). Con el umbral de 75 ULI, una campaña mueve ≈10 t — ≈17-25 % de la capacidad instalada, consistente con planta subutilizada | `Seguimiento TR ulis` |
 | Precio de lista y costo índice por artículo | Precio: lista de precios oficial. Costo: precio de lista × 0,335 (fórmula provista por la empresa: 50 % de bonificación máxima, 33 % de rentabilidad bruta sobre el precio bonificado) | Lista de precios de la empresa |
 | Tasa de costo del capital inmovilizado | 📌 pendiente, a definir con la empresa | — |
 
@@ -182,7 +182,7 @@ concreta o se pierde, y es la salida que conecta el subsistema del horno con el 
 | Duración de campaña, cantidad de campañas | 🟡 Parcial — el patrón real es más irregular de lo asumido; se derivó directamente del registro, no coincide con "una campaña semanal" limpia | Registro de tratamiento térmico |
 | Plazo del zincado tercerizado | ✅ Resuelto, con dos fuentes cruzables | Tablero de seguimiento de ULI + registro de envasado |
 | Precio y costo índice por artículo | 🟡 Parcial — resuelto para los artículos con precio en la lista oficial; quedan 5 artículos de alto volumen pendientes de precio | Lista de precios de la empresa |
-| Kg por ULI | 🟡 Parcial — falta confirmar la relación lata↔ULI | Ficha técnica de artículos |
+| Kg por ULI | ✅ Resuelto (28/09/2026) — 143 kg/ULI en promedio | `Seguimiento TR ulis` |
 | Costo energético del horno | ✅ Resuelto (electricidad) / 📌 pendiente (GLP y facturas reales de cruce) | Planilla interna de costo + facturas comprometidas para el 28/09 |
 | Stock valorizado inicial | 📌 Pendiente | Empresa |
 | Política de stock | ✅ Resuelto: no existe — todo contra pedido, salvo excepciones puntuales aún no identificadas | Confirmado por la empresa |
@@ -256,10 +256,10 @@ independiente (sección 13). Lo que todavía falta definir para llegar al 100 %:
 
 - El costo del GLP del generador endotérmico y el cruce contra facturas reales de energía (comprometidos
   para el 28/09).
-- La relación kg/ULI exacta, la política de stock vs. contra pedido si la empresa la tuviera para algún
-  artículo elegido, y el precio de 5 artículos de alto volumen todavía sin listar oficialmente.
-- La elección final de los 10 a 30 artículos representativos del modelo (el criterio de selección está
-  definido; falta ejecutarlo).
+- El precio de 5 artículos de alto volumen todavía sin listar oficialmente, y si alguno de los artículos
+  elegidos es una de las excepciones que sí llevan stock.
+- Confirmar la elección final de los 10 a 30 artículos representativos (hay una propuesta de 15 armada y
+  pendiente de validar con la empresa).
 - La tasa de costo del capital inmovilizado, que la empresa todavía no proveyó.
 
 Ninguno de estos puntos cambia la estructura del modelo — son valores de parámetros, no componentes sin

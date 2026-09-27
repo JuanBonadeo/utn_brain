@@ -2772,6 +2772,13 @@ subte, y sobre la misma estación.
 
 ## Log
 
+- **2026-09-28**: TPI, grupo 2 (Casermeiro). Resuelto el kg por ULI: la empresa confirmó que "Cant. x
+  U.L.I." y "P. Pieza" en `Seguimiento TR ulis` están en **millares**, no en piezas sueltas — kg/ULI =
+  Cant. x U.L.I. × P. Pieza directo. Sobre 310 artículos: media 143 kg/ULI (mediana 136, rango 5,9-362,5).
+  Con el umbral de 75 ULI, una campaña mueve ≈10 t, que reconcilia bien contra los "60-90 t/mes" de
+  capacidad instalada del brief inicial (≈17-25% de utilización, consistente con planta subutilizada).
+  Actualizados `05-respuestas-al-docente.md` y `EspecificacionModelo_GRUPO_XX.md/.pdf/.docx`.
+
 - **2026-09-27** (4): TPI, grupo 2 (Casermeiro). Aclaradas varias dudas sobre los pendientes: stock
   valorizado y tasa de capital explicados en criollo; corregido el registro ISO del horno a una sola
   pregunta puntual (¿anotan consumo real o lectura de medidor?, ya que "planilla vs. papel" estaba resuelto
