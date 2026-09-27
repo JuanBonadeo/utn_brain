@@ -179,6 +179,12 @@ Materias y un tema corto y específico.
   poné matrices y tablas alineadas dentro de bloques de código. Evitá `*` sueltos
   pegados a negritas (ej. `z*`). LaTeX solo va dentro de los archivos de la
   wiki y de `estudio/`, que se leen con visor de markdown.
+- Archivos clickeables: cuando en el chat nombres un archivo del repo, escribilo
+  como enlace markdown con ruta absoluta `file://`, que en la terminal de Orca
+  se abre con un click. Formato:
+  `[practica-4-sensibilidad-dualidad.md](file:///Users/juanbonadeo/Desktop/UTN/materias/IO/estudio/practica-4-sensibilidad-dualidad.md)`.
+  Los espacios de la ruta van como `%20`. Aplica solo al chat; dentro de la
+  wiki se siguen usando `[[wikilinks]]` y rutas relativas.
 
 ## TONO
 Directo, riguroso, sin adornos. Si algo está mal resuelto, decilo claro
