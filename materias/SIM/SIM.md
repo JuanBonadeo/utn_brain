@@ -2772,6 +2772,15 @@ subte, y sobre la misma estación.
 
 ## Log
 
+- **2026-09-28** (2): TPI, grupo 2 (Casermeiro). El grupo tiene 5 integrantes, no solo Gonzalo: Brizio
+  Augusto (52479), Casermeiro Gonzalo (52674), Constantini Jeremias, Messina Tiziano, Navos Juan Ignacio
+  (los tres últimos sin legajo todavía). Actualizada la carátula de `EspecificacionModelo_GRUPO_XX.md/.pdf`.
+  Agregada una aclaración de que la herramienta prevista para la Etapa 2/2 es AnyLogic 8 (Process Modeling
+  Library) — no se detalló antes a propósito, para mantener la especificación independiente de la
+  herramienta; se aclaró solo a título informativo tras una duda del grupo. Limpiados los marcadores
+  internos (✅/🟡) del documento de avance, siguiendo la edición que hizo el grupo en Google Docs; el `.docx`
+  no se regeneró para no pisar esa copia, que sigue siendo la de trabajo colaborativo.
+
 - **2026-09-28**: TPI, grupo 2 (Casermeiro). Resuelto el kg por ULI: la empresa confirmó que "Cant. x
   U.L.I." y "P. Pieza" en `Seguimiento TR ulis` están en **millares**, no en piezas sueltas — kg/ULI =
   Cant. x U.L.I. × P. Pieza directo. Sobre 310 artículos: media 143 kg/ULI (mediana 136, rango 5,9-362,5).

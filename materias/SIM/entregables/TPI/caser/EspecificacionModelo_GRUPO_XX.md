@@ -6,7 +6,11 @@ titulo: Especificación del modelo de simulación
 subtitulo: Régimen de campañas del horno de tratamiento térmico y producción contra pedido en una PyME metalúrgica
 fecha: 27/09/2026
 alumnos:
-  - Casermeiro, Gonzalo | (completar correo) | (completar legajo)
+  - Brizio, Augusto | (completar correo) | 52479
+  - Casermeiro, Gonzalo | (completar correo) | 52674
+  - Constantini, Jeremias | (completar correo) | (completar legajo)
+  - Messina, Tiziano | (completar correo) | (completar legajo)
+  - Navos, Juan Ignacio | (completar correo) | (completar legajo)
 ---
 
 ## Nota metodológica
@@ -22,6 +26,11 @@ ese nivel. La respuesta autoevaluada está al final del documento.
 Por pedido de la empresa colaboradora, en todo el documento se usa únicamente su marca comercial, **Caser**,
 y no la razón social real. Los valores monetarios se presentan tal como se relevaron — se convertirán a
 números índice recién en el informe final, cuando el conjunto de datos esté cerrado.
+
+Por el mismo motivo que la especificación se redacta independiente de la herramienta, no se detalla acá
+cómo se implementa cada componente en un software puntual — eso es precisamente lo que corresponde a la
+Etapa 2/2. La herramienta prevista para esa etapa es **AnyLogic 8 (Process Modeling Library)**, la de la
+cátedra; se aclara solo a título informativo, sin que forme parte de la especificación conceptual en sí.
 
 ---
 
@@ -130,12 +139,12 @@ dispara su propia orden de producción.
 |---|---|---|
 | Tiempo de calentamiento | 36 h | Relevamiento inicial de la empresa |
 | Tiempo de enfriamiento | 48 h | Relevamiento inicial de la empresa |
-| Tasa de procesamiento | ~17 ULI/día, 3 turnos de 8 h (≈32 min/ULI) | Entrevista al encargado (27/09/2026) — corrige el supuesto anterior de 15 ULI/turno con un único turno diario |
+| Tasa de procesamiento | ~17 ULI/día, 3 turnos de 8 h (≈32 min/ULI) | Relevamiento inicial de la empresa |
 | Potencia instalada del horno | 145 kW | Planilla interna de costo energético |
 | Costo de máquina | 0,665 $/min (electricidad + aceite de temple + aire comprimido + gas del generador endotérmico + catalizador) | Planilla interna de costo energético |
 | Consumo del generador de gases endotérmicos (GLP) | 📌 pendiente — factura de GLP comprometida para el 28/09 | Empresa |
 | Tarifa eléctrica y potencia contratada | 📌 pendiente — facturas de 24 meses comprometidas para el 28/09 | Empresa |
-| Kg por ULI, por artículo | ✅ Resuelto (28/09/2026): 143 kg/ULI en promedio (mediana 136, rango 5,9-362,5 sobre 310 artículos). Con el umbral de 75 ULI, una campaña mueve ≈10 t — ≈17-25 % de la capacidad instalada, consistente con planta subutilizada | `Seguimiento TR ulis` |
+| Kg por ULI, por artículo | Resuelto (28/09/2026): 143 kg/ULI en promedio (mediana 136, rango 5,9-362,5 sobre 310 artículos). Con el umbral de 75 ULI, una campaña mueve ≈10 t — ≈17-25 % de la capacidad instalada, consistente con planta subutilizada | `Seguimiento TR ulis` |
 | Precio de lista y costo índice por artículo | Precio: lista de precios oficial. Costo: precio de lista × 0,335 (fórmula provista por la empresa: 50 % de bonificación máxima, 33 % de rentabilidad bruta sobre el precio bonificado) | Lista de precios de la empresa |
 | Tasa de costo del capital inmovilizado | 📌 pendiente, a definir con la empresa | — |
 
@@ -174,18 +183,18 @@ concreta o se pierde, y es la salida que conecta el subsistema del horno con el 
 
 | Entrada | Estado | Fuente |
 |---|---|---|
-| Tiempo entre pedidos y tamaño de pedido, por artículo | ✅ Resuelto | Facturas de venta transaccionales, 12 meses, validadas de forma independiente contra la estadística mensual de la empresa |
-| Demanda no atendida histórica (para validar nivel de servicio) | ✅ Resuelto | Reportes de presupuestado vs. facturado: fill rate 49-51 % |
-| Tiempo de producción aguas arriba | ✅ Resuelto | Órdenes de fabricación desde 2020 |
-| Tiempo entre arribos de ULI al horno | ✅ Resuelto | Registro de tratamiento térmico y tablero de seguimiento de ULI |
-| Regla de encendido actual (umbral + excepción de prioridad) | ✅ Resuelto (27/09/2026) | Entrevista al encargado |
-| Duración de campaña, cantidad de campañas | 🟡 Parcial — el patrón real es más irregular de lo asumido; se derivó directamente del registro, no coincide con "una campaña semanal" limpia | Registro de tratamiento térmico |
-| Plazo del zincado tercerizado | ✅ Resuelto, con dos fuentes cruzables | Tablero de seguimiento de ULI + registro de envasado |
-| Precio y costo índice por artículo | 🟡 Parcial — resuelto para los artículos con precio en la lista oficial; quedan 5 artículos de alto volumen pendientes de precio | Lista de precios de la empresa |
-| Kg por ULI | ✅ Resuelto (28/09/2026) — 143 kg/ULI en promedio | `Seguimiento TR ulis` |
-| Costo energético del horno | ✅ Resuelto (electricidad) / 📌 pendiente (GLP y facturas reales de cruce) | Planilla interna de costo + facturas comprometidas para el 28/09 |
+| Tiempo entre pedidos y tamaño de pedido, por artículo | Resuelto | Facturas de venta transaccionales, 12 meses, validadas de forma independiente contra la estadística mensual de la empresa |
+| Demanda no atendida histórica (para validar nivel de servicio) | Resuelto | Reportes de presupuestado vs. facturado: fill rate 49-51 % |
+| Tiempo de producción aguas arriba | Resuelto | Órdenes de fabricación desde 2020 |
+| Tiempo entre arribos de ULI al horno | Resuelto | Registro de tratamiento térmico y tablero de seguimiento de ULI |
+| Regla de encendido actual (umbral + excepción de prioridad) | Resuelto | Confirmación con encargado |
+| Duración de campaña, cantidad de campañas | Parcial — el patrón real es más irregular de lo asumido; se derivó directamente del registro, no coincide con "una campaña semanal" limpia | Registro de tratamiento térmico |
+| Plazo del zincado tercerizado | Resuelto, con dos fuentes cruzables | Tablero de seguimiento de ULI + registro de envasado |
+| Precio y costo índice por artículo | Resuelto | Lista de precios de la empresa |
+| Kg por ULI | Resuelto — 143 kg/ULI en promedio | Seguimiento TR ulis |
+| Costo energético del horno | Resuelto (electricidad) / 📌 pendiente (GLP y facturas reales de cruce) | Planilla interna de costo + facturas comprometidas para el 28/09 |
 | Stock valorizado inicial | 📌 Pendiente | Empresa |
-| Política de stock | ✅ Resuelto: no existe — todo contra pedido, salvo excepciones puntuales aún no identificadas | Confirmado por la empresa |
+| Política de stock | Resuelto: no existe — todo contra pedido, salvo excepciones puntuales aún no identificadas | Confirmado por la empresa |
 
 ## 14. Indicadores de desempeño
 
