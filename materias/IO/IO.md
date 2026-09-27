@@ -19,7 +19,7 @@
 > primer parcial acotado a las Unidades 1–5), en 2026 hay **un único parcial** y el alcance
 > es **todo el programa**. Lo respaldan los dos materiales de circulación entre alumnos
 > bajados el 2026-09-27 — `fuentes/resumen-operativa-companero.pdf` (32 pág.) y
-> `fuentes/preguntas-frecuentes.pdf` (20 pág., **106 preguntas de teoría**) —, que recorren
+> `fuentes/preguntas-frecuentes.pdf` (20 pág., **89 preguntas de teoría**) —, que recorren
 > la misma secuencia: PL → conceptos básicos → Simplex → sensibilidad → dualidad →
 > transporte/trasbordo/asignación → entera y mixta → redes → stock. *No son material
 > oficial de cátedra: el alcance sigue sin confirmarse con el profesor.*
@@ -28,13 +28,13 @@
 > - **CPM/PERT y programación no lineal no figuran en ninguno de los dos.** Las Unidades 10
 >   y 12 quedan fuera del alcance presunto. (Lagrange sí aparece, pero como herramienta
 >   dentro del stock multiartículo con limitaciones, no como unidad de PNL.)
-> - **LINDO no es tema con preguntas propias**: cero menciones en las 106 preguntas. Aparece
+> - **LINDO no es tema con preguntas propias**: cero menciones en las 89 preguntas. Aparece
 >   solo como herramienta en dos lugares — en redes, *"el algoritmo especializado no es
 >   objeto de examen; alcanza con plantear el modelo y resolverlo con LINDO"*; y en entera,
 >   como trampa: la sensibilidad que reporta LINDO **no es válida** en un programa entero,
 >   porque corresponde al relajado, no al modelo con los cortes de ramificación y poda.
 >
-> **Reparto de las 106 preguntas por tema** — dónde está el peso real de la teoría:
+> **Reparto de las 89 preguntas por tema** — dónde está el peso real de la teoría:
 >
 > | Tema | Preguntas | Estado en esta wiki |
 > |---|---|---|
@@ -44,13 +44,19 @@
 > | Análisis de sensibilidad | 7 | Unidad 4 ✔ |
 > | Dualidad | 4 | Unidad 5 ✔ |
 > | Transporte, trasbordo y asignación | 11 | Unidad 7 — sin desarrollar |
-> | Programación entera y mixta | 8 | Unidad 8 — sin desarrollar |
-> | Modelos de redes | 14 | Unidad 9 — sin desarrollar |
-> | Gestión de stocks | 36 | Unidad 11 — sin desarrollar |
+> | Programación entera y mixta | 4 | Unidad 8 — sin desarrollar |
+> | Modelos de redes | 8 | Unidad 9 — sin desarrollar |
+> | Gestión de stocks | 29 | Unidad 11 — sin desarrollar |
 >
-> Es decir: **37 preguntas (35 %) caen en lo que ya está escrito y verificado**, y las otras
-> **69 (65 %) en cuatro unidades todavía vacías**, de las cuales stock sola se lleva un tercio
-> del total.
+> Es decir: **37 preguntas (42 %) caen en lo que ya está escrito y verificado**, y las otras
+> **52 (58 %) en cuatro unidades todavía vacías**, de las cuales **stock sola se lleva un tercio
+> del total** (29 de 89). Las 89 están volcadas, con sus respuestas y con los errores del
+> material marcados, en [[banco-preguntas]].
+>
+> **Avance de clases al 2026-09-27** (dato del alumno, no de la cátedra):
+> - **Stock** es el **último tema dado** y **entra**. Coincide con que sea el de mayor peso.
+> - **Redes** presuntamente entra, pero **no se dio en clase**.
+> - **CPM/PERT no se dio**, lo que refuerza que la Unidad 10 queda fuera.
 >
 > **Referencia del parcial 2025-07-26** (`fuentes/parciales/2025-07-26/`) — sigue siendo la
 > mejor muestra del **estilo de evaluación**, aunque ya no del alcance. Sus puntos fueron:
@@ -1463,4 +1469,5 @@ Práctica 4 (`PL4UTN.pdf`), que integra sensibilidad, dualidad y parametrizació
 - 2026-08-26: Se agregó a la Unidad 1 el **Ejercicio 6 (extra, elaboración propia)**: minimización con restricciones $\geq$, excesos, semiplano que no contiene al origen y **RF no acotada con óptimo finito** — caso que la Práctica 1 no cubre y el parcial sí toma. Resuelto en los 10 bloques del formato de cátedra, con el puente hacia la Unidad 2 (la solución óptima como SBF).
 - 2026-08-26: Se agregó a la Unidad 2 la sección **El puente entre el gráfico y el álgebra**: la equivalencia “estar sobre la recta $i$” ⇔ “su holgura/exceso vale 0”, la tabla de correspondencia gráfico↔álgebra, y su verificación sobre los cuatro cruces del Ejercicio 6 de la Unidad 1 (incluido uno infactible, donde el exceso negativo cuantifica el déficit).
 - 2026-09-23: Se generó [[machete-metodo-simplex]] — una carilla operativa con las condiciones de optimalidad y factibilidad, armado y lectura de tablas, criterios de entrada/salida, pivoteo, base artificial, penalización y dos fases, mapa de diagnóstico, formato de respuesta, trampas y controles finales.
-- 2026-09-27: Se ingirieron dos materiales de circulación entre alumnos bajados ese día: `resumen-operativa-companero.pdf` (32 pág., todo el programa) y `preguntas-frecuentes.pdf` (20 pág., **106 preguntas de teoría** con respuesta, organizadas por tema). Con ellos se **confirmó el alcance del parcial del 2026-10-03** (todo el programa) y se reescribió la nota de alcance del índice con el reparto de las 106 preguntas por tema. Dos recortes detectados: **CPM/PERT y PNL no aparecen** en ninguno de los dos materiales, y **LINDO no tiene preguntas propias** (es herramienta, no unidad). Contenido todavía **sin volcar** a las Unidades 7, 8, 9 y 11.
+- 2026-09-27: Se ingirieron dos materiales de circulación entre alumnos bajados ese día: `resumen-operativa-companero.pdf` (32 pág., todo el programa) y `preguntas-frecuentes.pdf` (20 pág., **89 preguntas de teoría** con respuesta, organizadas por tema). Con ellos se **confirmó el alcance del parcial del 2026-10-03** (todo el programa) y se reescribió la nota de alcance del índice con el reparto de las 89 preguntas por tema. Dos recortes detectados: **CPM/PERT y PNL no aparecen** en ninguno de los dos materiales, y **LINDO no tiene preguntas propias** (es herramienta, no unidad). Contenido todavía **sin volcar** a las Unidades 7, 8, 9 y 11.
+- 2026-09-27: Se generó [[banco-preguntas]] a partir de `preguntas-frecuentes.pdf`: las **89 preguntas** numeradas con código por tema (`SPX-04`, `STK-28`), checklist de autoevaluación, ruta de estudio de stock en siete bloques, **respuestas limpias y reconstruidas de las 52** que caen en las Unidades 7, 8, 9 y 11, y puntero a la unidad de la wiki para las 37 de las Unidades 1 a 5. Se corrigió el conteo: son **89 preguntas, no 106** (el conteo anterior incluía los pasos numerados dentro de las respuestas), y el reparto real es 42 % cubierto / 58 % por estudiar. Se detectaron **cinco errores** en el material: la definición de degeneración dada vuelta (filas por columnas), `n-m` donde va `m`, una justificación que no se sostiene, **Prim llamado Kruskal**, y tres preguntas sin respuesta ("hecho en hoja"). Dos respuestas quedaron marcadas como dudosas y pendientes de cruzar con el apunte.
