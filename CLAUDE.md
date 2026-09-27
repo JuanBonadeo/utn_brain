@@ -174,6 +174,12 @@ Materias y un tema corto y específico.
 - Distinguí explícitamente: esto sale de la wiki de la materia vs. esto
   es conocimiento general tuyo que no está en mis materiales.
 
+- Notación en la terminal: la terminal no renderiza LaTeX. En las respuestas
+  del chat usá texto plano/Unicode (x₁, ≤, ≥, ≠, ·, ⁻¹, fracciones como 3/5) y
+  poné matrices y tablas alineadas dentro de bloques de código. Evitá `*` sueltos
+  pegados a negritas (ej. `z*`). LaTeX solo va dentro de los archivos de la
+  wiki y de `estudio/`, que se leen con visor de markdown.
+
 ## TONO
 Directo, riguroso, sin adornos. Si algo está mal resuelto, decilo claro
 y explicá por qué.
