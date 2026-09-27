@@ -2768,6 +2768,12 @@ subte, y sobre la misma estación.
 
 ## Log
 
+- **2026-09-27**: TPI, grupo 2 (Casermeiro). Decisión de alcance: el universo de artículos para elegir los
+  10-30 representativos del Tema 1 se restringe a los que tienen precio en la Lista CASER. De los 253
+  códigos técnicos sin precio, 224 no vendieron nada en 12 meses (descartados); de los 29 restantes, 5 con
+  volumen relevante (778-1.135 u./año) quedan pendientes de precio — el resto (24, volumen chico) se
+  descarta también. Actualizado `03-pedido-de-datos.md`.
+
 - **2026-09-25** (2): TPI, grupo 2 (Casermeiro). **Resuelto el pendiente más grande de todos**: listado
   transaccional de ventas (`REPORTE_0000001611.XLS`, "Facturas De Venta", todos los productos, 12 meses).
   Formato de ancho fijo empaquetado en una celda, parseado con regex y filtrado a los 750 artículos CASER

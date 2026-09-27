@@ -119,8 +119,24 @@ Con esto se hace el ABC, se ve qué se vende, qué se fabrica, qué se importa y
   (código, precio, unidades por envase, tipo de envase) — 1002 filas, 956 con código `C...`.
   Cruce hecho (`datos-locales/_perfil/maestro_lista_caser.csv`): 995 de 1002 códigos de `Lista Exportable`
   quedaron con familia asignada. Contra `Codigos y Planos.xlsm` (539 códigos), solo **286 cruzan** — quedan
-  **253 artículos técnicos sin precio en esta lista** (¿discontinuados? ¿fuera de lista oficial?
-  **a confirmar**).
+  **253 artículos técnicos sin precio en esta lista**.
+
+  **Decisión de alcance (2026-09-27)**: el universo de artículos para elegir los representativos del Tema 1
+  se restringe a los que están en la Lista CASER con precio. De los 253 sin precio, **224 no tuvieron
+  ninguna venta en los 12 meses** de facturas (`chequeo_253_sin_precio.md`) — se descartan sin más. De los
+  29 restantes, 5 se despegan del resto en volumen y quedan **pendientes de precio** (si la empresa lo pasa,
+  entran al universo; si no, quedan afuera):
+
+  | Código | Descripción | Unidades vendidas (12 m) |
+  |---|---|---|
+  | C9655018 | TORN.CASER MQE FX MT 5 X 18 AC ZC | 1.134,9 |
+  | C7864813 | TORN.CASER-ROSC HEX 10 X 1/2" P.Gru | 789,7 |
+  | C6804219 | TORN.AUTOP.CASER-Wall CabHex1/4 8 | 778,6 |
+  | C9900061 | TORN. CASER-Rosc AAG FH BB 4,2 X 13 | 440,0 |
+  | C9605012 | TORN.CASERFORM HEX COMB 5x12 ZC TRI | 342,5 |
+
+  Los otros 24 (entre 48 y 240 unidades/año) quedan afuera: volumen chico, no van a competir por entrar
+  entre los 10-30 representativos.
   **Unidad de venta — aclarado (2026-09-25) por la empresa**: cada código granel/base (p. ej. `C1003551`)
   se vende por **millar** aunque se entregue en Caja Master de otra cantidad física (ej: se entregan cajas
   pero se facturan 2,5 millares); el código de **estuche** correspondiente (p. ej. `C10035515`) se vende por
