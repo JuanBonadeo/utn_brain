@@ -19,23 +19,22 @@ mes— construyera el modelo en cualquier herramienta de simulación, sin tener 
 nada?** Con esa vara medimos cada sección, y dejamos marcado explícitamente (📌) lo que todavía no llega a
 ese nivel. La respuesta autoevaluada está al final del documento.
 
-Por pedido de confidencialidad de la empresa colaboradora, se usa en todo el documento el nombre ficticio
-**Fijamet SRL** (marca **FIJAMET**) en lugar del real, y los valores monetarios se presentan tal como se
-relevaron — se convertirán a números índice recién en el informe final, cuando el conjunto de datos esté
-cerrado.
+Por pedido de la empresa colaboradora, en todo el documento se usa únicamente su marca comercial, **Caser**,
+y no la razón social real. Los valores monetarios se presentan tal como se relevaron — se convertirán a
+números índice recién en el informe final, cuando el conjunto de datos esté cerrado.
 
 ---
 
 ## 1. Sistema seleccionado
 
-La cadena de producción interna de Fijamet SRL, una PyME metalúrgica fabricante de tornillos y elementos
+La cadena de producción interna de Caser, una PyME metalúrgica fabricante de tornillos y elementos
 de fijación, acotada al subconjunto de artículos fabricados bajo la marca propia (no se incluyen accesorios
 comprados a terceros ni artículos importados) y centrada en el recurso que gobierna el tiempo de entrega de
 la mayoría de ellos: el horno de tratamiento térmico (cementación y temple).
 
 ## 2. Descripción del problema
 
-Fijamet SRL atraviesa una reestructuración financiera y opera con muy baja capacidad ociosa de capital: no
+Caser atraviesa una reestructuración financiera y opera con muy baja capacidad ociosa de capital: no
 mantiene stock de seguridad reglado para prácticamente ningún artículo — la fabricación es, por decantación,
 contra pedido. El horno de tratamiento térmico funciona de forma intermitente, no continua, porque
 encenderlo tiene un costo fijo grande (36 h de calentamiento y 48 h de enfriamiento durante las cuales no
