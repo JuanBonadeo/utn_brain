@@ -17,14 +17,20 @@
  *   <!-- cols: 5,25,25,15,15,15 -->   (porcentajes, suman 100)
  * Si no se indica, reparte en partes iguales.
  *
+ * Imágenes: ![alt](ruta/relativa.png) — solo PNG/JPG (Word/Google Docs no
+ * garantizan SVG). La ruta es relativa al .md de entrada. Se centra y se
+ * escala para entrar en el ancho de página; si la imagen es más angosta que
+ * eso, se respeta su tamaño real.
+ *
  * Ignora todo lo anterior al primer "## " (bloque de notas internas del .md).
  */
 const fs = require('fs');
+const path = require('path');
 const {
   Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType,
   Table, TableRow, TableCell, WidthType, BorderStyle, ShadingType,
   TableLayoutType, VerticalAlign, Footer, PageNumber,
-  ExternalHyperlink, LineRuleType,
+  ExternalHyperlink, LineRuleType, ImageRun,
 } = require('docx');
 
 const [, , inPath, outPath, ...flags] = process.argv;
@@ -56,6 +62,60 @@ const HEAD_INK = '15406B';   // azul oscuro del texto de encabezado, para contra
 const LANG = { value: 'es-AR' };
 
 const line = (color, size) => ({ style: BorderStyle.SINGLE, size, color });
+
+/* ---------- imágenes ---------- */
+// Ancho de página disponible en píxeles a 96 DPI (mismo criterio que Word/Google Docs
+// usan al importar): CONTENT_W está en twips (1440/pulgada); 96 px/pulgada.
+const MAX_IMG_PX = Math.round((CONTENT_W / 1440) * 96);
+
+function pngSize(buf) {
+  // Cabecera IHDR de PNG: ancho en los bytes 16-19, alto en 20-23, big-endian.
+  if (buf.length < 24 || buf.readUInt32BE(0) !== 0x89504e47 && buf.toString('ascii', 1, 4) !== 'PNG') {
+    return null;
+  }
+  return { width: buf.readUInt32BE(16), height: buf.readUInt32BE(20) };
+}
+
+function jpgSize(buf) {
+  // Recorre los marcadores JPEG buscando un SOFn con las dimensiones.
+  let i = 2;
+  if (buf[0] !== 0xff || buf[1] !== 0xd8) return null;
+  while (i < buf.length) {
+    if (buf[i] !== 0xff) return null;
+    const marker = buf[i + 1];
+    if (marker === 0xd8 || marker === 0xd9) { i += 2; continue; }
+    const len = buf.readUInt16BE(i + 2);
+    if (marker >= 0xc0 && marker <= 0xcf && marker !== 0xc4 && marker !== 0xc8 && marker !== 0xcc) {
+      return { height: buf.readUInt16BE(i + 5), width: buf.readUInt16BE(i + 7) };
+    }
+    i += 2 + len;
+  }
+  return null;
+}
+
+function imageParagraph(altText, relPath, basePath) {
+  const abs = path.resolve(path.dirname(basePath), relPath);
+  if (!fs.existsSync(abs)) {
+    console.error(`Aviso: no encontré la imagen "${relPath}" (resuelta a ${abs}); la salteo.`);
+    return new Paragraph({ children: runs(`[imagen no encontrada: ${altText}]`, { color: RED }) });
+  }
+  const ext = path.extname(abs).toLowerCase();
+  const data = fs.readFileSync(abs);
+  const dims = ext === '.png' ? pngSize(data) : (ext === '.jpg' || ext === '.jpeg') ? jpgSize(data) : null;
+  if (!dims) {
+    console.error(`Aviso: no pude leer dimensiones de "${relPath}" (¿es PNG o JPG?); la salteo.`);
+    return new Paragraph({ children: runs(`[imagen no soportada: ${altText}]`, { color: RED }) });
+  }
+  const scale = Math.min(1, MAX_IMG_PX / dims.width);
+  const w = Math.round(dims.width * scale);
+  const h = Math.round(dims.height * scale);
+  const type = ext === '.png' ? 'png' : 'jpg';
+  return new Paragraph({
+    alignment: AlignmentType.CENTER,
+    spacing: { before: 120, after: 200 },
+    children: [new ImageRun({ type, data, transformation: { width: w, height: h } })],
+  });
+}
 
 /* ---------- inline ---------- */
 function runs(text, base = {}) {
@@ -280,6 +340,12 @@ while (i < lines.length) {
   if (h) {
     children.push(heading(h[1].length, h[2]));
     lastHeadingLvl = h[1].length;
+    i++; continue;
+  }
+
+  const img = trimmed.match(/^!\[([^\]]*)\]\(([^)]+)\)$/);
+  if (img) {
+    children.push(imageParagraph(img[1], img[2], inPath));
     i++; continue;
   }
 

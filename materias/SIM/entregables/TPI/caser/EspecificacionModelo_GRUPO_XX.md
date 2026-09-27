@@ -236,14 +236,14 @@ concreta o se pierde, y es la salida que conecta el subsistema del horno con el 
 
 **Figura 1.** Flujo del sistema: entidades, colas, recursos y procesos.
 
-![Flujo del sistema](../../../figs/tpi-caser-flujo-sistema.svg)
+![Flujo del sistema](../../../figs/tpi-caser-flujo-sistema.png)
 
 *Fuente: elaboración propia.*
 
 **Figura 2.** Estados del horno, con la regla de encendido y la excepción de prioridad confirmada el
 27/09/2026.
 
-![Estados del horno](../../../figs/tpi-caser-estados-horno.svg)
+![Estados del horno](../../../figs/tpi-caser-estados-horno.png)
 
 *Fuente: elaboración propia.*
 
