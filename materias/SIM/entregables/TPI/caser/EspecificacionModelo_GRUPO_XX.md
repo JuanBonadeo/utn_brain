@@ -142,8 +142,8 @@ dispara su propia orden de producción.
 | Tasa de procesamiento | ~17 ULI/día, 3 turnos de 8 h (≈32 min/ULI) | Relevamiento inicial de la empresa |
 | Potencia instalada del horno | 145 kW | Planilla interna de costo energético |
 | Costo de máquina | 0,665 $/min (electricidad + aceite de temple + aire comprimido + gas del generador endotérmico + catalizador) | Planilla interna de costo energético |
-| Consumo del generador de gases endotérmicos (GLP) | 📌 pendiente — factura de GLP comprometida para el 28/09 | Empresa |
-| Tarifa eléctrica y potencia contratada | 📌 pendiente — facturas de 24 meses comprometidas para el 28/09 | Empresa |
+| Consumo del generador de gases endotérmicos (GLP) | 📌 pendiente — factura de GLP comprometida para el 29/09 | Empresa |
+| Tarifa eléctrica y potencia contratada | Facturas de 64 meses-medidor recibidas (2024-2026), tarifa 2 B1 con potencia registrada/convenida pico y fuera de pico. 📌 Sin usar todavía: el medidor histórico rotulado "Horno" consume en promedio el doble que el de "Fábrica" de forma sostenida, lo que no cierra contra la actividad real relevada — a confirmar con la empresa qué carga cubría antes de calibrar nada con este dato | Empresa |
 | Kg por ULI, por artículo | Resuelto (28/09/2026): 143 kg/ULI en promedio (mediana 136, rango 5,9-362,5 sobre 310 artículos). Con el umbral de 75 ULI, una campaña mueve ≈10 t — ≈17-25 % de la capacidad instalada, consistente con planta subutilizada | `Seguimiento TR ulis` |
 | Precio de lista y costo índice por artículo | Precio: lista de precios oficial. Costo: precio de lista × 0,335 (fórmula provista por la empresa: 50 % de bonificación máxima, 33 % de rentabilidad bruta sobre el precio bonificado) | Lista de precios de la empresa |
 | Tasa de costo del capital inmovilizado | 📌 pendiente, a definir con la empresa | — |
@@ -192,7 +192,7 @@ concreta o se pierde, y es la salida que conecta el subsistema del horno con el 
 | Plazo del zincado tercerizado | Resuelto, con dos fuentes cruzables | Tablero de seguimiento de ULI + registro de envasado |
 | Precio y costo índice por artículo | Resuelto | Lista de precios de la empresa |
 | Kg por ULI | Resuelto — 143 kg/ULI en promedio | Seguimiento TR ulis |
-| Costo energético del horno | Resuelto (electricidad) / 📌 pendiente (GLP y facturas reales de cruce) | Planilla interna de costo + facturas comprometidas para el 28/09 |
+| Costo energético del horno | Resuelto en teoría (planilla interna). Facturas reales recibidas pero 📌 sin usar — hay una discrepancia entre medidores a aclarar con la empresa antes de cruzarlas contra el modelo teórico. GLP pendiente | Planilla interna de costo + 64 facturas de electricidad (2024-2026) |
 | Stock valorizado inicial | 📌 Pendiente | Empresa |
 | Política de stock | Resuelto: no existe — todo contra pedido, salvo excepciones puntuales aún no identificadas | Confirmado por la empresa |
 
@@ -263,10 +263,13 @@ el flujo general (Figura 1, sección 6) están completamente especificados, con 
 prioridad ya incorporada, y la mayor parte de los datos de entrada está relevada y validada de forma
 independiente (sección 13). Lo que todavía falta definir para llegar al 100 %:
 
-- El costo del GLP del generador endotérmico y el cruce contra facturas reales de energía (comprometidos
-  para el 28/09).
-- El precio de 5 artículos de alto volumen todavía sin listar oficialmente, y si alguno de los artículos
-  elegidos es una de las excepciones que sí llevan stock.
+- El costo del GLP del generador endotérmico (llega mañana) y aclarar con la empresa qué carga eléctrica
+  cubría exactamente el medidor histórico "Horno" — las 64 facturas de electricidad ya llegaron, pero ese
+  medidor consume en promedio el doble que el de "Fábrica" durante más de dos años, lo que no cierra contra
+  la actividad real del horno relevada en `Termico 2026`. Probablemente alimentaba más equipos que solo el
+  horno; no se usa para calibrar nada hasta confirmarlo.
+- ~~El precio de 5 artículos de alto volumen~~ Resuelto (28/09/2026). Falta confirmar si alguno de los
+  artículos elegidos es una de las excepciones que sí llevan stock.
 - Confirmar la elección final de los 10 a 30 artículos representativos (hay una propuesta de 15 armada y
   pendiente de validar con la empresa).
 - La tasa de costo del capital inmovilizado, que la empresa todavía no proveyó.

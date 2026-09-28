@@ -127,13 +127,16 @@ Con esto se hace el ABC, se ve qué se vende, qué se fabrica, qué se importa y
   29 restantes, 5 se despegan del resto en volumen y quedan **pendientes de precio** (si la empresa lo pasa,
   entran al universo; si no, quedan afuera):
 
-  | Código | Descripción | Unidades vendidas (12 m) |
-  |---|---|---|
-  | C9655018 | TORN.CASER MQE FX MT 5 X 18 AC ZC | 1.134,9 |
-  | C7864813 | TORN.CASER-ROSC HEX 10 X 1/2" P.Gru | 789,7 |
-  | C6804219 | TORN.AUTOP.CASER-Wall CabHex1/4 8 | 778,6 |
-  | C9900061 | TORN. CASER-Rosc AAG FH BB 4,2 X 13 | 440,0 |
-  | C9605012 | TORN.CASERFORM HEX COMB 5x12 ZC TRI | 342,5 |
+  | Código | Descripción | Unidades vendidas (12 m) | Precio (millar) | Costo índice |
+  |---|---|---|---|---|
+  | C9655018 | TORN.CASER MQE FX MT 5 X 18 AC ZC | 1.134,9 | $77.053 | 25,81 |
+  | C7864813 | TORN.CASER-ROSC HEX 10 X 1/2" P.Gru | 789,7 | $48.260 | 16,17 |
+  | C6804219 | TORN.AUTOP.CASER-Wall CabHex1/4 8 | 778,6 | $33.569 | 11,25 |
+  | C9900061 | TORN. CASER-Rosc AAG FH BB 4,2 X 13 | 440,0 | $39.565 | 13,25 |
+  | C9605012 | TORN.CASERFORM HEX COMB 5x12 ZC TRI | 342,5 | $57.730 | 19,34 |
+
+  **Precio recibido (2026-09-28)**, agregado a `datos-locales/_perfil/maestro_lista_caser.csv`. Asumido
+  en la misma convención que el resto de la Lista CASER (por millar) — a confirmar si no.
 
   Los otros 24 (entre 48 y 240 unidades/año) quedan afuera: volumen chico, no van a competir por entrar
   entre los 10-30 representativos.
@@ -199,3 +202,19 @@ Con esto se hace el ABC, se ve qué se vende, qué se fabrica, qué se importa y
   (p. ej. `KIT131`) que son combos, no artículos simples — excluir de la selección de representativos.
   Archivos: `REPORTE_...1603/1604/1606/1607.XLS`, `lista-caser.xlsx`, guardados en `datos-locales/abm/`
   (gitignoreados, no versionados).
+
+- **Facturas de electricidad — recibidas (2026-09-28), pero con una discrepancia a aclarar antes de usarlas.**
+  64 facturas (`Facturas Energía.zip`), dos medidores por mes desde enero/2024 hasta abril/2026 ("Fábrica" y
+  "Horno", tarifa 2 B1) y desde mayo/2026 un único medidor combinado (con el "Horno" pasando a tarifa mínima
+  "sin uso"). Extraídas a `datos-locales/_perfil/facturas_energia.csv` (kWh, importe, potencia registrada y
+  convenida pico/fuera de pico).
+  **Problema**: el medidor "Horno" consume en promedio **44.300 kWh/mes**, más del doble que "Fábrica"
+  (20.200 kWh/mes), sostenido durante 29 meses seguidos — no cierra contra la actividad real del horno
+  (`Termico 2026`: ~12 tandas irregulares en 8 meses, varias de un solo día). Hipótesis: el medidor "Horno"
+  no alimentaba solo el horno, sino otro conjunto de equipos también (coincide con lo del brief original:
+  *"la empresa tenía dos suministros eléctricos de 300 kW y posteriormente unificó ambos servicios"* — la
+  caída a "sin uso" en mayo/junio 2026 sería justo esa unificación).
+  **A confirmar con la empresa antes de usar este dato para calibrar nada**: ¿qué alimentaba exactamente el
+  medidor histórico "Horno"? Si alimentaba más que el horno, no sirve para aislar su consumo — se sigue con
+  el costo teórico (145 kW, 0,665 $/min) en vez del medido.
+  **GLP**: sigue pendiente, comprometido para el 29/09.

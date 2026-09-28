@@ -2772,6 +2772,17 @@ subte, y sobre la misma estación.
 
 ## Log
 
+- **2026-09-28** (3): TPI, grupo 2 (Casermeiro). Recibidos y aplicados los 5 precios de artículos de alto
+  volumen que faltaban en la Lista CASER (agregados a `maestro_lista_caser.csv` con costo índice ×0,335).
+  Recibidas y procesadas 64 facturas de electricidad (2024-2026, dos medidores por mes hasta abril/2026,
+  combinado después). **Hallazgo a confirmar antes de usarlo**: el medidor "Horno" consume en promedio el
+  doble que el de "Fábrica" de forma sostenida durante 29 meses — no cierra contra la actividad real del
+  horno relevada en `Termico 2026`. Hipótesis: ese medidor alimentaba más equipos que solo el horno, y la
+  caída a "sin uso" en mayo/junio 2026 coincide con la unificación de los dos suministros eléctricos que
+  mencionaba el brief original de la familia. No se usa para calibrar el modelo energético hasta aclararlo.
+  GLP sigue pendiente (llega 29/09). Actualizados `03-pedido-de-datos.md` y
+  `EspecificacionModelo_GRUPO_XX.md/.pdf`.
+
 - **2026-09-28** (2): TPI, grupo 2 (Casermeiro). El grupo tiene 5 integrantes, no solo Gonzalo: Brizio
   Augusto (52479), Casermeiro Gonzalo (52674), Constantini Jeremias, Messina Tiziano, Navos Juan Ignacio
   (los tres últimos sin legajo todavía). Actualizada la carátula de `EspecificacionModelo_GRUPO_XX.md/.pdf`.
