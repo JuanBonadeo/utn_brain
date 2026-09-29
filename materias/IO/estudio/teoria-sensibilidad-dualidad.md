@@ -782,7 +782,7 @@ Comparación con el Simplex primal, para no confundirlos:
 | LINDO | Qué es |
 |---|---|
 | `SLK 2` | holgura de la **restricción 1** (LINDO cuenta el funcional como fila 1) |
-| fila `ART` / fila `1)` | $z_j - c_j$, **no** $c_j - z_j$: hay que cambiarle el signo |
-| `DUAL PRICES` | los $u_i$ (precios sombra), ya con el signo correcto |
+| fila `ART` / fila `1)` | $z_j - c_j$, **no** $c_j - z_j$: hay que cambiarle el signo. **Su columna derecha no es $W^*$ en minimización**: LINDO minimiza como *maximizar $-W$*, así que ahí aparece $-W^*$ (ej. 4: $-3868$, y el óptimo real es $W^*=3868$) |
+| `DUAL PRICES` | cuánto **mejora** el funcional por cada unidad más de $b_i$. En **max** coincide con el $u_i$; en **min** viene con el signo **opuesto** al $u_i$ (que mide cuánto *cambia* $W$). Ej. 4: LINDO imprime $-0{,}15$ / $13{,}4$ / $3{,}1$ y los $u_i$ son $+0{,}15$ / $-13{,}4$ / $-3{,}1$. Para el control $W^*=\sum u_i b_i$ hay que usar los $u_i$, no lo que imprime LINDO |
 | `REDUCED COST` | costo reducido de cada variable, en valor absoluto |
 | `SLACK OR SURPLUS` | valor de la holgura/exceso de esa restricción |
