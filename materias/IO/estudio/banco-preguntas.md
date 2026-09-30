@@ -32,7 +32,7 @@ diez temas.
 | Análisis de sensibilidad | `SEN` | 7 | ✔ Unidad 4 |
 | Dualidad | `DUA` | 4 | ✔ Unidad 5 |
 | **Subtotal ya cubierto** | | **37** | **42 %** |
-| Transporte, trasbordo y asignación | `TTA` | 11 | ⚠ Unidad 7 vacía |
+| Transporte, trasbordo y asignación | `TTA` | 11 | Unidad 7 ✔ |
 | Programación entera y mixta | `ENT` | 4 | ⚠ Unidad 8 vacía |
 | Modelos de redes | `RED` | 8 | ⚠ Unidad 9 vacía |
 | Gestión de stock | `STK` | 29 | ⚠ Unidad 11 vacía |
@@ -103,17 +103,17 @@ en este banco**: presuntamente fuera de alcance.
 
 ## Transporte, trasbordo y asignación
 
-- [ ] `TTA-01` ⚠ Defina el problema de transporte y el problema de trasbordo.
-- [ ] `TTA-02` ⚠ Describir el problema de asignación.
-- [ ] `TTA-03` ⚠ ¿Qué particularidad tienen los problemas de transporte, trasbordo y asignación?
-- [ ] `TTA-04` ⚠ Si las capacidades y demandas son enteras, ¿la solución también será entera?
-- [ ] `TTA-05` ⚠ ¿Qué sucede si la oferta total excede a la demanda total?
-- [ ] `TTA-06` ⚠ ¿Qué sucede si la demanda total excede a la oferta total?
-- [ ] `TTA-07` ⚠ ¿Cuándo una solución de transporte es degenerada?
-- [ ] `TTA-08` ⚠ ¿Pueden aplicarse los algoritmos de transporte a los problemas de trasbordo?
-- [ ] `TTA-09` ⚠ ¿Qué significa que un modelo de transporte esté balanceado? En fórmulas, con ejemplo.
-- [ ] `TTA-10` ⚠ ¿Por qué una solución básica de un modelo balanceado tiene a lo sumo $m+n-1$ variables positivas?
-- [ ] `TTA-11` ⚠ En un trasbordo, ¿qué representan las ecuaciones con término independiente $=0$? ¿Y si ese término fuera distinto de cero?
+- [ ] `TTA-01` Defina el problema de transporte y el problema de trasbordo.
+- [ ] `TTA-02` Describir el problema de asignación.
+- [ ] `TTA-03` ¿Qué particularidad tienen los problemas de transporte, trasbordo y asignación?
+- [ ] `TTA-04` Si las capacidades y demandas son enteras, ¿la solución también será entera?
+- [ ] `TTA-05` ¿Qué sucede si la oferta total excede a la demanda total?
+- [ ] `TTA-06` ¿Qué sucede si la demanda total excede a la oferta total?
+- [ ] `TTA-07` ¿Cuándo una solución de transporte es degenerada?
+- [ ] `TTA-08` ¿Pueden aplicarse los algoritmos de transporte a los problemas de trasbordo?
+- [ ] `TTA-09` ¿Qué significa que un modelo de transporte esté balanceado? En fórmulas, con ejemplo.
+- [ ] `TTA-10` ¿Por qué una solución básica de un modelo balanceado tiene a lo sumo $m+n-1$ variables positivas?
+- [ ] `TTA-11` En un trasbordo, ¿qué representan las ecuaciones con término independiente $=0$? ¿Y si ese término fuera distinto de cero?
 
 ## Programación entera y mixta
 

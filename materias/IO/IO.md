@@ -8,7 +8,7 @@
 4. Unidad 4 — Análisis de sensibilidad
 5. Unidad 5 — Dualidad
 6. Unidad 6 — Resolución por software: LINDO y Solver _(sin desarrollar)_
-7. Unidad 7 — Modelos especiales: transporte, transbordo y asignación _(sin desarrollar)_
+7. Unidad 7 — Modelos especiales: transporte, transbordo y asignación
 8. Unidad 8 — Programación lineal entera y mixta _(sin desarrollar)_
 9. Unidad 9 — Modelos de redes _(sin desarrollar)_
 10. Unidad 10 — Administración de proyectos: CPM y PERT _(sin desarrollar)_
@@ -49,7 +49,7 @@
 > | Método Simplex | 17 | Unidad 3 ✔ |
 > | Análisis de sensibilidad | 7 | Unidad 4 ✔ |
 > | Dualidad | 4 | Unidad 5 ✔ |
-> | Transporte, trasbordo y asignación | 11 | Unidad 7 — sin desarrollar |
+> | Transporte, trasbordo y asignación | 11 | Unidad 7 ✔ |
 > | Programación entera y mixta | 4 | Unidad 8 — sin desarrollar |
 > | Modelos de redes | 8 | Unidad 9 — sin desarrollar |
 > | Gestión de stocks | 29 | Unidad 11 — sin desarrollar |
@@ -1458,6 +1458,190 @@ Práctica 4 (`PL4UTN.pdf`), que integra sensibilidad, dualidad y parametrizació
 
 ---
 
+### Unidad 7 — Modelos especiales: transporte, transbordo y asignación
+
+#### Conceptos clave
+
+- **Transporte:** distribuir un producto **homogéneo** desde $m$ **fuentes** (con oferta $a_i$) hacia $n$ **destinos** (con demanda $b_j$) al **mínimo costo** total. La variable es $x_{ij}$, las unidades enviadas de $i$ a $j$, y $c_{ij}$ es el costo unitario de esa ruta.
+- **Balanceado:** $\sum_i a_i = \sum_j b_j$. Cuando no lo está, se balancea con una fuente o un destino **ficticio** de costo cero.
+- **Transbordo:** transporte con **nodos intermedios** (depósitos) que reciben y reenvían. Cada nodo intermedio tiene una restricción de **conservación de flujo**: lo que entra es igual a lo que sale.
+- **Asignación:** caso particular del transporte con **todas las ofertas y demandas iguales a 1**. Cada origen va a un solo destino y cada destino recibe un solo origen (relación uno a uno).
+- **Particularidad común de los tres:** la matriz $A$ es casi toda de ceros y el resto son $1$ o $-1$. De esa estructura salen dos propiedades: las **soluciones enteras automáticas** y la existencia de **algoritmos especializados** más rápidos que el Simplex general.
+
+#### Desarrollo
+
+##### El problema de transporte
+
+**Ejemplo del apunte (usinas).** Tres plantas generadoras abastecen a cuatro ciudades. Costos por millón de kWh:
+
+| Desde \ Hacia | Ciudad 1 | Ciudad 2 | Ciudad 3 | Ciudad 4 | Oferta |
+|---|---|---|---|---|---|
+| Planta 1 | 8 | 6 | 10 | 9 | 35 |
+| Planta 2 | 9 | 12 | 13 | 7 | 50 |
+| Planta 3 | 14 | 9 | 16 | 5 | 40 |
+| **Demanda** | 45 | 20 | 30 | 30 | |
+
+$x_{ij}$ = millones de kWh enviados de la planta $i$ a la ciudad $j$ ($i = 1..3$, $j = 1..4$), así que hay $3 \times 4 = 12$ variables. Hay **una restricción por fila** (oferta) y **una por columna** (demanda):
+
+$$
+\begin{aligned}
+\text{Min } W = {} & 8x_{11} + 6x_{12} + 10x_{13} + 9x_{14} + 9x_{21} + 12x_{22} + 13x_{23} + 7x_{24} \\
+& + 14x_{31} + 9x_{32} + 16x_{33} + 5x_{34} \\
+\text{s.a. } & x_{11} + x_{12} + x_{13} + x_{14} \leq 35 \qquad \text{(oferta planta 1)} \\
+& x_{21} + x_{22} + x_{23} + x_{24} \leq 50 \\
+& x_{31} + x_{32} + x_{33} + x_{34} \leq 40 \\
+& x_{11} + x_{21} + x_{31} \geq 45 \qquad \text{(demanda ciudad 1)} \\
+& x_{12} + x_{22} + x_{32} \geq 20 \\
+& x_{13} + x_{23} + x_{33} \geq 30 \\
+& x_{14} + x_{24} + x_{34} \geq 30 \\
+& x_{ij} \geq 0
+\end{aligned}
+$$
+
+Resuelto con LINDO: $W^* = 1020$, con $x_{12} = 10$, $x_{13} = 25$, $x_{21} = 45$, $x_{23} = 5$, $x_{32} = 10$, $x_{34} = 30$ y el resto en cero. Verificación: $60 + 250 + 405 + 65 + 90 + 150 = 1020$ ✓. Oferta total $= 125 =$ demanda total, así que está balanceado, y hay $6 = m+n-1$ variables positivas.
+
+**Formulación general:**
+
+$$
+\text{Min } W = \sum_{i=1}^{m} \sum_{j=1}^{n} c_{ij}\, x_{ij}
+\qquad
+\begin{cases}
+\sum_{j=1}^{n} x_{ij} \leq a_i & i = 1..m \quad \text{(oferta: no enviar más de lo que hay)}\\[2pt]
+\sum_{i=1}^{m} x_{ij} \geq b_j & j = 1..n \quad \text{(demanda: no enviar menos de lo pedido)}\\[2pt]
+x_{ij} \geq 0
+\end{cases}
+$$
+
+Si el funcional es de **máximo** (contribuciones en vez de costos), **sigue siendo un problema de transporte**: las restricciones no cambian.
+
+##### Balanceo
+
+Un modelo está **balanceado** si $\sum_i a_i = \sum_j b_j$. En ese caso las dos familias de restricciones se cumplen **con igualdad** y se escriben con $=$.
+
+| Situación | Qué se agrega | Costo | Qué significa en el óptimo |
+|---|---|---|---|
+| Oferta total **>** demanda total | **Destino ficticio** con demanda $\sum a_i - \sum b_j$ | $0$ | Lo enviado al ficticio es **capacidad ociosa** de cada fuente |
+| Demanda total **>** oferta total | **Fuente ficticia** con oferta $\sum b_j - \sum a_i$ | $0$ | Lo que sale del ficticio es **demanda insatisfecha** de cada destino |
+
+Ojo: si la demanda supera a la oferta y se deja el modelo con restricciones de demanda $\geq$, el problema es **no factible**. La fuente ficticia es la forma de obtener igual el plan de mínimo costo que abastece todo lo posible.
+
+##### Soluciones enteras automáticas
+
+Si todos los $a_i$ y $b_j$ son **enteros** y el problema es factible, **siempre existe una solución óptima entera**. Se debe a la estructura de $A$ (solo $0$, $1$ y $-1$). Por eso **no hace falta** declarar las $x_{ij}$ enteras ni recurrir a programación entera (Unidad 8), aunque la respuesta tenga que ser en unidades enteras (vagones, camiones, personas).
+
+##### Matriz $A$, $m+n-1$ y degeneración
+
+- La matriz $A$ tiene $m \cdot n$ columnas (una por ruta) y $m + n$ filas (una por fuente y una por destino). Cada columna $x_{ij}$ tiene exactamente **dos unos**: uno en la fila de la fuente $i$ y otro en la del destino $j$.
+- En un modelo **balanceado**, una de las $m+n$ ecuaciones es **redundante**. Si sumás todas las ecuaciones de oferta y restás todas las de demanda (menos una), te queda exactamente la que faltaba. Esto pasa justamente porque $\sum a_i = \sum b_j$.
+- Por lo tanto hay $m+n-1$ ecuaciones independientes, y **toda solución básica tiene $m+n-1$ variables básicas**, o sea **a lo sumo $m+n-1$ variables positivas**.
+- **Degenerada:** una solución básica con **menos de $m+n-1$** variables positivas (alguna básica vale cero).
+
+Ejemplo del apunte: con $m = 3$ y $n = 5$ hay 8 ecuaciones, pero solo 7 son independientes, y hay 15 incógnitas.
+
+##### El problema de asignación
+
+Es un transporte con $a_i = 1$ y $b_j = 1$: cada objeto se asigna **entero** a una sola tarea (los objetos son "indivisibles").
+
+$$
+\text{Min } W = \sum_i \sum_j c_{ij}\, x_{ij}
+\qquad
+\sum_j x_{ij} = 1 \ \ \forall i
+\qquad
+\sum_i x_{ij} = 1 \ \ \forall j
+\qquad
+x_{ij} \in \{0, 1\}
+$$
+
+$x_{ij} = 1$ si el origen $i$ se asigna al destino $j$, y $0$ si no. Por la propiedad de integralidad **alcanza con pedir $x_{ij} \geq 0$**: el Simplex devuelve ceros y unos. Así lo plantea el apunte en su ejemplo.
+
+**Ejemplo del apunte (vendedores a zonas):**
+
+| | Zona 1 | Zona 2 | Zona 3 |
+|---|---|---|---|
+| Vendedor 1 | 50 | 70 | 90 |
+| Vendedor 2 | 140 | 100 | 120 |
+| Vendedor 3 | 150 | 130 | 160 |
+
+Asignación óptima: V1 → Z1, V2 → Z3, V3 → Z2, con $W^* = 50 + 120 + 130 = 300$.
+
+**Desbalanceado** (más orígenes que destinos, o al revés): con $m > n$ quedan $m - n$ orígenes sin asignar; con $m < n$ quedan $n - m$ destinos libres. Se balancea igual que el transporte, con filas o columnas ficticias de costo cero. En LINDO, la alternativa directa es poner **$\leq 1$ del lado que sobra** y $= 1$ del lado escaso. Así lo resuelve la cátedra en el Ej. 5 de la Práctica 5: 4 compañías ($\leq 1$) y 3 proyectos ($= 1$).
+
+##### El problema de transbordo
+
+Es una generalización del transporte con **nodos intermedios** (depósitos, almacenes). Suele salir más barato enviar a través de ellos que directo. Hay tres tipos de nodos:
+
+| Nodo | Qué hace | Restricción |
+|---|---|---|
+| **Origen** | solo envía | lo que sale $\leq$ (o $=$) su oferta |
+| **Transbordo** | recibe y reenvía | $\sum \text{entra} - \sum \text{sale} = 0$ (no acumula stock) |
+| **Destino** | solo recibe | lo que entra $=$ (o $\geq$) su demanda |
+
+**Ejemplo del apunte.** Dos fábricas (1: oferta 50; 2: oferta 100), dos depósitos (3 y 4) y tres centros de venta (5: 20; 6: 40; 7: 90). Oferta total = demanda total = 150. $x_{ij}$ = cantidad enviada del nodo $i$ al $j$, con arcos entre los dos depósitos en ambos sentidos:
+
+$$
+\begin{aligned}
+\text{Min } W = {} & 10x_{13} + 5x_{14} + 8x_{23} + 7x_{24} + 4x_{34} + 4x_{43} \\
+& + 3x_{35} + 7x_{36} + 1x_{37} + 2x_{45} + 1x_{46} + 6x_{47} \\
+\text{s.a. } & x_{13} + x_{14} = 50 \qquad x_{23} + x_{24} = 100 && \text{(orígenes)} \\
+& x_{13} + x_{23} + x_{43} - x_{34} - x_{35} - x_{36} - x_{37} = 0 && \text{(depósito 3)} \\
+& x_{14} + x_{24} + x_{34} - x_{43} - x_{45} - x_{46} - x_{47} = 0 && \text{(depósito 4)} \\
+& x_{35} + x_{45} = 20 \qquad x_{36} + x_{46} = 40 \qquad x_{37} + x_{47} = 90 && \text{(destinos)} \\
+& x_{ij} \geq 0
+\end{aligned}
+$$
+
+Óptimo: $x_{14} = 50$, $x_{23} = 90$, $x_{24} = 10$, $x_{37} = 90$, $x_{45} = 20$, $x_{46} = 40$, con $W^* = 1210$. Verificación: $250 + 720 + 70 + 90 + 40 + 40 = 1210$ ✓.
+
+**El término independiente de un nodo de transbordo** (del banco de preguntas, `TTA-11`). Escribiendo la restricción como $-\sum \text{entra} + \sum \text{sale} = d$:
+
+- $d = 0$: nodo de paso puro, todo lo que entra sale.
+- $d > 0$: el nodo **aporta** $d$ unidades propias, así que funciona también como origen.
+- $d < 0$: el nodo **retiene** $|d|$ unidades para consumo propio, así que funciona también como destino.
+
+**Formulación alternativa por caminos** (la que usa la cátedra en el Ej. 4 de la Práctica 5): si **todo** envío pasa por exactamente un nodo intermedio, se puede definir $x_{ijk}$ = unidades del origen $i$ al destino $k$ **pasando por** $j$, con costo $c_{ij} + c_{jk}$. Así el transbordo queda como un transporte común con $m \times (\text{intermedios}) \times n$ variables y sin restricciones de conservación. Es más fácil de plantear, pero solo sirve cuando no hay envíos directos ni arcos entre intermedios. En el ejemplo del apunte hay arcos entre depósitos ($x_{34}$ y $x_{43}$), así que ahí no alcanza.
+
+Los algoritmos de transporte también se aplican al transbordo, siempre que se lo formule **balanceado**.
+
+##### Variantes
+
+- **Maximización:** los $c_{ij}$ pasan a ser beneficios o contribuciones. Las restricciones no cambian.
+- **Rutas prohibidas o inaceptables:** se **eliminan** las variables de esas rutas. En un algoritmo de tabla, la alternativa equivalente es asignarles un costo $M$ muy grande.
+
+#### Ejercicios resueltos tipo
+
+Práctica 5 (`PL5UTN.pdf`). La cátedra resuelve **todo planteando el PL y corriéndolo en LINDO**, sin algoritmos manuales.
+
+| Ej. | Tipo | Punto clave |
+|---|---|---|
+| 1 | Transporte (canteras A, B, C → sitios 1, 2) | Oferta 900 > demanda 800 → destino ficticio de 100 |
+| 2 | Transporte de **máximo** (bases → blancos, toneladas por vuelo) | Oferta $4 \times 150 = 600$ = requerimiento $3 \times 200 = 600$: balanceado |
+| 3 | Transporte con salida de LINDO + sensibilidad | Es la Práctica 4 aplicada: costo reducido, holgura, rango de $c_{ij}$ |
+| 4 | Transbordo (granos: M, B, X → E, F → H, L, K, P) | Formulación por caminos $x_{ijk}$, con $c = c_{ij} + c_{jk}$. Oferta 14 > demanda 12 |
+| 5 | Asignación desbalanceada (4 compañías, 3 proyectos) | Compañías $\leq 1$, proyectos $= 1$. $W^* = 21$ (A→1, B→2, C→4) |
+| 6 | Asignación balanceada 4×4 (máquinas → tareas) | Sin resolución de la cátedra |
+
+**Ej. 3, resolución de la cátedra** (contribuciones por equipo y planta, máximo; capacidades de planta $\leq 11000$, mínimos por equipo $\geq$):
+
+- a) $x_{22}$ tiene costo reducido 40, así que para que convenga fabricarlo su contribución tiene que superar $50 + 40$: **$c_{22} > 90$**.
+- b) La holgura de la restricción 2 (fila 3 de LINDO) vale 0: la planta 2 usa **toda** su capacidad.
+- c) $c_{11}$ pasa de 60 a 80: $\Delta = +20$, dentro del aumento permitido de 40. La base no cambia y $Z^* = 1\,770\,000 + 20 \cdot 2000 = 1\,810\,000$.
+
+**Ej. 4:** óptimo de $419$ u.m. Se envía 1 vagón M→F→K, 2 B→E→H, 4 B→E→L, 2 X→F→K y 3 X→F→P. Quedan 2 vagones de M sin usar.
+
+#### Dudas / pendientes
+
+- **La resolución de la cátedra (`PL5UTNresol.pdf`) no coincide con el enunciado en los Ej. 1 y 2.** Resuelve otra versión: el Ej. 1 tiene ofertas 40/96 y demandas 64/48, y el Ej. 2 es de plantas y productos A, B, C. Los Ej. 3 a 5 sí coinciden y el 6 no tiene resolución. Los Ej. 1, 2 y 6 hay que resolverlos por cuenta propia.
+- **Algoritmos manuales** (esquina noroeste, Vogel, MODI, método húngaro): **no aparecen** en el apunte, ni en la práctica, ni en el resumen de circulación. El enfoque de la cátedra es modelizar y resolver con LINDO. Confirmar con el profesor si toma alguno.
+- En la resolución del Ej. 4 hay una errata: el último coeficiente de M figura como `CMEH = 6+24 = 30` y debería ser `CMFP`.
+
+#### Fuentes
+
+- `Material de cursado (2023)/Teoría/Modelos especiales de PL.pdf` (cap. 8 del apunte, M. L. Cerrano) — ingerido 2026-09-30
+- `Material de cursado (2023)/Práctica/PL5UTN.pdf` y `Resuelta/PL5UTNresol.pdf` — ingeridos 2026-09-30
+- `resumen-operativa-companero.pdf` (págs. 17–18) y `preguntas-frecuentes.pdf` (`TTA-01` a `TTA-11`, ver [[banco-preguntas]])
+
+---
+
 ## Log
 
 - 2026-08-13: Se ingirió el **Material de cursado 2023** completo a `fuentes/IO/` (44 archivos: apunte PLC1–PLC9, PPTs de cátedra, prácticas PL1–PL6 con resoluciones, CPM/PERT, stock, PNL). Convertidos a markdown; **todavía sin volcar a la wiki** salvo PLC1 y PLC2.
@@ -1480,3 +1664,4 @@ Práctica 4 (`PL4UTN.pdf`), que integra sensibilidad, dualidad y parametrizació
 - 2026-09-30: Práctica 4 — se trabajó el **Ejercicio 5** (construcción del dual, incisos a–d) en sesión, cotejado con `Resol ej 5.pdf` de la cátedra. Se dio de baja la **parametrización** del alcance del parcial (decisión del alumno; nota agregada al índice).
 - 2026-09-30: Se generó [[machete-sensibilidad-dualidad]] — hoja de repaso de la Práctica 4: $B^{-1}$ en la tabla, cuadro maestro de sensibilidad (Max y cómo adaptarlo a Min), regla del 100%, lectura de precios sombra (holgura vs. exceso), construcción del dual para primal Max y Min, Simplex dual, errores típicos detectados practicando y mapa de ejercicios. Sin parametrización.
 - 2026-09-30: El machete en markdown se reemplazó por una **hoja de fórmulas en cajas**, imprimible: `formulas-sensibilidad-dualidad.pdf` (fuente `.html`, generada con `scripts/formulario-pdf.js`). Carilla 1: sensibilidad (base $B^{-1}$, $c_k$, $b_k$, $a_{ij}$, variable y restricción nuevas, regla del 100%, Simplex dual, cierre de rangos). Carilla 2: dualidad (construcción, signos para primal Max y Min, teoremas, lectura en la tabla, holguras complementarias, interpretación económica, LINDO, errores típicos).
+- 2026-09-30: Se ingirió la **Unidad 7 — transporte, transbordo y asignación** desde `Modelos especiales de PL.pdf` (cap. 8), `PL5UTN.pdf` y `PL5UTNresol.pdf`, cruzado con el resumen de circulación y las `TTA-01..11` del banco. Contenido: formulación general, balanceo con ficticios, integralidad automática, $m+n-1$ y degeneración, asignación (balanceada y desbalanceada), transbordo (por conservación de flujo y por caminos $x_{ijk}$), variantes y mapa de la Práctica 5. Ejemplos del apunte verificados a mano ($W^*$ = 1020, 300, 1210). Detectado: la resolución de la cátedra de los Ej. 1 y 2 corresponde a otra versión del enunciado.
