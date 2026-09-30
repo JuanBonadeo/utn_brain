@@ -58,8 +58,6 @@
           <tr><td>\(b_i\)</td><td><b>factibilidad</b></td><td>columna \(X\) (\(x_B \geq 0\))</td></tr>
         </table>
         <p>Óptimo: <b>Max</b> \(c_j - z_j \leq 0\ \forall j\) · <b>Min</b> \(c_j - z_j \geq 0\ \forall j\)</p>
-        <p class="note"><b>LINDO:</b> <code>SLK k+1</code> = holgura de la restricción \(k\) (fila 1 = funcional).
-        Fila <code>ART</code> \(= z_j - c_j\): cambiarle el signo.</p>
       </div>
     </div>
   </div>
@@ -76,6 +74,7 @@
         Rango: \(c_k + \Delta c_k\). Dentro, \(x^*\) igual y
         \[ z^{*\prime} = z^* + \Delta c_k\, x_k^* \]</li>
     </ol>
+    <p class="note">\(y_{kj} = 0\) no restringe. Grupo vacío → esa cota es \(\pm\infty\).</p>
     <p class="warn"><b>Min:</b> la condición es \(\geq 0\). No básica: \(\Delta c_k \geq -(c_k - z_k)\).
     Básica: se invierten los grupos → \(\max_{y_{kj}<0} \leq \Delta c_k \leq \min_{y_{kj}>0}\).</p>
   </div>
@@ -91,6 +90,7 @@
         \[ x_i' = x_i + r_{ik}\,\Delta b_k \qquad z^{*\prime} = z^* + u_k\,\Delta b_k \]
         Control: \(z^{*\prime} = c_B\,x_B'\).</li>
     </ol>
+    <p class="note">\(r_{ik} = 0\) no restringe. Grupo vacío → esa cota es \(\pm\infty\).</p>
     <p class="warn">Vale igual en Max y en Min. Si \(\Delta b_k\) sale del rango, alguna \(x_B < 0\) → <b>Simplex dual</b>.</p>
   </div>
 
@@ -142,7 +142,7 @@
     </ul>
   </div>
 
-  <div class="box">
+  <div class="box full">
     <h2>Simplex dual <span class="tag">(cuando el cambio sale del rango)</span></h2>
     <ol>
       <li>Arranca <b>óptimo pero no factible</b>: \(c_j - z_j\) ok, alguna \(x_B < 0\).</li>
@@ -150,16 +150,6 @@
       <li><b>Entra</b>: \(\displaystyle \min_{y_{rj}<0} \left| \frac{c_j - z_j}{y_{rj}} \right|\). Sin ningún \(y_{rj} < 0\) → <b>no factible</b>.</li>
       <li>Pivotear y repetir hasta \(x_B \geq 0\).</li>
     </ol>
-  </div>
-
-  <div class="box">
-    <h2>Cómo cerrar un rango</h2>
-    <ul>
-      <li>Denominador \(> 0\) → cota <b>inferior</b> → de todas, la <b>mayor</b>.</li>
-      <li>Denominador \(< 0\) → cota <b>superior</b> → de todas, la <b>menor</b>.</li>
-      <li>Denominador \(= 0\) → no restringe. Grupo vacío → esa cota es \(\pm\infty\).</li>
-      <li>Rango del coeficiente = valor actual + rango de \(\Delta\).</li>
-    </ul>
   </div>
 
 </div>
@@ -209,8 +199,6 @@
     <ul>
       <li><b>Fundamental:</b> si el primal tiene óptimo finito, el dual también y
         \[ w^* = z^* \qquad u = c_B\,B^{-1} \]</li>
-      <li><b>Débil</b> (primal Max): para cualquier par factible, \(z \leq w\).</li>
-      <li>El dual del dual es el primal.</li>
       <li>Primal <b>no acotado</b> → dual <b>no factible</b>.</li>
       <li>Primal <b>no factible</b> → dual no acotado o no factible.</li>
     </ul>
@@ -225,39 +213,25 @@
     <ul>
       <li>Holgura de la restricción dual \(j\) = costo reducido de \(x_j\): \(s_j = |c_j - z_j|\).</li>
       <li>Por fórmula: \(u = c_B\,B^{-1}\). Control: \(\sum_i b_i\,u_i = z^*\).</li>
+      <li>\(u_i\) = cuánto cambia \(z^*\) por unidad de \(b_i\). Válido <b>solo dentro del rango de \(b_i\)</b>.</li>
     </ul>
+    <table>
+      <tr><th></th><th>Costo reducido</th><th>Costo marginal</th></tr>
+      <tr><td>Es de</td><td>una <b>variable</b> \(x_j\)</td><td>una <b>restricción</b></td></tr>
+      <tr><td>Se lee</td><td>\(c_j - z_j\) de \(x_j\)</td><td>\(c_j - z_j\) de su holgura</td></tr>
+      <tr><td>Vale 0</td><td>si \(x_j\) es básica</td><td>si la restricción es pasiva</td></tr>
+    </table>
   </div>
 
   <div class="box">
     <h2>Holguras complementarias</h2>
     \[ h_i \cdot u_i = 0 \qquad\qquad x_j \cdot s_j = 0 \]
-    <table>
-      <tr><th>Primal</th><th class="c">↔</th><th>Dual</th></tr>
-      <tr><td>holgura/exceso \(h_i\) de la restricción \(i\)</td><td class="c">↔</td><td>variable \(u_i\)</td></tr>
-      <tr><td>variable \(x_j\)</td><td class="c">↔</td><td>holgura \(s_j\) de la restricción \(j\)</td></tr>
-    </table>
     <ul>
       <li>Sobra recurso (\(h_i > 0\)) → \(u_i = 0\).</li>
       <li>\(u_i \neq 0\) → el recurso está agotado (\(h_i = 0\)).</li>
       <li>\(x_j > 0\) → su restricción dual se cumple con igualdad.</li>
     </ul>
     <p class="note">En cada renglón, al menos un lado es 0. Si los dos son \(\neq 0\), hay un error.</p>
-  </div>
-
-  <div class="box">
-    <h2>Interpretación económica</h2>
-    <ul>
-      <li><b>Precio sombra</b> \(u_i = \partial z^*/\partial b_i\): cuánto cambia \(z^*\) por una unidad más de \(b_i\). Es lo máximo que conviene pagar por ella.</li>
-      <li>Vale <b>solo dentro del rango de \(b_i\)</b>. No es el precio de mercado.</li>
-      <li>Actividad con \(x_j > 0\) → el valor de los recursos que consume es igual a su \(c_j\).</li>
-    </ul>
-    <table>
-      <tr><th></th><th>Costo reducido</th><th>Costo marginal</th></tr>
-      <tr><td>Es de</td><td>una <b>variable</b> \(x_j\)</td><td>una <b>restricción</b></td></tr>
-      <tr><td>Se lee</td><td>\(c_j - z_j\) de \(x_j\)</td><td>\(c_j - z_j\) de su holgura</td></tr>
-      <tr><td>Dice</td><td>cuánto le falta a \(c_j\) para entrar</td><td>cuánto vale una unidad más</td></tr>
-      <tr><td>Vale 0</td><td>si \(x_j\) es básica</td><td>si la restricción es pasiva</td></tr>
-    </table>
   </div>
 
   <div class="box">
@@ -270,18 +244,6 @@
       <tr><td><code>REDUCED COST</code></td><td>\(|c_j - z_j|\)</td></tr>
       <tr><td><code>SLACK OR SURPLUS</code></td><td>valor de la holgura/exceso</td></tr>
     </table>
-  </div>
-
-  <div class="box">
-    <h2>Errores típicos</h2>
-    <ol>
-      <li>Mezclar convenciones: \(b_i\) por \(-1\) en el funcional y restricciones sin tocar.</li>
-      <li>Dual de un <b>Min</b> es <b>Max</b>, y sus restricciones son \(\leq\).</li>
-      <li>Omitir "\(u_i\) libre" en una igualdad.</li>
-      <li>Para \(\Delta b_k\), usar la columna de la <b>variable</b> \(x_k\) en vez de la de la <b>holgura</b> \(k\).</li>
-      <li>En \(c_k - z_k'\), usar otro \(c\): \(c_k\) sigue siendo el original.</li>
-      <li>\(c_j - z_j = 0\) no es "entra": es óptimo alternativo.</li>
-    </ol>
   </div>
 
 </div>
