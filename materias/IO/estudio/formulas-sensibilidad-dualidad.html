@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>IO — Fórmulas de sensibilidad y dualidad</title>
+<style>
+  @page { size: A4; margin: 9mm 9mm 8mm 9mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 8.6pt; line-height: 1.32; color: #111; }
+  .page { break-after: page; }
+  .page:last-child { break-after: auto; }
+  h1 { font-size: 14pt; text-align: center; margin: 0 0 2.5mm; letter-spacing: .02em; }
+  h1 small { display: block; font-size: 7.5pt; font-weight: normal; color: #555; letter-spacing: 0; margin-top: .6mm; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; border-top: 1.2px solid #111; border-left: 1.2px solid #111; }
+  .box { border-right: 1.2px solid #111; border-bottom: 1.2px solid #111; padding: 1.6mm 2.2mm 1.8mm; break-inside: avoid; }
+  .full { grid-column: 1 / -1; }
+  .box h2 { font-size: 9.2pt; margin: 0 0 1mm; text-decoration: underline; text-underline-offset: 1.5px; }
+  .box h2 .tag { text-decoration: none; font-weight: normal; font-size: 7.4pt; color: #444; margin-left: 1.5mm; }
+  ol, ul { margin: .4mm 0 .6mm; padding-left: 4.2mm; }
+  li { margin: 0 0 .5mm; }
+  p { margin: .3mm 0 .8mm; }
+  .katex { font-size: 1.02em; }
+  .katex-display { margin: .9mm 0; }
+  .katex-display > .katex { font-size: 1.04em; }
+  .note { font-size: 7.8pt; color: #333; }
+  .warn { font-size: 7.8pt; border-left: 2px solid #111; padding-left: 1.6mm; margin-top: 1mm; }
+  table { border-collapse: collapse; width: 100%; margin: .8mm 0; font-size: 8pt; }
+  th, td { border: .8px solid #777; padding: .5mm 1.2mm; text-align: left; vertical-align: top; }
+  th { background: #ececec; font-weight: bold; }
+  td.c, th.c { text-align: center; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 2mm; }
+  b.k { font-weight: bold; }
+</style>
+</head>
+<body>
+
+<!-- ═════════════════════════════════ PÁGINA 1 — SENSIBILIDAD ═════════════════════════════════ -->
+<section class="page">
+<h1>Fórmulas para sensibilidad<small>IO · Práctica 4 · Todo sale de la tabla óptima — un cambio por vez</small></h1>
+
+<div class="grid">
+
+  <div class="box full">
+    <h2>Base: la tabla óptima es \(B^{-1}\)</h2>
+    <div class="two">
+      <div>
+        \[ x_B = B^{-1}b \qquad Y_j = B^{-1}A_j \qquad z_j = c_B\,Y_j \]
+        \[ u = c_B\,B^{-1} \qquad z^{*} = c_B\,x_B \]
+        <ul>
+          <li>\(B^{-1}\) = columnas que eran la identidad al inicio → las <b>holguras</b>, en el orden de las restricciones.</li>
+          <li>Restricción \(\geq\): la identidad era la <b>ficticia</b>. Columna de exceso \(= -B^{-1}e_i\) (signo cambiado).</li>
+        </ul>
+      </div>
+      <div>
+        <table>
+          <tr><th>Cambia</th><th>Puede romper</th><th>Se mira</th></tr>
+          <tr><td>\(c_j\)</td><td><b>optimalidad</b></td><td>fila \(c_j - z_j\)</td></tr>
+          <tr><td>\(b_i\)</td><td><b>factibilidad</b></td><td>columna \(X\) (\(x_B \geq 0\))</td></tr>
+        </table>
+        <p>Óptimo: <b>Max</b> \(c_j - z_j \leq 0\ \forall j\) · <b>Min</b> \(c_j - z_j \geq 0\ \forall j\)</p>
+        <p class="note"><b>LINDO:</b> <code>SLK k+1</code> = holgura de la restricción \(k\) (fila 1 = funcional).
+        Fila <code>ART</code> \(= z_j - c_j\): cambiarle el signo.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="box">
+    <h2>Variación de los coeficientes \(c_k\)</h2>
+    <ol>
+      <li>Si \(x_k\) es <b>no básica</b>: solo cambia su propio \(c_k - z_k\).
+        \[ (c_k + \Delta c_k) - z_k \leq 0 \;\Rightarrow\; \Delta c_k \leq -(c_k - z_k) \]
+        Dentro del rango <b>no cambia nada</b>: ni \(x^*\) ni \(z^*\) (porque \(x_k = 0\)).</li>
+      <li>Si \(x_k\) es <b>básica</b>: se mueven <b>todos</b> los \(c_j - z_j\). Se usa la <b>fila</b> de \(x_k\), columnas no básicas:
+        \[ (c_j - z_j)' = (c_j - z_j) - \Delta c_k\, y_{kj} \leq 0 \]
+        \[ \max_{y_{kj}>0} \frac{c_j - z_j}{y_{kj}} \;\leq\; \Delta c_k \;\leq\; \min_{y_{kj}<0} \frac{c_j - z_j}{y_{kj}} \]
+        Rango: \(c_k + \Delta c_k\). Dentro, \(x^*\) igual y
+        \[ z^{*\prime} = z^* + \Delta c_k\, x_k^* \]</li>
+    </ol>
+    <p class="warn"><b>Min:</b> la condición es \(\geq 0\). No básica: \(\Delta c_k \geq -(c_k - z_k)\).
+    Básica: se invierten los grupos → \(\max_{y_{kj}<0} \leq \Delta c_k \leq \min_{y_{kj}>0}\).</p>
+  </div>
+
+  <div class="box">
+    <h2>Variación de los términos independientes \(b_k\)</h2>
+    <ol>
+      <li>Se usa la <b>columna \(k\) de \(B^{-1}\)</b> = la de la <b>holgura</b> de la restricción \(k\) (en LINDO, <code>SLK k+1</code>). Sus elementos: \(r_{ik}\).</li>
+      <li>La nueva solución tiene que seguir siendo factible:
+        \[ x_B' = x_B + \Delta b_k \, B^{-1}_{\cdot k} \geq 0 \]
+        \[ \max_{r_{ik}>0} \frac{-x_i}{r_{ik}} \;\leq\; \Delta b_k \;\leq\; \min_{r_{ik}<0} \frac{-x_i}{r_{ik}} \]</li>
+      <li>Rango: \(b_k + \Delta b_k\). Dentro, <b>misma base</b> pero los valores se mueven:
+        \[ x_i' = x_i + r_{ik}\,\Delta b_k \qquad z^{*\prime} = z^* + u_k\,\Delta b_k \]
+        Control: \(z^{*\prime} = c_B\,x_B'\).</li>
+    </ol>
+    <p class="warn">Vale igual en Max y en Min. Si \(\Delta b_k\) sale del rango, alguna \(x_B < 0\) → <b>Simplex dual</b>.</p>
+  </div>
+
+  <div class="box">
+    <h2>Cambio en los coeficientes tecnológicos \(a_{ij}\)</h2>
+    <p>Solo para \(x_k\) <b>no básica</b> (su columna no está en \(B\)):</p>
+    <ol>
+      <li>Nueva columna: \(Y_k' = B^{-1}A_k'\)</li>
+      <li>Nuevo \(z_k' = c_B\,Y_k'\)</li>
+      <li>Calcular \(c_k - z_k'\) con el \(c_k\) <b>original</b> (no cambió).</li>
+      <li>Max: si \(\leq 0\) la solución actual sigue óptima (\(x^*\), \(z^*\) iguales).
+        Si \(> 0\), entra \(A_k'\): se itera <b>desde esta tabla</b>, no se rehace.</li>
+    </ol>
+    <p class="warn">Si \(x_k\) es <b>básica</b>, cambia \(B\) y con ella \(B^{-1}\) y toda la tabla: no hay atajo, se rehace.</p>
+  </div>
+
+  <div class="box">
+    <h2>Agregar una variable nueva \(x_n\) <span class="tag">(con \(c_n\) y \(A_n\))</span></h2>
+    <p>Se la trata como una no básica que no estaba en la tabla:</p>
+    <ol>
+      <li>\(Y_n = B^{-1}A_n\)</li>
+      <li>\(z_n = c_B\,Y_n = \sum_i a_{in}\,u_i\) <span class="note">(valor de los recursos que consume)</span></li>
+      <li>Calcular \(c_n - z_n\)</li>
+      <li>Max: \(> 0\) <b>conviene</b> → entra, seguir iterando · \(= 0\) no mejora: <b>óptimo alternativo</b> · \(< 0\) <b>no conviene</b>, óptimo intacto.</li>
+    </ol>
+  </div>
+
+  <div class="box">
+    <h2>Agregar una restricción nueva</h2>
+    <ol>
+      <li>Reemplazar la solución óptima \(x^*\) en la restricción nueva.</li>
+      <li><b>La cumple</b> → es <b>pasiva</b>: \(x^*\) y \(z^*\) no cambian.</li>
+      <li><b>No la cumple</b> → es <b>activa</b>, \(x^*\) deja de ser factible:
+        <ul>
+          <li>agregar la fila con su holgura;</li>
+          <li>anular los coeficientes de las básicas (restar filas) para recuperar la identidad;</li>
+          <li>queda óptima pero no factible → <b>Simplex dual</b>.</li>
+        </ul></li>
+    </ol>
+  </div>
+
+  <div class="box">
+    <h2>Regla del 100% <span class="tag">(varios cambios a la vez)</span></h2>
+    \[ r_k = \frac{|\Delta_k|}{|\text{variación máx. permitida en ese sentido}|} \]
+    <ul>
+      <li>\(\sum r_k \leq 100\%\) → la base sigue óptima.</li>
+      <li>\(\sum r_k > 100\%\) → <b>no concluye</b>: hay que recalcular.</li>
+      <li>Los \(c_j\) y los \(b_i\) se suman <b>por separado</b>.</li>
+    </ul>
+  </div>
+
+  <div class="box">
+    <h2>Simplex dual <span class="tag">(cuando el cambio sale del rango)</span></h2>
+    <ol>
+      <li>Arranca <b>óptimo pero no factible</b>: \(c_j - z_j\) ok, alguna \(x_B < 0\).</li>
+      <li><b>Sale</b> la básica más negativa → fila pivote \(r\).</li>
+      <li><b>Entra</b>: \(\displaystyle \min_{y_{rj}<0} \left| \frac{c_j - z_j}{y_{rj}} \right|\). Sin ningún \(y_{rj} < 0\) → <b>no factible</b>.</li>
+      <li>Pivotear y repetir hasta \(x_B \geq 0\).</li>
+    </ol>
+  </div>
+
+  <div class="box">
+    <h2>Cómo cerrar un rango</h2>
+    <ul>
+      <li>Denominador \(> 0\) → cota <b>inferior</b> → de todas, la <b>mayor</b>.</li>
+      <li>Denominador \(< 0\) → cota <b>superior</b> → de todas, la <b>menor</b>.</li>
+      <li>Denominador \(= 0\) → no restringe. Grupo vacío → esa cota es \(\pm\infty\).</li>
+      <li>Rango del coeficiente = valor actual + rango de \(\Delta\).</li>
+    </ul>
+  </div>
+
+</div>
+</section>
+
+<!-- ═════════════════════════════════ PÁGINA 2 — DUALIDAD ═════════════════════════════════ -->
+<section class="page">
+<h1>Fórmulas para dualidad<small>IO · Práctica 4 · El dual pregunta cuánto vale cada recurso</small></h1>
+
+<div class="grid">
+
+  <div class="box">
+    <h2>Construcción del dual</h2>
+    <ol>
+      <li><b>Max ↔ Min.</b></li>
+      <li>Cada <b>restricción</b> \(i\) del primal → una <b>variable</b> \(u_i\).</li>
+      <li>Cada <b>variable</b> \(x_j\) del primal → una <b>restricción</b> \(j\).</li>
+      <li>Los \(b_i\) → coeficientes de \(u_i\) en el funcional.</li>
+      <li>Los \(c_j\) → lados derechos, <b>con su signo</b>.</li>
+      <li>Se traspone \(A\): la columna de \(x_j\) es la fila \(j\) del dual.</li>
+    </ol>
+    <p>Forma canónica:</p>
+    \[ \begin{array}{c|c} \text{Max } z = cx & \text{Min } w = b^{T}u \\ Ax \leq b & A^{T}u \geq c^{T} \\ x \geq 0 & u \geq 0 \end{array} \]
+    <p class="note">No hace falta forma estándar: sin holguras y el \(b_i\) negativo pasa tal cual.</p>
+  </div>
+
+  <div class="box">
+    <h2>Signos del dual</h2>
+    <table>
+      <tr><th>Primal <b>Max</b></th><th>Dual (Min)</th><th>Primal <b>Min</b></th><th>Dual (Max)</th></tr>
+      <tr><td>restr. \(\leq\)</td><td>\(u_i \geq 0\)</td><td>restr. \(\geq\)</td><td>\(y_i \geq 0\)</td></tr>
+      <tr><td>restr. \(\geq\)</td><td>\(u_i \leq 0\)</td><td>restr. \(\leq\)</td><td>\(y_i \leq 0\)</td></tr>
+      <tr><td>restr. \(=\)</td><td>\(u_i\) <b>libre</b></td><td>restr. \(=\)</td><td>\(y_i\) <b>libre</b></td></tr>
+      <tr><td>\(x_j \geq 0\)</td><td>restr. \(\geq\)</td><td>\(x_j \geq 0\)</td><td>restr. \(\leq\)</td></tr>
+      <tr><td>\(x_j \leq 0\)</td><td>restr. \(\leq\)</td><td>\(x_j \leq 0\)</td><td>restr. \(\geq\)</td></tr>
+      <tr><td>\(x_j\) libre</td><td>restr. \(=\)</td><td>\(x_j\) libre</td><td>restr. \(=\)</td></tr>
+    </table>
+    <ul>
+      <li>Restricción <b>natural</b> (la canónica) → variable \(\geq 0\); la <b>rara</b> → \(\leq 0\); la <b>=</b> → libre.</li>
+      <li>Alternativa: pasar antes a canónica (\(\geq\) por \(-1\); \(=\) en dos \(\leq\) y \(\geq\)). Da el mismo dual. <b>No mezclar caminos.</b></li>
+      <li><b>Escribir el signo de todas las variables.</b> Si no se dice nada, se asume \(\geq 0\).</li>
+    </ul>
+  </div>
+
+  <div class="box">
+    <h2>Teoremas</h2>
+    <ul>
+      <li><b>Fundamental:</b> si el primal tiene óptimo finito, el dual también y
+        \[ w^* = z^* \qquad u = c_B\,B^{-1} \]</li>
+      <li><b>Débil</b> (primal Max): para cualquier par factible, \(z \leq w\).</li>
+      <li>El dual del dual es el primal.</li>
+      <li>Primal <b>no acotado</b> → dual <b>no factible</b>.</li>
+      <li>Primal <b>no factible</b> → dual no acotado o no factible.</li>
+    </ul>
+    <p class="warn"><b>Control obligatorio:</b> \(w^* = z^*\). Si no da, el dual está mal planteado.</p>
+  </div>
+
+  <div class="box">
+    <h2>Lectura del dual en la tabla óptima del primal</h2>
+    <p>Fila \(c_j - z_j\), bajo la columna de cada restricción:</p>
+    \[ \text{holgura } (\leq): \; u_i = -(c_j - z_j) \qquad \text{exceso } (\geq): \; u_i = +(c_j - z_j) \]
+    <p class="note">Vale en Max y en Min (la columna de exceso es la de holgura con signo cambiado).</p>
+    <ul>
+      <li>Holgura de la restricción dual \(j\) = costo reducido de \(x_j\): \(s_j = |c_j - z_j|\).</li>
+      <li>Por fórmula: \(u = c_B\,B^{-1}\). Control: \(\sum_i b_i\,u_i = z^*\).</li>
+    </ul>
+  </div>
+
+  <div class="box">
+    <h2>Holguras complementarias</h2>
+    \[ h_i \cdot u_i = 0 \qquad\qquad x_j \cdot s_j = 0 \]
+    <table>
+      <tr><th>Primal</th><th class="c">↔</th><th>Dual</th></tr>
+      <tr><td>holgura/exceso \(h_i\) de la restricción \(i\)</td><td class="c">↔</td><td>variable \(u_i\)</td></tr>
+      <tr><td>variable \(x_j\)</td><td class="c">↔</td><td>holgura \(s_j\) de la restricción \(j\)</td></tr>
+    </table>
+    <ul>
+      <li>Sobra recurso (\(h_i > 0\)) → \(u_i = 0\).</li>
+      <li>\(u_i \neq 0\) → el recurso está agotado (\(h_i = 0\)).</li>
+      <li>\(x_j > 0\) → su restricción dual se cumple con igualdad.</li>
+    </ul>
+    <p class="note">En cada renglón, al menos un lado es 0. Si los dos son \(\neq 0\), hay un error.</p>
+  </div>
+
+  <div class="box">
+    <h2>Interpretación económica</h2>
+    <ul>
+      <li><b>Precio sombra</b> \(u_i = \partial z^*/\partial b_i\): cuánto cambia \(z^*\) por una unidad más de \(b_i\). Es lo máximo que conviene pagar por ella.</li>
+      <li>Vale <b>solo dentro del rango de \(b_i\)</b>. No es el precio de mercado.</li>
+      <li>Actividad con \(x_j > 0\) → el valor de los recursos que consume es igual a su \(c_j\).</li>
+    </ul>
+    <table>
+      <tr><th></th><th>Costo reducido</th><th>Costo marginal</th></tr>
+      <tr><td>Es de</td><td>una <b>variable</b> \(x_j\)</td><td>una <b>restricción</b></td></tr>
+      <tr><td>Se lee</td><td>\(c_j - z_j\) de \(x_j\)</td><td>\(c_j - z_j\) de su holgura</td></tr>
+      <tr><td>Dice</td><td>cuánto le falta a \(c_j\) para entrar</td><td>cuánto vale una unidad más</td></tr>
+      <tr><td>Vale 0</td><td>si \(x_j\) es básica</td><td>si la restricción es pasiva</td></tr>
+    </table>
+  </div>
+
+  <div class="box">
+    <h2>Salida de LINDO</h2>
+    <table>
+      <tr><th>LINDO</th><th>Qué es</th></tr>
+      <tr><td><code>SLK k+1</code></td><td>holgura de la restricción \(k\)</td></tr>
+      <tr><td>fila <code>ART</code></td><td>\(z_j - c_j\) (cambiar el signo). En Min, la columna X muestra \(-W^*\).</td></tr>
+      <tr><td><code>DUAL PRICES</code></td><td>cuánto <b>mejora</b> el funcional. Max: \(= u_i\) · Min: \(= -u_i\)</td></tr>
+      <tr><td><code>REDUCED COST</code></td><td>\(|c_j - z_j|\)</td></tr>
+      <tr><td><code>SLACK OR SURPLUS</code></td><td>valor de la holgura/exceso</td></tr>
+    </table>
+  </div>
+
+  <div class="box">
+    <h2>Errores típicos</h2>
+    <ol>
+      <li>Mezclar convenciones: \(b_i\) por \(-1\) en el funcional y restricciones sin tocar.</li>
+      <li>Dual de un <b>Min</b> es <b>Max</b>, y sus restricciones son \(\leq\).</li>
+      <li>Omitir "\(u_i\) libre" en una igualdad.</li>
+      <li>Para \(\Delta b_k\), usar la columna de la <b>variable</b> \(x_k\) en vez de la de la <b>holgura</b> \(k\).</li>
+      <li>En \(c_k - z_k'\), usar otro \(c\): \(c_k\) sigue siendo el original.</li>
+      <li>\(c_j - z_j = 0\) no es "entra": es óptimo alternativo.</li>
+    </ol>
+  </div>
+
+</div>
+</section>
+
+</body>
+</html>
