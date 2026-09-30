@@ -34,6 +34,12 @@
 >   como trampa: la sensibilidad que reporta LINDO **no es válida** en un programa entero,
 >   porque corresponde al relajado, no al modelo con los cortes de ramificación y poda.
 >
+> **Recorte por decisión del alumno (2026-09-30):** la **parametrización** (PLC4 §4.10,
+> Ejercicios 8 y 9 de la Práctica 4) queda **fuera** del estudio para el parcial. Es
+> consistente con el banco: **cero** de las 89 preguntas la mencionan. El Simplex dual
+> sigue dentro, porque se usa también en sensibilidad cuando un cambio de $b_i$ rompe la
+> factibilidad.
+>
 > **Reparto de las 89 preguntas por tema** — dónde está el peso real de la teoría:
 >
 > | Tema | Preguntas | Estado en esta wiki |
@@ -1471,3 +1477,4 @@ Práctica 4 (`PL4UTN.pdf`), que integra sensibilidad, dualidad y parametrizació
 - 2026-09-23: Se generó [[machete-metodo-simplex]] — una carilla operativa con las condiciones de optimalidad y factibilidad, armado y lectura de tablas, criterios de entrada/salida, pivoteo, base artificial, penalización y dos fases, mapa de diagnóstico, formato de respuesta, trampas y controles finales.
 - 2026-09-27: Se ingirieron dos materiales de circulación entre alumnos bajados ese día: `resumen-operativa-companero.pdf` (32 pág., todo el programa) y `preguntas-frecuentes.pdf` (20 pág., **89 preguntas de teoría** con respuesta, organizadas por tema). Con ellos se **confirmó el alcance del parcial del 2026-10-03** (todo el programa) y se reescribió la nota de alcance del índice con el reparto de las 89 preguntas por tema. Dos recortes detectados: **CPM/PERT y PNL no aparecen** en ninguno de los dos materiales, y **LINDO no tiene preguntas propias** (es herramienta, no unidad). Contenido todavía **sin volcar** a las Unidades 7, 8, 9 y 11.
 - 2026-09-27: Se generó [[banco-preguntas]] a partir de `preguntas-frecuentes.pdf`: las **89 preguntas** numeradas con código por tema (`SPX-04`, `STK-28`), checklist de autoevaluación, ruta de estudio de stock en siete bloques, **respuestas limpias y reconstruidas de las 52** que caen en las Unidades 7, 8, 9 y 11, y puntero a la unidad de la wiki para las 37 de las Unidades 1 a 5. Se corrigió el conteo: son **89 preguntas, no 106** (el conteo anterior incluía los pasos numerados dentro de las respuestas), y el reparto real es 42 % cubierto / 58 % por estudiar. Se detectaron **cinco errores** en el material: la definición de degeneración dada vuelta (filas por columnas), `n-m` donde va `m`, una justificación que no se sostiene, **Prim llamado Kruskal**, y tres preguntas sin respuesta ("hecho en hoja"). Dos respuestas quedaron marcadas como dudosas y pendientes de cruzar con el apunte.
+- 2026-09-30: Práctica 4 — se trabajó el **Ejercicio 5** (construcción del dual, incisos a–d) en sesión, cotejado con `Resol ej 5.pdf` de la cátedra. Se dio de baja la **parametrización** del alcance del parcial (decisión del alumno; nota agregada al índice).
