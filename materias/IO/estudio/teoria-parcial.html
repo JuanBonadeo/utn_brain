@@ -35,19 +35,49 @@
 <div class="c"><b>Idea del método</b>
 <p>Recorre soluciones básicas factibles (vértices) pasando siempre a una adyacente que mejore el funcional. En cada iteración responde dos preguntas: <b>¿es óptima la solución actual?</b> (condición de optimalidad, decide quién entra) y <b>¿cuánto puede crecer la variable que entra sin romper \(x \geq 0\)?</b> (condición de factibilidad, decide quién sale).</p></div>
 
-<div class="c"><b>Condición de factibilidad</b>
-<p>La columna de la variable que entra, expresada en la base actual, es \(Y_j = B^{-1}A_j\). Si \(x_j\) toma el valor \(\theta\), cada básica pasa a valer \(x_i - \theta\,y_{ij}\), y para seguir siendo factible tiene que ser \(\geq 0\):</p>
-\[ \theta = \min_i \left\{ \frac{x_i}{y_{ij}} \;:\; y_{ij} > 0 \right\} \]
-<p>Sale la variable básica que alcanza ese mínimo, porque es la que queda en cero. Solo se divide por \(y_{ij} > 0\): si \(y_{ij} \leq 0\) esa fila no limita. Si ningún \(y_{ij}\) es positivo, la variable puede crecer indefinidamente y la solución es <b>no acotada</b>. Un \(\theta = 0\) es válido y produce un pivote degenerado.</p></div>
+<div class="c"><b>Punto de partida</b>
+<p>Forma estándar \(\text{Max } z = cx\), \(Ax = b\), \(x \geq 0\), con una SBF de base \(B = [B_1, \dots, B_m]\). Como las no básicas valen cero, \(Bx_B + Nx_N = b\) se reduce a:</p>
+\[ x_1 B_1 + x_2 B_2 + \dots + x_m B_m = b \tag{1} \]
+<p>Toda columna no básica \(A_j\) se puede escribir como combinación lineal de los vectores de la base:</p>
+\[ A_j = y_{1j}B_1 + y_{2j}B_2 + \dots + y_{mj}B_m = B\,Y_j \quad\Longrightarrow\quad Y_j = B^{-1}A_j \tag{2} \]
+<p>Notación: el subíndice \(i\) recorre la base y el subíndice \(j\) la no base.</p></div>
 
-<div class="c"><b>Condición de optimalidad</b>
-<p>Con \(z_j = \sum_i c_i\,y_{ij}\) (lo que se pierde al reacomodar las básicas), al entrar \(x_j = \theta\) el funcional queda:</p>
-\[ z = z_0 + \theta\,(c_j - z_j) \]
+<div class="c"><b>Desarrollo de la condición de factibilidad <span class="tag">(decide quién sale)</span></b>
+<ol>
+<li>Se quiere hacer entrar \(x_j\) con un valor \(\theta_j \geq 0\). Se multiplica (2) por \(\theta_j\) y se resta de (1):
+\[ (x_1 - \theta_j y_{1j})B_1 + (x_2 - \theta_j y_{2j})B_2 + \dots + (x_m - \theta_j y_{mj})B_m + \theta_j A_j = b \]
+Es una nueva solución del sistema: \(x_j\) vale \(\theta_j\) y cada básica pasa a valer \(x_i - \theta_j\,y_{ij}\). Por cada unidad de \(x_j\) que entra, \(x_i\) baja \(y_{ij}\).</li>
+<li>Para que sea <b>factible</b>, ninguna variable puede quedar negativa:
+\[ x_i - \theta_j\,y_{ij} \geq 0 \qquad \forall i \]</li>
+<li>Si \(y_{ij} \leq 0\), la desigualdad se cumple para cualquier \(\theta_j \geq 0\): esa fila no limita. Si \(y_{ij} > 0\), se despeja:
+\[ \theta_j \leq \frac{x_i}{y_{ij}} \]</li>
+<li>Para que se cumpla en todas las filas a la vez, \(\theta_j\) no puede superar el menor de esos cocientes. Además, para que la nueva solución sea <b>básica</b> (a lo sumo \(m\) componentes positivas), una de las básicas tiene que anularse. Las dos cosas se logran tomando:
+\[ \theta_j = \min_i \left\{ \frac{x_i}{y_{ij}} \;:\; y_{ij} > 0 \right\} = \frac{x_r}{y_{rj}} \]</li>
+<li>La variable \(x_r\) que alcanza el mínimo <b>sale de la base</b>, porque su nuevo valor es
+\[ x_r - \frac{x_r}{y_{rj}}\,y_{rj} = 0 \]</li>
+<li>Si ningún \(y_{ij}\) es positivo, ninguna fila limita: \(x_j\) puede crecer indefinidamente sin violar las restricciones y la solución es <b>no acotada</b>. Si el mínimo es \(\theta_j = 0\), el pivote es degenerado.</li>
+</ol></div>
+
+<div class="c"><b>Desarrollo de la condición de optimalidad <span class="tag">(decide quién entra)</span></b>
+<ol>
+<li>En la SBF actual, con \(x_N = 0\), el funcional vale:
+\[ z_0 = c_B\,x_B = \sum_i c_i\,x_i \]</li>
+<li>En la nueva solución obtenida por la condición de factibilidad, las básicas valen \(x_i - \theta_j y_{ij}\) y la entrante vale \(\theta_j\):
+\[ z = \sum_i c_i\,(x_i - \theta_j\,y_{ij}) + c_j\,\theta_j \]</li>
+<li>Distribuyendo y sacando \(\theta_j\) como factor común:
+\[ z = \sum_i c_i\,x_i - \theta_j \sum_i c_i\,y_{ij} + \theta_j\,c_j = z_0 + \theta_j \Big( c_j - \sum_i c_i\,y_{ij} \Big) \]</li>
+<li>Llamando \(z_j = \sum_i c_i\,y_{ij} = c_B\,Y_j\) (lo que se deja de ganar en las básicas por cada unidad de \(x_j\)):
+\[ z = z_0 + \theta_j\,(c_j - z_j) \]</li>
+<li>Como \(\theta_j \geq 0\), el signo de \(c_j - z_j\) decide si conviene que \(x_j\) entre. En <b>maximización</b>:
+\[ c_j - z_j > 0 \Rightarrow z > z_0 \ \text{(mejora)} \qquad c_j - z_j = 0 \Rightarrow z = z_0 \qquad c_j - z_j < 0 \Rightarrow z < z_0 \]</li>
+<li>Por lo tanto:
 <table>
-<tr><th></th><th>Es óptima si</th><th>Entra</th></tr>
+<tr><th></th><th>La solución es óptima si</th><th>Entra</th></tr>
 <tr><td>Max</td><td>todos los \(c_j - z_j \leq 0\)</td><td>el mayor \(c_j - z_j\) positivo</td></tr>
 <tr><td>Min</td><td>todos los \(c_j - z_j \geq 0\)</td><td>el menor \(c_j - z_j\) negativo</td></tr>
-</table></div>
+</table>
+Si en el óptimo una no básica tiene \(c_j - z_j = 0\), hacerla entrar no cambia \(z\): hay óptimos alternativos.</li>
+</ol></div>
 
 <div class="c"><b>Variables de holgura, exceso y ficticias</b>
 <ul>
