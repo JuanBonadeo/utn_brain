@@ -1644,6 +1644,7 @@ Práctica 5 (`PL5UTN.pdf`). La cátedra resuelve **todo planteando el PL y corri
 
 ## Log
 
+- 2026-10-01: Se generó [[resumen-prioritario-parcial]] en `estudio/`, ordenado por prioridad según la clase de consulta del 2026-09-30/10-01: Simplex, dualidad, sensibilidad, stock, programación entera, transporte/asignación/transbordo, redes y conceptos básicos. Fusiona wiki curada, banco de preguntas y material confirmado; marca cautelas donde el banco aún requiere verificación.
 - 2026-08-13: Se ingirió el **Material de cursado 2023** completo a `fuentes/IO/` (44 archivos: apunte PLC1–PLC9, PPTs de cátedra, prácticas PL1–PL6 con resoluciones, CPM/PERT, stock, PNL). Convertidos a markdown; **todavía sin volcar a la wiki** salvo PLC1 y PLC2.
 - 2026-08-13: Se ingirió el **TPI 2026** (enunciado + Etapa 1 del Grupo 1, comisión 402) a `fuentes/IO/TPI/`.
 - 2026-08-13: Se resolvieron y volcaron los **ejercicios 1 a 5 de la Práctica 1** en la Unidad 1, en formato de cátedra, más una sección de **trampas prácticas**. Se verificaron computacionalmente los ejercicios 4 y 5 (sin resolución oficial vigente).
