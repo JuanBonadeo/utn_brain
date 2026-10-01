@@ -33,7 +33,7 @@ diez temas.
 | Dualidad | `DUA` | 4 | ✔ Unidad 5 |
 | **Subtotal ya cubierto** | | **37** | **42 %** |
 | Transporte, trasbordo y asignación | `TTA` | 11 | Unidad 7 ✔ |
-| Programación entera y mixta | `ENT` | 4 | ⚠ Unidad 8 vacía |
+| Programación entera y mixta | `ENT` | 4 | Unidad 8 ✔ |
 | Modelos de redes | `RED` | 8 | ⚠ Unidad 9 vacía |
 | Gestión de stock | `STK` | 29 | ⚠ Unidad 11 vacía |
 | **Subtotal por estudiar** | | **52** | **58 %** |
@@ -117,11 +117,11 @@ en este banco**: presuntamente fuera de alcance.
 
 ## Programación entera y mixta
 
-- [ ] `ENT-01` ⚠ Tipos de modelos de PL con enteros.
-- [ ] `ENT-02` ⚠ ¿Qué métodos para resolver problemas enteros y mixtos existen?
-- [ ] `ENT-03` ⚠ Describir el criterio que usa el algoritmo de ramificación y poda.
-- [ ] `ENT-04` ⚠ Programa lineal relajado: ¿qué es y para qué se usa?
-- [ ] `ENT-05` ⚠ *(no está entre las 89; sale del resumen y es trampa clásica)* ¿Por qué no es válido usar el análisis de sensibilidad que reporta LINDO en un programa entero?
+- [ ] `ENT-01` Tipos de modelos de PL con enteros.
+- [ ] `ENT-02` ¿Qué métodos para resolver problemas enteros y mixtos existen?
+- [ ] `ENT-03` Describir el criterio que usa el algoritmo de ramificación y poda.
+- [ ] `ENT-04` Programa lineal relajado: ¿qué es y para qué se usa?
+- [ ] `ENT-05` *(no está entre las 89; sale del resumen y es trampa clásica)* ¿Por qué no es válido usar el análisis de sensibilidad que reporta LINDO en un programa entero?
 
 ## Modelos de redes
 

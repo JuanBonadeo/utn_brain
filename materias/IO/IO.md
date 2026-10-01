@@ -9,7 +9,7 @@
 5. Unidad 5 — Dualidad
 6. Unidad 6 — Resolución por software: LINDO y Solver _(sin desarrollar)_
 7. Unidad 7 — Modelos especiales: transporte, transbordo y asignación
-8. Unidad 8 — Programación lineal entera y mixta _(sin desarrollar)_
+8. Unidad 8 — Programación lineal entera y mixta
 9. Unidad 9 — Modelos de redes _(sin desarrollar)_
 10. Unidad 10 — Administración de proyectos: CPM y PERT _(sin desarrollar)_
 11. Unidad 11 — Gestión de stocks _(sin desarrollar)_
@@ -50,7 +50,7 @@
 > | Análisis de sensibilidad | 7 | Unidad 4 ✔ |
 > | Dualidad | 4 | Unidad 5 ✔ |
 > | Transporte, trasbordo y asignación | 11 | Unidad 7 ✔ |
-> | Programación entera y mixta | 4 | Unidad 8 — sin desarrollar |
+> | Programación entera y mixta | 4 | Unidad 8 ✔ |
 > | Modelos de redes | 8 | Unidad 9 — sin desarrollar |
 > | Gestión de stocks | 29 | Unidad 11 — sin desarrollar |
 >
@@ -1631,14 +1631,173 @@ Práctica 5 (`PL5UTN.pdf`). La cátedra resuelve **todo planteando el PL y corri
 #### Dudas / pendientes
 
 - **La resolución de la cátedra (`PL5UTNresol.pdf`) no coincide con el enunciado en los Ej. 1 y 2.** Resuelve otra versión: el Ej. 1 tiene ofertas 40/96 y demandas 64/48, y el Ej. 2 es de plantas y productos A, B, C. Los Ej. 3 a 5 sí coinciden y el 6 no tiene resolución. Los Ej. 1, 2 y 6 hay que resolverlos por cuenta propia.
-- **Algoritmos manuales** (esquina noroeste, Vogel, MODI, método húngaro): **no aparecen** en el apunte, ni en la práctica, ni en el resumen de circulación. El enfoque de la cátedra es modelizar y resolver con LINDO. Confirmar con el profesor si toma alguno.
+- ~~Algoritmos manuales (esquina noroeste, Vogel, MODI, método húngaro)~~ → **confirmado que no se toman**: `PLC8.pdf` (Torrent) dice textualmente que el método modificado de distribución y el húngaro "no serán objeto de estudio en el presente curso". El enfoque es modelizar y resolver con LINDO.
 - En la resolución del Ej. 4 hay una errata: el último coeficiente de M figura como `CMEH = 6+24 = 30` y debería ser `CMFP`.
 
 #### Fuentes
 
 - `Material de cursado (2023)/Teoría/Modelos especiales de PL.pdf` (cap. 8 del apunte, M. L. Cerrano) — ingerido 2026-09-30
 - `Material de cursado (2023)/Práctica/PL5UTN.pdf` y `Resuelta/PL5UTNresol.pdf` — ingeridos 2026-09-30
+- `Material de cursado (2023)/Teoría/PLC8.pdf` (Modelos especiales, N. Torrent) — consultado 2026-10-01 para el alcance de los algoritmos
 - `resumen-operativa-companero.pdf` (págs. 17–18) y `preguntas-frecuentes.pdf` (`TTA-01` a `TTA-11`, ver [[banco-preguntas]])
+
+---
+
+### Unidad 8 — Programación lineal entera y mixta
+
+#### Conceptos clave
+
+- **Para qué existe:** la PL supone variables **continuas**. Redondear su óptimo solo es aceptable cuando los valores son grandes, porque el error relativo es despreciable. Cuando no lo son (abrir 2 o 3 locales, llevar o no un artículo), redondear puede dar una solución **no óptima** o directamente **no factible**, y hay que imponer la integridad dentro del modelo.
+- **Tipos de modelos** (`ENT-01`):
+  - **Entero puro:** todas las variables son enteras.
+  - **Entero mixto:** solo algunas lo son.
+  - **Binario (puro o mixto):** las variables enteras solo valen $0$ o $1$. Sirven para representar **decisiones sí/no** (abrir o no, fabricar o no, asignar o no).
+- **Programa lineal relajado** (`ENT-04`): el mismo modelo **sin** la condición de enteros. Casi todos los algoritmos resuelven una sucesión de relajados.
+- **No es "lineal" en sentido estricto:** el conjunto de soluciones de un entero puro es **discreto y no convexo**. Por eso el Simplex directo no sirve: el óptimo ya no está garantizado en un vértice del poliedro.
+
+#### Desarrollo
+
+##### El relajado como cota
+
+El relajado admite todo lo que admite el entero y más. Por eso su óptimo es **al menos tan bueno** como el entero:
+
+$$
+\text{Max: } z^*_{\text{entero}} \leq z^*_{\text{relajado}} \qquad\qquad \text{Min: } w^*_{\text{entero}} \geq w^*_{\text{relajado}}
+$$
+
+El relajado es una **cota superior** en Max y una **cota inferior** en Min. Si el óptimo del relajado ya sale entero, es también el óptimo entero.
+
+**Ejemplo del apunte (Boxcar, restaurantes):** $x_1$ = locales en los suburbios, $x_2$ = locales en el centro.
+
+$$
+\begin{aligned}
+\text{Max } z = 1200x_1 &+ 2000x_2 \\
+2x_1 + 6x_2 &\leq 27 && \text{(inversión, en cientos de miles de US\$)}\\
+x_2 &\geq 2 && \text{(al menos 2 en el centro)}\\
+3x_1 + x_2 &\leq 19 && \text{(administradores)}\\
+x_1, x_2 &\geq 0 \text{ enteros}
+\end{aligned}
+$$
+
+| | $x_1$ | $x_2$ | $z^*$ |
+|---|---|---|---|
+| Relajado | 5,44 | 2,66 | 11.900 |
+| Entero | 4 | 3 | **10.800** |
+
+Redondear el relajado no sirve: $(5, 3)$ viola la inversión ($10 + 18 = 28 > 27$), y $(5, 2)$ es factible pero da $10.000$, peor que el óptimo entero.
+
+##### Métodos de solución (`ENT-02`)
+
+| Familia | Idea | Algoritmos |
+|---|---|---|
+| **De corte** | Parten del óptimo del relajado y agregan restricciones (**cortes**) que eliminan zonas sin puntos enteros, hasta que el vértice óptimo queda entero | Fraccionario (enteros puros) y mixto |
+| **De búsqueda** (enumeración) | Enumeran los puntos enteros, pero con tests que inspeccionan **explícitamente solo una parte** y descartan el resto implícitamente | **Ramificación y poda** (*branch and bound*), el más usado. Es el que usa LINDO |
+
+##### Ramificación y poda (`ENT-03`)
+
+```text
+1. RESOLVER el relajado. Si sale entero, terminó.
+2. RAMIFICAR por una variable fraccionaria xₖ = v (cualquiera, no hay regla):
+      rama izquierda:  xₖ ≤ ⌊v⌋        rama derecha:  xₖ ≥ ⌊v⌋ + 1
+   (la franja entre ⌊v⌋ y ⌊v⌋+1 se elimina porque no contiene enteros)
+   En binarias: xₖ = 0  /  xₖ = 1.
+3. Resolver cada rama como relajado, con la MISMA función objetivo.
+4. PODAR una rama (no seguir ramificándola) si:
+      · es NO FACTIBLE;
+      · su solución YA ES ENTERA → candidata; si mejora a la mejor conocida, pasa a ser la COTA;
+      · su relajado es PEOR O IGUAL que la cota → no puede mejorarla.
+5. Seguir hasta que no queden ramas abiertas. La mejor entera encontrada es el óptimo.
+```
+
+**Ejemplo del apunte (entero puro):**
+
+$$
+\text{Max } z = 7x_1 + 9x_2 \qquad -x_1 + 3x_2 \leq 6 \qquad 7x_1 + x_2 \leq 35 \qquad x_1, x_2 \geq 0 \text{ enteros}
+$$
+
+```text
+                    P0 (relajado): x₁ = 4,5   x₂ = 3,5   z = 63
+                         ramifico por x₁
+             ┌───────────────┴────────────────┐
+         x₁ ≤ 4                            x₁ ≥ 5
+   A: x₁ = 4, x₂ = 10/3, z = 58      B: x₁ = 5, x₂ = 0, z = 35
+      fraccionaria → sigo               ENTERA → cota = 35, podo
+      (58 > 35, todavía puede mejorar)
+        ramifico por x₂
+     ┌──────────┴──────────┐
+  x₂ ≤ 3                x₂ ≥ 4
+  x₁ = 4, x₂ = 3        NO FACTIBLE (pide x₁ ≥ 6, choca con x₁ ≤ 4)
+  z = 55, ENTERA        → podo
+  → nueva cota 55, podo
+
+  ÓPTIMO ENTERO: x₁ = 4, x₂ = 3, z* = 55     (el relajado daba 63)
+```
+
+**Ejemplo binario del apunte:** $\text{Max } z = 9x_1 + 5x_2 + 6x_3 + 4x_4$ con $6x_1 + 3x_2 + 5x_3 + 2x_4 \leq 10$, $x_3 + x_4 \leq 1$, $x_3 \leq x_1$, $x_4 \leq x_2$ y $x_j \in \{0, 1\}$. El relajado da $x_1 = 5/6$ y $z = 16{,}5$. Se ramifica con $x_1 = 0$ / $x_1 = 1$: la rama $x_1 = 0$ ya sale binaria ($z = 9$, primera cota), y siguiendo por $x_1 = 1$ se llega al óptimo $x_1 = x_2 = 1$, $x_3 = x_4 = 0$, **$z^* = 14$**. Verificado enumerando las 16 combinaciones.
+
+##### LINDO con enteros
+
+```text
+MAX ... ST ... END
+GIN X1        ← X1 entera general       (GIN 2 = las 2 primeras variables)
+INT Y1        ← Y1 binaria (0/1)        (INT 5 = las 5 primeras variables)
+```
+
+**Trampa (`ENT-05`):** en un programa entero **no son válidos** los precios duales ni los rangos de sensibilidad que imprime LINDO. Corresponden al **relajado** con las restricciones que agregó la ramificación, no al modelo entero. El análisis de la Práctica 4 se apoya en que la base óptima no cambia, y eso acá no aplica.
+
+##### Modelización con variables binarias
+
+Es lo que más pide la práctica. Cada recurso conecta una condición en palabras con una restricción:
+
+| Situación | Modelización | Ejemplo |
+|---|---|---|
+| **Costo fijo** (se paga si se produce algo) | $y_i \in \{0,1\}$ en el funcional con su costo fijo, y $x_i \leq M\,y_i$ | Proveedores de telefonía (apunte); productos con inversión inicial (P6, Ej. 2) |
+| **Capacidad que existe solo si se construye** | $\sum_j x_{ij} \leq \text{cap}_i \cdot y_i$ | Plantas y almacenes (P6, Ej. 3 y 4) |
+| **Ampliación de capacidad** | $\sum_j x_{Aj} \leq 500 + 500\,y_A$ | Duplicar la planta A (P6, Ej. 3) |
+| **A lo sumo $k$ de $n$** | $\sum_i y_i \leq k$ | A lo sumo 2 productos (P6, Ej. 2) |
+| **Excluyentes** (no los dos) | $y_C + y_D \leq 1$ | No fabricar C y D juntos |
+| **"B solo si NO A"** | $y_A + y_B \leq 1$ | Construir B solo si no se amplía A (P6, Ej. 3) |
+| **"B solo si A"** (implicación) | $y_B \leq y_A$ | — |
+| **Límite que depende de una decisión** | $\sum x \leq 6000\,y_A + 8000\,(1 - y_A)$ | Tope de producción según se haga A o no (P6, Ej. 2) |
+| **Valores discretos** (0, 180 o 360) | $x = 180\,y_1 + 360\,y_2$, con $y_1 + y_2 \leq 1$ | Lotes fijos |
+| **Selección + asignación** | Asignación con $\leq 1$ del lado que sobra, más restricciones sobre grupos | Candidatos a máquinas, sin el 1 y el 2 juntos (P6, Ej. 5): $\sum_j x_{1j} + \sum_j x_{2j} \leq 1$ |
+
+**Cómo elegir $M$:** tiene que ser **suficientemente grande** para no limitar a $x_i$ cuando $y_i = 1$. Lo correcto es usar la cota natural de $x_i$ (por ejemplo, el tope de producción). La cátedra usa $M = 10000$ en el Ej. 2, con un tope de 8000. Un $M$ exagerado anda en teoría, pero empeora numéricamente el relajado.
+
+**Para verificar una restricción lógica:** armá la tabla de verdad con las combinaciones de las binarias y marcá cuáles tienen que quedar permitidas. Es como lo justifica la cátedra en el Ej. 3: $y_A + y_B \leq 1$ prohíbe solo $(1, 1)$.
+
+##### Otros modelos del apunte
+
+- **Mochila** (contenedores en un carguero): $\text{Max} \sum v_i x_i$ con $\sum p_i x_i \leq C$ y $x_i$ binarias. Es el Ej. 1 de la práctica.
+- **Función lineal por partes** (descuentos por cantidad, Euing Gas): se escribe $x$ como combinación convexa de los puntos de ruptura con pesos $q_i$, y binarias $y_i$ que eligen **un solo tramo** ($\sum y_i = 1$, $q_1 \leq y_1$, $q_i \leq y_{i-1} + y_i$, $q_n \leq y_{n-1}$).
+- **Agente viajero:** es una asignación con la condición extra de que la solución forme **un solo circuito**. La asignación sola puede dar **subcircuitos** (ejemplo del apunte: 1-2-1 y 3-5-4-3, con $w = 230$, que funciona como **cota inferior**). Se rompen por ramificación y poda anulando un arco del subcircuito más corto. Cualquier circuito completo da una **cota superior** (300). El óptimo es **275 km**, con circuitos alternativos 1-2-3-4-5-1 y 1-5-4-3-2-1.
+
+#### Ejercicios resueltos tipo
+
+Práctica 6 (`PL6UTN.pdf`). La cátedra **modeliza y resuelve con LINDO**.
+
+| Ej. | Tipo | Punto clave | Resultado |
+|---|---|---|---|
+| 1 | Mochila binaria (excursionista, 60 kg) | $x_i$ binarias, una sola restricción de peso | Artículos 2 y 3, valor **130**, 58 kg (relajado: 135) |
+| 2 | Costo fijo + lógicas | $x_i \leq M y_i$; $\sum y_i \leq 2$; $y_C + y_D \leq 1$; tope $6000 y_A + 8000(1-y_A)$ | Solo B, 8000 unidades, **Z = 538.000** |
+| 3 | Localización de plantas | Capacidad condicionada; ampliación $500 + 500 y_A$; $y_A + y_B \leq 1$ | — |
+| 4 | Localización de almacenes | Costo fijo mensual por almacén + transporte; capacidad $\leq \text{cap}\cdot y_i$ | — |
+| 5 | Asignación con selección | 5 candidatos ($\leq 1$), 3 máquinas ($= 1$), candidatos 1 y 2 excluyentes | — |
+
+Los resultados de los Ej. 1 y 2 fueron verificados por enumeración.
+
+#### Dudas / pendientes
+
+- **Errores en `PL6UTNresol.pdf`:**
+  - **Ej. 3:** las restricciones de demanda figuran con $\leq$. Tienen que ir con **$\geq$**, porque son demandas **mínimas**. Con $\leq$ y minimizando costos, el óptimo trivial es no producir nada.
+  - **Ej. 4:** la resolución corresponde a **otro problema** (granjas, compañías A y B, proteínas), no al de almacenes del enunciado. Hay que resolverlo por cuenta propia.
+- No hay ejercicios de ramificación y poda **a mano** en la práctica: el algoritmo entra como teoría (`ENT-03`) y la práctica es de modelización.
+
+#### Fuentes
+
+- `Material de cursado (2023)/Teoría/PLC9.pdf` (Programación lineal entera y mixta, N. Torrent) — ingerido 2026-10-01
+- `Material de cursado (2023)/Práctica/PL6UTN.pdf` y `Resuelta/PL6UTNresol.pdf` — ingeridos 2026-10-01
+- `resumen-operativa-companero.pdf` (págs. 19–21) y [[banco-preguntas]] (`ENT-01` a `ENT-05`)
 
 ---
 
@@ -1666,3 +1825,4 @@ Práctica 5 (`PL5UTN.pdf`). La cátedra resuelve **todo planteando el PL y corri
 - 2026-09-30: Se generó [[machete-sensibilidad-dualidad]] — hoja de repaso de la Práctica 4: $B^{-1}$ en la tabla, cuadro maestro de sensibilidad (Max y cómo adaptarlo a Min), regla del 100%, lectura de precios sombra (holgura vs. exceso), construcción del dual para primal Max y Min, Simplex dual, errores típicos detectados practicando y mapa de ejercicios. Sin parametrización.
 - 2026-09-30: El machete en markdown se reemplazó por una **hoja de fórmulas en cajas**, imprimible: `formulas-sensibilidad-dualidad.pdf` (fuente `.html`, generada con `scripts/formulario-pdf.js`). Carilla 1: sensibilidad (base $B^{-1}$, $c_k$, $b_k$, $a_{ij}$, variable y restricción nuevas, regla del 100%, Simplex dual, cierre de rangos). Carilla 2: dualidad (construcción, signos para primal Max y Min, teoremas, lectura en la tabla, holguras complementarias, interpretación económica, LINDO, errores típicos).
 - 2026-09-30: Se ingirió la **Unidad 7 — transporte, transbordo y asignación** desde `Modelos especiales de PL.pdf` (cap. 8), `PL5UTN.pdf` y `PL5UTNresol.pdf`, cruzado con el resumen de circulación y las `TTA-01..11` del banco. Contenido: formulación general, balanceo con ficticios, integralidad automática, $m+n-1$ y degeneración, asignación (balanceada y desbalanceada), transbordo (por conservación de flujo y por caminos $x_{ijk}$), variantes y mapa de la Práctica 5. Ejemplos del apunte verificados a mano ($W^*$ = 1020, 300, 1210). Detectado: la resolución de la cátedra de los Ej. 1 y 2 corresponde a otra versión del enunciado.
+- 2026-10-01: Se ingirió la **Unidad 8 — programación lineal entera y mixta** desde `PLC9.pdf`, `PL6UTN.pdf` y `PL6UTNresol.pdf`, cruzado con el resumen de circulación y `ENT-01..05`. Contenido: tipos de modelos, relajado como cota, métodos de corte y de búsqueda, ramificación y poda con el árbol del ejemplo del apunte reconstruido, LINDO (`GIN`/`INT`) y la trampa de la sensibilidad, **tabla de recursos de modelización con binarias** (costo fijo, capacidad condicionada, excluyentes, implicaciones, límites que dependen de una decisión, valores discretos), mochila, lineal por partes y agente viajero. Ejemplos verificados por enumeración (55, 14, 10.800, 130, 538.000). Detectados dos errores de la resolución de la cátedra (Ej. 3 con demanda $\leq$; Ej. 4 de otro problema). En la Unidad 7 se cerró la duda de los algoritmos: `PLC8.pdf` los excluye del curso.
