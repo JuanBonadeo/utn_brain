@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>IO — Glosario de notación de stocks</title>
+<style>
+  @page { size: A4; margin: 8mm 9mm 7mm 9mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 8.4pt; line-height: 1.28; color: #1a1a1a; }
+  header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 2px solid #1f3a5f; padding-bottom: 1.5mm; margin-bottom: 3mm; }
+  header h1 { font-size: 14pt; margin: 0; color: #1f3a5f; }
+  header span { font-size: 7.6pt; color: #666; }
+
+  .hero { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2.5mm; margin-bottom: 3mm; }
+  .hero div { border-radius: 2mm; padding: 2mm 2.5mm; }
+  .hero .q  { background: #e6f0fa; border: 1px solid #9cbfe3; }
+  .hero .ct { background: #fdf0e3; border: 1px solid #e8b98a; }
+  .hero .qs { background: #e9f6ec; border: 1px solid #9fd1ab; }
+  .hero b.big { font-size: 13pt; display: block; margin-bottom: .6mm; }
+  .hero .q b.big { color: #1f5fa0; } .hero .ct b.big { color: #b05a12; } .hero .qs b.big { color: #2b7a3d; }
+  .hero small { color: #555; }
+  .ex { background: #f5f5f5; border-left: 3px solid #1f3a5f; padding: 1.4mm 2.5mm; margin: -1mm 0 3mm; font-size: 8pt; }
+
+  .cols { columns: 2; column-gap: 4mm; }
+  section { break-inside: avoid; margin: 0 0 3mm; border: 1px solid #d5dbe3; border-radius: 2mm; overflow: hidden; }
+  section h2 { margin: 0; font-size: 9pt; color: #fff; background: #1f3a5f; padding: 1mm 2.5mm; }
+  section h2 em { font-style: normal; font-weight: normal; font-size: 7.4pt; opacity: .85; margin-left: 1.5mm; }
+  section.blue h2 { background: #1f5fa0; } section.orange h2 { background: #b05a12; }
+  section.green h2 { background: #2b7a3d; } section.purple h2 { background: #5b3f8c; }
+  section.red h2 { background: #9b2c2c; } section.gray h2 { background: #4a5563; }
+  table { border-collapse: collapse; width: 100%; }
+  td { padding: .75mm 2.2mm; vertical-align: top; border-top: 1px solid #eceff3; }
+  tr:first-child td { border-top: none; }
+  tr:nth-child(even) td { background: #f8f9fb; }
+  td.s { width: 15mm; font-weight: bold; white-space: nowrap; }
+  td.u { width: 19mm; color: #666; font-size: 7.6pt; text-align: right; white-space: nowrap; }
+  .foot { padding: 1mm 2.2mm 1.2mm; font-size: 7.6pt; color: #444; background: #fffbea; border-top: 1px solid #eee2a8; }
+
+  .traps { border: 1.5px solid #9b2c2c; border-radius: 2mm; padding: 1.6mm 2.5mm; background: #fdf2f2; break-inside: avoid; }
+  .traps h3 { margin: 0 0 1mm; font-size: 9pt; color: #9b2c2c; }
+  .traps ul { margin: 0; padding-left: 4mm; } .traps li { margin-bottom: .5mm; }
+  .katex { font-size: 1.02em; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Gestión de stocks — qué significa cada letra</h1>
+  <span>IO · complemento de <i>formulas-stock.pdf</i> · práctica PGSTOCK</span>
+</header>
+
+<div class="hero">
+  <div class="q"><b class="big">\(Q\) — cantidad</b>Cuántas unidades pido <b>por orden</b> (tamaño del lote).<br><small>Unidad: u</small></div>
+  <div class="ct"><b class="big">\(CT(Q)\) — costo</b>Cuánto me cuesta <b>cada unidad</b> si pido de a \(Q\): precio + pedido + mantener.<br><small>Unidad: $/u &nbsp;·&nbsp; por período: \(CT \cdot D\)</small></div>
+  <div class="qs"><b class="big">\(Q^*\) — el óptimo</b>El \(Q\) que hace <b>mínimo</b> a \(CT(Q)\).<br><small>\(Q^* = \sqrt{2DL/(C\,i)}\)</small></div>
+</div>
+<div class="ex"><b>Ejemplo:</b> pido \(Q = 500\) u → \(CT(500) = \$10{,}40\)/u. &nbsp;Pido \(Q^* = 300\) u → \(CT(300) = \$10{,}25\)/u, el mínimo. &nbsp;\(Q\) se <i>elige</i>; \(CT\) es el <i>resultado</i> de esa elección.</div>
+
+<div class="cols">
+
+<section class="blue">
+  <h2>Datos del problema<em>lo que da el enunciado</em></h2>
+  <table>
+    <tr><td class="s">\(D\)</td><td>Demanda (consumo)</td><td class="u">u / tiempo</td></tr>
+    <tr><td class="s">\(C\)</td><td>Costo unitario (precio de compra)</td><td class="u">$ / u</td></tr>
+    <tr><td class="s">\(L\)</td><td>Costo fijo de lanzar <b>una</b> orden</td><td class="u">$ / orden</td></tr>
+    <tr><td class="s">\(i\)</td><td>Tasa de mantenimiento (costo de tener stock)</td><td class="u">1 / tiempo</td></tr>
+    <tr><td class="s">\(LT\)</td><td>Lead time: plazo de provisión</td><td class="u">tiempo</td></tr>
+    <tr><td class="s">\(V\)</td><td>Velocidad de ingreso / producción</td><td class="u">u / tiempo</td></tr>
+  </table>
+  <div class="foot">\(D\), \(i\), \(LT\) y \(V\) en la <b>misma unidad de tiempo</b>. Sin \(i\) en el enunciado → \(i = 0{,}24\) anual (2 % mensual).</div>
+</section>
+
+<section class="orange">
+  <h2>Resultados del modelo<em>lo que calculás</em></h2>
+  <table>
+    <tr><td class="s">\(Q\)</td><td>Tamaño del lote</td><td class="u">u</td></tr>
+    <tr><td class="s">\(Q^*\)</td><td>Lote óptimo</td><td class="u">u</td></tr>
+    <tr><td class="s">\(CT(Q)\)</td><td>Costo total <b>por unidad</b> con lote \(Q\)</td><td class="u">$ / u</td></tr>
+    <tr><td class="s">\(CT \cdot D\)</td><td>Costo total <b>del período</b></td><td class="u">$ / tiempo</td></tr>
+    <tr><td class="s">\(C(Q)\)</td><td>Precio unitario que depende de \(Q\) (descuentos)</td><td class="u">$ / u</td></tr>
+    <tr><td class="s">\(A(Q)\)</td><td>Área bajo la curva de stock en un ciclo; básico: \(Q^2/(2D)\)</td><td class="u">u · tiempo</td></tr>
+    <tr><td class="s">\(T^*\)</td><td>Tiempo entre pedidos \(= Q^*/D\)</td><td class="u">tiempo</td></tr>
+    <tr><td class="s">\(n^*\)</td><td>Pedidos por período \(= D/Q^*\)</td><td class="u">pedidos / t</td></tr>
+    <tr><td class="s">\(PP\)</td><td>Punto de pedido: con este stock, pido</td><td class="u">u</td></tr>
+    <tr><td class="s">\(T_c\)</td><td>Período práctico redondeado (\(Q_c = D\,T_c\))</td><td class="u">tiempo</td></tr>
+    <tr><td class="s">\(k\)</td><td>Tamaño de caja (comprar en múltiplos de \(k\))</td><td class="u">u</td></tr>
+  </table>
+</section>
+
+<section class="green">
+  <h2>Consumo durante el ingreso</h2>
+  <table>
+    <tr><td class="s">\(\theta\)</td><td>Tiempo que tarda en entrar el lote \(= Q/V\)</td><td class="u">tiempo</td></tr>
+    <tr><td class="s">\(M\)</td><td>Existencia máxima \(= Q\,(1 - D/V)\)</td><td class="u">u</td></tr>
+  </table>
+</section>
+
+<section class="purple">
+  <h2>Descuentos</h2>
+  <table>
+    <tr><td class="s">\(C_1\)</td><td>Precio antes del escalón (\(Q \lt a\))</td><td class="u">$ / u</td></tr>
+    <tr><td class="s">\(C_2\)</td><td>Precio con descuento (\(Q \ge a\)), \(C_2 \lt C_1\)</td><td class="u">$ / u</td></tr>
+    <tr><td class="s">\(a\)</td><td>Cantidad donde arranca el descuento</td><td class="u">u</td></tr>
+    <tr><td class="s">\(Q_1^*, Q_2^*\)</td><td>Lote óptimo calculado con \(C_1\) y con \(C_2\)</td><td class="u">u</td></tr>
+  </table>
+</section>
+
+<section class="gray">
+  <h2>Varios artículos y Lagrange<em>subíndice \(j\) = artículo</em></h2>
+  <table>
+    <tr><td class="s">\(D_j, C_j, L_j\)</td><td>Datos del artículo \(j\)</td><td class="u">—</td></tr>
+    <tr><td class="s">\(\delta_j\)</td><td>\(C_j\,i\) (o \(C_j\,i\,(1 - D_j/V_j)\))</td><td class="u">$/(u·t)</td></tr>
+    <tr><td class="s">\(S\)</td><td>\(\sum_j \delta_j D_j\) (período común)</td><td class="u">$ / t²</td></tr>
+    <tr><td class="s">\(\lambda\)</td><td>Costo de no tener una unidad más del recurso</td><td class="u">según recurso</td></tr>
+    <tr><td class="s">\(v_j\)</td><td>Espacio que ocupa una unidad de \(j\)</td><td class="u">m² o m³ / u</td></tr>
+    <tr><td class="s">\(E_0\)</td><td>Espacio total disponible</td><td class="u">m² o m³</td></tr>
+    <tr><td class="s">\(\tau_j\)</td><td>Horas de preparación por orden de \(j\)</td><td class="u">h / orden</td></tr>
+    <tr><td class="s">\(P_0\)</td><td>Horas de preparación disponibles</td><td class="u">h</td></tr>
+    <tr><td class="s">\(I_0\)</td><td>Capital máximo inmovilizado en stock</td><td class="u">$</td></tr>
+  </table>
+</section>
+
+<section class="red">
+  <h2>Demanda aleatoria</h2>
+  <table>
+    <tr><td class="s">\(\bar d\)</td><td>Demanda media</td><td class="u">u / tiempo</td></tr>
+    <tr><td class="s">\(S_d\)</td><td>Desvío de la demanda (muestral, \(n-1\))</td><td class="u">u</td></tr>
+    <tr><td class="s">\(SS\)</td><td>Stock de seguridad \(= z\,S_d\sqrt{LT}\)</td><td class="u">u</td></tr>
+    <tr><td class="s">\(z\)</td><td>Valor de la normal según el riesgo</td><td class="u">—</td></tr>
+    <tr><td class="s">\(RF\)</td><td>Riesgo de faltante por ciclo (1 %, 5 %…)</td><td class="u">%</td></tr>
+    <tr><td class="s">\(T\)</td><td>Período de revisión (revisión periódica)</td><td class="u">tiempo</td></tr>
+    <tr><td class="s">\(q_r\)</td><td>Stock que hay al revisar</td><td class="u">u</td></tr>
+    <tr><td class="s">\(q_{pe}\)</td><td>Pedidos hechos que todavía no llegaron</td><td class="u">u</td></tr>
+  </table>
+</section>
+
+<div class="traps">
+  <h3>⚠ Pares que se confunden</h3>
+  <ul>
+    <li>\(Q\) (unidades) ≠ \(CT\) ($ por unidad).</li>
+    <li>\(CT\) es por unidad; el costo del período es \(CT \cdot D\).</li>
+    <li>\(C\) (precio) ≠ \(CT\) (precio + pedido + mantener).</li>
+    <li>\(T\) (revisión periódica) ≠ \(T^*\) (entre pedidos, modelo básico).</li>
+    <li>\(S\) (período común) ≠ \(S_d\) (desvío de la demanda).</li>
+    <li>\(L\) (costo de orden, $) ≠ \(LT\) (plazo, tiempo).</li>
+  </ul>
+</div>
+
+</div>
+</body>
+</html>
