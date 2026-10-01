@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>IO — Fórmulas de gestión de stocks</title>
+<style>
+  @page { size: A4; margin: 6mm 8mm 5mm 8mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 8pt; line-height: 1.24; color: #111; }
+  h1 { font-size: 12pt; text-align: center; margin: 0 0 1.5mm; }
+  h1 small { display: block; font-size: 7.4pt; font-weight: normal; color: #555; margin-top: .5mm; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; border-top: 1.2px solid #111; border-left: 1.2px solid #111; }
+  .box { border-right: 1.2px solid #111; border-bottom: 1.2px solid #111; padding: 1.1mm 2mm 1.2mm; break-inside: avoid; }
+  .full { grid-column: 1 / -1; }
+  .box h2 { font-size: 8.9pt; margin: 0 0 .8mm; text-decoration: underline; text-underline-offset: 1.5px; }
+  .box h2 .tag { text-decoration: none; font-weight: normal; font-size: 7.2pt; color: #444; margin-left: 1.2mm; }
+  ol, ul { margin: .3mm 0 .5mm; padding-left: 4mm; }
+  li { margin: 0 0 .35mm; }
+  p { margin: .2mm 0 .6mm; }
+  .katex { font-size: 1em; }
+  .katex-display { margin: .4mm 0; }
+  .note { font-size: 7.5pt; color: #333; }
+  .warn { font-size: 7.5pt; border-left: 2px solid #111; padding-left: 1.5mm; margin-top: .8mm; }
+  table { border-collapse: collapse; width: 100%; margin: .6mm 0; font-size: 7.8pt; }
+  th, td { border: .8px solid #777; padding: .35mm 1.1mm; text-align: left; vertical-align: top; }
+  th { background: #ececec; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 2mm; }
+</style>
+</head>
+<body>
+
+<h1>Fórmulas de gestión de stocks<small>IO · Práctica de stock (PGSTOCK) · Apunte Mascó–Torrent</small></h1>
+
+<div class="grid">
+
+  <div class="box full">
+    <h2>Datos y unidades</h2>
+    <div class="two">
+      <div>
+        <table>
+          <tr><td>\(D\)</td><td>demanda [u/tiempo]</td><td>\(L\)</td><td>costo fijo por orden [$/orden]</td></tr>
+          <tr><td>\(C\)</td><td>costo unitario [$/u]</td><td>\(i\)</td><td>tasa de mantenimiento [1/tiempo]</td></tr>
+          <tr><td>\(LT\)</td><td>plazo de provisión</td><td>\(V\)</td><td>velocidad de ingreso [u/tiempo]</td></tr>
+        </table>
+        <p><b>\(D\), \(i\), \(LT\) y \(V\) en la misma unidad de tiempo.</b> 1 mes = 30,42 días · 1 semana = 0,23 mes · año hábil = 276 días (apunte).</p>
+      </div>
+      <div>
+        <p><b>Si el enunciado no da \(i\):</b> las respuestas de la práctica salen con <b>\(i = 0{,}24\) anual = 2 % mensual</b> (verificado en los Ej. 1, 2, 5 y 13).</p>
+        <p><b>Costo general</b> (por unidad, en el momento de utilización; por período: \(CT \cdot D\)):</p>
+        \[ CT(Q) = C(Q) + \frac{L}{Q} + \frac{C(Q)\, i\, A(Q)}{Q} \]
+        <p><b>Armado de \(L\)</b> (orden de fabricación):</p>
+        \[ L = \text{gasto administrativo} + h_{\text{prep}} \cdot \$_{\text{hora}} + u_{\text{desecho}} \cdot (\text{costo} - \text{recupero}) \]
+      </div>
+    </div>
+  </div>
+
+  <div class="box">
+    <h2>Modelo básico <span class="tag">(Ej. 1)</span></h2>
+    \[ CT(Q) = C + \frac{L}{Q} + \frac{C\,i\,Q}{2D} \qquad Q^* = \sqrt{\frac{2DL}{C\,i}} \]
+    \[ T^* = \frac{Q^*}{D} \qquad n^* = \frac{D}{Q^*} \qquad PP = D \cdot LT \]
+    <ul>
+      <li><b>Período práctico</b> \(T_c\): \(Q_c = D\,T_c\) y recalcular \(CT(Q_c)\). La curva es plana cerca de \(Q^*\).</li>
+      <li><b>Vende por cajas de \(k\)</b>: evaluar \(CT\) en los múltiplos de \(k\) vecinos de \(Q^*\) y elegir el menor.</li>
+      <li><b>Cambia \(L\)</b>: \(Q^*\) es proporcional a \(\sqrt{L}\) (\(L\) baja 20 % → \(Q^* \cdot \sqrt{0{,}8}\)).</li>
+      <li>Control: en \(Q^*\), \(L/Q^* = C\,i\,Q^*/(2D)\).</li>
+    </ul>
+  </div>
+
+  <div class="box">
+    <h2>Consumo durante el ingreso <span class="tag">(Ej. 2)</span></h2>
+    \[ Q^* = \sqrt{\frac{2DL}{C\,i\,(1 - D/V)}} \qquad V > D \]
+    <ul>
+      <li>Tiempo de ingreso del lote: \(\theta = Q/V\)</li>
+      <li>Demanda durante el ingreso: \(D \cdot \theta = Q\,D/V\)</li>
+      <li>Existencia máxima: \(M = Q\,(1 - D/V)\)</li>
+    </ul>
+    <p class="note">Gráfico: sube con pendiente \(V - D\) durante \(\theta\), baja con pendiente \(-D\).</p>
+  </div>
+
+  <div class="box">
+    <h2>Descuento con escalón <span class="tag">(Ej. 3 y 4: precio para TODO el lote)</span></h2>
+    <p>\(C_1\) si \(Q < a\); \(C_2 < C_1\) si \(Q \geq a\). Cada tramo usa el modelo básico con su precio.</p>
+    <ol>
+      <li>Calcular \(Q_2^* = \sqrt{2DL/(C_2 i)}\). Si \(Q_2^* \geq a\) → \(Q^* = Q_2^*\).</li>
+      <li>Si no: calcular \(Q_1^*\), \(CT_1(Q_1^*)\) y \(CT_2(a)\). Elegir el menor.</li>
+    </ol>
+    <p class="warn">Con \(L = 0\), \(CT\) crece con \(Q\) en cada tramo: el mínimo de cada tramo está en su <b>cantidad más chica</b> (mínimo de compra o \(a\)). Comparar esos puntos.</p>
+  </div>
+
+  <div class="box">
+    <h2>Descuento por excedente <span class="tag">(Ej. 5: sólo lo que excede a \(a\))</span></h2>
+    <p>Hasta \(a\) unidades a \(C_1\), el excedente a \(C_2\). Para \(Q > a\):</p>
+    \[ C(Q) = C_2 + \frac{(C_1 - C_2)\,a}{Q} \qquad \lim_{Q \to \infty} C(Q) = C_2 \]
+    \[ Q^* = \sqrt{\frac{2D\,\big(L + (C_1 - C_2)\,a\big)}{C_2\, i}} \quad (\text{válido si } > a) \]
+    <p>Comparar \(CT\) en ese \(Q^*\) con el mejor \(CT\) a precio \(C_1\) (\(Q \leq a\)).</p>
+  </div>
+
+  <div class="box">
+    <h2>Período común <span class="tag">(Ej. 6 y 7)</span></h2>
+    \[ T^* = \sqrt{\frac{2L}{S}} \qquad S = \sum_j \delta_j D_j \qquad Q_j^* = D_j\,T^* \]
+    <p>\(L\) = costo de <b>toda</b> la orden conjunta. \(\delta_j = C_j\,i\) (o \(C_j\,i\,(1 - D_j/V_j)\)).</p>
+    <p><b>ABC</b> (Ej. 7): calcular \(C_j D_j\), ordenar de mayor a menor, acumular %. Los últimos (clase C) son los de poco capital: los que suman el % pedido.</p>
+  </div>
+
+  <div class="box">
+    <h2>Restricciones con Lagrange <span class="tag">(Ej. 8, 9 y 10)</span></h2>
+    <ol>
+      <li>Calcular cada \(Q_j^*\) sin restricción.</li>
+      <li>Evaluar el recurso. Si alcanza, la restricción no es efectiva.</li>
+      <li>Si no alcanza: probar valores de \(\lambda > 0\) hasta que la restricción se cumpla <b>con igualdad</b>.</li>
+    </ol>
+    <table>
+      <tr><th>Recurso</th><th>Restricción</th><th>Lote</th></tr>
+      <tr><td>Espacio</td><td>\(\sum v_j Q_j \leq E_0\)</td><td>\(\sqrt{\dfrac{2D_jL_j}{C_j i + 2\lambda v_j}}\)</td></tr>
+      <tr><td>Preparación</td><td>\(\sum \frac{D_j}{Q_j}\tau_j \leq P_0\)</td><td>\(\sqrt{\dfrac{2D_j(L_j + \lambda\tau_j)}{C_j i(1 - D_j/V_j)}}\)</td></tr>
+      <tr><td>Capital</td><td>\(\sum \frac{C_j Q_j}{2} \leq I_0\)</td><td>\(\sqrt{\dfrac{2D_jL_j}{C_j(i + \lambda)}}\)</td></tr>
+    </table>
+    <p class="note">\(\lambda\) = costo marginal de no disponer de una unidad más del recurso. Capital: \(i + \lambda\) = tasa máxima para tomar dinero e invertirlo en stock.</p>
+  </div>
+
+  <div class="box full">
+    <h2>Demanda aleatoria <span class="tag">(Ej. 11, 12 y 13)</span></h2>
+    <div class="two">
+      <div>
+        <p><b>Punto de pedido</b> (revisión continua):</p>
+        \[ PP = \bar d \cdot LT + SS \qquad SS = z\,S_d\,\sqrt{LT} \]
+        <ul>
+          <li>Tabla de frecuencias: \(\bar d = \sum x_k f_k\) con marcas de clase; desvío <b>muestral</b> (con \(n - 1\)).</li>
+          <li>Costo anual del stock de seguridad: \(SS \cdot C \cdot i\). \(LT\) desconocido: \(\sqrt{LT} = SS/(z\,S_d)\).</li>
+        </ul>
+        <table>
+          <tr><th>RF</th><td>1 %</td><td>2 %</td><td>3 %</td><td>5 %</td><td>10 %</td></tr>
+          <tr><th>\(z\)</th><td>2,33</td><td>2,05</td><td>1,88</td><td>1,645</td><td>1,28</td></tr>
+        </table>
+      </div>
+      <div>
+        <p><b>Revisión periódica</b> cada \(T\): el pedido cubre <b>\(T + LT\)</b>.</p>
+        \[ SS = z\,S_d\,\sqrt{T + LT} \]
+        \[ Q^* = \bar d\,(T + LT) + SS - q_r - q_{pe} \]
+        <p>\(q_r\) = existencia al revisar · \(q_{pe}\) = pendientes de entrega.</p>
+        <p class="warn"><b>RF</b> = probabilidad de que la demanda en el período de incertidumbre supere lo disponible (por ciclo).</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
