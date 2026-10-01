@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>IO — Teoría para el parcial</title>
+<style>
+  @page { size: A4; margin: 14mm 15mm 14mm 15mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 9.6pt; line-height: 1.42; color: #111; }
+  h1 { font-size: 13pt; margin: 0 0 4mm; padding-bottom: 1.5mm; border-bottom: 1.5px solid #111; }
+  h2 { font-size: 11.5pt; margin: 6mm 0 2mm; padding: 1mm 2mm; background: #ececec; border-left: 3px solid #111; break-after: avoid; }
+  h2 .p { float: right; font-size: 8pt; font-weight: normal; color: #444; margin-top: .6mm; }
+  h3 { font-size: 10pt; margin: 3.2mm 0 1mm; break-after: avoid; }
+  .c { margin: 0 0 2.2mm; break-inside: avoid; }
+  .c > b:first-child { display: block; margin-bottom: .3mm; }
+  p { margin: 0 0 1.2mm; }
+  ul, ol { margin: .4mm 0 1.2mm; padding-left: 5mm; }
+  li { margin: 0 0 .5mm; }
+  .katex { font-size: 1.03em; }
+  .katex-display { margin: 1.2mm 0; }
+  table { border-collapse: collapse; margin: 1mm 0 1.6mm; font-size: 9pt; break-inside: avoid; }
+  th, td { border: .8px solid #888; padding: .7mm 2mm; text-align: left; vertical-align: top; }
+  th { background: #f2f2f2; }
+  .tag { font-weight: normal; font-size: 8.4pt; color: #555; margin-left: 1mm; }
+  .note { font-size: 8.8pt; color: #333; border-left: 2px solid #999; padding-left: 2mm; margin: 1mm 0 1.6mm; }
+</style>
+</head>
+<body>
+
+<h1>Investigación Operativa — Teoría para el parcial</h1>
+
+<!-- ═══════════════════════ SIMPLEX ═══════════════════════ -->
+<h2>Método Simplex <span class="p">Prioridad 1</span></h2>
+
+<div class="c"><b>Idea del método</b>
+<p>Recorre soluciones básicas factibles (vértices) pasando siempre a una adyacente que mejore el funcional. En cada iteración responde dos preguntas: <b>¿es óptima la solución actual?</b> (condición de optimalidad, decide quién entra) y <b>¿cuánto puede crecer la variable que entra sin romper \(x \geq 0\)?</b> (condición de factibilidad, decide quién sale).</p></div>
+
+<div class="c"><b>Condición de factibilidad</b>
+<p>La columna de la variable que entra, expresada en la base actual, es \(Y_j = B^{-1}A_j\). Si \(x_j\) toma el valor \(\theta\), cada básica pasa a valer \(x_i - \theta\,y_{ij}\), y para seguir siendo factible tiene que ser \(\geq 0\):</p>
+\[ \theta = \min_i \left\{ \frac{x_i}{y_{ij}} \;:\; y_{ij} > 0 \right\} \]
+<p>Sale la variable básica que alcanza ese mínimo, porque es la que queda en cero. Solo se divide por \(y_{ij} > 0\): si \(y_{ij} \leq 0\) esa fila no limita. Si ningún \(y_{ij}\) es positivo, la variable puede crecer indefinidamente y la solución es <b>no acotada</b>. Un \(\theta = 0\) es válido y produce un pivote degenerado.</p></div>
+
+<div class="c"><b>Condición de optimalidad</b>
+<p>Con \(z_j = \sum_i c_i\,y_{ij}\) (lo que se pierde al reacomodar las básicas), al entrar \(x_j = \theta\) el funcional queda:</p>
+\[ z = z_0 + \theta\,(c_j - z_j) \]
+<table>
+<tr><th></th><th>Es óptima si</th><th>Entra</th></tr>
+<tr><td>Max</td><td>todos los \(c_j - z_j \leq 0\)</td><td>el mayor \(c_j - z_j\) positivo</td></tr>
+<tr><td>Min</td><td>todos los \(c_j - z_j \geq 0\)</td><td>el menor \(c_j - z_j\) negativo</td></tr>
+</table></div>
+
+<div class="c"><b>Variables de holgura, exceso y ficticias</b>
+<ul>
+<li>Restricción \(\leq\): se suma una <b>holgura</b>, que puede formar la base inicial.</li>
+<li>Restricción \(\geq\): se resta un <b>exceso</b> y se suma una <b>ficticia</b> (artificial). La base inicial la forma la ficticia, nunca el exceso (su coeficiente es \(-1\)).</li>
+<li>Restricción \(=\): se suma una ficticia.</li>
+<li>La ficticia no representa nada real: solo arma la identidad inicial. Se penaliza en el funcional con \(-M\) en Max y \(+M\) en Min, para que el método la saque de la base.</li>
+</ul></div>
+
+<div class="c"><b>Diagnóstico de la tabla óptima</b>
+<table>
+<tr><th>Caso</th><th>Cómo se reconoce</th></tr>
+<tr><td>Óptimo único</td><td>todas las no básicas tienen \(c_j - z_j\) estrictamente distinto de 0</td></tr>
+<tr><td>Óptimos alternativos</td><td>alguna <b>no básica</b> tiene \(c_j - z_j = 0\)</td></tr>
+<tr><td>Degenerada</td><td>alguna <b>básica</b> vale 0</td></tr>
+<tr><td>No acotada</td><td>hay una variable que mejora el funcional pero su columna no tiene ningún \(y_{ij} > 0\)</td></tr>
+<tr><td>No factible</td><td>al terminar queda una ficticia en la base con valor positivo</td></tr>
+</table></div>
+
+<div class="c"><b>Dónde está \(B^{-1}\) en la tabla</b>
+<p>Toda columna de la tabla es \(Y_j = B^{-1}A_j\). Las columnas que formaban la identidad en la tabla inicial (holguras y ficticias) son, en la tabla final, las columnas de \(B^{-1}\). La base actual dice <b>cuál</b> es \(B\); la base inicial dice <b>dónde</b> leer \(B^{-1}\).</p></div>
+
+<!-- ═══════════════════════ DUALIDAD ═══════════════════════ -->
+<h2>Dualidad <span class="p">Prioridad 1</span></h2>
+
+<div class="c"><b>Programa dual</b>
+<p>A todo programa lineal (primal) le corresponde otro programa lineal (dual). El primal decide <b>cuánto producir</b>; el dual decide <b>cuánto vale cada recurso</b>. La tabla óptima de cualquiera de los dos contiene la solución óptima del otro.</p>
+\[ \begin{array}{c|c} \textbf{Primal} & \textbf{Dual} \\ \hline \text{Max } z = cx & \text{Min } W = b^{T}u \\ Ax \leq b & A^{T}u \geq c^{T} \\ x \geq 0 & u \geq 0 \end{array} \]
+<p>Cada restricción del primal genera una variable dual, cada variable del primal genera una restricción dual, los \(b_i\) pasan al funcional y los \(c_j\) a los términos independientes.</p></div>
+
+<div class="c"><b>Signos del dual</b>
+<table>
+<tr><th>Primal Max</th><th>Dual (Min)</th><th>Primal Min</th><th>Dual (Max)</th></tr>
+<tr><td>restricción \(\leq\)</td><td>\(u_i \geq 0\)</td><td>restricción \(\geq\)</td><td>\(y_i \geq 0\)</td></tr>
+<tr><td>restricción \(\geq\)</td><td>\(u_i \leq 0\)</td><td>restricción \(\leq\)</td><td>\(y_i \leq 0\)</td></tr>
+<tr><td>restricción \(=\)</td><td>\(u_i\) libre</td><td>restricción \(=\)</td><td>\(y_i\) libre</td></tr>
+<tr><td>\(x_j \geq 0\)</td><td>restricción \(\geq\)</td><td>\(x_j \geq 0\)</td><td>restricción \(\leq\)</td></tr>
+<tr><td>\(x_j\) libre</td><td>restricción \(=\)</td><td>\(x_j\) libre</td><td>restricción \(=\)</td></tr>
+</table></div>
+
+<div class="c"><b>Teorema fundamental de la dualidad</b>
+<p>Si el primal tiene solución óptima finita, el dual también la tiene, ambos valores óptimos coinciden y los valores óptimos de las variables duales son los costos marginales (valores implícitos) de las restricciones del primal:</p>
+\[ z^* = W^* \qquad\qquad u = c_B\,B^{-1} \]</div>
+
+<div class="c"><b>Holguras complementarias</b>
+\[ h_i \cdot u_i = 0 \qquad\qquad x_j \cdot s_j = 0 \]
+<p>En cada par primal–dual, al menos uno de los dos vale cero:</p>
+<ul>
+<li>Si sobra un recurso (\(h_i > 0\)), su precio sombra es cero.</li>
+<li>Si un recurso tiene precio sombra distinto de cero, está agotado.</li>
+<li>Si una actividad se realiza (\(x_j > 0\)), el valor de los recursos que consume es igual a su contribución.</li>
+<li>Si la restricción dual de una actividad se cumple con holgura, esa actividad no se realiza.</li>
+</ul></div>
+
+<div class="c"><b>Lectura del dual en la tabla óptima del primal</b>
+<p>En la fila \(c_j - z_j\), bajo la columna de cada restricción: \(u_i = -(c_j - z_j)\) bajo una holgura y \(u_i = +(c_j - z_j)\) bajo un exceso. Vale en Max y en Min.</p></div>
+
+<div class="c"><b>Interpretación económica <span class="tag">(prioridad 3)</span></b>
+<p>El precio sombra es lo que vale un recurso <b>para esta empresa con este plan</b>, no su precio de mercado. Siempre que una actividad opere a nivel positivo, el costo marginal de los recursos que consume es igual al beneficio que aporta; si no, no conviene iniciarla.</p></div>
+
+<!-- ═══════════════════════ SENSIBILIDAD ═══════════════════════ -->
+<h2>Análisis de sensibilidad <span class="p">Prioridad 1</span></h2>
+
+<div class="c"><b>Valor implícito (precio sombra, costo marginal)</b>
+<p>Es <b>cuánto cambia el valor óptimo de la función objetivo ante un cambio unitario en el término independiente de una restricción</b>, dentro del rango en que la base no cambia:</p>
+\[ u_i = \frac{\partial z^*}{\partial b_i} \]
+<p>Su consecuencia económica es que mide lo máximo que conviene pagar por una unidad más del recurso. Si el recurso sobra, vale cero.</p></div>
+
+<div class="c"><b>Costo reducido</b>
+<p>Asociado a una <b>variable no básica</b>: cuánto tiene que mejorar su coeficiente \(c_j\) para que convenga incorporarla a la solución. Vale cero para las básicas. No confundir con el costo marginal, que es de una <b>restricción</b>.</p></div>
+
+<div class="c"><b>Qué rompe cada cambio</b>
+<p>La tabla óptima es \(B^{-1}\) aplicada a los datos originales. Como \(c_j - z_j\) no depende de \(b\) y \(x_B = B^{-1}b\) no depende de \(c\):</p>
+<ul>
+<li>Cambiar un \(c_j\) puede romper la <b>optimalidad</b>, nunca la factibilidad.</li>
+<li>Cambiar un \(b_i\) puede romper la <b>factibilidad</b>, nunca la optimalidad.</li>
+</ul></div>
+
+<div class="c"><b>Cambio en un coeficiente del funcional \(c_k\)</b>
+<ul>
+<li><b>\(x_k\) no básica:</b> solo cambia su propio \(c_k - z_k\). En Max sigue óptima si \(\Delta c_k \leq -(c_k - z_k)\). Dentro del rango no cambian ni \(x^*\) ni \(z^*\).</li>
+<li><b>\(x_k\) básica:</b> cambia \(c_B\) y con él todos los \(c_j - z_j\) de las no básicas: \((c_j - z_j)' = (c_j - z_j) - \Delta c_k\,y_{kj}\). Dentro del rango \(x^*\) no cambia, pero \(z^{*\prime} = z^* + \Delta c_k\,x_k^*\).</li>
+</ul></div>
+
+<div class="c"><b>Cambio en un término independiente \(b_i\)</b>
+\[ x_B' = x_B + \Delta b_i \cdot \big(\text{columna } i \text{ de } B^{-1}\big) \geq 0 \qquad\qquad z^{*\prime} = z^* + u_i\,\Delta b_i \]
+<p>Dentro del rango la base no cambia, pero los valores de las básicas sí. El valor implícito \(u_i\) es válido solo dentro de ese rango.</p></div>
+
+<div class="c"><b>Cambio tecnológico, variable nueva y restricción nueva</b>
+<ul>
+<li><b>Cambia la columna de una no básica, o se agrega una variable:</b> se calcula \(Y_j = B^{-1}A_j\), \(z_j = c_B\,Y_j\) y \(c_j - z_j\). Si no mejora, la solución actual sigue siendo óptima; si mejora, la variable entra y se sigue iterando.</li>
+<li><b>Restricción nueva:</b> se evalúa el óptimo actual en ella. Si la cumple, no cambia nada; si no la cumple, la solución deja de ser factible y hay que reoptimizar.</li>
+</ul></div>
+
+<!-- ═══════════════════════ STOCK ═══════════════════════ -->
+<h2>Gestión de stocks <span class="p">Prioridad 1</span></h2>
+
+<div class="c"><b>El stock como desperdicio</b>
+<p>El stock no agrega valor por sí mismo: inmoviliza capital, ocupa espacio, requiere administración y oculta problemas de producción. Existe porque protege contra la aleatoriedad de la demanda y de los aprovisionamientos, tiempos de preparación altos, paradas no programadas, falta de versatilidad de equipos o personal, fallas de calidad, y porque hay ventajas en comprar o transportar por cantidad.</p>
+<p>La gestión persigue dos objetivos en tensión: <b>minimizar las existencias</b> y <b>asegurar el suministro</b>. Los modelos buscan el equilibrio entre ambos.</p></div>
+
+<div class="c"><b>Fórmula general del costo</b>
+<p>Costo total medio por unidad de producto en el momento de su utilización:</p>
+\[ CT(Q) = \frac{C(Q)\,Q + L + C(Q)\,i\,A(Q)}{Q} = C(Q) + \frac{L}{Q} + \frac{C(Q)\,i\,A(Q)}{Q} \]
+<table>
+<tr><td>\(C(Q)\)</td><td>costo unitario de compra o fabricación</td></tr>
+<tr><td>\(L\)</td><td>costo fijo de emitir una orden (o de preparar una corrida)</td></tr>
+<tr><td>\(i\)</td><td>tasa de mantenimiento de existencias, en [1/unidad de tiempo]</td></tr>
+<tr><td>\(A(Q)\)</td><td>área bajo la curva de existencias durante el ciclo: \(\int q(t)\,dt\)</td></tr>
+</table>
+<p>De esta expresión salen todos los modelos: cada uno define cómo son \(C(Q)\) y \(A(Q)\).</p></div>
+
+<div class="c"><b>Modelo básico</b>
+<p>Supuestos: \(C\) constante; demanda continua y uniforme; ingreso del lote instantáneo; plazo de provisión \(LT\) constante y conocido; sin faltantes. Entonces \(A(Q) = Q^2/(2D)\) y:</p>
+\[ CT(Q) = C + \frac{L}{Q} + \frac{C\,i\,Q}{2D} \qquad\Longrightarrow\qquad Q^* = \sqrt{\frac{2\,D\,L}{C\,i}} \]
+<p>Es la suma de una constante, una hipérbola decreciente (costo de ordenar) y una recta creciente (costo de mantener); el mínimo es único. Para bajar el costo sin empeorar el servicio hay que <b>reducir \(L\)</b>, no simplemente pedir menos.</p></div>
+
+<div class="c"><b>Punto de pedido</b>
+<p>En un sistema activado por la demanda, se emite la orden cuando las existencias llegan a \(PP = D \cdot LT\), con \(D\) y \(LT\) en la misma unidad de tiempo.</p></div>
+
+<div class="c"><b>Consumo durante el ingreso</b>
+<p>El lote ingresa a velocidad \(V\) mientras se consume a velocidad \(D\). El stock máximo no es \(Q\) sino \(M = Q\,(1 - D/V)\), y:</p>
+\[ Q^* = \sqrt{\frac{2\,D\,L}{C\,i\,(1 - D/V)}} \]
+<p>Requiere \(V > D\). Si \(V = D\), el lote óptimo tiende a infinito (producción continua).</p></div>
+
+<div class="c"><b>Modelo de período común</b>
+<p>Sistema activado por el tiempo: \(n\) artículos se piden juntos cada \(T\), así que \(Q_j = D_j\,T\). Con \(C = \sum C_j D_j\), \(L = \sum L_j\) (gasto fijo de toda la orden), \(S = \sum \delta_j D_j\) y \(\delta_j = C_j i\) (o \(C_j i\,(1 - D_j/V_j)\) con consumo durante el ingreso):</p>
+\[ CT(T) = C + \frac{L}{T} + \frac{S}{2}\,T \qquad\Longrightarrow\qquad T^* = \sqrt{\frac{2L}{S}} \qquad Q_j^* = D_j\,T^* \]
+<p>Es la misma estructura del modelo básico, con \(T\) como variable de decisión. No hace falta conocer los \(L_j\) individuales.</p></div>
+
+<div class="c"><b>Descuento por cantidad excedente</b>
+<p>Si las primeras \(a\) unidades se pagan \(C_1\) y el excedente \(C_2 < C_1\), para \(Q > a\):</p>
+\[ C(Q) = \frac{C_1\,a + C_2\,(Q - a)}{Q} = C_2 + \frac{(C_1 - C_2)\,a}{Q} \qquad\qquad \lim_{Q\to\infty} C(Q) = C_2 \]
+<p>El precio medio se acerca a \(C_2\) desde arriba, pero no lo alcanza para ningún \(Q\) finito.</p></div>
+
+<div class="c"><b>Restricciones con multiplicadores de Lagrange</b>
+<p>Se calculan los \(Q_j^*\) sin restricción. Si respetan el recurso disponible, la restricción no es efectiva. Si lo superan, la restricción se cumple con igualdad en el óptimo: se forma la función de Lagrange y se da valores a \(\lambda > 0\) hasta que se cumpla.</p>
+<table>
+<tr><th>Restricción</th><th>Lote óptimo</th><th>Significado de \(\lambda\)</th></tr>
+<tr><td>Espacio: \(\sum v_j Q_j \leq E_0\)</td><td>\(Q_j = \sqrt{\dfrac{2D_jL_j}{C_j i + 2\lambda v_j}}\)</td><td>costo marginal de no disponer de una unidad más de espacio, en [$/(volumen·tiempo)]. Los artículos voluminosos se penalizan más.</td></tr>
+<tr><td>Tiempo de preparación: \(\sum \frac{D_j}{Q_j}\tau_j \leq P_0\)</td><td>\(Q_j = \sqrt{\dfrac{2D_j(L_j + \lambda\tau_j)}{C_j i\,(1 - D_j/V_j)}}\)</td><td>costo marginal de no disponer de más tiempo de preparación. Al subir \(\lambda\) los lotes crecen: menos preparaciones.</td></tr>
+<tr><td>Financiera: \(\sum C_j Q_j/2 \leq I_0\)</td><td>\(Q_j = \sqrt{\dfrac{2D_jL_j}{C_j\,(i + \lambda)}}\)</td><td>incremento del costo anual por cada peso que se podría economizar con más capital. \(i_1 + \lambda\) es la tasa por debajo de la cual conviene aceptar dinero para invertir en stocks.</td></tr>
+</table></div>
+
+<div class="c"><b>Riesgo de faltante y stock de seguridad</b>
+<p><b>Riesgo de faltante (RF):</b> probabilidad de que la demanda durante el plazo de provisión exceda el punto de pedido, \(RF = P(D_{LT} > PP)\). Aproximando \(D_{LT}\) por una normal:</p>
+\[ PP = \bar D_{LT} + z\,S_{D_{LT}} \qquad\qquad SS = z\,S_{D_{LT}} \]
+<p>\(z\) es el factor de seguridad. El RF es una probabilidad <b>por ciclo</b>; no es lo mismo que la proporción de demanda servida desde stock.</p></div>
+
+<div class="c"><b>Revisión periódica <span class="tag">(prioridad 3)</span></b>
+<p>Se revisan las existencias cada \(T\), fijado a priori (por ejemplo, con el período común). Lo pedido en una revisión tiene que cubrir la demanda durante \(T + LT\), porque el próximo pedido recién llega después de la próxima revisión más el plazo de entrega:</p>
+\[ SS = z\,S_{D_{T+LT}} \qquad\qquad Q^* = \bar D_{T+LT} + SS - q_r - q_{pe} \]
+<p>con \(q_r\) las existencias al revisar y \(q_{pe}\) los ingresos pendientes de entrega.</p></div>
+
+<div class="c"><b>Análisis ABC <span class="tag">(prioridad 3)</span></b>
+<p>Clasifica los artículos por su costo anual: un 10–20 % de los artículos concentra el 70–80 % del capital en stock. <b>A</b>: hasta el 75 % acumulado del costo total; <b>B</b>: del 75 % al 95 %; <b>C</b>: del 95 % al 100 %. A los de escaso valor se los controla por revisión periódica en vez de punto de pedido, salvo que su faltante sea crítico.</p></div>
+
+<!-- ═══════════════════════ ENTERA ═══════════════════════ -->
+<h2>Programación lineal entera y mixta <span class="p">Prioridad 1</span></h2>
+
+<div class="c"><b>Tipos de modelos</b>
+<ul>
+<li><b>Entero puro:</b> todas las variables son enteras.</li>
+<li><b>Entero mixto:</b> solo algunas variables son enteras.</li>
+<li><b>Binario (puro o mixto):</b> las variables enteras solo valen 0 o 1; representan decisiones sí/no.</li>
+</ul>
+<p>En sentido estricto un programa entero puro no es lineal: su conjunto de soluciones es discreto y no convexo.</p></div>
+
+<div class="c"><b>Programa lineal relajado</b>
+<p>Es el programa entero sin la condición de integridad. Como admite todo lo que admite el entero y más, su óptimo es una <b>cota</b>: superior en Max, inferior en Min. El entero nunca puede ser mejor. Redondear el óptimo del relajado no garantiza ni factibilidad ni optimalidad.</p></div>
+
+<div class="c"><b>Métodos de solución</b>
+<ul>
+<li><b>De corte:</b> parten del óptimo del relajado y agregan restricciones (cortes) que eliminan zonas sin puntos enteros, hasta que el vértice óptimo es entero. Algoritmo fraccionario (enteros puros) y mixto.</li>
+<li><b>De búsqueda (enumeración):</b> enumeran los puntos enteros, pero con tests que inspeccionan explícitamente solo una parte y descartan el resto implícitamente. El principal es ramificación y poda.</li>
+</ul></div>
+
+<div class="c"><b>Ramificación y poda (branch and bound)</b>
+<ol>
+<li>Resolver el relajado. Si la solución es entera, es la óptima.</li>
+<li>Elegir una variable con valor fraccionario, por ejemplo \(x_k = 3{,}5\), y dividir en dos subproblemas: \(x_k \leq 3\) y \(x_k \geq 4\). La franja intermedia se elimina porque no contiene enteros.</li>
+<li>Resolver cada subproblema como relajado, con la misma función objetivo.</li>
+<li><b>Podar</b> una rama si es infactible, si su solución ya es entera (pasa a ser la mejor conocida si mejora a la anterior), o si su relajado no puede mejorar la mejor solución entera conocida.</li>
+<li>Repetir hasta agotar las ramas.</li>
+</ol></div>
+
+<div class="c"><b>Sensibilidad en programas enteros</b>
+<p>No son válidos los precios sombra ni el análisis de sensibilidad que informa el software (LINDO): corresponden al modelo <b>relajado</b> con las restricciones agregadas por la ramificación, no al modelo entero. La interpretación dual se apoya en la convexidad y en moverse dentro de una base óptima, y el conjunto factible entero no es convexo.</p></div>
+
+<!-- ═══════════════════════ TRANSPORTE ═══════════════════════ -->
+<h2>Transporte, transbordo y asignación <span class="p">Prioridad 2</span></h2>
+
+<div class="c"><b>Problema de transporte</b>
+<p>Distribuir un producto homogéneo desde \(m\) fuentes (oferta \(a_i\)) hacia \(n\) destinos (demanda \(b_j\)) al mínimo costo total, con \(x_{ij}\) = unidades enviadas de \(i\) a \(j\):</p>
+\[ \text{Min } W = \sum_i \sum_j c_{ij}\,x_{ij} \qquad \sum_j x_{ij} \leq a_i \qquad \sum_i x_{ij} \geq b_j \qquad x_{ij} \geq 0 \]
+<p>La matriz \(A\) tiene casi todos sus coeficientes nulos y el resto iguales a 1 (o \(-1\) en transbordo). Si el funcional es de máximo, sigue siendo un problema de transporte.</p></div>
+
+<div class="c"><b>Modelo balanceado</b>
+<p>Está balanceado si \(\sum a_i = \sum b_j\); en ese caso todas las restricciones se cumplen con igualdad. Si la oferta excede la demanda, se agrega un <b>destino ficticio</b> de costo cero, cuyos envíos son capacidad ociosa. Si la demanda excede la oferta, el problema es no factible; se agrega una <b>fuente ficticia</b> de costo cero, cuyos envíos son demanda insatisfecha.</p></div>
+
+<div class="c"><b>Soluciones enteras</b>
+<p>Si las ofertas y las demandas son enteras y el problema es factible, siempre existe una solución óptima entera, por la estructura especial de \(A\). No hace falta imponer integridad.</p></div>
+
+<div class="c"><b>Variables básicas y degeneración</b>
+<p>En un modelo balanceado, de las \(m + n\) ecuaciones una es redundante (se obtiene de las demás porque la oferta total es igual a la demanda total). Hay \(m + n - 1\) restricciones independientes, así que toda solución básica tiene <b>a lo sumo \(m + n - 1\)</b> variables positivas. Si tiene menos, es <b>degenerada</b>.</p></div>
+
+<div class="c"><b>Problema de asignación</b>
+<p>Caso particular del transporte con todas las ofertas y demandas iguales a 1: relaciona ofertas con demandas uno a uno, minimizando el costo total. \(x_{ij} = 1\) si \(i\) se asigna a \(j\), y 0 si no. Por la integralidad alcanza con pedir \(x_{ij} \geq 0\). Si está desbalanceado se balancea igual que el transporte.</p></div>
+
+<div class="c"><b>Problema de transbordo</b>
+<p>Extensión del transporte con nodos intermedios que reciben y reenvían. Cada nodo de transbordo tiene una restricción de conservación: lo que entra menos lo que sale es igual a cero (no acumula). Si el término independiente es positivo, el nodo además aporta flujo (actúa como origen); si es negativo, retiene flujo (actúa como destino). Los algoritmos de transporte se aplican al transbordo formulándolo balanceado.</p></div>
+
+<!-- ═══════════════════════ REDES ═══════════════════════ -->
+<h2>Modelos de redes <span class="p">Prioridad 2</span></h2>
+
+<div class="c"><b>Definiciones</b>
+<ul>
+<li><b>Red (grafo):</b> conjunto de nodos unidos por arcos. Un <b>arco dirigido</b> permite flujo en un solo sentido.</li>
+<li><b>Trayectoria:</b> sucesión de arcos que conecta dos nodos. <b>Ciclo:</b> trayectoria que empieza y termina en el mismo nodo.</li>
+<li><b>Red conexa:</b> todo par de nodos está unido por alguna trayectoria.</li>
+<li><b>Árbol:</b> red conexa sin ciclos. <b>Árbol de expansión:</b> árbol que conecta todos los nodos; con \(n\) nodos tiene \(n - 1\) arcos.</li>
+</ul></div>
+
+<div class="c"><b>Árbol de expansión mínima</b>
+<p>Conectar todos los nodos, sin ciclos, con la mínima longitud o costo total.</p>
+<ul>
+<li><b>Prim:</b> se parte de un nodo cualquiera y en cada paso se agrega el arco más corto que une el árbol actual con un nodo todavía no incluido.</li>
+<li><b>Kruskal:</b> se ordenan todos los arcos de menor a mayor y se agregan en ese orden, salteando los que formarían un ciclo.</li>
+</ul>
+<p>Los dos terminan con \(n - 1\) arcos. Si hay empates puede haber más de un árbol óptimo.</p></div>
+
+<div class="c"><b>Ruta más corta</b>
+<p>Hallar el camino de menor distancia, costo o tiempo entre un origen y un destino. <b>Dijkstra:</b> se etiquetan los nodos con la distancia acumulada desde el origen y el nodo previo; en cada paso se hace permanente la etiqueta temporal de menor distancia y se actualizan sus vecinos si mejoran; al fijar el destino, el camino se reconstruye hacia atrás. Como programa lineal: se envía una unidad de flujo del origen (término independiente 1) al destino (\(-1\)), con conservación en los nodos intermedios (0).</p></div>
+
+<div class="c"><b>Flujo máximo</b>
+<p>Red dirigida con capacidades máximas en los arcos, una fuente y un destino. Se busca el mayor flujo total por unidad de tiempo de la fuente al destino, con \(0 \leq x_{ij} \leq \text{capacidad}_{ij}\) y conservación del flujo en los nodos intermedios. Es un flujo continuo: agua, electricidad, vehículos por hora.</p></div>
+
+<div class="c"><b>Flujo capacitado de costo mínimo</b>
+<p>Modelo general con fuentes (oferta), destinos (demanda), nodos de transbordo, arcos con capacidad y costo por unidad de flujo; se minimiza el costo total. Transporte, transbordo, ruta más corta y flujo máximo son casos particulares.</p></div>
+
+<!-- ═══════════════════════ CONCEPTOS BÁSICOS ═══════════════════════ -->
+<h2>Conceptos básicos de programación lineal <span class="p">Prioridad 2</span></h2>
+
+<div class="c"><b>Definiciones</b>
+<ul>
+<li><b>Combinación lineal convexa:</b> \(x = \sum \lambda_i x_i\) con \(\lambda_i \geq 0\) y \(\sum \lambda_i = 1\).</li>
+<li><b>Conjunto convexo:</b> dados dos puntos cualesquiera del conjunto, el segmento que los une está totalmente contenido en él.</li>
+<li><b>Punto extremo (vértice):</b> punto que no puede expresarse como combinación lineal convexa de otros dos puntos distintos del conjunto.</li>
+<li><b>Polítopo:</b> intersección de un número finito de semiespacios cerrados; si está acotado, <b>poliedro</b>.</li>
+<li><b>Solución:</b> todo \(x\) que satisface \(Ax = b\). <b>Solución factible:</b> además cumple \(x \geq 0\).</li>
+<li><b>Solución básica:</b> con \(m\) restricciones y \(n\) variables, se anulan \(n - m\) variables y se resuelve para las \(m\) restantes (las básicas), cuyas columnas forman una base (\(\det B \neq 0\)).</li>
+<li><b>Solución básica factible (SBF):</b> solución básica con todas sus variables no negativas.</li>
+<li><b>SBF degenerada:</b> tiene menos de \(m\) componentes estrictamente positivas, es decir, alguna variable básica vale cero.</li>
+<li><b>Hipótesis de rango completo:</b> \(A\) es \(m \times n\) con \(m < n\) y rango \(m\); las ecuaciones son linealmente independientes.</li>
+</ul></div>
+
+<div class="c"><b>Teoremas <span class="tag">(enunciar; no se pide demostración)</span></b>
+<ol>
+<li>El conjunto de soluciones factibles de un programa lineal es un <b>conjunto convexo cerrado</b>, porque es intersección de semiespacios cerrados.</li>
+<li><b>Teorema fundamental de la PL:</b> si existe una solución factible, existe una solución básica factible; si existe una solución factible óptima, existe una solución básica factible óptima.</li>
+<li><b>Teorema de equivalencia:</b> un punto es punto extremo del conjunto de soluciones factibles <b>si y solo si</b> es una solución básica factible.</li>
+<li>La función objetivo alcanza su óptimo en <b>al menos un punto extremo</b>. Si lo alcanza en más de uno, también lo alcanza en toda combinación convexa de ellos.</li>
+</ol>
+<p>Consecuencia: el óptimo se busca entre las SBF (un número finito de vértices), que es lo que hace el Simplex.</p></div>
+
+<div class="c"><b>Solución conceptual <span class="tag">(prioridad 3)</span></b>
+<p>Método de fuerza bruta que se deduce de los teoremas: llevar el problema a forma estándar, elegir todas las bases posibles (\(m\) columnas con \(\det \neq 0\)), resolver cada sistema por Cramer, descartar las soluciones no factibles y evaluar el funcional en las restantes. Es correcto pero inviable a escala, porque la cantidad de bases crece combinatoriamente.</p></div>
+
+<div class="c"><b>Tipos de solución</b>
+<table>
+<tr><th>Caso</th><th>Qué ocurre</th></tr>
+<tr><td>Única</td><td>el óptimo se alcanza en un solo vértice</td></tr>
+<tr><td>Múltiple (alternativa)</td><td>el funcional es paralelo a una restricción activa; son óptimos dos vértices y todo el segmento que los une</td></tr>
+<tr><td>No acotada</td><td>el funcional mejora indefinidamente dentro de la región factible; suele indicar un error de formulación</td></tr>
+<tr><td>No factible</td><td>las restricciones son incompatibles: no hay región factible</td></tr>
+</table>
+<p>Una región factible no acotada no implica solución no acotada: puede haber óptimo finito.</p></div>
+
+</body>
+</html>

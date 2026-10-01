@@ -472,7 +472,7 @@ Estan en tension: los modelos buscan el equilibrio.
 La consulta marco esto como base de todo stock:
 
 ```text
-CT(Q) = C(Q) Q + L + C(Q) i A(Q)
+CT(Q) = [C(Q) Q + L + C(Q) i A(Q)] / Q = C(Q) + L/Q + C(Q) i A(Q)/Q
 ```
 
 Version por unidad para modelo basico, con `C` constante:
@@ -656,7 +656,7 @@ lambda = costo marginal de no disponer de mas dinero
 i + lambda = tasa hasta la cual conviene aceptar dinero para invertir en stocks
 ```
 
-Nota de cautela del banco: el factor exacto puede ser `i + lambda` o `i + 2 lambda` segun si la restriccion se plantea sobre inversion media o capital maximo. La interpretacion economica es la que importa para el parcial.
+Verificado contra el apunte (Masco-Torrent): con la restriccion `sum C_j Q_j / 2 <= I0` (inversion media) resulta `Q_j = sqrt(2 D_j L_j / (C_j (i + lambda)))`. El factor es `i + lambda`.
 
 ### 4.8. Riesgo de faltante
 
