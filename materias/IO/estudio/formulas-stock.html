@@ -25,10 +25,15 @@
   th, td { border: .8px solid #777; padding: .35mm 1.1mm; text-align: left; vertical-align: top; }
   th { background: #ececec; }
   .two { display: grid; grid-template-columns: 1fr 1fr; gap: 2mm; }
+  .page { break-after: page; }
+  .page:last-child { break-after: auto; }
+  section.page:first-of-type { font-size: 7.6pt; line-height: 1.2; }
+  section.page:first-of-type .katex-display { margin: .2mm 0; }
 </style>
 </head>
 <body>
 
+<section class="page">
 <h1>Fórmulas de gestión de stocks<small>IO · Práctica de stock (PGSTOCK) · Apunte Mascó–Torrent</small></h1>
 
 <div class="grid">
@@ -92,14 +97,15 @@
     <p>Hasta \(a\) unidades a \(C_1\), el excedente a \(C_2\). Para \(Q > a\):</p>
     \[ C(Q) = C_2 + \frac{(C_1 - C_2)\,a}{Q} \qquad \lim_{Q \to \infty} C(Q) = C_2 \]
     \[ Q^* = \sqrt{\frac{2D\,\big(L + (C_1 - C_2)\,a\big)}{C_2\, i}} \quad (\text{válido si } > a) \]
-    <p>Comparar \(CT\) en ese \(Q^*\) con el mejor \(CT\) a precio \(C_1\) (\(Q \leq a\)).</p>
+    \[ CT_2(Q) = C_2 + \frac{L + k}{Q} + C(Q)\,\frac{i\,Q}{2D} \qquad k = (C_1 - C_2)\,a \]
+    <p>Comparar \(CT_2(Q^*)\) con el mejor \(CT\) a precio \(C_1\). Se compara <b>\(CT\)</b>, no el precio medio.</p>
   </div>
 
   <div class="box">
     <h2>Período común <span class="tag">(Ej. 6 y 7)</span></h2>
     \[ T^* = \sqrt{\frac{2L}{S}} \qquad S = \sum_j \delta_j D_j \qquad Q_j^* = D_j\,T^* \]
     <p>\(L\) = costo de <b>toda</b> la orden conjunta. \(\delta_j = C_j\,i\) (o \(C_j\,i\,(1 - D_j/V_j)\)).</p>
-    <p><b>ABC</b> (Ej. 7): calcular \(C_j D_j\), ordenar de mayor a menor, acumular %. Los últimos (clase C) son los de poco capital: los que suman el % pedido.</p>
+    <p><b>ABC</b> (Ej. 7): \(C_j D_j\), ordenar y acumular %. "Los de menos importancia hasta X %": sumar desde el más chico sin pasar X % (tope).</p>
   </div>
 
   <div class="box">
@@ -144,5 +150,122 @@
   </div>
 
 </div>
+</section>
+
+<section class="page">
+<h1>Cómo resolver los ejercicios de stock<small>Procedimientos, conversiones y trampas que aparecieron en la práctica y en los finales</small></h1>
+
+<div class="grid">
+
+  <div class="box">
+    <h2>Qué modelo es</h2>
+    <table>
+      <tr><th>Si el enunciado dice…</th><th>Modelo</th></tr>
+      <tr><td>compra, entrega de una vez, precio fijo</td><td>básico</td></tr>
+      <tr><td>se fabrica, "capacidad de producción" \(V\), ingreso a lo largo de un lapso</td><td>consumo durante el ingreso</td></tr>
+      <tr><td>precio menor para TODO el lote desde \(a\)</td><td>descuento con escalón</td></tr>
+      <tr><td>precio menor solo para lo que EXCEDE \(a\)</td><td>descuento por excedente</td></tr>
+      <tr><td>varios artículos pedidos juntos, orden conjunta</td><td>período común</td></tr>
+      <tr><td>varios artículos + espacio / horas / capital limitado</td><td>Lagrange</td></tr>
+      <tr><td>\(\sigma\), tabla de frecuencias, RF, "controlan permanentemente"</td><td>punto de pedido aleatorio</td></tr>
+      <tr><td>"se revisa cada \(T\)", existencia y pendientes dados</td><td>revisión periódica</td></tr>
+    </table>
+  </div>
+
+  <div class="box">
+    <h2>Unidades y datos</h2>
+    <ul>
+      <li><b>Cantidades</b> por día → por año: se <b>multiplica</b> (5 cajas/día · 276 = 1.380/año).</li>
+      <li><b>Tasas</b> por año → por día: se <b>divide</b> (\(i\) = 0,24/año → 0,24/276 = 0,00087/día).</li>
+      <li>Lo más seguro: pasar \(D\) a la unidad de \(i\) y dejar \(i\) como viene.</li>
+      <li>"Costo anual de \(x\) $ por unidad" <b>ya es \(C \cdot i\)</b>: va directo al denominador.</li>
+      <li>"RF del 95 %" = nivel de servicio → <b>RF = 5 %</b> (\(z\) = 1,645). Dejarlo aclarado.</li>
+      <li>Si falta \(i\), declararlo como supuesto: "se adopta \(i\) = 24 % anual".</li>
+      <li>Demanda por día hábil → año de 276 días; si no, 365 (aclarar).</li>
+    </ul>
+  </div>
+
+  <div class="box">
+    <h2>C y CT no son lo mismo</h2>
+    <ul>
+      <li>\(C\): <b>dato</b>, precio de compra o fabricación de una unidad.</li>
+      <li>\(CT(Q)\): <b>resultado</b>, costo real por unidad = \(C\) + pedir (\(L/Q\)) + mantener. Siempre \(CT > C\).</li>
+      <li>\(C \cdot i\): costo de mantener <b>una</b> unidad durante <b>un</b> período.</li>
+      <li>\(CT \cdot D\): costo total por período.</li>
+      <li>Para elegir entre alternativas (cajas, tramos, ofertas) se compara <b>\(CT\)</b>.</li>
+    </ul>
+  </div>
+
+  <div class="box">
+    <h2>Armado de \(L\) <span class="tag">(Ej. 2)</span></h2>
+    <p>\(L\) = todo lo que se gasta <b>por orden</b>, sin importar \(Q\):</p>
+    <ul>
+      <li>gasto administrativo de emisión;</li>
+      <li>horas de preparación × costo de la hora-máquina;</li>
+      <li>piezas desechadas × (costo <b>hasta esa etapa</b> − valor de recupero).</li>
+    </ul>
+    <p class="warn">El desecho se valoriza al costo de la etapa en que se tira (35), no al costo de la pieza terminada (605).</p>
+  </div>
+
+  <div class="box">
+    <h2>Descuentos: procedimiento <span class="tag">(Ej. 3, 4 y 5)</span></h2>
+    <p><b>Escalón:</b> candidatos = \(Q_2^*\) (si \(\geq a\)); si no, \(Q_1^*\) y el borde \(a\). Con \(L = 0\): la compra mínima y \(a\).</p>
+    <p><b>Excedente:</b> calcular \(Q^*\) con \(L + k\) y comparar su \(CT\) con la política a precio \(C_1\).</p>
+    <p class="warn">El mínimo de \(CT\) está siempre en un punto de derivada nula (\(Q^*\) de un tramo) o en un punto de discontinuidad (\(a\)).</p>
+    <p class="note">Respuesta: "conviene \(Q\) porque su \(CT\) es menor": el ahorro en precio supera el mayor costo de mantener.</p>
+  </div>
+
+  <div class="box">
+    <h2>Gráficos</h2>
+    <ul>
+      <li><b>Existencias, básico:</b> diente de sierra; sube vertical a \(Q\) y baja con pendiente \(-D\) en \(T = Q/D\).</li>
+      <li><b>Existencias, consumo en el ingreso:</b> sube con pendiente \(V - D\) durante \(\theta = Q/V\) hasta \(M = Q(1 - D/V)\), baja con \(-D\). El pico no es \(Q\).</li>
+      <li><b>Ley de precios:</b> escalón; en \(a\) el punto pertenece al tramo de \(C_2\) (\(\bullet\)) y no al de \(C_1\) (\(\circ\)).</li>
+      <li><b>\(CT(Q)\) con escalón:</b> dos curvas en U, \(CT_2\) por debajo, con un salto hacia abajo en \(a\).</li>
+    </ul>
+  </div>
+
+  <div class="box">
+    <h2>Período común y período práctico <span class="tag">(Ej. 6 y 7)</span></h2>
+    <ul>
+      <li>\(S\) = costo de mantener de toda la familia: pedir cada \(T\) cuesta \(S\,T/2\) por período en mantener.</li>
+      <li>\(\delta_j = C_j\,i\) si se compra; \(C_j\,i\,(1 - D_j/V_j)\) si se fabrica.</li>
+      <li><b>Óptimo</b> \(T^*\) = el de la fórmula. <b>Práctico</b> \(T_c\) = un valor cómodo cercano (cada 20 días, cada mes) que se elige.</li>
+      <li>Con \(T_c\): recalcular \(Q_j = D_j\,T_c\) y verificar que el costo variable \(L/T + S\,T/2\) casi no cambia.</li>
+    </ul>
+  </div>
+
+  <div class="box">
+    <h2>Demanda aleatoria: pasos <span class="tag">(Ej. 11–13, finales)</span></h2>
+    <ol>
+      <li>Lote: <b>modelo básico con la demanda media</b> (lo aleatorio no cambia \(Q^*\)).</li>
+      <li>\(z\) según el RF; \(S_{LT} = S_d\sqrt{LT}\) (se multiplica por la <b>raíz</b> del tiempo).</li>
+      <li>\(SS = z\,S_{LT}\), redondeado <b>hacia arriba</b>.</li>
+      <li>\(PP = \bar d \cdot LT + SS\).</li>
+      <li>Costo anual del \(SS\): \(SS \cdot C \cdot i\), con \(i\) <b>anual</b>.</li>
+    </ol>
+    <p class="note">Si \(PP > Q\), siempre hay un pedido en camino: se compara \(PP\) con existencias + pendientes de entrega.</p>
+  </div>
+
+  <div class="box full">
+    <h2>Punto de pedido vs. revisión periódica <span class="tag">(pregunta de teoría de final)</span></h2>
+    <div class="two">
+      <table>
+        <tr><th></th><th>Punto de pedido</th><th>Revisión periódica</th></tr>
+        <tr><td>Lo activa</td><td>la demanda (stock llega a \(PP\))</td><td>el tiempo (cada \(T\))</td></tr>
+        <tr><td>Cantidad</td><td>fija: \(Q^*\)</td><td>variable: lo que falte para \(T + LT\)</td></tr>
+        <tr><td>Momento</td><td>variable</td><td>fijo</td></tr>
+        <tr><td>Registros</td><td>actualizar en cada movimiento</td><td>solo al revisar</td></tr>
+        <tr><td>\(SS\) cubre</td><td>\(LT\)</td><td>\(T + LT\) → más stock promedio</td></tr>
+      </table>
+      <div>
+        <p><b>Punto de pedido:</b> artículos A, B importantes, críticos y estacionales (control más estrecho). Ejemplo: distribuidora que pide 468 kg cada vez que el stock más lo pendiente baja a 766 kg.</p>
+        <p><b>Revisión periódica:</b> artículos C, de poco valor; permite agrupar artículos de un mismo proveedor (período común). No conviene para artículos caros. Ejemplo: hospital que revisa cada 30 días y pide lo que falta para 30 días más el plazo de entrega.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+</section>
 </body>
 </html>
