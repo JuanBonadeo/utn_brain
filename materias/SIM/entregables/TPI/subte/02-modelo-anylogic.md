@@ -429,8 +429,10 @@ molinetes, esa ventana tiene congestión.
 **Cierre y métricas.** El corte de métricas coincide con el cierre de ingresos: Lq, utilización, ocupación y
 procesados a las 09:30 se congelan en `t = 9000`. El experimento sigue hasta que sale el último pasajero que
 ingresó antes de las 09:30; entonces emite la fila, escribe el archivo si corresponde y termina con
-`getEngine().finish()`. La cohorte pico se define por el instante de ingreso. El tiempo de disipación se
-mide desde el último ingreso al vestíbulo.
+`getEngine().finish()`. La cohorte pico se define por el instante de ingreso. El campo 12 es el **tiempo de drenaje
+final**: desde el último ingreso al vestíbulo hasta que sale el último pasajero (caminata, servicio y salida).
+No es la disipación por tanda de `Main` ni la del caso (01 §135): hasta 2026-10-05 se llamaba "tiempo de
+disipación" y se renombró para no presentarlo como tal. Es secundaria y no entra en la comparación primaria.
 
 **Prueba sintética.** `PeatonalFranjaPrueba` corre un par E0-E1 con valores de prueba explícitos: 80 %
 Roca, 60 s de demora, 120 s de descarga y servicio triangular 2/3/5 s. Sus filas salen como

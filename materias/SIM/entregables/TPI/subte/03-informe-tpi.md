@@ -229,7 +229,7 @@ operativos y se desactive `modoDemo`. Por cada réplica se exportarán:
 - escenario y semilla;
 - pasajeros generados, desviados, procesados a las 09:30 y procesados con drenaje;
 - espera media, P90 y proporción sobre 30 s;
-- Lq, cola máxima y tiempo de disipación;
+- Lq, cola máxima y tiempo de drenaje final (desde el último ingreso hasta que sale el último pasajero);
 - utilización media, utilización por molinete y dispersión;
 - las mismas medidas restringidas a la cohorte 08:15-08:45.
 

@@ -86,7 +86,7 @@ encabezados de la hoja `Corridas`:
 | 9 | Proporción sobre 30 s | Proporción con espera mayor a 30 s |
 | 10 | Lq | Lq |
 | 11 | Cola máxima | Cola máxima |
-| 12 | Tiempo de disipación | Tiempo de disipación |
+| 12 | Tiempo de drenaje final (último egreso − último ingreso) | Tiempo de drenaje final |
 | 13 | Utilización media | Utilización media |
 | 14 | Dispersión de utilización | Dispersión de utilización |
 | 15 | Pasajeros de cohorte pico | Pasajeros de la cohorte pico |

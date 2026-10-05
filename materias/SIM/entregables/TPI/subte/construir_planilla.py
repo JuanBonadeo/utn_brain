@@ -56,7 +56,7 @@ FAMILIAS = {
     'Proporción con espera mayor a 30 s':  ('Primaria',   'Menor', '%'),
     'Lq':                                  ('Secundaria', 'Menor', 'pasajeros'),
     'Cola máxima':                         ('Secundaria', 'Menor', 'pasajeros'),
-    'Tiempo de disipación':                ('Secundaria', 'Menor', 's'),
+    'Tiempo de drenaje final':               ('Secundaria', 'Menor', 's'),
     'Utilización media':                   ('Secundaria', 'Menor', '%'),
     'Dispersión de utilización':           ('Secundaria', 'Menor', '% (p.p.)'),
     'Pasajeros de la cohorte pico':        ('Secundaria', 'Igual', 'pasajeros'),

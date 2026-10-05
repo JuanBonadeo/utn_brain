@@ -52,7 +52,7 @@ CAMPOS = [
     'Proporción con espera mayor a 30 s',
     'Lq',
     'Cola máxima',
-    'Tiempo de disipación',
+    'Tiempo de drenaje final',
     'Utilización media',
     'Dispersión de utilización',
     'Pasajeros de la cohorte pico',
