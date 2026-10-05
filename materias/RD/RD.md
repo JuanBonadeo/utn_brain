@@ -219,6 +219,15 @@ Fragmento  Long. total  Datos      Offset en bytes  Offset en el campo (÷8)  MF
 3          220          1200–1399  1200             150                      0
 ```
   ⚠️ El apunte escribe el desplazamiento **en bytes** (0, 600, 1200). En el campo real va **dividido por 8** (0, 75, 150). Si te piden el valor del campo, dividí por 8. Ojo: los datos de cada fragmento salvo el último tienen que ser múltiplo de 8 (600 sí lo es).
+- *Ejemplo del TP de comandos de red de Baró (apéndice D):* hay que transportar **1000 B de datos** sobre una red con un **máximo de 256 B** por datagrama, con header de 20 B e Identificación = 20. Entrarían 256 − 20 = 236 B de datos, pero tiene que ser múltiplo de 8, así que **232 B** (29 × 8). Salen **5 fragmentos**: cuatro de 232 B y uno de 72 B.
+```
+Fragmento         1     2     3     4     5
+Identificación    20    20    20    20    20
+Long. total       252   252   252   252   92
+Desplazamiento    0     29    58    87    116     (en unidades de 8 B)
+MF (más datos)    1     1     1     1     0
+```
+  En total viajan 1100 B en lugar de 1020: es el costo de repetir el header. ⚠️ El TP pone **72** como longitud del último fragmento; eso son solo los datos, y la longitud total es **92**. Además, en cada fragmento se recalculan la longitud y el checksum; el resto de los campos se copia. Si se vuelve a fragmentar un fragmento con MF = 1, todos los nuevos quedan con MF = 1. **Reensamblado:** el destino reserva un buffer de **65.535 B** y arranca un **temporizador de reensamblado**; si vence antes de que lleguen todos los fragmentos, **descarta** lo recibido.
 
 ##### Direccionamiento
 - Direcciones de **32 bits (4 bytes)** → **2³² ≈ 4.294 millones**. Se escriben en decimal separando bytes por punto. Cada interfaz (RJ-45) tiene su IP → un router tiene una IP por interfaz.
@@ -373,10 +382,19 @@ Tipo  Mensaje
 - **Ejemplo:** A (192.168.0.10) le manda a B (10.10.0.7), que está en otra red. A pregunta por ARP la MAC de **R1** (192.168.0.1) y le manda la trama a esa MAC con el datagrama adentro (IP origen A, IP destino B). Del otro lado, R1 hace ARP para conocer la MAC de B. **Es el mismo datagrama viajando en dos tramas distintas.**
 - **Tabla o caché ARP:** cada host guarda los pares IP↔MAC que va resolviendo, así no repite preguntas. Las entradas tienen un **tiempo de vida** y se borran al vencer, por si cambian la IP o la placa. **Optimización:** como todos escuchan el broadcast, el destino y las demás estaciones pueden anotar al que preguntó sin necesidad de preguntar ellos.
 - **Trama Ethernet**, donde viaja el datagrama: preámbulo (8 B) | MAC destino (6 B) | MAC origen (6 B) | tipo (2 B) | datos (64–1500 B) | CRC (4 B).
-- **BOOTP:** el mail de Baró dice que el apunte lo trata, pero **el apunte que llegó no lo incluye**. *Esto es conocimiento general, no sale de las fuentes:* es el **antecesor de DHCP** y asigna la configuración IP al arrancar, pero de forma **estática** (tabla fija que arma el administrador, sin arriendo). DHCP lo reemplazó. Para más detalle, ver Tanenbaum 5.6.4.
+- **BOOTP** (TP de comandos de red de Baró, apéndice DHCP): es el **antecesor de DHCP**. Le pasa a un host su configuración IP al arrancar, pero a partir de una **base de datos que el administrador carga a mano** (configuración previa, sin asignación dinámica ni arriendo). **DHCP se basa en BOOTP** y mantiene cierta compatibilidad, pero agrega la **asignación dinámica** y el **arriendo** (*lease*), que permite recuperar y reasignar direcciones. Los dos **viajan sobre UDP, puertos 67 y 68**, y **se pueden rutear**: un router hace de "agente de reenvío BOOTP" hacia un servidor de otra subred. **RARP**, en cambio, solo le daba al host su IP, sin otros parámetros, y servía para una sola LAN.
 
 ##### DHCP (Dynamic Host Configuration Protocol)
-- Asigna **IP dinámica**: al encender, la PC manda un **broadcast** pidiendo IP; el servidor DHCP se la asigna con un **tiempo de arriendo** (expira/renueva). También entrega **gateway y DNS**. RFC 2131/2132; reemplazó a **BOOTP y RARP**.
+- Asigna **IP dinámica**: al encender, la PC manda un **broadcast** pidiendo IP; el servidor DHCP se la asigna con un **tiempo de arriendo** (expira/renueva). También entrega **gateway y DNS**. RFC 2131/2132; reemplazó a **BOOTP y RARP**. Usa **UDP, puertos 67 (servidor) y 68 (cliente)**.
+
+##### Comandos de red (TP de Baró, `fuentes/Baro-2do-parcial/9 - Comandos de red.pdf`)
+- **`ping <ip>`:** manda **ICMP echo request** y espera **echo reply**. En Windows manda **4** por defecto y muestra bytes, tiempo y TTL de cada respuesta. Para diagnosticar se va de adentro hacia afuera: `ping 127.0.0.1` (pila TCP/IP propia; **no prueba la placa**), después el router local y después más allá del router. Si reporta **paquetes duplicados**, hay un posible problema en el gateway; si reporta **paquetes dañados**, suele ser un problema de hardware en el camino.
+  - Opciones útiles: `-t` (sin fin), `-n N` (cantidad), `-l` (tamaño), **`-f` (activa el bit "no fragmentar")**, `-i` (TTL), `-v` (Tipo de Servicio), **`-r N` (registro de ruta)**, **`-s N` (marca de tiempo)**, `-j`/`-k` (ruta origen libre/estricta), `-w` (timeout). Las opciones `-r` y `-s` confirman que **registro de ruta y marca de tiempo se usan desde ICMP** (pregunta de la guía).
+  - **Sin respuesta**, las causas posibles son: IP mal escrita, la IP no está configurada en el equipo destino, problema de cableado (probar con otro equipo del mismo segmento) o que el destino esté detrás de un router y **no haya gateway configurado**.
+- **`tracert <host>`:** manda ICMP echo con TTL 1, 2, 3… Cada router devuelve **"tiempo de vida expirado en tránsito"** (ICMP 11) y el destino final responde con **echo reply**. Muestra **3 tiempos de ida y vuelta por salto**. Las pérdidas que importan son las del **último salto**: un asterisco en un salto intermedio suele ser un router que no contesta ICMP, no una falla. Opciones: `-d` (sin resolver nombres), `-h` (máximo de saltos, 30 por defecto), `-w` (timeout).
+- **`ipconfig`:** muestra IP, máscara y gateway de cada adaptador. `/all` agrega todo, incluidos DNS y WINS. **`/release` y `/renew`** liberan y renuevan la IP, y **solo funcionan si el equipo usa DHCP**.
+- **`arp`:** muestra y modifica la **caché ARP**. **`arp -a`** muestra la tabla, `arp -d <ip>` borra una entrada y **`arp -s <ip> <mac>`** agrega una entrada **estática** (permanente).
+- **`netstat`:** muestra conexiones y estadísticas TCP/IP. **`-a`** muestra todas las conexiones y los puertos en escucha, `-n` lo muestra en formato numérico, `-e` da estadísticas Ethernet, **`-r` muestra la tabla de rutas**, `-s` da estadísticas por protocolo y `-p tcp|udp` filtra por protocolo.
 
 ##### MPLS · OSPF · BGP
 - **MPLS (Multiprotocol Label Switching):** agrega una **etiqueta (label)** al paquete y rutea por ella (más rápido que por IP). Se lo llama **capa 2,5**; usa routers **LSR**; header de **32 bits** (20 bits label + QoS + bit "hay más labels" + TTL). RFC 3031.
@@ -614,7 +632,7 @@ La IP tiene que caer en la subred 10.118.64.0 y estar 42.51 direcciones más arr
 - Confirmar con Medin si toma el **diagrama de ISP** dibujado a mano o basta describirlo.
 - **2do parcial Baró:** faltan las secciones de **Tanenbaum 5.2.1–5.2.5, 5.6.6 y 5.6.7**, base de las preguntas 🔶 de ruteo de la guía: tabla de ruteo, ruta default, SA, IGP, tipos de área, LSP, grafo. **No hay PDF del libro en el repo.** Baró ofrece mandarlo si se le pide; si no, mirar `archivo/Resumenes/` ("Resumen Tanenebaum.pdf", "Redes Resumen 2024 Parcial 2.pdf", "Resumen para 2º parcial") y copiar lo útil a `fuentes/`.
 - **Inundación (*flooding*) como algoritmo de ruteo (5.2.3):** acá solo aparece como método de broadcast. Falta desarrollarla como algoritmo de ruteo en sí.
-- **BOOTP:** el mail lo anuncia en el apunte, pero el apunte que llegó no lo trae.
+- ~~**BOOTP:** el mail lo anuncia en el apunte, pero el apunte que llegó no lo trae.~~ Resuelto con el TP de comandos de red (apéndice DHCP): ver *ARP*.
 - **Erratas del apunte de Baró:** (a) dice que un ping a un host inexistente devuelve "ICMP tipo 11". En la práctica, si el host no contesta **no llega ningún ICMP** y el ping solo muestra "tiempo de espera agotado"; el tipo 11 aparece cuando el TTL llega a 0. (b) Llama "CRC" al checksum del header. (c) Escribe el desplazamiento de fragmento en bytes en vez de en unidades de 8 bytes. (d) La errata de P1 (155.24 por 155.4).
 - **Diferencia entre fuentes:** el apunte de Baró describe el byte 2 del header como **Tipo de Servicio** (prioridad + D/T/R); las diapositivas de Medin y Tanenbaum 5ª ed. lo describen como **Differentiated Services + ECN**. Para el parcial de Baró, contestá con la versión de ToS, que es la que pregunta la guía.
 
@@ -632,6 +650,7 @@ La IP tiene que caer en la subred 10.118.64.0 y estar 42.51 direcciones más arr
 - `fuentes/Baro-2do-parcial/8 - Práctica IPV4 resuelto.pdf` (práctica de la cátedra: 29 ejercicios de direccionamiento IPv4; del Drive, `archivo/Material de Cursado/Práctica/`)
 - `fuentes/Baro-2do-parcial/6 - Práctica de Capa de Red.pdf` (práctica de la cátedra: 9 problemas de ruteo y servicios; figuras en `figs/practica6-*`)
 - `fuentes/Baro-2do-parcial/2º Parcial - 2024-10-29 - Baro y Medin.jpeg` (2do parcial real 2024, com. 403: práctica de Baró + teoría de Medín; del Drive, `archivo/Examenes/`)
+- `fuentes/Baro-2do-parcial/9 - Comandos de red.pdf` (TP de Baró: ping, tracert, ipconfig, arp, netstat; apéndices DHCP/BOOTP y fragmentación)
 - `fuentes/RD/Medin-1er-parcial/Preguntas y Respuestas Parciales de Medin.docx` (preguntas reales)
 - Tanenbaum & Wetherall, *Computer Networks*, 5th ed.
 
@@ -778,3 +797,4 @@ Comunicación **extremo a extremo** confiable y eficiente entre aplicaciones. Fu
 - 2026-10-05: Ingesta de la **práctica IPv4 resuelta** de la cátedra (del Drive). Unidad 2: convención **subredes válidas = 2ⁿ − 2** en *Subnetting a mano*; ejercicios 1–20 verificados (4 erratas de desarrollo marcadas) y 21–28 resueltos (no venían resueltos). Banco nuevo: `estudio/banco-ejercicios-2do-parcial.md`.
 - 2026-10-05: Ingesta de la **práctica de Capa de Red** de la cátedra (del Drive). Unidad 2, ejercicios: 9 problemas (servicios, QoS, tabla de vector distancia, RPF y sink tree, árbol multicast, TTL, diseño /29), con figuras recortadas en `figs/`. Sumados al banco de ejercicios del 2do parcial.
 - 2026-10-05: Ingesta del **2do parcial real del 29/10/2024** (Baró y Medín, com. 403). Unidad 2: 4 ejercicios de Baró resueltos (subredes en clase A, máscara para un host dado, 5 subredes en 204.12.30.0, OSPF vs RIP). Unidad 3: las 5 preguntas reales identificadas como la teoría de Medín de ese parcial; índice: Transporte como probable 2do teórico (a confirmar). Ambas al banco.
+- 2026-10-05: Ingesta del **TP de comandos de red** de Baró (del Drive). Unidad 2: nueva subsección *Comandos de red* (ping y sus opciones `-f`/`-r`/`-s`, tracert, ipconfig, arp, netstat); BOOTP ahora con fuente (UDP 67/68, configuración manual vs arriendo de DHCP; queda resuelto el pendiente); ejercicio de fragmentación 1000 B / MTU 256 con la errata de la longitud del último fragmento.

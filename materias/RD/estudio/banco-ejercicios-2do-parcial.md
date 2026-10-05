@@ -245,3 +245,25 @@ Cliente                 Servidor
 **5) Enuncie diferencias entre TCP y UDP.**
 
 Respuesta: TCP es orientado a conexión, confiable (retransmite y ordena), con control de flujo y de congestión, header de 20 B o más y flujo de bytes; se usa en web, correo y transferencias. UDP es sin conexión, sin garantías ni controles, con header de 8 B y mensajes individuales; se usa en voz y video en tiempo real, DNS y DHCP.
+
+## Fragmentación y comandos de red (TP de Baró)
+
+**1) Se deben transportar 1000 bytes de datos sobre una red que soporta como máximo 256 bytes por datagrama. El header IP es de 20 bytes y la Identificación vale 20. Determinar los campos de cada fragmento.**
+
+Respuesta: entrarían 236 B de datos, pero tienen que ser múltiplo de 8, así que son 232 B (29 bloques). Salen 5 fragmentos:
+```
+Fragmento         1     2     3     4     5
+Identificación    20    20    20    20    20
+Long. total       252   252   252   252   92
+Desplazamiento    0     29    58    87    116
+MF                1     1     1     1     0
+```
+Viajan 1100 B en vez de 1020. El TP pone 72 como longitud del último fragmento: son los datos; la longitud total es 92.
+
+**2) ¿Qué comando y opción usarías para: a) ver la tabla ARP; b) ver la tabla de rutas del host; c) renovar la IP obtenida por DHCP; d) hacer un ping que prohíba fragmentar; e) hacer un ping registrando la ruta?**
+
+Respuesta: a) `arp -a` · b) `netstat -r` (o `route print`) · c) `ipconfig /renew` (solo si el equipo usa DHCP) · d) `ping -f` · e) `ping -r N`.
+
+**3) Hacés ping y no hay respuesta. ¿Qué causas revisás?**
+
+Respuesta: que la IP esté bien escrita; que esa IP esté configurada en el equipo destino; el cableado (probar con otro equipo del mismo segmento); y, si el destino está detrás de un router, que el host tenga configurado el gateway. Antes que nada, `ping 127.0.0.1` prueba la pila TCP/IP propia, aunque no la placa.
