@@ -100,9 +100,6 @@ def listar(carpeta_id):
         m = re.search(r"/d/([\w-]+)", href)
         if m:
             out.append(("F", nombre, m.group(1), DESCARGA.format(id=m.group(1))))
-    if len(out) >= 50:
-        print(f"  ⚠️  la carpeta {carpeta_id} lista {len(out)} entradas: la vista pública "
-              f"podría estar truncada; revisala a mano en el Drive.", file=sys.stderr)
     return out
 
 
@@ -123,7 +120,12 @@ def bajar(url, destino):
     tmp = destino + ".parcial"
     with pedir(url) as r:
         if "text/html" in (r.headers.get("Content-Type") or ""):
-            raise RuntimeError("el Drive devolvió una página HTML (sin permiso o cuota agotada)")
+            pagina = r.read(4096).decode("utf-8", "replace")
+            if "download file" in pagina:  # "Can't download file"
+                raise RuntimeError("el Drive no permite bajar este archivo (bloqueado por el "
+                                   "dueño o por Google); si hace falta, abrilo a mano")
+            raise RuntimeError("el Drive devolvió una página HTML en vez del archivo "
+                               "(sin permiso o cuota de descarga agotada: reintentá más tarde)")
         with open(tmp, "wb") as f:
             while True:
                 bloque = r.read(1 << 20)
