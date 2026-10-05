@@ -456,6 +456,29 @@ peatones, el volumen que implica el perfil SBASE. Mostró dos problemas:
   orientación. Como el piloto que no drenó tenía la orientación correcta, la causa del atasco **sigue
   abierta**. Las sospechas son la cabeza a 0,4 m del paso y 28 colas separadas 1 m que desbordan sobre el
   mismo hall. Falta confirmarlo mirando `PeatonalFranjaVisualE0` y corriendo `PeatonalFranjaPrueba`.
+
+**Elección de cola y piloto de la franja completa (2026-10-05).** La causa real del atasco era la regla de
+elección. El costo de cada cola usaba `queueSize()` multiplicado por `servicioAsignadoPed`. AnyLogic evalúa la
+elección de `pedMolinetes` **antes** del *On exit* de `pedSource`, que es donde se sortea ese servicio; por eso
+valía 0 y la fila no pesaba. El contador `eleccionesSinServicio` lo confirmó: 18.545 de 18.545 elecciones.
+Cada pasajero iba al molinete más alineado con su entrada. Los molinetes 2-8, 19 y 20 quedaban sin uso, las
+filas desbordaban por el acceso y 432 personas quedaban trabadas en el hall. Ahora el costo es desvío lateral
+más los asignados a ese molinete que todavía no empezaron a validar (`asignadosPed`, que cuenta a los que
+caminan y a los que esperan), multiplicados por el servicio de referencia del escenario.
+
+Con valores de prueba y E0 (20 molinetes), la franja 07:00-09:30 completa dio:
+
+| Medida | Valor |
+|---|---|
+| Drenaje | completo, 18.545 de 18.545 |
+| Espera media / P90 | 31 s / 71 s |
+| Espera mayor a 30 s | 38 % |
+| Cohorte pico | 4.360 personas, P90 de 82 s |
+| Utilización por molinete | entre 17 % y 52 % (los 20 se usan) |
+| Caudal simulado por ventana contra SBASE | la mayoría dentro de ±6 %; las desviaciones mayores son 07:15 (−16 %) y 08:00 (+15 %) |
+| Tiempo real de cómputo | 274 s |
+
+Las 60 corridas de producción llevan unas 4,6 h en una máquina: la opción A de la §6 del plan alcanza.
 - **Tiempo de cómputo.** Una corrida completa tardó unos 43 minutos. A ese ritmo, las 60 corridas de
   producción llevarían más de 40 horas. Con el atasco corregido, las corridas deberían drenar antes, pero el
   tiempo real se mide en el próximo piloto y puede obligar a reducir el número de pares o a correrlos por

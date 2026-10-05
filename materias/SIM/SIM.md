@@ -2774,6 +2774,13 @@ subte, y sobre la misma estación.
 
 ## Log
 
+- **2026-10-05** (4): TPI subte, primer piloto completo que drena. Se encontró la causa del atasco: la
+  elección de cola se evaluaba antes de sortear el servicio del pasajero (`eleccionesSinServicio`
+  = 100 %), así que la fila no pesaba y todos iban al molinete alineado con la entrada. Corregido con un
+  contador propio de asignados por molinete y el servicio de referencia. Resultado de E0 con valores de
+  prueba en la franja completa: drena 18.545 de 18.545, espera media 31 s, P90 71 s, los 20 molinetes
+  entre 17 % y 52 %, caudal por ventana cercano a SBASE y 4,6 min de cómputo por corrida. Próximo paso:
+  calibrar el escenario intermedio (T3.4).
 - **2026-10-05** (3): TPI subte, auditoría del modelo contra el ejemplo oficial y revisión en paralelo
   (demanda, métricas, experimentos). Corregido y commiteado por partes:
   - la orientación de las colas, que el IDE había pisado en el commit anterior;
