@@ -296,6 +296,12 @@ Máscara           Último byte  Subredes  Hosts/subred  Saltos entre subredes
 ```
   **Truco del salto:** salto = 256 − (byte interesante de la máscara). Las subredes arrancan en múltiplos del salto; el broadcast es el siguiente múltiplo − 1. Con un byte de máscara distinto de 0 o 255 también se parten redes A o B. Por ejemplo, 255.255.192.0 divide una clase B en 4 subredes de 2¹⁴ − 2 = 16.382 hosts.
 
+> ⚠️ **Convención de la cátedra: subredes válidas = 2ⁿ − 2** (práctica IPv4 resuelta, `fuentes/Baro-2do-parcial/8 - Práctica IPV4 resuelto.pdf`). Así como en cada subred se descartan la dirección de red y la de broadcast, **la práctica descarta también la primera subred (la de bits de subred en 0, *subnet zero*) y la última (bits de subred en 1)**. Es la regla clásica de la RFC 950; hoy los equipos usan todas las subredes, pero **las respuestas de Baró salen con −2**:
+> - /28 sobre una clase C da 16 bloques, de los cuales **14 son subredes válidas** con 14 hosts cada una (ej. 16).
+> - /30 sobre una clase C da 64 bloques: **62 subredes** de 2 hosts (ej. 10).
+> - Para pedir *n* subredes: el menor *k* tal que **2ᵏ − 2 ≥ n**. Para 10 subredes, k = 4 (14 ≥ 10); para 55, k = 6 (62 ≥ 55).
+> - **Cómo se numeran:** en las tablas de la práctica, el bloque que empieza en la red base es el **N° 1**. En los ejercicios que piden "la subred N", tomé **subred N = base + N × salto** (el bloque 0, *subnet zero*, no cuenta como subred válida). Si en clase las numeran distinto, corré un salto.
+
 - **Caso práctico del apunte (diseño):** una empresa tiene contratadas las públicas **194.143.17.8/29** (red .8, broadcast .15, máscara 255.255.255.248, 6 hosts útiles: .9 a .14) y necesita **3 servidores** (correo, web, proxy) **+ 20 PCs**.
   - **Red pública /29:** router .9 (gateway de los servidores), proxy .10, y web y correo en dos de las restantes (.11–.14). Los servidores y el router van con IP pública para ser accesibles desde Internet.
   - **Red privada 192.168.1.0/24:** las 20 PCs usan IPs privadas con **gateway 192.168.1.1**, que es la IP privada del **proxy**.
@@ -439,6 +445,66 @@ Red **194.143.17.144**, broadcast **194.143.17.159**, máscara **255.255.255.240
 
 ---
 
+> **Práctica de la cátedra — Direccionamiento IPv4 resuelto** (`fuentes/Baro-2do-parcial/8 - Práctica IPV4 resuelto.pdf`). Son 29 ejercicios, casi todos **multiple choice**. Los ej. 1 a 20 vienen resueltos en el original; los verifiqué con Python y están bien, salvo 4 erratas del desarrollo (no de la respuesta), marcadas abajo. Los ej. 21 a 28 venían **sin resolver**: los resolví yo, también verificados. El 29 repite el 3. Todos usan la convención **subredes válidas = 2ⁿ − 2** (ver *Subnetting a mano*). Los enunciados completos, en formato para practicar, están en `estudio/banco-ejercicios-2do-parcial.md`.
+
+```
+Ej  Enunciado (resumido)                                         Respuesta
+1   Clase B en 8 subredes, 2500 hosts/subred: ¿máscara?          255.255.240.0 (/20: 14 subredes válidas, 4094 hosts)
+2   ¿Cuáles binarias son clase B? (1er byte 128–191)             153.120.109.194 · 185.200.55.76 · 159.75.63.43
+3   Máscara 255.255.224.0: ¿cuál no es de la misma subred?       172.16.63.51 (subred .32.0; las otras, .64.0)
+4   191.168.10.11 en binario                                     10111111.10101000.00001010.00001011
+5   00001010.10101001.00001011.10001011 en decimal               10.169.11.139
+6   ¿Cuál es privada clase A?                                    00001010.… = 10.120.109.248
+7   172.18.71.2 / 255.255.248.0: ¿red y broadcast?               red 172.18.64.0 · bc 172.18.71.255
+8   ¿Qué máscara tiene prefijo /24?                              255.255.255.0
+9   192.168.85.129 / 255.255.255.192: ¿red y broadcast?          red 192.168.85.128 · bc 192.168.85.191
+10  192.168.1.0 con /30: ¿subredes y hosts?                      62 subredes de 2 hosts
+11  156.233.42.56 (clase B) con 7 bits de subred                 126 subredes de 510 hosts (máscara 255.255.254.0)
+12  Clase B con 500 hosts por subred                             255.255.254.0 (510 hosts)
+13  172.16.45.14/30: ¿subred?                                    172.16.45.12
+14  Asignables en la subred de 192.168.15.19/28                  .17 y .29 (subred .16–.31)
+15  Clase C, 10 subredes con el máximo de hosts                  255.255.255.240 (14 subredes × 14 hosts)
+16  /28 sobre 210.10.2.0: ¿subredes y nodos?                     14 subredes y 14 nodos
+17  172.16.210.0/22: ¿subred?                                    172.16.208.0 (hasta .211.255)
+18  Binario a decimal (A, B, C)                                  100.10.235.39 · 172.18.158.15 · 192.167.178.69
+19  Sobre esas 3: ¿qué es cierto?                                A pública clase A · B privada clase B · C pública clase C
+```
+**Erratas del original (solo en el desarrollo):** ej. 1 dice "/19" y 255.255.240.0 es **/20**; ej. 7 dice "/20" y escribe la máscara en binario como `11110000`, pero 255.255.248.0 es **/21** = `11111000`; ej. 3 y 13 escriben "172.168…" por **172.16…**. Ej. 19, opción C: 192.**167**.x.x es pública (el rango privado de clase C es 192.**168**).
+
+**Ej. 21–28, resueltos (no venían resueltos).** Método: la máscara dada define la **red base** (IP AND máscara); se agregan bits de subred o se dejan bits de host según lo pedido; **subred N = base + N × salto**; **host H de una subred = dirección de la subred + H**.
+```
+21  6 subredes, 180.10.1.0 / 255.255.254.0
+    base 180.10.0.0/23 · 2³−2 = 6 ≥ 6 → 3 bits → /26 (salto 64)
+    subredes 1–6: 180.10.0.64 · 0.128 · 0.192 · 1.0 · 1.64 · 1.128
+22  Subredes de ≥120 hosts, 172.15.35.0 / 24
+    7 bits de host → /25 → 172.15.35.0/25 y 172.15.35.128/25 (126 hosts c/u)
+    Ojo: con la regla 2ⁿ−2 un solo bit de subred no da ninguna subred válida; acá hay que usar las dos.
+23  ≥100 subredes, 10.0.0.0/8
+    2⁷−2 = 126 → 7 bits → /15 (255.254.0.0, salto 2 en el 2do byte)
+    subred 39 = 10.78.0.0 · 76 = 10.152.0.0 · 87 = 10.174.0.0 · 99 = 10.198.0.0
+24  ≥2000 hosts, 153.15.0.0 / 255.255.192.0
+    base /18 · 11 bits de host → /21 (salto 8 en el 3er byte) · 2³−2 = 6 subredes válidas
+    a) host 1312 (el enunciado no dice de qué subred; tomando la 1): 153.15.8.0 + 1312 = 153.15.13.32
+    b) host 287 de la subred 5: 153.15.40.0 + 287 = 153.15.41.31
+    c) host 1898 de la subred 6: 153.15.48.0 + 1898 = 153.15.55.106
+25  ≥30 subredes, 190.10.0.0 / 255.255.192.0
+    base /18 · 2⁵−2 = 30 → 5 bits → /23 (salto 2 en el 3er byte)
+    subred 15 = 190.10.30.0 · 20 = 190.10.40.0 · 30 = 190.10.60.0
+26  ≥500 hosts, 172.15.0.0 / 255.224.0.0
+    base = 172.15.0.0 AND 255.224.0.0 = 172.0.0.0/11 · 9 bits de host → /23 (bloques de 512)
+    a) host 254 de la subred 3854: 172.30.28.254
+    b) host 64 de la subred 198:   172.1.140.64
+    c) host 487 de la subred 2670: 172.20.221.231
+27  ≥12 hosts, 201.154.10.0 / 255.255.255.224
+    base /27 · 4 bits de host → /28 (salto 16) · 1ª subred = .0, 2ª = .16
+    1ª: hosts 4, 7, 9 = .4 · .7 · .9      2ª: hosts 3, 8, 11 = .19 · .24 · .27
+28  172.30.0.0/16, hoy 25 y a futuro 55 subredes de ≥1000 hosts
+    2⁶−2 = 62 ≥ 55 → /22 → 1022 hosts ≥ 1000 → 255.255.252.0 (opción C)
+```
+Para pasar de "host H" a la dirección: H = 256·q + r → se suma q al 3er byte y r al 4to. Por ejemplo, 1312 = 5·256 + 32, así que 153.15.8.0 + 1312 = 153.15.13.32.
+
+---
+
 > **Guía de Estudio de Baró — preguntas tipo de parcial** (`fuentes/Baro-2do-parcial/GUIA DE ESTUDIO DE CAPA DE RED.docx`). Baró dice que **complementan la práctica de problemas**. Al lado de cada pregunta está **dónde está la respuesta en esta wiki**; las marcadas con 🔶 no tienen desarrollo suficiente en las fuentes actuales y requieren Tanenbaum (ver Dudas).
 
 *Protocolo IP – Direcciones IP – Subnetting*
@@ -488,6 +554,7 @@ Red **194.143.17.144**, broadcast **194.143.17.159**, máscara **255.255.255.240
 - `fuentes/Baro-2do-parcial/Apunte 2do parcial (Capa de Red).docx` (TCP/IP, direcciones, máscaras, datagrama IP, fragmentación, ARP, ICMP, ping, tracert)
 - `fuentes/Baro-2do-parcial/Práctica Direcciones IP - Máscaras de Subred.docx` (es un extracto del apunte: §2.2–2.3 + ejercicios)
 - `fuentes/Baro-2do-parcial/GUIA DE ESTUDIO DE CAPA DE RED.docx` (preguntas tipo de parcial)
+- `fuentes/Baro-2do-parcial/8 - Práctica IPV4 resuelto.pdf` (práctica de la cátedra: 29 ejercicios de direccionamiento IPv4; del Drive, `archivo/Material de Cursado/Práctica/`)
 - `fuentes/RD/Medin-1er-parcial/Preguntas y Respuestas Parciales de Medin.docx` (preguntas reales)
 - Tanenbaum & Wetherall, *Computer Networks*, 5th ed.
 
@@ -631,3 +698,4 @@ Comunicación **extremo a extremo** confiable y eficiente entre aplicaciones. Fu
 ## Log
 - 2026-07-21: Ingesta inicial del material del 1er parcial de Medin (10 PDFs de teórico + doc de preguntas). Se crearon las 3 unidades (Enlace, Red, Transporte) y el índice. Fuentes en `fuentes/RD/Medin-1er-parcial/`. Ajuste: parcial de Medin es conceptual → ejercicios tipo = preguntas reales; cálculos numéricos marcados como poco probables.
 - 2026-10-05: Ingesta del material del **2do parcial práctico de Baró** (dos mails reenviados por Gonza + el de fechas de Medín). Fuentes en `fuentes/Baro-2do-parcial/`: los mails, apunte de Capa de Red, práctica de máscaras de subred y guía de estudio. Unidad 2: nuevo bloque de alcance y fechas (práctica el 21/10 y teoría el 27/10 para el grupo A–Fassine); header IPv4 ampliado con Tipo de Servicio (prioridad, D/T/R), números de protocolo, opciones y fragmentación con ejemplo; tabla de clases y de direcciones especiales; utilidad de los rangos privados; nueva sección *Subnetting a mano* con el caso práctico; tipos ICMP, diagnóstico con ping y tracert; caché ARP; práctica de máscaras resuelta y verificada; guía de Baró mapeada a la wiki. Pendiente: Tanenbaum 5.2/5.6.6/5.6.7 para las preguntas de ruteo marcadas 🔶.
+- 2026-10-05: Ingesta de la **práctica IPv4 resuelta** de la cátedra (del Drive). Unidad 2: convención **subredes válidas = 2ⁿ − 2** en *Subnetting a mano*; ejercicios 1–20 verificados (4 erratas de desarrollo marcadas) y 21–28 resueltos (no venían resueltos). Banco nuevo: `estudio/banco-ejercicios-2do-parcial.md`.
