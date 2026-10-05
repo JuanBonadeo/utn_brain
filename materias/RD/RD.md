@@ -481,7 +481,7 @@ Red **194.143.17.144**, broadcast **194.143.17.159**, máscara **255.255.255.240
 
 ---
 
-> **Práctica de la cátedra — Direccionamiento IPv4 resuelto** (`fuentes/Baro-2do-parcial/8 - Práctica IPV4 resuelto.pdf`). Son 29 ejercicios, casi todos **multiple choice**. Los ej. 1 a 20 vienen resueltos en el original; los verifiqué con Python y están bien, salvo 4 erratas del desarrollo (no de la respuesta), marcadas abajo. Los ej. 21 a 28 venían **sin resolver**: los resolví yo, también verificados. El 29 repite el 3. Todos usan la convención **subredes válidas = 2ⁿ − 2** (ver *Subnetting a mano*). Los enunciados completos, en formato para practicar, están en `estudio/banco-ejercicios-2do-parcial.md`.
+> **Práctica de la cátedra — Direccionamiento IPv4 resuelto** (`fuentes/Baro-2do-parcial/8 - Práctica IPV4 resuelto.pdf`). Son 29 ejercicios, casi todos **multiple choice**. Los ej. 1 a 20 vienen resueltos en el original; los verifiqué con Python y están bien, salvo 4 erratas del desarrollo (no de la respuesta), marcadas abajo. Los ej. 21 a 28 venían **sin resolver**: los resolví yo, también verificados. El 29 repite el 3. Todos usan la convención **subredes válidas = 2ⁿ − 2** (ver *Subnetting a mano*). Los enunciados completos, en formato para practicar, están en `estudio/banco-ejercicios-baro.md`.
 
 ```
 Ej  Enunciado (resumido)                                         Respuesta
@@ -814,7 +814,7 @@ La IP tiene que caer en la subred 10.118.64.0 y estar 42.51 direcciones más arr
 | Usos | HTTP, FTP, correo, archivos | Voz/video, DNS, DHCP, multicast |
 
 #### Ejercicios resueltos tipo
-> Estos 5 son **preguntas reales**: la parte de **teoría de Medín del 2do parcial del 29/10/2024**, com. 403 (`fuentes/Baro-2do-parcial/2º Parcial - 2024-10-29 - Baro y Medin.jpeg`; las respuestas vienen del documento de preguntas de Medín). Es el mejor indicio de que el **2do teórico de Medín (27/10/2026) es de Capa de Transporte** (a confirmar en clase). En 2024 fueron preguntas para desarrollar, no multiple choice.
+> Estos 5 son **preguntas reales**: la parte de **teoría de Medín del 2do parcial del 29/10/2024**, com. 403; para practicar con las respuestas al final: `estudio/preguntas-medin-2do-parcial.md` (`fuentes/Baro-2do-parcial/2º Parcial - 2024-10-29 - Baro y Medin.jpeg`; las respuestas vienen del documento de preguntas de Medín). Es el mejor indicio de que el **2do teórico de Medín (27/10/2026) es de Capa de Transporte** (a confirmar en clase). En 2024 fueron preguntas para desarrollar, no multiple choice.
 
 **1) ¿Qué responsabilidades tiene la capa de transporte?**
 Comunicación **extremo a extremo** confiable y eficiente entre aplicaciones. Funciones: dividir en **segmentos** y reensamblar; entrega **ordenada y confiable** (TCP); **control de errores**; **control de flujo** (según el receptor); **multiplexación** por puertos; **control de congestión** (solo TCP).
@@ -851,3 +851,4 @@ Comunicación **extremo a extremo** confiable y eficiente entre aplicaciones. Fu
 - 2026-10-05: Ingesta del **TP de comandos de red** de Baró (del Drive). Unidad 2: nueva subsección *Comandos de red* (ping y sus opciones `-f`/`-r`/`-s`, tracert, ipconfig, arp, netstat); BOOTP ahora con fuente (UDP 67/68, configuración manual vs arriendo de DHCP; queda resuelto el pendiente); ejercicio de fragmentación 1000 B / MTU 256 con la errata de la longitud del último fragmento.
 - 2026-10-05: Ingesta de la **teoría de UDP** de la cátedra (del Drive) en `fuentes/Medin-2do-parcial/`. Unidad 3: header UDP (8 B, longitud hasta 65.515), checksum opcional y pseudoencabezado (protocolo 17), RPC, RTP/RTCP, buffer y jitter. Registrada la **contradicción** sobre qué hace UDP ante un error (descarta vs. avisa a la capa superior) y la lista de preguntas para Medín.
 - 2026-10-05: **Consulta al Tanenbaum** (5ª ed. en castellano, del Drive; solo consulta, no se copió a `fuentes/`). Unidad 2: nuevo bloque *Ruteo, Sistemas Autónomos, OSPF y BGP* (ruteo vs. reenvío, tabla, ruta predeterminada, inundación, paquete de estado del enlace, grafo, AS, IGP, RIP, áreas y tipos de router, BGP). Las 8 preguntas 🔶 de la guía quedan resueltas; el límite de 15 saltos de RIP queda como conocimiento general.
+- 2026-10-05: Se separan los derivados por profesor: `estudio/banco-ejercicios-baro.md` (solo práctica de Baró; antes `banco-ejercicios-2do-parcial.md`) y `estudio/preguntas-medin-2do-parcial.md` (las 5 preguntas de teoría de Medín de 2024).

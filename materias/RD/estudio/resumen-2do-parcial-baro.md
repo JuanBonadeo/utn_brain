@@ -511,7 +511,7 @@ Frag  Long.total  Datos   Campo desplaz.  MF
 - **E16.** **172.16.208.0** (salto 4 en el 3er byte; 210 cae en [208, 212)).
 - **E17.** 2⁵ − 2 = 30, así que la máscara es **/23 (255.255.254.0)**, con salto 2 en el 3er byte. Subred 15 = **190.10.30.0** · 20 = **190.10.40.0** · 30 = **190.10.60.0**.
 
-Hay más ejercicios resueltos (29 de direccionamiento, 9 de ruteo y los de comandos) en el **banco de ejercicios del 2do parcial**.
+Hay más ejercicios resueltos (29 de direccionamiento, 9 de ruteo y los de comandos) en el **banco de ejercicios de Baró**.
 
 ## Datos para memorizar
 - Header IPv4: **20 B** mínimo, **60 B** máximo. Longitud total máxima **65.535**. TTL máximo **255**. Desplazamiento en **unidades de 8 B**.
