@@ -1,7 +1,7 @@
 ---
 title: "Pedidos de datos - TPI Subte Constitución"
 subject: "Simulación"
-status: "Correos del 23/09 enviados; faltan los dos trámites formales (TAD y Ley 104)"
+status: "Los dos trámites formales ingresados el 05/10; esperando respuesta (≈ 27/10)"
 actualizado: 2026-10-05
 ---
 
@@ -15,9 +15,9 @@ concreto se responde antes. Lo que no figura acá ya se pidió en los correos de
 
 | Organismo | Canal usado | Enviado | Respuesta | Qué falta |
 |---|---|---|---|---|
-| SBASE | correo `info@sbase.com.ar` | 23/09 | Ninguna | Pedido formal por Ley 104 (BA Colaborativa). El correo no es el canal formal |
+| SBASE | correo `info@sbase.com.ar` (23/09); Ley 104 n.º 01084412/26 (05/10) | 23/09 y 05/10 | Pendiente | Esperar el mail de la DGAIGA (2 días hábiles) y la respuesta |
 | Emova | correo `comunicaciones@emova.com.ar` | 23/09 | Ninguna | Emova es concesionaria privada y la Ley 104 no le alcanza directamente: su parte se pide a SBASE (§2, punto 4). Opcional: un recordatorio por correo |
-| Trenes Argentinos Operaciones (SOFSE) | correo `informacionpublica@trenesargentinos.gob.ar` | 23/09 | 25/09: "los pedidos deberán efectuarse a través de TAD" | Cargar el trámite en TAD (§1) |
+| Trenes Argentinos Operaciones (SOFSE) | correo (23/09); TAD EX-2026-96962531- -APN-DNPAIP#AAIP (05/10) | 23/09 y 05/10 | 25/09: derivó a TAD. TAD: pendiente | Revisar el buzón de TAD |
 
 Plazos legales: 15 días hábiles en los dos casos. La Nación admite una prórroga de 15 días (Ley 27.275) y
 la Ciudad, una de 10 (Ley 104). Si no responden, hay reclamo: ante la AAIP para Trenes Argentinos y ante
@@ -27,8 +27,8 @@ Registrar acá cada trámite apenas se cargue:
 
 | Trámite | Fecha | Número | Vence (15 hábiles) | Comprobante |
 |---|---|---|---|---|
-| TAD Trenes Argentinos | | | | `datos/solicitudes/` |
-| Ley 104 SBASE | | | | `datos/solicitudes/` |
+| TAD Trenes Argentinos (dependencia: SOFSE) | 05/10/2026 | EX-2026-96962531- -APN-DNPAIP#AAIP | ≈ 27/10/2026 (feriado 12/10 descontado); +15 hábiles de prórroga | Buzón de TAD; las notificaciones llegan a la cuenta TAD, no al mail |
+| Ley 104 SBASE (BA Colaborativa, área Ministerio de Infraestructura) | 05/10/2026 13:50 | 01084412/26 | ≈ 27/10/2026 (feriado 12/10 descontado); +10 hábiles de prórroga | Pantalla de confirmación; la DGAIGA avisa por mail en 2 días hábiles |
 
 Los comprobantes van en `datos/solicitudes/` en PDF o como captura, **sin CUIL ni DNI visibles**: el repo
 es público.
