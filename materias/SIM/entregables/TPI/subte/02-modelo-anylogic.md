@@ -452,7 +452,7 @@ peatones, el volumen que implica el perfil SBASE. Mostró dos problemas:
   largo, de x = 420 a x = 480, con la cabeza a 2 m del paso (x = 500). El verificador controla esa
   orientación. Como el piloto que no drenó tenía la orientación correcta, la causa del atasco **sigue
   abierta**. Las sospechas son la cabeza a 0,4 m del paso y 28 colas separadas 1 m que desbordan sobre el
-  mismo hall. Falta confirmarlo con `PeatonalFranjaPrueba` animado.
+  mismo hall. Falta confirmarlo mirando `PeatonalFranjaVisualE0` y corriendo `PeatonalFranjaPrueba`.
 - **Tiempo de cómputo.** Una corrida completa tardó unos 43 minutos. A ese ritmo, las 60 corridas de
   producción llevarían más de 40 horas. Con el atasco corregido, las corridas deberían drenar antes, pero el
   tiempo real se mide en el próximo piloto y puede obligar a reducir el número de pares o a correrlos por
