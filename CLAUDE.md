@@ -212,6 +212,8 @@ Materias y un tema corto y específico.
   `[practica-4-sensibilidad-dualidad.md](file:///Users/juanbonadeo/Desktop/UTN/materias/IO/estudio/practica-4-sensibilidad-dualidad.md)`.
   Los espacios de la ruta van como `%20`. Aplica solo al chat; dentro de la
   wiki se siguen usando `[[wikilinks]]` y rutas relativas.
+- No abras los archivos generados (PDF, docx, etc.) con `open` ni en el
+  navegador: pasá solo el enlace clickeable y los abro yo.
 
 ## TONO
 Directo, riguroso, sin adornos. Si algo está mal resuelto, decilo claro
