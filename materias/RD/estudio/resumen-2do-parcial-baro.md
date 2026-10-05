@@ -1,15 +1,10 @@
-# Redes de Datos — Resumen 2do Parcial práctico (Prof. Baró)
+# REDES DE DATOS - Práctica
 
-> **Fecha:** miércoles **21/10** (grupo Aguirre–Fassine), en el horario y aula de siempre. **Si llegás 10 minutos tarde, no rendís.** La teoría de Medín es el martes 27/10.
->
-> **Qué entra:** solo **Capa de Red**. Del Tanenbaum, cap. 5: **5.1**, **5.2.1–5.2.5**, **5.6.1–5.6.2**, **5.6.4**, **5.6.6–5.6.7**. Además, el apunte y la práctica de máscaras de Baró, y su guía de estudio.
-> **No entran:** congestión, MPLS, broadcast/multicast/anycast, jerarquías, móviles, ad-hoc.
->
-> **Cómo leer este resumen:** todo sale de la wiki (`RD.md`, Unidad 2) y de las fuentes de Baró, **salvo** lo marcado con **[Tanenbaum]**. Eso lo completé con conocimiento general del libro, porque ninguna de tus fuentes lo desarrolla. Son las preguntas de ruteo de la guía sobre tabla de ruteo, ruta default, SA, IGP, áreas, LSP y grafo. Si conseguís el PDF del libro (Baró lo ofrece por mail), conviene confirmarlo.
->
-> **Prioridad:** (1) **subnetting**, que es la parte práctica; (2) la **guía con preguntas y respuestas** (sección 7); (3) el header IP, ARP e ICMP; (4) ruteo, OSPF y BGP.
+**Comisión 403 Germán Baró**
 
-## 1. Servicios de la capa de red (Tanenbaum 5.1)
+**Resumen para segundo parcial**
+
+## Servicios de la capa de red
 
 La capa 3 lleva **paquetes** del origen al destino final atravesando varias redes. Su elemento principal es el **router**, que guarda el paquete, mira la IP destino y lo despacha por la línea de salida que indica su tabla (*store-and-forward*).
 
@@ -25,36 +20,36 @@ La capa 3 lleva **paquetes** del origen al destino final atravesando varias rede
 
 **IP es sin conexión y no confiable ("best effort"):** los datagramas pueden perderse, duplicarse o llegar desordenados. La confiabilidad la pone la capa de transporte (TCP).
 
-## 2. Ruteo (Tanenbaum 5.2.1–5.2.5)
+## Ruteo
 
 ### Conceptos base
-- **Ruteo [Tanenbaum]:** es decidir **por qué línea de salida** se reenvía cada paquete para que llegue a destino. Se distinguen dos tareas: el **reenvío** (*forwarding*), que es consultar la tabla para cada paquete que llega, y el **ruteo** propiamente dicho, que es **armar y actualizar la tabla** con un **algoritmo de ruteo**.
-- **Tabla de ruteo [Tanenbaum]:** una fila por destino (red/prefijo) con la **línea de salida o próximo salto** y la **métrica** de esa ruta. **La arma cada router**: con un algoritmo dinámico, intercambiando información con los demás (RIP, OSPF, BGP), o la carga a mano el administrador (ruteo estático).
-- **Ruta default [Tanenbaum]:** la entrada que se usa **cuando el destino no coincide con ninguna otra** (`0.0.0.0/0`). Existe porque un router no puede conocer todas las redes de Internet: lo desconocido se manda "hacia arriba", al router del ISP o de salida. Un host hace lo mismo con su **gateway** (puerta de enlace).
+- **Ruteo:** *(Tanenbaum)* es decidir **por qué línea de salida** se reenvía cada paquete para que llegue a destino. Se distinguen dos tareas: el **reenvío** (*forwarding*), que es consultar la tabla para cada paquete que llega, y el **ruteo** propiamente dicho, que es **armar y actualizar la tabla** con un **algoritmo de ruteo**.
+- **Tabla de ruteo:** *(Tanenbaum)* una fila por destino (red/prefijo) con la **línea de salida o próximo salto** y la **métrica** de esa ruta. **La arma cada router**: con un algoritmo dinámico, intercambiando información con los demás (RIP, OSPF, BGP), o la carga a mano el administrador (ruteo estático).
+- **Ruta default:** *(Tanenbaum)* la entrada que se usa **cuando el destino no coincide con ninguna otra** (`0.0.0.0/0`). Existe porque un router no puede conocer todas las redes de Internet: lo desconocido se manda "hacia arriba", al router del ISP o de salida. Un host hace lo mismo con su **gateway** (puerta de enlace).
 - **Estático vs dinámico:** las rutas **estáticas** (no adaptativas) se configuran a mano y no reaccionan a cambios. Las **dinámicas** (adaptativas) se recalculan solas cuando cambia la topología o el tráfico; son las que usan los routers de Internet.
 - **Métrica:** es el **costo** asignado a un enlace o a una ruta, que sirve para comparar caminos y elegir el mejor. Ejemplos: **cantidad de saltos** (RIP), **retardo**, **ancho de banda** (OSPF: costo inversamente proporcional a la velocidad, 1 Gbps → 1 y 100 Mbps → 10), carga, distancia, costo económico.
-- **Principio de optimalidad (5.2.1):** si J está en la ruta óptima de I a K, entonces la ruta óptima de J a K va por ese mismo camino. Por eso el conjunto de rutas óptimas hacia un destino forma un árbol: el **sink tree** (árbol sumidero). No tiene bucles, así que todo paquete llega en una cantidad finita de saltos.
+- **Principio de optimalidad:** si J está en la ruta óptima de I a K, entonces la ruta óptima de J a K va por ese mismo camino. Por eso el conjunto de rutas óptimas hacia un destino forma un árbol: el **sink tree** (árbol sumidero). No tiene bucles, así que todo paquete llega en una cantidad finita de saltos.
 
 ### Algoritmos
-- **Camino más corto, Dijkstra (5.2.2):** cada nodo se etiqueta con su distancia al origen. Se elige el nodo provisorio de menor etiqueta, se lo hace permanente y desde él se relajan sus vecinos. Ejemplo del teórico: la ruta A→D más corta es ABEFHD, con costo 10.
-- **Inundación (*flooding*, 5.2.3):** cada paquete se reenvía **por todas las líneas menos por la que llegó**. Para que no se multiplique sin fin se usan dos mecanismos: un **contador de saltos** en el header, que baja en cada router y descarta el paquete al llegar a 0, y un **número de secuencia** por origen para descartar duplicados. Es muy robusta (si existe un camino, lo encuentra), siempre encuentra también el camino más corto y sirve de base para otros algoritmos: estado de enlace la usa para distribuir sus paquetes. Su costo es mucho tráfico duplicado.
+- **Camino más corto, Dijkstra:** cada nodo se etiqueta con su distancia al origen. Se elige el nodo provisorio de menor etiqueta, se lo hace permanente y desde él se relajan sus vecinos. Ejemplo del teórico: la ruta A→D más corta es ABEFHD, con costo 10.
+- **Inundación (*flooding*):** cada paquete se reenvía **por todas las líneas menos por la que llegó**. Para que no se multiplique sin fin se usan dos mecanismos: un **contador de saltos** en el header, que baja en cada router y descarta el paquete al llegar a 0, y un **número de secuencia** por origen para descartar duplicados. Es muy robusta (si existe un camino, lo encuentra), siempre encuentra también el camino más corto y sirve de base para otros algoritmos: estado de enlace la usa para distribuir sus paquetes. Su costo es mucho tráfico duplicado.
 
-**Vector distancia (5.2.4), o Bellman-Ford:** cada router tiene una tabla, el "vector", con la **mejor distancia conocida a cada destino y por qué línea**. Periódicamente **la intercambia solo con sus vecinos** y recalcula: distancia al destino = mínimo, sobre cada vecino, de (distancia que informa ese vecino + costo hasta ese vecino). Así funcionaban ARPANET y luego **RIP**.
+**Vector distancia, o Bellman-Ford:** cada router tiene una tabla, el "vector", con la **mejor distancia conocida a cada destino y por qué línea**. Periódicamente **la intercambia solo con sus vecinos** y recalcula: distancia al destino = mínimo, sobre cada vecino, de (distancia que informa ese vecino + costo hasta ese vecino). Así funcionaban ARPANET y luego **RIP**.
 
 - Ejemplo del teórico: J tiene vecinos A (8), I (10), H (12) y K (6). Para llegar a G conviene ir **por H, con 18**.
 - **Cuenta a infinito:** las buenas noticias se propagan rápido; las malas, lento. Cuando cae un enlace, los vecinos se siguen informando rutas viejas y suman de a 1. Se mitiga fijando un "infinito" chico (en RIP, 16 saltos).
 
-**Estado de enlace (5.2.5):** lo usan **OSPF** e IS-IS. **Los 5 pasos** son pregunta de la guía:
+**Estado de enlace:** lo usan **OSPF** e IS-IS. **Los 5 pasos** son pregunta de la guía:
 
 1. **Descubrir a los vecinos** y sus direcciones, con paquetes **HELLO**.
 2. **Medir el costo** (la métrica) a cada vecino.
 3. **Armar un paquete de estado de enlace** (LSP) con lo aprendido.
 4. **Enviarlo a todos los routers** por inundación, y recibir los de todos los demás.
 5. **Calcular la ruta más corta** a cada router con **Dijkstra**.
-- **Composición del LSP [Tanenbaum]:** la **identidad del emisor**, un **número de secuencia** (para descartar duplicados y paquetes viejos), una **edad** (se decrementa y el paquete expira al llegar a 0) y la **lista de vecinos con el costo a cada uno**.
-- **El grafo [Tanenbaum]:** con los LSP de todos, **cada router arma el grafo completo de la topología**: nodos = routers, aristas = enlaces con su costo. Sobre ese grafo corre Dijkstra **localmente** para obtener su sink tree y llenar su tabla. Sirve para que cada router calcule rutas óptimas por su cuenta, con información completa.
+- **Composición del LSP:** *(Tanenbaum)* la **identidad del emisor**, un **número de secuencia** (para descartar duplicados y paquetes viejos), una **edad** (se decrementa y el paquete expira al llegar a 0) y la **lista de vecinos con el costo a cada uno**.
+- **El grafo:** *(Tanenbaum)* con los LSP de todos, **cada router arma el grafo completo de la topología**: nodos = routers, aristas = enlaces con su costo. Sobre ese grafo corre Dijkstra **localmente** para obtener su sink tree y llenar su tabla. Sirve para que cada router calcule rutas óptimas por su cuenta, con información completa.
 
-### Vector distancia vs estado de enlace (pregunta de la guía)
+### Vector distancia vs estado de enlace
 | | Vector distancia (RIP) | Estado de enlace (OSPF) |
 |---|---|---|
 | Qué informa | **Toda su tabla** (cómo ve a todos) | **Solo sus enlaces** (a sus vecinos y su costo) |
@@ -64,9 +59,11 @@ La capa 3 lleva **paquetes** del origen al destino final atravesando varias rede
 | Convergencia | Lenta; sufre la cuenta a infinito | **Rápida**, sin cuenta a infinito |
 | Recursos | Pocos | Más memoria y procesamiento |
 
-## 3. Protocolo IP (Tanenbaum 5.6.1)
+## Protocolo IP
 
-### Header IPv4: 20 bytes fijos + hasta 40 de opciones (en filas de 32 bits)
+### Header IPv4
+
+Tiene **20 bytes fijos** más hasta **40 de opciones**, organizados en filas de 32 bits.
 ```
  0       4       8              16    19                    31
 +-------+-------+---------------+-----+---------------------+
@@ -126,9 +123,9 @@ Frag  Long.total  Datos       Desplaz.(bytes)  Campo(÷8)  MF
 2     620         600–1199    600              75         1
 3     220         1200–1399   1200             150        0
 ```
-⚠️ El apunte escribe el desplazamiento en **bytes**. El valor real del campo es ese número **dividido 8**.
+**Ojo:** El apunte escribe el desplazamiento en **bytes**. El valor real del campo es ese número **dividido 8**.
 
-## 4. Direcciones IP y subnetting (Tanenbaum 5.6.2) — el núcleo práctico
+## Direcciones IP y subnetting
 
 ### Clases y máscaras por defecto
 | Clase | Primeros bits | 1er byte | Formato | Máscara | Hosts por red |
@@ -156,7 +153,7 @@ Frag  Long.total  Datos       Desplaz.(bytes)  Campo(÷8)  MF
 | red + host en 1 | Broadcast a **esa** red |
 | `127.x.x.x` | **Loopback**: prueba la pila TCP/IP propia, no la placa de red |
 
-### Método (lo que se calcula en el parcial)
+### Método de cálculo
 ```
 Red        = IP AND máscara
 Broadcast  = IP OR (NOT máscara)          (= red con todos los bits de host en 1)
@@ -199,9 +196,9 @@ Máscara           /    Subredes  Hosts  Salto
 
 **Cómo decide un host:** aplica su máscara a la IP destino. Si da su misma red, **entrega directo** (ARP al destino). Si no, se lo manda al **gateway** (ARP al gateway).
 
-## 5. Protocolos de control (Tanenbaum 5.6.4) y comandos de red
+## Protocolos de control y comandos de red
 
-### ICMP — capa 3
+### ICMP
 - **Informa errores y transporta mensajes de control.** No decide nada: eso queda para las capas superiores. Viaja **dentro de un datagrama IP** (Protocolo = 1), pero **es de capa 3 (red)**.
 - Si un mensaje ICMP se pierde, **no se genera otro ICMP** por eso.
 - También es el protocolo de control que se usa con las opciones **registro de ruta** y **marca de tiempo** (`ping -r`, tipos 13/14).
@@ -219,7 +216,7 @@ Máscara           /    Subredes  Hosts  Salto
 - **Error:** la pila TCP/IP del host está mal. Se prueba con `ping 127.0.0.1`.
 - **TRACERT / traceroute** manda paquetes con **TTL = 1, 2, 3…** (hasta 30). Cada router que lleva el TTL a 0 devuelve un **ICMP 11** con su IP, y así se arma el camino salto a salto. **Windows usa ICMP echo y Unix usa UDP.**
 
-### ARP — de IP a MAC
+### ARP: de IP a MAC
 - **Para qué** (pregunta de la guía): para conocer la **MAC** que corresponde a una IP **dentro de la LAN**. La trama Ethernet necesita la MAC de destino y el datagrama solo trae la IP. Si el destino está en otra red, se averigua la MAC del **gateway**.
 - **Cómo funciona:** la pregunta va en **broadcast** ("¿quién tiene la IP X?") y lleva la IP y la MAC de quien pregunta. La respuesta vuelve **directa** (unicast).
 - **Caché ARP:** guarda los pares IP↔MAC con un **tiempo de vida**, para no preguntar de nuevo. Como todos escuchan la pregunta, todos pueden anotar a quien preguntó.
@@ -228,31 +225,31 @@ Máscara           /    Subredes  Hosts  Salto
 
 ### DHCP y BOOTP
 - **DHCP:** al arrancar, el host pide configuración por **broadcast**. El servidor le asigna IP con un **tiempo de arriendo** y además le pasa **máscara, gateway y DNS**.
-- **BOOTP** es su antecesor. *[Conocimiento general]* Asignaba la configuración al bootear desde una tabla **fija** que cargaba el administrador, sin arriendo. DHCP lo reemplazó (junto con RARP).
+- **BOOTP** es su antecesor. *(conocimiento general)* Asignaba la configuración al bootear desde una tabla **fija** que cargaba el administrador, sin arriendo. DHCP lo reemplazó (junto con RARP).
 
-## 6. OSPF y BGP (Tanenbaum 5.6.6–5.6.7)
+## OSPF y BGP
 
 ### Sistemas Autónomos e IGP
-**Sistema Autónomo (SA) [Tanenbaum]:** una red o conjunto de redes **bajo una única administración** (un ISP, una empresa, una universidad), con **su propia política de ruteo**. Se identifica con un **número de SA**.
+**Sistema Autónomo (SA):** *(Tanenbaum)* una red o conjunto de redes **bajo una única administración** (un ISP, una empresa, una universidad), con **su propia política de ruteo**. Se identifica con un **número de SA**.
 
 - **Cómo está conformado:** **routers internos**, que rutean dentro del SA con un **IGP**, y **routers frontera** (*border*), que lo conectan con otros SA usando **BGP**. Internet es una interconexión de SA.
 
-**IGP (Interior Gateway Protocol) [Tanenbaum]:** protocolo de ruteo **intradominio**, que trabaja **dentro de un SA**.
+**IGP (Interior Gateway Protocol):** *(Tanenbaum)* protocolo de ruteo **intradominio**, que trabaja **dentro de un SA**.
 
 - **Función:** calcular las rutas **más eficientes** (de menor costo) entre las redes del SA y adaptarse rápido a los cambios. Como hay un solo administrador, **no hay políticas**: solo importa la eficiencia.
 - **Ejemplos:** **RIP**, **OSPF**, IS-IS.
 - Su contraparte entre SA es el **EGP**, protocolo **interdominio**: **BGP**.
-- **RIP:** vector distancia, **IGP** (dentro de un SA), con la **cantidad de saltos** como métrica. Sirve para **redes chicas**: 16 saltos = infinito *[conocimiento general]*. Sufre la cuenta a infinito, por eso OSPF lo reemplazó en redes medianas y grandes.
+- **RIP:** vector distancia, **IGP** (dentro de un SA), con la **cantidad de saltos** como métrica. Sirve para **redes chicas**: 16 saltos = infinito *(conocimiento general)*. Sufre la cuenta a infinito, por eso OSPF lo reemplazó en redes medianas y grandes.
 
-### OSPF (Open Shortest Path First)
+### OSPF
 **Principios:**
 
-- Es un IGP de **estado de enlace**, con los 5 pasos de la sección 2 y Dijkstra. **Abierto**: estándar publicado (RFC 2328).
+- Es un IGP de **estado de enlace**, con los 5 pasos explicados en Ruteo y Dijkstra. **Abierto**: estándar publicado (RFC 2328).
 - Admite **varias métricas** (distancia, retardo…).
 - Se **adapta rápido** a los cambios de topología.
 - Hace **balanceo de carga** entre caminos de igual costo (**ECMP**).
 - Soporta **jerarquía en áreas** y **autenticación** de los mensajes.
-- Mensajes: **Hello** (descubrir vecinos) y **Link State Update** (enviar el estado). *[Tanenbaum]* También Link State Ack, Database Description y Link State Request.
+- Mensajes: **Hello** (descubrir vecinos) y **Link State Update** (enviar el estado). *(Tanenbaum)* También Link State Ack, Database Description y Link State Request.
 - En cada LAN se elige un **router designado** (más un backup) que habla por todos; así no hace falta que cada par de routers se comunique.
 
 **Ventajas sobre vector distancia:**
@@ -263,42 +260,40 @@ Máscara           /    Subredes  Hosts  Salto
 - Hace **balanceo de carga**.
 - **Escala** gracias a las áreas.
 - Solo envía **cambios**, no la tabla entera.
-- **Qué quiere decir que reconoce jerarquías [Tanenbaum]:** el SA se divide en **áreas**, y **cada router conoce en detalle solo la topología de su área**. Del resto conoce solo resúmenes. El tráfico entre áreas **pasa siempre por el backbone**: área origen → router de borde → backbone → router de borde → área destino. Con esto se achican las tablas y los cálculos.
+- **Qué quiere decir que reconoce jerarquías:** *(Tanenbaum)* el SA se divide en **áreas**, y **cada router conoce en detalle solo la topología de su área**. Del resto conoce solo resúmenes. El tráfico entre áreas **pasa siempre por el backbone**: área origen → router de borde → backbone → router de borde → área destino. Con esto se achican las tablas y los cálculos.
 
-**Área y tipos de área [Tanenbaum]:** un área es una **parte del SA**, una red o un grupo de redes contiguas.
+**Área y tipos de área:** *(Tanenbaum)* un área es una **parte del SA**, una red o un grupo de redes contiguas.
 
 - **Backbone (área 0):** las conecta a todas. Toda área tiene que estar conectada al backbone.
 - **Stub (área terminal):** tiene **una sola salida**, así que no recibe las rutas externas y usa una **ruta default**.
 - **Áreas comunes:** las demás.
-- **Routers** *[Tanenbaum]*: **internos** (todo dentro de un área), **de borde de área** (conectan su área con el backbone), **del backbone** y **de frontera del SA** (hablan con otros SA).
+- **Routers** *(Tanenbaum)*: **internos** (todo dentro de un área), **de borde de área** (conectan su área con el backbone), **del backbone** y **de frontera del SA** (hablan con otros SA).
 
-### BGP (Border Gateway Protocol)
+### BGP
 - **En qué consiste:** es el protocolo de ruteo **interdominio**, **entre Sistemas Autónomos**. Lo corren los **routers frontera**, que establecen **conexiones TCP** entre sí.
 - **Entorno:** Internet a nivel de SA (ISP con ISP, empresas *multihomed* con sus proveedores).
 - **Filosofía: ruteo por políticas** (*policy-based*). No importa solo la ruta más corta, sino **qué tráfico se acepta llevar y para quién**, por razones económicas, de seguridad o políticas. Por ejemplo, no hacer de tránsito gratis para un competidor. Se distinguen relaciones **cliente–proveedor** (se paga el tránsito) y **peering** (tráfico recíproco gratis).
 - **Algoritmo: vector de ruta** (*path vector*). Cada router anuncia la **ruta completa**, la lista de SA que atraviesa, y no solo la distancia. Así **detecta bucles** (descarta toda ruta que ya lo contiene) y **evita la cuenta a infinito**.
 
-## 7. Guía de estudio de Baró — preguntas y respuestas
-
-> Las preguntas son **textuales** de la guía de Baró (`GUIA DE ESTUDIO DE CAPA DE RED.docx`). Lo marcado **[Tanenbaum]** no está en tus fuentes: lo completé con el contenido del libro.
+## Preguntas de la guía de estudio
 
 ### Protocolo IP – Direcciones IP – Subnetting
 
-**P1. ¿Qué campo/subcampo de la Cabecera IP indica la prioridad del datagrama?**
+**1) ¿Qué campo/subcampo de la Cabecera IP indica la prioridad del datagrama?**
 
-**R:** El subcampo **Prioridad** (o Precedencia), que ocupa los **3 primeros bits del campo Tipo de Servicio**. Va de **0** (prioridad baja) a **7** (prioridad máxima).
+El subcampo **Prioridad** (o Precedencia), que ocupa los **3 primeros bits del campo Tipo de Servicio**. Va de **0** (prioridad baja) a **7** (prioridad máxima).
 
-**P2. El indicador "T" dentro del campo Tipo de Servicio del Datagrama IP tiene una finalidad específica, ¿cuál es?**
+**2) El indicador "T" dentro del campo Tipo de Servicio del Datagrama IP tiene una finalidad específica, ¿cuál es?**
 
-**R:** El bit **T (*Throughput*)** le pide a los routers **alto rendimiento**: que el datagrama vaya por la ruta que permita transmitir **el mayor volumen de datos en el menor tiempo** ("enviar mucho"). Es una **sugerencia**: cada router puede respetarla o ignorarla. Junto con él están **D** (*Delay*: bajo retardo, "enviar rápido") y **R** (*Reliability*: alta confiabilidad, "enviar bien").
+El bit **T (*Throughput*)** le pide a los routers **alto rendimiento**: que el datagrama vaya por la ruta que permita transmitir **el mayor volumen de datos en el menor tiempo** ("enviar mucho"). Es una **sugerencia**: cada router puede respetarla o ignorarla. Junto con él están **D** (*Delay*: bajo retardo, "enviar rápido") y **R** (*Reliability*: alta confiabilidad, "enviar bien").
 
-**P3. Dentro del Campo de Opciones del datagrama IP existe una opción que se utiliza como "registro de ruta", ¿cuál es su utilidad?**
+**3) Dentro del Campo de Opciones del datagrama IP existe una opción que se utiliza como "registro de ruta", ¿cuál es su utilidad?**
 
-**R:** Cada router por el que pasa el datagrama **agrega su dirección IP** en esa opción. Así se puede saber **qué camino siguió el datagrama**, lo que sirve para **diagnosticar y depurar problemas de ruteo** (por ejemplo, detectar un desvío o un bucle). Como el espacio de opciones es de 40 bytes, entran unas **9 direcciones**.
+Cada router por el que pasa el datagrama **agrega su dirección IP** en esa opción. Así se puede saber **qué camino siguió el datagrama**, lo que sirve para **diagnosticar y depurar problemas de ruteo** (por ejemplo, detectar un desvío o un bucle). Como el espacio de opciones es de 40 bytes, entran unas **9 direcciones**.
 
-**P4. ¿Cuál es la función/utilidad de definir rangos de direcciones privadas dentro de cada clase de direcciones IP?**
+**4) ¿Cuál es la función/utilidad de definir rangos de direcciones privadas dentro de cada clase de direcciones IP?**
 
-**R:** Permiten armar **redes internas (intranets)** sin contratar direcciones públicas, que son escasas y caras. Las ventajas son:
+Permiten armar **redes internas (intranets)** sin contratar direcciones públicas, que son escasas y caras. Las ventajas son:
 - **No hay conflicto con Internet:** esos rangos nunca se asignan a hosts públicos.
 - **Se ahorran direcciones IPv4:** todas las organizaciones pueden reusar los mismos rangos.
 - **Seguridad:** los hosts privados **no son accesibles desde Internet**. Salen a través de un router, proxy o NAT con IP pública, pero nadie puede entrar a ellos desde afuera.
@@ -307,70 +302,69 @@ Los rangos son: clase A `10.0.0.0`, clase B `172.16.0.0` a `172.31.0.0` y clase 
 
 ### Protocolos de Control de Internet
 
-**P1. ¿Con qué finalidad se realiza una petición ARP dentro de una LAN?**
+**1) ¿Con qué finalidad se realiza una petición ARP dentro de una LAN?**
 
-**R:** Para obtener la **dirección física (MAC)** que corresponde a una dirección IP. El datagrama solo trae la IP destino, pero para enviarlo por la LAN hay que armar una trama con la **MAC de destino**. Si el destino está en la misma red, se pregunta por su MAC; si está en otra, se pregunta por la MAC del **router/gateway**. La petición va por **broadcast** ("¿quién tiene la IP X?") y lleva la IP y la MAC de quien pregunta. La respuesta vuelve **directa** y se guarda en la **caché ARP**.
+Para obtener la **dirección física (MAC)** que corresponde a una dirección IP. El datagrama solo trae la IP destino, pero para enviarlo por la LAN hay que armar una trama con la **MAC de destino**. Si el destino está en la misma red, se pregunta por su MAC; si está en otra, se pregunta por la MAC del **router/gateway**. La petición va por **broadcast** ("¿quién tiene la IP X?") y lleva la IP y la MAC de quien pregunta. La respuesta vuelve **directa** y se guarda en la **caché ARP**.
 
-**P2. ¿A qué capa del modelo OSI pertenece el protocolo ICMP?**
+**2) ¿A qué capa del modelo OSI pertenece el protocolo ICMP?**
 
-**R:** A la **capa 3 (red)**. Sus mensajes viajan **encapsulados dentro de datagramas IP** (campo Protocolo = 1), pero eso no lo convierte en un protocolo de capa 4: es el protocolo de control y error que acompaña a IP.
+A la **capa 3 (red)**. Sus mensajes viajan **encapsulados dentro de datagramas IP** (campo Protocolo = 1), pero eso no lo convierte en un protocolo de capa 4: es el protocolo de control y error que acompaña a IP.
 
-**P3. Cuando se utilizan las opciones de cabecera "Registro de Ruta" y "Marca de Tiempo", ¿qué protocolo de control se utiliza?**
+**3) Cuando se utilizan las opciones de cabecera "Registro de Ruta" y "Marca de Tiempo", ¿qué protocolo de control se utiliza?**
 
-**R:** **ICMP**. Las dos opciones se usan con los mensajes de **eco** de ICMP (`ping -r` hace un ping con registro de ruta), y ICMP tiene además los mensajes específicos de **marca de tiempo** (tipos **13**, solicitud, y **14**, respuesta).
+**ICMP**. Las dos opciones se usan con los mensajes de **eco** de ICMP (`ping -r` hace un ping con registro de ruta), y ICMP tiene además los mensajes específicos de **marca de tiempo** (tipos **13**, solicitud, y **14**, respuesta).
 
 ### Protocolos de Ruteo
 
-**P1. Defina el concepto de Ruteo en Internet.**
+**1) Defina el concepto de Ruteo en Internet.**
 
-**R:** Es el proceso por el cual los **routers deciden por qué línea de salida reenviar cada datagrama** para que llegue a la red destino. Para eso usan una **tabla de ruteo**, que arman y actualizan con **algoritmos y protocolos de ruteo**: un IGP dentro de cada Sistema Autónomo y BGP entre Sistemas Autónomos. Se distingue el **reenvío** (consultar la tabla para cada paquete) del **ruteo** propiamente dicho (armar la tabla). **[Tanenbaum]**
+Es el proceso por el cual los **routers deciden por qué línea de salida reenviar cada datagrama** para que llegue a la red destino. Para eso usan una **tabla de ruteo**, que arman y actualizan con **algoritmos y protocolos de ruteo**: un IGP dentro de cada Sistema Autónomo y BGP entre Sistemas Autónomos. Se distingue el **reenvío** (consultar la tabla para cada paquete) del **ruteo** propiamente dicho (armar la tabla). *(Tanenbaum)*
 
-**P2. ¿En qué consiste una Tabla de Ruteo? ¿Quién la arma?**
+**2) ¿En qué consiste una Tabla de Ruteo? ¿Quién la arma?**
 
-**R:** Es la tabla del router que asocia cada **red destino** (prefijo) con la **línea de salida o próximo salto** por donde hay que mandar el paquete, y con la **métrica** de esa ruta. La arma **cada router**: dinámicamente, ejecutando un protocolo de ruteo (RIP, OSPF, BGP) que intercambia información con los demás routers, o el **administrador a mano**, si las rutas son estáticas. **[Tanenbaum]**
+Es la tabla del router que asocia cada **red destino** (prefijo) con la **línea de salida o próximo salto** por donde hay que mandar el paquete, y con la **métrica** de esa ruta. La arma **cada router**: dinámicamente, ejecutando un protocolo de ruteo (RIP, OSPF, BGP) que intercambia información con los demás routers, o el **administrador a mano**, si las rutas son estáticas. *(Tanenbaum)*
 
-**P3. ¿Qué es una ruta default? ¿Por qué motivo existe dicha entrada dentro de la Tabla de Ruteo?**
+**3) ¿Qué es una ruta default? ¿Por qué motivo existe dicha entrada dentro de la Tabla de Ruteo?**
 
-**R:** Es la entrada que se usa **cuando la red destino no coincide con ninguna otra entrada** de la tabla. Se escribe `0.0.0.0/0`. Existe porque **un router no puede tener en su tabla todas las redes de Internet**: lo que no conoce lo manda a un router "de salida" (el del ISP), que sí sabe cómo seguir. Un host hace lo mismo con su **puerta de enlace (gateway)**. **[Tanenbaum]**
+Es la entrada que se usa **cuando la red destino no coincide con ninguna otra entrada** de la tabla. Se escribe `0.0.0.0/0`. Existe porque **un router no puede tener en su tabla todas las redes de Internet**: lo que no conoce lo manda a un router "de salida" (el del ISP), que sí sabe cómo seguir. Un host hace lo mismo con su **puerta de enlace (gateway)**. *(Tanenbaum)*
 
-**P4. ¿En qué consiste un Sistema Autónomo? ¿Cómo está conformado? Describa.**
+**4) ¿En qué consiste un Sistema Autónomo? ¿Cómo está conformado? Describa.**
 
-**R:** Es una red o un conjunto de redes **bajo una única administración** (un ISP, una empresa, una universidad), con **su propia política de ruteo**, identificado por un **número de SA**. Internet es la interconexión de miles de Sistemas Autónomos. Está formado por:
+Es una red o un conjunto de redes **bajo una única administración** (un ISP, una empresa, una universidad), con **su propia política de ruteo**, identificado por un **número de SA**. Internet es la interconexión de miles de Sistemas Autónomos. Está formado por:
 - **Routers internos**, que rutean dentro del SA usando un **IGP** (RIP, OSPF).
 - **Routers frontera (*border*)**, que conectan el SA con otros SA usando **BGP**.
 
-**[Tanenbaum]**
+*(Tanenbaum)*
 
-**P5. ¿Qué es un IGP? Funciones que cumple y entorno de aplicación.**
+**5) ¿Qué es un IGP? Funciones que cumple y entorno de aplicación.**
 
-**R:** Un **IGP (Interior Gateway Protocol)** es un protocolo de ruteo **interior o intradominio**.
+Un **IGP (Interior Gateway Protocol)** es un protocolo de ruteo **interior o intradominio**.
 - **Funciones:** calcular las **rutas de menor costo** entre las redes del SA, mantener actualizadas las tablas y **adaptarse rápido a los cambios** de topología. Como hay un solo administrador, no maneja políticas: solo busca **eficiencia**.
 - **Entorno:** **dentro de un Sistema Autónomo**.
 - **Ejemplos:** **RIP**, **OSPF**, IS-IS.
 
-Su contraparte entre Sistemas Autónomos es el protocolo exterior, **BGP**. **[Tanenbaum]**
+Su contraparte entre Sistemas Autónomos es el protocolo exterior, **BGP**. *(Tanenbaum)*
 
-**P6. ¿Qué diferencia operativa existe entre un protocolo de Vector Distancia y uno de Estado de Enlace?**
+**6) ¿Qué diferencia operativa existe entre un protocolo de Vector Distancia y uno de Estado de Enlace?**
 
-**R:**
 - **Vector distancia (RIP):** cada router envía **su tabla completa** (su distancia a todos los destinos) **solo a sus vecinos**, de forma periódica. Ningún router conoce la topología; cada uno recalcula con Bellman-Ford. **Converge lento** y sufre el problema de la **cuenta a infinito**.
 - **Estado de enlace (OSPF):** cada router envía **solo el estado de sus propios enlaces** (sus vecinos y el costo a cada uno) **a todos los routers**, por inundación. Así **todos conocen la topología completa** y cada uno calcula sus rutas con **Dijkstra**. **Converge rápido** y no tiene cuenta a infinito, a cambio de **más memoria y procesamiento**.
 
-**P7. ¿Qué es una Métrica y para qué sirve? Dé ejemplos.**
+**7) ¿Qué es una Métrica y para qué sirve? Dé ejemplos.**
 
-**R:** Es el **valor de costo** que se le asigna a un enlace o a una ruta. Sirve para **comparar caminos y elegir el mejor** (el de menor costo total). Ejemplos:
+Es el **valor de costo** que se le asigna a un enlace o a una ruta. Sirve para **comparar caminos y elegir el mejor** (el de menor costo total). Ejemplos:
 - **Cantidad de saltos** (RIP).
 - **Retardo**.
 - **Ancho de banda**: en OSPF el costo es inversamente proporcional a la velocidad (1 Gbps → 1; 100 Mbps → 10).
 - **Carga** del enlace, **distancia**, **costo económico**.
 
-**P8. ¿En qué entorno trabaja el protocolo RIP?**
+**8) ¿En qué entorno trabaja el protocolo RIP?**
 
-**R:** **Dentro de un Sistema Autónomo**: es un **IGP** de **vector distancia**, pensado para **redes chicas**. Usa como métrica la **cantidad de saltos**, con un máximo de **15** (16 se toma como infinito), y por eso no sirve para redes grandes. Por su convergencia lenta fue reemplazado por OSPF en redes medianas y grandes.
+**Dentro de un Sistema Autónomo**: es un **IGP** de **vector distancia**, pensado para **redes chicas**. Usa como métrica la **cantidad de saltos**, con un máximo de **15** (16 se toma como infinito), y por eso no sirve para redes grandes. Por su convergencia lenta fue reemplazado por OSPF en redes medianas y grandes.
 
-**P9. ¿Qué principios de funcionamiento tiene el OSPF? ¿Cuáles son las ventajas sobre los protocolos de Vector Distancia?**
+**9) ¿Qué principios de funcionamiento tiene el OSPF? ¿Cuáles son las ventajas sobre los protocolos de Vector Distancia?**
 
-**R:** Principios de funcionamiento:
+Principios de funcionamiento:
 - Es un IGP de **estado de enlace** y un **estándar abierto** (RFC 2328).
 - Descubre a sus vecinos con mensajes **Hello**, mide el costo de cada enlace, **inunda** paquetes de estado de enlace (*Link State Update*) y calcula las rutas con **Dijkstra**.
 - Admite **varias métricas** y hace **balanceo de carga** entre caminos de igual costo (**ECMP**).
@@ -385,53 +379,51 @@ Ventajas sobre vector distancia:
 - **Escala** a redes grandes gracias a las áreas.
 - Solo envía **cambios**, no la tabla entera.
 
-**P10. ¿Qué quiere decir que OSPF reconoce jerarquías de ruteo?**
+**10) ¿Qué quiere decir que OSPF reconoce jerarquías de ruteo?**
 
-**R:** Que divide el Sistema Autónomo en **áreas** conectadas a un **área backbone (área 0)**, en dos niveles. **Cada router conoce en detalle solo la topología de su área**; del resto conoce solo resúmenes. El tráfico entre áreas **siempre pasa por el backbone**: área origen → router de borde → backbone → router de borde → área destino. Así se **achican las tablas, los mensajes y el cálculo** de cada router. **[Tanenbaum]**
+Que divide el Sistema Autónomo en **áreas** conectadas a un **área backbone (área 0)**, en dos niveles. **Cada router conoce en detalle solo la topología de su área**; del resto conoce solo resúmenes. El tráfico entre áreas **siempre pasa por el backbone**: área origen → router de borde → backbone → router de borde → área destino. Así se **achican las tablas, los mensajes y el cálculo** de cada router. *(Tanenbaum)*
 
-**P11. ¿Qué es un área dentro de un Sistema Autónomo y qué tipos de áreas existen?**
+**11) ¿Qué es un área dentro de un Sistema Autónomo y qué tipos de áreas existen?**
 
-**R:** Un área es una **porción del SA**: una red o un grupo de redes contiguas con su propia topología interna, que los routers de otras áreas no ven en detalle. Tipos:
+Un área es una **porción del SA**: una red o un grupo de redes contiguas con su propia topología interna, que los routers de otras áreas no ven en detalle. Tipos:
 - **Backbone (área 0):** el área central que **conecta a todas las demás**. Toda área tiene que estar conectada al backbone.
 - **Área stub (terminal):** tiene **una sola salida**, por eso no recibe las rutas externas y usa una **ruta default** para salir.
 - **Áreas comunes:** las demás, conectadas al backbone.
 
-Según su ubicación, los routers pueden ser **internos**, **de borde de área**, **del backbone** o **de frontera del SA**. **[Tanenbaum]**
+Según su ubicación, los routers pueden ser **internos**, **de borde de área**, **del backbone** o **de frontera del SA**. *(Tanenbaum)*
 
-**P12. ¿En qué consiste el protocolo BGP? ¿En qué entorno se aplica? ¿Qué filosofía de ruteo utiliza?**
+**12) ¿En qué consiste el protocolo BGP? ¿En qué entorno se aplica? ¿Qué filosofía de ruteo utiliza?**
 
-**R:**
 - **En qué consiste:** es el protocolo de ruteo **exterior o interdominio** (*Border Gateway Protocol*). Lo corren los **routers frontera**, que intercambian rutas sobre **conexiones TCP**.
 - **Entorno:** **entre Sistemas Autónomos**, es decir, Internet a nivel de ISP y de organizaciones conectadas a uno o varios proveedores (*multihoming*).
 - **Filosofía:** **ruteo por políticas**. No busca solo la ruta más corta, sino decidir **qué tráfico acepta llevar y para quién**, por razones económicas, de seguridad o políticas. Por ejemplo, no ser tránsito gratis de un competidor. Se distinguen las relaciones **cliente–proveedor** (se paga el tránsito) y **peering** (intercambio recíproco gratis).
 - **Algoritmo:** **vector de ruta** (*path vector*). Cada router anuncia la **ruta completa** (la lista de SA que atraviesa); así **detecta bucles** y evita la cuenta a infinito.
 
-**P13. ¿Cómo están compuestos los paquetes de Estado de Enlace en OSPF?**
+**13) ¿Cómo están compuestos los paquetes de Estado de Enlace en OSPF?**
 
-**R:** Cada paquete de estado de enlace (LSP) contiene:
+Cada paquete de estado de enlace (LSP) contiene:
 - La **identidad del router emisor**.
 - Un **número de secuencia**, para descartar duplicados y paquetes viejos.
 - Una **edad**, que se va decrementando; el paquete se descarta al llegar a 0.
 - La **lista de sus vecinos con el costo (métrica) a cada uno**.
 
-**[Tanenbaum]**
+*(Tanenbaum)*
 
-**P14. ¿En qué consiste un Grafo en OSPF y con qué fines se realiza?**
+**14) ¿En qué consiste un Grafo en OSPF y con qué fines se realiza?**
 
-**R:** Con los paquetes de estado de enlace que recibe de todos los routers, **cada router arma un grafo de la topología completa**: los **nodos** son los routers y las **aristas** son los enlaces, con su costo. Ese grafo se arma para **calcular sobre él, con Dijkstra, la ruta más corta a cada destino** y así llenar la tabla de ruteo. Cada router lo calcula **localmente** y con información completa. **[Tanenbaum]**
+Con los paquetes de estado de enlace que recibe de todos los routers, **cada router arma un grafo de la topología completa**: los **nodos** son los routers y las **aristas** son los enlaces, con su costo. Ese grafo se arma para **calcular sobre él, con Dijkstra, la ruta más corta a cada destino** y así llenar la tabla de ruteo. Cada router lo calcula **localmente** y con información completa. *(Tanenbaum)*
 
-**P15. ¿Cuáles son los 5 pasos que ejecuta el OSPF para aprender y difundir rutas óptimas?**
+**15) ¿Cuáles son los 5 pasos que ejecuta el OSPF para aprender y difundir rutas óptimas?**
 
-**R:**
 1. **Descubrir a sus vecinos** y conocer sus direcciones (paquetes Hello).
 2. **Medir el costo** (la métrica) del enlace a cada vecino.
 3. **Armar un paquete de estado de enlace** con todo lo aprendido.
 4. **Enviar ese paquete a todos los routers** por inundación, y recibir los de todos los demás.
 5. **Calcular la ruta más corta** a cada router con **Dijkstra**.
 
-## 8. Ejercicios para practicar (con respuestas)
+## Ejercicios de práctica
 
-> Intentalos antes de mirar la respuesta. Están verificados con Python (módulo `ipaddress`).
+Intentalos antes de mirar las respuestas, que están al final de la sección.
 
 **E1.** 172.16.45.200 / 255.255.240.0. ¿Red, broadcast, rango de hosts y cantidad?
 **E2.** 10.25.130.7 / 255.255.255.192. ¿Red y broadcast?
@@ -462,7 +454,7 @@ Frag  Long.total  Datos   Campo desplaz.  MF
   Todos los fragmentos llevan la misma Identificación y reensambla solo el destino.
 - **E9.** Es un **ICMP tipo 3, "destino inaccesible"**, y lo genera el **gateway** (192.168.0.1) porque no tiene camino hacia esa red. Revisá la configuración IP, la máscara y el gateway del host, y la tabla del router.
 
-## Datos de memoria
+## Datos para memorizar
 - Header IPv4: **20 B** mínimo, **60 B** máximo. Longitud total máxima **65.535**. TTL máximo **255**. Desplazamiento en **unidades de 8 B**.
 - Campo Protocolo: **1 ICMP · 2 IGMP · 6 TCP · 17 UDP**.
 - Tipos ICMP: **0/8** eco · **3** inaccesible · **4** source quench · **5** redirect · **11** tiempo excedido · **12** parámetro · **13/14** marca de tiempo.
@@ -470,3 +462,11 @@ Frag  Long.total  Datos   Campo desplaz.  MF
 - MTU Ethernet **1500**. Trama Ethernet: MAC de **6 B** cada una.
 - **RIP** = vector distancia, saltos, IGP · **OSPF** = estado de enlace, Dijkstra, áreas, IGP · **BGP** = vector de ruta, políticas, entre SA, sobre TCP.
 - `tracert` (Windows) usa **ICMP**; `traceroute` (Unix) usa **UDP**. Los dos se basan en el **TTL** y en la respuesta **ICMP 11**.
+
+## Fuentes
+
+- Apunte de Baró, *Apunte 2do parcial (Capa de Red)*: direcciones IP, máscaras, datagrama IP, fragmentación, ARP, ICMP, ping y tracert.
+- Práctica de Baró, *Direcciones IP - Máscaras de Subred*.
+- Guía de estudio de Baró, *Guía de estudio de Capa de Red*.
+- Tanenbaum y Wetherall, *Redes de Computadoras*, 5ª ed., cap. 5 (5.1, 5.2.1–5.2.5, 5.6.1–5.6.2, 5.6.4, 5.6.6–5.6.7).
+- Los temas marcados *(Tanenbaum)* no están desarrollados en el apunte de Baró: se completaron con el libro.
