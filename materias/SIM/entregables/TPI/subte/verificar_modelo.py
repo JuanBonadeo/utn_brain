@@ -103,7 +103,7 @@ static class Pasajero {
  double tEntradaColaPed, tIngresoSistemaPed, tInicioServicioPed, servicioAsignadoPed, y;
  double getY(){return y;}
  boolean enColaPed, enPicoPed, desdeRocaPed=true;
- String nombreMolinetePed="";
+ String nombreMolinetePed=""; int colaElegidaPed=-1;
 }
 static class PedSourceStub { int injected, calls; java.util.ArrayList<Integer> sizes=new java.util.ArrayList<Integer>(); void inject(int n) {injected+=n;calls++;sizes.add(n);} }
 class EventStub { double at=-1; void restart(double t) {at=clock+t;} }
@@ -142,11 +142,20 @@ public static void main(String[] args) throws Exception {
  for(int k=0;k<28;k++){m.molinetesPeatonales.colas.add(new QueuePath(225+10*k+(k>=14?20:0),0));e1.molinetesPeatonales.colas.add(m.molinetesPeatonales.colas.get(k));e1b.molinetesPeatonales.colas.add(m.molinetesPeatonales.colas.get(k));}
  Pasajero sur=new Pasajero();sur.y=515;sur.servicioAsignadoPed=3;
  ok(m.elegirColaPed(sur)==m.molinetesPeatonales.colas.get(19),"E0 elige el habilitado mas cercano (20)");
- ok(e1.elegirColaPed(sur)==e1.molinetesPeatonales.colas.get(21),"E1 usa hasta el 22");
- ok(e1b.elegirColaPed(sur)==e1b.molinetesPeatonales.colas.get(27),"la ampliacion puede usar el 28");
+ sur.colaElegidaPed=-1;ok(e1.elegirColaPed(sur)==e1.molinetesPeatonales.colas.get(21),"E1 usa hasta el 22");
+ sur.colaElegidaPed=-1;ok(e1b.elegirColaPed(sur)==e1b.molinetesPeatonales.colas.get(27),"la ampliacion puede usar el 28");
  m.molinetesPeatonales.colas.get(19).size=3;
- ok(m.elegirColaPed(sur)==m.molinetesPeatonales.colas.get(18),"una cola ocupada desvia al molinete vecino");
+ sur.colaElegidaPed=-1;m.enCaminoPed=new int[28];ok(m.elegirColaPed(sur)==m.molinetesPeatonales.colas.get(18),"una cola ocupada desvia al molinete vecino");
  m.molinetesPeatonales.colas.get(19).size=0;
+ // Efecto manada: con colas vacias, cinco pasajeros del mismo tren no eligen todos la misma cola,
+ // porque cada eleccion cuenta a los que ya van en camino; al llegar a la cola dejan de contar.
+ {SubtePedLogicCheck h=new SubtePedLogicCheck();h.molinetesOperativosPed=22;for(QueuePath q:m.molinetesPeatonales.colas)h.molinetesPeatonales.colas.add(q);
+  java.util.HashSet<QueuePath> elegidas=new java.util.HashSet<QueuePath>();Pasajero[] tanda=new Pasajero[5];
+  for(int i=0;i<5;i++){tanda[i]=new Pasajero();tanda[i].y=360;tanda[i].servicioAsignadoPed=2.4;elegidas.add(h.elegirColaPed(tanda[i]));}
+  ok(elegidas.size()==5,"la tanda se reparte entre colas: "+elegidas.size());
+  int total=0;for(int c:h.enCaminoPed)total+=c;ok(total==5,"cinco en camino");
+  h.elegirColaPed(tanda[0]);total=0;for(int c:h.enCaminoPed)total+=c;ok(total==5,"re-elegir no duplica el conteo");
+  h.llegaAColaPed(tanda[0]);h.llegaAColaPed(tanda[0]);total=0;for(int c:h.enCaminoPed)total+=c;ok(total==4 && tanda[0].colaElegidaPed==-1,"al llegar deja de estar en camino (una sola vez)");}
  // Demo: corte de metricas en horizonteMetricasPedSeg y semilla efectiva semillaPed.
  m.inicioPicoPedSeg=0;m.finPicoPedSeg=10;m.inicializarPed();
  eq(m.horizonteCortePed,600,"corte demo");ok(m.rng.seed==20260923L,"semilla efectiva");
@@ -157,7 +166,11 @@ public static void main(String[] args) throws Exception {
  ok(m.pagaPed()==1 && m.pagaMaxPed==1,"transito: validando cuenta en zona paga");
  SubtePedLogicCheck dir=new SubtePedLogicCheck();dir.inicializarPed();Pasajero sinCola=new Pasajero();dir.registraIngresoPed(sinCola);
  ok(dir.hallPed()==1,"transito: recien ingresado esta en el hall");sinCola.nombreMolinetePed="molinetePed02";dir.comienzaServicioPed(sinCola);
- ok(dir.hallPed()==0 && dir.pagaPed()==1 && dir.nEsperandoPed==0,"transito: servicio inmediato sin cola");dir.salePed();ok(dir.pagaPed()==0,"transito: sale de la zona paga");
+ ok(dir.hallPed()==0 && dir.pagaPed()==1 && dir.nEsperandoPed==0,"transito: servicio inmediato sin cola");
+ // Quien pasa directo sin hacer cola espera 0, aunque haya tardado en caminar desde el acceso.
+ {SubtePedLogicCheck w=new SubtePedLogicCheck();w.inicializarPed();Pasajero directo=new Pasajero();w.clock=10;w.registraIngresoPed(directo);directo.tEntradaColaPed=10;
+  w.clock=42;directo.nombreMolinetePed="molinetePed03";w.comienzaServicioPed(directo);
+  ok(w.nEsperasPed==1 && w.esperaMaxPed==0 && w.nMas30Ped==0,"sin cola la espera es 0, no la caminata: "+w.esperaMaxPed);}dir.salePed();ok(dir.pagaPed()==0,"transito: sale de la zona paga");
  ok(dir.segundosRealesPed()>=0 && dir.inicioRealMsPed>0,"tiempo real medido desde la inicializacion");
  ok(dir.intervaloProgresoPed()==300 && franja(20,0.001).intervaloProgresoPed()==900,"progreso cada 5 min (demo) o 15 min (franja)");
  m.clock=8;m.terminaServicioPed(p);

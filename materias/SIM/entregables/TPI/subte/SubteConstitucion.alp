@@ -3604,6 +3604,21 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 					</Properties>
 				</Variable>
 				<Variable Class="PlainVariable">
+					<Id>1793000000034</Id>
+					<Name><![CDATA[enCaminoPed]]></Name>
+					<X>1250</X><Y>1010</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>false</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="default" StaticVariable="false">
+						<Type><![CDATA[int[]]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[new int[28]]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
 					<Id>1793000000001</Id>
 					<Name><![CDATA[nLlegadosMolinetePed]]></Name>
 					<X>1250</X><Y>835</Y>
@@ -4578,11 +4593,32 @@ tAreaColaPed = ahora;]]></Body>
 						<Name><![CDATA[ped]]></Name>
 						<Type><![CDATA[Pasajero]]></Type>
 					</Parameter>
-					<Body><![CDATA[nLlegadosMolinetePed++;
+					<Body><![CDATA[llegaAColaPed(ped);
+nLlegadosMolinetePed++;
 actualizarAreaColaPed();
 ped.enColaPed = true;
 nEsperandoPed++;
 qMaxPed = Math.max(qMaxPed, nEsperandoPed);]]></Body>
+				</Function>
+				<Function AccessType="public" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[void]]></ReturnType>
+					<Id>1793000000036</Id>
+					<Name><![CDATA[llegaAColaPed]]></Name>
+					<X>1500</X><Y>78</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>false</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Parameter>
+						<Name><![CDATA[ped]]></Name>
+						<Type><![CDATA[Pasajero]]></Type>
+					</Parameter>
+					<Body><![CDATA[// El pasajero llego a la cola (o al molinete): deja de contar como "en camino".
+if (ped.colaElegidaPed >= 0) {
+    enCaminoPed[ped.colaElegidaPed]--;
+    ped.colaElegidaPed = -1;
+}]]></Body>
 				</Function>
 				<Function AccessType="public" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
@@ -4619,14 +4655,18 @@ actualizarTransitoPed();]]></Body>
 						<Name><![CDATA[ped]]></Name>
 						<Type><![CDATA[Pasajero]]></Type>
 					</Parameter>
-					<Body><![CDATA[// Quien empieza a validar sin haber pasado por la cola llega al molinete en este instante.
-if (!ped.enColaPed) nLlegadosMolinetePed++;
-if (ped.enColaPed) {
+					<Body><![CDATA[// Quien empieza a validar sin haber pasado por la cola llega al molinete en este instante
+// y su espera es 0. tEntradaColaPed solo vale si el pasajero entro a la cola: si no, conserva
+// la hora de entrada al bloque (en el acceso, a ~41 m) y la "espera" seria la caminata.
+llegaAColaPed(ped);
+boolean hizoCola = ped.enColaPed;
+if (!hizoCola) nLlegadosMolinetePed++;
+if (hizoCola) {
     actualizarAreaColaPed();
     nEsperandoPed--;
     ped.enColaPed = false;
 }
-double espera = Math.max(0, time() - ped.tEntradaColaPed);
+double espera = hizoCola ? Math.max(0, time() - ped.tEntradaColaPed) : 0;
 sumaEsperaPed += espera;
 nEsperasPed++;
 esperaMaxPed = Math.max(esperaMaxPed, espera);
@@ -5136,21 +5176,29 @@ return inicioRealMsPed <= 0 ? 0 : (System.currentTimeMillis() - inicioRealMsPed)
 					</Parameter>
 					<Body><![CDATA[// Supuesto de comportamiento (plano hipotetico): cada pasajero elige, entre los molinetes
 // habilitados, la cola que minimiza el desvio lateral a 1,3 m/s mas la espera estimada por
-// las personas que ya estan en ella. Los molinetes suspendidos nunca se eligen.
+// las personas que ya estan en ella Y las que ya la eligieron y van caminando hacia ella
+// (enCaminoPed). Sin ese conteo, todo el pasaje de un tren elige la misma cola vacia antes de
+// que llegue el primero (efecto manada). Los molinetes suspendidos nunca se eligen.
+if (ped.colaElegidaPed >= 0) {
+    enCaminoPed[ped.colaElegidaPed]--;
+    ped.colaElegidaPed = -1;
+}
 java.util.List<QueuePath> colas = molinetesPeatonales.getQueues();
-QueuePath mejor = null;
+int mejor = -1;
 double mejorCosto = Double.MAX_VALUE;
 for (int i = 0; i < molinetesOperativosPed && i < colas.size(); i++) {
     QueuePath cola = colas.get(i);
     double desvioSeg = Math.abs(ped.getY() - cola.getEndPoint().y) / 10.0 / 1.3;
-    double costo = desvioSeg + molinetesPeatonales.queueSize(cola) * ped.servicioAsignadoPed;
+    double costo = desvioSeg + (molinetesPeatonales.queueSize(cola) + enCaminoPed[i]) * ped.servicioAsignadoPed;
     if (costo < mejorCosto) {
         mejorCosto = costo;
-        mejor = cola;
+        mejor = i;
     }
 }
-if (mejor == null) throw new IllegalStateException("No hay molinetes habilitados");
-return mejor;]]></Body>
+if (mejor < 0) throw new IllegalStateException("No hay molinetes habilitados");
+enCaminoPed[mejor]++;
+ped.colaElegidaPed = mejor;
+return colas.get(mejor);]]></Body>
 				</Function>
 				<Function AccessType="public" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
@@ -9061,6 +9109,21 @@ return String.join(",", partes);]]></Body>
 						<Type><![CDATA[boolean]]></Type>        
 						<InitialValue Class="CodeValue">
 							<Code><![CDATA[false]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1793000000035</Id>
+					<Name><![CDATA[colaElegidaPed]]></Name>
+					<X>40</X><Y>240</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>false</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="default" StaticVariable="false">
+						<Type><![CDATA[int]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[-1]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
