@@ -1,0 +1,2182 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-10-05T21:42:49Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 256242125,
+  "lat": -34.6273936,
+  "lon": -58.3811172,
+  "tags": {
+    "name": "Constitución",
+    "network": "Subte de Buenos Aires",
+    "operator": "Emova Movilidad S.A.",
+    "public_transport": "station",
+    "railway": "station",
+    "railway:position": "4.3",
+    "start_date": "1934-11-09",
+    "station": "subway",
+    "subway": "yes",
+    "wikidata": "Q2995069",
+    "wikipedia": "es:Constitución (Subte de Buenos Aires)"
+  }
+},
+{
+  "type": "node",
+  "id": 1549497959,
+  "lat": -34.6313601,
+  "lon": -58.3811273,
+  "tags": {
+    "railway": "buffer_stop"
+  }
+},
+{
+  "type": "node",
+  "id": 1957896641,
+  "lat": -34.6304872,
+  "lon": -58.3788446,
+  "tags": {
+    "railway": "buffer_stop"
+  }
+},
+{
+  "type": "node",
+  "id": 1957897967,
+  "lat": -34.6305029,
+  "lon": -58.3788180,
+  "tags": {
+    "railway": "buffer_stop"
+  }
+},
+{
+  "type": "node",
+  "id": 1978947865,
+  "lat": -34.6282298,
+  "lon": -58.3804052,
+  "tags": {
+    "level": "0",
+    "railway": "subway_entrance",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 3111585574,
+  "lat": -34.6279264,
+  "lon": -58.3810708,
+  "tags": {
+    "railway": "subway_entrance"
+  }
+},
+{
+  "type": "node",
+  "id": 3111585579,
+  "lat": -34.6278094,
+  "lon": -58.3811179,
+  "tags": {
+    "layer": "-1",
+    "railway": "buffer_stop"
+  }
+},
+{
+  "type": "node",
+  "id": 3111585582,
+  "lat": -34.6278056,
+  "lon": -58.3810870,
+  "tags": {
+    "layer": "-1",
+    "railway": "buffer_stop"
+  }
+},
+{
+  "type": "node",
+  "id": 3111585590,
+  "lat": -34.6276813,
+  "lon": -58.3810376,
+  "tags": {
+    "railway": "subway_entrance"
+  }
+},
+{
+  "type": "node",
+  "id": 3443461320,
+  "lat": -34.6288257,
+  "lon": -58.3800506,
+  "tags": {
+    "railway": "buffer_stop"
+  }
+},
+{
+  "type": "node",
+  "id": 3443461321,
+  "lat": -34.6288257,
+  "lon": -58.3800877,
+  "tags": {
+    "railway": "buffer_stop"
+  }
+},
+{
+  "type": "node",
+  "id": 3443461322,
+  "lat": -34.6288312,
+  "lon": -58.3802305,
+  "tags": {
+    "railway": "buffer_stop"
+  }
+},
+{
+  "type": "node",
+  "id": 3443461323,
+  "lat": -34.6288297,
+  "lon": -58.3802691,
+  "tags": {
+    "railway": "buffer_stop"
+  }
+},
+{
+  "type": "node",
+  "id": 3443461324,
+  "lat": -34.6288354,
+  "lon": -58.3804272,
+  "tags": {
+    "railway": "buffer_stop",
+    "wikimedia_commons": "File:Estación_Constitución,_guardachoques.JPG"
+  }
+},
+{
+  "type": "node",
+  "id": 3443461325,
+  "lat": -34.6288354,
+  "lon": -58.3804612,
+  "tags": {
+    "railway": "buffer_stop",
+    "wikimedia_commons": "File:Estación_Constitución,_guardachoques.JPG"
+  }
+},
+{
+  "type": "node",
+  "id": 3443461326,
+  "lat": -34.6288380,
+  "lon": -58.3806104,
+  "tags": {
+    "railway": "buffer_stop"
+  }
+},
+{
+  "type": "node",
+  "id": 3443461327,
+  "lat": -34.6288380,
+  "lon": -58.3806449,
+  "tags": {
+    "railway": "buffer_stop"
+  }
+},
+{
+  "type": "node",
+  "id": 3443461328,
+  "lat": -34.6288393,
+  "lon": -58.3808154,
+  "tags": {
+    "railway": "buffer_stop"
+  }
+},
+{
+  "type": "node",
+  "id": 3443461329,
+  "lat": -34.6288392,
+  "lon": -58.3808470,
+  "tags": {
+    "railway": "buffer_stop"
+  }
+},
+{
+  "type": "node",
+  "id": 3443461330,
+  "lat": -34.6288407,
+  "lon": -58.3810074,
+  "tags": {
+    "railway": "buffer_stop"
+  }
+},
+{
+  "type": "node",
+  "id": 3443461331,
+  "lat": -34.6288413,
+  "lon": -58.3810397,
+  "tags": {
+    "railway": "buffer_stop"
+  }
+},
+{
+  "type": "node",
+  "id": 3443461332,
+  "lat": -34.6288439,
+  "lon": -58.3811900,
+  "tags": {
+    "railway": "buffer_stop"
+  }
+},
+{
+  "type": "node",
+  "id": 3443461333,
+  "lat": -34.6288250,
+  "lon": -58.3798992,
+  "tags": {
+    "railway": "buffer_stop"
+  }
+},
+{
+  "type": "node",
+  "id": 4277460233,
+  "lat": -34.6274366,
+  "lon": -58.3812819,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "public_transport": "platform",
+    "shelter": "yes",
+    "tactile_paving": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 4605829636,
+  "lat": -34.6281814,
+  "lon": -58.3810811,
+  "tags": {
+    "railway": "subway_entrance"
+  }
+},
+{
+  "type": "node",
+  "id": 4873332011,
+  "lat": -34.6272380,
+  "lon": -58.3804424,
+  "tags": {
+    "bench": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 4873332012,
+  "lat": -34.6270293,
+  "lon": -58.3809494,
+  "tags": {
+    "railway": "subway_entrance"
+  }
+},
+{
+  "type": "node",
+  "id": 5171746559,
+  "lat": -34.6282576,
+  "lon": -58.3805698,
+  "tags": {
+    "addr:city": "Ciudad Autónoma de Buenos Aires",
+    "addr:country": "AR",
+    "addr:housenumber": "1128",
+    "addr:postcode": "C1138",
+    "addr:street": "Avenida Brasil",
+    "name": "Plaza Constitución",
+    "network": "Subte de Buenos Aires",
+    "network:wikidata": "Q497044",
+    "not:network:wikidata": "Q2962337",
+    "operator": "Trenes Argentinos",
+    "platforms": "14",
+    "public_transport": "station",
+    "railway": "station",
+    "short_name": "Constitución",
+    "start_date": "1865-08-14",
+    "station": "subway",
+    "subway": "yes",
+    "wikidata": "Q800596",
+    "wikipedia": "es:Estación Constitución"
+  }
+},
+{
+  "type": "node",
+  "id": 5930603131,
+  "lat": -34.6272743,
+  "lon": -58.3817654,
+  "tags": {
+    "bench": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5930603132,
+  "lat": -34.6272627,
+  "lon": -58.3814228,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 5930603134,
+  "lat": -34.6272566,
+  "lon": -58.3810647,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 5930603135,
+  "lat": -34.6274253,
+  "lon": -58.3808451,
+  "tags": {
+    "bench": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5930603137,
+  "lat": -34.6274057,
+  "lon": -58.3800401,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5930603139,
+  "lat": -34.6276633,
+  "lon": -58.3803733,
+  "tags": {
+    "bench": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5930603141,
+  "lat": -34.6276655,
+  "lon": -58.3805148,
+  "tags": {
+    "bench": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5930603144,
+  "lat": -34.6276728,
+  "lon": -58.3808689,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 5930603145,
+  "lat": -34.6276744,
+  "lon": -58.3809614,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 5930603146,
+  "lat": -34.6276732,
+  "lon": -58.3807824,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5930603149,
+  "lat": -34.6276859,
+  "lon": -58.3812638,
+  "tags": {
+    "bench": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5930603150,
+  "lat": -34.6274436,
+  "lon": -58.3814665,
+  "tags": {
+    "bench": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "public_transport": "platform",
+    "shelter": "yes",
+    "tactile_paving": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5930603151,
+  "lat": -34.6275480,
+  "lon": -58.3807710,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5930603152,
+  "lat": -34.6275430,
+  "lon": -58.3805042,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 5930603153,
+  "lat": -34.6275557,
+  "lon": -58.3810244,
+  "tags": {
+    "bus": "yes",
+    "check_date:shelter": "2026-04-04",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5930603177,
+  "lat": -34.6288359,
+  "lon": -58.3814468,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 5930603178,
+  "lat": -34.6286797,
+  "lon": -58.3814560,
+  "tags": {
+    "bench": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5930603179,
+  "lat": -34.6285521,
+  "lon": -58.3814510,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 5930603183,
+  "lat": -34.6283826,
+  "lon": -58.3814658,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 5930603786,
+  "lat": -34.6278846,
+  "lon": -58.3815756,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 5930603787,
+  "lat": -34.6278857,
+  "lon": -58.3818077,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 5930603789,
+  "lat": -34.6278912,
+  "lon": -58.3821014,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 5933210989,
+  "lat": -34.6268495,
+  "lon": -58.3801568,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "note": "90?",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5935994185,
+  "lat": -34.6258684,
+  "lon": -58.3805577,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5935994187,
+  "lat": -34.6258000,
+  "lon": -58.3805859,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5935994188,
+  "lat": -34.6257040,
+  "lon": -58.3806382,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "note": "148",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5935994189,
+  "lat": -34.6255208,
+  "lon": -58.3807053,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "note": "148",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5935994190,
+  "lat": -34.6254115,
+  "lon": -58.3807495,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "note": "148",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5935994191,
+  "lat": -34.6252957,
+  "lon": -58.3807884,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "note": "148",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5935994192,
+  "lat": -34.6249370,
+  "lon": -58.3821349,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "note": "148",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5935994193,
+  "lat": -34.6250209,
+  "lon": -58.3821295,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "note": "148",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5935994194,
+  "lat": -34.6251114,
+  "lon": -58.3821201,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "note": "148",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5935994195,
+  "lat": -34.6254286,
+  "lon": -58.3821161,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "note": "148e",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5935994196,
+  "lat": -34.6256841,
+  "lon": -58.3821061,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "note": "148f",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5935994197,
+  "lat": -34.6260935,
+  "lon": -58.3820893,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5935994199,
+  "lat": -34.6264155,
+  "lon": -58.3820762,
+  "tags": {
+    "bench": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5935994201,
+  "lat": -34.6266614,
+  "lon": -58.3815528,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 5935994205,
+  "lat": -34.6267628,
+  "lon": -58.3819230,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 5935994206,
+  "lat": -34.6267270,
+  "lon": -58.3817882,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 5935994207,
+  "lat": -34.6266906,
+  "lon": -58.3816608,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5935994209,
+  "lat": -34.6266254,
+  "lon": -58.3814147,
+  "tags": {
+    "bench": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5935994211,
+  "lat": -34.6264555,
+  "lon": -58.3808327,
+  "tags": {
+    "bus": "yes",
+    "check_date:shelter": "2024-09-10",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 6133535969,
+  "lat": -34.6307967,
+  "lon": -58.3825180,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "15 de Noviembre y Salta",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 6133577491,
+  "lat": -34.6310683,
+  "lon": -58.3825909,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Salta y 15 de Noviembre",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 6133577493,
+  "lat": -34.6282535,
+  "lon": -58.3827346,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Salta y Brasil",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 6133577495,
+  "lat": -34.6275688,
+  "lon": -58.3815398,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "public_transport": "platform",
+    "shelter": "yes",
+    "tactile_paving": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 6133577497,
+  "lat": -34.6263360,
+  "lon": -58.3788127,
+  "tags": {
+    "bench": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Avenida Garay",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 6135674118,
+  "lat": -34.6290209,
+  "lon": -58.3833042,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "O'Brien y Salta",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 6215506165,
+  "lat": -34.6268241,
+  "lon": -58.3844013,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Santiago del Estero y Av. Juan de Garay",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 6439583922,
+  "lat": -34.6291206,
+  "lon": -58.3791952,
+  "tags": {
+    "bench": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Estación Constitución",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 6439583923,
+  "lat": -34.6288833,
+  "lon": -58.3792944,
+  "tags": {
+    "bench": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Estación Constitución",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 6439583924,
+  "lat": -34.6286803,
+  "lon": -58.3793783,
+  "tags": {
+    "bench": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Estación Constitución",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 6439583925,
+  "lat": -34.6285522,
+  "lon": -58.3794219,
+  "tags": {
+    "bench": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Estación Constitución",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 6439583926,
+  "lat": -34.6284535,
+  "lon": -58.3794587,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Estación Constitución",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 6439583933,
+  "lat": -34.6283624,
+  "lon": -58.3794943,
+  "tags": {
+    "bench": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Estación Constitución",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 6439622873,
+  "lat": -34.6241115,
+  "lon": -58.3828734,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Salta y Cochabamba",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 6439622875,
+  "lat": -34.6292012,
+  "lon": -58.3826972,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Constitución",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 6439622876,
+  "lat": -34.6288112,
+  "lon": -58.3827183,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Constitución",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 6439622877,
+  "lat": -34.6286185,
+  "lon": -58.3827290,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Constitución",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 6439622878,
+  "lat": -34.6284728,
+  "lon": -58.3827370,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Constitución",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 6462368781,
+  "lat": -34.6281568,
+  "lon": -58.3840166,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Brasil y Santiago del Estero",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 6689751401,
+  "lat": -34.6244878,
+  "lon": -58.3828763,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Salta y Constitución",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 7111349182,
+  "lat": -34.6242417,
+  "lon": -58.3828805,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Salta y Cochabamba",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 7111375287,
+  "lat": -34.6291118,
+  "lon": -58.3774879,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Hospital Elizalde",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 7111375289,
+  "lat": -34.6291834,
+  "lon": -58.3774437,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Hospital Elizalde",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 7194584438,
+  "lat": -34.6272467,
+  "lon": -58.3806248,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 7221721238,
+  "lat": -34.6266972,
+  "lon": -58.3769542,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Parroquia Santa Catalina",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 7221721240,
+  "lat": -34.6275668,
+  "lon": -58.3814060,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "public_transport": "platform",
+    "shelter": "yes",
+    "tactile_paving": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 7221721242,
+  "lat": -34.6275403,
+  "lon": -58.3803713,
+  "tags": {
+    "bench": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 7221721244,
+  "lat": -34.6270266,
+  "lon": -58.3830079,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Garay y Salta",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 7221721246,
+  "lat": -34.6270636,
+  "lon": -58.3837395,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Juan de Garay al 1200",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 8264888389,
+  "lat": -34.6261675,
+  "lon": -58.3796391,
+  "tags": {
+    "bench": "no",
+    "covered": "yes",
+    "highway": "bus_stop",
+    "name": "Constitución",
+    "public_transport": "platform",
+    "unsigned": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 8264888390,
+  "lat": -34.6269223,
+  "lon": -58.3785930,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Avenida Garay",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 8573601190,
+  "lat": -34.6274034,
+  "lon": -58.3801688,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 8573601192,
+  "lat": -34.6274101,
+  "lon": -58.3805175,
+  "tags": {
+    "bus": "yes",
+    "check_date:shelter": "2026-04-04",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 8573601195,
+  "lat": -34.6276860,
+  "lon": -58.3813886,
+  "tags": {
+    "bench": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "public_transport": "platform",
+    "shelter": "yes",
+    "tactile_paving": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 8573601198,
+  "lat": -34.6278327,
+  "lon": -58.3801554,
+  "tags": {
+    "bench": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "note": "51",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 9025724919,
+  "lat": -34.6270691,
+  "lon": -58.3839615,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Juan de Garay al 1200",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 9027144080,
+  "lat": -34.6280137,
+  "lon": -58.3832882,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Brasil y Salta",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 9027144084,
+  "lat": -34.6281296,
+  "lon": -58.3792703,
+  "tags": {
+    "bench": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Constitución",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 9027144085,
+  "lat": -34.6282598,
+  "lon": -58.3792220,
+  "tags": {
+    "bench": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Constitución",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 9027144086,
+  "lat": -34.6283978,
+  "lon": -58.3791750,
+  "tags": {
+    "bench": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Constitución",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 9027144091,
+  "lat": -34.6288072,
+  "lon": -58.3790115,
+  "tags": {
+    "bench": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Constitución",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 9220202249,
+  "lat": -34.6280427,
+  "lon": -58.3844018,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Santiago del Estero y Brasil",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 9220202251,
+  "lat": -34.6297132,
+  "lon": -58.3842641,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Santiago del Estero y Pedro Echagüe",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 9220229192,
+  "lat": -34.6311105,
+  "lon": -58.3825873,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Salta y 15 de Noviembre",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9244466792,
+  "lat": -34.6267058,
+  "lon": -58.3823605,
+  "tags": {
+    "bench": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Lima Oeste y Garay",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 9284776417,
+  "lat": -34.6268903,
+  "lon": -58.3836946,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Juan de Garay al 1200",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 9284776419,
+  "lat": -34.6279950,
+  "lon": -58.3781947,
+  "tags": {
+    "bench": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Irigoyen y Brasil",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 9287308676,
+  "lat": -34.6256079,
+  "lon": -58.3823803,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Lima y Pavón",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 9287308678,
+  "lat": -34.6250120,
+  "lon": -58.3824018,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Lima y Constitución",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9690731983,
+  "lat": -34.6268539,
+  "lon": -58.3857988,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "San José y Garay",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 9867229866,
+  "lat": -34.6253454,
+  "lon": -58.3775214,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Garay y Tacuarí",
+    "note": "195",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 9867229868,
+  "lat": -34.6254959,
+  "lon": -58.3779178,
+  "tags": {
+    "bench": "yes",
+    "bin": "no",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "lit": "yes",
+    "name": "Garay y Tacuarí",
+    "public_transport": "platform",
+    "shelter": "yes",
+    "tactile_paving": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 9867229872,
+  "lat": -34.6273681,
+  "lon": -58.3781880,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Brasil e Irigoyen",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 9867229875,
+  "lat": -34.6277091,
+  "lon": -58.3791174,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "covered": "yes",
+    "highway": "bus_stop",
+    "name": "Playa de Regulación Constitución",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 9918248924,
+  "lat": -34.6268925,
+  "lon": -58.3835404,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Juan de Garay al 1200",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 9918248926,
+  "lat": -34.6264853,
+  "lon": -58.3809373,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 9918248928,
+  "lat": -34.6281384,
+  "lon": -58.3781143,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Irigoyen y Brasil",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 9918248929,
+  "lat": -34.6282587,
+  "lon": -58.3780620,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Irigoyen y Brasil",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 10796247333,
+  "lat": -34.6251478,
+  "lon": -58.3823910,
+  "tags": {
+    "bench": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Lima y Constitución",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 10998538772,
+  "lat": -34.6283724,
+  "lon": -58.3777371,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Caseros e Irigoyen",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 10998553540,
+  "lat": -34.6279965,
+  "lon": -58.3766977,
+  "tags": {
+    "bench": "yes",
+    "bin": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "lit": "yes",
+    "name": "Caseros y Tacuari",
+    "public_transport": "platform",
+    "shelter": "yes",
+    "tactile_paving": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 11033470496,
+  "lat": -34.6306372,
+  "lon": -58.3813644,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Lima y 15 de Noviembre de 1889",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 11033470497,
+  "lat": -34.6305802,
+  "lon": -58.3813704,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Lima y 15 de Noviembre de 1889",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 11033470498,
+  "lat": -34.6305329,
+  "lon": -58.3813697,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Lima y 15 de Noviembre de 1889",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 11061198130,
+  "lat": -34.6301472,
+  "lon": -58.3788355,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Constitución",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 11111645970,
+  "lat": -34.6253972,
+  "lon": -58.3776667,
+  "tags": {
+    "bench": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Garay y Tacuarí",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 11435473764,
+  "lat": -34.6246531,
+  "lon": -58.3842206,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Constitucion y Santiago del Estero",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 11435473765,
+  "lat": -34.6246594,
+  "lon": -58.3841187,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Constitucion y Santiago del Estero",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 11548842080,
+  "lat": -34.6269091,
+  "lon": -58.3841667,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Garay y Santiago del Estero",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 11552894812,
+  "lat": -34.6246558,
+  "lon": -58.3840301,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Constitución y Santiago del Estero",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 11798938185,
+  "lat": -34.6257989,
+  "lon": -58.3823656,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Lima y Pavón",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 13168814952,
+  "lat": -34.6269107,
+  "lon": -58.3842069,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Garay y Santiago del Estero",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 13168814955,
+  "lat": -34.6270299,
+  "lon": -58.3830556,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Garay y Salta",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 13168814957,
+  "lat": -34.6266464,
+  "lon": -58.3814791,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plaza Constitución",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 14054283701,
+  "lat": -34.6299328,
+  "lon": -58.3826614,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "way",
+  "id": 141895271,
+  "center": {
+    "lat": -34.6275610,
+    "lon": -58.3810654
+  },
+  "tags": {
+    "area": "yes",
+    "bus": "yes",
+    "highway": "platform",
+    "name": "Constitución",
+    "public_transport": "platform",
+    "shelter": "yes",
+    "surface": "paved",
+    "tactile_paving": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 141895274,
+  "center": {
+    "lat": -34.6274302,
+    "lon": -58.3809822
+  },
+  "tags": {
+    "area": "yes",
+    "bench": "yes",
+    "bus": "yes",
+    "check_date:shelter": "2026-04-04",
+    "highway": "platform",
+    "name": "Constitución",
+    "public_transport": "platform",
+    "shelter": "yes",
+    "surface": "paved",
+    "tactile_paving": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 141895276,
+  "center": {
+    "lat": -34.6276854,
+    "lon": -58.3810321
+  },
+  "tags": {
+    "area": "yes",
+    "bus": "yes",
+    "highway": "platform",
+    "name": "Constitución",
+    "public_transport": "platform",
+    "surface": "paved",
+    "tactile_paving": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 185219421,
+  "center": {
+    "lat": -34.6302855,
+    "lon": -58.3808746
+  },
+  "tags": {
+    "area": "yes",
+    "bench": "yes",
+    "bin": "yes",
+    "name": "Andén 4 y 5",
+    "public_transport": "platform",
+    "railway": "platform",
+    "ref": "4;5",
+    "shelter": "yes",
+    "train": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 185225436,
+  "center": {
+    "lat": -34.6302192,
+    "lon": -58.3810536
+  },
+  "tags": {
+    "area": "yes",
+    "bench": "yes",
+    "bin": "yes",
+    "name": "Andén 2 y 3",
+    "public_transport": "platform",
+    "railway": "platform",
+    "ref": "2;3",
+    "shelter": "yes",
+    "train": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 185225441,
+  "center": {
+    "lat": -34.6300227,
+    "lon": -58.3805215
+  },
+  "tags": {
+    "area": "yes",
+    "bench": "yes",
+    "bin": "yes",
+    "name": "Andén 8 y 9",
+    "public_transport": "platform",
+    "railway": "platform",
+    "ref": "8;9",
+    "shelter": "yes",
+    "train": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 185225447,
+  "center": {
+    "lat": -34.6300638,
+    "lon": -58.3806883
+  },
+  "tags": {
+    "area": "yes",
+    "bench": "yes",
+    "bin": "yes",
+    "name": "Andén 6 y 7",
+    "public_transport": "platform",
+    "railway": "platform",
+    "ref": "6;7",
+    "shelter": "yes",
+    "train": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 185225449,
+  "center": {
+    "lat": -34.6300055,
+    "lon": -58.3811867
+  },
+  "tags": {
+    "bench": "yes",
+    "covered": "yes",
+    "name": "Andén 1",
+    "public_transport": "platform",
+    "railway": "platform",
+    "ref": "1",
+    "train": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 297828451,
+  "center": {
+    "lat": -34.6305505,
+    "lon": -58.3800727
+  },
+  "tags": {
+    "area": "yes",
+    "bench": "yes",
+    "bin": "yes",
+    "name": "Andén 14 y 15",
+    "public_transport": "platform",
+    "railway": "platform",
+    "ref": "14;15",
+    "shelter": "yes",
+    "train": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 297828453,
+  "center": {
+    "lat": -34.6304271,
+    "lon": -58.3802043
+  },
+  "tags": {
+    "area": "yes",
+    "bench": "yes",
+    "bin": "yes",
+    "name": "Andén 12 y 13",
+    "public_transport": "platform",
+    "railway": "platform",
+    "ref": "12;13",
+    "shelter": "yes",
+    "train": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 297828454,
+  "center": {
+    "lat": -34.6300598,
+    "lon": -58.3803235
+  },
+  "tags": {
+    "area": "yes",
+    "bench": "yes",
+    "bin": "yes",
+    "name": "Andén 10 y 11",
+    "public_transport": "platform",
+    "railway": "platform",
+    "ref": "10;11",
+    "shelter": "yes",
+    "train": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 306291533,
+  "center": {
+    "lat": -34.6273980,
+    "lon": -58.3811210
+  },
+  "tags": {
+    "bench": "yes",
+    "bin": "yes",
+    "covered": "yes",
+    "layer": "-2",
+    "location": "underground",
+    "public_transport": "platform",
+    "railway": "platform",
+    "subway": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 306291535,
+  "center": {
+    "lat": -34.6274049,
+    "lon": -58.3811491
+  },
+  "tags": {
+    "covered": "yes",
+    "layer": "-2",
+    "location": "underground",
+    "public_transport": "platform",
+    "railway": "platform",
+    "subway": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 545564850,
+  "center": {
+    "lat": -34.6274041,
+    "lon": -58.3810820
+  },
+  "tags": {
+    "covered": "yes",
+    "layer": "-2",
+    "location": "underground",
+    "public_transport": "platform",
+    "railway": "platform",
+    "subway": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1361058245,
+  "center": {
+    "lat": -34.6256582,
+    "lon": -58.3850219
+  },
+  "tags": {
+    "addr:city": "Ciudad Autónoma de Buenos Aires",
+    "addr:country": "AR",
+    "addr:street": "Pavón",
+    "amenity": "bus_station",
+    "bus": "yes",
+    "name": "Terminal Empresa San Vicente",
+    "public_transport": "station"
+  }
+}
+
+  ]
+}

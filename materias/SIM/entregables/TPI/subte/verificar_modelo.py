@@ -413,7 +413,14 @@ for name,(runs,modo,archivo,final) in {'PeatonalCorridasApareadas':('60','true',
  assert set(free)==set(ped_param_ids.values())
  assert free['semillaPed']=='20260923L + index / 2' and free['molinetesOperativosPed']=='index % 2 == 0 ? 20 : 22'
  assert free['modoFranjaPed']==modo and free['archivoSalidaPed']==archivo
- assert all(free[k] is None for k in ('proporcionRocaPed','demoraAccesoRocaSeg','duracionDescargaSeg','servicioPedSeg'))
+ calib={k:free[k] for k in ('proporcionRocaPed','demoraAccesoRocaSeg','duracionDescargaSeg','servicioPedSeg','servicioMinPedSeg','servicioMaxPedSeg')}
+ if name=='PeatonalCorridasApareadas':
+  # Escenario intermedio (T3.4, 2026-10-05): rangos de la §5 del plan; demora con D = 85 m (OpenStreetMap) y h = 5 m.
+  assert calib=={'proporcionRocaPed':'0.8','demoraAccesoRocaSeg':'106','duracionDescargaSeg':'145','servicioPedSeg':'2.4','servicioMinPedSeg':'1.8','servicioMaxPedSeg':'3.5'}, calib
+  rng={ped_param_ids[x.findtext('Id')]:x.findtext('Expression/Code') for x in e.findall('RangeVariationParamValue')}
+  assert all(rng[k]==v for k,v in calib.items()), 'freeform y range deben coincidir'
+ else:
+  assert all(calib[k] is None for k in ('proporcionRocaPed','demoraAccesoRocaSeg','duracionDescargaSeg','servicioPedSeg'))
 # Par i -> semilla 20260923+i, E0 en índice par y E1 en el siguiente.
 assert [(20260923+i//2, 20 if i%2==0 else 22) for i in range(4)]==[(20260923,20),(20260923,22),(20260924,20),(20260924,22)]
 pasajero_variable_names={x.findtext('Name') for x in agents['Pasajero'].findall('Variables/Variable')}

@@ -10552,6 +10552,9 @@ return String.join(",", partes);]]></Body>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1792000000011</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[2.4]]></Code>
+				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1792000000015</Id>
@@ -10564,18 +10567,33 @@ return String.join(",", partes);]]></Body>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1792000000300</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[0.8]]></Code>
+				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1792000000302</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[106]]></Code>
+				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1792000000304</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[145]]></Code>
+				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1792000000306</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[1.8]]></Code>
+				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1792000000308</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[3.5]]></Code>
+				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1792000000310</Id>
@@ -10636,6 +10654,9 @@ return String.join(",", partes);]]></Body>
 			<RangeVariationParamValue>	
 				<Id>1792000000011</Id>
 				<Type>FIXED</Type>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[2.4]]></Code>
+				</Expression>
 			</RangeVariationParamValue>
 			<RangeVariationParamValue>	
 				<Id>1792000000015</Id>
@@ -10651,22 +10672,37 @@ return String.join(",", partes);]]></Body>
 			<RangeVariationParamValue>	
 				<Id>1792000000300</Id>
 				<Type>FIXED</Type>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[0.8]]></Code>
+				</Expression>
 			</RangeVariationParamValue>
 			<RangeVariationParamValue>	
 				<Id>1792000000302</Id>
 				<Type>FIXED</Type>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[106]]></Code>
+				</Expression>
 			</RangeVariationParamValue>
 			<RangeVariationParamValue>	
 				<Id>1792000000304</Id>
 				<Type>FIXED</Type>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[145]]></Code>
+				</Expression>
 			</RangeVariationParamValue>
 			<RangeVariationParamValue>	
 				<Id>1792000000306</Id>
 				<Type>FIXED</Type>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[1.8]]></Code>
+				</Expression>
 			</RangeVariationParamValue>
 			<RangeVariationParamValue>	
 				<Id>1792000000308</Id>
 				<Type>FIXED</Type>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[3.5]]></Code>
+				</Expression>
 			</RangeVariationParamValue>
 			<RangeVariationParamValue>	
 				<Id>1792000000310</Id>

@@ -456,9 +456,14 @@ Todos los valores son de **propuesta** a la cátedra (D2). La columna "Estado" m
 |---|---:|---:|---:|---|---|
 | `servicioPedSeg` (s/pax) | 2,0 | 2,4 | 3,0 | TCQSM 3.ª ed., Exh. 10-27, p. 10-42: smart card en London, 2,4 s; torniquete de NY, 2,6-2,9 s. SPSG 2012 §3.3: 25 pax/min por molinete. Cota SBASE: en 15 min se observaron hasta 246 pax en un molinete, así que la media sostenida es ≤ 900/246 = **3,66 s** | Rango [DATO externo]; que aplique al molinete de trípode SUBE es [SUP] |
 | Forma del servicio | triangular (1,5; 2,0; 3,0) | triangular (1,8; 2,4; 3,5) | triangular (2,2; 3,0; 4,5) | El modelo admite triangular (`servicioMin/MaxPedSeg`). La asimetría a derecha refleja fallas de lectura. Los extremos son [SUP]; la media de cada triangular queda ≤ 3,66 s | [SUP] |
-| `duracionDescargaSeg` | ≈ 45 | ≈ 75 | 120 | N_bajan × t_flujo / (n_puertas × 2). t_flujo = 1,38 / 1,7 / 2,03 s por pasajero (TCQSM Exh. 8-12, p. 8-25). 120 s = criterio de diseño del SPSG (el tren se vacía por los molinetes en 2 min). 45 y 75 suponen 7 coches × 3 puertas por lado (T3.3) | Fórmula [DATO]; puertas y carga [SUP] |
-| `demoraAccesoRocaSeg` | D/1,25 + h/0,30 | D/0,95 + h/0,30 | D/0,63 + h/0,20 | 1,25 m/s = velocidad de diseño (TCQSM p. 10-20). 0,63 m/s = SPSG §5.1, flujo congestionado. Escaleras: 18 m/min bajando (TCQSM p. 10-24/25) y 12 m/min (SPSG). El 0,95 intermedio es interpolación [SUP]. D y h salen de T3.2 | [DATO] + [PEND T3.2] |
+| `duracionDescargaSeg` | 220 | 145 | 110 | **Corregido el 2026-10-05.** Es la dispersión con la que el pasaje de un tren *llega al vestíbulo*, no solo el tiempo de bajar por las puertas. La domina la caminata por el andén: el último coche está ~138 m detrás del primero (7 coches × ~23 m [SUP]), lo que da 138/0,63, 138/0,95 y 138/1,25 s. La versión anterior (45/75/120 s, solo flujo por puertas) además tenía los extremos invertidos: una descarga **corta** concentra la oleada y genera **más** cola, así que es el caso pesimista | Fórmula [DATO] + largo de coche [SUP] |
+| `demoraAccesoRocaSeg` | 84 | 106 | 159 | D/1,25 + h/0,30; D/0,95 + h/0,30; D/0,63 + h/0,20, con **D = 85 m** y h = 5 m. D es la mediana, entre las 14 vías, del recorrido en L desde el paragolpes hasta la boca de la Línea C del hall (OpenStreetMap, consulta del 2026-10-05; `datos/medir_acceso_osm.py`; rango de 69 a 112 m). h es [SUP]: un nivel | [DATO OSM] + [SUP] |
 | `proporcionRocaPed` | 0,70 | 0,80 | 0,90 | **Sin fuente citable** de transferencia Roca → Línea C (el subagente buscó en CNRT, GCBA y prensa). Contexto: Plaza Constitución vende el 29,3 % de los pasajes del Roca, 35,3 M en 2024 (CNRT, pp. 15 y 31), y el vestíbulo Principal da al hall ferroviario [SUP] | [SUP] explícito; pedir aval |
+
+**Escenario intermedio cargado (T3.4, 2026-10-05).** `PeatonalCorridasApareadas` usa servicio triangular
+(1,8; 2,4; 3,5) s, descarga de 145 s, demora de 106 s y proporción Roca de 0,8. Los contextos se ordenan por
+**congestión**. El optimista combina servicio corto, descarga larga y proporción Roca baja; el pesimista, lo
+contrario.
 
 **Qué parámetros entran en la sensibilidad:**
 

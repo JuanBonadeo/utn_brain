@@ -2774,6 +2774,12 @@ subte, y sobre la misma estación.
 
 ## Log
 
+- **2026-10-05** (5): TPI subte, calibración del escenario intermedio (T3.4). La demora del andén al
+  vestíbulo se midió en OpenStreetMap (`datos/medir_acceso_osm.py`): D = 85 m, mediana entre 14 vías (rango
+  69-112 m), h = 5 m [SUP], demora intermedia 106 s. Se corrigió la descarga de la §5, que medía solo el
+  flujo por puertas y tenía los extremos invertidos para la congestión. Ahora es la caminata por el andén:
+  145 s en el intermedio, 110 s en el pesimista y 220 s en el optimista. `PeatonalCorridasApareadas` queda
+  con servicio triangular (1,8; 2,4; 3,5) s, descarga de 145 s, demora de 106 s y proporción Roca 0,8.
 - **2026-10-05** (4): TPI subte, primer piloto completo que drena. Se encontró la causa del atasco: la
   elección de cola se evaluaba antes de sortear el servicio del pasajero (`eleccionesSinServicio`
   = 100 %), así que la fila no pesaba y todos iban al molinete alineado con la entrada. Corregido con un
