@@ -9,7 +9,6 @@ tren;ramal;llegada;segundos_desde_07
 1054;Bosques (vía Temperley);06:54;-360
 5340;Glew / A. Korn;06:55;-300
 4060;La Plata;06:58;-120
-4608;Ezeiza / Cañuelas;06:59;-60
 3042;Ezeiza / Cañuelas;07:02;120
 1058;Bosques (vía Temperley);07:07;420
 2064;Bosques (vía Quilmes);07:10;600
@@ -21,7 +20,6 @@ tren;ramal;llegada;segundos_desde_07
 4068;La Plata;07:30;1800
 5352;Glew / A. Korn;07:34;2040
 3054;Ezeiza / Cañuelas;07:37;2220
-4612;Ezeiza / Cañuelas;07:41;2460
 1070;Bosques (vía Temperley);07:42;2520
 5356;Glew / A. Korn;07:43;2580
 2072;Bosques (vía Quilmes);07:46;2760
@@ -37,7 +35,6 @@ tren;ramal;llegada;segundos_desde_07
 1082;Bosques (vía Temperley);08:15;4500
 4084;La Plata;08:22;4920
 5368;Glew / A. Korn;08:22;4920
-4614;Ezeiza / Cañuelas;08:23;4980
 3070;Ezeiza / Cañuelas;08:25;5100
 1086;Bosques (vía Temperley);08:30;5400
 5372;Glew / A. Korn;08:31;5460
@@ -51,7 +48,6 @@ tren;ramal;llegada;segundos_desde_07
 5380;Glew / A. Korn;08:55;6900
 3082;Ezeiza / Cañuelas;09:02;7320
 1098;Bosques (vía Temperley);09:03;7380
-4616;Ezeiza / Cañuelas;09:05;7500
 4100;La Plata;09:10;7800
 5384;Glew / A. Korn;09:10;7800
 3086;Ezeiza / Cañuelas;09:14;8040

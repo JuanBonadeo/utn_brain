@@ -9,6 +9,9 @@ Criterios:
 - trenes con número par (convención de la línea: los pares circulan hacia Pza. Constitución);
 - el arribo es el último horario de la fila del tren (columna Pza. Constitución);
 - se descartan filas con menos de 6 horarios (lanzaderas Bosques-Gutiérrez que no llegan a Constitución);
+- se descartan los trenes 46xx del PDF Ezeiza/Cañuelas: son la lanzadera Cañuelas -> Ezeiza (tabla izquierda,
+  que termina en "Ezeiza (trasbordo)"); su último horario es la llegada a Ezeiza, no a Constitución.
+  Hasta el 2026-10-05 se colaban como cuatro arribos fantasma (06:59, 07:41, 08:23 y 09:05);
 - un mismo tren publicado en dos PDFs se cuenta una vez y debe tener el mismo arribo.
 
 Salida: datos/arribos_roca_constitucion_habiles.csv (tren;ramal;llegada;segundos_desde_07).
@@ -80,6 +83,8 @@ def main(argv=None):
         for tren, horas in trenes(texto_habiles(pdf)).items():
             if int(tren) % 2 or len(horas) < 6:
                 continue
+            if 'ezeiza' in pdf.name and tren.startswith('46'):
+                continue  # lanzadera Cañuelas -> Ezeiza: no llega a Constitución
             # Trenes que cruzan la medianoche: se suma un día a los horarios posteriores.
             horas = [h + 1440 * any(x - y > 600 for x, y in zip(horas[:i], horas[1:i + 1])) for i, h in enumerate(horas)]
             if any(b < a for a, b in zip(horas, horas[1:])):
