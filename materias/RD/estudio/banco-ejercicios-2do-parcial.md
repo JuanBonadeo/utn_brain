@@ -192,3 +192,56 @@ Respuesta: TTL = 3 (B → D → F → H).
 **5) Diseñe las direcciones IP de 5 máquinas en la red 111.159.35.0. ¿Qué máscara y qué prefijo tiene?**
 
 Respuesta: 3 bits de host (2³ − 2 = 6 ≥ 5), máscara 255.255.255.248, prefijo /29. Máquinas: 111.159.35.1 a .5 (la .0 es la red y la .7 el broadcast).
+
+## Parcial real: 2do parcial del 29/10/2024 (com. 403)
+
+### Práctica (Baró)
+
+**1) ¿Cuántas subredes distintas se pueden direccionar dentro de una red clase A con máscara 255.255.252.0?**
+
+Respuesta: de /8 a /22 hay 14 bits de subred: 2¹⁴ = 16.384 bloques, **16.382 subredes válidas** (2¹⁴ − 2).
+
+**2) Si se dispone de la IP 10.118.106.51, ¿qué máscara hay que usar para que esa dirección sea el host 42.51 de la subred 10.118.64.0?**
+
+Respuesta: **255.255.192.0 (/18)**. Con salto 64 en el 3er byte, 106 cae en el bloque que empieza en 64, y 106.51 − 64.0 = 42.51. Con /19 (salto 32) caería en el bloque .96.
+
+**3) Suponga una red IP 204.12.30.0 formada por 5 subredes. a) ¿Cuál es la máscara mínima que permite direccionarlas unívocamente? b) ¿Qué IP irá en el campo IP destino de un paquete enviado al host 14 de la subred 204.12.30.192? c) ¿Y al host 14 de las 5 subredes simultáneamente?**
+
+Respuesta:
+- a) **255.255.255.224 (/27)**, porque 2³ − 2 = 6 ≥ 5.
+- b) **204.12.30.206** (.192 + 14).
+- c) **204.12.30.238**: campo de subred en todos 1 ("todas las subredes", RFC 950) más el host 14, o sea 224 + 14. Es una interpretación propia; confirmar con Baró.
+
+**4) Enuncie 4 ventajas de OSPF sobre RIP.**
+
+Respuesta: converge rápido y no tiene cuenta a infinito (conoce la topología completa); usa una métrica por costo y ancho de banda, sin el límite de 15 saltos; escala con áreas; solo envía los cambios, no la tabla completa periódicamente. Además: balanceo ECMP y autenticación.
+
+### Teoría (Medín)
+
+**1) ¿Qué responsabilidades tiene la capa de transporte?**
+
+Respuesta: comunicación extremo a extremo confiable y eficiente entre aplicaciones. Divide en segmentos y reensambla, garantiza entrega ordenada y confiable (TCP), hace control de errores y de flujo, multiplexa por puertos y controla la congestión (solo TCP).
+
+**2) ¿Cómo controla la congestión el protocolo UDP?**
+
+Respuesta: no la controla. No tiene control de congestión ni de flujo: envía al ritmo de la aplicación. Si hace falta control, lo implementa la aplicación.
+
+**3) ¿Qué sucede si UDP detecta un error? ¿Y TCP?**
+
+Respuesta: UDP no retransmite. El documento de preguntas de Medín dice que descarta el datagrama; la diapositiva de UDP de la cátedra dice que avisa a las capas superiores y deja que decidan (ver Unidad 3). TCP detecta el error y retransmite hasta recibir el ACK, manteniendo el orden.
+
+**4) Grafique un ejemplo de conexión 3-way handshake.**
+
+Respuesta:
+```
+Cliente                 Servidor
+   | ---- SYN (seq=x) ------> |
+   | <-- SYN+ACK (seq=y,      |
+   |      ack=x+1) ---------- |
+   | ---- ACK (ack=y+1) ----> |
+   |   conexión establecida   |
+```
+
+**5) Enuncie diferencias entre TCP y UDP.**
+
+Respuesta: TCP es orientado a conexión, confiable (retransmite y ordena), con control de flujo y de congestión, header de 20 B o más y flujo de bytes; se usa en web, correo y transferencias. UDP es sin conexión, sin garantías ni controles, con header de 8 B y mensajes individuales; se usa en voz y video en tiempo real, DNS y DHCP.

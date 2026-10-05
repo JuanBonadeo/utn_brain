@@ -18,7 +18,7 @@
 ## Índice
 1. Unidad 1 — Capa de Enlace: control de flujo y errores
 2. Unidad 2 — Capa de Red: servicios, ruteo, IPv4, congestión y protocolos de control  📌 *(entra en el 2do parcial práctico de Baró. No entran: broadcast/multicast/anycast, jerarquías, móviles, ad-hoc, Control de Congestión ni MPLS)*
-3. Unidad 3 — Capa de Transporte: servicios, características, TCP y UDP  ⚠️ *(FUERA del 1er parcial — queda para el final)*
+3. Unidad 3 — Capa de Transporte: servicios, características, TCP y UDP  ⚠️ *(FUERA del 1er parcial. **Probable 2do teórico de Medín, 27/10**: en 2024 tomó solo Transporte; a confirmar en clase)*
 
 **Cómo está armada cada unidad:** Conceptos clave (repaso rápido) → Desarrollo (por tema del teórico) → Ejercicios resueltos tipo → Dudas / pendientes → Fuentes.
 
@@ -562,6 +562,24 @@ Para 5 hosts hacen falta **3 bits de host** (2³ − 2 = 6 ≥ 5), así que la m
 
 ---
 
+> **Parcial real — 2do parcial PRÁCTICA, Baró, com. 403, 29/10/2024** (`fuentes/Baro-2do-parcial/2º Parcial - 2024-10-29 - Baro y Medin.jpeg`, transcripción a mano de un alumno). Es el antecedente más directo del parcial del 21/10. La parte de teoría de Medín de ese mismo día está en la Unidad 3.
+
+**1) ¿Cuántas subredes distintas se pueden direccionar dentro de una red clase A con máscara 255.255.252.0?**
+Clase A tiene máscara por defecto /8 y 255.255.252.0 es /22, así que hay **14 bits de subred**: 2¹⁴ = 16.384 bloques, y con la convención de la cátedra **16.382 subredes válidas** (2¹⁴ − 2).
+
+**2) Con la IP 10.118.106.51, ¿qué máscara hace que esa dirección sea el host 42.51 de la subred 10.118.64.0?**
+La IP tiene que caer en la subred 10.118.64.0 y estar 42.51 direcciones más arriba: 106.51 − 64.0 = 42.51 ✔. Hay que buscar el salto con el que 106 cae en un bloque que empieza en 64. Con /19 (salto 32) cae en .96 ✘; con /18 (salto 64) cae en [64, 128) ✔. Respuesta: **255.255.192.0 (/18)**.
+
+**3) Una red IP 204.12.30.0 está formada por 5 subredes.**
+- a) **Máscara mínima** que permita direccionarlas unívocamente: 2³ − 2 = 6 ≥ 5, así que son 3 bits de subred: **255.255.255.224 (/27)**. Subredes válidas: .32, .64, .96, .128, .160 y .192.
+- b) **IP destino** de un paquete al **host 14 de la subred 204.12.30.192**: .192 + 14 = **204.12.30.206**.
+- c) **Al host 14 de las 5 subredes simultáneamente:** con la convención clásica (RFC 950), el campo de subred en **todos 1** significa "todas las subredes". Por eso esa subred se descarta como válida. Campo de subred `111` + host 14 (`01110`) = 224 + 14 = **204.12.30.238**. *(Interpretación mía: el enunciado está transcripto a mano y no tiene respuesta oficial. Conviene confirmarlo con Baró.)*
+
+**4) Cuatro ventajas de OSPF sobre RIP.**
+(1) **Converge rápido y no tiene cuenta a infinito**, porque cada router conoce la topología completa. (2) **Mejor métrica**: costo según ancho de banda en vez de solo saltos, y sin el límite de 15 saltos de RIP. (3) **Escala** gracias a la jerarquía en áreas. (4) **Solo envía cambios** (actualizaciones de estado de enlace) en vez de la tabla entera de forma periódica. También: balanceo de carga entre caminos de igual costo (ECMP) y autenticación de mensajes.
+
+---
+
 > **Guía de Estudio de Baró — preguntas tipo de parcial** (`fuentes/Baro-2do-parcial/GUIA DE ESTUDIO DE CAPA DE RED.docx`). Baró dice que **complementan la práctica de problemas**. Al lado de cada pregunta está **dónde está la respuesta en esta wiki**; las marcadas con 🔶 no tienen desarrollo suficiente en las fuentes actuales y requieren Tanenbaum (ver Dudas).
 
 *Protocolo IP – Direcciones IP – Subnetting*
@@ -613,6 +631,7 @@ Para 5 hosts hacen falta **3 bits de host** (2³ − 2 = 6 ≥ 5), así que la m
 - `fuentes/Baro-2do-parcial/GUIA DE ESTUDIO DE CAPA DE RED.docx` (preguntas tipo de parcial)
 - `fuentes/Baro-2do-parcial/8 - Práctica IPV4 resuelto.pdf` (práctica de la cátedra: 29 ejercicios de direccionamiento IPv4; del Drive, `archivo/Material de Cursado/Práctica/`)
 - `fuentes/Baro-2do-parcial/6 - Práctica de Capa de Red.pdf` (práctica de la cátedra: 9 problemas de ruteo y servicios; figuras en `figs/practica6-*`)
+- `fuentes/Baro-2do-parcial/2º Parcial - 2024-10-29 - Baro y Medin.jpeg` (2do parcial real 2024, com. 403: práctica de Baró + teoría de Medín; del Drive, `archivo/Examenes/`)
 - `fuentes/RD/Medin-1er-parcial/Preguntas y Respuestas Parciales de Medin.docx` (preguntas reales)
 - Tanenbaum & Wetherall, *Computer Networks*, 5th ed.
 
@@ -726,7 +745,7 @@ Para 5 hosts hacen falta **3 bits de host** (2³ − 2 = 6 ≥ 5), así que la m
 | Usos | HTTP, FTP, correo, archivos | Voz/video, DNS, DHCP, multicast |
 
 #### Ejercicios resueltos tipo
-> Estos 5 son **preguntas reales** de otro parcial de Medin (Capa de Transporte).
+> Estos 5 son **preguntas reales**: la parte de **teoría de Medín del 2do parcial del 29/10/2024**, com. 403 (`fuentes/Baro-2do-parcial/2º Parcial - 2024-10-29 - Baro y Medin.jpeg`; las respuestas vienen del documento de preguntas de Medín). Es el mejor indicio de que el **2do teórico de Medín (27/10/2026) es de Capa de Transporte** (a confirmar en clase). En 2024 fueron preguntas para desarrollar, no multiple choice.
 
 **1) ¿Qué responsabilidades tiene la capa de transporte?**
 Comunicación **extremo a extremo** confiable y eficiente entre aplicaciones. Funciones: dividir en **segmentos** y reensamblar; entrega **ordenada y confiable** (TCP); **control de errores**; **control de flujo** (según el receptor); **multiplexación** por puertos; **control de congestión** (solo TCP).
@@ -758,3 +777,4 @@ Comunicación **extremo a extremo** confiable y eficiente entre aplicaciones. Fu
 - 2026-10-05: Ingesta del material del **2do parcial práctico de Baró** (dos mails reenviados por Gonza + el de fechas de Medín). Fuentes en `fuentes/Baro-2do-parcial/`: los mails, apunte de Capa de Red, práctica de máscaras de subred y guía de estudio. Unidad 2: nuevo bloque de alcance y fechas (práctica el 21/10 y teoría el 27/10 para el grupo A–Fassine); header IPv4 ampliado con Tipo de Servicio (prioridad, D/T/R), números de protocolo, opciones y fragmentación con ejemplo; tabla de clases y de direcciones especiales; utilidad de los rangos privados; nueva sección *Subnetting a mano* con el caso práctico; tipos ICMP, diagnóstico con ping y tracert; caché ARP; práctica de máscaras resuelta y verificada; guía de Baró mapeada a la wiki. Pendiente: Tanenbaum 5.2/5.6.6/5.6.7 para las preguntas de ruteo marcadas 🔶.
 - 2026-10-05: Ingesta de la **práctica IPv4 resuelta** de la cátedra (del Drive). Unidad 2: convención **subredes válidas = 2ⁿ − 2** en *Subnetting a mano*; ejercicios 1–20 verificados (4 erratas de desarrollo marcadas) y 21–28 resueltos (no venían resueltos). Banco nuevo: `estudio/banco-ejercicios-2do-parcial.md`.
 - 2026-10-05: Ingesta de la **práctica de Capa de Red** de la cátedra (del Drive). Unidad 2, ejercicios: 9 problemas (servicios, QoS, tabla de vector distancia, RPF y sink tree, árbol multicast, TTL, diseño /29), con figuras recortadas en `figs/`. Sumados al banco de ejercicios del 2do parcial.
+- 2026-10-05: Ingesta del **2do parcial real del 29/10/2024** (Baró y Medín, com. 403). Unidad 2: 4 ejercicios de Baró resueltos (subredes en clase A, máscara para un host dado, 5 subredes en 204.12.30.0, OSPF vs RIP). Unidad 3: las 5 preguntas reales identificadas como la teoría de Medín de ese parcial; índice: Transporte como probable 2do teórico (a confirmar). Ambas al banco.
