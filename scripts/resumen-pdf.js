@@ -18,6 +18,9 @@
  * párrafos que empiezan con **N) …** se toman como preguntas (negrita) y todo
  * lo que sigue hasta la próxima pregunta como respuesta (con sangría).
  *
+ * Un "## Respuestas" arranca en página nueva (bancos de ejercicios con las
+ * respuestas al final). Las imágenes se centran y se achican.
+ *
  * Marcas "(Tanenbaum)" / "(conocimiento general)" en itálica salen en gris chico.
  *
  * Números de página del índice: dos pasadas. Se imprime, se lee con pdftotext
@@ -76,7 +79,8 @@ renderer.heading = function ({ tokens, depth, text }) {
   if (depth === 2 || depth === 3) {
     const id = `h${++n}`;
     heads.push({ id, depth, text: strip(text) });
-    return `<h${depth} id="${id}">${inner}</h${depth}>\n`;
+    const cls = depth === 2 && /^respuestas$/i.test(strip(text)) ? ' class="answers"' : '';
+    return `<h${depth} id="${id}"${cls}>${inner}</h${depth}>\n`;
   }
   return `<h${depth}>${inner}</h${depth}>\n`;
 };
@@ -134,6 +138,8 @@ pre code { font-size: inherit; }
 blockquote { margin: 4pt 0 8pt; padding: 0 0 0 7pt; border-left: 1.5pt solid #000; }
 hr { border: 0; border-top: 0.6pt solid #000; margin: 10pt 0; }
 
+h2.answers { break-before: page; margin-top: 0; }
+img { display: block; max-width: 55%; max-height: 62mm; margin: 4pt auto 8pt; }
 .src { font-size: 8.5pt; color: #555; font-style: italic; font-weight: normal; }
 
 /* preguntas y respuestas */
