@@ -96,7 +96,7 @@ utilizado debe declararse como supuesto y someterse a sensibilidad.
 
 La segunda fuente es el horario oficial de la línea Roca publicado por Trenes Argentinos, vigente desde el
 03/08/2026. De los cuatro cuadros horarios que llegan a Plaza Constitución (La Plata, Bosques, Glew/A. Korn
-y Ezeiza/Cañuelas) se extrajeron los arribos de días hábiles: 50 trenes entre las 07:00 y las 09:30, con un
+y Ezeiza/Cañuelas) se extrajeron los arribos de días hábiles: 47 trenes entre las 07:00 y las 09:30, con un
 intervalo mediano de 3 minutos y un máximo de 8. Este dato fija cuándo llegan las oleadas, pero no cuántas
 personas trae cada tren ni qué parte del pasaje se dirige a la Línea C.
 
@@ -137,7 +137,7 @@ servidores y 3 s de servicio produce esperas `0, 0, 3, 3, 6`, espera media 2,4 s
 3, área de cola 12 pasajero-s y ocupación 15 molinete-s.
 
 La demanda de la franja combina datos y supuestos declarados. Los arribos de los trenes surgen del horario
-oficial del Roca (50 trenes hábiles entre las 07:00 y las 09:30, vigente desde el 03/08/2026) y el total por
+oficial del Roca (47 trenes hábiles entre las 07:00 y las 09:30, vigente desde el 03/08/2026) y el total por
 ventana, del perfil de validaciones de SBASE. Una fracción de esa demanda, pendiente de dato, llega en los
 trenes y se reparte entre los que arriban en cada ventana; su pasaje ingresa de forma escalonada durante una
 duración de descarga también pendiente. El resto entra desde la calle con llegadas de Poisson. Los números

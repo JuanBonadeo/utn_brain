@@ -87,6 +87,10 @@ def leer_filas(rutas: list[Path]) -> tuple[dict[str, list[tuple[str, list[str]]]
     return por_tipo, ignoradas
 
 
+# Producción (CSV_PEATONAL) exige cohorte pico no vacía; las demo pueden no cubrir 08:15-08:45. Lo fija main().
+MODO_PRODUCCION = True
+
+
 def convertir(origen: str, campos: list[str]) -> tuple[str, int, list[float]]:
     if len(campos) != 2 + len(CAMPOS):
         raise ErrorCarga(f'{origen}: se esperaban {2 + len(CAMPOS)} campos y hay {len(campos)}')
@@ -117,6 +121,8 @@ def convertir(origen: str, campos: list[str]) -> tuple[str, int, list[float]]:
         raise ErrorCarga(f'{origen}: procesados al corte mayor que con drenaje')
     if valores[12] > generados:
         raise ErrorCarga(f'{origen}: cohorte pico mayor que el total generado')
+    if MODO_PRODUCCION and valores[12] == 0:
+        raise ErrorCarga(f'{origen}: cohorte pico vacía (sus medidas valdrían 0); la franja debe cubrir 08:15-08:45')
     return escenario, semilla, valores
 
 
@@ -215,6 +221,8 @@ def main(argv=None) -> int:
     ap.add_argument('--demo', action='store_true', help='cargar filas CSV_PEATONAL_DEMO en una copia de prueba')
     ap.add_argument('--sobrescribir', action='store_true')
     args = ap.parse_args(argv)
+    global MODO_PRODUCCION
+    MODO_PRODUCCION = not args.demo
 
     try:
         por_tipo, _ = leer_filas(args.entradas)

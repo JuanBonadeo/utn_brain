@@ -393,8 +393,9 @@ Los cuatro valores que siguen sin dato arrancan en `-1` y la inicialización lan
 **Horario del Roca.** Los arribos se extraen de los PDF oficiales de Trenes Argentinos (horarios vigentes
 desde el 03/08/2026), guardados sin modificar en `datos/roca/`. `datos/extraer_arribos_roca.py` toma la
 sección de lunes a viernes, los trenes pares (los que circulan hacia Constitución) y la última columna de
-cada fila. Descarta las lanzaderas Bosques-Gutiérrez y controla que un tren repetido en dos PDF tenga el
-mismo arribo. El resultado, `datos/arribos_roca_constitucion_habiles.csv`, tiene 50 trenes entre las 07:00 y
+cada fila. Descarta las lanzaderas Bosques-Gutiérrez y la lanzadera Cañuelas→Ezeiza (trenes 46xx, que hasta el
+2026-10-05 se colaban como cuatro arribos fantasma) y controla que un tren repetido en dos PDF tenga el
+mismo arribo. El resultado, `datos/arribos_roca_constitucion_habiles.csv`, tiene 47 trenes entre las 07:00 y
 las 09:30 (un tren cada 3 minutos en mediana; hasta 8 minutos sin trenes; cuatro pares de trenes llegan en
 el mismo minuto) de los ramales La Plata, Bosques (vía Quilmes y vía Temperley), Glew/A. Korn y
 Ezeiza/Cañuelas. El verificador comprueba que el arreglo del modelo sea exactamente ese archivo. No se

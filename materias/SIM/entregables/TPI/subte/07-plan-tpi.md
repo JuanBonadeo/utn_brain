@@ -22,7 +22,7 @@ Convención usada en todo el plan:
 1. **El modelo existe, pero ninguna corrida de la franja completa terminó bien.** El único piloto no drenó y además tardó ~43 min. La corrección de las colas invertidas **no está confirmada**. Lo primero es un piloto corto y barato que no necesita datos externos.
 2. **Hallazgo nuevo que invalida E1 tal como está escrito.** En el dataset SBASE 2026 el vestíbulo Principal tiene **22 identificadores de molinete**: `Turn09`-`Turn29`, con tráfico, y `Turn07`, casi sin uso. Los "28 instalados" son el total de la **estación** e incluyen los 7-8 de Plaza [VERIF]. Hay que redefinir E1 (decisión **D1**) antes de producir.
 3. **No hace falta esperar a SBASE, Emova ni Trenes Argentinos.** Hay fuentes citables para acotar el tiempo de validación, la descarga y la marcha: TCQSM 3.ª ed. (TRB), SPSG de London Underground y la cota empírica de SBASE. Con eso se proponen rangos a la cátedra y la respuesta de los organismos queda como mejora, no como requisito.
-4. **Cómputo.** PLE permite corridas en paralelo, pero hoy están desactivadas, y los experimentos tienen 512-1024 MB de memoria [VERIF]. La recomendación es escalonada: primero corregir y medir; después paralelizar y repartir entre dos máquinas. Recién si nada de eso alcanza, acotar el horizonte a la hora pico. La capa lógica queda como plan B.
+4. **Cómputo.** PLE permite corridas en paralelo, pero hoy están desactivadas, y los experimentos tenían 512-1024 MB de memoria [VERIF] (subidos a 4096 MB el 24/09). La recomendación es escalonada: primero corregir y medir; después paralelizar y repartir entre dos máquinas. Recién si nada de eso alcanza, acotar el horizonte a la hora pico. La capa lógica queda como plan B.
 5. **Brechas formales con la consigna:**
    - no hay TeX, pandoc, OBS ni Zoom instalados;
    - las diapositivas son `.pptx`, no Google Slides;
@@ -688,7 +688,7 @@ Si la entrega real es antes de S6, se comprime S4-S5. Lo primero que se sacrific
 | 15 | Faltan experimentos en la lista | 02:212 | Falta `PeatonalFranjaPrueba` |
 | 16 | El corte de E1 a 787 s no aparece | 03:194-200, Log (10) de `SIM.md` | Agregarlo |
 | 17 | "Mínimo 30 pares con ampliación secuencial" | 03:219 contra la planilla, el cargador y el experimento fijos en 30 | T1.5 más §7.3 |
-| 18 | "50 trenes" | 03:99, 06:23 | Con 60 s de demora entran 51 (el de las 06:59): aclarar "50 arribos en la franja; 51 ingresos" |
+| 18 | "50 trenes" | 03:99, 06:23 | Resuelto 2026-10-05: eran 47; el de las 06:59 y otros tres eran la lanzadera Cañuelas→Ezeiza (46xx), ya excluida |
 | 19 | E3 "medible en campo" | 01:116 contra 01:151 y `SIM.md` (sin medición presencial) | Corregir 01 |
 | 20 | `SIM.md` desactualizado | Tabla de datasets ("⏳ medición en campo"), "conseguir horarios del Roca", "próximo hito 23/09" | Actualizar; los horarios ya están desde el 24/09 |
 | 21 | Log de `SIM.md` con entradas del **2026-09-25** (Casermeiro) | `SIM.md`:2771-2788 | Hoy es 24/09 y los commits son del 24/09: corregir la fecha |

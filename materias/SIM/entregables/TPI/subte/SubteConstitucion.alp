@@ -4613,7 +4613,8 @@ nLlegadosMolinetePed++;
 actualizarAreaColaPed();
 ped.enColaPed = true;
 nEsperandoPed++;
-qMaxPed = Math.max(qMaxPed, nEsperandoPed);]]></Body>
+// Igual que Lq, la cola maxima se mide hasta el corte (09:30); el drenaje posterior no cuenta.
+if (time() < horizonteCortePed) qMaxPed = Math.max(qMaxPed, nEsperandoPed);]]></Body>
 				</Function>
 				<Function AccessType="public" StaticFunction="false">
 					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
@@ -5032,6 +5033,9 @@ if (modoFranjaPed) {
     if (proporcionRocaPed < 0 || proporcionRocaPed > 1 || demoraAccesoRocaSeg < 0 || duracionDescargaSeg <= 0 || servicioPedSeg <= 0)
         throw new IllegalArgumentException("Franja peatonal PENDIENTE DE CALIBRACION: completar proporcionRocaPed, "
             + "demoraAccesoRocaSeg, duracionDescargaSeg y servicioPedSeg con mediciones o rangos aprobados");
+    // El horario cargado arranca a las 06:30: una demora mayor a 1800 s dejaria sin trenes la primera ventana.
+    if (demoraAccesoRocaSeg > 1800)
+        throw new IllegalArgumentException("demoraAccesoRocaSeg > 1800 s: el horario del Roca cargado empieza a las 06:30");
     boolean triangular = servicioMinPedSeg >= 0 || servicioMaxPedSeg >= 0;
     if (triangular && !(servicioMinPedSeg > 0 && servicioMinPedSeg <= servicioPedSeg && servicioPedSeg <= servicioMaxPedSeg))
         throw new IllegalArgumentException("Servicio triangular: requiere 0 < servicioMinPedSeg <= servicioPedSeg <= servicioMaxPedSeg");

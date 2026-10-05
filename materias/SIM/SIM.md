@@ -2717,7 +2717,7 @@ subte, y sobre la misma estación.
   planilla con validaciones. Falta incorporar los rangos aprobados, reemplazar la geometría provisoria por
   el plano y ejecutar en el IDE el piloto `PeatonalCorridasDemo`. Mientras tanto la vista usa un **plano
   hipotético** (vestíbulo 70 × 34 m, 28 molinetes lineales en dos bancos, una cola por molinete). La
-  demanda de la franja ya usa el **horario oficial del Roca** (50 trenes hábiles 07:00-09:30) y el perfil
+  demanda de la franja ya usa el **horario oficial del Roca** (47 trenes hábiles 07:00-09:30; corregido el 05/10, había 4 trenes fantasma de la lanzadera Cañuelas→Ezeiza) y el perfil
   SBASE; quedan pendientes la proporción Roca/calle, la demora de acceso, la duración de descarga y el
   tiempo de servicio.
   E2 cuenta el desvío pero todavía no simula la cola de Plaza.
@@ -2774,6 +2774,21 @@ subte, y sobre la misma estación.
 
 ## Log
 
+- **2026-10-05** (3): TPI subte, auditoría del modelo contra el ejemplo oficial y revisión en paralelo
+  (demanda, métricas, experimentos). Corregido y commiteado por partes:
+  - la orientación de las colas, que el IDE había pisado en el commit anterior;
+  - 4 trenes fantasma del Roca: la lanzadera Cañuelas→Ezeiza 46xx; quedan 47 trenes;
+  - el efecto manada en la elección de cola: ahora cuenta a los que van en camino;
+  - la espera de quien pasa directo, que incluía ~32 s de caminata (ahora 0);
+  - el campo 12, renombrado "tiempo de drenaje final" porque no era la disipación por tanda;
+  - la velocidad con generador propio y las semillas mezcladas por flujo, para los números comunes E0/E1;
+  - el fin a 17.900 s, por el tope de 5 h de PLE;
+  - un CSV propio para `PeatonalFranjaPrueba`;
+  - la demora con tope de 1800 s;
+  - la cola máxima cortada a las 09:30;
+  - el cargador, que rechaza una cohorte pico vacía en producción.
+
+  Nada de esto se corrió todavía en el IDE.
 - **2026-10-05** (2): TPI subte, colas de los molinetes. Juan detectó en el IDE que las colas estaban
   giradas. Comparado con el ejemplo oficial *Subway Entrance Hall*: en AnyLogic la cabeza de la cola es el
   **último punto** (flecha hacia el servicio, a 2 m), no el primero. La inversión del 24/09 era incorrecta.

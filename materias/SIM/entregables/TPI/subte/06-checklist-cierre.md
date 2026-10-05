@@ -16,11 +16,11 @@ como completa por haber funcionado con la demostración sintética.
 | Tema, alcance y escenario base | Hecho | Vestíbulo Principal, días hábiles 07:00-09:30, E0 contra E1 |
 | Perfilado de SBASE | Hecho | 117 días hábiles y diez ventanas de 15 minutos reproducibles con `scripts/sbase-perfil.py` |
 | Modelo lógico E0-E3 | Hecho como prototipo | Conservación, cierre 09:30, drenaje y métricas verificados |
-| Capa peatonal E0-E1 | Hecho como prototipo | 28 puestos, configuración 20/28, misma semilla y salida `CSV_PEATONAL` |
+| Capa peatonal E0-E1 | Hecho como prototipo | 28 puestos dibujados (23-28 hipotéticos), configuración 20/22, misma semilla y salida `CSV_PEATONAL` |
 | Compilación AnyLogic 8.9.9 | Hecho | Build correcto el 2026-09-24 |
 | Piloto espacial E0-E1 | Hecho | Ambos escenarios drenaron 480 de 480 peatones y terminaron con cola cero |
 | Extensión peatonal a 07:00-09:30 | Preparada | `modoFranjaPed`, corte a 09:30, drenaje, cohorte pico y conservación; entradas en `-1` bloquean la corrida |
-| Demanda por horario del Roca | Hecha | 50 trenes hábiles 07:00-09:30 extraídos de los PDF oficiales; descarga escalonada, acceso de calle Poisson, servicio triangular y control de caudal por ventana |
+| Demanda por horario del Roca | Hecha | 47 trenes hábiles 07:00-09:30 extraídos de los PDF oficiales; descarga escalonada, acceso de calle Poisson, servicio triangular y control de caudal por ventana |
 | Automatización de 30 pares | Preparada | `PeatonalCorridasApareadas` escribe `corridas_peatonales.csv`; `cargar_corridas.py` valida y carga la planilla |
 | Build con la extensión | Hecho | El IDE regeneró y compiló el modelo el 2026-09-24; `PeatonalCorridasApareadas` terminó en t = 0 sin pasajeros, consistente con el bloqueo por calibración |
 | Piloto de franja completa (valores de prueba) | Ejecutado con hallazgos | E0 no drenó por un atasco de colas (corregido: colas invertidas); una corrida tardó ~43 min; E1 se cortó a 787 s |
@@ -60,7 +60,7 @@ como completa por haber funcionado con la demostración sintética.
 ## Control de cada par de corridas
 
 - E0 y E1 usan la misma semilla, demanda, tiempos de servicio y geometría.
-- La única diferencia del par es `molinetesOperativosPed`: 20 en E0 y 28 en E1.
+- La única diferencia del par es `molinetesOperativosPed`: 20 en E0 y 22 en E1 (28 es la ampliación hipotética E1B, que no se carga).
 - `generados = procesados con drenaje + desviados`; para E0-E1, desviados debe ser cero.
 - El experimento continúa hasta que la cohorte generada antes del corte abandona el sistema.
 - Cada corrida produce exactamente una fila `CSV_PEATONAL`; ninguna queda como `CSV_PEATONAL_INCOMPLETO`.
