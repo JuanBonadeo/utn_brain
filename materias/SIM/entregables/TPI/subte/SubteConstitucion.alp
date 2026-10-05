@@ -3030,7 +3030,7 @@ return (modoDemo ? "DEMO; " : "SIN VALIDAR; ") + "E" + escenario
 			<Id>1791000000001</Id>
 			<Name><![CDATA[MainPeatonal]]></Name>
 			<StartupCode><![CDATA[inicializarPed();
-traceln(modoFranjaPed ? "FRANJA PEATONAL 07:00-09:30 - ENTRADAS PENDIENTES DE CALIBRACION - GEOMETRIA SINTETICA" : "DEMO PEATONAL - GEOMETRIA Y DATOS SINTETICOS");
+traceln(modoFranjaPed ? (pruebaSinteticaPed ? "FRANJA PEATONAL 07:00-09:30 - VALORES DE PRUEBA - PLANO HIPOTETICO" : "FRANJA PEATONAL 07:00-09:30 - RANGOS CON FUENTE (PLAN 5) - PLANO HIPOTETICO") : "DEMO PEATONAL - GEOMETRIA Y DATOS SINTETICOS");
 configurarMolinetesPed();
 if (modoFranjaPed) programarDemandaFranjaPed(); else proximaTandaPed.restart(0);
 cierreMetricasPed.restart(horizonteCortePed);
@@ -4940,7 +4940,7 @@ return acumulada/fin;]]></Body>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[return (modoFranjaPed ? (pruebaSinteticaPed ? "FRANJA PEATONAL - PRUEBA SINTETICA, NO ES RESULTADO" : "FRANJA PEATONAL - ENTRADAS PENDIENTES DE CALIBRACION - PLANO HIPOTETICO") : "DEMO PEATONAL SINTETICA")
+					<Body><![CDATA[return (modoFranjaPed ? (pruebaSinteticaPed ? "FRANJA PEATONAL - PRUEBA SINTETICA, NO ES RESULTADO" : "FRANJA PEATONAL - RANGOS CON FUENTE (PLAN 5) - PLANO HIPOTETICO") : "DEMO PEATONAL SINTETICA")
  + "; corteSeg=" + horizonteCortePed + "; trenes=" + nTrenesPed + "; tandas=" + nTandasPed + "; inyectados=" + nInyectadosPed
  + "; desdeRoca=" + nDesdeRocaPed + "; desdeCalle=" + nDesdeCallePed
  + "; generados=" + nGeneradosPed + "; procesados=" + nProcesadosPed
@@ -6158,7 +6158,7 @@ return String.join(",", partes);]]></Body>
 					<Rotation>0.0</Rotation>
 					<Color>-65536</Color>
 					<Text><![CDATA[PLANO HIPOTÉTICO Y DATOS SINTÉTICOS - NO ES EL PLANO OFICIAL]]></Text>
-					<TextCode><![CDATA[modoFranjaPed ? "PLANO HIPOTÉTICO - ENTRADAS PENDIENTES DE CALIBRACIÓN - NO ES EL PLANO OFICIAL" : "PLANO HIPOTÉTICO Y DATOS SINTÉTICOS - NO ES EL PLANO OFICIAL"]]></TextCode>
+					<TextCode><![CDATA[modoFranjaPed ? "PLANO HIPOTÉTICO - PARÁMETROS POR RANGOS CON FUENTE, SIN MEDICIÓN PROPIA - NO ES EL PLANO OFICIAL" : "PLANO HIPOTÉTICO Y DATOS SINTÉTICOS - NO ES EL PLANO OFICIAL"]]></TextCode>
 					<Font>
 						<Name>SansSerif</Name>
 						<Size>13</Size>
@@ -6599,26 +6599,17 @@ return String.join(",", partes);]]></Body>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>-25</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>25</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>16</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>-9</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>16</X><Y>25</Y><Z>0</Z></Point>
-						<Point><X>16</X><Y>30</Y><Z>0</Z></Point>
-						<Point><X>16</X><Y>5</Y><Z>0</Z></Point>
-						<Point><X>-9</X><Y>30</Y><Z>0</Z></Point>
-						<Point><X>0</X><Y>30</Y><Z>0</Z></Point>
-						<Point><X>25</X><Y>30</Y><Z>0</Z></Point>
-						<Point><X>0</X><Y>5</Y><Z>0</Z></Point>
-						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>0</X><Y>25</Y><Z>0</Z></Point>
 						<Point><X>0</X><Y>-25</Y><Z>0</Z></Point>
+						<Point><X>0</X><Y>25</Y><Z>0</Z></Point>
+						<Point><X>0</X><Y>30</Y><Z>0</Z></Point>
+						<Point><X>0</X><Y>5</Y><Z>0</Z></Point>
+						<Point><X>0</X><Y>55</Y><Z>0</Z></Point>
 					</Points>
 				</Wall>
 				<Wall>
 					<Id>1792000000109</Id>
 					<Name><![CDATA[cabinaControl]]></Name>
-					<X>496</X><Y>360</Y>
+					<X>500</X><Y>360</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -6633,20 +6624,11 @@ return String.join(",", partes);]]></Body>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>-25</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>25</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>24</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>-1</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>24</X><Y>25</Y><Z>0</Z></Point>
-						<Point><X>24</X><Y>20</Y><Z>0</Z></Point>
-						<Point><X>24</X><Y>-5</Y><Z>0</Z></Point>
-						<Point><X>-1</X><Y>20</Y><Z>0</Z></Point>
-						<Point><X>0</X><Y>20</Y><Z>0</Z></Point>
-						<Point><X>25</X><Y>20</Y><Z>0</Z></Point>
-						<Point><X>0</X><Y>-5</Y><Z>0</Z></Point>
-						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>0</X><Y>25</Y><Z>0</Z></Point>
 						<Point><X>0</X><Y>-25</Y><Z>0</Z></Point>
+						<Point><X>0</X><Y>25</Y><Z>0</Z></Point>
+						<Point><X>0</X><Y>20</Y><Z>0</Z></Point>
+						<Point><X>0</X><Y>-5</Y><Z>0</Z></Point>
+						<Point><X>0</X><Y>45</Y><Z>0</Z></Point>
 					</Points>
 				</Wall>
 				<Wall>
@@ -6667,20 +6649,11 @@ return String.join(",", partes);]]></Body>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>-25</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>25</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>16</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>-9</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>16</X><Y>25</Y><Z>0</Z></Point>
-						<Point><X>16</X><Y>10</Y><Z>0</Z></Point>
-						<Point><X>16</X><Y>-15</Y><Z>0</Z></Point>
-						<Point><X>-9</X><Y>10</Y><Z>0</Z></Point>
-						<Point><X>0</X><Y>10</Y><Z>0</Z></Point>
-						<Point><X>25</X><Y>10</Y><Z>0</Z></Point>
-						<Point><X>0</X><Y>-15</Y><Z>0</Z></Point>
-						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>0</X><Y>25</Y><Z>0</Z></Point>
 						<Point><X>0</X><Y>-25</Y><Z>0</Z></Point>
+						<Point><X>0</X><Y>25</Y><Z>0</Z></Point>
+						<Point><X>0</X><Y>10</Y><Z>0</Z></Point>
+						<Point><X>0</X><Y>-15</Y><Z>0</Z></Point>
+						<Point><X>0</X><Y>35</Y><Z>0</Z></Point>
 					</Points>
 				</Wall>
 				<Wall>
