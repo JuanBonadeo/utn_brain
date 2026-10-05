@@ -4,9 +4,20 @@
 >
 > ⚠️ **Alcance del parcial (confirmado 2026-07-21):** es **multiple choice, 10 preguntas**, y entra **solo Capa de Enlace + Capa de Red** (Unidades 1 y 2). La **Unidad 3 (Transporte) NO entra** en este parcial — se conserva para el final. Los **ejercicios reales** de Medin están al final de las Unidades 2 y 3.
 
+> 📌 **2do Parcial — PRÁCTICA, Prof. Germán Baró (mails del 30/09 y 01/10/2026).** Entra **solo Capa de Red = Unidad 2**. Temario por Tanenbaum (5ª ed.), **Cap. 5**:
+> - **5.1** completo (págs. 305-311) — servicios con y sin conexión
+> - **5.2.1 a 5.2.5** (págs. 311-325) — principio de optimalidad, camino más corto, inundación, vector distancia, estado de enlace
+> - **5.6.1 y 5.6.2** (págs. 374-390) — protocolo IP, direcciones IP, subredes
+> - **5.6.4** (págs. 398-403) — protocolos de control (ICMP, ARP, DHCP)
+> - **5.6.6 y 5.6.7** (págs. 405-414) — OSPF y BGP
+>
+> Además: apunte de Baró (ICMP, ARP, comandos ping/tracert), práctica de **máscaras de subred** (problemas) y una **guía de estudio** con preguntas tipo. Todo está en `fuentes/Baro-2do-parcial/`.
+>
+> **Fechas (mail de Medín, 01/10):** si tu apellido va de Aguirre a Fassine (Bonadeo entra acá), rendís **práctica (Baró) el mié 21/10** y **teoría (Medín) el mar 27/10**. Si va después, rendís **teoría el 20/10** y **práctica el 28/10**. Siempre en el horario y aula habituales; **si llegás 10 min tarde, no rendís**. Por ahora **no hay mail sobre el temario del 2do teórico de Medín**.
+
 ## Índice
 1. Unidad 1 — Capa de Enlace: control de flujo y errores
-2. Unidad 2 — Capa de Red: servicios, ruteo, IPv4, congestión y protocolos de control
+2. Unidad 2 — Capa de Red: servicios, ruteo, IPv4, congestión y protocolos de control  📌 *(entra en el 2do parcial práctico de Baró. No entran: broadcast/multicast/anycast, jerarquías, móviles, ad-hoc, Control de Congestión ni MPLS)*
 3. Unidad 3 — Capa de Transporte: servicios, características, TCP y UDP  ⚠️ *(FUERA del 1er parcial — queda para el final)*
 
 **Cómo está armada cada unidad:** Conceptos clave (repaso rápido) → Desarrollo (por tema del teórico) → Ejercicios resueltos tipo → Dudas / pendientes → Fuentes.
@@ -108,6 +119,7 @@
 - **IPv4:** direcciones de 32 bits, header 20–60 bytes, prefijo de red + host, máscara, CIDR, **NAT** + rangos privados, **TTL**.
 - **Congestión (5 etapas):** provisioning → traffic-aware routing → admission control → traffic throttling → load shedding.
 - **Protocolos de control:** **ICMP** (errores/diagnóstico), **ARP** (IP→MAC), **DHCP** (IP dinámica), MPLS, OSPF, BGP.
+- **Foco del 2do parcial de Baró (práctico):** **subnetting a mano** (dirección de red = IP AND máscara; broadcast = IP OR NOT máscara; hosts = 2ʰ − 2), clases y direcciones especiales/privadas, **campos del header IP** (prioridad y bits D/T/R del Tipo de Servicio, opciones *registro de ruta* y *marca de tiempo*, fragmentación), **ARP/ICMP** con ping y tracert, y **ruteo**: tabla de ruteo, ruta default, Sistema Autónomo, IGP, métrica, RIP vs OSPF, áreas, BGP.
 
 #### Desarrollo
 
@@ -167,17 +179,46 @@
 |---|---|---|
 | Versión | 4 bits | IPv4 / IPv6 |
 | IHL (largo de header) | 4 bits | 5 = 20 bytes (mínimo); 15 = 60 bytes (máx.) |
-| Differentiated Services | 1 byte | QoS: 6 bits clase de servicio + 2 bits congestión (ECN) |
-| Total Length | 2 bytes | Largo total; máx **65.535 = 2¹⁶−1** |
-| Identificación | 2 bytes | Para rearmar la secuencia en el receptor |
-| DF (Don't Fragment) | 1 bit | "1" = no fragmentar |
-| MF (More Fragments) | 1 bit | "1" = faltan más fragmentos (0 en el último) |
-| Fragment Offset | 13 bits | Nº de fragmento; máx **8191** |
-| TTL (Time to Live) | 8 bits | −1 por router; máx **255 saltos**; a 0 se descarta y se avisa (evita loops) |
-| Protocol | — | Protocolo de capa 4: **TCP o UDP** |
-| Header Checksum | — | Detecta errores del header; se recalcula en cada router (cambia el TTL) |
+| Differentiated Services (ex **Tipo de Servicio**) | 1 byte | QoS: 6 bits clase de servicio + 2 bits congestión (ECN). Lectura original en el recuadro de abajo |
+| Total Length | 2 bytes | Largo total en bytes; máx **65.535 = 2¹⁶−1** |
+| Identificación | 2 bytes | Junto con origen, destino y protocolo identifica al datagrama. **Todos los fragmentos llevan la misma** |
+| Flags | 3 bits | 1 sin uso + **DF** (*Don't Fragment*; "NF" en el apunte): 1 = prohibido fragmentar; si hace falta, se descarta + **MF** (*More Fragments*): 1 = faltan fragmentos, 0 en el último |
+| Fragment Offset | 13 bits | Posición del fragmento dentro del datagrama original, **en unidades de 8 bytes** (64 bits). Por eso todo fragmento menos el último lleva datos múltiplos de 8. Máx **8191** |
+| TTL (Time to Live) | 8 bits | −1 por router; máx **255 saltos**; a 0 se descarta y se manda **ICMP tipo 11 (tiempo excedido)** al origen (evita loops) |
+| Protocol | 8 bits | Qué lleva en el campo de datos: **1 = ICMP, 2 = IGMP, 6 = TCP, 17 = UDP** |
+| Header Checksum | 16 bits | Verifica **solo el header** (los datos los controlan las capas superiores); se recalcula en cada router porque cambia el TTL. El apunte lo llama "CRC cabecera", pero es una **suma de comprobación** (complemento a uno), no un CRC |
 | Source / Destination | 32 bits c/u | IP origen / destino |
-- **Opciones** (raramente usadas): Security, Strict/Loose source routing, Record route, Timestamp.
+| Opciones + Relleno | 0–40 bytes | Opcionales; el relleno completa hasta múltiplo de 32 bits |
+
+> **Tipo de Servicio, lectura original (RFC 791, la que usa el apunte de Baró y la que pregunta la guía):**
+> - **Prioridad / Precedencia** (3 bits): 0 = baja … 7 = máxima. **Es el subcampo que indica la prioridad del datagrama.**
+> - **Bit D** (*Delay*): pide **bajo retardo** ("enviar rápido").
+> - **Bit T** (*Throughput*): pide **alto rendimiento**, o sea mucho caudal en el menor tiempo ("enviar mucho").
+> - **Bit R** (*Reliability*): pide **alta confiabilidad**, o sea minimizar pérdida o daño ("enviar bien").
+> - 2 bits sin uso.
+>
+> D/T/R son **sugerencias**: cada router las puede respetar o ignorar. Hoy ese byte se redefinió como **DiffServ (6 bits) + ECN (2 bits)**.
+
+- **Opciones** (raramente usadas; pensadas para pruebas y depuración de red):
+  - **Seguridad:** indica qué tan secreto es el datagrama.
+  - **Ruteo estricto desde el origen** (*strict source routing*): el emisor da el camino completo.
+  - **Ruteo libre desde el origen** (*loose source routing*): el emisor da una lista de routers por los que no debe dejar de pasar.
+  - **Registro de ruta** (*record route*): cada router que atraviesa agrega su IP. Sirve para **ver qué camino siguió el paquete**, por ejemplo para depurar ruteo. Como el espacio de opciones es chico, entran pocas direcciones (≈9).
+  - **Marca de tiempo** (*timestamp*): como registro de ruta, pero cada router agrega también **su IP y una marca de 32 bits con la hora**. Sirve para medir demoras por tramo.
+  - Estas dos opciones de diagnóstico se usan con mensajes **ICMP**: `ping -r` manda un *echo* con *record route*; además existen los tipos ICMP 13/14 (*timestamp*).
+
+##### Fragmentación (MTU)
+- **MTU:** la mayor cantidad de datos que entra en una trama de esa red (Ethernet **1500 B**; Token Ring 8192 B). Si el próximo tramo tiene una MTU menor que el datagrama, **el router lo fragmenta**. Cada fragmento es un datagrama nuevo con **la misma Identificación**, su propio Offset y su propio MF.
+- **Solo el destino reensambla.** Los routers intermedios no lo hacen, porque les costaría trabajo y memoria. Los fragmentos pueden llegar desordenados sin problema. Si **DF = 1** y hace falta fragmentar, el router **descarta** el datagrama.
+- *Ejemplo del apunte:* A manda **1400 B de datos** (1420 B en total, con un header de 20 B). Cruza la red 1 (MTU 1500) sin cambios, pero la red 2 tiene **MTU 620**:
+
+```
+Fragmento  Long. total  Datos      Offset en bytes  Offset en el campo (÷8)  MF
+1          620          0–599      0                0                        1
+2          620          600–1199   600              75                       1
+3          220          1200–1399  1200             150                      0
+```
+  ⚠️ El apunte escribe el desplazamiento **en bytes** (0, 600, 1200). En el campo real va **dividido por 8** (0, 75, 150). Si te piden el valor del campo, dividí por 8. Ojo: los datos de cada fragmento salvo el último tienen que ser múltiplo de 8 (600 sí lo es).
 
 ##### Direccionamiento
 - Direcciones de **32 bits (4 bytes)** → **2³² ≈ 4.294 millones**. Se escriben en decimal separando bytes por punto. Cada interfaz (RJ-45) tiene su IP → un router tiene una IP por interfaz.
@@ -185,15 +226,81 @@
 - **Máscara de subred:** todos 1 en el prefijo y 0 en la parte de host; `AND` entre máscara y una IP → da el prefijo de red. *Ej.:* `/24` → `255.255.255.0`.
 
 ##### Clases (hasta 1993, obsoleto) y CIDR (actual)
-- **Clases:** A (prefijo 7 bits, 128 redes, 16M hosts), B (14 bits, 16.384 redes, 65.536 hosts), C (21 bits, 256 hosts), D (**multicast**), E (uso futuro). Prefijo **fijo** por clase.
+- **Clases:** prefijo **fijo** por clase; la clase se reconoce por los **primeros bits**.
+
+| Clase | Primeros bits | Formato (r = red, h = host) | Rango del 1er byte | Redes | Hosts por red | Máscara por defecto |
+|---|---|---|---|---|---|---|
+| A | `0` | r.h.h.h | 0–127 | 128 | 16.777.214 | 255.0.0.0 (/8) |
+| B | `10` | r.r.h.h | 128–191 | 16.384 | 65.534 | 255.255.0.0 (/16) |
+| C | `110` | r.r.r.h | 192–223 | 2.097.152 | 254 | 255.255.255.0 (/24) |
+| D | `1110` | grupo multicast | 224–239 | — | — | — |
+| E | `1111` | reservadas, no se usan | 240–255 | — | — | — |
+
+  Hosts utilizables = 2ʰ − 2, porque se restan la dirección de red y la de broadcast. Por eso la clase C da 254 y no 256.
 - **CIDR (Classless InterDomain Routing):** agrupa prefijos en **superredes** (*route aggregation*, RFC 4632) → una sola entrada en la tabla del router para muchas subredes. Redujo los prefijos a ~200.000 en el mundo (por eso IPv4 "aguantó").
 
 ##### Direcciones especiales · subredes · NAT
-- **Especiales:** `0.0.0.0` (booteo/propia red), `255.255.255.255` (broadcast local), `127.x.x.x` (loopback). IPs **públicas** (únicas, circulan por Internet) vs **privadas** (solo internas). Asigna **ICANN**.
+- **Especiales:** su significado depende del host que las use.
+
+| Bits de red | Bits de host | Significado | Ejemplo |
+|---|---|---|---|
+| todos 0 | todos 0 | Este host (se usa al bootear) | `0.0.0.0` |
+| todos 0 | host | Ese host **dentro de mi red** | `0.0.0.10` |
+| red | todos 0 | **La red** (no se asigna a un host) | `192.168.1.0` |
+| todos 1 | todos 1 | Broadcast a **mi** red | `255.255.255.255` |
+| red | todos 1 | Broadcast a **la red indicada** (*directed broadcast*) | `192.168.1.255` |
+| 127 | cualquiera | **Loopback**: mi propio host; prueba que TCP/IP está instalado | `127.0.0.1` |
+
+- **Públicas vs privadas:** las **públicas** son únicas y visibles en todo Internet; las asigna **ICANN** y se contratan. Las **privadas** solo son visibles dentro de la red propia: salen a Internet a través de un router/proxy/NAT con IP pública, y **desde Internet no se puede llegar a ellas**.
+  - **Para qué sirven los rangos privados (pregunta de la guía):** permiten armar intranets **sin pedir ni pagar IPs públicas** y **sin chocar con ninguna dirección de Internet**, porque esos rangos nunca se asignan a hosts públicos. Además, cualquier organización puede reusar el mismo rango, lo que **ahorra direcciones IPv4**, y los hosts internos quedan **inaccesibles desde afuera**, que es una protección.
+  - **Rangos por clase:** A `10.0.0.0`; B `172.16.0.0`–`172.31.0.0`; C `192.168.0.0`–`192.168.255.0`. En CIDR: `/8`, `/12` y `/16`.
+- **Estáticas vs dinámicas:** una **estática** es siempre la misma; la usan los servidores para ser localizables. Una **dinámica** cambia en cada conexión: el ISP o el DHCP la presta mientras estás conectado, porque el ISP tiene más clientes que direcciones.
+- **Intranet / extranet / Internet:** una intranet es una red privada TCP/IP; una extranet es la unión de dos o más intranets, por líneas dedicadas o a través de Internet; Internet es la mayor red pública TCP/IP.
 - **Subred:** red dentro de otra; cada una con su prefijo → tablas de routers más chicas. Desventaja: si un host cambia de red debe cambiar su IP (la **MAC** no cambia nunca).
 - **NAT (Network Address Translation):** el ISP traduce IPs **privadas** en una pública; las máquinas de una casa se distinguen por el **puerto** (16 bits; puertos 0–1023 reservados, ej. **80 = web**). Rangos privados: **10.0.0.0/8**, **172.16.0.0/12**, **192.168.0.0/16**. Crítica: viola el principio de que una máquina no debería cambiar su IP; con IPv6 se seguiría usando como **firewall**.
 
-> **Subnetting numérico (ej. Universidad de Londres / 128.208.0.0/16):** el teórico trae repartos de direcciones con cálculo de prefijos y máscaras. Es **poco probable** que Medin tome subnetting a mano; alcanza con entender **qué es** el prefijo/máscara/CIDR/NAT.
+##### Subnetting a mano (núcleo del parcial práctico de Baró)
+> Para el 1er parcial de Medin alcanzaba con entender qué son el prefijo, la máscara, CIDR y NAT. **Para Baró sí se calcula a mano**: la práctica de máscaras forma parte del temario.
+
+- **Para qué sirve la máscara:** un host la usa para decidir si el destino está **en su misma subred**, y entonces entrega directo (ARP al destino), o **en otra**, y entonces se lo manda al **gateway/router** (ARP al gateway). Ningún host está aislado: todos tienen IP y máscara. Si no se especifica la máscara, se toma la de su clase.
+- **Las tres operaciones:**
+
+```
+Dirección de red        = IP AND máscara
+Dirección de broadcast  = IP OR (NOT máscara)
+Hosts utilizables       = 2^(bits de host) − 2
+Primer host = red + 1        Último host = broadcast − 1
+```
+
+- **Ejemplo (misma subred o no):** máscara 255.255.0.0.
+```
+148.120.33.110  10010100.01111000.00100001.01101110
+255.255.0.0     11111111.11111111.00000000.00000000
+AND →           148.120.0.0
+148.120.33.89   AND → 148.120.0.0   misma subred: entrega directa
+148.115.89.3    AND → 148.115.0.0   otra subred: va al router
+```
+
+- **Subnetting de una clase C:** se toman bits de host para hacer subredes.
+
+```
+Máscara           Último byte  Subredes  Hosts/subred  Saltos entre subredes
+255.255.255.0     00000000         1         254        —
+255.255.255.128   10000000         2         126        x.0, x.128
+255.255.255.192   11000000         4          62        de 64 en 64
+255.255.255.224   11100000         8          30        de 32 en 32
+255.255.255.240   11110000        16          14        de 16 en 16
+255.255.255.248   11111000        32           6        de 8 en 8
+255.255.255.252   11111100        64           2        de 4 en 4  (enlaces punto a punto)
+255.255.255.254   11111110       128           0        ninguna posible
+```
+  **Truco del salto:** salto = 256 − (byte interesante de la máscara). Las subredes arrancan en múltiplos del salto; el broadcast es el siguiente múltiplo − 1. Con un byte de máscara distinto de 0 o 255 también se parten redes A o B. Por ejemplo, 255.255.192.0 divide una clase B en 4 subredes de 2¹⁴ − 2 = 16.382 hosts.
+
+- **Caso práctico del apunte (diseño):** una empresa tiene contratadas las públicas **194.143.17.8/29** (red .8, broadcast .15, máscara 255.255.255.248, 6 hosts útiles: .9 a .14) y necesita **3 servidores** (correo, web, proxy) **+ 20 PCs**.
+  - **Red pública /29:** router .9 (gateway de los servidores), proxy .10, y web y correo en dos de las restantes (.11–.14). Los servidores y el router van con IP pública para ser accesibles desde Internet.
+  - **Red privada 192.168.1.0/24:** las 20 PCs usan IPs privadas con **gateway 192.168.1.1**, que es la IP privada del **proxy**.
+  - **El proxy tiene dos IPs**, una por red: deja salir a la red privada y **bloquea el acceso desde afuera**.
+  - **Idea:** las IPs públicas son caras, así que solo se le dan a lo que tiene que verse desde Internet.
 
 #### Control de Congestión (capa de red)
 - **Congestión:** retardo excesivo por demasiados paquetes en tránsito. La gestionan **capa 3 y capa 4** en conjunto. Al saturarse los buffers se pierden paquetes → se retransmiten → **empeora**. Más memoria **no** ayuda (Nagle, 1987: memoria infinita empeora el problema).
@@ -227,8 +334,40 @@
 | Ruta alternativa | Existe una mejor ruta al destino |
 | Eco | Lo usa **ping** (responde "echo reply") para ver si un host está vivo |
 
+- **ICMP es de capa 3 (red)**, aunque viaja **encapsulado dentro de un datagrama IP** (campo Protocolo = 1). **Solo informa, no decide**: qué hacer queda en manos de las capas superiores. Si se pierde un mensaje ICMP **no se genera otro ICMP por eso**; simplemente se descarta.
+- **Tipos ICMP** (campo de 8 bits al inicio del mensaje):
+
+```
+Tipo  Mensaje
+0     Respuesta de eco (Echo Reply)            ← ping
+3     Destino inaccesible
+4     Disminución de tráfico (Source Quench)   ← en desuso
+5     Redireccionar (cambio de ruta)
+8     Solicitud de eco (Echo)                  ← ping
+11    Tiempo excedido (TTL = 0)                ← tracert/traceroute
+12    Problema de parámetros
+13/14 Solicitud/Respuesta de marca de tiempo
+17/18 Solicitud/Respuesta de máscara
+(15/16 Solicitud/Respuesta de información: obsoletos)
+```
+
+- **PING:** manda **tipo 8**; el destino contesta **tipo 0**. Comprueba las capas **física, de enlace y de red** (cableado, placas, configuración IP) entre los dos hosts. **No dice nada de transporte ni de aplicación**: el correo puede fallar aunque el ping ande. Algunos hosts tienen el eco desactivado por seguridad.
+  - **Diagnóstico** (A hace `ping B`):
+    - **Respuesta:** el cableado, las placas y la configuración IP están bien, y el router intermedio, si hay uno, deja pasar el tráfico en los dos sentidos.
+    - **Tiempo de espera agotado:** revisar el host B y el cableado hasta B. Si hay router, primero hacé ping al gateway.
+    - **Host de destino inaccesible** (ICMP 3, lo devuelve el gateway): no hay camino. Revisá IP y máscara (¿A y B están en la misma red?) o el **gateway** configurado en A.
+    - **Error:** TCP/IP mal instalado en A. Probá `ping 127.0.0.1`, que testea la pila TCP/IP pero **no la placa de red**.
+  - En una red de redes se hace ping **router por router** para ubicar en qué tramo está la falla.
+- **TRACERT / traceroute:** manda datagramas con **TTL = 1, 2, 3…** (por defecto hasta 30 saltos). Cada router que lleva el TTL a 0 descarta el paquete y devuelve un **ICMP 11**, y así revela su IP. El conjunto de respuestas arma la traza del camino. **Windows `tracert` usa ICMP echo; Unix `traceroute` usa UDP.** Si la comunicación se corta, muestra en qué salto.
+
 ##### ARP (Address Resolution Protocol)
 - Traduce **IP → MAC** en la LAN. Si un host necesita la MAC de una IP, manda un **broadcast** preguntando "¿quién tiene tal IP?"; el dueño responde con su MAC. (RFC 826.) Si el destino está en otra red, se resuelve la MAC del **default gateway** (IP más baja de la red). Clave: las **IP origen/destino son fijas**, las **MAC cambian** en cada LAN.
+- **Para qué se hace una petición ARP (pregunta de la guía):** para averiguar la **dirección física (MAC)** que corresponde a una IP dentro de la LAN, porque la trama Ethernet necesita la MAC de destino y el datagrama solo trae la IP. Si el destino está en otra red, se pregunta por la MAC del **router/gateway**.
+- **Mecánica:** la **pregunta va por broadcast** y lleva la IP y la MAC de quien pregunta. La **respuesta va directa (unicast)** a quien preguntó.
+- **Ejemplo:** A (192.168.0.10) le manda a B (10.10.0.7), que está en otra red. A pregunta por ARP la MAC de **R1** (192.168.0.1) y le manda la trama a esa MAC con el datagrama adentro (IP origen A, IP destino B). Del otro lado, R1 hace ARP para conocer la MAC de B. **Es el mismo datagrama viajando en dos tramas distintas.**
+- **Tabla o caché ARP:** cada host guarda los pares IP↔MAC que va resolviendo, así no repite preguntas. Las entradas tienen un **tiempo de vida** y se borran al vencer, por si cambian la IP o la placa. **Optimización:** como todos escuchan el broadcast, el destino y las demás estaciones pueden anotar al que preguntó sin necesidad de preguntar ellos.
+- **Trama Ethernet**, donde viaja el datagrama: preámbulo (8 B) | MAC destino (6 B) | MAC origen (6 B) | tipo (2 B) | datos (64–1500 B) | CRC (4 B).
+- **BOOTP:** el mail de Baró dice que el apunte lo trata, pero **el apunte que llegó no lo incluye**. *Esto es conocimiento general, no sale de las fuentes:* es el **antecesor de DHCP** y asigna la configuración IP al arrancar, pero de forma **estática** (tabla fija que arma el administrador, sin arriendo). DHCP lo reemplazó. Para más detalle, ver Tanenbaum 5.6.4.
 
 ##### DHCP (Dynamic Host Configuration Protocol)
 - Asigna **IP dinámica**: al encender, la PC manda un **broadcast** pidiendo IP; el servidor DHCP se la asigna con un **tiempo de arriendo** (expira/renueva). También entrega **gateway y DNS**. RFC 2131/2132; reemplazó a **BOOTP y RARP**.
@@ -257,8 +396,86 @@ Las 5: (1) Planificación (*network provisioning*), (2) Ruteo según tráfico (*
 **5) ¿Para qué se emplean ARP, ICMP y DHCP?**
 **ARP:** IP → MAC en la LAN. **ICMP:** informa errores y diagnostica (ping, traceroute). **DHCP:** asigna IP y parámetros (gateway, DNS) automáticamente al conectarse.
 
+---
+
+> **Práctica de Baró — Direcciones IP y máscaras de subred** (`fuentes/Baro-2do-parcial/Práctica Direcciones IP - Máscaras de Subred.docx`). Los resultados son los del apunte; los verifiqué a mano y tienen **una errata**, marcada abajo.
+
+**P1) Red y broadcast con máscara por defecto, o la indicada:**
+```
+IP / máscara                    Red             Broadcast
+18.120.16.250   (A, /8)         18.0.0.0        18.255.255.255
+18.120.16.255   /255.255.0.0    18.120.0.0      18.120.255.255   (.255 al final es un host válido: el host es de 16 bits)
+155.4.220.39    (B, /16)        155.4.0.0       155.4.255.255    ⚠️ el apunte dice 155.24.255.255: errata
+194.209.14.33   (C, /24)        194.209.14.0    194.209.14.255
+190.33.109.133  /255.255.255.0  190.33.109.0    190.33.109.255
+```
+
+**P2) Mi host es 192.168.5.65/24. ¿Qué significan estas direcciones?**
+`0.0.0.0` es mi propio host · `0.0.0.29` es el host .29 de mi red, o sea 192.168.5.29 · `192.168.67.0` es la red 192.168.67.0 · `255.255.255.255` es broadcast a mi red (192.168.5.0) · `192.130.10.255` es broadcast a la red 192.130.10.0 · `127.0.0.1` es loopback, mi propio host.
+
+**P3) Red y broadcast con máscaras no estándar.** Método: pasar a binario **solo el byte "interesante"**, el que en la máscara no es ni 0 ni 255.
+```
+IP / máscara                       Byte IP    Byte másc.  Red              Broadcast
+190.33.109.133 /255.255.255.128    10000101   10000000    190.33.109.128   190.33.109.255
+192.168.20.25  /255.255.255.240    00011001   11110000    192.168.20.16    192.168.20.31
+192.168.20.25  /255.255.255.224    00011001   11100000    192.168.20.0     192.168.20.31
+192.168.20.25  /255.255.255.192    00011001   11000000    192.168.20.0     192.168.20.63
+140.190.20.10  /255.255.192.0      00010100   11000000    140.190.0.0      140.190.63.255
+140.190.130.10 /255.255.192.0      10000010   11000000    140.190.128.0    140.190.191.255
+140.190.220.10 /255.255.192.0      11011100   11000000    140.190.192.0    140.190.255.255
+```
+Con el truco del salto: /255.255.192.0 da salto 256 − 192 = 64 en el 3er byte, así que las subredes son .0, .64, .128 y .192. El 130 cae en [128, 192), con red .128.0 y broadcast .191.255.
+
+**P4) Los hosts públicos de una empresa van de 194.143.17.145 a 194.143.17.158. ¿Red, broadcast y máscara?**
+```
+145 = 1001 0001
+158 = 1001 1110
+      ^^^^ los 4 bits en común son la parte de red; los últimos 4 son de host
+red = 1001 0000 = 144     broadcast = 1001 1111 = 159
+```
+Red **194.143.17.144**, broadcast **194.143.17.159**, máscara **255.255.255.240** (/28, 14 hosts: .145 a .158 ✔).
+
+**P5) Caso práctico de diseño** (194.143.17.8/29 + 20 PCs privadas detrás de un proxy): está resuelto en *Subnetting a mano*, más arriba.
+
+---
+
+> **Guía de Estudio de Baró — preguntas tipo de parcial** (`fuentes/Baro-2do-parcial/GUIA DE ESTUDIO DE CAPA DE RED.docx`). Baró dice que **complementan la práctica de problemas**. Al lado de cada pregunta está **dónde está la respuesta en esta wiki**; las marcadas con 🔶 no tienen desarrollo suficiente en las fuentes actuales y requieren Tanenbaum (ver Dudas).
+
+*Protocolo IP – Direcciones IP – Subnetting*
+1. ¿Qué campo/subcampo de la cabecera IP indica la **prioridad**? → Tipo de Servicio, subcampo **Prioridad (3 bits)**. Ver *Encabezamiento IPv4*.
+2. ¿Qué finalidad tiene el **bit T** del Tipo de Servicio? → pedir **alto throughput**. Ver *Encabezamiento IPv4*.
+3. ¿Para qué sirve la opción **registro de ruta**? → registra las IP de los routers por los que pasa, para depurar el camino. Ver *Encabezamiento IPv4*, Opciones.
+4. ¿Para qué se definen **rangos privados** en cada clase? → Ver *Direcciones especiales · subredes · NAT*.
+
+*Protocolos de Control de Internet*
+1. ¿Con qué finalidad se hace una **petición ARP** en una LAN? → Ver *ARP*.
+2. ¿A qué capa OSI pertenece **ICMP**? → **Capa 3 (red)**, aunque viaja dentro de IP. Ver *ICMP*.
+3. Con las opciones **registro de ruta** y **marca de tiempo**, ¿qué protocolo de control se usa? → **ICMP**. Ver *Encabezamiento IPv4*, Opciones.
+
+*Protocolos de Ruteo*
+1. Defina **ruteo** en Internet. → Ver *Ruta Óptima Origen-Destino*. 🔶 Falta una definición formal (Tanenbaum 5.2).
+2. ¿Qué es una **tabla de ruteo**? ¿Quién la arma? → 🔶 Solo mencionada ("tabla interna" del router).
+3. ¿Qué es una **ruta default** y por qué existe en la tabla? → 🔶 No está desarrollado.
+4. ¿Qué es un **Sistema Autónomo** y cómo está conformado? → Mencionado en *Estructura de Internet* y *OSPF/BGP*. 🔶 Falta la definición.
+5. ¿Qué es un **IGP**? Funciones y entorno. → OSPF y RIP son intradominio. 🔶 Falta el término "IGP" y sus funciones.
+6. Diferencia operativa entre **vector distancia** y **estado de enlace**. → Ver *Vector Distancia* y *Estado de Enlaces*.
+7. ¿Qué es una **métrica**? Ejemplos. → Saltos, retardo, costo y ancho de banda; ver *Ruta Óptima* y *Estado de Enlaces*.
+8. ¿En qué entorno trabaja **RIP**? → Vector distancia, **intradominio (IGP)**, para redes chicas (máx. 15 saltos). 🔶 Ampliar con Tanenbaum.
+9. Principios de **OSPF** y ventajas sobre vector distancia. → Ver *Estado de Enlaces* y *OSPF*.
+10. ¿Qué significa que OSPF reconoce **jerarquías de ruteo**? → Áreas + backbone (área 0). Ver *OSPF*. 🔶 Ampliar.
+11. ¿Qué es un **área** y qué **tipos de áreas** hay? → 🔶 Solo backbone/área 0; faltan los tipos (backbone, stub, etc.).
+12. ¿En qué consiste **BGP**, en qué entorno se aplica y qué filosofía usa? → Ver *BGP*: interdominio, políticas, path vector.
+13. ¿Cómo se componen los **paquetes de estado de enlace** en OSPF? → 🔶 No está desarrollado (identidad del emisor, nº de secuencia, edad y lista de vecinos con costos; Tanenbaum 5.2.5).
+14. ¿Qué es un **grafo** en OSPF y para qué se arma? → 🔶 No está desarrollado. Es el mapa de la topología armado con los LSP, sobre el que se corre Dijkstra.
+15. ¿Cuáles son los **5 pasos** de OSPF para aprender y difundir rutas óptimas? → Ver *Estado de Enlaces*, los 5 pasos.
+
 #### Dudas / pendientes
 - Confirmar con Medin si toma el **diagrama de ISP** dibujado a mano o basta describirlo.
+- **2do parcial Baró:** faltan las secciones de **Tanenbaum 5.2.1–5.2.5, 5.6.6 y 5.6.7**, base de las preguntas 🔶 de ruteo de la guía: tabla de ruteo, ruta default, SA, IGP, tipos de área, LSP, grafo. **No hay PDF del libro en el repo.** Baró ofrece mandarlo si se le pide; si no, mirar `archivo/Resumenes/` ("Resumen Tanenebaum.pdf", "Redes Resumen 2024 Parcial 2.pdf", "Resumen para 2º parcial") y copiar lo útil a `fuentes/`.
+- **Inundación (*flooding*) como algoritmo de ruteo (5.2.3):** acá solo aparece como método de broadcast. Falta desarrollarla como algoritmo de ruteo en sí.
+- **BOOTP:** el mail lo anuncia en el apunte, pero el apunte que llegó no lo trae.
+- **Erratas del apunte de Baró:** (a) dice que un ping a un host inexistente devuelve "ICMP tipo 11". En la práctica, si el host no contesta **no llega ningún ICMP** y el ping solo muestra "tiempo de espera agotado"; el tipo 11 aparece cuando el TTL llega a 0. (b) Llama "CRC" al checksum del header. (c) Escribe el desplazamiento de fragmento en bytes en vez de en unidades de 8 bytes. (d) La errata de P1 (155.24 por 155.4).
+- **Diferencia entre fuentes:** el apunte de Baró describe el byte 2 del header como **Tipo de Servicio** (prioridad + D/T/R); las diapositivas de Medin y Tanenbaum 5ª ed. lo describen como **Differentiated Services + ECN**. Para el parcial de Baró, contestá con la versión de ToS, que es la que pregunta la guía.
 
 #### Fuentes
 - `fuentes/RD/Medin-1er-parcial/1 - Capa de Red - Servicios y distribución.pdf`
@@ -267,6 +484,10 @@ Las 5: (1) Planificación (*network provisioning*), (2) Ruteo según tráfico (*
 - `fuentes/RD/Medin-1er-parcial/4 - Capa de Red - Control de Congestión.pdf`
 - `fuentes/RD/Medin-1er-parcial/6 - Capa de Red - Protocolos de control.pdf`
 - `fuentes/RD/Medin-1er-parcial/Capa de Red.pdf` (compilado de los anteriores)
+- `fuentes/Baro-2do-parcial/mails-temario-y-fechas.md` (temario por páginas de Tanenbaum + fechas del 2do parcial)
+- `fuentes/Baro-2do-parcial/Apunte 2do parcial (Capa de Red).docx` (TCP/IP, direcciones, máscaras, datagrama IP, fragmentación, ARP, ICMP, ping, tracert)
+- `fuentes/Baro-2do-parcial/Práctica Direcciones IP - Máscaras de Subred.docx` (es un extracto del apunte: §2.2–2.3 + ejercicios)
+- `fuentes/Baro-2do-parcial/GUIA DE ESTUDIO DE CAPA DE RED.docx` (preguntas tipo de parcial)
 - `fuentes/RD/Medin-1er-parcial/Preguntas y Respuestas Parciales de Medin.docx` (preguntas reales)
 - Tanenbaum & Wetherall, *Computer Networks*, 5th ed.
 
@@ -409,3 +630,4 @@ Comunicación **extremo a extremo** confiable y eficiente entre aplicaciones. Fu
 
 ## Log
 - 2026-07-21: Ingesta inicial del material del 1er parcial de Medin (10 PDFs de teórico + doc de preguntas). Se crearon las 3 unidades (Enlace, Red, Transporte) y el índice. Fuentes en `fuentes/RD/Medin-1er-parcial/`. Ajuste: parcial de Medin es conceptual → ejercicios tipo = preguntas reales; cálculos numéricos marcados como poco probables.
+- 2026-10-05: Ingesta del material del **2do parcial práctico de Baró** (dos mails reenviados por Gonza + el de fechas de Medín). Fuentes en `fuentes/Baro-2do-parcial/`: los mails, apunte de Capa de Red, práctica de máscaras de subred y guía de estudio. Unidad 2: nuevo bloque de alcance y fechas (práctica el 21/10 y teoría el 27/10 para el grupo A–Fassine); header IPv4 ampliado con Tipo de Servicio (prioridad, D/T/R), números de protocolo, opciones y fragmentación con ejemplo; tabla de clases y de direcciones especiales; utilidad de los rangos privados; nueva sección *Subnetting a mano* con el caso práctico; tipos ICMP, diagnóstico con ping y tracert; caché ARP; práctica de máscaras resuelta y verificada; guía de Baró mapeada a la wiki. Pendiente: Tanenbaum 5.2/5.6.6/5.6.7 para las preguntas de ruteo marcadas 🔶.
