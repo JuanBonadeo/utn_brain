@@ -3620,7 +3620,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				</Variable>
 				<Variable Class="PlainVariable">
 					<Id>1793000000034</Id>
-					<Name><![CDATA[enCaminoPed]]></Name>
+					<Name><![CDATA[asignadosPed]]></Name>
 					<X>1250</X><Y>1010</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
@@ -4608,8 +4608,7 @@ tAreaColaPed = ahora;]]></Body>
 						<Name><![CDATA[ped]]></Name>
 						<Type><![CDATA[Pasajero]]></Type>
 					</Parameter>
-					<Body><![CDATA[llegaAColaPed(ped);
-nLlegadosMolinetePed++;
+					<Body><![CDATA[nLlegadosMolinetePed++;
 actualizarAreaColaPed();
 ped.enColaPed = true;
 nEsperandoPed++;
@@ -4644,7 +4643,7 @@ return z ^ (z >>> 31);]]></Body>
 					<ReturnModificator>VOID</ReturnModificator>
 					<ReturnType><![CDATA[void]]></ReturnType>
 					<Id>1793000000036</Id>
-					<Name><![CDATA[llegaAColaPed]]></Name>
+					<Name><![CDATA[liberaAsignacionPed]]></Name>
 					<X>1500</X><Y>78</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
@@ -4654,9 +4653,9 @@ return z ^ (z >>> 31);]]></Body>
 						<Name><![CDATA[ped]]></Name>
 						<Type><![CDATA[Pasajero]]></Type>
 					</Parameter>
-					<Body><![CDATA[// El pasajero llego a la cola (o al molinete): deja de contar como "en camino".
+					<Body><![CDATA[// El pasajero empezo a validar (o se reasigna): deja de contar en el molinete que eligio.
 if (ped.colaElegidaPed >= 0) {
-    enCaminoPed[ped.colaElegidaPed]--;
+    asignadosPed[ped.colaElegidaPed]--;
     ped.colaElegidaPed = -1;
 }]]></Body>
 				</Function>
@@ -4698,7 +4697,7 @@ actualizarTransitoPed();]]></Body>
 					<Body><![CDATA[// Quien empieza a validar sin haber pasado por la cola llega al molinete en este instante
 // y su espera es 0. tEntradaColaPed solo vale si el pasajero entro a la cola: si no, conserva
 // la hora de entrada al bloque (en el acceso, a ~41 m) y la "espera" seria la caminata.
-llegaAColaPed(ped);
+liberaAsignacionPed(ped);
 boolean hizoCola = ped.enColaPed;
 if (!hizoCola) nLlegadosMolinetePed++;
 if (hizoCola) {
@@ -5223,28 +5222,26 @@ return inicioRealMsPed <= 0 ? 0 : (System.currentTimeMillis() - inicioRealMsPed)
 						<Type><![CDATA[Pasajero]]></Type>
 					</Parameter>
 					<Body><![CDATA[// Supuesto de comportamiento (plano hipotetico): cada pasajero elige, entre los molinetes
-// habilitados, la cola que minimiza el desvio lateral a 1,3 m/s mas la espera estimada por
-// las personas que ya estan en ella Y las que ya la eligieron y van caminando hacia ella
-// (enCaminoPed). Sin ese conteo, todo el pasaje de un tren elige la misma cola vacia antes de
-// que llegue el primero (efecto manada). Los molinetes suspendidos nunca se eligen.
-if (ped.colaElegidaPed >= 0) {
-    enCaminoPed[ped.colaElegidaPed]--;
-    ped.colaElegidaPed = -1;
-}
+// habilitados, la cola que minimiza el desvio lateral a 1,3 m/s mas la espera estimada por las
+// personas ya asignadas a ese molinete que todavia no empezaron a validar (asignadosPed: las que
+// van caminando y las que estan en la fila). Se usa un contador propio y no queueSize(): el piloto
+// del 2026-10-05 mostro colas de 40 personas junto a molinetes habilitados sin uso (efecto manada).
+// Los molinetes suspendidos nunca se eligen.
+liberaAsignacionPed(ped);
 java.util.List<QueuePath> colas = molinetesPeatonales.getQueues();
 int mejor = -1;
 double mejorCosto = Double.MAX_VALUE;
 for (int i = 0; i < molinetesOperativosPed && i < colas.size(); i++) {
     QueuePath cola = colas.get(i);
     double desvioSeg = Math.abs(ped.getY() - cola.getEndPoint().y) / 10.0 / 1.3;
-    double costo = desvioSeg + (molinetesPeatonales.queueSize(cola) + enCaminoPed[i]) * ped.servicioAsignadoPed;
+    double costo = desvioSeg + asignadosPed[i] * ped.servicioAsignadoPed;
     if (costo < mejorCosto) {
         mejorCosto = costo;
         mejor = i;
     }
 }
 if (mejor < 0) throw new IllegalStateException("No hay molinetes habilitados");
-enCaminoPed[mejor]++;
+asignadosPed[mejor]++;
 ped.colaElegidaPed = mejor;
 return colas.get(mejor);]]></Body>
 				</Function>

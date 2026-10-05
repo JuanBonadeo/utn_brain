@@ -144,18 +144,23 @@ public static void main(String[] args) throws Exception {
  ok(m.elegirColaPed(sur)==m.molinetesPeatonales.colas.get(19),"E0 elige el habilitado mas cercano (20)");
  sur.colaElegidaPed=-1;ok(e1.elegirColaPed(sur)==e1.molinetesPeatonales.colas.get(21),"E1 usa hasta el 22");
  sur.colaElegidaPed=-1;ok(e1b.elegirColaPed(sur)==e1b.molinetesPeatonales.colas.get(27),"la ampliacion puede usar el 28");
- m.molinetesPeatonales.colas.get(19).size=3;
- sur.colaElegidaPed=-1;m.enCaminoPed=new int[28];ok(m.elegirColaPed(sur)==m.molinetesPeatonales.colas.get(18),"una cola ocupada desvia al molinete vecino");
- m.molinetesPeatonales.colas.get(19).size=0;
+ m.asignadosPed=new int[28];m.asignadosPed[19]=3;
+ sur.colaElegidaPed=-1;ok(m.elegirColaPed(sur)==m.molinetesPeatonales.colas.get(18),"una cola ocupada desvia al molinete vecino");
+ m.asignadosPed=new int[28];
  // Efecto manada: con colas vacias, cinco pasajeros del mismo tren no eligen todos la misma cola,
- // porque cada eleccion cuenta a los que ya van en camino; al llegar a la cola dejan de contar.
+ // porque cada eleccion cuenta a los asignados que todavia no empezaron a validar (caminando o en fila).
  {SubtePedLogicCheck h=new SubtePedLogicCheck();h.molinetesOperativosPed=22;for(QueuePath q:m.molinetesPeatonales.colas)h.molinetesPeatonales.colas.add(q);
   java.util.HashSet<QueuePath> elegidas=new java.util.HashSet<QueuePath>();Pasajero[] tanda=new Pasajero[5];
   for(int i=0;i<5;i++){tanda[i]=new Pasajero();tanda[i].y=360;tanda[i].servicioAsignadoPed=2.4;elegidas.add(h.elegirColaPed(tanda[i]));}
   ok(elegidas.size()==5,"la tanda se reparte entre colas: "+elegidas.size());
-  int total=0;for(int c:h.enCaminoPed)total+=c;ok(total==5,"cinco en camino");
-  h.elegirColaPed(tanda[0]);total=0;for(int c:h.enCaminoPed)total+=c;ok(total==5,"re-elegir no duplica el conteo");
-  h.llegaAColaPed(tanda[0]);h.llegaAColaPed(tanda[0]);total=0;for(int c:h.enCaminoPed)total+=c;ok(total==4 && tanda[0].colaElegidaPed==-1,"al llegar deja de estar en camino (una sola vez)");}
+  int total=0;for(int c:h.asignadosPed)total+=c;ok(total==5,"cinco asignados");
+  h.elegirColaPed(tanda[0]);total=0;for(int c:h.asignadosPed)total+=c;ok(total==5,"re-elegir no duplica el conteo");
+  h.clock=1;tanda[1].tEntradaColaPed=1;h.entraColaPed(tanda[1]);total=0;for(int c:h.asignadosPed)total+=c;ok(total==5,"en la fila sigue contando");
+  // Con 40 asignados en el molinete mas cercano, el siguiente va a otro aunque quede a 10 m.
+  for(int i=0;i<40;i++){Pasajero x=new Pasajero();x.y=360;x.servicioAsignadoPed=2.4;h.asignadosPed[13]++;}
+  Pasajero otro=new Pasajero();otro.y=360;otro.servicioAsignadoPed=2.4;ok(h.elegirColaPed(otro)!=h.molinetesPeatonales.colas.get(13),"no se suma a una fila de 40");
+  h.liberaAsignacionPed(tanda[0]);h.liberaAsignacionPed(tanda[0]);ok(tanda[0].colaElegidaPed==-1,"liberar dos veces es inocuo");
+  h.clock=5;tanda[1].nombreMolinetePed="molinetePed10";int antes=0;for(int c:h.asignadosPed)antes+=c;h.comienzaServicioPed(tanda[1]);int despues=0;for(int c:h.asignadosPed)despues+=c;ok(despues==antes-1,"al empezar a validar se libera");}
  // Demo: corte de metricas en horizonteMetricasPedSeg y semilla efectiva semillaPed.
  m.inicioPicoPedSeg=0;m.finPicoPedSeg=10;m.inicializarPed();
  eq(m.horizonteCortePed,600,"corte demo");ok(m.rng.seed==20260923L,"semilla efectiva");
