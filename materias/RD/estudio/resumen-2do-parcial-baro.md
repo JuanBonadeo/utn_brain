@@ -123,7 +123,15 @@ Frag  Long.total  Datos       Desplaz.(bytes)  Campo(÷8)  MF
 2     620         600–1199    600              75         1
 3     220         1200–1399   1200             150        0
 ```
-**Ojo:** El apunte escribe el desplazamiento en **bytes**. El valor real del campo es ese número **dividido 8**.
+**Ojo:** El apunte escribe el desplazamiento en **bytes**. El valor real del campo es ese número **dividido 8**. El TP de comandos de red de Baró lo usa así.
+
+*Ejemplo (TP de comandos de red):* 1000 B de datos, con un máximo de 256 B por datagrama. Entrarían 236 B de datos, pero tiene que ser múltiplo de 8, así que **232 B**.
+```
+Frag   Long.total  Desplaz.  MF
+1–4    252         0 · 29 · 58 · 87    1
+5      92          116                0
+```
+Viajan 1100 B en vez de 1020. El TP pone 72 como longitud del último fragmento, pero esos son los datos: la longitud total es 92.
 
 ## Direcciones IP y subnetting
 
@@ -182,8 +190,12 @@ Máscara           /    Subredes  Hosts  Salto
 ```
 **Para elegir la máscara:**
 
-- **Por cantidad de subredes:** tomá *n* bits prestados tal que 2ⁿ ≥ subredes.
+- **Por cantidad de subredes:** tomá *n* bits prestados tal que **2ⁿ − 2 ≥ subredes**.
 - **Por cantidad de hosts:** dejá *h* bits de host tal que 2ʰ − 2 ≥ hosts.
+
+**Convención de la cátedra: subredes válidas = 2ⁿ − 2.** Así como en cada subred no se usan la dirección de red ni la de broadcast, la práctica resuelta de Baró **descarta también la primera subred (bits de subred en 0) y la última (bits de subred en 1)**. Por ejemplo, /28 sobre una clase C da 16 bloques, pero **14 subredes válidas**; /30 da **62**. Hoy los equipos usan todas, pero las respuestas del parcial salen con −2. Cuando piden "la subred N": subred N = red base + N × salto.
+
+**Host H de una subred:** se suma H a la dirección de la subred. Si H es mayor que 255, se descompone: H = 256·q + r, y se suma q al 3er byte y r al 4to. Por ejemplo, el host 1312 de 153.15.8.0: 1312 = 5·256 + 32, así que da 153.15.13.32.
 
 **Problema inverso** (te dan el rango de hosts y piden la red): pasá a binario el primero y el último. Los **bits en común** son la red y el resto es el host. Ejemplo: .145 a .158 → `1001 0001` / `1001 1110` → 4 bits en común → red **.144**, broadcast **.159**, máscara **255.255.255.240**.
 
@@ -214,7 +226,14 @@ Máscara           /    Subredes  Hosts  Salto
 - **Tiempo agotado:** revisar el host destino y el cableado. Si hay un router en el medio, hacé ping al gateway primero.
 - **Host inaccesible** (ICMP 3): IP o máscara mal (no están en la misma red), o el gateway mal configurado.
 - **Error:** la pila TCP/IP del host está mal. Se prueba con `ping 127.0.0.1`.
-- **TRACERT / traceroute** manda paquetes con **TTL = 1, 2, 3…** (hasta 30). Cada router que lleva el TTL a 0 devuelve un **ICMP 11** con su IP, y así se arma el camino salto a salto. **Windows usa ICMP echo y Unix usa UDP.**
+- **TRACERT / traceroute** manda paquetes con **TTL = 1, 2, 3…** (hasta 30). Cada router que lleva el TTL a 0 devuelve un **ICMP 11** con su IP, y así se arma el camino salto a salto. Muestra 3 tiempos por salto. Un asterisco en un salto intermedio suele ser un router que no contesta ICMP, no una falla. **Windows usa ICMP echo y Unix usa UDP.**
+
+**Comandos de red (TP de Baró):**
+
+- **`ping`:** por defecto manda 4 ecos. **`-f`** activa "no fragmentar", **`-r N`** registra la ruta, **`-s N`** registra la hora, `-i` fija el TTL, `-v` el Tipo de Servicio, `-n` la cantidad y `-t` hace que no pare.
+- **`ipconfig`:** muestra IP, máscara y gateway. `/all` muestra todo (DNS, WINS). **`/release` y `/renew`** liberan y renuevan la IP, y **solo funcionan con DHCP**.
+- **`arp -a`:** muestra la caché ARP. `arp -d` borra una entrada y **`arp -s <ip> <mac>`** agrega una **estática**.
+- **`netstat`:** muestra conexiones TCP/IP. **`-a`** muestra las conexiones y los puertos en escucha, `-n` lo muestra numérico, **`-r` muestra la tabla de rutas**, `-s` da estadísticas por protocolo y `-e` estadísticas Ethernet.
 
 ### ARP: de IP a MAC
 - **Para qué** (pregunta de la guía): para conocer la **MAC** que corresponde a una IP **dentro de la LAN**. La trama Ethernet necesita la MAC de destino y el datagrama solo trae la IP. Si el destino está en otra red, se averigua la MAC del **gateway**.
@@ -225,7 +244,8 @@ Máscara           /    Subredes  Hosts  Salto
 
 ### DHCP y BOOTP
 - **DHCP:** al arrancar, el host pide configuración por **broadcast**. El servidor le asigna IP con un **tiempo de arriendo** y además le pasa **máscara, gateway y DNS**.
-- **BOOTP** es su antecesor. *(conocimiento general)* Asignaba la configuración al bootear desde una tabla **fija** que cargaba el administrador, sin arriendo. DHCP lo reemplazó (junto con RARP).
+- **BOOTP** es su antecesor. Asignaba la configuración al bootear desde una **base de datos que cargaba a mano el administrador**, sin asignación dinámica ni arriendo. DHCP se basa en BOOTP y le agrega el **arriendo** (*lease*), que permite recuperar y reasignar direcciones.
+- **Los dos viajan sobre UDP, puertos 67 (servidor) y 68 (cliente)**, y se pueden rutear: el router hace de agente de reenvío. **RARP** solo daba la IP y servía para una sola LAN.
 
 ## OSPF y BGP
 
@@ -265,9 +285,10 @@ Máscara           /    Subredes  Hosts  Salto
 **Área y tipos de área:** *(Tanenbaum)* un área es una **parte del SA**, una red o un grupo de redes contiguas.
 
 - **Backbone (área 0):** las conecta a todas. Toda área tiene que estar conectada al backbone.
-- **Stub (área terminal):** tiene **una sola salida**, así que no recibe las rutas externas y usa una **ruta default**.
+- **Stub (área aislada):** tiene **un solo router de frontera**, así que toda ruta hacia afuera empieza con "ir al router de frontera" (una **ruta default**). Ni siquiera necesita recibir los resúmenes de las demás áreas.
 - **Áreas comunes:** las demás.
-- **Routers** *(Tanenbaum)*: **internos** (todo dentro de un área), **de borde de área** (conectan su área con el backbone), **del backbone** y **de frontera del SA** (hablan con otros SA).
+- **Routers** *(Tanenbaum)*: **internos** (todo dentro de un área), **del backbone** (área 0), **de frontera de área** (conectan dos o más áreas y **también forman parte del backbone**; resumen los destinos de su área con su costo y no pasan la topología) y **de límite del SA** (inyectan las rutas hacia otros SA).
+- Las áreas **no se superponen**. Desde afuera de un área **se ven sus destinos, pero no su topología**.
 
 ### BGP
 - **En qué consiste:** es el protocolo de ruteo **interdominio**, **entre Sistemas Autónomos**. Lo corren los **routers frontera**, que establecen **conexiones TCP** entre sí.
@@ -426,22 +447,50 @@ Con los paquetes de estado de enlace que recibe de todos los routers, **cada rou
 Intentalos antes de mirar las respuestas, que están al final de la sección.
 
 **E1.** 172.16.45.200 / 255.255.240.0. ¿Red, broadcast, rango de hosts y cantidad?
+
 **E2.** 10.25.130.7 / 255.255.255.192. ¿Red y broadcast?
+
 **E3.** ¿Están 192.168.1.70 y 192.168.1.130 en la misma subred con máscara /25?
+
 **E4.** Hay que dividir 192.168.10.0/24 en **6 subredes**. ¿Qué máscara usás? Listá las subredes.
+
 **E5.** Desde 200.10.5.0/24 se necesitan subredes de **50 hosts** cada una. ¿Qué máscara usás, cuántas subredes salen y cuáles son?
+
 **E6.** Los hosts de una red van de 200.1.1.65 a 200.1.1.94. ¿Red, broadcast y máscara?
+
 **E7.** ¿De qué clase es cada una? ¿Es pública o privada? 130.5.2.1 · 223.1.1.1 · 10.0.0.1 · 172.32.1.1 · 172.20.1.1
+
 **E8.** Un datagrama de **4000 B en total** (header de 20 B) tiene que cruzar una Ethernet (MTU 1500). Armá los fragmentos con su longitud total, el valor del campo desplazamiento y MF.
+
 **E9.** Hacés ping a un host de otra red y te devuelve "Host de destino inaccesible" desde 192.168.0.1. ¿Qué mensaje ICMP es, quién lo genera y qué revisás?
+
+**Parcial real de Baró (29/10/2024):**
+
+**E10.** ¿Cuántas subredes distintas se pueden direccionar en una clase A con máscara 255.255.252.0?
+
+**E11.** Con la IP 10.118.106.51, ¿qué máscara hace que sea el host 42.51 de la subred 10.118.64.0?
+
+**E12.** La red 204.12.30.0 tiene 5 subredes. a) ¿Cuál es la máscara mínima? b) ¿Qué IP destino lleva un paquete al host 14 de la subred .192? c) ¿Y al host 14 de las 5 subredes a la vez?
+
+**E13.** Dé 4 ventajas de OSPF sobre RIP.
+
+**De la práctica de la cátedra:**
+
+**E14.** A C (vecinos B, D y E, a costo 6, 3 y 5) le llegan los vectores para A–F: desde B (5, 0, 8, 12, 6, 2), desde D (16, 12, 6, 0, 9, 10) y desde E (7, 6, 3, 9, 0, 4). Armá la tabla nueva de C.
+
+**E15.** Clase B dividida en 8 subredes con 2500 hosts cada una. ¿Qué máscara usás?
+
+**E16.** 172.16.210.0/22: ¿a qué subred pertenece?
+
+**E17.** Se necesitan 30 subredes como mínimo en 190.10.0.0 / 255.255.192.0. ¿Qué máscara usás y cuáles son las subredes 15, 20 y 30?
 
 **Respuestas**
 
 - **E1.** Salto 256 − 240 = 16 en el 3er byte, y 45 cae en [32, 48). Red **172.16.32.0**, broadcast **172.16.47.255**, hosts .32.1 a .47.254: **4094** (2¹² − 2). Es una /20.
 - **E2.** Salto 64 en el 4to byte, y 7 cae en [0, 64). Red **10.25.130.0**, broadcast **10.25.130.63**, 62 hosts.
 - **E3.** **No.** Con /25 (salto 128), 70 cae en la subred .0 y 130 en la subred .128.
-- **E4.** Hace falta 2ⁿ ≥ 6, entonces n = 3: **/27 (255.255.255.224)**. Salen 8 subredes de 30 hosts: .0, .32, .64, .96, .128, .160, .192 y .224 (sobran 2).
-- **E5.** Hace falta 2ʰ − 2 ≥ 50, entonces h = 6: **/26 (255.255.255.192)**. Salen **4 subredes** de 62 hosts: .0, .64, .128 y .192.
+- **E4.** Hace falta 2ⁿ − 2 ≥ 6, entonces n = 3: **/27 (255.255.255.224)**. Hay 8 bloques y **6 subredes válidas** de 30 hosts: .32, .64, .96, .128, .160 y .192. La .0 y la .224 se descartan por la convención de la cátedra.
+- **E5.** Hace falta 2ʰ − 2 ≥ 50, entonces h = 6: **/26 (255.255.255.192)**. Hay 4 bloques de 62 hosts (.0, .64, .128 y .192), pero con la convención de la cátedra solo **2 subredes son válidas**: **.64 y .128**.
 - **E6.** 65 = `0100 0001` y 94 = `0101 1110`: 3 bits en común. Red **200.1.1.64**, broadcast **200.1.1.95**, máscara **255.255.255.224** (/27).
 - **E7.** 130.5.2.1 es **B pública**; 223.1.1.1 es **C pública**; 10.0.0.1 es **A privada**; 172.32.1.1 es **B pública** (queda fuera de 172.16–172.31, una trampa típica); 172.20.1.1 es **B privada**.
 - **E8.** Hay 3980 B de datos y entran 1480 por fragmento (1500 − 20, que ya es múltiplo de 8).
@@ -453,12 +502,24 @@ Frag  Long.total  Datos   Campo desplaz.  MF
 ```
   Todos los fragmentos llevan la misma Identificación y reensambla solo el destino.
 - **E9.** Es un **ICMP tipo 3, "destino inaccesible"**, y lo genera el **gateway** (192.168.0.1) porque no tiene camino hacia esa red. Revisá la configuración IP, la máscara y el gateway del host, y la tabla del router.
+- **E10.** De /8 a /22 hay 14 bits de subred: 2¹⁴ − 2 = **16.382 subredes válidas**.
+- **E11.** **255.255.192.0 (/18)**. Con salto 64, 106 cae en el bloque que empieza en 64, y 106.51 − 64.0 = 42.51. Con /19 caería en .96.
+- **E12.** a) **255.255.255.224 (/27)**, porque 2³ − 2 = 6 ≥ 5. b) **204.12.30.206**. c) **204.12.30.238**: el campo de subred en todos 1 significa "todas las subredes" (RFC 950), más el host 14 (224 + 14). Esta respuesta es interpretación mía; confirmala con Baró.
+- **E13.** Converge rápido y sin cuenta a infinito (conoce la topología completa); usa métrica por costo y ancho de banda, no solo saltos; escala con áreas; solo envía cambios, no la tabla entera. También: balanceo ECMP y autenticación.
+- **E14.** A **11 por B** · B **6 por B** · C 0 · D **3 por D** · E **5 por E** · F **8 por B**. Para cada destino: mínimo de (costo al vecino + distancia que informa ese vecino).
+- **E15.** **255.255.240.0 (/20)**: 2⁴ − 2 = 14 subredes ≥ 8 y 4094 hosts ≥ 2500. Con /19 quedarían 2³ − 2 = 6 subredes, que no alcanzan.
+- **E16.** **172.16.208.0** (salto 4 en el 3er byte; 210 cae en [208, 212)).
+- **E17.** 2⁵ − 2 = 30, así que la máscara es **/23 (255.255.254.0)**, con salto 2 en el 3er byte. Subred 15 = **190.10.30.0** · 20 = **190.10.40.0** · 30 = **190.10.60.0**.
+
+Hay más ejercicios resueltos (29 de direccionamiento, 9 de ruteo y los de comandos) en el **banco de ejercicios del 2do parcial**.
 
 ## Datos para memorizar
 - Header IPv4: **20 B** mínimo, **60 B** máximo. Longitud total máxima **65.535**. TTL máximo **255**. Desplazamiento en **unidades de 8 B**.
 - Campo Protocolo: **1 ICMP · 2 IGMP · 6 TCP · 17 UDP**.
 - Tipos ICMP: **0/8** eco · **3** inaccesible · **4** source quench · **5** redirect · **11** tiempo excedido · **12** parámetro · **13/14** marca de tiempo.
 - Rangos privados: **10/8 · 172.16/12 · 192.168/16**. Loopback **127.0.0.1**.
+- **Subredes válidas = 2ⁿ − 2** y hosts válidos = 2ʰ − 2 (convención de la cátedra). Salto = 256 − byte de la máscara.
+- DHCP y BOOTP: **UDP 67/68**. `netstat -r` muestra la tabla de rutas; `arp -a`, la caché ARP.
 - MTU Ethernet **1500**. Trama Ethernet: MAC de **6 B** cada una.
 - **RIP** = vector distancia, saltos, IGP · **OSPF** = estado de enlace, Dijkstra, áreas, IGP · **BGP** = vector de ruta, políticas, entre SA, sobre TCP.
 - `tracert` (Windows) usa **ICMP**; `traceroute` (Unix) usa **UDP**. Los dos se basan en el **TTL** y en la respuesta **ICMP 11**.
@@ -469,4 +530,6 @@ Frag  Long.total  Datos   Campo desplaz.  MF
 - Práctica de Baró, *Direcciones IP - Máscaras de Subred*.
 - Guía de estudio de Baró, *Guía de estudio de Capa de Red*.
 - Tanenbaum y Wetherall, *Redes de Computadoras*, 5ª ed., cap. 5 (5.1, 5.2.1–5.2.5, 5.6.1–5.6.2, 5.6.4, 5.6.6–5.6.7).
-- Los temas marcados *(Tanenbaum)* no están desarrollados en el apunte de Baró: se completaron con el libro.
+- Práctica de la cátedra: *Práctica IPv4 resuelta*, *Problemas de Capa de Red* y el TP *Comandos de red* (Baró).
+- 2do parcial real del 29/10/2024 (com. 403).
+- Los temas marcados *(Tanenbaum)* no están desarrollados en el material de Baró: se completaron con el libro y se verificaron contra la 5ª edición en castellano. El límite de 15 saltos de RIP no está en el libro (conocimiento general).
