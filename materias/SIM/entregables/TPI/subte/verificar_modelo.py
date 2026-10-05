@@ -153,6 +153,10 @@ public static void main(String[] args) throws Exception {
   java.util.HashSet<QueuePath> elegidas=new java.util.HashSet<QueuePath>();Pasajero[] tanda=new Pasajero[5];
   for(int i=0;i<5;i++){tanda[i]=new Pasajero();tanda[i].y=360;tanda[i].servicioAsignadoPed=2.4;elegidas.add(h.elegirColaPed(tanda[i]));}
   ok(elegidas.size()==5,"la tanda se reparte entre colas: "+elegidas.size());
+  // Aunque el servicio propio todavia no este sorteado (eleccion antes del On exit de la fuente), la fila pesa.
+  {SubtePedLogicCheck z=new SubtePedLogicCheck();z.molinetesOperativosPed=22;for(QueuePath q:m.molinetesPeatonales.colas)z.molinetesPeatonales.colas.add(q);
+   java.util.HashSet<QueuePath> el=new java.util.HashSet<QueuePath>();for(int i=0;i<5;i++){Pasajero x=new Pasajero();x.y=360;x.servicioAsignadoPed=0;el.add(z.elegirColaPed(x));}
+   ok(el.size()==5 && z.eleccionesSinServicioPed==5,"sin servicio sorteado igual se reparte: "+el.size());}
   int total=0;for(int c:h.asignadosPed)total+=c;ok(total==5,"cinco asignados");
   h.elegirColaPed(tanda[0]);total=0;for(int c:h.asignadosPed)total+=c;ok(total==5,"re-elegir no duplica el conteo");
   h.clock=1;tanda[1].tEntradaColaPed=1;h.entraColaPed(tanda[1]);total=0;for(int c:h.asignadosPed)total+=c;ok(total==5,"en la fila sigue contando");
