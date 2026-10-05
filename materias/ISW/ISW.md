@@ -9211,10 +9211,16 @@ métricas de proyecto vs producto — ver [Unidad 8](#unidad-8--medición-y-aná
   18-36. **U5**: guía de V&V de INTECO (ya no "no ingerida"), recetas de particiones/valores límite
   y de derivación desde CU, ejercicios 20-42 (resoluciones de alumnos corregidas). **U4, U6, U7,
   U8**: agregados puntuales desde los resúmenes de alumnos y la práctica. U9 sin cambios.
-- 2026-10-05: `estudio/resumen-ad.md` (+ .pdf, 101 págs.) — resumen de estudio para el **parcial de
+- 2026-10-05: `estudio/resumen-ad-extendido.md` (+ .pdf, 101 págs.; originalmente `resumen-ad.md`) — resumen de estudio para el **parcial de
   Aprobación Directa**, con el mismo estilo que el de Regularización (prosa, el porqué antes de las
   definiciones, tablas sólo para comparar). 26 capítulos en orden temático sobre las 9 unidades: los
   del resumen de Regularización ampliados con la bibliografía oficial ingerida después, y nuevos
   para riesgos, requerimientos, configuración, PPQA, medición y pericias. Dos capítulos de consulta
   para usar durante el parcial: **24** (cómo reconocer el área de proceso en un enunciado) y **25**
   (cómo resolver las preguntas BP). Cierra con las confusiones frecuentes agrupadas por tema.
+- 2026-10-05: `estudio/resumen-ad.md` (+ .pdf, **57 págs.**) — versión condensada del resumen AD, con
+  la misma proporción que el de Regularización (unas 9-10 págs. por cada 100 de bibliografía). Los
+  capítulos 2 a 19 vuelven al texto del resumen de Regularización más lo nuevo que pesa en el AD; los
+  nuevos (riesgos, requerimientos, configuración, PPQA, medición, pericias) quedan acotados; los
+  criterios de discriminación y el método BP se concentran en los capítulos 24 y 25. La de 101 págs.
+  queda como `resumen-ad-extendido.md`.
