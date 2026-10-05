@@ -2726,9 +2726,10 @@ subte, y sobre la misma estación.
   (`scripts/build-tpi-formulario-docx.py`). Falta reenviarlo en el envío real (Classroom/mail al docente).
 - Conseguir los horarios oficiales de arribo del Roca a Constitución y solicitar a SBASE/Emova y Trenes
   Argentinos datos de mayor granularidad sobre servicio y arribos.
-- **Solicitudes de datos**: correos enviados el 2026-09-23 a SBASE, Emova y Trenes Argentinos. Queda como
-  TODO completar los formularios web oficiales de SBASE/GCBA (Ley 104), Emova y Trenes Argentinos, guardar
-  los números de trámite o capturas y hacer seguimiento de las respuestas.
+- **Solicitudes de datos**: correos enviados el 2026-09-23 a SBASE, Emova y Trenes Argentinos. Al 05/10 solo
+  respondió Trenes Argentinos (25/09), pidiendo que el pedido entre por TAD. Los dos trámites formales (TAD y
+  Ley 104 a SBASE, con los planos primero, como pidió la cátedra) tienen texto listo en
+  `entregables/TPI/subte/09-pedidos-de-datos.md`; falta cargarlos y registrar número y vencimiento.
 - La validación remota puede contrastar caudales agregados contra SBASE, pero no la espera ni el largo de cola
   reales. No presentar resultados condicionales como mediciones del sistema actual.
 - Fechas de entrega y presentación: se publican en Classroom (no están en el enunciado).
@@ -2772,6 +2773,11 @@ subte, y sobre la misma estación.
 
 ## Log
 
+- **2026-10-05**: TPI subte, pedidos de datos. Revisada la bandeja: SBASE y Emova no respondieron los
+  correos del 23/09; Trenes Argentinos contestó el 25/09 que el pedido tiene que ir por TAD (id=1001). La
+  cátedra aprobó la Pedestrian Library y pidió solicitar los planos. Escrito `09-pedidos-de-datos.md` con el
+  estado de cada pedido, el texto para TAD (Trenes Argentinos) y el texto para la Ley 104 vía BA Colaborativa
+  (SBASE, que absorbe la parte de Emova). Corrige el "28 identificadores del Principal" del correo: son 22.
 - **2026-09-28** (3): TPI, grupo 2 (Casermeiro). Recibidos y aplicados los 5 precios de artículos de alto
   volumen que faltaban en la Lista CASER (agregados a `maestro_lista_caser.csv` con costo índice ×0,335).
   Recibidas y procesadas 64 facturas de electricidad (2024-2026, dos medidores por mes hasta abril/2026,
