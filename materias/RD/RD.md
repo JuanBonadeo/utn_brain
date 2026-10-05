@@ -396,6 +396,24 @@ Tipo  Mensaje
 - **`arp`:** muestra y modifica la **caché ARP**. **`arp -a`** muestra la tabla, `arp -d <ip>` borra una entrada y **`arp -s <ip> <mac>`** agrega una entrada **estática** (permanente).
 - **`netstat`:** muestra conexiones y estadísticas TCP/IP. **`-a`** muestra todas las conexiones y los puertos en escucha, `-n` lo muestra en formato numérico, `-e` da estadísticas Ethernet, **`-r` muestra la tabla de rutas**, `-s` da estadísticas por protocolo y `-p tcp|udp` filtra por protocolo.
 
+##### Ruteo, Sistemas Autónomos, OSPF y BGP — verificado con Tanenbaum
+> Base de las preguntas de ruteo de la guía de Baró. Verificado contra **Tanenbaum y Wetherall, *Redes de computadoras*, 5ª ed. en castellano** (`archivo/Material de Cursado/Libros/`, solo consulta), secciones 5.2 a 5.2.5, 5.6.6 y 5.6.7.
+
+- **Ruteo vs. reenvío (5.2):** el **algoritmo de enrutamiento** es la parte del software de red que decide **por qué línea de salida** se transmite un paquete. El libro separa dos procesos del router: el **reenvío** (*forwarding*), que toma cada paquete que llega y busca en la **tabla de enrutamiento** la línea de salida, y el **enrutamiento**, que **llena y actualiza esa tabla**; ahí trabaja el algoritmo. Con datagramas se decide paquete por paquete; con circuitos virtuales, solo al armar el circuito.
+- **Tabla de ruteo:** asocia cada **destino** (red) con la **línea de salida o próximo salto** y su **costo**. **La arma el propio router** con el algoritmo de enrutamiento, o el administrador a mano si es estática.
+- **Ruta predeterminada (default):** la entrada a la que va todo lo que **no coincide con otra ruta**. El libro la usa para una **red aislada** (*stub network*) conectada al resto de Internet por **un solo enlace**: no tiene otro lugar adonde mandar lo externo, así que no necesita BGP; alcanza con una ruta predeterminada hacia su proveedor.
+- **Inundación como algoritmo de ruteo (5.2.3):** cada paquete se reenvía **por todas las líneas excepto por la que llegó**. Para que no se multiplique sin fin se usa un **contador de saltos** que se decrementa en cada router o un **número de secuencia por origen** para descartar duplicados. Es **muy robusta**, siempre encuentra también el **camino más corto** y sirve para difundir información, por ejemplo los paquetes de estado de enlace.
+- **Paquete de estado del enlace (5.2.5):** lleva la **identidad del emisor**, un **número de secuencia**, una **edad** y la **lista de vecinos con el costo a cada uno**.
+- **El grafo:** cuando un router juntó el conjunto completo de paquetes de estado del enlace, **arma el grafo de toda la red**. **Cada enlace aparece dos veces**, una por sentido, y puede tener **costos distintos** en cada uno. Sobre ese grafo corre **Dijkstra** localmente. Si un router informa mal sus enlaces, el grafo de todos queda mal.
+- **Sistema Autónomo (AS):** cada red **operada de manera independiente** de las demás. El modelo mental es **la red de un ISP**. Adentro se rutea con un protocolo **intradominio**; entre AS, con el **interdominio** (BGP). Cada AS puede elegir su protocolo interno, pero todos tienen que usar el mismo interdominio.
+- **IGP:** el libro llama al protocolo **intradominio** "**protocolo de puerta de enlace interior**", y al interdominio, "de puerta de enlace exterior". Su objetivo es **mover paquetes de la forma más eficiente** dentro del AS, **sin preocuparse por políticas**. Ejemplos: RIP, OSPF, IS-IS.
+- **RIP:** vector de distancia (Bellman-Ford distribuido, heredado de ARPANET). **Funciona bien en sistemas pequeños** y empeora a medida que la red crece; **sufre el conteo al infinito y converge lento**. Por eso ARPANET pasó a estado del enlace en 1979 y la IETF desarrolló OSPF (estándar en 1990, basado en IS-IS). *El límite de 15 saltos (16 = infinito) no está en el libro: es conocimiento general.*
+- **Áreas y jerarquía de OSPF (5.6.6):** un AS grande se divide en **áreas numeradas**. Un **área** es **una red o un conjunto de redes contiguas**; las áreas **no se superponen** y no hace falta que cubran todo el AS. **Desde afuera de un área se ven sus destinos, pero no su topología**, y eso es lo que permite escalar.
+  - **Área troncal (backbone, área 0):** **todas las áreas se conectan a ella**, a veces mediante túneles. Así se puede ir de cualquier área a cualquier otra.
+  - **Área aislada (*stub area*):** tiene **un solo router de frontera** hacia afuera. Ni siquiera hace falta pasarle el resumen: toda ruta a destinos externos empieza con "ir al router de frontera".
+  - **Tipos de router:** **internos** (todo dentro de un área), **troncales** (en el área 0), **de frontera de área** (conectan dos o más áreas, **también forman parte del backbone**, resumen los destinos de su área con su costo y lo inyectan en las otras, sin pasar la topología) y **de límite de AS** (inyectan rutas a destinos de otros AS).
+- **BGP (5.6.7):** protocolo **interdominio**. A diferencia de un IGP, **se preocupa por la política**: por ejemplo, una empresa puede no querer llevar tráfico de tránsito entre dos AS ajenos aunque esté en la ruta más corta. Es un **protocolo de vector de ruta**: cada router guarda **la ruta usada**, es decir el próximo salto más la **secuencia de AS** del recorrido, y no solo el costo. Así detecta bucles. Los pares de routers BGP se comunican por **conexiones TCP**, lo que da confiabilidad y oculta los detalles de las redes que atraviesan. Las empresas **multihomed** se conectan a varios ISP para tener más confiabilidad.
+
 ##### MPLS · OSPF · BGP
 - **MPLS (Multiprotocol Label Switching):** agrega una **etiqueta (label)** al paquete y rutea por ella (más rápido que por IP). Se lo llama **capa 2,5**; usa routers **LSR**; header de **32 bits** (20 bits label + QoS + bit "hay más labels" + TTL). RFC 3031.
 - **OSPF (Open Shortest Path First):** protocolo **intradominio** (dentro de un Sistema Autónomo); usa **estado de enlaces**; IETF 1990 (RFC 2328), basado en IS-IS. Divide el SA en **áreas** que se conectan al **backbone (área 0)**; **routers frontera/border** entre áreas; se elige un **designated router** (+ backup) por LAN; mensajes **"Hello"** y **"Link State Update"**. Balanceo **ECMP (Equal Cost Multi Path)**.
@@ -598,7 +616,7 @@ La IP tiene que caer en la subred 10.118.64.0 y estar 42.51 direcciones más arr
 
 ---
 
-> **Guía de Estudio de Baró — preguntas tipo de parcial** (`fuentes/Baro-2do-parcial/GUIA DE ESTUDIO DE CAPA DE RED.docx`). Baró dice que **complementan la práctica de problemas**. Al lado de cada pregunta está **dónde está la respuesta en esta wiki**; las marcadas con 🔶 no tienen desarrollo suficiente en las fuentes actuales y requieren Tanenbaum (ver Dudas).
+> **Guía de Estudio de Baró — preguntas tipo de parcial** (`fuentes/Baro-2do-parcial/GUIA DE ESTUDIO DE CAPA DE RED.docx`). Baró dice que **complementan la práctica de problemas**. Al lado de cada pregunta está **dónde está la respuesta en esta wiki**; las de ruteo se completaron con Tanenbaum (bloque *Ruteo, Sistemas Autónomos, OSPF y BGP*).
 
 *Protocolo IP – Direcciones IP – Subnetting*
 1. ¿Qué campo/subcampo de la cabecera IP indica la **prioridad**? → Tipo de Servicio, subcampo **Prioridad (3 bits)**. Ver *Encabezamiento IPv4*.
@@ -612,26 +630,26 @@ La IP tiene que caer en la subred 10.118.64.0 y estar 42.51 direcciones más arr
 3. Con las opciones **registro de ruta** y **marca de tiempo**, ¿qué protocolo de control se usa? → **ICMP**. Ver *Encabezamiento IPv4*, Opciones.
 
 *Protocolos de Ruteo*
-1. Defina **ruteo** en Internet. → Ver *Ruta Óptima Origen-Destino*. 🔶 Falta una definición formal (Tanenbaum 5.2).
-2. ¿Qué es una **tabla de ruteo**? ¿Quién la arma? → 🔶 Solo mencionada ("tabla interna" del router).
-3. ¿Qué es una **ruta default** y por qué existe en la tabla? → 🔶 No está desarrollado.
-4. ¿Qué es un **Sistema Autónomo** y cómo está conformado? → Mencionado en *Estructura de Internet* y *OSPF/BGP*. 🔶 Falta la definición.
-5. ¿Qué es un **IGP**? Funciones y entorno. → OSPF y RIP son intradominio. 🔶 Falta el término "IGP" y sus funciones.
+1. Defina **ruteo** en Internet. → Ver *Ruteo, Sistemas Autónomos, OSPF y BGP* (ruteo vs. reenvío).
+2. ¿Qué es una **tabla de ruteo**? ¿Quién la arma? → Ver *Ruteo, Sistemas Autónomos, OSPF y BGP*.
+3. ¿Qué es una **ruta default** y por qué existe en la tabla? → Ver *Ruteo, Sistemas Autónomos, OSPF y BGP* (ruta predeterminada).
+4. ¿Qué es un **Sistema Autónomo** y cómo está conformado? → Ver *Ruteo, Sistemas Autónomos, OSPF y BGP* y los tipos de router de OSPF.
+5. ¿Qué es un **IGP**? Funciones y entorno. → Ver *Ruteo, Sistemas Autónomos, OSPF y BGP* (protocolo de puerta de enlace interior).
 6. Diferencia operativa entre **vector distancia** y **estado de enlace**. → Ver *Vector Distancia* y *Estado de Enlaces*.
 7. ¿Qué es una **métrica**? Ejemplos. → Saltos, retardo, costo y ancho de banda; ver *Ruta Óptima* y *Estado de Enlaces*.
-8. ¿En qué entorno trabaja **RIP**? → Vector distancia, **intradominio (IGP)**, para redes chicas (máx. 15 saltos). 🔶 Ampliar con Tanenbaum.
+8. ¿En qué entorno trabaja **RIP**? → Vector distancia, **intradominio (IGP)**, sistemas pequeños. Ver *Ruteo, Sistemas Autónomos, OSPF y BGP*.
 9. Principios de **OSPF** y ventajas sobre vector distancia. → Ver *Estado de Enlaces* y *OSPF*.
-10. ¿Qué significa que OSPF reconoce **jerarquías de ruteo**? → Áreas + backbone (área 0). Ver *OSPF*. 🔶 Ampliar.
-11. ¿Qué es un **área** y qué **tipos de áreas** hay? → 🔶 Solo backbone/área 0; faltan los tipos (backbone, stub, etc.).
+10. ¿Qué significa que OSPF reconoce **jerarquías de ruteo**? → Áreas + backbone (área 0). Ver *Ruteo, Sistemas Autónomos, OSPF y BGP*.
+11. ¿Qué es un **área** y qué **tipos de áreas** hay? → Backbone, aislada (*stub*) y comunes. Ver *Ruteo, Sistemas Autónomos, OSPF y BGP*.
 12. ¿En qué consiste **BGP**, en qué entorno se aplica y qué filosofía usa? → Ver *BGP*: interdominio, políticas, path vector.
-13. ¿Cómo se componen los **paquetes de estado de enlace** en OSPF? → 🔶 No está desarrollado (identidad del emisor, nº de secuencia, edad y lista de vecinos con costos; Tanenbaum 5.2.5).
-14. ¿Qué es un **grafo** en OSPF y para qué se arma? → 🔶 No está desarrollado. Es el mapa de la topología armado con los LSP, sobre el que se corre Dijkstra.
+13. ¿Cómo se componen los **paquetes de estado de enlace** en OSPF? → Identidad del emisor, nº de secuencia, edad y vecinos con su costo. Ver *Ruteo, Sistemas Autónomos, OSPF y BGP*.
+14. ¿Qué es un **grafo** en OSPF y para qué se arma? → Ver *Ruteo, Sistemas Autónomos, OSPF y BGP*.
 15. ¿Cuáles son los **5 pasos** de OSPF para aprender y difundir rutas óptimas? → Ver *Estado de Enlaces*, los 5 pasos.
 
 #### Dudas / pendientes
 - Confirmar con Medin si toma el **diagrama de ISP** dibujado a mano o basta describirlo.
-- **2do parcial Baró:** faltan las secciones de **Tanenbaum 5.2.1–5.2.5, 5.6.6 y 5.6.7**, base de las preguntas 🔶 de ruteo de la guía: tabla de ruteo, ruta default, SA, IGP, tipos de área, LSP, grafo. **No hay PDF del libro en el repo.** Baró ofrece mandarlo si se le pide; si no, mirar `archivo/Resumenes/` ("Resumen Tanenebaum.pdf", "Redes Resumen 2024 Parcial 2.pdf", "Resumen para 2º parcial") y copiar lo útil a `fuentes/`.
-- **Inundación (*flooding*) como algoritmo de ruteo (5.2.3):** acá solo aparece como método de broadcast. Falta desarrollarla como algoritmo de ruteo en sí.
+- ~~**2do parcial Baró:** faltaban Tanenbaum 5.2.1–5.2.5, 5.6.6 y 5.6.7 para las preguntas 🔶 de la guía.~~ Resuelto: verificado contra el libro (bloque *Ruteo, Sistemas Autónomos, OSPF y BGP*).
+- ~~**Inundación como algoritmo de ruteo (5.2.3).**~~ Resuelto en el mismo bloque.
 - ~~**BOOTP:** el mail lo anuncia en el apunte, pero el apunte que llegó no lo trae.~~ Resuelto con el TP de comandos de red (apéndice DHCP): ver *ARP*.
 - **Erratas del apunte de Baró:** (a) dice que un ping a un host inexistente devuelve "ICMP tipo 11". En la práctica, si el host no contesta **no llega ningún ICMP** y el ping solo muestra "tiempo de espera agotado"; el tipo 11 aparece cuando el TTL llega a 0. (b) Llama "CRC" al checksum del header. (c) Escribe el desplazamiento de fragmento en bytes en vez de en unidades de 8 bytes. (d) La errata de P1 (155.24 por 155.4).
 - **Diferencia entre fuentes:** el apunte de Baró describe el byte 2 del header como **Tipo de Servicio** (prioridad + D/T/R); las diapositivas de Medin y Tanenbaum 5ª ed. lo describen como **Differentiated Services + ECN**. Para el parcial de Baró, contestá con la versión de ToS, que es la que pregunta la guía.
@@ -832,3 +850,4 @@ Comunicación **extremo a extremo** confiable y eficiente entre aplicaciones. Fu
 - 2026-10-05: Ingesta del **2do parcial real del 29/10/2024** (Baró y Medín, com. 403). Unidad 2: 4 ejercicios de Baró resueltos (subredes en clase A, máscara para un host dado, 5 subredes en 204.12.30.0, OSPF vs RIP). Unidad 3: las 5 preguntas reales identificadas como la teoría de Medín de ese parcial; índice: Transporte como probable 2do teórico (a confirmar). Ambas al banco.
 - 2026-10-05: Ingesta del **TP de comandos de red** de Baró (del Drive). Unidad 2: nueva subsección *Comandos de red* (ping y sus opciones `-f`/`-r`/`-s`, tracert, ipconfig, arp, netstat); BOOTP ahora con fuente (UDP 67/68, configuración manual vs arriendo de DHCP; queda resuelto el pendiente); ejercicio de fragmentación 1000 B / MTU 256 con la errata de la longitud del último fragmento.
 - 2026-10-05: Ingesta de la **teoría de UDP** de la cátedra (del Drive) en `fuentes/Medin-2do-parcial/`. Unidad 3: header UDP (8 B, longitud hasta 65.515), checksum opcional y pseudoencabezado (protocolo 17), RPC, RTP/RTCP, buffer y jitter. Registrada la **contradicción** sobre qué hace UDP ante un error (descarta vs. avisa a la capa superior) y la lista de preguntas para Medín.
+- 2026-10-05: **Consulta al Tanenbaum** (5ª ed. en castellano, del Drive; solo consulta, no se copió a `fuentes/`). Unidad 2: nuevo bloque *Ruteo, Sistemas Autónomos, OSPF y BGP* (ruteo vs. reenvío, tabla, ruta predeterminada, inundación, paquete de estado del enlace, grafo, AS, IGP, RIP, áreas y tipos de router, BGP). Las 8 preguntas 🔶 de la guía quedan resueltas; el límite de 15 saltos de RIP queda como conocimiento general.
