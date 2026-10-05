@@ -623,3 +623,37 @@ verifica contra las bibliotecas instaladas antes de abrir el IDE.
 - [Source — documentación oficial](https://anylogic.help/9/libraries/process-modeling/source.html): generación por llamadas a `inject(n)`.
 - [Seize — documentación oficial](https://anylogic.help/9/libraries/process-modeling/seize.html): captura de recursos y cola interna.
 - [Recursos — documentación oficial](https://anylogic.help/library-reference-guides/process-modeling-library/using-resources.html): unidades de recursos compartidos por procesos.
+
+
+## Resultados de producción: escenario intermedio (2026-10-05)
+
+`PeatonalCorridasApareadas` corrió 30 pares E0-E1 con semillas comunes (20260923-20260952). Hubo 60 filas
+`CSV_PEATONAL`, ninguna `INCOMPLETO`, y cada corrida tardó unos 7 s. El cargador validó los pares y la
+conservación, y la planilla quedó cargada. El análisis sale de `analisis_corridas.py`: diferencias
+apareadas, IC t con Bonferroni (k = 3) para las primarias y 95 % individual para las secundarias.
+
+| Medida | E0 | E1 | D = E1 - E0 | s(D) | IC | Cambio |
+|---|---:|---:|---:|---:|---|---:|
+| **P90 de espera (s)** | 28.270 | 18.490 | -9.780 | 0.321 | [-9.929; -9.631] (98.33 %) | -34.6 % |
+| **Proporción con espera > 30 s** | 0.085 | 0.021 | -0.064 | 0.004 | [-0.065; -0.062] (98.33 %) | -75.2 % |
+| **P90 cohorte pico (s)** | 36.650 | 25.600 | -11.050 | 0.669 | [-11.360; -10.740] (98.33 %) | -30.2 % |
+| Espera media (s) | 10.861 | 7.394 | -3.468 | 0.120 | [-3.512; -3.423] (95 %) | -31.9 % |
+| Espera media cohorte pico (s) | 16.240 | 10.788 | -5.452 | 0.268 | [-5.553; -5.352] (95 %) | -33.6 % |
+| Lq (personas) | 22.142 | 15.062 | -7.080 | 0.251 | [-7.173; -6.986] (95 %) | -32.0 % |
+| Cola máxima | 230.100 | 169.733 | -60.367 | 4.287 | [-61.967; -58.766] (95 %) | -26.2 % |
+| Utilización media | 0.261 | 0.237 | -0.024 | 0.000 | [-0.024; -0.024] (95 %) | -9.1 % |
+| Tiempo de drenaje final (s) | 65.550 | 65.020 | -0.530 | 2.393 | [-1.424; 0.364] (95 %) | -0.8 % |
+
+**Lectura.** Las tres primarias bajan con E1 y sus IC están lejos de 0:
+- P90 de espera: −9,8 s (−35 %);
+- proporción con espera mayor a 30 s: de 8,5 % a 2,1 %;
+- P90 de la cohorte pico: −11,1 s (−30 %).
+
+Con la precisión pedida (±1 s y ±1 punto porcentual), n* da entre 4 y 6 pares, así que 30 alcanzan de sobra.
+El tiempo de drenaje final no cambia: su IC contiene a 0.
+
+**Limitación importante.** s(D) es muy chico (0,3 s en el P90) porque todas las réplicas usan el mismo
+perfil medio de SBASE: solo varían el servicio, la calle y la caminata. Los IC miden la variabilidad
+*del modelo* con un día tipo, no la variación entre días reales. Para incorporarla, se podría sortear en
+cada par el perfil de un día hábil real de los 80 de marzo-junio, o hacer la sensibilidad con
+`factorDemandaPed`.

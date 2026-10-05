@@ -443,6 +443,8 @@ assert len(capacidad)>=cc.MIN_PARES, f'la planilla oficial debe admitir al menos
 fila_ped=next(f for f in ped.findall('Functions/Function') if f.findtext('Name')=='filaResultadoPed').findtext('Body')
 assert fila_ped.count('Integer.toString')+fila_ped.count('String.format')+fila_ped.count('Long.toString')+2==2+len(cc.CAMPOS), 'escenario + "0" desviados + 15 conversiones'
 import contextlib, io
+import hashlib
+_hash_planilla=hashlib.sha256(Path(cc.PLANILLA_OFICIAL).read_bytes()).hexdigest()
 with tempfile.TemporaryDirectory(prefix='subte-carga-') as tmp, contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
  tmp=Path(tmp); log=tmp/'consola.txt'; copia=tmp/'copia.xlsx'
  rows=[]
@@ -453,7 +455,10 @@ with tempfile.TemporaryDirectory(prefix='subte-carga-') as tmp, contextlib.redir
  assert cc.main([str(log),'--demo'])==0
  assert cc.main([str(log),'--demo','--escribir'])==1, 'demo no puede escribir la planilla oficial'
  assert cc.main([str(log)])==1, 'demo no puede cargarse como producción'
- assert cc.main([str(log),'--demo','--escribir','--salida',str(copia)])==0
+ # La planilla oficial ya tiene la producción: la prueba de escritura parte de una planilla vacía regenerada.
+ vacia=tmp/'vacia.xlsx'
+ subprocess.run([sys.executable,str(p.parent/'construir_planilla.py'),'--salida',str(vacia)],check=True,capture_output=True)
+ assert cc.main([str(log),'--demo','--escribir','--planilla',str(vacia),'--salida',str(copia)])==0
  hoja=openpyxl.load_workbook(copia)[cc.HOJA]
  assert hoja['C8'].value==480 and hoja['O8'].value==40.5 and hoja['P8'].value==20.5 and hoja['Q8'].value=='=IF(OR(O8="",P8=""),"",P8-O8)'
  assert hoja['AS37'].value==0 and hoja['AG37'].value==0.4
@@ -469,7 +474,8 @@ with tempfile.TemporaryDirectory(prefix='subte-carga-') as tmp, contextlib.redir
  with contextlib.redirect_stderr(salida_e1b):
   assert cc.main([str(tmp/'e1b.txt'),'--demo'])==1, 'E1B no debe cargarse en la planilla'
  assert 'E1B' in salida_e1b.getvalue(), 'el rechazo de E1B debe explicar el motivo'
-assert openpyxl.load_workbook(cc.PLANILLA_OFICIAL)[cc.HOJA]['C8'].value is None, 'la planilla oficial debe seguir vacía'
+# Las pruebas del cargador no tocan la planilla oficial (que desde 2026-10-05 tiene los 30 pares de producción).
+assert hashlib.sha256(Path(cc.PLANILLA_OFICIAL).read_bytes()).hexdigest()==_hash_planilla, 'las pruebas modificaron la planilla oficial'
 
 # Autoprueba (T1.5, aceptación observable 2): el IC paired-t que calcula la hoja Resumen
 # (T.INV.2T sobre n y k reales) coincide a 1e-6 con el mismo cálculo hecho a mano en Python,
@@ -557,7 +563,9 @@ else:
        contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
    tmp2=Path(tmp2); log2=tmp2/'consola.txt'; copia2=tmp2/'copia.xlsx'; salida_csv=tmp2/'csv'
    log2.write_text('\n'.join(filas)+'\n')
-   assert cc.main([str(log2),'--demo','--escribir','--salida',str(copia2)])==0
+   vacia2=tmp2/'vacia.xlsx'
+   subprocess.run([sys.executable,str(p.parent/'construir_planilla.py'),'--salida',str(vacia2)],check=True,capture_output=True)
+   assert cc.main([str(log2),'--demo','--escribir','--planilla',str(vacia2),'--salida',str(copia2)])==0
    resultado=subprocess.run(['soffice','--headless','--convert-to','csv',str(copia2),'--outdir',str(salida_csv)],
                              capture_output=True, text=True, timeout=120)
    assert resultado.returncode==0, resultado.stderr

@@ -2792,6 +2792,17 @@ Conclusiones:
 
 ## Log
 
+- **2026-10-05** (7): TPI subte, primera producción completa.
+  - Corridas: 30 pares E0-E1 con el escenario intermedio, 60 filas válidas, ~7 s por corrida.
+  - Arreglos que hicieron falta antes: la cabina y los cierres pasaron a paredes abiertas, porque un peatón
+    empujado quedaba encerrado y cortaba el experimento. Las corridas previas quedaron en `corridas-descartadas/`.
+  - Resultados de E1 contra E0, con IC Bonferroni (k = 3) lejos de 0:
+    - P90 de espera: de 28,3 s a 18,5 s;
+    - proporción con espera mayor a 30 s: de 8,5 % a 2,1 %;
+    - P90 de la cohorte pico: de 36,7 s a 25,6 s;
+    - n* entre 4 y 6.
+  - Limitación: las réplicas comparten el perfil medio, así que los IC no reflejan la variación entre días.
+  - Planilla cargada; `analisis_corridas.py` nuevo.
 - **2026-10-05** (6): TPI subte, ingesta de 5 papers de acceso abierto (`fuentes/papers-tpi-subte/` y su
   texto en `fuentes/txt/papers-tpi-subte/`): Seriani et al. 2025 (molinetes, Valparaíso), Wang et al. 2024
   (PLOS ONE, Pekín), Tian et al. 2026 (Scientific Reports, trasbordo desde ferrocarril), Li et al. 2024
