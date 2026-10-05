@@ -22,6 +22,10 @@ sus reglas de estructura, ingesta, consultas, lint, Git y tono.
 - `fuentes/` y `archivo/` son inmutables. No editar, mover ni borrar archivos
   allí; los insumos binarios se convierten con `scripts/ingest.py` antes de
   analizarlos.
+- `archivo/` está gitignorado: se baja y se actualiza desde el Drive público
+  de la facu con `scripts/drive-archivo.py`, que sólo agrega archivos que
+  faltan (`--dry-run` para ver qué hay de nuevo). Detalle en `CLAUDE.md`,
+  sección ESTRUCTURA.
 - Al incorporar material, fusionarlo en la unidad correspondiente de la wiki,
   actualizar el índice si hace falta y registrar el cambio en el Log.
 - Para responder consultas, leer primero la wiki relevante y distinguir con

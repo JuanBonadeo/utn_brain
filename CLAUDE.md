@@ -39,7 +39,8 @@ de materia fuera de ahí.
 - `archivo/` → **reserva heredada**, no curada: es el drive viejo de la facu
   volcado tal cual, con `Material de Cursado/`, `Resúmenes/` y `Examenes/`
   (parciales y finales viejos, muchos como foto `.jpg`). Está gitignorado
-  (1.4 GB) y solo existe en local.
+  (más de 1.4 GB) y solo existe en local: cada máquina lo baja por su cuenta
+  (ver abajo).
   - Es de donde sacamos material cuando una materia lo necesita: se **copia**
     lo que se va a usar a `fuentes/` de esa misma materia y recién ahí se
     ingiere. Nunca ingieras directo desde `archivo/`.
@@ -47,6 +48,30 @@ de materia fuera de ahí.
     duplicado con `fuentes/`.
   - Si te pido material de una materia y su `fuentes/` está flaca, fijate en
     `archivo/` antes de decir que no hay nada.
+  - **De dónde sale y cómo se baja.** Es el Drive público de la facu:
+    https://drive.google.com/drive/folders/1ZgKML44drc8Wq3pcbHsc-ozPINv6xSHQ
+    Cada `archivo/` es el contenido de la carpeta de esa materia en el Drive,
+    volcado tal cual (`Examenes/`, `Material de Cursado/`, `Resumenes/`,
+    `LEER.pdf`). El mapeo código → carpeta del Drive vive en
+    `scripts/drive-archivo.py` (`MATERIAS`): `4º AÑO/` para ASI, ICS, IO, LEG,
+    RD, SIM y TPA; `2° AÑO/Ingeniería y Sociedad` para IYS; `Electivas/` para
+    IPP y SGD. Si se agrega una materia, se suma ahí.
+  - En una máquina nueva (o si falta `archivo/`), se baja con
+    `python3 scripts/drive-archivo.py` (en Windows: `py scripts\drive-archivo.py`).
+    No necesita login ni dependencias; tarda varios minutos.
+  - **Actualizar con material nuevo:** el mismo comando, opcionalmente con
+    códigos (`python3 scripts/drive-archivo.py ICS RD`). Primero corré con
+    `--dry-run` para ver qué hay de nuevo. El script **sólo agrega** lo que
+    falta: nunca sobrescribe ni borra nada local. Si en el Drive renombraron o
+    movieron carpetas, queda la versión vieja y se suma la nueva (duplicado
+    aceptado, por la regla de inmutabilidad). `--comparar` lista lo local que
+    ya no está en el Drive, sólo como información.
+  - Después de actualizar, mostrame en una lista corta qué llegó de nuevo por
+    materia (la salida del script). Señalá lo que sirve para alguna unidad
+    floja o para el próximo parcial, y ofrecé copiarlo a `fuentes/` e
+    ingerirlo. No ingieras nada sin que lo confirme.
+  - Pedimelo explícitamente o proponelo en un LINT: no lo corras solo al
+    iniciar la sesión, porque lista cientos de carpetas.
 - Ojo: los archivos de `estudio/` y `entregables/` están un nivel más abajo
   que `figs/`. Las imágenes se referencian como `../figs/x.png` desde ahí, y
   como `figs/x.png` solo desde `[CÓDIGO].md`.
@@ -113,6 +138,8 @@ Cuando pido "revisá [MATERIA]" o "revisá todo":
   más nuevas que el Log)
 - Material sin aprovechar: hay algo en `materias/[CÓDIGO]/archivo/` que
   cubre una unidad floja y todavía no se copió a `materias/[CÓDIGO]/fuentes/`
+- Material nuevo en el Drive: corré `scripts/drive-archivo.py [CÓDIGO] --dry-run`
+  y listá lo que todavía no está en `archivo/`
 - Contradicciones entre fuentes distintas dentro de la misma unidad
 - Reportá en lista corta. No reescribas nada sin que lo confirme.
 
