@@ -478,7 +478,22 @@ Con valores de prueba y E0 (20 molinetes), la franja 07:00-09:30 completa dio:
 | Caudal simulado por ventana contra SBASE | la mayoría dentro de ±6 %; las desviaciones mayores son 07:15 (−16 %) y 08:00 (+15 %) |
 | Tiempo real de cómputo | 274 s |
 
-Las 60 corridas de producción llevan unas 4,6 h en una máquina: la opción A de la §6 del plan alcanza.
+El par E0-E1 (`PeatonalFranjaVisualE0`/`E1`, misma semilla) generó exactamente la misma demanda: 18.545
+pasajeros, 14.829 desde el Roca y 4.360 en la cohorte pico. Eso confirma los números aleatorios comunes.
+Con E1 (22 molinetes), frente a E0:
+
+| Medida | E1 | Diferencia con E0 |
+|---|---:|---:|
+| Espera media | 23,5 s | −7,9 s |
+| P90 | 53,7 s | −17,7 s |
+| Espera mayor a 30 s | 30,6 % | −7,5 pp |
+| P90 de la cohorte pico | 64,2 s | −17,7 s |
+| Lq | 48,4 | −16,2 |
+
+Es un solo par con valores de prueba, así que **no es un resultado**. Sin animación, E1 tardó 28 s reales (E0
+tardó 274 s con la animación visible): las 60 corridas de producción llevarían unos 30 minutos. Los molinetes
+12 y 14 quedan en ~16 % de utilización contra ~30 % del resto, en los dos escenarios, por una causa
+geométrica a revisar: el 14 está junto a la cabina.
 - **Tiempo de cómputo.** Una corrida completa tardó unos 43 minutos. A ese ritmo, las 60 corridas de
   producción llevarían más de 40 horas. Con el atasco corregido, las corridas deberían drenar antes, pero el
   tiempo real se mide en el próximo piloto y puede obligar a reducir el número de pares o a correrlos por
