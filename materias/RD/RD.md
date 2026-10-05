@@ -754,6 +754,38 @@ La IP tiene que caer en la subred 10.118.64.0 y estar 42.51 direcciones más arr
 #### UDP (comparación con TCP)
 - **UDP (User Datagram Protocol):** sin conexión, envío inmediato, header mínimo de **8 bytes**, message-oriented. **No** hace control de flujo ni de congestión (envía al ritmo de la aplicación → puede saturar). Ante error (checksum) **descarta** el datagrama, sin retransmitir. Usos: **voz/video en tiempo real, DNS, DHCP, multicast**.
 
+> **Ampliado con la diapositiva de la cátedra "4 - Protocolo UDP"** (`fuentes/Medin-2do-parcial/4 - Protocolo UDP.pdf`, del Drive).
+
+##### Encabezamiento UDP
+- **8 bytes**: **puerto origen (2 B)**, **puerto destino (2 B)**, **longitud (2 B)** y **checksum (2 B)**. RFC 768.
+- El segmento mide **de 8 B** (solo el header) **a 65.515 B**, para que el segmento más largo entre en un paquete IP: 65.535 − 20 del header IP.
+- UDP **solo separa comunicaciones por puerto**. No establece ni libera conexión: manda un mensaje en cada dirección y deja el resto a la aplicación.
+
+##### Checksum y pseudoencabezado
+- **El checksum es opcional.** Si no se calcula, el campo va en ceros. Desactivarlo solo tiene sentido si los datos no son críticos, como en VoIP.
+- Cubre **todo el segmento UDP más un pseudoencabezado IP** (igual que TCP): IP origen, IP destino, un byte en cero, el **número de protocolo (17)** y la **longitud UDP**. El algoritmo es la suma en complemento a uno de palabras de 16 bits; en el receptor, el resultado incluyendo el checksum tiene que dar cero.
+- **Viola la estructura de capas**: la capa 4 controla datos de la capa 3, pero sirve para detectar paquetes que llegaron al destino equivocado.
+- ⚠️ **Qué hace ante un error: las fuentes no coinciden.** La diapositiva dice que **"si detecta errores, avisa a las capas superiores"** y que **"deja que las capas superiores decidan qué hacer"**. El documento de preguntas de Medín (respuesta de la pregunta 3, abajo) y la tabla de esta sección dicen que **descarta** el datagrama. En los dos casos **UDP no retransmite**. Para el parcial conviene decir que **UDP detecta el error con el checksum pero no lo corrige ni retransmite: lo descarta o lo informa, y la decisión queda en manos de la aplicación**. Hay que preguntarle a Medín cuál espera.
+
+##### RPC (llamada a procedimiento remoto)
+- Un host ejecuta un proceso en otro como si fuera una función local. Por ejemplo, pedir una canción en Spotify.
+- **Pasos:**
+  1. El cliente ejecuta el **client stub**.
+  2. El client stub empaqueta los parámetros (**marshaling**).
+  3. El sistema operativo del cliente envía el mensaje.
+  4. El sistema operativo del servidor se lo pasa al **server stub**.
+  5. El server stub llama al servidor.
+- La respuesta vuelve por el camino inverso. Es un mecanismo distinto de los *sockets*, y **UDP sirve para transportarlo**.
+
+##### Tiempo real: RTP y RTCP
+- **Streaming** (radio por internet, VoIP, teleconferencias, música y películas) se transporta sobre **UDP + RTP** (*Real-Time Protocol*, RFC 3550).
+- **RTP** junta varios paquetes de tiempo real y los encapsula en segmentos UDP. **No retransmite ni confirma**: un paquete retransmitido llegaría tarde, y si se pierde uno, decide la aplicación. Define **perfiles de codificación** (MP3, GSM, PCM 8 bits…) y cuida el **sincronismo**: cada muestra se reproduce en el instante en que se grabó, y se sincronizan varias cadenas (video y audio en distintos idiomas).
+  - **Header RTP:** versión (2 bits), P (relleno), X (hay header adicional), CC (cantidad de fuentes, 4 bits), M (marca para la aplicación), **payload type** (7 bits, la codificación), **número de secuencia** (16 bits), **timestamp** (instante de inicio, para el sincronismo y el jitter), **identificador de fuente de sincronización** y **de fuentes contribuyentes** (si hay mezcla).
+- **RTCP** (*Real-time Transport Control Protocol*): es el **control** de RTP. Da **sincronismo y feedback**, y con esa información se puede **bajar la velocidad y la calidad** cuando la red tiene problemas, y al revés.
+- **Buffer y jitter:** el **jitter** es la variación del retardo entre segmentos. El receptor usa un **buffer**, que fija un punto de reproducción que cubra el 99 % de las muestras:
+  - **≈10 s** en streaming de una sola vía (Netflix, Spotify);
+  - **mucho menos** en videoconferencia (Zoom), para que se pueda interactuar.
+
 | | TCP | UDP |
 |---|---|---|
 | Orientación | A conexión (3-way handshake) | Sin conexión (envío inmediato) |
@@ -773,7 +805,7 @@ Comunicación **extremo a extremo** confiable y eficiente entre aplicaciones. Fu
 **No la controla.** UDP no implementa control de congestión ni de flujo: envía al ritmo de la aplicación, sin adaptarse al estado de la red → puede saturar. Si se necesita control, lo debe implementar la aplicación.
 
 **3) ¿Qué sucede si UDP detecta un error? ¿Y TCP?**
-**UDP:** si el datagrama llega corrupto (checksum), simplemente lo **descarta**; sin retransmisión ni recuperación. **TCP:** detecta el error y **retransmite** los segmentos perdidos/dañados hasta recibir el ACK; mantiene orden y confiabilidad.
+**UDP:** si el datagrama llega corrupto (checksum), simplemente lo **descarta**; sin retransmisión ni recuperación. *(La diapositiva de UDP dice en cambio que **avisa a las capas superiores** y deja que ellas decidan: ver* Checksum y pseudoencabezado.*)* **TCP:** detecta el error y **retransmite** los segmentos perdidos/dañados hasta recibir el ACK; mantiene orden y confiabilidad.
 
 **4) Grafique un ejemplo de conexión 3-way handshake.**
 `Cliente → SYN → Servidor` · `Servidor → SYN-ACK → Cliente` · `Cliente → ACK → Servidor`, y a partir de ahí flujo bidireccional. El cliente inicia con SYN; el servidor responde SYN-ACK (puede empezar a enviar); el cliente confirma con ACK.
@@ -782,12 +814,13 @@ Comunicación **extremo a extremo** confiable y eficiente entre aplicaciones. Fu
 (Ver tabla de arriba: orientación, confiabilidad, control de flujo/congestión, tamaño de cabecera, byte-stream vs mensajes, usos.)
 
 #### Dudas / pendientes
-- _(nada pendiente por ahora)_
+- **Preguntarle a Medín:** (1) si el 2do teórico es solo Transporte o mezcla con Red; (2) si es multiple choice o para desarrollar; (3) si entra control de congestión de TCP (slow start, Tahoe/Reno, tasa justa); (4) qué espera en "¿qué hace UDP si detecta un error?": descartar o avisar a la capa superior (ver *Checksum y pseudoencabezado*).
 
 #### Fuentes
 - `fuentes/RD/Medin-1er-parcial/1 - Capa de Transporte - Servicios y Primitivas.pdf`
 - `fuentes/RD/Medin-1er-parcial/2 - Capa de Transporte - Características de transporte.pdf`
 - `fuentes/RD/Medin-1er-parcial/3 - Capa de Transporte - Protocolo TCP.pdf`
+- `fuentes/Medin-2do-parcial/4 - Protocolo UDP.pdf` (diapositiva de la cátedra: header, checksum, pseudoencabezado, RPC, RTP/RTCP; del Drive)
 - `fuentes/RD/Medin-1er-parcial/Preguntas y Respuestas Parciales de Medin.docx` (preguntas reales)
 - Tanenbaum & Wetherall, *Computer Networks*, 5th ed.
 
@@ -798,3 +831,4 @@ Comunicación **extremo a extremo** confiable y eficiente entre aplicaciones. Fu
 - 2026-10-05: Ingesta de la **práctica de Capa de Red** de la cátedra (del Drive). Unidad 2, ejercicios: 9 problemas (servicios, QoS, tabla de vector distancia, RPF y sink tree, árbol multicast, TTL, diseño /29), con figuras recortadas en `figs/`. Sumados al banco de ejercicios del 2do parcial.
 - 2026-10-05: Ingesta del **2do parcial real del 29/10/2024** (Baró y Medín, com. 403). Unidad 2: 4 ejercicios de Baró resueltos (subredes en clase A, máscara para un host dado, 5 subredes en 204.12.30.0, OSPF vs RIP). Unidad 3: las 5 preguntas reales identificadas como la teoría de Medín de ese parcial; índice: Transporte como probable 2do teórico (a confirmar). Ambas al banco.
 - 2026-10-05: Ingesta del **TP de comandos de red** de Baró (del Drive). Unidad 2: nueva subsección *Comandos de red* (ping y sus opciones `-f`/`-r`/`-s`, tracert, ipconfig, arp, netstat); BOOTP ahora con fuente (UDP 67/68, configuración manual vs arriendo de DHCP; queda resuelto el pendiente); ejercicio de fragmentación 1000 B / MTU 256 con la errata de la longitud del último fragmento.
+- 2026-10-05: Ingesta de la **teoría de UDP** de la cátedra (del Drive) en `fuentes/Medin-2do-parcial/`. Unidad 3: header UDP (8 B, longitud hasta 65.515), checksum opcional y pseudoencabezado (protocolo 17), RPC, RTP/RTCP, buffer y jitter. Registrada la **contradicción** sobre qué hace UDP ante un error (descarta vs. avisa a la capa superior) y la lista de preguntas para Medín.
