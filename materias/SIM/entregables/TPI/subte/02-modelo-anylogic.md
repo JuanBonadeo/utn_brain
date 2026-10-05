@@ -436,7 +436,7 @@ disipación" y se renombró para no presentarlo como tal. Es secundaria y no ent
 
 **Prueba sintética.** `PeatonalFranjaPrueba` corre un par E0-E1 con valores de prueba explícitos: 80 %
 Roca, 60 s de demora, 120 s de descarga y servicio triangular 2/3/5 s. Sus filas salen como
-`CSV_PEATONAL_DEMO` en `corridas_peatonales_demo.csv`: sirven para verificar la mecánica y el tiempo de
+`CSV_PEATONAL_DEMO` en `corridas_peatonales_prueba.csv` (separado del de `PeatonalCorridasDemo` desde el 2026-10-05, para no mezclar filas con las mismas claves): sirven para verificar la mecánica y el tiempo de
 cómputo, no como resultado. Desde el primer piloto se limita a 07:00-07:30 (`horizonteArribosPedSeg = 1800`)
 para que tarde minutos y no una hora.
 
@@ -485,7 +485,7 @@ sincronizada para que dos corridas en paralelo no intercalen líneas; `AllowPara
 `false` hasta comprobar en el IDE que un par en paralelo da las mismas filas que en secuencia (T2.3).
 
 `PeatonalFranjaVisualE0` y `PeatonalFranjaVisualE1` corren la franja completa con animación (escala 30x, hasta
-18.000 s) y los mismos valores de prueba que `PeatonalFranjaPrueba`, sin escribir archivo. Sirven para ver
+17.900 s) y los mismos valores de prueba que `PeatonalFranjaPrueba`, sin escribir archivo. Sirven para ver
 dónde se traba el flujo (T2.6) y son la base del experimento de exhibición del video (T6.2).
 
 El plano sigue siendo hipotético en este modo y la vista lo indica con el aviso
@@ -493,8 +493,9 @@ El plano sigue siendo hipotético en este modo y la vista lo indica con el aviso
 arribos: la franja hereda los supuestos y controles de calibración de la sección 3.
 
 Restricciones de AnyLogic PLE que condicionan la producción: la Pedestrian Library admite como máximo
-**5 horas de tiempo de modelo** (por eso el experimento de producción termina a los 18.000 s: 9000 s de
-arribos más hasta 9000 s de drenaje) y el modelo puede crear hasta **50.000 agentes dinámicos**. Una franja
+**5 horas de tiempo de modelo** (por eso el experimento de producción termina a los 17.900 s: 9000 s de
+arribos más hasta 8900 s de drenaje, con 100 s de margen para que el modelo emita la fila `INCOMPLETO` antes
+de que la librería corte en las 5 h) y el modelo puede crear hasta **50.000 agentes dinámicos**. Una franja
 de unos 17.500 pasajeros cabe en ese límite por corrida; debe confirmarse en la primera ejecución de
 producción que el límite no se acumula entre las 60 corridas del experimento.
 

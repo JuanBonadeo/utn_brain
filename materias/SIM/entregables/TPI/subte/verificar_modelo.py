@@ -373,7 +373,7 @@ assert set(visuales)=={'PeatonalFranjaVisualE0','PeatonalFranjaVisualE1'}
 for name,mol in (('PeatonalFranjaVisualE0','20'),('PeatonalFranjaVisualE1','22')):
  ps={x.findtext('ParameterName'):x.findtext('ParameterValue/Code') for x in visuales[name].findall('Parameters/Parameter')}
  assert ps['molinetesOperativosPed']==mol and ps['modoFranjaPed']=='true' and ps['pruebaSinteticaPed']=='true' and ps['archivoSalidaPed'] is None, name
- assert float(visuales[name].findtext('ModelTimeProperties/FinalTime'))==18000
+ assert float(visuales[name].findtext('ModelTimeProperties/FinalTime'))==17900  # margen bajo el tope de 5 h de PLE
 # Memoria de la JVM de cada experimento peatonal (T2.3): la franja no entra en 512-1024 MB.
 for e in r.iter():
  if e.tag in ('SimulationExperiment','ParamVariationExperiment') and e.get('ActiveObjectClassId')==ped.findtext('Id'):
@@ -388,18 +388,18 @@ for e in [x for x in experiments if x.get('ActiveObjectClassId')==ped.findtext('
 pvs={e.findtext('Name'):e for e in r.findall('Model/Experiments/ParamVariationExperiment')}
 assert set(pvs)=={'PeatonalCorridasApareadas','PeatonalCorridasDemo','PeatonalFranjaPrueba'}
 prueba={ped_param_ids[x.findtext('Id')]:x.findtext('Expression/Code') for x in pvs['PeatonalFranjaPrueba'].findall('FreeformParamValue')}
-assert prueba['modoFranjaPed']=='true' and prueba['pruebaSinteticaPed']=='true' and prueba['archivoSalidaPed']=='"corridas_peatonales_demo.csv"'
+assert prueba['modoFranjaPed']=='true' and prueba['pruebaSinteticaPed']=='true' and prueba['archivoSalidaPed']=='"corridas_peatonales_prueba.csv"'
 assert pvs['PeatonalFranjaPrueba'].findtext('NumberOfRuns')=='2' and float(pvs['PeatonalFranjaPrueba'].findtext('ModelTimeProperties/FinalTime'))<=18000
 assert prueba['horizonteArribosPedSeg']=='1800'
 assert ped_defaults_early['pruebaSinteticaPed']=='false'
 pvs={k:v for k,v in pvs.items() if k!='PeatonalFranjaPrueba'}
-for name,(runs,modo,archivo,final) in {'PeatonalCorridasApareadas':('60','true','"corridas_peatonales.csv"','18000'),
+for name,(runs,modo,archivo,final) in {'PeatonalCorridasApareadas':('60','true','"corridas_peatonales.csv"','17900'),
                                        'PeatonalCorridasDemo':('6','false','"corridas_peatonales_demo.csv"','900')}.items():
  e=pvs[name]
  assert e.get('ActiveObjectClassId')==ped.findtext('Id')
  assert e.findtext('UseFreeformParameters')=='true' and e.findtext('NumberOfRuns')==runs
  assert e.findtext('AllowParallelEvaluations')=='false'
- assert float(e.findtext('ModelTimeProperties/FinalTime'))<=18000, 'PLE limita la Pedestrian Library a 5 h de modelo'
+ assert float(e.findtext('ModelTimeProperties/FinalTime'))<18000, 'PLE limita la Pedestrian Library a 5 h de modelo'
  free={ped_param_ids[x.findtext('Id')]:x.findtext('Expression/Code') for x in e.findall('FreeformParamValue')}
  assert set(free)==set(ped_param_ids.values())
  assert free['semillaPed']=='20260923L + index / 2' and free['molinetesOperativosPed']=='index % 2 == 0 ? 20 : 22'
