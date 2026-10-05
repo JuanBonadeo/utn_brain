@@ -505,6 +505,63 @@ Para pasar de "host H" a la dirección: H = 256·q + r → se suma q al 3er byte
 
 ---
 
+> **Práctica de la cátedra — Problemas de Capa de Red** (`fuentes/Baro-2do-parcial/6 - Práctica de Capa de Red.pdf`). Son 9 problemas resueltos en el original; revisé las soluciones y están bien. Los 2, 5, 6 y 7 (QoS, broadcast y multicast) **no están en el temario de Baró** (5.2.7 en adelante no entra), pero quedan como práctica.
+
+**Problema 1.** a) Dos aplicaciones donde convenga un servicio **orientado a conexión**. b) Dos donde convenga uno **sin conexión**.
+a) **Homebanking**, porque no tolera pérdidas ni errores, y el **correo electrónico**. b) La **transmisión de un partido en vivo**, donde no hay tiempo para retransmitir, y una **videoconferencia o VoIP**.
+
+**Problema 2.** Cite 4 parámetros que se negocian antes de una comunicación para garantizar cierta QoS.
+**Tráfico pico y promedio** (tasa de bits), **retardo máximo**, **jitter** (variación máxima del retardo) y **pérdida de paquetes** (tasa máxima de error).
+
+**Problema 3.** Si todos los routers y hosts funcionan bien, ¿puede un paquete llegar a un destino equivocado?
+**Sí:** una interferencia en el medio que no se pueda corregir puede alterar el campo de dirección destino.
+
+**Problema 4 (vector distancia).** A C llegan los vectores (destinos A, B, C, D, E, F) **desde B: (5, 0, 8, 12, 6, 2)**, **desde D: (16, 12, 6, 0, 9, 10)** y **desde E: (7, 6, 3, 9, 0, 4)**. Los costos de C a B, D y E son **6, 3 y 5**. Armar la nueva tabla de C.
+
+![Red del problema 4](figs/practica6-p4-vector-distancia.png)
+
+Para cada destino se suma el costo hasta cada vecino más la distancia que informa ese vecino, y se queda el mínimo:
+```
+Destino   por B (6+…)   por D (3+…)   por E (5+…)   Mejor
+A         6+5  = 11     3+16 = 19     5+7  = 12     11 por B
+B         6+0  = 6      3+12 = 15     5+6  = 11     6  por B
+C         —             —             —             0
+D         6+12 = 18     3+0  = 3      5+9  = 14     3  por D
+E         6+6  = 12     3+9  = 12     5+0  = 5      5  por E
+F         6+2  = 8      3+10 = 13     5+4  = 9      8  por B
+```
+Tabla nueva de C: **A 11 (B) · B 6 (B) · C 0 · D 3 (D) · E 5 (E) · F 8 (B)**. Ojo: el vector que C tenía antes no se usa; solo cuentan los vectores que llegan de los vecinos.
+
+**Problema 5.** En la red de la figura, ¿cuántos paquetes de broadcast genera B con a) *reverse path forwarding* y b) *sink tree*?
+
+![Red y sink tree del problema 5](figs/practica6-p5-rpf-sink-tree.png)
+
+a) Con RPF, el broadcast le llega a B por uno de sus dos vecinos (A o C); alcanza con **1 paquete** hacia el otro. b) Con el sink tree desde B, genera **2 paquetes**, uno a A y otro a C. *Ojo:* la solución de a) trata a B como un router que **reenvía** un broadcast que le llegó, no como el que lo origina.
+
+**Problema 6.** En la red 5-15a se agrega una línea entre F y G, pero el sink tree (5-15b) no cambia. ¿Qué cambia en el RPF (5-15c)?
+**Nada:** si el árbol óptimo no se modifica, tampoco cambia el árbol inverso.
+
+**Problema 7.** Hallar el **árbol multicast** para el router C, con hosts del grupo en A, B, C, D, E, F, I y K.
+
+![Red del problema 7](figs/practica6-p7-red.png)
+
+Se podan los enlaces hacia routers sin hosts del grupo, **salvo J**, porque hay que pasar por él para llegar a I:
+
+![Árbol multicast para C](figs/practica6-p7-arbol-multicast.png)
+
+**Problema 8.** En la figura 5-20, B se reinició y no tiene rutas, pero tiene que mandarle un paquete a H. Envía broadcasts con TTL = 1, 2, 3… ¿Con qué TTL alcanza?
+
+![Red del problema 8](figs/practica6-p8-ttl.png)
+
+**TTL = 3**: B → D → F → H son 3 saltos.
+
+![Camino de B a H](figs/practica6-p8-ttl-solucion.png)
+
+**Problema 9.** a) Diseñar las IP de 5 máquinas en la red 111.159.35.0. b) ¿Qué máscara y qué prefijo?
+Para 5 hosts hacen falta **3 bits de host** (2³ − 2 = 6 ≥ 5), así que la máscara es **255.255.255.248** y el prefijo **/29**. Máquinas: **111.159.35.1 a 111.159.35.5** (la .6 queda libre; la .0 es la red y la .7 el broadcast).
+
+---
+
 > **Guía de Estudio de Baró — preguntas tipo de parcial** (`fuentes/Baro-2do-parcial/GUIA DE ESTUDIO DE CAPA DE RED.docx`). Baró dice que **complementan la práctica de problemas**. Al lado de cada pregunta está **dónde está la respuesta en esta wiki**; las marcadas con 🔶 no tienen desarrollo suficiente en las fuentes actuales y requieren Tanenbaum (ver Dudas).
 
 *Protocolo IP – Direcciones IP – Subnetting*
@@ -555,6 +612,7 @@ Para pasar de "host H" a la dirección: H = 256·q + r → se suma q al 3er byte
 - `fuentes/Baro-2do-parcial/Práctica Direcciones IP - Máscaras de Subred.docx` (es un extracto del apunte: §2.2–2.3 + ejercicios)
 - `fuentes/Baro-2do-parcial/GUIA DE ESTUDIO DE CAPA DE RED.docx` (preguntas tipo de parcial)
 - `fuentes/Baro-2do-parcial/8 - Práctica IPV4 resuelto.pdf` (práctica de la cátedra: 29 ejercicios de direccionamiento IPv4; del Drive, `archivo/Material de Cursado/Práctica/`)
+- `fuentes/Baro-2do-parcial/6 - Práctica de Capa de Red.pdf` (práctica de la cátedra: 9 problemas de ruteo y servicios; figuras en `figs/practica6-*`)
 - `fuentes/RD/Medin-1er-parcial/Preguntas y Respuestas Parciales de Medin.docx` (preguntas reales)
 - Tanenbaum & Wetherall, *Computer Networks*, 5th ed.
 
@@ -699,3 +757,4 @@ Comunicación **extremo a extremo** confiable y eficiente entre aplicaciones. Fu
 - 2026-07-21: Ingesta inicial del material del 1er parcial de Medin (10 PDFs de teórico + doc de preguntas). Se crearon las 3 unidades (Enlace, Red, Transporte) y el índice. Fuentes en `fuentes/RD/Medin-1er-parcial/`. Ajuste: parcial de Medin es conceptual → ejercicios tipo = preguntas reales; cálculos numéricos marcados como poco probables.
 - 2026-10-05: Ingesta del material del **2do parcial práctico de Baró** (dos mails reenviados por Gonza + el de fechas de Medín). Fuentes en `fuentes/Baro-2do-parcial/`: los mails, apunte de Capa de Red, práctica de máscaras de subred y guía de estudio. Unidad 2: nuevo bloque de alcance y fechas (práctica el 21/10 y teoría el 27/10 para el grupo A–Fassine); header IPv4 ampliado con Tipo de Servicio (prioridad, D/T/R), números de protocolo, opciones y fragmentación con ejemplo; tabla de clases y de direcciones especiales; utilidad de los rangos privados; nueva sección *Subnetting a mano* con el caso práctico; tipos ICMP, diagnóstico con ping y tracert; caché ARP; práctica de máscaras resuelta y verificada; guía de Baró mapeada a la wiki. Pendiente: Tanenbaum 5.2/5.6.6/5.6.7 para las preguntas de ruteo marcadas 🔶.
 - 2026-10-05: Ingesta de la **práctica IPv4 resuelta** de la cátedra (del Drive). Unidad 2: convención **subredes válidas = 2ⁿ − 2** en *Subnetting a mano*; ejercicios 1–20 verificados (4 erratas de desarrollo marcadas) y 21–28 resueltos (no venían resueltos). Banco nuevo: `estudio/banco-ejercicios-2do-parcial.md`.
+- 2026-10-05: Ingesta de la **práctica de Capa de Red** de la cátedra (del Drive). Unidad 2, ejercicios: 9 problemas (servicios, QoS, tabla de vector distancia, RPF y sink tree, árbol multicast, TTL, diseño /29), con figuras recortadas en `figs/`. Sumados al banco de ejercicios del 2do parcial.

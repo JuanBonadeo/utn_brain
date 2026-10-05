@@ -157,3 +157,38 @@ Cómo se calcula: subred N empieza en N × 512 direcciones desde la base. Por ej
 Respuesta: con 4 bits de host la máscara es **/28**, con salto 16; la 1ª subred es .0 y la 2ª es .16.
 - 1ª subred: **201.154.10.4 · .7 · .9**
 - 2ª subred: **201.154.10.19 · .24 · .27**
+
+## Ruteo y servicios (práctica de la cátedra)
+
+**1) a) Mencione dos aplicaciones donde sea más apropiado un servicio orientado a conexión. b) Dos donde convenga un servicio sin conexión.**
+
+Respuesta: a) homebanking (no tolera pérdidas ni errores) y correo electrónico. b) transmisión de un partido en vivo (no hay tiempo para retransmitir) y videoconferencia o VoIP.
+
+**2) Suponiendo que todos los routers y hosts funcionan bien, ¿puede un paquete ser entregado a un destino equivocado?**
+
+Respuesta: sí. Una interferencia en el medio que no se pueda corregir puede alterar el campo de dirección destino.
+
+**3) Vector distancia.** En la red de la figura, a C llegan los vectores (destinos A, B, C, D, E, F) desde B: (5, 0, 8, 12, 6, 2), desde D: (16, 12, 6, 0, 9, 10) y desde E: (7, 6, 3, 9, 0, 4). Los costos de C a B, D y E son 6, 3 y 5. Armá la nueva tabla de C, con línea de salida y costo.
+
+![Red del problema](../figs/practica6-p4-vector-distancia.png)
+
+Respuesta: para cada destino, mínimo de (costo al vecino + distancia que informa el vecino).
+```
+Destino   por B   por D   por E   Mejor
+A         11      19      12      11 por B
+B         6       15      11      6  por B
+C         —       —       —       0
+D         18      3       14      3  por D
+E         12      12      5       5  por E
+F         8       13      9       8  por B
+```
+
+**4) TTL.** En la figura, B se reinició y no tiene rutas, pero tiene que enviarle un paquete a H. Envía broadcasts con TTL = 1, 2, 3… ¿Con qué TTL alcanza?
+
+![Red del problema](../figs/practica6-p8-ttl.png)
+
+Respuesta: TTL = 3 (B → D → F → H).
+
+**5) Diseñe las direcciones IP de 5 máquinas en la red 111.159.35.0. ¿Qué máscara y qué prefijo tiene?**
+
+Respuesta: 3 bits de host (2³ − 2 = 6 ≥ 5), máscara 255.255.255.248, prefijo /29. Máquinas: 111.159.35.1 a .5 (la .0 es la red y la .7 el broadcast).
