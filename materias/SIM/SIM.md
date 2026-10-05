@@ -2701,6 +2701,24 @@ revierte**. En días hábiles, Constitución pierde ~19,7 bicicletas netas entre
 recupera ~15,1 entre 17 y 20 h; Madero Office hace el espejo. Mismo patrón commuter que sostiene el tema del
 subte, y sobre la misma estación.
 
+#### Antecedentes: papers leídos (2026-10-05)
+
+Detalle en `entregables/TPI/subte/10-antecedentes.md`. Originales en `fuentes/papers-tpi-subte/`.
+
+| Supuesto | Modelo | Literatura | Fuente |
+|---|---|---|---|
+| Tiempo de validación | Triangular (1,8; 2,4; 3,5) s, media 2,57 | 2 s (Valparaíso); 2,9-3,5 s (Pekín, NFC < QR); U(3; 5) s (norma china) | Seriani et al. 2025; Wang et al. 2024; Tian et al. 2026 |
+| Velocidad | U(1,1; 1,5) m/s | Rango de la literatura 1,1-1,5; calibrado 1,37 m/s | Li et al. 2024 (*Sensors*) |
+| Elección de molinete | Desvío más asignados × servicio | Sesgo fuerte por cercanía: 88,2 % al grupo más cercano; un molinete lejano se usa el 0,4 % | Tian 2026; Seriani 2025 |
+| Validación | Caudal por ventana contra SBASE | % de uso por molinete, simulado contra observado (±4 %) | Seriani 2025 |
+
+Conclusiones:
+- El escenario intermedio está dentro de lo observado y el pesimista cubre servicios de ~3 s.
+- La cercanía domina la elección, así que dónde se ubican los molinetes extra de E1 pesa tanto como su cantidad.
+- Ningún estudio informa el diámetro del peatón: hay que citarlo aparte o declararlo.
+- El antecedente de Nueva York (Zhen et al., WSC 2024) usa arribos Poisson sin oleadas: modelar las oleadas
+  del Roca es un aporte del TP.
+
 #### Pendientes del TPI de subte
 
 - **Parámetros no observados**: acordar con el docente si se acepta tratarlos mediante rangos y análisis de
@@ -2774,6 +2792,12 @@ subte, y sobre la misma estación.
 
 ## Log
 
+- **2026-10-05** (6): TPI subte, ingesta de 5 papers de acceso abierto (`fuentes/papers-tpi-subte/` y su
+  texto en `fuentes/txt/papers-tpi-subte/`): Seriani et al. 2025 (molinetes, Valparaíso), Wang et al. 2024
+  (PLOS ONE, Pekín), Tian et al. 2026 (Scientific Reports, trasbordo desde ferrocarril), Li et al. 2024
+  (Sensors, calibración de fuerza social) y Zhen et al. 2024 (WSC, Nueva York). Escrito
+  `10-antecedentes.md` con los aportes, el contraste con los supuestos del modelo y las referencias APA; tabla
+  resumen en la sección del TPI.
 - **2026-10-05** (5): TPI subte, calibración del escenario intermedio (T3.4). La demora del andén al
   vestíbulo se midió en OpenStreetMap (`datos/medir_acceso_osm.py`): D = 85 m, mediana entre 14 vías (rango
   69-112 m), h = 5 m [SUP], demora intermedia 106 s. Se corrigió la descarga de la §5, que medía solo el
