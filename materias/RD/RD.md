@@ -674,7 +674,9 @@ La IP tiene que caer en la subred 10.118.64.0 y estar 42.51 direcciones más arr
 
 ### Unidad 3 — Capa de Transporte: servicios, características, TCP y UDP
 
-> ⚠️ **FUERA del 1er parcial (Medin).** Este parcial es multiple choice sobre **Enlace + Red** únicamente. Transporte no entra; se conserva acá como material para el final.
+> ⚠️ **FUERA del 1er parcial (Medin).** Ese parcial fue multiple choice sobre Enlace + Red.
+>
+> 📌 **Probable 2do teórico de Medín (mar 27/10).** En 2024 tomó solo Transporte (ver *Ejercicios resueltos tipo*); a confirmar en clase. Resumen: `estudio/resumen-2do-parcial-medin.md`.
 
 #### Conceptos clave
 - La **Capa 4 (Transporte)** da comunicación **extremo a extremo** (las capas 1–3 son salto a salto). Unidad de datos: **segmento**.
@@ -814,7 +816,7 @@ La IP tiene que caer en la subred 10.118.64.0 y estar 42.51 direcciones más arr
 | Usos | HTTP, FTP, correo, archivos | Voz/video, DNS, DHCP, multicast |
 
 #### Ejercicios resueltos tipo
-> Estos 5 son **preguntas reales**: la parte de **teoría de Medín del 2do parcial del 29/10/2024**, com. 403; para practicar con las respuestas al final: `estudio/preguntas-medin-2do-parcial.md` (`fuentes/Baro-2do-parcial/2º Parcial - 2024-10-29 - Baro y Medin.jpeg`; las respuestas vienen del documento de preguntas de Medín). Es el mejor indicio de que el **2do teórico de Medín (27/10/2026) es de Capa de Transporte** (a confirmar en clase). En 2024 fueron preguntas para desarrollar, no multiple choice.
+> Estos 5 son **preguntas reales**: la parte de **teoría de Medín del 2do parcial del 29/10/2024**, com. 403; están en el resumen de Medín, `estudio/resumen-2do-parcial-medin.md` (`fuentes/Baro-2do-parcial/2º Parcial - 2024-10-29 - Baro y Medin.jpeg`; las respuestas vienen del documento de preguntas de Medín). Es el mejor indicio de que el **2do teórico de Medín (27/10/2026) es de Capa de Transporte** (a confirmar en clase). En 2024 fueron preguntas para desarrollar, no multiple choice.
 
 **1) ¿Qué responsabilidades tiene la capa de transporte?**
 Comunicación **extremo a extremo** confiable y eficiente entre aplicaciones. Funciones: dividir en **segmentos** y reensamblar; entrega **ordenada y confiable** (TCP); **control de errores**; **control de flujo** (según el receptor); **multiplexación** por puertos; **control de congestión** (solo TCP).
@@ -852,3 +854,4 @@ Comunicación **extremo a extremo** confiable y eficiente entre aplicaciones. Fu
 - 2026-10-05: Ingesta de la **teoría de UDP** de la cátedra (del Drive) en `fuentes/Medin-2do-parcial/`. Unidad 3: header UDP (8 B, longitud hasta 65.515), checksum opcional y pseudoencabezado (protocolo 17), RPC, RTP/RTCP, buffer y jitter. Registrada la **contradicción** sobre qué hace UDP ante un error (descarta vs. avisa a la capa superior) y la lista de preguntas para Medín.
 - 2026-10-05: **Consulta al Tanenbaum** (5ª ed. en castellano, del Drive; solo consulta, no se copió a `fuentes/`). Unidad 2: nuevo bloque *Ruteo, Sistemas Autónomos, OSPF y BGP* (ruteo vs. reenvío, tabla, ruta predeterminada, inundación, paquete de estado del enlace, grafo, AS, IGP, RIP, áreas y tipos de router, BGP). Las 8 preguntas 🔶 de la guía quedan resueltas; el límite de 15 saltos de RIP queda como conocimiento general.
 - 2026-10-05: Se separan los derivados por profesor: `estudio/banco-ejercicios-baro.md` (solo práctica de Baró; antes `banco-ejercicios-2do-parcial.md`) y `estudio/preguntas-medin-2do-parcial.md` (las 5 preguntas de teoría de Medín de 2024).
+- 2026-10-05: Resumen del **2do teórico de Medín** (Capa de Transporte, provisorio hasta confirmar el temario): `estudio/resumen-2do-parcial-medin.md` + pdf + docx, con las 5 preguntas reales de 2024 y 8 de 2dos parciales de otros profesores (2025), respondidas. Reemplaza a `preguntas-medin-2do-parcial` (borrado). Tahoe/Reno contrastado con la diapositiva y con Tanenbaum.
