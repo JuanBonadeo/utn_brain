@@ -9224,3 +9224,9 @@ métricas de proyecto vs producto — ver [Unidad 8](#unidad-8--medición-y-aná
   nuevos (riesgos, requerimientos, configuración, PPQA, medición, pericias) quedan acotados; los
   criterios de discriminación y el método BP se concentran en los capítulos 24 y 25. La de 101 págs.
   queda como `resumen-ad-extendido.md`.
+- 2026-10-05: podcasts de repaso para el AD — `estudio/podcast-ad/` con seis PDFs recortados de
+  `resumen-ad.md` (ep. 1 requerimientos, cambios y configuración · 2 PPQA, medición y pericias ·
+  3 proyecto, estimación, riesgos y ciclos de vida · 4 V&V y pruebas · 5 calidad, CMMI y procesos ·
+  6 simulacro, con un anexo de todas las preguntas de los AD 2024 y 2025) y
+  `estudio/prompt-podcast-ad.md` con un prompt por episodio para NotebookLM, orientado a razonar y
+  decidir (el parcial es a libro abierto), más versiones cortas de menos de 500 caracteres.
