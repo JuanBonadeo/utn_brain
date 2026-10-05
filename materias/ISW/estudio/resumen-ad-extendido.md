@@ -6,6 +6,9 @@
 > definiciones, y las tablas aparecen sólo donde hay algo que comparar. El orden es temático, no el
 > del examen. Los capítulos 24 y 25 están pensados para consultarlos durante el parcial. Para el
 > detalle completo de cada tema y los ejercicios resueltos está la wiki (`ISW.md`).
+>
+> **Versión extendida (101 págs.).** La versión para estudiar es `resumen-ad.md`, condensada a unas
+> 60 páginas con la misma proporción que el resumen de Regularización.
 
 ## 1. El parcial y su temario
 
