@@ -313,10 +313,11 @@ for g,q in zip(gates,queues):
  assert float(g.findtext('Dx'))>0 and float(g.findtext('Dy'))==0 and g.findtext('Bidirectional')=='false', 'el paso va del hall a la zona paga'
  pts=[(float(x.findtext('X')),float(x.findtext('Y'))) for x in q.find('Points')][::3]
  qx,qy=float(q.findtext('X')),float(q.findtext('Y'))
- # En AnyLogic la cabeza de la cola es el punto inicial y el desborde sigue la dirección del último tramo:
- # la cola arranca junto al molinete y crece hacia el hall.
- tail=(qx+pts[-1][0],qy+pts[-1][1])
- assert entry_x < tail[0] < qx < gx < gx+float(g.findtext('Dx')) < exit_x and abs(qy-gy)<1e-9 and gx-qx<10, g.findtext('Name')
+ # Convención del ejemplo oficial "Subway Entrance Hall" (fareGates y ticketMachines): el punto inicial
+ # (0,0) es la cola y el último punto es la cabeza, con la flecha hacia el servicio y a 2 m de él.
+ # La inversión del 2026-09-24 (cabeza en el punto inicial) era incorrecta.
+ head=(qx+pts[-1][0],qy+pts[-1][1])
+ assert entry_x < qx < head[0] < gx < gx+float(g.findtext('Dx')) < exit_x and abs(qy-gy)<1e-9 and 10 <= gx-head[0] <= 30, g.findtext('Name')
 assert len(ped.findall('.//Wall'))>=40
 aviso=ped.find(".//Text[Name='avisoPeatonal']")
 assert 'PLANO HIPOTÉTICO' in aviso.findtext('Text') and 'NO ES EL PLANO OFICIAL' in aviso.findtext('TextCode')

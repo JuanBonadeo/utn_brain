@@ -443,11 +443,16 @@ peatones, el volumen que implica el perfil SBASE. Mostró dos problemas:
 
 - **Atasco.** A las 09:30 habían salido 12.600, y al llegar al límite de 5 h solo 14.232: el sistema no
   drenó. La utilización media de los molinetes fue de apenas 23 %, con 497 personas en cola. El cuello de
-  botella no era la capacidad de validación, sino el movimiento de los peatones. Causa probable: las colas
-  estaban dibujadas con la cabeza en el extremo lejano. En AnyLogic la cabeza es el punto inicial y el
-  desborde sigue la dirección del último tramo, así que la cola crecía hacia los molinetes. Se invirtieron
-  las 28 colas: ahora arrancan junto al molinete y crecen hacia el hall. El verificador controla esa
-  orientación. Falta confirmarlo con el piloto corto.
+  botella no era la capacidad de validación, sino el movimiento de los peatones. Ese día se atribuyó a la
+  orientación de las colas y se invirtieron las 28, con la cabeza en el punto inicial.
+  **Corrección del 2026-10-05:** esa inversión era incorrecta. En el ejemplo oficial *Subway Entrance Hall*
+  (fareGates y ticketMachines) el punto inicial de cada cola es el extremo lejano y el **último punto es la
+  cabeza**, con la flecha hacia el servicio y a 2 m de él. Con la inversión, el primero de la fila esperaba
+  a 8 m del molinete y la flecha apuntaba al hall. Las 28 colas usan ahora la geometría del ejemplo: 6 m de
+  largo, de x = 420 a x = 480, con la cabeza a 2 m del paso (x = 500). El verificador controla esa
+  orientación. Como el piloto que no drenó tenía la orientación correcta, la causa del atasco **sigue
+  abierta**. Las sospechas son la cabeza a 0,4 m del paso y 28 colas separadas 1 m que desbordan sobre el
+  mismo hall. Falta confirmarlo con `PeatonalFranjaPrueba` animado.
 - **Tiempo de cómputo.** Una corrida completa tardó unos 43 minutos. A ese ritmo, las 60 corridas de
   producción llevarían más de 40 horas. Con el atasco corregido, las corridas deberían drenar antes, pero el
   tiempo real se mide en el próximo piloto y puede obligar a reducir el número de pares o a correrlos por

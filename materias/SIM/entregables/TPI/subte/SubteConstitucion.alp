@@ -4248,7 +4248,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Connector>
 					<Id>1791000000013</Id>
 					<Name><![CDATA[conPedSourceServicio]]></Name>
-					<X>0</X><Y>0</Y>
+					<X>0</X><Y>20</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -4274,14 +4274,14 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 						<ItemName><![CDATA[in]]></ItemName>
 					</TargetConnectableItemReference>
 					<Points>
-						<Point><X>300</X><Y>80</Y></Point>
-						<Point><X>450</X><Y>80</Y></Point>
+						<Point><X>330</X><Y>80</Y></Point>
+						<Point><X>450</X><Y>90</Y></Point>
 					</Points>
 				</Connector>
 				<Connector>
 					<Id>1791000000014</Id>
 					<Name><![CDATA[conPedServicioSalida]]></Name>
-					<X>0</X><Y>0</Y>
+					<X>0</X><Y>20</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -4307,14 +4307,14 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 						<ItemName><![CDATA[in]]></ItemName>
 					</TargetConnectableItemReference>
 					<Points>
-						<Point><X>490</X><Y>80</Y></Point>
-						<Point><X>600</X><Y>80</Y></Point>
+						<Point><X>490</X><Y>90</Y></Point>
+						<Point><X>600</X><Y>90</Y></Point>
 					</Points>
 				</Connector>
 				<Connector>
 					<Id>1791000000103</Id>
 					<Name><![CDATA[conPedSalidaSink]]></Name>
-					<X>0</X><Y>0</Y>
+					<X>0</X><Y>20</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -4340,14 +4340,14 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 						<ItemName><![CDATA[in]]></ItemName>
 					</TargetConnectableItemReference>
 					<Points>
-						<Point><X>640</X><Y>80</Y></Point>
+						<Point><X>640</X><Y>90</Y></Point>
 						<Point><X>760</X><Y>80</Y></Point>
 					</Points>
 				</Connector>
 				<Connector>
 					<Id>1792000000339</Id>
 					<Name><![CDATA[conPedSourceCalleServicio]]></Name>
-					<X>0</X><Y>0</Y>
+					<X>0</X><Y>20</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -4373,10 +4373,10 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 						<ItemName><![CDATA[in]]></ItemName>
 					</TargetConnectableItemReference>
 					<Points>
-						<Point><X>300</X><Y>30</Y></Point>
+						<Point><X>330</X><Y>30</Y></Point>
 						<Point><X>400</X><Y>30</Y></Point>
 						<Point><X>400</X><Y>80</Y></Point>
-						<Point><X>450</X><Y>80</Y></Point>
+						<Point><X>450</X><Y>90</Y></Point>
 					</Points>
 				</Connector>
 			</Connectors>
@@ -5330,7 +5330,7 @@ return String.join(",", partes);]]></Body>
 				<EmbeddedObject>
 					<Id>1791000000015</Id>
 					<Name><![CDATA[pedSource]]></Name>
-					<X>300</X><Y>80</Y>
+					<X>300</X><Y>100</Y>
 					<Label><X>-15</X><Y>-30</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -5526,7 +5526,7 @@ return String.join(",", partes);]]></Body>
 				<EmbeddedObject>
 					<Id>1792000000335</Id>
 					<Name><![CDATA[pedSourceCalle]]></Name>
-					<X>300</X><Y>30</Y>
+					<X>300</X><Y>50</Y>
 					<Label><X>-15</X><Y>-30</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -5722,7 +5722,7 @@ return String.join(",", partes);]]></Body>
 				<EmbeddedObject>
 					<Id>1791000000019</Id>
 					<Name><![CDATA[pedMolinetes]]></Name>
-					<X>450</X><Y>80</Y>
+					<X>450</X><Y>100</Y>
 					<Label><X>-20</X><Y>-25</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -5835,7 +5835,7 @@ return String.join(",", partes);]]></Body>
 				<EmbeddedObject>
 					<Id>1791000000104</Id>
 					<Name><![CDATA[pedSalida]]></Name>
-					<X>600</X><Y>80</Y>
+					<X>600</X><Y>100</Y>
 					<Label><X>-20</X><Y>-30</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -5923,7 +5923,7 @@ return String.join(",", partes);]]></Body>
 				<EmbeddedObject>
 					<Id>1791000000021</Id>
 					<Name><![CDATA[pedSink]]></Name>
-					<X>760</X><Y>80</Y>
+					<X>760</X><Y>100</Y>
 					<Label><X>-20</X><Y>-30</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>

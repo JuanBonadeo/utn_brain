@@ -2774,6 +2774,12 @@ subte, y sobre la misma estación.
 
 ## Log
 
+- **2026-10-05** (2): TPI subte, colas de los molinetes. Juan detectó en el IDE que las colas estaban
+  giradas. Comparado con el ejemplo oficial *Subway Entrance Hall*: en AnyLogic la cabeza de la cola es el
+  **último punto** (flecha hacia el servicio, a 2 m), no el primero. La inversión del 24/09 era incorrecta.
+  Las 28 colas usan ahora la geometría del ejemplo (6 m, cabeza a 2 m del molinete), corregidos el
+  verificador y `02-modelo-anylogic.md`. La causa del atasco del primer piloto sigue abierta; falta el
+  piloto animado `PeatonalFranjaPrueba`.
 - **2026-10-05**: TPI subte, pedidos de datos. Revisada la bandeja: SBASE y Emova no respondieron los
   correos del 23/09; Trenes Argentinos contestó el 25/09 que el pedido tiene que ir por TAD (id=1001). La
   cátedra aprobó la Pedestrian Library y pidió solicitar los planos. Escrito `09-pedidos-de-datos.md` con el
