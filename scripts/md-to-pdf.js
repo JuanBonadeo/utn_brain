@@ -56,7 +56,7 @@ const MATERIAS = {
   SGD: 'Soporte a la Gestión de Datos',
   ASI: 'Administración de Sistemas de Información',
   IPP: 'Intro a la Práctica Profesional',
-  ICS: 'Ingeniería y Calidad de Software',
+  ISW: 'Ingeniería y Calidad de Software',
 };
 
 function eyebrowFor(file) {

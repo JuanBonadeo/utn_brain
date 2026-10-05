@@ -14,9 +14,9 @@ Reglas (las mismas del CLAUDE.md para `archivo/`):
 
 Uso:
   python3 scripts/drive-archivo.py                  # actualiza todas las materias
-  python3 scripts/drive-archivo.py ICS RD           # sólo esas
+  python3 scripts/drive-archivo.py ISW RD           # sólo esas
   python3 scripts/drive-archivo.py --dry-run        # muestra qué bajaría, no baja
-  python3 scripts/drive-archivo.py ICS --comparar   # además lista lo local que ya no está en el Drive
+  python3 scripts/drive-archivo.py ISW --comparar   # además lista lo local que ya no está en el Drive
 
 Al final imprime los archivos nuevos por materia: ese es el material candidato a
 copiar a `fuentes/` e ingerir.
@@ -37,7 +37,7 @@ RAIZ_DRIVE = "1ZgKML44drc8Wq3pcbHsc-ozPINv6xSHQ"  # carpeta "UTN" del Drive
 # código -> (id de la carpeta de la materia en el Drive, ruta legible)
 MATERIAS = {
     "ASI": ("1B2f0wTl1kiPOjN-b4exhyz3JDzuZZw9C", "4º AÑO/Administración de Sistemas de Información"),
-    "ICS": ("1VJJ04eHB8hRrZriCKJ-Ha1EodwLhi2f3", "4º AÑO/Ingeniería y Calidad de Software"),
+    "ISW": ("1VJJ04eHB8hRrZriCKJ-Ha1EodwLhi2f3", "4º AÑO/Ingeniería y Calidad de Software"),
     "IO":  ("1qY_d4w0BAVVBiVDc68kslUSCluP7EkWn", "4º AÑO/Investigación Operativa"),
     "LEG": ("1kA9pJ6aVZwHTcaW2dhJQveGcnQVtAy0k", "4º AÑO/Legislación"),
     "RD":  ("1e5MZUFocfXBkwDw7E33NTQjwXQBNPBay", "4º AÑO/Redes de Datos"),

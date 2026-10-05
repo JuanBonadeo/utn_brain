@@ -458,9 +458,9 @@ sabe por qué salió como salió y si el próximo va a salir mejor**.
 
 #### Fuentes
 
-- `fuentes/ICS/Resumen Unidad 1,2y3.md` — secciones "U1 – Modelos de Calidad de Software",
+- `fuentes/Resumen Unidad 1,2y3.md` — secciones "U1 – Modelos de Calidad de Software",
   "Comprender los niveles de madurez", "Componentes del área de proceso".
-- `fuentes/ICS/Preguntas de Cuestionario.md` — sección "CMMI" y las secciones por área de
+- `fuentes/Preguntas de Cuestionario.md` — sección "CMMI" y las secciones por área de
   proceso.
 - `fuentes/clases-2026/clase-2-rosas.md` — madurez vs. capacidad, niveles 4 y 5, elementos de
   CMMI.
@@ -795,11 +795,11 @@ publicado, para encontrar y eliminar inconsistencias, redactado por otro PM."**
   temario. De acá salen los propósitos y las metas/prácticas oficiales de OPF, OPD y OT. Ojo: las
   páginas del temario son las **impresas**; en este PDF, las áreas están 7 páginas antes
   (OPD 286, OPF 308, OT 342, PMC 380, PP 394, VAL 558, VER 572).
-- `fuentes/ICS/Resumen Unidad 1,2y3.md` — "U2: Gestión de procesos", "Enfoque de procesos de la
+- `fuentes/Resumen Unidad 1,2y3.md` — "U2: Gestión de procesos", "Enfoque de procesos de la
   organización (OPF)", "Formación Organizativa (OT)", "Introducción a procesos y RUP".
-- `fuentes/ICS/Resumen de ISW.md` — "U2: Introducción a procesos y RUP" (elementos del proceso
+- `fuentes/Resumen de ISW.md` — "U2: Introducción a procesos y RUP" (elementos del proceso
   según RUP, con más detalle en fase/disciplina/guías).
-- `fuentes/ICS/Preguntas de Cuestionario.md` — secciones OPD y OPF.
+- `fuentes/Preguntas de Cuestionario.md` — secciones OPD y OPF.
 
 ---
 
@@ -1308,9 +1308,9 @@ reserva sólo va el VE del **riesgo residual**.
 
 #### Fuentes
 
-- `fuentes/ICS/Resumen Unidad 1,2y3.md` — "U3 – Gestión de Proyectos de Software": Áreas CMMi PP
+- `fuentes/Resumen Unidad 1,2y3.md` — "U3 – Gestión de Proyectos de Software": Áreas CMMi PP
   y PMC, Guía práctica de gestión de proyectos, Guías avanzadas de puntos de función.
-- `fuentes/ICS/Preguntas de Cuestionario.md` — secciones PMC, REQM, PP, PPQA, CM, RSKM, MA, RD.
+- `fuentes/Preguntas de Cuestionario.md` — secciones PMC, REQM, PP, PPQA, CM, RSKM, MA, RD.
 - `fuentes/clases-2026/clase-3-rosas.md` — tipos de proyecto (DES/MANT/DESPL), EDT y órdenes de
   precedencia, métodos de estimación (valor esperado, Delphi, puntos de función, puntos de
   historia), distribución 40-20-40.
@@ -2767,11 +2767,11 @@ partición, sobre todo en las válidas.
 
 #### Fuentes
 
-- `fuentes/ICS/Unidad 5.md` — fuente principal y más detallada de la unidad (V&V, ciclos de
+- `fuentes/Unidad 5.md` — fuente principal y más detallada de la unidad (V&V, ciclos de
   vida, estrategias, niveles y tipos de prueba, técnicas dinámicas y estáticas, revisiones).
-- `fuentes/ICS/Resumen Unidad 1,2y3.md` — "U5 – Verificación y Validación" (versión más
+- `fuentes/Resumen Unidad 1,2y3.md` — "U5 – Verificación y Validación" (versión más
   resumida del mismo contenido).
-- `fuentes/ICS/Preguntas de Cuestionario.md` — secciones "Ciclo de vida - Incrementos",
+- `fuentes/Preguntas de Cuestionario.md` — secciones "Ciclo de vida - Incrementos",
   "Validación y Verificación", "Particiones de equivalencia".
 - `fuentes/clases-2026/clase-2-brozo.md` — V&V, estática vs dinámica, formalidad de las
   revisiones, los 10 principios de prueba, particionamiento de equivalencia y por valores
@@ -5461,7 +5461,7 @@ métricas de proyecto vs producto — ver [Unidad 8](#unidad-8--medición-y-aná
 
 #### Fuentes
 
-- `fuentes/ICS/Resumen de ISW.md` — "Gestión efectiva calidad producto", "El costo de la
+- `fuentes/Resumen de ISW.md` — "Gestión efectiva calidad producto", "El costo de la
   prueba", "Factores que afectan al esfuerzo de pruebas", "Automatización y Manual",
   "Estrategias de test", "KPIs".
 
@@ -5469,7 +5469,7 @@ métricas de proyecto vs producto — ver [Unidad 8](#unidad-8--medición-y-aná
 
 ## Log
 
-- 2026-08-10: Ingesta inicial de la materia. Se cargaron 4 fuentes en `fuentes/ICS/`
+- 2026-08-10: Ingesta inicial de la materia. Se cargaron 4 fuentes en `fuentes/`
   (`Resumen Unidad 1,2y3.md`, `Unidad 5.md`, `Resumen de ISW.md`,
   `Preguntas de Cuestionario.md`). Se creó el índice completo y se desarrollaron las
   unidades 1, 2, 3, 4 y 5 desde cero (el archivo estaba vacío). Se resolvió además la

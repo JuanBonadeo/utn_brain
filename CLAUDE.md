@@ -19,7 +19,7 @@ tiempo repitiendo cosas que ya deberían estar escritas en algún lado.
 | SGD | Soporte a la Gestión de Datos con P. Visual |
 | ASI | Administración de Sistemas de Información |
 | IPP | Intro a la Práctica Profesional |
-| ICS | Ingeniería y Calidad de Software |
+| ISW | Ingeniería y Calidad de Software (ICS) |
 
 ## ESTRUCTURA
 Todo lo de una materia vive dentro de `materias/[CÓDIGO]/`. No hay carpetas
@@ -53,14 +53,14 @@ de materia fuera de ahí.
     Cada `archivo/` es el contenido de la carpeta de esa materia en el Drive,
     volcado tal cual (`Examenes/`, `Material de Cursado/`, `Resumenes/`,
     `LEER.pdf`). El mapeo código → carpeta del Drive vive en
-    `scripts/drive-archivo.py` (`MATERIAS`): `4º AÑO/` para ASI, ICS, IO, LEG,
+    `scripts/drive-archivo.py` (`MATERIAS`): `4º AÑO/` para ASI, ISW, IO, LEG,
     RD, SIM y TPA; `2° AÑO/Ingeniería y Sociedad` para IYS; `Electivas/` para
     IPP y SGD. Si se agrega una materia, se suma ahí.
   - En una máquina nueva (o si falta `archivo/`), se baja con
     `python3 scripts/drive-archivo.py` (en Windows: `py scripts\drive-archivo.py`).
     No necesita login ni dependencias; tarda varios minutos.
   - **Actualizar con material nuevo:** el mismo comando, opcionalmente con
-    códigos (`python3 scripts/drive-archivo.py ICS RD`). Primero corré con
+    códigos (`python3 scripts/drive-archivo.py ISW RD`). Primero corré con
     `--dry-run` para ver qué hay de nuevo. El script **sólo agrega** lo que
     falta: nunca sobrescribe ni borra nada local. Si en el Drive renombraron o
     movieron carpetas, queda la versión vieja y se suma la nueva (duplicado

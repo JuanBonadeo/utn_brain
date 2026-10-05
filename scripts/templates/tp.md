@@ -4,7 +4,7 @@
 # scripts/datos-alumno.json. Acá va solo lo que cambia por trabajo.
 # Borrá las líneas que no apliquen (grupo, etapa, subtitulo son opcionales).
 
-codigo: XXX                      # IO, IYS, SIM, RD, ASI, ICS, LEG, TPA, SGD, IPP
+codigo: XXX                      # IO, IYS, SIM, RD, ASI, ISW, LEG, TPA, SGD, IPP
 materia: Nombre completo de la materia
 tipo: Trabajo Práctico N.º 1     # o "Trabajo Final Integrador", "Informe", etc.
 titulo: Título del trabajo

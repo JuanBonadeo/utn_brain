@@ -5,7 +5,7 @@
 > leerse de corrido:
 > cada capítulo abre explicando por qué el tema existe antes de entrar en las definiciones, y las
 > tablas aparecen sólo donde hay algo que comparar. El orden es temático, no el del examen.
-> Para el detalle completo de cada tema está la wiki (`ICS.md`); para practicar, el banco de
+> Para el detalle completo de cada tema está la wiki (`ISW.md`); para practicar, el banco de
 > preguntas (`banco-preguntas.md`).
 ## 1. El parcial y su temario
 

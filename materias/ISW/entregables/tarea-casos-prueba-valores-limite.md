@@ -1,7 +1,7 @@
 # Tarea — Casos de prueba por valores límite (aplicación bancaria)
 
 > Fuente de verdad del entregable. Se genera con
-> `npm run docx -- materias/ICS/tarea-casos-prueba-valores-limite.md materias/ICS/tarea-casos-prueba-valores-limite.docx`.
+> `npm run docx -- materias/ISW/tarea-casos-prueba-valores-limite.md materias/ISW/tarea-casos-prueba-valores-limite.docx`.
 > No editar el .docx ni el .pdf a mano.
 
 ---

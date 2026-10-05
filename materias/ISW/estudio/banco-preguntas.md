@@ -1,4 +1,4 @@
-# ICS — Banco de preguntas de parciales de regularización
+# ISW — Banco de preguntas de parciales de regularización
 
 Armado a partir de los **9 parciales de regularización** guardados en
 `fuentes/parciales-regularizacion/` (2012, 2013, 2015, 2016, 2020, 2021, 2022, 2024, 2025).
@@ -370,7 +370,7 @@ Las palabras que disparan cada técnica:
 
 Hoy no se toma en este formato, pero **es el mismo contenido** que las preguntas de conteo de
 hoy, y es idéntico al ejercicio del recargo de cuota de la clase 2 (ver
-[ICS.md → U5 → ejercicio 19](../ICS.md)).
+[ISW.md → U5 → ejercicio 19](../ISW.md)).
 
 ---
 
