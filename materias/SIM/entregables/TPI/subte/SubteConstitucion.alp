@@ -3544,6 +3544,21 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 					</Properties>
 				</Variable>
 				<Variable Class="PlainVariable">
+					<Id>1793000000037</Id>
+					<Name><![CDATA[rngVelocidadPed]]></Name>
+					<X>1250</X><Y>1035</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>false</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="default" StaticVariable="false">
+						<Type><![CDATA[java.util.Random]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[new java.util.Random(3)]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
 					<Id>1792000000319</Id>
 					<Name><![CDATA[nDesdeRocaPed]]></Name>
 					<X>1250</X><Y>735</Y>
@@ -4601,6 +4616,30 @@ nEsperandoPed++;
 qMaxPed = Math.max(qMaxPed, nEsperandoPed);]]></Body>
 				</Function>
 				<Function AccessType="public" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[long]]></ReturnType>
+					<Id>1793000000038</Id>
+					<Name><![CDATA[mezclarSemillaPed]]></Name>
+					<X>1500</X><Y>61</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>false</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Parameter>
+						<Name><![CDATA[semilla]]></Name>
+						<Type><![CDATA[long]]></Type>
+					</Parameter>
+					<Parameter>
+						<Name><![CDATA[flujo]]></Name>
+						<Type><![CDATA[int]]></Type>
+					</Parameter>
+					<Body><![CDATA[// Finalizador SplitMix64: semillas vecinas (pares consecutivos, flujos distintos) quedan independientes.
+long z = semilla * 0x9E3779B97F4A7C15L + flujo * 0xBF58476D1CE4E5B9L;
+z = (z ^ (z >>> 30)) * 0xBF58476D1CE4E5B9L;
+z = (z ^ (z >>> 27)) * 0x94D049BB133111EBL;
+return z ^ (z >>> 31);]]></Body>
+				</Function>
+				<Function AccessType="public" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
 					<ReturnType><![CDATA[void]]></ReturnType>
 					<Id>1793000000036</Id>
@@ -5015,8 +5054,13 @@ if (modoFranjaPed) {
 // La semilla efectiva es semillaPed. La calle y el servicio usan generadores propios para que E0 y E1
 // reciban exactamente los mismos arribos y tiempos de validacion (numeros aleatorios comunes).
 getDefaultRandomGenerator().setSeed(semillaPed);
-rngCallePed.setSeed(semillaPed * 1000003L + 11);
-rngServicioPed.setSeed(semillaPed * 1000003L + 29);
+// Cada flujo recibe una semilla mezclada (mezclarSemillaPed): con java.util.Random, semillas que
+// difieren en poco (antes +11 y +29) dan primeros numeros casi iguales y flujos correlacionados.
+rngCallePed.setSeed(mezclarSemillaPed(semillaPed, 1));
+rngServicioPed.setSeed(mezclarSemillaPed(semillaPed, 2));
+// La velocidad de cada peaton usa su propio generador: el generador por defecto lo consume tambien
+// la Pedestrian Library, en un orden que depende del escenario, y rompia los numeros comunes E0/E1.
+rngVelocidadPed.setSeed(mezclarSemillaPed(semillaPed, 3));
 inicioRealMsPed = System.currentTimeMillis();
 inicializadoPed = true;]]></Body>
 				</Function>
@@ -5495,7 +5539,7 @@ return String.join(",", partes);]]></Body>
 						<Parameter>
 							<Name><![CDATA[comfortableSpeed]]></Name>
 							<Value Class="CodeUnitValue">
-								<Code><![CDATA[uniform(1.1, 1.5)]]></Code>
+								<Code><![CDATA[uniform(1.1, 1.5, rngVelocidadPed)]]></Code>
 								<Unit Class="SpeedUnits"><![CDATA[MPS]]></Unit>
 							</Value>
 						</Parameter>
@@ -5691,7 +5735,7 @@ return String.join(",", partes);]]></Body>
 						<Parameter>
 							<Name><![CDATA[comfortableSpeed]]></Name>
 							<Value Class="CodeUnitValue">
-								<Code><![CDATA[uniform(1.1, 1.5)]]></Code>
+								<Code><![CDATA[uniform(1.1, 1.5, rngVelocidadPed)]]></Code>
 								<Unit Class="SpeedUnits"><![CDATA[MPS]]></Unit>
 							</Value>
 						</Parameter>

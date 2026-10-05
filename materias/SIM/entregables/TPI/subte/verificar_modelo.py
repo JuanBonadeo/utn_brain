@@ -294,6 +294,8 @@ sources={x.findtext('Name'):{p.findtext('Name'):p.findtext('Value/Code') for p i
 assert sources['pedSource']['locationLine']=='entradaPeatonal' and sources['pedSourceCalle']['locationLine']=='entradaCalle'
 assert sources['pedSource']['onExit']=='ped.desdeRocaPed = true; registraIngresoPed(ped);'
 assert sources['pedSourceCalle']['onExit']=='ped.desdeRocaPed = false; registraIngresoPed(ped);'
+# Velocidad con generador propio (numeros aleatorios comunes E0/E1); el generador por defecto lo consume la libreria.
+assert all(sources[k]['comfortableSpeed']=='uniform(1.1, 1.5, rngVelocidadPed)' for k in ('pedSource','pedSourceCalle'))
 conns={(c.findtext('SourceEmbeddedObjectReference/ItemName'),c.findtext('TargetEmbeddedObjectReference/ItemName')) for c in ped.findall('Connectors/Connector')}
 assert {('pedSource','pedMolinetes'),('pedSourceCalle','pedMolinetes'),('pedMolinetes','pedSalida'),('pedSalida','pedSink')}<=conns
 # El horario embebido es exactamente el extraído de los PDFs oficiales del Roca.
