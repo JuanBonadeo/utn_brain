@@ -181,7 +181,10 @@ if (htmlOnly) { console.log(`HTML  → ${path.relative(process.cwd(), outHtml)}`
 
 /* ─────────────── pdf en dos pasadas ─────────────── */
 function hasPdftotext() {
-  try { execFileSync('pdftotext', ['-v'], { stdio: 'ignore' }); return true; } catch { return false; }
+  // Algunas builds (la de Git Bash en Windows) salen con código 99 en -v:
+  // solo cuenta como ausente si no se encuentra el binario.
+  try { execFileSync('pdftotext', ['-v'], { stdio: 'ignore' }); return true; }
+  catch (e) { return e.code !== 'ENOENT'; }
 }
 const norm = (s) => s.normalize('NFC').replace(/\s+/g, ' ').trim();
 
@@ -202,7 +205,8 @@ const norm = (s) => s.normalize('NFC').replace(/\s+/g, ' ').trim();
 
     await print();
     if (hasPdftotext()) {
-      const txt = execFileSync('pdftotext', ['-enc', 'UTF-8', outPdf, '-'], { encoding: 'utf8' });
+      // -layout: sin él, el pdftotext de xpdf pega el título con el párrafo siguiente.
+      const txt = execFileSync('pdftotext', ['-layout', '-enc', 'UTF-8', outPdf, '-'], { encoding: 'utf8' });
       // Un título ocupa su propia línea: se busca primero como línea exacta
       // (evita que "OSPF" matchee dentro de "OSPF y BGP") y, si no aparece
       // (título partido en dos líneas), como texto dentro de la página.
