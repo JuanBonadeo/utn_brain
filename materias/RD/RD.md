@@ -18,7 +18,8 @@
 ## Índice
 1. Unidad 1 — Capa de Enlace: control de flujo y errores
 2. Unidad 2 — Capa de Red: servicios, ruteo, IPv4, congestión y protocolos de control  📌 *(entra en el 2do parcial práctico de Baró. No entran: broadcast/multicast/anycast, jerarquías, móviles, ad-hoc, Control de Congestión ni MPLS)*
-3. Unidad 3 — Capa de Transporte: servicios, características, TCP y UDP  ⚠️ *(FUERA del 1er parcial. **Probable 2do teórico de Medín, 27/10**: en 2024 tomó solo Transporte; a confirmar en clase)*
+3. Unidad 3 — Capa de Transporte: servicios, características, TCP, UDP y puertos  📌 *(entra en el **2do teórico de Medín, mar 27/10**; confirmado por mail)*
+4. Unidad 4 — Firewall y seguridad perimetral  📌 *(entra en el 2do teórico de Medín)*
 
 **Cómo está armada cada unidad:** Conceptos clave (repaso rápido) → Desarrollo (por tema del teórico) → Ejercicios resueltos tipo → Dudas / pendientes → Fuentes.
 
@@ -672,11 +673,11 @@ La IP tiene que caer en la subred 10.118.64.0 y estar 42.51 direcciones más arr
 - `fuentes/RD/Medin-1er-parcial/Preguntas y Respuestas Parciales de Medin.docx` (preguntas reales)
 - Tanenbaum & Wetherall, *Computer Networks*, 5th ed.
 
-### Unidad 3 — Capa de Transporte: servicios, características, TCP y UDP
+### Unidad 3 — Capa de Transporte: servicios, características, TCP, UDP y puertos
 
 > ⚠️ **FUERA del 1er parcial (Medin).** Ese parcial fue multiple choice sobre Enlace + Red.
 >
-> 📌 **Probable 2do teórico de Medín (mar 27/10).** En 2024 tomó solo Transporte (ver *Ejercicios resueltos tipo*); a confirmar en clase. Resumen: `estudio/resumen-2do-parcial-medin.md`.
+> 📌 **2do teórico de Medín (mar 27/10): temario confirmado.** El mail de Medín del 15/08 (reenviado por Gonza el 06/10) adjunta "los apuntes que estamos estudiando a partir del 1er examen parcial, y que tienen el contenido a ser evaluado en el 2do examen parcial de teoría" (`fuentes/Medin-2do-parcial/examen 2.rar`). Entran: **Transporte** (servicios y primitivas, características, TCP, UDP), **Capa de Transporte y Puertos** y **Firewall** (Unidad 4). Resumen: `estudio/resumen-2do-parcial-medin.md`.
 
 #### Conceptos clave
 - La **Capa 4 (Transporte)** da comunicación **extremo a extremo** (las capas 1–3 son salto a salto). Unidad de datos: **segmento**.
@@ -785,7 +786,7 @@ La IP tiene que caer en la subred 10.118.64.0 y estar 42.51 direcciones más arr
 - **El checksum es opcional.** Si no se calcula, el campo va en ceros. Desactivarlo solo tiene sentido si los datos no son críticos, como en VoIP.
 - Cubre **todo el segmento UDP más un pseudoencabezado IP** (igual que TCP): IP origen, IP destino, un byte en cero, el **número de protocolo (17)** y la **longitud UDP**. El algoritmo es la suma en complemento a uno de palabras de 16 bits; en el receptor, el resultado incluyendo el checksum tiene que dar cero.
 - **Viola la estructura de capas**: la capa 4 controla datos de la capa 3, pero sirve para detectar paquetes que llegaron al destino equivocado.
-- ⚠️ **Qué hace ante un error: las fuentes no coinciden.** La diapositiva dice que **"si detecta errores, avisa a las capas superiores"** y que **"deja que las capas superiores decidan qué hacer"**. El documento de preguntas de Medín (respuesta de la pregunta 3, abajo) y la tabla de esta sección dicen que **descarta** el datagrama. En los dos casos **UDP no retransmite**. Para el parcial conviene decir que **UDP detecta el error con el checksum pero no lo corrige ni retransmite: lo descarta o lo informa, y la decisión queda en manos de la aplicación**. Hay que preguntarle a Medín cuál espera.
+- ✅ **Qué hace ante un error (resuelto).** La versión de esta diapositiva que mandó Medín para el 2do parcial (`4 - Capa de Transporte - Protocolo UDP (versión Medín 2026).pdf`) dice textualmente: **"Si detecta errores, no corrige pero avisa a las capas superiores"**. Esa es la respuesta para su parcial. Lo que sigue queda como antecedente. **Antes las fuentes no coincidían.** La diapositiva dice que **"si detecta errores, avisa a las capas superiores"** y que **"deja que las capas superiores decidan qué hacer"**. El documento de preguntas de Medín (respuesta de la pregunta 3, abajo) y la tabla de esta sección dicen que **descarta** el datagrama. En los dos casos **UDP no retransmite**. Para el parcial conviene decir que **UDP detecta el error con el checksum pero no lo corrige ni retransmite: lo descarta o lo informa, y la decisión queda en manos de la aplicación**. Hay que preguntarle a Medín cuál espera.
 
 ##### RPC (llamada a procedimiento remoto)
 - Un host ejecuta un proceso en otro como si fuera una función local. Por ejemplo, pedir una canción en Spotify.
@@ -815,6 +816,67 @@ La IP tiene que caer en la subred 10.118.64.0 y estar 42.51 direcciones más arr
 | Servicio | Byte-stream | Mensajes individuales |
 | Usos | HTTP, FTP, correo, archivos | Voz/video, DNS, DHCP, multicast |
 
+#### Puertos (apunte "Capa de Transporte y Puertos", UTN 2024)
+> Fuente: `fuentes/Medin-2do-parcial/Capa de Transporte y Puertos-UTN.pdf` (38 págs., entra en el 2do teórico de Medín). Repite lo básico de TCP y UDP ya desarrollado arriba; acá va solo lo nuevo.
+
+##### Qué es un puerto
+- Es un **número de 16 bits (0 a 65.535)** que identifica **a qué proceso o aplicación** va el segmento dentro del host. Viaja en el header de TCP y de UDP (puerto origen y destino). IP lleva el paquete hasta el host; el puerto lo lleva hasta la aplicación.
+- **Socket = IP + puerto**: identifica una aplicación que emite o recibe datos. Ejemplo: al visitar una web, el destino es `IP del servidor : 443` y el origen es `tu IP : puerto efímero`, para que la respuesta sepa a dónde volver.
+- **Puerto 0:** no se usa para comunicarse; por convención, un programa pide el puerto 0 para que **el sistema operativo le asigne uno libre**.
+
+##### Tipos de puertos (rangos IANA)
+
+| Tipo | Rango | Uso |
+|---|---|---|
+| **Conocidos** (*well-known*) | **0 – 1023** | Reservados y asignados por la **IANA** a servicios estándar (HTTP, FTP, SSH…) |
+| **Registrados** | **1024 – 49.151** | Las organizaciones los piden a la IANA para su aplicación (ej. 3389 RDP, 3306 MySQL). "Semirreservados": si dejan de usarse, se reasignan |
+| **Efímeros / dinámicos / privados** | **49.152 – 65.535** | Los toma el **cliente** como puerto de **origen** de cada conexión, y se reutilizan constantemente |
+
+##### Puertos que conviene saber
+
+```
+Puerto     Prot.     Servicio
+20 / 21    TCP       FTP (datos / control)
+22         TCP       SSH y SFTP (acceso remoto seguro)
+23         TCP       Telnet (acceso remoto sin cifrar: inseguro)
+25         TCP       SMTP (envío de correo)          587: SMTP seguro
+53         UDP/TCP   DNS
+67 / 68    UDP       DHCP (servidor / cliente)
+69         UDP       TFTP (transferencia simple, sin garantías)
+80         TCP       HTTP                            8080: alternativo
+110        TCP       POP3 (recibir correo)           995: POP3 seguro
+123        UDP       NTP (sincronizar relojes)
+143        TCP       IMAP (correo)                   993: IMAP seguro
+161 / 162  UDP       SNMP (administrar equipos / recibir avisos)
+179        TCP       BGP
+443        TCP       HTTPS (web segura, con TLS)
+500/4500   UDP       IPsec (VPN)
+1194       UDP/TCP   OpenVPN
+3306       TCP       MySQL
+3389       TCP       Escritorio remoto de Windows (RDP)
+```
+
+##### Estados de un puerto
+- **Abierto:** hay un servicio escuchando y es accesible desde afuera.
+- **Cerrado:** rechaza la comunicación; no hay servicio escuchando.
+- **Filtrado:** el tráfico pasa por un **firewall** que lo filtra, así que no se sabe si hay servicio.
+- Además existen estados intermedios: no filtrado, abierto/filtrado y cerrado/filtrado (seis en total).
+- **Abrir puertos / reenvío de puertos (*port forwarding*):** como los routers hogareños hacen **NAT**, para que un servidor interno (FTP, SSH, VPN, un juego) sea accesible desde Internet hay que **reenviar** un puerto de la IP pública hacia el equipo interno.
+- **Seguridad:** un puerto en sí no es peligroso; lo peligroso es un **servicio expuesto sin proteger o desactualizado**. Recomendaciones: abrir solo lo necesario, cerrar lo que no se usa (UPnP 5000, SNMP 161, Telnet 23, RDP 3389 expuesto), y vigilar con un IDS/IPS. Hay que revisar también los **puertos UDP abiertos** (DNS, DHCP, SNMP), que también se atacan.
+
+##### Vulnerabilidades de TCP y de los puertos
+- **Inundación SYN (*SYN flood*):** el atacante manda muchos SYN y **nunca completa el 3-way handshake**; el servidor queda con conexiones a medio abrir hasta no poder atender a nadie (**denegación de servicio, DoS**). Defensas: filtrar las IP atacantes (difícil, porque se pueden falsificar), **limitar las conexiones nuevas**, y **SYN cache / SYN cookies** (ajustes del kernel).
+- **Manipulación de paquetes:** interceptar y cambiar los números de puerto (ataques *man-in-the-middle*).
+- **Spoofing:** mandar paquetes con una **IP o puerto de origen falso**, para ocultar al atacante o hacerse pasar por un host de confianza.
+- **Redirección de puertos:** es legítima (el reenvío de puertos de NAT), pero también se puede usar mal.
+- **Tunneling:** encapsular un protocolo dentro de otro (por ejemplo, SSH dentro de HTTPS). Sirve para **atravesar firewalls** u ocultar qué tráfico es.
+
+##### TCP vs UDP en la práctica
+- **VPN:** se prefiere **UDP** (header más chico, más rápido, más conexiones simultáneas y más ancho de banda). Si se pierde algo dentro del túnel, lo recuperan las capas de adentro, que en general usan TCP. **OpenVPN** permite TCP o UDP (recomendado UDP, puerto 1194); **WireGuard** usa solo UDP.
+- **Web:** HTTP (80) y HTTPS (443) van sobre **TCP**. **HTTP/3** pasa a **QUIC**, un protocolo que funciona **sobre UDP** y suma confiabilidad y cifrado obligatorio (TLS 1.3): más rápido que TCP y más fiable que UDP.
+- **Regla práctica:** **TCP** para archivos, correo, mensajes y navegación (no puede faltar nada); **UDP** para streaming en vivo, videojuegos y videollamadas (importa la velocidad, se tolera perder algo).
+- ⚠️ El apunte dice que en TCP "cada paquete debe ser confirmado antes de que se envíe el siguiente". Eso es **stop-and-wait**, y TCP no funciona así: usa **ventana deslizante** (ver *Ventana deslizante*). TCP es más lento por el handshake, los ACK y el control de congestión, no porque espere cada confirmación.
+
 #### Ejercicios resueltos tipo
 > Estos 5 son **preguntas reales**: la parte de **teoría de Medín del 2do parcial del 29/10/2024**, com. 403; están en el resumen de Medín, `estudio/resumen-2do-parcial-medin.md` (`fuentes/Baro-2do-parcial/2º Parcial - 2024-10-29 - Baro y Medin.jpeg`; las respuestas vienen del documento de preguntas de Medín). Es el mejor indicio de que el **2do teórico de Medín (27/10/2026) es de Capa de Transporte** (a confirmar en clase). En 2024 fueron preguntas para desarrollar, no multiple choice.
 
@@ -834,6 +896,7 @@ Comunicación **extremo a extremo** confiable y eficiente entre aplicaciones. Fu
 (Ver tabla de arriba: orientación, confiabilidad, control de flujo/congestión, tamaño de cabecera, byte-stream vs mensajes, usos.)
 
 #### Dudas / pendientes
+- ~~(1) y (4) resueltos~~: el temario lo confirmó el mail de Medín (Transporte + Puertos + Firewall) y la versión 2026 de la diapositiva de UDP dice que "avisa a las capas superiores".
 - **Preguntarle a Medín:** (1) si el 2do teórico es solo Transporte o mezcla con Red; (2) si es multiple choice o para desarrollar; (3) si entra control de congestión de TCP (slow start, Tahoe/Reno, tasa justa); (4) qué espera en "¿qué hace UDP si detecta un error?": descartar o avisar a la capa superior (ver *Checksum y pseudoencabezado*).
 
 #### Fuentes
@@ -841,8 +904,87 @@ Comunicación **extremo a extremo** confiable y eficiente entre aplicaciones. Fu
 - `fuentes/RD/Medin-1er-parcial/2 - Capa de Transporte - Características de transporte.pdf`
 - `fuentes/RD/Medin-1er-parcial/3 - Capa de Transporte - Protocolo TCP.pdf`
 - `fuentes/Medin-2do-parcial/4 - Protocolo UDP.pdf` (diapositiva de la cátedra: header, checksum, pseudoencabezado, RPC, RTP/RTCP; del Drive)
+- `fuentes/Medin-2do-parcial/examen 2.rar` (apuntes del 2do teórico mandados por Medín: los 4 de transporte, Puertos y Firewall)
+- `fuentes/Medin-2do-parcial/4 - Capa de Transporte - Protocolo UDP (versión Medín 2026).pdf` (misma diapositiva; resuelve qué hace UDP ante un error)
+- `fuentes/Medin-2do-parcial/Capa de Transporte y Puertos-UTN.pdf` (puertos, tipos y estados, vulnerabilidades, VPN, QUIC)
 - `fuentes/RD/Medin-1er-parcial/Preguntas y Respuestas Parciales de Medin.docx` (preguntas reales)
 - Tanenbaum & Wetherall, *Computer Networks*, 5th ed.
+
+### Unidad 4 — Firewall y seguridad perimetral
+
+> 📌 **Entra en el 2do teórico de Medín (27/10).** Fuente: `fuentes/Medin-2do-parcial/Clase sobre Firewall.pdf`. Es un **temario de clase con viñetas**, no un desarrollo: lo que está *en itálica* completa las definiciones con conocimiento general.
+
+#### Conceptos clave
+- **Firewall (cortafuegos):** dispositivo o software que **controla y filtra el tráfico entre redes** según un **conjunto de reglas**. Metáfora: el **guardia de seguridad** o el **aduanero** en la frontera de la red.
+- Existe por la necesidad de **seguridad perimetral**: una "muralla" digital entre la red propia y el exterior, frente a amenazas como malware, accesos no autorizados y DoS.
+- **Política "denegar por defecto"** (*default deny*): todo lo que no está permitido explícitamente, se bloquea. Es lo opuesto a "permitir por defecto".
+- **Tipos por método de filtrado:** filtrado de paquetes (*stateless*), inspección de estado (*stateful*), de aplicación o proxy, y de próxima generación (**NGFW**).
+
+#### Desarrollo
+
+##### Cómo funciona: reglas
+El firewall **inspecciona los headers** de cada paquete y lo compara con sus reglas. Cada regla tiene:
+
+| Componente | Ejemplo |
+|---|---|
+| **Origen** (IP o red) | Cualquiera / 10.0.0.0/8 |
+| **Destino** (IP o red) | 200.1.1.10 (servidor web) |
+| **Protocolo** | TCP / UDP / ICMP |
+| **Puerto** (servicio) | 443 |
+| **Acción** | Permitir / Denegar / Registrar |
+
+- **El orden de las reglas es crítico:** se evalúan **de la más específica a la más general**, y la primera que coincide decide.
+- **Principios de diseño:** **mínimo privilegio** (permitir solo el tráfico esencial); **regla de limpieza** al final: **"denegar todo y registrar"**; **documentar** cada regla.
+- **Objetos de la política:** grupos de IP, grupos de puertos o servicios, y **zonas**, para no repetir reglas.
+- *Ejemplo (ejercicio conceptual de la clase): para una DMZ, permitir HTTP/HTTPS (80/443) desde Internet hacia el servidor web y **denegar todo lo demás** desde Internet.*
+
+##### Tipos de firewall por método de filtrado
+
+| Tipo | Capa | Cómo filtra | Ventaja / desventaja |
+|---|---|---|---|
+| **Filtrado de paquetes (*stateless*)** | 3 y 4 | Mira cada paquete **por separado** (IP, puerto, protocolo) | Rápido / vulnerable a **spoofing**, no entiende el contexto |
+| **Inspección de estado (*stateful*)** | 3 y 4 | Mantiene una **tabla de conexiones** y evalúa cada paquete **en el contexto de su sesión** (entrante vs. saliente) | Mucho más seguro |
+| **De aplicación o proxy** | 7 | Hace de **intermediario**: corta la conexión en dos e **inspecciona el contenido** (URL, comandos) | El más profundo / más lento |
+| **NGFW** (próxima generación) | 3 a 7 | *Stateful* + control de aplicaciones + IPS + más servicios | El más completo |
+
+*Ejemplo de por qué importa el estado: un stateless no sabe si un paquete que entra es la **respuesta** a una conexión que abrió alguien de adentro o un intento de conexión desde afuera; un stateful lo sabe porque tiene anotada la conexión saliente en su tabla.*
+
+##### NGFW (*Next Generation Firewall*)
+- **Por qué:** inspeccionar solo headers y estado ya no alcanza: muchas aplicaciones usan los mismos puertos (por ejemplo, todo va por 443).
+- **Control y conciencia de aplicaciones:** identifica y controla **aplicaciones específicas independientemente del puerto**.
+- **IPS** (*Intrusion Prevention System*): detecta y **bloquea** tráfico malicioso comparándolo con **firmas de ataque**.
+- **Servicios adicionales:** inspección del **tráfico cifrado** SSL/TLS (hay que descifrarlo para verlo, con consideraciones de privacidad); **antimalware**; **filtrado web y de URL** por categorías; **sandboxing** (ejecutar código sospechoso aislado para ver qué hace); **inteligencia de amenazas** (listas externas de IP y dominios maliciosos).
+
+##### Por implementación y por ubicación
+- **Hardware (*appliance*):** equipo dedicado, alto rendimiento, para empresas.
+- **Software:** instalado en el sistema operativo (por ejemplo, el Firewall de Windows); para equipos finales.
+- **Virtual / en la nube (FWaaS):** para entornos virtualizados y la nube.
+- **Perimetral:** entre la red interna e Internet.
+- **Interno (segmentación):** entre segmentos internos, por ejemplo servidores y usuarios.
+- **DMZ (zona desmilitarizada):** *una red intermedia, entre Internet y la red interna, donde se ponen los **servidores públicos** (web, correo). Desde Internet se puede llegar a la DMZ pero no a la red interna; si comprometen un servidor de la DMZ, la red interna sigue protegida.*
+
+##### NAT y firewall
+- **SNAT (NAT de origen):** traduce las IP privadas a la pública para que la **red interna salga** a Internet.
+- **DNAT (NAT de destino) / reenvío de puertos:** permite que el **tráfico externo llegue a un servidor interno**, por ejemplo uno de la DMZ.
+- Las reglas de NAT y las del firewall **trabajan juntas**: *el reenvío de puertos hace llegar el paquete al servidor, pero además tiene que haber una regla que lo permita.*
+
+##### Gestión y operación
+- **Logs:** registrar el tráfico y **analizarlo** para detectar intentos de ataque o tráfico anómalo.
+- **Auditoría de políticas:** revisión periódica para eliminar reglas obsoletas o redundantes.
+- **Alta disponibilidad (HA):** firewalls **en pares** para redundancia, activo/pasivo (*Active/Standby*) o activo/activo.
+
+##### Desafíos y tendencias
+- **Desafíos:** trabajo remoto, protección de recursos en la nube (AWS, Azure, GCP), **microsegmentación** (controlar el tráfico **dentro** del datacenter, llamado *este-oeste*) y **Zero Trust** ("**nunca confíes, siempre verificá**": el firewall como punto donde se aplica esa política).
+- **Tendencias:** **FWaaS** (firewall como servicio en la nube), **SASE** (red SD-WAN más seguridad, todo en la nube), automatización con IA/ML, y firewalls para entornos industriales e IoT.
+
+#### Ejercicios resueltos tipo
+- _(todavía no hay preguntas reales de firewall; ver las preguntas tipo en `estudio/resumen-2do-parcial-medin.md`)_
+
+#### Dudas / pendientes
+- La fuente es solo un temario: si Medín da más detalle en clase (por ejemplo, la definición formal de DMZ o ejemplos de reglas), sumarlo acá.
+
+#### Fuentes
+- `fuentes/Medin-2do-parcial/Clase sobre Firewall.pdf` (temario de la clase, dentro de `examen 2.rar`)
 
 ## Log
 - 2026-07-21: Ingesta inicial del material del 1er parcial de Medin (10 PDFs de teórico + doc de preguntas). Se crearon las 3 unidades (Enlace, Red, Transporte) y el índice. Fuentes en `fuentes/RD/Medin-1er-parcial/`. Ajuste: parcial de Medin es conceptual → ejercicios tipo = preguntas reales; cálculos numéricos marcados como poco probables.
@@ -855,3 +997,4 @@ Comunicación **extremo a extremo** confiable y eficiente entre aplicaciones. Fu
 - 2026-10-05: **Consulta al Tanenbaum** (5ª ed. en castellano, del Drive; solo consulta, no se copió a `fuentes/`). Unidad 2: nuevo bloque *Ruteo, Sistemas Autónomos, OSPF y BGP* (ruteo vs. reenvío, tabla, ruta predeterminada, inundación, paquete de estado del enlace, grafo, AS, IGP, RIP, áreas y tipos de router, BGP). Las 8 preguntas 🔶 de la guía quedan resueltas; el límite de 15 saltos de RIP queda como conocimiento general.
 - 2026-10-05: Se separan los derivados por profesor: `estudio/banco-ejercicios-baro.md` (solo práctica de Baró; antes `banco-ejercicios-2do-parcial.md`) y `estudio/preguntas-medin-2do-parcial.md` (las 5 preguntas de teoría de Medín de 2024).
 - 2026-10-05: Resumen del **2do teórico de Medín** (Capa de Transporte, provisorio hasta confirmar el temario): `estudio/resumen-2do-parcial-medin.md` + pdf + docx, con las 5 preguntas reales de 2024 y 8 de 2dos parciales de otros profesores (2025), respondidas. Reemplaza a `preguntas-medin-2do-parcial` (borrado). Tahoe/Reno contrastado con la diapositiva y con Tanenbaum.
+- 2026-10-06: Ingesta de los **apuntes del 2do teórico de Medín** (`examen 2.rar`, mail del 15/08 reenviado por Gonza). Temario confirmado: Transporte + Puertos + Firewall. Los 3 primeros PDFs de transporte ya estaban (idénticos). Unidad 3: nueva sección *Puertos* (tipos y rangos IANA, puertos clave, estados, reenvío de puertos, SYN flood y spoofing, TCP vs. UDP en VPN y web, QUIC); resuelta la duda de UDP con la versión 2026 ("no corrige pero avisa a las capas superiores"). **Unidad 4 nueva: Firewall y seguridad perimetral.**
