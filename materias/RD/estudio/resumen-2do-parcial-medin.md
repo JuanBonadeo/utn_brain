@@ -233,10 +233,34 @@ Es un **número de 16 bits (0 a 65.535)** que indica **a qué aplicación** va u
 **Reenvío de puertos (*port forwarding*):** el router de casa hace **NAT**. Para que un servidor interno (FTP, VPN, un juego) sea accesible desde Internet, hay que **reenviar** un puerto de la IP pública hacia esa máquina. **Lo peligroso no es el puerto, sino el servicio expuesto:** hay que abrir solo lo necesario y mantener actualizado lo que escucha.
 
 ### Ataques a TCP y a los puertos
-- **Inundación SYN (*SYN flood*):** el atacante manda muchos SYN y **nunca completa el 3-way handshake**. El servidor se llena de conexiones a medio abrir y deja de atender (**denegación de servicio**). Defensas: limitar las conexiones nuevas y usar **SYN cookies / SYN cache**. Filtrar las IP atacantes sirve poco, porque se pueden falsificar.
+- **Inundación SYN (*SYN flood*):** el atacante manda muchos SYN y **nunca completa el 3-way handshake**. El servidor se llena de conexiones a medio abrir y deja de atender (**denegación de servicio**). Defensas: limitar las conexiones nuevas (globales o por IP), aceptar solo IP confiables y usar **SYN cookies / SYN cache**, que retrasan la reserva de recursos hasta que el handshake se completa. Filtrar las IP atacantes sirve poco, porque se pueden falsificar.
+- **Predicción de secuencia TCP:** el atacante **adivina el número de secuencia** que va a usar una conexión y manda paquetes falsificados que el destino acepta como legítimos, **antes de que llegue el paquete del host verdadero**. Por eso el número de secuencia inicial es **aleatorio**.
 - **Spoofing:** paquetes con **IP o puerto de origen falsos**, para esconder al atacante o hacerse pasar por un host de confianza.
 - **Manipulación de paquetes:** interceptar y cambiar los puertos (*man-in-the-middle*).
 - **Tunneling:** meter un protocolo dentro de otro (por ejemplo, SSH dentro de HTTPS) para **atravesar firewalls**.
+
+### Peligros de los puertos abiertos y cómo protegerlos
+Un puerto abierto es una puerta hacia el equipo. Los riesgos que marca el apunte:
+- **Malware, troyanos y accesos no autorizados:** usan el puerto abierto para entrar y correr servicios no autorizados.
+- **Exposición de vulnerabilidades:** el atacante **escanea** los puertos, consulta los servicios que escuchan y averigua versiones para atacar después.
+- **DoS / DDoS:** saturan el servicio expuesto hasta que deja de responder.
+
+Los **más atacados** son los de los servicios más usados: **FTP 21, SSH 22, Telnet 23, SMTP 25, HTTP 80, HTTPS 443 y POP3 110**.
+
+**Cómo protegerlos:**
+- **Todos cerrados por defecto** y abrir solo los que un servicio necesita: menos servicios expuestos es **menos superficie de ataque**. El firewall cierra todo y abre solo lo pedido.
+- **Software actualizado:** de nada sirve cerrar todo menos un puerto si el servicio que escucha ahí tiene fallas.
+- **Autenticación robusta:** contraseñas fuertes, certificados o claves SSH. **Telnet (23) se cierra siempre**, porque viaja sin cifrar.
+- **Monitorear** qué puertos están en uso, investigar el tráfico raro y sumar un **IDS/IPS**.
+
+**Los puertos UDP también se atacan:**
+- **DNS (UDP 53):** si no hay servidor DNS, se bloquea en el firewall; si lo hay, se **limitan las peticiones por segundo** y se banean IP. **Fail2ban** lee los logs y le pide al firewall que bloquee las IP que generan tráfico anormal.
+- **DHCP (UDP 67/68):** se puede saturar con *DHCP Discover* o escanear para buscar versiones vulnerables. Si no se usa, se deshabilita.
+- **SNMP (UDP 161/162):** corre con permisos de administrador. **SNMPv2c viaja en texto claro**; **SNMPv3 agrega autenticación y cifrado**. Si no se usa, se deshabilita o se bloquean los puertos. Responder solo a ciertas IP no alcanza, porque con UDP el spoofing es fácil; conviene separar la red de gestión en **VLAN** o usarlo dentro de un túnel SSH o VPN.
+
+**Cómo ver qué puertos tenés abiertos:**
+- **Desde Internet:** con un test de puertos web contra tu IP pública.
+- **Desde la LAN:** con **Nmap** (`-sU` para UDP, `-sS` para TCP). Nmap clasifica el puerto según la respuesta: hay contestación → **abierto**; no hay respuesta → **abierto/filtrado**; ICMP tipo 3 *port unreachable* → **cerrado**; otro error ICMP → **filtrado**.
 
 ### TCP o UDP según el uso
 - **VPN:** se prefiere **UDP**, porque es más liviano y rápido, y si algo se pierde lo recupera el TCP que va adentro del túnel. **OpenVPN** permite los dos (recomendado UDP 1194); **WireGuard** usa solo UDP.
@@ -275,7 +299,11 @@ El firewall **revisa los headers** de cada paquete y lo compara con sus reglas. 
 
 **Ejemplo de la diferencia stateless / stateful:** te llega un paquete desde Internet al puerto 51.234 de tu PC. Un *stateless* no sabe si es la respuesta a una web que abriste o un ataque. Un *stateful* lo sabe, porque tiene anotada en su tabla la conexión que salió desde ese puerto.
 
-**NGFW, servicios extra:** **IPS** (bloquea tráfico malicioso por **firmas de ataque**), inspección del tráfico **cifrado** SSL/TLS, antimalware, **filtrado web por URL** y categorías, **sandboxing** (ejecuta lo sospechoso aislado para ver qué hace) e **inteligencia de amenazas** (listas externas de IP y dominios maliciosos).
+**Por qué hace falta un NGFW:** el *stateful* solo mira headers y estado, pero hoy muchas aplicaciones comparten el mismo puerto (casi todo va por el 443). Mirando el puerto, el firewall no puede distinguir una web legítima de una aplicación no permitida. El NGFW **identifica la aplicación sin importar el puerto**.
+
+**El firewall en el modelo OSI:** el *stateless* y el *stateful* trabajan en las capas **3 y 4** (Internet y transporte en TCP/IP), el proxy en la **7** (aplicación) y el NGFW de la **3 a la 7**. Cuanto más arriba inspecciona, más ve, pero más procesamiento necesita.
+
+**NGFW, servicios extra:** **IPS** (bloquea tráfico malicioso por **firmas de ataque**), inspección del tráfico **cifrado** SSL/TLS (para verlo tiene que descifrarlo, lo que plantea **cuestiones de privacidad**), antimalware, **filtrado web por URL** y categorías, **sandboxing** (ejecuta lo sospechoso aislado para ver qué hace) e **inteligencia de amenazas** (listas externas de IP y dominios maliciosos).
 
 ### Implementación y ubicación
 - **Hardware (*appliance*):** equipo dedicado; empresas.
@@ -293,7 +321,7 @@ El firewall **revisa los headers** de cada paquete y lo compara con sus reglas. 
 ### Operación y tendencias
 - **Logs** (registrar y analizar el tráfico para ver intentos de ataque), **auditoría** de reglas (sacar las obsoletas) y **alta disponibilidad** (firewalls en par: activo/pasivo o activo/activo).
 - **Desafíos:** trabajo remoto, nube, **microsegmentación** (controlar el tráfico **dentro** del datacenter) y **Zero Trust**: "nunca confíes, siempre verificá".
-- **Tendencias:** **FWaaS**, **SASE** (red y seguridad en la nube), automatización con IA, firewalls para industria e IoT.
+- **Tendencias:** **FWaaS**, **SASE** (*Secure Access Service Edge*: junta en la nube la red, **SD-WAN**, con la seguridad: firewall, CASB y ZTNA), automatización con IA/ML, firewalls para industria e IoT (entornos OT).
 
 ## Preguntas de parciales
 
@@ -414,6 +442,22 @@ Es una red intermedia entre Internet y la red interna donde se ponen los **servi
 
 Las VPN usan **UDP** porque es más liviano y rápido, y lo que se pierda dentro del túnel lo recupera el TCP de las capas de adentro (OpenVPN recomienda UDP; WireGuard usa solo UDP). **QUIC** es el protocolo de transporte de HTTP/3: funciona **sobre UDP** y le agrega confiabilidad y cifrado obligatorio, así que es más rápido que TCP y más fiable que UDP.
 
+**24) ¿Por qué un puerto abierto es un riesgo y cómo se protegen los puertos?**
+
+Un puerto abierto expone el servicio que escucha detrás. Por ahí pueden entrar **malware y accesos no autorizados**, un **escaneo** permite averiguar servicios y versiones vulnerables, y se puede saturar el servicio con un **DoS**. Para protegerlos: **todo cerrado por defecto** y abrir solo lo necesario (menos superficie de ataque), **software actualizado**, **autenticación robusta** (claves SSH, certificados; cerrar Telnet), **monitorear** los puertos en uso y sumar **firewall + IDS/IPS**.
+
+**25) ¿En qué consiste el ataque de predicción de secuencia TCP?**
+
+El atacante **adivina el número de secuencia** de una conexión TCP y manda paquetes falsificados con ese número, haciéndose pasar por uno de los extremos. El destino los acepta como legítimos si llegan **antes** que los del host verdadero. Se previene con números de secuencia iniciales **aleatorios** (32 bits), que no se pueden predecir.
+
+**26) ¿Por qué hay que revisar también los puertos UDP abiertos? Dé ejemplos.**
+
+Porque servicios críticos usan UDP y también se atacan. **DNS (53):** se bloquea si no hay servidor y, si lo hay, se limitan las peticiones (por ejemplo, con Fail2ban). **DHCP (67/68):** se puede saturar con *DHCP Discover*; si no se usa, se deshabilita. **SNMP (161/162):** la v2c viaja en texto claro; conviene la **v3** (autenticación y cifrado) o bloquearlo. Además, como UDP no tiene conexión, **falsificar la IP de origen es fácil**, así que filtrar por IP no alcanza.
+
+**27) ¿Por qué no alcanza un firewall stateful y qué capas inspecciona cada tipo de firewall?**
+
+El *stateful* decide por IP, puerto y estado de la conexión, pero hoy muchas aplicaciones van por el mismo puerto (443), así que **no puede distinguirlas**. El **NGFW** reconoce la aplicación sin importar el puerto y suma IPS. Por capas: **stateless y stateful, capas 3–4**; **proxy, capa 7**; **NGFW, de la 3 a la 7**.
+
 ## Datos para memorizar
 - La capa 4 es **extremo a extremo**; la unidad es el **segmento**; la dirección es el **puerto** (16 bits).
 - Puertos: **FTP 20/21 · Telnet 23 · SMTP 25 · HTTP 80 · DHCP 67/68 · port mapper 111**.
@@ -430,6 +474,7 @@ Las VPN usan **UDP** porque es más liviano y rápido, y lo que se pierda dentro
 - Firewall: regla = **origen, destino, protocolo, puerto y acción**. **Stateless** (capas 3–4, por paquete) · **stateful** (tabla de conexiones) · **proxy** (capa 7) · **NGFW** (+ aplicaciones + IPS).
 - **Denegar por defecto** + **mínimo privilegio** + regla de limpieza **"denegar todo y registrar"**. **DMZ** = servidores públicos aislados de la red interna.
 - UDP ante un error: **no corrige, avisa a las capas superiores**.
+- Puertos más atacados: **21, 22, 23, 25, 80, 443, 110**. **SNMPv2c** en texto claro, **SNMPv3** cifrado. **Nmap** `-sU` (UDP) / `-sS` (TCP).
 
 ## Fuentes
 - Teóricos de la cátedra (Medín): *1 - Servicios y primitivas de transporte*, *2 - Características de transporte*, *3 - Protocolo TCP*, *4 - Protocolo UDP*.

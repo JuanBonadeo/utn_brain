@@ -870,6 +870,14 @@ Puerto     Prot.     Servicio
 - **Spoofing:** mandar paquetes con una **IP o puerto de origen falso**, para ocultar al atacante o hacerse pasar por un host de confianza.
 - **Redirección de puertos:** es legítima (el reenvío de puertos de NAT), pero también se puede usar mal.
 - **Tunneling:** encapsular un protocolo dentro de otro (por ejemplo, SSH dentro de HTTPS). Sirve para **atravesar firewalls** u ocultar qué tráfico es.
+- **Predicción de secuencia TCP:** el atacante adivina el número de secuencia de una conexión y manda paquetes falsificados que el destino acepta como legítimos si llegan **antes** que los del host verdadero. Por eso el número de secuencia inicial es aleatorio. A las defensas del SYN flood el apunte suma **aceptar solo IP confiables**.
+
+##### Peligros de los puertos abiertos y protección
+- **Riesgos:** malware, troyanos y accesos no autorizados; **exposición de vulnerabilidades** (el atacante escanea, consulta servicios y versiones); DoS/DDoS sobre el servicio expuesto.
+- **Más atacados:** FTP 21, SSH 22, Telnet 23, SMTP 25, HTTP 80, HTTPS 443, POP3 110.
+- **Protección:** todo **cerrado por defecto** (menos **superficie de ataque**); **software actualizado** en lo que escucha; **autenticación robusta** (certificados, claves SSH; cerrar Telnet); **monitorear** puertos en uso; firewall + **IDS/IPS**.
+- **Servicios UDP:** **DNS 53** (bloquearlo si no hay servidor; si lo hay, limitar peticiones por segundo; **Fail2ban** lee logs y bloquea IP en el firewall). **DHCP 67/68** (flood de *DHCP Discover*, escaneo de versiones; deshabilitar si no se usa). **SNMP 161/162** (corre como administrador; **v2c en texto claro**, **v3 con autenticación y cifrado**; deshabilitar o bloquear; filtrar por IP no alcanza porque en UDP el spoofing es fácil; red de gestión en **VLAN** o dentro de un túnel SSH/VPN).
+- **Comprobar puertos abiertos:** desde Internet, un test web contra la IP pública; desde la LAN, **Nmap** (`-sU` UDP, `-sS` TCP). Nmap clasifica: contesta → abierto; sin respuesta → abierto/filtrado; ICMP tipo 3 *port unreachable* → cerrado; otro error ICMP → filtrado.
 
 ##### TCP vs UDP en la práctica
 - **VPN:** se prefiere **UDP** (header más chico, más rápido, más conexiones simultáneas y más ancho de banda). Si se pierde algo dentro del túnel, lo recuperan las capas de adentro, que en general usan TCP. **OpenVPN** permite TCP o UDP (recomendado UDP, puerto 1194); **WireGuard** usa solo UDP.
@@ -954,6 +962,7 @@ El firewall **inspecciona los headers** de cada paquete y lo compara con sus reg
 - **Control y conciencia de aplicaciones:** identifica y controla **aplicaciones específicas independientemente del puerto**.
 - **IPS** (*Intrusion Prevention System*): detecta y **bloquea** tráfico malicioso comparándolo con **firmas de ataque**.
 - **Servicios adicionales:** inspección del **tráfico cifrado** SSL/TLS (hay que descifrarlo para verlo, con consideraciones de privacidad); **antimalware**; **filtrado web y de URL** por categorías; **sandboxing** (ejecutar código sospechoso aislado para ver qué hace); **inteligencia de amenazas** (listas externas de IP y dominios maliciosos).
+- **Firewall en el modelo OSI:** stateless y stateful en **L3–L4** (Internet y transporte en TCP/IP); proxy en **L7**; NGFW de **L3 a L7**.
 
 ##### Por implementación y por ubicación
 - **Hardware (*appliance*):** equipo dedicado, alto rendimiento, para empresas.
@@ -975,7 +984,7 @@ El firewall **inspecciona los headers** de cada paquete y lo compara con sus reg
 
 ##### Desafíos y tendencias
 - **Desafíos:** trabajo remoto, protección de recursos en la nube (AWS, Azure, GCP), **microsegmentación** (controlar el tráfico **dentro** del datacenter, llamado *este-oeste*) y **Zero Trust** ("**nunca confíes, siempre verificá**": el firewall como punto donde se aplica esa política).
-- **Tendencias:** **FWaaS** (firewall como servicio en la nube), **SASE** (red SD-WAN más seguridad, todo en la nube), automatización con IA/ML, y firewalls para entornos industriales e IoT.
+- **Tendencias:** **FWaaS** (firewall como servicio en la nube), **SASE** (*Secure Access Service Edge*: red SD-WAN más seguridad, es decir firewall, CASB y ZTNA, todo en la nube), automatización con IA/ML, y firewalls para entornos industriales e IoT.
 
 #### Ejercicios resueltos tipo
 - _(todavía no hay preguntas reales de firewall; ver las preguntas tipo en `estudio/resumen-2do-parcial-medin.md`)_
@@ -998,3 +1007,4 @@ El firewall **inspecciona los headers** de cada paquete y lo compara con sus reg
 - 2026-10-05: Se separan los derivados por profesor: `estudio/banco-ejercicios-baro.md` (solo práctica de Baró; antes `banco-ejercicios-2do-parcial.md`) y `estudio/preguntas-medin-2do-parcial.md` (las 5 preguntas de teoría de Medín de 2024).
 - 2026-10-05: Resumen del **2do teórico de Medín** (Capa de Transporte, provisorio hasta confirmar el temario): `estudio/resumen-2do-parcial-medin.md` + pdf + docx, con las 5 preguntas reales de 2024 y 8 de 2dos parciales de otros profesores (2025), respondidas. Reemplaza a `preguntas-medin-2do-parcial` (borrado). Tahoe/Reno contrastado con la diapositiva y con Tanenbaum.
 - 2026-10-06: Ingesta de los **apuntes del 2do teórico de Medín** (`examen 2.rar`, mail del 15/08 reenviado por Gonza). Temario confirmado: Transporte + Puertos + Firewall. Los 3 primeros PDFs de transporte ya estaban (idénticos). Unidad 3: nueva sección *Puertos* (tipos y rangos IANA, puertos clave, estados, reenvío de puertos, SYN flood y spoofing, TCP vs. UDP en VPN y web, QUIC); resuelta la duda de UDP con la versión 2026 ("no corrige pero avisa a las capas superiores"). **Unidad 4 nueva: Firewall y seguridad perimetral.**
+- 2026-10-06: Revisión del temario completo del 2do teórico de Medín contra la wiki. Firewall ya estaba cubierto. Unidad 3 (*Puertos*): se agregan la predicción de secuencia TCP, los peligros de los puertos abiertos y cómo protegerlos, los puertos más atacados, la protección de DNS, DHCP y SNMP (v2c vs. v3, Fail2ban) y el escaneo con Nmap. Unidad 4: firewall en el modelo OSI, componentes de SASE. Resumen de Medín actualizado: preguntas tipo 24–27.
