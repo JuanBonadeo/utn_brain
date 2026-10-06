@@ -1,5 +1,6 @@
 // Presentación de SGD: Serverless — variante C · Historia.
-// Hilo conductor: el sistema de inscripciones a materias de la facu (escenario ilustrativo).
+// Hilo conductor: el SysAcad, el sistema de autogestión de la facu, el día de inscripción a materias.
+// Los números del caso son supuestos ilustrativos, no mediciones del SysAcad real.
 // Uso (desde la raíz del repo):  node scripts/pptx-sgd-serverless/build-opcion-c.js
 const pptxgen = require("pptxgenjs");
 const fs = require("fs");
@@ -101,31 +102,52 @@ pres.addSection({ title: S1 });
 // 1. Portada
 {
   const s = nueva("OSCURA", S1,
-    "[Expositor 1] Buenas, somos el grupo de serverless. En vez de definirlo de entrada, vamos a contarlo con una historia que todos conocemos: el sistema de inscripciones de la facu. Cada uno de nosotros va a responder una pregunta sobre ese caso.");
+    "[Expositor 1] Buenas, somos el grupo de serverless. En vez de definirlo de entrada, vamos a contarlo con una historia que todos sufrimos: el SysAcad el día de inscripción a materias. Todo el año anda, y justo el día que lo necesitamos todos, se cae. Cada uno de nosotros va a responder una pregunta sobre ese caso.");
   texto(s, "SOPORTE A LA GESTIÓN DE DATOS CON P. VISUAL", { x: ML, y: 1.1, w: 8, h: 0.4, fontSize: 13, bold: true, color: CORAL, charSpacing: 2 });
   texto(s, "Serverless", { x: ML, y: 1.65, w: 8, h: 1.4, fontSize: 72, bold: true, color: WHITE, fontFace: HEAD, valign: "middle" });
-  texto(s, "La historia de un sistema que se cae un día al año", { x: ML, y: 3.15, w: 7.6, h: 1.1, fontSize: 26, color: LAV2, fontFace: HEAD, italic: true });
+  texto(s, "La historia del SysAcad, que se cae justo el día de la inscripción", { x: ML, y: 3.15, w: 7.4, h: 1.1, fontSize: 26, color: LAV2, fontFace: HEAD, italic: true });
   texto(s, [
     { text: "Integrantes: ", options: { bold: true, color: WHITE } },
     { text: "Bonadeo, Juan Cruz · [Integrante 2] · [Integrante 3] · [Integrante 4]", options: { color: LAV2 } },
   ], { x: ML, y: 5.55, w: 8.6, h: 0.4, fontSize: 14 });
   texto(s, "UTN — Facultad Regional Rosario · Ingeniería en Sistemas de Información · 2026", { x: ML, y: 6.0, w: 8.6, h: 0.4, fontSize: 13, color: MUTED });
-  // motivo: grilla de alumnos, casi todos apagados salvo un bloque encendido (el pico)
-  for (let r = 0; r < 6; r++) for (let c = 0; c < 6; c++) {
-    const on = r >= 2 && c >= 2 && r <= 4;
-    s.addShape(pres.shapes.OVAL, { x: 9.15 + c * 0.6, y: 1.25 + r * 0.6, w: 0.38, h: 0.38,
-      fill: { color: on ? CORAL : "3A2E66" }, line: { type: "none" }, objectName: "alumno" });
+  // ilustración: el SysAcad el día de inscripción (ventana de navegador + pico de tráfico)
+  const bx = 8.35, by = 1.0, bw = 4.4, bh = 4.75;
+  s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: bx, y: by, w: bw, h: bh, rectRadius: 0.12, fill: { color: WHITE }, line: { type: "none" },
+    shadow: { type: "outer", color: "000000", opacity: 0.35, blur: 12, offset: 4, angle: 90 }, objectName: "navegador" });
+  s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: bx, y: by, w: bw, h: 0.5, rectRadius: 0.12, fill: { color: LAV }, line: { type: "none" }, objectName: "barra" });
+  s.addShape(pres.shapes.RECTANGLE, { x: bx, y: by + 0.3, w: bw, h: 0.2, fill: { color: LAV }, line: { type: "none" }, objectName: "barra-base" });
+  ["F2545B", "F5B841", "5BC27A"].forEach((c, i) => s.addShape(pres.shapes.OVAL, { x: bx + 0.2 + i * 0.22, y: by + 0.18, w: 0.14, h: 0.14, fill: { color: c }, line: { type: "none" }, objectName: "punto" }));
+  s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: bx + 0.95, y: by + 0.11, w: bw - 1.15, h: 0.28, rectRadius: 0.14, fill: { color: WHITE }, line: { color: LAV2, width: 0.75 }, objectName: "url" });
+  texto(s, "sysacad · inscripción a cursado", { x: bx + 1.1, y: by + 0.11, w: bw - 1.4, h: 0.28, fontSize: 10, color: MUTED, valign: "middle" });
+  texto(s, "503", { x: bx + 0.35, y: by + 0.7, w: 2.2, h: 1.0, fontSize: 60, bold: true, color: CORAL, fontFace: HEAD, valign: "middle" });
+  texto(s, [{ text: "Servicio no disponible", options: { bold: true, color: INK, breakLine: true } },
+    { text: "Demasiados usuarios conectados. Intente más tarde.", options: { color: SLATE, fontSize: 12 } }],
+    { x: bx + 0.35, y: by + 1.75, w: bw - 0.7, h: 0.8, fontSize: 15 });
+  // spinner que no termina
+  for (let i = 0; i < 8; i++) {
+    const ang = i * Math.PI / 4, r = 0.3, cx = bx + bw - 0.75, cy = by + 1.2;
+    s.addShape(pres.shapes.OVAL, { x: cx + r * Math.cos(ang) - 0.06, y: cy + r * Math.sin(ang) - 0.06, w: 0.12, h: 0.12,
+      fill: { color: VIOLET, transparency: 10 + i * 11 }, line: { type: "none" }, objectName: "spinner" });
   }
-  texto(s, "Un día al año, todos a la vez", { x: 9.15, y: 4.95, w: 3.6, h: 0.4, fontSize: 12, italic: true, color: MUTED });
+  const horas = ["06", "07", "08", "09", "10", "11", "12"];
+  const ped = [2, 4, 100, 85, 40, 15, 6];
+  s.addChart(pres.charts.AREA, [{ name: "pedidos", labels: horas, values: ped }], {
+    x: bx + 0.2, y: by + 2.65, w: bw - 0.4, h: 1.7, chartColors: [CORAL], chartColorsOpacity: 85,
+    catAxisLabelColor: MUTED, catAxisLabelFontSize: 10, catAxisLabelFontFace: BODY, catAxisLineShow: false,
+    valAxisHidden: true, valGridLine: { style: "none" }, catGridLine: { style: "none" }, showLegend: false, showValue: false,
+  });
+  texto(s, "pedidos por minuto · día de inscripción", { x: bx + 0.35, y: by + bh - 0.42, w: bw - 0.7, h: 0.3, fontSize: 10, color: MUTED, italic: true });
+  texto(s, "Recreación ilustrativa, no una captura real", { x: bx, y: by + bh + 0.12, w: bw, h: 0.3, fontSize: 10, color: MUTED, italic: true, align: "right" });
 }
 
 // 2. El caso (gráfico nativo)
 {
   const s = nueva("CONTENIDO", S1,
-    "[Expositor 1] Este es el caso. El sistema de inscripciones a materias casi no se usa en todo el año, pero el día que abren las inscripciones entran miles de alumnos a la vez y se cae. Los números del gráfico son un escenario ilustrativo, no datos reales de la facu. La pregunta es: ¿cómo dimensionás un sistema así?");
-  encabezado(s, "EL CASO", "Inscripciones: 364 días tranquilos y uno que lo tira todo");
+    "[Expositor 1] Este es el caso. El SysAcad se usa poco casi todo el año, pero los días que abre la inscripción a cursado, en marzo y en agosto, entramos miles de alumnos a la vez y se cae. Los números del gráfico son supuestos para el ejemplo, no mediciones del SysAcad real: no conocemos cómo está montado por dentro. La pregunta es: ¿cómo dimensionás un sistema así?");
+  encabezado(s, "EL CASO", "SysAcad: tranquilo todo el año, caído el día de inscripción");
   const meses = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
-  const vals = [10, 60, 5000, 80, 70, 60, 20, 90, 70, 60, 50, 15];
+  const vals = [10, 60, 5000, 80, 70, 60, 30, 4000, 70, 60, 50, 15];
   s.addChart(pres.charts.BAR, [{ name: "Alumnos simultáneos", labels: meses, values: vals }], {
     x: ML, y: 1.7, w: 8.2, h: 4.75, barDir: "col", chartColors: vals.map(v => v > 1000 ? CORAL : LAV2), varyColors: true,
     showValue: true, dataLabelPosition: "outEnd", dataLabelFontSize: 12, dataLabelColor: SLATE, dataLabelFontFace: BODY,
@@ -137,10 +159,10 @@ pres.addSection({ title: S1 });
   const xr = ML + 8.6, wr = W - ML - xr;
   supuesto(s, xr, 1.75, 2.6);
   texto(s, "5.000", { x: xr, y: 2.25, w: wr, h: 1.0, fontSize: 60, bold: true, color: CORAL, fontFace: HEAD, valign: "middle" });
-  texto(s, "alumnos a la vez el día que abren las inscripciones", { x: xr, y: 3.25, w: wr, h: 0.75, fontSize: 15, color: SLATE });
+  texto(s, "alumnos a la vez el día que abre la inscripción a cursado", { x: xr, y: 3.25, w: wr, h: 0.75, fontSize: 15, color: SLATE });
   texto(s, "< 100", { x: xr, y: 4.2, w: wr, h: 0.8, fontSize: 40, bold: true, color: VIOLET, fontFace: HEAD, valign: "middle" });
   texto(s, "el resto del año", { x: xr, y: 5.0, w: wr, h: 0.4, fontSize: 15, color: SLATE });
-  fuente(s, "Escenario ilustrativo: los números del caso son supuestos para el ejemplo, no datos de la UTN.");
+  fuente(s, "Escenario ilustrativo: los números del caso son supuestos para el ejemplo, no mediciones del SysAcad ni datos de la UTN.");
 }
 
 // 3. El dilema
@@ -150,7 +172,7 @@ pres.addSection({ title: S1 });
   encabezado(s, "EL CASO", "El dilema: ¿para cuántos alumnos compramos el servidor?");
   const cw = (CW - 2 * 0.4) / 3, y = 1.75, h = 4.0;
   const ops = [
-    ["Para el pico", "Aguanta el día de inscripción, pero 364 días está ocioso y lo pagás igual.", "ocioso", 5, 1, LAV, VIOLET],
+    ["Para el pico", "Aguanta la inscripción, pero el resto del año está ocioso y lo pagás igual.", "ocioso", 5, 1, LAV, VIOLET],
     ["Para el promedio", "Barato todo el año, pero el día que importa se satura y se cae.", "saturado", 2, 2, LAV, VIOLET],
     ["Que siga a la demanda", "Capacidad cero cuando no hay nadie, miles de instancias en el pico.", "serverless", 0, 0, VIOLET, WHITE],
   ];
@@ -367,7 +389,7 @@ capitulo(S3, "03", "¿Cuánto cuesta? ¿Y qué le pasa a la base de datos?",
 // 11. Punto de cruce (gráfico nativo)
 {
   const s = nueva("CONTENIDO", S3,
-    "[Expositor 3] Pero ojo: serverless no es siempre más barato. Normalizado por procesador, el vCPU-hora de Lambda cuesta unas tres veces lo que una instancia equivalente. Las líneas se cruzan cerca del treinta y cuatro por ciento de uso: debajo gana serverless, arriba conviene un servidor. Nuestro sistema de inscripciones está casi todo el año cerca del cero, así que está bien del lado izquierdo.");
+    "[Expositor 3] Pero ojo: serverless no es siempre más barato. Normalizado por procesador, el vCPU-hora de Lambda cuesta unas tres veces lo que una instancia equivalente. Las líneas se cruzan cerca del treinta y cuatro por ciento de uso: debajo gana serverless, arriba conviene un servidor. El SysAcad está casi todo el año cerca del cero, así que está bien del lado izquierdo.");
   encabezado(s, "COSTOS", "Gana mientras el uso esté debajo de un tercio");
   const us = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
   s.addChart(pres.charts.LINE, [
@@ -390,7 +412,7 @@ capitulo(S3, "03", "¿Cuánto cuesta? ¿Y qué le pasa a la base de datos?",
     { text: "~3×", options: { bold: true, color: VIOLET, fontSize: 26, fontFace: HEAD, breakLine: true } },
     { text: "cuesta el vCPU-hora de Lambda frente a una instancia.", options: { color: SLATE, breakLine: true } },
     { text: " ", options: { fontSize: 8, breakLine: true } },
-    { text: "Inscripciones: ", options: { bold: true, color: VIOLET } },
+    { text: "SysAcad: ", options: { bold: true, color: VIOLET } },
     { text: "casi todo el año cerca de 0 % de uso. Del lado que gana serverless.", options: { color: SLATE } },
   ], { x: xr + 0.3, y: 3.5, w: wr - 0.6, h: 2.7, fontSize: 15 });
   fuente(s, "Cálculo propio con precios oficiales: Lambda ≈ USD 0,106 / vCPU-h; EC2 c7g.large ≈ USD 0,036 / vCPU-h.");
@@ -449,7 +471,7 @@ capitulo(S4, "04", "¿Y si el sistema se usara todo el día?",
 // 14. Cuándo no + Prime Video
 {
   const s = nueva("CONTENIDO", S4,
-    "[Expositor 4] Serverless encaja con cargas espigadas, disparadas por eventos y sin estado, como nuestras inscripciones. No encaja con cargas constantes, latencia crítica o cadenas largas de funciones. El ejemplo más famoso lo dio Amazon: en 2023 el equipo de Prime Video sacó un sistema de monitoreo de serverless, lo pasó a un solo proceso en contenedores y bajó el costo un noventa por ciento, porque lo caro era mover datos entre funciones, no procesarlos.");
+    "[Expositor 4] Serverless encaja con cargas espigadas, disparadas por eventos y sin estado, como el SysAcad en inscripción. No encaja con cargas constantes, latencia crítica o cadenas largas de funciones. El ejemplo más famoso lo dio Amazon: en 2023 el equipo de Prime Video sacó un sistema de monitoreo de serverless, lo pasó a un solo proceso en contenedores y bajó el costo un noventa por ciento, porque lo caro era mover datos entre funciones, no procesarlos.");
   encabezado(s, "CUÁNDO NO", "Prime Video: −90 % de costo saliendo de serverless");
   const hw = 3.85;
   [["Encaja", ["Carga espigada", "Disparada por eventos", "Sin estado"], VIOLET, "✓"],
@@ -504,9 +526,9 @@ capitulo(S4, "04", "¿Y si el sistema se usara todo el día?",
 // 16. Cierre: vuelta al caso
 {
   const s = nueva("OSCURA", S4,
-    "[Expositor 4] Volvamos al sistema de inscripciones. Con serverless aguanta el pico, cuesta casi cero el resto del año y lo único que hay que cuidar es la base, con un pooler. Ese es el criterio general: serverless es un trade-off que se elige por encaje con el problema, no por moda. Gracias, ¿preguntas?");
+    "[Expositor 4] Volvamos al SysAcad. Si estuviera armado así, aguantaría el pico, costaría casi cero el resto del año y lo único que habría que cuidar es la base, con un pooler. Ese es el criterio general: serverless es un trade-off que se elige por encaje con el problema, no por moda. Gracias, ¿preguntas?");
   texto(s, "VOLVIENDO AL CASO", { x: ML, y: 0.9, w: 8, h: 0.4, fontSize: 13, bold: true, color: CORAL, charSpacing: 2 });
-  texto(s, "El sistema de inscripciones, en serverless", { x: ML, y: 1.35, w: 8.2, h: 0.8, fontSize: 30, bold: true, color: WHITE, fontFace: HEAD, valign: "middle" });
+  texto(s, "El SysAcad, en serverless", { x: ML, y: 1.35, w: 8.2, h: 0.8, fontSize: 30, bold: true, color: WHITE, fontFace: HEAD, valign: "middle" });
   const ideas = [["Aguanta el pico", "escala de 0 a cientos de entornos sin comprar nada."],
     ["Cuesta casi cero", "el resto del año, porque el uso está muy debajo de un tercio."],
     ["Cuidá la base", "con un pooler o una base serverless."]];
