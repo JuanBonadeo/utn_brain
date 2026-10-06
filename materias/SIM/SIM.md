@@ -2822,6 +2822,18 @@ Conclusiones:
   prueba en la franja completa: drena 18.545 de 18.545, espera media 31 s, P90 71 s, los 20 molinetes
   entre 17 % y 52 %, caudal por ventana cercano a SBASE y 4,6 min de cómputo por corrida. Próximo paso:
   calibrar el escenario intermedio (T3.4).
+- **2026-10-05**: TPI, grupo 2 (Casermeiro). La empresa aclaró lo de las facturas de electricidad: hasta
+  abril/2026 había dos servicios, "Fábrica" (máquinas, luminarias, oficinas) y uno **exclusivo del horno**;
+  desde el 01/05/2026 se unificaron. La hipótesis del 28/09 (que el medidor "Horno" alimentaba más equipos)
+  era incorrecta, y el argumento de que "no cierra contra la actividad" subestimaba el tiempo caliente del
+  horno. Validado contra los registros de producción, 28 meses: kWh del horno ≈ 2.013 + 1.384 × campañas +
+  2.445 × días activos, R² = 0,89 → **P_mant ≈ 102 kW** (≈70 % de los 145 kW instalados). El costo por
+  encendido (1.384 ± 1.288 kWh) es impreciso pero ~3 errores estándar por debajo del techo teórico de
+  5.220 kWh: caso base la estimación, sensibilidad de 0 a 5.220. Campañas contadas con hueco > 3 días: 41
+  entre ene/2024 y ago/2026, mediana 10 días, máximo 77. Costo todo incluido 290 $/kWh en mar/2025 contra
+  277,7 de la planilla de costos. **Corrección de unidades**: los costos por minuto de esa planilla están
+  en USD (145 kW × 0,184151 USD/kWh ÷ 60 = 0,44503 exacto), no en pesos. Actualizados `03-`, `05-` y
+  `EspecificacionModelo_GRUPO_XX.md/.pdf`. Pendiente solo el GLP.
 - **2026-10-05** (3): TPI subte, auditoría del modelo contra el ejemplo oficial y revisión en paralelo
   (demanda, métricas, experimentos). Corregido y commiteado por partes:
   - la orientación de las colas, que el IDE había pisado en el commit anterior;
@@ -3045,7 +3057,7 @@ Conclusiones:
   uno chico (15 kW), que además no se aplica a todo el catálogo (192 registros completos contra 1032 de
   cementación en 2026). Decisión de alcance: el revenido queda fuera de la cola/lote simulada, tratado como
   demora fija donde aplica. Actualizados `01-`, `02-`, `04-` y `05-respuestas-al-docente.md` con esto. De
-  paso, costo energético del horno con cifra real (Master Plan, hoja "Costo de Energía": 0,665 $/min, 145 kW
+  paso, costo energético del horno con cifra real (Master Plan, hoja "Costo de Energía": 0,665 USD/min a plena potencia, 145 kW
   instalados) en vez de estimado, y confirmado el plazo del zincado tercerizado con dos fuentes cruzables
   (`Seguimiento TR ulis` y `ENVASADO 2022`/LATAS).
 - **2026-09-22**: TPI, grupo 1 (Bonadeo + Estevez). Regenerado el formulario de propuesta de tema:

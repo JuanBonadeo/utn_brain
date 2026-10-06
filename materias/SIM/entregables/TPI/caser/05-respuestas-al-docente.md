@@ -173,7 +173,7 @@ exporta a planilla sin restricción. Lo que falta es ejecutar la exportación.
 | Tiempo de ciclo por ULI | ISO: registro de cargas | Determinístico (32 min), salvo que el registro muestre diferencias por familia |
 | Kg por ULI, por artículo | `Seguimiento TR ulis` ("Cant. x U.L.I." × "P. Pieza") | ✅ Resuelto (2026-09-28): ambas columnas están en **millares** ("Cant. x U.L.I." = cantidad de millares, "P. Pieza" = kg por millar), no en piezas sueltas — corregido tras confirmación de la empresa. kg/ULI = Cant. x U.L.I. × P. Pieza directo, sin dividir por mil. Sobre 310 artículos: media 143 kg/ULI, mediana 136, rango 5,9-362,5. Con el umbral de 75 ULI, una campaña mueve ≈10 t — reconciliado contra los "60-90 t/mes" de capacidad instalada del brief inicial: da ≈17-25% de utilización, consistente con "planta subutilizada" |
 | Plazo del zincado tercerizado | Remitos de ida y vuelta | Ajuste (lognormal / gamma) o empírica |
-| P_cal y P_mant (potencia media calentando y a temperatura) | Corregido (27/09/2026): no hay un antes/después limpio por reactivación — el horno operó intermitente todo el período. Facturas de energía de 24 meses (a cruzar contra el modelo teórico ya calculado) + potencia nominal instalada (145 kW) | §2.3 |
+| P_cal y P_mant (potencia media calentando y a temperatura) | Resuelto en parte (05/10/2026). El medidor "Horno" fue **exclusivo del horno** hasta abril/2026 (confirmado por la empresa); con 28 meses de sus facturas contra días con cementado (`Seguimiento TR ulis`): kWh = 2.013 + 1.384 × campañas + 2.445 × días activos, R² = 0,89. **P_mant ≈ 102 kW** (2.445 ± 179 kWh/día), ≈70 % de los 145 kW instalados. El término por encendido (1.384 ± 1.288 kWh) es impreciso, pero queda ~3 errores estándar por debajo del techo teórico de 145 kW × 36 h = 5.220 kWh: **caso base = la estimación empírica, sensibilidad de 0 a 5.220 kWh**. No hay un antes/después limpio por reactivación — el horno operó intermitente todo el período | §2.3 |
 | Costo estándar y precio por artículo | Lista de precios de la empresa (Lista CASER) | Directo, en números índice. `PrecioPorPieza` ya calculado y comparable entre artículos |
 | Campañas por mes, ULI y kg por campaña, duración, espera | ISO: registro de cargas desde 01/2026 | **No son entradas**: se reservan para la validación (§4) |
 | Tasa de costo del capital inmovilizado | Empresa (quien maneje finanzas, no el encargado de producción) | Parámetro, con sensibilidad. Pregunta sugerida: "si tuvieran esa plata en la cuenta en vez de en producto en proceso, ¿qué tasa mensual le pondrían a tenerla inmovilizada?" — alcanza una estimación gruesa |
@@ -206,9 +206,15 @@ El consumo no es una variable aleatoria de entrada: es una función determiníst
 horno. Lo que se estima son dos potencias medias, P_cal (durante las 36 h de calentamiento) y P_mant
 (a temperatura, durante el procesamiento), por tres vías que se cruzan:
 
-- **Facturas**: regresión sobre 24 meses, `kWh_mes = a + b · campañas_mes + c · ULI_mes`. El término
-  a es la base sin horno (2025 es el control), b el costo fijo de encender (≈ P_cal · 36 h) y c el
-  marginal por ULI (≈ P_mant · 32 min).
+- **Facturas** (hecho, 05/10/2026): el medidor del horno fue exclusivo hasta abril/2026, así que no hace
+  falta un año de control sin horno ni restar una base. Regresión sobre 28 meses (ene/2024-abr/2026),
+  `kWh_mes = a + b · campañas_mes + c · días_activos_mes`, con las campañas y días tomados de las fechas de
+  cementado de `Seguimiento TR ulis`: a = 2.013, b = 1.384 ± 1.288 kWh por encendido, c = 2.445 ± 179 kWh
+  por día activo (≈102 kW), R² = 0,89. Se usó días activos y no ULI como regresor porque explica más
+  (R² = 0,89 contra 0,73 con ULI cementadas): el horno consume por estar caliente, no por la cantidad que
+  trata. c da P_mant; b es impreciso (no se distingue de cero) pero queda ~3 errores estándar por debajo del
+  techo teórico de 5.220 kWh, así que el caso base usa la estimación empírica y la sensibilidad (§2.4)
+  barre de 0 a 5.220 kWh.
 - **Potencia nominal**: 27 resistencias × potencia unitaria acota P_cal por arriba y da el factor de
   uso.
 - **Registro ISO**: si anota lectura de medidor o consumo por campaña, es medición directa y reemplaza
@@ -478,7 +484,10 @@ para mandar a fábrica está en `03-pedido-de-datos.md` §Pedido para el Tema 1)
 6. ~~¿Un turno adicional de carga durante la campaña es operable?~~ **Ya no aplica**: el punto 2 mostró
    que ya son 3 turnos (24 h), no queda un turno adicional que agregar. El encargado no entendió la
    pregunta porque, con la info real, no tenía sentido — se cae el escenario E4.
-7. Facturas de energía: 24 meses, con potencia contratada y si hay penalización por exceso.
+7. ~~Facturas de energía: 24 meses, con potencia contratada y si hay penalización por exceso.~~ **Recibidas
+   y procesadas (28/09-05/10/2026)**: 64 facturas, ene/2024-ago/2026, con potencia convenida y registrada. El
+   medidor "Horno" era exclusivo del horno hasta abril/2026; ver la fila de P_cal y P_mant en §2.1 y
+   `03-pedido-de-datos.md`. Pendiente solo el GLP del generador endotérmico.
 8. De los 10-30 artículos elegidos, ¿cuáles requieren revenido? Para esos, la mediana histórica de
    `Termico 2026`/hoja Revenido (o de la columna "Revenido" de `Seguimiento TR ulis`) da la demora fija
    a sumar.

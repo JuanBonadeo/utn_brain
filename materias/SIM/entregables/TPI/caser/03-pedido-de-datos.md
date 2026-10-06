@@ -203,18 +203,43 @@ Con esto se hace el ABC, se ve qué se vende, qué se fabrica, qué se importa y
   Archivos: `REPORTE_...1603/1604/1606/1607.XLS`, `lista-caser.xlsx`, guardados en `datos-locales/abm/`
   (gitignoreados, no versionados).
 
-- **Facturas de electricidad — recibidas (2026-09-28), pero con una discrepancia a aclarar antes de usarlas.**
-  64 facturas (`Facturas Energía.zip`), dos medidores por mes desde enero/2024 hasta abril/2026 ("Fábrica" y
-  "Horno", tarifa 2 B1) y desde mayo/2026 un único medidor combinado (con el "Horno" pasando a tarifa mínima
-  "sin uso"). Extraídas a `datos-locales/_perfil/facturas_energia.csv` (kWh, importe, potencia registrada y
+- **Facturas de electricidad — recibidas (2026-09-28), aclaradas (2026-10-05) y validadas.**
+  64 facturas (`Facturas Energía.zip`), dos medidores por mes desde enero/2024 hasta abril/2026 ("Fábrica",
+  medidor DIGA00044446, y "Horno", medidor DIGA00040491, ambos tarifa 2 B1) y desde mayo/2026 un único servicio
+  combinado. Extraídas a `datos-locales/_perfil/facturas_energia.csv` (kWh, importe, potencia registrada y
   convenida pico/fuera de pico).
-  **Problema**: el medidor "Horno" consume en promedio **44.300 kWh/mes**, más del doble que "Fábrica"
-  (20.200 kWh/mes), sostenido durante 29 meses seguidos — no cierra contra la actividad real del horno
-  (`Termico 2026`: ~12 tandas irregulares en 8 meses, varias de un solo día). Hipótesis: el medidor "Horno"
-  no alimentaba solo el horno, sino otro conjunto de equipos también (coincide con lo del brief original:
-  *"la empresa tenía dos suministros eléctricos de 300 kW y posteriormente unificó ambos servicios"* — la
-  caída a "sin uso" en mayo/junio 2026 sería justo esa unificación).
-  **A confirmar con la empresa antes de usar este dato para calibrar nada**: ¿qué alimentaba exactamente el
-  medidor histórico "Horno"? Si alimentaba más que el horno, no sirve para aislar su consumo — se sigue con
-  el costo teórico (145 kW, 0,665 $/min) en vez del medido.
-  **GLP**: sigue pendiente, comprometido para el 29/09.
+  **Aclaración de la empresa (2026-10-05)**: hasta abril/2026 había dos servicios — uno para máquinas,
+  luminarias y oficinas ("Fábrica") y otro **exclusivo del horno**; desde el 01/05/2026 se unificaron en uno
+  solo. La hipótesis que se había planteado el 28/09 (que el medidor "Horno" alimentaba más equipos que el
+  horno) era **incorrecta**, y el argumento de que "no cierra contra la actividad" subestimaba el tiempo que
+  el horno está caliente (calentamiento 36 h, enfriamiento 48 h, y encendidos mantenidos entre campañas).
+  Precisión de las facturas: el servicio que sobrevive a la unificación figura en el medidor de Fábrica
+  (DIGA00044446): en junio con la potencia convenida de Fábrica (86/109 kW, y registró 156/180) y desde julio
+  con 156/180 kW, en línea con la que tenía el Horno; el medidor viejo del Horno queda facturando solo cuota
+  de servicio ("sin uso"). No cambia nada para el modelo.
+  **Validación contra los registros de producción** (`horno_kwh_vs_ulis.md`, `horno_regresion2.md`),
+  28 meses (ene/2024-abr/2026) del medidor exclusivo del horno contra las fechas de cementado de
+  `Seguimiento TR ulis`:
+  - kWh del horno ≈ 2.013 + 1.384 × (campañas iniciadas en el mes) + 2.445 × (días con cementado):
+    **R² = 0,89**.
+  - El término por día está bien identificado: **2.445 ± 179 kWh por día activo ≈ 102 kW de potencia
+    media**, alrededor del 70 % de los 145 kW instalados.
+  - El término por encendido es **impreciso** (1.384 ± 1.288 kWh): con datos mensuales no se separa bien del
+    consumo por día y no se distingue de cero. Sí queda unos 3 errores estándar por debajo del techo teórico
+    de 5.220 kWh (36 h × 145 kW a plena potencia), lo que sugiere que el calentamiento real consume bastante
+    menos que ese techo — o que el criterio de campaña (hueco > 3 días) no coincide con los encendidos
+    reales. Caso base: la estimación empírica; sensibilidad (§2.4 de `05-respuestas-al-docente.md`): de 0 a
+    5.220 kWh.
+  - Contando campañas con el mismo criterio (hueco > 3 días entre fechas de cementado): **41 campañas** entre
+    ene/2024 y ago/2026, **mediana de 10 días**, media 14,1, máximo 77 (corridas largas sin apagar), 1,29
+    campañas por mes en promedio.
+  - Consumo mensual del horno: 40.000-70.000 kWh en 2024-2025, ~23.000-25.000 en 2026. Para jun-ago/2026
+    (servicio ya unificado) se estima restando a la factura combinada la base de Fábrica (13.540 kWh/mes,
+    promedio feb-may/2026): ≈23.600, 7.600 y 10.100 kWh, en línea con los días de cementado de cada mes
+    (11, 6 y 5). Es una estimación gruesa, no una medición.
+  - Costo todo incluido de la electricidad del medidor Horno en marzo/2025: **290 $/kWh**, a 4 % de los
+    277,7 $/kWh que usa la planilla de costos.
+  **Corrección de unidades**: los costos por minuto de la planilla "Costo de Energía" están en **USD**, no en
+  pesos (145 kW × 0,184151 USD/kWh ÷ 60 = 0,44503, exacto; tipo de cambio implícito ≈ 1.508 ARS/USD). El
+  costo de máquina de 0,665 es **USD/min a plena potencia**.
+  **GLP**: sigue pendiente.
