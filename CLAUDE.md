@@ -85,6 +85,9 @@ de materia fuera de ahí.
   Los datos fijos (facultad, legajo, correo, comisión por materia) viven en
   `scripts/datos-alumno.json`, no se retipean en cada trabajo. Ver
   `scripts/templates/README.md`.
+- `scripts/md-to-epub.js` → pasa un resumen `.md` a `.epub` para leerlo en el
+  Kindle: `node scripts/md-to-epub.js <archivo.md>`. Un capítulo por `##`,
+  índice navegable con los `###`, imágenes incluidas. No renderiza LaTeX.
 - `scripts/ingest.py` → wrapper de markitdown para convertir fuentes no-md.
   Corre con el venv del proyecto: `.venv/bin/python scripts/ingest.py <archivo>`.
   Ojo con los zips de Google Drive: `unzip` rompe los acentos de los nombres

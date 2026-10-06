@@ -9230,3 +9230,5 @@ métricas de proyecto vs producto — ver [Unidad 8](#unidad-8--medición-y-aná
   6 simulacro, con un anexo de todas las preguntas de los AD 2024 y 2025) y
   `estudio/prompt-podcast-ad.md` con un prompt por episodio para NotebookLM, orientado a razonar y
   decidir (el parcial es a libro abierto), más versiones cortas de menos de 500 caracteres.
+- 2026-10-06: `estudio/resumen-ad-extendido.epub` — la versión de 101 págs. del resumen AD en EPUB
+  para leer en el Kindle (26 capítulos con índice navegable), generada con `scripts/md-to-epub.js`.
