@@ -111,58 +111,65 @@ pres.addSection({ title: S1 });
     { text: "Bonadeo, Juan Cruz · [Integrante 2] · [Integrante 3] · [Integrante 4]", options: { color: LAV2 } },
   ], { x: ML, y: 5.55, w: 8.6, h: 0.4, fontSize: 14 });
   texto(s, "UTN — Facultad Regional Rosario · Ingeniería en Sistemas de Información · 2026", { x: ML, y: 6.0, w: 8.6, h: 0.4, fontSize: 13, color: MUTED });
-  // ilustración: el SysAcad el día de inscripción (ventana de navegador + pico de tráfico)
-  const bx = 8.35, by = 1.0, bw = 4.4, bh = 4.75;
-  s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: bx, y: by, w: bw, h: bh, rectRadius: 0.12, fill: { color: WHITE }, line: { type: "none" },
-    shadow: { type: "outer", color: "000000", opacity: 0.35, blur: 12, offset: 4, angle: 90 }, objectName: "navegador" });
+  // motivo: grilla de alumnos, casi todos apagados salvo un bloque encendido (el pico)
+  for (let r = 0; r < 6; r++) for (let c = 0; c < 6; c++) {
+    const on = r >= 2 && c >= 2 && r <= 4;
+    s.addShape(pres.shapes.OVAL, { x: 9.15 + c * 0.6, y: 1.25 + r * 0.6, w: 0.38, h: 0.38,
+      fill: { color: on ? CORAL : "3A2E66" }, line: { type: "none" }, objectName: "alumno" });
+  }
+  texto(s, "El día de inscripción, todos a la vez", { x: 9.15, y: 4.95, w: 3.6, h: 0.4, fontSize: 12, italic: true, color: MUTED });
+}
+
+// 2. El caso: el 503 del día de inscripción + demanda contra capacidad (gráfico nativo)
+{
+  const s = nueva("CONTENIDO", S1,
+    "[Expositor 1] Esto lo vimos todos: el día que abre la inscripción a cursado entramos al SysAcad y nos encontramos con esto. El gráfico explica por qué. La línea violeta es lo que aguanta un servidor dimensionado para el uso normal; la coral es la demanda de ese día. A las ocho la demanda la supera unas cinco veces, y todo lo que no entra se responde con un error. El resto del año, en cambio, ese servidor está casi ocioso. Los números son supuestos para el ejemplo: no sabemos cómo está montado el SysAcad por dentro.");
+  encabezado(s, "EL CASO", "SysAcad: tranquilo todo el año, caído el día de inscripción");
+  // ventana de navegador con el 503
+  const bx = ML, by = 1.75, bw = 5.0, bh = 3.0;
+  s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: bx, y: by, w: bw, h: bh, rectRadius: 0.12, fill: { color: WHITE }, line: { color: LAV2, width: 1 },
+    shadow: { type: "outer", color: "3B1F78", opacity: 0.18, blur: 10, offset: 3, angle: 90 }, objectName: "navegador" });
   s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: bx, y: by, w: bw, h: 0.5, rectRadius: 0.12, fill: { color: LAV }, line: { type: "none" }, objectName: "barra" });
   s.addShape(pres.shapes.RECTANGLE, { x: bx, y: by + 0.3, w: bw, h: 0.2, fill: { color: LAV }, line: { type: "none" }, objectName: "barra-base" });
   ["F2545B", "F5B841", "5BC27A"].forEach((c, i) => s.addShape(pres.shapes.OVAL, { x: bx + 0.2 + i * 0.22, y: by + 0.18, w: 0.14, h: 0.14, fill: { color: c }, line: { type: "none" }, objectName: "punto" }));
   s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: bx + 0.95, y: by + 0.11, w: bw - 1.15, h: 0.28, rectRadius: 0.14, fill: { color: WHITE }, line: { color: LAV2, width: 0.75 }, objectName: "url" });
   texto(s, "sysacad · inscripción a cursado", { x: bx + 1.1, y: by + 0.11, w: bw - 1.4, h: 0.28, fontSize: 10, color: MUTED, valign: "middle" });
-  texto(s, "503", { x: bx + 0.35, y: by + 0.7, w: 2.2, h: 1.0, fontSize: 60, bold: true, color: CORAL, fontFace: HEAD, valign: "middle" });
+  texto(s, "503", { x: bx + 0.4, y: by + 0.75, w: 2.4, h: 1.05, fontSize: 64, bold: true, color: CORAL, fontFace: HEAD, valign: "middle" });
   texto(s, [{ text: "Servicio no disponible", options: { bold: true, color: INK, breakLine: true } },
-    { text: "Demasiados usuarios conectados. Intente más tarde.", options: { color: SLATE, fontSize: 12 } }],
-    { x: bx + 0.35, y: by + 1.75, w: bw - 0.7, h: 0.8, fontSize: 15 });
-  // spinner que no termina
+    { text: "Demasiados usuarios conectados. Intente más tarde.", options: { color: SLATE, fontSize: 13 } }],
+    { x: bx + 0.4, y: by + 1.95, w: bw - 0.8, h: 0.8, fontSize: 17 });
   for (let i = 0; i < 8; i++) {
-    const ang = i * Math.PI / 4, r = 0.3, cx = bx + bw - 0.75, cy = by + 1.2;
-    s.addShape(pres.shapes.OVAL, { x: cx + r * Math.cos(ang) - 0.06, y: cy + r * Math.sin(ang) - 0.06, w: 0.12, h: 0.12,
+    const ang = i * Math.PI / 4, r = 0.32, cx = bx + bw - 0.9, cy = by + 1.27;
+    s.addShape(pres.shapes.OVAL, { x: cx + r * Math.cos(ang) - 0.065, y: cy + r * Math.sin(ang) - 0.065, w: 0.13, h: 0.13,
       fill: { color: VIOLET, transparency: 10 + i * 11 }, line: { type: "none" }, objectName: "spinner" });
   }
-  const horas = ["06", "07", "08", "09", "10", "11", "12"];
-  const ped = [2, 4, 100, 85, 40, 15, 6];
-  s.addChart(pres.charts.AREA, [{ name: "pedidos", labels: horas, values: ped }], {
-    x: bx + 0.2, y: by + 2.65, w: bw - 0.4, h: 1.7, chartColors: [CORAL], chartColorsOpacity: 85,
-    catAxisLabelColor: MUTED, catAxisLabelFontSize: 10, catAxisLabelFontFace: BODY, catAxisLineShow: false,
-    valAxisHidden: true, valGridLine: { style: "none" }, catGridLine: { style: "none" }, showLegend: false, showValue: false,
+  texto(s, "Recreación ilustrativa, no una captura real", { x: bx, y: by + bh + 0.08, w: bw, h: 0.25, fontSize: 10, color: MUTED, italic: true });
+  // cifras del caso
+  supuesto(s, bx, 5.25, 2.6);
+  [["5.000", "alumnos a la vez a las 08:00", CORAL], ["< 100", "el resto del año", VIOLET]].forEach(([a, b, col], i) => {
+    const x = bx + i * 2.6;
+    texto(s, a, { x, y: 5.65, w: 2.4, h: 0.6, fontSize: 34, bold: true, color: col, fontFace: HEAD, valign: "middle" });
+    texto(s, b, { x, y: 6.22, w: 2.4, h: 0.35, fontSize: 13, color: SLATE });
   });
-  texto(s, "pedidos por minuto · día de inscripción", { x: bx + 0.35, y: by + bh - 0.42, w: bw - 0.7, h: 0.3, fontSize: 10, color: MUTED, italic: true });
-  texto(s, "Recreación ilustrativa, no una captura real", { x: bx, y: by + bh + 0.12, w: bw, h: 0.3, fontSize: 10, color: MUTED, italic: true, align: "right" });
-}
-
-// 2. El caso (gráfico nativo)
-{
-  const s = nueva("CONTENIDO", S1,
-    "[Expositor 1] Este es el caso. El SysAcad se usa poco casi todo el año, pero los días que abre la inscripción a cursado, en marzo y en agosto, entramos miles de alumnos a la vez y se cae. Los números del gráfico son supuestos para el ejemplo, no mediciones del SysAcad real: no conocemos cómo está montado por dentro. La pregunta es: ¿cómo dimensionás un sistema así?");
-  encabezado(s, "EL CASO", "SysAcad: tranquilo todo el año, caído el día de inscripción");
-  const meses = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
-  const vals = [10, 60, 5000, 80, 70, 60, 30, 4000, 70, 60, 50, 15];
-  s.addChart(pres.charts.BAR, [{ name: "Alumnos simultáneos", labels: meses, values: vals }], {
-    x: ML, y: 1.7, w: 8.2, h: 4.75, barDir: "col", chartColors: vals.map(v => v > 1000 ? CORAL : LAV2), varyColors: true,
-    showValue: true, dataLabelPosition: "outEnd", dataLabelFontSize: 12, dataLabelColor: SLATE, dataLabelFontFace: BODY,
-    catAxisLabelColor: SLATE, valAxisLabelColor: MUTED, catAxisLabelFontSize: 13, valAxisLabelFontSize: 11,
-    catAxisLabelFontFace: BODY, valAxisLabelFontFace: BODY, valAxisMaxVal: 6000, valAxisMinVal: 0, valAxisMajorUnit: 1000,
-    valGridLine: { color: "ECE8F5", size: 1 }, catGridLine: { style: "none" }, showLegend: false, barGapWidthPct: 45,
-    showValAxisTitle: true, valAxisTitle: "alumnos simultáneos en el pico del mes", valAxisTitleFontSize: 11, valAxisTitleColor: MUTED, valAxisTitleFontFace: BODY,
+  // demanda contra capacidad, día de inscripción
+  const xr = bx + bw + 0.55, wr = W - ML - xr;
+  texto(s, "Pedidos por segundo el día de inscripción", { x: xr, y: 1.75, w: wr, h: 0.4, fontSize: 17, bold: true, color: VIOLET });
+  const horas = ["06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00"];
+  const dem = [5, 60, 2000, 1300, 450, 200, 90, 60, 40];
+  s.addChart(pres.charts.LINE, [
+    { name: "Demanda", labels: horas, values: dem },
+    { name: "Capacidad de un servidor dimensionado para el uso normal", labels: horas, values: horas.map(() => 400) },
+  ], {
+    x: xr - 0.1, y: 2.2, w: wr + 0.1, h: 3.55, chartColors: [CORAL, VIOLET], lineSize: 3, lineDataSymbol: "none",
+    showLegend: true, legendPos: "t", legendFontSize: 12, legendFontFace: BODY, legendColor: SLATE,
+    catAxisLabelColor: MUTED, valAxisLabelColor: MUTED, catAxisLabelFontSize: 11, valAxisLabelFontSize: 11,
+    catAxisLabelFontFace: BODY, valAxisLabelFontFace: BODY, valAxisMinVal: 0, valAxisMaxVal: 2200, valAxisMajorUnit: 500,
+    valAxisLabelFormatCode: "0", valGridLine: { color: "ECE8F5", size: 1 }, catGridLine: { style: "none" },
   });
-  const xr = ML + 8.6, wr = W - ML - xr;
-  supuesto(s, xr, 1.75, 2.6);
-  texto(s, "5.000", { x: xr, y: 2.25, w: wr, h: 1.0, fontSize: 60, bold: true, color: CORAL, fontFace: HEAD, valign: "middle" });
-  texto(s, "alumnos a la vez el día que abre la inscripción a cursado", { x: xr, y: 3.25, w: wr, h: 0.75, fontSize: 15, color: SLATE });
-  texto(s, "< 100", { x: xr, y: 4.2, w: wr, h: 0.8, fontSize: 40, bold: true, color: VIOLET, fontFace: HEAD, valign: "middle" });
-  texto(s, "el resto del año", { x: xr, y: 5.0, w: wr, h: 0.4, fontSize: 15, color: SLATE });
-  fuente(s, "Escenario ilustrativo: los números del caso son supuestos para el ejemplo, no mediciones del SysAcad ni datos de la UTN.");
+  caja(s, xr, 5.9, wr, 0.62, LAV);
+  texto(s, [{ text: "A las 08:00 la demanda supera 5 veces la capacidad: ", options: { bold: true, color: INK } },
+    { text: "todo lo que no entra es un 503.", options: { color: CORAL, bold: true } }],
+    { x: xr + 0.25, y: 5.9, w: wr - 0.5, h: 0.62, fontSize: 15, valign: "middle" });
 }
 
 // 3. El dilema
