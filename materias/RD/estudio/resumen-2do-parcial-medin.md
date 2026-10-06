@@ -2,7 +2,7 @@
 
 **Comisión 403 Cristian Medín**
 
-**Resumen para segundo parcial: Capa de Transporte**
+**Resumen para segundo parcial: Transporte, Puertos y Firewall**
 
 ## Servicios y primitivas de transporte
 
@@ -160,7 +160,7 @@ El receptor informa **rangos de lo que sí recibió**, así el emisor sabe exact
 - **El checksum es opcional:** si no se usa, va en ceros. Conviene desactivarlo solo si los datos no son críticos, como en VoIP.
 - Cubre el segmento más un **pseudoencabezado IP**: IP origen, IP destino, un byte en cero, el **protocolo (17)** y la longitud. Es una suma en complemento a uno de palabras de 16 bits.
 - Que la capa 4 controle campos de la capa 3 **viola la estructura de capas**, pero permite detectar paquetes que llegaron al host equivocado.
-- **Ojo, las fuentes no coinciden sobre qué hace UDP ante un error.** La diapositiva de la cátedra dice que **avisa a las capas superiores y deja que ellas decidan**; el documento de preguntas de Medín dice que **descarta** el datagrama. Lo seguro: **UDP detecta el error con el checksum, pero no lo corrige ni retransmite**. Confirmar con Medín qué respuesta espera.
+- **Qué hace UDP ante un error:** el apunte de Medín para este parcial lo dice textual: **"si detecta errores, no corrige pero avisa a las capas superiores"**. Es decir, **detecta** el error con el checksum, pero **no lo corrige ni retransmite**: la decisión queda en manos de la aplicación. *(Un documento viejo de preguntas decía que lo descarta; usá la versión del apunte.)*
 
 ### RPC (llamada a procedimiento remoto)
 Un host ejecuta un proceso en otro como si fuera una función local; por ejemplo, al pedir una canción en Spotify.
@@ -189,13 +189,111 @@ La respuesta vuelve por el camino inverso. Es distinto de los sockets, y **UDP s
 |---|---|---|
 | Conexión | Orientado a conexión (3-way handshake) | Sin conexión: manda directamente |
 | Confiabilidad | Garantiza entrega y orden; retransmite | No garantiza entrega ni orden |
-| Ante un error | Retransmite hasta recibir el ACK | No retransmite (descarta o avisa a la aplicación) |
+| Ante un error | Retransmite hasta recibir el ACK | No corrige ni retransmite: **avisa a las capas superiores** |
 | Control de flujo y congestión | Sí (ventana, AIMD, slow start) | No |
 | Checksum | Obligatorio | Opcional |
 | Header | 20 B + opciones | 8 B |
 | Datos | Flujo de bytes | Mensajes individuales |
 | Destinos | Solo unicast | Unicast, broadcast y multicast |
 | Usos | Web, correo, FTP, **transferencia bancaria** | Voz y video en tiempo real (**streaming**, con RTP), DNS, DHCP |
+
+## Puertos
+
+### Qué es un puerto
+Es un **número de 16 bits (0 a 65.535)** que indica **a qué aplicación** va un segmento dentro del host. IP lleva el paquete hasta la máquina; el puerto lo lleva hasta el programa. Viaja en el header de TCP y de UDP como puerto origen y puerto destino.
+
+- **Socket = IP + puerto.** Ejemplo: al entrar a una web, el destino es `IP del servidor : 443` y el origen es `tu IP : 51.234`, un puerto efímero que eligió tu sistema para que la respuesta sepa a dónde volver.
+- **Puerto 0:** no se usa para comunicarse. Un programa lo pide para que **el sistema operativo le asigne un puerto libre**.
+
+### Tipos de puertos (rangos de la IANA)
+
+| Tipo | Rango | Para qué |
+|---|---|---|
+| **Conocidos** (*well-known*) | **0 – 1023** | Servicios estándar, asignados por la **IANA** (HTTP, FTP, SSH…) |
+| **Registrados** | **1024 – 49.151** | Las organizaciones los piden a la IANA para su aplicación (3389 RDP, 3306 MySQL) |
+| **Efímeros** (dinámicos o privados) | **49.152 – 65.535** | Los usa el **cliente** como puerto de **origen** de cada conexión; se reutilizan todo el tiempo |
+
+### Puertos que conviene saber
+```
+20/21  TCP  FTP (datos/control)       110  TCP  POP3 (recibir correo)
+22     TCP  SSH (remoto seguro)       123  UDP  NTP (hora)
+23     TCP  Telnet (remoto, inseguro) 143  TCP  IMAP (correo)
+25     TCP  SMTP (enviar correo)      161  UDP  SNMP (administrar equipos)
+53     UDP  DNS                       179  TCP  BGP
+67/68  UDP  DHCP (servidor/cliente)   443  TCP  HTTPS
+69     UDP  TFTP                      1194 UDP  OpenVPN
+80     TCP  HTTP (8080 alternativo)   3389 TCP  Escritorio remoto (RDP)
+```
+
+### Estados de un puerto
+- **Abierto:** hay un servicio escuchando y se puede llegar desde afuera.
+- **Cerrado:** no hay servicio; la comunicación se rechaza.
+- **Filtrado:** un **firewall** filtra el tráfico, así que desde afuera no se sabe qué hay.
+
+**Reenvío de puertos (*port forwarding*):** el router de casa hace **NAT**. Para que un servidor interno (FTP, VPN, un juego) sea accesible desde Internet, hay que **reenviar** un puerto de la IP pública hacia esa máquina. **Lo peligroso no es el puerto, sino el servicio expuesto:** hay que abrir solo lo necesario y mantener actualizado lo que escucha.
+
+### Ataques a TCP y a los puertos
+- **Inundación SYN (*SYN flood*):** el atacante manda muchos SYN y **nunca completa el 3-way handshake**. El servidor se llena de conexiones a medio abrir y deja de atender (**denegación de servicio**). Defensas: limitar las conexiones nuevas y usar **SYN cookies / SYN cache**. Filtrar las IP atacantes sirve poco, porque se pueden falsificar.
+- **Spoofing:** paquetes con **IP o puerto de origen falsos**, para esconder al atacante o hacerse pasar por un host de confianza.
+- **Manipulación de paquetes:** interceptar y cambiar los puertos (*man-in-the-middle*).
+- **Tunneling:** meter un protocolo dentro de otro (por ejemplo, SSH dentro de HTTPS) para **atravesar firewalls**.
+
+### TCP o UDP según el uso
+- **VPN:** se prefiere **UDP**, porque es más liviano y rápido, y si algo se pierde lo recupera el TCP que va adentro del túnel. **OpenVPN** permite los dos (recomendado UDP 1194); **WireGuard** usa solo UDP.
+- **Web:** HTTP y HTTPS van sobre **TCP**. **HTTP/3** usa **QUIC**, que funciona **sobre UDP**, agrega confiabilidad y cifrado obligatorio: más rápido que TCP y más fiable que UDP.
+- **Regla:** **TCP** para archivos, correo y navegación; **UDP** para streaming en vivo, juegos y videollamadas.
+
+**Ojo con un error del apunte:** dice que TCP es lento porque "cada paquete debe ser confirmado antes de enviar el siguiente". Eso es stop-and-wait, y TCP usa **ventana deslizante**: manda varios segmentos sin esperar cada ACK. Es más lento por el handshake, los ACK y el control de congestión.
+
+## Firewall
+
+### Qué es
+Un **firewall (cortafuegos)** es un dispositivo o software que **controla y filtra el tráfico entre redes** según un **conjunto de reglas**. La metáfora de la clase es la del **guardia de seguridad** o el **aduanero** en la frontera de la red. Existe porque hace falta **seguridad perimetral**: una muralla entre la red propia y el exterior, frente al malware, los accesos no autorizados y la denegación de servicio.
+
+### Reglas y política
+El firewall **revisa los headers** de cada paquete y lo compara con sus reglas. Cada regla tiene:
+
+| Origen | Destino | Protocolo | Puerto | Acción |
+|---|---|---|---|---|
+| IP o red | IP o red | TCP / UDP / ICMP | Servicio | Permitir / Denegar / Registrar |
+
+- **"Denegar por defecto"** (*default deny*): se bloquea todo lo que no esté permitido explícitamente. Es lo contrario de "permitir por defecto".
+- **El orden importa:** las reglas van **de la más específica a la más general**.
+- **Mínimo privilegio:** permitir solo el tráfico esencial.
+- **Regla de limpieza:** la última regla es **"denegar todo y registrar"**.
+- **Documentar** cada regla y agruparlas con objetos (grupos de IP, de puertos, zonas).
+- **Ejemplo de la clase, para una DMZ:** permitir HTTP/HTTPS (80/443) desde Internet hacia el servidor web, y **denegar todo lo demás** desde Internet.
+
+### Tipos por cómo filtran
+
+| Tipo | Capa | Cómo filtra |
+|---|---|---|
+| **Filtrado de paquetes (*stateless*)** | 3 y 4 | Mira **cada paquete aislado** (IP, puerto, protocolo). Rápido, pero vulnerable a **spoofing** |
+| **Inspección de estado (*stateful*)** | 3 y 4 | Lleva una **tabla de conexiones** y evalúa cada paquete **en el contexto de su sesión**. Mucho más seguro |
+| **De aplicación / proxy** | 7 | Hace de **intermediario**: corta la conexión en dos e **inspecciona el contenido** (URL, comandos) |
+| **NGFW** (próxima generación) | 3 a 7 | Stateful + **control de aplicaciones** (aunque compartan puerto) + **IPS** + servicios extra |
+
+**Ejemplo de la diferencia stateless / stateful:** te llega un paquete desde Internet al puerto 51.234 de tu PC. Un *stateless* no sabe si es la respuesta a una web que abriste o un ataque. Un *stateful* lo sabe, porque tiene anotada en su tabla la conexión que salió desde ese puerto.
+
+**NGFW, servicios extra:** **IPS** (bloquea tráfico malicioso por **firmas de ataque**), inspección del tráfico **cifrado** SSL/TLS, antimalware, **filtrado web por URL** y categorías, **sandboxing** (ejecuta lo sospechoso aislado para ver qué hace) e **inteligencia de amenazas** (listas externas de IP y dominios maliciosos).
+
+### Implementación y ubicación
+- **Hardware (*appliance*):** equipo dedicado; empresas.
+- **Software:** en el sistema operativo, como el Firewall de Windows; equipos finales.
+- **Virtual o en la nube (FWaaS).**
+- **Perimetral:** entre la red interna e Internet.
+- **Interno:** separa segmentos internos, por ejemplo servidores de usuarios.
+- **DMZ (zona desmilitarizada):** *red intermedia donde van los **servidores públicos** (web, correo). Desde Internet se llega a la DMZ, pero no a la red interna: si comprometen un servidor público, lo interno sigue protegido.* (La definición desarrollada es mía; la clase solo nombra el concepto.)
+
+### NAT y firewall
+- **SNAT (NAT de origen):** la red interna **sale** a Internet con la IP pública.
+- **DNAT (NAT de destino) / reenvío de puertos:** el tráfico de afuera **entra** a un servidor interno, por ejemplo uno de la DMZ.
+- NAT y firewall trabajan juntos: el reenvío lleva el paquete al servidor, pero **tiene que haber una regla que lo permita**.
+
+### Operación y tendencias
+- **Logs** (registrar y analizar el tráfico para ver intentos de ataque), **auditoría** de reglas (sacar las obsoletas) y **alta disponibilidad** (firewalls en par: activo/pasivo o activo/activo).
+- **Desafíos:** trabajo remoto, nube, **microsegmentación** (controlar el tráfico **dentro** del datacenter) y **Zero Trust**: "nunca confíes, siempre verificá".
+- **Tendencias:** **FWaaS**, **SASE** (red y seguridad en la nube), automatización con IA, firewalls para industria e IoT.
 
 ## Preguntas de parciales
 
@@ -216,7 +314,7 @@ Darle a las aplicaciones una comunicación **extremo a extremo** confiable y efi
 
 **3) ¿Qué sucede si UDP detecta un error? ¿Y TCP?**
 
-- **UDP** detecta el error con el checksum (si está activado), pero **no retransmite ni corrige**. Según el documento de preguntas de Medín, **descarta** el datagrama. Según la diapositiva de la cátedra, **avisa a las capas superiores** para que decidan. En cualquier caso, la recuperación queda en manos de la aplicación.
+- **UDP** detecta el error con el checksum (si está activado), pero **no lo corrige ni retransmite: avisa a las capas superiores**, que deciden qué hacer. Es lo que dice el apunte de Medín para este parcial.
 - **TCP** detecta el error con el checksum (obligatorio), descarta el segmento dañado y **lo retransmite**: el emisor no recibe el ACK y reenvía cuando vence el temporizador. Mantiene el orden y la confiabilidad.
 
 **4) Grafique un ejemplo de conexión 3-way handshake.**
@@ -272,6 +370,50 @@ Se activa el flag **URG** y el **puntero urgente** indica dónde terminan los da
 - **Streaming:** **UDP (con RTP)**. Importa que llegue a tiempo, no que llegue todo: retransmitir un paquete de video viejo no sirve.
 - **Transferencia bancaria:** **TCP**. No puede perderse, duplicarse ni desordenarse ningún dato.
 
+### Preguntas tipo de Puertos y Firewall (armadas a partir de los apuntes)
+
+> No hay preguntas reales de estos temas: estas las armé con los apuntes que mandó Medín.
+
+**14) ¿Qué es un puerto y qué tipos de puertos hay según su rango?**
+
+Es un número de 16 bits (0 a 65.535) que identifica a qué aplicación va un segmento dentro del host; viaja en el header de TCP y UDP. Según la IANA: **conocidos** (0–1023, servicios estándar), **registrados** (1024–49.151, se piden a la IANA para una aplicación) y **efímeros** (49.152–65.535, los usa el cliente como puerto de origen de cada conexión).
+
+**15) ¿Qué es un puerto efímero? Dé un ejemplo.**
+
+Es un puerto del rango 49.152–65.535 que el sistema operativo le asigna al **cliente** como **puerto de origen** de una conexión, y que se reutiliza después. Ejemplo: al abrir una web, el destino es el puerto 443 del servidor y el origen, un efímero como el 51.234 de tu PC; por ahí vuelve la respuesta.
+
+**16) ¿Qué estados puede tener un puerto?**
+
+**Abierto** (hay un servicio escuchando y es accesible), **cerrado** (no hay servicio, se rechaza la conexión) y **filtrado** (un firewall filtra el tráfico y no se puede saber qué hay detrás).
+
+**17) ¿En qué consiste un ataque de inundación SYN y cómo se mitiga?**
+
+El atacante manda muchos SYN y nunca completa el 3-way handshake; el servidor acumula conexiones a medio abrir hasta no poder atender a nadie (denegación de servicio). Se mitiga limitando las conexiones nuevas y con **SYN cookies / SYN cache**; filtrar las IP sirve poco porque se pueden falsificar.
+
+**18) ¿Qué es un firewall y cuáles son los componentes de una regla?**
+
+Es un dispositivo o software que controla y filtra el tráfico entre redes según un conjunto de reglas, como un aduanero en la frontera de la red. Cada regla tiene **origen, destino, protocolo, puerto y acción** (permitir, denegar o registrar).
+
+**19) ¿Qué diferencia hay entre un firewall stateless y uno stateful?**
+
+El **stateless** (filtrado de paquetes) evalúa cada paquete por separado según IP, puerto y protocolo: es rápido, pero vulnerable al spoofing y no entiende el contexto. El **stateful** mantiene una **tabla de conexiones** y evalúa cada paquete en el contexto de su sesión, por ejemplo sabe si un paquete entrante es la respuesta a una conexión que salió desde adentro.
+
+**20) ¿Qué es un NGFW y qué agrega?**
+
+Es el firewall de próxima generación: suma a la inspección de estado el **control de aplicaciones** (las reconoce aunque usen el mismo puerto), un **IPS** que bloquea tráfico malicioso por firmas, inspección del tráfico cifrado, antimalware, filtrado web, sandboxing e inteligencia de amenazas.
+
+**21) ¿Qué es la política "denegar por defecto" y qué es la regla de limpieza?**
+
+**Denegar por defecto:** se bloquea todo lo que no esté expresamente permitido. **Regla de limpieza:** la última regla del firewall, "denegar todo y registrar", que atrapa lo que no coincidió con ninguna regla anterior. Junto con el **mínimo privilegio** y el orden de lo más específico a lo más general, son los principios de diseño de la política.
+
+**22) ¿Qué es una DMZ y para qué sirve?**
+
+Es una red intermedia entre Internet y la red interna donde se ponen los **servidores públicos** (web, correo). Desde Internet se puede llegar a la DMZ, pero no a la red interna, así que si comprometen un servidor público lo interno sigue protegido. Con **DNAT / reenvío de puertos** se dirige el tráfico externo hacia esos servidores.
+
+**23) ¿Por qué las VPN suelen usar UDP y qué es QUIC?**
+
+Las VPN usan **UDP** porque es más liviano y rápido, y lo que se pierda dentro del túnel lo recupera el TCP de las capas de adentro (OpenVPN recomienda UDP; WireGuard usa solo UDP). **QUIC** es el protocolo de transporte de HTTP/3: funciona **sobre UDP** y le agrega confiabilidad y cifrado obligatorio, así que es más rápido que TCP y más fiable que UDP.
+
 ## Datos para memorizar
 - La capa 4 es **extremo a extremo**; la unidad es el **segmento**; la dirección es el **puerto** (16 bits).
 - Puertos: **FTP 20/21 · Telnet 23 · SMTP 25 · HTTP 80 · DHCP 67/68 · port mapper 111**.
@@ -283,10 +425,15 @@ Se activa el flag **URG** y el **puntero urgente** indica dónde terminan los da
 - **AIMD:** sube sumando, baja a la mitad. **Tahoe** vuelve a slow start; **Reno** sigue desde la mitad (fast recovery).
 - **SCTP** hace multiplexación inversa; **TCP** no (solo unicast).
 - Streaming: **UDP + RTP/RTCP**. WiFi retransmite en **capa 2**; satélite usa **FEC**.
+- Rangos de puertos: **conocidos 0–1023 · registrados 1024–49.151 · efímeros 49.152–65.535**. Estados: abierto, cerrado y filtrado.
+- **SYN flood** = handshakes sin completar (DoS); se mitiga con **SYN cookies**. **QUIC** (HTTP/3) va sobre **UDP**.
+- Firewall: regla = **origen, destino, protocolo, puerto y acción**. **Stateless** (capas 3–4, por paquete) · **stateful** (tabla de conexiones) · **proxy** (capa 7) · **NGFW** (+ aplicaciones + IPS).
+- **Denegar por defecto** + **mínimo privilegio** + regla de limpieza **"denegar todo y registrar"**. **DMZ** = servidores públicos aislados de la red interna.
+- UDP ante un error: **no corrige, avisa a las capas superiores**.
 
 ## Fuentes
 - Teóricos de la cátedra (Medín): *1 - Servicios y primitivas de transporte*, *2 - Características de transporte*, *3 - Protocolo TCP*, *4 - Protocolo UDP*.
 - *Preguntas y respuestas de parciales de Medín* y el 2do parcial real del 29/10/2024 (com. 403).
 - Preguntas de 2dos parciales de 2025 de otros profesores de la cátedra (Travaglino, Pastori), como práctica.
 - Tanenbaum y Wetherall, *Redes de Computadoras*, 5ª ed., cap. 6.
-- **El temario del 2do teórico de 2026 (27/10) todavía no está confirmado.** Este resumen asume que es Capa de Transporte, como en 2024.
+- Apuntes del 2do teórico que mandó Medín (`examen 2.rar`): los 4 de transporte, *Capa de Transporte y Puertos* (UTN, 2024) y *Clase sobre Firewall*. **Temario confirmado por su mail:** Transporte + Puertos + Firewall.
