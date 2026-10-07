@@ -115,6 +115,7 @@ cp = ";".join(jars)
 
 # ------------------------------------------------------------------ 2. compilación contra la API
 api = """import com.anylogic.engine.*;
+import com.anylogic.engine.analysis.*;
 import com.anylogic.libraries.processmodeling.*;
 public class CaserApiCheck extends Agent {
 static class ULI extends Agent { %ULI% }
@@ -141,6 +142,7 @@ harness = r"""import java.util.*;
 public class CaserLogicCheck {
 static class Agent {}
 static class ULI extends Agent { %ULI% }
+static class DataSet { DataSet(int n) {} void add(double x, double y) {} }
 // ---------- motor de eventos discretos mínimo ----------
 static boolean LIFO = false;
 double clock = 0; long seq = 0; boolean terminado = false;
