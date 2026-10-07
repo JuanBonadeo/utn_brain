@@ -2570,10 +2570,12 @@ información real y utilidad concreta. Todo el material está en [`entregables/T
 - `03-pedido-de-datos.md` — pedido de exportaciones del ABM (base común + específico por opción) y guion de entrevista.
 - `04-formulario-eleccion-tema.md` — propuesta de tema con tres candidatos, alcance, medidas de salida, validación y supuestos.
 - `05-respuestas-al-docente.md` — respuestas a las cinco preguntas del docente sobre el Tema 1 (bloques y statechart del horno en AnyLogic, datos y ajuste de distribuciones, regla actual y escenarios, validación con tolerancias, diseño de experimentos con semillas comunes y paired-t). Termina con la lista de puntos a confirmar con la empresa antes de enviarla.
+- `06-articulos-seleccionados.md` — los 15 artículos representativos para la Etapa 2.
+- `07-modelo-anylogic.md` — guía del modelo (`modelo/CaserHorno.alp`): protocolo con el IDE, verificación, estados del horno, entradas, experimentos E0-E3 y checklist de la primera sesión en el IDE. En `modelo/` están también el generador, el verificador (`verificar_modelo.py`) y el test de medias (`analizar_corridas.py`).
 
 **Tema principal propuesto**: régimen de campañas del horno de cementación y temple, con la política de stock
 acoplada. El horno tiene ~36 h de calentamiento y ~48 h de enfriamiento y se enciende recién con 70-80 ULI
-acumuladas (15 ULI por turno, campaña de ~1 semana): son ~84 h de preparación por ~40 h de proceso efectivo.
+acumuladas y carga ~17 ULI por día en 3 turnos: son ~84 h de preparación (calentar + enfriar) por campaña.
 Con la planta subutilizada, la espera para juntar el lote puede ser de semanas, y es esa espera la que fija
 el lead time y, por lo tanto, cuánto stock hace falta y cuánto capital queda inmovilizado. El horno está
 aguas arriba de todo lo demás.
@@ -2582,19 +2584,22 @@ Descartado explícitamente del alcance: flujo de caja y tiempo de supervivencia 
 una política es aritmética, no simulación; las salidas del modelo (compras, inventario, campañas, ventas por
 período) alimentan una proyección externa en planilla. Queda como trabajo futuro.
 
-**Estado (2026-09-27): el docente aprobó la propuesta.** Modelado habilitado — ya se puede empezar a
-construir en AnyLogic. Pendiente entregar hoy un documento de avance (a definir formato con el docente).
-Historial: la propuesta se envió el 16/09, el docente respondió con cinco preguntas de fondo (cómo se
+**Estado (2026-10-07): Etapa 1 del modelo construida y verificada fuera del IDE** (el horno solo, con
+llegadas exógenas de ULI lavadas). Falta abrirla en AnyLogic: Build, M/M/1, corridas E0-E3 y comparación
+fila por fila con el CSV del verificador (checklist en `07-modelo-anylogic.md` §6). Después vienen la
+validación contra el registro (con el mismo período que las entradas) y la Etapa 2 (demanda, aguas arriba,
+zincado y nivel de servicio). La regla de fin de campaña quedó confirmada: el horno carga mientras haya cola.
+
+Historial: el docente aprobó la propuesta el 27/09 y la especificación (entrega previa) se entregó ese día.
+La propuesta se envió el 16/09, el docente respondió con cinco preguntas de fondo (cómo se
 modela el horno en AnyLogic, qué datos hay, cuál es la regla actual y las alternativas, cómo se valida, cómo se
 diseña el experimento), quedaron respondidas en `05-respuestas-al-docente.md`, y la mayoría de los
-`[confirmar]` con la empresa se cerraron el 27/09 en una entrevista con el encargado — con dos correcciones
-reales al diseño (ver Log): las ULI que llegan con el horno prendido NO se suman a la campaña en curso salvo
-prioridad, y son 3 turnos de 8 h (no un turno por día). También se corrigió que el horno no tuvo una
-reactivación puntual en 01/2026 — opera intermitente desde antes.
-La empresa confirmó que toda la información existe; falta ejecutar la exportación del ABM (ver
-`04-formulario-eleccion-tema.md` §Estado de los datos). El dato que más cambia el análisis: si el sistema conserva y exporta los presupuestos no
-concretados y las notas de venta canceladas, hay medición retroactiva de venta perdida; si no, la venta
-perdida solo puede ser salida del modelo.
+`[confirmar]` con la empresa se cerraron el 27/09 en una entrevista con el encargado (son 3 turnos de 8 h,
+no uno). Esa entrevista dejó anotado que las ULI que llegan con el horno prendido esperan la próxima
+campaña; el registro lo contradecía y el 07/10 el encargado lo corrigió: se cargan igual. El horno no tuvo
+una reactivación puntual en 01/2026: opera intermitente desde antes. Los datos del ABM (ventas, presupuestado
+contra facturado, lista de precios, seguimiento de ULI, facturas de energía) ya están recibidos y perfilados;
+falta el GLP.
 
 ### TPI Bonadeo y Estevez — molinetes de Constitución
 
@@ -2791,6 +2796,28 @@ Conclusiones:
 ---
 
 ## Log
+
+- **2026-10-07** (3): TPI, grupo 2 (Casermeiro). **Etapa 1 del modelo en AnyLogic, construida y verificada
+  fuera del IDE** (`entregables/TPI/caser/modelo/`, guía en `07-modelo-anylogic.md`). `CaserHorno.alp`
+  (formato 8.9.9): `source → colaHorno (Wait) → horno (Delay, capacidad 1) → sink`, con la lógica del horno
+  en funciones Java de `Main` (estados Apagado → Acumulando → Calentando → Procesando → Enfriando) y
+  experimentos `Visual`, `VerificacionMM1` y `CorridasE0E3` (4 escenarios × 30 semillas comunes, CSV).
+  Decisiones del día, tomadas con Gonzalo: tiempo en vacío de 48 h (el registro muestra huecos de 1-2 días
+  dentro de campañas, imposibles si se apagara y recalentara), un encendido por prioridad trata solo las
+  urgentes (campañas chicas: encienden con 39 en cola y tratan 5), ciclo de 85 min (lo medido en fines de
+  semana, 99 min, queda como sensibilidad) y llegadas de los últimos 12 meses. **El encargado confirmó la
+  regla de fin de campaña** ("las cargamos igual"): el horno carga mientras haya cola; cerrado el punto 10
+  de `05-` y corregidos §1.2, §3.1, §3.2 de `05-` y §11, §15, §18 de la especificación (PDF regenerado).
+  E3 se redefinió como 96 h en vacío, porque la base ya mantiene 48. Llegadas: bootstrap de 52 semanas reales
+  de ULI lavadas (lunes a viernes; el 49 % de los días hábiles sin lavado y picos de 10-20 ULI), con
+  `pPrioridad` = 17/1.794. `verificar_modelo.py` compila las funciones contra la API instalada y las corre
+  en un motor de eventos mínimo: trazas exactas, cupo, prioridad, espera máxima, conservación, números
+  aleatorios comunes, FIFO = LIFO y el **M/M/1 degenerado dentro del 0,1 %** (Lq, L, W, Wq, ρ).
+  `analizar_corridas.py` hace el t apareado con Bonferroni y compara el CSV de AnyLogic con el del motor
+  mínimo, que deben coincidir campo por campo. Primera comparación informal con el registro: espera media
+  ≈ 7 días contra 10,2, y ULI por campaña ≈ 100 contra 164; hay que comparar contra el mismo período antes de
+  validar. Limitación nueva: el lavado se concentra en días con el horno prendido (68 % de las ULI en el
+  58 % de los días hábiles), así que las llegadas no son del todo exógenas.
 
 - **2026-10-07** (2): TPI, grupo 2 (Casermeiro). Segunda pasada antes de arrancar en AnyLogic, con tres
   correcciones a lo que estaba escrito. (1) **El lavado es previo al horno**, no posterior: en el 99,1 % de

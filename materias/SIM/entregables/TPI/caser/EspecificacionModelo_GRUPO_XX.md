@@ -175,7 +175,7 @@ caso se adelanta el encendido o se extiende el tiempo en vacío para esperarlo. 
 reemplaza al supuesto original (que asumía que toda ULI entrante se sumaba a la campaña) y es lo que hace
 que `horasEnVacio` no sea un tiempo fijo, sino condicional a si hay o no una prioridad pendiente.
 
-📌 **Punto en revisión (07/10/2026).** Al contrastar esa regla con el registro de producción de 2024 a
+**Corrección confirmada (07/10/2026).** Al contrastar esa regla con el registro de producción de 2024 a
 2026 (39 campañas, tomando como una misma campaña las fechas de cementado separadas por 3 días o menos), el
 registro no coincide con una regla estricta de "las ULI que llegan se guardan para la próxima":
 - La cola al encender tiene mediana de **77 ULI** (rango intercuartil 44-106), lo que confirma el umbral de
@@ -188,8 +188,9 @@ registro no coincide con una regla estricta de "las ULI que llegan se guardan pa
 
 La lectura que mejor se ajusta a los datos es que el horno, una vez encendido, **procesa mientras haya cola y
 apaga cuando se vacía**; lo que se guarda para la próxima son las ULI que llegan una vez iniciado el
-apagado. Se está confirmando con el encargado. La estructura de la Figura 2 no cambia; cambia solo la
-condición con la que `Procesando` sigue cargando ULI nuevas.
+apagado. **El encargado lo confirmó** ("las cargamos igual"): la regla de fin de campaña es procesar mientras
+haya cola. La estructura de la Figura 2 no cambia; cambia solo la condición con la que `Procesando` sigue
+cargando ULI nuevas. La excepción de prioridad se mantiene para los encendidos anticipados.
 
 ## 12. Relaciones entre componentes
 
@@ -244,10 +245,9 @@ concreta o se pierde, y es la salida que conecta el subsistema del horno con el 
   aleatoria adicional con la distribución empírica observada, sin cola ni capacidad propia.
 - No existe política de stock (s, Q): toda la producción es contra pedido, confirmado directamente por la
   empresa, salvo excepciones puntuales todavía sin identificar entre los artículos elegidos.
-- Regla de fin de campaña, **en revisión** (ver §11): el encargado indicó que las ULI que llegan con el horno
-  prendido se guardan para la próxima campaña salvo prioridad por entrega comprometida, pero el registro
-  de producción muestra campañas que tratan una mediana de 186 ULI y apagan con la cola casi vacía. Hasta
-  confirmarlo, el supuesto de trabajo es que el horno procesa mientras haya cola y apaga cuando se vacía.
+- Regla de fin de campaña (ver §11), **confirmada el 07/10/2026**: el horno procesa mientras haya cola,
+  incluidas las ULI que llegan con el horno prendido, y apaga después de un tiempo con la cola vacía. Lo
+  respalda el registro de producción (campañas de mediana 186 ULI que apagan con la cola casi vacía).
 - El costo de la potencia eléctrica contratada es un costo fijo hundido para esta decisión de corto plazo:
   la comparación entre escenarios se hace sobre el consumo incremental de encender y operar el horno.
 - El histórico de ventas refleja demanda atendida más una fracción medible de demanda no atendida (vía los
@@ -292,16 +292,12 @@ independiente (sección 13). Lo que todavía falta definir para llegar al 100 %:
   consumo se explica por los días de operación con R² = 0,89. Lo que queda abierto de la energía es el
   costo fijo por encendido, que con datos mensuales solo se estima de forma imprecisa y se cubre con
   análisis de sensibilidad entre 0 y su techo teórico.
-- Confirmar con el encargado la regla de fin de campaña (§11): si las ULI que llegan con el horno prendido
-  se cargan mientras haya cola, como indica el registro, o se guardan para la próxima. Es lo único de este
-  documento que puede cambiar la lógica del horno y no solo un parámetro.
 - Confirmar si alguno de los artículos elegidos es una de las excepciones que sí llevan stock.
 - Confirmar la elección final de los 10 a 30 artículos representativos (hay una propuesta de 15 armada y
   pendiente de validar con la empresa).
 - La tasa de costo del capital inmovilizado, que la empresa todavía no proveyó.
 
-Salvo la regla de fin de campaña, ninguno de estos puntos cambia la estructura del modelo — son valores de
-parámetros, no componentes sin definir. La regla de fin de campaña cambia la condición con la que el horno
-sigue cargando ULI, no los estados ni las entidades. Por eso se considera que la especificación conceptual
-está lista para empezar la construcción del modelo programado, con esa regla como primera consulta al
-encargado.
+Ninguno de estos puntos cambia la estructura del modelo: son valores de parámetros, no componentes sin
+definir. La regla de fin de campaña, que era el único punto capaz de cambiar la lógica del horno, quedó
+confirmada con el encargado el 07/10/2026. Por eso se considera que la especificación conceptual está lista
+para la construcción del modelo programado.

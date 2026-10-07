@@ -30,19 +30,18 @@ circula como agente individual; la campaña es un **estado del horno**, no una e
 Flujo de las ULI (Process Modeling Library):
 
 ```
-ULI lavada ─► colaHorno   Queue, FIFO, capacidad ilimitada. TimeMeasureStart "espera horno".
+ULI lavada ─► colaHorno   Wait, capacidad ilimitada; la espera se mide de la entrada al despacho.
                           (El lavado es previo al horno: en el 99 % de las ULI del seguimiento es
                           del mismo día o anterior al cementado. Es parte de "aguas arriba", §1.5.)
-          ─► compuerta    Hold. Deja pasar solo el cupo de la campaña: al entrar a Procesando se
-                          fija cupo = colaHorno.size() y se hace unblock(); en el On exit del Hold,
-                          cupo--, y al llegar a 0 se hace block(). Las ULI que llegan después
-                          quedan en cola para la próxima campaña (regla del 27/09, EN REVISIÓN:
-                          el registro no la respalda, ver punto 10 de las notas internas), salvo
-                          las prioritarias, que suman 1 al cupo al entrar a colaHorno.
-          ─► tomarHorno   Seize. Recursos: horno (ResourcePool, capacidad 1) y operadorHorno
-                          (ResourcePool, capacidad 1, con Schedule de turno).
-          ─► ciclo        Delay, minPorULI = 1440 / 17 ≈ 85 min, capacidad 1.
-          ─► soltarHorno  Release. TimeMeasureEnd "espera horno" (espera en cola + ciclo).
+                          Implementado (07/10/2026) como bloque Wait: la ULI sale solo cuando
+                          despachar() la libera con free(), así el horno elige cuál carga
+                          (urgentes primero, después FIFO) y solo en Procesando.
+          ─► horno        Delay, minPorULI = 1440 / 17 ≈ 85 min, capacidad 1. Reemplaza al
+                          Hold + Seize/Release del diseño original: con un solo horno y operación
+                          24 h, el recurso no agrega nada que no haga la capacidad 1 del Delay.
+                          Regla de fin de campaña confirmada el 07/10/2026: el horno carga
+                          mientras haya cola (work-conserving); el Hold con cupo por campaña de la
+                          regla del 27/09 quedó como modo alternativo (modoFinCampana = cupo).
           ─► revenido     Delay con distribución empírica, solo si el artículo lo lleva (§1.5).
           ─► zincado (Delay, plazo aleatorio del tercero) ─► envasado (Delay)
           ─► entrega      Sink. TimeMeasureEnd pedido → entrega: tiempo de entrega y nivel de servicio.
@@ -60,7 +59,7 @@ Control del horno: un **statechart** en `Main`, con una variable acumuladora de 
 | `Apagado` | inicio del modelo; fin del enfriamiento | hay ULI en cola → `Acumulando` (inmediato) | 0 |
 | `Acumulando` | primera ULI en cola | por **condición** `colaHorno.size() >= umbralULI`, o por **timeout** de espera máxima cuando la regla lo tiene → `Calentando` | 0 |
 | `Calentando` | regla cumplida | **timeout** `hCalentamiento` = 36 h → `Procesando` | P_cal |
-| `Procesando` (subestados `Cargando` / `CalienteEnVacio`) | fin del calentamiento | `Cargando` mientras queda cupo; cuando sale del `ciclo` la última ULI del cupo pasa a `CalienteEnVacio`, y de ahí **timeout** `horasEnVacio` → `Enfriando`. `horasEnVacio` = 0 por default; solo se extiende si hay una ULI prioritaria en camino (ver abajo) | P_mant |
+| `Procesando` (subestados `Cargando` / `CalienteEnVacio`) | fin del calentamiento | `Cargando` mientras haya ULI en cola; con la cola vacía pasa a `CalienteEnVacio`, y de ahí **timeout** `horasEnVacio` → `Enfriando`, salvo que llegue una ULI (vuelve a `Cargando`). `horasEnVacio` = 48 h (07/10/2026: el registro muestra huecos de 1-2 días sin carga dentro de campañas). Un encendido por prioridad trata solo las urgentes y enfría sin espera | P_mant |
 | `Enfriando` | fin de la campaña | **timeout** `hEnfriamiento` = 48 h → `Apagado` | 0 |
 
 **Confirmado con el encargado (2026-09-27) — corrige el supuesto original**: las ULI que llegan mientras el
@@ -267,17 +266,18 @@ del intervalo; los críticos se reportan con su rango de validez (paso 6 de Law)
 Relevada con la empresa: el horno se enciende cuando se acumulan **unas 70-80 ULI**. No hay tiempo
 máximo de espera formal ni regla escrita; la decisión es del encargado **[confirmar en la entrevista
 si adelanta el encendido por pedidos comprometidos; si lo hace, se modela como prioridad de la ULI,
-no como cambio de regla]** — **confirmado (2026-09-27)**: sí lo hace. En el modelo: `umbralULI = 75`,
-`esperaMaxDias = ∞`, `horasEnVacio = 0` (se apaga apenas termina el cupo), extendido solo por prioridad.
+no como cambio de regla]** — **confirmado (2026-09-27)**: sí lo hace. En el modelo (07/10/2026):
+`umbralULI = 75`, `esperaMaxDias = ∞`, `horasEnVacio = 48` h, carga mientras haya cola, y una ULI urgente
+(`pPrioridad` = 0,0095 por ULI) enciende bajo el umbral y se trata sola. Ver `07-modelo-anylogic.md`.
 
 ### 3.2 Escenarios
 
 | Escenario | `umbralULI` | `esperaMaxDias` | `horasEnVacio` | Qué cambia |
 |---|---|---|---|---|
-| E0 base | 75 | ∞ | 0 (+ prioridad) | Regla actual |
-| E1 umbral bajo | 45 | ∞ | 0 (+ prioridad) | Campañas más frecuentes y cortas: menos espera, más kWh/kg |
-| E2 umbral + espera máxima | 75 | 15 | 0 (+ prioridad) | Se enciende al cumplirse cualquiera de las dos: acota el peor caso de espera |
-| E3 mantener caliente (opcional) | 75 | ∞ | 24-48 h si hay OF en curso | Evita 36 + 48 h entre campañas cercanas. Requiere P_mant confiable |
+| E0 base | 75 | ∞ | 48 | Regla actual (con prioridad en todos los escenarios) |
+| E1 umbral bajo | 45 | ∞ | 48 | Campañas más frecuentes y cortas: menos espera, más kWh/kg |
+| E2 umbral + espera máxima | 75 | 15 | 48 | Se enciende al cumplirse cualquiera de las dos: acota el peor caso de espera |
+| E3 mantener caliente | 75 | ∞ | 96 | Evita 36 + 48 h entre campañas cercanas. Redefinido el 07/10/2026: la base ya mantiene 48 h, la alternativa es el doble |
 
 Los valores de umbral y espera (dos o tres por parámetro) se eligen con las corridas piloto (paso 5)
 para cubrir el rango donde la respuesta cambia. El E4 (turno adicional de carga) se cayó: el horno ya
@@ -504,7 +504,9 @@ para mandar a fábrica está en `03-pedido-de-datos.md` §Pedido para el Tema 1)
    `06-articulos-seleccionados.md`).
 9. De los artículos elegidos, ¿alguno es una de las excepciones que sí se mantienen con stock? (la regla
    general confirmada es "todo contra pedido" — ver §1.5).
-10. **Regla de fin de campaña — bloquea el `Hold` de §1.2 (07/10/2026).** El diseño del `Hold` con cupo por
+10. ~~**Regla de fin de campaña — bloquea el `Hold` de §1.2 (07/10/2026).**~~ **Resuelto el mismo 07/10/2026**:
+    el encargado respondió "las cargamos igual". Work-conserving es la regla base del modelo y el cupo queda
+    como modo alternativo. Contexto original: el diseño del `Hold` con cupo por
     campaña (las ULI que llegan con el horno prendido esperan la próxima) sale de la entrevista del 27/09,
     pero el registro no lo respalda. Sobre 39 campañas de 2024 a 2026 (`datos-locales/_perfil/campanas_cola.md`):
     la cola al encender tiene mediana de 77 ULI (confirma el umbral de 70-80), pero las 22 campañas de 7 días

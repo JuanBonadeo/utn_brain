@@ -278,7 +278,7 @@ Con esto se hace el ABC, se ve qué se vende, qué se fabrica, qué se importa y
   **17 de menos de 7 días** (mediana 5 ULI, cola al encender 39). La cola de ULI lavadas y no cementadas al
   encender tiene **mediana de 77** (rango intercuartil 44-106): confirma el umbral de 70-80 como disparador.
   Las campañas largas apagan con la cola casi vacía (mediana 15), así que las ULI que llegan con el horno
-  prendido se cargan mientras haya cola; ver la regla en revisión en §11 de la especificación y el punto 10 de
+  prendido se cargan mientras haya cola (confirmado por el encargado el 07/10/2026); ver §11 de la especificación y el punto 10 de
   `05-respuestas-al-docente.md`.
   **Corrección**: la utilización del horno no es 17-25 % (cuenta que asumía 75 ULI por campaña). Medida mes a
   mes con las toneladas reales cementadas: **31 t/mes en 2024-2025 (42 % de 75 t) y 20 t/mes en 2026 (26 %)**,
