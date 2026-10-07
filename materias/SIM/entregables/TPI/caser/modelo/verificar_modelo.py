@@ -94,6 +94,18 @@ on_cola = code(bp["colaHorno"]["onEnter"].find("Value/Code"))
 on_sink = code(bp["sink"]["onEnter"].find("Value/Code"))
 delay_expr = code(bp["horno"]["delayTime"].find("Value/Code"))
 startup = code(main.find("StartupCode"))
+# Expresiones de la presentación, el statechart y los gráficos: se compilan contra la API (no se ejecutan).
+expr_pres = []
+for el in main.find("Presentation").iter():
+    if el.tag in ("XCode", "YCode", "VisibleCode", "FillColorCode", "LineColorCode", "TextCode", "ColorCode", "WidthCode", "HeightCode"):
+        expr_pres.append(code(el))
+    elif el.tag == "ReplicationCode":
+        expr_pres.append("(int) (" + code(el.find("Code")) + ")")
+    elif el.tag == "Expression2":
+        expr_pres.append("(double) (" + code(el) + ")")
+for t in main.findall("StatechartElements/StatechartElement[@Class='Transition']"):
+    expr_pres.append("(boolean) (" + code(t.find("Properties/Condition")) + ")")
+presentacion = "void presentacion(int index) {" + " ".join(f"Object p{i} = {e};" for i, e in enumerate(expr_pres)) + "}"
 cuerpo = "\n".join(campos + funcs)
 
 tmp = tempfile.TemporaryDirectory(prefix="caser-check-")
@@ -110,9 +122,10 @@ Source<Agent> source; Wait<Agent> colaHorno; Delay<Agent> horno; Sink<Agent> sin
 EventTimeout %EVENTOS%;
 %CUERPO%
 void callbacks(Agent agent) { %ONCOLA% %ONSINK% double dt = %DELAY%; %STARTUP% %ACCIONES% }
+%PRESENTACION%
 }""".replace("%ULI%", " ".join(uli_campos)).replace("%EVENTOS%", ", ".join(n for n, _ in eventos)) \
    .replace("%CUERPO%", cuerpo).replace("%ONCOLA%", on_cola).replace("%ONSINK%", on_sink) \
-   .replace("%DELAY%", delay_expr).replace("%STARTUP%", startup).replace("%ACCIONES%", " ".join(a for _, a in eventos))
+   .replace("%DELAY%", delay_expr).replace("%STARTUP%", startup).replace("%ACCIONES%", " ".join(a for _, a in eventos))    .replace("%PRESENTACION%", presentacion)
 (d / "CaserApiCheck.java").write_text(api, encoding="utf-8")
 # El classpath completo supera el largo máximo de una línea de comando en Windows: va en un @argfile.
 (d / "javac.args").write_text('-cp "' + cp.replace("\\", "/") + '"', encoding="utf-8")
@@ -121,7 +134,7 @@ r = subprocess.run([str(JAVAC), "-encoding", "UTF-8", "-nowarn", "@" + str(d / "
 if r.returncode:
     print(r.stdout, r.stderr)
     sys.exit("FALLA 2/3: las funciones no compilan contra la API de AnyLogic")
-print("OK 2/3: funciones, eventos y callbacks compilan contra la API de AnyLogic 8.9 (Source/Wait/Delay/Sink, EventTimeout)")
+print(f"OK 2/3: funciones, eventos, callbacks y {len(expr_pres)} expresiones de presentacion/statechart compilan contra la API de AnyLogic 8.9")
 
 # ------------------------------------------------------------------ 3. motor mínimo + pruebas
 harness = r"""import java.util.*;
@@ -138,7 +151,8 @@ void correr(double hasta) { while (!terminado && !fel.isEmpty() && fel.peek().t 
 class EventTimeout { Ev p; Runnable accion;
   void restart(double dt) { reset(); if (dt < 0) throw new AssertionError("timeout negativo"); p = agendar(clock + dt, () -> { p = null; accion.run(); }); }
   void reset() { if (p != null) { p.cancelado = true; p = null; } }
-  boolean isActive() { return p != null; } }
+  boolean isActive() { return p != null; }
+  double getRest() { return p == null ? 0 : p.t - clock; } }
 class Wait implements Iterable<Agent> { ArrayList<Agent> l = new ArrayList<Agent>();
   boolean free(Agent a) { if (!l.remove(a)) return false; entraHorno(a); return true; }
   public Iterator<Agent> iterator() { return new ArrayList<Agent>(l).iterator(); }
