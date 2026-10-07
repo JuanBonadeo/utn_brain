@@ -1,46 +1,73 @@
-# Artículos representativos del Tema 1 — propuesta
+# Artículos representativos del Tema 1 — propuesta (v2, 2026-10-07)
 
-> Universo de partida: los 310 artículos de `datos-locales/_perfil/candidatos_articulos2.csv` (catálogo
-> CASER con precio en la Lista CASER, sin códigos KIT). Criterio: mezcla de familias, de volumen, de fill
-> rate, y mayoría que pase por el horno con al menos un caso que no.
+> Reemplaza la propuesta del 2026-09-27, que tenía errores en las columnas "pasa horno" y "revenido" (ver
+> "Qué se corrigió"). Fuente de verdad para esas dos columnas: `Seguimiento TR ulis` (12.527 ULI, 2023-2026),
+> a nivel de código base de fábrica. Tablas completas en `datos-locales/_perfil/candidatos_v3.csv`.
 
-## Hallazgo previo a la selección
+## Hallazgos que condicionan la selección
 
-Los códigos de venta de mayor volumen son mayormente variantes de **estuche** (empaque chico), y el
-seguimiento de producción (`Seguimiento TR ulis`) está anotado contra el código **granel** de fábrica —
-mismo producto físico, dos códigos distintos. Sin corregirlo, solo 14 de 310 artículos parecían pasar por
-el horno; corrigiendo (cada código de venta enlazado a su código de fábrica por prefijo), son **205 de 310**.
-Implicancia para el modelo: la demanda de un artículo representativo debe sumar sus ventas por granel y por
-estuche cuando corresponda — son la misma producción, dos canales de venta.
+**1. Estuche vs. granel.** Los códigos de venta de mayor volumen son variantes de estuche y la producción se
+registra contra el código granel de fábrica (mismo producto, dos códigos). Se enlazan por prefijo del código.
+La demanda de un artículo representativo suma sus ventas por granel y por estuche. Los volúmenes mezclan
+unidades de facturación (estuches y millares), así que los porcentajes de volumen son indicativos.
+
+**2. El revenido es por artículo y casi binario.** De 193 artículos base: 74 pasan por el horno sin revenido,
+24 por horno y revenido (77-100 % de sus ULI), 8 no pasan por el horno y 87 no tienen datos suficientes
+(menos de 15 ULI en el seguimiento). **Los 24 con revenido son todos de CASER-Drill.**
+
+**3. Los artículos con revenido son los peor servidos.** Fill rate ponderado de los artículos de horno solo:
+**66 %** (74 artículos). Con revenido: **33 %** (24 artículos). Es co-ocurrencia dentro de una familia: como
+todos los de revenido son Drill, no se puede separar el efecto del revenido del efecto de la familia.
+Implicancia para el alcance: sacar el revenido de la cola simulada es razonable (el estudio cambia la regla
+del horno de cementación, no la del de revenido), pero **los artículos con revenido no deben excluirse de la
+selección** — son el 22 % del volumen y donde está el problema de servicio. Para ellos el revenido entra
+como una demora aleatoria con la distribución empírica (ver `03-pedido-de-datos.md`), no como constante.
+
+**4. Casi todo el volumen pasa por el horno.** Ponderado por volumen: 63 % horno solo, 22 % horno + revenido,
+15 % sin datos suficientes, ~0 % sin horno. Los 8 artículos sin horno son CASER-Max y CASER-Maq de volumen
+mínimo. CASER-Plast **sí** pasa por el horno (C3224020: 100 % de sus 28 ULI): la suposición anterior de que
+las roscas para plásticos no se tratan era incorrecta.
 
 ## Propuesta (15 artículos, pendiente de confirmación con la empresa)
 
-| Código | Familia | Volumen/año | Pasa horno | Fill rate | Nota |
-|---|---|---|---|---|---|
-| C8114232 | CASER-Drill | 813 | Sí | 18% | pérdida grande — caso de estudio central |
-| C1003551 | CASER-Wall | alto (+ estuche C10035515) | Sí | 87% | alto volumen, buen fill rate |
-| C1003532 | CASER-Wall | alto (+ estuche) | Sí | — | alto volumen |
-| C1113516 | CASER-Fix | 349 (+ estuche) | Sí | 82% | |
-| C4104213 | CASER-Drill | medio (+ estuche) | Sí | — | |
-| C7003510 | CASER-Drill | 190 | Sí | 32% | pérdida media |
-| C7404813 | CASER-Rosc | 93 | Sí | 95% | fill rate alto, contraste |
-| C1114520 | CASER-Fix | 90 | Sí | 78% | |
-| C1115040 | CASER-Fix | 123 (+ estuche) | Sí | **1,6%** | pérdida casi total — caso extremo |
-| C1004275 | CASER-Wall | medio (+ estuche) | Sí | — | |
-| C2003525 | CASER-Wall | 84 | Sí | 40% | |
-| C8203913 | CASER-Drill | 63 | Sí | 65% | |
-| C8506350 | CASER-Max | bajo | Sí | — | familia distinta, artículo especial |
-| C3914050 | CASER-Maq | bajo | Sí | — | familia distinta, artículo especial |
-| C3224030 | CASER-Plast | bajo | **No** | — | caso bypass del horno (rosca para plásticos) |
+| Código base | Familia | Volumen presup. | Fill rate | ULI en seguimiento | Horno | Revenido |
+|---|---|---:|---:|---:|---:|---:|
+| C1003551 | CASER-Wall | 542 | 87 % | 1.092 | 98 % | 0 % |
+| C1003532 | CASER-Wall | 492 | 78 % | 415 | 99 % | 0 % |
+| C3104213 | CASER-Wall | 162 | 25 % | 371 | 98 % | 0 % |
+| C1004275 | CASER-Wall | 156 | 87 % | 294 | 94 % | 0 % |
+| C2003525 | CASER-Wall | 84 | 40 % | 399 | 98 % | 0 % |
+| C1113516 | CASER-Fix | 349 | 82 % | 136 | 100 % | 0 % |
+| C1115040 | CASER-Fix | 123 | **2 %** | 57 | 98 % | 0 % |
+| C1114050 | CASER-Fix | 65 | 97 % | 223 | 100 % | 0 % |
+| C8114232 | CASER-Drill | 823 | **18 %** | 16 | 100 % | 88 % |
+| C4104213 | CASER-Drill | 248 | 47 % | 221 | 99 % | 93 % |
+| C4104219 | CASER-Drill | 118 | 46 % | 62 | 100 % | 92 % |
+| C6106351 | CASER-Drill | 47 | 21 % | 420 | 99 % | 77 % |
+| C7006008 | CASER-Max | 5 | 100 % | 21 | **0 %** | — |
+| C9157050 | CASER-Max | 2 | 0 % | 118 | **0 %** | — |
+| C3914050 | CASER-Maq | 3 | 0 % | 48 | **0 %** | — |
 
-Cubre las 7 familias del catálogo, mezcla alto/bajo volumen y fill rate alto/bajo/extremo, y tiene el único
-caso relevante de "no pasa por horno" entre los artículos con datos.
+Cubre 42 % del volumen presupuestado del universo con precio (3.219 de 7.676), con fill rate ponderado de
+54 % contra 56 % del universo: la muestra no está sesgada hacia casos fáciles ni difíciles. Incluye los tres
+perfiles (horno solo, horno + revenido, sin horno) y cinco de las siete familias.
+
+**Quedan afuera**: CASER-Rosc (el mejor candidato, C7404813, tiene 6 ULI en el seguimiento) y CASER-Plast
+(1 unidad vendida en el año): sin datos suficientes para caracterizarlos. Los tres artículos sin horno tienen
+volumen de venta casi nulo; sirven para ejercitar el camino que saltea el horno, no para medir servicio.
+
+## Qué se corrigió respecto de la propuesta del 27/09
+
+- La columna "pasa horno" se había armado con una heurística sobre códigos de venta: C3914050 figuraba como
+  "sí" y no pasa por el horno (0 de 48 ULI); C8506350 pasa en 2 de 11; C3224030 no tiene ULI en el seguimiento.
+  Se reemplazaron por artículos con datos del seguimiento.
+- Se afirmaba que ninguno de los 310 artículos llevaba revenido, midiendo solo la hoja 2026 de `Termico 2026`.
+  Con el seguimiento completo, 4 de los 15 anteriores lo llevaban, y 24 artículos base en total.
+- Se afirmaba que CASER-Plast no pasa por el horno; sí pasa.
 
 ## Pendiente
 
-- Confirmar con la empresa si alguno de estos 15 no es representativo en la práctica (por ejemplo, si algún
-  código está discontinuado pese a tener ventas históricas).
-- De estos 15, verificar cuáles llevan revenido (ninguno de los 310 del universo general lo lleva según
-  `Termico 2026`/Revenido, pero conviene confirmarlo específicamente para estos).
-- Confirmar si alguno es de las excepciones que sí se mantienen con stock (regla general: todo contra
-  pedido).
+- Confirmar con la empresa si alguno de estos 15 está discontinuado o no es representativo en la práctica.
+- Confirmar si alguno es de las excepciones que sí se mantienen con stock (regla general: todo contra pedido).
+- Decidir si se sustituye alguno de los tres sin horno por un artículo de CASER-Rosc o CASER-Plast con más
+  datos, si la empresa los considera importantes.

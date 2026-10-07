@@ -107,8 +107,8 @@ pedidos comprometidos, confirmado por el encargado).
 **Alcance del "horno" en el modelo**: cementación + temple, que la empresa hace en un solo ciclo en el horno
 grande (confirmado en planillas: máquina "TKN + generador endotérmico", 145 kW). El revenido es un proceso
 aparte, en un horno chico separado ("POTE", 15 kW), que no se aplica a todos los artículos y tiene muchos
-menos registros — queda fuera de la cola/lote simulada; para los artículos donde aplica se estima como una
-demora fija adicional, no como un segundo régimen de campaña.
+menos registros — queda fuera de la cola/lote simulada; para los artículos donde aplica se modela como una
+demora aleatoria adicional con distribución empírica, no como un segundo régimen de campaña.
 
 **Riesgo**: medio-bajo. Muy acotado y original (el profe valora originalidad). Depende de que el consumo energético por carga sea conocido o estimable.
 

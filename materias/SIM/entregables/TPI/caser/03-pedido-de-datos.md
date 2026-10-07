@@ -243,3 +243,43 @@ Con esto se hace el ABC, se ve qué se vende, qué se fabrica, qué se importa y
   pesos (145 kW × 0,184151 USD/kWh ÷ 60 = 0,44503, exacto; tipo de cambio implícito ≈ 1.508 ARS/USD). El
   costo de máquina de 0,665 es **USD/min a plena potencia**.
   **GLP**: sigue pendiente.
+
+- **Orden de las etapas y tiempos entre etapas — medidos (2026-10-07)** sobre `Seguimiento TR ulis`
+  (12.527 ULI con inicio de prensa entre 2023 y 2026; `datos-locales/_perfil/orden_etapas.md`).
+  **Corrección de estructura**: el lavado es **previo** al horno (en el 99,1 % de las 11.461 ULI con ambas
+  fechas, el lavado es del mismo día o anterior al cementado). El orden real es Prensa → Laminado → Lavado →
+  Horno → [Revenido] → Tratamiento superficial (zincado) → Fraccionado. La lista de proceso que se había
+  anotado el 13/09 ponía el lavado después del tratamiento térmico; el diagrama y la especificación
+  heredaron ese orden y se corrigieron.
+  Tiempos entre etapas, en días (mediana / media / p90):
+  | Tramo | Mediana | Media | P90 |
+  |---|---:|---:|---:|
+  | Prensa → Laminado | 3 | 8,2 | 20 |
+  | Laminado → Lavado | 2 | 5,0 | 8 |
+  | **Lavado → Cementado (espera del horno)** | **4** | **10,2** | **26** |
+  | Cementado → Enviado a zincado (sin revenido) | 5 | 12,3 | 28 |
+  | Cementado → Revenido (solo artículos con revenido) | 5 | 11,7 | 31 |
+  | Revenido → Enviado a zincado | 6 | 13,0 | 34 |
+  | Enviado → Recibido (zincado) | 2 | 3,0 | 6 |
+  | Recibido → Fraccionado | 1 | 4,2 | 9 |
+  Son a la vez parámetros de entrada (tramos fuera del horno) y blancos de validación (la espera del horno
+  y el tiempo total). Los tramos Cementado → Enviado incluyen la espera del envío al zincador, que no está
+  explicada: el seguimiento no distingue si la demora es de transporte, de lote de envío o de otra
+  operación. Las fechas vienen con errores de tipeo (años mal puestos); se usaron solo tramos de 0 a 400 días.
+  **Revenido por artículo**: lo llevan el 14,7 % de las ULI, pero de forma casi binaria por artículo (24
+  artículos base con 77-100 %, el resto ~0 %), todos de CASER-Drill. Los artículos con revenido tienen fill
+  rate ponderado de 33 %, contra 66 % los de horno solo. Detalle y selección corregida en
+  `06-articulos-seleccionados.md`.
+
+- **Campañas del horno y utilización real — medidas (2026-10-07)** (`datos-locales/_perfil/campanas_cola.md`).
+  39 campañas iniciadas entre enero de 2024 y agosto de 2026 (el 41 de más arriba se contó desde diciembre
+  de 2023), con el criterio de hueco > 3 días entre fechas de cementado. ULI por campaña: mediana 114, media
+  164, máximo 757. Dos grupos: **22 campañas de 7 días o más** (mediana 186 ULI, cola al encender 98) y
+  **17 de menos de 7 días** (mediana 5 ULI, cola al encender 39). La cola de ULI lavadas y no cementadas al
+  encender tiene **mediana de 77** (rango intercuartil 44-106): confirma el umbral de 70-80 como disparador.
+  Las campañas largas apagan con la cola casi vacía (mediana 15), así que las ULI que llegan con el horno
+  prendido se cargan mientras haya cola; ver la regla en revisión en §11 de la especificación y el punto 10 de
+  `05-respuestas-al-docente.md`.
+  **Corrección**: la utilización del horno no es 17-25 % (cuenta que asumía 75 ULI por campaña). Medida mes a
+  mes con las toneladas reales cementadas: **31 t/mes en 2024-2025 (42 % de 75 t) y 20 t/mes en 2026 (26 %)**,
+  con picos de 65,5 t (mayo/2025) y 49 t (feb/2024 y ago/2025).

@@ -2792,6 +2792,23 @@ Conclusiones:
 
 ## Log
 
+- **2026-10-07** (2): TPI, grupo 2 (Casermeiro). Segunda pasada antes de arrancar en AnyLogic, con tres
+  correcciones a lo que estaba escrito. (1) **El lavado es previo al horno**, no posterior: en el 99,1 % de
+  las 11.461 ULI con ambas fechas el lavado es del mismo día o anterior al cementado; el orden real es
+  Prensa → Laminado → Lavado → Horno → [Revenido] → Zincado → Fraccionado. Corregidos el diagrama (Fig. 1),
+  la especificación, `01-` y `05-`. (2) **Revenido**: lo llevan el 14,7 % de las ULI, casi binario por
+  artículo (24 artículos base, todos CASER-Drill, 77-100 %), y esos artículos tienen fill rate de 33 %
+  contra 66 % los de horno solo (co-ocurrencia dentro de una familia, no prueba de causa). La propuesta de
+  artículos del 27/09 tenía errores en "pasa horno" y "revenido" (se medía solo la hoja 2026 de `Termico`);
+  reescrito `06-articulos-seleccionados.md` con el seguimiento como fuente. El revenido pasa de demora
+  constante a demora aleatoria con distribución empírica (mediana 5 d, media 11,7, p90 31). (3) **Campañas**
+  (39 desde 2024): cola al encender de mediana 77 ULI (confirma el umbral de 70-80), pero las campañas de 7
+  días o más tratan una mediana de 186 ULI y apagan con la cola casi vacía, y 17 de 39 son encendidos chicos
+  (mediana 5 ULI). Eso respalda la contradicción que ya se había anotado: las ULI que llegan con el horno
+  prendido sí se cargan mientras haya cola; el `Hold` con cupo queda en revisión hasta confirmarlo con el
+  encargado (punto 10 de `05-`). Corregida la utilización: 31 t/mes en 2024-2025 (42 %) y 20 t/mes en 2026
+  (26 %), no 17-25 %. Medidos también los tiempos entre etapas (espera del horno: mediana 4 d, media 10,2,
+  p90 26). Actualizados `01-` a `06-`, `EspecificacionModelo_GRUPO_XX.md/.pdf` y la figura.
 - **2026-10-07**: TPI, grupo 2 (Casermeiro). Puesta al día antes de arrancar en AnyLogic. Corregido el
   tiempo de ciclo por ULI: 32 min salía de "15 por turno" y daba ~45 ULI/día con 3 turnos; con ~17 ULI/día
   es 1440/17 ≈ 85 min (el registro `Termico 2026` da mediana 18 y media 16 ULI/día en los días intermedios

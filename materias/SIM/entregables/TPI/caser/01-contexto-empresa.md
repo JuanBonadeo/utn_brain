@@ -45,14 +45,17 @@ Fuente: brief armado por la familia (2026-09-13) + respuestas de Gonzalo en la m
     Supuestos.
 - Línea de cincado electrolítico propia, **desinstalada / no operativa**.
 
-**Proceso productivo** (confirmado por Gonzalo; casi todo interno)
+**Proceso productivo** (confirmado por Gonzalo; casi todo interno). **Orden corregido el 2026-10-07**: la
+lista original ponía el lavado después del tratamiento térmico, pero en el 99 % de las ULI del seguimiento
+el lavado es del mismo día o anterior al cementado.
 1. Compra de alambre de acero listo para usar (no hay trefilado). Proveedor histórico: Acindar/ArcelorMittal.
 2. Estampado (= recalcado en frío de la cabeza; la máquina es la estampadora/recalcadora; el setup es el **cambio de matrices**).
 3. Laminado de rosca.
-4. Tratamiento térmico (cementación y temple) en horno propio.
-5. Lavado.
+4. Lavado.
+5. Tratamiento térmico (cementación y temple) en horno propio. En algunos artículos (CASER-Drill), revenido
+   posterior en un horno aparte.
 6. **Cincado — tercerizado** (fosfatizado también).
-7. Envasado.
+7. Envasado (en el seguimiento, "Fraccionado").
 8. Almacenamiento y despacho.
 
 **Sistemas y datos**
@@ -76,10 +79,11 @@ Fuente: brief armado por la familia (2026-09-13) + respuestas de Gonzalo en la m
 - Precios y costos constantes en el horizonte (en índices).
 - Zincado tercerizado con plazo aleatorio; no se modela al tercero por dentro.
 - **Revenido fuera del alcance del modelo de eventos discretos**: es un proceso aparte, en otro equipo, que
-  no se aplica a todos los artículos. Para los artículos donde aplica se trata como una demora fija adicional
-  (estimada de la mediana histórica), no como una cola/lote simulado. Los artículos representativos del Tema 1
-  se eligen priorizando los que no pasan por revenido, para no ensuciar el modelo con un segundo régimen de
-  campaña.
+  no se aplica a todos los artículos. Para los artículos donde aplica se trata como una demora aleatoria
+  adicional con la distribución empírica (mediana 5 días, media 11,7, p90 31; corregido el 2026-10-07, antes
+  era una constante), no como una cola/lote simulado. Corregido también que no se evitan en la selección: el
+  revenido lo llevan 24 artículos, todos de CASER-Drill, y son los peor servidos (ver
+  `06-articulos-seleccionados.md`).
 
 ## Datos que la empresa entrega (confirmado 2026-09-16, exportación prevista 2026-09-17)
 

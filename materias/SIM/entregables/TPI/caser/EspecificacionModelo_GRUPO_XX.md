@@ -64,16 +64,19 @@ mantener el nivel de servicio por encima de un mínimo aceptable, bajo distintos
 ## 3. Límites del sistema
 
 **Dentro del alcance**: demanda de un subconjunto de 10 a 30 artículos representativos de la marca propia;
-producción agregada aguas arriba (estampado y laminado, sin distinguir máquina por máquina); el horno de
-cementación y temple con su régimen de campañas; lavado; zincado tercerizado (modelado como una demora
-externa, sin representar el proceso interno del tercero); envasado; entrega y medición del nivel de
-servicio.
+producción agregada aguas arriba (estampado, laminado y lavado, sin distinguir máquina por máquina); el horno
+de cementación y temple con su régimen de campañas; zincado tercerizado (modelado como una demora externa,
+sin representar el proceso interno del tercero); envasado; entrega y medición del nivel de servicio.
 
 **Fuera del alcance**, con la justificación de por qué:
 - **Revenido**: es un tratamiento posterior a la cementación, realizado en un horno distinto y de mucha
-  menor potencia, que no se aplica a todo el catálogo (en el registro de 2026 tiene menos de un quinto de
-  los casos completos que la cementación). Incorporarlo exigiría un segundo régimen de campaña sobre datos
-  más finos, para una fracción del flujo. Se trata como una demora fija adicional donde corresponda.
+  menor potencia, que no se aplica a todo el catálogo: lo llevan el 15 % de las ULI registradas entre 2023 y
+  2026, concentradas en unos pocos artículos (todos de la familia CASER-Drill), que a su vez son el 22 % del
+  volumen. Incorporarlo exigiría un segundo régimen de campaña, y el estudio varía la regla del horno de
+  cementación, no la del de revenido. Para los artículos que lo llevan se modela como una demora aleatoria
+  adicional con la distribución empírica observada (mediana 5 días, media 11,7, percentil 90 de 31), sin
+  cola ni capacidad propia. Limitación: si la regla de cementación cambiara el ritmo con que llegan ULI al
+  revenido, esa demora no se adaptaría.
 - **Artículos importados**: no se tratan térmicamente, no interactúan con el recurso crítico del sistema.
 - **Flujo de caja y rentabilidad global de la empresa**: exceden el objeto de un estudio de simulación de
   eventos discretos.
@@ -84,8 +87,8 @@ servicio.
 
 - **Pedido**: la unidad de demanda del cliente. Dispara la producción directamente, sin pasar por un
   chequeo de stock (no existe stock de seguridad reglado).
-- **ULI (Unidad de Transporte Interno)**: el lote físico que circula por estampado, laminado, el horno,
-  lavado, zincado y envasado. Es la entidad que efectivamente atraviesa la cola y el recurso críticos.
+- **ULI (Unidad de Transporte Interno)**: el lote físico que circula por estampado, laminado, lavado, el
+  horno, zincado y envasado. Es la entidad que efectivamente atraviesa la cola y el recurso críticos.
 
 No se modela la pieza individual: no aporta al análisis y multiplicaría innecesariamente la cantidad de
 agentes creados por corrida.
@@ -96,15 +99,16 @@ agentes creados por corrida.
 |---|---|---|
 | Horno | 1 | Cementación + temple en un solo ciclo. Recurso crítico del sistema |
 | Operador del horno | 1 | Disponible en **3 turnos de 8 h (24 h corridas)** durante la fase de procesamiento — corregido tras entrevista con el encargado (se asumía un turno diario) |
-| Capacidad agregada aguas arriba | agregada por familia | Estampado y laminado tratados como un único recurso de capacidad agregada, no máquina por máquina |
+| Capacidad agregada aguas arriba | agregada por familia | Estampado, laminado y lavado tratados como un único recurso de capacidad agregada, no máquina por máquina |
 | Zincado tercerizado | externo, no modelado | Se representa solo el tiempo de tránsito (demora), no la capacidad del tercero |
 
 ## 6. Procesos
 
-Ver Figura 1. Secuencia: **pedido → producción aguas arriba (agregada) → [horno, si el artículo lleva
-tratamiento térmico] → lavado → zincado tercerizado → envasado → entrega**. Los artículos que no requieren
-tratamiento térmico saltean el horno directo a lavado. No hay una etapa de reposición de stock: cada pedido
-dispara su propia orden de producción.
+Ver Figura 1. Secuencia: **pedido → producción aguas arriba (estampado, laminado y lavado, agregado) →
+[horno, si el artículo lleva tratamiento térmico] → zincado tercerizado → envasado → entrega**. El lavado es
+previo al horno: en el 99 % de las 11.461 ULI del seguimiento con ambas fechas, el lavado es del mismo día o
+anterior al cementado. Los artículos que no requieren tratamiento térmico saltean el horno y siguen directo
+al zincado. No hay una etapa de reposición de stock: cada pedido dispara su propia orden de producción.
 
 ## 7. Colas
 
@@ -146,7 +150,7 @@ dispara su propia orden de producción.
 | Potencia media del horno en operación | ≈102 kW (≈70 % de la instalada): 2.445 ± 179 kWh por día con cementado, medido sobre 28 meses (ene/2024-abr/2026) del medidor eléctrico exclusivo del horno. R² = 0,89 | Facturas de electricidad + `Seguimiento TR ulis` |
 | Energía fija por encendido | Imprecisa con datos mensuales: 1.384 ± 1.288 kWh, unos 3 errores estándar por debajo del techo teórico de 36 h × 145 kW = 5.220 kWh. Caso base: la estimación; sensibilidad de 0 a 5.220 kWh | Planilla interna + facturas |
 | Tarifa eléctrica y potencia contratada | Facturas de 2024 a agosto/2026 recibidas, tarifa 2 B1. Potencia convenida (pico/fuera de pico): horno 149/170 kW entre 2025 y abril/2026; fábrica 26-43/86-167 kW según el mes; servicio único 86/109 kW en junio y 156/180 kW desde julio/2026. Costo todo incluido ≈290 $/kWh en el medidor del horno en marzo/2025 | Empresa |
-| Kg por ULI, por artículo | Resuelto (28/09/2026): 143 kg/ULI en promedio (mediana 136, rango 5,9-362,5 sobre 310 artículos). Con el umbral de 75 ULI, una campaña mueve ≈10 t — ≈17-25 % de la capacidad instalada, consistente con planta subutilizada | `Seguimiento TR ulis` |
+| Kg por ULI, por artículo | Resuelto (28/09/2026): 143 kg/ULI en promedio (mediana 136, rango 5,9-362,5 sobre 310 artículos). Medido mes a mes sobre el seguimiento: 31 t/mes en 2024-2025 y 20 t/mes en 2026, es decir 42 % y 26 % de los 60-90 t/mes de capacidad instalada (tomando 75 t), consistente con planta subutilizada | `Seguimiento TR ulis` |
 | Precio de lista y costo índice por artículo | Precio: lista de precios oficial. Costo: precio de lista × 0,335 (fórmula provista por la empresa: 50 % de bonificación máxima, 33 % de rentabilidad bruta sobre el precio bonificado) | Lista de precios de la empresa |
 | Tasa de costo del capital inmovilizado | 📌 pendiente, a definir con la empresa | — |
 
@@ -170,6 +174,22 @@ ingresar pronto un artículo con una entrega comprometida que no puede esperar a
 caso se adelanta el encendido o se extiende el tiempo en vacío para esperarlo. Este mecanismo de prioridad
 reemplaza al supuesto original (que asumía que toda ULI entrante se sumaba a la campaña) y es lo que hace
 que `horasEnVacio` no sea un tiempo fijo, sino condicional a si hay o no una prioridad pendiente.
+
+📌 **Punto en revisión (07/10/2026).** Al contrastar esa regla con el registro de producción de 2024 a
+2026 (39 campañas, tomando como una misma campaña las fechas de cementado separadas por 3 días o menos), el
+registro no coincide con una regla estricta de "las ULI que llegan se guardan para la próxima":
+- La cola al encender tiene mediana de **77 ULI** (rango intercuartil 44-106), lo que confirma el umbral de
+  70-80 ULI como disparador.
+- Pero las campañas de 7 días o más (22 de 39) procesan una mediana de **186 ULI** y apagan con la cola casi
+  vacía (mediana de 15 ULI esperando). Para tratar eso, las ULI que llegan con el horno prendido tienen que
+  cargarse mientras haya cola. La campaña más larga duró 77 días sin apagar (757 ULI).
+- Las otras 17 campañas son chicas (mediana de 5 ULI, cola al encender de 39): son los encendidos por
+  prioridad, y son el 44 % de los encendidos, no un caso excepcional.
+
+La lectura que mejor se ajusta a los datos es que el horno, una vez encendido, **procesa mientras haya cola y
+apaga cuando se vacía**; lo que se guarda para la próxima son las ULI que llegan una vez iniciado el
+apagado. Se está confirmando con el encargado. La estructura de la Figura 2 no cambia; cambia solo la
+condición con la que `Procesando` sigue cargando ULI nuevas.
 
 ## 12. Relaciones entre componentes
 
@@ -220,12 +240,14 @@ concreta o se pierde, y es la salida que conecta el subsistema del horno con el 
 - Zincado tercerizado modelado como una demora externa con plazo aleatorio; no se modela al tercero por
   dentro.
 - El "horno" simulado es cementación y temple en un solo ciclo. El revenido queda fuera del modelo (otro
-  equipo, no aplica a todo el catálogo) y se estima, donde corresponde, como una demora fija adicional.
+  equipo, no aplica a todo el catálogo) y, para los artículos que lo llevan, se modela como una demora
+  aleatoria adicional con la distribución empírica observada, sin cola ni capacidad propia.
 - No existe política de stock (s, Q): toda la producción es contra pedido, confirmado directamente por la
   empresa, salvo excepciones puntuales todavía sin identificar entre los artículos elegidos.
-- Las ULI que llegan mientras el horno está prendido **no** se suman por defecto a la campaña en curso; solo
-  lo hacen bajo la excepción de prioridad por entrega comprometida (corregido tras la entrevista con el
-  encargado).
+- Regla de fin de campaña, **en revisión** (ver §11): el encargado indicó que las ULI que llegan con el horno
+  prendido se guardan para la próxima campaña salvo prioridad por entrega comprometida, pero el registro
+  de producción muestra campañas que tratan una mediana de 186 ULI y apagan con la cola casi vacía. Hasta
+  confirmarlo, el supuesto de trabajo es que el horno procesa mientras haya cola y apaga cuando se vacía.
 - El costo de la potencia eléctrica contratada es un costo fijo hundido para esta decisión de corto plazo:
   la comparación entre escenarios se hace sobre el consumo incremental de encender y operar el horno.
 - El histórico de ventas refleja demanda atendida más una fracción medible de demanda no atendida (vía los
@@ -270,11 +292,16 @@ independiente (sección 13). Lo que todavía falta definir para llegar al 100 %:
   consumo se explica por los días de operación con R² = 0,89. Lo que queda abierto de la energía es el
   costo fijo por encendido, que con datos mensuales solo se estima de forma imprecisa y se cubre con
   análisis de sensibilidad entre 0 y su techo teórico.
+- Confirmar con el encargado la regla de fin de campaña (§11): si las ULI que llegan con el horno prendido
+  se cargan mientras haya cola, como indica el registro, o se guardan para la próxima. Es lo único de este
+  documento que puede cambiar la lógica del horno y no solo un parámetro.
 - Confirmar si alguno de los artículos elegidos es una de las excepciones que sí llevan stock.
 - Confirmar la elección final de los 10 a 30 artículos representativos (hay una propuesta de 15 armada y
   pendiente de validar con la empresa).
 - La tasa de costo del capital inmovilizado, que la empresa todavía no proveyó.
 
-Ninguno de estos puntos cambia la estructura del modelo — son valores de parámetros, no componentes sin
-definir — por lo que se considera que la especificación conceptual está cerrada y lista para la etapa de
-construcción del modelo programado.
+Salvo la regla de fin de campaña, ninguno de estos puntos cambia la estructura del modelo — son valores de
+parámetros, no componentes sin definir. La regla de fin de campaña cambia la condición con la que el horno
+sigue cargando ULI, no los estados ni las entidades. Por eso se considera que la especificación conceptual
+está lista para empezar la construcción del modelo programado, con esa regla como primera consulta al
+encargado.

@@ -30,19 +30,23 @@ circula como agente individual; la campaña es un **estado del horno**, no una e
 Flujo de las ULI (Process Modeling Library):
 
 ```
-ULI lista ─► colaHorno    Queue, FIFO, capacidad ilimitada. TimeMeasureStart "espera horno".
+ULI lavada ─► colaHorno   Queue, FIFO, capacidad ilimitada. TimeMeasureStart "espera horno".
+                          (El lavado es previo al horno: en el 99 % de las ULI del seguimiento es
+                          del mismo día o anterior al cementado. Es parte de "aguas arriba", §1.5.)
           ─► compuerta    Hold. Deja pasar solo el cupo de la campaña: al entrar a Procesando se
                           fija cupo = colaHorno.size() y se hace unblock(); en el On exit del Hold,
                           cupo--, y al llegar a 0 se hace block(). Las ULI que llegan después
-                          quedan en cola para la próxima campaña (regla confirmada 27/09), salvo
+                          quedan en cola para la próxima campaña (regla del 27/09, EN REVISIÓN:
+                          el registro no la respalda, ver punto 10 de las notas internas), salvo
                           las prioritarias, que suman 1 al cupo al entrar a colaHorno.
           ─► tomarHorno   Seize. Recursos: horno (ResourcePool, capacidad 1) y operadorHorno
                           (ResourcePool, capacidad 1, con Schedule de turno).
           ─► ciclo        Delay, minPorULI = 1440 / 17 ≈ 85 min, capacidad 1.
           ─► soltarHorno  Release. TimeMeasureEnd "espera horno" (espera en cola + ciclo).
-          ─► lavado (Delay) ─► zincado (Delay, plazo aleatorio del tercero) ─► envasado (Delay)
-          ─► ingresoStock Sink: stock[artículo] += piezas de la ULI; si hay pedidos pendientes
-                          de ese artículo, se sirven.
+          ─► revenido     Delay con distribución empírica, solo si el artículo lo lleva (§1.5).
+          ─► zincado (Delay, plazo aleatorio del tercero) ─► envasado (Delay)
+          ─► entrega      Sink. TimeMeasureEnd pedido → entrega: tiempo de entrega y nivel de servicio.
+                          No hay ingreso a stock: la producción es contra pedido (§1.5).
 ```
 
 Si el registro de cargas muestra que el horno aloja varias ULI a la vez (horno continuo de empuje), el
@@ -128,19 +132,22 @@ vienen las ULI y adónde va lo tratado. Tres subsistemas, deliberadamente agrega
   histórico) mejor que un modelo con stock intermedio. **Pendiente**: si alguno de los artículos
   representativos elegidos resulta ser una de las excepciones con stock, se le agrega el chequeo puntual
   para ese artículo — no para todos.
-- **Aguas arriba** (estampado + laminado, agregado por familia): `Delay` con tiempo = preparación +
-  cantidad / tasa, ajustado de las OF históricas → `Split` en ⌈cantidad / piezas por ULI⌉ ULI →
-  `colaHorno`, o directo a lavado vía `SelectOutput` si el artículo no lleva tratamiento térmico.
-- **Aguas abajo**: lavado, zincado tercerizado (`Delay` con plazo ajustado de los remitos), envasado,
-  ingreso a stock.
+- **Aguas arriba** (estampado + laminado + lavado, agregado por familia): `Delay` con tiempo = preparación +
+  cantidad / tasa, ajustado de las OF históricas y de los tiempos entre etapas del seguimiento (§2.1) →
+  `Split` en ⌈cantidad / piezas por ULI⌉ ULI → `colaHorno`, o directo a zincado vía `SelectOutput` si el
+  artículo no lleva tratamiento térmico.
+- **Aguas abajo**: revenido donde aplica, zincado tercerizado (`Delay` con plazo ajustado de los remitos),
+  envasado y entrega.
 
 No incluye **revenido**: es un tratamiento posterior a la cementación, en un horno distinto ("POTE", de
-mucha menor potencia que el de cementación) y que no se aplica a todo el catálogo — el registro de 2026
-tiene menos de un quinto de los casos completos que el de cementación. Agregarlo exigiría un segundo
-régimen de campaña (otro umbral, otro statechart) sobre datos bastante más finos, para una fracción del
-flujo. Los artículos elegidos para el modelo se priorizan entre los que no lo requieren; donde un
-artículo seleccionado sí lo requiera, el revenido se suma como una demora fija adicional (mediana
-histórica), no como un servidor con cola propia.
+mucha menor potencia que el de cementación) y que no se aplica a todo el catálogo — lo llevan el 15 % de
+las ULI del seguimiento 2023-2026, concentradas en 24 artículos de CASER-Drill. Agregarlo exigiría un
+segundo régimen de campaña (otro umbral, otro statechart) para una fracción del flujo, y el estudio varía
+la regla del horno de cementación, no la del de revenido. Los artículos con revenido **sí** entran en la
+selección (son el 22 % del volumen y los peor servidos); para ellos el revenido se suma como una demora
+aleatoria con la distribución empírica (mediana 5 días, media 11,7, p90 31), no como un servidor con cola
+propia. Limitación declarada: si la regla de cementación cambiara el ritmo de llegada de ULI al revenido,
+esa demora no se adaptaría.
 
 Las entidades son el **pedido** y la **ULI**, nunca la pieza: no aporta al análisis y la edición PLE
 limita a 50.000 agentes creados por corrida.
@@ -171,11 +178,11 @@ exporta a planilla sin restricción. Lo que falta es ejecutar la exportación.
 | Tiempo entre pedidos y tamaño de pedido, por artículo | ✅ Resuelto (2026-09-25): facturas de venta transaccionales, 12 meses, validadas contra la estadística mensual | Ajuste por artículo o familia (tiempo entre pedidos: exponencial / gamma; tamaño: empírica discreta) |
 | Demanda no atendida histórica | ✅ Resuelto (2026-09-24): reportes "Artículos Presupuestados/facturados" del ABM, por cliente y por artículo, 12 meses | Fill rate histórico global 49-51%, con 20% de artículos en entrega cero. Válido para validar nivel de servicio (§4.1), no distingue motivo de la pérdida |
 | Política de reposición | — | **No aplica**: confirmado que es todo contra pedido (sin (s, Q) reglado), salvo excepciones puntuales a identificar entre los artículos elegidos |
-| Tiempo aguas arriba (estampado + laminado) | ABM / ISO: OF con fecha de inicio y fin, cantidad, familia | Regresión tiempo = preparación + cantidad / tasa por familia; el residuo como distribución |
+| Tiempo aguas arriba (estampado + laminado + lavado) | Resuelto (07/10/2026): `Seguimiento TR ulis`, 12.527 ULI con fecha de inicio de cada etapa (2023-2026) | Medido por tramo, en días (mediana / media / p90): Prensa→Laminado 3 / 8,2 / 20; Laminado→Lavado 2 / 5,0 / 8. Ajuste por familia o empírica. Las cantidades por lote salen de las OF |
 | Tiempo entre arribos de ULI al horno (Etapa 1) | ISO: registro de cargas + OF | Ajuste sobre las fechas en que cada ULI quedó lista |
 | Tiempo de ciclo por ULI | ISO: registro de cargas | Determinístico (≈ 85 min = 24 h / 17), salvo que el registro muestre diferencias por familia |
-| Kg por ULI, por artículo | `Seguimiento TR ulis` ("Cant. x U.L.I." × "P. Pieza") | ✅ Resuelto (2026-09-28): ambas columnas están en **millares** ("Cant. x U.L.I." = cantidad de millares, "P. Pieza" = kg por millar), no en piezas sueltas — corregido tras confirmación de la empresa. kg/ULI = Cant. x U.L.I. × P. Pieza directo, sin dividir por mil. Sobre 310 artículos: media 143 kg/ULI, mediana 136, rango 5,9-362,5. Con el umbral de 75 ULI, una campaña mueve ≈10 t — reconciliado contra los "60-90 t/mes" de capacidad instalada del brief inicial: da ≈17-25% de utilización, consistente con "planta subutilizada" |
-| Plazo del zincado tercerizado | Remitos de ida y vuelta | Ajuste (lognormal / gamma) o empírica |
+| Kg por ULI, por artículo | `Seguimiento TR ulis` ("Cant. x U.L.I." × "P. Pieza") | ✅ Resuelto (2026-09-28): ambas columnas están en **millares** ("Cant. x U.L.I." = cantidad de millares, "P. Pieza" = kg por millar), no en piezas sueltas — corregido tras confirmación de la empresa. kg/ULI = Cant. x U.L.I. × P. Pieza directo, sin dividir por mil. Sobre 310 artículos: media 143 kg/ULI, mediana 136, rango 5,9-362,5. **Corregido (07/10/2026)**: la cuenta anterior asumía 75 ULI por campaña (≈10 t), pero las campañas reales tratan una mediana de 114 ULI. Medido mes a mes: **31 t/mes en 2024-2025 y 20 t/mes en 2026** (máximo 65,5 t en mayo/2025), contra los "60-90 t/mes" de capacidad instalada del brief: 42 % y 26 % de utilización (sobre 75 t), consistente con "planta subutilizada" |
+| Plazo del zincado tercerizado | Resuelto (07/10/2026): `Seguimiento TR ulis` (Enviado→Recibido, 12.325 ULI) | Mediana 2 días, media 3,0, p90 6. Demora previa al envío (Cementado→Enviado, sin revenido): mediana 5, media 12,3, p90 28. Ajuste (lognormal / gamma) o empírica |
 | P_cal y P_mant (potencia media calentando y a temperatura) | Resuelto en parte (05/10/2026). El medidor "Horno" fue **exclusivo del horno** hasta abril/2026 (confirmado por la empresa); con 28 meses de sus facturas contra días con cementado (`Seguimiento TR ulis`): kWh = 2.013 + 1.384 × campañas + 2.445 × días activos, R² = 0,89. **P_mant ≈ 102 kW** (2.445 ± 179 kWh/día), ≈70 % de los 145 kW instalados. El término por encendido (1.384 ± 1.288 kWh) es impreciso, pero queda ~3 errores estándar por debajo del techo teórico de 145 kW × 36 h = 5.220 kWh: **caso base = la estimación empírica, sensibilidad de 0 a 5.220 kWh**. No hay un antes/después limpio por reactivación — el horno operó intermitente todo el período | §2.3 |
 | Costo estándar y precio por artículo | Lista de precios de la empresa (Lista CASER) | Directo, en números índice. `PrecioPorPieza` ya calculado y comparable entre artículos |
 | Campañas por mes, ULI y kg por campaña, duración, espera | ISO: registro de cargas desde 01/2026 | **No son entradas**: se reservan para la validación (§4) |
@@ -332,7 +339,7 @@ lapso y nivel de demanda que la historia:
 | Campañas por mes | registro de cargas | error relativo de la media ≤ 10 % |
 | ULI (y kg) por campaña | registro de cargas | ≤ 10 % |
 | Duración de campaña | registro de cargas | ≤ 10 % |
-| Espera de una ULI antes del horno | fecha ULI lista (OF) → fecha de carga | ≤ 15 % en la media; percentil 90 dentro del intervalo del modelo |
+| Espera de una ULI antes del horno | fecha de lavado → fecha de cementado (`Seguimiento TR ulis`): **mediana 4 días, media 10,2, p90 26** (11.353 ULI) | ≤ 15 % en la media; percentil 90 dentro del intervalo del modelo |
 | Tiempo de entrega de pedidos (Etapa 2) | NV → remito | ≤ 20 % |
 | Nivel de servicio (Etapa 2) | reportes presupuestado/facturado — 49-51 % histórico | ≤ 15 % (con el motivo de la brecha aún sin separar; ver §2.1) |
 | kWh mensuales | facturas 2026 | ≤ 15 % |
@@ -491,11 +498,24 @@ para mandar a fábrica está en `03-pedido-de-datos.md` §Pedido para el Tema 1)
    y procesadas (28/09-05/10/2026)**: 64 facturas, ene/2024-ago/2026, con potencia convenida y registrada. El
    medidor "Horno" era exclusivo del horno hasta abril/2026; ver la fila de P_cal y P_mant en §2.1 y
    `03-pedido-de-datos.md`. Pendiente solo el GLP del generador endotérmico.
-8. De los 10-30 artículos elegidos, ¿cuáles requieren revenido? Para esos, la mediana histórica de
-   `Termico 2026`/hoja Revenido (o de la columna "Revenido" de `Seguimiento TR ulis`) da la demora fija
-   a sumar.
+8. ~~De los 10-30 artículos elegidos, ¿cuáles requieren revenido?~~ **Resuelto (07/10/2026)** con la
+   columna "Revenido" de `Seguimiento TR ulis`: 4 de los 15 propuestos (los de CASER-Drill). La demora a
+   sumar es la distribución empírica Cementado→Revenido→Envío, no una constante (ver
+   `06-articulos-seleccionados.md`).
 9. De los artículos elegidos, ¿alguno es una de las excepciones que sí se mantienen con stock? (la regla
    general confirmada es "todo contra pedido" — ver §1.5).
+10. **Regla de fin de campaña — bloquea el `Hold` de §1.2 (07/10/2026).** El diseño del `Hold` con cupo por
+    campaña (las ULI que llegan con el horno prendido esperan la próxima) sale de la entrevista del 27/09,
+    pero el registro no lo respalda. Sobre 39 campañas de 2024 a 2026 (`datos-locales/_perfil/campanas_cola.md`):
+    la cola al encender tiene mediana de 77 ULI (confirma el umbral de 70-80), pero las 22 campañas de 7 días
+    o más tratan una mediana de 186 ULI (máximo 757 en 77 días) y apagan con la cola casi vacía (mediana 15).
+    Eso solo es posible si las ULI que llegan se cargan mientras haya cola. Las otras 17 campañas son chicas
+    (mediana 5 ULI, cola al encender 39): los encendidos por prioridad, el 44 % del total. **Hipótesis a
+    confirmar**: el horno es "work-conserving" (procesa mientras haya cola, apaga al vaciarse) y lo que se
+    guarda para la próxima son las ULI que llegan una vez iniciado el apagado. Si se confirma, el `Hold` con
+    cupo se reemplaza por una condición sobre el tamaño de la cola en `Procesando`, y `horasEnVacio ≈ 0`.
+    **Pregunta para el encargado**: *"Cuando el horno ya está procesando y llegan ULI nuevas, ¿las cargan
+    igual a medida que llegan mientras haya cola, o las dejan esperando para la próxima encendida?"*
 
 **Supuestos que quedaron escritos en la respuesta** (si alguno está mal, corregir ahí):
 **3 turnos de 8 h (24 h), ~17 ULI/día** (corregido 2026-09-27, antes decía "un turno por día"); horno de una
@@ -503,7 +523,7 @@ ULI a la vez (≈ 85 min); **las ULI que llegan durante la campaña NO se proces
 próxima, salvo prioridad por entrega comprometida** (corregido 2026-09-27, antes era al revés); sin
 recalentamiento parcial desde tibio en la base; campaña actual sin límite de espera fijo, con adelanto de
 encendido y extensión de `horasEnVacio` por prioridad (confirmado); revenido fuera del modelo (otro equipo,
-no aplica a todo el catálogo, se estima como demora fija donde corresponda); sin política de stock (s, Q) —
+no aplica a todo el catálogo, demora aleatoria empírica donde corresponda); sin política de stock (s, Q) —
 todo contra pedido, confirmado por la empresa, salvo excepciones puntuales a identificar entre los
 artículos elegidos.
 

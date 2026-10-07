@@ -144,7 +144,7 @@ con las fechas de inicio y fin de las órdenes de fabricación.
 - Zincado tercerizado modelado como un retardo aleatorio; no se modela al tercero por dentro.
 - El "horno" simulado es cementación + temple (un solo ciclo, un solo equipo). El revenido —proceso aparte,
   en otro equipo, que no se aplica a todo el catálogo— queda fuera de la cola/lote simulada; donde aplica se
-  estima como una demora fija adicional a partir de la mediana histórica.
+  modela como una demora aleatoria adicional con la distribución empírica observada.
 - El costo de la potencia eléctrica contratada es un costo fijo hundido para la decisión de corto plazo: la
   comparación entre escenarios se hace sobre el **consumo incremental** de encender y operar el horno.
 - El histórico de ventas refleja **demanda atendida**, no demanda real de mercado. La venta perdida por
