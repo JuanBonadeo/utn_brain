@@ -2792,6 +2792,16 @@ Conclusiones:
 
 ## Log
 
+- **2026-10-07**: TPI, grupo 2 (Casermeiro). Puesta al día antes de arrancar en AnyLogic. Corregido el
+  tiempo de ciclo por ULI: 32 min salía de "15 por turno" y daba ~45 ULI/día con 3 turnos; con ~17 ULI/día
+  es 1440/17 ≈ 85 min (el registro `Termico 2026` da mediana 18 y media 16 ULI/día en los días intermedios
+  de campaña). Aplicados también en `05-` la regla de fin de campaña (`horasEnVacio = 0` + prioridad, en
+  lugar de "fin del turno"), un cupo por campaña en el `Hold` (las ULI que llegan con el horno prendido
+  esperan la próxima), la baja del E4 y de s/Q en la tabla de artículos; en `01-`, el supuesto de turnos.
+  Regenerado el PDF de la especificación. **Contradicción abierta**: las campañas largas del registro
+  tratan 118-312 ULI (ene: 312 en 24 días; mar 118, abr 152, jun 194, jul-ago 143), no 70-80, lo que choca
+  con "las ULI que llegan durante la campaña no se suman". Además hay 6 encendidos de 1-2 días con 1-12 ULI
+  (¿prioridad?). Hay que aclararlo con el encargado antes de programar el `Hold`.
 - **2026-10-05** (7): TPI subte, primera producción completa.
   - Corridas: 30 pares E0-E1 con el escenario intermedio, 60 filas válidas, ~7 s por corrida.
   - Arreglos que hicieron falta antes: la cabina y los cierres pasaron a paredes abiertas, porque un peatón

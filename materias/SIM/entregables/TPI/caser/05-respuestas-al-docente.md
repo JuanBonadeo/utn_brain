@@ -13,7 +13,7 @@
 ### 1.1 Qué es el horno físicamente, y por qué no es `Batch` → `Delay`
 
 El horno no trata las 70-80 ULI juntas. Es un horno eléctrico de 27 resistencias que, una vez a
-temperatura, procesa las ULI **de a una**, a razón de unas 15 por turno de 8 h (≈ 32 min por ULI). Lo
+temperatura, procesa las ULI **de a una**, a razón de unas 17 por día en 3 turnos de 8 h (≈ 85 min por ULI). Lo
 que lo convierte en un sistema "por lotes" no es la capacidad sino el **costo de arranque**: 36 h de
 calentamiento antes de la primera ULI y 48 h de enfriamiento después de la última, durante las cuales
 no está disponible. En vocabulario de colas es un servidor con **tiempo de preparación y política de
@@ -31,11 +31,14 @@ Flujo de las ULI (Process Modeling Library):
 
 ```
 ULI lista ─► colaHorno    Queue, FIFO, capacidad ilimitada. TimeMeasureStart "espera horno".
-          ─► compuerta    Hold. Abierta solo mientras el horno está en Procesando (unblock/block
-                          en las acciones de entrada y salida del estado).
+          ─► compuerta    Hold. Deja pasar solo el cupo de la campaña: al entrar a Procesando se
+                          fija cupo = colaHorno.size() y se hace unblock(); en el On exit del Hold,
+                          cupo--, y al llegar a 0 se hace block(). Las ULI que llegan después
+                          quedan en cola para la próxima campaña (regla confirmada 27/09), salvo
+                          las prioritarias, que suman 1 al cupo al entrar a colaHorno.
           ─► tomarHorno   Seize. Recursos: horno (ResourcePool, capacidad 1) y operadorHorno
                           (ResourcePool, capacidad 1, con Schedule de turno).
-          ─► ciclo        Delay, 32 min por ULI (8 h / 15), capacidad 1.
+          ─► ciclo        Delay, minPorULI = 1440 / 17 ≈ 85 min, capacidad 1.
           ─► soltarHorno  Release. TimeMeasureEnd "espera horno" (espera en cola + ciclo).
           ─► lavado (Delay) ─► zincado (Delay, plazo aleatorio del tercero) ─► envasado (Delay)
           ─► ingresoStock Sink: stock[artículo] += piezas de la ULI; si hay pedidos pendientes
@@ -43,7 +46,7 @@ ULI lista ─► colaHorno    Queue, FIFO, capacidad ilimitada. TimeMeasureStart
 ```
 
 Si el registro de cargas muestra que el horno aloja varias ULI a la vez (horno continuo de empuje), el
-`Delay` pasa a capacidad k con tiempo k × 32 min: mismo caudal, distinta residencia. Se decide con el
+`Delay` pasa a capacidad k con tiempo k × 85 min: mismo caudal, distinta residencia. Se decide con el
 registro, no cambia nada más.
 
 Control del horno: un **statechart** en `Main`, con una variable acumuladora de kWh.
@@ -53,7 +56,7 @@ Control del horno: un **statechart** en `Main`, con una variable acumuladora de 
 | `Apagado` | inicio del modelo; fin del enfriamiento | hay ULI en cola → `Acumulando` (inmediato) | 0 |
 | `Acumulando` | primera ULI en cola | por **condición** `colaHorno.size() >= umbralULI`, o por **timeout** de espera máxima cuando la regla lo tiene → `Calentando` | 0 |
 | `Calentando` | regla cumplida | **timeout** `hCalentamiento` = 36 h → `Procesando` | P_cal |
-| `Procesando` (subestados `Cargando` / `CalienteEnVacio`) | fin del calentamiento | `Cargando` ↔ `CalienteEnVacio` según la cola tenga o no ULI; de `CalienteEnVacio`, **timeout** `horasEnVacio` → `Enfriando`, salvo prioridad (ver abajo) | P_mant |
+| `Procesando` (subestados `Cargando` / `CalienteEnVacio`) | fin del calentamiento | `Cargando` mientras queda cupo; cuando sale del `ciclo` la última ULI del cupo pasa a `CalienteEnVacio`, y de ahí **timeout** `horasEnVacio` → `Enfriando`. `horasEnVacio` = 0 por default; solo se extiende si hay una ULI prioritaria en camino (ver abajo) | P_mant |
 | `Enfriando` | fin de la campaña | **timeout** `hEnfriamiento` = 48 h → `Apagado` | 0 |
 
 **Confirmado con el encargado (2026-09-27) — corrige el supuesto original**: las ULI que llegan mientras el
@@ -81,9 +84,9 @@ modelo; es lo que se compara con el registro ISO de cargas (§4).
 |---|---|
 | 36 h de calentamiento | timeout de `Calentando → Procesando` (parámetro `hCalentamiento`) |
 | 48 h de enfriamiento | timeout de `Enfriando → Apagado` (parámetro `hEnfriamiento`) |
-| ~17 ULI/día (corrige "15 por turno") | **Confirmado (2026-09-27)**: son **3 turnos de 8 h** cubriendo las 24 h, no un turno por día. `Delay` de 32 min con capacidad 1, `operadorHorno` con `Schedule` de 3 turnos continuos durante `Procesando` |
+| ~17 ULI/día (corrige "15 por turno") | **Confirmado (2026-09-27)**: son **3 turnos de 8 h** cubriendo las 24 h, no un turno por día. `Delay` de 1440/17 ≈ 85 min con capacidad 1 (el registro `Termico 2026` da mediana 18 ULI/día y media 16 en los días intermedios de campaña), `operadorHorno` con `Schedule` de 3 turnos continuos durante `Procesando` |
 | Umbral de 70-80 ULI | parámetro `umbralULI = 75`; 70 y 80 como sensibilidad |
-| Campaña de ~1 semana | **no es un parámetro, es una salida**: 75 ULI / 15 por turno = 5 turnos de carga. Que el modelo devuelva ~1 semana es una verificación |
+| Campaña de ~1 semana | **no es un parámetro, es una salida**: 75 ULI / 17 por día ≈ 4,4 días de carga + 36 h + 48 h ≈ 7,9 días. Que el modelo devuelva ~1 semana es una verificación |
 | 84 h de preparación por 40 h de proceso | idem: emerge de los tres puntos anteriores |
 | 27 resistencias | potencia nominal instalada; acota P_cal y P_mant (§2.3) |
 
@@ -170,7 +173,7 @@ exporta a planilla sin restricción. Lo que falta es ejecutar la exportación.
 | Política de reposición | — | **No aplica**: confirmado que es todo contra pedido (sin (s, Q) reglado), salvo excepciones puntuales a identificar entre los artículos elegidos |
 | Tiempo aguas arriba (estampado + laminado) | ABM / ISO: OF con fecha de inicio y fin, cantidad, familia | Regresión tiempo = preparación + cantidad / tasa por familia; el residuo como distribución |
 | Tiempo entre arribos de ULI al horno (Etapa 1) | ISO: registro de cargas + OF | Ajuste sobre las fechas en que cada ULI quedó lista |
-| Tiempo de ciclo por ULI | ISO: registro de cargas | Determinístico (32 min), salvo que el registro muestre diferencias por familia |
+| Tiempo de ciclo por ULI | ISO: registro de cargas | Determinístico (≈ 85 min = 24 h / 17), salvo que el registro muestre diferencias por familia |
 | Kg por ULI, por artículo | `Seguimiento TR ulis` ("Cant. x U.L.I." × "P. Pieza") | ✅ Resuelto (2026-09-28): ambas columnas están en **millares** ("Cant. x U.L.I." = cantidad de millares, "P. Pieza" = kg por millar), no en piezas sueltas — corregido tras confirmación de la empresa. kg/ULI = Cant. x U.L.I. × P. Pieza directo, sin dividir por mil. Sobre 310 artículos: media 143 kg/ULI, mediana 136, rango 5,9-362,5. Con el umbral de 75 ULI, una campaña mueve ≈10 t — reconciliado contra los "60-90 t/mes" de capacidad instalada del brief inicial: da ≈17-25% de utilización, consistente con "planta subutilizada" |
 | Plazo del zincado tercerizado | Remitos de ida y vuelta | Ajuste (lognormal / gamma) o empírica |
 | P_cal y P_mant (potencia media calentando y a temperatura) | Resuelto en parte (05/10/2026). El medidor "Horno" fue **exclusivo del horno** hasta abril/2026 (confirmado por la empresa); con 28 meses de sus facturas contra días con cementado (`Seguimiento TR ulis`): kWh = 2.013 + 1.384 × campañas + 2.445 × días activos, R² = 0,89. **P_mant ≈ 102 kW** (2.445 ± 179 kWh/día), ≈70 % de los 145 kW instalados. El término por encendido (1.384 ± 1.288 kWh) es impreciso, pero queda ~3 errores estándar por debajo del techo teórico de 145 kW × 36 h = 5.220 kWh: **caso base = la estimación empírica, sensibilidad de 0 a 5.220 kWh**. No hay un antes/después limpio por reactivación — el horno operó intermitente todo el período | §2.3 |
@@ -242,7 +245,7 @@ ellos.
 | Estacionariedad de la demanda | Estacionaria en el horizonte | Factor de demanda 0,8 / 1,0 / 1,2 |
 | Tasa de costo del capital | Valor dado por la empresa | Tres niveles |
 | Plazo de zincado si hay pocos remitos (< 20) | Triangular con mínimo, moda y máximo del encargado (recomendación de Law cuando solo hay estimación de expertos) | ±20 % en la moda |
-| Tiempo de ciclo por ULI | 32 min determinístico | ±20 % |
+| Tiempo de ciclo por ULI | ≈ 85 min determinístico | ±20 % |
 
 Método: un factor por vez alrededor del caso base, 30 réplicas, intervalo de confianza apareado de la
 diferencia contra la base. Un factor es crítico si mueve la medida primaria más que la semi-amplitud
@@ -257,27 +260,27 @@ del intervalo; los críticos se reportan con su rango de validez (paso 6 de Law)
 Relevada con la empresa: el horno se enciende cuando se acumulan **unas 70-80 ULI**. No hay tiempo
 máximo de espera formal ni regla escrita; la decisión es del encargado **[confirmar en la entrevista
 si adelanta el encendido por pedidos comprometidos; si lo hace, se modela como prioridad de la ULI,
-no como cambio de regla]**. En el modelo: `umbralULI = 75`, `esperaMaxDias = ∞`, `horasEnVacio` =
-hasta el fin del turno.
+no como cambio de regla]** — **confirmado (2026-09-27)**: sí lo hace. En el modelo: `umbralULI = 75`,
+`esperaMaxDias = ∞`, `horasEnVacio = 0` (se apaga apenas termina el cupo), extendido solo por prioridad.
 
 ### 3.2 Escenarios
 
 | Escenario | `umbralULI` | `esperaMaxDias` | `horasEnVacio` | Qué cambia |
 |---|---|---|---|---|
-| E0 base | 75 | ∞ | fin del turno | Regla actual |
-| E1 umbral bajo | 45 | ∞ | fin del turno | Campañas más frecuentes y cortas: menos espera, más kWh/kg |
-| E2 umbral + espera máxima | 75 | 15 | fin del turno | Se enciende al cumplirse cualquiera de las dos: acota el peor caso de espera |
+| E0 base | 75 | ∞ | 0 (+ prioridad) | Regla actual |
+| E1 umbral bajo | 45 | ∞ | 0 (+ prioridad) | Campañas más frecuentes y cortas: menos espera, más kWh/kg |
+| E2 umbral + espera máxima | 75 | 15 | 0 (+ prioridad) | Se enciende al cumplirse cualquiera de las dos: acota el peor caso de espera |
 | E3 mantener caliente (opcional) | 75 | ∞ | 24-48 h si hay OF en curso | Evita 36 + 48 h entre campañas cercanas. Requiere P_mant confiable |
 
 Los valores de umbral y espera (dos o tres por parámetro) se eligen con las corridas piloto (paso 5)
-para cubrir el rango donde la respuesta cambia. Un turno adicional de carga durante la campaña sería un
-E4 si la empresa lo considera operable **[confirmar]**.
+para cubrir el rango donde la respuesta cambia. El E4 (turno adicional de carga) se cayó: el horno ya
+opera en 3 turnos (24 h).
 
 ### 3.3 Parametrización en AnyLogic
 
 Parámetros de `Main`: `umbralULI` (int), `esperaMaxDias` (double; ∞ = sin límite), `horasEnVacio`
 (double), `hCalentamiento`, `hEnfriamiento`, `factorDemanda` (double), `semilla` (int),
-`tasaCapitalMensual`, `tarifaKWh`. Por artículo, en la tabla de la base de datos: s, Q, piezas por
+`tasaCapitalMensual`, `tarifaKWh`, `minPorULI`. Por artículo, en la tabla de la base de datos: piezas por
 ULI, kg por ULI, costo índice, pasa por horno (sí/no). Todo se varía desde el experimento sin tocar el
 modelo.
 
@@ -358,7 +361,7 @@ En orden, documentando cada cambio en el documento de supuestos:
    que excluir de la historia y del ajuste) y unidades (kg por ULI varía por artículo).
 2. Regla: si el encargado adelanta campañas por pedidos comprometidos, la regla real no es umbral
    puro; se agrega la prioridad y se vuelve a correr.
-3. Turnos de carga y tasa de 15 por turno: verificar contra las fechas de carga del registro.
+3. Tasa de ~17 ULI/día en 3 turnos: verificar contra las fechas de carga del registro.
 4. Fin de campaña: si en la práctica no se procesan las ULI que llegan durante la campaña (o se
    mantiene el horno caliente más de lo supuesto), se corrige `horasEnVacio` o la condición de salida.
 
@@ -496,7 +499,7 @@ para mandar a fábrica está en `03-pedido-de-datos.md` §Pedido para el Tema 1)
 
 **Supuestos que quedaron escritos en la respuesta** (si alguno está mal, corregir ahí):
 **3 turnos de 8 h (24 h), ~17 ULI/día** (corregido 2026-09-27, antes decía "un turno por día"); horno de una
-ULI a la vez (32 min); **las ULI que llegan durante la campaña NO se procesan en ella — se guardan para la
+ULI a la vez (≈ 85 min); **las ULI que llegan durante la campaña NO se procesan en ella — se guardan para la
 próxima, salvo prioridad por entrega comprometida** (corregido 2026-09-27, antes era al revés); sin
 recalentamiento parcial desde tibio en la base; campaña actual sin límite de espera fijo, con adelanto de
 encendido y extensión de `horasEnVacio` por prioridad (confirmado); revenido fuera del modelo (otro equipo,

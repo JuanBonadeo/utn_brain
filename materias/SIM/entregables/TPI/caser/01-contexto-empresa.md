@@ -70,7 +70,8 @@ Fuente: brief armado por la familia (2026-09-13) + respuestas de Gonzalo en la m
 ## Supuestos que el modelo va a declarar (a validar con la empresa)
 
 - Demanda estacionaria dentro del horizonte simulado (o estacionalidad simple si los datos la muestran).
-- Un solo turno.
+- Un solo turno aguas arriba (estampado, laminado); el horno opera en 3 turnos de 8 h (24 h) durante la
+  campaña (corregido 2026-09-27).
 - Capacidad agregada por familia de producto, no máquina por máquina.
 - Precios y costos constantes en el horizonte (en índices).
 - Zincado tercerizado con plazo aleatorio; no se modela al tercero por dentro.

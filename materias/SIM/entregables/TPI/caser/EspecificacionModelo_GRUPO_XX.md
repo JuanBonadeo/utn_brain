@@ -139,7 +139,7 @@ dispara su propia orden de producción.
 |---|---|---|
 | Tiempo de calentamiento | 36 h | Relevamiento inicial de la empresa |
 | Tiempo de enfriamiento | 48 h | Relevamiento inicial de la empresa |
-| Tasa de procesamiento | ~17 ULI/día, 3 turnos de 8 h (≈32 min/ULI) | Relevamiento inicial de la empresa |
+| Tasa de procesamiento | ~17 ULI/día, 3 turnos de 8 h (≈85 min/ULI) | Relevamiento inicial de la empresa |
 | Potencia instalada del horno | 145 kW | Planilla interna de costo energético |
 | Costo de máquina | 0,665 USD/min a plena potencia (electricidad + aceite de temple + aire comprimido + gas del generador endotérmico + catalizador) | Planilla interna de costo energético |
 | Consumo del generador de gases endotérmicos (GLP) | 📌 pendiente — factura de GLP a recibir de la empresa | Empresa |
