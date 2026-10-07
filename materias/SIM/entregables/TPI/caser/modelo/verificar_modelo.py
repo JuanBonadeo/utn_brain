@@ -71,6 +71,10 @@ assert set(exps) == {"Visual", "VerificacionMM1", "CorridasE0E3"}
 cor = {pid[f.findtext("Id")]: f.findtext("Expression/Code") for f in exps["CorridasE0E3"].findall("FreeformParamValue")}
 assert exps["CorridasE0E3"].findtext("NumberOfRuns") == "120" and cor["semilla"] == "1 + index % 30"
 assert all(r.findtext("ReturnModificator") in ("VOID", "RETURNS_VALUE") for r in main.findall("Functions/Function"))
+# Los eventos se programan solo con restart(): tienen que ser "User control". Con "occuresOnce" el motor los
+# agenda al arrancar el agente y pisa el restart(0) de inicializar() (07/10/2026: sin llegadas en el IDE).
+modos = {e.findtext("Name"): e.find("Properties").get("Mode") for e in main.findall("Events/Event")}
+assert all(m == "userControls" for m in modos.values()), f"eventos que no son userControls: {modos}"
 print("OK 1/3: XML bien formado, Ids unicos, Source->Wait->Delay(1)->Sink, experimentos completos")
 
 # ------------------------------------------------------------------ extracción de Java

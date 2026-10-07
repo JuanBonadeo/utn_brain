@@ -539,47 +539,47 @@ synchronized (java.io.File.class) {
         throw new RuntimeException("No se pudo escribir " + archivoSalida, ex);
     }
 }</Body></Function></Functions><Events><Event><Id>1800000000152</Id><Name>eDia</Name><X>1950</X><Y>40</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
-<Properties TriggerType="timeout" Mode="occuresOnce"><Timeout Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></Timeout>
+<Properties TriggerType="timeout" Mode="userControls"><Timeout Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></Timeout>
 <Rate Class="CodeUnitValue"><Code>1</Code><Unit Class="RateUnits">PER_HOUR</Unit></Rate>
 <Id>1800000000153</Id><OccurrenceAtTime>true</OccurrenceAtTime><OccurrenceDate>1783584000000</OccurrenceDate>
 <OccurrenceTime Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></OccurrenceTime><RecurrenceCode Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></RecurrenceCode>
 <Condition>false</Condition></Properties><Action>nuevoDia(); eDia.restart(24);</Action></Event><Event><Id>1800000000154</Id><Name>eLlegada</Name><X>1950</X><Y>70</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
-<Properties TriggerType="timeout" Mode="occuresOnce"><Timeout Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></Timeout>
+<Properties TriggerType="timeout" Mode="userControls"><Timeout Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></Timeout>
 <Rate Class="CodeUnitValue"><Code>1</Code><Unit Class="RateUnits">PER_HOUR</Unit></Rate>
 <Id>1800000000155</Id><OccurrenceAtTime>true</OccurrenceAtTime><OccurrenceDate>1783584000000</OccurrenceDate>
 <OccurrenceTime Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></OccurrenceTime><RecurrenceCode Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></RecurrenceCode>
 <Condition>false</Condition></Properties><Action>llegada();</Action></Event><Event><Id>1800000000156</Id><Name>eDespacho</Name><X>1950</X><Y>100</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
-<Properties TriggerType="timeout" Mode="occuresOnce"><Timeout Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></Timeout>
+<Properties TriggerType="timeout" Mode="userControls"><Timeout Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></Timeout>
 <Rate Class="CodeUnitValue"><Code>1</Code><Unit Class="RateUnits">PER_HOUR</Unit></Rate>
 <Id>1800000000157</Id><OccurrenceAtTime>true</OccurrenceAtTime><OccurrenceDate>1783584000000</OccurrenceDate>
 <OccurrenceTime Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></OccurrenceTime><RecurrenceCode Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></RecurrenceCode>
 <Condition>false</Condition></Properties><Action>despachar();</Action></Event><Event><Id>1800000000158</Id><Name>eCalentamiento</Name><X>1950</X><Y>130</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
-<Properties TriggerType="timeout" Mode="occuresOnce"><Timeout Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></Timeout>
+<Properties TriggerType="timeout" Mode="userControls"><Timeout Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></Timeout>
 <Rate Class="CodeUnitValue"><Code>1</Code><Unit Class="RateUnits">PER_HOUR</Unit></Rate>
 <Id>1800000000159</Id><OccurrenceAtTime>true</OccurrenceAtTime><OccurrenceDate>1783584000000</OccurrenceDate>
 <OccurrenceTime Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></OccurrenceTime><RecurrenceCode Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></RecurrenceCode>
 <Condition>false</Condition></Properties><Action>finCalentamiento();</Action></Event><Event><Id>1800000000160</Id><Name>eVacio</Name><X>1950</X><Y>160</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
-<Properties TriggerType="timeout" Mode="occuresOnce"><Timeout Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></Timeout>
+<Properties TriggerType="timeout" Mode="userControls"><Timeout Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></Timeout>
 <Rate Class="CodeUnitValue"><Code>1</Code><Unit Class="RateUnits">PER_HOUR</Unit></Rate>
 <Id>1800000000161</Id><OccurrenceAtTime>true</OccurrenceAtTime><OccurrenceDate>1783584000000</OccurrenceDate>
 <OccurrenceTime Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></OccurrenceTime><RecurrenceCode Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></RecurrenceCode>
 <Condition>false</Condition></Properties><Action>finVacio();</Action></Event><Event><Id>1800000000162</Id><Name>eEnfriamiento</Name><X>1950</X><Y>190</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
-<Properties TriggerType="timeout" Mode="occuresOnce"><Timeout Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></Timeout>
+<Properties TriggerType="timeout" Mode="userControls"><Timeout Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></Timeout>
 <Rate Class="CodeUnitValue"><Code>1</Code><Unit Class="RateUnits">PER_HOUR</Unit></Rate>
 <Id>1800000000163</Id><OccurrenceAtTime>true</OccurrenceAtTime><OccurrenceDate>1783584000000</OccurrenceDate>
 <OccurrenceTime Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></OccurrenceTime><RecurrenceCode Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></RecurrenceCode>
 <Condition>false</Condition></Properties><Action>finEnfriamiento();</Action></Event><Event><Id>1800000000164</Id><Name>eEsperaMax</Name><X>1950</X><Y>220</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
-<Properties TriggerType="timeout" Mode="occuresOnce"><Timeout Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></Timeout>
+<Properties TriggerType="timeout" Mode="userControls"><Timeout Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></Timeout>
 <Rate Class="CodeUnitValue"><Code>1</Code><Unit Class="RateUnits">PER_HOUR</Unit></Rate>
 <Id>1800000000165</Id><OccurrenceAtTime>true</OccurrenceAtTime><OccurrenceDate>1783584000000</OccurrenceDate>
 <OccurrenceTime Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></OccurrenceTime><RecurrenceCode Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></RecurrenceCode>
 <Condition>false</Condition></Properties><Action>esperaMaxCumplida();</Action></Event><Event><Id>1800000000166</Id><Name>eInicioMedicion</Name><X>1950</X><Y>250</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
-<Properties TriggerType="timeout" Mode="occuresOnce"><Timeout Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></Timeout>
+<Properties TriggerType="timeout" Mode="userControls"><Timeout Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></Timeout>
 <Rate Class="CodeUnitValue"><Code>1</Code><Unit Class="RateUnits">PER_HOUR</Unit></Rate>
 <Id>1800000000167</Id><OccurrenceAtTime>true</OccurrenceAtTime><OccurrenceDate>1783584000000</OccurrenceDate>
 <OccurrenceTime Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></OccurrenceTime><RecurrenceCode Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></RecurrenceCode>
 <Condition>false</Condition></Properties><Action>inicioMedicion();</Action></Event><Event><Id>1800000000168</Id><Name>eFin</Name><X>1950</X><Y>280</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
-<Properties TriggerType="timeout" Mode="occuresOnce"><Timeout Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></Timeout>
+<Properties TriggerType="timeout" Mode="userControls"><Timeout Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></Timeout>
 <Rate Class="CodeUnitValue"><Code>1</Code><Unit Class="RateUnits">PER_HOUR</Unit></Rate>
 <Id>1800000000169</Id><OccurrenceAtTime>true</OccurrenceAtTime><OccurrenceDate>1783584000000</OccurrenceDate>
 <OccurrenceTime Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></OccurrenceTime><RecurrenceCode Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></RecurrenceCode>

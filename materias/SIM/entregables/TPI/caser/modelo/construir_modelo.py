@@ -410,7 +410,8 @@ synchronized (java.io.File.class) {
 }'''),
 ]
 
-# Eventos: (nombre, acción). Todos "de control manual": se programan con restart() desde las funciones.
+# Eventos: (nombre, acción). Todos en modo "User control" (userControls): solo se disparan cuando las funciones
+# los programan con restart(). Con "occuresOnce" AnyLogic los agenda al arrancar y pisa el restart() del inicio.
 EVENTS = [
     ("eDia", "nuevoDia(); eDia.restart(24);"),
     ("eLlegada", "llegada();"),
@@ -463,7 +464,7 @@ def xml_func(name, ret, args, body, X, Y):
 def xml_event(name, action, X, Y):
     t = '<Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit>'
     return f"""<Event><Id>{nid()}</Id><Name>{x(name)}</Name><X>{X}</X><Y>{Y}</Y>{LABEL}{FLAGS_OFF}
-<Properties TriggerType="timeout" Mode="occuresOnce"><Timeout Class="CodeUnitValue">{t}</Timeout>
+<Properties TriggerType="timeout" Mode="userControls"><Timeout Class="CodeUnitValue">{t}</Timeout>
 <Rate Class="CodeUnitValue"><Code>1</Code><Unit Class="RateUnits">PER_HOUR</Unit></Rate>
 <Id>{nid()}</Id><OccurrenceAtTime>true</OccurrenceAtTime><OccurrenceDate>1783584000000</OccurrenceDate>
 <OccurrenceTime Class="CodeUnitValue">{t}</OccurrenceTime><RecurrenceCode Class="CodeUnitValue">{t}</RecurrenceCode>
