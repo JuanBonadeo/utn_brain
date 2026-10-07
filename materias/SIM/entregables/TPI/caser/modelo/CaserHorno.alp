@@ -1,0 +1,643 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.9.9.202607020844" AlpVersion="8.9.9">
+<Model><Id>1800000000182</Id><Name>CaserHorno</Name><EngineVersion>6</EngineVersion><JavaPackageName>caserhorno</JavaPackageName><ModelTimeUnit>Hour</ModelTimeUnit>
+<Folders></Folders>
+<ActiveObjectClasses>
+<ActiveObjectClass><Id>1800000000001</Id><Name>Main</Name><Generic>false</Generic>
+<GenericParameter><Id>1783514567442</Id><Name>1783514567442</Name><GenericParameterValue Class="CodeValue"><Code>T extends Agent</Code></GenericParameterValue><GenericParameterLabel>Generic parameter:</GenericParameterLabel></GenericParameter>
+<FlowChartsUsage>ENTITY</FlowChartsUsage><SamplesToKeep>100</SamplesToKeep><LimitNumberOfArrayElements>false</LimitNumberOfArrayElements><ElementsLimitValue>100</ElementsLimitValue><MakeDefaultViewArea>true</MakeDefaultViewArea><SceneGridColor /><SceneBackgroundColor>-4144960</SceneBackgroundColor><EnvironmentResourceRef /><EnvironmentType>NONE</EnvironmentType><EnvironmentRotationX>0</EnvironmentRotationX><EnvironmentRotationY>0</EnvironmentRotationY><EnvironmentRotationZ>0</EnvironmentRotationZ><EnvironmentIntensity>1</EnvironmentIntensity>
+<AgentProperties><EnvironmentDefinesInitialLocation>true</EnvironmentDefinesInitialLocation><RotateAnimationTowardsMovement>true</RotateAnimationTowardsMovement><RotateAnimationVertically>false</RotateAnimationVertically><VelocityCode Class="CodeUnitValue"><Code>10</Code><Unit Class="SpeedUnits">MPS</Unit></VelocityCode><PhysicalLength Class="CodeUnitValue"><Code>1</Code><Unit Class="LengthUnits">METER</Unit></PhysicalLength><PhysicalWidth Class="CodeUnitValue"><Code>1</Code><Unit Class="LengthUnits">METER</Unit></PhysicalWidth><PhysicalHeight Class="CodeUnitValue"><Code>1</Code><Unit Class="LengthUnits">METER</Unit></PhysicalHeight></AgentProperties>
+<EnvironmentProperties><EnableSteps>false</EnableSteps><StepDurationCode Class="CodeUnitValue"><Code>1.0</Code><Unit Class="TimeUnits">HOUR</Unit></StepDurationCode><SpaceType>CONTINUOUS</SpaceType><WidthCode>500</WidthCode><HeightCode>500</HeightCode><ZHeightCode>0</ZHeightCode><ColumnsCountCode>100</ColumnsCountCode><RowsCountCode>100</RowsCountCode><NeigborhoodType>MOORE</NeigborhoodType><LayoutType>USER_DEF</LayoutType><NetworkType>USER_DEF</NetworkType><ConnectionsPerAgentCode>2</ConnectionsPerAgentCode><ConnectionsRangeCode>50</ConnectionsRangeCode><NeighborLinkFractionCode>0.95</NeighborLinkFractionCode><MCode>10</MCode></EnvironmentProperties>
+<DatasetsCreationProperties><AutoCreate>false</AutoCreate><Id>1800000000016</Id><OccurrenceAtTime>true</OccurrenceAtTime><OccurrenceDate>1783584000000</OccurrenceDate><OccurrenceTime Class="CodeUnitValue"><Code>0</Code><Unit Class="TimeUnits">HOUR</Unit></OccurrenceTime><RecurrenceCode Class="CodeUnitValue"><Code>24</Code><Unit Class="TimeUnits">HOUR</Unit></RecurrenceCode></DatasetsCreationProperties>
+<ScaleRuler><Id>1800000000017</Id><Name>scale</Name><X>0</X><Y>-150</Y><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>false</ShowLabel><DrawMode>SHAPE_DRAW_2D3D</DrawMode><Length>100</Length><Rotation>0</Rotation><ScaleType>BASED_ON_LENGTH</ScaleType><ModelLength>10</ModelLength><LengthUnits>METER</LengthUnits><Scale>10</Scale><InheritedFromParentAgentType>true</InheritedFromParentAgentType></ScaleRuler>
+<CurrentLevel>1800000000018</CurrentLevel><ConnectionsId>1800000000019</ConnectionsId>
+<Variables><Variable Class="Parameter"><Id>1800000000020</Id><Name>escenario</Name><X>1100</X><Y>40</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" ModificatorType="STATIC"><Type>String</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<DefaultValue Class="CodeValue"><Code>"E0"</Code></DefaultValue>
+<ParameterEditor><Id>1800000000021</Id><EditorContolType>TEXT_BOX</EditorContolType><MinSliderValue>0</MinSliderValue><MaxSliderValue>100</MaxSliderValue><DelimeterType>NO_DELIMETER</DelimeterType></ParameterEditor>
+</Properties><Description>Etiqueta del escenario en la fila de resultados (E0..E3, MM1, ...).</Description></Variable><Variable Class="Parameter"><Id>1800000000022</Id><Name>umbralULI</Name><X>1100</X><Y>62</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" ModificatorType="STATIC"><Type>int</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<DefaultValue Class="CodeValue"><Code>75</Code></DefaultValue>
+<ParameterEditor><Id>1800000000023</Id><EditorContolType>TEXT_BOX</EditorContolType><MinSliderValue>0</MinSliderValue><MaxSliderValue>100</MaxSliderValue><DelimeterType>NO_DELIMETER</DelimeterType></ParameterEditor>
+</Properties><Description>ULI en cola que disparan el encendido. Base 75 (relevado 70-80; cola al encender medida: mediana 77).</Description></Variable><Variable Class="Parameter"><Id>1800000000024</Id><Name>esperaMaxDias</Name><X>1100</X><Y>84</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" ModificatorType="STATIC"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<DefaultValue Class="CodeValue"><Code>Double.POSITIVE_INFINITY</Code></DefaultValue>
+<ParameterEditor><Id>1800000000025</Id><EditorContolType>TEXT_BOX</EditorContolType><MinSliderValue>0</MinSliderValue><MaxSliderValue>100</MaxSliderValue><DelimeterType>NO_DELIMETER</DelimeterType></ParameterEditor>
+</Properties><Description>Espera máxima de la ULI más vieja antes de forzar el encendido (E2). Infinito = sin límite.</Description></Variable><Variable Class="Parameter"><Id>1800000000026</Id><Name>horasEnVacio</Name><X>1100</X><Y>106</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" ModificatorType="STATIC"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<DefaultValue Class="CodeValue"><Code>48</Code></DefaultValue>
+<ParameterEditor><Id>1800000000027</Id><EditorContolType>TEXT_BOX</EditorContolType><MinSliderValue>0</MinSliderValue><MaxSliderValue>100</MaxSliderValue><DelimeterType>NO_DELIMETER</DelimeterType></ParameterEditor>
+</Properties><Description>Horas que el horno sigue caliente con la cola vacía antes de enfriar. Base 48 h: el registro muestra huecos de 1-2 días dentro de campañas que solo se explican con el horno caliente.</Description></Variable><Variable Class="Parameter"><Id>1800000000028</Id><Name>hCalentamiento</Name><X>1100</X><Y>128</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" ModificatorType="STATIC"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<DefaultValue Class="CodeValue"><Code>36</Code></DefaultValue>
+<ParameterEditor><Id>1800000000029</Id><EditorContolType>TEXT_BOX</EditorContolType><MinSliderValue>0</MinSliderValue><MaxSliderValue>100</MaxSliderValue><DelimeterType>NO_DELIMETER</DelimeterType></ParameterEditor>
+</Properties><Description>Horas de calentamiento (relevado).</Description></Variable><Variable Class="Parameter"><Id>1800000000030</Id><Name>hEnfriamiento</Name><X>1100</X><Y>150</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" ModificatorType="STATIC"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<DefaultValue Class="CodeValue"><Code>48</Code></DefaultValue>
+<ParameterEditor><Id>1800000000031</Id><EditorContolType>TEXT_BOX</EditorContolType><MinSliderValue>0</MinSliderValue><MaxSliderValue>100</MaxSliderValue><DelimeterType>NO_DELIMETER</DelimeterType></ParameterEditor>
+</Properties><Description>Horas de enfriamiento (relevado).</Description></Variable><Variable Class="Parameter"><Id>1800000000032</Id><Name>minPorULI</Name><X>1100</X><Y>172</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" ModificatorType="STATIC"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<DefaultValue Class="CodeValue"><Code>1440.0 / 17</Code></DefaultValue>
+<ParameterEditor><Id>1800000000033</Id><EditorContolType>TEXT_BOX</EditorContolType><MinSliderValue>0</MinSliderValue><MaxSliderValue>100</MaxSliderValue><DelimeterType>NO_DELIMETER</DelimeterType></ParameterEditor>
+</Properties><Description>Minutos de ciclo por ULI. Base 85 min (17 ULI/día, encargado). Medido en fines de semana: ~99 min (sensibilidad).</Description></Variable><Variable Class="Parameter"><Id>1800000000034</Id><Name>modoFinCampana</Name><X>1100</X><Y>194</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" ModificatorType="STATIC"><Type>String</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<DefaultValue Class="CodeValue"><Code>"workConserving"</Code></DefaultValue>
+<ParameterEditor><Id>1800000000035</Id><EditorContolType>TEXT_BOX</EditorContolType><MinSliderValue>0</MinSliderValue><MaxSliderValue>100</MaxSliderValue><DelimeterType>NO_DELIMETER</DelimeterType></ParameterEditor>
+</Properties><Description>workConserving: procesa mientras haya cola (lo que respaldan los datos). cupo: solo las ULI en cola al terminar de calentar (regla del 27/09).</Description></Variable><Variable Class="Parameter"><Id>1800000000036</Id><Name>pPrioridad</Name><X>1100</X><Y>216</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" ModificatorType="STATIC"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<DefaultValue Class="CodeValue"><Code>0.0095</Code></DefaultValue>
+<ParameterEditor><Id>1800000000037</Id><EditorContolType>TEXT_BOX</EditorContolType><MinSliderValue>0</MinSliderValue><MaxSliderValue>100</MaxSliderValue><DelimeterType>NO_DELIMETER</DelimeterType></ParameterEditor>
+</Properties><Description>Probabilidad de que una ULI sea urgente (entrega comprometida). Estimada como encendidos chicos / ULI llegadas con el horno apagado (17/1794, 2024-2026).</Description></Variable><Variable Class="Parameter"><Id>1800000000038</Id><Name>soloUrgentesEnPrioridad</Name><X>1100</X><Y>238</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" ModificatorType="STATIC"><Type>boolean</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<DefaultValue Class="CodeValue"><Code>true</Code></DefaultValue>
+<ParameterEditor><Id>1800000000039</Id><EditorContolType>TEXT_BOX</EditorContolType><MinSliderValue>0</MinSliderValue><MaxSliderValue>100</MaxSliderValue><DelimeterType>NO_DELIMETER</DelimeterType></ParameterEditor>
+</Properties><Description>Un encendido por prioridad trata solo las ULI urgentes y apaga sin tiempo en vacío (campañas chicas del registro).</Description></Variable><Variable Class="Parameter"><Id>1800000000040</Id><Name>factorDemanda</Name><X>1100</X><Y>260</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" ModificatorType="STATIC"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<DefaultValue Class="CodeValue"><Code>1.0</Code></DefaultValue>
+<ParameterEditor><Id>1800000000041</Id><EditorContolType>TEXT_BOX</EditorContolType><MinSliderValue>0</MinSliderValue><MaxSliderValue>100</MaxSliderValue><DelimeterType>NO_DELIMETER</DelimeterType></ParameterEditor>
+</Properties><Description>Multiplica las llegadas (0,8 / 1,0 / 1,2 en la sensibilidad).</Description></Variable><Variable Class="Parameter"><Id>1800000000042</Id><Name>semilla</Name><X>1100</X><Y>282</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" ModificatorType="STATIC"><Type>long</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<DefaultValue Class="CodeValue"><Code>1</Code></DefaultValue>
+<ParameterEditor><Id>1800000000043</Id><EditorContolType>TEXT_BOX</EditorContolType><MinSliderValue>0</MinSliderValue><MaxSliderValue>100</MaxSliderValue><DelimeterType>NO_DELIMETER</DelimeterType></ParameterEditor>
+</Properties><Description>Semilla de la réplica: la réplica j usa la semilla j en todos los escenarios (números aleatorios comunes).</Description></Variable><Variable Class="Parameter"><Id>1800000000044</Id><Name>calentamientoModeloDias</Name><X>1100</X><Y>304</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" ModificatorType="STATIC"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<DefaultValue Class="CodeValue"><Code>90</Code></DefaultValue>
+<ParameterEditor><Id>1800000000045</Id><EditorContolType>TEXT_BOX</EditorContolType><MinSliderValue>0</MinSliderValue><MaxSliderValue>100</MaxSliderValue><DelimeterType>NO_DELIMETER</DelimeterType></ParameterEditor>
+</Properties><Description>Período de calentamiento del modelo, descartado de las estadísticas (a fijar con Welch).</Description></Variable><Variable Class="Parameter"><Id>1800000000046</Id><Name>horizonteDias</Name><X>1100</X><Y>326</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" ModificatorType="STATIC"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<DefaultValue Class="CodeValue"><Code>365</Code></DefaultValue>
+<ParameterEditor><Id>1800000000047</Id><EditorContolType>TEXT_BOX</EditorContolType><MinSliderValue>0</MinSliderValue><MaxSliderValue>100</MaxSliderValue><DelimeterType>NO_DELIMETER</DelimeterType></ParameterEditor>
+</Properties><Description>Días medidos después del calentamiento.</Description></Variable><Variable Class="Parameter"><Id>1800000000048</Id><Name>kWhPorDiaCaliente</Name><X>1100</X><Y>348</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" ModificatorType="STATIC"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<DefaultValue Class="CodeValue"><Code>2445</Code></DefaultValue>
+<ParameterEditor><Id>1800000000049</Id><EditorContolType>TEXT_BOX</EditorContolType><MinSliderValue>0</MinSliderValue><MaxSliderValue>100</MaxSliderValue><DelimeterType>NO_DELIMETER</DelimeterType></ParameterEditor>
+</Properties><Description>kWh por día con el horno a temperatura (regresión sobre 28 meses de facturas: 2.445 ± 179, ≈102 kW).</Description></Variable><Variable Class="Parameter"><Id>1800000000050</Id><Name>kWhPorEncendido</Name><X>1100</X><Y>370</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" ModificatorType="STATIC"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<DefaultValue Class="CodeValue"><Code>1384</Code></DefaultValue>
+<ParameterEditor><Id>1800000000051</Id><EditorContolType>TEXT_BOX</EditorContolType><MinSliderValue>0</MinSliderValue><MaxSliderValue>100</MaxSliderValue><DelimeterType>NO_DELIMETER</DelimeterType></ParameterEditor>
+</Properties><Description>kWh fijos por encendido (regresión: 1.384 ± 1.288; sensibilidad 0-5.220).</Description></Variable><Variable Class="Parameter"><Id>1800000000052</Id><Name>tarifaKWh</Name><X>1100</X><Y>392</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" ModificatorType="STATIC"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<DefaultValue Class="CodeValue"><Code>290</Code></DefaultValue>
+<ParameterEditor><Id>1800000000053</Id><EditorContolType>TEXT_BOX</EditorContolType><MinSliderValue>0</MinSliderValue><MaxSliderValue>100</MaxSliderValue><DelimeterType>NO_DELIMETER</DelimeterType></ParameterEditor>
+</Properties><Description>$/kWh todo incluido (factura del horno, mar/2025). El kWh se informa también aparte.</Description></Variable><Variable Class="Parameter"><Id>1800000000054</Id><Name>modoLlegadas</Name><X>1100</X><Y>414</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" ModificatorType="STATIC"><Type>String</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<DefaultValue Class="CodeValue"><Code>"semanas"</Code></DefaultValue>
+<ParameterEditor><Id>1800000000055</Id><EditorContolType>TEXT_BOX</EditorContolType><MinSliderValue>0</MinSliderValue><MaxSliderValue>100</MaxSliderValue><DelimeterType>NO_DELIMETER</DelimeterType></ParameterEditor>
+</Properties><Description>semanas: bootstrap de semanas reales (lun-vie) de ULI lavadas, últimos 12 meses. poisson: solo para la verificación M/M/1.</Description></Variable><Variable Class="Parameter"><Id>1800000000056</Id><Name>tasaPoissonPorHora</Name><X>1100</X><Y>436</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" ModificatorType="STATIC"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<DefaultValue Class="CodeValue"><Code>0</Code></DefaultValue>
+<ParameterEditor><Id>1800000000057</Id><EditorContolType>TEXT_BOX</EditorContolType><MinSliderValue>0</MinSliderValue><MaxSliderValue>100</MaxSliderValue><DelimeterType>NO_DELIMETER</DelimeterType></ParameterEditor>
+</Properties><Description>Tasa de llegadas en modo poisson (ULI/h).</Description></Variable><Variable Class="Parameter"><Id>1800000000058</Id><Name>cicloExponencial</Name><X>1100</X><Y>458</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" ModificatorType="STATIC"><Type>boolean</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<DefaultValue Class="CodeValue"><Code>false</Code></DefaultValue>
+<ParameterEditor><Id>1800000000059</Id><EditorContolType>TEXT_BOX</EditorContolType><MinSliderValue>0</MinSliderValue><MaxSliderValue>100</MaxSliderValue><DelimeterType>NO_DELIMETER</DelimeterType></ParameterEditor>
+</Properties><Description>Ciclo exponencial de media minPorULI (solo verificación M/M/1). Falso = ciclo constante.</Description></Variable><Variable Class="Parameter"><Id>1800000000060</Id><Name>llegadasSemanas</Name><X>1100</X><Y>480</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" ModificatorType="STATIC"><Type>int[]</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<DefaultValue Class="CodeValue"><Code>new int[] {12,16,15,19,11,17,10,15,14,15,13,13,15,14,12,14,20,14,17,17,19,14,16,18,14,13,19,7,11,5,8,5,10,6,4,7,10,9,6,0,4,0,0,0,10,13,4,2,6,3,5,0,0,0,8,0,5,8,0,0,0,0,17,2,0,10,13,0,0,20,0,3,21,0,22,0,13,23,0,0,0,1,13,27,0,4,0,14,18,20,0,0,0,0,0,0,0,0,0,0,0,6,24,25,23,0,0,12,5,0,5,18,9,12,12,14,0,34,10,20,13,18,16,20,7,0,12,2,0,0,0,0,0,0,0,0,0,19,23,17,0,0,0,10,11,0,9,0,0,18,6,0,0,0,0,0,0,10,0,5,0,0,0,0,0,0,0,0,9,0,0,1,0,19,18,37,0,3,0,16,24,26,0,15,0,0,0,0,0,0,0,0,0,0,0,16,20,21,0,0,0,19,21,21,19,15,0,0,6,0,0,0,19,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,15,16,20,23,20,0,0,0,0,0,6,8,0,0,12,0,0,13,8,0,0,0,5,0,3}</Code></DefaultValue>
+<ParameterEditor><Id>1800000000061</Id><EditorContolType>TEXT_BOX</EditorContolType><MinSliderValue>0</MinSliderValue><MaxSliderValue>100</MaxSliderValue><DelimeterType>NO_DELIMETER</DelimeterType></ParameterEditor>
+</Properties><Description>ULI lavadas por día hábil (lun-vie), 52 semanas reales consecutivas 2025-08-15 a 2026-08-14.</Description></Variable><Variable Class="Parameter"><Id>1800000000062</Id><Name>kgCuantiles</Name><X>1100</X><Y>502</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" ModificatorType="STATIC"><Type>double[]</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<DefaultValue Class="CodeValue"><Code>new double[] {35.55,87.5,90,90.78,92,100,104.6,105,106.75,107.2,107.2,107.2,107.2,107.2,108.6,110,110,110,110,110,110,110,110.6,111,112.5,113,113.89,114.4,114.45,115,115.5,117.25,119,120,120,120,121,121.1,121.6,121.8,122.5,124,124.38,124.8,125.4,126.9,126.9,127.8,128.4,131,131.6,132,134.4,135.6,136.2,139.2,140,141.75,142.45,142.6,143.6,144.55,144.55,145.6,146.4,146.4,149.6,151.2,152,152,153.2,155.05,157.05,159.26,163.09,164.4,165,165,166.35,166.8,167.85,168.15,168.45,175.48,182.4,186,186,189,189,191,192,193.8,194.75,197.5,205.5,207,210,214.5,225.94,240,290}</Code></DefaultValue>
+<ParameterEditor><Id>1800000000063</Id><EditorContolType>TEXT_BOX</EditorContolType><MinSliderValue>0</MinSliderValue><MaxSliderValue>100</MaxSliderValue><DelimeterType>NO_DELIMETER</DelimeterType></ParameterEditor>
+</Properties><Description>Cuantiles 0..100 % de kg por ULI (mismas ULI). Se muestrea por inversa de la función de distribución empírica.</Description></Variable><Variable Class="Parameter"><Id>1800000000064</Id><Name>archivoSalida</Name><X>1100</X><Y>524</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" ModificatorType="STATIC"><Type>String</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<DefaultValue Class="CodeValue"><Code>""</Code></DefaultValue>
+<ParameterEditor><Id>1800000000065</Id><EditorContolType>TEXT_BOX</EditorContolType><MinSliderValue>0</MinSliderValue><MaxSliderValue>100</MaxSliderValue><DelimeterType>NO_DELIMETER</DelimeterType></ParameterEditor>
+</Properties><Description>Si no está vacío, agrega una fila por corrida a ese CSV (en la carpeta del .alp).</Description></Variable><Variable Class="PlainVariable"><Id>1800000000066</Id><Name>estado</Name><X>1400</X><Y>40</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>int</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable><Variable Class="PlainVariable"><Id>1800000000067</Id><Name>ocupado</Name><X>1400</X><Y>62</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>boolean</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>false</Code></InitialValue></Properties></Variable><Variable Class="PlainVariable"><Id>1800000000068</Id><Name>enVacio</Name><X>1400</X><Y>84</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>boolean</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>false</Code></InitialValue></Properties></Variable><Variable Class="PlainVariable"><Id>1800000000069</Id><Name>campanaPrioridad</Name><X>1400</X><Y>106</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>boolean</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>false</Code></InitialValue></Properties></Variable><Variable Class="PlainVariable"><Id>1800000000070</Id><Name>campanaMedida</Name><X>1400</X><Y>128</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>boolean</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>false</Code></InitialValue></Properties></Variable><Variable Class="PlainVariable"><Id>1800000000071</Id><Name>nEnCola</Name><X>1400</X><Y>150</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>int</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable><Variable Class="PlainVariable"><Id>1800000000072</Id><Name>kgEnCola</Name><X>1400</X><Y>172</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable><Variable Class="PlainVariable"><Id>1800000000073</Id><Name>semanaActual</Name><X>1400</X><Y>194</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>int</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable><Variable Class="PlainVariable"><Id>1800000000074</Id><Name>llegadasPendientes</Name><X>1400</X><Y>216</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>java.util.ArrayList&lt;Double&gt;</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>new java.util.ArrayList&lt;Double&gt;()</Code></InitialValue></Properties></Variable><Variable Class="PlainVariable"><Id>1800000000075</Id><Name>rngLlegadas</Name><X>1400</X><Y>238</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>java.util.Random</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>null</Code></InitialValue></Properties></Variable><Variable Class="PlainVariable"><Id>1800000000076</Id><Name>rngKg</Name><X>1400</X><Y>260</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>java.util.Random</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>null</Code></InitialValue></Properties></Variable><Variable Class="PlainVariable"><Id>1800000000077</Id><Name>rngUrgente</Name><X>1400</X><Y>282</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>java.util.Random</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>null</Code></InitialValue></Properties></Variable><Variable Class="PlainVariable"><Id>1800000000078</Id><Name>rngDemanda</Name><X>1400</X><Y>304</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>java.util.Random</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>null</Code></InitialValue></Properties></Variable><Variable Class="PlainVariable"><Id>1800000000079</Id><Name>rngCiclo</Name><X>1400</X><Y>326</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>java.util.Random</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>null</Code></InitialValue></Properties></Variable><Variable Class="PlainVariable"><Id>1800000000080</Id><Name>midiendo</Name><X>1400</X><Y>348</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>boolean</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>false</Code></InitialValue></Properties></Variable><Variable Class="PlainVariable"><Id>1800000000081</Id><Name>tInicioMedicion</Name><X>1400</X><Y>370</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable><Variable Class="PlainVariable"><Id>1800000000082</Id><Name>tUltimo</Name><X>1400</X><Y>392</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable><Variable Class="PlainVariable"><Id>1800000000083</Id><Name>tEncendido</Name><X>1400</X><Y>414</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable><Variable Class="PlainVariable"><Id>1800000000084</Id><Name>tPrimerCiclo</Name><X>1400</X><Y>436</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>-1</Code></InitialValue></Properties></Variable><Variable Class="PlainVariable"><Id>1800000000085</Id><Name>tUltimoCiclo</Name><X>1400</X><Y>458</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>-1</Code></InitialValue></Properties></Variable><Variable Class="PlainVariable"><Id>1800000000086</Id><Name>ulisCampana</Name><X>1400</X><Y>480</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>int</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable><Variable Class="PlainVariable"><Id>1800000000087</Id><Name>kgCampana</Name><X>1400</X><Y>502</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable><Variable Class="PlainVariable"><Id>1800000000088</Id><Name>nLlegadas</Name><X>1400</X><Y>524</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>int</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable><Variable Class="PlainVariable"><Id>1800000000089</Id><Name>nTratadas</Name><X>1400</X><Y>546</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>int</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable><Variable Class="PlainVariable"><Id>1800000000090</Id><Name>kgTratados</Name><X>1400</X><Y>568</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable><Variable Class="PlainVariable"><Id>1800000000091</Id><Name>nEncendidos</Name><X>1400</X><Y>590</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>int</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable><Variable Class="PlainVariable"><Id>1800000000092</Id><Name>nEncendidosPrioridad</Name><X>1400</X><Y>612</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>int</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable><Variable Class="PlainVariable"><Id>1800000000093</Id><Name>sumaColaAlEncender</Name><X>1400</X><Y>634</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable><Variable Class="PlainVariable"><Id>1800000000094</Id><Name>sumaColaAlApagar</Name><X>1400</X><Y>656</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable><Variable Class="PlainVariable"><Id>1800000000095</Id><Name>areaCola</Name><X>1400</X><Y>678</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable><Variable Class="PlainVariable"><Id>1800000000096</Id><Name>areaColaKg</Name><X>1400</X><Y>700</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable><Variable Class="PlainVariable"><Id>1800000000097</Id><Name>areaSistema</Name><X>1400</X><Y>722</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable><Variable Class="PlainVariable"><Id>1800000000098</Id><Name>horasOcupado</Name><X>1400</X><Y>744</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable><Variable Class="PlainVariable"><Id>1800000000099</Id><Name>horasCaliente</Name><X>1400</X><Y>766</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable><Variable Class="PlainVariable"><Id>1800000000100</Id><Name>sumaSistema</Name><X>1400</X><Y>788</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable><Variable Class="PlainVariable"><Id>1800000000101</Id><Name>esperas</Name><X>1400</X><Y>810</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>java.util.ArrayList&lt;Double&gt;</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>new java.util.ArrayList&lt;Double&gt;()</Code></InitialValue></Properties></Variable><Variable Class="PlainVariable"><Id>1800000000102</Id><Name>ulisPorCampana</Name><X>1400</X><Y>832</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>java.util.ArrayList&lt;Double&gt;</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>new java.util.ArrayList&lt;Double&gt;()</Code></InitialValue></Properties></Variable><Variable Class="PlainVariable"><Id>1800000000103</Id><Name>kgPorCampana</Name><X>1400</X><Y>854</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>java.util.ArrayList&lt;Double&gt;</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>new java.util.ArrayList&lt;Double&gt;()</Code></InitialValue></Properties></Variable><Variable Class="PlainVariable"><Id>1800000000104</Id><Name>diasPorCampana</Name><X>1400</X><Y>876</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>java.util.ArrayList&lt;Double&gt;</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>new java.util.ArrayList&lt;Double&gt;()</Code></InitialValue></Properties></Variable><Variable Class="PlainVariable"><Id>1800000000105</Id><Name>prioridadPorCampana</Name><X>1400</X><Y>898</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>java.util.ArrayList&lt;Boolean&gt;</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>new java.util.ArrayList&lt;Boolean&gt;()</Code></InitialValue></Properties></Variable><Variable Class="PlainVariable"><Id>1800000000106</Id><Name>finalizado</Name><X>1400</X><Y>920</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>boolean</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>false</Code></InitialValue></Properties></Variable></Variables><Connectors><Connector><Id>1800000000117</Id><Name>c1</Name><X>90</X><Y>200</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel>
+<SourceEmbeddedObjectReference><PackageName>caserhorno</PackageName><ClassName>Main</ClassName><ItemName>source</ItemName></SourceEmbeddedObjectReference>
+<SourceConnectableItemReference><PackageName>com.anylogic.libraries.processmodeling</PackageName><ClassName>Source</ClassName><ItemName>out</ItemName></SourceConnectableItemReference>
+<TargetEmbeddedObjectReference><PackageName>caserhorno</PackageName><ClassName>Main</ClassName><ItemName>colaHorno</ItemName></TargetEmbeddedObjectReference>
+<TargetConnectableItemReference><PackageName>com.anylogic.libraries.processmodeling</PackageName><ClassName>Wait</ClassName><ItemName>in</ItemName></TargetConnectableItemReference>
+<Points><Point><X>0</X><Y>0</Y></Point><Point><X>130</X><Y>0</Y></Point></Points></Connector><Connector><Id>1800000000118</Id><Name>c2</Name><X>240</X><Y>200</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel>
+<SourceEmbeddedObjectReference><PackageName>caserhorno</PackageName><ClassName>Main</ClassName><ItemName>colaHorno</ItemName></SourceEmbeddedObjectReference>
+<SourceConnectableItemReference><PackageName>com.anylogic.libraries.processmodeling</PackageName><ClassName>Wait</ClassName><ItemName>out</ItemName></SourceConnectableItemReference>
+<TargetEmbeddedObjectReference><PackageName>caserhorno</PackageName><ClassName>Main</ClassName><ItemName>horno</ItemName></TargetEmbeddedObjectReference>
+<TargetConnectableItemReference><PackageName>com.anylogic.libraries.processmodeling</PackageName><ClassName>Delay</ClassName><ItemName>in</ItemName></TargetConnectableItemReference>
+<Points><Point><X>0</X><Y>0</Y></Point><Point><X>130</X><Y>0</Y></Point></Points></Connector><Connector><Id>1800000000119</Id><Name>c3</Name><X>390</X><Y>200</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel>
+<SourceEmbeddedObjectReference><PackageName>caserhorno</PackageName><ClassName>Main</ClassName><ItemName>horno</ItemName></SourceEmbeddedObjectReference>
+<SourceConnectableItemReference><PackageName>com.anylogic.libraries.processmodeling</PackageName><ClassName>Delay</ClassName><ItemName>out</ItemName></SourceConnectableItemReference>
+<TargetEmbeddedObjectReference><PackageName>caserhorno</PackageName><ClassName>Main</ClassName><ItemName>sink</ItemName></TargetEmbeddedObjectReference>
+<TargetConnectableItemReference><PackageName>com.anylogic.libraries.processmodeling</PackageName><ClassName>Sink</ClassName><ItemName>in</ItemName></TargetConnectableItemReference>
+<Points><Point><X>0</X><Y>0</Y></Point><Point><X>130</X><Y>0</Y></Point></Points></Connector></Connectors><AgentLinks><AgentLink><Id>1800000000019</Id><Name>connections</Name><X>50</X><Y>-50</Y><Label><X>15</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><HandleReceiveInConnections>false</HandleReceiveInConnections><AgentLinkType>COLLECTION_OF_LINKS</AgentLinkType><AgentLinkBidirectional>true</AgentLinkBidirectional><MessageType>Object</MessageType><LineStyle>SOLID</LineStyle><LineWidth>1</LineWidth><LineColor>-16777216</LineColor><LineZOrder>UNDER_AGENTS</LineZOrder><LineArrow>NONE</LineArrow><LineArrowPosition>END</LineArrowPosition></AgentLink></AgentLinks>
+<EmbeddedObjects><EmbeddedObject><Id>1800000000109</Id><Name>source</Name><X>80</X><Y>200</Y><Label><X>-5</X><Y>-20</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel>
+<ActiveObjectClass><PackageName>com.anylogic.libraries.processmodeling</PackageName><ClassName>Source</ClassName></ActiveObjectClass>
+<GenericParameterSubstitute><GenericParameterSubstituteReference><PackageName>com.anylogic.libraries.processmodeling</PackageName><ClassName>Source</ClassName><ItemName>1412336242928</ItemName></GenericParameterSubstituteReference></GenericParameterSubstitute>
+<Parameters><Parameter><Name>arrivalType</Name><Value Class="CodeValue"><Code>self.MANUAL</Code></Value></Parameter><Parameter><Name>newEntity</Name><Value Class="EntityCodeValue"><IsAgentEntity>true</IsAgentEntity><EntityEmbeddedObject><Id>1800000000107</Id><ActiveObjectClass><PackageName>caserhorno</PackageName><ClassName>ULI</ClassName></ActiveObjectClass><GenericParameterSubstitute><GenericParameterSubstituteReference><PackageName>caserhorno</PackageName><ClassName>ULI</ClassName><ItemName>1800000000003</ItemName></GenericParameterSubstituteReference></GenericParameterSubstitute><Parameters></Parameters><ReplicationFlag>true</ReplicationFlag><Replication Class="CodeValue"><Code>100</Code></Replication><CollectionType>ARRAY_LIST_BASED</CollectionType><InitialLocationType>XYZ</InitialLocationType><ColumnCode Class="CodeValue"><Code>0</Code></ColumnCode><RowCode Class="CodeValue"><Code>0</Code></RowCode><LocationNameCode Class="CodeValue"><Code>""</Code></LocationNameCode><InitializationType>SPECIFIED_NUMBER</InitializationType><InitializationDatabaseTableQuery><Id>1800000000108</Id><TableReference></TableReference></InitializationDatabaseTableQuery><InitializationDatabaseType>ONE_AGENT_PER_DATABASE_RECORD</InitializationDatabaseType><QuantityColumn></QuantityColumn></EntityEmbeddedObject></Value></Parameter></Parameters><ReplicationFlag>false</ReplicationFlag><Replication Class="CodeValue"><Code>100</Code></Replication>
+<CollectionType>ARRAY_LIST_BASED</CollectionType><InitialLocationType>XYZ</InitialLocationType>
+<ColumnCode Class="CodeValue"><Code>0</Code></ColumnCode><RowCode Class="CodeValue"><Code>0</Code></RowCode>
+<LocationNameCode Class="CodeValue"><Code>""</Code></LocationNameCode><InitializationType>SPECIFIED_NUMBER</InitializationType>
+<InitializationDatabaseTableQuery><Id>1800000000110</Id><TableReference></TableReference></InitializationDatabaseTableQuery>
+<InitializationDatabaseType>ONE_AGENT_PER_DATABASE_RECORD</InitializationDatabaseType><QuantityColumn></QuantityColumn></EmbeddedObject><EmbeddedObject><Id>1800000000111</Id><Name>colaHorno</Name><X>230</X><Y>200</Y><Label><X>-5</X><Y>-20</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel>
+<ActiveObjectClass><PackageName>com.anylogic.libraries.processmodeling</PackageName><ClassName>Wait</ClassName></ActiveObjectClass>
+<GenericParameterSubstitute><GenericParameterSubstituteReference><PackageName>com.anylogic.libraries.processmodeling</PackageName><ClassName>Wait</ClassName><ItemName>1412336243169</ItemName></GenericParameterSubstituteReference></GenericParameterSubstitute>
+<Parameters><Parameter><Name>maximumCapacity</Name><Value Class="CodeValue"><Code>true</Code></Value></Parameter><Parameter><Name>onEnter</Name><Value Class="CodeValue"><Code>entraCola((ULI) agent);</Code></Value></Parameter><Parameter><Name>forceStatisticsCollection</Name><Value Class="CodeValue"><Code>true</Code></Value></Parameter></Parameters><ReplicationFlag>false</ReplicationFlag><Replication Class="CodeValue"><Code>100</Code></Replication>
+<CollectionType>ARRAY_LIST_BASED</CollectionType><InitialLocationType>XYZ</InitialLocationType>
+<ColumnCode Class="CodeValue"><Code>0</Code></ColumnCode><RowCode Class="CodeValue"><Code>0</Code></RowCode>
+<LocationNameCode Class="CodeValue"><Code>""</Code></LocationNameCode><InitializationType>SPECIFIED_NUMBER</InitializationType>
+<InitializationDatabaseTableQuery><Id>1800000000112</Id><TableReference></TableReference></InitializationDatabaseTableQuery>
+<InitializationDatabaseType>ONE_AGENT_PER_DATABASE_RECORD</InitializationDatabaseType><QuantityColumn></QuantityColumn></EmbeddedObject><EmbeddedObject><Id>1800000000113</Id><Name>horno</Name><X>380</X><Y>200</Y><Label><X>-5</X><Y>-20</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel>
+<ActiveObjectClass><PackageName>com.anylogic.libraries.processmodeling</PackageName><ClassName>Delay</ClassName></ActiveObjectClass>
+<GenericParameterSubstitute><GenericParameterSubstituteReference><PackageName>com.anylogic.libraries.processmodeling</PackageName><ClassName>Delay</ClassName><ItemName>1412336242930</ItemName></GenericParameterSubstituteReference></GenericParameterSubstitute>
+<Parameters><Parameter><Name>delayTime</Name><Value Class="CodeUnitValue"><Code>tiempoCiclo()</Code><Unit Class="TimeUnits">HOUR</Unit></Value></Parameter><Parameter><Name>capacity</Name><Value Class="CodeValue"><Code>1</Code></Value></Parameter><Parameter><Name>forceStatisticsCollection</Name><Value Class="CodeValue"><Code>true</Code></Value></Parameter></Parameters><ReplicationFlag>false</ReplicationFlag><Replication Class="CodeValue"><Code>100</Code></Replication>
+<CollectionType>ARRAY_LIST_BASED</CollectionType><InitialLocationType>XYZ</InitialLocationType>
+<ColumnCode Class="CodeValue"><Code>0</Code></ColumnCode><RowCode Class="CodeValue"><Code>0</Code></RowCode>
+<LocationNameCode Class="CodeValue"><Code>""</Code></LocationNameCode><InitializationType>SPECIFIED_NUMBER</InitializationType>
+<InitializationDatabaseTableQuery><Id>1800000000114</Id><TableReference></TableReference></InitializationDatabaseTableQuery>
+<InitializationDatabaseType>ONE_AGENT_PER_DATABASE_RECORD</InitializationDatabaseType><QuantityColumn></QuantityColumn></EmbeddedObject><EmbeddedObject><Id>1800000000115</Id><Name>sink</Name><X>530</X><Y>200</Y><Label><X>-5</X><Y>-20</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel>
+<ActiveObjectClass><PackageName>com.anylogic.libraries.processmodeling</PackageName><ClassName>Sink</ClassName></ActiveObjectClass>
+<GenericParameterSubstitute><GenericParameterSubstituteReference><PackageName>com.anylogic.libraries.processmodeling</PackageName><ClassName>Sink</ClassName><ItemName>1412336242929</ItemName></GenericParameterSubstituteReference></GenericParameterSubstitute>
+<Parameters><Parameter><Name>onEnter</Name><Value Class="CodeValue"><Code>finCiclo((ULI) agent);</Code></Value></Parameter></Parameters><ReplicationFlag>false</ReplicationFlag><Replication Class="CodeValue"><Code>100</Code></Replication>
+<CollectionType>ARRAY_LIST_BASED</CollectionType><InitialLocationType>XYZ</InitialLocationType>
+<ColumnCode Class="CodeValue"><Code>0</Code></ColumnCode><RowCode Class="CodeValue"><Code>0</Code></RowCode>
+<LocationNameCode Class="CodeValue"><Code>""</Code></LocationNameCode><InitializationType>SPECIFIED_NUMBER</InitializationType>
+<InitializationDatabaseTableQuery><Id>1800000000116</Id><TableReference></TableReference></InitializationDatabaseTableQuery>
+<InitializationDatabaseType>ONE_AGENT_PER_DATABASE_RECORD</InitializationDatabaseType><QuantityColumn></QuantityColumn></EmbeddedObject></EmbeddedObjects><Presentation><Level><Id>1800000000018</Id><Name>level</Name><X>0</X><Y>0</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel>
+<DrawMode>SHAPE_DRAW_2D3D</DrawMode><Z>0</Z><LevelVisibility>DIM_NON_CURRENT</LevelVisibility><Presentation><Text><Id>1800000000170</Id><Name>titulo</Name><X>40</X><Y>30</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel>
+<DrawMode>SHAPE_DRAW_2D3D</DrawMode><EmbeddedIcon>false</EmbeddedIcon><Z>0</Z><Rotation>0.0</Rotation><Color>-12490271</Color>
+<Text>Caser - horno de cementacion y temple (Etapa 1: llegadas exogenas)</Text><Font><Name>SansSerif</Name><Size>22</Size><Style>1</Style></Font><Alignment>LEFT</Alignment></Text><Text><Id>1800000000171</Id><Name>txtEscenario</Name><X>40</X><Y>70</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel>
+<DrawMode>SHAPE_DRAW_2D3D</DrawMode><EmbeddedIcon>false</EmbeddedIcon><Z>0</Z><Rotation>0.0</Rotation><Color>-12490271</Color>
+<Text>Escenario</Text><TextCode>"Escenario " + escenario + " | semilla " + semilla + " | umbral " + umbralULI + " ULI | vacio " + horasEnVacio + " h | " + modoFinCampana</TextCode><Font><Name>SansSerif</Name><Size>14</Size><Style>0</Style></Font><Alignment>LEFT</Alignment></Text><Text><Id>1800000000172</Id><Name>txtEstado</Name><X>40</X><Y>100</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel>
+<DrawMode>SHAPE_DRAW_2D3D</DrawMode><EmbeddedIcon>false</EmbeddedIcon><Z>0</Z><Rotation>0.0</Rotation><Color>-12490271</Color>
+<Text>Estado</Text><TextCode>"Horno: " + nombreEstado() + (campanaPrioridad &amp;&amp; estado &gt;= 2 &amp;&amp; estado &lt;= 3 ? " (prioridad)" : "") + "   |   dia " + (int) Math.floor(time() / 24)</TextCode><Font><Name>SansSerif</Name><Size>18</Size><Style>1</Style></Font><Alignment>LEFT</Alignment></Text><Text><Id>1800000000173</Id><Name>txtCola</Name><X>40</X><Y>130</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel>
+<DrawMode>SHAPE_DRAW_2D3D</DrawMode><EmbeddedIcon>false</EmbeddedIcon><Z>0</Z><Rotation>0.0</Rotation><Color>-12490271</Color>
+<Text>Cola</Text><TextCode>"ULI en cola: " + nEnCola + "   (" + Math.round(kgEnCola) + " kg)"</TextCode><Font><Name>SansSerif</Name><Size>14</Size><Style>0</Style></Font><Alignment>LEFT</Alignment></Text><Text><Id>1800000000174</Id><Name>txtStats</Name><X>40</X><Y>300</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel>
+<DrawMode>SHAPE_DRAW_2D3D</DrawMode><EmbeddedIcon>false</EmbeddedIcon><Z>0</Z><Rotation>0.0</Rotation><Color>-12490271</Color>
+<Text>Stats</Text><TextCode>(midiendo ? "Midiendo" : "Calentamiento del modelo") + " | encendidos " + nEncendidos + " (prioridad " + nEncendidosPrioridad + ") | ULI tratadas " + nTratadas + " | kWh " + Math.round(kWhTotal())</TextCode><Font><Name>SansSerif</Name><Size>14</Size><Style>0</Style></Font><Alignment>LEFT</Alignment></Text><Text><Id>1800000000175</Id><Name>aviso</Name><X>40</X><Y>330</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel>
+<DrawMode>SHAPE_DRAW_2D3D</DrawMode><EmbeddedIcon>false</EmbeddedIcon><Z>0</Z><Rotation>0.0</Rotation><Color>-12490271</Color>
+<Text>Entradas reales agregadas (12 meses). Modelo en verificacion: resultados no validados.</Text><Font><Name>SansSerif</Name><Size>12</Size><Style>0</Style></Font><Alignment>LEFT</Alignment></Text></Presentation></Level></Presentation>
+<StartupCode>inicializar();</StartupCode><Functions><Function AccessType="public" StaticFunction="false"><ReturnModificator>VOID</ReturnModificator><ReturnType>void</ReturnType>
+<Id>1800000000120</Id><Name>inicializar</Name><X>1700</X><Y>40</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label>
+<Body>if (umbralULI &lt; 1) throw new IllegalArgumentException("umbralULI debe ser &gt;= 1: " + umbralULI);
+if (minPorULI &lt;= 0 || hCalentamiento &lt; 0 || hEnfriamiento &lt; 0 || horasEnVacio &lt; 0)
+    throw new IllegalArgumentException("tiempos del horno invalidos");
+if (!(esperaMaxDias &gt; 0)) throw new IllegalArgumentException("esperaMaxDias debe ser &gt; 0 (infinito = sin limite)");
+if (!modoFinCampana.equals("workConserving") &amp;&amp; !modoFinCampana.equals("cupo"))
+    throw new IllegalArgumentException("modoFinCampana debe ser workConserving o cupo: " + modoFinCampana);
+if (pPrioridad &lt; 0 || pPrioridad &gt; 1) throw new IllegalArgumentException("pPrioridad fuera de [0,1]");
+if (factorDemanda &lt; 0) throw new IllegalArgumentException("factorDemanda negativo");
+if (modoLlegadas.equals("semanas")) {
+    if (llegadasSemanas == null || llegadasSemanas.length &lt; 5 || llegadasSemanas.length % 5 != 0)
+        throw new IllegalArgumentException("llegadasSemanas debe tener 5 valores (lun-vie) por semana");
+} else if (modoLlegadas.equals("poisson")) {
+    if (tasaPoissonPorHora &lt;= 0) throw new IllegalArgumentException("tasaPoissonPorHora debe ser &gt; 0");
+} else throw new IllegalArgumentException("modoLlegadas debe ser semanas o poisson: " + modoLlegadas);
+if (kgCuantiles == null || kgCuantiles.length &lt; 2) throw new IllegalArgumentException("kgCuantiles vacio");
+// Un generador por fuente de aleatoriedad: con la misma semilla, las llegadas, los kg y las urgencias
+// son identicos en todos los escenarios (numeros aleatorios comunes).
+rngLlegadas = new java.util.Random(semilla * 10 + 1);
+rngKg = new java.util.Random(semilla * 10 + 2);
+rngUrgente = new java.util.Random(semilla * 10 + 3);
+rngDemanda = new java.util.Random(semilla * 10 + 4);
+rngCiclo = new java.util.Random(semilla * 10 + 5);
+tUltimo = time();
+midiendo = calentamientoModeloDias &lt;= 0;
+tInicioMedicion = midiendo ? time() : calentamientoModeloDias * 24;
+if (!midiendo) eInicioMedicion.restart(calentamientoModeloDias * 24);
+eFin.restart((Math.max(0, calentamientoModeloDias) + horizonteDias) * 24);
+if (modoLlegadas.equals("semanas")) eDia.restart(0);
+else eLlegada.restart(exponencial(tasaPoissonPorHora, rngLlegadas));
+traceln("HORNO " + escenario + " semilla=" + semilla + " umbral=" + umbralULI + " esperaMax=" + esperaMaxDias
+    + " vacio=" + horasEnVacio + "h modo=" + modoFinCampana + " pPrioridad=" + pPrioridad + " demanda=" + factorDemanda);</Body></Function><Function AccessType="public" StaticFunction="false"><ReturnModificator>RETURNS_VALUE</ReturnModificator><ReturnType>double</ReturnType>
+<Id>1800000000121</Id><Name>exponencial</Name><X>1700</X><Y>62</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label>
+<Parameter><Name>tasa</Name><Type>double</Type></Parameter><Parameter><Name>r</Name><Type>java.util.Random</Type></Parameter><Body>return -Math.log(1 - r.nextDouble()) / tasa;</Body></Function><Function AccessType="public" StaticFunction="false"><ReturnModificator>RETURNS_VALUE</ReturnModificator><ReturnType>double</ReturnType>
+<Id>1800000000122</Id><Name>tiempoCiclo</Name><X>1700</X><Y>84</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label>
+<Body>return cicloExponencial ? exponencial(60.0 / minPorULI, rngCiclo) : minPorULI / 60.0;</Body></Function><Function AccessType="public" StaticFunction="false"><ReturnModificator>RETURNS_VALUE</ReturnModificator><ReturnType>double</ReturnType>
+<Id>1800000000123</Id><Name>muestraKg</Name><X>1700</X><Y>106</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label>
+<Body>double u = rngKg.nextDouble() * (kgCuantiles.length - 1);
+int i = (int) Math.floor(u);
+if (i &gt;= kgCuantiles.length - 1) return kgCuantiles[kgCuantiles.length - 1];
+return kgCuantiles[i] + (u - i) * (kgCuantiles[i + 1] - kgCuantiles[i]);</Body></Function><Function AccessType="public" StaticFunction="false"><ReturnModificator>VOID</ReturnModificator><ReturnType>void</ReturnType>
+<Id>1800000000124</Id><Name>nuevoDia</Name><X>1700</X><Y>128</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label>
+<Body>// Lavado de lunes a viernes. Cada lunes se sortea una semana real completa de las observadas
+// (bootstrap por bloques: conserva los dias sin lavado y la autocorrelacion dentro de la semana).
+int dia = (int) Math.floor(time() / 24 + 1e-9);
+int dow = dia % 7;
+if (dow == 0) semanaActual = rngLlegadas.nextInt(llegadasSemanas.length / 5);
+if (dow &gt;= 5) return;
+int base = llegadasSemanas[semanaActual * 5 + dow];
+int n = 0;
+for (int i = 0; i &lt; base; i++) {
+    n += (int) Math.floor(factorDemanda);
+    if (rngDemanda.nextDouble() &lt; factorDemanda - Math.floor(factorDemanda)) n++;
+}
+java.util.ArrayList&lt;Double&gt; horas = new java.util.ArrayList&lt;Double&gt;();
+for (int i = 0; i &lt; n; i++) horas.add(dia * 24 + 6 + rngLlegadas.nextDouble() * 16);  // entre las 6 y las 22
+java.util.Collections.sort(horas);
+llegadasPendientes.addAll(horas);
+if (!llegadasPendientes.isEmpty() &amp;&amp; !eLlegada.isActive()) eLlegada.restart(Math.max(0, llegadasPendientes.get(0) - time()));</Body></Function><Function AccessType="public" StaticFunction="false"><ReturnModificator>VOID</ReturnModificator><ReturnType>void</ReturnType>
+<Id>1800000000125</Id><Name>llegada</Name><X>1700</X><Y>150</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label>
+<Body>if (modoLlegadas.equals("poisson")) {
+    source.inject(1);
+    eLlegada.restart(exponencial(tasaPoissonPorHora, rngLlegadas));
+    return;
+}
+while (!llegadasPendientes.isEmpty() &amp;&amp; llegadasPendientes.get(0) &lt;= time() + 1e-9) {
+    llegadasPendientes.remove(0);
+    source.inject(1);
+}
+if (!llegadasPendientes.isEmpty()) eLlegada.restart(Math.max(0, llegadasPendientes.get(0) - time()));</Body></Function><Function AccessType="public" StaticFunction="false"><ReturnModificator>VOID</ReturnModificator><ReturnType>void</ReturnType>
+<Id>1800000000126</Id><Name>entraCola</Name><X>1700</X><Y>172</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label>
+<Parameter><Name>u</Name><Type>ULI</Type></Parameter><Body>acumular();
+u.tLlegada = time();
+u.kg = muestraKg();
+u.urgente = rngUrgente.nextDouble() &lt; pPrioridad;
+u.enCupo = false;
+u.despachado = false;
+nEnCola++;
+kgEnCola += u.kg;
+if (midiendo) nLlegadas++;
+evaluarEncendido();
+pedirDespacho();</Body></Function><Function AccessType="public" StaticFunction="false"><ReturnModificator>VOID</ReturnModificator><ReturnType>void</ReturnType>
+<Id>1800000000127</Id><Name>evaluarEncendido</Name><X>1700</X><Y>194</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label>
+<Body>if (estado == 0 &amp;&amp; nEnCola &gt; 0) {
+    acumular();
+    estado = 1;
+    if (!Double.isInfinite(esperaMaxDias))
+        eEsperaMax.restart(Math.max(0, esperaMaxDias * 24 - (time() - llegadaMasVieja())));
+}
+if (estado == 1) {
+    if (nEnCola &gt;= umbralULI) encender(false);
+    else if (hayUrgenteEnCola()) encender(true);
+}</Body></Function><Function AccessType="public" StaticFunction="false"><ReturnModificator>RETURNS_VALUE</ReturnModificator><ReturnType>double</ReturnType>
+<Id>1800000000128</Id><Name>llegadaMasVieja</Name><X>1700</X><Y>216</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label>
+<Body>double t = time();
+for (Agent a : colaHorno) { ULI u = (ULI) a; if (!u.despachado &amp;&amp; u.tLlegada &lt; t) t = u.tLlegada; }
+return t;</Body></Function><Function AccessType="public" StaticFunction="false"><ReturnModificator>RETURNS_VALUE</ReturnModificator><ReturnType>boolean</ReturnType>
+<Id>1800000000129</Id><Name>hayUrgenteEnCola</Name><X>1700</X><Y>238</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label>
+<Body>for (Agent a : colaHorno) { ULI u = (ULI) a; if (!u.despachado &amp;&amp; u.urgente) return true; }
+return false;</Body></Function><Function AccessType="public" StaticFunction="false"><ReturnModificator>VOID</ReturnModificator><ReturnType>void</ReturnType>
+<Id>1800000000130</Id><Name>encender</Name><X>1700</X><Y>260</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label>
+<Parameter><Name>porPrioridad</Name><Type>boolean</Type></Parameter><Body>acumular();
+eEsperaMax.reset();
+estado = 2;
+campanaPrioridad = porPrioridad;
+tEncendido = time();
+campanaMedida = midiendo;
+if (campanaMedida) {
+    nEncendidos++;
+    if (porPrioridad) nEncendidosPrioridad++;
+    sumaColaAlEncender += nEnCola;
+}
+ulisCampana = 0;
+kgCampana = 0;
+tPrimerCiclo = -1;
+tUltimoCiclo = -1;
+eCalentamiento.restart(hCalentamiento);</Body></Function><Function AccessType="public" StaticFunction="false"><ReturnModificator>VOID</ReturnModificator><ReturnType>void</ReturnType>
+<Id>1800000000131</Id><Name>finCalentamiento</Name><X>1700</X><Y>282</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label>
+<Body>acumular();
+estado = 3;
+enVacio = false;
+// Modo cupo (regla del 27/09): la campana trata solo lo que estaba en cola al llegar a temperatura,
+// mas las urgentes que lleguen despues. En workConserving no se marca nada.
+if (modoFinCampana.equals("cupo") &amp;&amp; !campanaPrioridad)
+    for (Agent a : colaHorno) { ULI u = (ULI) a; if (!u.despachado) u.enCupo = true; }
+pedirDespacho();</Body></Function><Function AccessType="public" StaticFunction="false"><ReturnModificator>VOID</ReturnModificator><ReturnType>void</ReturnType>
+<Id>1800000000132</Id><Name>pedirDespacho</Name><X>1700</X><Y>304</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label>
+<Body>if (!eDespacho.isActive()) eDespacho.restart(0);</Body></Function><Function AccessType="public" StaticFunction="false"><ReturnModificator>VOID</ReturnModificator><ReturnType>void</ReturnType>
+<Id>1800000000133</Id><Name>despachar</Name><X>1700</X><Y>326</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label>
+<Body>if (estado != 3 || ocupado) return;
+ULI sig = elegirSiguiente();
+if (sig == null) {
+    if (!enVacio) {
+        enVacio = true;
+        eVacio.restart(campanaPrioridad &amp;&amp; soloUrgentesEnPrioridad ? 0 : horasEnVacio);
+    }
+    return;
+}
+if (enVacio) { enVacio = false; eVacio.reset(); }
+acumular();
+sig.despachado = true;
+sig.tInicio = time();
+nEnCola--;
+kgEnCola -= sig.kg;
+ocupado = true;
+if (tPrimerCiclo &lt; 0) tPrimerCiclo = time();
+if (midiendo) esperas.add(time() - sig.tLlegada);
+if (!colaHorno.free(sig)) throw new IllegalStateException("colaHorno.free fallo para una ULI en cola");</Body></Function><Function AccessType="public" StaticFunction="false"><ReturnModificator>RETURNS_VALUE</ReturnModificator><ReturnType>ULI</ReturnType>
+<Id>1800000000134</Id><Name>elegirSiguiente</Name><X>1700</X><Y>348</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label>
+<Body>// Urgentes primero; entre iguales, la mas vieja (FIFO).
+ULI mejor = null;
+for (Agent a : colaHorno) {
+    ULI u = (ULI) a;
+    if (u.despachado) continue;
+    boolean candidata;
+    if (campanaPrioridad &amp;&amp; soloUrgentesEnPrioridad) candidata = u.urgente;
+    else if (modoFinCampana.equals("cupo")) candidata = u.urgente || u.enCupo;
+    else candidata = true;
+    if (!candidata) continue;
+    if (mejor == null || (u.urgente &amp;&amp; !mejor.urgente) || (u.urgente == mejor.urgente &amp;&amp; u.tLlegada &lt; mejor.tLlegada)) mejor = u;
+}
+return mejor;</Body></Function><Function AccessType="public" StaticFunction="false"><ReturnModificator>VOID</ReturnModificator><ReturnType>void</ReturnType>
+<Id>1800000000135</Id><Name>finCiclo</Name><X>1700</X><Y>370</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label>
+<Parameter><Name>u</Name><Type>ULI</Type></Parameter><Body>acumular();
+ocupado = false;
+ulisCampana++;
+kgCampana += u.kg;
+tUltimoCiclo = u.tInicio;
+if (midiendo) {
+    nTratadas++;
+    kgTratados += u.kg;
+    sumaSistema += time() - u.tLlegada;
+}
+pedirDespacho();</Body></Function><Function AccessType="public" StaticFunction="false"><ReturnModificator>VOID</ReturnModificator><ReturnType>void</ReturnType>
+<Id>1800000000136</Id><Name>finVacio</Name><X>1700</X><Y>392</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label>
+<Body>if (estado != 3 || ocupado) return;
+acumular();
+enVacio = false;
+cerrarCampana();
+estado = 4;
+eEnfriamiento.restart(hEnfriamiento);</Body></Function><Function AccessType="public" StaticFunction="false"><ReturnModificator>VOID</ReturnModificator><ReturnType>void</ReturnType>
+<Id>1800000000137</Id><Name>cerrarCampana</Name><X>1700</X><Y>414</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label>
+<Body>if (!campanaMedida) return;
+ulisPorCampana.add((double) ulisCampana);
+kgPorCampana.add(kgCampana);
+prioridadPorCampana.add(campanaPrioridad);
+// Igual que en el registro: dias calendario entre el primer y el ultimo cementado.
+diasPorCampana.add(tPrimerCiclo &lt; 0 ? 0.0 : Math.floor(tUltimoCiclo / 24) - Math.floor(tPrimerCiclo / 24) + 1);
+sumaColaAlApagar += nEnCola;</Body></Function><Function AccessType="public" StaticFunction="false"><ReturnModificator>VOID</ReturnModificator><ReturnType>void</ReturnType>
+<Id>1800000000138</Id><Name>finEnfriamiento</Name><X>1700</X><Y>436</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label>
+<Body>acumular();
+estado = 0;
+evaluarEncendido();</Body></Function><Function AccessType="public" StaticFunction="false"><ReturnModificator>VOID</ReturnModificator><ReturnType>void</ReturnType>
+<Id>1800000000139</Id><Name>esperaMaxCumplida</Name><X>1700</X><Y>458</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label>
+<Body>if (estado == 1 &amp;&amp; nEnCola &gt; 0) encender(false);</Body></Function><Function AccessType="public" StaticFunction="false"><ReturnModificator>VOID</ReturnModificator><ReturnType>void</ReturnType>
+<Id>1800000000140</Id><Name>acumular</Name><X>1700</X><Y>480</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label>
+<Body>double t = time();
+if (midiendo) {
+    double dt = t - tUltimo;
+    areaCola += nEnCola * dt;
+    areaColaKg += kgEnCola * dt;
+    areaSistema += (nEnCola + (ocupado ? 1 : 0)) * dt;
+    if (ocupado) horasOcupado += dt;
+    if (estado == 3) horasCaliente += dt;
+}
+tUltimo = t;</Body></Function><Function AccessType="public" StaticFunction="false"><ReturnModificator>VOID</ReturnModificator><ReturnType>void</ReturnType>
+<Id>1800000000141</Id><Name>inicioMedicion</Name><X>1700</X><Y>502</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label>
+<Body>acumular();
+midiendo = true;
+tInicioMedicion = time();
+nLlegadas = 0; nTratadas = 0; kgTratados = 0; nEncendidos = 0; nEncendidosPrioridad = 0;
+sumaColaAlEncender = 0; sumaColaAlApagar = 0; areaCola = 0; areaColaKg = 0; areaSistema = 0;
+horasOcupado = 0; horasCaliente = 0; sumaSistema = 0;
+esperas.clear(); ulisPorCampana.clear(); kgPorCampana.clear(); diasPorCampana.clear(); prioridadPorCampana.clear();</Body></Function><Function AccessType="public" StaticFunction="false"><ReturnModificator>VOID</ReturnModificator><ReturnType>void</ReturnType>
+<Id>1800000000142</Id><Name>finCorrida</Name><X>1700</X><Y>524</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label>
+<Body>acumular();
+emitirResultado();
+finalizado = true;
+finishSimulation();</Body></Function><Function AccessType="public" StaticFunction="false"><ReturnModificator>RETURNS_VALUE</ReturnModificator><ReturnType>double</ReturnType>
+<Id>1800000000143</Id><Name>horasMedidas</Name><X>1700</X><Y>546</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label>
+<Body>return time() - tInicioMedicion;</Body></Function><Function AccessType="public" StaticFunction="false"><ReturnModificator>RETURNS_VALUE</ReturnModificator><ReturnType>double</ReturnType>
+<Id>1800000000144</Id><Name>media</Name><X>1700</X><Y>568</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label>
+<Parameter><Name>v</Name><Type>java.util.ArrayList&lt;Double&gt;</Type></Parameter><Body>if (v.isEmpty()) return Double.NaN;
+double s = 0;
+for (double d : v) s += d;
+return s / v.size();</Body></Function><Function AccessType="public" StaticFunction="false"><ReturnModificator>RETURNS_VALUE</ReturnModificator><ReturnType>double</ReturnType>
+<Id>1800000000145</Id><Name>cuantil</Name><X>1700</X><Y>590</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label>
+<Parameter><Name>v</Name><Type>java.util.ArrayList&lt;Double&gt;</Type></Parameter><Parameter><Name>p</Name><Type>double</Type></Parameter><Body>// Rango mas proximo: ceil(p n), igual que en el analisis de los datos reales.
+if (v.isEmpty()) return Double.NaN;
+java.util.ArrayList&lt;Double&gt; c = new java.util.ArrayList&lt;Double&gt;(v);
+java.util.Collections.sort(c);
+int k = (int) Math.ceil(p * c.size());
+return c.get(Math.max(0, Math.min(c.size() - 1, k - 1)));</Body></Function><Function AccessType="public" StaticFunction="false"><ReturnModificator>RETURNS_VALUE</ReturnModificator><ReturnType>double</ReturnType>
+<Id>1800000000146</Id><Name>kWhTotal</Name><X>1700</X><Y>612</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label>
+<Body>return kWhPorEncendido * nEncendidos + kWhPorDiaCaliente / 24 * horasCaliente;</Body></Function><Function AccessType="public" StaticFunction="false"><ReturnModificator>RETURNS_VALUE</ReturnModificator><ReturnType>double</ReturnType>
+<Id>1800000000147</Id><Name>campanasPorMes</Name><X>1700</X><Y>634</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label>
+<Body>return nEncendidos / (horasMedidas() / (24 * 30.4375));</Body></Function><Function AccessType="public" StaticFunction="false"><ReturnModificator>RETURNS_VALUE</ReturnModificator><ReturnType>String</ReturnType>
+<Id>1800000000148</Id><Name>nombreEstado</Name><X>1700</X><Y>656</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label>
+<Body>switch (estado) {
+    case 0: return "Apagado";
+    case 1: return "Acumulando";
+    case 2: return "Calentando";
+    case 3: return enVacio ? "Caliente en vacio" : "Cargando";
+    case 4: return "Enfriando";
+    default: return "?";
+}</Body></Function><Function AccessType="public" StaticFunction="false"><ReturnModificator>RETURNS_VALUE</ReturnModificator><ReturnType>String</ReturnType>
+<Id>1800000000149</Id><Name>encabezado</Name><X>1700</X><Y>678</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label>
+<Body>return "escenario;semilla;umbralULI;esperaMaxDias;horasEnVacio;modoFinCampana;pPrioridad;factorDemanda;minPorULI;"
+    + "horasMedidas;nLlegadas;nTratadas;kgTratados;nEncendidos;nEncendidosPrioridad;campanasPorMes;"
+    + "uliPorCampanaMedia;uliPorCampanaMediana;diasPorCampanaMedia;colaAlEncenderMedia;colaAlApagarMedia;"
+    + "esperaMediaDias;esperaP90Dias;esperaMaximaDias;colaMediaULI;colaMediaKg;sistemaMedioULI;sistemaMedioHoras;"
+    + "utilizacion;fraccionCaliente;kWhTotal;kWhPorKg;costoEnergiaPorKg";</Body></Function><Function AccessType="public" StaticFunction="false"><ReturnModificator>RETURNS_VALUE</ReturnModificator><ReturnType>String</ReturnType>
+<Id>1800000000150</Id><Name>filaResultado</Name><X>1700</X><Y>700</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label>
+<Body>double h = horasMedidas();
+java.util.ArrayList&lt;Double&gt; esperasDias = new java.util.ArrayList&lt;Double&gt;();
+for (double e : esperas) esperasDias.add(e / 24);
+int nc = ulisPorCampana.size();
+double[] v = {
+    umbralULI, esperaMaxDias, horasEnVacio, pPrioridad, factorDemanda, minPorULI,
+    h, nLlegadas, nTratadas, kgTratados, nEncendidos, nEncendidosPrioridad, campanasPorMes(),
+    media(ulisPorCampana), cuantil(ulisPorCampana, 0.5), media(diasPorCampana),
+    nEncendidos &gt; 0 ? sumaColaAlEncender / nEncendidos : Double.NaN, nc &gt; 0 ? sumaColaAlApagar / nc : Double.NaN,
+    media(esperasDias), cuantil(esperasDias, 0.9), esperasDias.isEmpty() ? Double.NaN : java.util.Collections.max(esperasDias),
+    areaCola / h, areaColaKg / h, areaSistema / h, nTratadas &gt; 0 ? sumaSistema / nTratadas : Double.NaN,
+    horasOcupado / h, horasCaliente / h, kWhTotal(), kWhTotal() / kgTratados, kWhTotal() / kgTratados * tarifaKWh };
+StringBuilder sb = new StringBuilder(escenario + ";" + semilla);
+for (int i = 0; i &lt; v.length; i++) {
+    if (i == 3) sb.append(";").append(modoFinCampana);
+    sb.append(";").append(String.format(java.util.Locale.US, "%.6g", v[i]));
+}
+return sb.toString();</Body></Function><Function AccessType="public" StaticFunction="false"><ReturnModificator>VOID</ReturnModificator><ReturnType>void</ReturnType>
+<Id>1800000000151</Id><Name>emitirResultado</Name><X>1700</X><Y>722</Y><PublicFlag>true</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel><Label><X>10</X><Y>0</Y></Label>
+<Body>String fila = filaResultado();
+traceln("CSV_HORNO;" + fila);
+traceln(String.format(java.util.Locale.US,
+    "RESUMEN %s semilla=%d: encendidos=%d (prioridad %d), %.2f campanas/mes, ULI/campana media %.1f, espera media %.2f d, p90 %.2f d, kWh/kg %.3f",
+    escenario, semilla, nEncendidos, nEncendidosPrioridad, campanasPorMes(), media(ulisPorCampana),
+    media(esperas) / 24, cuantil(esperas, 0.9) / 24, kWhTotal() / kgTratados));
+if (archivoSalida == null || archivoSalida.isEmpty()) return;
+synchronized (java.io.File.class) {
+    try {
+        java.io.File f = new java.io.File(archivoSalida);
+        boolean nuevo = !f.exists() || f.length() == 0;
+        java.io.FileWriter w = new java.io.FileWriter(f, true);
+        if (nuevo) w.write(encabezado() + "\n");
+        w.write(fila + "\n");
+        w.close();
+    } catch (java.io.IOException ex) {
+        throw new RuntimeException("No se pudo escribir " + archivoSalida, ex);
+    }
+}</Body></Function></Functions><Events><Event><Id>1800000000152</Id><Name>eDia</Name><X>1950</X><Y>40</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties TriggerType="timeout" Mode="occuresOnce"><Timeout Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></Timeout>
+<Rate Class="CodeUnitValue"><Code>1</Code><Unit Class="RateUnits">PER_HOUR</Unit></Rate>
+<Id>1800000000153</Id><OccurrenceAtTime>true</OccurrenceAtTime><OccurrenceDate>1783584000000</OccurrenceDate>
+<OccurrenceTime Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></OccurrenceTime><RecurrenceCode Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></RecurrenceCode>
+<Condition>false</Condition></Properties><Action>nuevoDia(); eDia.restart(24);</Action></Event><Event><Id>1800000000154</Id><Name>eLlegada</Name><X>1950</X><Y>70</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties TriggerType="timeout" Mode="occuresOnce"><Timeout Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></Timeout>
+<Rate Class="CodeUnitValue"><Code>1</Code><Unit Class="RateUnits">PER_HOUR</Unit></Rate>
+<Id>1800000000155</Id><OccurrenceAtTime>true</OccurrenceAtTime><OccurrenceDate>1783584000000</OccurrenceDate>
+<OccurrenceTime Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></OccurrenceTime><RecurrenceCode Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></RecurrenceCode>
+<Condition>false</Condition></Properties><Action>llegada();</Action></Event><Event><Id>1800000000156</Id><Name>eDespacho</Name><X>1950</X><Y>100</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties TriggerType="timeout" Mode="occuresOnce"><Timeout Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></Timeout>
+<Rate Class="CodeUnitValue"><Code>1</Code><Unit Class="RateUnits">PER_HOUR</Unit></Rate>
+<Id>1800000000157</Id><OccurrenceAtTime>true</OccurrenceAtTime><OccurrenceDate>1783584000000</OccurrenceDate>
+<OccurrenceTime Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></OccurrenceTime><RecurrenceCode Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></RecurrenceCode>
+<Condition>false</Condition></Properties><Action>despachar();</Action></Event><Event><Id>1800000000158</Id><Name>eCalentamiento</Name><X>1950</X><Y>130</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties TriggerType="timeout" Mode="occuresOnce"><Timeout Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></Timeout>
+<Rate Class="CodeUnitValue"><Code>1</Code><Unit Class="RateUnits">PER_HOUR</Unit></Rate>
+<Id>1800000000159</Id><OccurrenceAtTime>true</OccurrenceAtTime><OccurrenceDate>1783584000000</OccurrenceDate>
+<OccurrenceTime Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></OccurrenceTime><RecurrenceCode Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></RecurrenceCode>
+<Condition>false</Condition></Properties><Action>finCalentamiento();</Action></Event><Event><Id>1800000000160</Id><Name>eVacio</Name><X>1950</X><Y>160</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties TriggerType="timeout" Mode="occuresOnce"><Timeout Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></Timeout>
+<Rate Class="CodeUnitValue"><Code>1</Code><Unit Class="RateUnits">PER_HOUR</Unit></Rate>
+<Id>1800000000161</Id><OccurrenceAtTime>true</OccurrenceAtTime><OccurrenceDate>1783584000000</OccurrenceDate>
+<OccurrenceTime Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></OccurrenceTime><RecurrenceCode Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></RecurrenceCode>
+<Condition>false</Condition></Properties><Action>finVacio();</Action></Event><Event><Id>1800000000162</Id><Name>eEnfriamiento</Name><X>1950</X><Y>190</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties TriggerType="timeout" Mode="occuresOnce"><Timeout Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></Timeout>
+<Rate Class="CodeUnitValue"><Code>1</Code><Unit Class="RateUnits">PER_HOUR</Unit></Rate>
+<Id>1800000000163</Id><OccurrenceAtTime>true</OccurrenceAtTime><OccurrenceDate>1783584000000</OccurrenceDate>
+<OccurrenceTime Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></OccurrenceTime><RecurrenceCode Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></RecurrenceCode>
+<Condition>false</Condition></Properties><Action>finEnfriamiento();</Action></Event><Event><Id>1800000000164</Id><Name>eEsperaMax</Name><X>1950</X><Y>220</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties TriggerType="timeout" Mode="occuresOnce"><Timeout Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></Timeout>
+<Rate Class="CodeUnitValue"><Code>1</Code><Unit Class="RateUnits">PER_HOUR</Unit></Rate>
+<Id>1800000000165</Id><OccurrenceAtTime>true</OccurrenceAtTime><OccurrenceDate>1783584000000</OccurrenceDate>
+<OccurrenceTime Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></OccurrenceTime><RecurrenceCode Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></RecurrenceCode>
+<Condition>false</Condition></Properties><Action>esperaMaxCumplida();</Action></Event><Event><Id>1800000000166</Id><Name>eInicioMedicion</Name><X>1950</X><Y>250</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties TriggerType="timeout" Mode="occuresOnce"><Timeout Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></Timeout>
+<Rate Class="CodeUnitValue"><Code>1</Code><Unit Class="RateUnits">PER_HOUR</Unit></Rate>
+<Id>1800000000167</Id><OccurrenceAtTime>true</OccurrenceAtTime><OccurrenceDate>1783584000000</OccurrenceDate>
+<OccurrenceTime Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></OccurrenceTime><RecurrenceCode Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></RecurrenceCode>
+<Condition>false</Condition></Properties><Action>inicioMedicion();</Action></Event><Event><Id>1800000000168</Id><Name>eFin</Name><X>1950</X><Y>280</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties TriggerType="timeout" Mode="occuresOnce"><Timeout Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></Timeout>
+<Rate Class="CodeUnitValue"><Code>1</Code><Unit Class="RateUnits">PER_HOUR</Unit></Rate>
+<Id>1800000000169</Id><OccurrenceAtTime>true</OccurrenceAtTime><OccurrenceDate>1783584000000</OccurrenceDate>
+<OccurrenceTime Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></OccurrenceTime><RecurrenceCode Class="CodeUnitValue"><Code>1e12</Code><Unit Class="TimeUnits">HOUR</Unit></RecurrenceCode>
+<Condition>false</Condition></Properties><Action>finCorrida();</Action></Event></Events></ActiveObjectClass>
+<ActiveObjectClass><Id>1800000000002</Id><Name>ULI</Name><Generic>false</Generic>
+<GenericParameter><Id>1800000000003</Id><Name>1800000000003</Name><GenericParameterValue Class="CodeValue"><Code>T extends Agent</Code></GenericParameterValue><GenericParameterLabel>Generic parameter:</GenericParameterLabel></GenericParameter>
+<FlowChartsUsage>ENTITY</FlowChartsUsage><SamplesToKeep>100</SamplesToKeep><LimitNumberOfArrayElements>false</LimitNumberOfArrayElements><ElementsLimitValue>100</ElementsLimitValue><MakeDefaultViewArea>true</MakeDefaultViewArea><SceneGridColor /><SceneBackgroundColor>-4144960</SceneBackgroundColor><EnvironmentResourceRef /><EnvironmentType>NONE</EnvironmentType><EnvironmentRotationX>0</EnvironmentRotationX><EnvironmentRotationY>0</EnvironmentRotationY><EnvironmentRotationZ>0</EnvironmentRotationZ><EnvironmentIntensity>1</EnvironmentIntensity>
+<AgentProperties><EnvironmentDefinesInitialLocation>true</EnvironmentDefinesInitialLocation><RotateAnimationTowardsMovement>true</RotateAnimationTowardsMovement><RotateAnimationVertically>false</RotateAnimationVertically><VelocityCode Class="CodeUnitValue"><Code>10</Code><Unit Class="SpeedUnits">MPS</Unit></VelocityCode><PhysicalLength Class="CodeUnitValue"><Code>1</Code><Unit Class="LengthUnits">METER</Unit></PhysicalLength><PhysicalWidth Class="CodeUnitValue"><Code>1</Code><Unit Class="LengthUnits">METER</Unit></PhysicalWidth><PhysicalHeight Class="CodeUnitValue"><Code>1</Code><Unit Class="LengthUnits">METER</Unit></PhysicalHeight></AgentProperties>
+<EnvironmentProperties><EnableSteps>false</EnableSteps><StepDurationCode Class="CodeUnitValue"><Code>1.0</Code><Unit Class="TimeUnits">HOUR</Unit></StepDurationCode><SpaceType>CONTINUOUS</SpaceType><WidthCode>500</WidthCode><HeightCode>500</HeightCode><ZHeightCode>0</ZHeightCode><ColumnsCountCode>100</ColumnsCountCode><RowsCountCode>100</RowsCountCode><NeigborhoodType>MOORE</NeigborhoodType><LayoutType>USER_DEF</LayoutType><NetworkType>USER_DEF</NetworkType><ConnectionsPerAgentCode>2</ConnectionsPerAgentCode><ConnectionsRangeCode>50</ConnectionsRangeCode><NeighborLinkFractionCode>0.95</NeighborLinkFractionCode><MCode>10</MCode></EnvironmentProperties>
+<DatasetsCreationProperties><AutoCreate>false</AutoCreate><Id>1800000000004</Id><OccurrenceAtTime>true</OccurrenceAtTime><OccurrenceDate>1783584000000</OccurrenceDate><OccurrenceTime Class="CodeUnitValue"><Code>0</Code><Unit Class="TimeUnits">HOUR</Unit></OccurrenceTime><RecurrenceCode Class="CodeUnitValue"><Code>24</Code><Unit Class="TimeUnits">HOUR</Unit></RecurrenceCode></DatasetsCreationProperties>
+<ScaleRuler><Id>1800000000005</Id><Name>scale</Name><X>0</X><Y>-150</Y><PublicFlag>false</PublicFlag><PresentationFlag>false</PresentationFlag><ShowLabel>false</ShowLabel><DrawMode>SHAPE_DRAW_2D3D</DrawMode><Length>100</Length><Rotation>0</Rotation><ScaleType>BASED_ON_LENGTH</ScaleType><ModelLength>10</ModelLength><LengthUnits>METER</LengthUnits><Scale>10</Scale><InheritedFromParentAgentType>true</InheritedFromParentAgentType></ScaleRuler>
+<CurrentLevel>1800000000006</CurrentLevel><ConnectionsId>1800000000007</ConnectionsId>
+<Variables><Variable Class="PlainVariable"><Id>1800000000008</Id><Name>tLlegada</Name><X>40</X><Y>40</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable><Variable Class="PlainVariable"><Id>1800000000009</Id><Name>kg</Name><X>40</X><Y>65</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable><Variable Class="PlainVariable"><Id>1800000000010</Id><Name>tInicio</Name><X>40</X><Y>90</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>double</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>0</Code></InitialValue></Properties></Variable><Variable Class="PlainVariable"><Id>1800000000011</Id><Name>urgente</Name><X>40</X><Y>115</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>boolean</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>false</Code></InitialValue></Properties></Variable><Variable Class="PlainVariable"><Id>1800000000012</Id><Name>enCupo</Name><X>40</X><Y>140</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>boolean</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>false</Code></InitialValue></Properties></Variable><Variable Class="PlainVariable"><Id>1800000000013</Id><Name>despachado</Name><X>40</X><Y>165</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel>
+<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false"><Type>boolean</Type><UnitType>NONE</UnitType><SdArray>false</SdArray>
+<InitialValue Class="CodeValue"><Code>false</Code></InitialValue></Properties></Variable></Variables><AgentLinks><AgentLink><Id>1800000000007</Id><Name>connections</Name><X>50</X><Y>-50</Y><Label><X>15</X><Y>0</Y></Label><PublicFlag>false</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>true</ShowLabel><HandleReceiveInConnections>false</HandleReceiveInConnections><AgentLinkType>COLLECTION_OF_LINKS</AgentLinkType><AgentLinkBidirectional>true</AgentLinkBidirectional><MessageType>Object</MessageType><LineStyle>SOLID</LineStyle><LineWidth>1</LineWidth><LineColor>-16777216</LineColor><LineZOrder>UNDER_AGENTS</LineZOrder><LineArrow>NONE</LineArrow><LineArrowPosition>END</LineArrowPosition></AgentLink></AgentLinks><Presentation><Level><Id>1800000000006</Id><Name>level</Name><X>0</X><Y>0</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel>
+<DrawMode>SHAPE_DRAW_2D3D</DrawMode><Z>0</Z><LevelVisibility>DIM_NON_CURRENT</LevelVisibility><Presentation><Rectangle><Id>1800000000014</Id><Name>cuerpoULI</Name><X>-5</X><Y>-5</Y><Label><X>0</X><Y>-10</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel><DrawMode>SHAPE_DRAW_2D3D</DrawMode><EmbeddedIcon>false</EmbeddedIcon><Z>0</Z><ZHeight>10</ZHeight><LineWidth>1</LineWidth><LineColor>-10066330</LineColor><LineMaterial>null</LineMaterial><LineStyle>SOLID</LineStyle><Width>10</Width><Height>10</Height><Rotation>0.0</Rotation><FillColor>-23296</FillColor><FillMaterial>null</FillMaterial></Rectangle></Presentation></Level></Presentation></ActiveObjectClass>
+</ActiveObjectClasses>
+<DifferentialEquationsMethod>EULER</DifferentialEquationsMethod><MixedEquationsMethod>RK45_NEWTON</MixedEquationsMethod><AlgebraicEquationsMethod>MODIFIED_NEWTON</AlgebraicEquationsMethod><AbsoluteAccuracy>1.0E-5</AbsoluteAccuracy><FixedTimeStep>0.001</FixedTimeStep><RelativeAccuracy>1.0E-5</RelativeAccuracy><TimeAccuracy>1.0E-9</TimeAccuracy>
+<Frame><Id>1800000000183</Id><Width>1200</Width><Height>760</Height></Frame>
+<Database><Id>1800000000184</Id><Logging>false</Logging><AutoExport>false</AutoExport><ShutdownCompact>false</ShutdownCompact><ImportSettings></ImportSettings><ExportSettings></ExportSettings></Database>
+<RunConfiguration ActiveObjectClassId="1800000000001"><Id>1800000000185</Id><Name>RunConfiguration</Name><MaximumMemory>1024</MaximumMemory>
+<ModelTimeProperties><StopOption>Stop at specified time</StopOption><InitialDate>1783584000000</InitialDate><InitialTime>0.0</InitialTime><FinalDate>1783584000000</FinalDate><FinalTime>10921</FinalTime></ModelTimeProperties>
+<AnimationProperties><StopNever>true</StopNever><ExecutionMode>realTimeScaled</ExecutionMode><RealTimeScale>48.0</RealTimeScale><EnableZoomAndPanning>true</EnableZoomAndPanning><EnableDeveloperPanel>false</EnableDeveloperPanel><ShowDeveloperPanelOnStart>false</ShowDeveloperPanelOnStart></AnimationProperties>
+<Inputs></Inputs><Outputs></Outputs></RunConfiguration>
+<Experiments><SimulationExperiment ActiveObjectClassId="1800000000001"><Id>1800000000176</Id><Name>Visual</Name><CommandLineArguments /><MaximumMemory>1024</MaximumMemory>
+<RandomNumberGenerationType>fixedSeed</RandomNumberGenerationType><CustomGeneratorCode>new Random()</CustomGeneratorCode><SeedValue>1</SeedValue><SelectionModeForSimultaneousEvents>LIFO</SelectionModeForSimultaneousEvents><VmArgs /><LoadRootFromSnapshot>false</LoadRootFromSnapshot>
+<Presentation><Text><Id>1800000000177</Id><Name>text</Name><X>50</X><Y>30</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel>
+<DrawMode>SHAPE_DRAW_2D3D</DrawMode><EmbeddedIcon>false</EmbeddedIcon><Z>0</Z><Rotation>0.0</Rotation><Color>-12490271</Color>
+<Text>Caser horno - E0, semilla 1 (animacion)</Text><Font><Name>SansSerif</Name><Size>20</Size><Style>0</Style></Font><Alignment>LEFT</Alignment></Text></Presentation><Parameters><Parameter><ParameterName>escenario</ParameterName><ParameterValue Class="CodeValue"><Code>"E0"</Code></ParameterValue></Parameter><Parameter><ParameterName>umbralULI</ParameterName></Parameter><Parameter><ParameterName>esperaMaxDias</ParameterName></Parameter><Parameter><ParameterName>horasEnVacio</ParameterName></Parameter><Parameter><ParameterName>hCalentamiento</ParameterName></Parameter><Parameter><ParameterName>hEnfriamiento</ParameterName></Parameter><Parameter><ParameterName>minPorULI</ParameterName></Parameter><Parameter><ParameterName>modoFinCampana</ParameterName></Parameter><Parameter><ParameterName>pPrioridad</ParameterName></Parameter><Parameter><ParameterName>soloUrgentesEnPrioridad</ParameterName></Parameter><Parameter><ParameterName>factorDemanda</ParameterName></Parameter><Parameter><ParameterName>semilla</ParameterName></Parameter><Parameter><ParameterName>calentamientoModeloDias</ParameterName></Parameter><Parameter><ParameterName>horizonteDias</ParameterName></Parameter><Parameter><ParameterName>kWhPorDiaCaliente</ParameterName></Parameter><Parameter><ParameterName>kWhPorEncendido</ParameterName></Parameter><Parameter><ParameterName>tarifaKWh</ParameterName></Parameter><Parameter><ParameterName>modoLlegadas</ParameterName></Parameter><Parameter><ParameterName>tasaPoissonPorHora</ParameterName></Parameter><Parameter><ParameterName>cicloExponencial</ParameterName></Parameter><Parameter><ParameterName>llegadasSemanas</ParameterName></Parameter><Parameter><ParameterName>kgCuantiles</ParameterName></Parameter><Parameter><ParameterName>archivoSalida</ParameterName></Parameter></Parameters>
+<PresentationProperties><EnableZoomAndPanning>true</EnableZoomAndPanning><ExecutionMode>realTimeScaled</ExecutionMode><Title>Caser horno - E0, semilla 1 (animacion)</Title><EnableDeveloperPanel>true</EnableDeveloperPanel><ShowDeveloperPanelOnStart>false</ShowDeveloperPanelOnStart><RealTimeScale>48.0</RealTimeScale></PresentationProperties>
+<ModelTimeProperties><StopOption>Stop at specified time</StopOption><InitialDate>1783584000000</InitialDate><InitialTime>0.0</InitialTime><FinalDate>1783584000000</FinalDate><FinalTime>10921</FinalTime></ModelTimeProperties><BypassInitialScreen>true</BypassInitialScreen></SimulationExperiment><SimulationExperiment ActiveObjectClassId="1800000000001"><Id>1800000000178</Id><Name>VerificacionMM1</Name><CommandLineArguments /><MaximumMemory>1024</MaximumMemory>
+<RandomNumberGenerationType>fixedSeed</RandomNumberGenerationType><CustomGeneratorCode>new Random()</CustomGeneratorCode><SeedValue>1</SeedValue><SelectionModeForSimultaneousEvents>LIFO</SelectionModeForSimultaneousEvents><VmArgs /><LoadRootFromSnapshot>false</LoadRootFromSnapshot>
+<Presentation><Text><Id>1800000000179</Id><Name>text</Name><X>50</X><Y>30</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel>
+<DrawMode>SHAPE_DRAW_2D3D</DrawMode><EmbeddedIcon>false</EmbeddedIcon><Z>0</Z><Rotation>0.0</Rotation><Color>-12490271</Color>
+<Text>Caser horno - caso degenerado M/M/1 (lambda 0,7/h, mu 1/h)</Text><Font><Name>SansSerif</Name><Size>20</Size><Style>0</Style></Font><Alignment>LEFT</Alignment></Text></Presentation><Parameters><Parameter><ParameterName>escenario</ParameterName><ParameterValue Class="CodeValue"><Code>"MM1"</Code></ParameterValue></Parameter><Parameter><ParameterName>umbralULI</ParameterName><ParameterValue Class="CodeValue"><Code>1</Code></ParameterValue></Parameter><Parameter><ParameterName>esperaMaxDias</ParameterName></Parameter><Parameter><ParameterName>horasEnVacio</ParameterName><ParameterValue Class="CodeValue"><Code>0</Code></ParameterValue></Parameter><Parameter><ParameterName>hCalentamiento</ParameterName><ParameterValue Class="CodeValue"><Code>0</Code></ParameterValue></Parameter><Parameter><ParameterName>hEnfriamiento</ParameterName><ParameterValue Class="CodeValue"><Code>0</Code></ParameterValue></Parameter><Parameter><ParameterName>minPorULI</ParameterName><ParameterValue Class="CodeValue"><Code>60</Code></ParameterValue></Parameter><Parameter><ParameterName>modoFinCampana</ParameterName></Parameter><Parameter><ParameterName>pPrioridad</ParameterName><ParameterValue Class="CodeValue"><Code>0</Code></ParameterValue></Parameter><Parameter><ParameterName>soloUrgentesEnPrioridad</ParameterName></Parameter><Parameter><ParameterName>factorDemanda</ParameterName></Parameter><Parameter><ParameterName>semilla</ParameterName></Parameter><Parameter><ParameterName>calentamientoModeloDias</ParameterName><ParameterValue Class="CodeValue"><Code>100</Code></ParameterValue></Parameter><Parameter><ParameterName>horizonteDias</ParameterName><ParameterValue Class="CodeValue"><Code>2400</Code></ParameterValue></Parameter><Parameter><ParameterName>kWhPorDiaCaliente</ParameterName></Parameter><Parameter><ParameterName>kWhPorEncendido</ParameterName></Parameter><Parameter><ParameterName>tarifaKWh</ParameterName></Parameter><Parameter><ParameterName>modoLlegadas</ParameterName><ParameterValue Class="CodeValue"><Code>"poisson"</Code></ParameterValue></Parameter><Parameter><ParameterName>tasaPoissonPorHora</ParameterName><ParameterValue Class="CodeValue"><Code>0.7</Code></ParameterValue></Parameter><Parameter><ParameterName>cicloExponencial</ParameterName><ParameterValue Class="CodeValue"><Code>true</Code></ParameterValue></Parameter><Parameter><ParameterName>llegadasSemanas</ParameterName></Parameter><Parameter><ParameterName>kgCuantiles</ParameterName></Parameter><Parameter><ParameterName>archivoSalida</ParameterName></Parameter></Parameters>
+<PresentationProperties><EnableZoomAndPanning>true</EnableZoomAndPanning><ExecutionMode>realTimeScaled</ExecutionMode><Title>Caser horno - caso degenerado M/M/1 (lambda 0,7/h, mu 1/h)</Title><EnableDeveloperPanel>true</EnableDeveloperPanel><ShowDeveloperPanelOnStart>false</ShowDeveloperPanelOnStart><RealTimeScale>1000000.0</RealTimeScale></PresentationProperties>
+<ModelTimeProperties><StopOption>Stop at specified time</StopOption><InitialDate>1783584000000</InitialDate><InitialTime>0.0</InitialTime><FinalDate>1783584000000</FinalDate><FinalTime>60001</FinalTime></ModelTimeProperties><BypassInitialScreen>true</BypassInitialScreen></SimulationExperiment><ParamVariationExperiment ActiveObjectClassId="1800000000001"><Id>1800000000180</Id><Name>CorridasE0E3</Name><CommandLineArguments /><MaximumMemory>2048</MaximumMemory>
+<RandomNumberGenerationType>fixedSeed</RandomNumberGenerationType><CustomGeneratorCode>new Random()</CustomGeneratorCode><SeedValue>1</SeedValue><SelectionModeForSimultaneousEvents>LIFO</SelectionModeForSimultaneousEvents><VmArgs /><LoadRootFromSnapshot>false</LoadRootFromSnapshot>
+<Presentation><Text><Id>1800000000181</Id><Name>text</Name><X>50</X><Y>30</Y><Label><X>10</X><Y>0</Y></Label><PublicFlag>true</PublicFlag><PresentationFlag>true</PresentationFlag><ShowLabel>false</ShowLabel>
+<DrawMode>SHAPE_DRAW_2D3D</DrawMode><EmbeddedIcon>false</EmbeddedIcon><Z>0</Z><Rotation>0.0</Rotation><Color>-12490271</Color>
+<Text>Caser horno - E0 a E3, 30 replicas con semillas comunes</Text><Font><Name>SansSerif</Name><Size>20</Size><Style>0</Style></Font><Alignment>LEFT</Alignment></Text></Presentation>
+<AllowParallelEvaluations>false</AllowParallelEvaluations><UseFreeformParameters>true</UseFreeformParameters><NumberOfRuns>120</NumberOfRuns><FreeformParamValue><Id>1800000000020</Id><Expression Class="CodeValue"><Code>"E" + (index / 30)</Code></Expression></FreeformParamValue><FreeformParamValue><Id>1800000000022</Id><Expression Class="CodeValue"><Code>index / 30 == 1 ? 45 : 75</Code></Expression></FreeformParamValue><FreeformParamValue><Id>1800000000024</Id><Expression Class="CodeValue"><Code>index / 30 == 2 ? 15 : Double.POSITIVE_INFINITY</Code></Expression></FreeformParamValue><FreeformParamValue><Id>1800000000026</Id><Expression Class="CodeValue"><Code>index / 30 == 3 ? 96 : 48</Code></Expression></FreeformParamValue><FreeformParamValue><Id>1800000000028</Id></FreeformParamValue><FreeformParamValue><Id>1800000000030</Id></FreeformParamValue><FreeformParamValue><Id>1800000000032</Id></FreeformParamValue><FreeformParamValue><Id>1800000000034</Id></FreeformParamValue><FreeformParamValue><Id>1800000000036</Id></FreeformParamValue><FreeformParamValue><Id>1800000000038</Id></FreeformParamValue><FreeformParamValue><Id>1800000000040</Id></FreeformParamValue><FreeformParamValue><Id>1800000000042</Id><Expression Class="CodeValue"><Code>1 + index % 30</Code></Expression></FreeformParamValue><FreeformParamValue><Id>1800000000044</Id></FreeformParamValue><FreeformParamValue><Id>1800000000046</Id></FreeformParamValue><FreeformParamValue><Id>1800000000048</Id></FreeformParamValue><FreeformParamValue><Id>1800000000050</Id></FreeformParamValue><FreeformParamValue><Id>1800000000052</Id></FreeformParamValue><FreeformParamValue><Id>1800000000054</Id></FreeformParamValue><FreeformParamValue><Id>1800000000056</Id></FreeformParamValue><FreeformParamValue><Id>1800000000058</Id></FreeformParamValue><FreeformParamValue><Id>1800000000060</Id></FreeformParamValue><FreeformParamValue><Id>1800000000062</Id></FreeformParamValue><FreeformParamValue><Id>1800000000064</Id><Expression Class="CodeValue"><Code>"corridas_horno.csv"</Code></Expression></FreeformParamValue><RangeVariationParamValue><Id>1800000000020</Id><Type>FIXED</Type></RangeVariationParamValue><RangeVariationParamValue><Id>1800000000022</Id><Type>FIXED</Type></RangeVariationParamValue><RangeVariationParamValue><Id>1800000000024</Id><Type>FIXED</Type></RangeVariationParamValue><RangeVariationParamValue><Id>1800000000026</Id><Type>FIXED</Type></RangeVariationParamValue><RangeVariationParamValue><Id>1800000000028</Id><Type>FIXED</Type></RangeVariationParamValue><RangeVariationParamValue><Id>1800000000030</Id><Type>FIXED</Type></RangeVariationParamValue><RangeVariationParamValue><Id>1800000000032</Id><Type>FIXED</Type></RangeVariationParamValue><RangeVariationParamValue><Id>1800000000034</Id><Type>FIXED</Type></RangeVariationParamValue><RangeVariationParamValue><Id>1800000000036</Id><Type>FIXED</Type></RangeVariationParamValue><RangeVariationParamValue><Id>1800000000038</Id><Type>FIXED</Type></RangeVariationParamValue><RangeVariationParamValue><Id>1800000000040</Id><Type>FIXED</Type></RangeVariationParamValue><RangeVariationParamValue><Id>1800000000042</Id><Type>FIXED</Type></RangeVariationParamValue><RangeVariationParamValue><Id>1800000000044</Id><Type>FIXED</Type></RangeVariationParamValue><RangeVariationParamValue><Id>1800000000046</Id><Type>FIXED</Type></RangeVariationParamValue><RangeVariationParamValue><Id>1800000000048</Id><Type>FIXED</Type></RangeVariationParamValue><RangeVariationParamValue><Id>1800000000050</Id><Type>FIXED</Type></RangeVariationParamValue><RangeVariationParamValue><Id>1800000000052</Id><Type>FIXED</Type></RangeVariationParamValue><RangeVariationParamValue><Id>1800000000054</Id><Type>FIXED</Type></RangeVariationParamValue><RangeVariationParamValue><Id>1800000000056</Id><Type>FIXED</Type></RangeVariationParamValue><RangeVariationParamValue><Id>1800000000058</Id><Type>FIXED</Type></RangeVariationParamValue><RangeVariationParamValue><Id>1800000000060</Id><Type>FIXED</Type></RangeVariationParamValue><RangeVariationParamValue><Id>1800000000062</Id><Type>FIXED</Type></RangeVariationParamValue><RangeVariationParamValue><Id>1800000000064</Id><Type>FIXED</Type></RangeVariationParamValue>
+<ModelTimeProperties><StopOption>Stop at specified time</StopOption><InitialDate>1783584000000</InitialDate><InitialTime>0.0</InitialTime><FinalDate>1783584000000</FinalDate><FinalTime>10921</FinalTime></ModelTimeProperties>
+<PresentationProperties><EnableZoomAndPanning>false</EnableZoomAndPanning><Title>Caser horno - E0 a E3, 30 replicas con semillas comunes</Title><EnableDeveloperPanel>true</EnableDeveloperPanel><ShowDeveloperPanelOnStart>false</ShowDeveloperPanelOnStart></PresentationProperties>
+<ReplicationsProperties><UseReplication>false</UseReplication><FixedReplicationsNumber>true</FixedReplicationsNumber><ReplicationPerIteration>1</ReplicationPerIteration><MinimumReplication>1</MinimumReplication><MaximumReplication>1</MaximumReplication><ConfidenceLevel>LEVEL_95</ConfidenceLevel><ErrorPercent>0.5</ErrorPercent><ExpressionForConfidenceComputation>0</ExpressionForConfidenceComputation></ReplicationsProperties>
+</ParamVariationExperiment></Experiments>
+<RequiredLibraryReference><LibraryName>com.anylogic.libraries.modules.markup_descriptors</LibraryName><VersionMajor>1</VersionMajor><VersionMinor>0</VersionMinor><VersionBuild>0</VersionBuild></RequiredLibraryReference>
+<RequiredLibraryReference><LibraryName>com.anylogic.libraries.processmodeling</LibraryName><VersionMajor>8</VersionMajor><VersionMinor>0</VersionMinor><VersionBuild>5</VersionBuild></RequiredLibraryReference>
+</Model>
+<ConvertersApplied><Uuid>9f7858c9-b2c8-4ead-9244-fd08833f642b</Uuid><Uuid>404652e6-561a-404c-aab2-ab7415f40ef5</Uuid><Uuid>6fd6cd57-6dfe-4fc6-be0b-c74065351957</Uuid><Uuid>3325dc48-3ad4-41e3-836f-dfd0e98fe1ed</Uuid><Uuid>bb27038a-0f3a-48bb-b235-4a44066a14aa</Uuid><Uuid>3f69ef3d-706e-41a6-8af0-11658c5eef68</Uuid><Uuid>3f6fe405-e047-4304-91d6-6eee206d1106</Uuid><Uuid>820d2b51-5b4a-48e7-b0b6-e46418e3c0f2</Uuid><Uuid>630818fa-8975-4b70-976f-03180dce01db</Uuid><Uuid>7c7e471c-004e-495e-a4ad-d840620ab38e</Uuid><Uuid>3e38ff63-1f70-4ec0-b42c-e879b146785d</Uuid><Uuid>b1eb86e4-14b3-405c-8257-56b80f1b485d</Uuid><Uuid>d55f9fb6-86bb-45ea-9db1-79cecfa0ce91</Uuid><Uuid>ab77aafd-8f02-4354-b789-928d45b1f73c</Uuid><Uuid>e4f14fd7-1c4a-42e9-b91d-db2415f475db</Uuid><Uuid>6d208120-6c7a-45a6-b411-402f18890d9b</Uuid><Uuid>1816cdd0-177c-4973-9e88-dd8b95318556</Uuid><Uuid>5c23f62f-06dc-46ad-8ead-688ec434e3e5</Uuid><Uuid>5c7d7990-3f35-41eb-ae16-d0c16098acc6</Uuid><Uuid>02a16c52-a834-4f30-b6af-a6aee51a294e</Uuid><Uuid>f0988929-2718-4984-a1b6-c1f2ce152f1f</Uuid><Uuid>1c9d9cfe-ea2b-43f9-8f62-dc31d8ed3ae1</Uuid><Uuid>34cb742a-8ba4-47a7-87e6-f2685fe69e97</Uuid><Uuid>4fe10751-c399-4752-94b7-30113ad45070</Uuid><Uuid>c13fe5ac-6466-446e-886a-12df1431b1eb</Uuid><Uuid>714f9ca2-426e-4bff-8569-2d18f58fdcf8</Uuid><Uuid>045aeb5f-1087-4ac7-9702-a49404e7f7e8</Uuid><Uuid>840e9a0a-de98-4b7d-a172-f9bbda2d6b98</Uuid><Uuid>e342358b-75ed-4812-9376-6043fb6cb473</Uuid><Uuid>f3d5ccdc-1bb3-466f-871d-f6b92a26cbb4</Uuid><Uuid>59acb6fb-561c-4038-b722-a596a748b3c7</Uuid><Uuid>be7e6726-05c0-4228-821d-a8df91aeb5bc</Uuid><Uuid>df4a6a60-9ce8-4c6c-91c0-ad5a5d732259</Uuid><Uuid>47491eb9-4606-42bd-8399-125a2b95fded</Uuid><Uuid>9b2d1306-5d19-439a-8f2c-b144dd7e22fa</Uuid><Uuid>ef421152-8732-4f97-9acb-c8e9a6890d5e</Uuid><Uuid>d48f8080-25b1-44f5-8322-7bf2712ff974</Uuid><Uuid>6c4de826-daad-4cd4-b703-51dfe803e822</Uuid><Uuid>01af22d6-6889-4e98-a3df-e6eddc40fc92</Uuid><Uuid>ea3b3dbe-cca2-4bde-957b-feaef7e18789</Uuid><Uuid>e737c8c6-b526-4f88-b89e-554e205b0614</Uuid><Uuid>efd24e87-d7f7-425f-9cb0-3ee17c7b2116</Uuid><Uuid>a62607e6-047e-4910-a1ec-5426bf9283b5</Uuid><Uuid>64dceb5b-de05-47c7-8e40-e9b293e80d75</Uuid><Uuid>8d51c652-6aee-4de8-ba03-47b289a13ec5</Uuid><Uuid>51d7b5ce-5664-4750-b1a0-fabcdc31e49a</Uuid><Uuid>6522e3af-aa9e-421c-b667-e11db73cd8ca</Uuid><Uuid>9ac073a0-7abf-4dff-826f-9c44d4780590</Uuid><Uuid>2da9c21c-adc7-405a-a36e-46fbd9dfcd42</Uuid><Uuid>fe4d1053-9c84-4221-bac7-cb489a7064ff</Uuid><Uuid>1f005f88-e6d7-4bdc-81fa-3acf4c89cf64</Uuid><Uuid>42dc5a7c-d7b1-4653-92b9-9359b46cc2d4</Uuid><Uuid>e25721a9-34f9-479c-a4c3-31f5ec9e117d</Uuid><Uuid>506d1de3-06df-4131-9e88-e43f1768e3d8</Uuid><Uuid>e6625695-25a2-43d0-9056-1e9a1a594b1e</Uuid><Uuid>91990287-4edf-4e38-aa6c-66d0e906807b</Uuid><Uuid>2216cdd0-177c-5678-9e88-dd8b95312234</Uuid><Uuid>1737c8c6-b526-4dd8-589e-ee4e205b06f4</Uuid><Uuid>6a43bef6-8b70-4253-a828-82c3ab399655</Uuid><Uuid>0a27038a-0f3a-48bb-b235-4a44066a1402</Uuid><Uuid>0a9ec2c3-5e18-4c0a-a183-fd86d9d9a08b</Uuid><Uuid>2216cdd0-177c-5678-9e88-dd8b95313334</Uuid><Uuid>2216cdd0-177c-5678-9e88-dd8b95313335</Uuid><Uuid>5b8ebeed-6b58-4c3a-8d5f-0958b1a90ce6</Uuid></ConvertersApplied>
+</AnyLogicWorkspace>
