@@ -2797,6 +2797,14 @@ Conclusiones:
 
 ## Log
 
+- **2026-10-07** (5): TPI, grupo 2 (Casermeiro). Primera validación de la Etapa 1
+  (`entregables/TPI/caser/08-validacion-etapa1.md`, script `modelo/validar_etapa1.py`): E0 contra el registro
+  del mismo período que las entradas (15 campañas, 1.749 ULI, 9 facturas). Dentro de tolerancia: toneladas
+  por mes (−3 %) y duración de campaña (−2 %). Fuera: campañas por mes (+18 %), ULI por campaña (+20 %),
+  espera media (−19 %; 7,3 contra 9,0 días) y kWh por mes (−16 %). Causa más probable: el umbral real es más
+  alto que el relevado (las campañas largas arrancan con ~99 en cola, ~85-90 descontando el calentamiento).
+  No se calibra: se pregunta al encargado. También hay que preguntar por la cola larga de la espera (4,6 %
+  de las ULI esperan más de 30 días) y por los encendidos de 1-2 ULI.
 - **2026-10-07** (4): TPI, grupo 2 (Casermeiro). **Etapa 1 corrida en AnyLogic.** Primer intento sin
   llegadas: los eventos estaban en modo `occuresOnce` y el motor pisaba el `restart(0)` del inicio; pasados a
   `userControls` (el verificador ahora lo controla). `VerificacionMM1` en el IDE: Lq 1,6146, L 2,3131,
