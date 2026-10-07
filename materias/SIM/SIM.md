@@ -2797,6 +2797,15 @@ Conclusiones:
 
 ## Log
 
+- **2026-10-07** (4): TPI, grupo 2 (Casermeiro). **Etapa 1 corrida en AnyLogic.** Primer intento sin
+  llegadas: los eventos estaban en modo `occuresOnce` y el motor pisaba el `restart(0)` del inicio; pasados a
+  `userControls` (el verificador ahora lo controla). `VerificacionMM1` en el IDE: Lq 1,6146, L 2,3131,
+  W 3,3027 h, Wq 2,3053 h, ρ 0,6985 contra 1,6333 / 2,3333 / 3,3333 / 2,3333 / 0,7 de la teoría (≤ 1,2 %),
+  iguales al verificador. `CorridasE0E3` (120 corridas) produjo un `corridas_horno.csv` **idéntico byte a
+  byte** al del motor mínimo: el IDE ejecuta exactamente la lógica verificada. Primer test apareado (no
+  validado todavía): las tres alternativas bajan la espera y el producto en cola y suben el kWh/kg, todas
+  significativas. E1 (umbral 45): espera −2,7 días (7,3 → 4,5), kWh/kg +9 %. E2 (espera máx. 15 d):
+  −1,0 día, +6 %. E3 (96 h en vacío): −1,7 días, +34 %. Falta ponerle precio a la espera para comparar.
 - **2026-10-07** (3): TPI, grupo 2 (Casermeiro). **Etapa 1 del modelo en AnyLogic, construida y verificada
   fuera del IDE** (`entregables/TPI/caser/modelo/`, guía en `07-modelo-anylogic.md`). `CaserHorno.alp`
   (formato 8.9.9): `source → colaHorno (Wait) → horno (Delay, capacidad 1) → sink`, con la lógica del horno
