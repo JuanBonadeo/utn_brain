@@ -40,7 +40,7 @@ C13035165 solo tiene 297). Parecen el mismo tornillo que el C100... con otro col
 códigos de granel (millares) con códigos de estuche (unidades de estuche) sin convertir. Ahora cada línea se pasa a
 millares con "Unidades por Envase" de la Lista CASER (un C13035165, estuche x500, = 0,5 millar del C1303516), y
 cada código de venta se lleva a su código de fabricación: arandela (C6x1 → C6x0) y color de zincado (C110/C130 →
-C100, confirmado por la empresa; C121/C131 → C111 por analogía, **a confirmar**). Script:
+C100; C121/C131 → C111; ambas confirmadas por la empresa). Script:
 `datos-locales/_perfil/seleccion_v5.py`. El 100 % de los millares queda con código de fabricación en el seguimiento.
 
 | Perfil | Artículos | Millares | % | Fill rate |
@@ -53,36 +53,40 @@ C100, confirmado por la empresa; C121/C131 → C111 por analogía, **a confirmar
 
 Con esta medida los 15 de abajo cubren el 45 % de los millares, con fill rate 45 % (sesgo hacia los mal servidos,
 por el peso del C8114232). Faltan dos de los más vendidos: **C1003516** (4.º, 211 millares, 77 %; absorbe al
-C13035165 azul) y **C1003538** (7.º, 128 millares, 66 %). El C6106351 baja a 12 % medido en millares. Propuesta
-pendiente de decidir con el grupo: sumar C1003516 y C1003538 y sacar C9157050 y C3914050 (menos de 1 millar por año).
+C13035165 azul) y **C1003538** (7.º, 128 millares, 66 %). El C6106351 baja a 12 % medido en millares. **Decidido
+(07/10/2026)**: entran C1003516 y C1003538, salen C9157050 y C3914050 (menos de 1 millar por año).
 
-## Propuesta (15 artículos, pendiente de confirmación con la empresa)
+## Selección (15 artículos, v5 — 07/10/2026)
 
-| Código base | Familia | Volumen presup. | Fill rate | ULI en seguimiento | Horno | Revenido |
-|---|---|---:|---:|---:|---:|---:|
-| C1003551 | CASER-Wall | 542 | 87 % | 1.092 | 98 % | 0 % |
-| C1003532 | CASER-Wall | 492 | 78 % | 415 | 99 % | 0 % |
-| C3104213 | CASER-Wall | 162 | 25 % | 371 | 98 % | 0 % |
-| C1004275 | CASER-Wall | 156 | 87 % | 294 | 94 % | 0 % |
-| C2003525 | CASER-Wall | 84 | 40 % | 399 | 98 % | 0 % |
-| C1113516 | CASER-Fix | 349 | 82 % | 136 | 100 % | 0 % |
-| C1115040 | CASER-Fix | 123 | **2 %** | 57 | 98 % | 0 % |
-| C1114050 | CASER-Fix | 65 | 97 % | 223 | 100 % | 0 % |
-| C8114232 | CASER-Drill | 823 | **18 %** | 16 | 100 % | 88 % |
-| C4104213 | CASER-Drill | 248 | 47 % | 221 | 99 % | 93 % |
-| C4104219 | CASER-Drill | 118 | 46 % | 62 | 100 % | 92 % |
-| C6106351 | CASER-Drill | 127 | 21 % | 420 | 99 % | 77 % |
-| C7006008 | CASER-Max | 5 | 100 % | 21 | **0 %** | — |
-| C9157050 | CASER-Max | 2 | 0 % | 118 | **0 %** | — |
-| C3914050 | CASER-Maq | 3 | 0 % | 48 | **0 %** | — |
+Demanda en millares por código de fabricación (presupuestado, 12 meses). "Puesto" = ranking por millares entre
+los 223 códigos de fabricación del universo con precio.
 
-Cubre 42 % del volumen presupuestado del universo con precio (3.299 de 7.935, con la corrección de la arandela),
-con fill rate ponderado de 53 % contra 55 % del universo: la muestra no está sesgada hacia casos fáciles ni difíciles. Incluye los tres
-perfiles (horno solo, horno + revenido, sin horno) y cinco de las siete familias.
+| Código fabricación | Familia | Millares | Fill rate | Puesto | ULI en seguimiento | Perfil |
+|---|---|---:|---:|---:|---:|---|
+| C8114232 | CASER-Drill | 818,0 | 18 % | 1 | 16 | horno + revenido |
+| C1003551 | CASER-Wall | 279,5 | 85 % | 2 | 1.092 | horno |
+| C1003532 | CASER-Wall | 257,0 | 76 % | 3 | 415 | horno |
+| C1003516 | CASER-Wall | 211,0 | 77 % | 4 | 104 | horno |
+| C1113516 | CASER-Fix | 181,5 | 83 % | 6 | 136 | horno |
+| C1003538 | CASER-Wall | 128,0 | 66 % | 7 | 353 | horno |
+| C4104213 | CASER-Drill | 124,0 | 47 % | 8 | 221 | horno + revenido |
+| C3104213 | CASER-Wall | 81,0 | 25 % | 11 | 371 | horno |
+| C6106351 | CASER-Drill | 74,5 | 12 % | 13 | 420 | horno + revenido |
+| C1115040 | CASER-Fix | 61,5 | 2 % | 16 | 57 | horno |
+| C4104219 | CASER-Drill | 59,0 | 46 % | 19 | 62 | horno + revenido |
+| C2003525 | CASER-Wall | 42,0 | 40 % | 24 | 399 | horno |
+| C1004275 | CASER-Wall | 32,8 | 85 % | 30 | 294 | horno |
+| C1114050 | CASER-Fix | 32,5 | 97 % | 31 | 223 | horno |
+| C7006008 | CASER-Max | 5,0 | 100 % | 103 | 21 | sin horno |
+
+Cubre el **52 %** de los millares del universo (2.387 de 4.567), con fill rate ponderado de 49 % contra 53 % del
+universo. Incluye los tres perfiles y cuatro familias (Wall, Fix, Drill, Max). El C8114232 tiene pocas ULI (16) pero
+grandes: ~60 millares cada una, 960 desde 2023, coherente con que se entregue solo el 18 % de lo presupuestado.
 
 **Quedan afuera**: CASER-Rosc (el mejor candidato, C7404813, tiene 6 ULI en el seguimiento) y CASER-Plast
-(1 unidad vendida en el año): sin datos suficientes para caracterizarlos. Los tres artículos sin horno tienen
-volumen de venta casi nulo; sirven para ejercitar el camino que saltea el horno, no para medir servicio.
+(1 unidad vendida en el año): sin datos suficientes para caracterizarlos. También CASER-Maq: sus artículos sin
+horno venden menos de 1 millar por año. El C7006008 queda solo para ejercitar el camino que saltea el horno, no
+para medir servicio.
 
 ## Qué se corrigió respecto de la propuesta del 27/09
 
