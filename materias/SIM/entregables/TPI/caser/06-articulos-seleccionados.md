@@ -36,6 +36,26 @@ en 21 %: sigue siendo de los peor servidos. Los fill rate por perfil no cambian 
 **Pendiente de confirmar**: los C110... ("DOR") y C130... ("AZUL") siguen sin enlazar (512 de presupuestado; el
 C13035165 solo tiene 297). Parecen el mismo tornillo que el C100... con otro color de zincado.
 
+**6. Demanda en millares y por código de fabricación (v5, 07/10/2026).** Hasta la v4 se sumaba "presupuestado" de
+códigos de granel (millares) con códigos de estuche (unidades de estuche) sin convertir. Ahora cada línea se pasa a
+millares con "Unidades por Envase" de la Lista CASER (un C13035165, estuche x500, = 0,5 millar del C1303516), y
+cada código de venta se lleva a su código de fabricación: arandela (C6x1 → C6x0) y color de zincado (C110/C130 →
+C100, confirmado por la empresa; C121/C131 → C111 por analogía, **a confirmar**). Script:
+`datos-locales/_perfil/seleccion_v5.py`. El 100 % de los millares queda con código de fabricación en el seguimiento.
+
+| Perfil | Artículos | Millares | % | Fill rate |
+|---|---:|---:|---:|---:|
+| Horno solo | 77 | 2.354 | 52 % | 69 % |
+| Horno + revenido | 26 | 1.292 | 28 % | 27 % |
+| Sin horno | 8 | 7 | 0 % | 70 % |
+| Pocos datos (< 15 ULI) | 112 | 914 | 20 % | 46 % |
+| **Total** | 223 | 4.567 | | 53 % |
+
+Con esta medida los 15 de abajo cubren el 45 % de los millares, con fill rate 45 % (sesgo hacia los mal servidos,
+por el peso del C8114232). Faltan dos de los más vendidos: **C1003516** (4.º, 211 millares, 77 %; absorbe al
+C13035165 azul) y **C1003538** (7.º, 128 millares, 66 %). El C6106351 baja a 12 % medido en millares. Propuesta
+pendiente de decidir con el grupo: sumar C1003516 y C1003538 y sacar C9157050 y C3914050 (menos de 1 millar por año).
+
 ## Propuesta (15 artículos, pendiente de confirmación con la empresa)
 
 | Código base | Familia | Volumen presup. | Fill rate | ULI en seguimiento | Horno | Revenido |
