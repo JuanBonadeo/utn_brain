@@ -28,6 +28,14 @@ como una demora aleatoria con la distribución empírica (ver `03-pedido-de-dato
 mínimo. CASER-Plast **sí** pasa por el horno (C3224020: 100 % de sus 28 ULI): la suposición anterior de que
 las roscas para plásticos no se tratan era incorrecta.
 
+**5. Hexagonales tipo 1: se fabrican como C6x0 y se venden como C6x1 (empresa, 07/10/2026).** Los C610.../C630...
+se venden con la arandela vulcanizada colocada como C611.../C631...: mismo producto físico, mismos procesos. La
+v3 dejaba esos 30 códigos de venta (259 de presupuestado) sin código de fábrica. Corregido en
+`datos-locales/_perfil/seleccion_v4.py`. El C6106351 pasa de 47 a 127 de presupuestado, pero su fill rate sigue
+en 21 %: sigue siendo de los peor servidos. Los fill rate por perfil no cambian (66 % horno solo, 33 % con revenido).
+**Pendiente de confirmar**: los C110... ("DOR") y C130... ("AZUL") siguen sin enlazar (512 de presupuestado; el
+C13035165 solo tiene 297). Parecen el mismo tornillo que el C100... con otro color de zincado.
+
 ## Propuesta (15 artículos, pendiente de confirmación con la empresa)
 
 | Código base | Familia | Volumen presup. | Fill rate | ULI en seguimiento | Horno | Revenido |
@@ -43,13 +51,13 @@ las roscas para plásticos no se tratan era incorrecta.
 | C8114232 | CASER-Drill | 823 | **18 %** | 16 | 100 % | 88 % |
 | C4104213 | CASER-Drill | 248 | 47 % | 221 | 99 % | 93 % |
 | C4104219 | CASER-Drill | 118 | 46 % | 62 | 100 % | 92 % |
-| C6106351 | CASER-Drill | 47 | 21 % | 420 | 99 % | 77 % |
+| C6106351 | CASER-Drill | 127 | 21 % | 420 | 99 % | 77 % |
 | C7006008 | CASER-Max | 5 | 100 % | 21 | **0 %** | — |
 | C9157050 | CASER-Max | 2 | 0 % | 118 | **0 %** | — |
 | C3914050 | CASER-Maq | 3 | 0 % | 48 | **0 %** | — |
 
-Cubre 42 % del volumen presupuestado del universo con precio (3.219 de 7.676), con fill rate ponderado de
-54 % contra 56 % del universo: la muestra no está sesgada hacia casos fáciles ni difíciles. Incluye los tres
+Cubre 42 % del volumen presupuestado del universo con precio (3.299 de 7.935, con la corrección de la arandela),
+con fill rate ponderado de 53 % contra 55 % del universo: la muestra no está sesgada hacia casos fáciles ni difíciles. Incluye los tres
 perfiles (horno solo, horno + revenido, sin horno) y cinco de las siete familias.
 
 **Quedan afuera**: CASER-Rosc (el mejor candidato, C7404813, tiene 6 ULI en el seguimiento) y CASER-Plast
