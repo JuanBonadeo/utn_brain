@@ -2797,6 +2797,14 @@ Conclusiones:
 
 ## Log
 
+- **2026-10-08**: TPI, grupo 2 (Casermeiro). Recibidas las facturas de GLP (58 cargas, 12/2023-09/2026):
+  ≈ 100 kg de propano por día de horno caliente desde 03/2025 (R² 0,86), unos 200.000 $ por día, 25-30 % del costo
+  eléctrico de ese día. Faltan facturas de 04-10/2024 y 12/2024-02/2025 (incompatibles con la capacidad de los
+  tanques). Residencia en el horno: 30 min, una sola ULI a la vez en la cinta. Corregida la selección de artículos
+  (`06-`): códigos de venta llevados a código de fabricación (arandela C6x1 → C6x0, color C110/C130 → C100 y
+  C121/C131 → C111) y demanda en millares (estuches convertidos). Entran C1003516 y C1003538 (4.º y 7.º en
+  ventas); los 15 cubren el 52 % de los millares. Los artículos con revenido entregan el 27 % de lo pedido, contra
+  69 % los de horno solo.
 - **2026-10-07** (6): TPI, grupo 2 (Casermeiro). Respuestas del encargado y de la empresa incorporadas al
   modelo de la Etapa 1. Umbral 79 = promedio real de la cola al encender: el "90-100" de las planillas estaba
   inflado por producto retenido sin demanda (el 8 % de las ULI espera más de 30 días a propósito). Los días con

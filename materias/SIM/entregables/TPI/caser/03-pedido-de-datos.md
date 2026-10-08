@@ -283,3 +283,16 @@ Con esto se hace el ABC, se ve qué se vende, qué se fabrica, qué se importa y
   **Corrección**: la utilización del horno no es 17-25 % (cuenta que asumía 75 ULI por campaña). Medida mes a
   mes con las toneladas reales cementadas: **31 t/mes en 2024-2025 (42 % de 75 t) y 20 t/mes en 2026 (26 %)**,
   con picos de 65,5 t (mayo/2025) y 49 t (feb/2024 y ago/2025).
+
+- **GLP del generador endotérmico — recibido (08/10/2026).** 59 PDF de YPF Gas (`datos-locales/facturas-glp/`,
+  extraídos con `_perfil/extraer_facturas_glp.py` a `facturas_glp.csv`): 58 cargas de propano en kg entre 12/2023 y
+  09/2026, más una nota de débito por intereses que se descarta. Dos tanques vinculados de 4.000 L (bocas 423251 y
+  428031), monitoreados a distancia por YPF Gas, que repone antes del 40 %: las cargas siguen al consumo con un
+  retraso máximo de unos 2.400 kg (~23 días de horno caliente). **Faltan facturas**: no hay cargas entre 04/2024 y
+  10/2024 (87 días de horno caliente) ni entre 12/2024 y 02/2025 (63 días), imposible con esa capacidad. Serie
+  continua desde 03/2025: **≈ 100 kg de GLP por día de horno caliente** (regresión trimestral sobre días de campaña,
+  R² 0,86); el término por encendido no se separa con datos trimestrales. Precio sin IVA de 1.280 $/kg (2025) a
+  2.004 $/kg (09/2026): unos 200.000 $ por día caliente, del orden de un 25-30 % del costo eléctrico del mismo día.
+- **Tiempo de residencia en el horno — relevado (08/10/2026)**: 30 minutos de punta a punta. Con una ULI cada
+  85 minutos, en la cinta hay una sola ULI a la vez. El modelo carga una ULI cada 85 min con capacidad 1; la espera
+  medida incluye 55 min de más por ULI, despreciable frente a esperas de días.
