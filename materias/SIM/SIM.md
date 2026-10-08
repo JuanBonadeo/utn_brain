@@ -2797,6 +2797,17 @@ Conclusiones:
 
 ## Log
 
+- **2026-10-07** (6): TPI, grupo 2 (Casermeiro). Respuestas del encargado y de la empresa incorporadas al
+  modelo de la Etapa 1. Umbral 79 = promedio real de la cola al encender: el "90-100" de las planillas estaba
+  inflado por producto retenido sin demanda (el 8 % de las ULI espera más de 30 días a propósito). Los días con
+  1-2 ULI cementadas son error de planilla: excluidos, lo que tira la regla "un encendido por prioridad trata
+  solo urgentes" (los encendidos cortos reales tratan toda la cola) y baja `pPrioridad` a 0,0054. Regresión de
+  energía rehecha sin esos días: 2.303 kWh por encendido, 2.402 por día caliente, R² 0,90. El horno se mantiene
+  prendido si se sabe que entra más (48 h); E3 pasa a ser "apagar enseguida". El lavado se apura antes de encender
+  por riesgo de oxidación: las llegadas no son del todo exógenas (limitación declarada). Costo del capital 2 %
+  mensual y plazo prometido 60 días (para la Etapa 2). Segunda validación: 4 de 6 métricas dentro de tolerancia
+  (antes 2), incluida la espera; queda alta la frecuencia de campañas (+15 %). Presentación para el video
+  (planta 2D, statechart, gráficos con DataSet propio). Pendientes: GLP, ULI en la cinta a la vez.
 - **2026-10-07** (5): TPI, grupo 2 (Casermeiro). Primera validación de la Etapa 1
   (`entregables/TPI/caser/08-validacion-etapa1.md`, script `modelo/validar_etapa1.py`): E0 contra el registro
   del mismo período que las entradas (15 campañas, 1.749 ULI, 9 facturas). Dentro de tolerancia: toneladas

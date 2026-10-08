@@ -1,4 +1,28 @@
-# TPI Caser — validación de la Etapa 1 (primera pasada, 2026-10-07)
+# TPI Caser — validación de la Etapa 1
+
+## Segunda pasada (2026-10-07, con las respuestas del encargado)
+
+Cambios: umbral 79 (promedio real, sin producto retenido ni registros erróneos), 48 h caliente sin carga
+(confirmado), encendidos anticipados que tratan toda la cola, `pPrioridad` 0,0054, regresión de energía sin
+registros erróneos. La espera se compara solo con ULI que no quedaron retenidas a propósito (≤ 30 días: el 8 %
+espera más por falta de demanda). Números del motor mínimo del verificador, que con los parámetros anteriores
+coincidió byte a byte con AnyLogic; falta confirmarlos corriendo `CorridasE0E3` en el IDE.
+
+| Métrica | Registro | Modelo | Error | Tolerancia | Veredicto |
+|---|---:|---:|---:|---:|---|
+| Toneladas tratadas por mes | 21,6 | 21,1 | −2,5 % | 10 % | **OK** |
+| Duración de campaña (días) | 9,82 | 9,68 | −1,4 % | 10 % | **OK** |
+| Espera media, sin retenidas (días) | 7,38 | 6,52 | −11,7 % | 15 % | **OK** (Welch no contiene 0) |
+| kWh del horno por mes | 38.000 | 33.500 | −11,8 % | 15 % | **OK** |
+| Campañas por mes | 0,94 | 1,08 | +15,3 % | 10 % | fuera |
+| ULI por campaña | 114 | 139 | +21,9 % | 10 % | fuera (n = 11, Welch contiene 0) |
+| Espera p90 (días) | 19 | 14,4 | −24 % | — | informativa |
+
+Cuatro de seis métricas dentro de tolerancia (en la primera pasada eran dos). Lo que queda afuera es la
+frecuencia de campañas: el modelo enciende algo más seguido. Con 11 campañas en la ventana, la diferencia de ULI
+por campaña no es significativa. Ninguna de estas métricas se usó para fijar parámetros.
+
+## Primera pasada (2026-10-07, antes de las respuestas)
 
 > E0 (30 réplicas de `CorridasE0E3`, AnyLogic) contra el registro del **mismo período** que las entradas: ULI
 > lavadas del 15/08/2025 al 14/08/2026, campañas que empiezan en ese lapso (15) y facturas del medidor

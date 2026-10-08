@@ -32,7 +32,8 @@ from analizar_corridas import t_cuantil  # noqa: E402
 DATOS = AQUI.parent / "datos-locales"
 CSV_M = Path(sys.argv[1]) if len(sys.argv) > 1 else AQUI / "corridas_horno.csv"
 INI, FIN = pd.Timestamp("2025-08-15"), pd.Timestamp("2026-08-14")
-KWH_BASE_MES = 2013  # término constante de la regresión: el medidor del horno lo registra aunque no haya campaña
+KWH_BASE_MES = 2750  # término constante de la regresión (horno_regresion3.py): el medidor lo registra aunque no haya campaña
+ESPERA_RETENIDA = 30  # días: más que esto es producto "sin apuro" retenido a propósito (encargado, 07/10/2026)
 
 # ---------------- registro real ----------------
 tr = pd.read_excel(DATOS / "Simulación" / "Seguimiento TR ulis.xlsx", sheet_name="Tablero TR ULIS", header=1, engine="openpyxl")
@@ -43,6 +44,13 @@ tr = tr[(tr["Inicio Prensa"] >= "2023-01-01") & (tr["Inicio Prensa"] <= "2026-09
 ok = tr["Cementado"].notna() & (tr["Cementado"] - tr["Lavado"]).dt.days.between(-1, 400)
 cem = tr[ok].copy()
 ULT = cem["Cementado"][cem["Cementado"] <= "2026-12-31"].max()
+# Días sueltos de 1-2 ULI = error de planilla (encargado, 07/10/2026): se excluyen esas ULI.
+cem["dia"] = cem["Cementado"].dt.normalize()
+_d = pd.Series(sorted(cem["dia"].unique()))
+_c = (_d.diff().dt.days.fillna(99) > 3).cumsum()
+for _, _g in _d.groupby(_c):
+    if cem["dia"].between(_g.min(), _g.max()).sum() <= 2:
+        cem = cem[~cem["dia"].between(_g.min(), _g.max())]
 
 # Campañas: fechas de cementado separadas por más de 3 días (mismo criterio que campanas_cola.py)
 dd = pd.Series(sorted(cem["Cementado"].dt.normalize().unique()))
@@ -60,7 +68,8 @@ cv = camps[(camps["ini"] >= INI) & (camps["ini"] <= min(FIN, ULT))]
 meses_ventana = ((min(FIN, ULT) - INI).days + 1) / 30.4375
 
 lav = cem[cem["Lavado"].between(INI, FIN) & (cem["Cementado"] <= ULT)]
-espera = (lav["Cementado"].dt.normalize() - lav["Lavado"].dt.normalize()).dt.days.clip(lower=0)
+espera_todas = (lav["Cementado"].dt.normalize() - lav["Lavado"].dt.normalize()).dt.days.clip(lower=0)
+espera = espera_todas[espera_todas <= ESPERA_RETENIDA]  # el modelo no representa el producto retenido sin demanda
 kg_mes = cem[cem["Cementado"].between(INI, ULT)]["kg"].sum() / meses_ventana / 1000
 fac = pd.read_csv(DATOS / "_perfil" / "facturas_energia.csv")
 fac = fac[(fac["tipo"] == "Horno") & (pd.to_datetime(fac["periodo_hasta"]) > INI) & (pd.to_datetime(fac["periodo_hasta"]) <= "2026-04-30")]
@@ -98,11 +107,11 @@ NOMBRES = [
     ("uli", "ULI por campaña", 0.10),
     ("dias", "Duración de campaña (días)", 0.10),
     ("cola", "Cola al encender (ULI)", None),
-    ("esperaMedia", "Espera antes del horno, media (días)", 0.15),
-    ("esperaP90", "Espera antes del horno, p90 (días)", None),
+    ("esperaMedia", "Espera media, sin retenidas (días)", 0.15),
+    ("esperaP90", "Espera p90, sin retenidas (días)", None),
     ("tMes", "Toneladas tratadas por mes", 0.10),
     ("kwhMes", "kWh del horno por mes", 0.15),
-    ("fracPrioridad", "Fracción de encendidos chicos/prioridad", None),
+    ("fracPrioridad", "Fracción de encendidos cortos (< 7 días)", None),
 ]
 
 
@@ -143,5 +152,5 @@ for _, r in cv.iterrows():
     print(f"  {r['ini'].date()}  {r['dias']:3d} d  {r['uli']:4d} ULI  cola {r['cola']:3d}")
 print(f"\nModelo, distribución de la espera entre réplicas: media {mod['esperaMedia'].mean():.2f} "
       f"(rango {mod['esperaMedia'].min():.2f}-{mod['esperaMedia'].max():.2f}); p90 {mod['esperaP90'].mean():.1f}")
-print(f"Registro, espera: mediana {np.median(espera):.0f}, media {espera.mean():.2f}, p90 {np.quantile(espera, .9):.0f}, "
-      f"máx {espera.max():.0f}; ULI con espera > 30 días: {100*(espera > 30).mean():.1f} %")
+print(f"Registro, espera de todas las ULI: media {espera_todas.mean():.2f}, p90 {np.quantile(espera_todas, .9):.0f}, "
+      f"máx {espera_todas.max():.0f}; retenidas (> {ESPERA_RETENIDA} días, sin demanda): {100*(espera_todas > ESPERA_RETENIDA).mean():.1f} %")

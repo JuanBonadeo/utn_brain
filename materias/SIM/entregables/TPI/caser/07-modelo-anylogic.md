@@ -104,13 +104,13 @@ quedan solo agregados.
 |---|---|---|
 | `llegadasSemanas` | 52 semanas reales × 5 días hábiles (ULI lavadas que van al horno, 18/08/2025-14/08/2026) | Bootstrap por **semanas completas**: cada lunes se sortea una de las 52. Conserva los días sin lavado (49 % de los hábiles), los picos de 10-20 ULI y la autocorrelación dentro de la semana (0,43). Media 33,6 ULI/semana = 4,8/día calendario. Hora de llegada uniforme entre las 6 y las 22 |
 | `kgCuantiles` | 101 cuantiles de kg por ULI (media 140,9, mediana 131,6) | Mismas ULI; inversa de la distribución empírica |
-| `umbralULI` | 75 | Relevado 70-80; cola al encender medida: mediana 77 |
+| `umbralULI` | 79 | Promedio de la cola al encender de las campañas largas 2024-2026, sin ULI retenidas por falta de demanda ni registros erróneos (decisión del 07/10). Coincide con el 70-80 relevado |
 | `minPorULI` | 1440/17 ≈ 85 min | Encargado. Medido en fines de semana (cola nunca vacía por llegadas): ≈ 99 min → sensibilidad |
 | `horasEnVacio` | 48 h | Huecos de 1-2 días sin cementado dentro de campañas, imposibles con apagado y recalentado (≥ 84 h) |
 | `hCalentamiento`, `hEnfriamiento` | 36 h, 48 h | Relevado |
-| `pPrioridad` | 0,0095 | 17 encendidos chicos / 1.794 ULI llegadas con el horno apagado (2024-2026) |
-| `soloUrgentesEnPrioridad` | `true` | Campañas chicas: encienden con 39 en cola y tratan 5 (decisión del 07/10) |
-| `kWhPorDiaCaliente`, `kWhPorEncendido` | 2.445, 1.384 | Regresión de facturas (05- §2.3) |
+| `pPrioridad` | 0,0054 | 10 encendidos cortos reales / 1.857 ULI llegadas con el horno apagado (2024-2026, sin los días de 1-2 ULI, que son error de planilla) |
+| `soloUrgentesEnPrioridad` | `false` | Los encendidos cortos reales tratan toda la cola (~27 ULI). La regla "solo urgentes" salía de registros erróneos |
+| `kWhPorDiaCaliente`, `kWhPorEncendido` | 2.402, 2.303 | Regresión de facturas sin registros erróneos (R² 0,90; `horno_regresion3.py`) |
 | `tarifaKWh` | 290 $/kWh | Factura del horno, mar/2025 |
 | `calentamientoModeloDias`, `horizonteDias` | 90, 365 | El calentamiento se fija con Welch en los pilotos (05- §5.1) |
 
@@ -128,13 +128,13 @@ reciben exactamente las mismas ULI (números aleatorios comunes, 05- §5.3).
 
 | Escenario | `umbralULI` | `esperaMaxDias` | `horasEnVacio` |
 |---|---:|---:|---:|
-| E0 base | 75 | ∞ | 48 |
+| E0 base | 79 | ∞ | 48 |
 | E1 umbral bajo | 45 | ∞ | 48 |
-| E2 umbral + espera máxima | 75 | 15 | 48 |
-| E3 mantener caliente | 75 | ∞ | 96 |
+| E2 umbral + espera máxima | 79 | 15 | 48 |
+| E3 apagar enseguida | 79 | ∞ | 0 |
 
-E3 se redefinió: la base ya mantiene el horno caliente 48 h (lo que muestra el registro), así que la alternativa
-es mantenerlo el doble. Los valores 45, 15 y 96 son provisorios: se ajustan con las corridas piloto (paso 5).
+E3 (07/10): el encargado mantiene el horno prendido si sabe que entra más carga; la alternativa es apagarlo apenas
+se vacía la cola. Los valores 45 y 15 son provisorios: se ajustan con las corridas piloto (paso 5).
 
 Cada corrida escribe una fila con 33 campos (`encabezado()` en `Main`) y la imprime en consola con el prefijo
 `CSV_HORNO`. El test de medias:

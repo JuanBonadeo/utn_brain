@@ -203,7 +203,7 @@ public static void main(String[] a) {
     ok(m.esperas.equals(Arrays.asList(3.0, 3.0, 3.0, 0.0)), "esperas " + m.esperas);
     ok(m.nEncendidos == 1 && m.ulisPorCampana.equals(Arrays.asList(4.0)), "una campana de 4 ULI");
     eq(m.horasCaliente, 4.7, "horas a temperatura (3 a 7.7)");
-    eq(m.kWhTotal(), 1384 + 2445.0 / 24 * 4.7, "kWh");
+    eq(m.kWhTotal(), m.kWhPorEncendido + m.kWhPorDiaCaliente / 24 * 4.7, "kWh");
     eq(m.diasPorCampana.get(0), 1, "dias calendario de la campana");
     ok(m.balance() == 0 && m.nTratadas == 4, "conservacion"); }
   // B. Modo cupo: la ULI que llega durante la campaña espera a la próxima.
@@ -215,7 +215,7 @@ public static void main(String[] a) {
     CaserLogicCheck w = traza(3, "workConserving"); w.llegaEn(0); w.llegaEn(1); w.llegaEn(2); w.llegaEn(4.5); w.correr(20);
     ok(w.ulisPorCampana.equals(Arrays.asList(4.0)), "workConserving trata las 4"); }
   // C. Prioridad: una urgente con 2 normales en cola enciende antes del umbral y trata solo la urgente.
-  { CaserLogicCheck m = traza(5, "workConserving");
+  { CaserLogicCheck m = traza(5, "workConserving"); m.soloUrgentesEnPrioridad = true;
     m.llegaEn(0); m.llegaEn(1); m.llegaUrgenteEn(2);
     m.correr(2.0); ok(m.estado == 2 && m.campanaPrioridad, "la urgente enciende por prioridad");
     m.correr(4.0); ok(m.estado == 4, "trata solo la urgente (3-4) y enfria sin vacio");
