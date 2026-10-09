@@ -10036,7 +10036,7 @@ return String.join(",", partes);]]></Body>
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
 					<Color>-12490271</Color>
-					<Text><![CDATA[Subte Constitución - Franja 07:00-09:30 E0 (20 molinetes) - valores de prueba, no es resultado]]></Text>
+					<Text><![CDATA[Subte Constitución - Franja 07:00-09:30 E0 (20 molinetes) - escenario intermedio (rangos con fuente)]]></Text>
 					<Font>
 						<Name>SansSerif</Name>
 						<Size>24</Size>
@@ -10092,7 +10092,7 @@ return String.join(",", partes);]]></Body>
 				<Parameter>
 					<ParameterName><![CDATA[servicioPedSeg]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[3]]></Code>
+						<Code><![CDATA[2.4]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
@@ -10110,25 +10110,25 @@ return String.join(",", partes);]]></Body>
 				<Parameter>
 					<ParameterName><![CDATA[demoraAccesoRocaSeg]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[60]]></Code>
+						<Code><![CDATA[106]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[duracionDescargaSeg]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[120]]></Code>
+						<Code><![CDATA[145]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[servicioMinPedSeg]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[2]]></Code>
+						<Code><![CDATA[1.8]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[servicioMaxPedSeg]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[5]]></Code>
+						<Code><![CDATA[3.5]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
@@ -10140,7 +10140,7 @@ return String.join(",", partes);]]></Body>
 				<Parameter>
 					<ParameterName><![CDATA[pruebaSinteticaPed]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[true]]></Code>
+						<Code><![CDATA[false]]></Code>
 					</ParameterValue>
 				</Parameter>
 			</Parameters>
@@ -10188,7 +10188,7 @@ return String.join(",", partes);]]></Body>
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
 					<Color>-12490271</Color>
-					<Text><![CDATA[Subte Constitución - Franja 07:00-09:30 E1 (22 molinetes) - valores de prueba, no es resultado]]></Text>
+					<Text><![CDATA[Subte Constitución - Franja 07:00-09:30 E1 (22 molinetes) - escenario intermedio (rangos con fuente)]]></Text>
 					<Font>
 						<Name>SansSerif</Name>
 						<Size>24</Size>
@@ -10244,7 +10244,7 @@ return String.join(",", partes);]]></Body>
 				<Parameter>
 					<ParameterName><![CDATA[servicioPedSeg]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[3]]></Code>
+						<Code><![CDATA[2.4]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
@@ -10262,25 +10262,25 @@ return String.join(",", partes);]]></Body>
 				<Parameter>
 					<ParameterName><![CDATA[demoraAccesoRocaSeg]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[60]]></Code>
+						<Code><![CDATA[106]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[duracionDescargaSeg]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[120]]></Code>
+						<Code><![CDATA[145]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[servicioMinPedSeg]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[2]]></Code>
+						<Code><![CDATA[1.8]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[servicioMaxPedSeg]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[5]]></Code>
+						<Code><![CDATA[3.5]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
@@ -10292,7 +10292,7 @@ return String.join(",", partes);]]></Body>
 				<Parameter>
 					<ParameterName><![CDATA[pruebaSinteticaPed]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[true]]></Code>
+						<Code><![CDATA[false]]></Code>
 					</ParameterValue>
 				</Parameter>
 			</Parameters>

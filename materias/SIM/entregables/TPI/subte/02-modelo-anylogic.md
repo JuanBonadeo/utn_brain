@@ -524,7 +524,9 @@ sincronizada para que dos corridas en paralelo no intercalen líneas; `AllowPara
 `false` hasta comprobar en el IDE que un par en paralelo da las mismas filas que en secuencia (T2.3).
 
 `PeatonalFranjaVisualE0` y `PeatonalFranjaVisualE1` corren la franja completa con animación (escala 30x, hasta
-17.900 s) y los mismos valores de prueba que `PeatonalFranjaPrueba`, sin escribir archivo. Sirven para ver
+17.900 s) sin escribir archivo. Desde el 2026-10-09 usan el escenario intermedio, igual que
+`PeatonalCorridasApareadas`: servicio triangular (1,8; 2,4; 3,5) s, demora 106 s, descarga 145 s, proporción Roca 0,8
+y `pruebaSinteticaPed = false`. Antes usaban los valores de prueba de `PeatonalFranjaPrueba`. Sirven para ver
 dónde se traba el flujo (T2.6) y son la base del experimento de exhibición del video (T6.2).
 
 El plano sigue siendo hipotético en este modo y la vista lo indica con el aviso
