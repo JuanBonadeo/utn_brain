@@ -2797,6 +2797,13 @@ Conclusiones:
 
 ## Log
 
+- **2026-10-09** (2): TPI, grupo 2 (Casermeiro). Costo en pesos en el modelo (`modelo/agregar_costos.py`):
+  luz marginal 102 $/kWh (el promedio de 290 incluía el cargo fijo de potencia, hundido), GLP 130 kg por día
+  caliente a 2.250 $/kg, capital al 2 % mensual sobre 4.467 $/kg de producto. Corregido el precio por pieza del
+  granel en la lista de precios: se divide por mil (se factura por millar), no por las piezas de la caja; afectaba
+  385 códigos. Resultado (motor mínimo, falta confirmar en AnyLogic): E0 cuesta ~84 M$/año, casi todo energía
+  (79 M$) y poco capital (4,8 M$). E1 (+4,8 M$) y E2 (+2,9 M$) cuestan más; **E3, apagar enseguida, ahorra
+  ~18 M$/año** a cambio de +1,1 días de espera media. El capital parado pesa poco frente a tener el horno caliente.
 - **2026-10-09**: TPI, grupo 2 (Casermeiro). Estadística anual de compra de GLP (05/2024-04/2025, litros por mes)
   completa el año sin facturas. Serie 01/2024-08/2026: ≈ 130 kg de GLP por día de horno caliente (± 12, R² 0,92
   trimestral); no hace falta buscar las facturas faltantes.

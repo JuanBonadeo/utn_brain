@@ -24,13 +24,15 @@ _args = [a for a in sys.argv[1:] if a != "--comparar"]
 ARCH = Path(_args[0]) if _args else AQUI / "corridas_horno.csv"
 COMPARAR = Path(_args[1]) if "--comparar" in sys.argv and len(_args) > 1 else None
 
-# Primarias de la Etapa 1 (sin demanda ni nivel de servicio, que entran en la Etapa 2):
-# energía por kg y producto inmovilizado antes del horno (kg promedio en cola), más la espera media.
-PRIMARIAS = [("kWhPorKg", "kWh por kg tratado"), ("colaMediaKg", "kg promedio en cola (WIP pre-horno)"),
-             ("esperaMediaDias", "espera media en cola (días)")]
-SECUNDARIAS = [("esperaP90Dias", "espera p90 (días)"), ("campanasPorMes", "campañas por mes"),
-               ("nEncendidosPrioridad", "encendidos por prioridad"), ("uliPorCampanaMedia", "ULI por campaña"),
-               ("fraccionCaliente", "fracción del tiempo a temperatura"), ("costoEnergiaPorKg", "$ de energía por kg")]
+# Primarias de la Etapa 1 (05- §3.4; sin demanda ni nivel de servicio, que entran en la Etapa 2): costo relevante
+# del año = energía (luz marginal + gas) + costo financiero del producto parado antes del horno, y sus dos partes.
+PRIMARIAS = [("costoTotal", "costo relevante del año ($)"), ("costoEnergia", "energía: luz + gas ($)"),
+             ("costoCapital", "capital parado al 2 % mensual ($)")]
+SECUNDARIAS = [("esperaMediaDias", "espera media en cola (días)"), ("esperaP90Dias", "espera p90 (días)"),
+               ("colaMediaKg", "kg promedio en cola"), ("kWhPorKg", "kWh por kg tratado"), ("glpKg", "GLP del año (kg)"),
+               ("campanasPorMes", "campañas por mes"), ("nEncendidosPrioridad", "encendidos por prioridad"),
+               ("uliPorCampanaMedia", "ULI por campaña"), ("fraccionCaliente", "fracción del tiempo a temperatura")]
+DERIVADAS = {"costoEnergia": lambda f: float(f["costoLuz"]) + float(f["costoGLP"])}
 
 
 def betainc(a, b, x):
@@ -139,8 +141,9 @@ def main():
         print(f"{'medida':38s} {'E0':>10s} {e:>10s} {'D medio':>10s} {'s(D)':>9s}   IC                        nivel   ¿≠0?")
         for grupo, alfa, etiqueta in ((PRIMARIAS, 0.05 / len(PRIMARIAS), "98,3 %"), (SECUNDARIAS, 0.05, "95 %")):
             for col, nombre in grupo:
-                x0 = [float(por[("E0", s)][col]) for s in sem]
-                xk = [float(por[(e, s)][col]) for s in sem]
+                val = DERIVADAS.get(col, lambda f, c=col: float(f[c]))
+                x0 = [val(por[("E0", s)]) for s in sem]
+                xk = [val(por[(e, s)]) for s in sem]
                 z = [b - a for a, b in zip(x0, xk)]
                 m, sd, lo, hi = intervalo(z, alfa)
                 sig = "sí" if (lo > 0 or hi < 0) else "no"

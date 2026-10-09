@@ -111,7 +111,9 @@ quedan solo agregados.
 | `pPrioridad` | 0,0054 | 10 encendidos cortos reales / 1.857 ULI llegadas con el horno apagado (2024-2026, sin los días de 1-2 ULI, que son error de planilla) |
 | `soloUrgentesEnPrioridad` | `false` | Los encendidos cortos reales tratan toda la cola (~27 ULI). La regla "solo urgentes" salía de registros erróneos |
 | `kWhPorDiaCaliente`, `kWhPorEncendido` | 2.402, 2.303 | Regresión de facturas sin registros erróneos (R² 0,90; `horno_regresion3.py`) |
-| `tarifaKWh` | 290 $/kWh | Factura del horno, mar/2025 |
+| `tarifaKWh` | 102 $/kWh | **Marginal**: pendiente importe ~ kWh de las facturas del horno 03/2025-04/2026 (R² 0,95); el cargo fijo de potencia (~6,8 M$/mes) es hundido |
+| `kgGLPPorDiaCaliente`, `precioGLPkg` | 130 kg, 2.250 $/kg | Facturas YPF Gas + estadística de compras 01/2024-08/2026 (R² 0,92); precio 09/2026 con impuestos |
+| `costoProductoKg`, `tasaCapitalMensual` | 4.467 $/kg, 2 % | Lista × 0,335 por kg, ponderado por las ULI de 12 meses (cota superior: producto terminado); tasa de la empresa |
 | `calentamientoModeloDias`, `horizonteDias` | 90, 365 | El calentamiento se fija con Welch en los pilotos (05- §5.1) |
 
 Generadores: uno por fuente (`rngLlegadas`, `rngKg`, `rngUrgente`, `rngDemanda`, `rngCiclo`), sembrados con

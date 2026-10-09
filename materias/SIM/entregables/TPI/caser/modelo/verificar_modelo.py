@@ -239,7 +239,7 @@ public static void main(String[] a) {
   String[] filas = new String[4]; double[][] llegadas = new double[4][];
   for (int e = 0; e < 4; e++) {
     CaserLogicCheck m = new CaserLogicCheck(); m.escenario = "E" + e; m.semilla = 7;
-    if (e == 1) m.umbralULI = 45; if (e == 2) m.esperaMaxDias = 15; if (e == 3) m.horasEnVacio = 96;
+    if (e == 1) m.umbralULI = 45; if (e == 2) m.esperaMaxDias = 15; if (e == 3) m.horasEnVacio = 0;
     m.startup(); m.correr(1e9);
     ok(m.terminado && m.finalizado, "la corrida termina sola");
     ok(m.balance() == 0, "conservacion E" + e);
