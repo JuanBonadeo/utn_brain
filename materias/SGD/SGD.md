@@ -16,7 +16,7 @@ _(sin unidades cargadas todavía)_
   `scripts/pptx-sgd-serverless/`.
 - **Informe: Serverless** → `entregables/serverless/informe-serverless.md` (+ `.pdf`)
   Versión para entregar del informe de investigación: 12 págs., carátula,
-  sin las notas internas. Faltan profe e integrantes en el frontmatter.
+  sin las notas internas. Profes: Torres y Castagnino.
 - **Cuestionario: Serverless** → `entregables/serverless/cuestionario.md`
   10 preguntas (8 opción múltiple, 2 V/F) para la clase, con clave. El Google
   Form se genera con `cuestionario-form.gs` (Apps Script).

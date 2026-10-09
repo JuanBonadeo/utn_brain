@@ -153,9 +153,11 @@ if (defaults.logo) {
 const alumnos = asList(meta.alumnos).map((a) => a.split('|').map((x) => x.trim()));
 const conDatos = alumnos.some((a) => a.length > 1);
 
+// La columna de correo se omite si ningún alumno lo tiene ("Apellido, Nombre | | legajo").
+const conCorreo = alumnos.some((a) => a[1]);
 const alumnosHtml = !alumnos.length ? '' : conDatos
-  ? `<table class="alu"><thead><tr><th>Nombre y Apellido</th><th>Correo electrónico</th><th>Legajo</th></tr></thead><tbody>${
-      alumnos.map((a) => `<tr><td>${esc(a[0])}</td><td>${esc(a[1] || '')}</td><td>${esc(a[2] || '')}</td></tr>`).join('')
+  ? `<table class="alu"><thead><tr><th>Nombre y Apellido</th>${conCorreo ? '<th>Correo electrónico</th>' : ''}<th>Legajo</th></tr></thead><tbody>${
+      alumnos.map((a) => `<tr><td>${esc(a[0])}</td>${conCorreo ? `<td>${esc(a[1] || '')}</td>` : ''}<td>${esc(a[2] || '')}</td></tr>`).join('')
     }</tbody></table>`
   : `<div class="lista">${alumnos.map((a) => `<div>${esc(a[0])}</div>`).join('')}</div>`;
 

@@ -7,13 +7,14 @@ subtitulo: Qué es, cómo funciona por dentro, cuánto cuesta y cuándo conviene
 fecha: 09/10/2026
 
 profesores:
-  - (completar)
+  - Juan Torres
+  - Mario Castagnino
 
 alumnos:
-  - Casermeiro, Gonzalo | (completar correo) | 52674
-  - (completar) | (completar) | (completar)
-  - (completar) | (completar) | (completar)
-  - (completar) | (completar) | (completar)
+  - Bonadeo, Juan Cruz | | 53533
+  - Brizio, Augusto | | 52479
+  - Casermeiro, Gonzalo | | 52674
+  - Vitali, Bruno | | 53137
 ---
 
 ## 1. Introducción
