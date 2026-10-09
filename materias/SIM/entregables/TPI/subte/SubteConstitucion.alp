@@ -2692,8 +2692,8 @@ return (modoDemo ? "DEMO; " : "SIN VALIDAR; ") + "E" + escenario
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
 					<Color>-65536</Color>
-					<Text><![CDATA[DEMO SINTÉTICA — modelo implementado, todavía no calibrado ni validado]]></Text>
-					<TextCode><![CDATA[modoDemo ? "DEMO SINTÉTICA — modelo implementado, todavía no calibrado ni validado" : "PARÁMETROS CARGADOS — resultados pendientes de validación"]]></TextCode>
+					<Text><![CDATA[CAPA LÓGICA DE VERIFICACIÓN — datos sintéticos; los resultados salen de la capa peatonal (MainPeatonal)]]></Text>
+					<TextCode><![CDATA[modoDemo ? "CAPA LÓGICA DE VERIFICACIÓN — datos sintéticos; los resultados salen de la capa peatonal (MainPeatonal)" : "PARÁMETROS CARGADOS — resultados pendientes de validación"]]></TextCode>
 					<Font>
 						<Name>SansSerif</Name>
 						<Size>14</Size>
@@ -6275,27 +6275,6 @@ return String.join(",", partes);]]></Body>
 					</Font>
 					<Alignment>LEFT</Alignment>
 				</Text>
-				<Text>
-					<Id>1791000000106</Id>
-					<Name><![CDATA[etiquetaSalida]]></Name>
-					<X>670</X><Y>278</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<EmbeddedIcon>false</EmbeddedIcon>
-					<Z>0</Z>
-					<Rotation>0.0</Rotation>
-					<Color>-12490271</Color>
-					<Text><![CDATA[Escaleras a andenes Línea C]]></Text>
-					<Font>
-						<Name>SansSerif</Name>
-						<Size>13</Size>
-						<Style>0</Style>
-					</Font>
-					<Alignment>LEFT</Alignment>
-				</Text>
 				<TargetLine>
 					<Id>1791000000029</Id>
 					<Name><![CDATA[entradaPeatonal]]></Name>
@@ -6370,6 +6349,27 @@ return String.join(",", partes);]]></Body>
 					<FillColor>-2039584</FillColor>
 					<FillMaterial>null</FillMaterial>
 				</Rectangle>
+				<Text>
+					<Id>1791000000106</Id>
+					<Name><![CDATA[etiquetaSalida]]></Name>
+					<X>600</X><Y>280</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-12490271</Color>
+					<Text><![CDATA[Escaleras a andenes Línea C]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>13</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
 				<Wall>
 					<Id>1792000000102</Id>
 					<Name><![CDATA[paredNorteOeste]]></Name>
