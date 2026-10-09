@@ -657,3 +657,24 @@ perfil medio de SBASE: solo varían el servicio, la calle y la caminata. Los IC 
 *del modelo* con un día tipo, no la variación entre días reales. Para incorporarla, se podría sortear en
 cada par el perfil de un día hábil real de los 80 de marzo-junio, o hacer la sensibilidad con
 `factorDemandaPed`.
+
+### Reproducción en otra máquina (2026-10-09)
+
+Se volvió a correr `PeatonalCorridasApareadas` en Windows con AnyLogic PLE, con el mismo `.alp` y las mismas
+semillas. El archivo es [`verificacion/corridas_peatonales_reproduccion-windows-2026-10-09.csv`](verificacion/corridas_peatonales_reproduccion-windows-2026-10-09.csv)
+y no se carga en la planilla: la producción oficial sigue siendo `corridas_peatonales.csv` del 05/10.
+
+| Medida primaria | D 05/10 | D 09/10 (Windows) | IC 09/10 (98,33 %) |
+|---|---:|---:|---|
+| P90 de espera (s) | -9,78 | -9,80 | [-9,98; -9,62] |
+| Proporción con espera > 30 s | -0,064 | -0,064 | [-0,067; -0,062] |
+| P90 cohorte pico (s) | -11,05 | -11,17 | [-11,42; -10,92] |
+
+- **Demanda idéntica:** los pasajeros generados coinciden en las 60 corridas, así que las semillas por flujo
+  (trenes, calle, servicio) se reproducen exactamente.
+- **Movimiento no idéntico bit a bit:** ninguna fila es igual a la de producción. Las esperas difieren en
+  décimas de segundo, y las medias de E0 y E1 cambian menos de 0,2 s. La causa probable es que la
+  simulación peatonal no es determinística entre plataformas (aritmética de coma flotante y orden interno
+  de actualización de los peatones). Esto no está confirmado con documentación de AnyLogic.
+- **Conclusión:** E1 reduce las tres primarias con IC lejos de 0 en las dos máquinas. El resultado no
+  depende de la máquina en que se corre.

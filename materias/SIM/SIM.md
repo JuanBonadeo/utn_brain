@@ -2797,6 +2797,13 @@ Conclusiones:
 
 ## Log
 
+- **2026-10-09**: TPI subte, reproducción de la producción en Windows (Matías). `PeatonalCorridasApareadas` dio
+  60 filas válidas con la misma demanda en las 60 corridas, pero ninguna fila idéntica bit a bit: la capa
+  peatonal no es determinística entre máquinas. Las primarias quedan iguales a menos de 0,2 s (P90: D = -9,80
+  contra -9,78; P90 pico: -11,17 contra -11,05) y la conclusión no cambia. El CSV quedó en
+  `entregables/TPI/subte/verificacion/` y la comparación en `02-modelo-anylogic.md`. Ojo: los experimentos
+  `PeatonalFranjaVisualE0`/`E1` siguen con los valores de prueba (servicio 3 s, demora 60 s, descarga 120 s),
+  no con el intermedio.
 - **2026-10-08**: TPI, grupo 2 (Casermeiro). Recibidas las facturas de GLP (58 cargas, 12/2023-09/2026):
   ≈ 100 kg de propano por día de horno caliente desde 03/2025 (R² 0,86), unos 200.000 $ por día, 25-30 % del costo
   eléctrico de ese día. Faltan facturas de 04-10/2024 y 12/2024-02/2025 (incompatibles con la capacidad de los
