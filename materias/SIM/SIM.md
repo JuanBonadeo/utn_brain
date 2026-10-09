@@ -2797,6 +2797,9 @@ Conclusiones:
 
 ## Log
 
+- **2026-10-09**: TPI, grupo 2 (Casermeiro). Estadística anual de compra de GLP (05/2024-04/2025, litros por mes)
+  completa el año sin facturas. Serie 01/2024-08/2026: ≈ 130 kg de GLP por día de horno caliente (± 12, R² 0,92
+  trimestral); no hace falta buscar las facturas faltantes.
 - **2026-10-09**: TPI subte, reproducción de la producción en Windows (Matías). `PeatonalCorridasApareadas` dio
   60 filas válidas con la misma demanda en las 60 corridas, pero ninguna fila idéntica bit a bit: la capa
   peatonal no es determinística entre máquinas. Las primarias quedan iguales a menos de 0,2 s (P90: D = -9,80

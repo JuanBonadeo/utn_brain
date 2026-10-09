@@ -296,3 +296,9 @@ Con esto se hace el ABC, se ve qué se vende, qué se fabrica, qué se importa y
 - **Tiempo de residencia en el horno — relevado (08/10/2026)**: 30 minutos de punta a punta. Con una ULI cada
   85 minutos, en la cinta hay una sola ULI a la vez. El modelo carga una ULI cada 85 min con capacidad 1; la espera
   medida incluye 55 min de más por ULI, despreciable frente a esperas de días.
+- **Estadística anual de compra de GLP, 05/2024-04/2025 — recibida (09/10/2026)**, del sistema de gestión, en
+  litros por mes (coincide con las facturas donde hay: marzo/2025 = 1.437,69 L). Confirma que faltaban 61.465 L
+  (~31.400 kg) de facturas en ese año; **no hace falta buscarlas**: para el modelo alcanza con el total mensual y
+  el precio sale de las facturas. Serie completa 01/2024-08/2026 (facturas + estadística, densidad 0,512 kg/L,
+  `_perfil/glp_mensual.csv`): **≈ 130 kg de GLP por día de horno caliente** (regresión trimestral, ± 12, R² 0,92);
+  el término por encendido no es significativo. Con solo 2025-2026 daba ~100 kg/día: caso base 130, sensibilidad 100.
