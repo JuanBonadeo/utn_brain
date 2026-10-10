@@ -17,11 +17,11 @@ que conviene decirlo.
 | Expositor | Bloque | Láminas | Tiempo | Acumulado |
 |---|---|---|---|---|
 | 1 | Qué es | 1–4 | 3:30 | 3:30 |
-| 2 | Cómo funciona por dentro | 5–7 | 3:45 | 7:15 |
-| 3 | Economía y datos | 8–10 | 3:50 | 11:05 |
-| 4 | Límites y futuro | 11–14 | 3:30 | 14:35 |
+| 2 | Cómo funciona por dentro | 5–7 | 4:00 | 7:30 |
+| 3 | Economía y datos | 8–10 | 3:50 | 11:20 |
+| 4 | Límites y futuro | 11–14 | 3:30 | 14:50 |
 
-El texto hablado dura unos 12:45 a 145 palabras por minuto; el resto es margen
+El texto hablado dura unos 13:10 a 145 palabras por minuto; el resto es margen
 para pausas, cambios de expositor y algún imprevisto. Los bloques 2 y
 3 son los más técnicos: conviene que los tomen quienes mejor manejen el tema.
 
@@ -144,7 +144,7 @@ paquete liviano, con pocas dependencias.
 
 ## Lámina 7 — El sandbox por dentro
 
-*Expositor 2 · 1:15*
+*Expositor 2 · 1:40*
 
 Ahora, el problema que tiene el proveedor es difícil: correr código de miles de
 clientes distintos en la misma máquina física, sin que uno pueda ver al otro, y
@@ -157,11 +157,17 @@ milisegundos y con unos cinco megas de memoria extra. Lo logra sacando todo lo
 que una PC normal trae y una función no necesita. El aislamiento es por
 hardware. Es la base de Lambda.
 
-Cloudflare tomó el camino opuesto: isolates de V8, el motor de JavaScript de
-Chrome. Un solo proceso aloja miles de funciones aisladas entre sí. Arrancan
-unas cien veces más rápido que un proceso de Node, así que el cold start
-prácticamente desaparece. El costo es que el aislamiento es por software y
-solo corre JavaScript o WebAssembly.
+Cloudflare eligió el camino opuesto. En vez de darle a cada función su propia
+máquina virtual, mete miles de funciones dentro de un mismo programa: V8, el
+motor que ejecuta JavaScript en Chrome. Adentro de ese programa, cada función
+vive en un compartimento separado, que se llama isolate, con sus propias
+variables y sin poder ver las de las demás.
+
+La ventaja es la velocidad. Como el motor ya está andando, sumar una función
+nueva es casi instantáneo: unas cien veces más rápido que arrancar un programa
+de Node desde cero. El cold start prácticamente desaparece. La contra son dos
+cosas: la separación entre clientes la hace el software, no el hardware, y
+solo se puede correr JavaScript o WebAssembly.
 
 Pase al expositor 3: todo esto tiene un costo, y ahí es donde serverless se
 pone interesante.
