@@ -206,7 +206,9 @@
   - **Ruteo libre desde el origen** (*loose source routing*): el emisor da una lista de routers por los que no debe dejar de pasar.
   - **Registro de ruta** (*record route*): cada router que atraviesa agrega su IP. Sirve para **ver qué camino siguió el paquete**, por ejemplo para depurar ruteo. Como el espacio de opciones es chico, entran pocas direcciones (≈9).
   - **Marca de tiempo** (*timestamp*): como registro de ruta, pero cada router agrega también **su IP y una marca de 32 bits con la hora**. Sirve para medir demoras por tramo.
-  - Estas dos opciones de diagnóstico se usan con mensajes **ICMP**: `ping -r` manda un *echo* con *record route*; además existen los tipos ICMP 13/14 (*timestamp*).
+  - Estas dos opciones son de **IP**, pero se usan a través de **ICMP**, el protocolo de control y diagnóstico de IP: `ping -r N` manda un *echo* con *registro de ruta* y `ping -s N` uno con *marca de tiempo*; el *echo reply* trae los datos de vuelta. Sirven para **ver el camino** (rutas raras, loops) y **dónde está la demora**, en el momento, no como registro histórico.
+  - Ojo: los **tipos ICMP 13/14** (*timestamp request/reply*) son otra cosa: mensajes ICMP propios para pedirle la hora a otro host. No tienen relación con la opción *marca de tiempo* del header IP. *(conocimiento general: RFC 791 vs. RFC 792)*
+  - Las opciones ocupan como máximo **40 bytes**: entran **9 IPs** en registro de ruta y **4 pares IP + hora** en marca de tiempo (por eso Windows limita `-r` a 9 y `-s` a 4). *(conocimiento general)*
 
 ##### Fragmentación (MTU)
 - **MTU:** la mayor cantidad de datos que entra en una trama de esa red (Ethernet **1500 B**; Token Ring 8192 B). Si el próximo tramo tiene una MTU menor que el datagrama, **el router lo fragmenta**. Cada fragmento es un datagrama nuevo con **la misma Identificación**, su propio Offset y su propio MF.
@@ -628,7 +630,7 @@ La IP tiene que caer en la subred 10.118.64.0 y estar 42.51 direcciones más arr
 *Protocolos de Control de Internet*
 1. ¿Con qué finalidad se hace una **petición ARP** en una LAN? → Ver *ARP*.
 2. ¿A qué capa OSI pertenece **ICMP**? → **Capa 3 (red)**, aunque viaja dentro de IP. Ver *ICMP*.
-3. Con las opciones **registro de ruta** y **marca de tiempo**, ¿qué protocolo de control se usa? → **ICMP**. Ver *Encabezamiento IPv4*, Opciones.
+3. Con las opciones **registro de ruta** y **marca de tiempo**, ¿qué protocolo de control se usa? → **ICMP**: son opciones de diagnóstico del header IP que se usan a través de ICMP (`ping -r`, `ping -s`). No confundir con los tipos ICMP 13/14. Ver *Encabezamiento IPv4*, Opciones.
 
 *Protocolos de Ruteo*
 1. Defina **ruteo** en Internet. → Ver *Ruteo, Sistemas Autónomos, OSPF y BGP* (ruteo vs. reenvío).
@@ -1008,3 +1010,4 @@ El firewall **inspecciona los headers** de cada paquete y lo compara con sus reg
 - 2026-10-05: Resumen del **2do teórico de Medín** (Capa de Transporte, provisorio hasta confirmar el temario): `estudio/resumen-2do-parcial-medin.md` + pdf + docx, con las 5 preguntas reales de 2024 y 8 de 2dos parciales de otros profesores (2025), respondidas. Reemplaza a `preguntas-medin-2do-parcial` (borrado). Tahoe/Reno contrastado con la diapositiva y con Tanenbaum.
 - 2026-10-06: Ingesta de los **apuntes del 2do teórico de Medín** (`examen 2.rar`, mail del 15/08 reenviado por Gonza). Temario confirmado: Transporte + Puertos + Firewall. Los 3 primeros PDFs de transporte ya estaban (idénticos). Unidad 3: nueva sección *Puertos* (tipos y rangos IANA, puertos clave, estados, reenvío de puertos, SYN flood y spoofing, TCP vs. UDP en VPN y web, QUIC); resuelta la duda de UDP con la versión 2026 ("no corrige pero avisa a las capas superiores"). **Unidad 4 nueva: Firewall y seguridad perimetral.**
 - 2026-10-06: Revisión del temario completo del 2do teórico de Medín contra la wiki. Firewall ya estaba cubierto. Unidad 3 (*Puertos*): se agregan la predicción de secuencia TCP, los peligros de los puertos abiertos y cómo protegerlos, los puertos más atacados, la protección de DNS, DHCP y SNMP (v2c vs. v3, Fail2ban) y el escaneo con Nmap. Unidad 4: firewall en el modelo OSI, componentes de SASE. Resumen de Medín actualizado: preguntas tipo 24–27.
+- 2026-10-11: Unidad 2 (*Opciones* del header IPv4): corregida la justificación de "registro de ruta y marca de tiempo → ICMP". Son opciones de IP que se usan a través de ICMP (`ping -r`/`-s`); los tipos ICMP 13/14 son otro mecanismo. Corregido también en el resumen y el cuestionario de Baró.

@@ -213,7 +213,7 @@ Máscara           /    Subredes  Hosts  Salto
 ### ICMP
 - **Informa errores y transporta mensajes de control.** No decide nada: eso queda para las capas superiores. Viaja **dentro de un datagrama IP** (Protocolo = 1), pero **es de capa 3 (red)**.
 - Si un mensaje ICMP se pierde, **no se genera otro ICMP** por eso.
-- También es el protocolo de control que se usa con las opciones **registro de ruta** y **marca de tiempo** (`ping -r`, tipos 13/14).
+- También es el protocolo de control que se usa con las opciones de diagnóstico del header IP **registro de ruta** y **marca de tiempo** (`ping -r`, `ping -s`). No confundir con los tipos ICMP 13/14, que son otro mecanismo.
 ```
 0  Respuesta de eco (ping)          8  Solicitud de eco (ping)
 3  Destino inaccesible              11 Tiempo excedido (TTL=0) → tracert
@@ -333,7 +333,9 @@ A la **capa 3 (red)**. Sus mensajes viajan **encapsulados dentro de datagramas I
 
 **3) Cuando se utilizan las opciones de cabecera "Registro de Ruta" y "Marca de Tiempo", ¿qué protocolo de control se utiliza?**
 
-**ICMP**. Las dos opciones se usan con los mensajes de **eco** de ICMP (`ping -r` hace un ping con registro de ruta), y ICMP tiene además los mensajes específicos de **marca de tiempo** (tipos **13**, solicitud, y **14**, respuesta).
+**ICMP**. Registro de ruta y marca de tiempo son **opciones del header IP** pensadas para diagnóstico: la primera muestra el **camino** que siguió el paquete y la segunda la **demora** en cada router. Se usan a través de **ICMP**, el protocolo de control y diagnóstico de IP, por ejemplo con `ping -r` y `ping -s`: el *echo reply* trae los datos de vuelta al origen.
+
+Ojo: los tipos ICMP **13/14** (*timestamp*) son mensajes ICMP aparte, sin relación con la opción *marca de tiempo* de IP. No usarlos como justificación.
 
 ### Protocolos de Ruteo
 

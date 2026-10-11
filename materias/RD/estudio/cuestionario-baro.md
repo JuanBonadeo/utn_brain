@@ -189,7 +189,7 @@ Son todas las preguntas conceptuales de Capa de Red que tenemos, sin repetir. Ca
 
 **30)** **ICMP**: destino inaccesible (tipo 3), tiempo excedido (11), problema de parámetros (12), source quench (4, en desuso) y redireccionar (5).
 
-**31)** **ICMP**. Las dos opciones se usan con los mensajes de eco (`ping -r` registra la ruta y `ping -s` los horarios), y ICMP tiene además los mensajes de marca de tiempo (tipos 13 y 14).
+**31)** **ICMP**. Son opciones de diagnóstico del header IP (camino que siguió el paquete y demora en cada router) y se usan a través de ICMP, el protocolo de control y diagnóstico de IP: `ping -r` registra la ruta y `ping -s` los horarios. Los tipos ICMP 13/14 (*timestamp*) son otro mecanismo y no tienen relación con esta opción.
 
 **32)** Manda paquetes con **TTL = 1, 2, 3…** (hasta 30). Cada router donde el TTL llega a 0 descarta el paquete y devuelve un **ICMP 11** con su IP; así se descubre cada salto. El destino final responde con un ICMP 0. **Windows (`tracert`) usa ICMP echo; Unix (`traceroute`) usa UDP.**
 
