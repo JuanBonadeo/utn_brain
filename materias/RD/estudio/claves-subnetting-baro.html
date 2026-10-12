@@ -2,27 +2,27 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<title>RD — Claves de subnetting</title>
+<title>RD — Claves del 2do parcial de Baró</title>
 <style>
   @page { size: A4; margin: 7mm 8mm 6mm 8mm; }
   * { box-sizing: border-box; }
-  body { margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 9.6pt; line-height: 1.34; color: #111; }
-  h1 { font-size: 14pt; text-align: center; margin: 0 0 1.5mm; }
+  body { margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 8.7pt; line-height: 1.27; color: #111; }
+  h1 { font-size: 13pt; text-align: center; margin: 0 0 1.5mm; }
   h1 small { display: block; font-size: 7.6pt; font-weight: normal; color: #555; margin-top: .5mm; }
   .grid { display: grid; grid-template-columns: 1fr 1fr; border-top: 1.2px solid #111; border-left: 1.2px solid #111; }
-  .box { border-right: 1.2px solid #111; border-bottom: 1.2px solid #111; padding: 1.9mm 2.6mm 2mm; break-inside: avoid; }
+  .box { border-right: 1.2px solid #111; border-bottom: 1.2px solid #111; padding: 1.3mm 2.3mm 1.4mm; break-inside: avoid; }
   .full { grid-column: 1 / -1; }
-  .box h2 { font-size: 10.2pt; margin: 0 0 1mm; text-decoration: underline; text-underline-offset: 1.5px; }
+  .box h2 { font-size: 9.4pt; margin: 0 0 1mm; text-decoration: underline; text-underline-offset: 1.5px; }
   .box h2 .tag { text-decoration: none; font-weight: normal; font-size: 7.4pt; color: #444; margin-left: 1.2mm; }
   ol, ul { margin: .3mm 0 .6mm; padding-left: 4.2mm; }
   li { margin: 0 0 .45mm; }
   p { margin: .3mm 0 .7mm; }
-  .ej { font-size: 8.8pt; color: #333; border-left: 2px solid #999; padding-left: 1.5mm; margin-top: .9mm; }
-  table { border-collapse: collapse; width: 100%; margin: .6mm 0; font-size: 9.2pt; }
-  th, td { border: .8px solid #777; padding: .7mm 1.3mm; text-align: center; vertical-align: middle; }
+  .ej { font-size: 8pt; color: #333; border-left: 2px solid #999; padding-left: 1.5mm; margin-top: .9mm; }
+  table { border-collapse: collapse; width: 100%; margin: .6mm 0; font-size: 8.3pt; }
+  th, td { border: .8px solid #777; padding: .35mm 1.2mm; text-align: center; vertical-align: middle; }
   th { background: #ececec; }
   td.l, th.l { text-align: left; }
-  code, .mono { font-family: Menlo, Consolas, monospace; font-size: 8.8pt; }
+  code, .mono { font-family: Menlo, Consolas, monospace; font-size: 7.9pt; }
   .f td { text-align: left; border: none; padding: .25mm 1mm; }
   .f td:first-child { font-weight: bold; white-space: nowrap; width: 33%; }
   .two { display: grid; grid-template-columns: 1fr 1fr; gap: 0 4mm; }
@@ -31,7 +31,7 @@
 </head>
 <body>
 
-<h1>Claves de subnetting y direcciones IP<small>RD · 2do parcial práctico de Baró · Convención de la cátedra: subredes válidas = 2ⁿ − 2</small></h1>
+<h1>Claves del 2do parcial práctico de Baró<small>RD · Subnetting · direcciones IP · fragmentación · ping/ICMP · Convención de la cátedra: subredes válidas = 2ⁿ − 2</small></h1>
 
 <div class="grid">
 
@@ -119,6 +119,39 @@
     </table>
   </div>
 
+  <div class="box">
+    <h2>F. Fragmentación <span class="tag">E8</span></h2>
+    <table class="f">
+      <tr><td>Datos del original</td><td>long. total − 20</td></tr>
+      <tr><td>Datos por fragmento</td><td>MTU − 20, ↓ a múltiplo de 8</td></tr>
+      <tr><td>Cantidad</td><td>datos / datos por frag., ↑ al entero</td></tr>
+      <tr><td>Long. total</td><td>datos del fragmento + 20</td></tr>
+      <tr><td>Desplazamiento</td><td>byte de inicio / 8 (solo datos)</td></tr>
+      <tr><td>MF</td><td>1, salvo el último (0)</td></tr>
+    </table>
+    <p>Misma <b>Identificación</b> en todos · solo el <b>destino</b> reensambla · <b>DF = 1</b> → se descarta (ICMP 3) · Control: Σ datos = original.</p>
+    <table>
+      <tr><th>Frag</th><th>Datos (bytes)</th><th>Long. total</th><th>Desplaz.</th><th>MF</th></tr>
+      <tr><td>1</td><td>0 – 1479</td><td>1500</td><td>0</td><td>1</td></tr>
+      <tr><td>2</td><td>1480 – 2959</td><td>1500</td><td>185</td><td>1</td></tr>
+      <tr><td>3</td><td>2960 – 3979</td><td>1040</td><td>370</td><td>0</td></tr>
+    </table>
+    <p class="ej">4000 B en total, MTU 1500 → 3980 de datos, 1480 por fragmento (1480 / 8 = 185)</p>
+  </div>
+
+  <div class="box">
+    <h2>G. Ping e ICMP <span class="tag">E9</span></h2>
+    <p><b>ping</b> = ICMP <b>8</b> (echo request) → ICMP <b>0</b> (echo reply). Prueba capas física, enlace y red; no transporte ni aplicación. Si el destino está en otra red (según la máscara), va al <b>gateway</b>.</p>
+    <table>
+      <tr><th class="l">Resultado</th><th class="l">Significa</th><th class="l">Revisás</th></tr>
+      <tr><td class="l"><b>Respuesta</b></td><td class="l">anda todo, ida y vuelta</td><td class="l">nada</td></tr>
+      <tr><td class="l"><b>Tiempo agotado</b></td><td class="l">no vuelve ningún mensaje</td><td class="l">host B y cableado; ping al gateway</td></tr>
+      <tr><td class="l"><b>Destino inaccesible</b></td><td class="l">ICMP 3 de un <b>router</b> (la IP de "respuesta desde"): no tiene camino</td><td class="l">IP, máscara y gateway de A; ruta del router</td></tr>
+      <tr><td class="l"><b>Error</b></td><td class="l">falla la pila TCP/IP de A</td><td class="l">ping 127.0.0.1</td></tr>
+    </table>
+    <p>Diagnóstico de adentro hacia afuera: <b>127.0.0.1 → gateway → más allá</b>. <b>tracert</b>: TTL 1, 2, 3… y cada router devuelve un <b>ICMP 11</b>.</p>
+  </div>
+
   <div class="box full">
     <h2>Trampas</h2>
     <div class="two">
@@ -127,12 +160,14 @@
         <li>Los bloques arrancan en <b>0</b> y en múltiplos del salto: .32 a <b>.63</b>.</li>
         <li><b>Bloque</b> (32) ≠ <b>hosts</b> (30). Contá con +1: 62 − 33 + 1 = 30.</li>
         <li>Dos −2: hosts (red y bc, siempre) y subredes (1.ª y última, Baró).</li>
+        <li>"En total" incluye el header: datos = total − 20, numerados de 0 a datos − 1.</li>
       </ul>
       <ul>
         <li>La clase da la máscara <b>por defecto</b>; si el bloque es más chico, manda el bloque.</li>
         <li>Escribí <b>máscara</b>, no "mac" (MAC = dirección física). Bloque, no "trama".</li>
         <li>Revisá los 3 primeros bytes en toda la tabla.</li>
         <li>Justificá: cuenta de 2ⁿ − 2, salto y qué bloques descartás.</li>
+        <li>Fragmentación: el desplazamiento cuenta <b>solo datos</b> (1480 / 8, no 1500 / 8). Si da decimal, hay error.</li>
       </ul>
     </div>
   </div>
