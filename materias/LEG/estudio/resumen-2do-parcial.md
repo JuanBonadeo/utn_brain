@@ -127,7 +127,13 @@ protege por **derecho de autor** y no por patente.
   - **Obra en colaboración**: el aporte de cada uno **no se puede separar**. Todos son titulares y nadie decide la explotación **sin el consentimiento de los demás**.
   - **Obra colectiva**: una persona **toma la iniciativa, coordina** y publica a su nombre; es la titular. Los demás conservan el **derecho moral** sobre lo que aportaron.
 - **Art. 5 — Plazo.** Toda la **vida del autor** y **70 años** para los herederos, contados desde el **1 de enero del año siguiente a la muerte**. En colaboración, desde la muerte del **último** colaborador. Sin herederos, pasa al **Estado**.
-- **Art. 59.** Lo marcó el profesor, pero su texto no está en ninguna fuente que tengamos. **Pendiente: buscarlo en InfoLEG.**
+- **Arts. 57 a 63 — El registro de obras.** El **art. 59**, que figura en los apuntes de clase, está en este capítulo. El Registro publica en el **Boletín Oficial** las obras que se presentan, y si en **un mes** nadie se opone, las **inscribe** y entrega el título al autor que lo pida. Alrededor de él:
+  - el editor debe **depositar** los ejemplares de toda obra publicada (arts. 57 y 61);
+  - el depósito **garantiza los derechos** del autor (art. 62);
+  - si la obra **no se inscribe**, el derecho del autor **queda suspendido** hasta que se inscriba (art. 63).
+- **Si el 59 estaba mal anotado**, los otros artículos de la 11.723 que se suelen preguntar en Sistemas son:
+  - **art. 9**: quien tiene licencia de un programa puede hacer **una única copia de salvaguardia**, identificada con su nombre y la fecha, solo para reemplazar el original;
+  - **art. 55 bis**: la explotación del software incluye los **contratos de licencia** de uso o reproducción.
 
 ## 3. Unidad 5 — Derecho laboral
 
