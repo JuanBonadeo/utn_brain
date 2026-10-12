@@ -9232,3 +9232,5 @@ métricas de proyecto vs producto — ver [Unidad 8](#unidad-8--medición-y-aná
   decidir (el parcial es a libro abierto), más versiones cortas de menos de 500 caracteres.
 - 2026-10-06: `estudio/resumen-ad-extendido.epub` — la versión de 101 págs. del resumen AD en EPUB
   para leer en el Kindle (26 capítulos con índice navegable), generada con `scripts/md-to-epub.js`.
+- 2026-10-12: `estudio/resumen-ad.epub` — la versión condensada (57 págs.) del resumen AD en EPUB
+  para el Kindle (26 capítulos con índice navegable), generada con `scripts/md-to-epub.js`.
