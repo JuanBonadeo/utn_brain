@@ -1,10 +1,11 @@
 # Legislación — Wiki
 
-> **2do parcial: mié 28/10/2026, escrito.** Entran las **unidades 4, 5 y 6**. Por la poca cantidad de
-> clases, en 2026 sólo se dio la unidad 4; la 5 y la 6 se estudian del resumen 2025
-> (`fuentes/resumen-legislacion-2do-parcial-2025.md`, fuente confiable). Los artículos **no se piden
-> completos**: se piden unos pocos ejemplos (típicamente "3 ejemplos" de un artículo). Ver
-> [[#Para el parcial — qué artículos y cuántos ejemplos]].
+> **2do parcial: mié 28/10/2026, escrito.** Entran las **unidades 4, 5 y 6**. En 2026 sólo se dio
+> en clase la unidad 4. Fuentes: U4, el resumen 2025 y los apuntes de clase (la cátedra sólo pasó
+> la lista de leyes); **U5, el apunte de cátedra 2026** (está escrito sobre la reforma de la Ley
+> 27.802 y deja desactualizado al resumen 2025); **U6, la ley 11.291, el Estatuto y el Código de
+> Ética** con los artículos que marca la guía de la cátedra. Los artículos **no se piden completos**:
+> se piden unos pocos ejemplos (confirmar en clase). Resumen para estudiar: `estudio/resumen-2do-parcial.md`.
 
 ## Índice
 1. Unidad 1 — _(sin desarrollar: no hay fuentes cargadas)_
@@ -18,15 +19,18 @@
 
 ## Para el parcial — qué artículos y cuántos ejemplos
 
-Sale de los apuntes de clase 2026 (U4) y de las marcas del resumen 2025 (U6).
+U4 sale de los apuntes de clase 2026; U6, de las preguntas guía de la cátedra
+(`fuentes/catedra/u6/preguntas-guia-colegio.md`). U5 no tiene artículos marcados: la guía de lectura
+pregunta por temas.
 
 | Unidad | Norma | Artículos | Qué se pide |
 |---|---|---|---|
 | 4 | Ley de patentes 24.481 | **6 y 7** | 3 ejemplos de cada uno |
 | 4 | Ley de marcas 22.362 | **1, 2 y 3** | el 1 para saber qué es registrable; **3 ejemplos del 2 y del 3** |
 | 4 | Ley 11.723 (propiedad intelectual) | **1, 2, 4, 5 y 59** | qué protege, facultades del autor, titulares, plazo |
-| 6 | Ley 11.291 (Colegio de Ingenieros Especialistas, Santa Fe) | **4, 18, 19, 21, 24** | 18: elegir 3 causales |
-| 6 | Código de ética | **5 y 6** | art. 6: 3 ejemplos por ámbito (12 puntos) |
+| 6 | Ley 11.291 (creación del Colegio) | **1, 2, 3, 4, 6, 11, 18, 19 y 21** | carácter, distritos, normativa, finalidades, autoridades, tribunal, causales, sanciones, matriculación |
+| 6 | Estatuto (Dec. 0601/99) | **4 a 10, 12, 13, 22, 23, 49, 54 y 55** | ejercicio profesional, uso del título, matrícula, inhabilitados, cancelación, causales y sanciones, tribunal. **Prevalece sobre la ley donde se repiten** |
+| 6 | Código de Ética | **1, 2, 6 y 8** | competencia del tribunal; art. 6: ejemplos por ámbito; art. 8: composición del tribunal |
 
 ## Desarrollo
 
@@ -135,7 +139,7 @@ Pluralidad de autores (inc. a):
 #### Dudas / pendientes
 - **Art. 59 de la 11.723**: el profesor lo marcó como artículo de parcial, pero no está desarrollado ni en los apuntes ni en el resumen. Conseguir el texto (InfoLEG) y agregarlo.
 - **Derechos reales — enumeración del resumen.** Lista "posesión" como derecho real. *(Conocimiento general, no está en tus materiales:)* en el CCyC la posesión es una **relación de poder** sobre la cosa, no un derecho real; el art. 1887 enumera dominio, condominio, propiedad horizontal, conjuntos inmobiliarios, tiempo compartido, cementerio privado, superficie, usufructo, uso, habitación, servidumbre, hipoteca, anticresis y prenda. En el parcial, mejor dar ejemplos que no se discutan: dominio, propiedad horizontal, usufructo, tiempo compartido.
-- **Invenciones del trabajador.** El resumen 2025 pone el régimen de los 90 días, el 50 % de regalías y el año posterior al egreso a continuación de la 11.723. *(Conocimiento general:)* ese régimen es el de las invenciones laborales de la **ley de patentes** (art. 10 de la Ley 24.481). Lo que sí es de la 11.723 es el art. 4 inc. d (software hecho por dependientes).
+- **Invenciones del trabajador.** El resumen 2025 pone el régimen de los 90 días, el 50 % de regalías y el año posterior al egreso a continuación de la 11.723. *(Conocimiento general:)* ese régimen es el de las invenciones laborales de la **ley de patentes** (art. 10 de la Ley 24.481). **La cátedra lo explica con el art. 82 de la LCT** más el art. 4 inc. d de la 11.723 (apunte de U5): ver Unidad 5, bloque 2. En el parcial, usar ese encuadre.
 - **Novedad en el modelo de utilidad.** El resumen dice "novedad local"; los apuntes de clase dicen sólo "novedad". Si lo preguntan, decir novedad + aplicación industrial y que, a diferencia de la patente, **no exige mérito inventivo**.
 
 #### Fuentes
@@ -146,202 +150,454 @@ Pluralidad de autores (inc. a):
 
 ### Unidad 5 — Legislación laboral: el contrato de trabajo
 
-> No se dio en clase en 2026: todo sale del resumen 2025.
+> **Fuente principal: el apunte de cátedra 2026** (`fuentes/catedra/u5/apunte-derecho-laboral.md`,
+> Dra. Massachiodi / Abog. Soria), escrito sobre la **Ley 27.802**, la reforma laboral que modificó
+> la LCT (Ley 20.744). El resumen 2025 es anterior a la reforma: donde difieren, vale el apunte.
+> La guía de lectura de la cátedra (`fuentes/catedra/u5/guia-de-lectura.md`) ordena la unidad en
+> cinco bloques; esta sección sigue ese orden.
 
 #### Conceptos clave
-- **Contrato de trabajo** (LCT): "habrá contrato de trabajo, **cualquiera sea su forma o denominación**, siempre que una persona **física** se obligue a realizar actos, ejecutar obras o prestar servicios a favor de otra **bajo relación de dependencia**, durante un **período** determinado o indeterminado, mediante el **pago de una remuneración**".
-- Dos elementos esenciales: **relación de dependencia** y **remuneración**.
-- Los **derechos laborales son irrenunciables**, y un convenio colectivo nunca puede empeorar lo que fija la LCT.
-- **Principio protectorio**: ante la duda —sobre si hay relación laboral o cómo interpretar una norma— se resuelve **a favor del trabajador**.
+- **Trabajo para el derecho laboral**: actividad **lícita prestada a otro**, que tiene facultad de dirigirla, **a cambio de una remuneración** (art. 4 LCT). Con la Ley 27.802 el trabajo se define primero como **relación de intercambio con fin económico** ("lo económico prima por sobre lo humano").
+- **El derecho del trabajo sólo se ocupa del trabajo en relación de dependencia.** La reforma **achicó** qué se considera dependencia y **amplió** el trabajo autónomo.
+- **Contrato de trabajo (art. 21)**: una **persona humana** se obliga a prestar servicios a favor de otra **bajo su dependencia**, por un período determinado o indeterminado, mediante el pago de una **remuneración**. La 27.802 cambió "persona física" por "persona humana" y eliminó los usos y costumbres como fuente de las cláusulas.
+- **Relación de trabajo (art. 22)**: la **ejecución efectiva** de esa prestación. El contrato es la **fuente jurídica** del vínculo; la relación es su **cumplimiento** en los hechos.
+- **Orden público laboral**: lo pactado no puede quedar por debajo de la ley ni del convenio colectivo; los derechos del trabajador son irrenunciables.
 
 #### Desarrollo
 
-**Contrato de trabajo (U5) vs. contrato de servicio (U3)**
+##### 1. Régimen legal y contrato de trabajo
 
-| | Contrato de trabajo | Contrato de servicio |
-|---|---|---|
-| Norma | LCT y convenios colectivos | Código Civil y Comercial |
-| Vínculo | **Relación de dependencia** | **Autónomo** |
-| Quién presta | Sólo **persona humana** | Persona humana o jurídica |
-| Pago | **Remuneración** | **Honorarios** (el prestador se hace cargo de sus aportes) |
+**Qué queda fuera de la relación dependiente**
+- **Trabajo benévolo**: gratuito, sin buscar beneficio propio (colaborar en una institución).
+- **Trabajo familiar**: entre cónyuges, de padres e hijos bajo responsabilidad parental, de hijos convivientes.
+- **Trabajo autónomo**: retribuido, pero por cuenta y riesgo propios.
+- **Nuevas exclusiones de la Ley 27.802**: servicios profesionales con facturación, contrataciones civiles o comerciales y algunas formas de trabajo en plataformas.
+- El **art. 2 LCT** excluye además a ciertos empleados de la Administración Pública, al personal de casas particulares, a los trabajadores agrarios (tienen régimen propio), a los prestadores independientes de plataformas, al personal embarcado y a las personas privadas de libertad.
 
-**Las tres dependencias**
-- **Económica**: el riesgo de la empresa lo corre el empleador.
-- **Jurídica-disciplinaria**: el empleador da órdenes y el trabajador debe cumplirlas; si no, puede sancionarlo ("en lo disciplinario, el empleador es juez y parte").
-- **Técnica**: el empleador dice **cómo, cuándo y dónde** se trabaja.
+**Ámbito de la LCT (Ley 20.744)**: contratos ejecutados en territorio argentino, cualquiera sea el lugar de celebración o la nacionalidad de las partes. Si la actividad tiene **estatuto especial o convenio colectivo**, la LCT es **supletoria**.
 
-**Alta y período de prueba**
-- **Alta**: la registración del trabajador. Debe hacerse desde el primer momento, antes del período de prueba (**alta temprana**).
-- **Período de prueba**: el despido no genera indemnización. Originalmente **3 meses** (art. 92 bis LCT); la **Ley Bases (Ley 27.742)** lo llevó a **6 meses**, ampliable por **convenio colectivo** a **8 meses** en empresas de 6 a 100 trabajadores y a **1 año** en empresas de hasta 5.
-- Los convenios colectivos se negocian en **paritarias** entre la **patronal** (cámara de empleadores del rubro) y el **sindicato o gremio**.
+**Las tres subordinaciones**
 
-**Modalidades**
+| Tipo | Qué significa |
+|---|---|
+| **Técnica** | El trabajador adecua su actividad a los criterios, métodos o sistemas del empleador, incluso mediante herramientas tecnológicas |
+| **Económica** | Pone su fuerza de trabajo a disposición a cambio de remuneración y **no asume el riesgo empresario** |
+| **Jurídica** | El empleador puede **dirigir, controlar y ejercer poder disciplinario** |
 
-| Modalidad | Qué la caracteriza | Ejemplo |
-|---|---|---|
-| **Plazo indeterminado** | Regla general; dura hasta la jubilación o la muerte, salvo ruptura. El trabajador sigue yendo hasta recibir el telegrama o carta documento | Empleo común |
-| **Plazo fijo** | Fecha de inicio y de fin, **máximo 5 años**. No hace falta notificar el fin | Contrato del 1/3 al 31/12 |
-| **Eventual** | Se sabe cuándo empieza pero no cuándo termina; necesidades extraordinarias | Pico de demanda extraordinario |
-| **De temporada** | La relación existe, pero la prestación cobra sentido en ciertas épocas del año | Guardavidas, heladería que cierra en invierno |
+**Elementos esenciales**
 
-**Presunciones a favor del trabajador.** Dar por ciertos hechos que pueden serlo o no.
-- **De existencia** del contrato de trabajo.
-- **De continuidad**: si el empleador no puede probar la ruptura, la relación sigue.
-- **Por silencio del empleador**: si se le pidió que se expida y calla, se tiene por cierto lo que el trabajador planteó.
-- **Por no exhibir los libros obligatorios** (horarios, registros, remuneraciones, higiene y seguridad, licencias, aportes): si no los exhibe en un juicio o reclamo, se presume a favor del trabajador; no tenerlos ya es sancionable (multa, clausura).
+| Elemento | Contenido |
+|---|---|
+| **Sujetos** | Trabajador y empleador |
+| **Objeto** | Prestación **personal e infungible**, en condiciones de subordinación; posible, determinada o determinable, lícita |
+| **Causa final** | Para el trabajador, la **remuneración**; para el empleador, recibir la prestación y **apropiarse de su resultado** |
 
-**Deberes duales** (rigen para las dos partes)
-- **Obligación genérica**: cumplir lo pactado y todo el marco legal. Rige la **autonomía de la voluntad**, siempre que lo pactado no sea abusivo ni viole la ley. Por **irretroactividad**, se aplica la ley vigente al contratar.
-- **Buena fe**: obrar como un **buen empleador** y un **buen trabajador** (lealtad), y la **buena fe creencia** (la expectativa legítima sobre la conducta del otro).
+- **Consentimiento**: puede ser verbal; no puede vulnerar el orden público laboral.
+- **Capacidad**: plena desde los **18 años**; limitada entre **16 y 18**.
+- **Forma**: **libertad de formas**, salvo excepciones: el **plazo fijo** debe ser **escrito**, y requieren comunicación escrita la renuncia, el preaviso, ciertas suspensiones y la justa causa del despido.
 
-Los deberes de uno son los derechos del otro: si el empleador debe hacer los aportes, el trabajador tiene derecho a que se los hagan.
+**Sujetos**
+- **Trabajador (art. 25)**: persona humana que presta servicios en las condiciones de los arts. 21 y 22. La prestación es **personal** y no se delega. Se diferencia del **autónomo** porque trabaja bajo dependencia y no por su cuenta y riesgo.
+- **Empleador (art. 26)**: persona humana o jurídica, o conjunto de ellas aun sin personalidad jurídica, que requiere los servicios de un trabajador. Organiza, dirige, controla y disciplina.
+- **Empresa (art. 5)**: organización de medios personales, materiales e inmateriales bajo una dirección, con fines económicos o benéficos. **Empresario**: quien la dirige. **Establecimiento**: unidad técnica o de ejecución; una empresa puede tener varios.
+
+**Prueba y presunción del art. 23**
+- Rige la **libertad de prueba**: confesional, documental, pericial, informativa, testimonial.
+- **Presunción**: si se prueba la prestación de servicios en situación de dependencia, **se presume el contrato de trabajo** (admite prueba en contrario).
+- **Ley 27.802**: la presunción **no se aplica** a contrataciones de obra, servicios profesionales u oficios sin dependencia **cuando se emiten comprobantes** (factura) **o se paga por sistemas bancarios**. Aun así, el trabajador puede probar por otros medios que hubo dependencia real.
+
+##### 2. Derechos y obligaciones de las partes
+
+Los derechos de una parte son los deberes de la otra.
+
+| Deberes del empleador | Deberes del trabajador |
+|---|---|
+| Pagar la remuneración (carácter **alimentario**), como mínimo el **SMVM** o el salario de convenio; **especie hasta el 20 %** | **Obediencia** a las órdenes legítimas |
+| **Seguridad**: proteger la vida, salud, integridad psicofísica y bienes del trabajador | **Diligencia y colaboración**: puntualidad, asistencia, dedicación |
+| **Ocupación efectiva** y adecuada a la categoría | **Fidelidad**: buena fe, no perjudicar al empleador |
+| Diligencia e iniciativa | **Reserva o secreto** de la información confidencial |
+| Cumplir obligaciones laborales, sindicales y de seguridad social; llevar la documentación | **Custodia** de los instrumentos de trabajo |
+| Entregar certificados de trabajo | **Responsabilidad por daños** causados con **dolo o culpa grave** |
+| Facilitar la **formación profesional** | **No concurrencia** (competencia desleal), salvo autorización |
+| **Igualdad de trato**, no discriminar | **Auxilio** ante peligro grave o inminente |
 
 **Facultades del empleador**
-- **Organización**: qué produce, cómo estructura los sectores, qué recursos usa.
-- **Dirección**: dar órdenes sobre cómo hacer las tareas.
-- **Control**: verificar horarios, rendimiento, seguridad (marcadores, cámaras, software), **respetando la dignidad y la privacidad**.
-- **Disciplinaria**: sancionar incumplimientos.
-- **Ius variandi**: modificar condiciones del contrato **dentro de límites**: no puede tocar los **elementos esenciales** (remuneración, jornada, categoría), debe respetar la **indemnidad** del trabajador y el cambio debe ser **funcional** a la empresa. Válido: cambio de sucursal, correr el horario respetando la duración de la jornada, cambio de sector sin afectar la categoría.
-- Si el empleador **abusa del ius variandi**: (1) el trabajador lo **intima** por un medio fehaciente para que restituya las condiciones; (2) si no responde o persiste, se considera en **despido indirecto** y cobra como si fuera despido sin causa.
+- **Organización**: tareas, distribución, métodos, modo, tiempo y lugar.
+- **Reglamentaria**: dictar reglamentos internos y políticas.
+- **Dirección**: dar órdenes e instrucciones.
+- **Control**: asistencia, puntualidad, tareas, uso de herramientas, respetando **dignidad, intimidad, privacidad y protección de datos**.
+- **Disciplinaria**: sancionar con **contemporaneidad, proporcionalidad y sin doble sanción**.
 
-**Extinción, despido e indemnización**
+**Derechos del trabajador**: remuneración; que las facultades del empleador respeten su dignidad; ocupación efectiva; aportes y certificados; formación; igualdad; **protección de sus invenciones**; libertad de expresión e intimidad.
 
-| Quién rompe | Figura | ¿Indemnización? |
+**Invenciones, descubrimientos y software del trabajador**
+- **LCT art. 82**:
+  - Son del **trabajador** las invenciones o descubrimientos **personales**, aunque haya usado instrumentos que no le pertenecen.
+  - Son del **empleador** cuando: a) derivan de los procedimientos, métodos o instalaciones del establecimiento, o de sus experimentaciones, investigaciones o mejoras; b) el trabajador fue **contratado con ese objeto**.
+- **Ley 11.723, art. 4 inc. d**: el empleador es titular del software que sus dependientes **contratados para programar** produjeron en sus funciones, **salvo estipulación en contrario**.
+- Aplicado al software:
+  - hecho **fuera** del contrato de trabajo, aun con herramientas ajenas → del **trabajador**;
+  - hecho por alguien **contratado para eso** → del **empleador**, salvo pacto distinto;
+  - derivado de los **procedimientos, métodos o instalaciones** de la empresa, sea cual sea el objeto del contrato → del **empleador**.
+
+**Ius variandi (art. 66, texto de la Ley 27.802)**
+- El empleador puede cambiar la **forma y modalidades** de la prestación si **no altera modalidades esenciales** del contrato **ni causa perjuicio material** al trabajador.
+- Se pueden cambiar aspectos **no esenciales**: modalidades, distribución del tiempo, lugar de trabajo. Para los **esenciales** hace falta el **consentimiento** del trabajador.
+- **Perjuicio material** = daño económico: baja directa o indirecta del sueldo, más gastos de viaje por un traslado.
+- **Art. 69**: el ius variandi **no puede usarse como sanción**.
+- Si el empleador hace un cambio prohibido y, **intimado**, no lo deja sin efecto, el trabajador puede considerarse en **despido indirecto** (como despido sin causa).
+
+##### 3. Modalidades del contrato y jornada
+
+**El contrato por tiempo indeterminado es la modalidad típica**; las de duración determinada son excepciones.
+
+| Modalidad | Requisitos y rasgos |
+|---|---|
+| **Plazo fijo** (arts. 90 y 93) | **Plazo cierto**, **por escrito**, **máximo 5 años** (sin mínimo), **causas objetivas** que lo justifiquen. La 27.802 limitó la indemnización por ruptura anticipada |
+| **Temporada** (art. 96) | Actividades del giro normal que se cumplen **sólo en ciertas épocas del año** y se repiten en cada ciclo. La relación es **permanente** aunque la prestación sea discontinua |
+| **Eventual** | Necesidades **transitorias, extraordinarias u ocasionales**; no se puede fijar de antemano cuándo termina. En suplencias, se indica a quién reemplaza. La reforma flexibilizó sus requisitos |
+| **Tiempo parcial** (art. 92 ter) | Jornada **menor** a la legal o convencional, sueldo **proporcional**. La 27.802 eliminó el tope de **dos tercios** de la jornada y permite horas suplementarias voluntarias, sin superar la jornada legal |
+
+**Período de prueba (art. 92 bis, plazos de la Ley 27.802)**
+
+| Trabajadores de la empresa | Período de prueba |
+|---|---|
+| Hasta 5 | **1 año** |
+| Entre 6 y 100 | **8 meses** |
+| Más de 100 | **6 meses** |
+
+- Cualquiera de las partes puede terminar el vínculo **sin causa y sin indemnización por antigüedad**.
+- El empleador **no puede usar el período de prueba dos veces** con el mismo trabajador (si lo hace, renunció a él).
+- Es **abuso** contratar sucesivamente a distintos trabajadores para un mismo puesto permanente para no efectivizar a nadie.
+- **Hay que registrar desde el inicio**: no registrar implica **renunciar** al período de prueba.
+- Durante la prueba rigen **todos los derechos** (incluso sindicales), los **aportes**, las prestaciones por accidente y enfermedad laboral, y por enfermedad inculpable hasta que termine el período. **Cuenta como antigüedad.**
+
+**Jornada (art. 197)**: todo el tiempo en que el trabajador está **a disposición** del empleador, incluidas las pausas impuestas por la tarea. **No** incluye el viaje al trabajo.
+
+| Jornada | Horario | Máximo |
 |---|---|---|
-| Empleador | Despido **con causa** — debe probar **injuria grave** del trabajador | No |
-| Empleador | Despido **sin causa** | Sí |
-| Trabajador | **Renuncia** | No |
-| Trabajador | **Despido indirecto** — por injuria grave del empleador | Sí |
+| **Diurna** | 6 a 21 h | **8 h diarias o 48 semanales** (Ley 11.544, Convenio 1 OIT). Hay trabajo extraordinario si se pasan las **48 semanales** o las **9 diarias** |
+| **Nocturna** | 21 a 6 h | **7 h**; se paga igual que una jornada de 8. Si se alternan horas diurnas y nocturnas, la jornada se reduce **8 minutos por cada hora nocturna** (art. 200) |
+| **Insalubre** | — | **6 h diarias y 36 semanales**, con el mismo sueldo que 8 h. Sólo existe si la **autoridad administrativa** la declara, con dictamen médico |
 
-- El despido se perfecciona cuando el trabajador **recibe el telegrama**. Siempre se cobran los salarios trabajados hasta esa fecha.
-- **Indemnización por antigüedad**: **un mes de sueldo por año trabajado o fracción mayor de 3 meses**.
-- **Injuria grave**: incumplimiento de los deberes hacia la otra parte con gravedad suficiente para romper la relación. Lo habitual es una escalada de sanciones antes del despido, aunque un único hecho grave puede bastar.
-- **Preaviso** (a cargo del empleador): **15 días** en período de prueba, **1 mes** con antigüedad de hasta 5 años, **2 meses** con más de 5. Si no preavisa, paga la **indemnización sustitutiva** (lo que habría pagado de sueldo en ese plazo). El trabajador debe preavisar **15 días**.
+- **Horas extraordinarias (art. 203)**: el trabajador **no está obligado**, salvo **fuerza mayor** (no puede negarse) o exigencias excepcionales de la economía o la empresa (puede negarse si prueba perjuicio).
+- **Recargo (art. 201)**: **50 %** en días hábiles; **100 %** sábados después de las 13, domingos y feriados.
+- **Banco de horas (Ley 27.802)**: compensar el exceso de horas con menos jornada después, francos o descansos, en lugar de pagarlas. **No elimina** los topes de jornada ni los descansos mínimos, ni las normas de higiene y seguridad.
 
-**Sanciones disciplinarias — tres requisitos**
-1. **Gradualidad**: apercibimiento verbal (llamado de atención) → apercibimiento escrito → **suspensión** (sin goce de haberes, notificada por telegrama con los días) → despido.
-2. **Proporcionalidad** entre la falta y la sanción.
-3. **Contemporaneidad**: la sanción es correctiva, debe ser inmediata ("no te puedo despedir hoy por una falta de hace 5 meses"). Se exceptúa el tiempo de una investigación necesaria para identificar al responsable.
+##### 4. Vacaciones, licencias y enfermedades
 
-No son sanciones, pero son suspensiones: por **enfermedad o accidente** (se mantiene el sueldo) y por **causas económicas**.
+**Vacaciones** (art. 14 bis CN): descanso anual **obligatorio, pago e irrenunciable**.
+- Requisito: haber trabajado **al menos la mitad de los días hábiles** del año; si no, 1 día cada 20 trabajados.
 
-**Remuneración.** Se debe por poner la fuerza de trabajo **a disposición** del empleador, no sólo por el trabajo efectivo. Nunca menor al **salario mínimo, vital y móvil**.
-- **Por tiempo**: hora, día, semana, quincena, mes.
-- **Por rendimiento**: **comisión** (individual o grupal; si no se llega al mínimo, el empleador completa), **destajo** o por unidad de obra (el empleador debe proveer materia prima suficiente para la producción media), **participación en las ganancias**, **prima** (por superar la media esperada).
-- Los **premios** no son remuneración por resultado: son **incentivos** (ej. presentismo).
-- Según la forma de pago: **dinero** o **especie** (vivienda, alimento). La parte en especie tiene un tope (ver Dudas).
+| Antigüedad al 31/12 | Vacaciones |
+|---|---|
+| Hasta 5 años | **14** días corridos |
+| Más de 5 y hasta 10 | **21** |
+| Más de 10 y hasta 20 | **28** |
+| Más de 20 | **35** |
+
+- Empiezan un **lunes**; se otorgan entre el **1/10 y el 30/4**; se notifican por escrito con **30 días** de anticipación. Se pagan **al inicio**.
+- No se acumulan, salvo un tercio del período anterior por acuerdo. La **27.802** permite **fraccionarlas** por acuerdo en tramos de **al menos 7 días**, gozarlas fuera del período legal, e **interrumpirlas por enfermedad**.
+- Al terminar el contrato, las no gozadas se pagan como **indemnización proporcional** (art. 156).
+
+**Licencias especiales** (días corridos y pagos): nacimiento **2**, matrimonio **10**, fallecimiento de cónyuge **3**, de hijo o padre **3** (uno hábil), de hermano **1**, examen **2 por examen, hasta 10 por año**.
+
+**Enfermedad o accidente inculpable (arts. 208 a 213)**: alteración de la salud que **impide trabajar** y **no tiene relación con el trabajo** (las laborales van por la Ley de Riesgos del Trabajo 24.557). Requisitos: **inculpable**, **incapacitante** y **manifestada durante la relación**.
+- **Aviso (art. 209)**: hay que comunicar la enfermedad y dónde se está **en la primera jornada de ausencia**. Con la 27.802, si no se avisa a tiempo hay que probar la enfermedad **y la imposibilidad de avisar**.
+- **Certificado (art. 210, reformado)**: con **diagnóstico, tratamiento y días de reposo**, firmado digitalmente por un profesional habilitado (Ley 27.553).
+- **Control médico** del empleador; si el certificado y el control discrepan, se va a una **junta médica oficial** o a un instituto de solvencia técnica, **a costa del empleador**.
+- **Sueldo**: se paga **3, 6 o 12 meses** según el caso; después hay **reserva del puesto hasta 1 año**, sin sueldo.
+
+**Trabajo de mujeres y menores**
+- **Licencia por maternidad**: **45 días antes y 45 después** del parto (se puede reducir la previa a no menos de 10 y pasar el resto a después): **90 días** en total, con prohibición de trabajar. La asignación la paga ANSES.
+- La trabajadora debe **comunicar el embarazo** con certificado de la fecha probable de parto. Desde ahí tiene **estabilidad**. Si la despiden **7 meses y medio antes o después del parto**, se presume que fue por maternidad: **indemnización agravada de un año de sueldos** (13 con el SAC) además de la común (art. 181).
+- Al terminar la licencia puede: volver, rescindir (con 1 año de antigüedad), pedir **excedencia de 3 a 6 meses** sin sueldo (con 1 año de antigüedad) o no volver (rescisión tácita).
+- **Menores**: prohibido antes de los **16**. De **16 a 18**: hasta **6 h diarias y 36 semanales**, nada de trabajo nocturno, **15 días** mínimos de vacaciones.
+
+##### 5. Remuneración, suspensión, preaviso y extinción
+
+**Remuneración (art. 103)**: contraprestación por el contrato. **Nunca menor al SMVM**. Se paga por **poner la fuerza de trabajo a disposición**, aunque en ciertos casos no se trabaje.
+- **SMVM**: la menor remuneración en efectivo para un trabajador sin cargas de familia por jornada legal. No confundir con el **salario básico de convenio**, que suele ser mayor.
+
+| Clasificación | Tipos |
+|---|---|
+| **Por tiempo** | **Jornal** (por día u hora) o **sueldo** (suma fija por mes o quincena) |
+| **Por resultado** | **Destajo** (por unidad producida) · **comisión** (porcentaje de las ventas, art. 108) · **prima** (por rendir **por encima de la media**: eso la distingue del destajo) |
+| **Complementarias** | **SAC** (un sueldo más por año, en dos cuotas: **30/6 y 18/12**) · gratificaciones · participación en ganancias |
+| **Por forma de pago** | **Dinero** (art. 105 reformado: en moneda nacional o extranjera, por acreditación bancaria) o **especie** (complementa, no sustituye; **tope 20 %**) |
+
+- **Componentes dinámicos (art. 104 bis, nuevo)**: incentivos por productividad, bonos por objetivos, premios variables; se pueden pactar por convenio, acuerdo de empresa o individual, o decisión del empleador.
+- **Propinas (art. 104 reformado)**: **no son remuneración, aunque sean habituales.** Es uno de los cambios que el apunte pide remarcar.
+
+**Remunerativo vs. no remunerativo.** Lo remunerativo genera **aportes y contribuciones** e incide en SAC, vacaciones e indemnizaciones. Ponerle a una suma la etiqueta "no remunerativa" no alcanza: depende de la ley.
+
+| Remunerativos | No remunerativos |
+|---|---|
+| Comisiones · viáticos **sin** comprobantes · especie · premios · adicionales (antigüedad, título) · sueldo por enfermedad inculpable o accidente · SAC · feriados · horas extra · licencias · vacaciones gozadas · gratificaciones | Propinas · viáticos **con** comprobantes · reintegros documentados · indemnizaciones (preaviso, vacaciones no gozadas, despido, accidente) · **beneficios sociales** (art. 103 bis) · prestaciones complementarias exceptuadas (art. 105: acciones, dividendos, auto, transporte, celular e internet laborales) |
+
+- **Beneficios sociales (art. 103 bis, reformado)**: prestaciones de seguridad social **no remunerativas, no dinerarias, no acumulables ni canjeables por dinero**, que el empleador da voluntariamente para mejorar la calidad de vida del trabajador y su familia. Ej.: comedor, reintegros médicos, ropa de trabajo, guardería, útiles escolares, capacitación. **No son salario en especie ni generan aportes.**
+
+**Suspensión de ciertos efectos del contrato**: interrupción **transitoria** de algunas obligaciones; el contrato **sigue vigente**.
+- Causas: enfermedad o accidente inculpable; cargos gremiales (art. 217); causas **económicas**, **disciplinarias** y **preventiva** (arts. 214 a 224); maternidad; excedencia.
+- **Art. 218**: toda suspensión debe tener **justa causa, plazo fijo y notificación por escrito**.
+- **Topes por año aniversario**: falta o disminución de trabajo **30 días**; disciplinarias **30 días**; fuerza mayor **75 días**; **todas juntas 90 días**. Si se exceden y el trabajador lo impugna, puede haber injuria.
+- **Económicas**: se valoran con criterio **restrictivo**. La crisis general o la caída de ventas son riesgo empresario y no alcanzan. Se respeta el **orden de antigüedad**.
+- **Disciplinaria**: amonestación o apercibimiento, y suspensiones de **1 a 30 días al año**, con **contemporaneidad, proporcionalidad y sin doble sanción**. El trabajador tiene **30 días para cuestionarla**.
+- **Preventiva**: cuando el trabajador está imputado en un proceso penal.
+
+**Preaviso**: obligación **bilateral** de avisar la extinción con anticipación.
+
+| Quién | Plazo |
+|---|---|
+| Trabajador | **15 días** |
+| Empleador, antigüedad hasta 5 años | **1 mes** |
+| Empleador, más de 5 años | **2 meses** |
+
+Si se omite, se paga la **indemnización sustitutiva**. Si el despido sin preaviso no cae el último día del mes, se paga además la **integración del mes de despido**.
+
+**Extinción del contrato**
+
+| Origen | Supuestos |
+|---|---|
+| Voluntad del empleador | Despido **con** o **sin** justa causa |
+| Causas del empleador | Falta o disminución de trabajo, fuerza mayor, quiebra, muerte |
+| Causas del trabajador | Incapacidad absoluta, inhabilitación, jubilación, muerte |
+| Voluntad del trabajador | **Despido indirecto**, **renuncia**, abandono de trabajo |
+| Voluntad de ambos / otras | Mutuo acuerdo, vencimiento del plazo fijo, fin de la obra |
+
+- **Despido**: acto **unilateral, recepticio y extintivo**.
+- **Con justa causa**: incumplimiento tan grave que impide seguir (**injuria**). Se comunica **por escrito y con claridad**; la causa **no se puede cambiar después** y quien la invoca **debe probarla**.
+- **Indirecto**: el empleador incumple gravemente y, **intimado**, no lo corrige; se indemniza como despido sin causa.
+
+**Indemnización por antigüedad**: **un mes por año o fracción mayor de 3 meses**, sobre la **mejor remuneración mensual, normal y habitual** del último año. Mínimo **un mes**. Tiene **tope** por convenio, pero por el fallo **"Vizzoti"** el tope no puede recortar más del **33 %**. La 27.802 permite que los convenios creen **fondos de cese** a cargo del empleador.
+
+**Rubros de la liquidación final**: días trabajados, **SAC proporcional** (siempre), **vacaciones proporcionales**, y si corresponde: indemnización por antigüedad, sustitutiva de preaviso e integración del mes.
 
 #### Ejercicios resueltos tipo
 
-**Caso: un programador factura como monotributista hace dos años a una sola empresa, cumple horario fijo en la oficina y recibe órdenes de un jefe.** → Hay **contrato de trabajo** aunque se haya llamado "servicio": vale "cualquiera sea su forma o denominación", se dan las tres dependencias (técnica: horario y lugar; jurídica: órdenes; económica: el riesgo es de la empresa) y rige la **presunción de existencia** del contrato.
+**Caso: un programador factura como monotributista a una sola empresa, cumple horario en la oficina y recibe órdenes de un jefe.** → Antes de la reforma, la presunción del art. 23 jugaba a su favor. **Con la Ley 27.802 la presunción no se aplica** porque hay facturación. Pero puede **probar por otros medios** la dependencia real: horario y lugar (técnica), órdenes y control (jurídica), no asumir riesgo (económica). Si lo prueba, hay contrato de trabajo.
 
-**Caso: la empresa le cambia la categoría a un analista senior y le asigna tareas de soporte de nivel inicial con menor sueldo.** → **Abuso del ius variandi**: toca elementos esenciales (categoría y remuneración). El trabajador intima a que lo restituyan; si la empresa no lo hace, puede considerarse en **despido indirecto** y cobrar indemnización como despido sin causa.
+**Caso: una software factory de 40 empleados contrata a una analista el 1/3 y la despide el 15/9 sin causa.** → Con 40 trabajadores el período de prueba es de **8 meses**: sigue en prueba, así que **no hay indemnización por antigüedad**. Sí se pagan los días trabajados, SAC y vacaciones proporcionales. Si **no la registraron desde el inicio**, se considera que el empleador **renunció** al período de prueba.
 
-**Caso: despido sin causa ni preaviso de alguien con 6 años y 4 meses de antigüedad.** → Indemnización por antigüedad: **7 sueldos** (6 años más una fracción mayor de 3 meses). Preaviso omitido con más de 5 años: **2 meses** de indemnización sustitutiva. Más los salarios trabajados hasta la fecha.
+**Caso: un desarrollador contratado como soporte técnico hace en su casa, con su notebook, una app que no tiene relación con su trabajo.** → Es una invención **personal** (art. 82 LCT): es **suya**. Si lo hubieran contratado **para programar** esa app, o la app derivara de los métodos o sistemas de la empresa, sería del empleador (art. 82 y art. 4 inc. d de la 11.723).
+
+**Caso: despido sin causa ni preaviso, con 6 años y 4 meses de antigüedad, el día 10 del mes.** → Antigüedad: **7 sueldos** (6 años más una fracción mayor de 3 meses). Preaviso omitido con más de 5 años: **2 sueldos**. **Integración del mes** (los días del 11 al fin de mes). Más días trabajados, SAC y vacaciones proporcionales.
+
+**Caso: el empleador traslada a un trabajador a una sucursal a 40 km y no le cubre el viaje.** → El lugar no es esencial, pero el traslado le genera **perjuicio material** (más gastos): el cambio excede el ius variandi (art. 66). Intima; si no lo corrigen, **despido indirecto**.
 
 #### Dudas / pendientes
-- **Tope de la remuneración en especie.** El resumen dice "20 % o 30 %, no puede superar el 20 %". *(Conocimiento general:)* la LCT (art. 107) fija que la parte en especie no puede superar el **20 %** del total. Usar 20 %.
-- **Período de prueba.** Las cifras de 6/8/12 meses son de la **Ley 27.742** (Ley Bases), que el resumen cita por error como "artículo 27742". Verificar si la cátedra 2026 lo da así.
+- La **reforma (Ley 27.802)** está muy reciente: si en clase se da algo distinto, vale lo de clase.
+- El apunte menciona que la reforma "limitó las consecuencias indemnizatorias" de la ruptura anticipada del plazo fijo, pero no dice cómo.
+- **Resumen 2025 desactualizado** en: período de prueba (decía 6 meses ampliable por convenio), presunción del art. 23, propinas, invenciones (régimen de patentes en vez del art. 82 LCT), "despido" como último escalón de la gradualidad de sanciones (el apunte habla de apercibimiento y suspensiones), y preaviso de 15 días del empleador en período de prueba (el apunte no lo menciona).
 
 #### Fuentes
-- `fuentes/resumen-legislacion-2do-parcial-2025.md`, sección "Legislación Laboral: Contrato del trabajo".
+- `fuentes/catedra/u5/apunte-derecho-laboral.md` — apunte de cátedra 2026 (31 págs.). **Fuente principal.**
+- `fuentes/catedra/u5/guia-de-lectura.md` — guía de lectura de la cátedra, en 5 bloques.
+- `fuentes/resumen-legislacion-2do-parcial-2025.md` — resumen 2025, anterior a la reforma; sólo como apoyo.
 
 ---
 
 ### Unidad 6 — Ejercicio profesional: responsabilidad y Colegio de Ingenieros Especialistas
 
-> No se dio en clase en 2026: todo sale del resumen 2025. El resumen no numera esta sección; se
-> asume que es la unidad 6 porque está entre la 5 (laboral) y la 8 (obras), y el parcial toma 4–6.
+> Tres normas del Colegio, de la más general a la más específica: **Ley provincial 11.291** (1995,
+> crea el Colegio), **Estatuto** (Decreto 0601/99) y **Código de Ética Profesional y Disciplina**
+> (Res. 28, texto 2018). **Regla de la cátedra:** donde la ley y el Estatuto regulan lo mismo
+> (causales y tipos de sanción, matriculación, cancelación), **vale el Estatuto**, que es la norma
+> más específica. Más la parte de **responsabilidad civil** (diapositivas de la Prof. Massachiodi).
 
 #### Conceptos clave
-- Dos partes: **cómo se incurre en responsabilidad** (civil, penal, administrativa) y la **normativa del Colegio de Ingenieros Especialistas** de Santa Fe (Ley 11.291 y Código de Ética).
-- **Función de cada responsabilidad**: la **civil** es **resarcitoria** (compensar económicamente a la víctima, volverla al estado previo); la **penal** es **punitiva** (castigar; si hay multa, el dinero va al Estado, no a la víctima).
-- La responsabilidad no surge de estar presente: hay que **atribuirla** y probar los presupuestos. La penal exige que la conducta esté **tipificada** como delito (tipificación **taxativa**).
+- **Funciones de la responsabilidad**: la **civil** es **resarcitoria** (compensar a la víctima); la **penal** es **punitiva** (castigar; la multa va al Estado). La responsabilidad no surge de estar presente: hay que **atribuirla**. La penal exige un delito **tipificado** (taxativo).
+- **Responsabilidad civil contractual** (incumplir una obligación) y **extracontractual** (violar el deber genérico de **no dañar a otro**).
+- **Colegio de Ingenieros Especialistas**: **persona jurídica de derecho privado en ejercicio de funciones públicas** (ley, art. 1). Controla la matrícula y el ejercicio profesional y tiene **poder disciplinario exclusivo** sobre los colegiados (Estatuto, art. 21). No es parte del Poder Judicial.
+- **Ingeniero especialista**: toda rama de la ingeniería **no comprendida** en las leyes de los otros colegios (10.653, 10.780, 10.781, 10.946, 11.008) y las especialidades futuras (Estatuto, art. 2). Incluye a **Sistemas de Información**.
 
 #### Desarrollo
 
-**Funciones de la responsabilidad civil**
-- **Preventiva**: quien sepa que se produce o puede producirse un daño, y esté en condiciones, debe evitarlo o impedir que continúe o se agrave. Existe una acción judicial preventiva para que el juez ordene el cese.
-- **Punitiva** (mínima): multa civil cuando no basta el resarcimiento. Está en la **Ley de Defensa del Consumidor** y la **Ley de Defensa de la Competencia**.
-- **Resarcitoria** (**principal**): compensar el daño. Decir "compensar", no "reparar": hay daños que no se pueden reparar.
+##### Responsabilidad civil
 
-**Los cuatro presupuestos de la responsabilidad civil**
+**Funciones**
+- **Preventiva**: quien pueda debe evitar que un daño se produzca, continúe o se agrave. Hay acción judicial preventiva.
+- **Punitiva** (excepcional): multa civil; está en la Ley de Defensa del Consumidor y la de Defensa de la Competencia.
+- **Resarcitoria** (la principal): **compensar** el daño. Decir "compensar", no "reparar": hay daños irreparables.
 
-1. **Antijuridicidad**: todo daño se presume contrario a derecho si la ley no lo justifica. Justificaciones:
-   - **Legítima defensa**: agresión ilícita actual o inminente, falta de provocación de quien se defiende, **medio proporcionado**.
-   - **Estado de necesidad**: causar un daño para evitar uno mayor.
-   - **Caso fortuito o fuerza mayor**: hecho imprevisible o, previsto, inevitable (tsunami, piquete).
+**Los cuatro presupuestos**
+
+1. **Antijuridicidad**: acción u omisión **no justificada**. Todo daño se presume antijurídico si la ley no lo justifica. Justificaciones:
+   - **Legítima defensa**: 1) agresión ilícita actual o inminente; 2) falta de provocación de quien se defiende; 3) medio **proporcionado**.
+   - **Estado de necesidad**: dañar para evitar un mal mayor.
+   - **Caso fortuito o fuerza mayor**: imprevisible o, previsto, inevitable.
 2. **Factor de atribución**:
-   - **Subjetivos** (miran la culpabilidad):
-     - **Culpa**: **negligencia** (hacer menos de lo debido, falta de cuidado), **imprudencia** (actuar apresuradamente), **impericia** en el arte o profesión (actuar fuera de las competencias o sin responder a lo que acredita el título).
-     - **Dolo**: intención de dañar, o total indiferencia por las consecuencias.
-     - Ej.: choco a mi vecino por agacharme a buscar algo que se me cayó → **negligencia**; lo choco porque no me deja dormir → **dolo**.
-   - **Objetivos** (no importa la culpa; la ley asigna la responsabilidad):
-     - El **principal** responde **objetiva e indirectamente** por los daños de sus **dependientes** (art. 1753 CCyC); el dependiente responde **directa y subjetivamente**. Ambas responsabilidades son **concurrentes**.
-     - **Dueño y guardián** de la cosa responden concurrentemente (si mi perro muerde a alguien, respondo yo).
-     - En el contrato de obra, la ley fija qué pasa si no se entrega la obra.
-3. **Nexo causal**: relación de causa-efecto entre la conducta y el daño. Ej.: lesiono a alguien, va a un dispensario y muere porque explota una caldera → **no** respondo por la muerte.
-4. **Daño**: lesión a un derecho sobre la persona, el patrimonio o un derecho de incidencia colectiva. Sin daño no hay nada que resarcir.
-   - **Material**:
-     - **Daño emergente**: la pérdida en el patrimonio (no vale lo mismo un 0 km que un auto usado).
-     - **Lucro cesante**: lo que la víctima deja de ganar en su actividad habitual (escultora con las dos manos quebradas).
-     - **Pérdida de chance**: oportunidades perdidas (el contrato que el escultor ya tenía y no puede cumplir).
-   - **Moral**: aflicción, sufrimiento (difamación); se puede pedir una retractación pública o una indemnización.
-   - **Personal o a la salud**: lesiones que afectan la calidad de vida (una fractura, estrés postraumático).
+   - **Subjetivo**:
+     - **Culpa**: omitir la diligencia debida según la obligación y las circunstancias de persona, tiempo y lugar. Comprende **imprudencia** (apresurarse), **negligencia** (hacer menos de lo debido) e **impericia** en el arte o profesión.
+     - **Dolo**: dañar **intencionalmente** o con **manifiesta indiferencia** por los intereses ajenos.
+     - **Valoración**: cuanto mayor es el deber de obrar con prudencia y conocimiento, **más diligencia se exige**. Por eso a un profesional se le pide más que a un lego.
+     - **Profesional liberal (art. 1768 CCyC)**: su responsabilidad es **subjetiva**, **salvo que haya comprometido un resultado concreto** y no lo logre.
+   - **Objetivo**: se prescinde de la culpa.
+     - Obligaciones **de resultado** (art. 1723).
+     - **Principal por el hecho del dependiente** (art. 1753): responde objetiva e indirectamente cuando el daño ocurre en ejercicio o con ocasión de las funciones encomendadas; el dependiente responde directa y subjetivamente; son **concurrentes**.
+     - **Dueño y guardián** de la cosa.
+3. **Nexo causal**: relación de **causa a efecto** entre el acto y el daño.
+4. **Daño (art. 1737)**: **lesión a un derecho o interés no prohibido**, que tiene por objeto la persona, el patrimonio o un derecho de incidencia colectiva.
+   - **Material**: **daño emergente** (lo que se pierde), **lucro cesante** (lo que se deja de ganar), **pérdida de chance** (oportunidades perdidas).
+   - **Moral**: aflicción, sufrimiento (difamación).
+   - **Personal o a la salud**: lesiones que afectan la calidad de vida.
 
-**Colegio de Ingenieros Especialistas — Ley 11.291 (Santa Fe)**
-- **Art. 1**: el Colegio es **persona jurídica de derecho privado en ejercicio de funciones públicas**. No es parte del Poder Judicial ni dicta sentencias: controla el ejercicio profesional (matrícula, ejercicio ilegal, pagos).
-- **Art. 2**: es **provincial** y se divide en **distritos**; hay que matricularse donde se ejerce. Se fijan domicilio **real** y **laboral**.
-- **Art. 3** — marco legal: Ley 11.291, estatuto, código de ética y disciplina, decretos reglamentarios.
-- **Art. 4** — funciones (las principales):
-  - a) controlar el ejercicio de la profesión;
-  - b) gobernar la matrícula;
-  - c) ejercer el poder disciplinario sobre los colegiados;
-  - e) velar porque nadie ejerza sin estar autorizado;
-  - f) dar intervención inmediata al **ministerio fiscal** ante delitos de acción pública;
-  - g) representar a los colegiados ante los poderes públicos;
-  - ll) estimular la investigación científica;
-  - m) organizar congresos, jornadas y cursos.
-- **Tribunal de ética (art. 11 y ss.)**: investiga faltas e infracciones éticas; actúa **de oficio o a petición de parte**.
-- **Art. 18 — causales de sanción disciplinaria** (elegir 3):
-  - negligencia reiterada, ineptitud manifiesta u omisiones en los deberes profesionales;
-  - incumplimiento del código de ética;
-  - condena criminal por delito doloso, o pronunciamiento judicial que inhabilite para ejercer;
-  - todo acto que comprometa el honor, el decoro y la dignidad de la profesión.
-- **Art. 19 — sanciones**: llamado de atención, apercibimiento privado o público, multa, suspensión de la matrícula.
-- **Art. 21 — requisitos de matriculación**: domicilio real, legal y profesional en la provincia; título de Ingeniero Especialista; no estar en causal de cancelación; pagar el derecho de matrícula.
-- **Art. 22**: no se puede denegar la matrícula por motivos discriminatorios.
-- **Art. 24 — cancelación o suspensión de la matrícula**:
-  - pedido del propio colegiado;
-  - incompatibilidades legales, mientras duren;
-  - enfermedad física o mental que inhabilite temporalmente;
-  - sanciones, por el tiempo que duren;
-  - estar sometido a proceso criminal por actos del ejercicio profesional.
+##### Ley 11.291 — el Colegio
 
-**Código de Ética**
-- **Art. 2**: alcanza también a **no matriculados**; el tribunal de ética tiene competencia para sancionarlos.
-- **Art. 5**: el profesional tiene deberes para con **los colegas, la profesión, el Colegio y el empleador/comitente**.
-- **Art. 6** — actos contrarios a la ética (enumeración **enunciativa**). Se piden **3 por ámbito**:
+Arts. fundamentales para la cátedra: **1, 2, 3, 4, 6, 11, 18, 19 y 21**.
 
-| Ámbito | Ejemplos |
+- **Art. 1 — Carácter**: persona jurídica de **derecho privado** en ejercicio de **funciones públicas**.
+- **Art. 2 — División**: dos **Colegios de Distrito**: **I con sede en Santa Fe** (norte: La Capital, General Obligado, Vera, 9 de Julio, San Javier, San Jerónimo, San Cristóbal, San Justo, Las Colonias, Garay, Castellano) y **II con sede en Rosario** (sur: Rosario, Belgrano, Iriondo, San Lorenzo, Gral. López, Caseros, Constitución, San Martín). Hay que matricularse donde se ejerce.
+- **Art. 3 — Normativa**: la ley y su reglamentación, el **Estatuto**, el **Reglamento Interno**, el **Código de Ética**, y las resoluciones y acuerdos de los órganos del Colegio.
+- **Art. 4 — Finalidades** (lista **no taxativa**). Las principales:
+  - a) **controlar el ejercicio** de la profesión;
+  - b) **gobernar la matrícula**;
+  - c) ejercer el **poder disciplinario**;
+  - d) vigilar que se cumplan la ley y las normas de la profesión;
+  - e) velar porque **nadie ejerza sin autorización**, y combatir el **ejercicio ilegal**;
+  - dar intervención al **Ministerio Fiscal** ante delitos de acción pública;
+  - representar y defender a los colegiados ante los poderes públicos;
+  - colaborar con el Estado en proyectos de ley;
+  - estimular la investigación y organizar congresos y cursos;
+  - recaudar matrícula, cuotas y multas;
+  - actuar como **árbitro**;
+  - elegir sus autoridades y dictar sus reglamentos.
+- **Art. 6 — Autoridades**:
+
+| Nivel | Órganos de gobierno |
 |---|---|
-| **Profesión** | Negligencia o ineptitud manifiesta, aunque la ordene un superior · aceptar tareas que excedan las incumbencias del título o violen la ley · firmar informes o especificaciones que no revisó · ser parcial como perito · estar condenado o procesado penalmente por hechos de la profesión |
-| **Colegas** | Usar documentos técnicos de otro sin su consentimiento · difamar o desprestigiar colegas · cobrar honorarios viles que desprestigien la profesión · discriminar colegas |
-| **Empleador / comitente** | Aceptar comisiones o beneficios de interesados en el trabajo · revelar datos reservados del empleador o información sobre lo confiado a su estudio |
-| **Colegio** | Incumplir las normas de matriculación · incumplir la Ley 11.291, el estatuto y los códigos · difamar a los directivos por sus funciones · incurrir en causales de inhabilitación |
+| **Provincial** | **Asambleas** ordinarias y extraordinarias · **Directorio General** (con sede en el distrito que tiene la presidencia) · **Tribunal de Ética Profesional y Disciplina** |
+| **Distrito** | **Asambleas** de distrito · **Directorio de Distrito** (preside un ingeniero de cualquier especialidad; igual número de miembros por área) · **Comisión Revisora de Cuentas** |
+
+  Las áreas del Directorio de Distrito son, según la ley, cuatro: Química, Electricista, Mecánica y demás especialidades. El apunte de cátedra agrega una quinta: **Sistemas de Información**.
+- **Art. 7**: los cargos en los Directorios de Distrito y en el Tribunal son **obligatorios**, salvo dispensa.
+- **Art. 11 — Tribunal de Ética**: órgano con **potestad exclusiva y autónoma** para **investigar, conocer y juzgar** las faltas en el ejercicio, la inconducta que afecte el decoro y toda violación de un principio ético. Actúa **de oficio o a petición de parte**.
+- **Art. 12**: **4 titulares y 2 suplentes por distrito**, **2 años**, reelegibles; hace falta **5 años de ejercicio**; presidente elegido cada año; excusación y recusación como los jueces. **Art. 13**: incompatible con otro cargo en el Colegio.
+- **Procedimiento** (arts. 15 a 17):
+  - el **denunciante no es parte**, pero debe colaborar;
+  - no hay sanción sin citar al inculpado a defenderse en **7 días** (ampliables al doble);
+  - el fallo se dicta **fundado**, en **15 días hábiles**.
+- **Art. 18 — Causales de sanción**: ver la del Estatuto (art. 22), que es idéntica.
+- **Art. 19 — Sanciones**: llamado de atención, apercibimiento privado o público, multa, suspensión de la matrícula. El sancionado no puede ocupar cargos directivos mientras dure la sanción.
+- **Art. 20**: el Directorio puede **rehabilitar** al excluido de la matrícula a los **3 años** del fallo firme.
+- **Art. 21 — Matriculación**: acto por el que el Colegio **habilita** para ejercer en la provincia. Requisitos: inscripción en el Registro Especial y a) domicilio real, legal y profesional en la provincia; b) título de ingeniero especialista; c) no estar en causal de cancelación; d) pagar el derecho. **Reinscripción anual**.
+- **Art. 22**: no se puede negar la matrícula por **discriminación**. **Art. 24**: causales de cancelación o suspensión (ver Estatuto, art. 13).
+
+##### Estatuto del Colegio (Decreto 0601/99)
+
+Arts. fundamentales para la cátedra: **4 a 10, 12, 13, 22, 23, 49, 54 y 55**.
+
+- **Art. 4 — Ejercicio profesional**: toda actividad técnica, **pública o privada, libre o en relación de dependencia**, que según las incumbencias implique:
+  - a) **ofrecer, contratar o prestar servicios** que requieran conocimientos de ingeniero especialista;
+  - b) desempeñar **cargos, funciones o comisiones** en entidades públicas o privadas, o nombramientos judiciales o administrativos, que los requieran;
+  - c) **experimentación, ensayos, tasación, docencia y divulgación** técnica o científica;
+  - d) **presentar ante autoridades** documentos, proyectos, estudios o informes.
+- **Art. 5 — Actuación personal**: el ejercicio es **siempre personal**; se prohíbe **ceder el uso del título o la firma**.
+- **Art. 6 — Identificación**: en todo trabajo hay que poner **título, matrícula, firma y aclaración**.
+- **Art. 7 — Uso del título**: términos, leyendas, insignias, emblemas, dibujos o actos de los que **pueda inferirse ejercicio profesional**, a juicio del Colegio.
+- **Art. 8**: todo trabajo de ingeniería especialista debe contar con **al menos un profesional** matriculado.
+- **Art. 9 — Visado y aportes**: los trabajos se **tramitan, registran o visan** en el distrito y se pagan los **aportes** antes de presentarlos; nadie puede darles curso sin eso. El Colegio puede cobrar los aportes al profesional y, solidariamente, al **comitente**, e **inspeccionar** obras. Eludir aportes se denuncia ante el Tribunal.
+- **Art. 10 — Matriculación**: autoriza a ejercer en la provincia; se pide por escrito. Requisitos:
+  - a) **obligación de matricularse** para todo profesional que ejerza, sea **en relación de dependencia** pública o privada, **independiente** o **empresario**;
+  - b) domicilio real, legal y profesional en la provincia;
+  - c) título del art. 2, o afín;
+  - d) no estar en causal de cancelación;
+  - e) pagar el derecho de matriculación.
+  - **Art. 11**: reinscripción **anual** (sin inhabilitación ni suspensión, y pagando).
+- **Art. 12 — Inhabilitados para ejercer**:
+  - a) **condenados** penalmente por causas de la actuación profesional, mientras dure la condena o sus efectos;
+  - b) declarados **incapaces**;
+  - c) **excluidos o suspendidos** por sanción disciplinaria **en cualquier jurisdicción del país**, durante la sanción.
+- **Art. 13 — Cancelación o suspensión de la matrícula**:
+  - a) **pedido** del propio colegiado;
+  - b) **incompatibilidades**, mientras subsistan;
+  - c) **enfermedad** física o mental que inhabilite temporariamente;
+  - d) **sanciones**, por su duración;
+  - e) estar sometido a **proceso criminal** por hechos del ejercicio profesional, o penado por **delitos contra la propiedad**.
+  - **Art. 14**: para volver a inscribirse hace falta **dictamen favorable del Tribunal**.
+- **Art. 22 — Causales de sanción** (elegir 3):
+  - a) **condena por delito doloso** o fallo judicial que inhabilite para ejercer;
+  - b) incumplir la **ley 11.291**, su reglamento, el **Estatuto** o los reglamentos internos;
+  - c) **negligencia reiterada, ineptitud manifiesta u omisiones** en los deberes profesionales;
+  - d) violar el régimen de **incompatibilidades o inhabilidades**;
+  - e) incumplir el **Código de Ética**;
+  - f) actos que afecten las **relaciones profesionales** o menoscaben la profesión o su libre ejercicio;
+  - g) actos que comprometan el **honor, el decoro y la dignidad** de la profesión;
+  - h) **inasistencia** injustificada de miembros de órganos directivos a **3 sesiones consecutivas o 5 alternadas**.
+- **Art. 23 — Sanciones** (graduadas según la falta, la reiteración y las circunstancias):
+  - a) **llamado de atención**;
+  - b) **apercibimiento** privado o público;
+  - c) **multa de hasta 20 veces** el derecho de inscripción anual;
+  - d) **suspensión de hasta 3 años** e inhabilitación para ejercer en toda la provincia.
+  - **Art. 24**: el sancionado no puede ocupar cargos directivos mientras dure la sanción.
+- **Art. 49 — Tribunal de Ética**: **un solo Tribunal**, con potestad disciplinaria y **12 miembros**: **8 titulares y 4 suplentes** (4 y 2 por distrito). Presidente elegido cada año entre los titulares; mandato de **2 años**, reelegible. **Art. 50**: requisitos para integrarlo, entre ellos **5 años de matrícula** y no tener otro cargo en el Colegio. **Art. 51**: actúa en **una sala por distrito**, de al menos 3 miembros.
+- **Art. 54 — Código de Ética**: lo elabora el Tribunal y lo aprueba el Directorio Provincial, con la correlación entre faltas y penas. Debe garantizar:
+  - el **debido proceso**;
+  - una **acusación clara y precisa**;
+  - el **derecho de defensa y de prueba**;
+  - un **fallo fundado**;
+  - una **instancia revisora**.
+
+  El Tribunal tiene **poder autónomo de investigación** y actúa **de oficio o a pedido de parte**.
+- **Art. 55 — Denuncias**: quien se crea perjudicado por un matriculado puede presentarse ante el Tribunal. Antes de iniciar el procedimiento, el Tribunal puede llamar a una **audiencia de conciliación** o **desestimar de oficio** las denuncias notoriamente improcedentes.
+
+##### Código de Ética Profesional y Disciplina (Res. 28, 2018)
+
+Arts. fundamentales para la cátedra: **1, 2, 6 y 8**.
+
+- **Art. 1**: los ingenieros especialistas ajustan su conducta al **Código**, al **Estatuto** y a las normas complementarias.
+- **Art. 2 — Competencia del Tribunal**: conoce y juzga, en cuestiones de disciplina y ética:
+  - las **faltas** cometidas en el ejercicio de la profesión;
+  - la **inconducta** que afecte el decoro de la profesión;
+  - todo caso en que se haya **violado un principio de ética** profesional.
+- **Art. 5**: el ejercicio impone deberes para con **la profesión, los colegas, los comitentes o empleadores y el Colegio**.
+- **Art. 6 — Actos contrarios a la ética** (lista **no taxativa**). Se piden **3 por ámbito**:
+
+| Ámbito | Incisos |
+|---|---|
+| **I. Profesión** (12) | a) actos contra la **buena técnica**, negligencia o ineptitud, **aun por orden del superior** · b) aceptar tareas que **excedan las incumbencias** del título o violen la ley · c) **firmar** planos, dictámenes o informes que no hizo, estudió ni visó · d) figurar junto a **no profesionales** generando confusión; publicidad engañosa · e) datos **falsos** en anuncios · f) dar o recibir **comisiones** por trámites, designaciones o encargos · g) ser **parcial como perito**, árbitro o jurado, o al adjudicar contratos · h) **asesorar a la parte contraria** en el mismo asunto · i) ser perito oficial con **las generales de la ley** · j) **desacreditar** el prestigio profesional · k) estar **condenado** por causas profesionales · l) estar **procesado** por hechos del ejercicio |
+| **II. Colegas** (8) | a) usar **trabajos ajenos** (ideas, planos, proyectos, documentos técnicos o **informáticos**) sin consentimiento, salvo citando la fuente · b) **difamar** colegas · c) **sustituir** a un colega sin causa y sin avisarle · d) evacuar consultas sobre el trabajo de otro **sin avisarle** · e) pagar **retribuciones indignas** a colaboradores · f) aceptar **honorarios** manifiestamente inferiores a los de plaza · g) **competencia desleal** usando el cargo · h) **discriminar** |
+| **III. Comitentes o empleadores** (2) | a) aceptar **comisiones o beneficios de proveedores**, contratistas o interesados · b) **revelar datos reservados** (técnicos, financieros o personales), salvo obligación legal |
+| **IV. Colegio** (5) | a) cumplir las normas de **matriculación** · b) cumplir las **resoluciones** de sus órganos · c) respetar la ley 11.291, el Estatuto y el Código · d) no **difamar a los directivos** ni desprestigiar la institución · e) no incurrir en **inhabilitaciones o incompatibilidades** |
+
+- **Art. 7**: las acciones por faltas éticas **prescriben a los 2 años** del hecho.
+- **Art. 8 — Composición del Tribunal**: un **Juez unipersonal**, que **recibe la causa** y el ofrecimiento de prueba y la **desestima o eleva** a juzgamiento; y un **Tribunal Colegiado de 3 miembros** por distrito (más 2 suplentes), que recibe la prueba y **dicta sentencia**.
+- **Procedimiento** (arts. 21 a 36):
+  - la denuncia la puede presentar **cualquier persona**, por escrito;
+  - **traslado al denunciado por 7 días** (20 si vive fuera de Rosario o Santa Fe); si no comparece, se le nombra **defensor de oficio**;
+  - la causa **caduca a los 6 meses** sin actos de impulso;
+  - **prueba en 30 días**;
+  - **sentencia en 15 días**, diciendo si los hechos están probados, si son falta, si se absuelve o sanciona, y con qué sanción;
+  - las sanciones firmes se publican, salvo el apercibimiento privado.
+- **Art. 37 — Sanciones**: las mismas cuatro, con una **tabla de correlación** inciso por inciso. Por ejemplo, condena penal (I k) → suspensión; negligencia (I a) → multa o suspensión; difamar colegas (II b) → llamado de atención o apercibimiento. El sancionado no puede ocupar cargos directivos **mientras dure la sanción y 5 años después**.
+- **Art. 38 — Apelación**: **10 días** desde la notificación, ante la **Cámara**; sólo apela el **denunciado**, y el denunciante no es parte.
+
+**Contradicción entre normas.** La **ley (art. 19)** dice que la multa y la suspensión se apelan en **5 días ante la Corte Suprema provincial**. El **Código (art. 38)** y el apunte dicen **10 días ante la Cámara**. Por la regla de la norma específica, responder con el **Código** y mencionar la diferencia.
 
 #### Ejercicios resueltos tipo
 
-**Caso: un ingeniero en sistemas firma la auditoría de un sistema que no revisó, y por una falla el cliente pierde datos de facturación de un mes.** → **Civil**: antijuridicidad (sin justificación), factor de atribución subjetivo — **negligencia** (o impericia si excedió su competencia) —, nexo causal entre la firma sin revisar y la pérdida no detectada, y daño material (**daño emergente** por la reconstrucción y **lucro cesante** por lo no facturado). **Ética**: art. 6 del código, "autorizar informes que no fueron revisados" → sanción del art. 19 por el tribunal de ética (art. 18: incumplimiento del código de ética).
+**Caso: un ingeniero en sistemas firma la auditoría de un sistema que no revisó; por una falla, el cliente pierde la facturación de un mes.**
+- **Civil**: responsabilidad **contractual** (incumplió lo pactado). Antijuridicidad sin justificación. Factor **subjetivo**: **negligencia**, valorada con más rigor por ser profesional (no comprometió un resultado, art. 1768). Nexo causal con la pérdida. Daño **emergente** y **lucro cesante**.
+- **Ética**: Código, art. 6 I c) (firmar lo que no revisó) → sanción b) o c) según la correlación del art. 37. Causal del Estatuto, art. 22 e) (incumplir el Código).
 
-**Caso: un empleado de una consultora borra por error la base de un cliente.** → Responde el dependiente (directa y subjetivamente, por negligencia) y la consultora como **principal** (objetiva e indirectamente). Son responsabilidades **concurrentes**: el cliente puede reclamarle a la empresa.
+**Caso: un ingeniero matriculado le "presta" la firma a un técnico sin título para que presente un proyecto ante la municipalidad.** → Viola el **art. 5 del Estatuto** (ejercicio personal, prohibido ceder la firma) y el **art. 6 I c) del Código** (autorizar un trabajo que no hizo ni visó). Además el técnico ejerce sin matrícula: el Colegio debe **combatir el ejercicio ilegal** (ley, art. 4).
+
+**Caso: ¿tiene que matricularse un ingeniero en sistemas que trabaja en relación de dependencia en un banco?** → **Sí**: el Estatuto (art. 10 a) obliga a matricularse a todo el que ejerza, **también en relación de dependencia**, y el art. 4 define el ejercicio profesional "libre o en relación de dependencia".
+
+**Caso: una consultora borra por error la base de un cliente a través de un empleado.** → El empleado responde **directa y subjetivamente** (negligencia); la consultora, como **principal**, **objetiva e indirectamente** (art. 1753), porque el daño ocurrió en ejercicio de las funciones encomendadas. Son **concurrentes**.
 
 #### Dudas / pendientes
-- El resumen lista los tipos de responsabilidad como "penal, jurídica, civil", pero en el párrafo anterior habla de responsabilidad **administrativa**. Lo coherente es **civil, penal y administrativa**; "jurídica" parece un error de tipeo.
-- Numeración de la unidad (6) asumida, ver nota inicial.
+- **Apelación**: 5 días ante la Corte (ley) o 10 días ante la Cámara (Código). Confirmar en clase cuál piden.
+- **Inhabilidad para cargos** del sancionado: mientras dure la sanción (ley y Estatuto) o **5 años más** (Código, art. 37).
+- **Áreas del Directorio de Distrito**: la ley transcripta dice cuatro; el apunte de cátedra suma Sistemas de Información.
+- Las diapositivas de responsabilidad civil tienen 5 láminas que son sólo imagen y no se pudieron leer; su contenido parece estar en las láminas con texto.
 
 #### Fuentes
-- `fuentes/resumen-legislacion-2do-parcial-2025.md`, sección "Legislación específica del ejercicio profesional".
+- `fuentes/catedra/u6/preguntas-guia-colegio.md` — preguntas guía y artículos fundamentales de cada norma.
+- `fuentes/catedra/u6/apunte-colegio.md` — apunte de cátedra sobre la ley 11.291.
+- `fuentes/catedra/u6/ley-11291-creacion-colegio.md`, `estatuto-colegio.md`, `codigo-de-etica.md` — textos completos, transcriptos de los PDF escaneados.
+- `fuentes/catedra/u6/responsabilidad-civil.md` — diapositivas de responsabilidad civil.
+- `fuentes/resumen-legislacion-2do-parcial-2025.md` — resumen 2025, sección de ejercicio profesional.
 
 ---
 
@@ -389,3 +645,4 @@ No son sanciones, pero son suspensiones: por **enfermedad o accidente** (se mant
 ## Log
 - Archivo creado.
 - 2026-10-10: primer ingest. `fuentes/resumen-legislacion-2do-parcial-2025.md` (resumen de un alumno del año pasado, unidades 4, 5, 6 y 8) y `fuentes/apuntes-clase-unidad4.md` (apuntes propios de clase 2026, sólo U4). Creadas las unidades 4, 5, 6 y 8 con ejercicios tipo, más la tabla de artículos del parcial (2do parcial: mié 28/10, escrito, U4–U6). Marcados como pendientes: el art. 59 de la 11.723 (pedido por el profesor y sin texto en las fuentes), la posesión listada como derecho real, el régimen de invenciones laborales ubicado en la 11.723 y el tope del 20 % en especie.
+- 2026-10-12: ingest del material de cátedra (`fuentes/catedra/`): U4 lista de leyes; U5 apunte de derecho laboral 2026 y guía de lectura; U6 apunte del Colegio, preguntas guía, diapositivas de responsabilidad civil y la ley 11.291, el Estatuto y el Código de Ética (transcriptos de PDF escaneados). **Unidad 5 reescrita** desde el apunte, sobre la Ley 27.802 (período de prueba por tamaño de empresa, presunción del art. 23 restringida, propinas no remunerativas, jornada, vacaciones, licencias, enfermedad, maternidad, remunerativo vs. no remunerativo, suspensiones, preaviso, extinción). **Unidad 6 completada** con el Estatuto (arts. 4–13, 22, 23, 49–55), el Código (arts. 1, 2, 6 completo, 7, 8, 37, 38), las autoridades de la ley y la responsabilidad contractual/extracontractual (art. 1768). Tabla de artículos actualizada con los que marca la cátedra. Contradicción registrada: apelación en 5 días ante la Corte (ley) vs. 10 días ante la Cámara (Código).
