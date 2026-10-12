@@ -3,10 +3,11 @@
  * resumen-pdf.js — Markdown -> PDF con el estilo de los resúmenes de cursada
  * (tipo Google Docs): Arial, texto justificado, títulos en negrita, carátula
  * mínima con índice paginado (puntos guía + nº de página) y nº de página abajo
- * a la derecha. Sin colores ni recuadros.
+ * a la derecha. Sin colores ni recuadros, salvo con --color (títulos y
+ * tablas en azul).
  *
  * Uso (desde la raíz del repo):
- *   node scripts/resumen-pdf.js <entrada.md> [salida.pdf] [--html-only]
+ *   node scripts/resumen-pdf.js <entrada.md> [salida.pdf] [--html-only] [--color]
  *
  * Estructura esperada del .md:
  *   # TÍTULO                      → título de la carátula (negrita, subrayado)
@@ -58,6 +59,7 @@ const inMd = path.resolve(pos[0]);
 const outPdf = path.resolve(pos[1] || inMd.replace(/\.md$/, '.pdf'));
 const outHtml = outPdf.replace(/\.pdf$/, '.html');
 const htmlOnly = flags.includes('--html-only');
+const colorTheme = flags.includes('--color');
 
 /* ─────────────── md → partes ─────────────── */
 const raw = fs.readFileSync(inMd, 'utf8').replace(/\r\n/g, '\n');
@@ -124,7 +126,7 @@ ul > li { position: relative; }
 ul > li::before { content: "-"; position: absolute; left: -4.5mm; }
 ol { list-style: decimal; }
 
-table { width: 100%; border-collapse: collapse; margin: 4pt 0 9pt; font-size: 9.5pt; line-height: 1.3;
+table { width: calc(100% - 2pt); border-collapse: collapse; margin: 4pt 1pt 9pt; font-size: 9.5pt; line-height: 1.3;
         break-inside: avoid; text-align: left; }
 th, td { border: 0.6pt solid #000; padding: 3pt 5pt; vertical-align: top; }
 th { font-weight: bold; background: #efefef; }
@@ -146,7 +148,20 @@ img { display: block; max-width: 55%; max-height: 62mm; margin: 4pt auto 8pt; }
 .q { font-weight: bold; margin: 11pt 0 4pt; break-after: avoid; text-align: left; }
 .a { margin-left: 7mm; }
 ul.a, ol.a { margin-left: 7mm; }
-`;
+` + (colorTheme ? `
+/* --color: títulos y tablas en azul, para leer en pantalla */
+.cover h1 { color: #1f3864; text-decoration: none; border-bottom: 2pt solid #2e75b6; padding-bottom: 4pt; }
+.toc-title { color: #1f3864; }
+h2 { color: #1f3864; border-bottom: 1.2pt solid #2e75b6; padding-bottom: 2pt; }
+h3 { color: #2e75b6; }
+h4 { color: #1f3864; }
+table { border: 0.8pt solid #8eaadb; }
+th, td { border: 0.5pt solid #b4c6e7; }
+th { background: #dae3f3; color: #1f3864; }
+tbody tr:nth-child(even) td { background: #f5f8fc; }
+blockquote { border-left: 2.5pt solid #2e75b6; background: #f2f6fb; padding: 4pt 8pt; }
+.q { color: #1f3864; }
+` : '');
 
 const html = `<!doctype html><html lang="es"><head><meta charset="utf-8"><title>${esc(title)}</title>
 <style>${css}</style></head><body>
@@ -165,7 +180,7 @@ ${bodyHtml}
     let el=h.nextElementSibling, inQ=false;
     while(el && el.tagName!=='H2'){
       const isQ = el.tagName==='P' && el.firstElementChild && el.firstElementChild.tagName==='STRONG'
-                  && /^\\d+\\)/.test(el.textContent.trim()) && el.firstElementChild.textContent.length>=el.textContent.trim().length-1;
+                  && /^\\d+[a-z]?\\)/.test(el.textContent.trim()) && el.firstElementChild.textContent.length>=el.textContent.trim().length-1;
       if(isQ){ el.classList.add('q'); inQ=true; }
       else if(el.tagName==='H3'){ inQ=false; }
       else if(inQ){ el.classList.add('a'); }

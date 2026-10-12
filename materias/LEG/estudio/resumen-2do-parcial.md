@@ -162,6 +162,10 @@ dependencia**. Quedan fuera:
 - el **autónomo**, por cuenta y riesgo propios;
 - las exclusiones nuevas que trajo la reforma.
 
+**Ámbito de la LCT.** Se aplica a los contratos que se **ejecutan en Argentina**, sin importar dónde
+se firmaron ni la nacionalidad de las partes. Si la actividad tiene **estatuto especial o convenio
+colectivo**, la LCT es **supletoria**.
+
 **Contrato de trabajo (art. 21):** una **persona humana** se obliga a prestar servicios **bajo
 dependencia** de otra, por tiempo determinado o indeterminado, a cambio de una **remuneración**.
 **Relación de trabajo (art. 22):** la **ejecución efectiva** de esos servicios. El contrato es la
@@ -277,6 +281,7 @@ haber trabajado al menos **la mitad de los días hábiles** del año.
 
 - Empiezan un **lunes** y se dan entre el **1/10 y el 30/4**, avisadas con **30 días** de anticipación y pagadas **al inicio**.
 - Con la reforma se pueden **fraccionar** (tramos de 7 días o más) y se **interrumpen por enfermedad**.
+- Cuentan como **días trabajados** las licencias, la enfermedad inculpable y el accidente de trabajo. **No cuentan** las faltas injustificadas, las suspensiones disciplinarias ni las licencias sin goce.
 - Las no gozadas se pagan al terminar el contrato.
 
 **Licencias especiales** (corridas y pagas):
@@ -320,6 +325,7 @@ paga por **poner la fuerza de trabajo a disposición**, aunque haya días en que
 - **En dinero o en especie**: la especie **complementa**, no reemplaza, y tiene **tope del 20 %**.
 - **Componentes dinámicos** (art. 104 bis, nuevo): bonos por objetivos, premios por productividad.
 - **Propinas**: con la reforma, **no son remuneración aunque sean habituales**.
+- **Pago digital**: el sueldo se paga por **acreditación en cuenta sueldo**, y se admiten **recibos digitales** con firma electrónica o digital.
 
 **Remunerativo o no remunerativo.** Lo **remunerativo** genera aportes y cuenta para el SAC, las
 vacaciones y las indemnizaciones. Llamar "no remunerativa" a una suma no alcanza: depende de la ley.
@@ -342,7 +348,8 @@ Toda suspensión necesita **justa causa, plazo fijo y aviso por escrito** (art. 
 
 - Las **económicas** se miran con criterio restrictivo: la crisis general o la caída de ventas son **riesgo empresario** y no alcanzan. Se respeta el orden de antigüedad.
 - Las **disciplinarias** van de 1 a 30 días por año, y el trabajador tiene **30 días para cuestionarlas**.
-- Hay además suspensión **preventiva** (proceso penal) y por enfermedad, maternidad o cargo gremial.
+- La **preventiva** se da cuando el trabajador está **imputado en un proceso penal**: se interrumpen las tareas y el sueldo hasta que termina. Si el hecho tenía que ver con el trabajo y lo **sobreseen**, cobra los **salarios caídos** y elige entre volver o considerarse despedido. Si el hecho era ajeno al trabajo y la denuncia la hizo un tercero, vuelve a su puesto pero sin salarios caídos.
+- También suspenden el contrato la enfermedad, la maternidad y el cargo gremial.
 
 **Preaviso:** el trabajador avisa con **15 días**. El empleador, con **1 mes** si la antigüedad es
 de hasta 5 años y **2 meses** si es mayor. Si no avisa, paga la **indemnización sustitutiva**. Y si
@@ -461,6 +468,8 @@ de **Sistemas de Información** está incluida.
   - pagar el derecho.
 
   Además, la **reinscripción es anual**.
+- **Art. 22.** No se puede negar la matrícula por razones **ideológicas, políticas, raciales o religiosas**.
+- **Art. 20.** El Directorio puede **rehabilitar** a quien fue excluido de la matrícula, pasados **3 años** del fallo firme.
 
 ### 4.4 Estatuto: el ejercicio profesional
 
@@ -581,60 +590,474 @@ Colegio tiene que combatir el ejercicio ilegal.
 banco?** **Sí.** El art. 4 del Estatuto define el ejercicio profesional como libre **o en relación
 de dependencia**, y el art. 10 obliga a matricularse a quienes trabajan en dependencia.
 
-## 5. Preguntas de las guías de la cátedra, respondidas
+## 5. Preguntas de la guía de lectura — Unidad 5
 
-**1) ¿Qué es la relación de dependencia y cuáles son sus tres formas?** Es la situación de quien
-presta servicios en una organización ajena, bajo las directivas del empleador y **sin asumir el
-riesgo**. Se manifiesta en tres subordinaciones. La **técnica**: seguir los métodos del empleador.
-La **económica**: poner la fuerza de trabajo por un sueldo sin correr el riesgo empresario. La
-**jurídica**: el empleador puede dirigir, controlar y sancionar.
+Todas las preguntas de la guía de lectura de derecho laboral, en el orden de la cátedra, respondidas
+como para el escrito. El desarrollo está en el capítulo 3.
 
-**2) ¿Qué diferencia hay entre contrato y relación de trabajo?** El **contrato** (art. 21) es el
-acuerdo por el que una persona humana se obliga a trabajar bajo dependencia a cambio de un sueldo:
-es la **fuente** del vínculo. La **relación** (art. 22) es la **prestación efectiva** de esos
-servicios, es decir, su ejecución.
+### Bloque 1 — Régimen legal y contrato de trabajo
 
-**3) ¿Qué es el ius variandi y cuáles son sus límites?** Es la facultad del empleador de cambiar la
-forma y las modalidades del trabajo (art. 66). Sus límites son tres: no alterar lo **esencial** del
-contrato, no causar **perjuicio material** y no usarlo **como sanción**. Si se excede, el
-trabajador intima y, si el empleador no corrige, puede considerarse en **despido indirecto**.
+**1a) ¿Qué se entiende por trabajo para el derecho del trabajo y qué características debe reunir para quedar dentro de la relación dependiente?**
 
-**4) ¿Qué es el período de prueba y cuánto dura?** Es el lapso inicial del contrato por tiempo
-indeterminado en el que **cualquiera de las partes puede terminarlo sin indemnización**. Con la
-reforma dura **1 año** en empresas de hasta 5 trabajadores, **8 meses** en las de 6 a 100 y **6
-meses** en las de más de 100. Durante ese período rigen todos los derechos y los aportes, y si el
-trabajador no se registró desde el inicio, el empleador pierde el período de prueba.
+Es la actividad **lícita** que una persona presta **a otra**, que tiene la facultad de **dirigirla**,
+**a cambio de una remuneración** (art. 4 LCT). Para que entre en la relación laboral tiene que ser
+prestada **en relación de dependencia**: personal, por cuenta y riesgo ajenos y bajo las directivas
+del empleador. Con la Ley 27.802 se la define primero como una relación de **intercambio con fin
+económico**, y el concepto de dependencia se volvió más restrictivo.
 
-**5) ¿Qué son las horas extraordinarias y qué recargo tienen?** Son las que se trabajan por encima
-de la jornada máxima. No son obligatorias, salvo fuerza mayor o exigencias excepcionales. Se pagan
-con **50 %** de recargo en días hábiles y **100 %** los sábados después de las 13, los domingos y
-los feriados. El **banco de horas** de la reforma permite compensarlas con descanso, siempre
-respetando los topes de jornada.
+**1b) ¿Qué actividades quedan fuera de la relación laboral dependiente?**
 
-**6) ¿Qué diferencia hay entre conceptos remunerativos y no remunerativos?** Los
-**remunerativos** integran el sueldo: generan **aportes** y cuentan para el SAC, las vacaciones y
-la indemnización (comisiones, horas extra, premios, SAC). Los **no remunerativos** no lo integran
-(viáticos con comprobante, indemnizaciones, beneficios sociales y, desde la reforma, las
-**propinas**). No alcanza con que se los llame así: lo decide la ley.
+- El **trabajo benévolo**: gratuito y sin beneficio propio.
+- El **trabajo familiar**: entre cónyuges, entre padres e hijos bajo responsabilidad parental, o de hijos convivientes.
+- El **trabajo autónomo**: por cuenta y riesgo propios.
+- Con la reforma, también los **servicios profesionales con facturación**, las **contrataciones civiles o comerciales** y algunas formas de **trabajo en plataformas**.
+- El art. 2 excluye además a ciertos empleados públicos, al personal de casas particulares y a los trabajadores agrarios, que tienen su propio régimen.
 
-**7) ¿Qué carácter tiene el Colegio y cómo se divide?** Es una persona jurídica de **derecho privado
-en ejercicio de funciones públicas** (ley, art. 1). Para funcionar se divide en dos distritos: el
-**I, con sede en Santa Fe**, y el **II, con sede en Rosario** (art. 2).
+**1c) ¿Qué es la relación de dependencia y cuáles son las tres formas de subordinación?**
 
-**8) ¿Qué es el Tribunal de Ética, cómo se compone y qué juzga?** Es el órgano con potestad
-**exclusiva y autónoma** para investigar y juzgar las faltas en el ejercicio de la profesión, la
-inconducta que afecte el decoro y las violaciones de principios éticos. Actúa **de oficio o a
-pedido de parte**.
-- **Según el Estatuto**, es un solo tribunal de **12 miembros**: 8 titulares y 4 suplentes, 4 y 2 por distrito, por 2 años.
-- **Según el Código**, funciona con un **juez unipersonal**, que recibe la causa, y un **tribunal colegiado de 3** por distrito, que dicta sentencia.
+Es la situación de quien presta servicios en una **organización ajena**, bajo las directivas del
+empleador y **sin asumir el riesgo**. La subordinación puede ser de tres formas:
+- **Técnica**: el trabajador adecua su tarea a los métodos y sistemas del empleador, incluso tecnológicos.
+- **Económica**: pone su fuerza de trabajo a disposición a cambio de un sueldo y no corre el riesgo empresario.
+- **Jurídica**: el empleador puede dirigir, controlar y ejercer poder disciplinario.
 
-**9) ¿Qué se considera ejercicio profesional?** Toda actividad técnica, **pública o privada, libre
-o en relación de dependencia**, que implique ofrecer o prestar servicios de ingeniería, ocupar
-cargos que los requieran, hacer ensayos, tasaciones o docencia, o presentar proyectos e informes
-ante autoridades (Estatuto, art. 4). El ejercicio es **personal**: no se puede ceder el título ni la
-firma (art. 5).
+**1d) ¿Qué diferencia hay entre contrato de trabajo y relación de trabajo?**
 
-**10) ¿Quiénes están inhabilitados para ejercer?** Según el Estatuto (art. 12):
-- los **condenados** por causas profesionales, mientras dure la condena;
-- los **incapaces**;
-- los **excluidos o suspendidos** por sanción en cualquier jurisdicción del país, mientras dure la sanción.
+El **contrato** (art. 21) es el acuerdo por el que una persona humana se obliga a prestar servicios
+bajo dependencia a cambio de una remuneración: es la **fuente jurídica** del vínculo. La **relación**
+(art. 22) es la **prestación efectiva** de esos servicios, es decir, el contrato en ejecución.
+
+**1e) ¿Cuáles son los elementos esenciales del contrato y qué finalidad persigue cada parte?**
+
+Son tres:
+- los **sujetos**: trabajador y empleador;
+- el **objeto**: una prestación **personal e infungible**, lícita y determinada;
+- la **causa**.
+
+La causa es la finalidad de cada parte: para el trabajador, **cobrar una remuneración**; para el
+empleador, **recibir la prestación y apropiarse de su resultado**.
+
+**1f) ¿Quiénes son trabajador y empleador? ¿Qué diferencia hay entre trabajador dependiente y autónomo?**
+
+- **Trabajador** (art. 25): la **persona humana** que presta servicios en las condiciones de los arts. 21 y 22. Su prestación es personal.
+- **Empleador** (art. 26): la persona humana o jurídica, o un conjunto de ellas aunque no tenga personalidad jurídica, que **requiere sus servicios**. Organiza, dirige, controla y disciplina.
+
+El **dependiente** trabaja bajo las órdenes y el riesgo de otro. El **autónomo**, por su cuenta y
+riesgo.
+
+### Bloque 2 — Derechos y obligaciones de las partes
+
+**2a) ¿Cuáles son los principales deberes del empleador respecto de la remuneración y la ocupación efectiva?**
+
+- **Remuneración:** pagarla en tiempo, porque tiene **carácter alimentario**, y como mínimo el **SMVM** o el salario de convenio. La parte en especie no puede superar el **20 %**.
+- **Ocupación efectiva:** darle al trabajador tareas **reales y adecuadas a su categoría**. No alcanza con pagarle y no darle trabajo.
+
+**2b) ¿Cuáles son las principales facultades del empleador?**
+
+- **Organización:** decide tareas, métodos, tiempo y lugar del trabajo.
+- **Reglamentaria:** dicta reglamentos internos.
+- **Dirección:** da órdenes.
+- **Control:** respetando la dignidad, la intimidad y los datos personales del trabajador.
+- **Disciplinaria:** sanciona con **contemporaneidad, proporcionalidad y sin doble sanción**.
+- **Ius variandi:** modifica condiciones no esenciales.
+
+**2c) ¿Cuáles son los principales deberes del trabajador?**
+
+- **Obediencia** a las órdenes legítimas.
+- **Diligencia y colaboración**: puntualidad y asistencia.
+- **Fidelidad** y buena fe.
+- **Reserva** de la información confidencial.
+- **Custodia** de las herramientas.
+- **Responder por daños** causados con dolo o culpa grave.
+- **No concurrencia**: no competir deslealmente.
+- **Auxilio** ante un peligro grave.
+
+**2d) ¿Cuáles son los principales derechos del trabajador?**
+
+- Cobrar la remuneración.
+- Que las facultades del empleador respeten su **dignidad**, su patrimonio y su salud.
+- **Ocupación efectiva**.
+- Que se hagan los **aportes** y le entreguen los certificados.
+- **Formación** profesional.
+- **Igualdad de trato** y no discriminación.
+- Protección de sus **invenciones**.
+- Libertad de expresión e **intimidad**.
+
+**2e) ¿Qué establece el apunte sobre invenciones, descubrimientos y software del trabajador?**
+
+**Art. 82 de la LCT:**
+- Las invenciones **personales** son del trabajador, aunque haya usado instrumentos ajenos.
+- Son del **empleador** si derivan de los **procedimientos, métodos o instalaciones** de la empresa, o si el trabajador fue **contratado con ese objeto**.
+
+Para el software rige además el **art. 4 inc. d de la Ley 11.723**: el empleador es titular del
+programa que produjo un dependiente **contratado para programar**, salvo pacto en contrario.
+
+Por lo tanto:
+- si el software se hace **fuera** del contrato de trabajo, es del **trabajador**;
+- si se hace **para lo que lo contrataron**, o **deriva de los métodos de la empresa**, es del **empleador**.
+
+**2f) ¿Qué es el ius variandi, qué puede modificar el empleador y cuáles son sus límites?**
+
+Es la facultad de cambiar la **forma y modalidades** de la prestación (art. 66, reformado).
+- **Qué puede cambiar:** aspectos **no esenciales**, como la distribución del horario, el lugar de trabajo o la modalidad.
+- **Límites:**
+  - no puede **alterar modalidades esenciales**, salvo con consentimiento del trabajador;
+  - no puede causar **perjuicio material**, como bajar el sueldo o aumentar los gastos de viaje;
+  - no puede usarlo **como sanción** (art. 69).
+- **Si se excede:** el trabajador **intima** y, si el empleador no lo deja sin efecto, se considera en **despido indirecto**.
+
+### Bloque 3 — Modalidades y jornada
+
+**3a) ¿Cuál es la modalidad típica y cuáles son las de duración determinada?**
+
+La típica es el contrato **por tiempo indeterminado**: dura hasta que el trabajador se jubila.
+Las de duración determinada son excepciones: **plazo fijo**, **temporada** y **eventual**. El
+apunte también explica el contrato a **tiempo parcial**.
+
+**3b) ¿Qué características tienen el plazo fijo, la temporada y el eventual?**
+
+- **Plazo fijo:** plazo cierto, **por escrito**, **máximo 5 años** y con **causas objetivas** que lo justifiquen. La reforma limitó la indemnización por romperlo antes de tiempo.
+- **Temporada:** tareas del giro normal que se cumplen **solo en ciertas épocas del año** y se repiten cada ciclo. La relación es **permanente** aunque la prestación sea discontinua.
+- **Eventual:** cubre necesidades **transitorias o extraordinarias**, sin fecha de fin previsible. En una suplencia hay que indicar a quién se reemplaza.
+
+**3c) ¿Qué es el período de prueba, cuánto dura y qué derechos hay durante él?**
+
+Es el lapso inicial del contrato por tiempo indeterminado (art. 92 bis) en el que **cualquiera de
+las partes puede terminar el vínculo sin causa y sin indemnización por antigüedad**.
+
+Duración, según la cantidad de trabajadores de la empresa:
+
+| Trabajadores | Período de prueba |
+|---|---|
+| Hasta 5 | **1 año** |
+| De 6 a 100 | **8 meses** |
+| Más de 100 | **6 meses** |
+
+Durante ese período:
+- rigen **todos los derechos**, incluidos los sindicales;
+- se pagan **aportes**;
+- hay cobertura por accidentes y enfermedades;
+- el tiempo **cuenta como antigüedad**.
+
+Reglas sobre su uso:
+- no se puede usar dos veces con el mismo trabajador;
+- **si no se registra al trabajador desde el inicio, el empleador pierde el período de prueba**.
+
+**3d) ¿Qué es la jornada y cuáles son los límites de la normal, la nocturna y la insalubre?**
+
+Es todo el tiempo en que el trabajador está **a disposición** del empleador (art. 197). El viaje no
+cuenta.
+
+| Jornada | Horario | Límite |
+|---|---|---|
+| Normal (diurna) | 6 a 21 h | **8 horas diarias o 48 semanales** |
+| Nocturna | 21 a 6 h | **7 horas**. Si es mixta, se reducen 8 minutos por cada hora nocturna |
+| Insalubre | — | **6 horas diarias y 36 semanales**. Solo existe si la declara la autoridad administrativa |
+
+La nocturna y la insalubre se pagan igual que una jornada de 8 horas.
+
+**3e) ¿Qué son las horas extraordinarias, cuándo pueden exigirse y qué recargo tienen?**
+
+Son las que superan la jornada máxima legal o convencional.
+- **¿Son obligatorias?** No (art. 203), salvo por **fuerza mayor** o por **exigencias excepcionales** de la economía o de la empresa. En este último caso el trabajador puede negarse si prueba un perjuicio.
+- **Recargo** (art. 201):
+  - **50 %** en días hábiles;
+  - **100 %** los sábados después de las 13, los domingos y los feriados.
+
+**3f) ¿Qué es el banco de horas y qué límites deben respetarse?**
+
+Es un mecanismo de **compensación horaria** que incorporó la Ley 27.802. El exceso de horas se
+compensa después con menos jornada, francos o descansos, en lugar de pagarlo como horas extra.
+**No elimina** los topes de jornada ni los descansos mínimos, y hay que seguir respetando las
+normas de higiene y seguridad.
+
+### Bloque 4 — Vacaciones, licencias y enfermedades
+
+**4a) ¿Qué finalidad tienen las vacaciones, qué requisito piden y cómo varía su duración?**
+
+Son un descanso anual **obligatorio, pago e irrenunciable** para que el trabajador se recupere
+(art. 14 bis de la Constitución). Para tenerlas completas hay que haber trabajado **al menos la
+mitad de los días hábiles** del año.
+
+Duración según la antigüedad:
+
+| Antigüedad | Vacaciones |
+|---|---|
+| Hasta 5 años | **14 días** |
+| Más de 5 y hasta 10 | **21 días** |
+| Más de 10 y hasta 20 | **28 días** |
+| Más de 20 | **35 días** |
+
+Con la reforma, pueden **fraccionarse** en tramos de al menos 7 días.
+
+**4b) ¿Qué es una enfermedad o accidente inculpable y qué requisitos debe reunir?**
+
+Es toda alteración de la salud que **impide trabajar** y que **no tiene relación con el trabajo**
+(art. 208). Las enfermedades vinculadas al trabajo se rigen por la Ley de Riesgos del Trabajo
+24.557.
+
+Requisitos:
+- que sea **inculpable**;
+- que sea **incapacitante**;
+- que se manifieste **durante la relación laboral**.
+
+**4c) ¿Qué obligaciones tiene el trabajador y qué cambió la Ley 27.802?**
+
+- **Aviso:** debe avisar la enfermedad y dónde se encuentra **en la primera jornada de ausencia** (art. 209). Con la reforma, si no avisa a tiempo, tiene que probar la enfermedad **y que no pudo avisar**.
+- **Certificado médico** (art. 210, reformado): debe tener **diagnóstico, tratamiento y días de reposo**, y estar firmado **digitalmente** por un profesional habilitado.
+- **Control médico:** el empleador puede controlar. Si su médico no coincide con el certificado, se resuelve con una **junta médica oficial** o un instituto de solvencia técnica, **a costa del empleador**.
+
+### Bloque 5 — Remuneración y suspensión
+
+**5a) ¿Qué se entiende por remuneración?**
+
+Es la **contraprestación** que recibe el trabajador por el contrato de trabajo (art. 103). Nunca
+puede ser menor al **SMVM**. Se debe por **poner la fuerza de trabajo a disposición**, aunque en
+algunos casos no se trabaje.
+
+**5b) ¿Qué diferencia hay entre conceptos remunerativos y no remunerativos?**
+
+- Los **remunerativos** integran el sueldo: generan **aportes y contribuciones** y cuentan para el SAC, las vacaciones y las indemnizaciones. Ejemplos: comisiones, horas extra, premios, SAC y vacaciones gozadas.
+- Los **no remunerativos** no lo integran. Ejemplos: viáticos con comprobante, indemnizaciones, **beneficios sociales** (comedor, reintegros médicos, guardería) y, desde la reforma, las **propinas** aunque sean habituales.
+
+No alcanza con llamar "no remunerativa" a una suma: lo decide la ley.
+
+**5c) ¿Qué es la suspensión del contrato y cuáles son sus causas?**
+
+Es la **interrupción transitoria** de algunas obligaciones, mientras el contrato **sigue vigente**.
+
+Causas:
+- enfermedad o accidente inculpable;
+- cargos gremiales;
+- causas **económicas** (falta de trabajo o fuerza mayor);
+- causas **disciplinarias**;
+- suspensión **preventiva**;
+- licencia por maternidad;
+- excedencia.
+
+Toda suspensión debe tener **justa causa, plazo fijo y notificación por escrito** (art. 218).
+
+Topes por año:
+
+| Causa | Tope |
+|---|---|
+| Económica | **30 días** |
+| Disciplinaria | **30 días** |
+| Fuerza mayor | **75 días** |
+| Todas juntas | **90 días** |
+
+**5d) ¿Qué es el preaviso?**
+
+Es la obligación **bilateral** de avisar con anticipación que se termina el contrato.
+
+| Quién avisa | Plazo |
+|---|---|
+| Trabajador | **15 días** |
+| Empleador, con antigüedad de hasta 5 años | **1 mes** |
+| Empleador, con más de 5 años | **2 meses** |
+
+Si se omite, se paga la **indemnización sustitutiva**. Si el despido no cae a fin de mes, se paga
+además la **integración del mes de despido**.
+
+**5e) ¿Cuáles son las formas de extinción y qué indemnizaciones pueden corresponder?**
+
+Formas de extinción:
+- **despido con causa**, **sin causa** o **indirecto**;
+- **renuncia** o **abandono** del trabajo;
+- **mutuo acuerdo**;
+- **vencimiento del plazo**;
+- incapacidad, jubilación o muerte;
+- quiebra o fuerza mayor.
+
+Indemnizaciones que pueden corresponder:
+- **por antigüedad**: un mes por año o fracción mayor de 3 meses, con un mínimo de un mes;
+- **sustitutiva de preaviso**;
+- **integración del mes** de despido.
+
+Además, siempre se pagan los días trabajados, el **SAC proporcional** y las **vacaciones
+proporcionales**.
+
+## 6. Preguntas guía del Colegio — Unidad 6
+
+Las preguntas guía de la cátedra para las tres normas del Colegio, respondidas. El desarrollo está
+en el capítulo 4. Recordar la regla: donde la ley y el Estatuto se repiten, **vale el Estatuto**.
+
+### Ley 11.291
+
+**1) ¿Qué carácter tiene el Colegio?**
+
+Es una persona jurídica de **derecho privado en ejercicio de funciones públicas** (art. 1).
+
+**2) ¿Cómo se divide a los efectos de su funcionamiento?**
+
+En dos **Colegios de Distrito** (art. 2):
+- el **Distrito I**, con sede en **Santa Fe**;
+- el **Distrito II**, con sede en **Rosario**.
+
+**3) ¿Por qué normativa se rige?**
+
+Por la **ley 11.291** y su reglamentación, el **Estatuto**, el **Reglamento Interno** y el **Código
+de Ética Profesional**, además de las resoluciones y acuerdos de sus órganos (art. 3).
+
+**4) ¿Cuáles son sus finalidades y atribuciones?**
+
+Están en el art. 4, que no es taxativo. Las principales:
+- controlar el **ejercicio de la profesión**;
+- gobernar la **matrícula**;
+- ejercer el **poder disciplinario**;
+- velar porque **nadie ejerza sin autorización** y combatir el ejercicio ilegal;
+- dar intervención al **Ministerio Fiscal** ante delitos;
+- **representar** y defender a los colegiados;
+- colaborar con el Estado en proyectos de ley;
+- fomentar la investigación;
+- recaudar las cuotas;
+- actuar como **árbitro**;
+- dictar sus reglamentos.
+
+**5) ¿Quiénes son las autoridades del Colegio?**
+
+Están en el art. 6:
+- **A nivel provincial:** las **Asambleas** de matriculados, el **Directorio General** y el **Tribunal de Ética Profesional y Disciplina**.
+- **En cada distrito:** las **Asambleas** de distrito, el **Directorio de Distrito**, con representantes de cada área de la ingeniería, y la **Comisión Revisora de Cuentas**.
+
+Los cargos son **obligatorios**, salvo dispensa (art. 7).
+
+**6) ¿Qué es el Tribunal de Ética y qué atribuciones tiene?**
+
+Es el órgano con **potestad exclusiva y autónoma** para **investigar, conocer y juzgar**:
+- las faltas en el ejercicio de la profesión;
+- la inconducta que afecte el decoro;
+- las violaciones a principios éticos.
+
+Puede actuar **de oficio o a petición de parte** (art. 11).
+
+Además, el procedimiento tiene estas garantías:
+- nadie puede ser sancionado sin haber sido **citado a defenderse dentro de 7 días**;
+- el fallo debe ser **fundado** y dictarse en **15 días hábiles**.
+
+**7) ¿Cuáles son las causales de sanción?**
+
+Las enumera el art. 18 de la ley y las repite el **art. 22 del Estatuto**:
+- condena por **delito doloso**;
+- incumplir la **ley o el Estatuto**;
+- **negligencia reiterada o ineptitud manifiesta**;
+- violar **incompatibilidades**;
+- incumplir el **Código de Ética**;
+- actos que **menoscaben la profesión**;
+- actos contra el **honor y el decoro**;
+- **inasistencias** a 3 sesiones seguidas o 5 alternadas, si se integra un órgano.
+
+**8) ¿Cómo se aplican las sanciones, cuáles son y se pueden apelar?**
+
+Se gradúan según la **falta, la reiteración y las circunstancias**. Según el **Estatuto, art. 23**,
+son:
+- llamado de atención;
+- apercibimiento privado o público;
+- **multa de hasta 20 veces** el derecho de inscripción anual;
+- **suspensión de hasta 3 años**.
+
+**Sí, se pueden apelar**, pero las fuentes no coinciden en cómo:
+- La **ley (art. 19)** dice **5 días ante la Corte Suprema** provincial, para la multa y la suspensión.
+- El **Código (art. 38)** dice **10 días ante la Cámara**, y que solo puede apelar el denunciado.
+
+**9) ¿Qué es la matriculación y qué requisitos tiene?**
+
+Es el acto por el que el Colegio **habilita** a ejercer en la provincia. Requisitos (art. 21 de la
+ley y **art. 10 del Estatuto**):
+- **domicilio** real, legal y profesional en la provincia;
+- **título** de ingeniero especialista;
+- no estar en causal de **cancelación**;
+- pagar el **derecho de matriculación**.
+
+El Estatuto agrega que **deben matricularse todos los que ejercen**, también en relación de
+dependencia o como empresarios. La reinscripción es **anual**.
+
+### Estatuto (Decreto 0601/99)
+
+**10) ¿Qué se considera ejercicio profesional y qué tareas comprende?**
+
+Toda actividad técnica, **pública o privada, libre o en relación de dependencia** (art. 4), que
+implique:
+- **ofrecer, contratar o prestar servicios** de ingeniería;
+- desempeñar **cargos o funciones** que los requieran;
+- hacer **ensayos, tasaciones, docencia** o divulgación;
+- **presentar** proyectos o informes ante autoridades.
+
+**11) ¿Qué implica el ejercicio profesional en cuanto a la actuación?**
+
+Que es **siempre personal**: está prohibido **ceder el uso del título o la firma** (art. 5).
+
+**12) ¿Qué requisitos hay al ejercer (arts. 6, 8 y 9) y qué se considera uso del título (art. 7)?**
+
+Requisitos:
+- **Art. 6:** en todo trabajo se consignan **título, matrícula, firma y aclaración**.
+- **Art. 8:** todo trabajo debe tener **al menos un profesional** matriculado.
+- **Art. 9:** los trabajos se **visan o registran** en el Colegio y se pagan los **aportes** antes de presentarlos. El Colegio puede cobrárselos al comitente e inspeccionar obras.
+
+**Uso del título (art. 7):** emplear términos, leyendas, insignias, emblemas o actos de los que **se
+pueda inferir que uno ejerce la profesión**. Lo determina el Colegio.
+
+**13) ¿Quiénes están inhabilitados para ejercer?**
+
+Según el art. 12:
+- los **condenados** por causas de la actuación profesional, mientras dure la condena;
+- los declarados **incapaces**;
+- los **excluidos o suspendidos** por sanción disciplinaria en cualquier jurisdicción del país, mientras dure la sanción.
+
+**14) ¿Cuáles son las causas de cancelación o suspensión de la matrícula?**
+
+Según el art. 13:
+- el **pedido** del propio colegiado;
+- las **incompatibilidades**, mientras subsistan;
+- una **enfermedad** que inhabilite temporariamente;
+- las **sanciones**, mientras duren;
+- estar en **proceso criminal** por hechos de la profesión, o haber sido penado por **delitos contra la propiedad**.
+
+Para volver a matricularse hace falta **dictamen favorable del Tribunal** (art. 14).
+
+**15) ¿Cómo es la potestad disciplinaria del Tribunal de Ética (arts. 49, 54 y 55)?**
+
+- **Art. 49 — Composición:** es **un solo Tribunal** de **12 miembros**, 8 titulares y 4 suplentes, a razón de **4 titulares y 2 suplentes por distrito**. El mandato dura **2 años** y el presidente se elige cada año.
+- **Art. 54 — Código de Ética:** el Tribunal lo elabora con la correlación entre faltas y sanciones. El Código debe garantizar:
+  - el **debido proceso**;
+  - una **acusación clara**;
+  - la **defensa y la prueba**;
+  - un **fallo fundado**;
+  - una **instancia revisora**.
+  
+  Además, el Tribunal investiga con **autonomía**.
+- **Art. 55 — Denuncias:** quien se crea perjudicado puede denunciar. El Tribunal puede llamar a **conciliación** o **rechazar de oficio** las denuncias improcedentes.
+
+### Código de Ética
+
+**16) ¿Qué cuestiones conoce y juzga el Tribunal de Ética?**
+
+Según el art. 2, conoce y juzga:
+- las **faltas** cometidas en el ejercicio de la profesión;
+- la **inconducta** que afecte su decoro;
+- todo caso en que se haya **violado un principio de ética profesional**.
+
+**17) ¿Qué actos son contrarios a la ética, según el ámbito?**
+
+Están en el art. 6, que no es taxativo. Tres ejemplos de cada ámbito:
+- **Para con la profesión:**
+  - actuar contra la buena técnica o con negligencia, aun por orden del superior;
+  - aceptar tareas que exceden las incumbencias del título;
+  - firmar planos o informes que no hizo ni revisó.
+- **Para con los colegas:**
+  - usar trabajos ajenos sin consentimiento;
+  - difamar colegas;
+  - cobrar honorarios muy inferiores a los de plaza.
+- **Para con los comitentes o empleadores:**
+  - aceptar comisiones de proveedores o contratistas;
+  - revelar datos reservados.
+- **Para con el Colegio:**
+  - no cumplir las normas de matriculación;
+  - no acatar sus resoluciones;
+  - difamar a sus directivos.
+
+**18) ¿Cómo está compuesto el Tribunal de Ética?**
+
+Según el art. 8, tiene dos partes:
+- un **Juez unipersonal**, que **recibe la causa** y la prueba ofrecida, y la **desestima o la eleva** a juzgamiento;
+- un **Tribunal Colegiado de 3 miembros** por cada distrito, más 2 suplentes, que recibe la prueba y **dicta sentencia**.
