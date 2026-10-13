@@ -4918,16 +4918,295 @@ En el Gantt: **rojo** = actividad crítica (holgura 0), **azul** = no crítica.
 
 ### Unidad 6 — Emprendedorismo
 
-> **Unidad no desarrollada.** Es la base de la **Etapa 4 del TPI** (emprendimiento para ciudad inteligente + Canvas + pitch de una página). Material identificado en el campus pero **no copiado a `materias/ASI/fuentes/`** — copiarlo antes de arrancar la Etapa 4.
+> **Es la unidad que sostiene la Etapa 4 del TPI** (startup para ciudad inteligente + Business Model Canvas con fuentes de ingreso + resumen de una página para un inversor). Ver §8 para el mapeo consigna → material.
+>
+> **Origen del material.** Ingerido el 2026-10-13 desde el portal de la materia: las cinco clases (`ASI-6-C1` a `C5`) y las dos plantillas del Canvas. La cátedra no tiene apunte teórico para esta unidad, solo DIAP. Casi todo el texto se extrae bien con pymupdf. Son solo imagen: los ejemplos visuales de MVP (C2 p19–20), el Canvas de Osterwalder (C2 p35), el lienzo de propuesta de valor de Spotify (C3 p8–9) y los gráficos de tendencias de canales (C3 p30–32).
 
 #### Conceptos clave
 
-Contenidos según el Programa Analítico: proyectos innovadores y emprendimientos de base científica y tecnológica · tendencias actuales y transformación digital · ecosistemas emprendedores · herramientas de desarrollo y modelado de proyectos innovadores (**Design Thinking**, **Canvas**) · gestión de emprendimientos tecnológicos, **método Lean Start-up**.
+- **Emprender** (C1 p6): crear nuevas soluciones, transformar negocios, modificar procesos o llevar adelante cualquier iniciativa que promueva la evolución del mercado y genere un impacto en él.
+- **Emprendimiento (startup) vs. empresa** (C2 p6, ver también C2 p13): la empresa es una organización que vende productos o servicios a cambio de ganancias, y está en fase de **ejecución**. La startup es una **organización temporaria destinada a *buscar* un modelo de negocios repetible y escalable**, y está en fase de **búsqueda**. *Startup = experimento.*
+- **Lean Startup** (C2 p13–16): modelo que busca comprobar la viabilidad de una empresa con un uso optimizado y reducido de recursos. Tres ejes: **velocidad, aprendizaje validado y foco**. Se aplica combinando Design Thinking + Lean Startup + Agile.
+- **MVP** (C2 p18): la versión de un producto nuevo que permite recoger la **máxima cantidad de aprendizaje validado** sobre los clientes con el **mínimo esfuerzo**. ¿Cuál es el menor producto que puedo entregar el día 1 que resuelve problemas y crea ganancia para el cliente?
+- **Pivot vs. iteración** (C2 p25): el pivot es un **cambio sustantivo** de uno o más componentes del modelo de negocios y la iteración es un cambio menor. Pivotar **no** es abandonar la idea ni la visión: es cambiar el modelo de negocio.
+- **Modelo de negocios** (C2 p32): la forma en que una empresa crea valor para sí entregando productos y servicios a sus clientes.
+- **Business Model Canvas** (C2 p32): método visual que permite describir y analizar **en una sola hoja** los elementos que harán económicamente viable la empresa. Tiene nueve bloques.
+- **Propuesta de valor** (C3 p5, Osterwalder): la descripción de los beneficios que pueden esperar los clientes de tus productos y servicios. **No es la idea ni el producto:** es satisfacer una necesidad o un problema del cliente (C2 p37).
+- **Ajuste producto-mercado** (C3 p6–7): se logra cuando la propuesta de valor alivia frustraciones y crea alegrías relevantes para el cliente. Se busca iterando y pivotando.
+- **Triple impacto** (C1 p12): valor económico (sostenibilidad en el tiempo), impacto social e impacto ambiental (modelo regenerativo vs. extractivo). Movimiento B / Sistema B.
+- **Ecosistema emprendedor** (C1 p21): conjunto de actores, factores, relaciones y procesos que interactúan y moldean las condiciones para la creación, el desarrollo y la expansión de empresas en un espacio geográfico.
+- **Punto de equilibrio** (C5 p11–13): ingresos totales = costos totales. **Unidades = CF / (P − CVu)**.
+- **Flujo de ingresos vs. modelo de precios** (C5 p19): el flujo es la **estrategia** para generar ingresos de cada segmento y el modelo de precios es la **táctica** para fijar el precio en cada segmento.
+
+#### Desarrollo
+
+##### 1. Desarrollo emprendedor (C1)
+
+**¿Por qué emprender?** Porque algo te molesta. Uri Levine (Waze): *"Comencé Waze porque odio los embotellamientos"*. La bibliografía cierra con su libro: *Enamórate del problema, no de la solución*. Es el criterio que después reaparece en la propuesta de valor: se parte del problema, no del producto.
+
+**El emprendedor** (C1 p7) es la persona con aptitudes y actitudes para encarar nuevos retos, que avanza un paso más y no está satisfecha con lo que logró. **Cualidades del espíritu emprendedor** (C1 p8, según el manual de Junior Achievement): responsabilidad y compromiso, trabajo en equipo, perseverancia, creatividad, iniciativa, dinamismo, sentido crítico y asunción de riesgos, búsqueda de superación, confianza en sí mismo, capacidad de negociación, y capacidad de decisión y de trabajo bajo presión.
+
+**Tipos de emprendedores** (C1 p9, Andy Freire, *Pasión por emprender*):
+
+| Tipo | Rasgo | Ejemplo |
+|---|---|---|
+| **Luchadores** | Emprenden para subsistir: es su única alternativa | El taxista que usa el capital que le queda para comprar un auto |
+| **Gladiadores** | Lo llevan en la sangre: aun con otras opciones, eligen emprender y se comprometen más allá de las modas | Wenceslao Casares (Patagon), Alec Oxenford (DeRemate), Marcos Galperin (Mercado Libre) |
+| **Caza-olas** | Se suben a la moda del momento y saltan de ola en ola sin comprometerse con ninguna | Parripollos (80), paddle (90), cybercafés (2000), cerveza artesanal (2010) |
+
+**Tu camino emprendedor** (C1 p10): identificar capacidades e intereses (¿qué te enoja?, ¿qué considerás injusto?, ¿qué te gustaría cambiar?) y decidir qué tipo de emprendimiento formar: ¿socio que aporte fondos o aptitudes?, ¿compartir el control?, ¿familia o amigos que inviertan? Herramienta sugerida: **IKIGAI** ("razón de ser").
+
+**Disrupción** (C1 p11): no tiene que ver con la tecnología, sino con **cambiar el comportamiento y el equilibrio del mercado**. Ejemplo: McDonald's en 1940 cambió el mercado de bares solo modificando sus procesos, y así creó el fast food. Otros casos de la lámina: taxis (Uber), hotelería (Airbnb), comercio minorista y medios.
+
+**Organizaciones de triple impacto** (C1 p12–14):
+
+| Pilar | Contenido |
+|---|---|
+| Económico | Para existir, la organización tiene que generar como mínimo los ingresos que gasta. El valor económico le da sostenibilidad en el tiempo |
+| Social | Cómo se vincula con accionistas, colaboradores, proveedores y consumidores: inclusión, no discriminación, prevención de accidentes, liderazgo positivo y transparencia |
+| Ambiental | Modelo **extractivo** (consume recursos del planeta y los reduce) vs. **regenerativo** (ayuda a regenerar los ambientes con los que se vincula) |
+
+Principios del **Movimiento B**: gobernanza responsable (transparencia y propósito), impacto en los trabajadores, impacto en la comunidad, impacto ambiental y clientes conscientes. La actividad de clase (C1 p14) pide, para cada idea: **(1) producto o servicio, (2) cómo genera ingresos, (3) impacto social, (4) impacto ambiental**, y un pitch de 3 minutos. Los ejemplos de la cátedra son reciclaje colaborativo, huertas urbanas con app de distribución, ropa con textiles reciclados, energía solar comunitaria y una app contra el desperdicio de alimentos.
+
+**Emprender en Argentina** (C1 p16–25):
+
+- **Fortalezas** (StartupBlink): capacidad demostrada para crear startups de alto impacto (Mercado Libre, Ualá) y programadores especializados. **Debilidad:** incertidumbre económica, y además las startups exitosas tienden a irse (Auth0, comprada por Okta, quedó con sede en EE. UU.).
+- **Contexto económico**: la inflación complica la planificación y la fijación de precios y reduce la demanda. La volatilidad del dólar encarece los insumos importados, **y el hosting y el software en la nube se pagan en dólares**. Además falta financiamiento a tasas razonables.
+- **Sectores en crecimiento**: **fintech** (Mercado Pago, Ualá), **agtech** (Deepagro, Sima, Agrofy) y **edtech** (E-ducativa, CoderHouse, Digital House, Henry).
+- **Rol del Estado**: **Ley de Emprendedores (2017)**, que crea las SAS, reduce la burocracia y da incentivos fiscales. **Ley de Economía del Conocimiento (2020)**: software, servicios profesionales, biotecnología y robótica, con foco en exportación. También créditos subsidiados (Banco Nación) e incubadoras y aceleradoras.
+- **Componentes del ecosistema** (C1 p21): primeros clientes y redes; talento y formación; infraestructura y entidades de apoyo (incubadoras, asesores, mentores, ONG); cultura (visibilizar éxitos, tolerancia al riesgo y al fracaso); acceso a financiamiento (bancos, ángeles, capital de riesgo); y apoyo real del Estado con un marco legal favorable.
+
+**Actores del ecosistema en Rosario y Santa Fe** (C1 p22–23). Sirven como **socios clave** y como **fuente de financiamiento** en el Canvas:
+
+| Tipo | Actores |
+|---|---|
+| Gobierno | Nación: Subsecretaría de Emprendedores · Provincia: "Activa Emprendedor", "Banco Solidario", Ministerio de Desarrollo Productivo · Rosario: capacitación "Rosario Emprende", consultorías gratuitas en Espacio Innova.R, programa de preincubación de empresas de base científico-tecnológica |
+| Incubadoras y aceleradoras | BCR Innova, X4 Company Builders, Glocal (agtech, foodtech, climatech), Innventure (agro), Ggidek, SF500, Aceleradora del Litoral (biotecnología) |
+| Inversores | Bolsa de Comercio de Rosario (red de innovación + rondas de inversión), Sancor Seguros Venture |
+| Cámaras, clústers y polos | Polo Tecnológico Rosario, Clúster TIC Santa Fe, Clúster CEDI, C3 Casilda, ADERR, Red Federal |
+| Apoyo emprendedor | Endeavor, Empretec, ASEA, Cámara Fintech, ADVA (videojuegos) |
+
+**Tendencias** (C1 p25): IA y big data, economía digital y e-commerce, **startups verdes y sustentables**, trabajo remoto e internacionalización, telemedicina. Factores que impulsan o frenan: financiamiento, marco legal, talento, plataformas colaborativas y escalabilidad regional.
+
+**Del fracaso al éxito** (C1 p27–36). Según GEM y Sbdar, **el 84% de los emprendimientos fracasa**. Causas agrupadas:
+
+| Grupo | Causas |
+|---|---|
+| Fallas de gestión | Falta de experiencia, decisiones basadas en suposiciones **sin validar con el mercado**, problemas de ejecución |
+| Mercado | Competencia intensa, condiciones económicas adversas, factores externos (pandemia, cambio tecnológico) |
+| Recursos financieros | **Burn rate** descontrolado, falta de fondos, subestimar costos o sobrestimar ingresos |
+| Producto inadecuado | **Solución a un problema inexistente**, mala investigación de usuarios, necesidades que cambian |
+| Competencia subestimada | No seguir a los emergentes, no innovar |
+| Inflexibilidad | No pivotar a tiempo, no escuchar al mercado |
+| Marketing y ventas | Falta de visibilidad, segmentación incorrecta, no entender el ciclo de ventas |
+| Factores humanos | Conflictos entre cofundadores, cultura débil, liderazgo pobre |
+
+Casos de la cátedra: **Bluesmart** (valija con GPS: USD 2,2 M en Indiegogo, muerta cuando las aerolíneas prohibieron las baterías no removibles, un riesgo regulatorio externo), **CookApp** (no escaló y no fue rentable frente a Rappi y UberEats), **ClickOn** (se desinfló la burbuja de los cupones), **Beepi** (gasto descontrolado), **Yik Yak** (mala reputación), **Quixey** (guerra con gigantes) y **Maple** (costos mayores que los ingresos). Lecciones: cuidá el dinero; sin usuarios la startup vale poco; la rentabilidad sí importa; aportá algo nuevo y evitá pelear con gigantes; los costos no pueden superar a los ingresos. El fracaso se entiende como aprendizaje (Edison, Fuckup Nights).
+
+##### 2. Gestión del emprendimiento y Lean Startup (C2)
+
+**Por qué no un plan de negocios clásico** (C2 p8–10): *"Ningún plan sobrevive al primer contacto con los clientes"*. Los primeros años de una startup son tan impredecibles que no entran en un plan a 5 años. **Las startups no son versiones pequeñas de grandes empresas**: contabilidad, operaciones, comportamiento organizacional y RRHH son herramientas irrelevantes en los dos primeros años.
+
+**Lean Startup: cómo se aplica** (C2 p16):
+
+| Tipo | Elemento |
+|---|---|
+| Estrategias | 1. Desarrollo de clientes (Customer Development) · 2. Desarrollo ágil |
+| Actividades | 3. MVP · 4. Pivot |
+| Herramienta | 5. **Business Model Canvas** |
+
+**Desarrollo de clientes** (C2 p17, Steve Blank). Cuatro pasos: **Descubrimiento** (¿cuáles son los problemas del cliente y cuánto pagaría por resolverlos?, ¿quiénes son usuarios y quiénes compradores?) → **Validación** (¿hay MVP validado?, ¿se entiende el ciclo de venta?, ¿tiene sentido el modelo económico?) → **Creación de clientes** (crear demanda, que es una estrategia y no una táctica) → **Desarrollo de la empresa** (reconstruir gestión y organización, revisar la misión). Entre descubrimiento y validación: *pivotar hasta encontrar y validar un modelo de negocio adecuado*.
+
+**MVP vs. prototipo** (C2 p21): el prototipo es una muestra **no funcional**; el MVP es una versión **funcional** que se lanza al mercado. **Tipos de MVP** con ejemplo de la cátedra:
+- **Landing page** (C2 p22): una página con un solo botón ("precios y planes") que solo pedía el email. Con eso validaron si había interés real antes de construir la herramienta.
+- **Mago de Oz** (C2 p23): Zappos fotografiaba zapatos de una zapatería local y, cuando entraba un pedido, el fundador los compraba y los enviaba. El cliente veía un e-commerce y por detrás era todo manual. Se validó la hipótesis "la gente paga por comprar zapatos online" sin stock ni logística. Amazon lo compró por USD 1.200 M en 2009.
+
+**Pivots famosos** (C2 p27): Twitter era Odeo (podcasting), YouTube un sitio de citas por video, Instagram era Burbn (check-ins), Groupon recolectaba fondos para causas sociales y Flickr era un juego de rol online. Las hipótesis *pueden fallar y probablemente lo hagan*; los pivots salen de los experimentos que las validan (C2 p26). El MVP se recomienda para productos de **gran visión**: para productos mínimos es innecesario (C2 p28).
+
+**Preguntas disparadoras del modelo de negocios** (C2 p30). Sirven como guion para el resumen al inversor: ¿qué problema real resolvés (a quién le duele y por qué importa)?, ¿quién usaría la solución?, ¿qué hace única tu propuesta?, ¿cómo ganarás dinero (quién paga y cuánto cuesta)?, ¿qué tecnología usarías (es viable y escalable)?, ¿quiénes formarían el equipo?
+
+**Para qué sirve el Canvas** (C2 p31–34): compartir la visión con alguien que pueda ayudarte a validar **o a invertir**, con un formato que todos entiendan, simple pero sin simplificar de más. Es útil en la **búsqueda** del modelo, no en su ejecución: permite formular hipótesis, salir a validarlas y actualizar el Canvas como medida del progreso del aprendizaje. Ordena cuatro preguntas: **¿qué** quiero hacer? (propuesta de valor), **¿a quién** se lo vendo? (segmentos, canales, relaciones), **¿cómo** lo logro? (recursos, actividades, socios), **¿cuánto** beneficio obtengo? (costos e ingresos).
+
+##### 3. Los nueve bloques del Canvas
+
+Disposición en la hoja (Osterwalder / Strategyzer). El orden de llenado que sigue la cátedra va de derecha a izquierda: cliente → valor → operación → números.
+
+```
+┌──────────┬──────────┬──────────┬──────────┬──────────┐
+│ Socios   │Actividad.│Propuesta │Relación  │Segmentos │
+│ clave    │ clave    │ de valor │c/clientes│de client.│
+│  (8)     │  (7)     │  (2)     │  (4)     │  (1)     │
+│          ├──────────┤          ├──────────┤          │
+│          │ Recursos │          │ Canales  │          │
+│          │ clave (6)│          │  (3)     │          │
+├──────────┴──────────┴────┬─────┴──────────┴──────────┤
+│ Estructura de costos (9) │ Fuentes de ingreso (5)    │
+└──────────────────────────┴───────────────────────────┘
+```
+
+| Bloque | Pregunta de la cátedra | Opciones que da la plantilla en español |
+|---|---|---|
+| **Segmentos de clientes** | ¿Para quién creamos valor? ¿Quiénes son los más importantes? | Mercado masivo · nicho · segmentado · diversificado · **plataforma múltiple** |
+| **Propuesta de valor** | ¿Qué valor entregamos? ¿Qué problema resolvemos? ¿Qué necesidad satisfacemos? | Novedad · desempeño · personalización · "ayuda a hacer el trabajo" · diseño · marca/estatus · precio · reducción de costos · reducción de riesgos · accesibilidad · conveniencia/usabilidad |
+| **Canales** | ¿Cómo llega el producto desde la empresa al cliente? | Fases: 1. conciencia · 2. evaluación · 3. compra · 4. entrega · 5. posventa |
+| **Relación con clientes** | ¿Cómo los obtenemos, mantenemos y hacemos crecer (get, keep, grow)? | Asistencia personal · asistencia personal dedicada · autoservicio · servicios automatizados · comunidades · cocreación |
+| **Fuentes de ingreso** | ¿Por qué valor pagan? ¿Cómo pagan y cómo prefieren pagar? ¿Cuánto aporta cada fuente? | Venta de activo · cargo por uso · suscripción · préstamo/alquiler · licenciamiento · corretaje · publicidad |
+| **Recursos clave** | ¿Qué recursos requieren la propuesta, los canales, la relación y los ingresos? | Físicos · intelectuales (marcas, patentes, **datos**) · humanos · financieros |
+| **Actividades clave** | ¿Qué acciones son imprescindibles? ¿En cuáles tenemos que ser expertos? | Producción · resolución de problemas · **plataforma/red** |
+| **Socios clave** | ¿Quiénes son los socios y proveedores clave? ¿Qué recursos les compramos y qué actividades hacen? | Motivaciones: optimización y economía de escala · reducir riesgo e incertidumbre · adquirir recursos o actividades |
+| **Estructura de costos** | ¿Cuáles son los costos, recursos y actividades más caros? | Enfoque en **costo** (bajo costo, máxima automatización, outsourcing) vs. en **valor** (premium) · fijos · variables · economías de escala y de alcance |
+
+##### 4. Producto y clientes: propuesta de valor, segmentos, canales y relación (C3)
+
+**Lienzo de propuesta de valor** (C3 p7): tiene dos lados. A la derecha está el **perfil del cliente** (lo que entendemos de él: trabajos, frustraciones y alegrías) y a la izquierda el **mapa de valor** (cómo le creamos valor: productos, aliviadores de frustraciones y creadores de alegrías). Primero se completa el perfil del cliente y después los creadores de valor; el resultado se vuelca al Canvas (C3 p11–12). Ejemplo de la cátedra: Spotify freemium (la lámina es imagen).
+
+**Segmentos** (C3 p14–22):
+- Se agrupan clientes con necesidades, comportamientos y atributos comunes. Se elige con fundamento a qué segmentos apuntar **y a cuáles no**.
+- **Son segmentos distintos si** necesitan una oferta diferente, distintos canales, otro tipo de relación, tienen otra rentabilidad o pagan por aspectos distintos de la oferta.
+- **Tamaño del mercado** (C3 p15), de mayor a menor: **Mercado total disponible** (cuántos querrían o necesitarían el producto; se estima con informes y búsquedas) → **Mercado atendido disponible** (cuántos pueden usarlo y pagarían; se averigua hablando con clientes potenciales) → **Mercado objetivo** (a quién exactamente le vendo en los años 1, 2 y 3; se empieza por los más cercanos). *(Equivale a TAM/SAM/SOM, sigla que la cátedra no usa.)*
+- **Identificar al cliente** (C3 p17): mercado objetivo + **early adopters** (los primeros que es más probable que compren) + **actores críticos** (de quienes depende el éxito aunque no compren; ejemplo: el cliente es el gerente de fábrica pero el actor crítico es el operario).
+- **Arquetipo de cliente** (C3 p19): nombre, edad y sexo, ocupación, nivel de ingresos, motivaciones y quién lo influencia (ejemplo: "Don José", jubilado de clase media-baja, influido por la hija y los nietos).
+- **Roles alrededor de la compra** (C3 p20): **paga, usa, decide, influye, recomienda, sabotea**. Ejemplo: en la compra de un videojuego, el que usa es el hijo, paga el padre, influye un youtuber y sabotea la madre. *Hay que considerarlos a todos al segmentar.*
+
+**Tipos de mercado para emprendedores** (C3 p21):
+
+| Mercado | Clientes | Necesidad | Competencia | Riesgo | Ejemplo |
+|---|---|---|---|---|---|
+| Existente | Conocidos | Eficiencia, calidad | Grande | Falta de ventas | Manaos |
+| Resegmentado | Posiblemente conocidos | Adaptación | Grande si el modelo es malo, chica si está bien | Redefinición | Flybondi |
+| Nuevo | Desconocidos | Mejora | Ninguna | Hay que evangelizar y educar | Uber |
+| Clonado | Posiblemente conocidos | Versión local | Ninguna | Malinterpretar necesidades locales | Mercado Libre |
+
+**Long tail** (C3 p22): productos de nicho que se venden poco de a uno, pero en conjunto dan un volumen representativo.
+
+**Canales** (C3 p24–35): son los puntos de contacto de comunicación, distribución y venta entre la empresa y el cliente.
+- **Propios** (equipo comercial, venta online, locales propios) vs. **de socios / indirectos** (locales de terceros, mayoristas).
+- **Físicos**: fabricantes (el producto es una pieza de lo que ellos venden), **integradores** (lo ofrecen como parte de su servicio, por ejemplo quien instala dispositivos solares), venta directa, distribuidores. El margen va bajando de la venta directa hacia los fabricantes.
+- **Digitales**: agregador (Zappos, PedidosYa), e-commerce propio, distribución en dos pasos (Amazon, Dafiti), comercio social y ventas promocionales (Groupon).
+- **Las cinco fases del canal** (C3 p33): información → evaluación → compra → entrega → posventa.
+
+**Relación con clientes** (C3 p38–45): captación, fidelización y estimulación de ventas, modelada con el **doble embudo**.
+- **Obtener (GET)**: crear demanda por medios pagos (agencias, avisos, ferias, email marketing, Ads) o gratuitos (prensa especializada, charlas, blogs, webinars, redes). En el canal físico el recorrido es **conocer → interesar → considerar → comprar**, con efecto viral por recomendaciones. En el digital es **adquirir** (llevar al cliente al sitio) → **activar** (que pague, use, se registre o comparta).
+- **Costo de adquisición de clientes (CAC)** (C3 p43). Ejemplo: Ads a USD 0,50 por clic × 10.000 visitas = USD 5.000 → 500 prueban la versión gratuita → 50 pagan → **CAC = 5.000 / 50 = USD 100**.
+- **Mantener (KEEP)**: programas de lealtad (YPF Serviclub), actualizaciones, posventa, eventos, redes y promociones exclusivas.
+- **Incrementar (GROW)**: *unbundling* (dividir el producto), **up-sell** (vender una versión mejor), **cross-sell** (complementos) y **referidos**. *Es más caro conseguir clientes nuevos que venderle más a los que ya están.*
+
+##### 5. Funcionamiento: recursos, actividades y socios (C4)
+
+*¿De qué y de quién dependo para que funcione el negocio?*
+
+**Recursos** (C4 p6–8): **físicos** (instalaciones, vehículos, máquinas, sistemas, puntos de venta), **intelectuales** (marcas, información privada, patentes, derechos de autor, **bases de datos de clientes**), **humanos** (vitales en los ámbitos creativos y de conocimiento intensivo) y **económico-financieros**. **Fuentes de financiamiento según su origen:** capital de riesgo, socios corporativos, **subsidios (ANR)**, créditos, familia, amigos, **crowdfunding**, **ángeles**, leasing y financiamiento del proveedor.
+
+**Actividades clave** (C4 p10–12): las que requieren la propuesta de valor, los canales, las relaciones y las fuentes de ingreso. Tres categorías:
+
+| Categoría | Qué implica | Ejemplo |
+|---|---|---|
+| Producción | Diseñar, fabricar y entregar en cantidad o con calidad superior | Fabricantes |
+| Resolución de problemas | Soluciones nuevas para problemas de cada cliente: gestión de la información, formación continua | Consultoras, hospitales |
+| **Plataforma / red** | Gestionar y promocionar la plataforma y prestar servicios sobre ella | eBay (mantener el sitio), Visa (transacciones entre comercios, clientes y bancos), Microsoft |
+
+**Socios** (C4 p15–23). Las alianzas sirven para optimizar el modelo, reducir riesgos o conseguir recursos. **Por qué asociarse:** salir antes al mercado, ampliar la oferta, usar mejor los recursos (es más fácil comprar e integrar), aprovechar el conocimiento del socio y acceder a mercados nuevos.
+
+| Tipo de asociación | Ejemplo de la cátedra |
+|---|---|
+| Coopetición (entre competidores) | Paseo Pellegrini (Rosario) |
+| Alianza estratégica entre no competidores | Spotify + discográficas |
+| Joint venture | Bagó + Arcor |
+| Proveedor estratégico (tercerización) | Freelancers |
+| Tráfico digital | Trivago |
+
+**Riesgos de asociarse con una empresa grande** (C4 p19): otros tiempos, propiedad del cliente poco clara, objetivos distintos, cambios de estrategia o del promotor interno, disputas de propiedad intelectual y dificultad para desligarse. **Estrategias** (C4 p20): asumir que la relación es asimétrica; distinguir socios **evangelistas** (al principio) de **operativos** (después); no confundir asociarse con una grande con tener una estrategia propia; buscar socios que den ventaja estratégica, y tener presente que el socio puede ser un futuro comprador. *Los socios del día 1 no son los de los años 3, 5 o 10* (C2 p43).
+
+##### 6. Rentabilidad: costos e ingresos (C5)
+
+**Costos fijos** (C5 p8): no dependen del volumen de ventas; los tendrías aunque no vendieras nada. Ejemplos: alquiler, servicios, mantenimiento de la tienda online, sueldos, contador, publicidad en redes, monotributo. **Costos variables** (C5 p9): dependen directamente del volumen. Ejemplos: mercadería, packaging, envío, comisión de venta e impuestos. Distinguirlos sirve para fijar precios, detectar economías de escala (el costo fijo se reparte en más unidades) y calcular el **punto de equilibrio**.
+
+**Punto de equilibrio — ejemplo de la cátedra** (C5 p12–13, remeras batik):
+
+$$Q_{eq} = \frac{CF}{P - CV_u} = \frac{120.000 + 150.000 + 90.000 + 1.000.000}{30.000 - 14.800} = \frac{1.360.000}{15.200} \approx 90 \text{ remeras/mes}$$
+
+Ojo: la cátedra **mete el retiro de los socios ($1.000.000) dentro de los costos fijos**, así que el equilibrio que calcula ya incluye un sueldo para los fundadores. Para qué sirve (C5 p14): revisar si el precio es demasiado bajo, decidir sobre materiales, evaluar productos nuevos y planificar (cuánto más vender para cubrir un alquiler mayor).
+
+**Ingresos** (C5 p17–27). La pregunta central es *¿por qué valor está dispuesto a pagar cada segmento?* La lámina p18 presenta como **definiciones erróneas** que el precio se fija a partir del costo y que debe ser menor que el de la competencia; las láminas siguientes las refutan.
+
+**Cómo cobrar** (C5 p20). Es la lista que pide la actividad 2 de la Etapa 4:
+
+| Modelo | Qué se cobra |
+|---|---|
+| Venta de bienes | La propiedad de un producto físico |
+| Tarifa por uso | Precio proporcional al servicio usado |
+| **Suscripción** | Acceso continuo al servicio |
+| Alquiler | Acceso temporario a un bien o servicio |
+| **Licencias** | Uso de propiedad intelectual |
+| **Intermediación** | Vincular a dos partes del negocio |
+| **Avisos** | Marcas que pagan para llegar a potenciales clientes |
+
+**Tácticas de precios** (C5 p21): **fijos** (costo + ganancia, por valor según segmento o funciones, por volumen) o **dinámicos** (negociación, yield management, tiempo real, subastas).
+
+**Cinco reglas de precios** (C5 p22–26):
+1. **Los precios definen los costos, no al revés.** El costo no dice nada del valor percibido ni del precio de la competencia.
+2. **Vender más no siempre es ganar más.** Con un margen de contribución del 30%, bajar el precio un 15% obliga a **duplicar** el volumen para ganar lo mismo.
+3. **Competir por precio es una batalla sin ganadores**: es lo más fácil de imitar. Conviene competir con innovación, servicio o marca.
+4. **No hace falta el mismo precio para todo el mercado.** Hay que segmentar precios (ejemplo de la fotocopiadora: en el acto a precio de lista, con 24 h de anticipación −15%, con 48 h −25%).
+5. **No hay recetas.** El precio surge de cuatro factores: **costos, competidores, clientes y canal**, y en algunos sectores también del **Estado**.
+
+**Modelo de ingresos** (C5 p27): tamaño del mercado y market share, cuánto vende cada canal, cuánto cuesta, cuántos clientes activa y cuánto cuesta adquirir un cliente nuevo (vuelve el CAC de C3).
+
+##### 7. Errores frecuentes al armar el Canvas *(síntesis propia a partir de las láminas citadas)*
+
+- **Confundir propuesta de valor con producto.** La cátedra lo marca en mayúsculas (C2 p37). "Una app de reportes" no es propuesta de valor; "reducir de 15 a 3 días la resolución de un reclamo" sí.
+- **Un solo segmento cuando el que paga no es el que usa.** C3 p20 obliga a separar roles. Con dos segmentos que interactúan, el segmento es **plataforma múltiple** y la actividad clave es **plataforma/red**.
+- **Precio por costo + margen.** C5 p22 lo descarta explícitamente.
+- **Fuentes de ingreso sin cuantificar.** La plantilla pregunta *cuánto aporta cada fuente a los ingresos generales*.
+- **Socios que no aportan recursos ni actividades.** Cada socio tiene que responder qué recurso clave le compramos o qué actividad hace por nosotros (C2 p43).
+
+##### 8. Conexión con la Etapa 4 del TPI
+
+| Actividad de la consigna | Qué usar de esta unidad |
+|---|---|
+| 1. Idea de startup | §1: disrupción, triple impacto, "enamorate del problema", tendencias y causas de fracaso. Para el problema de partida, el diagnóstico de Rosario de la Etapa 1 (ver TP Integrador) |
+| 2. Canvas con fuentes de ingreso | §3 (nueve bloques con las preguntas y opciones de la plantilla), §4 (segmentos y roles paga/usa/decide), §5 (recursos, actividades, socios y financiamiento), §6 (cómo cobrar y tácticas de precios). Plantilla: `Business Model Canvas_ESPAÑOL.pdf` |
+| 3. Resumen de una página para el inversor | Las preguntas de C2 p30 como guion (problema, usuario, diferencial, cómo gana dinero, tecnología, equipo). La cátedra no da formato de resumen ejecutivo: eso queda a criterio del grupo |
+
+#### Ejercicios resueltos tipo
+
+**Canvas resuelto de la cátedra — Porta celulares para bici impreso en 3D** (C2 p46–47). Es el único Canvas completo del material:
+
+| Bloque | Contenido |
+|---|---|
+| Socios clave | Club de ciclistas · proveedor de insumos |
+| Actividades clave | Impresión 3D · venta · distribución a negocios |
+| Recursos clave | Impresoras 3D · materiales para imprimir · sala de máquinas · computadora · responsable de ventas · repositorio de modelos |
+| Propuesta de valor | Poder ver el GPS · estar comunicado sin riesgo de caídas · facilidad de manejo en carreras · opciones prácticas y vistosas |
+| Relación con clientes | Marketing en Instagram · soporte posventa |
+| Canales | Online por Instagram · negocios de accesorios |
+| Segmentos | Ciclistas urbanos · corredores de bicicleta · negocios de accesorios |
+| Estructura de costos | Insumos de impresión 3D · service de impresoras · internet · horas del responsable de impresión |
+| Fuentes de ingreso | Venta de soportes por redes · venta mayorista a tiendas |
+
+Qué se ve: hay dos segmentos con canales distintos (consumidor final por Instagram y comercio por venta mayorista), y **cada segmento tiene su fuente de ingreso**. La propuesta de valor está escrita como beneficios para el usuario, no como características del producto.
+
+**Punto de equilibrio** (C5 p12–13): resuelto en §6.
+
+**Costo de adquisición de clientes** (C3 p43): resuelto en §4.
 
 #### Dudas / pendientes
 
-- Sin desarrollar. Material disponible en el campus: cinco diapositivas (`ASI-6-C1 Desarrollo Emprendedor` · `C2 Gestión del Negocio` · `C3 Producto y Clientes` · `C4 Funcionamiento del Emprendimiento` · `C5 Rentabilidad`) más `Business Model Canvas` en dos versiones (español y Strategyzer).
-- Bibliografía del programa para esta unidad: Ries, *El método Lean Startup* · Osterwalder y Pigneur, *Business Model Generation* · Lockwood, *Design Thinking* · Orzen y Paider, *The Lean IT field guide*.
+- La cátedra **no dio sugerencias para la Etapa 4** como las de la Etapa 3 (28/07). Si aparecen en el portal, ingerirlas: en la Etapa 3 fueron las que definieron qué se evaluaba.
+- La actividad 3 (resumen de una página) **no tiene guía de formato** en el material.
+- Design Thinking figura en el programa y en C2 p14, pero **no está desarrollado** en ninguna clase. Tampoco se ve el contenido de la bibliografía del programa (Ries, Osterwalder, Lockwood, Orzen y Paider).
+- La ejercitación de U5 nombraba **mecanismos de financiación** de proyectos de base tecnológica. Acá se cubren por enumeración (C4 p7, C1 p20–22), sin desarrollo.
+
+#### Fuentes
+
+- `materias/ASI/fuentes/Campus/ASI-Unidad6_Emprendimientos/ASI-6-C1-Desarrollo Emprendedor_DIAP.V2.1.pdf` — 39 láminas
+- `materias/ASI/fuentes/Campus/ASI-Unidad6_Emprendimientos/ASI-6-C2-Gestion del Negocio_DIAP.V2.3.pdf` — 50 láminas
+- `materias/ASI/fuentes/Campus/ASI-Unidad6_Emprendimientos/ASI-6-C3-Producto y Clientes_DIAP.V2.2.pdf` — 49 láminas
+- `materias/ASI/fuentes/Campus/ASI-Unidad6_Emprendimientos/ASI-6-C4-Funcionamiento del Emprendimiento_DIAP.V2.0.pdf` — 26 láminas
+- `materias/ASI/fuentes/Campus/ASI-Unidad6_Emprendimientos/ASI-6-C5-Rentabilidad_DIAP.V2.0.pdf` — 30 láminas
+- `materias/ASI/fuentes/Campus/ASI-Unidad6_Emprendimientos/Business Model Canvas_ESPAÑOL.pdf` y `Business Model Canvas_Strategyzer.pdf` — plantillas
+- `materias/ASI/fuentes/ASI26_TPIntegrador_Etapa4 - Emprendedorismo.md` — consigna de la Etapa 4
+- Bibliografía citada por la cátedra: Ries, *El método Lean Startup* · Osterwalder y Pigneur, *Generación de modelos de negocio* · Osterwalder, *Diseñando la propuesta de valor* · Blank, *The Four Steps to the Epiphany* · Blank y Dorf, *The Startup Owner's Manual* · Freire, *Pasión por emprender* · Sbdar, *Cómo perdurar con tu Pyme en Argentina* · Junior Achievement, *Aprender a Emprender* · Levine, *Enamórate del problema, no de la solución*.
 
 ---
 
@@ -4946,7 +5225,7 @@ Contenidos según el Programa Analítico: proyectos innovadores y emprendimiento
 | Etapa 1 | Entregada 23/04/2026 · corregida por cátedra 19/05/2026 · ajustada por el grupo 21/05/2026 (v3) |
 | Etapa 2 | Entregada 18/05/2026 (v1). **La tabla de versiones no registra corrección posterior — corregir antes de la Etapa 3.** |
 | Etapa 3 | Entregada 28/08/2026 (45 págs.) · corregida por el docente 30/08/2026: balance muy positivo y tres inconsistencias, corregidas por el grupo (50 actividades, dimensionado único de 60 técnicos, holgura recalculada a 192 días) · expuesta con presentación de 22 láminas. **Cerrada.** |
-| Etapa 4 | Consigna recibida 13/10/2026 (`fuentes/ASI26_TPIntegrador_Etapa4 - Emprendedorismo.md`): idea de startup para ciudad inteligente + Business Model Canvas con fuentes de ingreso + resumen de una página para un inversor. Se apoya en la Unidad 6. Sin empezar |
+| Etapa 4 | Consigna recibida 13/10/2026 (`fuentes/ASI26_TPIntegrador_Etapa4 - Emprendedorismo.md`): idea de startup para ciudad inteligente + Business Model Canvas con fuentes de ingreso + resumen de una página para un inversor. Se apoya en la Unidad 6 (ingerida el 13/10). Sin empezar |
 
 ##### Formato del documento de entrega (usar el mismo en la Etapa 3)
 
@@ -5660,6 +5939,7 @@ A **5 años**: **5.** Core Bancario Inteligente con IA y Big Data (Data Lake, ML
 
 ## Log
 
+- 2026-10-13: **ingerida la Unidad 6 — Emprendedorismo**, que era un stub. Se copiaron a `fuentes/Campus/ASI-Unidad6_Emprendimientos/` las cinco clases del portal (C1 Desarrollo Emprendedor · C2 Gestión del Negocio · C3 Producto y Clientes · C4 Funcionamiento · C5 Rentabilidad, 194 láminas) y las dos plantillas del Business Model Canvas. La unidad quedó con: definiciones (emprender, startup vs. empresa, Lean Startup, MVP, pivot), tipos de emprendedor de Freire, triple impacto y Movimiento B, emprender en Argentina (leyes de 2017 y 2020, sectores, contexto económico) y el **mapa del ecosistema de Rosario y Santa Fe**, causas de fracaso con los casos de la cátedra, desarrollo de clientes de Blank, tipos de MVP, **los nueve bloques del Canvas con las preguntas y opciones de la plantilla oficial**, lienzo de propuesta de valor, tamaño de mercado, roles paga/usa/decide/influye, tipos de mercado, canales y sus cinco fases, get/keep/grow con el cálculo de CAC, recursos y fuentes de financiamiento, categorías de actividades, tipos y riesgos de socios, costos fijos y variables, **punto de equilibrio** (ejemplo de las remeras batik), los siete modelos de cobro y las cinco reglas de precios. Se transcribió el único Canvas resuelto del material (porta celulares para bici, leído con visión porque la lámina es imagen) y se agregó la tabla consigna de la Etapa 4 → material. **Hallazgo:** en el ejemplo del punto de equilibrio la cátedra incluye el retiro de los socios dentro de los costos fijos. **Faltan:** sugerencias de cátedra para la Etapa 4, una guía de formato para el resumen de una página y el desarrollo de Design Thinking.
 - 2026-10-13: recibida la **consigna de la Etapa 4 del TPI — Emprendedorismo**, copiada a `fuentes/`. Tres actividades: proponer una startup que aplique TI para transformar una ciudad en inteligente (lista de ejes: TICs, residuos tóxicos, movilidad, sostenibilidad, planificación urbana, salud, seguridad, entorno social, transparencia, educación, open data), confeccionar el **Business Model Canvas** con fuentes de ingreso, y un **resumen de una página** para convencer a un inversor. Actualizada la tabla de estado del TPI: la Etapa 3 figuraba "en curso" y está entregada, corregida y expuesta. La Unidad 6 sigue sin desarrollar y es su sustento.
 - 2026-09-14: **machete del 2º parcial** en `materias/ASI/estudio/machete-parcial2.md` + `.pdf` (6 páginas). Solo el resumen de los tres temas, sin apartados de formato de examen: las seis áreas del Departamento de TI de Bancorp con su traducción a las líneas de soporte de ITIL; gestión de incidentes (definición, protocolo en tres etapas, escalado funcional y jerárquico con la tabla de derivación por tipo de incidente, herramientas y KPI); talento humano (plantilla de perfil de puesto, las cinco partes del anuncio con AIDA, fuentes de reclutamiento y el proceso); e higiene y seguridad (condiciones de trabajo, tipos de riesgo, los cuatro niveles de prevención primaria, catálogo de trece riesgos del área de desarrollo con su medida de nivel 1–2, y legislación).
 - 2026-09-14: **ingerido el contexto de Bancorp**, que estaba sin aprovechar en `archivo/Examenes/Parciales/1º Parcial/2026/`. Se copió a `materias/ASI/fuentes/Parcial2/` junto con la foto del enunciado del 1º parcial y se volcó a la sección del 2º parcial: perfil de la empresa y sus cuatro líneas de negocio, red de 45 sucursales, valores, **organigrama completo** (Directorio → Gerencia General → 6 gerencias + Auditoría de staff), las 7 gerencias del nivel ejecutivo, el nivel operativo, y sobre todo las **seis áreas del Departamento de TI con sus puestos** — que es de donde el docente exige que salgan las áreas del escalado, sin inventar. Se agregó el **mapeo explícito con las líneas de soporte de ITIL** de la Unidad 2: Mesa de Ayuda [06] = 1ª línea, áreas [01]–[04] = 2ª línea (escalado funcional), CIO y coordinadores = eje jerárquico, SOC [02] = gestión de eventos. Se volcaron también los **7 proyectos de TI** (4 del primer año, 3 a cinco años) y la transcripción del **enunciado del 1º parcial**, que confirma la forma del examen: proyecto asignado + bloques numerados que nombran el marco exigido en cada sub-punto. **Hipótesis a confirmar:** el "disparador de la materialización del riesgo" del punto 2.3 del 1º parcial es la bisagra con el 2º — ese riesgo se materializa y es el incidente a resolver.
