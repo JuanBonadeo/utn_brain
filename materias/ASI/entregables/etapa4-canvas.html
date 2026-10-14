@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Canvas Cuadra</title>
+<!--
+  Anexo I de la Etapa 4 (ASI, TPI 2026, grupo 310): Business Model Canvas de Cuadra.
+  Fuente de los contenidos: etapa4.md, punto 2. Si cambia el .md, actualizar acá.
+  PDF: imprimir a A3 apaisado desde Chrome (Guardar como PDF, márgenes por defecto, gráficos de fondo activados).
+-->
+<style>
+@page { size: A3 landscape; margin: 9mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #FFFFFF; }
+body { font-family: 'Lexend', 'Segoe UI', Arial, Helvetica, sans-serif; color: #15406B;
+       -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.hoja { width: 100%; height: 279mm; display: flex; flex-direction: column; overflow: hidden; }
+.cab { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3mm; }
+.cab h1 { font-size: 22px; margin: 0; font-weight: 700; letter-spacing: .01em; }
+.cab .sub { font-size: 11px; color: #4C6480; margin-top: 1mm; }
+.cab .der { text-align: right; font-size: 10px; color: #4C6480; line-height: 1.45; }
+.cab .der b { color: #15406B; }
+
+.canvas { flex: 1 1 auto; min-height: 0; display: grid; gap: 2mm;
+          grid-template-columns: repeat(10, 1fr);
+          grid-template-rows: 1fr 1fr 0.8fr; }
+.b { border: 1.2px solid #15406B; border-radius: 2px; padding: 2.6mm 3mm; overflow: hidden;
+     display: flex; flex-direction: column; background: #FFFFFF; }
+.b h2 { font-size: 13.5px; letter-spacing: .1em; text-transform: uppercase; margin: 0 0 .6mm;
+        display: flex; align-items: center; gap: 2mm; }
+.b h2 .n { display: inline-flex; width: 19px; height: 19px; border-radius: 50%; background: #15406B; color: #FFF;
+           font-size: 11px; align-items: center; justify-content: center; letter-spacing: 0; flex: 0 0 auto; }
+.b .q { font-size: 11px; color: #6B7F96; font-style: italic; margin: 0 0 1.8mm; }
+.b ul { margin: 0; padding-left: 4.4mm; font-size: 13px; line-height: 1.4; color: #22405F; }
+.b li { margin-bottom: 1.8mm; }
+.b li b { color: #15406B; }
+.b .tag { display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+          color: #8A6413; background: #FBF1DC; border-radius: 2px; padding: .3mm 1.4mm; margin-bottom: 1.6mm; align-self: flex-start; }
+
+.socios     { grid-column: 1 / 3;  grid-row: 1 / 3; }
+.actividad  { grid-column: 3 / 5;  grid-row: 1 / 2; }
+.recursos   { grid-column: 3 / 5;  grid-row: 2 / 3; }
+.valor      { grid-column: 5 / 7;  grid-row: 1 / 3; background: #F3F7FC; border-width: 1.8px; }
+.relacion   { grid-column: 7 / 9;  grid-row: 1 / 2; }
+.canales    { grid-column: 7 / 9;  grid-row: 2 / 3; }
+.segmentos  { grid-column: 9 / 11; grid-row: 1 / 3; }
+.costos     { grid-column: 1 / 6;  grid-row: 3 / 4; }
+.ingresos   { grid-column: 6 / 11; grid-row: 3 / 4; background: #F6FBF7; }
+
+table.t { border-collapse: collapse; width: 100%; font-size: 12px; color: #22405F; }
+table.t th { text-align: left; font-weight: 600; color: #15406B; border-bottom: 1px solid #9FB3C8; padding: .8mm 1.4mm; font-size: 11px; }
+table.t td { padding: 1mm 1.4mm; border-bottom: .6px solid #DCE5EF; vertical-align: top; }
+table.t td.r, table.t th.r { text-align: right; white-space: nowrap; }
+table.t tr.tot td { font-weight: 700; color: #15406B; border-bottom: none; }
+.dos { display: grid; grid-template-columns: 1.15fr 1fr; gap: 4mm; }
+.nota { font-size: 11.5px; color: #4C6480; margin-top: 1.4mm; line-height: 1.35; }
+.nota b { color: #15406B; }
+
+.rotulo { flex: 0 0 auto; border-top: 1.2px solid #15406B; margin-top: 3mm; padding-top: 2mm;
+          display: flex; justify-content: space-between; align-items: flex-end; font-size: 8.2px; color: #4C6480; }
+.rotulo b { color: #15406B; font-weight: 600; }
+.rotulo .der { text-align: right; }
+
+@media screen {
+  body { background: #E9EEF4; padding: 16px; }
+  .hoja { max-width: 1560px; height: auto; min-height: 980px; margin: 0 auto; background: #FFF; padding: 9mm; }
+  .canvas { min-height: 860px; }
+}
+@media screen and (max-width: 900px) {
+  .canvas { display: flex; flex-direction: column; }
+  .cab { flex-direction: column; align-items: flex-start; gap: 2mm; }
+  .cab .der { text-align: left; }
+  .dos { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="hoja">
+  <div class="cab">
+    <div>
+      <h1>Business Model Canvas — Cuadra</h1>
+      <div class="sub">Plataforma de reclamos urbanos con ruteo entre organizaciones, app de cuadrilla y datos abiertos · Gran Rosario, Santa Fe</div>
+    </div>
+    <div class="der">
+      <b>Anexo I</b> · TPI 2026 — Etapa 4: Emprendedorismo<br>
+      Comisión 403 · Grupo 310<br>
+      Precios, volúmenes y costos: supuestos a validar con el MVP
+    </div>
+  </div>
+
+  <div class="canvas">
+    <section class="b socios">
+      <h2><span class="n">8</span>Socios clave</h2>
+      <p class="q">¿Quién nos provee recursos o hace actividades por nosotros?</p>
+      <ul>
+        <li><b>Municipio piloto</b> del Gran Rosario: territorio y reclamos reales para el MVP; primer caso de éxito (socio evangelista).</li>
+        <li><b>Personal (Telecom)</b>: primera prestadora con cuadrillas en la zona y conectividad móvil para la app de campo.</li>
+        <li><b>Proveedor de nube</b>: cómputo, almacenamiento de fotos y mapas con costo por uso.</li>
+        <li><b>Polo Tecnológico Rosario · BCR Innova</b>: aceleración, mentoría, contacto con inversores.</li>
+        <li><b>UTN FRRo</b>: talento y validación técnica.</li>
+        <li><b>Vecinales</b>: difusión barrial y retroalimentación.</li>
+        <li><b>Programas de emprendedores</b> de Rosario y la provincia: capacitación y aportes no reembolsables.</li>
+      </ul>
+    </section>
+
+    <section class="b actividad">
+      <h2><span class="n">7</span>Actividades clave</h2>
+      <span class="tag">Plataforma / red</span>
+      <ul>
+        <li>Operar la plataforma: disponibilidad, seguridad y datos personales.</li>
+        <li>Desarrollar el motor de ruteo, la clasificación por imagen y los conectores.</li>
+        <li>Implementar y capacitar en cada municipio.</li>
+        <li>Vender al sector público y a prestadoras.</li>
+        <li>Sumar prestadoras en cada territorio.</li>
+        <li>Publicar datos abiertos e informes.</li>
+      </ul>
+    </section>
+
+    <section class="b recursos">
+      <h2><span class="n">6</span>Recursos clave</h2>
+      <ul>
+        <li><b>Intelectuales:</b> la plataforma de software y la <b>base georreferenciada de reclamos y tiempos</b>, que crece con cada cliente y es la barrera de entrada; marca y casos.</li>
+        <li><b>Humanos:</b> cinco cofundadores de Ingeniería en Sistemas; desde el año 2, un desarrollador y una persona de soporte.</li>
+        <li><b>Financieros:</b> ronda inicial de USD 70.000 y aportes no reembolsables.</li>
+        <li><b>Físicos:</b> mínimos. Sin hardware en la calle: el sensor es el celular.</li>
+      </ul>
+    </section>
+
+    <section class="b valor">
+      <h2><span class="n">2</span>Propuesta de valor</h2>
+      <p class="q">¿Qué problema le resolvemos a cada segmento?</p>
+      <ul>
+        <li><b>Municipio:</b> saber y mostrar cuánto tarda en resolver cada reclamo, sin desarrollar ni operar un sistema propio. Sin derivaciones manuales ni reclamos repetidos. <i>Reducción de costos · desempeño · accesibilidad.</i></li>
+        <li><b>Prestadora:</b> recibir solo los reclamos que son suyos, con foto y ubicación exacta, y cerrarlos con evidencia ante el regulador. Menos salidas en falso. <i>Reducción de costos y de riesgo.</i></li>
+        <li><b>Vecino:</b> reclamar una sola vez, en un solo lugar, y ver quién lo tiene y cuándo se resuelve. <i>Conveniencia.</i></li>
+        <li><b>Planificadores:</b> datos urbanos georreferenciados y con historia, que hoy no existen consolidados. <i>Novedad.</i></li>
+      </ul>
+      <p class="nota"><b>Diferencial:</b> cruzar organizaciones. Municipio y prestadoras en una misma red, con tiempos públicos. Con Rosario, integración al 147/SUA, no reemplazo.</p>
+    </section>
+
+    <section class="b relacion">
+      <h2><span class="n">4</span>Relación con clientes</h2>
+      <ul>
+        <li><b>Obtener:</b> asistencia personal dedicada con piloto de 90 días (municipios); autoservicio por QR en la calle (vecinos).</li>
+        <li><b>Mantener:</b> referente de cuenta, informe trimestral, <b>cocreación</b> en mesa de usuarios; notificaciones automáticas y <b>comunidad</b> vía vecinales.</li>
+        <li><b>Incrementar:</b> venta cruzada (prestadoras del territorio, informes, conector), cambio de tramo, referidos entre municipios.</li>
+      </ul>
+    </section>
+
+    <section class="b canales">
+      <h2><span class="n">3</span>Canales</h2>
+      <ul>
+        <li><b>Información:</b> venta directa; Polo Tecnológico, Clúster TIC Santa Fe, encuentros de municipios; QR en luminarias, contenedores y paradas.</li>
+        <li><b>Evaluación:</b> piloto con tablero de resultados.</li>
+        <li><b>Compra:</b> contratación directa o convenio; contrato comercial con la prestadora.</li>
+        <li><b>Entrega:</b> nube + implementación en el lugar; app web sin instalación.</li>
+        <li><b>Posventa:</b> mesa de ayuda; notificación de cierre y calificación.</li>
+      </ul>
+    </section>
+
+    <section class="b segmentos">
+      <h2><span class="n">1</span>Segmentos de clientes</h2>
+      <span class="tag">Plataforma múltiple</span>
+      <ul>
+        <li><b>Municipios medianos</b> del Gran Rosario y la provincia: pagan; decide la secretaría de gobierno o modernización.</li>
+        <li><b>Prestadoras en la vía pública</b> (electricidad, agua, gas, telecomunicaciones, cable): pagan por cuadrilla; decide la gerencia de operaciones.</li>
+        <li><b>Vecinos:</b> usan gratis; actor crítico junto con las cuadrillas.</li>
+        <li><b>Planificadores y analistas</b> (consultoras, universidades, obras públicas): pagan informes.</li>
+      </ul>
+      <p class="nota"><b>Mercado resegmentado.</b> Objetivo: 3, 8 y 14 municipios al cierre de los años 1, 2 y 3. <b>Early adopter:</b> municipio del Gran Rosario con agenda de modernización.</p>
+    </section>
+
+    <section class="b costos">
+      <h2><span class="n">9</span>Estructura de costos</h2>
+      <span class="tag">Enfoque en costo · máxima automatización</span>
+      <div class="dos">
+        <table class="t">
+          <tr><th>Fijos mensuales (año 1)</th><th class="r">USD</th></tr>
+          <tr><td>Retiro de 5 cofundadores (5 × 800)</td><td class="r">4.000</td></tr>
+          <tr><td>Nube base, herramientas y licencias</td><td class="r">500</td></tr>
+          <tr><td>Contador, sociedad y seguros</td><td class="r">250</td></tr>
+          <tr><td>Actividad comercial</td><td class="r">450</td></tr>
+          <tr><td>Coworking</td><td class="r">300</td></tr>
+          <tr class="tot"><td>Total costos fijos</td><td class="r">5.500</td></tr>
+        </table>
+        <div>
+          <table class="t">
+            <tr><th>Variables</th><th class="r">USD/mes</th></tr>
+            <tr><td>Por municipio (nube, notificaciones, soporte)</td><td class="r">180</td></tr>
+            <tr><td>Por cuadrilla (fotos, notificaciones)</td><td class="r">4</td></tr>
+          </table>
+          <p class="nota"><b>Punto de equilibrio:</b> Q = CF / (P − CVu) = 5.500 / (1.200 − 180) ≈ 5,4 → <b>6 municipios</b> de hasta 100.000 hab. Se alcanza durante el año 2 con la mezcla de municipios y cuadrillas proyectada.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="b ingresos">
+      <h2><span class="n">5</span>Fuentes de ingreso</h2>
+      <span class="tag">Sin publicidad · precio por valor, segmentado por tamaño</span>
+      <table class="t">
+        <tr><th>Fuente</th><th>Modelo · precio</th><th>Paga</th><th class="r">Año 3 (USD/año)</th><th class="r">Aporte</th></tr>
+        <tr><td><b>Suscripción municipal</b></td><td>Suscripción por tramo de habitantes: USD 600 · 1.200 · 2.200 por mes</td><td>Municipios</td><td class="r">182.400</td><td class="r">54,2%</td></tr>
+        <tr><td><b>Licencia por cuadrilla</b></td><td>Licencia: USD 35 por cuadrilla activa por mes (mínimo 10)</td><td>Prestadoras</td><td class="r">117.600</td><td class="r">34,9%</td></tr>
+        <tr><td><b>Datos e informes</b></td><td>Informe a medida USD 1.500 · interfaz de datos USD 400/mes. Tablero y datos abiertos gratis</td><td>Planificadores, prestadoras</td><td class="r">21.600</td><td class="r">6,4%</td></tr>
+        <tr><td><b>Implementación</b></td><td>Pago único al alta: USD 2.500</td><td>Municipios</td><td class="r">15.000</td><td class="r">4,5%</td></tr>
+        <tr class="tot"><td>Total año 3</td><td>14 municipios · 280 cuadrillas</td><td></td><td class="r">336.600</td><td class="r">100%</td></tr>
+      </table>
+      <p class="nota">Precios en dólares (la nube se paga en dólares), cobrados en pesos al tipo de cambio oficial con ajuste trimestral.</p>
+    </section>
+  </div>
+
+  <div class="rotulo">
+    <div><b>Universidad Tecnológica Nacional — FRRo</b> · Administración de Sistemas de Información · 4º Año ISI</div>
+    <div class="der">Disposición según la plantilla <i>Business Model Canvas</i> de la cátedra (Osterwalder y Pigneur, Strategyzer) · Detalle de cada bloque: documento principal, punto 2</div>
+  </div>
+</div>
+</body>
+</html>

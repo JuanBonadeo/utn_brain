@@ -11,6 +11,7 @@
  *   ## sección          ### campo/apartado          #### subapartado
  *   párrafos justificados, listas «- » y «1. », > citas, ---, tablas
  *   **negrita**, *itálica*, `código`
+ *   <!-- pagebreak --> fuerza un salto de página
  *   lo que contiene ⚠ sale en rojo (marcador interno, sacar antes de entregar)
  *
  * Ancho de columnas de una tabla: poner antes de la tabla, en el .md,
@@ -30,7 +31,7 @@ const {
   Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType,
   Table, TableRow, TableCell, WidthType, BorderStyle, ShadingType,
   TableLayoutType, VerticalAlign, Footer, PageNumber,
-  ExternalHyperlink, LineRuleType, ImageRun,
+  ExternalHyperlink, LineRuleType, ImageRun, PageBreak,
 } = require('docx');
 
 const [, , inPath, outPath, ...flags] = process.argv;
@@ -290,6 +291,11 @@ while (i < lines.length) {
   // directiva de anchos de columna
   const cols = trimmed.match(/^<!--\s*cols:\s*([\d.,\s]+)\s*-->$/);
   if (cols) { pendingCols = cols[1].split(',').map((n) => parseFloat(n.trim())); i++; continue; }
+  // salto de página explícito: <!-- pagebreak -->
+  if (/^<!--\s*pagebreak\s*-->$/.test(trimmed)) {
+    children.push(new Paragraph({ children: [new PageBreak()] }));
+    i++; continue;
+  }
   if (trimmed.startsWith('<!--')) { i++; continue; }
 
   if (trimmed === '---') {
