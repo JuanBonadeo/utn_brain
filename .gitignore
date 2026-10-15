@@ -52,3 +52,8 @@ materias/SIM/fuentes/Trabajo práctico integrador - Simulación de Hospital con 
 .claude/settings.local.json
 .claude/worktrees/
 .claude/scheduled_tasks.lock
+
+# Salidas de pytest / coverage
+.pytest_cache/
+.coverage
+htmlcov/
