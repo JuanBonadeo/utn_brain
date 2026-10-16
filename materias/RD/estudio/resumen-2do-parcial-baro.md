@@ -64,20 +64,17 @@ La capa 3 lleva **paquetes** del origen al destino final atravesando varias rede
 ### Header IPv4
 
 Tiene **20 bytes fijos** más hasta **40 de opciones**, organizados en filas de 32 bits.
-```
- 0       4       8              16    19                    31
-+-------+-------+---------------+-----+---------------------+
-| VERS  | HLEN  | Tipo Servicio |    Longitud total         |
-+-------+-------+---------------+-----+---------------------+
-|        Identificación         |Flags| Desplaz. fragmento  |
-+---------------+---------------+-----+---------------------+
-|      TTL      |   Protocolo   |  Checksum de cabecera     |
-+---------------+---------------+---------------------------+
-|                    Dirección IP origen                    |
-|                    Dirección IP destino                   |
-|            Opciones (si hay)          |      Relleno      |
-+-----------------------------------------------------------+
-```
+
+<table class="ipgrid">
+<tr class="bits"><td colspan="4">0</td><td colspan="4">4</td><td colspan="8">8</td><td colspan="3">16</td><td colspan="13">19 ··· 31</td></tr>
+<tr><td colspan="4">VERS</td><td colspan="4">HLEN</td><td colspan="8">Tipo de Servicio</td><td colspan="16">Longitud total</td></tr>
+<tr><td colspan="16">Identificación</td><td colspan="3">Flags</td><td colspan="13">Desplazamiento de fragmento</td></tr>
+<tr><td colspan="8">TTL</td><td colspan="8">Protocolo</td><td colspan="16">Checksum de cabecera</td></tr>
+<tr><td colspan="32">Dirección IP origen</td></tr>
+<tr><td colspan="32">Dirección IP destino</td></tr>
+<tr class="opt"><td colspan="24">Opciones (si hay)</td><td colspan="8">Relleno</td></tr>
+</table>
+
 | Campo | Bits | Para qué |
 |---|---|---|
 | VERS | 4 | Versión (4) |
@@ -117,20 +114,22 @@ Tiene **20 bytes fijos** más hasta **40 de opciones**, organizados en filas de 
 - **Receta:** datos por fragmento = MTU − 20, redondeado hacia abajo a múltiplo de 8. Campo desplazamiento = (byte de inicio del fragmento) / 8.
 
 *Ejemplo (apunte):* 1400 B de datos, con MTU 620 en el tramo siguiente.
-```
-Frag  Long.total  Datos       Desplaz.(bytes)  Campo(÷8)  MF
-1     620         0–599       0                0          1
-2     620         600–1199    600              75         1
-3     220         1200–1399   1200             150        0
-```
+
+| Frag | Long. total | Datos | Desplaz. (bytes) | Campo (÷ 8) | MF |
+|:-:|:-:|:-:|:-:|:-:|:-:|
+| 1 | 620 | 0–599 | 0 | 0 | 1 |
+| 2 | 620 | 600–1199 | 600 | 75 | 1 |
+| 3 | 220 | 1200–1399 | 1200 | 150 | 0 |
+
 **Ojo:** El apunte escribe el desplazamiento en **bytes**. El valor real del campo es ese número **dividido 8**. El TP de comandos de red de Baró lo usa así.
 
 *Ejemplo (TP de comandos de red):* 1000 B de datos, con un máximo de 256 B por datagrama. Entrarían 236 B de datos, pero tiene que ser múltiplo de 8, así que **232 B**.
-```
-Frag   Long.total  Desplaz.  MF
-1–4    252         0 · 29 · 58 · 87    1
-5      92          116                0
-```
+
+| Frag | Long. total | Campo desplaz. | MF |
+|:-:|:-:|:-:|:-:|
+| 1 a 4 | 252 | 0 · 29 · 58 · 87 | 1 |
+| 5 | 92 | 116 | 0 |
+
 Viajan 1100 B en vez de 1020. El TP pone 72 como longitud del último fragmento, pero esos son los datos: la longitud total es 92.
 
 ## Direcciones IP y subnetting
@@ -162,13 +161,15 @@ Viajan 1100 B en vez de 1020. El TP pone 72 como longitud del último fragmento,
 | `127.x.x.x` | **Loopback**: prueba la pila TCP/IP propia, no la placa de red |
 
 ### Método de cálculo
-```
-Red        = IP AND máscara
-Broadcast  = IP OR (NOT máscara)          (= red con todos los bits de host en 1)
-Hosts      = 2^(bits de host) − 2         (se restan la de red y la de broadcast)
-1er host   = red + 1     último host = broadcast − 1
-Salto      = 256 − (byte "interesante" de la máscara)
-```
+
+| Qué | Cómo se calcula | Nota |
+|---|---|---|
+| **Red** | IP AND máscara | |
+| **Broadcast** | IP OR (NOT máscara) | = red con todos los bits de host en 1 |
+| **Hosts** | 2^(bits de host) − 2 | se restan la de red y la de broadcast |
+| **1er / último host** | red + 1 / broadcast − 1 | |
+| **Salto** | 256 − byte "interesante" de la máscara | las subredes arrancan en múltiplos del salto |
+
 **Paso a paso:**
 
 1. Ubicá el **byte interesante**, el que en la máscara no es ni 0 ni 255. Los bytes con 255 se copian de la IP; los que tienen 0 dan 0 en la red y 255 en el broadcast.
@@ -179,15 +180,16 @@ Salto      = 256 − (byte "interesante" de la máscara)
 **Ejemplo:** 192.168.20.25 / 255.255.255.240. El salto es 256 − 240 = 16, así que las subredes son .0, .16, .32… El 25 cae en [16, 32), entonces la red es **192.168.20.16** y el broadcast **192.168.20.31**, con 14 hosts (.17 a .30).
 
 **Subredes de una clase C:**
-```
-Máscara           /    Subredes  Hosts  Salto
-255.255.255.128   /25      2      126    128
-255.255.255.192   /26      4       62     64
-255.255.255.224   /27      8       30     32
-255.255.255.240   /28     16       14     16
-255.255.255.248   /29     32        6      8
-255.255.255.252   /30     64        2      4   (enlaces punto a punto)
-```
+
+| Máscara | Prefijo | Bloques (2ⁿ) | Válidas cátedra (2ⁿ − 2) | Hosts | Salto |
+|---|:-:|:-:|:-:|:-:|:-:|
+| 255.255.255.128 | /25 | 2 | 0 | 126 | 128 |
+| 255.255.255.192 | /26 | 4 | 2 | 62 | 64 |
+| 255.255.255.224 | /27 | 8 | 6 | 30 | 32 |
+| 255.255.255.240 | /28 | 16 | 14 | 14 | 16 |
+| 255.255.255.248 | /29 | 32 | 30 | 6 | 8 |
+| 255.255.255.252 | /30 | 64 | 62 | 2 | 4 (enlaces punto a punto) |
+
 **Para elegir la máscara:**
 
 - **Por cantidad de subredes:** tomá *n* bits prestados tal que **2ⁿ − 2 ≥ subredes**.
@@ -214,12 +216,14 @@ Máscara           /    Subredes  Hosts  Salto
 - **Informa errores y transporta mensajes de control.** No decide nada: eso queda para las capas superiores. Viaja **dentro de un datagrama IP** (Protocolo = 1), pero **es de capa 3 (red)**.
 - Si un mensaje ICMP se pierde, **no se genera otro ICMP** por eso.
 - También es el protocolo de control que se usa con las opciones de diagnóstico del header IP **registro de ruta** y **marca de tiempo** (`ping -r`, `ping -s`). No confundir con los tipos ICMP 13/14, que son otro mecanismo.
-```
-0  Respuesta de eco (ping)          8  Solicitud de eco (ping)
-3  Destino inaccesible              11 Tiempo excedido (TTL=0) → tracert
-4  Source quench (en desuso)        12 Problema de parámetros
-5  Redireccionar (mejor ruta)       13/14 Marca de tiempo   17/18 Máscara
-```
+
+| Tipo | Mensaje | Tipo | Mensaje |
+|:-:|---|:-:|---|
+| **0** | Respuesta de eco (ping) | **8** | Solicitud de eco (ping) |
+| **3** | Destino inaccesible | **11** | Tiempo excedido (TTL = 0) → tracert |
+| **4** | Source quench (en desuso) | **12** | Problema de parámetros |
+| **5** | Redireccionar (mejor ruta) | **13/14 · 17/18** | Marca de tiempo · Máscara |
+
 **PING** manda un tipo 8 y recibe un tipo 0. Prueba las capas **física, de enlace y de red**, pero **no** transporte ni aplicación.
 
 - **Respuesta:** todo bien hasta capa 3.
@@ -496,13 +500,14 @@ Intentalos antes de mirar las respuestas, que están al final de la sección.
 - **E6.** 65 = `0100 0001` y 94 = `0101 1110`: 3 bits en común. Red **200.1.1.64**, broadcast **200.1.1.95**, máscara **255.255.255.224** (/27).
 - **E7.** 130.5.2.1 es **B pública**; 223.1.1.1 es **C pública**; 10.0.0.1 es **A privada**; 172.32.1.1 es **B pública** (queda fuera de 172.16–172.31, una trampa típica); 172.20.1.1 es **B privada**.
 - **E8.** Hay 3980 B de datos y entran 1480 por fragmento (1500 − 20, que ya es múltiplo de 8).
-```
-Frag  Long.total  Datos   Campo desplaz.  MF
-1     1500        1480    0               1
-2     1500        1480    185  (1480/8)   1
-3     1040        1020    370  (2960/8)   0
-```
-  Todos los fragmentos llevan la misma Identificación y reensambla solo el destino.
+
+| Frag | Long. total | Datos | Campo desplaz. | MF |
+|:-:|:-:|:-:|:-:|:-:|
+| 1 | 1500 | 1480 | 0 | 1 |
+| 2 | 1500 | 1480 | 185 (1480 / 8) | 1 |
+| 3 | 1040 | 1020 | 370 (2960 / 8) | 0 |
+
+Todos los fragmentos llevan la misma Identificación y reensambla solo el destino.
 - **E9.** Es un **ICMP tipo 3, "destino inaccesible"**, y lo genera el **gateway** (192.168.0.1) porque no tiene camino hacia esa red. Revisá la configuración IP, la máscara y el gateway del host, y la tabla del router.
 - **E10.** De /8 a /22 hay 14 bits de subred: 2¹⁴ − 2 = **16.382 subredes válidas**.
 - **E11.** **255.255.192.0 (/18)**. Con salto 64, 106 cae en el bloque que empieza en 64, y 106.51 − 64.0 = 42.51. Con /19 caería en .96.

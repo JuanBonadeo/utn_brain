@@ -23,6 +23,11 @@
  * respuestas al final). Las imágenes se centran y se achican.
  *
  * Marcas "(Tanenbaum)" / "(conocimiento general)" en itálica salen en gris chico.
+ * Párrafos que arrancan con **Ojo:** salen como aviso. Para diagramas de
+ * campos de bits (header IP), usar <table class="ipgrid"> con colspan = bits
+ * sobre 32 columnas; una fila <tr class="bits"> arriba con las posiciones.
+ * Tablas de datos: siempre como tabla markdown, no alineadas en ``` (en el PDF
+ * se desalinean).
  *
  * Números de página del índice: dos pasadas. Se imprime, se lee con pdftotext
  * (poppler) en qué página cayó cada título y se vuelve a imprimir. Si no hay
@@ -140,6 +145,20 @@ pre code { font-size: inherit; }
 blockquote { margin: 4pt 0 8pt; padding: 0 0 0 7pt; border-left: 1.5pt solid #000; }
 hr { border: 0; border-top: 0.6pt solid #000; margin: 10pt 0; }
 
+p, li { orphans: 3; widows: 3; }
+/* el párrafo que presenta una tabla, lista o código no queda solo al pie */
+p:has(+ table), p:has(+ pre), p:has(+ ul), p:has(+ ol) { break-after: avoid; }
+thead { display: table-header-group; }
+
+/* diagramas de campos de bits (<table class="ipgrid">, 32 columnas iguales) */
+table.ipgrid { table-layout: fixed; text-align: center; font-size: 9pt; border: 0 !important; }
+table.ipgrid td { padding: 4pt 2pt; vertical-align: middle; }
+table.ipgrid tr.bits td { border: 0; padding: 0 0 1pt; font-size: 7.5pt; color: #555; text-align: left; }
+table.ipgrid tr.opt td { border-style: dashed; }
+
+/* "Ojo:" en negrita al principio de un párrafo → aviso */
+p.ojo { border-left: 2pt solid #000; padding: 2pt 0 2pt 6pt; }
+
 h2.answers { break-before: page; margin-top: 0; }
 img { display: block; max-width: 55%; max-height: 62mm; margin: 4pt auto 8pt; }
 .src { font-size: 8.5pt; color: #555; font-style: italic; font-weight: normal; }
@@ -149,18 +168,37 @@ img { display: block; max-width: 55%; max-height: 62mm; margin: 4pt auto 8pt; }
 .a { margin-left: 7mm; }
 ul.a, ol.a { margin-left: 7mm; }
 ` + (colorTheme ? `
-/* --color: títulos y tablas en azul, para leer en pantalla */
+/* --color: títulos, tablas y avisos en color, para leer en pantalla */
 .cover h1 { color: #1f3864; text-decoration: none; border-bottom: 2pt solid #2e75b6; padding-bottom: 4pt; }
 .toc-title { color: #1f3864; }
-h2 { color: #1f3864; border-bottom: 1.2pt solid #2e75b6; padding-bottom: 2pt; }
-h3 { color: #2e75b6; }
+.toc-row.d2 a { color: #1f3864; font-weight: bold; }
+.toc-row .dots { border-bottom-color: #8eaadb; }
+h2 { color: #fff; background: #1f3864; padding: 4pt 8pt; border-radius: 2pt; }
+h3 { color: #2e75b6; border-bottom: 0.8pt solid #b4c6e7; padding-bottom: 1pt; }
 h4 { color: #1f3864; }
+strong { color: #10284a; }
+ul > li::before { color: #2e75b6; font-weight: bold; }
+ol > li::marker { color: #2e75b6; font-weight: bold; }
 table { border: 0.8pt solid #8eaadb; }
 th, td { border: 0.5pt solid #b4c6e7; }
-th { background: #dae3f3; color: #1f3864; }
-tbody tr:nth-child(even) td { background: #f5f8fc; }
+th { background: #2e75b6; color: #fff; }
+th strong { color: #fff; }
+tbody tr:nth-child(even) td { background: #f2f6fb; }
+pre { border-color: #b4c6e7; background: #f5f8fc; }
+code { color: #8b1a4a; }
 blockquote { border-left: 2.5pt solid #2e75b6; background: #f2f6fb; padding: 4pt 8pt; }
-.q { color: #1f3864; }
+p.ojo { border-left: 3pt solid #c55a11; background: #fbe9dc; padding: 4pt 8pt; }
+p.ojo > strong:first-child { color: #c55a11; }
+
+table.ipgrid tr td { background: #dae3f3; border: 0.6pt solid #2e75b6; color: #1f3864; font-weight: bold; }
+table.ipgrid tr:nth-child(odd):not(.bits) td { background: #c7d6ee; }
+table.ipgrid tr.bits td { background: none; border: 0; color: #2e75b6; font-weight: normal; }
+table.ipgrid tr.opt td { background: #f2f6fb; font-weight: normal; }
+
+.q { color: #1f3864; background: #e8eef8; padding: 3pt 6pt; border-left: 3pt solid #2e75b6; }
+.a { border-left: 1pt solid #b4c6e7; padding-left: 6pt; }
+ul.a, ol.a { padding-left: calc(7mm + 6pt); }
+.src { color: #7f7f7f; }
 ` : '');
 
 const html = `<!doctype html><html lang="es"><head><meta charset="utf-8"><title>${esc(title)}</title>
@@ -173,6 +211,11 @@ const html = `<!doctype html><html lang="es"><head><meta charset="utf-8"><title>
 </section>
 ${bodyHtml}
 <script>
+/* párrafos que arrancan con **Ojo:** → aviso */
+document.querySelectorAll('p').forEach(p=>{
+  const s=p.firstElementChild;
+  if(s && s.tagName==='STRONG' && p.firstChild===s && /^ojo\\b/i.test(s.textContent)) p.classList.add('ojo');
+});
 /* marcar preguntas/respuestas dentro de los "## ...Preguntas..." */
 (function(){
   const h2s=[...document.querySelectorAll('h2')].filter(h=>/preguntas/i.test(h.textContent));
