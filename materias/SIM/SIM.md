@@ -44,8 +44,9 @@ fotocopiada en 2019). El cap. 2 de Ross es la base de la Unidad 6.
 8. [Unidad 8 — Modelos analíticos de colas](#unidad-8--modelos-analíticos-de-colas)
 9. [Unidad 9 — Análisis de los datos de salida](#unidad-9--análisis-de-los-datos-de-salida)
 10. [Unidad 10 — Comparación de sistemas alternativos](#unidad-10--comparación-de-sistemas-alternativos)
-11. [TPI — consigna y estado](#tpi--trabajo-práctico-integrador)
-12. [Dudas / pendientes](#dudas--pendientes)
+11. [TPs de práctica (1.1 a 3)](#tps-de-práctica-11-a-3) — resumen; el repaso completo está en `estudio/repaso-tps.md`
+12. [TPI — consigna y estado](#tpi--trabajo-práctico-integrador)
+13. [Dudas / pendientes](#dudas--pendientes)
 
 ---
 
@@ -2479,6 +2480,23 @@ En el paso 9 de Weitz, la comparación de escenarios se plantea así:
 - `fuentes/clase-preexamen/Preguntas frecuentes.docx` — pregunta 1
 - `fuentes/examenes/parciales/2019/2019 - Parcial 2 - Weitz.txt`
 
+## TPs de práctica (1.1 a 3)
+
+> Grupo Brizio, Casermeiro, De la Rosa, Messina (el TP 3 ya sin De la Rosa). Informes entregados y código en
+> `entregables/TP1.1` … `entregables/TP3`. Los enunciados (J. I. Torres, 2026) **no están** en el brain.
+> Repaso para la exposición, con números, gráficas, errores de los informes y preguntas probables:
+> **`estudio/repaso-tps.md`** (+ `.pdf`).
+
+| TP | Tema | Qué se demostró | Unidades de la wiki |
+|---|---|---|---|
+| 1.1 | Ruleta europea (Python) | LGN dentro de cada corrida y TCL entre las 30 medias finales | 6 (6.7) |
+| 1.2 | Martingala, D'Alembert, Fibonacci y Winograd con capital ∞ y finito | E = −a/37 por apuesta, sin importar la estrategia; quiebras: Martingala 66,7 %, D'Alembert 56,7 %, Winograd 33,3 %, Fibonacci 16,7 % | 6 (6.5) |
+| 2.1 | GCL, cuadrados medios y `random` de Python; 6 tests | GCL y Python pasan todo; cuadrados medios (semilla 5731) cae en el ciclo 6100→2100→4100→8100 al paso 71 y falla media, varianza, χ² y KS | 7 (7.3–7.5) |
+| 2.2 | 9 distribuciones desde U(0,1) | Inversa, suma de exponenciales, Box-Muller, Bernoulli, multiplicativo; todas pasan KS o χ² | 7 (7.6–7.7) |
+| 3 | M/M/1, M/M/1/K e inventario (s, S), Python + AnyLogic | Teoría ≈ Python ≈ AnyLogic; con ρ > 1 Pb no baja de 1 − 1/ρ aunque crezca K; política óptima (30, 60) con costo ≈ 119,4 | 3, 4, 8, 9 |
+
+---
+
 ## TPI — Trabajo Práctico Integrador
 
 > Fuente: `fuentes/TPI Simulación - Enunciado.md`. Modalidad grupal, software **AnyLogic**.
@@ -2797,6 +2815,11 @@ Conclusiones:
 
 ## Log
 
+- **2026-10-20**: TPs de práctica 1.1, 1.2, 2.1, 2.2 y 3 traídos al brain desde `D:\Utn\4° Año\Simulacion`
+  (informes entregados + código en `entregables/TP*`; `entregables/TP_Colas` pasó a `entregables/TP3`, con el
+  `.alp` final y la bitácora de AnyLogic marcada como superada). Nueva sección "TPs de práctica" y repaso para la
+  exposición en `estudio/repaso-tps.md` + pdf. Detectado: el informe del TP 3 dice error < 5 % pero Lq con ρ = 0,75
+  da 6,1 %; el +472 de Martingala con capital ∞ es asimetría de la distribución, no esperanza positiva.
 - **2026-10-09** (2): TPI, grupo 2 (Casermeiro). Costo en pesos en el modelo (`modelo/agregar_costos.py`):
   luz marginal 102 $/kWh (el promedio de 290 incluía el cargo fijo de potencia, hundido), GLP 130 kg por día
   caliente a 2.250 $/kg, capital al 2 % mensual sobre 4.467 $/kg de producto. Corregido el precio por pieza del
