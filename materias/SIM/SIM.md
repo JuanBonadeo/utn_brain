@@ -2483,9 +2483,10 @@ En el paso 9 de Weitz, la comparación de escenarios se plantea así:
 ## TPs de práctica (1.1 a 3)
 
 > Grupo Brizio, Casermeiro, De la Rosa, Messina (el TP 3 ya sin De la Rosa). Informes entregados y código en
-> `entregables/TP1.1` … `entregables/TP3`. Los enunciados (J. I. Torres, 2026) **no están** en el brain.
-> Repaso para la exposición, con números, gráficas, errores de los informes y preguntas probables:
-> **`estudio/repaso-tps.md`** (+ `.pdf`).
+> `entregables/TP1.1` … `entregables/TP3`. Consignas de la cátedra (J. I. Torres, 2026) en `fuentes/tps-2026/`
+> (las del 1.1 al 2.2 en PDF, transcriptas en `fuentes/txt/tps-2026__*`; la del 3 en markdown).
+> Repaso para la exposición, con resumen en criollo, consigna, números, gráficas, errores de los informes y
+> preguntas probables: **`estudio/repaso-tps.md`** (+ `.pdf`).
 
 | TP | Tema | Qué se demostró | Unidades de la wiki |
 |---|---|---|---|
@@ -2494,6 +2495,14 @@ En el paso 9 de Weitz, la comparación de escenarios se plantea así:
 | 2.1 | GCL, cuadrados medios y `random` de Python; 6 tests | GCL y Python pasan todo; cuadrados medios (semilla 5731) cae en el ciclo 6100→2100→4100→8100 al paso 71 y falla media, varianza, χ² y KS | 7 (7.3–7.5) |
 | 2.2 | 9 distribuciones desde U(0,1) | Inversa, suma de exponenciales, Box-Muller, Bernoulli, multiplicativo; todas pasan KS o χ² | 7 (7.6–7.7) |
 | 3 | M/M/1, M/M/1/K e inventario (s, S), Python + AnyLogic | Teoría ≈ Python ≈ AnyLogic; con ρ > 1 Pb no baja de 1 − 1/ρ aunque crezca K; política óptima (30, 60) con costo ≈ 119,4 | 3, 4, 8, 9 |
+
+**Lo que cada consigna pedía y el informe no muestra:**
+
+- **1.1:** la gráfica del desvío contra n (hay 9 gráficas y se pedían 8, pero esa falta).
+- **1.2:** la barra de "frecuencia relativa de obtener la apuesta favorable" (el informe grafica la ganancia por tirada); la estrategia propia va con `-s w` en vez de `-s o`; no hay tabla de pagos por tipo de apuesta.
+- **2.1:** nada; se hizo más de lo pedido.
+- **2.2:** el método de rechazo para la uniforme, la exponencial y la normal (se explica en general, pero no se aplica).
+- **3:** Wq en las tablas (sale por Little: Lq/λ); la probabilidad de n clientes en **cola** (se grafica la de n en el **sistema**); la evolución en el tiempo de cada medida (solo están L y el costo total).
 
 ---
 
@@ -2815,6 +2824,10 @@ Conclusiones:
 
 ## Log
 
+- **2026-10-20** (2): ingeridas las consignas de los TPs 1.1, 1.2, 2.1 y 2.2 (PDF en `fuentes/tps-2026/`) y la del
+  TP 3 (texto pasado por el alumno, `fuentes/tps-2026/SIMULACIÓN_2026_TP3 - consigna.md`). Sección "TPs de
+  práctica": lista de lo que cada consigna pedía y el informe no muestra. `estudio/repaso-tps.md` + pdf: resumen
+  en criollo y consigna al principio de cada TP, "Ojo (consigna)" con las faltas y la pregunta 13 (Wq por Little).
 - **2026-10-20**: TPs de práctica 1.1, 1.2, 2.1, 2.2 y 3 traídos al brain desde `D:\Utn\4° Año\Simulacion`
   (informes entregados + código en `entregables/TP*`; `entregables/TP_Colas` pasó a `entregables/TP3`, con el
   `.alp` final y la bitácora de AnyLogic marcada como superada). Nueva sección "TPs de práctica" y repaso para la

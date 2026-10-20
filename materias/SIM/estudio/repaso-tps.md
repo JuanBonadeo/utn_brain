@@ -4,9 +4,9 @@
 
 **Grupo:** Brizio, Casermeiro, De la Rosa y Messina. En el TP 3 ya no está De la Rosa.
 
-Para cada TP: qué se hizo, los números que hay que tener en la cabeza, qué gráfica mostrar y qué errores del informe conviene conocer antes de que los marquen. Al final están las preguntas probables y los comandos para correr los programas en vivo.
+Cada TP arranca con un resumen **en criollo** (el recuadro) y lo que pedía la consigna. Después vienen el detalle de lo que se hizo, los números que hay que tener en la cabeza y qué gráfica mostrar. Al final de cada TP están los errores del informe y lo que la consigna pedía y el informe no muestra: conviene conocerlos antes de que los marquen. Cierran el documento las preguntas probables y los comandos para correr los programas en vivo.
 
-Todo sale de los informes entregados (`entregables/TP1.1` … `entregables/TP3`). Lo marcado *(conocimiento general)* no está en los informes: es contexto agregado para poder defenderlos.
+Todo sale de los informes entregados (`entregables/TP1.1` … `entregables/TP3`) y de las consignas de la cátedra (`fuentes/tps-2026/`). Lo marcado *(conocimiento general)* no está en esos documentos: es contexto agregado para poder defenderlos.
 
 ## 0. El hilo que une los cinco TPs
 
@@ -23,6 +23,15 @@ Contados juntos, los cinco TPs son una sola historia. Primero se **simula el aza
 Los cinco usan el mismo patrón: **simulado contra teórico, con varias corridas independientes**. Son 30 corridas en los 1.x, 10 000 valores por generador en los 2.x y al menos 10 réplicas con IC95 en el 3.
 
 ## 1. TP 1.1 — Simulación de una ruleta
+
+> **En criollo.** Hicimos una ruleta en Python que tira números del 0 al 36 y fuimos mirando cómo se comportan las cuentas tirada a tirada. Al principio es un caos: el 17 sale dos veces seguidas o no sale nunca. Con mil tiradas todo se acomoda a lo que dice la teoría: cada número sale 1 de cada 37 veces y el promedio da 18. Y si repetís el experimento 30 veces, los 30 promedios quedan amontonados alrededor de 18, en forma de campana. Es la ley de los grandes números y el teorema central del límite, vistos con los ojos.
+
+**Qué pedía la consigna.**
+
+- Un programa en Python que se corra como `python programa.py -c XXX -n YYY -e ZZ` (corridas, tiradas y número elegido), usando listas, `for` y Matplotlib.
+- Cuatro gráficas mínimas para una corrida, cada una contra su valor esperado: frecuencia relativa del número, promedio, **desvío** y varianza.
+- Después, varias corridas (con la cantidad justificada) en gráficas simultáneas, con un mínimo de 8 gráficas en total.
+- Justificar cada cosa con la teoría (TCL, estadísticos) y entregar un informe en LaTeX con formato de paper (plantilla arXiv).
 
 **Qué se hizo.** Una ruleta europea tiene 37 casilleros (del 0 al 36). Cada tirada es una uniforme discreta, generada con `random.randint(0, 36)`. El programa recibe por consola las corridas (`-c`), las tiradas (`-n`) y el número a estudiar (`-e`); se corrió con c = 30, n = 1000 y e = 17. Calcula tirada a tirada, en forma acumulada, la frecuencia absoluta y relativa del número elegido, la media, la varianza (estimador poblacional, divisor i) y el desvío. No usa NumPy: son bucles explícitos.
 
@@ -48,7 +57,19 @@ Los cinco usan el mismo patrón: **simulado contra teórico, con varias corridas
 
 **Ojo:** el informe se contradice en el orden de convergencia. Dice que primero converge la media (n ≈ 200), después la frecuencia relativa (n ≈ 400) y "finalmente" la varianza, pero a la varianza le asigna n ≈ 300. En error relativo, el orden real es media → varianza → frecuencia relativa. Con n = 1000, la media tiene un error relativo de ≈ 1,9 %, la varianza de ≈ 2,8 % y la frecuencia de un número puntual de ≈ 19 %, porque p = 1/37 es muy chica *(conocimiento general)*.
 
+**Ojo (consigna):** la consigna pide la gráfica del **desvío** contra n, y el informe no la tiene. Tiene las de frecuencia absoluta, frecuencia relativa, media y varianza. La fórmula del desvío sí está (σ ≈ 10,69). Si lo marcan: el desvío es la raíz de la varianza, así que converge igual que ella, a 10,69. El mínimo de 8 gráficas se cumple (hay 9).
+
 ## 2. TP 1.2 — Estrategias de apuesta
+
+> **En criollo.** Agarramos la ruleta del 1.1 y nos pusimos a apostar con las "estrategias para ganarle al casino" que andan por internet: Martingala (duplicar cuando perdés), D'Alembert (subir de a uno), Fibonacci (seguir la sucesión) y la de Winograd, el argentino que hizo saltar la banca en Mar del Plata. Conclusión: ninguna le gana a la casa. Por culpa del cero, cada peso apostado pierde en promedio 2,7 centavos, y eso no lo cambia ninguna estrategia: solo cambia cuándo y cómo perdés. Con plata limitada, la Martingala te funde en 2 de cada 3 sesiones; la más "segura" fue Fibonacci.
+
+**Qué pedía la consigna.**
+
+- Simular las apuestas monitoreando el flujo de caja y explicar los pagos según lo que se apuesta (color, fila, número).
+- Analizar Martingala, D'Alembert, Fibonacci y una estrategia elegida por el grupo, con las fuentes de cada una.
+- Cada estrategia con capital infinito y con capital acotado; en el acotado, contar las bancarrotas.
+- Dos parámetros nuevos: `-s` (m, d, f, **o** = otra) y `-a` (i, f).
+- Gráficas mínimas: barras con la **frecuencia relativa de obtener la apuesta favorable** según n, y el flujo de caja contra el capital inicial. Después, varias corridas simultáneas, con al menos 3 gráficas por estrategia.
 
 **Qué se hizo.** Se extendió el simulador del 1.1 para jugar cuatro estrategias, con capital infinito y con capital finito (C₀ = 1000, apuesta mínima 1). Se corrieron 30 corridas de 1000 tiradas con semilla 42.
 
@@ -83,7 +104,19 @@ Hay además una página web en Flask para correrlo desde el navegador.
 
 En 30 corridas ese caso casi nunca aparece, y por eso la media muestral sale positiva. El informe lo atribuye al "horizonte finito"; la explicación precisa es la asimetría *(conocimiento general)*. Lo mismo vale para el +167 de Fibonacci.
 
+**Ojo (consigna):** hay tres diferencias menores con lo que se pidió.
+
+- **La gráfica de barras no es la del boceto.** La consigna dibuja la frecuencia relativa de obtener la apuesta favorable (cuántas veces se gana); el informe muestra la ganancia o pérdida en plata de cada tirada. La idea es parecida, pero no es lo mismo.
+- **La estrategia propia se elige con `-s w`**, no con `-s o` como dice la consigna.
+- **Los pagos según la selección** (color, docena, columna, pleno) no se presentan como tabla. Solo aparecen los dos que se usan: chance simple 1 a 1 y pleno 35 a 1.
+
+Lo central sí está: las cuatro estrategias, los dos tipos de capital, las bancarrotas y las 3 gráficas por estrategia.
+
 ## 3. TP 2.1 — Generadores pseudoaleatorios
+
+> **En criollo.** La compu no puede tirar dados: los números "al azar" salen de una fórmula que, arrancando de una semilla, siempre da la misma secuencia. Programamos dos de esas fórmulas (el GCL y los cuadrados medios de von Neumann), las comparamos con la de Python y las pasamos por seis pruebas para ver si los números parecen azar de verdad. El GCL y el de Python aprueban todo. Cuadrados medios, al rato de arrancar, se queda trabado repitiendo los mismos cuatro números, y las pruebas lo agarran.
+
+**Qué pedía la consigna.** Investigar generadores reales y pseudoaleatorios, y los tests para evaluarlos. Programar al menos dos generadores, entre ellos un GCL, y testear el GCL con al menos cuatro pruebas. Compararlos con otros, incluido el de Python, idealmente en una tabla de resultados.
 
 **Qué se hizo.** Se programaron dos generadores y se compararon con el de Python, generando n = 10 000 valores con semilla fija:
 
@@ -116,7 +149,17 @@ Se aplicaron seis tests con α = 0,05: media, varianza, χ² con 10 intervalos (
 
 **Por qué el GCL anda** *(conocimiento general; el teorema está en la Unidad 7.4 de la wiki)*: con m = 2³¹, c impar y a − 1 múltiplo de 4 se cumple el teorema del GCL mixto, así que el período es completo (2³¹). Son los parámetros del `rand()` de ANSI C. Su debilidad conocida es que los bits bajos tienen período corto y que, en varias dimensiones, los puntos caen sobre hiperplanos.
 
+**Consigna:** cumplida de punta a punta, y con más de lo pedido: tres generadores y seis tests donde se pedían dos y cuatro.
+
 ## 4. TP 2.2 — Variables aleatorias de 9 distribuciones
+
+> **En criollo.** El generador te da números entre 0 y 1, todos con la misma chance. Pero para simular necesitás otras formas de azar: tiempos entre llegadas (exponencial), medidas que se amontonan en el medio (normal), cuántos clientes llegan en una hora (Poisson). Este TP es el recetario para transformar esos uniformes en nueve distribuciones distintas, siguiendo el libro de Naylor, y comprobar que lo que sale tiene la media, la varianza y la forma que tiene que tener. Las nueve dieron bien.
+
+**Qué pedía la consigna.**
+
+- Para cada distribución: la teoría (parámetros, función de probabilidad, gráficas), el paso a paso de la acumulada y su inversa, un programa en Python y un test.
+- El código tenía que ir dentro del informe.
+- Una tabla guía de la cátedra marcaba qué hacer con cada una: transformada inversa para las 9, **método de rechazo para la uniforme, la exponencial y la normal**, y test al menos para uniforme, exponencial, normal, binomial, Poisson y empírica.
 
 **Qué se hizo.** A partir de U(0,1) (`random.random()`, semilla 42) se generaron 10 000 valores de nueve distribuciones. Cada una se validó contra la teoría con la media, la varianza y una prueba de ajuste: Kolmogorov-Smirnov para las continuas y χ² para las discretas.
 
@@ -146,9 +189,30 @@ Se aplicaron seis tests con α = 0,05: media, varianza, χ² con 10 intervalos (
 
 Esto es la Unidad 7.6–7.7 de la wiki (Naylor cap. 4).
 
-**Ojo:** el informe explica el método de rechazo pero no lo usa en ninguna distribución. Si preguntan por qué: para las nueve había un método directo más simple que no descarta números. Además, la fuente uniforme es `random.random()` y no el GCL del TP 2.1. Es defendible, porque el 2.1 mostró que los dos pasan los tests, pero conviene tener la respuesta pensada.
+**Ojo (consigna):** la tabla guía pedía el **método de rechazo** para la uniforme, la exponencial y la normal. El informe lo explica en general (sección 2.1), pero no lo aplica a ninguna de las tres. Es la diferencia más visible con la consigna. Si preguntan:
+
+- Se priorizaron los métodos directos, que son más simples y no descartan números.
+- Cómo sería con rechazo para una densidad acotada en (a, b): se sortea x = a + (b − a)·U₁ y se acepta si U₂ ≤ f(x)/máx f; si no, se repite. Para la exponencial y la normal hay que truncar el soporte, porque no es acotado. Es la Unidad 7.6 B de la wiki.
+
+Lo demás se cumplió, y con más de lo pedido: se testearon las nueve y el código de las nueve está en el informe.
+
+**Ojo:** la fuente uniforme es `random.random()` y no el GCL del TP 2.1. Es defendible, porque el 2.1 mostró que los dos pasan los tests, pero conviene tener la respuesta pensada.
 
 ## 5. TP 3 — M/M/1, M/M/1/K e inventario (s, S)
+
+> **En criollo.** Juntamos todo en dos modelos clásicos y los programamos dos veces, en Python y en AnyLogic.
+>
+> El primero es una cola con un solo cajero (M/M/1): cuánta gente hay, cuánto espera y qué tan ocupado está el cajero, comparado con las fórmulas. Mientras lleguen menos de los que se atienden, la simulación clava la teoría. Si llegan igual o más, la cola crece sin parar. Con sala de espera limitada, a algunos los rebotan; y si llegan más de los que se atienden, agrandar la sala no sirve: igual rebotás el 20 %.
+>
+> El segundo es un depósito con política (s, S): cuando el stock baja de s, se pide lo que falta para llegar a S. Probamos 27 combinaciones y la más barata fue pedir cuando quedan 30 o menos, hasta completar 60. Python y AnyLogic dan lo mismo.
+
+**Qué pedía la consigna.**
+
+- **M/M/1:** L, Lq, W, Wq, utilización, probabilidad de n clientes **en cola** y probabilidad de denegación con cola de 0, 2, 5, 10 y 50. Todo como valor final **y en función del tiempo de simulación**.
+- **Tasas de arribo:** al menos 25, 50, 75, 100 y 125 % de la de servicio.
+- **Inventario:** costos de orden, mantenimiento, faltante y total, finales y en función del tiempo. Parámetros libres pero justificados.
+- **En los dos modelos:** al menos 10 corridas por experimento, marco teórico con fórmulas, comparación de tres fuentes (teoría, Python, AnyLogic) y parámetros fáciles de cambiar para mostrar en clase.
+- La cátedra sugiere una calculadora M/M/1 online para chequear la teoría.
 
 **Qué se hizo.** Dos simuladores de eventos discretos en Python, con avance al próximo evento, y los mismos modelos en AnyLogic (`TP_Colas.alp`). Se comparan tres fuentes: teoría, Python y AnyLogic.
 
@@ -229,6 +293,14 @@ Los costos se calculan por unidad de tiempo: orden = Σ(K + c·Q)/T, mantenimien
 
 **Ojo:** las conclusiones del informe dicen "error inferior al 5 % en todas las métricas", pero Lq con ρ = 0,75 da 2,113 contra 2,250: un **6,1 %** (L da 4,6 % y W 4,1 %). Si lo marcan: con ρ = 0,75 los valores consecutivos están muy correlacionados, y 10 corridas de 20 000 quedan justas; con más corridas o más horizonte la diferencia se cierra. Una corrida suelta de 20 000 con semilla 1 da L = 3,003.
 
+**Ojo (consigna):** de lo que pide la consigna del M/M/1, tres cosas no aparecen como tales en el informe.
+
+- **Wq (tiempo promedio en cola) no está en las tablas de resultados.** La fórmula está, pero las tablas traen L, Lq, W y U. Si lo piden, sale por Little: Wq = Lq/λ. Con ρ = 0,75 da 2,113/0,75 = 2,82 en Python y 2,347/0,75 = 3,13 en AnyLogic, contra 3,00 teórico. Con ρ = 0,25 y 0,50 da 0,33 y 1,00, igual que la teoría.
+- **La probabilidad de n clientes "en cola".** El informe grafica P(N = n) en el **sistema** y da la fórmula para la cola, P(Nq = 0) = P₀ + P₁ y P(Nq = n) = (1 − ρ)·ρⁿ⁺¹, pero no la grafica. Si preguntan: es la misma distribución corrida un lugar, porque con el servidor ocupado los que esperan son N − 1.
+- **"En función del tiempo de simulación".** Solo hay gráfica de convergencia para L y para el costo total del inventario, no para cada medida. Las demás se comportan igual. Para mostrarlo en vivo alcanza con correr `experimentos_mm1.py`.
+
+Lo demás se cumplió: las cinco tasas de arribo, los cinco tamaños de cola, al menos 10 corridas, el marco teórico, los parámetros justificados del inventario, las tres fuentes y los parámetros por línea de comando.
+
 ## 6. Correr en vivo
 
 Esta compu tiene Python 3.12 con numpy, matplotlib y Flask. Los comandos se corren desde la carpeta de cada TP, en el repo (`D:\Utn\4° Año\Simulacion\simulacion-UTN-2026\TP*`) o en `entregables/TP*/` del brain.
@@ -304,3 +376,7 @@ Porque incluye la compra de la mercadería: 3 por unidad × 25 unidades demandad
 **12) ¿(30, 60) es realmente mejor que (20, 60)?**
 
 Están prácticamente empatadas: ≈ 119,4 contra ≈ 119,7 en el desglose, y AnyLogic dio 120,0 para (20, 60) en una prueba previa. Con 10 réplicas, la diferencia cae dentro del ruido. Para afirmarlo haría falta un intervalo de confianza de la diferencia (t apareado con números aleatorios comunes, Unidad 10 de la wiki). Lo honesto es decir: "(30, 60) fue la de menor costo medio de la grilla; el valle está en s = 20–30, S = 60–70".
+
+**13) ¿Dónde está el tiempo promedio en cola (Wq)?**
+
+No quedó en las tablas, pero sale de las que están. Por Little, Wq = Lq/λ: con ρ = 0,75 da 2,82 en Python y 3,13 en AnyLogic, contra 3,00 teórico. También se puede sacar como W − 1/μ, que da 2,84 en Python.
