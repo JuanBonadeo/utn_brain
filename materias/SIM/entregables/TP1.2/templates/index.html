@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ruleta UTN-FRRO</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: radial-gradient(ellipse at center, #1a5c2a 0%, #0a1f10 100%);
+      min-height: 100vh;
+      font-family: Georgia, serif;
+      color: #f0e6d3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px 48px;
+    }
+
+    h1 {
+      font-size: 1.7rem;
+      color: #c8a32f;
+      text-align: center;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+      margin-bottom: 6px;
+    }
+
+    .subtitle {
+      font-size: 0.85rem;
+      color: #a8c8a0;
+      text-align: center;
+      letter-spacing: 1px;
+      margin-bottom: 28px;
+    }
+
+    /* ---- Layout principal ---- */
+    .main {
+      display: flex;
+      gap: 32px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+      max-width: 980px;
+    }
+
+    /* ---- Panel de parametros ---- */
+    .params {
+      background: rgba(0,0,0,0.45);
+      border: 1px solid rgba(200,163,47,0.35);
+      border-radius: 12px;
+      padding: 24px 20px;
+      min-width: 240px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .params h2 {
+      font-size: 1rem;
+      color: #c8a32f;
+      letter-spacing: 1px;
+      border-bottom: 1px solid rgba(200,163,47,0.3);
+      padding-bottom: 8px;
+      margin-bottom: 4px;
+    }
+
+    label {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 0.82rem;
+      color: #c8b89a;
+      letter-spacing: 0.5px;
+    }
+
+    input[type="number"], select {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(200,163,47,0.4);
+      border-radius: 6px;
+      color: #f0e6d3;
+      padding: 7px 10px;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input[type="number"]:focus, select:focus {
+      border-color: #c8a32f;
+    }
+
+    select option { background: #1a3a20; }
+
+    /* capital-tipo radio */
+    .radio-group {
+      display: flex;
+      gap: 16px;
+    }
+
+    .radio-group label {
+      flex-direction: row;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    input[type="radio"] { accent-color: #c8a32f; }
+
+    /* Capital field toggling */
+    #capitalRow { transition: opacity 0.3s; }
+    #capitalRow.oculto { opacity: 0.25; pointer-events: none; }
+
+    /* ---- Rueda ---- */
+    .wheel-panel {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    #ruletaCanvas {
+      cursor: pointer;
+      border-radius: 50%;
+      box-shadow: 0 0 40px rgba(0,0,0,0.7), 0 0 80px rgba(200,163,47,0.15);
+      transition: box-shadow 0.3s;
+    }
+
+    #ruletaCanvas:hover {
+      box-shadow: 0 0 50px rgba(0,0,0,0.8), 0 0 100px rgba(200,163,47,0.25);
+    }
+
+    #girarBtn {
+      background: linear-gradient(135deg, #c8a32f, #a07820);
+      border: none;
+      border-radius: 8px;
+      color: #1a0f0a;
+      cursor: pointer;
+      font-family: Georgia, serif;
+      font-size: 1rem;
+      font-weight: bold;
+      letter-spacing: 2px;
+      padding: 12px 36px;
+      text-transform: uppercase;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    #girarBtn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+    }
+
+    #girarBtn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    #resultado-tirada {
+      font-size: 1rem;
+      color: #c8a32f;
+      letter-spacing: 1px;
+      min-height: 24px;
+      text-align: center;
+    }
+
+    /* ---- Output consola ---- */
+    #output {
+      margin-top: 32px;
+      width: 100%;
+      max-width: 980px;
+      background: rgba(0,0,0,0.5);
+      border: 1px solid rgba(200,163,47,0.25);
+      border-radius: 10px;
+      padding: 16px 20px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.82rem;
+      color: #a8e6a0;
+      white-space: pre-wrap;
+      display: none;
+    }
+
+    /* ---- Graficas ---- */
+    #graficas {
+      margin-top: 28px;
+      width: 100%;
+      max-width: 980px;
+      display: none;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    #graficas h2 {
+      color: #c8a32f;
+      font-size: 1rem;
+      letter-spacing: 1px;
+      border-bottom: 1px solid rgba(200,163,47,0.3);
+      padding-bottom: 8px;
+    }
+
+    .graficas-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+    }
+
+    .graficas-grid img {
+      width: 100%;
+      max-width: 460px;
+      border-radius: 8px;
+      border: 1px solid rgba(200,163,47,0.2);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+    }
+
+    /* ---- Spinner ---- */
+    .spinner {
+      display: none;
+      width: 28px;
+      height: 28px;
+      border: 3px solid rgba(200,163,47,0.3);
+      border-top-color: #c8a32f;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+
+<h1>🎰 Ruleta Europea — UTN FRRO</h1>
+<p class="subtitle">Estudio económico-matemático de estrategias de apuesta</p>
+
+<div class="main">
+
+  <!-- Parametros -->
+  <div class="params">
+    <h2>⚙ Parámetros</h2>
+
+    <label>Corridas (-c)
+      <input type="number" id="corridas" value="30" min="1" max="500" />
+    </label>
+
+    <label>Tiradas por corrida (-n)
+      <input type="number" id="tiradas" value="1000" min="10" max="100000" />
+    </label>
+
+    <label>Estrategia (-s)
+      <select id="estrategia">
+        <option value="m">Martingala</option>
+        <option value="d">D'Alembert</option>
+        <option value="f">Fibonacci</option>
+        <option value="w">Winograd</option>
+      </select>
+    </label>
+
+    <label>Tipo de capital (-a)</label>
+    <div class="radio-group">
+      <label>
+        <input type="radio" name="capitalTipo" value="f" checked /> Finito
+      </label>
+      <label>
+        <input type="radio" name="capitalTipo" value="i" /> Infinito
+      </label>
+    </div>
+
+    <label id="capitalRow">Capital inicial
+      <input type="number" id="capital" value="100" min="1" />
+    </label>
+
+    <label>Apuesta mínima
+      <input type="number" id="apuestaMin" value="1" min="1" />
+    </label>
+  </div>
+
+  <!-- Ruleta -->
+  <div class="wheel-panel">
+    <canvas id="ruletaCanvas" width="380" height="380"></canvas>
+    <div id="resultado-tirada"></div>
+    <div class="spinner" id="spinner"></div>
+    <button id="girarBtn">🎲 Girar y Simular</button>
+  </div>
+
+</div>
+
+<!-- Output consola -->
+<pre id="output"></pre>
+
+<!-- Graficas -->
+<div id="graficas">
+  <h2>📊 Resultados</h2>
+  <div class="graficas-grid" id="graficasGrid"></div>
+</div>
+
+<script>
+  // -------------------------------------------------------------------------
+  // Ruleta europea — orden y colores oficiales
+  // -------------------------------------------------------------------------
+  const WHEEL = [0,32,15,19,4,21,2,25,17,34,6,27,13,36,11,30,8,23,10,5,24,16,33,1,20,14,31,9,22,18,29,7,28,12,35,3,26];
+  const RED   = new Set([1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36]);
+  const N     = WHEEL.length;
+  const SECTOR = (2 * Math.PI) / N;
+
+  function colorSector(num) {
+    if (num === 0)        return '#166a16';
+    if (RED.has(num))     return '#9b1c1c';
+    return '#1a1a1a';
+  }
+
+  // -------------------------------------------------------------------------
+  // Dibujo de la rueda
+  // -------------------------------------------------------------------------
+  const canvas = document.getElementById('ruletaCanvas');
+  const ctx    = canvas.getContext('2d');
+  const CX = canvas.width / 2;
+  const CY = canvas.height / 2;
+  const R_OUTER = CX - 8;
+  const R_NUM   = R_OUTER * 0.84;
+  const R_INNER = R_OUTER * 0.54;
+
+  let rotation = 0;
+
+  function drawWheel(rot) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Borde exterior (madera)
+    ctx.beginPath();
+    ctx.arc(CX, CY, R_OUTER + 7, 0, 2 * Math.PI);
+    ctx.fillStyle = '#2e1b0e';
+    ctx.fill();
+
+    // Sectores
+    for (let i = 0; i < N; i++) {
+      const angle = rot + i * SECTOR;
+      const a0 = angle - SECTOR / 2;
+      const a1 = angle + SECTOR / 2;
+
+      ctx.beginPath();
+      ctx.moveTo(CX, CY);
+      ctx.arc(CX, CY, R_OUTER, a0, a1);
+      ctx.closePath();
+      ctx.fillStyle = colorSector(WHEEL[i]);
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(200,163,47,0.45)';
+      ctx.lineWidth = 0.7;
+      ctx.stroke();
+
+      // Número
+      const tx = CX + R_NUM * Math.cos(angle);
+      const ty = CY + R_NUM * Math.sin(angle);
+      ctx.save();
+      ctx.translate(tx, ty);
+      ctx.rotate(angle + Math.PI / 2);
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 9px Arial';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(WHEEL[i].toString(), 0, 0);
+      ctx.restore();
+    }
+
+    // Círculo interior (cubo)
+    ctx.beginPath();
+    ctx.arc(CX, CY, R_INNER, 0, 2 * Math.PI);
+    ctx.fillStyle = '#100a06';
+    ctx.fill();
+    ctx.strokeStyle = '#c8a32f';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // Centro dorado
+    ctx.beginPath();
+    ctx.arc(CX, CY, R_INNER * 0.22, 0, 2 * Math.PI);
+    ctx.fillStyle = '#c8a32f';
+    ctx.fill();
+
+    // Marcador (triángulo dorado, fijo en la parte superior)
+    const my = CY - R_OUTER - 2;
+    ctx.beginPath();
+    ctx.moveTo(CX, CY - R_OUTER + 18);
+    ctx.lineTo(CX - 8, my);
+    ctx.lineTo(CX + 8, my);
+    ctx.closePath();
+    ctx.fillStyle = '#c8a32f';
+    ctx.fill();
+  }
+
+  drawWheel(rotation);
+
+  // -------------------------------------------------------------------------
+  // Animación de giro
+  // -------------------------------------------------------------------------
+  let spinning = false;
+
+  function easeOut(t) {
+    return 1 - Math.pow(1 - t, 4);
+  }
+
+  function spin() {
+    if (spinning) return;
+    spinning = true;
+
+    document.getElementById('girarBtn').disabled = true;
+    document.getElementById('resultado-tirada').textContent = '';
+    document.getElementById('spinner').style.display = 'none';
+
+    const totalRot = (6 + Math.random() * 6) * 2 * Math.PI; // 6-12 vueltas
+    const duration = 3000; // ms
+    const startRot = rotation;
+    const startTime = performance.now();
+
+    function frame(now) {
+      const elapsed = now - startTime;
+      const t = Math.min(elapsed / duration, 1);
+      rotation = startRot + totalRot * easeOut(t);
+      drawWheel(rotation);
+
+      if (t < 1) {
+        requestAnimationFrame(frame);
+      } else {
+        spinning = false;
+        // Número que quedó bajo el marcador (ángulo -π/2)
+        const normalizado = (((-Math.PI / 2) - rotation) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
+        const idx = Math.round(normalizado / SECTOR) % N;
+        const numero = WHEEL[idx];
+        const color = numero === 0 ? 'verde' : RED.has(numero) ? 'rojo' : 'negro';
+        document.getElementById('resultado-tirada').textContent =
+          `Salió el ${numero} (${color})`;
+        ejecutarSimulacion();
+      }
+    }
+
+    requestAnimationFrame(frame);
+  }
+
+  document.getElementById('girarBtn').addEventListener('click', spin);
+  canvas.addEventListener('click', spin);
+
+  // -------------------------------------------------------------------------
+  // Llamada al backend
+  // -------------------------------------------------------------------------
+  function ejecutarSimulacion() {
+    const spinner = document.getElementById('spinner');
+    const outputEl = document.getElementById('output');
+    const graficasEl = document.getElementById('graficas');
+
+    spinner.style.display = 'block';
+    outputEl.style.display = 'none';
+    graficasEl.style.display = 'none';
+
+    const capitalTipo = document.querySelector('input[name="capitalTipo"]:checked').value;
+
+    fetch('/simular', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        corridas:    parseInt(document.getElementById('corridas').value),
+        tiradas:     parseInt(document.getElementById('tiradas').value),
+        estrategia:  document.getElementById('estrategia').value,
+        capitalTipo: capitalTipo,
+        capital:     parseFloat(document.getElementById('capital').value),
+        apuestaMin:  parseFloat(document.getElementById('apuestaMin').value),
+      }),
+    })
+    .then(r => r.json())
+    .then(data => {
+      spinner.style.display = 'none';
+      document.getElementById('girarBtn').disabled = false;
+
+      // Consola
+      outputEl.textContent = data.output || data.error || '(sin salida)';
+      outputEl.style.display = 'block';
+
+      // Graficas
+      const grid = document.getElementById('graficasGrid');
+      grid.innerHTML = '';
+      const titulos = [
+        'Ganancia / pérdida por tirada',
+        'Flujo de caja — corrida única',
+        'Flujo de caja — todas las corridas',
+      ];
+      Object.entries(data.imagenes).forEach(([i, b64]) => {
+        const wrapper = document.createElement('div');
+        const img = document.createElement('img');
+        img.src = 'data:image/png;base64,' + b64;
+        img.alt = titulos[i] || `Gráfica ${i}`;
+        img.title = titulos[i] || '';
+        wrapper.appendChild(img);
+        grid.appendChild(wrapper);
+      });
+
+      if (Object.keys(data.imagenes).length > 0) {
+        graficasEl.style.display = 'flex';
+      }
+    })
+    .catch(err => {
+      spinner.style.display = 'none';
+      document.getElementById('girarBtn').disabled = false;
+      outputEl.textContent = 'Error de conexión: ' + err;
+      outputEl.style.display = 'block';
+    });
+  }
+
+  // -------------------------------------------------------------------------
+  // Ocultar campo capital si se elige infinito
+  // -------------------------------------------------------------------------
+  document.querySelectorAll('input[name="capitalTipo"]').forEach(r => {
+    r.addEventListener('change', () => {
+      document.getElementById('capitalRow').classList.toggle(
+        'oculto', r.value === 'i' && r.checked
+      );
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,402 @@
+\documentclass{article}
+
+\usepackage{arxiv}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{amsfonts}
+\usepackage{nicefrac}
+\usepackage{microtype}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{float}
+\graphicspath{ {./graficas_tp21/} }
+
+\title{TP 2.1 - GENERADORES PSEUDOALEATORIOS}
+
+\author{
+  Brizio Augusto \\
+  Universidad Tecnológica Nacional - FRRO \\
+  Zeballos 1341, S2000, Rosario, Argentina \\
+  \texttt{brizioaugusto@gmail.com} \\
+  \And
+  Casermeiro Gonzalo Nicolás \\
+  Universidad Tecnológica Nacional - FRRO \\
+  Zeballos 1341, S2000, Rosario, Argentina \\
+  \texttt{gonzacasermeiro@gmail.com} \\
+  \And
+  Messina Tiziano Leonel \\
+  Universidad Tecnológica Nacional - FRRO \\
+  Zeballos 1341, S2000, Rosario, Argentina \\
+  \texttt{tizilmessina@gmail.com} \\
+  \And
+  De la Rosa Valentin \\
+  Universidad Tecnológica Nacional - FRRO \\
+  Zeballos 1341, S2000, Rosario, Argentina \\
+  \texttt{mferreyra079@gmail.com} \\
+}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Este trabajo estudia la generación de números pseudoaleatorios mediante la
+implementación y comparación de tres fuentes de datos: un generador congruencial
+lineal (GCL), el método de los cuadrados medios y el generador provisto por
+Python mediante \texttt{random.random()}. Para evaluar la calidad estadística de
+las secuencias generadas se aplicaron seis pruebas: test de media, test de
+varianza, prueba chi-cuadrado de uniformidad, prueba de Kolmogorov-Smirnov,
+prueba de corridas y autocorrelación de primer orden.
+
+Se generaron $n = 10\,000$ valores para cada generador utilizando una semilla
+fija para garantizar reproducibilidad. Los resultados muestran que el GCL
+implementado y el generador de Python superan todas las pruebas consideradas,
+mientras que el método de cuadrados medios presenta fallas significativas en
+uniformidad, media y varianza. El análisis confirma que no alcanza con producir
+valores aparentemente desordenados: un generador útil para simulación debe
+aproximar una distribución uniforme, evitar patrones detectables y sostener esas
+propiedades a lo largo de secuencias suficientemente largas.
+\end{abstract}
+
+\section{Introducción}
+
+La simulación computacional requiere representar procesos inciertos mediante
+secuencias numéricas que se comporten como si fueran aleatorias. En una
+computadora, sin embargo, la aleatoriedad pura no surge naturalmente: los valores
+son generados por algoritmos deterministas que, a partir de un estado inicial o
+\textit{semilla}, producen una secuencia reproducible. A estos algoritmos se los
+conoce como generadores de números pseudoaleatorios.
+
+La reproducibilidad es una ventaja central en simulación, ya que permite repetir
+un experimento bajo las mismas condiciones iniciales y verificar los resultados.
+Pero también introduce un riesgo: si el algoritmo posee ciclos cortos, sesgos o
+correlaciones internas, la simulación puede producir conclusiones equivocadas.
+Por este motivo, además de programar generadores, es necesario evaluarlos con
+pruebas estadísticas que permitan detectar desviaciones respecto del
+comportamiento esperado.
+
+El objetivo de este trabajo es implementar generadores pseudoaleatorios en
+Python 3.x, aplicar tests de calidad sobre las secuencias obtenidas y comparar
+su desempeño con el generador incluido en el lenguaje. El informe se organiza de
+la siguiente manera: la Sección~2 describe los generadores estudiados; la
+Sección~3 presenta las pruebas estadísticas utilizadas; la Sección~4 expone los
+resultados obtenidos; y la Sección~5 desarrolla las conclusiones.
+
+\section{Generadores estudiados}
+
+\subsection{Generador congruencial lineal}
+
+El generador congruencial lineal (GCL) es uno de los métodos clásicos para
+obtener números pseudoaleatorios. A partir de una semilla inicial $X_0$, la
+secuencia se define mediante la recurrencia:
+
+\begin{equation}
+    X_{i+1} = (aX_i + c) \bmod m
+\end{equation}
+
+\noindent donde $a$ es el multiplicador, $c$ el incremento y $m$ el módulo. Para
+trabajar con valores en el intervalo $[0,1)$, cada entero generado se normaliza:
+
+\begin{equation}
+    U_i = \frac{X_i}{m}
+\end{equation}
+
+En la simulación se utilizaron los parámetros:
+
+\begin{equation}
+    a = 1103515245, \qquad c = 12345, \qquad m = 2^{31}
+\end{equation}
+
+\noindent con semilla $X_0 = 5731$. Estos parámetros corresponden a una familia
+de GCLs ampliamente utilizada históricamente. Si bien los GCLs modernos no son
+recomendables para criptografía, siguen siendo útiles para introducir los
+principios de generación pseudoaleatoria y para comparar calidad estadística.
+
+\subsection{Método de los cuadrados medios}
+
+El método de los cuadrados medios fue propuesto por John von Neumann. La idea es
+elevar al cuadrado la semilla actual, completar con ceros si es necesario y tomar
+los dígitos centrales como nuevo estado:
+
+\begin{equation}
+    X_{i+1} = \text{dígitos centrales}(X_i^2)
+\end{equation}
+
+Luego se normaliza el valor dividiéndolo por $10^d$, donde $d$ es la cantidad de
+dígitos utilizada:
+
+\begin{equation}
+    U_i = \frac{X_i}{10^d}
+\end{equation}
+
+En este trabajo se emplearon semillas de cuatro dígitos con $d = 4$ y semilla inicial
+$5731$. Aunque el método es simple, suele presentar ciclos cortos, convergencia a
+cero o patrones repetitivos, por lo que se espera un rendimiento inferior al del
+GCL y al generador de Python.
+
+\subsection{Generador de Python}
+
+Como referencia se utilizó \texttt{random.random()} de Python, que genera valores
+en $[0,1)$ mediante el generador Mersenne Twister. Este generador tiene un período
+muy grande y buenas propiedades estadísticas para simulación general, aunque no
+debe utilizarse para fines criptográficos \cite{python_random}.
+
+\section{Pruebas estadísticas}
+
+Para cada generador se produjeron $n = 10\,000$ valores pseudoaleatorios. Las
+secuencias fueron sometidas a seis pruebas. En todas ellas se tomó un nivel de
+significancia aproximado de $\alpha = 0{,}05$, equivalente al criterio usual
+$|Z| < 1{,}96$ para pruebas bilaterales.
+
+\subsection{Test de media}
+
+Para una distribución uniforme $U(0,1)$, la esperanza teórica es:
+
+\begin{equation}
+    E[U] = \frac{1}{2}
+\end{equation}
+
+El estadístico utilizado fue:
+
+\begin{equation}
+    Z_{\bar{U}} =
+    \frac{|\bar{U} - 0{,}5|}{\sqrt{\frac{1}{12n}}}
+\end{equation}
+
+\noindent y se acepta el comportamiento esperado si $Z_{\bar{U}} < 1{,}96$.
+
+\subsection{Test de varianza}
+
+La varianza teórica de una distribución uniforme $U(0,1)$ es:
+
+\begin{equation}
+    Var(U) = \frac{1}{12}
+\end{equation}
+
+Se comparó la varianza muestral contra este valor esperado mediante una
+aproximación normal del estadístico chi-cuadrado:
+
+\begin{equation}
+    Z_{S^2} =
+    \frac{\left| \frac{(n-1)S^2}{1/12} - (n-1) \right|}
+    {\sqrt{2(n-1)}}
+\end{equation}
+
+\subsection{Prueba chi-cuadrado}
+
+El intervalo $[0,1)$ se dividió en $k = 10$ subintervalos de igual amplitud. Para
+cada intervalo se comparó la frecuencia observada $O_j$ contra la frecuencia
+esperada $E_j = n/k$:
+
+\begin{equation}
+    \chi^2 = \sum_{j=1}^{k} \frac{(O_j - E_j)^2}{E_j}
+\end{equation}
+
+Con $k-1 = 9$ grados de libertad, el valor crítico para $\alpha = 0{,}05$ es
+$16{,}919$. La secuencia supera la prueba si $\chi^2 < 16{,}919$.
+
+\subsection{Prueba de Kolmogorov-Smirnov}
+
+La prueba de Kolmogorov-Smirnov compara la distribución empírica $F_n(x)$ con la
+función de distribución acumulada teórica $F(x) = x$:
+
+\begin{equation}
+    D = \sup_x |F_n(x) - F(x)|
+\end{equation}
+
+Para $n = 10\,000$, se utilizó el criterio:
+
+\begin{equation}
+    D < \frac{1{,}36}{\sqrt{n}} = 0{,}01360
+\end{equation}
+
+\subsection{Prueba de corridas}
+
+La prueba de corridas analiza la alternancia de valores por encima y por debajo
+de $0{,}5$. Si los valores son independientes, la cantidad de corridas debe
+aproximarse a:
+
+\begin{equation}
+    E[R] = \frac{2n_1n_2}{n_1+n_2} + 1
+\end{equation}
+
+\noindent donde $n_1$ es la cantidad de valores superiores o iguales a $0{,}5$ y
+$n_2$ la cantidad de valores inferiores.
+
+\subsection{Autocorrelación}
+
+Para detectar dependencia lineal entre valores consecutivos se calculó la
+autocorrelación de primer orden:
+
+\begin{equation}
+    \rho_1 =
+    \frac{\sum_{i=1}^{n-1}(U_i-\bar{U})(U_{i+1}-\bar{U})}
+    {\sum_{i=1}^{n}(U_i-\bar{U})^2}
+\end{equation}
+
+Luego se evaluó el estadístico $Z = |\rho_1|\sqrt{n}$, aceptando la hipótesis de
+ausencia de autocorrelación lineal si $Z < 1{,}96$.
+
+\section{Resultados y discusión}
+
+La Tabla~\ref{tab:resultados} resume los resultados obtenidos para los tres
+generadores. El valor \textbf{OK} indica que el estadístico quedó dentro del
+rango esperado; \textbf{RECHAZA} indica evidencia suficiente para descartar el
+comportamiento esperado en esa prueba.
+
+\begin{table}[H]
+\centering
+\caption{Resultados de las pruebas estadísticas para $n = 10\,000$ valores.}
+\label{tab:resultados}
+\begin{tabular}{llcl}
+\toprule
+\textbf{Generador} & \textbf{Test} & \textbf{Estadístico} & \textbf{Resultado} \\
+\midrule
+GCL & Media & 0{,}04387 & OK \\
+GCL & Varianza & 0{,}01743 & OK \\
+GCL & Chi-cuadrado & 3{,}14800 & OK \\
+GCL & Kolmogorov-Smirnov & 0{,}00492 & OK \\
+GCL & Corridas & 0{,}99737 & OK \\
+GCL & Autocorrelación & 1{,}25931 & OK \\
+\midrule
+Cuadrados medios & Media & 3{,}32149 & RECHAZA \\
+Cuadrados medios & Varianza & 27{,}99503 & RECHAZA \\
+Cuadrados medios & Chi-cuadrado & 14795{,}75200 & RECHAZA \\
+Cuadrados medios & Kolmogorov-Smirnov & 0{,}20780 & RECHAZA \\
+Cuadrados medios & Corridas & 0{,}05990 & OK \\
+Cuadrados medios & Autocorrelación & 0{,}18212 & OK \\
+\midrule
+Python random & Media & 0{,}88573 & OK \\
+Python random & Varianza & 0{,}23982 & OK \\
+Python random & Chi-cuadrado & 4{,}69600 & OK \\
+Python random & Kolmogorov-Smirnov & 0{,}00903 & OK \\
+Python random & Corridas & 0{,}43448 & OK \\
+Python random & Autocorrelación & 0{,}12095 & OK \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{histograma_generadores.png}
+    \caption{Histograma comparativo de los valores generados por cada método.}
+    \label{fig:histograma}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{primeros_valores.png}
+    \caption{Primeros 200 valores generados por cada método.}
+    \label{fig:primeros_valores}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{dispersion_pares.png}
+    \caption{Diagrama de dispersión entre valores consecutivos $U_i$ y $U_{i+1}$.}
+    \label{fig:dispersion}
+\end{figure}
+
+\subsection{Análisis del GCL}
+
+El generador congruencial lineal superó las seis pruebas aplicadas. La media y
+la varianza se mantuvieron muy cerca de los valores teóricos de una uniforme
+$U(0,1)$, mientras que las pruebas de uniformidad global también quedaron dentro
+de los límites esperados. El valor de chi-cuadrado fue $3{,}14800$, muy por
+debajo del límite $16{,}919$, lo que indica una distribución equilibrada entre
+los subintervalos.
+
+La prueba de corridas y la autocorrelación tampoco detectaron patrones fuertes
+entre valores consecutivos. Esto no significa que el GCL sea perfecto: los GCLs
+pueden presentar estructuras en dimensiones superiores y no son aptos para
+criptografía. Sin embargo, para el tamaño de muestra y las pruebas usadas en
+este trabajo, su comportamiento fue aceptable para simulación básica.
+
+\subsection{Análisis del método de cuadrados medios}
+
+El método de cuadrados medios mostró el peor desempeño. Falló el test de media,
+el test de varianza, la prueba chi-cuadrado y la prueba de Kolmogorov-Smirnov.
+El rechazo por chi-cuadrado fue especialmente marcado, con un
+$14795{,}75200$, muy superior al valor crítico $16{,}919$. Esto indica que los
+valores no se distribuyeron uniformemente en el intervalo $[0,1)$.
+
+Aunque superó la prueba de corridas y la prueba de autocorrelación, esto no
+alcanza para considerarlo un generador adecuado. Una secuencia puede alternar
+razonablemente alrededor de $0{,}5$ y aun así estar concentrada en ciertas zonas
+del intervalo o tener una varianza incorrecta. El resultado confirma la debilidad
+histórica del método: es simple de implementar, pero muy sensible a la semilla y
+propenso a ciclos cortos o estados degenerados.
+
+\subsection{Análisis del generador de Python}
+
+El generador de Python superó todas las pruebas, como era esperable para una
+herramienta estándar de simulación general. Sus estadísticos se mantuvieron lejos
+de los valores críticos tanto en uniformidad como en independencia básica. En
+particular, la prueba chi-cuadrado obtuvo $4{,}69600$ y Kolmogorov-Smirnov
+$0{,}00903$, valores compatibles con una muestra uniforme.
+
+Este comportamiento lo convierte en una alternativa confiable para simulaciones
+académicas y experimentales. No obstante, como indica la documentación oficial,
+el módulo \texttt{random} no debe utilizarse para aplicaciones criptográficas,
+ya que su objetivo es la simulación reproducible y no la seguridad.
+
+\section{Conclusiones}
+
+El trabajo permitió comprobar experimentalmente que la calidad de un generador
+pseudoaleatorio no puede asumirse únicamente porque sus valores parezcan
+desordenados. Es necesario aplicar pruebas estadísticas que evalúen uniformidad,
+media, varianza, independencia y ausencia de patrones simples.
+
+El generador congruencial lineal implementado tuvo un desempeño satisfactorio en
+las seis pruebas realizadas. Esto muestra que, con una selección adecuada de
+parámetros, un GCL puede ser útil en simulaciones introductorias. Sin embargo,
+también se debe reconocer su limitación: existen pruebas más exigentes y
+análisis multidimensionales capaces de revelar patrones que los tests básicos no
+detectan.
+
+El método de los cuadrados medios resultó claramente deficiente. Su falla en
+media, varianza y uniformidad confirma que se trata de un algoritmo histórico y
+didáctico, pero poco recomendable para simulaciones serias. La comparación con
+Python refuerza esta conclusión: el generador estándar del lenguaje mantuvo un
+comportamiento estable y superó todas las pruebas propuestas.
+
+En síntesis, para simulaciones reales conviene utilizar generadores probados y
+bien documentados. Los métodos simples como cuadrados medios son valiosos para
+comprender el problema, pero no para reemplazar generadores modernos. El GCL,
+por su parte, funciona correctamente en este experimento y permite observar de
+manera clara la relación entre algoritmo, semilla, período y calidad estadística.
+
+\bibliographystyle{unsrt}
+
+\begin{thebibliography}{9}
+
+\bibitem{torres_tp21}
+J.~I. Torres, \textit{TP 2.1 - Generadores pseudoaleatorios},
+Universidad Tecnológica Nacional - FRRO, 2026.
+
+\bibitem{tereom}
+Tereom, \textit{Números pseudoaleatorios},
+\url{https://tereom.github.io/est-computacional-2018/numeros-pseudoaleatorios.html}.
+
+\bibitem{random_analysis}
+Random.org, \textit{Introduction to Randomness and Random Numbers},
+\url{https://www.random.org/analysis/}.
+
+\bibitem{random_analysis_pdf}
+Random.org, \textit{Analysis of the Random Number Generator},
+\url{https://www.random.org/analysis/Analysis2005.pdf}.
+
+\bibitem{python_random}
+Python Software Foundation, \textit{random --- Generate pseudo-random numbers},
+\url{https://docs.python.org/3/library/random.html}.
+
+\bibitem{knuth}
+D.~E. Knuth, \textit{The Art of Computer Programming, Volume 2:
+Seminumerical Algorithms}, Addison-Wesley, 1997.
+
+\end{thebibliography}
+
+\end{document}

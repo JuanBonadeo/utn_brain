@@ -1,0 +1,554 @@
+\documentclass{article}
+
+\usepackage{arxiv}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{amsfonts}
+\usepackage{nicefrac}
+\usepackage{microtype}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{listings}
+\graphicspath{ {./graficas_tp22/} }
+
+\lstset{
+    language=Python,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue!70!black},
+    commentstyle=\color{green!40!black},
+    stringstyle=\color{red!60!black},
+    numbers=left,
+    numberstyle=\tiny,
+    frame=single,
+    breaklines=true,
+    showstringspaces=false,
+    tabsize=4
+}
+
+\title{TP 2.2 - GENERADORES DE NÚMEROS PSEUDOALEATORIOS DE DISTINTAS DISTRIBUCIONES}
+
+\author{
+  Brizio Augusto \\
+  Universidad Tecnológica Nacional - FRRO \\
+  Zeballos 1341, S2000, Rosario, Argentina \\
+  \texttt{brizioaugusto@gmail.com} \\
+  \And
+  Casermeiro Gonzalo Nicolás \\
+  Universidad Tecnológica Nacional - FRRO \\
+  Zeballos 1341, S2000, Rosario, Argentina \\
+  \texttt{gonzacasermeiro@gmail.com} \\
+  \And
+  Messina Tiziano Leonel \\
+  Universidad Tecnológica Nacional - FRRO \\
+  Zeballos 1341, S2000, Rosario, Argentina \\
+  \texttt{tizilmessina@gmail.com} \\
+  \And
+  De la Rosa Valentin \\
+  Universidad Tecnológica Nacional - FRRO \\
+  Zeballos 1341, S2000, Rosario, Argentina \\
+  \texttt{mferreyra079@gmail.com} \\
+}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Este trabajo continúa el estudio de generadores pseudoaleatorios iniciado en el
+TP 2.1. A partir de números uniformes en el intervalo $[0,1)$ se implementaron
+generadores para nueve distribuciones de probabilidad: uniforme, exponencial,
+gamma, normal, Pascal, binomial, hipergeométrica, Poisson y empírica discreta.
+El objetivo fue transformar una fuente uniforme en variables aleatorias con
+comportamientos probabilísticos distintos, utilizando transformación inversa,
+composición de variables, ensayos de Bernoulli, muestreo sin reemplazo y el
+método de Box-Muller.
+
+Para validar las simulaciones se generaron $n=10\,000$ valores por distribución
+y se compararon la media y la varianza observadas contra sus valores teóricos.
+Además, para distribuciones continuas se aplicó una prueba de
+Kolmogorov-Smirnov y para distribuciones discretas una medida de ajuste
+chi-cuadrado. Los resultados muestran errores relativos bajos en media y
+varianza, lo que confirma que las transformaciones implementadas producen
+secuencias compatibles con las distribuciones esperadas.
+\end{abstract}
+
+\section{Introducción}
+
+En el TP 2.1 se estudió la generación de números pseudoaleatorios uniformes y
+la necesidad de verificar su calidad estadística. Sin embargo, muchas
+simulaciones no trabajan directamente con valores uniformes, sino con tiempos
+entre llegadas, cantidades de eventos, demandas, tiempos de servicio, fallas,
+éxitos o variables físicas que responden a otras distribuciones.
+
+El problema central es entonces transformar una secuencia uniforme $U(0,1)$ en
+observaciones de una distribución deseada. Naylor presenta este enfoque como la
+base para generar valores de variables aleatorias en simulación computacional:
+partir de números uniformes y aplicar funciones matemáticas o algoritmos
+específicos para obtener la distribución buscada \cite{naylor}.
+
+El presente informe implementa y evalúa generadores para distribuciones
+continuas y discretas. En cada caso se presenta la función de probabilidad o
+densidad, sus parámetros, media y varianza, y el método computacional utilizado.
+El programa fue escrito en Python 3.x y genera automáticamente gráficas y una
+tabla resumen para contrastar el comportamiento simulado con el esperado.
+
+\section{Métodos}
+
+Todos los generadores parten de números pseudoaleatorios uniformes $U \sim
+U(0,1)$ provistos por \texttt{random.random()}. Se utilizó una semilla fija
+(\texttt{42}) para reproducir exactamente los resultados y $n=10\,000$ muestras
+por distribución.
+
+\subsection{Distribución uniforme}
+
+La distribución uniforme continua en $(a,b)$ posee densidad:
+
+\begin{equation}
+    f(x) =
+    \begin{cases}
+        \frac{1}{b-a}, & a \leq x \leq b \\
+        0, & \text{en otro caso}
+    \end{cases}
+\end{equation}
+
+\noindent Su acumulada es:
+
+\begin{equation}
+    F(x) = \frac{x-a}{b-a}
+\end{equation}
+
+\noindent Aplicando transformación inversa:
+
+\begin{equation}
+    U = \frac{x-a}{b-a}
+    \quad \Rightarrow \quad
+    X = a + (b-a)U
+\end{equation}
+
+Su media y varianza son:
+
+\begin{equation}
+    E[X] = \frac{a+b}{2}, \qquad Var(X) = \frac{(b-a)^2}{12}
+\end{equation}
+
+En la simulación se utilizó $a=2$ y $b=8$.
+
+\subsection{Distribución exponencial}
+
+La distribución exponencial modela tiempos entre eventos independientes con
+tasa $\lambda$:
+
+\begin{equation}
+    f(x)=\lambda e^{-\lambda x}, \qquad x \geq 0
+\end{equation}
+
+Su función acumulada es:
+
+\begin{equation}
+    F(x)=1-e^{-\lambda x}
+\end{equation}
+
+La inversa se obtiene igualando $U=F(x)$:
+
+\begin{equation}
+    U = 1-e^{-\lambda x}
+    \quad \Rightarrow \quad
+    X = -\frac{\ln(1-U)}{\lambda}
+\end{equation}
+
+Como $1-U$ también es uniforme, suele escribirse $X=-\ln(U)/\lambda$. En este
+trabajo se usó $\lambda=1{,}5$.
+
+\subsection{Distribución gamma}
+
+La distribución gamma, en la parametrización usada por Naylor, puede
+interpretarse como la suma de $k$ variables exponenciales independientes con la
+misma tasa $\lambda$ cuando $k$ es entero positivo. Su densidad es:
+
+\begin{equation}
+    f(x)=\frac{\lambda^k x^{k-1}e^{-\lambda x}}{(k-1)!}, \qquad x \geq 0
+\end{equation}
+
+\noindent con:
+
+\begin{equation}
+    E[X]=\frac{k}{\lambda}, \qquad Var(X)=\frac{k}{\lambda^2}
+\end{equation}
+
+Para $k$ entero, se puede generar una variable gamma/Erlang sumando
+exponenciales:
+
+\begin{equation}
+    X = \sum_{i=1}^{k} -\frac{\ln(1-U_i)}{\lambda}
+\end{equation}
+
+En la simulación se empleó $k=3$ y $\lambda=1{,}2$.
+
+\subsection{Distribución normal}
+
+La distribución normal con media $\mu$ y desvío estándar $\sigma$ tiene densidad:
+
+\begin{equation}
+    f(x)=\frac{1}{\sigma\sqrt{2\pi}}
+    e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}
+\end{equation}
+
+Para generarla se utilizó el método directo de Box-Muller. Dados dos uniformes
+independientes $U_1$ y $U_2$:
+
+\begin{equation}
+    Z_1=\sqrt{-2\ln(U_1)}\cos(2\pi U_2), \qquad
+    Z_2=\sqrt{-2\ln(U_1)}\sin(2\pi U_2)
+\end{equation}
+
+\noindent producen dos normales estándar. Luego se transforma:
+
+\begin{equation}
+    X = \mu + \sigma Z
+\end{equation}
+
+Se utilizaron $\mu=10$ y $\sigma=2$.
+
+\subsection{Distribución de Pascal}
+
+La distribución de Pascal o binomial negativa modela la cantidad de fallas $X$
+antes de obtener $r$ éxitos, con probabilidad de éxito $p$:
+
+\begin{equation}
+    P(X=x)=\binom{r+x-1}{x}p^r(1-p)^x,
+    \qquad x=0,1,2,\ldots
+\end{equation}
+
+\begin{equation}
+    E[X]=\frac{r(1-p)}{p}, \qquad
+    Var(X)=\frac{r(1-p)}{p^2}
+\end{equation}
+
+El algoritmo simula ensayos de Bernoulli hasta acumular $r$ éxitos. En el
+experimento se usó $r=4$ y $p=0{,}35$.
+
+\subsection{Distribución binomial}
+
+La distribución binomial cuenta la cantidad de éxitos en $n$ ensayos
+independientes de Bernoulli con probabilidad $p$:
+
+\begin{equation}
+    P(X=x)=\binom{n}{x}p^x(1-p)^{n-x}
+\end{equation}
+
+\begin{equation}
+    E[X]=np, \qquad Var(X)=np(1-p)
+\end{equation}
+
+Se generó realizando $n=12$ ensayos por observación y contando los uniformes
+menores a $p=0{,}4$.
+
+\subsection{Distribución hipergeométrica}
+
+La distribución hipergeométrica representa extracciones sin reemplazo desde una
+población de tamaño $N$, con $K$ elementos exitosos y $n$ extracciones
+realizadas:
+
+\begin{equation}
+    P(X=x)=
+    \frac{\binom{K}{x}\binom{N-K}{n-x}}{\binom{N}{n}}
+\end{equation}
+
+\begin{equation}
+    E[X]=n\frac{K}{N}, \qquad
+    Var(X)=n\frac{K}{N}\left(1-\frac{K}{N}\right)\frac{N-n}{N-1}
+\end{equation}
+
+El algoritmo actualiza las cantidades restantes de éxitos y fracasos después de
+cada extracción. Se usó $N=50$, $K=18$ y $n=10$.
+
+\subsection{Distribución de Poisson}
+
+La distribución de Poisson modela la cantidad de eventos en un intervalo fijo
+cuando estos ocurren con tasa promedio $\lambda$:
+
+\begin{equation}
+    P(X=x)=\frac{e^{-\lambda}\lambda^x}{x!},
+    \qquad x=0,1,2,\ldots
+\end{equation}
+
+\begin{equation}
+    E[X]=\lambda, \qquad Var(X)=\lambda
+\end{equation}
+
+Se utilizó el método multiplicativo: se generan uniformes y se acumula su
+producto hasta que cae por debajo de $e^{-\lambda}$. El número de factores
+menos uno es el valor de Poisson. Se usó $\lambda=4$.
+
+\subsection{Distribución empírica discreta}
+
+Una distribución empírica discreta asigna probabilidades explícitas a un
+conjunto finito de valores. En este trabajo:
+
+\begin{center}
+\begin{tabular}{cccccc}
+\toprule
+$x$ & 1 & 2 & 3 & 4 & 5 \\
+\midrule
+$P(X=x)$ & 0{,}10 & 0{,}20 & 0{,}35 & 0{,}25 & 0{,}10 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+El método consiste en formar probabilidades acumuladas y seleccionar el primer
+valor cuyo acumulado supere al uniforme generado:
+
+\begin{equation}
+    X=x_i \quad \text{si} \quad F(x_{i-1}) < U \leq F(x_i)
+\end{equation}
+
+\section{Implementación en Python}
+
+El Código~\ref{cod:continuas} muestra las transformaciones principales para
+distribuciones continuas. Todas parten de valores uniformes generados por
+\texttt{random.random()}.
+
+\begin{lstlisting}[caption={Generadores continuos implementados en Python.}, label={cod:continuas}]
+def uniforme(n, a=2.0, b=8.0):
+    return [a + (b - a) * random.random() for _ in range(n)]
+
+def exponencial(n, lambd=1.5):
+    return [-math.log(1 - random.random()) / lambd for _ in range(n)]
+
+def gamma_erlang(n, k=3, lambd=1.2):
+    valores = []
+    for _ in range(n):
+        total = 0.0
+        for _ in range(k):
+            total += -math.log(1 - random.random()) / lambd
+        valores.append(total)
+    return valores
+
+def normal_box_muller(n, media=10.0, desvio=2.0):
+    valores = []
+    while len(valores) < n:
+        u1 = max(random.random(), 1e-12)
+        u2 = random.random()
+        radio = math.sqrt(-2 * math.log(u1))
+        z1 = radio * math.cos(2 * math.pi * u2)
+        z2 = radio * math.sin(2 * math.pi * u2)
+        valores.append(media + desvio * z1)
+        if len(valores) < n:
+            valores.append(media + desvio * z2)
+    return valores
+\end{lstlisting}
+
+El Código~\ref{cod:discretas} resume la lógica de generación para algunas
+distribuciones discretas. En binomial y Pascal se emplean ensayos de Bernoulli;
+en Poisson, el método multiplicativo.
+
+\begin{lstlisting}[caption={Generadores discretos implementados en Python.}, label={cod:discretas}]
+def pascal(n, r=4, p=0.35):
+    valores = []
+    for _ in range(n):
+        exitos = 0
+        fallas = 0
+        while exitos < r:
+            if random.random() < p:
+                exitos += 1
+            else:
+                fallas += 1
+        valores.append(fallas)
+    return valores
+
+def binomial(n, ensayos=12, p=0.4):
+    valores = []
+    for _ in range(n):
+        exitos = sum(1 for _ in range(ensayos) if random.random() < p)
+        valores.append(exitos)
+    return valores
+
+def poisson(n, lambd=4.0):
+    valores = []
+    limite = math.exp(-lambd)
+    for _ in range(n):
+        k = 0
+        producto = 1.0
+        while producto > limite:
+            k += 1
+            producto *= random.random()
+        valores.append(k - 1)
+    return valores
+\end{lstlisting}
+
+\section{Resultados y discusión}
+
+La Tabla~\ref{tab:resultados} presenta la comparación entre valores observados
+y teóricos para $10\,000$ muestras. En distribuciones continuas, el último
+estadístico corresponde a Kolmogorov-Smirnov; en distribuciones discretas,
+corresponde a chi-cuadrado.
+
+\begin{table}[H]
+\centering
+\caption{Resumen de resultados de la simulación con semilla 42.}
+\label{tab:resultados}
+\begin{tabular}{lrrrrr}
+\toprule
+\textbf{Distribución} & \textbf{Media obs.} & \textbf{Media teo.} &
+\textbf{Var. obs.} & \textbf{Var. teo.} & \textbf{KS/$\chi^2$} \\
+\midrule
+Uniforme & 5{,}00151 & 5{,}00000 & 2{,}97963 & 3{,}00000 & 0{,}00626 \\
+Exponencial & 0{,}67046 & 0{,}66667 & 0{,}43472 & 0{,}44444 & 0{,}00984 \\
+Gamma & 2{,}48818 & 2{,}50000 & 2{,}06080 & 2{,}08333 & 0{,}01039 \\
+Normal & 10{,}02792 & 10{,}00000 & 3{,}99574 & 4{,}00000 & 0{,}01046 \\
+Pascal & 7{,}42330 & 7{,}42857 & 20{,}91281 & 21{,}22449 & 31{,}18428 \\
+Binomial & 4{,}77190 & 4{,}80000 & 2{,}83935 & 2{,}88000 & 8{,}76653 \\
+Hipergeométrica & 3{,}60420 & 3{,}60000 & 1{,}90193 & 1{,}88082 & 4{,}72206 \\
+Poisson & 4{,}00470 & 4{,}00000 & 3{,}97608 & 4{,}00000 & 13{,}13614 \\
+Empírica discreta & 3{,}05630 & 3{,}05000 & 1{,}24505 & 1{,}24750 & 2{,}57414 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Los errores relativos fueron bajos en todos los casos. La media observada de la
+uniforme fue $5{,}00151$, prácticamente igual al valor teórico $5$. La
+exponencial y la gamma muestran pequeñas diferencias atribuibles al error
+muestral. La normal generada por Box-Muller también coincide de forma clara con
+la media y varianza esperadas.
+
+En las distribuciones discretas, la comparación mediante barras simuladas y
+probabilidades teóricas permite verificar visualmente el ajuste. La binomial,
+hipergeométrica, Poisson y empírica discreta se comportan de manera muy estable.
+La distribución de Pascal presenta mayor dispersión, algo esperable por su
+varianza elevada.
+
+\subsection{Gráficas de distribuciones continuas}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{01_uniforme.png}
+    \caption{Valores generados para una distribución uniforme $U(2,8)$.}
+    \label{fig:uniforme}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{02_exponencial.png}
+    \caption{Valores generados para una distribución exponencial con $\lambda=1{,}5$.}
+    \label{fig:exponencial}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{03_gamma.png}
+    \caption{Valores generados para una distribución gamma/Erlang con $k=3$ y $\lambda=1{,}20$.}
+    \label{fig:gamma}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{04_normal.png}
+    \caption{Valores generados para una distribución normal $N(10,2)$.}
+    \label{fig:normal}
+\end{figure}
+
+\subsection{Gráficas de distribuciones discretas}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{05_pascal.png}
+    \caption{Valores generados para una distribución de Pascal con $r=4$ y $p=0{,}35$.}
+    \label{fig:pascal}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{06_binomial.png}
+    \caption{Valores generados para una distribución binomial con $n=12$ y $p=0{,}40$.}
+    \label{fig:binomial}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{07_hipergeometrica.png}
+    \caption{Valores generados para una distribución hipergeométrica con $N=50$, $K=18$ y $n=10$.}
+    \label{fig:hipergeometrica}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{08_poisson.png}
+    \caption{Valores generados para una distribución de Poisson con $\lambda=4$.}
+    \label{fig:poisson}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{09_empirica_discreta.png}
+    \caption{Valores generados para una distribución empírica discreta.}
+    \label{fig:empirica}
+\end{figure}
+
+\subsection{Comparación global}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{10_comparacion_medias.png}
+    \caption{Comparación entre medias observadas y medias teóricas.}
+    \label{fig:medias}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{11_comparacion_varianzas.png}
+    \caption{Comparación entre varianzas observadas y varianzas teóricas.}
+    \label{fig:varianzas}
+\end{figure}
+
+\section{Conclusiones}
+
+El trabajo demuestra que una fuente uniforme validada puede transformarse en
+variables aleatorias de múltiples distribuciones. La transformación inversa
+resultó directa para la uniforme y la exponencial; la gamma se generó como suma
+de exponenciales; la normal mediante Box-Muller; y las distribuciones discretas
+mediante ensayos, acumulación de probabilidades o mecanismos propios del
+experimento probabilístico.
+
+Los resultados obtenidos fueron consistentes con la teoría. Las medias y
+varianzas simuladas se mantuvieron cercanas a sus valores esperados, y las
+gráficas muestran una buena coincidencia entre las frecuencias observadas y las
+funciones teóricas. Esto confirma que los algoritmos implementados son adecuados
+para simulaciones académicas y permiten representar fenómenos más generales que
+los valores uniformes originales.
+
+También se observa que cada distribución requiere una técnica de generación
+distinta. No existe un único procedimiento universal igualmente simple para
+todos los casos: algunas distribuciones surgen por inversión de la acumulada,
+otras por suma o composición de variables, y otras por simular el proceso físico
+o lógico que les da origen.
+
+\bibliographystyle{unsrt}
+
+\begin{thebibliography}{9}
+
+\bibitem{naylor}
+T.~H. Naylor, \textit{Técnicas de simulación en computadoras},
+Editorial Limusa, 1982.
+
+\bibitem{torres_tp22}
+J.~I. Torres, \textit{TP 2.2 - Generadores de números pseudoaleatorios de
+distintas distribuciones de probabilidad}, Universidad Tecnológica Nacional -
+FRRO, 2026.
+
+\bibitem{python_random}
+Python Software Foundation, \textit{random --- Generate pseudo-random numbers},
+\url{https://docs.python.org/3/library/random.html}.
+
+\bibitem{box_muller}
+G.~E.~P. Box and M.~E. Muller, ``A Note on the Generation of Random Normal
+Deviates'', \textit{The Annals of Mathematical Statistics}, vol.~29, no.~2,
+pp.~610--611, 1958.
+
+\end{thebibliography}
+
+\end{document}

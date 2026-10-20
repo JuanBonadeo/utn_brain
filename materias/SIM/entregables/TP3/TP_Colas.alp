@@ -4,7 +4,7 @@
 	         AnyLogic Project File
 *************************************************
 -->
-<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.9.9.202607020844" AlpVersion="8.9.9">
+<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.9.9.202607020720" AlpVersion="8.9.9">
 <Model>
 	<Id>1783514567432</Id>
 	<Name><![CDATA[TP_Colas]]></Name>
@@ -127,7 +127,7 @@
 						<UnitType><![CDATA[NONE]]></UnitType>
 						<SdArray>false</SdArray>
 						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[0.75]]></Code>
+							<Code><![CDATA[1.25]]></Code>
 						</DefaultValue>
 						<ParameterEditor>
 							<Id>1783514850830</Id>
@@ -175,7 +175,7 @@
 						<UnitType><![CDATA[NONE]]></UnitType>
 						<SdArray>false</SdArray>
 						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[0]]></Code>
+							<Code><![CDATA[50]]></Code>
 						</DefaultValue>
 						<ParameterEditor>
 							<Id>1783514900876</Id>
@@ -470,7 +470,7 @@
 							<Name><![CDATA[rate]]></Name>
 							<Value Class="CodeUnitValue">
 								<Code><![CDATA[tasaArribo]]></Code>
-								<Unit Class="RateUnits"><![CDATA[PER_SECOND]]></Unit>
+								<Unit Class="RateUnits"><![CDATA[PER_MINUTE]]></Unit>
 							</Value>
 						</Parameter>
 						<Parameter>
@@ -629,7 +629,7 @@
 					<Id>1783514962324</Id>
 					<Name><![CDATA[timeMeasureStart]]></Name>
 					<X>100</X><Y>160</Y>
-					<Label><X>-45</X><Y>35</Y></Label>
+					<Label><X>-40</X><Y>45</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
@@ -697,7 +697,7 @@
 						<Parameter>
 							<Name><![CDATA[capacity]]></Name>
 							<Value Class="CodeValue">
-								<Code><![CDATA[K]]></Code>
+								<Code><![CDATA[max(K, 1)]]></Code>
 							</Value>
 						</Parameter>
 						<Parameter>
@@ -800,8 +800,8 @@
 						<Parameter>
 							<Name><![CDATA[delayTime]]></Name>
 							<Value Class="CodeUnitValue">
-								<Code><![CDATA[exponential(tasaServicio)]]></Code>
-								<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
+								<Code><![CDATA[exponential(1 / tasaServicio)]]></Code>
+								<Unit Class="TimeUnits"><![CDATA[MINUTE]]></Unit>
 							</Value>
 						</Parameter>
 						<Parameter>
@@ -870,7 +870,7 @@
 					<Id>1783514988447</Id>
 					<Name><![CDATA[timeMeasureEnd]]></Name>
 					<X>410</X><Y>160</Y>
-					<Label><X>-25</X><Y>30</Y></Label>
+					<Label><X>-25</X><Y>40</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
@@ -1157,7 +1157,7 @@
 					<Rotation>0.0</Rotation>
 					<Color>-16777216</Color>
 					<Text><![CDATA[text]]></Text>
-					<TextCode><![CDATA[timeMeasureEnd.distribution.mean() * 60]]></TextCode>
+					<TextCode><![CDATA[timeMeasureEnd.distribution.mean()]]></TextCode>
 					<Font>
 						<Name>SansSerif</Name>
 						<Size>10</Size>
@@ -1514,7 +1514,7 @@
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[int]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA[s]]></Code>
+							<Code><![CDATA[S]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -1606,7 +1606,7 @@
 						<UnitType><![CDATA[NONE]]></UnitType>
 						<SdArray>false</SdArray>
 						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[20]]></Code>
+							<Code><![CDATA[30]]></Code>
 						</DefaultValue>
 						<ParameterEditor>
 							<Id>1783520073604</Id>
@@ -1876,7 +1876,7 @@ inv -= elegirDemanda();]]></Action>
 					</Properties>
 					<Action><![CDATA[actualizarAreas();
 int posicion = inv + enTransito;
-if (posicion < s) {
+if (posicion <= s) {
     int q = S - posicion;
     costoOrdenAcum += Ksetup + cUnit * q;
     enTransito += q;
@@ -2262,6 +2262,89 @@ else return 4;]]></Body>
 				<InitialTime><![CDATA[0.0]]></InitialTime>
 				<FinalDate><![CDATA[1784668800000]]></FinalDate>
 				<FinalTime><![CDATA[20000.0]]></FinalTime>
+			</ModelTimeProperties>
+			<BypassInitialScreen>true</BypassInitialScreen>
+		</SimulationExperiment>
+		<!--   =========   Simulation Experiment   ========  -->
+		<SimulationExperiment ActiveObjectClassId="1783520054230">
+			<Id>1783641601079</Id>
+			<Name><![CDATA[SimulacionInventario]]></Name>
+			<CommandLineArguments><![CDATA[]]></CommandLineArguments>
+			<MaximumMemory>512</MaximumMemory>
+			<RandomNumberGenerationType>fixedSeed</RandomNumberGenerationType>
+			<CustomGeneratorCode>new Random()</CustomGeneratorCode>
+			<SeedValue>1</SeedValue>
+			<SelectionModeForSimultaneousEvents>LIFO</SelectionModeForSimultaneousEvents>
+			<VmArgs><![CDATA[]]></VmArgs>
+			<LoadRootFromSnapshot>false</LoadRootFromSnapshot>
+
+			<Presentation>
+				<Text>
+					<Id>1783641601081</Id>
+					<Name><![CDATA[text]]></Name>
+					<X>50</X><Y>30</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-12490271</Color>
+					<Text><![CDATA[TP_Colas]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>24</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+			</Presentation>
+
+			<Parameters>
+				<Parameter>
+					<ParameterName><![CDATA[s]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[S]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[tasaDemanda]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[Ksetup]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[cUnit]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[h]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[p]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[lagMin]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[lagMax]]></ParameterName>
+				</Parameter>
+			</Parameters>
+			<PresentationProperties>
+				<EnableZoomAndPanning>true</EnableZoomAndPanning>
+				<ExecutionMode><![CDATA[virtualTime]]></ExecutionMode>
+				<Title><![CDATA[TP_Colas : SimulacionInventario]]></Title>
+				<EnableDeveloperPanel>true</EnableDeveloperPanel>
+				<ShowDeveloperPanelOnStart>false</ShowDeveloperPanelOnStart>
+				<RealTimeScale>1.0</RealTimeScale>
+			</PresentationProperties>
+			<ModelTimeProperties>
+				<StopOption><![CDATA[Stop at specified time]]></StopOption>
+				<InitialDate><![CDATA[1783468800000]]></InitialDate>
+				<InitialTime><![CDATA[0.0]]></InitialTime>
+				<FinalDate><![CDATA[1783540800000]]></FinalDate>
+				<FinalTime><![CDATA[1200.0]]></FinalTime>
 			</ModelTimeProperties>
 			<BypassInitialScreen>true</BypassInitialScreen>
 		</SimulationExperiment>	

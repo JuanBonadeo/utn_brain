@@ -1,5 +1,10 @@
 # TP_Colas — Resultados de simulación (AnyLogic)
 
+> **Bitácora intermedia (al 2026-07-08), superada por el informe entregado** (`TP3 FINAL.pdf`, 2026-07-10).
+> El informe final usa la política óptima **(30, 60)** para el inventario (costo total 119,3 en AnyLogic),
+> no la (20, 60) de abajo, y reporta Pb(K=5, ρ=0,75) = **0,053** en AnyLogic. La lista "Pendiente" quedó
+> resuelta en el informe. Repaso para la exposición: `../../estudio/repaso-tps.md`.
+
 > Registro de corridas reales para el TP de M/M/1 y M/M/1/K. Modelo: `TP_Colas.alp`.
 > tasaServicio (μ) = 1 fijo en todo el TP; se varía tasaArribo (λ) para fijar ρ = λ/μ.
 
