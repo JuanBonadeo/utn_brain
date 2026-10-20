@@ -32,6 +32,8 @@ except ModuleNotFoundError:
     print("Falta instalar Matplotlib. Ejecuta: pip install matplotlib", file=sys.stderr)
     raise SystemExit(1)
 
+# El TP 1.2 reutiliza la ruleta del TP 1.1 (carpeta hermana).
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / 'TP1.1'))
 from simulacion_ruleta import guardar_figura, MIN_NUMERO, MAX_NUMERO
 
 

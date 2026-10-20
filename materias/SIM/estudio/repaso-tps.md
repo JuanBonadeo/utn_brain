@@ -231,26 +231,26 @@ Los costos se calculan por unidad de tiempo: orden = Σ(K + c·Q)/T, mantenimien
 
 ## 6. Correr en vivo
 
-Esta compu tiene Python 3.12 con numpy, matplotlib y Flask. Los comandos se corren desde la carpeta de cada TP, en `D:\Utn\4° Año\Simulacion` o en `entregables/TP*/` del brain.
+Esta compu tiene Python 3.12 con numpy, matplotlib y Flask. Los comandos se corren desde la carpeta de cada TP, en el repo (`D:\Utn\4° Año\Simulacion\simulacion-UTN-2026\TP*`) o en `entregables/TP*/` del brain.
 
 | TP | Comando | Ojo |
 |---|---|---|
 | 1.1 | `python simulacion_ruleta.py -c 30 -n 1000 -e 17` | genera las 9 gráficas en `graficas/` |
 | 1.2 | `python apuestas.py -c 30 -n 1000 -s m -a f --capital 1000 --semilla 42` | `--capital` por defecto es **100**: sin el flag los números no coinciden con el informe. `-s` m/d/f/w, `-a` i/f |
-| 1.2 web | `python app.py` y abrir localhost:5000 | necesita `apuestas.py` y `templates/` al lado |
-| 2.1 | `python tp2_1_simulacion.py` | imprime la tabla de los 6 tests |
+| 1.2 web | `python app.py` y abrir localhost:5000 | necesita `apuestas.py` y `templates/` al lado || 2.1 | `python tp2_1_simulacion.py` | imprime la tabla de los 6 tests |
 | 2.2 | `python tp2_2_simulacion.py` | gráficas + `resultados_tp22.csv` |
 | 3, una corrida | `python simulacion_mm1.py --lambda 0.75 --mu 1 --tiempo 20000` | `--cola 5` para M/M/1/K |
 | 3, inventario | `python simulacion_inventario.py --s 30 --S 60 --tiempo 1200` | |
 | 3, estudio completo | `python experimentos_mm1.py --corridas 10 --tiempo 20000` | tarda y regenera las gráficas |
 
-Las corridas sueltas del TP 3 están probadas en esta compu y coinciden con el informe:
+El 1.2 importa la ruleta del 1.1, así que la carpeta `TP1.1` tiene que estar al lado de `TP1.2`. Así quedaron en el repo y en el brain.
 
-- ρ = 0,75 da L = 3,003.
-- ρ = 1,25 con K = 5 da Pb = 0,257 (teórico 0,253).
-- El inventario (30, 60) da un total de 119,9.
+Estas corridas están probadas en esta compu:
 
-En la carpeta suelta `TP1.2` el script se llama `simulacion-con-apuestas.py`, así que la web no arranca desde ahí. Hay que usar la del repo (`simulacion-UTN-2026/TP1.1`) o la del brain.
+- **TP 1.2:** con los parámetros del informe reproduce los números exactos. Martingala con capital finito da −342,60 y 20 quiebras; Fibonacci da −17,00 y 5 quiebras.
+- **TP 3, M/M/1:** una corrida con ρ = 0,75 da L = 3,003.
+- **TP 3, M/M/1/K:** ρ = 1,25 con K = 5 da Pb = 0,257 (teórico 0,253).
+- **TP 3, inventario:** la política (30, 60) da un total de 119,9 (informe: 119,4).
 
 ## 7. Preguntas probables
 
