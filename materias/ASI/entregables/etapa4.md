@@ -7,9 +7,9 @@
 > **Anexo I — Business Model Canvas.** Lámina A3 apaisada en archivo independiente:
 > `etapa4-canvas.html` → `etapa4-canvas.pdf`.
 >
-> **Estado al 2026-10-14.** Las tres actividades de la consigna están desarrolladas. Idea
-> elegida por el grupo: plataforma de reclamos urbanos con ruteo a municipio y prestadoras,
-> app de cuadrilla y datos abiertos (candidata A).
+> **Estado al 2026-10-20.** Las tres actividades de la consigna están desarrolladas y no queda
+> nada pendiente de definición. Idea elegida por el grupo: plataforma de reclamos urbanos con
+> ruteo a municipio y prestadoras, app de cuadrilla y datos abiertos (candidata A).
 >
 > **Encuadre que no hay que perder.** Rosario **ya tiene** 147 + SUA + CIOR + Munibot. La
 > startup no compite con eso: Rosario es el modelo de referencia y un posible cliente de
@@ -18,8 +18,20 @@
 > **Todos los números son supuestos de la fase de búsqueda** (Lean Startup, C2): precios,
 > proyección y costos están marcados como hipótesis a validar con el MVP. No hay datos medidos.
 >
-> Pendiente de definición del grupo: el reparto de roles entre los cinco cofundadores
-> (punto 3) y la participación ofrecida al inversor (hoy 12%, propuesta). Marcados con ⚠.
+> **Definido el 2026-10-20** (eran los dos ⚠ de la versión 1):
+> - Cinco roles, cada uno dueño de una hipótesis del MVP (tabla del 2.6). Los roles **no tienen
+>   nombres asignados**: si el grupo los quiere, se agregan como columna en esa tabla.
+> - Pacto de socios con *vesting* a cuatro años con un mínimo de uno (riesgos del punto 1).
+> - 20% de la SAS al inversor por USD 70.000 (valuación posterior USD 350.000), en dos tramos de
+>   USD 35.000; el segundo se libera cuando el municipio piloto firma la suscripción (H4).
+>
+> **El resumen del punto 3 tiene que entrar en una página con Lexend**, que es más ancha que
+> la fuente que sustituye LibreOffice o Word si no la tienen instalada. Para medir sin Lexend,
+> renderizar una copia con Verdana (tan ancha o más): si entra con Verdana, entra con Lexend.
+>
+> **No correr `scripts/fix-cols-md.py` sobre este archivo.** Los anchos de columna están puestos
+> a mano. El script reparte por volumen de texto sin contar negritas ni el ancho de la fuente, y
+> con Lexend corta palabras ("Económic-o", "Participació-n") y parte montos en dos renglones.
 >
 > Contenido tomado de la wiki: Unidad 6 y sección TP Integrador.
 
@@ -58,6 +70,7 @@ Administración de Sistemas de Información — 4º Año Ingeniería en Sistemas
 | Mod | Fecha | Autor | Descripción |
 |---|---|---|---|
 | 1 | 14/10/2026 | Grupo N310 | Primera versión: idea de startup, Business Model Canvas con fuentes de ingreso y resumen para el inversor |
+| 2 | 20/10/2026 | Grupo N310 | Equipo fundador con un rol y una hipótesis del MVP por cofundador; pacto de socios con consolidación gradual de acciones; participación ofrecida al inversor, en dos tramos atados al piloto; resumen para el inversor ajustado a una página |
 
 ### ÍNDICE
 
@@ -161,8 +174,8 @@ Tomamos las causas de fracaso que la cátedra agrupa en la Unidad 6 y respondemo
 | Ciclo de venta largo del sector público y cambio de gestión cada cuatro años | Pilotos cortos con resultado medible; precios accesibles para un municipio mediano; cartera de varios municipios; el ingreso por prestadoras, que son privadas o mixtas, diversifica el riesgo político |
 | Inflación y costos en dólares (la infraestructura en la nube se paga en dólares) | Precio fijado en dólares y cobrado en pesos al tipo de cambio oficial, con ajuste trimestral; infraestructura con costo por uso |
 | Competir con un gigante o con el sistema propio de una ciudad grande | No competimos con el 147 de Rosario: nos integramos. El conector suma a Rosario como cliente de integración y de tablero, no de reemplazo |
-| Solución a un problema inexistente | El MVP valida H1 a H5 antes de construir el motor completo |
-| Conflictos entre cofundadores | Pacto de socios en la constitución de la SAS: roles, dedicación y salida |
+| Solución a un problema inexistente | El MVP valida H1 a H5 antes de construir el motor completo, y la segunda mitad de la inversión se libera recién cuando el municipio piloto firma la suscripción (H4) |
+| Conflictos entre cofundadores | Pacto de socios en la constitución de la SAS: un rol y una hipótesis del MVP por cofundador (punto 2.6), dedicación y salida. Las acciones de cada cofundador se consolidan de forma gradual en cuatro años, con un mínimo de uno (*vesting*): quien se va antes del primer año no conserva acciones, y quien se va a los dos años conserva la mitad |
 
 ### Marco legal
 
@@ -286,9 +299,21 @@ Los precios se fijan en dólares porque el principal costo, la infraestructura e
 | Tipo | Recurso |
 |---|---|
 | Intelectuales | La plataforma de software (aplicaciones, motor de ruteo, conector); **la base de datos georreferenciada de reclamos y tiempos**, que crece con cada municipio y es la barrera de entrada; la marca y los casos de éxito |
-| Humanos | Los cinco cofundadores, estudiantes avanzados de Ingeniería en Sistemas; a partir del año 2, un desarrollador y una persona de implementación y soporte |
-| Financieros | Ronda inicial de inversión y aportes no reembolsables de los programas de emprendedores (ver punto 3) |
+| Humanos | Los cinco cofundadores, estudiantes avanzados de Ingeniería en Sistemas, con un frente y una hipótesis del MVP cada uno (tabla siguiente); a partir del año 2, un desarrollador, que se suma a tecnología, y una persona de implementación y soporte, que se suma a operaciones |
+| Financieros | Ronda inicial de USD 70.000 por el 20% de la SAS, que valúa la empresa en USD 350.000 después de la inversión. Entra en dos tramos de USD 35.000: el segundo se libera cuando el municipio piloto firma la suscripción (H4). Se complementa con aportes no reembolsables de los programas de emprendedores (ver punto 3) |
 | Físicos | Mínimos: notebooks y celulares de prueba. No hay hardware en la calle: el sensor es el celular del vecino y el de la cuadrilla |
+
+**Equipo fundador.** Cada cofundador lleva un frente del negocio y responde por una de las hipótesis del MVP (punto 1), de modo que cada resultado del piloto tiene un responsable.
+
+<!-- cols: 22,56,22 -->
+
+| Rol | Responsabilidades | Hipótesis que lidera |
+|---|---|---|
+| Dirección y municipios | Venta institucional a los municipios, negociación del piloto y relación con el inversor y con los programas de emprendedores | H4 — el municipio paga |
+| Prestadoras y alianzas | Venta a las prestadoras y licencias por cuadrilla; relación con Personal y con los socios del ecosistema. Sostiene el pivot previsto si H4 falla | H5 — las prestadoras aceptan los reclamos ruteados |
+| Tecnología | Plataforma, app de cuadrilla y medición de tiempos, conectores, seguridad y protección de los datos personales. El motor de ruteo se construye recién cuando el piloto valida la demanda | H3 — la trazabilidad acorta los tiempos |
+| Producto y datos | App del vecino, tablero público, conjunto de datos abiertos e informes | H1 — los vecinos usan el canal nuevo |
+| Operaciones e implementación | Ruteo manual de los reclamos durante el piloto, alta de cada municipio nuevo, capacitación de las cuadrillas y mesa de ayuda | H2 — buena parte de los reclamos son repetidos |
 
 ### 2.7 Actividades clave
 
@@ -352,18 +377,16 @@ Con la mezcla de clientes proyectada, el margen de contribución al cierre del a
 
 ### Cuadra — del reclamo a la cuadrilla, a la vista de todos
 
-**El problema.** En las ciudades medianas, un bache, una luminaria apagada o un cable caído se reclaman por teléfono, redes o mensajería, muchas veces a quien no corresponde. El mismo problema entra veinte veces y nadie sabe cuánto tarda en resolverse. Rosario resolvió la recepción de reclamos para su ámbito con el 147 y su centro de operaciones. Los municipios del Gran Rosario no pueden pagarse algo así, y ni siquiera en Rosario el reclamo llega integrado a las empresas de servicios que trabajan en la calle.
+**El problema.** En las ciudades medianas, un bache, una luminaria apagada o un cable caído se reclaman por teléfono, redes o mensajería, a menudo a quien no corresponde. El mismo problema entra veinte veces y nadie sabe cuándo se resuelve. Rosario lo resolvió para su ámbito con el 147, pero los municipios del Gran Rosario no pueden costearlo, y ni en Rosario el reclamo llega a las prestadoras que trabajan en la calle.
 
-**La solución.** Una plataforma en la nube con cuatro piezas. El vecino reclama con una foto y sigue su reclamo. Un motor de ruteo lo envía al área municipal o a la prestadora que corresponde y agrupa los reclamos repetidos. La cuadrilla resuelve con la orden de trabajo en el celular y cierra con foto. Un tablero público muestra cuánto tarda cada responsable, con datos abiertos y anonimizados.
+**La solución.** Una plataforma en la nube: el vecino reclama con una foto y sigue su reclamo, un motor de ruteo lo envía al área municipal o a la prestadora que corresponde y agrupa los repetidos, la cuadrilla recibe la orden en el celular y cierra con foto, y un tablero público muestra cuánto tarda cada responsable, con datos abiertos.
 
-**Por qué es interesante.** No competimos con el sistema de una ciudad grande: llevamos su modelo, como servicio, a los municipios que no pueden construirlo, y nos integramos con el que ya existe. El diferencial es **cruzar organizaciones**: municipio y prestadoras en la misma red. Cada nuevo cliente vuelve más valiosa la plataforma para los demás, y la base de datos de reclamos y tiempos que se acumula es difícil de copiar. Además, cumple con la agenda de ciudad inteligente que piden los gobiernos locales: transparencia, datos abiertos y planificación urbana.
+**Por qué es interesante.** Llevamos como servicio el modelo de una ciudad grande a los municipios que no pueden construirlo, y nos integramos con el que ya existe. El diferencial es **cruzar organizaciones**: municipio y prestadoras en una misma red, que gana valor con cada cliente y acumula datos difíciles de copiar. Responde a la agenda de ciudad inteligente: transparencia, datos abiertos y planificación urbana.
 
-**Clientes y canales.** Pagan los municipios medianos del Gran Rosario y de la provincia y las prestadoras de servicios en la vía pública. El vecino lo usa gratis. Vendemos de forma directa, con un piloto de 90 días como puerta de entrada, y el propio municipio invita a las prestadoras de su territorio.
+**Clientes e ingresos.** Pagan los municipios, con una suscripción por tramo de habitantes (USD 600 a 2.200 por mes) y USD 2.500 de implementación, y las prestadoras, con una licencia de USD 35 por cuadrilla por mes; se suman informes de datos a medida. El vecino lo usa gratis y no hay publicidad. Vendemos de forma directa, con un piloto de 90 días como puerta de entrada, y el municipio invita a las prestadoras de su territorio. Con 14 municipios y 280 cuadrillas, el año 3 cierra en **USD 336.600**: 54% suscripciones, 35% licencias, 11% datos e implementación.
 
-**Cómo gana dinero.** Suscripción municipal por tramo de habitantes (USD 600 a 2.200 por mes), licencia por cuadrilla para las prestadoras (USD 35 por mes), implementación (USD 2.500 por única vez) e informes de datos a medida. Con 14 municipios y 280 cuadrillas al año 3, el ingreso anual proyectado es de **USD 336.600**: 54% suscripciones, 35% licencias, 11% datos e implementación. Sin publicidad.
+**Cómo se lleva a cabo.** Operamos con software, datos y personas, sin hardware en la calle: USD 5.500 de costos fijos por mes con el retiro de los socios, y equilibrio con unos seis municipios durante el año 2. Empezamos con un MVP de 90 días en un municipio piloto, con ruteo manual, para validar cinco hipótesis antes de automatizar, con el Polo Tecnológico Rosario, BCR Innova, la UTN FRRo y una prestadora local.
 
-**Cómo se lleva a cabo.** Lo que necesitamos para operar es software, datos y personas, sin hardware en la calle. Los costos fijos iniciales son de USD 5.500 por mes, sueldos de los fundadores incluidos. El equilibrio llega con unos seis municipios, durante el segundo año. El primer paso es un MVP de 90 días en un municipio piloto, con el ruteo hecho a mano por el equipo, para validar cinco hipótesis medibles antes de automatizar. Lo hacemos de la mano del Polo Tecnológico Rosario, BCR Innova, la UTN FRRo y una primera prestadora con cuadrillas en la zona.
+**El equipo.** Cinco cofundadores, estudiantes avanzados de Ingeniería en Sistemas de la UTN FRRo, que ya planificaron una plataforma de órdenes de trabajo con app de campo para una empresa de telecomunicaciones. Cada uno lleva un frente y una hipótesis del piloto: dirección y municipios, prestadoras y alianzas, tecnología, producto y datos, y operaciones. El pacto de socios consolida sus acciones en cuatro años.
 
-**El equipo.** Cinco cofundadores, estudiantes avanzados de Ingeniería en Sistemas de Información de la UTN FRRo, con experiencia en el análisis de procesos, la gestión de riesgos y la planificación de una plataforma de órdenes de trabajo para una empresa de telecomunicaciones. Roles: dirección y venta institucional, tecnología, producto y experiencia de usuario, datos, e implementación ⚠ *(asignación a definir por el grupo)*.
-
-**Qué pedimos.** **USD 70.000** para 18 meses de operación: el 60% para producto y equipo, el 25% para el piloto y la venta, y el 15% como reserva. A cambio ofrecemos el **12% de la SAS** ⚠ *(propuesta inicial)*, y lo complementamos con aportes no reembolsables de los programas de emprendedores. El hito que el inversor puede medir: **municipio piloto pagando al mes 6 y punto de equilibrio en el año 2.**
+**Qué pedimos.** **USD 70.000** para 18 meses: 60% producto y equipo, 25% piloto y venta, 15% reserva. A cambio, el **20% de la SAS** en dos desembolsos de USD 35.000 por el 10% cada uno: el primero financia el piloto y el segundo se libera cuando el municipio firma la suscripción, al mes 6. Si el piloto falla, el inversor arriesgó la mitad. Se suman aportes no reembolsables de programas públicos.
