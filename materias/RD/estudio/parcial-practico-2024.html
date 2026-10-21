@@ -2,23 +2,23 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<title>2do parcial práctico 29/10/2024 resuelto</title>
+<title>2do parcial práctico 29/10/2024</title>
 <style>
-  @page { size: A4; margin: 11mm 14mm; }
+  @page { size: A4; margin: 6mm 9mm; }
   * { box-sizing: border-box; }
-  body { margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 9.2pt; line-height: 1.3; color: #111; background: #fff; }
-  h1 { font-size: 14pt; text-align: center; margin: 0 0 1mm; }
-  .sub { text-align: center; color: #444; font-size: 9pt; margin: 0 0 5mm; }
-  h2 { break-after: avoid; font-size: 10.6pt; margin: 3mm 0 1.2mm; border-bottom: 1.2px solid #111; padding-bottom: .6mm; }
-  h3 { break-after: avoid; font-size: 9.6pt; margin: 2.2mm 0 .8mm; }
-  .enun { background: #f1f1f1; border-left: 3px solid #555; padding: 1.6mm 2.6mm; margin: 0 0 2mm; font-style: italic; }
-  p { margin: 1mm 0 1.6mm; text-align: justify; }
-  pre { font-family: Menlo, Consolas, monospace; font-size: 8.5pt; line-height: 1.3; background: #fafafa; border: .8px solid #ccc; padding: 1.8mm 2.6mm; margin: 1.2mm 0 2mm; white-space: pre; break-inside: avoid; }
-  .res { font-weight: bold; border: 1.2px solid #111; display: inline-block; padding: .6mm 2.4mm; margin: 1mm 0 1.6mm; }
-  .nota { font-size: 9pt; color: #333; border-left: 2px solid #999; padding-left: 2mm; }
+  body { margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 7.3pt; line-height: 1.2; color: #111; background: #fff; }
+  h1 { font-size: 11pt; text-align: center; margin: 0 0 2mm; }
+  .sub { text-align: center; color: #444; font-size: 7.5pt; margin: 0 0 2.5mm; }
+  h2 { break-after: avoid; font-size: 9pt; margin: 1.6mm 0 .6mm; border-bottom: 1.2px solid #111; padding-bottom: .6mm; }
+  h3 { break-after: avoid; font-size: 7.8pt; margin: 1mm 0 .3mm; }
+  .enun { background: #f1f1f1; border-left: 3px solid #555; padding: 1mm 2mm; margin: 0 0 1mm; font-style: italic; }
+  p { margin: .5mm 0 .9mm; text-align: justify; }
+  pre { font-family: Menlo, Consolas, monospace; font-size: 6.9pt; line-height: 1.18; background: #fafafa; border: .8px solid #ccc; padding: 1mm 2mm; margin: .6mm 0 1mm; white-space: pre; break-inside: avoid; }
+  .res { font-weight: bold; border: 1.2px solid #111; display: inline-block; padding: .3mm 2mm; margin: .5mm 0 .9mm; }
+  .nota { font-size: 7.4pt; color: #333; border-left: 2px solid #999; padding-left: 2mm; }
   ol, ul { margin: 1mm 0 2mm; padding-left: 5mm; }
   li { margin: 0 0 1mm; }
-  table { border-collapse: collapse; margin: 1.2mm 0 2mm; font-size: 9pt; }
+  table { border-collapse: collapse; margin: .6mm 0 1mm; font-size: 7.4pt; }
   th, td { border: .8px solid #777; padding: .2mm 2mm; text-align: center; }
   th { background: #ececec; }
   .x { color: #888; }
@@ -28,7 +28,6 @@
 <body>
 
 <h1>Redes de Datos: 2do parcial práctico (29/10/2024)</h1>
-<p class="sub">Resolución paso a paso · convención de la cátedra: subredes válidas = 2ⁿ − 2</p>
 
 <section>
 <h2>1) Subredes en una clase A</h2>
@@ -52,7 +51,6 @@
 <pre>subredes = 2¹⁴ − 2 = 16384 − 2 = 16382
 hosts    = 2¹⁰ − 2 =  1024 − 2 =  1022  por subred</pre>
 <div class="res">16.382 subredes (de 1022 hosts cada una)</div>
-<p class="nota">Error típico: contar los bits de subred desde /16 o /24. Siempre se cuentan desde el prefijo de la clase.</p>
 </section>
 
 <section>
@@ -100,20 +98,14 @@ s = 3  →  2³ − 2 = 6 ≥ 5   ✔
 <div class="res">a) 255.255.255.224 (/27)</div>
 <p>Salto 256 − 224 = 32 y hosts por subred 2⁵ − 2 = 30.</p>
 <table>
-  <tr><th>Bloque</th><th>Red</th><th>Hosts</th><th>Broadcast</th></tr>
-  <tr class="x"><td>0</td><td>204.12.30.0</td><td colspan="2">descartada</td></tr>
-  <tr><td>1</td><td>204.12.30.32</td><td>.33 – .62</td><td>.63</td></tr>
-  <tr><td>2</td><td>204.12.30.64</td><td>.65 – .94</td><td>.95</td></tr>
-  <tr><td>3</td><td>204.12.30.96</td><td>.97 – .126</td><td>.127</td></tr>
-  <tr><td>4</td><td>204.12.30.128</td><td>.129 – .158</td><td>.159</td></tr>
-  <tr><td>5</td><td>204.12.30.160</td><td>.161 – .190</td><td>.191</td></tr>
-  <tr><td>6</td><td>204.12.30.192</td><td>.193 – .222</td><td>.223</td></tr>
-  <tr class="x"><td>7</td><td>204.12.30.224</td><td colspan="2">descartada</td></tr>
+  <tr><th>Bloque</th><td class="x">0 ✘</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td class="x">7 ✘</td></tr>
+  <tr><th>Red</th><td class="x">.0</td><td>.32</td><td>.64</td><td>.96</td><td>.128</td><td>.160</td><td>.192</td><td class="x">.224</td></tr>
+  <tr><th>Hosts</th><td class="x">—</td><td>.33–.62</td><td>.65–.94</td><td>.97–.126</td><td>.129–.158</td><td>.161–.190</td><td>.193–.222</td><td class="x">—</td></tr>
+  <tr><th>Broadcast</th><td class="x">—</td><td>.63</td><td>.95</td><td>.127</td><td>.159</td><td>.191</td><td>.223</td><td class="x">—</td></tr>
 </table>
 
 <h3>b) Host 14 de la subred 204.12.30.192</h3>
-<pre>host H = subred + H  →  192 + 14 = 206   (cae en .193 – .222 ✔)</pre>
-<div class="res">b) 204.12.30.206</div>
+<p>Host H = subred + H → 192 + 14 = 206 (cae en .193 – .222 ✔) → <span class="res">b) 204.12.30.206</span></p>
 
 <h3>c) Host 14 de las 5 subredes a la vez</h3>
 <p>Con la convención clásica (RFC 950), el campo de subred <b>todo en 1</b> significa "todas las subredes". Por eso ese bloque se descarta como subred válida. Se arma el 4to byte con subred = 111 y host = 14:</p>
@@ -121,20 +113,8 @@ s = 3  →  2³ − 2 = 6 ≥ 5   ✔
 campo host   = 01110    (14)
 4to byte     = 111 01110 = 128 + 64 + 32 + 8 + 4 + 2 = 238</pre>
 <div class="res">c) 204.12.30.238</div>
-<p class="nota">El enunciado no tiene respuesta oficial. Conviene escribir el razonamiento (campo de subred en 1 = todas las subredes) además del número.</p>
 </section>
 
-<section>
-<h2>4) Ventajas de OSPF sobre RIP</h2>
-<p class="enun">Indique cuatro ventajas de OSPF sobre RIP.</p>
-<ol>
-  <li><b>Converge rápido y sin cuenta al infinito:</b> es de estado de enlace, cada router conoce la topología completa. RIP es vector distancia y cada router solo conoce un pedazo de la red.</li>
-  <li><b>Mejor métrica:</b> costo según ancho de banda y retardo, no solo cantidad de saltos. No tiene el límite de 15 saltos de RIP.</li>
-  <li><b>Escala:</b> divide la red en áreas conectadas a un backbone (área 0).</li>
-  <li><b>Solo envía cambios:</b> manda paquetes de estado de enlace cuando algo cambia, en vez de la tabla completa cada cierto tiempo. Genera menos tráfico.</li>
-</ol>
-<p>Otras: balanceo de carga entre caminos de igual costo y autenticación de los mensajes.</p>
-</section>
 
 </body>
 </html>
