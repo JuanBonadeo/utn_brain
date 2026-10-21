@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Subnetting IPv4</title>
+<style>
+  @page { size: A4; margin: 8mm 9mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 9pt; line-height: 1.3; color: #111; background: #fff; }
+  h1 { font-size: 13pt; text-align: center; margin: 0 0 2mm; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; border-top: 1.2px solid #111; border-left: 1.2px solid #111; }
+  .box { border-right: 1.2px solid #111; border-bottom: 1.2px solid #111; padding: 1.6mm 2.6mm 1.8mm; break-inside: avoid; }
+  .full { grid-column: 1 / -1; }
+  h2 { font-size: 9.8pt; margin: 0 0 1.2mm; text-decoration: underline; text-underline-offset: 1.5px; }
+  ol, ul { margin: .4mm 0 .8mm; padding-left: 4.4mm; }
+  li { margin: 0 0 .6mm; }
+  p { margin: .4mm 0 .8mm; }
+  table { border-collapse: collapse; margin: .8mm 0; font-size: 8.6pt; }
+  th, td { border: .8px solid #777; padding: .4mm 1.4mm; text-align: center; }
+  th { background: #ececec; }
+  .mono, code { font-family: Menlo, Consolas, monospace; font-size: 8.2pt; }
+  .ej { font-size: 8.4pt; color: #222; border-left: 2px solid #999; padding-left: 1.6mm; margin-top: 1mm; }
+  .ej .mono { font-size: 8pt; }
+  .three { display: grid; grid-template-columns: auto auto auto; gap: 0 6mm; justify-content: start; align-items: start; }
+</style>
+</head>
+<body>
+
+<h1>Subnetting IPv4</h1>
+
+<div class="grid">
+
+  <div class="box full">
+    <h2>Tablas</h2>
+    <div class="three">
+      <table>
+        <tr><th>Clase</th><th>1er byte</th><th>Base</th></tr>
+        <tr><td>A</td><td>1 – 126</td><td>/8</td></tr>
+        <tr><td>B</td><td>128 – 191</td><td>/16</td></tr>
+        <tr><td>C</td><td>192 – 223</td><td>/24</td></tr>
+      </table>
+      <table>
+        <tr><th>Byte</th><th>Binario</th><th>Unos</th><th>Salto</th></tr>
+        <tr><td>128</td><td class="mono">10000000</td><td>1</td><td>128</td></tr>
+        <tr><td>192</td><td class="mono">11000000</td><td>2</td><td>64</td></tr>
+        <tr><td>224</td><td class="mono">11100000</td><td>3</td><td>32</td></tr>
+        <tr><td>240</td><td class="mono">11110000</td><td>4</td><td>16</td></tr>
+        <tr><td>248</td><td class="mono">11111000</td><td>5</td><td>8</td></tr>
+        <tr><td>252</td><td class="mono">11111100</td><td>6</td><td>4</td></tr>
+        <tr><td>254</td><td class="mono">11111110</td><td>7</td><td>2</td></tr>
+        <tr><td>255</td><td class="mono">11111111</td><td>8</td><td>—</td></tr>
+      </table>
+      <table>
+        <tr><th>n</th><th>2ⁿ</th><th>2ⁿ − 2</th></tr>
+        <tr><td>2</td><td>4</td><td>2</td></tr>
+        <tr><td>3</td><td>8</td><td>6</td></tr>
+        <tr><td>4</td><td>16</td><td>14</td></tr>
+        <tr><td>5</td><td>32</td><td>30</td></tr>
+        <tr><td>6</td><td>64</td><td>62</td></tr>
+        <tr><td>7</td><td>128</td><td>126</td></tr>
+        <tr><td>8</td><td>256</td><td>254</td></tr>
+        <tr><td>9</td><td>512</td><td>510</td></tr>
+        <tr><td>10</td><td>1024</td><td>1022</td></tr>
+        <tr><td>11</td><td>2048</td><td>2046</td></tr>
+        <tr><td>12</td><td>4096</td><td>4094</td></tr>
+        <tr><td>13</td><td>8192</td><td>8190</td></tr>
+        <tr><td>14</td><td>16384</td><td>16382</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="box">
+    <h2>Subredes y hosts desde una máscara</h2>
+    <ol>
+      <li>Clase → prefijo base (A /8 · B /16 · C /24).</li>
+      <li>Máscara → contar unos: 255 = 8 · 0 = 0 · el byte del medio según la tabla.</li>
+      <li>Bits de subred <b>s = prefijo − base</b>. Bits de host <b>h = 32 − prefijo</b>.</li>
+      <li>Subredes válidas <b>2ˢ − 2</b>. Hosts por subred <b>2ʰ − 2</b>.</li>
+    </ol>
+    <p>s se cuenta desde la base de la clase, no desde /24.</p>
+    <p class="ej">Clase A, 255.255.252.0 → 8+8+6 = /22 → s = 14, h = 10 → 16.382 subredes de 1022 hosts</p>
+  </div>
+
+  <div class="box">
+    <h2>Elegir la máscara</h2>
+    <ul>
+      <li><b>N subredes:</b> menor s con 2ˢ − 2 ≥ N → prefijo = base + s.</li>
+      <li><b>H hosts:</b> menor h con 2ʰ − 2 ≥ H → prefijo = 32 − h → s = prefijo − base.</li>
+      <li><b>Las dos:</b> s y h por separado; controlar s + h ≤ 32 − base.</li>
+      <li><b>Prefijo → máscara:</b> p ÷ 8 = bytes en 255; el resto va al byte siguiente (1→128, 2→192, 3→224, 4→240, 5→248, 6→252, 7→254); los demás en 0.</li>
+    </ul>
+    <p>Es ≥, no &gt;. "Máximo de hosts" → menor s. s = 1 da 0 subredes válidas.</p>
+    <p class="ej">204.12.30.0, 5 subredes → C /24, s = 3 → /27 = 255.255.255.224, 30 hosts<br>
+    Clase B, 8 subredes de 2500 hosts → s = 4, h = 12 → /20 = 255.255.240.0</p>
+  </div>
+
+  <div class="box">
+    <h2>Direcciones</h2>
+    <ol>
+      <li>Byte interesante: el de la máscara que no es 255 ni 0. <b>Salto = 256 − byte</b>.</li>
+      <li><b>Subred N = N × salto</b> en ese byte; a la derecha, 0. La N° 0 y la última no valen.</li>
+      <li><b>Broadcast</b> = inicio de la siguiente − 1 (a la derecha, 255).</li>
+      <li><b>Hosts:</b> red + 1 … broadcast − 1.</li>
+      <li>IP dada → en ese byte, el múltiplo del salto ≤ al valor.</li>
+      <li><b>Host H de la subred N</b> = subred + H. Si H &gt; 255: H = 256·q + r → q al byte interesante, r al último.</li>
+    </ol>
+  </div>
+
+  <div class="box">
+    <h2>Hasta dónde llegan</h2>
+    <ul>
+      <li>Bloques = 2ˢ. Control: <b>bloques × salto = 256</b> (si s entra en un byte).</li>
+      <li>Primera válida = 1 × salto. Última válida = <b>256 − 2 × salto</b>.</li>
+      <li>Último bloque = 256 − salto = byte de la máscara (no vale).</li>
+      <li>Si N × salto ≥ 256, pasa al byte de la izquierda: 256·q + r.</li>
+    </ul>
+    <p class="ej">160.20.0.0 / 255.255.248.0 → salto 8 en el 3er byte<br>
+    subred 4 = 160.20.32.0 … 160.20.39.255 · última válida 160.20.240.0<br>
+    host 1000 de la subred 6 = 160.20.48.0 + (3·256 + 232) = 160.20.51.232</p>
+  </div>
+
+</div>
+</body>
+</html>
