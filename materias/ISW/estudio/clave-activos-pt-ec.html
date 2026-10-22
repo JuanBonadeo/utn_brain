@@ -6,141 +6,145 @@
 <style>
   @page { size: A4; margin: 8mm 10mm; }
   * { box-sizing: border-box; }
-  body { margin: 0; font-family: "Avenir Next", Helvetica, Arial, sans-serif; font-size: 8.8pt; color: #1d2329; line-height: 1.24; }
-  h1 { font-size: 17pt; margin: 0 0 1mm; letter-spacing: -.01em; }
-  .sub { color: #5b6470; margin: 0 0 3mm; font-size: 9pt; }
-  h2 { font-size: 11pt; margin: 0 0 2.5mm; display: flex; align-items: center; gap: 2mm; }
-  .num { background: #1d2329; color: #fff; border-radius: 50%; width: 6mm; height: 6mm; display: inline-flex; align-items: center; justify-content: center; font-size: 9pt; }
-  .key { border: 2px solid #1d2329; border-radius: 3mm; padding: 2mm 4mm; margin-bottom: 3mm; display: flex; gap: 4mm; align-items: center; }
-  .key b { font-size: 10.5pt; }
+  body { margin: 0; font-family: "Avenir Next", Helvetica, Arial, sans-serif; font-size: 8.8pt; color: #1d2329; line-height: 1.25; }
+  h1 { font-size: 16pt; margin: 0 0 .5mm; letter-spacing: -.01em; }
+  .sub { color: #5b6470; margin: 0 0 2.5mm; font-size: 8.6pt; }
+  h2 { font-size: 10.5pt; margin: 0 0 2mm; display: flex; align-items: center; gap: 2mm; }
+  .num { background: #1d2329; color: #fff; border-radius: 50%; width: 5.6mm; height: 5.6mm; display: inline-flex; align-items: center; justify-content: center; font-size: 8.5pt; flex: none; }
+  .panel { border: 1px solid #d4d9df; border-radius: 3mm; padding: 2.6mm 3.2mm; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5mm; margin-top: 3mm; }
+  .key { border: 2px solid #1d2329; border-radius: 3mm; padding: 2mm 4mm; display: flex; gap: 4mm; align-items: center; }
   .key .q { flex: 1; }
-  .key .plus { font-size: 16pt; font-weight: 700; color: #b45309; }
-  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
-  .panel { border: 1px solid #d4d9df; border-radius: 3mm; padding: 3mm 3.5mm; }
+  .key b { font-size: 10pt; }
+  .key .plus { font-size: 15pt; font-weight: 700; color: #b45309; }
+  small { font-size: 7.8pt; color: #5b6470; }
 
-  /* flow */
-  .node { border: 1.5px solid #6b7480; border-radius: 2mm; padding: 1.6mm 2.5mm; background: #f6f7f9; text-align: center; font-weight: 600; }
-  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; }
-  .arrow { text-align: center; color: #6b7480; font-size: 8pt; line-height: 1; margin: .8mm 0; }
-  .arrow span { display: block; font-size: 11pt; }
-  .res { border-radius: 2mm; padding: 1.6mm 2mm; text-align: center; font-weight: 700; color: #fff; }
-  .res small { display: block; font-weight: 400; font-size: 7.8pt; opacity: .95; margin-top: .4mm; }
-  .pt  { background: #15803d; }
-  .pr  { background: #0f766e; }
-  .ac  { background: #1d4ed8; }
-  .ec  { background: #b45309; }
-  .no  { background: #9aa1ab; }
-  .hint { font-size: 8pt; color: #5b6470; margin-top: 1.5mm; }
+  .tag { display: inline-block; border-radius: 1mm; padding: 0 1.4mm; color: #fff; font-weight: 700; font-size: 7.6pt; white-space: nowrap; }
+  .pt { background: #15803d; } .pr { background: #0f766e; } .ac { background: #1d4ed8; } .ec { background: #b45309; } .no { background: #9aa1ab; } .hr { background: #6d28d9; }
 
-  .filters .f { display: grid; grid-template-columns: 1fr auto; gap: 2mm; align-items: center; }
-  .filters .f .node { text-align: left; }
-  .filters .x { font-size: 7.8pt; color: #9aa1ab; white-space: nowrap; }
-  .filters .x b { color: #b91c1c; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { border-bottom: 1px solid #e3e7eb; padding: .8mm 1.4mm; text-align: left; vertical-align: top; }
+  th { font-size: 7.6pt; color: #5b6470; font-weight: 600; }
+  .ask td:first-child { font-weight: 600; white-space: nowrap; }
 
-  table { width: 100%; border-collapse: collapse; font-size: 8.6pt; }
-  th, td { border-bottom: 1px solid #e3e7eb; padding: .9mm 1.5mm; text-align: left; vertical-align: top; }
-  th { font-size: 8pt; color: #5b6470; font-weight: 600; }
-  .tag { display: inline-block; border-radius: 1mm; padding: 0 1.4mm; color: #fff; font-weight: 700; font-size: 7.8pt; }
-  .bottom { display: grid; grid-template-columns: 1.15fr 1fr; gap: 5mm; margin-top: 3mm; }
-  ul { margin: 0; padding-left: 4mm; }
-  li { margin-bottom: 1.1mm; }
-  .ask td:first-child { font-weight: 600; width: 46%; }
-  .warn { color: #b91c1c; font-weight: 700; }
+  /* árbol */
+  .node { border: 1.5px solid #6b7480; border-radius: 2mm; padding: 1.3mm 2mm; background: #f6f7f9; text-align: center; font-weight: 600; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5mm; }
+  .arrow { text-align: center; color: #6b7480; font-size: 7.6pt; line-height: 1; margin: .6mm 0; }
+  .arrow span { display: block; font-size: 10pt; }
+  .res { border-radius: 2mm; padding: 1.3mm 1.6mm; text-align: center; font-weight: 700; color: #fff; }
+  .res small { display: block; font-weight: 400; font-size: 7.4pt; color: #fff; opacity: .95; margin-top: .3mm; }
+  .hint { font-size: 7.8pt; color: #5b6470; margin: 1.6mm 0 0; }
+  code { font-family: Menlo, monospace; font-size: 7.6pt; background: #f1f3f5; padding: 0 .8mm; border-radius: .8mm; }
+
+  /* pasos de vigencia */
+  .steps { counter-reset: s; margin: 0; padding: 0; list-style: none; }
+  .steps li { display: grid; grid-template-columns: 6mm 1fr; gap: 1.5mm; margin-bottom: 1.3mm; align-items: start; }
+  .steps li::before { counter-increment: s; content: counter(s); background: #b45309; color: #fff; border-radius: 1.2mm; font-weight: 700; text-align: center; font-size: 8pt; padding: .3mm 0; }
+
+  /* línea de tiempo */
+  .tl { position: relative; height: 15mm; margin: 2.5mm 1mm 0; }
+  .tl .line { position: absolute; left: 0; right: 0; top: 6mm; border-top: 2px solid #9aa1ab; }
+  .tl .start { position: absolute; top: 0; bottom: 0; border-left: 2px dashed #b91c1c; }
+  .tl .start span { position: absolute; top: -.5mm; left: 1mm; font-size: 7.2pt; color: #b91c1c; font-weight: 700; white-space: nowrap; }
+  .tl .pt-dot { position: absolute; top: 4.6mm; width: 3.2mm; height: 3.2mm; border-radius: 50%; margin-left: -1.6mm; }
+  .tl .lbl { position: absolute; top: 9mm; font-size: 7pt; transform: translateX(-50%); text-align: center; white-space: nowrap; line-height: 1.15; }
+  .ok { background: #15803d; } .bad { background: #9aa1ab; } .x { background: #b91c1c; }
+
+  ul { margin: 0; padding-left: 3.6mm; }
+  li { margin-bottom: .9mm; }
 </style>
 </head>
 <body>
 
 <h1>Activo · Producto de trabajo · Elemento de configuración</h1>
-<p class="sub">ISW · U2 (activo vs. PT) y U6 (gestión de configuración)</p>
+<p class="sub">ISW · U2 (activo vs. PT) y U6 (qué va bajo gestión de configuración) · método paso a paso</p>
 
 <div class="key">
-  <div class="q"><b>① ¿Qué es?</b><br>producto de trabajo, producto o activo.<br><small>No cambia nunca.</small></div>
+  <div class="q"><b>¿Qué es?</b> producto de trabajo, producto o activo.<br><small>No cambia nunca.</small></div>
   <div class="plus">+</div>
-  <div class="q"><b>② ¿Lo pongo bajo control?</b><br>si sí, <b>además</b> es EC.<br><small>EC no es una 4.ª categoría: se suma, no reemplaza.</small></div>
+  <div class="q"><b>¿Lo pongo bajo control?</b> si sí, <b>además</b> es EC.<br><small>EC no es una 4.ª categoría: se suma, no reemplaza.</small></div>
+</div>
+
+<div class="panel" style="margin-top:3mm">
+  <h2><span class="num">0</span> ¿Qué pide? Subrayá el sustantivo que filtra, no "configuración" (está en todas)</h2>
+  <table class="ask">
+    <tr><th>La consigna dice…</th><th>Marcás…</th><th>Herramientas</th></tr>
+    <tr><td>"productos de trabajo bajo CM"</td><td>solo <span class="tag pt">PT</span> (lo que salió del proyecto)</td><td>no</td></tr>
+    <tr><td>"viable de CM y <b style="color:#b91c1c">no</b> producto de trabajo"</td><td>solo <span class="tag ac">activos</span> que el caso usa (la plantilla vigente)</td><td>no</td></tr>
+    <tr><td>"activos de proceso del proyecto"</td><td>solo <span class="tag ac">activos</span> vigentes → paso 3</td><td>no</td></tr>
+    <tr><td>"si estuviera en el año X…" / "reconstruir"</td><td>todo lo que <b>existía</b> y hace falta para reconstruir → paso 4</td><td><b>sí</b>, si sirven</td></tr>
+  </table>
+  <p class="hint">Si un elemento te queda marcado en dos preguntas espejo (PT y no PT), hay un error seguro.</p>
 </div>
 
 <div class="cols">
-  <!-- Pregunta 1 -->
   <div class="panel">
-    <h2><span class="num">1</span> ¿Qué es?</h2>
+    <h2><span class="num">1</span> ¿Qué es cada opción?</h2>
     <div class="node">¿Salió de un proyecto concreto?</div>
-    <div class="row">
-      <div class="arrow"><span>↓</span>sí</div>
-      <div class="arrow"><span>↓</span>no</div>
-    </div>
+    <div class="row"><div class="arrow"><span>↓</span>sí</div><div class="arrow"><span>↓</span>no</div></div>
     <div class="row">
       <div>
         <div class="node">¿Se entrega al cliente?</div>
+        <div class="row"><div class="arrow"><span>↓</span>sí</div><div class="arrow"><span>↓</span>no</div></div>
         <div class="row">
-          <div class="arrow"><span>↓</span>sí</div>
-          <div class="arrow"><span>↓</span>no</div>
-        </div>
-        <div class="row">
-          <div class="res pr">PRODUCTO<small>la app, el manual del sistema del cliente</small></div>
-          <div class="res pt">PRODUCTO DE TRABAJO<small>minuta, informe, .java, .class, CU</small></div>
+          <div class="res pr">PRODUCTO<small>la app, su manual</small></div>
+          <div class="res pt">PT<small>minuta, informe, .java, .class, plan, .mpp</small></div>
         </div>
       </div>
       <div>
-        <div class="node">¿Es un molde para muchos proyectos o algo que la org. compró?</div>
+        <div class="node">¿Molde para muchos proyectos o algo comprado?</div>
         <div class="arrow"><span>↓</span>sí</div>
-        <div class="res ac">ACTIVO<small>plantilla, guía, estándar, Word, Java, manual del compilador Java</small></div>
+        <div class="res ac">ACTIVO<small>plantilla, guía, estándar, definición</small></div>
+        <div class="arrow"><span>↓</span>si es software comprado</div>
+        <div class="res hr">HERRAMIENTA<small>Word, Java, MS Project (es activo)</small></div>
       </div>
     </div>
-    <p class="hint"><b>Señales:</b> "plantilla / guía / directriz / estándar" → activo · "del cliente / del sistema desarrollado" → producto de trabajo.<br>
-    En la grilla de U2, <b>"Ambos" nunca fue la correcta</b>.</p>
+    <p class="hint"><b>Por el nombre:</b> <code>Plla-CUR-20230803.docx</code> con fecha → activo · <code>CUR-AltaCliente.docx</code> sin fecha → PT · <code>Word 2019</code> → herramienta.<br>
+    El manual del compilador Java es <b>activo</b>. En la grilla de U2, "Ambos" nunca fue la correcta.</p>
   </div>
 
-  <!-- Pregunta 2 -->
-  <div class="panel filters">
+  <div class="panel">
     <h2><span class="num">2</span> ¿Va bajo configuración?</h2>
-    <div class="node" style="text-align:center">¿Lo usan varios grupos, puede cambiar, otros dependen de él o es crítico?</div>
-    <div class="arrow"><span>↓</span>sí → pasá los filtros del caso</div>
-    <div class="f"><div class="node">¿El caso lo menciona / lo usa?</div><div class="x"><b>no</b> → afuera (v1.0)</div></div>
-    <div class="arrow"><span>↓</span></div>
-    <div class="f"><div class="node">¿Es la versión vigente <u>al inicio</u> del proyecto?</div><div class="x"><b>no</b> → afuera</div></div>
-    <div class="arrow"><span>↓</span></div>
-    <div class="f"><div class="node">¿Su formato sigue en uso?</div><div class="x"><b>no</b> → afuera (.doc)</div></div>
-    <div class="arrow"><span>↓</span></div>
-    <div class="f"><div class="node">¿Existía en la fecha del caso?</div><div class="x"><b>no</b> → afuera (leng. B)</div></div>
-    <div class="arrow"><span>↓</span>pasa todo</div>
-    <div class="res ec">ELEMENTO DE CONFIGURACIÓN<small>un EC puede agrupar varios productos de trabajo (manual por capítulos)</small></div>
-    <p class="hint"><b>Herramientas</b> (Word, Java): entran solo si piden <b>reconstruir / garantizar la evolución</b>. Si piden productos de trabajo o activos del proyecto, la cátedra las dejó afuera.</p>
+    <p style="margin:0 0 1.5mm">Sí, si lo usan <b>varios grupos</b>, <b>puede cambiar</b>, otros <b>dependen</b> de él o es <b>crítico</b>: planes, requisitos, diseño, código fuente y compilado, casos de prueba, minutas, manuales, plantillas.</p>
+    <p class="hint" style="margin-top:0">Un EC puede agrupar varios PT (un manual escrito por capítulos es un solo EC).</p>
+
+    <h2 style="margin-top:2.6mm"><span class="num">3</span> Versión vigente de cada activo</h2>
+    <ol class="steps">
+      <li><span><b>Agrupá por tipo</b> (CUR, CUU, CUD, Def…): leé tipo y nombre <i>antes</i> que la fecha.</span></li>
+      <li><span><b>Tachá lo posterior</b> a la fecha de inicio del proyecto.</span></li>
+      <li><span><b>Tachá el formato discontinuado</b>: solo esa extensión, no el par (<code>.doc</code> ✗, <code>.docx</code> misma fecha ✓).</span></li>
+      <li><span>De cada grupo, <b>el más nuevo</b> de lo que queda. Si hay uno solo, va aunque sea viejo.</span></li>
+    </ol>
+    <div class="tl">
+      <div class="line"></div>
+      <div class="pt-dot bad" style="left:12%"></div><div class="lbl" style="left:12%">CUR<br>15/01</div>
+      <div class="pt-dot ok" style="left:46%"></div><div class="lbl" style="left:46%"><b>CUR 28/05</b><br>✓ va</div>
+      <div class="start" style="left:62%"><span>inicio 10/06</span></div>
+      <div class="pt-dot x" style="left:86%"></div><div class="lbl" style="left:86%">CUR 01/07<br>✗ posterior</div>
+    </div>
   </div>
 </div>
 
-<div class="bottom">
+<div class="cols">
   <div class="panel">
-    <h2><span class="num">0</span> Antes de marcar: ¿qué pide?</h2>
-    <table class="ask">
-      <tr><td>"productos de trabajo bajo CM"</td><td>solo <span class="tag pt">PT</span> que pasan los filtros. Nunca herramientas.</td></tr>
-      <tr><td>"viable de CM y <span class="warn">no</span> producto de trabajo"</td><td>solo <span class="tag ac">activos</span> del caso (la plantilla vigente).</td></tr>
-      <tr><td>"si estuviera en el año X…"</td><td>lo que <b>existía en X</b> y hace falta para reconstruir, herramientas incluidas.</td></tr>
-      <tr><td>"activos de proceso del proyecto"</td><td>de cada plantilla, la <b>más nueva antes del inicio</b>, en formato vigente.</td></tr>
-    </table>
-  </div>
-  <div class="panel">
-    <h2><span class="num">!</span> Trampas</h2>
+    <h2><span class="num">4</span> "Año X" / reconstruir</h2>
     <ul>
-      <li>Herramienta ≠ PT: Word o Java son <b>activos</b>. Si la consigna no dice <b>reconstruir / evolución / año X</b>, no las marques (Word 2013, Java SE 7 → afuera).</li>
-      <li>Versión que el caso <b>no nombra</b> (Base-clase-<b>v1.0</b>) → distractor, afuera.</li>
-      <li><b>"Podrá deducir que debió estar"</b> → <b>código fuente</b> (si hay una app) y <b>documentación de los requerimientos</b>. Casi nunca se nombran y casi siempre van.</li>
-      <li><b>Preguntas espejo</b>: buscá el "no" en la consigna.</li>
-      <li>"PT a nivel organizacional" → <b>NINGUNA</b>. Si dice activos → OPD.</li>
-    </ul>
+      <li>Parate en el año: lo que vino <b>después</b> no va (lenguaje B, estándar de 2010, chatbot, Jira).</li>
+      <li>Lo que <b>no se nombra pero se deduce</b>: <b>código fuente</b> (si hay una app) y <b>documentación de los requerimientos</b>. Casi siempre van.</li>
+      <li>Herramientas: van las que se usaban y <b>sirven</b>: lenguaje, compilador, el editor de los manuales. No va Word 2003 (no abre <code>.docx</code>) ni una reemplazada antes del inicio (Eclipse).</li>
     </ul>
   </div>
-</div>
-
-<div class="panel" style="margin-top:2.5mm">
-  <h2><span class="num">✓</span> Ejemplos confirmados</h2>
-  <table>
-    <tr><th>Elemento</th><th>①</th><th>② / por qué</th></tr>
-    <tr><td>Minuta · informe de talleres · .java · .class</td><td><span class="tag pt">PT</span></td><td><span class="tag ec">EC</span> salen del proyecto y cambian</td></tr>
-    <tr><td>Plla-CUR-20230803 vs. Plla-CUR-20221212 (inicio 01/10/23)</td><td><span class="tag ac">activo</span></td><td>solo la 20230803: la más nueva antes del inicio</td></tr>
-    <tr><td>Word 2013 · Java SE 7 · Base-clase-v1.0 ("viable de CM y no PT")</td><td><span class="tag ac">activo</span></td><td><span class="tag no">afuera</span> solo va la Base-clase-v2.0</td></tr>
-    <tr><td>Lenguaje B, "si estuviera en 2002"</td><td><span class="tag ac">activo</span></td><td><span class="tag no">afuera</span> no existía en 2002 (A y Word 2002 sí)</td></tr>
-    <tr><td>Código fuente · documentación del sistema (2002)</td><td><span class="tag pt">PT</span></td><td><span class="tag ec">EC</span> no se nombran: se deducen</td></tr>
-  </table>
+  <div class="panel">
+    <h2><span class="num">!</span> Trampas que ya te tomaron</h2>
+    <ul>
+      <li>Elegir la versión <b>más nueva que existe</b> en vez de la vigente al inicio.</li>
+      <li>Descartar el par entero (<code>.doc</code> + <code>.docx</code>) por la nota de formato.</li>
+      <li>Herramientas sin "reconstruir" en la consigna (Word 2013, Java SE 7, MS Project → afuera).</li>
+      <li>Versión que el caso no nombra (Base-clase-v1.0) → distractor.</li>
+      <li>"PT a nivel organizacional" → NINGUNA. Si dice activos → OPD.</li>
+    </ul>
+  </div>
 </div>
 
 </body>
