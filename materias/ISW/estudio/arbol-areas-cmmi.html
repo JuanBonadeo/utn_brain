@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>¿Qué área es? · CMMI</title>
+<style>
+  @page { size: A4 landscape; margin: 7mm 8mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Avenir Next", Helvetica, Arial, sans-serif; font-size: 7.6pt; color: #1d2329; line-height: 1.22; }
+  .top { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 4mm; margin-bottom: 2mm; }
+  h1 { font-size: 15pt; margin: 0; letter-spacing: -.01em; }
+  h1 span { font-weight: 500; color: #5b6470; font-size: 10pt; margin-left: 2mm; }
+  .legend { display: flex; gap: 3mm; font-size: 7.4pt; color: #5b6470; align-items: center; }
+  .sw { display: inline-block; width: 3mm; height: 3mm; border-radius: .6mm; vertical-align: -.4mm; margin-right: .8mm; }
+
+  .q { border: 2px solid #1d2329; border-radius: 2mm; padding: 1.2mm 2.5mm; font-weight: 700; font-size: 8.6pt; text-align: center; background: #fff; }
+  .q.sm { border-width: 1.5px; font-size: 7.8pt; padding: 1mm 2mm; }
+  .cat { border: 1.5px solid #9aa1ab; background: #eef0f3; border-radius: 1.6mm; padding: .9mm 1.6mm; font-weight: 700; text-align: center; font-size: 7.6pt; }
+  .cat small { display: block; font-weight: 500; color: #5b6470; font-size: 6.9pt; }
+  .arr { text-align: center; color: #6b7480; font-size: 6.9pt; line-height: 1; margin: .5mm 0; }
+  .arr b { display: block; font-size: 8.5pt; font-weight: 400; }
+
+  .card { border-radius: 1.8mm; padding: 1.3mm 1.8mm; border: 1.2px solid; }
+  .card h3 { margin: 0 0 .6mm; font-size: 8.2pt; }
+  .card h3 em { font-style: normal; font-weight: 500; font-size: 7pt; color: #5b6470; }
+  .card .d { font-weight: 600; margin-bottom: .5mm; }
+  .card ul { margin: 0; padding: 0; list-style: none; }
+  .card li { margin: 0 0 .25mm; }
+  .card li b { white-space: nowrap; }
+  .n3 { background: #fff8db; border-color: #e3c34d; }
+  .n2 { background: #e6f5e9; border-color: #7cc28a; }
+  .warn { color: #a3330f; }
+  .star { color: #b45309; font-weight: 700; }
+
+  .main { display: grid; grid-template-columns: 62mm 1fr; gap: 3mm; }
+  .side { border: 1px dashed #b9bfc7; border-radius: 2.5mm; padding: 2mm; }
+  .side .lbl, .proj .lbl { font-size: 7pt; color: #5b6470; text-transform: uppercase; letter-spacing: .06em; font-weight: 700; text-align: center; margin-bottom: 1mm; }
+  .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6mm; }
+  .stack { display: grid; gap: 1.6mm; }
+  .proj { border: 1px dashed #b9bfc7; border-radius: 2.5mm; padding: 2mm; }
+  .prow { display: grid; gap: 2mm; margin-top: 1.6mm; }
+  .r1 { grid-template-columns: 1fr 1fr 2fr; }
+  .r3 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+  .branch { display: flex; flex-direction: column; }
+  .branch > .card { flex: 1; }
+
+  .bottom { display: grid; grid-template-columns: 1.05fr 1fr 1fr 1.25fr; gap: 2mm; margin-top: 2mm; }
+  .step { border-radius: 2mm; padding: 1.4mm 2mm; background: #f1ecfb; border: 1.2px solid #b9a5e8; }
+  .step h3 { margin: 0 0 .6mm; font-size: 8.2pt; }
+  .step ul { margin: 0; padding-left: 3mm; }
+  .step li { margin-bottom: .3mm; }
+  .trap { background: #fdf0e8; border-color: #eab08a; }
+</style>
+</head>
+<body>
+
+<div class="top">
+  <h1>¿Qué área es? <span>Leé el enunciado: ¿qué se HACE y sobre QUÉ?</span></h1>
+  <div class="legend"><span><i class="sw" style="background:#e6f5e9;border:1px solid #7cc28a"></i>nivel 2</span><span><i class="sw" style="background:#fff8db;border:1px solid #e3c34d"></i>nivel 3</span><span><span class="star">★</span> agregado por tus errores</span></div>
+</div>
+
+<div class="q">1) ¿Para UN proyecto o para TODA la organización / la SF?</div>
+<div style="display:grid;grid-template-columns:62mm 1fr;gap:3mm">
+  <div class="arr"><b>↓</b>toda la org / todos los proyectos</div>
+  <div class="arr"><b>↓</b>un proyecto concreto</div>
+</div>
+
+<div class="main">
+  <!-- ORGANIZACIÓN -->
+  <div class="side">
+    <div class="lbl">Organización</div>
+    <div class="q sm">¿Qué se hace con el activo o proceso de la organización?</div>
+    <div class="stack" style="margin-top:1.6mm">
+      <div class="card n3"><h3>OPD <em>Definición de procesos</em></h3>
+        <div class="d">redactar / revisar entre pares / corregir un activo AÚN NO publicado</div>
+        <ul><li>procesos estándar → <b>1.1</b></li><li>ciclos de vida → <b>1.2</b></li><li>guías de adaptación, excepciones → <b>1.3</b></li><li>repositorio de medición → <b>1.4</b></li><li>biblioteca de activos → <b>1.5</b></li><li>entorno de trabajo → <b>1.6</b></li></ul></div>
+      <div class="card n3"><h3>OPF <em>Enfoque en procesos</em></h3>
+        <ul><li>evaluar procesos EN USO, fuertes / débiles → <b>1.2</b></li><li>patrocinio de la dirección → <b>1.2</b></li><li>planes de acción → <b>2.1</b></li><li>proyecto PILOTO, mejora aún NO aprobada → <b>SG2</b></li><li>desplegar lo YA aprobado → <b>SG3</b></li><li>consultas sobre los activos → <b>3.1</b></li></ul></div>
+      <div class="g2">
+        <div class="card n3"><h3>OT <em>Formación</em></h3>
+          <ul><li>roles y habilidades de la ORG → <b>1.1</b></li><li>qué forma la org y qué el proyecto → <b>1.2</b></li><li>plan táctico <b>1.3</b> · instructores <b>1.4</b></li><li>impartir <b>2.1</b> · registros <b>2.2</b> · eficacia <b>2.3</b></li><li class="warn">⚠ cursos para el proyecto X → PP 2.5</li></ul></div>
+        <div class="card n2"><h3>MA <em>para toda la SF</em></h3>
+          <div class="d">definir qué y cómo medir en todos los proyectos</div>
+          <ul><li>medidas <b>1.2</b></li><li>recolección <b>1.3</b></li><li>análisis <b>1.4</b></li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROYECTO -->
+  <div class="proj">
+    <div class="lbl">Proyecto</div>
+    <div class="q sm">2) ¿Qué se está haciendo en el proyecto?</div>
+
+    <div class="prow r1">
+      <div class="branch">
+        <div class="cat">PLANIFICAR<small>estimar · ANTES de arrancar · reunión de avance FUTURA</small></div>
+        <div class="arr"><b>↓</b></div>
+        <div class="card n2"><h3>PP <em>Planificación de proyecto</em></h3>
+          <ul><li><span class="star">★</span> alcance / EDT → <b>1.1</b></li><li>tamaño / PF → <b>1.2</b></li><li>ciclo de vida → <b>1.3</b></li><li>esfuerzo, costo → <b>1.4</b></li><li>calendario, presupuesto → <b>2.1</b></li><li>identificar riesgos → <b>2.2</b></li><li>DATOS que registra el proyecto → <b>2.3</b></li><li>personal <b>2.4</b> · habilidades <b>2.5</b></li><li>partes interesadas → <b>2.6</b></li><li>compromiso con el plan → <b>SG3</b></li></ul></div>
+      </div>
+      <div class="branch">
+        <div class="cat">REAL vs PLAN<small>DURANTE el proyecto · reunión de avance que YA PASÓ</small></div>
+        <div class="arr"><b>↓</b></div>
+        <div class="card n2"><h3>PMC <em>Monitoreo y control</em></h3>
+          <ul><li>real vs plan: parámetros <b>1.1</b></li><li>compromisos <b>1.2</b> · riesgos <b>1.3</b></li><li>datos <b>1.4</b> · involucración <b>1.5</b></li><li>revisiones de progreso <b>1.6</b> · de hitos <b>1.7</b></li><li><b>Acciones correctivas (SG2)</b>, según el tiempo:</li><li>buscando la causa → <b>2.1</b></li><li>se decide ahora → <b>2.2</b></li><li>se evalúa si funcionó → <b>2.3</b></li></ul></div>
+      </div>
+      <div class="branch">
+        <div class="cat">REQUERIMIENTOS</div>
+        <div class="arr"><b>↓</b></div>
+        <div class="q sm">¿El requerimiento ya está ACORDADO (en línea base)?</div>
+        <div class="g2" style="margin-top:.5mm">
+          <div class="arr"><b>↓</b>NO: se releva / aclara / valida</div>
+          <div class="arr"><b>↓</b>SÍ</div>
+        </div>
+        <div class="g2" style="flex:1">
+          <div class="card n3"><h3>RD <em>Desarrollo de reqs</em></h3>
+            <ul><li>relevar (entrevistas, prototipos) → <b>1.1</b></li><li>consolidar, resolver conflictos → <b>1.2</b></li><li>pasar a términos técnicos → <b>2.1</b></li><li>hacerlo verificable / medible → <b>3.3</b></li><li>balancear vs costo y plazo → <b>3.4</b></li><li>confirmar con el usuario ANTES de construir → <b>3.5</b></li></ul></div>
+          <div class="card n2"><h3>REQM <em>Gestión de reqs</em></h3>
+            <ul><li>entender, criterios de aceptación → <b>1.1</b></li><li>compromiso, Sponsor, se corre la fecha → <b>1.2</b></li><li>cambio: EVALUANDO el impacto → <b>1.3</b></li><li>matriz de trazabilidad → <b>1.4</b></li><li>plan / CU no coinciden con los reqs → <b>1.5</b></li><li class="warn">⚠ cambio YA aceptado, se tramitan los artefactos → CM 2.1</li></ul></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prow" style="grid-template-columns:1fr">
+      <div class="cat">REVISAR / CONTROLAR <small>un producto de trabajo o un proceso → ¿Contra QUÉ se compara y QUIÉN participa?</small></div>
+    </div>
+    <div class="prow r3" style="margin-top:1.2mm">
+      <div class="card n3"><h3>VER <em>Verificación</em></h3>
+        <div class="d">contra artefactos del PROPIO proyecto (spec, minutas, glosario)</div>
+        <ul><li>revisión entre pares → <b>SG2</b></li><li><span class="star">★</span> distribuir el material ANTES de la reunión → <b>2.1</b></li><li>pruebas unitarias, integración, sistema</li><li>preparar → <b>SG1</b> · verificar → <b>SG3</b></li></ul></div>
+      <div class="card n3"><h3>VAL <em>Validación</em></h3>
+        <div class="d">con el CLIENTE / usuario, uso real</div>
+        <ul><li>prueba de aceptación, alfa / beta</li><li>revisión con el cliente</li><li><span class="star">★</span> entorno: server, agenda, instalaciones del cliente → <b>1.2</b></li><li>preparar → <b>SG1</b> · validar → <b>SG2</b></li></ul></div>
+      <div class="card n2"><h3>PPQA <em>Aseg. de calidad</em></h3>
+        <div class="d">contra un ESTÁNDAR de la organización, lo hace alguien EXTERNO al proyecto</div>
+        <ul><li>evaluar procesos <b>1.1</b> · productos <b>1.2</b></li><li>escalar no conformidades → <b>2.1</b></li><li>registros de QA → <b>2.2</b></li></ul></div>
+      <div class="card n2"><h3>CM <em>Gestión de config.</em></h3>
+        <div class="d">contra convenciones DEL PROYECTO</div>
+        <ul><li>nombres de archivo, versiones, líneas base</li><li><span class="star">★</span> controlar que cumplan las reglas → <b>CM 3.2</b> auditoría <em>(tu árbol decía 2.2)</em></li></ul></div>
+    </div>
+
+    <div class="prow r3">
+      <div class="branch">
+        <div class="cat">MEDIR</div><div class="arr"><b>↓</b></div>
+        <div class="card n2"><h3>MA <em>Medición y análisis</em></h3>
+          <ul><li>objetivos <b>1.1</b> · medidas <b>1.2</b></li><li>cómo recoger <b>1.3</b> · analizar <b>1.4</b></li><li>cargar <b>2.1</b> · interpretar <b>2.2</b></li><li>guardar <b>2.3</b> · informar <b>2.4</b></li><li class="warn">⚠ datos de UN proyecto → PP 2.3</li><li class="warn">⚠ métricas plan vs real → PMC</li></ul></div>
+      </div>
+      <div class="branch">
+        <div class="cat">CONFIGURACIÓN<small>versiones, líneas base, cambios</small></div><div class="arr"><b>↓</b></div>
+        <div class="card n2"><h3>CM <em>Gestión de config.</em></h3>
+          <ul><li>identificar EC, IDs, propietario → <b>1.1</b></li><li>repositorio, permisos, backup → <b>1.2</b></li><li>crear / liberar líneas base → <b>1.3</b></li><li>seguir peticiones de cambio → <b>2.1</b></li><li>check-in/out, autorizar → <b>2.2</b></li><li>registros, diferencias entre LB → <b>3.1</b></li><li>auditorías de configuración → <b>3.2</b></li></ul></div>
+      </div>
+      <div class="branch">
+        <div class="cat">RIESGOS</div><div class="arr"><b>↓</b></div>
+        <div class="card n3"><h3>RSKM <em>Gestión de riesgos</em></h3>
+          <ul><li>fuentes y categorías → <b>1.1</b></li><li>parámetros, umbrales → <b>1.2</b></li><li>estrategia → <b>1.3</b></li><li>identificar <b>2.1</b> · priorizar <b>2.2</b></li><li>planes de mitigación → <b>3.1 / 3.2</b></li><li class="warn">⚠ identificar en el plan → PP 2.2</li><li class="warn">⚠ seguirlos → PMC 1.3 · casi nunca es la respuesta</li></ul></div>
+      </div>
+      <div class="branch">
+        <div class="cat">TÉCNICAS ≠ ÁREAS</div><div class="arr"><b>↓</b></div>
+        <div class="card" style="background:#f6f7f9;border-color:#c9ced5"><h3>Revisión entre pares / inspección</h3>
+          <ul><li>producto del proyecto → <b>VER</b></li><li>activo de la org sin publicar → <b>OPD</b></li><li>evaluación objetiva contra un estándar → <b>PPQA</b></li></ul></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="bottom">
+  <div class="step"><h3>3) ¿Qué PRÁCTICA? Mirá el tiempo verbal</h3>
+    <ul><li><b>futuro</b> (se distribuirá, se chequeará) → Preparar / Establecer</li><li><b>presente</b> (está chequeando) → Realizar / Llevar a cabo</li><li><b>pasado</b> (ya se documentó, ahora se almacena) → Analizar / Almacenar</li></ul></div>
+  <div class="step"><h3>4) ¿Área Y práctica correctas? Si no → NINGUNA</h3>
+    <ul><li>Leé la SIGLA, no sólo el texto (VAL SP 2.1 "pares" → NINGUNA)</li><li>El área la define la ACTIVIDAD, no el tema</li></ul></div>
+  <div class="step trap"><h3><span class="star">★</span> Trampas de tus errores (1/2)</h3>
+    <ul><li>Acordar con el Sponsor si se corre la fecha por un cambio → <b>REQM 1.2</b>, no NINGUNA</li><li>Distribuir el CU antes de la revisión → <b>VER 2.1</b> preparar, no 2.2</li></ul></div>
+  <div class="step trap"><h3><span class="star">★</span> Trampas de tus errores (2/2)</h3>
+    <ul><li>Coordinar el server del cliente para la aceptación → <b>VAL 1.2</b> entorno, no PP 2.1</li><li>Controlar nombres de archivo vs reglas del proyecto → <b>CM 3.2</b>, no PPQA ni CM 2.2</li><li>Agregar a la spec un dato de una minuta antes de aprobarla → <b>CM 2.1</b> (cátedra), no RD 3.5</li></ul></div>
+</div>
+
+</body>
+</html>
