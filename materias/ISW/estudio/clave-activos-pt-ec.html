@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <title>Activo · Producto de trabajo · EC</title>
 <style>
-  @page { size: A4; margin: 9mm 11mm; }
+  @page { size: A4; margin: 8mm 10mm; }
   * { box-sizing: border-box; }
-  body { margin: 0; font-family: "Avenir Next", Helvetica, Arial, sans-serif; font-size: 9.1pt; color: #1d2329; line-height: 1.26; }
+  body { margin: 0; font-family: "Avenir Next", Helvetica, Arial, sans-serif; font-size: 8.8pt; color: #1d2329; line-height: 1.24; }
   h1 { font-size: 17pt; margin: 0 0 1mm; letter-spacing: -.01em; }
   .sub { color: #5b6470; margin: 0 0 3mm; font-size: 9pt; }
   h2 { font-size: 11pt; margin: 0 0 2.5mm; display: flex; align-items: center; gap: 2mm; }
@@ -87,7 +87,7 @@
       </div>
     </div>
     <p class="hint"><b>Señales:</b> "plantilla / guía / directriz / estándar" → activo · "del cliente / del sistema desarrollado" → producto de trabajo.<br>
-    El producto también es producto de trabajo (el que se entrega). En la grilla de U2, <b>"Ambos" nunca fue la correcta</b>.</p>
+    En la grilla de U2, <b>"Ambos" nunca fue la correcta</b>.</p>
   </div>
 
   <!-- Pregunta 2 -->
@@ -121,24 +121,25 @@
   <div class="panel">
     <h2><span class="num">!</span> Trampas</h2>
     <ul>
-      <li>Herramienta ≠ producto de trabajo. Word o Java son <b>activos</b>.</li>
+      <li>Herramienta ≠ PT: Word o Java son <b>activos</b>. Si la consigna no dice <b>reconstruir / evolución / año X</b>, no las marques (Word 2013, Java SE 7 → afuera).</li>
+      <li>Versión que el caso <b>no nombra</b> (Base-clase-<b>v1.0</b>) → distractor, afuera.</li>
+      <li><b>"Podrá deducir que debió estar"</b> → <b>código fuente</b> (si hay una app) y <b>documentación de los requerimientos</b>. Casi nunca se nombran y casi siempre van.</li>
       <li><b>Preguntas espejo</b>: buscá el "no" en la consigna.</li>
-      <li>Marcar todo lo que suena a CM sin pasar los filtros.</li>
-      <li>Olvidar lo que no se nombra pero se deduce (la documentación del sistema).</li>
       <li>"PT a nivel organizacional" → <b>NINGUNA</b>. Si dice activos → OPD.</li>
+    </ul>
     </ul>
   </div>
 </div>
 
-<div class="panel" style="margin-top:3mm">
+<div class="panel" style="margin-top:2.5mm">
   <h2><span class="num">✓</span> Ejemplos confirmados</h2>
   <table>
     <tr><th>Elemento</th><th>①</th><th>② / por qué</th></tr>
-    <tr><td>Manual de usuario del compilador Java</td><td><span class="tag ac">activo</span></td><td>documentación de una herramienta comprada</td></tr>
     <tr><td>Minuta · informe de talleres · .java · .class</td><td><span class="tag pt">PT</span></td><td><span class="tag ec">EC</span> salen del proyecto y cambian</td></tr>
     <tr><td>Plla-CUR-20230803 vs. Plla-CUR-20221212 (inicio 01/10/23)</td><td><span class="tag ac">activo</span></td><td>solo la 20230803: la más nueva antes del inicio</td></tr>
-    <tr><td>Plla-CUU-20230305<b>.doc</b></td><td><span class="tag ac">activo</span></td><td><span class="tag no">afuera</span> los .doc se dejaron de usar el 01/08/23</td></tr>
+    <tr><td>Word 2013 · Java SE 7 · Base-clase-v1.0 ("viable de CM y no PT")</td><td><span class="tag ac">activo</span></td><td><span class="tag no">afuera</span> solo va la Base-clase-v2.0</td></tr>
     <tr><td>Lenguaje B, "si estuviera en 2002"</td><td><span class="tag ac">activo</span></td><td><span class="tag no">afuera</span> no existía en 2002 (A y Word 2002 sí)</td></tr>
+    <tr><td>Código fuente · documentación del sistema (2002)</td><td><span class="tag pt">PT</span></td><td><span class="tag ec">EC</span> no se nombran: se deducen</td></tr>
   </table>
 </div>
 
