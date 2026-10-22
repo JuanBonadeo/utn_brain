@@ -9234,3 +9234,12 @@ métricas de proyecto vs producto — ver [Unidad 8](#unidad-8--medición-y-aná
   para leer en el Kindle (26 capítulos con índice navegable), generada con `scripts/md-to-epub.js`.
 - 2026-10-12: `estudio/resumen-ad.epub` — la versión condensada (57 págs.) del resumen AD en EPUB
   para el Kindle (26 capítulos con índice navegable), generada con `scripts/md-to-epub.js`.
+- 2026-10-21: `estudio/guia-recu-regularizacion.md` + `.pdf` (48 págs.) para el recuperatorio del
+  24/10: guía teórica de U1, U2, U3 y U5 traída por el alumno, revisada contra la wiki y el banco
+  (8 correcciones: puntaje 2026, "Ninguna" sí puede ser correcta, grilla activo/producto/**ambos**,
+  informativos con declaración de propósito, dinámicas ↔ VAL es tendencia de INTECO, regresión
+  también ante cambios de entorno, valores límite de a pares y también sobre longitudes y fechas,
+  porcentajes de paralelo/de a par sin fuente) · el parcial de regularización del 26/09/2026
+  resuelto (8 consignas, 9 puntos) · 60 preguntas de `fuentes/Preguntas de Cuestionario.md`
+  limpias y filtradas al temario, con respuestas al final (✅/⚠️). `scripts/resumen-pdf.js`: las
+  tablas dentro de una pregunta ya no se pasan del margen.

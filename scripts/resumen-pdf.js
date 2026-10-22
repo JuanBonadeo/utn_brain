@@ -167,6 +167,7 @@ img { display: block; max-width: 55%; max-height: 62mm; margin: 4pt auto 8pt; }
 .q { font-weight: bold; margin: 11pt 0 4pt; break-after: avoid; text-align: left; }
 .a { margin-left: 7mm; }
 ul.a, ol.a { margin-left: 7mm; }
+table.a { width: calc(100% - 7mm - 8pt); }
 ` + (colorTheme ? `
 /* --color: títulos, tablas y avisos en color, para leer en pantalla */
 .cover h1 { color: #1f3864; text-decoration: none; border-bottom: 2pt solid #2e75b6; padding-bottom: 4pt; }
