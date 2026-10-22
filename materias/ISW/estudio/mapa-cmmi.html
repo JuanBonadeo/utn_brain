@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Mapa de CMMI</title>
+<style>
+  @page { size: A4 landscape; margin: 6mm 7mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Avenir Next", Helvetica, Arial, sans-serif; font-size: 6.9pt; color: #1d2329; line-height: 1.18; }
+  .top { display: grid; grid-template-columns: auto 1fr auto; gap: 3mm; align-items: stretch; margin-bottom: 2mm; }
+  h1 { font-size: 15pt; margin: 0; line-height: 1; }
+  h1 small { display: block; font-size: 7.6pt; font-weight: 500; color: #6d28d9; margin-top: 1mm; }
+  .box { border: 1px solid #d4d9df; border-radius: 2mm; padding: 1.3mm 2mm; }
+  .box h4 { margin: 0 0 .6mm; font-size: 7.6pt; }
+  .levels { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.2mm; }
+  .lv { border-radius: 1.5mm; padding: 1mm 1.4mm; border: 1px solid; }
+  .lv b { display: block; font-size: 7.4pt; }
+  .lv span { color: #4c2a92; }
+  .lv1 { background: #f3f4f6; border-color: #c9ced5; }
+  .lv2, .l2 { background: #e6f5e9; border-color: #7cc28a; }
+  .lv3, .l3 { background: #fff8db; border-color: #e3c34d; }
+  .lv4, .l4 { background: #ffeedd; border-color: #f0a35e; }
+  .lv5, .l5 { background: #fde8e8; border-color: #e88b8b; }
+  .note { color: #6d28d9; font-weight: 600; }
+
+  .grid { display: grid; grid-template-columns: 13mm 3fr 3.1fr 1.05fr 1.05fr; gap: 1.3mm; }
+  .ch { text-align: center; font-weight: 700; font-size: 7.6pt; border-radius: 1.5mm; padding: .7mm; }
+  .rl { writing-mode: vertical-rl; transform: rotate(180deg); text-align: center; font-weight: 700; font-size: 7.6pt; letter-spacing: .04em; text-transform: uppercase; background: #1d2329; color: #fff; border-radius: 1.5mm; padding: 1mm .5mm; }
+  .cell { display: grid; gap: 1.1mm; align-content: start; }
+  .sub1 { grid-template-columns: 1fr; }
+  .sub2 { grid-template-columns: 1fr 1fr; }
+  .sub3 { grid-template-columns: 1fr 1fr 1fr; }
+  .sub5 { grid-template-columns: repeat(5, 1fr); }
+  .empty { color: #8a919b; font-style: italic; display: flex; align-items: center; justify-content: center; text-align: center; border: 1px dashed #d4d9df; border-radius: 1.5mm; padding: 1mm; font-size: 6.6pt; }
+  .card { border: 1px solid; border-radius: 1.5mm; padding: .9mm 1.2mm; }
+  .card .hd { font-size: 6.8pt; margin-bottom: .3mm; }
+  .card .hd b { font-size: 8pt; margin-right: .5mm; }
+  .card .fr { color: #5b21b6; font-weight: 600; margin-bottom: .4mm; }
+  .card ul { margin: 0; padding: 0; list-style: none; }
+  .card li { margin: 0; }
+  .card .fl { color: #4b5563; font-style: italic; margin-top: .3mm; }
+  .card .pr { color: #5b6470; font-size: 6.3pt; margin-top: .4mm; border-top: 1px solid rgba(0,0,0,.08); padding-top: .3mm; }
+
+  .bottom { display: grid; grid-template-columns: 1.25fr 1.35fr .8fr .9fr; gap: 1.6mm; margin-top: 1.8mm; }
+  .bottom ul { margin: 0; padding-left: 3mm; }
+  .bottom li { margin: 0 0 .2mm; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 2mm; }
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div>
+    <h1>Mapa de CMMI</h1>
+    <h1><small>modelo de mejora de procesos de la organización</small></h1>
+    <div style="margin-top:1.5mm;font-size:6.6pt;color:#5b6470">◆ = activo (plantilla, guía, estándar)<br>sin ◆ = producto de trabajo del proyecto<br><span class="note">violeta</span> = frase clave / diferencia con el área parecida</div>
+  </div>
+  <div class="box">
+    <h4>Niveles de madurez <span class="note" style="font-weight:600">· ACUMULATIVO: para estar en un nivel se cumple TODO lo de la izquierda</span></h4>
+    <div class="levels">
+      <div class="lv lv1"><b>1 Inicial</b><span>Sin áreas definidas · heroicidad · no repite sus éxitos</span></div>
+      <div class="lv lv2"><b>2 Gestionado</b><span>Orden a nivel de PROYECTO · cada proyecto con su proceso · GG2</span></div>
+      <div class="lv lv3"><b>3 Definido</b><span>Orden a nivel de ORGANIZACIÓN · los proyectos ADAPTAN el estándar · GG3</span></div>
+      <div class="lv lv4"><b>4 Gest. cuantitativamente</b><span>Objetivos cuantitativos · estadística · ataca causas ESPECIALES · GG3</span></div>
+      <div class="lv lv5"><b>5 En optimización</b><span>Mejora continua: cambia el proceso · ataca causas COMUNES · GG3</span></div>
+    </div>
+  </div>
+  <div class="box" style="width:52mm">
+    <h4>Componentes de un área</h4>
+    <b>Requeridos:</b> SG y GG ← lo que se evalúa<br>
+    <b>Esperados:</b> SP y GP<br>
+    <b>Informativos:</b> subprácticas, productos típicos, notas<br>
+    <span class="note">Se evalúan las METAS, no las prácticas</span>
+  </div>
+</div>
+
+<div class="grid">
+  <div></div>
+  <div class="ch lv2">Nivel 2 — Gestionado</div>
+  <div class="ch lv3">Nivel 3 — Definido</div>
+  <div class="ch lv4">Nivel 4</div>
+  <div class="ch lv5">Nivel 5</div>
+  <div class="rl">Gestión de proyectos</div><div class="cell sub3"><div class="card l2"><div class="hd"><b>PP</b> Planificación de proyecto</div><div class="fr">ANTES de arrancar: estimar → planificar → comprometer</div><ul><li>SG1 Establecer estimaciones</li><li>SG2 Desarrollar un plan de proyecto</li><li>SG3 Obtener el compromiso con el plan</li></ul><div class="pr">EDT/WBS · estimaciones · plan de proyecto</div></div><div class="card l2"><div class="hd"><b>PMC</b> Monitoreo y control</div><div class="fr">DURANTE: plan vs real, y corregir hasta cerrar</div><ul><li>SG1 Monitorizar el proyecto frente al plan</li><li>SG2 Gestionar las acc. correctivas hasta cierre</li></ul><div class="fl">← MA le da los datos de medición</div><div class="pr">informes de avance · actas de hitos · acc. correctivas</div></div><div class="card l2"><div class="hd"><b>SAM</b> Gestión de acuerdos con proveedores</div><div class="fr">PP + PMC pero con un proveedor: acordar y hacer</div><ul><li>SG1 Establecer acuerdos con proveedores</li><li>SG2 Satisfacer los acuerdos con proveedores</li></ul><div class="pr">acuerdo/contrato · proveedores evaluados</div></div></div><div class="cell sub2"><div class="card l3"><div class="hd"><b>IPM</b> Gestión integrada del proyecto</div><div class="fr">El proyecto TOMA el proceso estándar y lo adapta (puente org → proyecto)</div><ul><li>SG1 Usar el proceso definido del proyecto</li><li>SG2 Coordinar y colaborar con las partes interesadas</li><li>(SG3 IPPD → fuera de alcance)</li></ul><div class="pr">proceso definido del proyecto · plan integrado</div></div><div class="card l3"><div class="hd"><b>RSKM</b> Gestión de riesgos</div><div class="fr">Estrategia, categorías y mitigación ≠ PP SP2.2 (plan) ≠ PMC SP1.3 (seguir)</div><ul><li>SG1 Preparar la gestión de riesgos</li><li>SG2 Identificar y analizar los riesgos</li><li>SG3 Mitigar los riesgos</li></ul><div class="pr">◆ estrategia de riesgos · ◆ fuentes y categorías · lista priorizada · planes de mitigación</div></div></div><div class="cell sub1"><div class="card l4"><div class="hd"><b>QPM</b> Gestión cuantitativa del proyecto</div><div class="fr">El proyecto se gestiona con NÚMEROS: control estadístico de subprocesos</div><ul><li>SG1 Gestionar cuantitativamente el proyecto</li><li>SG2 Gestionar estadísticamente el rendimiento de los subprocesos</li></ul><div class="fl">← OPP le da líneas base y modelos de rendimiento</div><div class="pr">objetivos cuantitativos · subprocesos seleccionados · gráficos de control</div></div></div><div class="cell empty"></div><div class="rl">Ingeniería</div><div class="cell sub1"><div class="card l2"><div class="hd"><b>REQM</b> Gestión de requerimientos</div><div class="fr">Gestiona los reqs: compromiso, cambios del cliente, trazabilidad</div><ul><li>SG1 Gestionar los requerimientos</li></ul><div class="fl">→ PP: le da el alcance · ← RD: RD los obtiene, REQM los gestiona</div><div class="pr">matriz de trazabilidad · solicitudes de cambio</div></div></div><div class="cell sub5" style="grid-column: span 3"><div class="card l3"><div class="hd"><b>RD</b> Desarrollo de requerimientos</div><div class="fr">OBTIENE las necesidades y las traduce a reqs (≠ REQM, que los gestiona después)</div><ul><li>SG1 Desarrollar los reqs de cliente</li><li>SG2 Desarrollar los reqs de producto</li><li>SG3 Analizar y validar los reqs</li></ul><div class="pr">reqs (cliente/producto/interfaz) · escenarios · glosario</div></div><div class="card l3"><div class="hd"><b>TS</b> Solución técnica</div><div class="fr">Elegir alternativa → diseñar → construir</div><ul><li>SG1 Seleccionar soluciones de componentes</li><li>SG2 Desarrollar el diseño</li><li>SG3 Implementar el diseño del producto</li></ul><div class="pr">alternativas evaluadas · diseño · código · doc. de usuario</div></div><div class="card l3"><div class="hd"><b>PI</b> Integración de producto</div><div class="fr">Juntar las piezas, que las interfaces encajen, y entregar</div><ul><li>SG1 Preparar la integración</li><li>SG2 Asegurar la compatibilidad de interfaces</li><li>SG3 Ensamblar los componentes y entregar</li></ul><div class="pr">secuencia de integración · descripción de interfaces · producto ensamblado</div></div><div class="card l3"><div class="hd"><b>VER</b> Verificación</div><div class="fr">¿Lo construí BIEN? vs especificación. Pares SÓLO acá · prueba de sistema</div><ul><li>SG1 Preparar la verificación</li><li>SG2 Realizar revisiones entre pares</li><li>SG3 Verificar productos de trabajo seleccionados</li></ul><div class="pr">informes de revisión entre pares · resultados de verificación</div></div><div class="card l3"><div class="hd"><b>VAL</b> Validación</div><div class="fr">¿Construí LO CORRECTO? Con el usuario en su entorno · aceptación, alfa/beta</div><ul><li>SG1 Preparar la validación</li><li>SG2 Validar el producto o componentes</li></ul><div class="pr">criterios de validación · resultados de validación</div></div></div><div class="rl">Soporte</div><div class="cell sub3"><div class="card l2"><div class="hd"><b>PPQA</b> Aseg. de calidad de proceso y producto</div><div class="fr">¿Se siguió el proceso o el estándar? (≠ VER: ¿el producto está bien hecho?)</div><ul><li>SG1 Evaluar objetivamente procesos y productos</li><li>SG2 Proporcionar una visión objetiva</li></ul><div class="pr">informes de no conformidad · registros de QA</div></div><div class="card l2"><div class="hd"><b>MA</b> Medición y análisis</div><div class="fr">Qué medir, cómo recoger, analizar y comunicar ≠ OPD</div><ul><li>SG1 Alinear las actividades de medición y análisis</li><li>SG2 Proporcionar los resultados de medición</li></ul><div class="fl">→ PMC: datos de medición</div><div class="pr">especificación de medidas · datos · informes</div></div><div class="card l2"><div class="hd"><b>CM</b> Gestión de configuración</div><div class="fr">Integridad de los artefactos: cambios que pide el EQUIPO</div><ul><li>SG1 Establecer líneas base</li><li>SG2 Seguir y controlar los cambios</li><li>SG3 Establecer la integridad</li></ul><div class="pr">lista de elementos de configuración · líneas base · auditorías</div></div></div><div class="cell sub1"><div class="card l3"><div class="hd"><b>DAR</b> Análisis de decisiones y resolución</div><div class="fr">Decisión importante → proceso formal: criterios, alternativas y método</div><ul><li>SG1 Evaluar alternativas</li></ul><div class="pr">◆ guía de cuándo aplicar DAR · criterios · decisión registrada y justificada</div></div></div><div class="cell empty"></div><div class="cell sub1"><div class="card l5"><div class="hd"><b>CAR</b> Análisis causal y resolución</div><div class="fr">Busca la CAUSA RAÍZ de los defectos para que no se repitan (causas comunes)</div><ul><li>SG1 Determinar las causas de defectos</li><li>SG2 Tratar las causas de los defectos</li></ul><div class="fl">→ OID: propuestas de mejora</div><div class="pr">análisis de causas (Ishikawa, Pareto) · propuestas de acción · registro de mejoras</div></div></div><div class="rl">Gestión de procesos</div><div class="cell empty">vacío: en nv2 el orden es por PROYECTO; lo organizacional arranca en nv3</div><div class="cell sub3"><div class="card l3"><div class="hd"><b>OPF</b> Enfoque en procesos de la org.</div><div class="fr">Motor de mejora: evaluar → piloto (SG2) → desplegar lo ya aprobado (SG3)</div><ul><li>SG1 Determinar oportunidades de mejora</li><li>SG2 Planificar e implementar mejoras</li><li>SG3 Desplegar activos e incorporar lecciones aprendidas</li></ul><div class="pr">evaluación de procesos · planes de acción · ◆ lecciones aprendidas</div></div><div class="card l3"><div class="hd"><b>OPD</b> Definición de procesos de la org.</div><div class="fr">CREA los activos (la fábrica de la biblioteca)</div><ul><li>SG1 Establecer los activos de proceso de la org.</li><li>(SG2 IPPD → fuera de alcance)</li></ul><div class="pr">◆ procesos estándar · ◆ ciclos de vida · ◆ guías de adaptación · ◆ repositorio de medición · ◆ biblioteca de activos · ◆ estándares de entorno</div></div><div class="card l3"><div class="hd"><b>OT</b> Formación organizativa</div><div class="fr">Capacitar a la ORGANIZACIÓN en roles (≠ PP SP2.5: lo de un proyecto)</div><ul><li>SG1 Establecer capacidad de formación</li><li>SG2 Proporcionar la formación necesaria</li></ul><div class="pr">plan táctico de formación · ◆ material de capacitación · registros de formación</div></div></div><div class="cell sub1"><div class="card l4"><div class="hd"><b>OPP</b> Rendimiento del proceso de la org.</div><div class="fr">¿Cuánto rinde NORMALMENTE el proceso? Líneas base desde el repositorio</div><ul><li>SG1 Establecer las líneas base y los modelos de rendimiento</li></ul><div class="fl">→ QPM</div><div class="pr">objetivos de calidad y rendimiento · ◆ líneas base · ◆ modelos de rendimiento</div></div></div><div class="cell sub1"><div class="card l5"><div class="hd"><b>OID</b> Innovación y despliegue en la org.</div><div class="fr">Mejoras incrementales e innovadoras: piloto → medir → desplegar a toda la org</div><ul><li>SG1 Seleccionar las mejoras</li><li>SG2 Desplegar las mejoras</li></ul><div class="pr">propuestas de mejora · resultados de pilotos · plan de despliegue</div></div></div>
+</div>
+
+<div class="bottom">
+  <div class="box">
+    <h4>VER vs VAL: ¿contra qué se compara el artefacto?</h4>
+    <div class="two">
+      <div><b>Contra OTRO DOCUMENTO del proyecto → VER</b><br>(reqs, especificación, diseño, particiones, estándar técnico) · "¿lo construí bien?" · lo juzga el EQUIPO</div>
+      <div><b>Contra la NECESIDAD REAL del cliente → VAL</b><br>(no hay documento "más arriba": el único que sabe si está bien es él) · "¿construí lo correcto?" · lo juzga el CLIENTE</div>
+    </div>
+  </div>
+  <div class="box">
+    <h4>¿Qué artefacto va con cuál?</h4>
+    <div class="two">
+      <div><b>VAL</b> (lo entiende y juzga el cliente): lista inicial de reqs F/NF · minuta revisada CON el cliente · prototipo (demostrarlo = validar) · manual de usuario · software en el entorno real · aceptación, piloto, beta</div>
+      <div><b>VER</b> (técnico, contra otro documento): diagramas · modelo y diccionario de datos · casos de prueba, particiones · código fuente · plan de proyecto · BD de prueba (entorno de verificación) · minuta revisada ENTRE NOSOTROS · pruebas unitarias, integración, sistema<br><b>NINGUNA:</b> BD de producción, herramientas, el repositorio</div>
+    </div>
+  </div>
+  <div class="box">
+    <h4>Ciclos de vida</h4>
+    <b>Requerimientos claros</b> → cascada · incremental<br>
+    <b>Requerimientos no claros</b> → iterativo
+  </div>
+  <div class="box">
+    <h4>Activos de proceso</h4>
+    Son <b>plantillas y definiciones</b> (más guías, estándares, procesos). Los crea <b>OPD</b>, los despliega <b>OPF</b>.
+  </div>
+</div>
+
+</body>
+</html>
