@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Activo · Producto de trabajo · EC</title>
+<style>
+  @page { size: A4; margin: 9mm 11mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Avenir Next", Helvetica, Arial, sans-serif; font-size: 9.1pt; color: #1d2329; line-height: 1.26; }
+  h1 { font-size: 17pt; margin: 0 0 1mm; letter-spacing: -.01em; }
+  .sub { color: #5b6470; margin: 0 0 3mm; font-size: 9pt; }
+  h2 { font-size: 11pt; margin: 0 0 2.5mm; display: flex; align-items: center; gap: 2mm; }
+  .num { background: #1d2329; color: #fff; border-radius: 50%; width: 6mm; height: 6mm; display: inline-flex; align-items: center; justify-content: center; font-size: 9pt; }
+  .key { border: 2px solid #1d2329; border-radius: 3mm; padding: 2mm 4mm; margin-bottom: 3mm; display: flex; gap: 4mm; align-items: center; }
+  .key b { font-size: 10.5pt; }
+  .key .q { flex: 1; }
+  .key .plus { font-size: 16pt; font-weight: 700; color: #b45309; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
+  .panel { border: 1px solid #d4d9df; border-radius: 3mm; padding: 3mm 3.5mm; }
+
+  /* flow */
+  .node { border: 1.5px solid #6b7480; border-radius: 2mm; padding: 1.6mm 2.5mm; background: #f6f7f9; text-align: center; font-weight: 600; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; }
+  .arrow { text-align: center; color: #6b7480; font-size: 8pt; line-height: 1; margin: .8mm 0; }
+  .arrow span { display: block; font-size: 11pt; }
+  .res { border-radius: 2mm; padding: 1.6mm 2mm; text-align: center; font-weight: 700; color: #fff; }
+  .res small { display: block; font-weight: 400; font-size: 7.8pt; opacity: .95; margin-top: .4mm; }
+  .pt  { background: #15803d; }
+  .pr  { background: #0f766e; }
+  .ac  { background: #1d4ed8; }
+  .ec  { background: #b45309; }
+  .no  { background: #9aa1ab; }
+  .hint { font-size: 8pt; color: #5b6470; margin-top: 1.5mm; }
+
+  .filters .f { display: grid; grid-template-columns: 1fr auto; gap: 2mm; align-items: center; }
+  .filters .f .node { text-align: left; }
+  .filters .x { font-size: 7.8pt; color: #9aa1ab; white-space: nowrap; }
+  .filters .x b { color: #b91c1c; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 8.6pt; }
+  th, td { border-bottom: 1px solid #e3e7eb; padding: .9mm 1.5mm; text-align: left; vertical-align: top; }
+  th { font-size: 8pt; color: #5b6470; font-weight: 600; }
+  .tag { display: inline-block; border-radius: 1mm; padding: 0 1.4mm; color: #fff; font-weight: 700; font-size: 7.8pt; }
+  .bottom { display: grid; grid-template-columns: 1.15fr 1fr; gap: 5mm; margin-top: 3mm; }
+  ul { margin: 0; padding-left: 4mm; }
+  li { margin-bottom: 1.1mm; }
+  .ask td:first-child { font-weight: 600; width: 46%; }
+  .warn { color: #b91c1c; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<h1>Activo · Producto de trabajo · Elemento de configuración</h1>
+<p class="sub">ISW · U2 (activo vs. PT) y U6 (gestión de configuración)</p>
+
+<div class="key">
+  <div class="q"><b>① ¿Qué es?</b><br>producto de trabajo, producto o activo.<br><small>No cambia nunca.</small></div>
+  <div class="plus">+</div>
+  <div class="q"><b>② ¿Lo pongo bajo control?</b><br>si sí, <b>además</b> es EC.<br><small>EC no es una 4.ª categoría: se suma, no reemplaza.</small></div>
+</div>
+
+<div class="cols">
+  <!-- Pregunta 1 -->
+  <div class="panel">
+    <h2><span class="num">1</span> ¿Qué es?</h2>
+    <div class="node">¿Salió de un proyecto concreto?</div>
+    <div class="row">
+      <div class="arrow"><span>↓</span>sí</div>
+      <div class="arrow"><span>↓</span>no</div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="node">¿Se entrega al cliente?</div>
+        <div class="row">
+          <div class="arrow"><span>↓</span>sí</div>
+          <div class="arrow"><span>↓</span>no</div>
+        </div>
+        <div class="row">
+          <div class="res pr">PRODUCTO<small>la app, el manual del sistema del cliente</small></div>
+          <div class="res pt">PRODUCTO DE TRABAJO<small>minuta, informe, .java, .class, CU</small></div>
+        </div>
+      </div>
+      <div>
+        <div class="node">¿Es un molde para muchos proyectos o algo que la org. compró?</div>
+        <div class="arrow"><span>↓</span>sí</div>
+        <div class="res ac">ACTIVO<small>plantilla, guía, estándar, Word, Java, manual del compilador Java</small></div>
+      </div>
+    </div>
+    <p class="hint"><b>Señales:</b> "plantilla / guía / directriz / estándar" → activo · "del cliente / del sistema desarrollado" → producto de trabajo.<br>
+    El producto también es producto de trabajo (el que se entrega). En la grilla de U2, <b>"Ambos" nunca fue la correcta</b>.</p>
+  </div>
+
+  <!-- Pregunta 2 -->
+  <div class="panel filters">
+    <h2><span class="num">2</span> ¿Va bajo configuración?</h2>
+    <div class="node" style="text-align:center">¿Lo usan varios grupos, puede cambiar, otros dependen de él o es crítico?</div>
+    <div class="arrow"><span>↓</span>sí → pasá los filtros del caso</div>
+    <div class="f"><div class="node">¿El caso lo menciona / lo usa?</div><div class="x"><b>no</b> → afuera (v1.0)</div></div>
+    <div class="arrow"><span>↓</span></div>
+    <div class="f"><div class="node">¿Es la versión vigente <u>al inicio</u> del proyecto?</div><div class="x"><b>no</b> → afuera</div></div>
+    <div class="arrow"><span>↓</span></div>
+    <div class="f"><div class="node">¿Su formato sigue en uso?</div><div class="x"><b>no</b> → afuera (.doc)</div></div>
+    <div class="arrow"><span>↓</span></div>
+    <div class="f"><div class="node">¿Existía en la fecha del caso?</div><div class="x"><b>no</b> → afuera (leng. B)</div></div>
+    <div class="arrow"><span>↓</span>pasa todo</div>
+    <div class="res ec">ELEMENTO DE CONFIGURACIÓN<small>un EC puede agrupar varios productos de trabajo (manual por capítulos)</small></div>
+    <p class="hint"><b>Herramientas</b> (Word, Java): entran solo si piden <b>reconstruir / garantizar la evolución</b>. Si piden productos de trabajo o activos del proyecto, la cátedra las dejó afuera.</p>
+  </div>
+</div>
+
+<div class="bottom">
+  <div class="panel">
+    <h2><span class="num">0</span> Antes de marcar: ¿qué pide?</h2>
+    <table class="ask">
+      <tr><td>"productos de trabajo bajo CM"</td><td>solo <span class="tag pt">PT</span> que pasan los filtros. Nunca herramientas.</td></tr>
+      <tr><td>"viable de CM y <span class="warn">no</span> producto de trabajo"</td><td>solo <span class="tag ac">activos</span> del caso (la plantilla vigente).</td></tr>
+      <tr><td>"si estuviera en el año X…"</td><td>lo que <b>existía en X</b> y hace falta para reconstruir, herramientas incluidas.</td></tr>
+      <tr><td>"activos de proceso del proyecto"</td><td>de cada plantilla, la <b>más nueva antes del inicio</b>, en formato vigente.</td></tr>
+    </table>
+  </div>
+  <div class="panel">
+    <h2><span class="num">!</span> Trampas</h2>
+    <ul>
+      <li>Herramienta ≠ producto de trabajo. Word o Java son <b>activos</b>.</li>
+      <li><b>Preguntas espejo</b>: buscá el "no" en la consigna.</li>
+      <li>Marcar todo lo que suena a CM sin pasar los filtros.</li>
+      <li>Olvidar lo que no se nombra pero se deduce (la documentación del sistema).</li>
+      <li>"PT a nivel organizacional" → <b>NINGUNA</b>. Si dice activos → OPD.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="panel" style="margin-top:3mm">
+  <h2><span class="num">✓</span> Ejemplos confirmados</h2>
+  <table>
+    <tr><th>Elemento</th><th>①</th><th>② / por qué</th></tr>
+    <tr><td>Manual de usuario del compilador Java</td><td><span class="tag ac">activo</span></td><td>documentación de una herramienta comprada</td></tr>
+    <tr><td>Minuta · informe de talleres · .java · .class</td><td><span class="tag pt">PT</span></td><td><span class="tag ec">EC</span> salen del proyecto y cambian</td></tr>
+    <tr><td>Plla-CUR-20230803 vs. Plla-CUR-20221212 (inicio 01/10/23)</td><td><span class="tag ac">activo</span></td><td>solo la 20230803: la más nueva antes del inicio</td></tr>
+    <tr><td>Plla-CUU-20230305<b>.doc</b></td><td><span class="tag ac">activo</span></td><td><span class="tag no">afuera</span> los .doc se dejaron de usar el 01/08/23</td></tr>
+    <tr><td>Lenguaje B, "si estuviera en 2002"</td><td><span class="tag ac">activo</span></td><td><span class="tag no">afuera</span> no existía en 2002 (A y Word 2002 sí)</td></tr>
+  </table>
+</div>
+
+</body>
+</html>
