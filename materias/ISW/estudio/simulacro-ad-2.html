@@ -99,17 +99,19 @@ table.grid td.wrong { background: var(--bad-soft); }
 .timer.low { color: var(--bad); border-color: var(--bad); background: var(--bad-soft); }
 .start { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 18px 16px; display: grid; gap: 10px; justify-items: start; }
 .start p { margin: 0; color: var(--muted); max-width: 60ch; }
-.timeup { font-weight: 600; color: var(--bad); }
+.timeup { font-weight: 600; color: var(--bad); margin: 0 0 8px; }
+.units h3 { grid-column: 1 / -1; margin: 6px 0 0; font-size: .8rem; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
 </style>
 
 <div class="wrap">
   <header class="top">
     <h1>Simulacro AD 2 · ISW</h1>
-    <p class="lead">20 preguntas más difíciles, concentradas en lo que fallaste: 8 preguntas BP (con dos razones verdaderas, prácticas sin falla y un caso NINGUNA) y 12 de relacionar actividad con área y práctica, con frases de tiempo y pares que se confunden.</p>
+    <p class="lead">20 preguntas más difíciles de U1 a U6, con todos los formatos del AD: relacionar actividad con área y práctica, BP, grillas, verdadero o falso, selección múltiple y cálculos.</p>
     <div class="rules">
       <div><b>Tiempo:</b> 1 hora desde que apretás Empezar. Al llegar a 0 se corrige solo; lo que no respondiste cuenta como mal.</div>
       <div><b>Selección única:</b> una opción. NINGUNA es una respuesta real.</div>
-      <div><b>BP:</b> puede haber más de una correcta. Una de más o de menos deja la pregunta en 0, y no se mezclan las del SÍ con las del NO.</div>
+      <div><b>Selección múltiple y BP:</b> marcá todas las correctas. Una de más o de menos deja la pregunta en 0. En BP no se mezclan las del SÍ con las del NO.</div>
+      <div><b>Grillas:</b> una opción por fila; la pregunta vale sólo si todas las filas están bien.</div>
     </div>
   </header>
 
@@ -138,143 +140,181 @@ table.grid td.wrong { background: var(--bad-soft); }
 const BP_NOTE = "BP --> Indicar si podrían surgir o no problemas de calidad en la Software Factory, optando por una o varias afirmaciones, o NINGUNA. No pueden combinarse las que consideran que SÍ hay problemas con las que NO.";
 const AREA_NOTE = "Relacione la actividad con el área de proceso y la práctica específica que corresponda (sólo una), o indique NINGUNA.";
 const DURATION = 60 * 60 * 1000;
+const TYPES = { AREA:"Área y práctica", BP:"BP", GRID:"Grillas y V/F", MULTI:"Selección múltiple", CALC:"Cálculos", CONC:"Conceptuales" };
 
 const Q = [
-// ---------- BP ----------
-{ k:"BP", tag:"U2 · Gestión de procesos · Mejora de procesos (OPF) · BP", type:"multi",
-  case:"La SF aprobó una nueva plantilla de casos de uso. El responsable de procesos la publica en la biblioteca de activos y envía un mail a todos los PM avisando que está disponible. No se controla qué proyectos la empezaron a usar. Las sugerencias que los analistas envían sobre la plantilla se guardan en una carpeta compartida que nadie revisa.",
-  text:"Dada la práctica descripta, indique si podrían surgir o no problemas de calidad.", note:BP_NOTE,
-  options:["No genera problemas de calidad, porque la plantilla quedó publicada en la biblioteca de activos, como pide OPD.","Sí podría generar problemas de calidad, porque el despliegue se limita a un mail y nadie monitorea si los proyectos adoptan la plantilla.","Sí podría generar problemas de calidad, porque las sugerencias de los analistas no se incorporan a los activos de proceso.","Sí podría generar problemas de calidad, porque la plantilla debería haberse probado primero en todos los proyectos al mismo tiempo.","Sí podría generar problemas de calidad, porque la plantilla debería aprobarla el cliente de cada proyecto."],
-  answer:[1,2],
-  explain:"Faltan dos eslabones de OPF SG3: monitorizar la implementación (3.3) y incorporar las experiencias en los activos (3.4). La opción de la biblioteca de activos dice algo cierto de OPD, pero el área en juego es el despliegue (OPF). La de probar en todos los proyectos a la vez es absurda: un piloto es en un proyecto." },
-{ k:"BP", tag:"U3 · Planificación y plan (PP) · BP", type:"multi",
-  case:"Al planificar, el PM arma la EDT junto con los técnicos, estima el tamaño con puntos función y el esfuerzo con datos históricos de la SF, identifica los riesgos con el equipo y los revisa con el cliente, define en el plan qué actividades realiza cada usuario clave en cada fase y obtiene el compromiso firmado del sponsor y del equipo.",
-  text:"Dada la práctica descripta, indique si podrían surgir o no problemas de calidad.", note:BP_NOTE,
-  options:["Sí podría generar problemas de calidad, porque las estimaciones deberían hacerse con la técnica Delphi.","No genera problemas de calidad, porque es una implementación correcta de la planificación según PP.","Sí podría generar problemas de calidad, porque los riesgos no deberían revisarse con el cliente para no generar desconfianza.","No genera problemas de calidad, porque es una implementación correcta de PMC.","Sí podría generar problemas de calidad, porque SQA debería aprobar el plan antes del compromiso."],
-  answer:[1],
-  explain:"No falta nada de PP: EDT (1.1), tamaño (1.2), esfuerzo con históricos (1.4), riesgos revisados con el cliente (2.2), involucración (2.6), compromiso (3.3). La opción que dice \"implementación correcta de PMC\" nombra el área equivocada: es falsa." },
-{ k:"BP", tag:"U4 · Gestión de requisitos (REQM) · BP", type:"multi",
-  case:"El cliente envía los pedidos de cambio por WhatsApp al líder técnico. El líder evalúa con su equipo cuánto esfuerzo implica cada uno y, si es menor a 16 horas, lo implementa sin consultar a nadie más. Los cambios mayores se tratan en el CCB. La matriz de trazabilidad se actualiza al cierre del proyecto.",
-  text:"Dada la práctica descripta, indique si podrían surgir o no problemas de calidad.", note:BP_NOTE,
-  options:["No genera problemas de calidad, porque los cambios mayores pasan por el CCB y los menores no justifican el procedimiento.","Sí podría generar problemas de calidad, porque no hay un canal oficial para los cambios, y los cambios menores no se registran ni se evalúa su impacto sobre otros requisitos.","Sí podría generar problemas de calidad, porque la trazabilidad no se mantiene durante el proyecto, así que no sirve para evaluar el impacto de cada cambio.","Sí podría generar problemas de calidad, porque el líder técnico no debería estimar el esfuerzo de un cambio.","Sí podría generar problemas de calidad, porque el problema principal es que se usa WhatsApp en lugar del mail."],
-  answer:[1,2],
-  explain:"Faltan canales oficiales (REQM 1.1), gestión de TODOS los cambios con su impacto (1.3) y trazabilidad viva (1.4). La del WhatsApp apunta a un detalle: cambiarlo por mail no arregla nada si sigue sin registro ni evaluación." },
-{ k:"BP", tag:"U5 · Verificación (VER) · BP", type:"multi",
-  case:"La SF tiene un grupo de testers dedicados exclusivamente a probar, que no participan del desarrollo. Los testers deciden los datos de prueba al momento de ejecutar, según su experiencia, y no documentan los casos ejecutados. En los proyectos de mantenimiento prueban sólo lo modificado.",
-  text:"Dada la práctica descripta, indique si podrían surgir o no problemas de calidad.", note:BP_NOTE,
-  options:["Sí podría generar problemas de calidad, porque los testers no deberían dedicarse sólo a probar, ya que pierden conocimiento del negocio.","Sí podría generar problemas de calidad, porque sin casos diseñados y documentados antes de ejecutar se pasan por alto casos, no se pueden repetir las pruebas y, al probar sólo lo modificado, aparecen errores de regresión.","No genera problemas de calidad, porque la independencia de los testers garantiza la calidad de las pruebas.","Sí podría generar problemas de calidad, porque las pruebas deberían hacerlas los propios programadores, que conocen el código."],
-  answer:[1],
-  explain:"El problema son los datos improvisados y sin documentar (VER 1.3, SG3), no los testers: el personal dedicado es la independencia que se pide. Las que culpan a los testers dedicados o piden que prueben los programadores dicen Sí con una razón falsa." },
-{ k:"BP", tag:"U3 · Seguimiento y control (PMC) · BP", type:"multi",
-  case:"En las reuniones de avance quincenales, el PM presenta al equipo de la SF el porcentaje de avance de cada tarea y el estado de los riesgos. Los desvíos se anotan en la minuta. El cliente recibe un informe mensual por mail. Si un desvío aparece en tres reuniones seguidas, el PM se lo comenta al sponsor.",
-  text:"Dada la práctica descripta, indique si podrían surgir o no problemas de calidad.", note:BP_NOTE,
-  options:["No genera problemas de calidad, porque los desvíos quedan registrados en la minuta.","Sí podría generar problemas de calidad, porque los desvíos se anotan pero no se analizan ni se definen acciones correctivas que se sigan hasta su cierre.","Sí podría generar problemas de calidad, porque el cliente no participa de las revisiones de progreso: sólo recibe un informe.","Sí podría generar problemas de calidad, porque el avance debería medirse sólo con las horas consumidas.","Sí podría generar problemas de calidad, porque las reuniones de avance deberían ser diarias."],
-  answer:[1,2],
-  explain:"Falta PMC SG2 (analizar y gestionar acciones correctivas hasta el cierre) y las revisiones sin el cliente son una señal de problema. Medir sólo con horas consumidas es falso (no alcanzan para medir el avance) y las reuniones diarias son un requisito inventado." },
-{ k:"BP", tag:"U6 · Gestión de configuración (CM) · BP", type:"multi",
-  case:"Cada versión que se entrega a un cliente se arma desde una línea base aprobada por el CCB. Se registra qué versión de cada artefacto compone cada línea base y qué diferencias tiene con la anterior. El repositorio de cada proyecto se conserva hasta que el producto se discontinúa.",
-  text:"Dada la práctica descripta, indique si podrían surgir o no problemas de calidad.", note:BP_NOTE,
-  options:["Sí podría generar problemas de calidad, porque el repositorio debería ser organizacional y no por proyecto.","Sí podría generar problemas de calidad, porque deberían conservarse sólo las últimas versiones para no generar confusión.","No genera problemas de calidad, porque es una implementación correcta de CM.","No genera problemas de calidad, porque es una implementación correcta de OPD, ya que se conservan los activos.","Sí podría generar problemas de calidad, porque la línea base debería aprobarla el cliente."],
-  answer:[2],
-  explain:"Tiene líneas base (1.3), registros con la composición y las diferencias (3.1) y control del CCB. El repositorio por proyecto no es un defecto de CM (es el distractor del AD 2024). La de \"implementación correcta de OPD\" nombra el área equivocada." },
-{ k:"BP", tag:"U4 · Desarrollo de requisitos (RD) · BP", type:"multi",
-  case:"El analista releva los requerimientos con el usuario. Para ganar tiempo, el equipo define por su cuenta qué dispositivos móviles serán compatibles y qué métricas de usabilidad se exigirán, tomando estándares de la industria. El cliente ve el sistema por primera vez en la prueba de aceptación.",
-  text:"Dada la práctica descripta, indique si podrían surgir o no problemas de calidad.", note:BP_NOTE,
-  options:["No genera problemas de calidad, porque los estándares de la industria hacen que los requisitos sean verificables.","Sí podría generar problemas de calidad, porque el relevamiento debería hacerlo el área comercial, que conoce al cliente.","Sí podría generar problemas de calidad, porque la prueba de aceptación debería hacerla el equipo de testing.","Sí podría generar problemas de calidad, porque los requerimientos deberían congelarse al terminar el relevamiento.","NINGUNA"],
-  answer:[4],
-  explain:"Hay problema (el equipo decide solo lo que debía confirmar el cliente y no hay validación temprana: RD 1.2, 3.3 y 3.5), pero ninguna opción del Sí da esa razón: todas son falsas. Cuando hay problema y ninguna razón lo describe, la respuesta es NINGUNA." },
-{ k:"BP", tag:"U2 · Definición de procesos (OPD) · BP", type:"multi",
-  case:"La SF tiene un proceso estándar con 14 plantillas obligatorias. Todos los proyectos, sin importar su tamaño ni su duración, deben completar las 14. En el último trimestre, un proyecto de dos semanas dedicó el 40 % de su esfuerzo a completar documentación.",
-  text:"Dada la práctica descripta, indique si podrían surgir o no problemas de calidad.", note:BP_NOTE,
-  options:["No genera problemas de calidad, porque aplicar el estándar completo garantiza la calidad del producto.","Sí podría generar problemas de calidad, porque faltan criterios y guías para adaptar el proceso estándar a cada proyecto.","Sí podría generar problemas de calidad, porque cada proyecto debería definir su propio proceso sin usar el estándar.","Sí podría generar problemas de calidad, porque el problema es que las plantillas no están en la biblioteca de activos.","Sí podría generar problemas de calidad, porque se aplica mal el proceso: se exige lo mismo a proyectos de tamaños muy distintos."],
-  answer:[1,4],
-  explain:"Falta OPD SP 1.3 (guías de adaptación). Es una falla por exceso o mala aplicación, que también es problema. Que cada proyecto defina su propio proceso va al otro extremo: sin estándar se pierde el nivel 3. Lo de la biblioteca es algo que el caso no dice." },
-
-// ---------- Relacionar área ----------
-{ k:"AREA", tag:"U2 · Definición de procesos (OPD) · Relacionar actividad con área CMMI", type:"single",
-  text:"Se diseña el repositorio de medición de la organización, donde todos los proyectos cargarán sus datos de esfuerzo y defectos para usarlos en estimaciones futuras.", note:AREA_NOTE,
-  options:["MA / SP 1.3 Especificar los procedimientos de recogida y de almacenamiento de datos","OPD / SP 1.4 Establecer el repositorio de medición de la organización","PP / SP 2.3 Planificar la gestión de los datos","OPD / SP 1.5 Establecer la biblioteca de activos de proceso de la organización","CM / SP 1.2 Establecer un sistema de gestión de configuración","NINGUNA"],
-  answer:1,
-  explain:"Repositorio común para todos los proyectos, a nivel organización: OPD SP 1.4. PP 2.3 es lo que registra UN proyecto. La biblioteca (1.5) guarda activos, no datos de medición." },
-{ k:"AREA", tag:"U3 · Planificación y plan (PP) · Relacionar actividad con área CMMI", type:"single",
-  text:"Al planificar el proyecto Turnos se decide qué datos registrará el proyecto (horas por tarea, defectos por caso de uso), en qué formato y dónde se guardarán.", note:AREA_NOTE,
-  options:["OPD / SP 1.4 Establecer el repositorio de medición de la organización","PP / SP 2.3 Planificar la gestión de los datos","PMC / SP 1.4 Monitorizar la gestión de los datos","PP / SP 2.7 Establecer el plan de proyecto","CM / SP 1.1 Identificar los elementos de configuración","NINGUNA"],
-  answer:1,
-  explain:"Qué datos registra UN proyecto, planificado antes de arrancar: PP SP 2.3. Controlar después que se cumpla sería PMC 1.4; el repositorio común de la organización sería OPD 1.4." },
-{ k:"AREA", tag:"U3 · Seguimiento y control (PMC) · Relacionar actividad con área CMMI", type:"single",
-  text:"Hace un mes se reemplazó al usuario clave que no asistía a las validaciones. Ahora se analiza si con el nuevo usuario se recuperó el ritmo de aprobación de los prototipos.", note:AREA_NOTE,
-  options:["PMC / SP 2.1 Analizar los problemas","PMC / SP 2.2 Llevar a cabo las acciones correctivas","PMC / SP 2.3 Gestionar las acciones correctivas","PMC / SP 1.5 Monitorizar la involucración de las partes interesadas","RD / SP 3.5 Validar los requerimientos","NINGUNA"],
+// ---------- U1 ----------
+{ u:"U1", k:"CONC", tag:"U1 · Modelos de calidad · Niveles de madurez", type:"single",
+  text:"Una SF certificada en nivel 3 deja de aplicar una sola práctica: RD SP 3.5 Validar los requerimientos. Todas las demás prácticas de nivel 2 y 3 se siguen cumpliendo. ¿En qué nivel de madurez queda?",
+  options:["Sigue en nivel 3, porque se evalúan las metas y no las prácticas sueltas","Nivel 3, con una observación sobre RD","Nivel 2","Nivel 1","No se puede determinar sin una nueva evaluación"],
   answer:2,
-  explain:"La acción correctiva ya se tomó hace un mes. Ahora se evalúa si funcionó: PMC SP 2.3. \"Se analiza\" es la trampa hacia 2.1, pero lo que se analiza es el resultado de la acción, no la causa del problema." },
-{ k:"AREA", tag:"U3 · Seguimiento y control (PMC) · Relacionar actividad con área CMMI", type:"single",
-  text:"Durante el proyecto, el PM controla a cuántas reuniones de validación asistieron los usuarios clave, comparado con lo que establecía el plan.", note:AREA_NOTE,
-  options:["PP / SP 2.6 Planificar la involucración de las partes interesadas","PMC / SP 1.5 Monitorizar la involucración de las partes interesadas","PMC / SP 1.2 Monitorizar los compromisos","VAL / SP 1.1 Seleccionar los productos a validar","PMC / SP 1.6 Llevar a cabo revisiones de progreso","NINGUNA"],
+  explain:"Sin RD SP 3.5 no se satisface RD SG3, así que RD (nivel 3) no se cumple. Como todo lo de nivel 2 sigue en pie, queda como máximo en nivel 2. Si faltara una práctica de un área de nivel 2, quedaría en nivel 1. Es cierto que se evalúan las metas, pero una meta no se satisface si falta una de sus prácticas." },
+{ u:"U1", k:"MULTI", tag:"U1 · Modelos de calidad · Niveles de madurez", type:"multi",
+  text:"Indique cuáles son características del nivel 3 (Definido) de la representación por etapas.",
+  options:["Los proyectos adaptan el proceso estándar de la organización","Cada proyecto define su propio proceso","Los subprocesos críticos se gestionan con técnicas estadísticas","Existen criterios y guías para adaptar el proceso estándar","Incluye el cumplimiento de todas las áreas de nivel 2","Se atacan las causas comunes de variación cambiando el proceso"],
+  answer:[0,3,4],
+  explain:"Nivel 3: orden a nivel de ORGANIZACIÓN, los proyectos adaptan el estándar con guías de adaptación, y es acumulativo. Cada proyecto con su propio proceso es nivel 2; la estadística es nivel 4; las causas comunes, nivel 5." },
+
+// ---------- U2 ----------
+{ u:"U2", k:"GRID", tag:"U2 · Gestión de procesos · Activo vs producto de trabajo", type:"grid",
+  text:"Indique en cada caso si, para la Software Factory, se trata de un activo, de un producto de trabajo o de ambos.",
+  cols:["Activo","Producto de trabajo","Ambos"],
+  rows:[
+    ["Checklist de la organización para revisar casos de uso",0],
+    ["Checklist completado en la revisión del caso de uso 12 del proyecto Turnos",1],
+    ["Lecciones aprendidas incorporadas a la biblioteca de activos",0],
+    ["Minuta de la reunión de lanzamiento del proyecto Turnos",1],
+    ["Estándar de codificación Java de la SF",0],
+    ["Plan de proyecto del sistema de turnos",1]
+  ],
+  explain:"El checklist de la organización es el molde (activo); el completado en una revisión concreta es lo moldeado (PT). Las lecciones aprendidas, una vez incorporadas a la biblioteca, son activos (OPF las incorpora como ◆). Minuta y plan salen del proyecto. \"Ambos\" nunca fue la correcta." },
+{ u:"U2", k:"AREA", tag:"U2 · Formación organizativa (OT) · Relacionar actividad con área CMMI", type:"single",
+  text:"Se arma el plan de formación de la organización para el próximo año: qué cursos se darán, en qué fechas, con qué instructores y con qué presupuesto.", note:AREA_NOTE,
+  options:["OT / SP 1.1 Establecer las necesidades estratégicas de formación","OT / SP 1.3 Establecer un plan táctico de formación organizativa","OT / SP 1.4 Establecer la capacidad de formación","PP / SP 2.5 Planificar el conocimiento y las habilidades necesarios","OPF / SP 2.1 Establecer planes de acción de procesos","NINGUNA"],
   answer:1,
-  explain:"Durante el proyecto y contra el plan: PMC SP 1.5. Planificarlo antes sería PP 2.6." },
-{ k:"AREA", tag:"U2 · Mejora de procesos (OPF) · Relacionar actividad con área CMMI", type:"single",
-  text:"El presidente de la SF obtiene el apoyo del directorio para contratar una consultora que evalúe las fortalezas y debilidades de los procesos que la organización usa hoy.", note:AREA_NOTE,
-  options:["OPF / SP 1.1 Establecer las necesidades de procesos de la organización","OPF / SP 1.2 Evaluar los procesos de la organización","OPF / SP 1.3 Identificar las mejoras de procesos de la organización","OPD / SP 1.1 Establecer los procesos estándar","OPF / SP 2.1 Establecer planes de acción de procesos","NINGUNA"],
+  explain:"El plan concreto (qué cursos, cuándo, quién, cuánto cuesta) es el plan táctico: OT SP 1.3. Las necesidades estratégicas (1.1) son el qué necesita la organización a largo plazo; la capacidad (1.4) es tener instructores y materiales." },
+{ u:"U2", k:"BP", tag:"U2 · Formación organizativa (OT) · BP", type:"multi",
+  case:"La SF lleva un registro actualizado de los cursos que hizo cada empleado. Los PM arman los equipos de proyecto según la disponibilidad de la gente, sin consultar esos registros. Nunca se evaluó si los cursos mejoraron el trabajo de quienes los hicieron.",
+  text:"Dada la práctica descripta, indique si podrían surgir o no problemas de calidad.", note:BP_NOTE,
+  options:["No genera problemas de calidad, porque los registros de formación existen y están actualizados, como pide OT.","Sí podría generar problemas de calidad, porque se asigna gente sin considerar sus habilidades, y pueden quedar equipos sin el perfil necesario.","Sí podría generar problemas de calidad, porque no se evalúa la eficacia de la formación, así que no se sabe si los cursos sirvieron.","Sí podría generar problemas de calidad, porque la formación debería darla cada proyecto y no la organización.","Sí podría generar problemas de calidad, porque los registros de formación deberían guardarse en el repositorio de medición de OPD."],
+  answer:[1,2],
+  explain:"Tener registros no alcanza si nadie los usa al asignar gente (PP 2.5) y si no se mide la eficacia (OT 2.3). La primera opción dice algo cierto, pero marca \"No genera\" y no se puede mezclar con las del Sí. El repositorio de medición es para datos de medición, no para registros de formación." },
+
+// ---------- U3 ----------
+{ u:"U3", k:"CALC", tag:"U3 · Gestión de proyectos · Cronograma e incrementos", type:"single",
+  case:"Dos módulos independientes, A y B, cada uno con su propio equipo, trabajando en paralelo. Duración en días hábiles:\n\nMódulo A: Analizar 3 · Diseñar 4 · Codificar 6 · Probar 3\nMódulo B: Analizar 2 · Diseñar 3 · Codificar 5 · Probar 2\n\nAl terminar AMBOS módulos se hace una integración de 2 días.",
+  caseMono:true,
+  text:"¿Cuál es la duración total del proyecto?",
+  options:["12","16","18","28","30"],
+  answer:2,
+  explain:"En paralelo, la duración la fija el camino más largo: A dura 16 y B 12, así que los módulos terminan el día 16. Más la integración: 18. 28 es sumar A y B; 30 es sumar todo. El esfuerzo sí se suma, la duración no." },
+{ u:"U3", k:"CALC", tag:"U3 · Gestión de proyectos · Estimación de esfuerzo", type:"single",
+  text:"Un proyecto tiene un esfuerzo total estimado de 1.000 horas-persona. Si se lo reparte según la distribución 40-20-40, ¿cuántas horas-persona corresponden a la codificación?",
+  options:["400","200","333","600","100"],
   answer:1,
-  explain:"Evaluar los procesos EN USO (fortalezas y debilidades) es OPF SP 1.2, y obtener el patrocinio de la dirección es su primera subpráctica." },
-{ k:"AREA", tag:"U2 · Mejora de procesos (OPF) · Relacionar actividad con área CMMI", type:"single",
-  text:"Tres meses después de desplegar el nuevo procedimiento de estimación, el grupo de procesos revisa en qué proyectos se está usando, en cuáles no y por qué.", note:AREA_NOTE,
-  options:["OPF / SP 2.2 Implementar los planes de acción de procesos","OPF / SP 3.1 Desplegar los activos de proceso de la organización","OPF / SP 3.2 Desplegar los procesos estándar","OPF / SP 3.3 Monitorizar la implementación","OPF / SP 1.2 Evaluar los procesos de la organización","NINGUNA"],
-  answer:3,
-  explain:"Ya se desplegó; ahora se controla si los proyectos lo adoptaron: OPF SP 3.3. 3.1 y 3.2 son el despliegue en sí; 2.2 es el piloto antes de aprobar." },
-{ k:"AREA", tag:"U2 · Formación organizativa (OT) · Relacionar actividad con área CMMI", type:"single",
-  text:"Se evalúa si el curso de casos de uso dictado en marzo mejoró la calidad de los casos de uso, comparando los defectos encontrados en las revisiones antes y después del curso.", note:AREA_NOTE,
-  options:["OT / SP 2.2 Establecer los registros de formación","OT / SP 2.3 Evaluar la eficacia de la formación","OT / SP 1.4 Establecer la capacidad de formación","OPF / SP 3.3 Monitorizar la implementación","VER / SP 2.3 Analizar los datos de la revisión entre pares","NINGUNA"],
+  explain:"40 % análisis y diseño, 20 % codificación, 40 % pruebas: 20 % de 1.000 = 200. El 400 es tomar el primer 40 como si fuera codificación. La 40-20-40 reparte un total que ya tenés; no sirve para calcularlo desde cero." },
+{ u:"U3", k:"GRID", tag:"U3 · Gestión de proyectos · Ciclos de vida", type:"grid",
+  text:"Indique si cada afirmación sobre ciclos de vida es verdadera o falsa.",
+  cols:["Verdadero","Falso"],
+  rows:[
+    ["En un ciclo incremental, el análisis se hace sólo en el primer incremento",1],
+    ["En un ciclo incremental, las pruebas de sistema se hacen en cada incremento",0],
+    ["En el iterativo, cada iteración vuelve a pasar por los mismos requisitos para refinarlos",0],
+    ["El espiral parte de que no hay incertidumbre en el problema",1],
+    ["La cascada es el ciclo que menos sirve con requisitos inestables",0],
+    ["Un prototipo puede reemplazar a la especificación escrita",1]
+  ],
+  explain:"Cada incremento es una cascada completa: análisis y pruebas de sistema en todos. El iterativo refina los mismos requisitos. El espiral ASUME incertidumbre alta y la gestiona con análisis de riesgos (el incremental es el que parte de que no la hay). El prototipo complementa la especificación, no la reemplaza." },
+{ u:"U3", k:"AREA", tag:"U3 · Planificación y plan (PP) · Relacionar actividad con área CMMI", type:"single",
+  text:"Antes de presentar el plan al cliente, se detecta que el calendario exige tres analistas en mayo, pero sólo hay dos disponibles. Se renegocia el alcance de la primera entrega para que entre con los recursos reales.", note:AREA_NOTE,
+  options:["PMC / SP 2.2 Llevar a cabo las acciones correctivas","PP / SP 3.2 Reconciliar los niveles de trabajo y de recursos","PP / SP 2.4 Planificar los recursos del proyecto","PP / SP 2.1 Establecer el presupuesto y el calendario","PMC / SP 1.1 Monitorizar los parámetros de planificación del proyecto","NINGUNA"],
   answer:1,
-  explain:"Si la capacitación sirvió: OT SP 2.3. Se usan datos de revisiones, pero lo que se evalúa es el curso, no el producto: no es VER 2.3." },
-{ k:"AREA", tag:"U5 · Validación (VAL) · Relacionar actividad con área CMMI", type:"single",
-  text:"Se acordó con el cliente qué casos de uso se presentarán en el workshop de la próxima semana para que los usuarios los validen.", note:AREA_NOTE,
-  options:["VAL / SP 1.1 Seleccionar los productos a validar","VAL / SP 1.3 Establecer los procedimientos y los criterios de validación","RD / SP 3.5 Validar los requerimientos","VAL / SP 2.1 Realizar la validación","PP / SP 2.6 Planificar la involucración de las partes interesadas","NINGUNA"],
+  explain:"Es ANTES de presentar el plan (planificación, no seguimiento), y lo que se hace es ajustar lo planificado a los recursos reales: PP SP 3.2. PMC 2.2 sería durante la ejecución." },
+
+// ---------- U4 ----------
+{ u:"U4", k:"MULTI", tag:"U4 · Requisitos · Desarrollo de requisitos (RD)", type:"multi",
+  text:"Indique cuáles son TÉCNICAS de obtención de requerimientos.",
+  options:["Entrevistas","Políticas de negocio","Observación del proceso de negocio","Estándares","Prototipos","Legislación vigente","Brainstorming"],
+  answer:[0,2,4,6],
+  explain:"Técnica = CÓMO se obtiene (una acción): entrevistas, observación, prototipos, brainstorming, cuestionarios. Políticas, estándares y leyes son FUENTES: de dónde sale el requisito. Es la pregunta espejo de \"fuentes de requerimientos\"." },
+{ u:"U4", k:"AREA", tag:"U4 · Gestión de requisitos (REQM) · Relacionar actividad con área CMMI", type:"single",
+  text:"Se establece que toda solicitud del cliente deberá ingresar por el formulario web del proyecto, y que se devolverá la que no tenga definido su criterio de aceptación.", note:AREA_NOTE,
+  options:["REQM / SP 1.1 Obtener una comprensión de los requerimientos","CM / SP 2.1 Seguir las peticiones de cambio","REQM / SP 1.3 Gestionar los cambios de los requerimientos","RD / SP 1.1 Obtener las necesidades","CM / SP 1.2 Establecer un sistema de gestión de configuración","NINGUNA"],
   answer:0,
-  explain:"Elegir qué se va a validar, antes del workshop: VAL SP 1.1 (es el ejemplo de la wiki). Realizar la validación sería el workshop en sí." },
-{ k:"AREA", tag:"U4 · Desarrollo de requisitos (RD) · Relacionar actividad con área CMMI", type:"single",
-  text:"En este momento se está realizando la reunión en la que el cliente prueba el prototipo de pantallas y confirma si refleja lo que necesita, antes de empezar a construir el sistema.", note:AREA_NOTE,
-  options:["VAL / SP 2.1 Realizar la validación","RD / SP 3.5 Validar los requerimientos","VER / SP 2.2 Llevar a cabo las revisiones entre pares","RD / SP 3.1 Establecer los conceptos operativos y los escenarios","VAL / SP 1.2 Establecer el entorno de validación","NINGUNA"],
+  explain:"Canales oficiales de entrada y criterios de aceptación: REQM SP 1.1 (\"toda solicitud que no cumpla será devuelta\" es el ejemplo típico)." },
+{ u:"U4", k:"BP", tag:"U4 · Desarrollo de requisitos (RD) · BP", type:"multi",
+  case:"El relevamiento lo hace el área comercial, sin participación de técnicos. Los requisitos se acuerdan verbalmente con el cliente y después el analista los escribe directamente en lenguaje técnico. El cliente no revisa la especificación antes de que empiece el desarrollo.",
+  text:"Dada la práctica descripta, indique si podrían surgir o no problemas de calidad.", note:BP_NOTE,
+  options:["Sí podría generar problemas de calidad, porque los requisitos no se validan con el cliente ni quedan en su lenguaje: puede construirse algo que no es lo que necesita.","Sí podría generar problemas de calidad, porque un relevamiento sin técnicos puede dejar requisitos no factibles o ambiguos.","No genera problemas de calidad, porque el área comercial es la que mejor conoce al cliente.","Sí podría generar problemas de calidad, porque el cliente no debería participar del relevamiento.","Sí podría generar problemas de calidad, porque el problema principal es que no se usa una herramienta de gestión de requisitos."],
+  answer:[0,1],
+  explain:"Faltan los requisitos de cliente en su lenguaje (RD 1.2), el análisis de factibilidad (3.3) y la validación temprana (3.5). La herramienta no es lo que falla: las herramientas ayudan pero no gestionan solas." },
+
+// ---------- U5 ----------
+{ u:"U5", k:"CALC", tag:"U5 · Verificación y validación · Particiones y valores límite", type:"single",
+  text:"El campo \"código de cliente\" es obligatorio y admite una cadena de hasta 10 caracteres alfanuméricos. Según el criterio de la cátedra, ¿qué longitudes corresponden a los valores límite?",
+  options:["1, 9, 10 y 11","9, 10 y 11","0 y 10","5 y 10","1 y 10"],
+  answer:0,
+  explain:"Para \"hasta N caracteres\" el límite se toma sobre la longitud: N−1, N y N+1, y según la consulta con la cátedra también 1 carácter: 1, 9, 10, 11. El vacío es una partición inválida aparte, no un valor límite de longitud." },
+{ u:"U5", k:"CALC", tag:"U5 · Verificación y validación · Particiones y valores límite", type:"single",
+  text:"Un sistema cobra la cuota según el tipo de socio (Básico, Plus o Premium, cada uno con tarifa distinta) y aplica un descuento según la edad (18 a 25, 26 a 64, 65 o más, cada tramo con descuento distinto). Las dos entradas son independientes. ¿Cuántos casos de prueba como mínimo cubren todas las particiones VÁLIDAS?",
+  options:["2","3","5","6","9"],
   answer:1,
-  explain:"Validar con el usuario, temprano y sobre un prototipo, ANTES de construir: RD SP 3.5 (valida los requerimientos). VAL valida el producto o sus componentes ya construidos." },
-{ k:"AREA", tag:"U5 · Verificación (VER) · Relacionar actividad con área CMMI", type:"single",
-  text:"Se define que los casos de uso del proyecto pasarán por una revisión entre pares, con qué checklist se revisarán y con qué criterio se dará por aprobado cada uno.", note:AREA_NOTE,
-  options:["VER / SP 1.1 Seleccionar los productos de trabajo a verificar","VER / SP 1.3 Establecer los procedimientos y los criterios de verificación","VER / SP 2.1 Preparar las revisiones entre pares","VAL / SP 1.3 Establecer los procedimientos y los criterios de validación","OPD / SP 1.1 Establecer los procesos estándar","NINGUNA"],
+  explain:"Las válidas se combinan: cada caso lleva una partición de cada entrada. El mínimo es la cantidad de la entrada que más tiene: 3. El 9 es cruzar todas las combinaciones, que es lo que haría una tabla de decisión; el 6 es sumarlas." },
+{ u:"U5", k:"CALC", tag:"U5 · Verificación y validación · Tablas de decisión", type:"single",
+  text:"El precio de un seguro depende de la edad del conductor (menor de 25 / de 25 a 65 / mayor de 65), de si tuvo siniestros (sí / no) y de la zona (urbana / rural). A los mayores de 65 no se les evalúa la zona. ¿Cuántas columnas quedan después de reducir la tabla?",
+  options:["6","8","10","12","7"],
+  answer:2,
+  explain:"Completa: 3 × 2 × 2 = 12. Para mayores de 65 la zona es indiferente: sus 4 columnas (siniestros × zona) se colapsan en 2. Quedan 12 − 2 = 10." },
+{ u:"U5", k:"GRID", tag:"U5 · Verificación y validación · Verificación vs validación", type:"grid",
+  text:"Indique si cada afirmación es verdadera o falsa.",
+  cols:["Verdadero","Falso"],
+  rows:[
+    ["La revisión entre pares de la ERS hecha por el equipo es una actividad de validación",1],
+    ["Demostrarle un prototipo al usuario es una actividad de validación",0],
+    ["La prueba de sistema es una actividad de verificación",0],
+    ["La prueba beta la realizan usuarios en su propio entorno",0],
+    ["Una reunión con el cliente para evaluar la especificación es una prueba dinámica de caja negra",1],
+    ["La base de datos de producción es un artefacto que se verifica",1]
+  ],
+  explain:"Revisión entre el equipo, contra otro documento: VER. Prototipo con el usuario: VAL. Prueba de sistema: VER. Beta: usuarios en su entorno. Una reunión para evaluar un documento no ejecuta nada: es estática. La BD de producción no es un producto a evaluar (NINGUNA)." },
+{ u:"U5", k:"BP", tag:"U5 · Verificación (VER) · BP", type:"multi",
+  case:"Los programadores prueban en sus PC con datos que inventa cada uno. La prueba de sistema se hace en un servidor con una versión de base de datos distinta de la de producción. Los resultados de las pruebas no se registran.",
+  text:"Dada la práctica descripta, indique si podrían surgir o no problemas de calidad.", note:BP_NOTE,
+  options:["Sí podría generar problemas de calidad, porque el entorno de prueba no es representativo de producción, y aparecerán defectos recién cuando el sistema esté en uso.","Sí podría generar problemas de calidad, porque sin registrar los resultados no se pueden analizar ni repetir las pruebas.","No genera problemas de calidad, porque los programadores conocen mejor que nadie su propio código.","Sí podría generar problemas de calidad, porque la prueba de sistema debería hacerla el cliente.","Sí podría generar problemas de calidad, porque el problema principal es que las pruebas no están automatizadas."],
+  answer:[0,1],
+  explain:"Faltan el entorno de verificación adecuado (VER 1.2, con estándares de entorno de OPD 1.6) y el registro y análisis de resultados (VER SG3). La prueba de sistema es VER, no del cliente; y la automatización no es lo que pide el modelo." },
+
+// ---------- U6 ----------
+{ u:"U6", k:"CALC", tag:"U6 · Gestión de configuración · Versiones y releases", type:"single",
+  case:"Política de versionado: <x>.<yy>. x cambia con cada cambio de funcionalidad, tiene UN dígito y la primera es 1. yy sube con cada corrección, tiene dos dígitos y vuelve a 00 cuando cambia x. La funcionalidad cambia una vez por año y las correcciones se publican cada quince días.",
+  text:"¿Cuántos años sobrevive el esquema?",
+  options:["4","9","10","99","24"],
   answer:1,
-  explain:"Definir el procedimiento (checklist) y el criterio de aprobación: VER SP 1.3. Preparar una revisión concreta (convocar, distribuir) sería 2.1." },
-{ k:"AREA", tag:"U6 · Gestión de configuración (CM) · Relacionar actividad con área CMMI", type:"single",
-  text:"Cada vez que se genera una compilación para testing, se produce automáticamente un documento con las modificaciones respecto de la compilación anterior.", note:AREA_NOTE,
-  options:["CM / SP 2.2 Controlar los elementos de configuración","CM / SP 3.1 Establecer registros de gestión de configuración","CM / SP 3.2 Realizar auditorías de configuración","CM / SP 1.3 Crear o liberar líneas base","REQM / SP 1.4 Mantener la trazabilidad bidireccional de los requerimientos","NINGUNA"],
+  explain:"yy: unas 24 correcciones por año, se reinicia con x → no se desborda. Manda x: de 1 a 9 son 9 valores, a uno por año → 9 años. El 4 es dividir 99 por 24 como si yy no se reiniciara; el 10 es contar desde 0." },
+{ u:"U6", k:"MULTI", tag:"U6 · Gestión de configuración · Ítems de configuración", type:"multi",
+  case:"Política: en cada proyecto se usa la versión de cada activo vigente al momento de comenzar el proyecto.\nFormato · Activos: <tipo>-<nombre>-<AAAAMMDD>.<ext> · Productos de trabajo: <tipo>-<nombre>.<ext> · Herramientas: <nombre> <versión>.\nEl proyecto se inició el 15/09/25. Las versiones de activos con extensión .odt no se usan más a partir del 01/09/25.",
+  text:"Defina los activos de proceso que forman parte de la gestión de configuración del proyecto.",
+  options:["Plla-PLAN-20250105.docx","Plla-PLAN-20250830.odt","Plla-PLAN-20250916.docx","Plla-CUR-20250702.docx","Plla-CUR-20250910.docx","Def-CUR-20240301.txt","LibreOffice 7","PLAN-Turnos.docx"],
+  answer:[0,4,5],
+  explain:"PLAN: la más nueva antes del inicio es la .odt, pero la .odt quedó fuera de uso el 01/09; la del 16/09 es posterior. Queda la .docx de enero, aunque sea vieja. CUR: la del 10/09. Def-CUR: la única. LibreOffice es herramienta; PLAN-Turnos no tiene fecha: es producto de trabajo." },
+{ u:"U6", k:"AREA", tag:"U6 · Gestión de configuración (CM) · Relacionar actividad con área CMMI", type:"single",
+  text:"Antes de liberar la línea base del producto, se verifica que el ejecutable construido coincida con la documentación técnica que lo describe y que estén incorporados todos los cambios aprobados, y sólo ellos.", note:AREA_NOTE,
+  options:["CM / SP 3.1 Establecer registros de gestión de configuración","CM / SP 3.2 Realizar auditorías de configuración","VER / SP 3.1 Realizar la verificación","PPQA / SP 1.2 Evaluar objetivamente los productos de trabajo y los servicios","CM / SP 1.3 Crear o liberar líneas base","NINGUNA"],
   answer:1,
-  explain:"Registrar las diferencias entre versiones o líneas base es CM SP 3.1 (está en el resumen como ejemplo)." },
-{ k:"AREA", tag:"U3 · Planificación y plan (PP) · Relacionar actividad con área CMMI", type:"single",
-  text:"Se planifica el curso de Angular que necesitan dos programadores del proyecto Turnos para poder cumplir con sus tareas.", note:AREA_NOTE,
-  options:["OT / SP 1.1 Establecer las necesidades estratégicas de formación","OT / SP 1.3 Establecer un plan táctico de formación organizativa","OT / SP 2.1 Impartir la formación","PMC / SP 1.5 Monitorizar la involucración de las partes interesadas","PP / SP 2.4 Planificar los recursos del proyecto","NINGUNA"],
-  answer:5,
-  explain:"Es la formación de UN proyecto: PP SP 2.5 (Planificar el conocimiento y las habilidades necesarios), que no está entre las opciones. Las de OT son de la organización, y PP 2.4 son recursos (personal, equipamiento). Respuesta: NINGUNA." }
+  explain:"Comprobar que lo construido coincide con su documentación (auditoría física) y que sólo entraron los cambios aprobados es auditoría de configuración: CM SP 3.2. No evalúa si el producto cumple su especificación (eso sería VER)." }
 ];
 
 const LET = "abcdefghijklmnopqrstuvwxyz";
-const KEY = "isw-simulacro-ad2-v1";
+const KEY = "isw-simulacro-ad2-v2";
 let ans = {}, graded = false, onlyWrong = false, startedAt = null, gradedAt = null, tick = null;
 
-function load() { try { const s = JSON.parse(localStorage.getItem(KEY) || "null"); if (s) { ans = s.ans || {}; graded = !!s.graded; startedAt = s.startedAt || null; gradedAt = s.gradedAt || null; } } catch (e) {} }
-function save() { try { localStorage.setItem(KEY, JSON.stringify({ ans, graded, startedAt, gradedAt })); } catch (e) {} }
-function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;" }[c])); }
-function isAnswered(i) { const q = Q[i], a = ans[i]; return q.type === "single" ? typeof a === "number" : Array.isArray(a) && a.length > 0; }
-function isCorrect(i) {
-  const q = Q[i], a = ans[i]; if (!isAnswered(i)) return false;
-  return q.type === "single" ? a === q.answer : [...a].sort().join(",") === [...q.answer].sort().join(",");
-}
 function seeded(n) { let x = n * 9301 + 49297; return () => { x = (x * 9301 + 49297) % 233280; return x / 233280; }; }
 const PERM = Q.map((q, i) => {
+  if (q.type === "grid") return null;
   const idx = q.options.map((o, j) => j);
   const fixed = idx.filter(j => q.options[j] === "NINGUNA");
   const mov = idx.filter(j => q.options[j] !== "NINGUNA");
-  const r = seeded(i + 17);
+  const r = seeded(i + 4);
   for (let k = mov.length - 1; k > 0; k--) { const m = Math.floor(r() * (k + 1)); [mov[k], mov[m]] = [mov[m], mov[k]]; }
   return mov.concat(fixed);
 });
 function letterOf(i, j) { return LET[PERM[i].indexOf(j)]; }
+
+function load() { try { const s = JSON.parse(localStorage.getItem(KEY) || "null"); if (s) { ans = s.ans || {}; graded = !!s.graded; startedAt = s.startedAt || null; gradedAt = s.gradedAt || null; } } catch (e) {} }
+function save() { try { localStorage.setItem(KEY, JSON.stringify({ ans, graded, startedAt, gradedAt })); } catch (e) {} }
+function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;" }[c])); }
+function isAnswered(i) {
+  const q = Q[i], a = ans[i];
+  if (q.type === "single") return typeof a === "number";
+  if (q.type === "multi") return Array.isArray(a) && a.length > 0;
+  return !!a && q.rows.every((r, k) => typeof a[k] === "number");
+}
+function isCorrect(i) {
+  const q = Q[i], a = ans[i]; if (!isAnswered(i)) return false;
+  if (q.type === "single") return a === q.answer;
+  if (q.type === "multi") return [...a].sort().join(",") === [...q.answer].sort().join(",");
+  return q.rows.every((r, k) => a[k] === r[1]);
+}
 function remaining() { return Math.max(0, DURATION - (Date.now() - startedAt)); }
 function fmt(ms) { const s = Math.ceil(ms / 1000), m = Math.floor(s / 60); return String(m).padStart(2, "0") + ":" + String(s % 60).padStart(2, "0"); }
 
@@ -282,15 +322,33 @@ function render() {
   const root = document.getElementById("quiz");
   root.innerHTML = Q.map((q, i) => {
     if (graded && onlyWrong && isCorrect(i)) return "";
-    const ok = graded && isCorrect(i), multi = q.type === "multi";
-    let body = q.case ? `<div class="case">${esc(q.case)}</div>` : "";
-    body += `<p class="qtext">${esc(q.text)}</p><p class="hint">${esc(q.note)}</p><div class="opts">`;
-    body += PERM[i].map((j) => { const o = q.options[j];
-      const chosen = multi ? (ans[i] || []).includes(j) : ans[i] === j;
-      const isAns = multi ? q.answer.includes(j) : q.answer === j;
-      let cls = ""; if (graded) { if (isAns) cls = "right"; else if (chosen) cls = "wrong"; }
-      return `<label class="opt ${cls}" for="q${i}o${j}"><input type="${multi ? "checkbox" : "radio"}" id="q${i}o${j}" name="q${i}" data-q="${i}" value="${j}" ${chosen ? "checked" : ""} ${graded ? "disabled" : ""}><span class="letter">${letterOf(i, j)})</span><span>${esc(o)}</span></label>`;
-    }).join("") + `</div>`;
+    const ok = graded && isCorrect(i);
+    let body = q.case ? `<div class="case${q.caseMono ? " mono" : ""}">${esc(q.case)}</div>` : "";
+    body += `<p class="qtext">${esc(q.text)}</p>`;
+    const hint = q.note ? q.note : q.type === "multi" ? "Selección múltiple: marcá todas las correctas. Una de más o de menos deja la pregunta en 0." : q.type === "grid" ? "Una opción por fila." : "Selección única.";
+    body += `<p class="hint">${esc(hint)}</p>`;
+    if (q.type === "grid") {
+      body += `<div class="gridwrap"><table class="grid"><tr><th></th>${q.cols.map(c => `<th>${esc(c)}</th>`).join("")}</tr>`;
+      q.rows.forEach((r, k) => {
+        body += `<tr><td class="row">${esc(r[0])}</td>`;
+        q.cols.forEach((c, j) => {
+          const chosen = ans[i] && ans[i][k] === j;
+          let cls = ""; if (graded) { if (j === r[1]) cls = "right"; else if (chosen) cls = "wrong"; }
+          body += `<td class="${cls}"><input type="radio" id="q${i}r${k}c${j}" name="q${i}r${k}" data-q="${i}" data-r="${k}" value="${j}" aria-label="${esc(r[0])}: ${esc(c)}" ${chosen ? "checked" : ""} ${graded ? "disabled" : ""}></td>`;
+        });
+        body += `</tr>`;
+      });
+      body += `</table></div>`;
+    } else {
+      const multi = q.type === "multi";
+      body += `<div class="opts">` + PERM[i].map(j => {
+        const o = q.options[j];
+        const chosen = multi ? (ans[i] || []).includes(j) : ans[i] === j;
+        const isAns = multi ? q.answer.includes(j) : q.answer === j;
+        let cls = ""; if (graded) { if (isAns) cls = "right"; else if (chosen) cls = "wrong"; }
+        return `<label class="opt ${cls}" for="q${i}o${j}"><input type="${multi ? "checkbox" : "radio"}" id="q${i}o${j}" name="q${i}" data-q="${i}" value="${j}" ${chosen ? "checked" : ""} ${graded ? "disabled" : ""}><span class="letter">${letterOf(i, j)})</span><span>${esc(o)}</span></label>`;
+      }).join("") + `</div>`;
+    }
     if (graded) body += `<div class="explain"><b>${ok ? "Bien." : "Por qué:"}</b> ${esc(q.explain)}</div>`;
     const verdict = graded ? `<span class="verdict ${ok ? "ok" : "bad"}">${ok ? "Correcta" : (isAnswered(i) ? "Incorrecta" : "Sin responder")}</span>` : "";
     return `<article class="q ${graded ? (ok ? "is-ok" : "is-bad") : ""}" id="q-${i}"><div class="qhead"><span class="qnum">${i + 1}.</span><span class="tag">[${esc(q.tag)}]</span>${verdict}</div>${body}</article>`;
@@ -337,9 +395,16 @@ function wrongText() {
   const lines = [`Simulacro AD 2 ISW: ${ok}/20 · tiempo usado ${fmt(Math.min(DURATION, gradedAt - startedAt))} · las que respondí mal`, ""];
   Q.forEach((q, i) => {
     if (isCorrect(i)) return;
-    lines.push(`${i + 1}. [${q.tag}] ` + (q.case ? q.case + " — " : "") + q.text);
-    lines.push(`   Marqué: ${fmtChoice(i, ans[i])}`);
-    lines.push(`   Correcta: ${fmtChoice(i, q.answer)}`);
+    lines.push(`${i + 1}. [${q.tag}] ` + (q.case ? q.case.replace(/\n+/g, " ") + " — " : "") + q.text);
+    if (q.type === "grid") {
+      q.rows.forEach((r, k) => {
+        const m = ans[i] ? ans[i][k] : undefined;
+        if (m !== r[1]) lines.push(`   Fila: ${r[0]}\n      Marqué: ${typeof m === "number" ? q.cols[m] : "(sin responder)"}\n      Correcta: ${q.cols[r[1]]}`);
+      });
+    } else {
+      lines.push(`   Marqué: ${fmtChoice(i, ans[i])}`);
+      lines.push(`   Correcta: ${fmtChoice(i, q.answer)}`);
+    }
     lines.push("");
   });
   return lines.join("\n");
@@ -349,10 +414,12 @@ function renderSummary(timeUp) {
   const box = document.getElementById("summary");
   if (!graded) { box.hidden = true; return; }
   const ok = Q.filter((q, i) => isCorrect(i)).length;
-  const part = k => { const idx = Q.map((q, i) => i).filter(i => Q[i].k === k); return `${idx.filter(isCorrect).length}/${idx.length}`; };
+  const cell = (label, pred) => { const idx = Q.map((q, i) => i).filter(i => pred(Q[i])); return idx.length ? `<div class="unit"><b>${idx.filter(isCorrect).length}/${idx.length}</b>${label}</div>` : ""; };
+  const byType = Object.keys(TYPES).map(k => cell(TYPES[k], q => q.k === k)).join("");
+  const byUnit = ["U1","U2","U3","U4","U5","U6"].map(u => cell(u, q => q.u === u)).join("");
   box.innerHTML = `${timeUp ? `<p class="timeup">Se terminó la hora: se corrigió con lo que tenías.</p>` : ""}
     <div class="score">${ok}/20<small>${Math.round(ok / 20 * 100)} % · ${ok >= 12 ? "aprobaría (60 %)" : "no llega al 60 %"} · tiempo usado ${fmt(Math.min(DURATION, gradedAt - startedAt))}</small></div>
-    <div class="units"><div class="unit"><b>${part("BP")}</b>BP</div><div class="unit"><b>${part("AREA")}</b>Área y práctica</div></div>
+    <div class="units"><h3>Por tipo</h3>${byType}<h3>Por unidad</h3>${byUnit}</div>
     <div class="actions">
       <button id="btnCopy">Copiar las que respondí mal</button>
       <button class="ghost" id="btnFilter">${onlyWrong ? "Ver todas" : "Ver sólo las incorrectas"}</button>
@@ -377,7 +444,8 @@ document.getElementById("quiz").addEventListener("change", e => {
   const t = e.target; if (!t.dataset || t.dataset.q === undefined || graded) return;
   const i = +t.dataset.q, q = Q[i];
   if (q.type === "single") ans[i] = +t.value;
-  else { const set = new Set(ans[i] || []); t.checked ? set.add(+t.value) : set.delete(+t.value); ans[i] = [...set].sort((a, b) => a - b); }
+  else if (q.type === "multi") { const set = new Set(ans[i] || []); t.checked ? set.add(+t.value) : set.delete(+t.value); ans[i] = [...set].sort((a, b) => a - b); }
+  else { ans[i] = ans[i] || {}; ans[i][+t.dataset.r] = +t.value; }
   save(); updateBar();
 });
 document.getElementById("btnStart").onclick = () => { startedAt = Date.now(); save(); show(); render(); startTick(); };
