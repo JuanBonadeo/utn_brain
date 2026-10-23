@@ -13,7 +13,7 @@
 @page { size: A3 landscape; margin: 9mm; }
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; background: #FFFFFF; }
-body { font-family: 'Lexend', 'Segoe UI', Arial, Helvetica, sans-serif; color: #15406B;
+body { font-family: 'Lexend', Arial, Helvetica, sans-serif; color: #15406B;
        -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 .hoja { width: 100%; height: 279mm; display: flex; flex-direction: column; overflow: hidden; }
 .cab { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3mm; }
@@ -189,8 +189,9 @@ table.t tr.tot td { font-weight: 700; color: #15406B; border-bottom: none; }
             <tr><th>Variables</th><th class="r">USD/mes</th></tr>
             <tr><td>Por municipio (nube, notificaciones, soporte)</td><td class="r">180</td></tr>
             <tr><td>Por cuadrilla (fotos, notificaciones)</td><td class="r">4</td></tr>
+            <tr><td>Tributos sobre lo facturado (IIBB, DReI, débitos y créditos)</td><td class="r">5%</td></tr>
           </table>
-          <p class="nota"><b>Punto de equilibrio:</b> Q = CF / (P − CVu) = 5.500 / (1.200 − 180) ≈ 5,4 → <b>6 municipios</b> de hasta 100.000 hab. Se alcanza durante el año 2 con la mezcla de municipios y cuadrillas proyectada.</p>
+          <p class="nota"><b>Punto de equilibrio:</b> Q = CF / (P − CVu) = 5.500 / (1.200 − 180 − 60) ≈ 5,7 → <b>6 municipios</b> de hasta 100.000 hab. El CVu suma la operación y el 5% de tributos. Se alcanza durante el año 2 con la mezcla de municipios y cuadrillas proyectada.</p>
         </div>
       </div>
     </section>
@@ -206,7 +207,7 @@ table.t tr.tot td { font-weight: 700; color: #15406B; border-bottom: none; }
         <tr><td><b>Implementación</b></td><td>Pago único al alta: USD 2.500</td><td>Municipios</td><td class="r">15.000</td><td class="r">4,5%</td></tr>
         <tr class="tot"><td>Total año 3</td><td>14 municipios · 280 cuadrillas</td><td></td><td class="r">336.600</td><td class="r">100%</td></tr>
       </table>
-      <p class="nota">Precios en dólares (la nube se paga en dólares), cobrados en pesos al tipo de cambio oficial con ajuste trimestral.</p>
+      <p class="nota">Precios en dólares y sin IVA (la nube se paga en dólares), cobrados en pesos al tipo de cambio oficial con ajuste trimestral.</p>
     </section>
   </div>
 

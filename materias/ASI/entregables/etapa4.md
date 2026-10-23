@@ -7,7 +7,7 @@
 > **Anexo I — Business Model Canvas.** Lámina A3 apaisada en archivo independiente:
 > `etapa4-canvas.html` → `etapa4-canvas.pdf`.
 >
-> **Estado al 2026-10-20.** Las tres actividades de la consigna están desarrolladas y no queda
+> **Estado al 2026-10-23** (versión 3: tributos en el 2.9). Las tres actividades de la consigna están desarrolladas y no queda
 > nada pendiente de definición. Idea elegida por el grupo: plataforma de reclamos urbanos con
 > ruteo a municipio y prestadoras, app de cuadrilla y datos abiertos (candidata A).
 >
@@ -71,6 +71,7 @@ Administración de Sistemas de Información — 4º Año Ingeniería en Sistemas
 |---|---|---|---|
 | 1 | 14/10/2026 | Grupo N310 | Primera versión: idea de startup, Business Model Canvas con fuentes de ingreso y resumen para el inversor |
 | 2 | 20/10/2026 | Grupo N310 | Equipo fundador con un rol y una hipótesis del MVP por cofundador; pacto de socios con consolidación gradual de acciones; participación ofrecida al inversor, en dos tramos atados al piloto; resumen para el inversor ajustado a una página |
+| 3 | 23/10/2026 | Grupo N310 | Tributos en la estructura de costos y punto de equilibrio recalculado; precios expresados sin IVA |
 
 ### ÍNDICE
 
@@ -265,7 +266,7 @@ Cada segmento que paga tiene su fuente de ingreso. **No usamos publicidad**: en 
 | **Licencia por cuadrilla** | Licencia mensual por cuadrilla activa en la app (mínimo 10) | USD 35 por cuadrilla | Prestadoras |
 | **Datos e informes** | Informes a medida y acceso a la interfaz de datos de alto volumen. El tablero y el conjunto de datos abierto son gratuitos | USD 1.500 por informe · USD 400 por mes de acceso a la interfaz | Planificadores, prestadoras y municipios |
 
-Los precios se fijan en dólares porque el principal costo, la infraestructura en la nube, se paga en dólares. Se cobran en pesos al tipo de cambio oficial, con ajuste trimestral.
+Los precios se fijan en dólares porque el principal costo, la infraestructura en la nube, se paga en dólares. Se cobran en pesos al tipo de cambio oficial, con ajuste trimestral, y se expresan sin IVA. Para las prestadoras, que son responsables inscriptas, el IVA es neutro. El municipio, en cambio, es un sujeto exento que no puede descontarlo, así que paga el 21% por encima del precio de lista.
 
 **Proyección de ingresos.** Ingreso mensual recurrente al cierre de cada año:
 
@@ -364,12 +365,15 @@ Cada socio aporta un recurso o hace una actividad que nosotros no hacemos.
 |---|---|
 | Por municipio: nube incremental, notificaciones y mesa de ayuda | USD 180 por mes |
 | Por cuadrilla: almacenamiento de fotos y notificaciones | USD 4 por mes |
+| Tributos sobre la facturación: Ingresos Brutos, Derecho de Registro e Inspección e impuesto a los débitos y créditos bancarios | 5% de lo facturado |
 
-**Punto de equilibrio.** Como hace la cátedra en su ejemplo, el retiro de los socios va dentro de los costos fijos. Para un municipio de hasta 100.000 habitantes:
+**Tributos.** La cátedra incluye los impuestos entre los costos variables. Por eso se suman los que se pagan sobre la facturación: Ingresos Brutos (provincial), Derecho de Registro e Inspección (municipal) e impuesto a los débitos y créditos bancarios. En conjunto se estiman en un 5% de lo facturado *(supuesto, a confirmar con un contador)*. El IVA no es un costo de la empresa, porque lo cobra y lo deposita, y por eso los precios se expresan sin IVA. El impuesto a las Ganancias recae sobre la utilidad, de modo que no modifica el punto de equilibrio. Su alícuota se reduce si la empresa se inscribe en el régimen de la Ley de Economía del Conocimiento. Los dos empleados que se suman en el año 2 se costean con las cargas sociales y el aguinaldo incluidos, para perfiles junior.
 
-Q = CF / (P − CVu) = 5.500 / (1.200 − 180) = 5.500 / 1.020 ≈ 5,4 → **6 municipios**
+**Punto de equilibrio.** Como hace la cátedra en su ejemplo, el retiro de los socios va dentro de los costos fijos. Para un municipio de hasta 100.000 habitantes, el costo variable unitario suma los USD 180 de operación y USD 60 de tributos (5% de USD 1.200):
 
-Con la mezcla de clientes proyectada, el margen de contribución al cierre del año 1 es de USD 2.790 por mes. Son USD 1.860 de los tres municipios y USD 930 de las 30 cuadrillas, la mitad de los costos fijos. **El equilibrio se alcanza durante el año 2.** Al cierre de ese año, el margen de contribución (USD 10.880 por mes) cubre los costos fijos aun después de sumar al equipo el desarrollador y la persona de soporte, unos USD 8.000 por mes en total. La brecha del primer año y medio es la que cubre la inversión que se pide en el punto 3.
+Q = CF / (P − CVu) = 5.500 / (1.200 − 180 − 60) = 5.500 / 960 ≈ 5,7 → **6 municipios**
+
+Con la mezcla de clientes proyectada y descontados los tributos, el margen de contribución al cierre del año 1 es de USD 2.620 por mes. Son USD 1.740 de los tres municipios y USD 880 de las 30 cuadrillas, casi la mitad de los costos fijos. **El equilibrio se alcanza durante el año 2.** Al cierre de ese año, el margen de contribución (USD 10.240 por mes) cubre los costos fijos aun después de sumar al equipo el desarrollador y la persona de soporte, unos USD 8.000 por mes en total. La brecha del primer año y medio es la que cubre la inversión que se pide en el punto 3.
 
 <!-- pagebreak -->
 
