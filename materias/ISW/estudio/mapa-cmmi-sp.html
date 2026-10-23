@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Prácticas específicas de CMMI</title>
+<style>
+  @page { size: A4 landscape; margin: 6mm 7mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Avenir Next", Helvetica, Arial, sans-serif; font-size: 7.2pt; color: #1d2329; line-height: 1.2; }
+  .top { display: flex; align-items: baseline; gap: 3mm; margin-bottom: 1.8mm; }
+  h1 { font-size: 13pt; margin: 0; }
+  .top span { color: #5b6470; font-size: 7.6pt; }
+  .sw { display: inline-block; width: 2.6mm; height: 2.6mm; border-radius: .5mm; vertical-align: -.3mm; margin: 0 .6mm 0 1.6mm; }
+  .grid { column-count: 4; column-gap: 2.2mm; }
+  .area { break-inside: avoid; border: 1px solid; border-radius: 1.6mm; padding: 1mm 1.4mm 1.1mm; margin-bottom: 2mm; }
+  .l2 { background: #f1faf3; border-color: #7cc28a; }
+  .l3 { background: #fffbea; border-color: #e3c34d; }
+  .area h2 { margin: 0 0 .6mm; font-size: 8.6pt; display: flex; justify-content: space-between; align-items: baseline; }
+  .area h2 em { font-style: normal; font-weight: 500; font-size: 6.8pt; color: #5b6470; }
+  .sg { font-weight: 700; margin: .7mm 0 .2mm; font-size: 7.1pt; color: #374151; border-top: 1px solid rgba(0,0,0,.08); padding-top: .5mm; }
+  .sg:first-of-type { border-top: none; padding-top: 0; }
+  .sp { display: grid; grid-template-columns: 5.4mm 1fr; gap: .6mm; margin: .15mm 0; }
+  .sp b { color: #1d2329; }
+  .cue { display: block; color: #6d28d9; font-size: 6.6pt; }
+</style>
+</head>
+<body>
+
+<div class="top">
+  <h1>Prácticas específicas (SP) de las áreas que entran</h1>
+  <span>U2 OPF · OPD · OT — U3 PP · PMC · RSKM — U4 REQM · RD — U5 VER · VAL — U6 CM
+    <i class="sw" style="background:#f1faf3;border:1px solid #7cc28a"></i>nivel 2
+    <i class="sw" style="background:#fffbea;border:1px solid #e3c34d"></i>nivel 3
+    · <span style="color:#6d28d9">violeta</span> = pista para reconocerla</span>
+</div>
+
+<div class="grid">
+
+  <div class="area l2"><h2>PP <em>Planificación de proyecto · U3</em></h2>
+    <div class="sg">SG1 Establecer estimaciones</div>
+    <div class="sp"><b>1.1</b><span>Estimar el alcance del proyecto<span class="cue">EDT / WBS de alto nivel</span></span></div>
+    <div class="sp"><b>1.2</b><span>Establecer las estimaciones de los atributos de los productos de trabajo y de las tareas<span class="cue">tamaño, puntos función</span></span></div>
+    <div class="sp"><b>1.3</b><span>Definir el ciclo de vida del proyecto</span></div>
+    <div class="sp"><b>1.4</b><span>Determinar las estimaciones de esfuerzo y de coste<span class="cue">horas y costo a partir del tamaño, datos históricos</span></span></div>
+    <div class="sg">SG2 Desarrollar un plan de proyecto</div>
+    <div class="sp"><b>2.1</b><span>Establecer el presupuesto y el calendario<span class="cue">hitos, cronograma</span></span></div>
+    <div class="sp"><b>2.2</b><span>Identificar los riesgos del proyecto</span></div>
+    <div class="sp"><b>2.3</b><span>Planificar la gestión de los datos<span class="cue">qué datos registra UN proyecto</span></span></div>
+    <div class="sp"><b>2.4</b><span>Planificar los recursos del proyecto</span></div>
+    <div class="sp"><b>2.5</b><span>Planificar el conocimiento y las habilidades necesarios<span class="cue">curso para el proyecto X</span></span></div>
+    <div class="sp"><b>2.6</b><span>Planificar la involucración de las partes interesadas<span class="cue">roles del cliente en el plan</span></span></div>
+    <div class="sp"><b>2.7</b><span>Establecer el plan de proyecto</span></div>
+    <div class="sg">SG3 Obtener el compromiso con el plan</div>
+    <div class="sp"><b>3.1</b><span>Revisar los planes que afectan al proyecto</span></div>
+    <div class="sp"><b>3.2</b><span>Reconciliar los niveles de trabajo y de recursos</span></div>
+    <div class="sp"><b>3.3</b><span>Obtener el compromiso con el plan</span></div>
+  </div>
+
+  <div class="area l2"><h2>PMC <em>Monitorización y control · U3</em></h2>
+    <div class="sg">SG1 Monitorizar el proyecto frente al plan</div>
+    <div class="sp"><b>1.1</b><span>Monitorizar los parámetros de planificación del proyecto<span class="cue">real vs plan: esfuerzo, costo, calendario</span></span></div>
+    <div class="sp"><b>1.2</b><span>Monitorizar los compromisos</span></div>
+    <div class="sp"><b>1.3</b><span>Monitorizar los riesgos del proyecto</span></div>
+    <div class="sp"><b>1.4</b><span>Monitorizar la gestión de los datos</span></div>
+    <div class="sp"><b>1.5</b><span>Monitorizar la involucración de las partes interesadas<span class="cue">usuario clave que no participa</span></span></div>
+    <div class="sp"><b>1.6</b><span>Llevar a cabo revisiones de progreso<span class="cue">periódicas</span></span></div>
+    <div class="sp"><b>1.7</b><span>Llevar a cabo revisiones de hitos</span></div>
+    <div class="sg">SG2 Gestionar las acciones correctivas hasta su cierre</div>
+    <div class="sp"><b>2.1</b><span>Analizar los problemas<span class="cue">buscando la causa</span></span></div>
+    <div class="sp"><b>2.2</b><span>Llevar a cabo las acciones correctivas<span class="cue">se decide / ejecuta ahora</span></span></div>
+    <div class="sp"><b>2.3</b><span>Gestionar las acciones correctivas<span class="cue">se evalúa si funcionó, lecciones aprendidas</span></span></div>
+  </div>
+
+  <div class="area l3"><h2>RSKM <em>Gestión de riesgos · U3</em></h2>
+    <div class="sg">SG1 Preparar la gestión de riesgos</div>
+    <div class="sp"><b>1.1</b><span>Determinar las fuentes y las categorías de los riesgos</span></div>
+    <div class="sp"><b>1.2</b><span>Definir los parámetros de los riesgos<span class="cue">probabilidad, impacto, umbrales</span></span></div>
+    <div class="sp"><b>1.3</b><span>Establecer una estrategia de gestión de riesgos</span></div>
+    <div class="sg">SG2 Identificar y analizar los riesgos</div>
+    <div class="sp"><b>2.1</b><span>Identificar los riesgos</span></div>
+    <div class="sp"><b>2.2</b><span>Evaluar, categorizar y priorizar los riesgos</span></div>
+    <div class="sg">SG3 Mitigar los riesgos</div>
+    <div class="sp"><b>3.1</b><span>Desarrollar los planes de mitigación de riesgos</span></div>
+    <div class="sp"><b>3.2</b><span>Implementar los planes de mitigación de riesgos</span></div>
+    <div class="sp"><b>⚠</b><span><span class="cue" style="display:inline">identificar en el plan → PP 2.2 · seguirlos → PMC 1.3</span></span></div>
+  </div>
+
+  <div class="area l2"><h2>REQM <em>Gestión de requerimientos · U4</em></h2>
+    <div class="sg">SG1 Gestionar los requerimientos</div>
+    <div class="sp"><b>1.1</b><span>Obtener una comprensión de los requerimientos<span class="cue">canales oficiales, criterios de aceptación</span></span></div>
+    <div class="sp"><b>1.2</b><span>Obtener el compromiso sobre los requerimientos<span class="cue">Sponsor acepta correr la fecha</span></span></div>
+    <div class="sp"><b>1.3</b><span>Gestionar los cambios de los requerimientos<span class="cue">todavía se evalúa el impacto</span></span></div>
+    <div class="sp"><b>1.4</b><span>Mantener la trazabilidad bidireccional de los requerimientos<span class="cue">matriz de trazabilidad</span></span></div>
+    <div class="sp"><b>1.5</b><span>Identificar las inconsistencias entre el trabajo del proyecto y los requerimientos</span></div>
+  </div>
+
+  <div class="area l3"><h2>RD <em>Desarrollo de requerimientos · U4</em></h2>
+    <div class="sg">SG1 Desarrollar los requerimientos de cliente</div>
+    <div class="sp"><b>1.1</b><span>Obtener las necesidades<span class="cue">relevar: entrevistas, prototipos, observación</span></span></div>
+    <div class="sp"><b>1.2</b><span>Desarrollar los requerimientos de cliente<span class="cue">consolidar, resolver conflictos</span></span></div>
+    <div class="sg">SG2 Desarrollar los requerimientos de producto</div>
+    <div class="sp"><b>2.1</b><span>Establecer los requerimientos de producto y de componentes del producto<span class="cue">pasar a términos técnicos</span></span></div>
+    <div class="sp"><b>2.2</b><span>Asignar los requerimientos de componentes del producto</span></div>
+    <div class="sp"><b>2.3</b><span>Identificar los requerimientos de interfaz</span></div>
+    <div class="sg">SG3 Analizar y validar los requerimientos</div>
+    <div class="sp"><b>3.1</b><span>Establecer los conceptos operativos y los escenarios</span></div>
+    <div class="sp"><b>3.2</b><span>Establecer una definición de la funcionalidad requerida</span></div>
+    <div class="sp"><b>3.3</b><span>Analizar los requerimientos<span class="cue">requisito vago o no medible</span></span></div>
+    <div class="sp"><b>3.4</b><span>Analizar los requerimientos para alcanzar el equilibrio<span class="cue">vs costo, plazo, riesgo</span></span></div>
+    <div class="sp"><b>3.5</b><span>Validar los requerimientos<span class="cue">con el usuario, temprano, prototipo</span></span></div>
+  </div>
+
+  <div class="area l3"><h2>VER <em>Verificación · U5</em></h2>
+    <div class="sg">SG1 Preparar la verificación</div>
+    <div class="sp"><b>1.1</b><span>Seleccionar los productos de trabajo a verificar</span></div>
+    <div class="sp"><b>1.2</b><span>Establecer el entorno de verificación<span class="cue">BD de prueba, herramientas</span></span></div>
+    <div class="sp"><b>1.3</b><span>Establecer los procedimientos y los criterios de verificación</span></div>
+    <div class="sg">SG2 Realizar revisiones entre pares</div>
+    <div class="sp"><b>2.1</b><span>Preparar las revisiones entre pares<span class="cue">futuro: distribuir el material antes de la reunión</span></span></div>
+    <div class="sp"><b>2.2</b><span>Llevar a cabo las revisiones entre pares<span class="cue">presente: la reunión en curso</span></span></div>
+    <div class="sp"><b>2.3</b><span>Analizar los datos de la revisión entre pares<span class="cue">después: almacenar los datos, proteger identidades</span></span></div>
+    <div class="sg">SG3 Verificar los productos de trabajo seleccionados</div>
+    <div class="sp"><b>3.1</b><span>Realizar la verificación<span class="cue">pruebas unitarias, integración, sistema</span></span></div>
+    <div class="sp"><b>3.2</b><span>Analizar los resultados de la verificación</span></div>
+  </div>
+
+  <div class="area l3"><h2>VAL <em>Validación · U5</em></h2>
+    <div class="sg">SG1 Preparar la validación</div>
+    <div class="sp"><b>1.1</b><span>Seleccionar los productos a validar</span></div>
+    <div class="sp"><b>1.2</b><span>Establecer el entorno de validación<span class="cue">server, agenda, instalaciones del cliente</span></span></div>
+    <div class="sp"><b>1.3</b><span>Establecer los procedimientos y los criterios de validación</span></div>
+    <div class="sg">SG2 Validar el producto o los componentes del producto</div>
+    <div class="sp"><b>2.1</b><span>Realizar la validación<span class="cue">aceptación, alfa / beta, con el cliente</span></span></div>
+    <div class="sp"><b>2.2</b><span>Analizar los resultados de la validación</span></div>
+    <div class="sp"><b>⚠</b><span><span class="cue" style="display:inline">VAL no tiene revisión entre pares: "VAL SP 2.1 Preparar las revisiones entre pares" → NINGUNA</span></span></div>
+  </div>
+
+  <div class="area l2"><h2>CM <em>Gestión de configuración · U6</em></h2>
+    <div class="sg">SG1 Establecer líneas base</div>
+    <div class="sp"><b>1.1</b><span>Identificar los elementos de configuración</span></div>
+    <div class="sp"><b>1.2</b><span>Establecer un sistema de gestión de configuración<span class="cue">repositorio, permisos, backup</span></span></div>
+    <div class="sp"><b>1.3</b><span>Crear o liberar líneas base</span></div>
+    <div class="sg">SG2 Seguir y controlar los cambios</div>
+    <div class="sp"><b>2.1</b><span>Seguir las peticiones de cambio<span class="cue">cambio ya aceptado, se tramita</span></span></div>
+    <div class="sp"><b>2.2</b><span>Controlar los elementos de configuración<span class="cue">autorizar, check-in / check-out</span></span></div>
+    <div class="sg">SG3 Establecer la integridad</div>
+    <div class="sp"><b>3.1</b><span>Establecer registros de gestión de configuración<span class="cue">diferencias entre LB</span></span></div>
+    <div class="sp"><b>3.2</b><span>Realizar auditorías de configuración<span class="cue">nombres vs reglas del proyecto (cuestionario)</span></span></div>
+  </div>
+
+  <div class="area l3"><h2>OPF <em>Enfoque en procesos de la org. · U2</em></h2>
+    <div class="sg">SG1 Determinar las oportunidades de mejora de procesos</div>
+    <div class="sp"><b>1.1</b><span>Establecer las necesidades de procesos de la organización</span></div>
+    <div class="sp"><b>1.2</b><span>Evaluar los procesos de la organización<span class="cue">fuertes / débiles, patrocinio</span></span></div>
+    <div class="sp"><b>1.3</b><span>Identificar las mejoras de procesos de la organización</span></div>
+    <div class="sg">SG2 Planificar e implementar las mejoras de procesos</div>
+    <div class="sp"><b>2.1</b><span>Establecer planes de acción de procesos</span></div>
+    <div class="sp"><b>2.2</b><span>Implementar los planes de acción de procesos<span class="cue">piloto, mejora aún no aprobada</span></span></div>
+    <div class="sg">SG3 Desplegar los activos e incorporar las lecciones aprendidas</div>
+    <div class="sp"><b>3.1</b><span>Desplegar los activos de proceso de la organización</span></div>
+    <div class="sp"><b>3.2</b><span>Desplegar los procesos estándar</span></div>
+    <div class="sp"><b>3.3</b><span>Monitorizar la implementación<span class="cue">¿los proyectos adoptaron la mejora?</span></span></div>
+    <div class="sp"><b>3.4</b><span>Incorporar las experiencias relativas al proceso en los activos de proceso</span></div>
+  </div>
+
+  <div class="area l3"><h2>OPD <em>Definición de procesos de la org. · U2</em></h2>
+    <div class="sg">SG1 Establecer los activos de proceso de la organización</div>
+    <div class="sp"><b>1.1</b><span>Establecer los procesos estándar<span class="cue">también: revisar entre pares un activo aún no publicado</span></span></div>
+    <div class="sp"><b>1.2</b><span>Establecer las descripciones de los modelos de ciclo de vida</span></div>
+    <div class="sp"><b>1.3</b><span>Establecer los criterios y las guías de adaptación<span class="cue">excepciones al estándar</span></span></div>
+    <div class="sp"><b>1.4</b><span>Establecer el repositorio de medición de la organización</span></div>
+    <div class="sp"><b>1.5</b><span>Establecer la biblioteca de activos de proceso de la organización</span></div>
+    <div class="sp"><b>1.6</b><span>Establecer los estándares del entorno de trabajo</span></div>
+  </div>
+
+  <div class="area l3"><h2>OT <em>Formación organizativa · U2</em></h2>
+    <div class="sg">SG1 Establecer una capacidad de formación organizativa</div>
+    <div class="sp"><b>1.1</b><span>Establecer las necesidades estratégicas de formación</span></div>
+    <div class="sp"><b>1.2</b><span>Determinar qué necesidades de formación son responsabilidad de la organización</span></div>
+    <div class="sp"><b>1.3</b><span>Establecer un plan táctico de formación organizativa</span></div>
+    <div class="sp"><b>1.4</b><span>Establecer la capacidad de formación<span class="cue">instructores, materiales</span></span></div>
+    <div class="sg">SG2 Proporcionar la formación necesaria</div>
+    <div class="sp"><b>2.1</b><span>Impartir la formación</span></div>
+    <div class="sp"><b>2.2</b><span>Establecer los registros de formación</span></div>
+    <div class="sp"><b>2.3</b><span>Evaluar la eficacia de la formación</span></div>
+  </div>
+
+</div>
+</body>
+</html>
