@@ -351,7 +351,7 @@ function render() {
     }
     if (graded) body += `<div class="explain"><b>${ok ? "Bien." : "Por qué:"}</b> ${esc(q.explain)}</div>`;
     const verdict = graded ? `<span class="verdict ${ok ? "ok" : "bad"}">${ok ? "Correcta" : (isAnswered(i) ? "Incorrecta" : "Sin responder")}</span>` : "";
-    return `<article class="q ${graded ? (ok ? "is-ok" : "is-bad") : ""}" id="q-${i}"><div class="qhead"><span class="qnum">${i + 1}.</span><span class="tag">[${esc(q.tag)}]</span>${verdict}</div>${body}</article>`;
+    return `<article class="q ${graded ? (ok ? "is-ok" : "is-bad") : ""}" id="q-${i}"><div class="qhead"><span class="qnum">${i + 1}.</span>${graded ? `<span class="tag">[${esc(q.tag)}]</span>` : ""}${verdict}</div>${body}</article>`;
   }).join("");
   updateBar();
 }
