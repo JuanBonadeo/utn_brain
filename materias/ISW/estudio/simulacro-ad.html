@@ -103,7 +103,7 @@ table.grid td.wrong { background: var(--bad-soft); }
       <div><b>Selección única:</b> una sola opción. NINGUNA es una respuesta real.</div>
       <div><b>Selección múltiple:</b> marcá todas las correctas. Una de más o una de menos deja la pregunta en 0.</div>
       <div><b>BP:</b> podés elegir varias, pero no mezclar las que dicen que SÍ hay problemas con las que dicen que NO.</div>
-      <div><b>Grillas:</b> una opción por fila; la pregunta vale sólo si todas las filas están bien.</div>
+      <div><b>Grillas:</b> una opción por fila; cada fila vale un punto, como en el parcial.</div>
     </div>
   </header>
 
@@ -423,6 +423,11 @@ function isAnswered(i) {
   if (q.type === "multi") return Array.isArray(a) && a.length > 0;
   return a && q.rows.every((r, k) => typeof a[k] === "number");
 }
+function pts(i) { const q = Q[i]; if (q.type !== "grid") return isCorrect(i) ? 1 : 0; const a = ans[i] || {}; return q.rows.filter((r, k) => a[k] === r[1]).length; }
+function maxPts(i) { return Q[i].type === "grid" ? Q[i].rows.length : 1; }
+function sumPts(idx) { return idx.reduce((s, i) => s + pts(i), 0); }
+function sumMax(idx) { return idx.reduce((s, i) => s + maxPts(i), 0); }
+const ALL = Q.map((q, i) => i);
 function isCorrect(i) {
   const q = Q[i], a = ans[i];
   if (!isAnswered(i)) return false;
@@ -465,7 +470,7 @@ function render() {
       }).join("") + `</div>`;
     }
     if (graded) body += `<div class="explain"><b>${ok ? "Bien." : "Por qué:"}</b> ${esc(q.explain)}</div>`;
-    const verdict = graded ? `<span class="verdict ${ok ? "ok" : "bad"}">${ok ? "Correcta" : "Incorrecta"}</span>` : "";
+    const verdict = graded ? `<span class="verdict ${ok ? "ok" : "bad"}">${q.type === "grid" ? `${pts(i)}/${maxPts(i)} filas` : (ok ? "Correcta" : (isAnswered(i) ? "Incorrecta" : "Sin responder"))}</span>` : "";
     return `<article class="q ${graded ? (ok ? "is-ok" : "is-bad") : ""}" id="q-${i}"><div class="qhead"><span class="qnum">${i + 1}.</span>${graded ? `<span class="tag">[${esc(q.tag)}]</span>` : ""}${verdict}</div>${body}</article>`;
   }).join("");
   updateProgress();
@@ -473,7 +478,7 @@ function render() {
 
 function updateProgress() {
   const n = Q.filter((q, i) => isAnswered(i)).length;
-  document.getElementById("progTxt").textContent = graded ? `Corregido · ${Q.filter((q, i) => isCorrect(i)).length} de 40 correctas` : `${n} de 40 respondidas`;
+  document.getElementById("progTxt").textContent = graded ? `Corregido · ${sumPts(ALL)} de ${sumMax(ALL)} puntos` : `${n} de 40 respondidas`;
   document.getElementById("progFill").style.transform = "scaleX(" + (graded ? 1 : n / Q.length) + ")";
   const btn = document.getElementById("btnGrade");
   btn.hidden = graded;
@@ -521,19 +526,19 @@ function wrongText() {
     }
     lines.push("");
   });
-  return lines.length ? "Simulacro AD ISW: las que respondí mal\n\n" + lines.join("\n") : "Respondí todas bien.";
+  return lines.length ? `Simulacro AD ISW: ${sumPts(ALL)}/${sumMax(ALL)} puntos · las que respondí mal\n\n` + lines.join("\n") : "Respondí todas bien.";
 }
 
 function renderSummary() {
   const box = document.getElementById("summary");
   if (!graded) { box.hidden = true; return; }
-  const ok = Q.filter((q, i) => isCorrect(i)).length;
+  const ok = sumPts(ALL), tot = sumMax(ALL);
   const units = ["U1", "U2", "U3", "U4", "U5", "U6"].map(u => {
-    const idx = Q.map((q, i) => i).filter(i => Q[i].u === u);
-    return `<div class="unit"><b>${idx.filter(isCorrect).length}/${idx.length}</b>${u}</div>`;
+    const idx = ALL.filter(i => Q[i].u === u);
+    return `<div class="unit"><b>${sumPts(idx)}/${sumMax(idx)}</b>${u}</div>`;
   }).join("");
-  const pass = ok >= 24;
-  box.innerHTML = `<div class="score">${ok}/40<small>${Math.round(ok / 40 * 100)} % · ${pass ? "aprobaría (60 %)" : "no llega al 60 %"}</small></div>
+  const pass = ok >= 0.6 * tot;
+  box.innerHTML = `<div class="score">${ok}/${tot} puntos<small>${Math.round(ok / tot * 100)} % · ${pass ? "aprobaría (60 %)" : "no llega al 60 %"} · cada fila de grilla vale 1 punto</small></div>
     <div class="units">${units}</div>
     <div class="actions">
       <button id="btnCopy">Copiar las que respondí mal</button>
