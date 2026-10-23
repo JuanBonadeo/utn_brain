@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Requerimientos</title>
+<style>
+  @page { size: A4; margin: 8mm 9mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Avenir Next", Helvetica, Arial, sans-serif; font-size: 8.2pt; color: #1d2329; line-height: 1.24; }
+  h1 { font-size: 15pt; margin: 0; letter-spacing: -.01em; }
+  h1 small { font-weight: 500; color: #5b6470; font-size: 9pt; margin-left: 2mm; }
+  h2 { font-size: 9.6pt; margin: 0 0 1.4mm; display: flex; align-items: center; gap: 1.8mm; }
+  .num { background: #1d2329; color: #fff; border-radius: 50%; width: 5mm; height: 5mm; display: inline-flex; align-items: center; justify-content: center; font-size: 7.8pt; flex: none; }
+  .panel { border: 1px solid #d4d9df; border-radius: 2.4mm; padding: 2mm 2.6mm; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2.6mm; margin-top: 2.4mm; }
+  .cols3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2.6mm; margin-top: 2.4mm; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { border-bottom: 1px solid #e3e7eb; padding: .6mm 1.2mm; text-align: left; vertical-align: top; }
+  th { font-size: 7.3pt; color: #5b6470; font-weight: 600; }
+  ul { margin: 0; padding-left: 3.4mm; }
+  li { margin-bottom: .6mm; }
+  .hint { font-size: 7.4pt; color: #5b6470; margin: 1mm 0 0; }
+  .ok { color: #15803d; font-weight: 700; } .bad { color: #b91c1c; font-weight: 700; }
+  td.sp { font-weight: 700; white-space: nowrap; width: 17%; }
+
+  /* decisión RD / REQM / CM */
+  .q { border: 2px solid #1d2329; border-radius: 2mm; padding: 1mm 2mm; font-weight: 700; text-align: center; }
+  .split { display: grid; grid-template-columns: 1fr 2.2fr; gap: 2mm; margin-top: 1mm; }
+  .arr { text-align: center; color: #6b7480; font-size: 7.2pt; line-height: 1; margin: .4mm 0; }
+  .arr b { display: block; font-size: 9pt; font-weight: 400; }
+  .rd { background: #fff8db; border: 1.2px solid #e3c34d; border-radius: 1.8mm; padding: 1.2mm 1.6mm; }
+  .rq { background: #e6f5e9; border: 1.2px solid #7cc28a; border-radius: 1.8mm; padding: 1.2mm 1.6mm; }
+  .rd h3, .rq h3 { margin: 0 0 .5mm; font-size: 8.6pt; }
+
+  /* flujo del cambio */
+  .flow { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0; }
+  .st { position: relative; background: #f1ecfb; border: 1.2px solid #b9a5e8; border-radius: 1.8mm; padding: 1mm 1.4mm; margin-right: 3.4mm; font-size: 7.6pt; }
+  .st:last-child { margin-right: 0; }
+  .st:not(:last-child)::after { content: "→"; position: absolute; right: -3.2mm; top: 50%; transform: translateY(-50%); color: #6d28d9; font-weight: 700; }
+  .st > b { display: block; font-size: 8pt; }
+  .warn { margin-top: 1.4mm; background: #fdf0e8; border: 1px solid #eab08a; border-radius: 1.6mm; padding: 1mm 1.8mm; }
+</style>
+</head>
+<body>
+
+<h1>Requerimientos <small>U4 · RD, REQM y gestión de cambios</small></h1>
+
+<div class="panel" style="margin-top:2.4mm">
+  <h2><span class="num">1</span> ¿RD, REQM o CM?</h2>
+  <div class="q">¿El requerimiento ya está ACORDADO (en línea base)?</div>
+  <div class="split">
+    <div>
+      <div class="arr"><b>↓</b>NO: se releva, aclara, completa o valida</div>
+      <div class="rd"><h3>RD · nivel 3</h3>
+        <table>
+          <tr><td class="sp">1.1</td><td>relevar (entrevistas, prototipos, observación) y descubrir lo no dicho</td></tr>
+          <tr><td class="sp">1.2</td><td>consolidar, completar, <b>resolver conflictos</b></td></tr>
+          <tr><td class="sp">2.1</td><td>pasar a términos técnicos · 2.2 asignar · 2.3 interfaces</td></tr>
+          <tr><td class="sp">3.3</td><td>requisito <b>vago o no medible</b> → hacerlo verificable</td></tr>
+          <tr><td class="sp">3.4</td><td>balancear vs costo, plazo, riesgo</td></tr>
+          <tr><td class="sp">3.5</td><td>validar <b>con el usuario, temprano</b> (prototipo)</td></tr>
+        </table>
+        <p class="hint" style="color:#a3330f">⚠ si el <b>equipo decide solo</b> lo que tenía que confirmar el cliente (dispositivos, métricas "estándar") → incorrecto.</p>
+      </div>
+    </div>
+    <div>
+      <div class="arr"><b>↓</b>SÍ: ¿qué se hace con el requerimiento acordado?</div>
+      <div class="rq"><h3>REQM · nivel 2 · una sola meta</h3>
+        <table>
+          <tr><td class="sp">REQM 1.1</td><td>entender con quien lo pidió · <b>canales oficiales</b> · criterios de aceptación</td></tr>
+          <tr><td class="sp">REQM 1.2</td><td><b>compromiso</b> de quienes implementan · Sponsor acepta correr una fecha</td></tr>
+          <tr><td class="sp">REQM 1.3</td><td>llega un cambio y <b>todavía se evalúa</b> cómo afecta ("se está chequeando")</td></tr>
+          <tr><td class="sp">REQM 1.4</td><td>actualizar / consultar la <b>matriz de trazabilidad</b></td></tr>
+          <tr><td class="sp">REQM 1.5</td><td>el plan, el diseño o los CU <b>no coinciden</b> con los reqs</td></tr>
+          <tr><td class="sp" style="color:#6d28d9">CM 2.1</td><td>el cambio <b>ya se aceptó</b> y se tramita: seguir la CR, ver qué modificar en los CU</td></tr>
+          <tr><td class="sp" style="color:#6d28d9">CM 2.2</td><td>autorizar, check-in/out, versión del elemento</td></tr>
+          <tr><td class="sp" style="color:#6d28d9">CM 1.3</td><td>acordar formalmente un conjunto de artefactos como base</td></tr>
+          <tr><td class="sp" style="color:#6d28d9">PPQA 2.1</td><td>alguien externo detecta cambios sin el workflow y <b>escala</b></td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <p class="hint">El análisis de impacto está en REQM 1.3 y en CM 2.1: decide <b>el momento</b> (¿todavía se evalúa o ya se aceptó?). Un cambio que no altera ningún requisito (refactor, defecto de código) → CM.</p>
+</div>
+
+<div class="panel" style="margin-top:2.4mm">
+  <h2><span class="num">2</span> El orden ante un cambio</h2>
+  <div class="flow">
+    <div class="st"><b>Registrar</b>la petición</div>
+    <div class="st"><b>Evaluar el impacto</b>con la matriz: reqs, módulos, pruebas, costo</div>
+    <div class="st"><b>Valorar</b>aceptar · negociar con el cliente · rechazar (queda registrado)</div>
+    <div class="st"><b>Modificar todo lo afectado</b>especificación, matriz, plan</div>
+    <div class="st"><b>Nueva línea base</b></div>
+    <div class="st"><b>Aprobación del cliente</b></div>
+  </div>
+  <div class="warn"><b class="bad">Trampa:</b> toda opción que <b>implementa antes de evaluar el impacto</b> es incorrecta ("registrar, actualizar la matriz y <i>comenzar la implementación</i>"). Pedir al cliente que resigne otros reqs tampoco: la negociación viene <b>después</b> de evaluar. Si el cambio toca leyes o datos personales → evaluar con legales.</div>
+</div>
+
+<div class="cols3">
+  <div class="panel">
+    <h2><span class="num">3</span> Fuentes vs técnicas</h2>
+    <p style="margin:0"><b>Fuente</b> = <b>de dónde</b> sale el requisito (algo que existe): <span class="ok">políticas de negocio, estándares</span>, leyes, usuarios.</p>
+    <p style="margin:1mm 0 0"><b>Técnica</b> = <b>cómo</b> lo obtengo (una acción): <span class="bad">ingeniería inversa, recorridos operativos</span>, entrevistas, cuestionarios, prototipos, observación, brainstorming.</p>
+    <p class="hint">Cátedra: fuentes = políticas de negocio y estándares.</p>
+  </div>
+  <div class="panel">
+    <h2><span class="num">4</span> Roles</h2>
+    <ul>
+      <li><b>Jefe de proyecto:</b> responsable de todo el proceso.</li>
+      <li><b>Cliente:</b> aprueba los reqs y su validación.</li>
+      <li><b>CCB</b> (comité de control de cambios / configuración): <b>aprueba los cambios</b>. Sólo su reunión abre una CR.</li>
+      <li><b>SQA:</b> revisa, no aprueba.</li>
+    </ul>
+    <p class="hint">Cátedra, "roles en la gestión de cambios": <b>CCB, SQA y jefe de proyecto</b> (no analista ni cliente).</p>
+  </div>
+  <div class="panel">
+    <h2><span class="num">5</span> Priorización</h2>
+    <p style="margin:0">El cliente prioriza por <b>valor</b>; el desarrollador informa <b>costo, dificultad y riesgo</b>. Si el cliente no puede, decide el JP.</p>
+    <p style="margin:1mm 0 0"><b>Factores (van todos):</b> costo · valor para el cliente · <b>tiempo</b> · facilidad técnica · facilidad organizacional · objetivos del negocio · restricciones legales.</p>
+    <p class="hint">Alta: esencial ya · media: puede esperar · baja: si sobran recursos.</p>
+  </div>
+</div>
+
+<div class="cols3">
+  <div class="panel">
+    <h2><span class="num">6</span> Trazabilidad</h2>
+    <ul>
+      <li><b>Hacia atrás</b> (pre): req → su origen. ¿De dónde viene?</li>
+      <li><b>Hacia adelante</b> (post): req → diseño, código, pruebas. ¿Qué se rompe si lo cambio?</li>
+      <li>Sirve sobre todo para <b>evaluar el impacto</b>. La mantiene <b>REQM 1.4</b>.</li>
+    </ul>
+  </div>
+  <div class="panel">
+    <h2><span class="num">7</span> Funcionales / no funcionales</h2>
+    <ul>
+      <li><b>F:</b> qué hace. <b>NF:</b> cualidades (rapidez, seguridad, usabilidad).</li>
+      <li>Los NF son <b>tan importantes</b> como los F: "son opcionales" es <span class="bad">falso</span>.</li>
+      <li>Redacción: qué y no cómo · sin pronombres · <b>sin "debería"</b> (suena opcional).</li>
+    </ul>
+  </div>
+  <div class="panel">
+    <h2><span class="num">8</span> Solicitudes de cambio (CR)</h2>
+    <ul>
+      <li>Son de <b>CM</b> (SG2), no de REQM; incluyen <b>defectos</b>.</li>
+      <li>Enviado → Abierta → Asignada → Resuelta → Verificada → Cerrada.</li>
+      <li>Válida pero fuera del release → <b>Pospuesta</b>.</li>
+      <li>Falta una práctica de REQM → nivel 1; de RD → máximo nivel 2.</li>
+    </ul>
+  </div>
+</div>
+
+</body>
+</html>
