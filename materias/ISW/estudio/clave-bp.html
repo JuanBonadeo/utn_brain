@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Preguntas BP</title>
+<style>
+  @page { size: A4; margin: 8mm 9mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Avenir Next", Helvetica, Arial, sans-serif; font-size: 8.2pt; color: #1d2329; line-height: 1.24; }
+  h1 { font-size: 16pt; margin: 0; letter-spacing: -.01em; }
+  .sub { color: #5b6470; margin: .5mm 0 2.5mm; font-size: 8.4pt; }
+  h2 { font-size: 10pt; margin: 0 0 1.6mm; display: flex; align-items: center; gap: 1.8mm; }
+  .num { background: #1d2329; color: #fff; border-radius: 50%; width: 5.2mm; height: 5.2mm; display: inline-flex; align-items: center; justify-content: center; font-size: 8pt; flex: none; }
+  .panel { border: 1px solid #d4d9df; border-radius: 2.6mm; padding: 2.2mm 2.8mm; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; margin-top: 2.6mm; }
+  b.si { color: #b91c1c; } b.no { color: #15803d; }
+
+  /* flujo del método */
+  .flow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; align-items: stretch; }
+  .st { position: relative; background: #f1ecfb; border: 1.2px solid #b9a5e8; border-radius: 2mm; padding: 1.4mm 1.8mm; margin-right: 4mm; }
+  .st:last-child { margin-right: 0; }
+  .st:not(:last-child)::after { content: "→"; position: absolute; right: -3.6mm; top: 50%; transform: translateY(-50%); color: #6d28d9; font-weight: 700; font-size: 10pt; }
+  .st > b { display: block; font-size: 8.4pt; margin-bottom: .4mm; }
+  .st small { color: #4b5563; font-size: 7.4pt; }
+
+  /* chequeo de razón */
+  .check { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6mm; margin-top: 1.4mm; }
+  .chk { border-radius: 1.6mm; background: #e6f5e9; border: 1px solid #7cc28a; padding: 1mm 1.4mm; text-align: center; font-weight: 600; }
+  .chk span { display: block; font-weight: 400; font-size: 7.3pt; color: #3f4a52; }
+  .rule { margin-top: 1.6mm; background: #fdf0e8; border: 1px solid #eab08a; border-radius: 1.6mm; padding: 1.2mm 1.8mm; }
+
+  table { width: 100%; border-collapse: collapse; }
+  th, td { border-bottom: 1px solid #e3e7eb; padding: .7mm 1.2mm; text-align: left; vertical-align: top; }
+  th { font-size: 7.4pt; color: #5b6470; font-weight: 600; }
+  td.a { font-weight: 700; white-space: nowrap; width: 11mm; }
+  td.f { color: #5b6470; font-size: 7.5pt; width: 27%; }
+  .sig td { font-size: 7.7pt; }
+  ul { margin: 0; padding-left: 3.4mm; }
+  li { margin-bottom: .7mm; }
+  .err td { font-size: 7.6pt; }
+  .err td:nth-child(3) { color: #a3330f; }
+  .err td:nth-child(4) { color: #15803d; font-weight: 600; }
+  .hint { font-size: 7.4pt; color: #5b6470; margin: 1.2mm 0 0; }
+</style>
+</head>
+<body>
+
+<h1>Preguntas BP <span style="font-weight:500;color:#5b6470;font-size:10pt">· ¿la práctica puede generar problemas de calidad?</span></h1>
+<p class="sub">Te describen cómo trabaja una software factory y elegís "No genera… porque…" / "Sí podría generar… porque…" / NINGUNA. <b>Se corrige la RAZÓN, no sólo el sí o el no.</b></p>
+
+<div class="panel">
+  <h2><span class="num">1</span> El método</h2>
+  <div class="flow">
+    <div class="st"><b>Leé la práctica como un proceso</b><small>quién hace qué, contra qué, cuándo… y <b>qué pasa al final</b>. El problema casi siempre está en la <b>última oración</b>.</small></div>
+    <div class="st"><b>Identificá el área</b><small>con el árbol de áreas: ¿proyecto u organización? ¿qué se hace? ¿contra qué se compara?</small></div>
+    <div class="st"><b>Buscá el eslabón que falta</b><small>contrastá con las prácticas del área (tabla de abajo). Si falta uno → <b class="si">SÍ</b> hay problema.</small></div>
+    <div class="st"><b>Evaluá cada razón por separado</b><small>pasa los 3 chequeos de abajo o se descarta, aunque diga "Sí".</small></div>
+    <div class="st"><b>No mezcles y marcá</b><small>todas del mismo lado. Si hay problema y ninguna razón lo describe → <b>NINGUNA</b>.</small></div>
+  </div>
+  <div class="check">
+    <div class="chk">¿Es CIERTA?<span>lo que dice pasa en el enunciado y es lo que pide el modelo</span></div>
+    <div class="chk">¿Ataca el eslabón que FALTA?<span>no otro detalle, no un requisito inventado</span></div>
+    <div class="chk">¿Es del ÁREA en juego?<span>una razón de otra área es falsa (repositorio organizacional → OPD)</span></div>
+  </div>
+  <div class="rule"><b>"No genera problemas"</b> es correcto sólo si la práctica cumple todo lo que pide el área. Un <b>"Sí… porque X"</b> con X falso vale lo mismo que un "No".</div>
+</div>
+
+<div class="panel" style="margin-top:2.6mm">
+  <h2><span class="num">2</span> Señales de problema por área (U1 a U6)</h2>
+  <table class="sig">
+    <tr><th>Área</th><th>Señal en el enunciado</th><th>Lo que falta</th></tr>
+    <tr><td class="a">PP</td><td>estimar sólo por experiencia o factor de mercado · <b>sin técnicos</b> · sin EDT · no se planifican <b>roles e involucración del cliente</b> · riesgos sin identificar</td><td class="f">EDT 1.1 · históricos 1.2/1.4 · riesgos 2.2 · involucración 2.6 · compromiso 3.3</td></tr>
+    <tr><td class="a">PMC</td><td>reuniones de avance <b>sin el cliente</b> · compromisos o riesgos que no se siguen · desvíos sin analizar · sin revisiones de hito</td><td class="f">monitorizar 1.1–1.7 · acciones correctivas hasta el cierre SG2</td></tr>
+    <tr><td class="a">REQM</td><td>cambio por <b>mail directo al programador</b> · sin análisis de impacto · sin trazabilidad (se prueba sólo lo modificado)</td><td class="f">criterios 1.1 · compromiso 1.2 · cambios 1.3 · trazabilidad 1.4</td></tr>
+    <tr><td class="a">RD</td><td>requisitos <b>verbales</b> · el cliente no ve nada hasta la instalación · relevamiento sin técnicos</td><td class="f">obtener 1.1/1.2 · validar 3.5</td></tr>
+    <tr><td class="a">VER</td><td>el programador <b>prueba su propio programa</b> · datos de prueba decididos <b>al ejecutar</b> · casos sin resultado esperado ni registro · sólo pruebas del cliente</td><td class="f">criterios 1.3 · pares SG2 · verificar y registrar SG3</td></tr>
+    <tr><td class="a">VAL</td><td>la <b>única</b> prueba es la del usuario y la diseña él · feedback recién con el sistema terminado · sin criterios de aceptación</td><td class="f">seleccionar 1.1 · criterios 1.3 · validar 2.1</td></tr>
+    <tr><td class="a">CM</td><td>artefactos versionados <b>sin relación entre sí</b> (sin línea base) · sólo la última versión · carpetas personales · cambios sin petición · pase a producción verbal</td><td class="f">identificar 1.1 · LB 1.3 · cambios 2.1/2.2 · auditorías 3.2</td></tr>
+    <tr><td class="a">OPF</td><td>mejoras <b>sólo por mail</b> · nadie controla si se adoptan · lecciones aprendidas archivadas · sin piloto</td><td class="f">planes 2.1 · desplegar 3.1 · monitorizar 3.3 · experiencias 3.4</td></tr>
+    <tr><td class="a">OPD</td><td>cada grupo / cada LP <b>define y guarda sus propios</b> documentos · detalle "según el autor" · sin guías de adaptación ni biblioteca</td><td class="f">SP 1.1 a 1.6 (procesos estándar, biblioteca…)</td></tr>
+    <tr><td class="a">OT</td><td>personal sin formación en lo que usa la SF · no se registra quién sabe qué · no se mide si sirvió</td><td class="f">plan 1.1–1.4 · registros 2.2 · eficacia 2.3</td></tr>
+    <tr><td class="a">RSKM</td><td>los riesgos se tratan <b>cuando ya ocurrieron</b></td><td class="f">preparar, identificar y mitigar ANTES</td></tr>
+  </table>
+</div>
+
+<div class="cols">
+  <div class="panel">
+    <h2><span class="num">3</span> Distractores que se repiten</h2>
+    <ul>
+      <li><b>"Es una implementación correcta / completa de X"</b>: justo le falta un eslabón de X.</li>
+      <li><b>Razón de otra área</b> ("no se guarda en un repositorio organizacional" → eso es OPD).</li>
+      <li><b>Requisito inventado o absoluto</b>: "todos los CU aprobados antes de estimar", "no funcionales obligatorias para <i>todo</i>". Si suena más estricto que el modelo, desconfiá.</li>
+      <li><b>"No es necesario definirlo en cada proyecto"</b> / "ya está en los manuales": CMMI lo pide por proyecto.</li>
+      <li><b>Buena comunicación o sanción</b> en lugar del mecanismo (independencia, seguimiento hasta el cierre).</li>
+    </ul>
+  </div>
+  <div class="panel">
+    <h2><span class="num">4</span> Lo que NO es un problema</h2>
+    <ul>
+      <li><b>Testers dedicados</b> sólo a probar: es la independencia que se pide.</li>
+      <li>Resolver una no conformidad <b>primero dentro del proyecto</b>.</li>
+      <li>Que el <b>líder de proyecto corrija</b> (mientras alguien siga y escale).</li>
+      <li>Repositorio <b>por proyecto</b>.</li>
+      <li>Un <b>supervisor que revisa estimaciones</b> (el problema sería la base).</li>
+      <li>Mencionar en la reunión de avance que un <b>usuario clave no participa</b>: es PMC 1.5, monitorizar la involucración.</li>
+    </ul>
+    <p class="hint">Falla por <b>defecto</b> (no se hace) o por <b>exceso / mala aplicación</b> (se mide todo sin objetivo): las dos son problema.</p>
+  </div>
+</div>
+
+<div class="panel" style="margin-top:2.6mm">
+  <h2><span class="num">!</span> Tus errores, con el método</h2>
+  <table class="err">
+    <tr><th>Práctica</th><th>Área · eslabón que falta</th><th>Marcaste (distractor)</th><th>Correcta</th></tr>
+    <tr><td>Cada LP define y guarda cómo hacer las tareas; se manda la lista por mail</td><td>OPD · procesos estándar y biblioteca de la org</td><td>"los debería definir el responsable de OPD <i>del proyecto</i>" (OPD es de la org)</td><td>riesgo de confusión sobre cuáles son los activos vigentes</td></tr>
+    <tr><td>El PM estima con métricas históricas y lo revisa sólo con el Sponsor</td><td>PP · revisar con técnicos</td><td>"antes deberían escribirse todos los CU aprobados" (inventado)</td><td>las estimaciones deberían revisarse con personal técnico</td></tr>
+    <tr><td>El plan incluye sólo roles de la SF (+ OT, OPF, OPD)</td><td>PP 2.6 · involucración del cliente</td><td>"es una implementación correcta de PP"</td><td>los miembros del cliente no sabrán qué hacer</td></tr>
+    <tr><td>Reunión de avance completa, con riesgos y usuario clave que no participa</td><td>PMC · <b>no falta nada</b></td><td>"no se mencionan problemas con usuarios clave"</td><td>No genera: implementación correcta de PMC</td></tr>
+    <tr><td>Sólo revisiones entre pares + aceptación; ninguna otra prueba funcional</td><td>VER · pruebas funcionales internas</td><td>"no funcionales obligatorias para todo" (absoluto)</td><td>faltan pruebas funcionales internas: no se cumple VER</td></tr>
+  </table>
+</div>
+
+</body>
+</html>
