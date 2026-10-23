@@ -1,0 +1,399 @@
+<title>Simulacro AD 2 de ISW</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:wght@600&display=swap">
+<style>
+/* Layout: una hoja de examen angosta; barra de progreso fija arriba; cada pregunta es un bloque numerado del formulario. */
+:root {
+  --bg: #f3f5f8;
+  --paper: #ffffff;
+  --ink: #18212b;
+  --muted: #5a6573;
+  --line: #d9dee5;
+  --accent: #1f4fa3;
+  --accent-soft: #e6eefb;
+  --ok: #17803d;
+  --ok-soft: #e4f4e9;
+  --bad: #b42318;
+  --bad-soft: #fbe9e7;
+  --case: #f7f8fb;
+  --font-body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", Menlo, Consolas, monospace;
+  --font-display: "IBM Plex Serif", Georgia, serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11161d; --paper: #18202a; --ink: #e6ebf1; --muted: #9aa6b4; --line: #2c3744;
+    --accent: #7ea6ef; --accent-soft: #1d2b42; --ok: #5cc985; --ok-soft: #15301f;
+    --bad: #f08a7e; --bad-soft: #3a1c1a; --case: #141b24; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11161d; --paper: #18202a; --ink: #e6ebf1; --muted: #9aa6b4; --line: #2c3744;
+  --accent: #7ea6ef; --accent-soft: #1d2b42; --ok: #5cc985; --ok-soft: #15301f;
+  --bad: #f08a7e; --bad-soft: #3a1c1a; --case: #141b24; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.5; }
+.wrap { max-width: 760px; margin: 0 auto; padding-inline: 16px; padding-block: 0 64px; }
+header.top { padding-block: 28px 8px; }
+h1 { font-family: var(--font-display); font-size: 1.9rem; line-height: 1.15; margin: 0 0 6px; text-wrap: balance; }
+.lead { color: var(--muted); margin: 0 0 14px; max-width: 62ch; }
+.rules { display: grid; gap: 6px; margin: 0 0 8px; padding: 12px 14px; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; font-size: .9rem; }
+.rules b { color: var(--ink); }
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding-block: 10px; border-bottom: 1px solid var(--line); margin-bottom: 18px; }
+.bar-inner { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
+.prog { flex: 1 1 220px; min-width: 0; }
+.prog-txt { font-family: var(--font-mono); font-size: .8rem; color: var(--muted); }
+.track { height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; margin-top: 4px; }
+.fill { height: 100%; width: 100%; background: var(--accent); transform-origin: left; transform: scaleX(0); transition: transform .2s; }
+button { font: inherit; font-weight: 600; border-radius: 6px; padding: 8px 14px; cursor: pointer; border: 1px solid var(--accent); background: var(--accent); color: var(--paper); }
+button.ghost { background: transparent; color: var(--accent); }
+button:disabled { opacity: .45; cursor: not-allowed; }
+button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.q { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 16px; margin-bottom: 14px; }
+.q.is-ok { border-color: var(--ok); }
+.q.is-bad { border-color: var(--bad); }
+.qhead { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; margin-bottom: 8px; }
+.qnum { font-family: var(--font-mono); font-weight: 600; color: var(--accent); }
+.tag { font-family: var(--font-mono); font-size: .74rem; color: var(--muted); letter-spacing: .02em; }
+.verdict { margin-left: auto; font-family: var(--font-mono); font-size: .78rem; font-weight: 600; padding: 1px 8px; border-radius: 4px; }
+.verdict.ok { color: var(--ok); background: var(--ok-soft); }
+.verdict.bad { color: var(--bad); background: var(--bad-soft); }
+.qtext { margin: 0 0 8px; }
+.case { white-space: pre-wrap; background: var(--case); border: 1px solid var(--line); padding: 10px 12px; margin: 0 0 10px; font-size: .92rem; border-radius: 6px; overflow-x: auto; }
+.case.mono { font-family: var(--font-mono); font-size: .82rem; white-space: pre; }
+.hint { font-size: .8rem; color: var(--muted); margin: 0 0 8px; }
+.opts { display: grid; gap: 6px; }
+.opt { display: grid; grid-template-columns: auto 1.6em 1fr; gap: 6px; align-items: start; padding: 7px 9px; border: 1px solid var(--line); border-radius: 6px; cursor: pointer; }
+.opt input { margin-top: 4px; }
+.opt .letter { font-family: var(--font-mono); color: var(--muted); }
+.opt span { min-width: 0; }
+.opt.right { background: var(--ok-soft); border-color: var(--ok); }
+.opt.wrong { background: var(--bad-soft); border-color: var(--bad); }
+.gridwrap { overflow-x: auto; }
+table.grid { border-collapse: collapse; width: 100%; font-size: .92rem; }
+table.grid th, table.grid td { border-bottom: 1px solid var(--line); padding: 7px 6px; text-align: center; vertical-align: middle; }
+table.grid th { font-size: .78rem; color: var(--muted); font-weight: 600; }
+table.grid td.row { text-align: left; }
+table.grid td.right { background: var(--ok-soft); }
+table.grid td.wrong { background: var(--bad-soft); }
+.explain { margin-top: 10px; padding: 10px 12px; background: var(--accent-soft); border-radius: 6px; font-size: .9rem; }
+.explain b { color: var(--accent); }
+.summary { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 16px; margin-bottom: 18px; }
+.score { font-family: var(--font-display); font-size: 2.2rem; line-height: 1; }
+.score small { font-family: var(--font-body); font-size: .9rem; color: var(--muted); margin-left: 6px; }
+.units { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 8px; margin: 12px 0; }
+.unit { border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; font-size: .82rem; }
+.unit b { display: block; font-family: var(--font-mono); font-size: 1rem; font-variant-numeric: tabular-nums; }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.copybox { width: 100%; min-height: 140px; margin-top: 10px; font-family: var(--font-mono); font-size: .78rem; background: var(--case); color: var(--ink); border: 1px solid var(--line); border-radius: 6px; padding: 8px; }
+.confirm { margin-top: 10px; padding: 10px; border: 1px solid var(--bad); border-radius: 6px; background: var(--bad-soft); display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.toast { font-size: .85rem; color: var(--ok); font-weight: 600; }
+.missing { font-size: .82rem; color: var(--bad); }
+.missing a { color: var(--bad); }
+@media (prefers-reduced-motion: reduce) { .fill { transition: none; } }
+</style>
+<style>
+.timer { font-family: var(--font-mono); font-weight: 600; font-size: 1.05rem; font-variant-numeric: tabular-nums; padding: 4px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--paper); }
+.timer.low { color: var(--bad); border-color: var(--bad); background: var(--bad-soft); }
+.start { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 18px 16px; display: grid; gap: 10px; justify-items: start; }
+.start p { margin: 0; color: var(--muted); max-width: 60ch; }
+.timeup { font-weight: 600; color: var(--bad); }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <h1>Simulacro AD 2 · ISW</h1>
+    <p class="lead">20 preguntas más difíciles, concentradas en lo que fallaste: 8 preguntas BP (con dos razones verdaderas, prácticas sin falla y un caso NINGUNA) y 12 de relacionar actividad con área y práctica, con frases de tiempo y pares que se confunden.</p>
+    <div class="rules">
+      <div><b>Tiempo:</b> 1 hora desde que apretás Empezar. Al llegar a 0 se corrige solo; lo que no respondiste cuenta como mal.</div>
+      <div><b>Selección única:</b> una opción. NINGUNA es una respuesta real.</div>
+      <div><b>BP:</b> puede haber más de una correcta. Una de más o de menos deja la pregunta en 0, y no se mezclan las del SÍ con las del NO.</div>
+    </div>
+  </header>
+
+  <section class="start" id="startBox">
+    <p>Cuando empieces, corre el reloj de 60 minutos. Si recargás la página, el tiempo sigue corriendo y tus respuestas quedan guardadas en este navegador.</p>
+    <button id="btnStart">Empezar · 1 hora</button>
+  </section>
+
+  <div class="bar" id="bar" hidden>
+    <div class="bar-inner">
+      <div class="prog">
+        <div class="prog-txt" id="progTxt">0 de 20 respondidas</div>
+        <div class="track"><div class="fill" id="progFill"></div></div>
+      </div>
+      <span class="timer" id="timer">60:00</span>
+      <button id="btnGrade">Entregar</button>
+    </div>
+    <div class="confirm" id="gradeConfirm" hidden><span id="gradeMsg"></span><button id="btnGradeYes">Entregar igual</button><button class="ghost" id="btnGradeNo">Seguir respondiendo</button></div>
+  </div>
+
+  <section id="summary" class="summary" hidden></section>
+  <main id="quiz" hidden></main>
+</div>
+
+<script>
+const BP_NOTE = "BP --> Indicar si podrían surgir o no problemas de calidad en la Software Factory, optando por una o varias afirmaciones, o NINGUNA. No pueden combinarse las que consideran que SÍ hay problemas con las que NO.";
+const AREA_NOTE = "Relacione la actividad con el área de proceso y la práctica específica que corresponda (sólo una), o indique NINGUNA.";
+const DURATION = 60 * 60 * 1000;
+
+const Q = [
+// ---------- BP ----------
+{ k:"BP", tag:"U2 · Gestión de procesos · Mejora de procesos (OPF) · BP", type:"multi",
+  case:"La SF aprobó una nueva plantilla de casos de uso. El responsable de procesos la publica en la biblioteca de activos y envía un mail a todos los PM avisando que está disponible. No se controla qué proyectos la empezaron a usar. Las sugerencias que los analistas envían sobre la plantilla se guardan en una carpeta compartida que nadie revisa.",
+  text:"Dada la práctica descripta, indique si podrían surgir o no problemas de calidad.", note:BP_NOTE,
+  options:["No genera problemas de calidad, porque la plantilla quedó publicada en la biblioteca de activos, como pide OPD.","Sí podría generar problemas de calidad, porque el despliegue se limita a un mail y nadie monitorea si los proyectos adoptan la plantilla.","Sí podría generar problemas de calidad, porque las sugerencias de los analistas no se incorporan a los activos de proceso.","Sí podría generar problemas de calidad, porque la plantilla debería haberse probado primero en todos los proyectos al mismo tiempo.","Sí podría generar problemas de calidad, porque la plantilla debería aprobarla el cliente de cada proyecto."],
+  answer:[1,2],
+  explain:"Faltan dos eslabones de OPF SG3: monitorizar la implementación (3.3) y incorporar las experiencias en los activos (3.4). La opción de la biblioteca de activos dice algo cierto de OPD, pero el área en juego es el despliegue (OPF). La de probar en todos los proyectos a la vez es absurda: un piloto es en un proyecto." },
+{ k:"BP", tag:"U3 · Planificación y plan (PP) · BP", type:"multi",
+  case:"Al planificar, el PM arma la EDT junto con los técnicos, estima el tamaño con puntos función y el esfuerzo con datos históricos de la SF, identifica los riesgos con el equipo y los revisa con el cliente, define en el plan qué actividades realiza cada usuario clave en cada fase y obtiene el compromiso firmado del sponsor y del equipo.",
+  text:"Dada la práctica descripta, indique si podrían surgir o no problemas de calidad.", note:BP_NOTE,
+  options:["Sí podría generar problemas de calidad, porque las estimaciones deberían hacerse con la técnica Delphi.","No genera problemas de calidad, porque es una implementación correcta de la planificación según PP.","Sí podría generar problemas de calidad, porque los riesgos no deberían revisarse con el cliente para no generar desconfianza.","No genera problemas de calidad, porque es una implementación correcta de PMC.","Sí podría generar problemas de calidad, porque SQA debería aprobar el plan antes del compromiso."],
+  answer:[1],
+  explain:"No falta nada de PP: EDT (1.1), tamaño (1.2), esfuerzo con históricos (1.4), riesgos revisados con el cliente (2.2), involucración (2.6), compromiso (3.3). La opción que dice \"implementación correcta de PMC\" nombra el área equivocada: es falsa." },
+{ k:"BP", tag:"U4 · Gestión de requisitos (REQM) · BP", type:"multi",
+  case:"El cliente envía los pedidos de cambio por WhatsApp al líder técnico. El líder evalúa con su equipo cuánto esfuerzo implica cada uno y, si es menor a 16 horas, lo implementa sin consultar a nadie más. Los cambios mayores se tratan en el CCB. La matriz de trazabilidad se actualiza al cierre del proyecto.",
+  text:"Dada la práctica descripta, indique si podrían surgir o no problemas de calidad.", note:BP_NOTE,
+  options:["No genera problemas de calidad, porque los cambios mayores pasan por el CCB y los menores no justifican el procedimiento.","Sí podría generar problemas de calidad, porque no hay un canal oficial para los cambios, y los cambios menores no se registran ni se evalúa su impacto sobre otros requisitos.","Sí podría generar problemas de calidad, porque la trazabilidad no se mantiene durante el proyecto, así que no sirve para evaluar el impacto de cada cambio.","Sí podría generar problemas de calidad, porque el líder técnico no debería estimar el esfuerzo de un cambio.","Sí podría generar problemas de calidad, porque el problema principal es que se usa WhatsApp en lugar del mail."],
+  answer:[1,2],
+  explain:"Faltan canales oficiales (REQM 1.1), gestión de TODOS los cambios con su impacto (1.3) y trazabilidad viva (1.4). La del WhatsApp apunta a un detalle: cambiarlo por mail no arregla nada si sigue sin registro ni evaluación." },
+{ k:"BP", tag:"U5 · Verificación (VER) · BP", type:"multi",
+  case:"La SF tiene un grupo de testers dedicados exclusivamente a probar, que no participan del desarrollo. Los testers deciden los datos de prueba al momento de ejecutar, según su experiencia, y no documentan los casos ejecutados. En los proyectos de mantenimiento prueban sólo lo modificado.",
+  text:"Dada la práctica descripta, indique si podrían surgir o no problemas de calidad.", note:BP_NOTE,
+  options:["Sí podría generar problemas de calidad, porque los testers no deberían dedicarse sólo a probar, ya que pierden conocimiento del negocio.","Sí podría generar problemas de calidad, porque sin casos diseñados y documentados antes de ejecutar se pasan por alto casos, no se pueden repetir las pruebas y, al probar sólo lo modificado, aparecen errores de regresión.","No genera problemas de calidad, porque la independencia de los testers garantiza la calidad de las pruebas.","Sí podría generar problemas de calidad, porque las pruebas deberían hacerlas los propios programadores, que conocen el código."],
+  answer:[1],
+  explain:"El problema son los datos improvisados y sin documentar (VER 1.3, SG3), no los testers: el personal dedicado es la independencia que se pide. Las que culpan a los testers dedicados o piden que prueben los programadores dicen Sí con una razón falsa." },
+{ k:"BP", tag:"U3 · Seguimiento y control (PMC) · BP", type:"multi",
+  case:"En las reuniones de avance quincenales, el PM presenta al equipo de la SF el porcentaje de avance de cada tarea y el estado de los riesgos. Los desvíos se anotan en la minuta. El cliente recibe un informe mensual por mail. Si un desvío aparece en tres reuniones seguidas, el PM se lo comenta al sponsor.",
+  text:"Dada la práctica descripta, indique si podrían surgir o no problemas de calidad.", note:BP_NOTE,
+  options:["No genera problemas de calidad, porque los desvíos quedan registrados en la minuta.","Sí podría generar problemas de calidad, porque los desvíos se anotan pero no se analizan ni se definen acciones correctivas que se sigan hasta su cierre.","Sí podría generar problemas de calidad, porque el cliente no participa de las revisiones de progreso: sólo recibe un informe.","Sí podría generar problemas de calidad, porque el avance debería medirse sólo con las horas consumidas.","Sí podría generar problemas de calidad, porque las reuniones de avance deberían ser diarias."],
+  answer:[1,2],
+  explain:"Falta PMC SG2 (analizar y gestionar acciones correctivas hasta el cierre) y las revisiones sin el cliente son una señal de problema. Medir sólo con horas consumidas es falso (no alcanzan para medir el avance) y las reuniones diarias son un requisito inventado." },
+{ k:"BP", tag:"U6 · Gestión de configuración (CM) · BP", type:"multi",
+  case:"Cada versión que se entrega a un cliente se arma desde una línea base aprobada por el CCB. Se registra qué versión de cada artefacto compone cada línea base y qué diferencias tiene con la anterior. El repositorio de cada proyecto se conserva hasta que el producto se discontinúa.",
+  text:"Dada la práctica descripta, indique si podrían surgir o no problemas de calidad.", note:BP_NOTE,
+  options:["Sí podría generar problemas de calidad, porque el repositorio debería ser organizacional y no por proyecto.","Sí podría generar problemas de calidad, porque deberían conservarse sólo las últimas versiones para no generar confusión.","No genera problemas de calidad, porque es una implementación correcta de CM.","No genera problemas de calidad, porque es una implementación correcta de OPD, ya que se conservan los activos.","Sí podría generar problemas de calidad, porque la línea base debería aprobarla el cliente."],
+  answer:[2],
+  explain:"Tiene líneas base (1.3), registros con la composición y las diferencias (3.1) y control del CCB. El repositorio por proyecto no es un defecto de CM (es el distractor del AD 2024). La de \"implementación correcta de OPD\" nombra el área equivocada." },
+{ k:"BP", tag:"U4 · Desarrollo de requisitos (RD) · BP", type:"multi",
+  case:"El analista releva los requerimientos con el usuario. Para ganar tiempo, el equipo define por su cuenta qué dispositivos móviles serán compatibles y qué métricas de usabilidad se exigirán, tomando estándares de la industria. El cliente ve el sistema por primera vez en la prueba de aceptación.",
+  text:"Dada la práctica descripta, indique si podrían surgir o no problemas de calidad.", note:BP_NOTE,
+  options:["No genera problemas de calidad, porque los estándares de la industria hacen que los requisitos sean verificables.","Sí podría generar problemas de calidad, porque el relevamiento debería hacerlo el área comercial, que conoce al cliente.","Sí podría generar problemas de calidad, porque la prueba de aceptación debería hacerla el equipo de testing.","Sí podría generar problemas de calidad, porque los requerimientos deberían congelarse al terminar el relevamiento.","NINGUNA"],
+  answer:[4],
+  explain:"Hay problema (el equipo decide solo lo que debía confirmar el cliente y no hay validación temprana: RD 1.2, 3.3 y 3.5), pero ninguna opción del Sí da esa razón: todas son falsas. Cuando hay problema y ninguna razón lo describe, la respuesta es NINGUNA." },
+{ k:"BP", tag:"U2 · Definición de procesos (OPD) · BP", type:"multi",
+  case:"La SF tiene un proceso estándar con 14 plantillas obligatorias. Todos los proyectos, sin importar su tamaño ni su duración, deben completar las 14. En el último trimestre, un proyecto de dos semanas dedicó el 40 % de su esfuerzo a completar documentación.",
+  text:"Dada la práctica descripta, indique si podrían surgir o no problemas de calidad.", note:BP_NOTE,
+  options:["No genera problemas de calidad, porque aplicar el estándar completo garantiza la calidad del producto.","Sí podría generar problemas de calidad, porque faltan criterios y guías para adaptar el proceso estándar a cada proyecto.","Sí podría generar problemas de calidad, porque cada proyecto debería definir su propio proceso sin usar el estándar.","Sí podría generar problemas de calidad, porque el problema es que las plantillas no están en la biblioteca de activos.","Sí podría generar problemas de calidad, porque se aplica mal el proceso: se exige lo mismo a proyectos de tamaños muy distintos."],
+  answer:[1,4],
+  explain:"Falta OPD SP 1.3 (guías de adaptación). Es una falla por exceso o mala aplicación, que también es problema. Que cada proyecto defina su propio proceso va al otro extremo: sin estándar se pierde el nivel 3. Lo de la biblioteca es algo que el caso no dice." },
+
+// ---------- Relacionar área ----------
+{ k:"AREA", tag:"U2 · Definición de procesos (OPD) · Relacionar actividad con área CMMI", type:"single",
+  text:"Se diseña el repositorio de medición de la organización, donde todos los proyectos cargarán sus datos de esfuerzo y defectos para usarlos en estimaciones futuras.", note:AREA_NOTE,
+  options:["MA / SP 1.3 Especificar los procedimientos de recogida y de almacenamiento de datos","OPD / SP 1.4 Establecer el repositorio de medición de la organización","PP / SP 2.3 Planificar la gestión de los datos","OPD / SP 1.5 Establecer la biblioteca de activos de proceso de la organización","CM / SP 1.2 Establecer un sistema de gestión de configuración","NINGUNA"],
+  answer:1,
+  explain:"Repositorio común para todos los proyectos, a nivel organización: OPD SP 1.4. PP 2.3 es lo que registra UN proyecto. La biblioteca (1.5) guarda activos, no datos de medición." },
+{ k:"AREA", tag:"U3 · Planificación y plan (PP) · Relacionar actividad con área CMMI", type:"single",
+  text:"Al planificar el proyecto Turnos se decide qué datos registrará el proyecto (horas por tarea, defectos por caso de uso), en qué formato y dónde se guardarán.", note:AREA_NOTE,
+  options:["OPD / SP 1.4 Establecer el repositorio de medición de la organización","PP / SP 2.3 Planificar la gestión de los datos","PMC / SP 1.4 Monitorizar la gestión de los datos","PP / SP 2.7 Establecer el plan de proyecto","CM / SP 1.1 Identificar los elementos de configuración","NINGUNA"],
+  answer:1,
+  explain:"Qué datos registra UN proyecto, planificado antes de arrancar: PP SP 2.3. Controlar después que se cumpla sería PMC 1.4; el repositorio común de la organización sería OPD 1.4." },
+{ k:"AREA", tag:"U3 · Seguimiento y control (PMC) · Relacionar actividad con área CMMI", type:"single",
+  text:"Hace un mes se reemplazó al usuario clave que no asistía a las validaciones. Ahora se analiza si con el nuevo usuario se recuperó el ritmo de aprobación de los prototipos.", note:AREA_NOTE,
+  options:["PMC / SP 2.1 Analizar los problemas","PMC / SP 2.2 Llevar a cabo las acciones correctivas","PMC / SP 2.3 Gestionar las acciones correctivas","PMC / SP 1.5 Monitorizar la involucración de las partes interesadas","RD / SP 3.5 Validar los requerimientos","NINGUNA"],
+  answer:2,
+  explain:"La acción correctiva ya se tomó hace un mes. Ahora se evalúa si funcionó: PMC SP 2.3. \"Se analiza\" es la trampa hacia 2.1, pero lo que se analiza es el resultado de la acción, no la causa del problema." },
+{ k:"AREA", tag:"U3 · Seguimiento y control (PMC) · Relacionar actividad con área CMMI", type:"single",
+  text:"Durante el proyecto, el PM controla a cuántas reuniones de validación asistieron los usuarios clave, comparado con lo que establecía el plan.", note:AREA_NOTE,
+  options:["PP / SP 2.6 Planificar la involucración de las partes interesadas","PMC / SP 1.5 Monitorizar la involucración de las partes interesadas","PMC / SP 1.2 Monitorizar los compromisos","VAL / SP 1.1 Seleccionar los productos a validar","PMC / SP 1.6 Llevar a cabo revisiones de progreso","NINGUNA"],
+  answer:1,
+  explain:"Durante el proyecto y contra el plan: PMC SP 1.5. Planificarlo antes sería PP 2.6." },
+{ k:"AREA", tag:"U2 · Mejora de procesos (OPF) · Relacionar actividad con área CMMI", type:"single",
+  text:"El presidente de la SF obtiene el apoyo del directorio para contratar una consultora que evalúe las fortalezas y debilidades de los procesos que la organización usa hoy.", note:AREA_NOTE,
+  options:["OPF / SP 1.1 Establecer las necesidades de procesos de la organización","OPF / SP 1.2 Evaluar los procesos de la organización","OPF / SP 1.3 Identificar las mejoras de procesos de la organización","OPD / SP 1.1 Establecer los procesos estándar","OPF / SP 2.1 Establecer planes de acción de procesos","NINGUNA"],
+  answer:1,
+  explain:"Evaluar los procesos EN USO (fortalezas y debilidades) es OPF SP 1.2, y obtener el patrocinio de la dirección es su primera subpráctica." },
+{ k:"AREA", tag:"U2 · Mejora de procesos (OPF) · Relacionar actividad con área CMMI", type:"single",
+  text:"Tres meses después de desplegar el nuevo procedimiento de estimación, el grupo de procesos revisa en qué proyectos se está usando, en cuáles no y por qué.", note:AREA_NOTE,
+  options:["OPF / SP 2.2 Implementar los planes de acción de procesos","OPF / SP 3.1 Desplegar los activos de proceso de la organización","OPF / SP 3.2 Desplegar los procesos estándar","OPF / SP 3.3 Monitorizar la implementación","OPF / SP 1.2 Evaluar los procesos de la organización","NINGUNA"],
+  answer:3,
+  explain:"Ya se desplegó; ahora se controla si los proyectos lo adoptaron: OPF SP 3.3. 3.1 y 3.2 son el despliegue en sí; 2.2 es el piloto antes de aprobar." },
+{ k:"AREA", tag:"U2 · Formación organizativa (OT) · Relacionar actividad con área CMMI", type:"single",
+  text:"Se evalúa si el curso de casos de uso dictado en marzo mejoró la calidad de los casos de uso, comparando los defectos encontrados en las revisiones antes y después del curso.", note:AREA_NOTE,
+  options:["OT / SP 2.2 Establecer los registros de formación","OT / SP 2.3 Evaluar la eficacia de la formación","OT / SP 1.4 Establecer la capacidad de formación","OPF / SP 3.3 Monitorizar la implementación","VER / SP 2.3 Analizar los datos de la revisión entre pares","NINGUNA"],
+  answer:1,
+  explain:"Si la capacitación sirvió: OT SP 2.3. Se usan datos de revisiones, pero lo que se evalúa es el curso, no el producto: no es VER 2.3." },
+{ k:"AREA", tag:"U5 · Validación (VAL) · Relacionar actividad con área CMMI", type:"single",
+  text:"Se acordó con el cliente qué casos de uso se presentarán en el workshop de la próxima semana para que los usuarios los validen.", note:AREA_NOTE,
+  options:["VAL / SP 1.1 Seleccionar los productos a validar","VAL / SP 1.3 Establecer los procedimientos y los criterios de validación","RD / SP 3.5 Validar los requerimientos","VAL / SP 2.1 Realizar la validación","PP / SP 2.6 Planificar la involucración de las partes interesadas","NINGUNA"],
+  answer:0,
+  explain:"Elegir qué se va a validar, antes del workshop: VAL SP 1.1 (es el ejemplo de la wiki). Realizar la validación sería el workshop en sí." },
+{ k:"AREA", tag:"U4 · Desarrollo de requisitos (RD) · Relacionar actividad con área CMMI", type:"single",
+  text:"En este momento se está realizando la reunión en la que el cliente prueba el prototipo de pantallas y confirma si refleja lo que necesita, antes de empezar a construir el sistema.", note:AREA_NOTE,
+  options:["VAL / SP 2.1 Realizar la validación","RD / SP 3.5 Validar los requerimientos","VER / SP 2.2 Llevar a cabo las revisiones entre pares","RD / SP 3.1 Establecer los conceptos operativos y los escenarios","VAL / SP 1.2 Establecer el entorno de validación","NINGUNA"],
+  answer:1,
+  explain:"Validar con el usuario, temprano y sobre un prototipo, ANTES de construir: RD SP 3.5 (valida los requerimientos). VAL valida el producto o sus componentes ya construidos." },
+{ k:"AREA", tag:"U5 · Verificación (VER) · Relacionar actividad con área CMMI", type:"single",
+  text:"Se define que los casos de uso del proyecto pasarán por una revisión entre pares, con qué checklist se revisarán y con qué criterio se dará por aprobado cada uno.", note:AREA_NOTE,
+  options:["VER / SP 1.1 Seleccionar los productos de trabajo a verificar","VER / SP 1.3 Establecer los procedimientos y los criterios de verificación","VER / SP 2.1 Preparar las revisiones entre pares","VAL / SP 1.3 Establecer los procedimientos y los criterios de validación","OPD / SP 1.1 Establecer los procesos estándar","NINGUNA"],
+  answer:1,
+  explain:"Definir el procedimiento (checklist) y el criterio de aprobación: VER SP 1.3. Preparar una revisión concreta (convocar, distribuir) sería 2.1." },
+{ k:"AREA", tag:"U6 · Gestión de configuración (CM) · Relacionar actividad con área CMMI", type:"single",
+  text:"Cada vez que se genera una compilación para testing, se produce automáticamente un documento con las modificaciones respecto de la compilación anterior.", note:AREA_NOTE,
+  options:["CM / SP 2.2 Controlar los elementos de configuración","CM / SP 3.1 Establecer registros de gestión de configuración","CM / SP 3.2 Realizar auditorías de configuración","CM / SP 1.3 Crear o liberar líneas base","REQM / SP 1.4 Mantener la trazabilidad bidireccional de los requerimientos","NINGUNA"],
+  answer:1,
+  explain:"Registrar las diferencias entre versiones o líneas base es CM SP 3.1 (está en el resumen como ejemplo)." },
+{ k:"AREA", tag:"U3 · Planificación y plan (PP) · Relacionar actividad con área CMMI", type:"single",
+  text:"Se planifica el curso de Angular que necesitan dos programadores del proyecto Turnos para poder cumplir con sus tareas.", note:AREA_NOTE,
+  options:["OT / SP 1.1 Establecer las necesidades estratégicas de formación","OT / SP 1.3 Establecer un plan táctico de formación organizativa","OT / SP 2.1 Impartir la formación","PMC / SP 1.5 Monitorizar la involucración de las partes interesadas","PP / SP 2.4 Planificar los recursos del proyecto","NINGUNA"],
+  answer:5,
+  explain:"Es la formación de UN proyecto: PP SP 2.5 (Planificar el conocimiento y las habilidades necesarios), que no está entre las opciones. Las de OT son de la organización, y PP 2.4 son recursos (personal, equipamiento). Respuesta: NINGUNA." }
+];
+
+const LET = "abcdefghijklmnopqrstuvwxyz";
+const KEY = "isw-simulacro-ad2-v1";
+let ans = {}, graded = false, onlyWrong = false, startedAt = null, gradedAt = null, tick = null;
+
+function load() { try { const s = JSON.parse(localStorage.getItem(KEY) || "null"); if (s) { ans = s.ans || {}; graded = !!s.graded; startedAt = s.startedAt || null; gradedAt = s.gradedAt || null; } } catch (e) {} }
+function save() { try { localStorage.setItem(KEY, JSON.stringify({ ans, graded, startedAt, gradedAt })); } catch (e) {} }
+function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;" }[c])); }
+function isAnswered(i) { const q = Q[i], a = ans[i]; return q.type === "single" ? typeof a === "number" : Array.isArray(a) && a.length > 0; }
+function isCorrect(i) {
+  const q = Q[i], a = ans[i]; if (!isAnswered(i)) return false;
+  return q.type === "single" ? a === q.answer : [...a].sort().join(",") === [...q.answer].sort().join(",");
+}
+function seeded(n) { let x = n * 9301 + 49297; return () => { x = (x * 9301 + 49297) % 233280; return x / 233280; }; }
+const PERM = Q.map((q, i) => {
+  const idx = q.options.map((o, j) => j);
+  const fixed = idx.filter(j => q.options[j] === "NINGUNA");
+  const mov = idx.filter(j => q.options[j] !== "NINGUNA");
+  const r = seeded(i + 17);
+  for (let k = mov.length - 1; k > 0; k--) { const m = Math.floor(r() * (k + 1)); [mov[k], mov[m]] = [mov[m], mov[k]]; }
+  return mov.concat(fixed);
+});
+function letterOf(i, j) { return LET[PERM[i].indexOf(j)]; }
+function remaining() { return Math.max(0, DURATION - (Date.now() - startedAt)); }
+function fmt(ms) { const s = Math.ceil(ms / 1000), m = Math.floor(s / 60); return String(m).padStart(2, "0") + ":" + String(s % 60).padStart(2, "0"); }
+
+function render() {
+  const root = document.getElementById("quiz");
+  root.innerHTML = Q.map((q, i) => {
+    if (graded && onlyWrong && isCorrect(i)) return "";
+    const ok = graded && isCorrect(i), multi = q.type === "multi";
+    let body = q.case ? `<div class="case">${esc(q.case)}</div>` : "";
+    body += `<p class="qtext">${esc(q.text)}</p><p class="hint">${esc(q.note)}</p><div class="opts">`;
+    body += PERM[i].map((j) => { const o = q.options[j];
+      const chosen = multi ? (ans[i] || []).includes(j) : ans[i] === j;
+      const isAns = multi ? q.answer.includes(j) : q.answer === j;
+      let cls = ""; if (graded) { if (isAns) cls = "right"; else if (chosen) cls = "wrong"; }
+      return `<label class="opt ${cls}" for="q${i}o${j}"><input type="${multi ? "checkbox" : "radio"}" id="q${i}o${j}" name="q${i}" data-q="${i}" value="${j}" ${chosen ? "checked" : ""} ${graded ? "disabled" : ""}><span class="letter">${letterOf(i, j)})</span><span>${esc(o)}</span></label>`;
+    }).join("") + `</div>`;
+    if (graded) body += `<div class="explain"><b>${ok ? "Bien." : "Por qué:"}</b> ${esc(q.explain)}</div>`;
+    const verdict = graded ? `<span class="verdict ${ok ? "ok" : "bad"}">${ok ? "Correcta" : (isAnswered(i) ? "Incorrecta" : "Sin responder")}</span>` : "";
+    return `<article class="q ${graded ? (ok ? "is-ok" : "is-bad") : ""}" id="q-${i}"><div class="qhead"><span class="qnum">${i + 1}.</span><span class="tag">[${esc(q.tag)}]</span>${verdict}</div>${body}</article>`;
+  }).join("");
+  updateBar();
+}
+
+function updateBar() {
+  const n = Q.filter((q, i) => isAnswered(i)).length;
+  document.getElementById("progTxt").textContent = graded ? `Corregido · ${Q.filter((q, i) => isCorrect(i)).length} de 20 correctas` : `${n} de 20 respondidas`;
+  document.getElementById("progFill").style.transform = "scaleX(" + (graded ? 1 : n / Q.length) + ")";
+  document.getElementById("btnGrade").hidden = graded;
+  const t = document.getElementById("timer");
+  if (graded) { t.textContent = "Tiempo usado " + fmt(Math.min(DURATION, gradedAt - startedAt)); t.classList.remove("low"); }
+  else if (startedAt) { const r = remaining(); t.textContent = fmt(r); t.classList.toggle("low", r <= 5 * 60 * 1000); }
+}
+
+function startTick() {
+  clearInterval(tick);
+  tick = setInterval(() => { if (graded) { clearInterval(tick); return; } if (remaining() <= 0) { grade(true); return; } updateBar(); }, 1000);
+}
+
+function show() {
+  const started = !!startedAt;
+  document.getElementById("startBox").hidden = started;
+  document.getElementById("bar").hidden = !started;
+  document.getElementById("quiz").hidden = !started;
+}
+
+function grade(timeUp) {
+  graded = true; gradedAt = Math.min(Date.now(), startedAt + DURATION); save(); clearInterval(tick);
+  document.getElementById("gradeConfirm").hidden = true;
+  renderSummary(timeUp); render();
+  document.getElementById("summary").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function fmtChoice(i, v) {
+  const q = Q[i];
+  if (q.type === "single") return typeof v === "number" ? `${letterOf(i, v)}) ${q.options[v]}` : "(sin responder)";
+  return (v && v.length) ? [...v].sort((a, b) => PERM[i].indexOf(a) - PERM[i].indexOf(b)).map(j => `${letterOf(i, j)}) ${q.options[j]}`).join(" · ") : "(sin responder)";
+}
+function wrongText() {
+  const ok = Q.filter((q, i) => isCorrect(i)).length;
+  const lines = [`Simulacro AD 2 ISW: ${ok}/20 · tiempo usado ${fmt(Math.min(DURATION, gradedAt - startedAt))} · las que respondí mal`, ""];
+  Q.forEach((q, i) => {
+    if (isCorrect(i)) return;
+    lines.push(`${i + 1}. [${q.tag}] ` + (q.case ? q.case + " — " : "") + q.text);
+    lines.push(`   Marqué: ${fmtChoice(i, ans[i])}`);
+    lines.push(`   Correcta: ${fmtChoice(i, q.answer)}`);
+    lines.push("");
+  });
+  return lines.join("\n");
+}
+
+function renderSummary(timeUp) {
+  const box = document.getElementById("summary");
+  if (!graded) { box.hidden = true; return; }
+  const ok = Q.filter((q, i) => isCorrect(i)).length;
+  const part = k => { const idx = Q.map((q, i) => i).filter(i => Q[i].k === k); return `${idx.filter(isCorrect).length}/${idx.length}`; };
+  box.innerHTML = `${timeUp ? `<p class="timeup">Se terminó la hora: se corrigió con lo que tenías.</p>` : ""}
+    <div class="score">${ok}/20<small>${Math.round(ok / 20 * 100)} % · ${ok >= 12 ? "aprobaría (60 %)" : "no llega al 60 %"} · tiempo usado ${fmt(Math.min(DURATION, gradedAt - startedAt))}</small></div>
+    <div class="units"><div class="unit"><b>${part("BP")}</b>BP</div><div class="unit"><b>${part("AREA")}</b>Área y práctica</div></div>
+    <div class="actions">
+      <button id="btnCopy">Copiar las que respondí mal</button>
+      <button class="ghost" id="btnFilter">${onlyWrong ? "Ver todas" : "Ver sólo las incorrectas"}</button>
+      <button class="ghost" id="btnReset">Empezar de nuevo</button>
+      <span class="toast" id="toast" hidden>Copiado. Pegalo en el chat.</span>
+    </div>
+    <textarea class="copybox" id="copybox" readonly hidden></textarea>
+    <div class="confirm" id="confirm" hidden><span>¿Borrar las respuestas y volver a empezar con el reloj en 60:00?</span><button id="btnYes">Sí, borrar</button><button class="ghost" id="btnNo">Cancelar</button></div>`;
+  box.hidden = false;
+  document.getElementById("btnCopy").onclick = () => {
+    const txt = wrongText(), ta = document.getElementById("copybox"); ta.value = txt;
+    const fallback = () => { ta.hidden = false; ta.focus(); ta.select(); };
+    try { navigator.clipboard.writeText(txt).then(() => { document.getElementById("toast").hidden = false; }, fallback); } catch (e) { fallback(); }
+  };
+  document.getElementById("btnFilter").onclick = () => { onlyWrong = !onlyWrong; renderSummary(false); render(); };
+  document.getElementById("btnReset").onclick = () => { document.getElementById("confirm").hidden = false; };
+  document.getElementById("btnNo").onclick = () => { document.getElementById("confirm").hidden = true; };
+  document.getElementById("btnYes").onclick = () => { ans = {}; graded = false; onlyWrong = false; startedAt = null; gradedAt = null; save(); renderSummary(false); show(); render(); window.scrollTo(0, 0); };
+}
+
+document.getElementById("quiz").addEventListener("change", e => {
+  const t = e.target; if (!t.dataset || t.dataset.q === undefined || graded) return;
+  const i = +t.dataset.q, q = Q[i];
+  if (q.type === "single") ans[i] = +t.value;
+  else { const set = new Set(ans[i] || []); t.checked ? set.add(+t.value) : set.delete(+t.value); ans[i] = [...set].sort((a, b) => a - b); }
+  save(); updateBar();
+});
+document.getElementById("btnStart").onclick = () => { startedAt = Date.now(); save(); show(); render(); startTick(); };
+document.getElementById("btnGrade").onclick = () => {
+  const miss = Q.filter((q, i) => !isAnswered(i)).length;
+  if (miss === 0) { grade(false); return; }
+  document.getElementById("gradeMsg").textContent = `Te faltan ${miss} sin responder; cuentan como mal.`;
+  document.getElementById("gradeConfirm").hidden = false;
+};
+document.getElementById("btnGradeYes").onclick = () => grade(false);
+document.getElementById("btnGradeNo").onclick = () => { document.getElementById("gradeConfirm").hidden = true; };
+
+load();
+show();
+if (startedAt && !graded && remaining() <= 0) { graded = true; gradedAt = startedAt + DURATION; save(); }
+renderSummary(false);
+render();
+if (startedAt && !graded) startTick();
+</script>
