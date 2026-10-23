@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Particiones y valores límite</title>
+<style>
+  @page { size: A4; margin: 8mm 9mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Avenir Next", Helvetica, Arial, sans-serif; font-size: 8.3pt; color: #1d2329; line-height: 1.25; }
+  h1 { font-size: 16pt; margin: 0; letter-spacing: -.01em; }
+  .sub { color: #5b6470; margin: .5mm 0 2.4mm; font-size: 8.4pt; }
+  h2 { font-size: 10pt; margin: 0 0 1.6mm; display: flex; align-items: center; gap: 1.8mm; }
+  .num { background: #1d2329; color: #fff; border-radius: 50%; width: 5.2mm; height: 5.2mm; display: inline-flex; align-items: center; justify-content: center; font-size: 8pt; flex: none; }
+  .panel { border: 1px solid #d4d9df; border-radius: 2.6mm; padding: 2.2mm 2.8mm; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; margin-top: 2.6mm; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { border-bottom: 1px solid #e3e7eb; padding: .7mm 1.2mm; text-align: left; vertical-align: top; }
+  th { font-size: 7.4pt; color: #5b6470; font-weight: 600; }
+  code { font-family: Menlo, monospace; font-size: 7.6pt; background: #f1f3f5; padding: 0 .7mm; border-radius: .7mm; }
+  ul { margin: 0; padding-left: 3.4mm; }
+  li { margin-bottom: .7mm; }
+  .hint { font-size: 7.5pt; color: #5b6470; margin: 1.2mm 0 0; }
+  .big { font-size: 9pt; font-weight: 700; }
+  .ok { color: #15803d; font-weight: 700; } .bad { color: #b91c1c; font-weight: 700; }
+
+  .ask td:first-child { font-weight: 600; width: 34%; }
+
+  /* recta numérica */
+  .line { position: relative; height: 22mm; margin: 2mm 2mm 0; }
+  .seg { position: absolute; top: 5mm; height: 6mm; border-radius: 1mm; display: flex; align-items: center; justify-content: center; font-size: 7.4pt; font-weight: 700; color: #fff; }
+  .inv { background: #b91c1c; } .v1 { background: #1d4ed8; } .v2 { background: #0f766e; } .v3 { background: #6d28d9; }
+  .tick { position: absolute; top: 12mm; transform: translateX(-50%); font-size: 7.6pt; font-weight: 700; color: #b45309; text-align: center; }
+  .tick::before { content: ""; display: block; width: 0; height: 2mm; border-left: 1.5px solid #b45309; margin: 0 auto .3mm; }
+  .cap { position: absolute; top: 0; font-size: 7pt; color: #5b6470; transform: translateX(-50%); white-space: nowrap; }
+
+  .steps { counter-reset: s; margin: 0; padding: 0; list-style: none; }
+  .steps > li { display: grid; grid-template-columns: 5.5mm 1fr; gap: 1.5mm; margin-bottom: 1.1mm; }
+  .steps > li::before { counter-increment: s; content: counter(s); background: #b45309; color: #fff; border-radius: 1.2mm; font-weight: 700; text-align: center; font-size: 8pt; padding: .2mm 0; height: 4.4mm; }
+  .trap td:nth-child(2) { color: #b91c1c; }
+  .trap td:nth-child(3) { color: #15803d; font-weight: 600; }
+  .trap td { font-size: 7.7pt; }
+</style>
+</head>
+<body>
+
+<h1>Particiones y valores límite</h1>
+<p class="sub">ISW · U5 · técnicas de caja negra. Un error tira el punto entero: seguí los pasos en orden.</p>
+
+<div class="panel">
+  <h2><span class="num">0</span> ¿Qué pide la consigna?</h2>
+  <table class="ask">
+    <tr><td>"particiones" / "cubrir las particiones válidas"</td><td><b>un representante cualquiera</b> de cada partición (un valor del medio sirve)</td></tr>
+    <tr><td>"valores límite" / "frontera"</td><td><b>los extremos</b>: en cada cambio de partición, el último valor de una y el primero de la siguiente. <span class="bad">Nunca uno del medio.</span></td></tr>
+    <tr><td>"mínimo de casos para las válidas"</td><td>= cantidad de particiones de la <b>entrada que más tiene</b> (las válidas se combinan). Con casos ya armados: contá sólo los que aportan una partición nueva.</td></tr>
+    <tr><td>"qué tener en cuenta al definir los casos a partir de las particiones"</td><td><span class="ok">sí:</span> entradas, salidas esperadas, comportamiento esperado, <b>técnica a emplear</b> · <span class="bad">no:</span> alfa/beta, quién la ejecuta, el lenguaje</td></tr>
+  </table>
+</div>
+
+<div class="cols">
+  <div class="panel">
+    <h2><span class="num">1</span> ¿De qué depende el resultado?</h2>
+    <p style="margin:0">Particioná <b>sólo lo que cambia el comportamiento</b> del sistema. Misma partición = <b>misma regla</b>, aunque la salida numérica cambie.</p>
+    <ul style="margin-top:1.2mm">
+      <li><b>Ruido:</b> datos que no intervienen en el cálculo <b>no generan particiones</b>. <i>Adicional por antigüedad (≤2, 2–5, 5–10, ≥10) + "jubilación a los 65" + "período de prueba de 6 meses" → <b>4</b> válidas, no 5.</i></li>
+      <li>Lista de opciones: <b>una por valor</b> si cada una tiene otra regla (monedas con recargos distintos); una sola si todas se tratan igual.</li>
+      <li>"No acumulables, se aplica el mayor": no agrega particiones si los tramos no se pisan.</li>
+      <li>Si una regla <b>cruza dos entradas</b> → tabla de decisión, no particiones.</li>
+    </ul>
+  </div>
+  <div class="panel">
+    <h2><span class="num">2</span> Traducí el texto a cortes</h2>
+    <table>
+      <tr><th>El enunciado dice</th><th>Corte</th></tr>
+      <tr><td>"menores de 25"</td><td><code>&lt; 25</code> → el 25 va en la siguiente</td></tr>
+      <tr><td>"superior a 65" / "más de 6"</td><td><code>≥ 66</code> / <code>≥ 7</code></td></tr>
+      <tr><td>"de 25 a 65"</td><td>incluye los dos extremos</td></tr>
+      <tr><td>"mayor a cero"</td><td>inválida <code>≤ 0</code> (el 0 también)</td></tr>
+      <tr><td>"enciende por encima de 25, apaga por debajo de 20"</td><td><b>zona muerta 20–25</b> = partición válida</td></tr>
+      <tr><td>válida hasta 31</td><td>inválida <code>&gt; 31</code>, que no se pisen</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="panel" style="margin-top:2.6mm">
+  <h2><span class="num">3</span> Válidas, inválidas y valores límite sobre la recta</h2>
+  <p style="margin:0">Ejemplo: pedido inválido si es menor que 2 · 20 % de 2 a 5 · 30 % de 6 a 9 · 40 % de 10 a 14.</p>
+  <div class="line">
+    <div class="cap" style="left:9%">inválida</div>
+    <div class="cap" style="left:30%">válida 1</div>
+    <div class="cap" style="left:52%">válida 2</div>
+    <div class="cap" style="left:73%">válida 3</div>
+    <div class="cap" style="left:92%">inválida</div>
+    <div class="seg inv" style="left:0;width:18%">≤ 1</div>
+    <div class="seg v1" style="left:18.5%;width:22%">2 – 5 · 20 %</div>
+    <div class="seg v2" style="left:41%;width:22%">6 – 9 · 30 %</div>
+    <div class="seg v3" style="left:63.5%;width:22%">10 – 14 · 40 %</div>
+    <div class="seg inv" style="left:86%;width:14%">≥ 15</div>
+    <div class="tick" style="left:16%">1</div><div class="tick" style="left:21%">2</div>
+    <div class="tick" style="left:38%">5</div><div class="tick" style="left:43.5%">6</div>
+    <div class="tick" style="left:60.5%">9</div><div class="tick" style="left:66%">10</div>
+    <div class="tick" style="left:83%">14</div><div class="tick" style="left:88.5%">15</div>
+  </div>
+  <div class="cols" style="margin-top:0">
+    <div><b>Particiones:</b> 3 válidas + inválidas (≤ 1, ≥ 15, no numérico, vacío si es obligatorio). Casos: <b>un representante</b> por partición, p. ej. 3 · 7 · 12.</div>
+    <div><b>Valores límite:</b> un <b>par por transición</b> → {1, 2, 5, 6, 9, 10} (respuesta de la guía); si más de 14 es inválido, se suman 14 y 15. Cadenas "hasta 20 caracteres" → <b>1, 19, 20, 21</b>. Sin rango (letras, lista) → partición pura.</div>
+  </div>
+</div>
+
+<div class="cols">
+  <div class="panel">
+    <h2><span class="num">4</span> Inválidas típicas de un campo</h2>
+    <ul>
+      <li>por <b>debajo</b> y por <b>encima</b> del rango;</li>
+      <li><b>tipo</b> incorrecto (letras en un número, decimal en un entero);</li>
+      <li><b>vacío</b>, siempre aparte (si el campo es opcional, el vacío es <b>válido</b>);</li>
+      <li>fecha inexistente (31/04, 29/02 no bisiesto).</li>
+    </ul>
+    <p class="hint">Un 0 que significa "sin límite" es <b>válido</b> con partición propia.</p>
+  </div>
+  <div class="panel">
+    <h2><span class="num">5</span> Armado de casos</h2>
+    <ol class="steps">
+      <li><span><b>Válidas se combinan:</b> cada caso lleva una válida de cada entrada. Mínimo = la entrada con más válidas.</span></li>
+      <li><span><b>Inválidas de a una</b>, con el resto válido: el primer error corta el proceso y tapa al segundo.</span></li>
+      <li><span>Salida esperada en cada caso ("OK" / "Error" si no te dan formato). La salida no se particiona como entrada.</span></li>
+    </ol>
+  </div>
+</div>
+
+<div class="panel" style="margin-top:2.6mm">
+  <h2><span class="num">!</span> Trampas que ya se tomaron</h2>
+  <table class="trap">
+    <tr><th>Situación</th><th>Error típico</th><th>Correcto</th></tr>
+    <tr><td>Datos extra en el enunciado (jubilación, período de prueba)</td><td>contarlos como particiones</td><td>son ruido: no cambian el cálculo</td></tr>
+    <tr><td>"40 % si la edad es superior a 65"</td><td>partición ≥ 65</td><td>≥ 66 (65 no tiene descuento)</td></tr>
+    <tr><td>"Los mayores de 17 pagan" (edad entera)</td><td>válida de un solo valor, 17</td><td>≥ 18; límites 17 y 18</td></tr>
+    <tr><td>Valores límite de tramos</td><td>un valor del medio del tramo</td><td>el par en cada transición</td></tr>
+    <tr><td>"Cubrir las particiones válidas"</td><td>poner los extremos</td><td>un representante por partición</td></tr>
+  </table>
+</div>
+
+</body>
+</html>
