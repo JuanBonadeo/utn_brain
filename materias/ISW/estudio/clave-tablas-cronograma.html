@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Tablas de decisión y cronograma</title>
+<style>
+  @page { size: A4; margin: 8mm 9mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Avenir Next", Helvetica, Arial, sans-serif; font-size: 8.2pt; color: #1d2329; line-height: 1.24; }
+  h1 { font-size: 15pt; margin: 0; letter-spacing: -.01em; }
+  h1 small { font-weight: 500; color: #5b6470; font-size: 9pt; margin-left: 2mm; }
+  .band { margin: 2.6mm 0 1.6mm; font-size: 8pt; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #fff; background: #1d2329; border-radius: 1.4mm; padding: .8mm 2.4mm; }
+  h2 { font-size: 9.6pt; margin: 0 0 1.4mm; }
+  .panel { border: 1px solid #d4d9df; border-radius: 2.4mm; padding: 2mm 2.6mm; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2.6mm; margin-top: 2.4mm; }
+  .cols3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2.6mm; margin-top: 2.4mm; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { border-bottom: 1px solid #e3e7eb; padding: .6mm 1.2mm; text-align: left; vertical-align: top; }
+  th { font-size: 7.3pt; color: #5b6470; font-weight: 600; }
+  ul { margin: 0; padding-left: 3.4mm; }
+  li { margin-bottom: .6mm; }
+  .hint { font-size: 7.4pt; color: #5b6470; margin: 1mm 0 0; }
+  .ok { color: #15803d; font-weight: 700; } .bad { color: #b91c1c; font-weight: 700; }
+  code { font-family: Menlo, monospace; font-size: 7.5pt; background: #f1f3f5; padding: 0 .7mm; border-radius: .7mm; }
+  pre { margin: 0; font-family: Menlo, monospace; font-size: 7.2pt; line-height: 1.3; background: #f6f7f9; border-radius: 1.4mm; padding: 1.2mm 1.6mm; }
+
+  /* tabla de decisión dibujada */
+  .dt { border-collapse: separate; border-spacing: 0; font-size: 7.6pt; }
+  .dt td, .dt th { border: none; padding: .5mm 1.6mm; text-align: center; }
+  .dt .lab { text-align: left; font-weight: 600; }
+  .dt tr.c td { background: #e8f0fe; }
+  .dt tr.a td { background: #fff4e5; }
+  .dt tr.sep td { border-top: 2px solid #1d2329; }
+  .dt th { color: #1d2329; font-weight: 700; }
+  .dt .col { outline: 2px solid #b45309; outline-offset: -1px; }
+
+  .count td:first-child { font-weight: 700; width: 24%; }
+  .ex td { font-size: 7.6pt; }
+  .ex td:last-child { font-weight: 700; color: #15803d; white-space: nowrap; }
+
+  .graph { display: flex; align-items: center; gap: 2mm; justify-content: center; margin: 1mm 0; }
+  .nd { width: 7mm; height: 7mm; border-radius: 50%; border: 1.5px solid #1d2329; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+  .ar { font-size: 7.2pt; color: #5b6470; text-align: center; line-height: 1.1; }
+</style>
+</head>
+<body>
+
+<h1>Tablas de decisión <small>+ cronograma, EDT e incrementos</small></h1>
+
+<div class="band">Tablas de decisión · U5</div>
+
+<div class="cols" style="margin-top:0">
+  <div class="panel">
+    <h2>Cómo es una tabla</h2>
+    <table class="dt">
+      <tr><th></th><th>R1</th><th>R2</th><th class="col">R3</th><th>R4</th></tr>
+      <tr class="c"><td class="lab">Condición 1</td><td>V</td><td>V</td><td class="col">F</td><td>F</td></tr>
+      <tr class="c"><td class="lab">Condición 2</td><td>V</td><td>F</td><td class="col">V</td><td>F</td></tr>
+      <tr class="a sep"><td class="lab">Acción A</td><td>X</td><td></td><td class="col"></td><td></td></tr>
+      <tr class="a"><td class="lab">Acción B</td><td></td><td>X</td><td class="col">X</td><td></td></tr>
+    </table>
+    <ul style="margin-top:1.2mm">
+      <li><b>Condiciones</b> arriba, <b>acciones</b> abajo.</li>
+      <li><b>Cada columna = una regla = un caso de prueba.</b></li>
+      <li>Se usa cuando <b>varias entradas se cruzan</b> en reglas de negocio (si un campo solo decide → particiones).</li>
+    </ul>
+  </div>
+  <div class="panel">
+    <h2>Qué te preguntan y cómo contarlo</h2>
+    <table class="count">
+      <tr><td>Condiciones</td><td>las <b>preguntas distintas</b> que evalúa el sistema. Si dos del enunciado son la misma pregunta → una sola.</td></tr>
+      <tr><td>Acciones</td><td>los <b>resultados que pueden darse de verdad</b>. Si una combinación no ocurre, su acción no cuenta.</td></tr>
+      <tr><td>Combinaciones</td><td><b>producto</b> de los valores de cada condición: 2ⁿ sólo si todas son binarias.</td></tr>
+      <tr><td>Columnas tras reducir</td><td>colapsar <b>indiferentes</b> ("–": si el usuario no existe, la contraseña no importa) e <b>imposibles</b>.</td></tr>
+      <tr><td>Cobertura total</td><td>un caso por regla. Casos que caen en la <b>misma regla</b> son redundantes, aunque los valores cambien.</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="panel" style="margin-top:2.4mm">
+  <h2>Los ejercicios de la cátedra (respuestas confirmadas)</h2>
+  <table class="ex">
+    <tr><th>Caso</th><th>Pregunta</th><th>Clave</th><th>Respuesta</th></tr>
+    <tr><td><b>Gimnasio</b>: Coulson / IronMan 10 % / Hulk 15 % + 5 % <i>adicional</i> por cuota al día</td><td>acciones</td><td>"adicional" = se suma a un descuento que ya existe → Coulson no lo recibe. Acciones: 0 %, 10 %, 15 %, +5 %</td><td>4</td></tr>
+    <tr><td></td><td>columnas tras reducir</td><td>la categoría tiene <b>3 valores</b> → 3 × 2, y no se colapsa ninguna</td><td>6</td></tr>
+    <tr><td><b>Farmacia</b>: OS en lista, desc. &gt; 30 %, carnet, inhabilitado…</td><td>combinaciones</td><td>"tiene OS" y "presenta carnet" son la misma pregunta → 4 condiciones</td><td>2⁴ = 16</td></tr>
+    <tr><td><b>Aerolínea</b>: usuario existe, contraseña, puntos suficientes</td><td>casos con todas V</td><td>sólo una columna tiene todo en V</td><td>1</td></tr>
+    <tr><td><b>Multas</b>: verde cubre R1 y R4; rojos DT1 (55,V) DT2 (44,V) DT3 (66,V) DT4 (77,F)</td><td>qué agregar</td><td>ubicá cada caso en su regla: DT1 y DT3 → R1 (repetida), DT2 → R3, DT4 → R2</td><td>DT2 y DT4</td></tr>
+  </table>
+  <p class="hint">Leé el enunciado buscando palabras que <b>unen o anulan</b> casos: "adicional", "se considera", "si no existe…".</p>
+</div>
+
+<div class="band">Cronograma, EDT e incrementos · U3</div>
+
+<div class="cols3" style="margin-top:0">
+  <div class="panel">
+    <h2>EDT</h2>
+    <ul>
+      <li><b>Lista</b> los paquetes de trabajo (PP 1.1): tareas con verbo, "Analizar módulo A".</li>
+      <li><span class="bad">No</span> lleva el orden ni el <b>esfuerzo</b>: eso va en el cronograma.</li>
+      <li>Módulos independientes <b>arrancan en paralelo</b>.</li>
+      <li><b>Predecesora directa</b> = la inmediatamente anterior (A → B → C: A no es directa de C).</li>
+    </ul>
+  </div>
+  <div class="panel">
+    <h2>Esfuerzo vs duración</h2>
+    <ul>
+      <li><b>Esfuerzo</b> (días u horas-persona) <b>se suma</b> y no cambia por cómo repartas.</li>
+      <li><b>Duración</b> (calendario) sale del <b>camino crítico</b>: en paralelo baja.</li>
+      <li><b>1 día-persona = 8 horas.</b> Si piden horas-persona, multiplicá.</li>
+    </ul>
+    <pre>Análisis X: 3 dp + Análisis B: 3 dp
+= 6 días-persona × 8 = <b>48 h-persona</b></pre>
+  </div>
+  <div class="panel">
+    <h2>Incrementos con "usa"</h2>
+    <div class="graph"><div class="nd">A</div><div class="ar">←usa</div><div class="nd">C</div><div class="ar">usa→</div><div class="nd">B</div></div>
+    <p style="margin:0">Si <b>X usa Y</b>, Y va en un incremento <b>anterior o el mismo</b>. Todo orden que respete eso es válido:</p>
+    <p style="margin:.6mm 0 0"><span class="ok">✓</span> A+B, C · A, B, C · B, A, C<br><span class="bad">✗</span> C primero · A+C, B (C sin B)</p>
+  </div>
+</div>
+
+<div class="cols" style="margin-top:2.4mm">
+  <div class="panel">
+    <h2>Estrategias para cumplir el plazo</h2>
+    <table>
+      <tr><td><span class="bad">No viable</span></td><td>alarga la duración (<b>½ jornada</b>) o es mala práctica / heroicidad (<b>horas extras</b>, saltear pruebas)</td></tr>
+      <tr><td><b>Debería analizarse</b></td><td>reorganiza el trabajo (<b>dividir en submódulos</b>, paralelizar, aprovechar la holgura, sumar recursos): hay que rehacer el Gantt</td></tr>
+      <tr><td><span class="ok">Viable</span></td><td>el caso da los números y se ve que entra</td></tr>
+    </table>
+  </div>
+  <div class="panel">
+    <h2>Sueltos que se preguntan</h2>
+    <ul>
+      <li><b>Releases mínimas:</b> cascada 1 · incremental con n incrementos → n (el "3" de "ALFA 3" es nombre).</li>
+      <li><b>Hito</b> = producto terminado o aprobación, no consume tiempo. <b>Punto de control</b> = se ubica según los riesgos, se define al planificar.</li>
+      <li>Reqs claros → cascada / incremental · no claros → iterativo / espiral.</li>
+    </ul>
+  </div>
+</div>
+
+</body>
+</html>
