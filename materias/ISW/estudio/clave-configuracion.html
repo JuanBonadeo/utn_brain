@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Gestión de configuración</title>
+<style>
+  @page { size: A4; margin: 8mm 9mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Avenir Next", Helvetica, Arial, sans-serif; font-size: 8.1pt; color: #1d2329; line-height: 1.24; }
+  h1 { font-size: 15pt; margin: 0; letter-spacing: -.01em; }
+  h1 small { font-weight: 500; color: #5b6470; font-size: 9pt; margin-left: 2mm; }
+  h2 { font-size: 9.6pt; margin: 0 0 1.4mm; display: flex; align-items: center; gap: 1.8mm; }
+  .num { background: #1d2329; color: #fff; border-radius: 50%; width: 5mm; height: 5mm; display: inline-flex; align-items: center; justify-content: center; font-size: 7.8pt; flex: none; }
+  .panel { border: 1px solid #d4d9df; border-radius: 2.4mm; padding: 2mm 2.6mm; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2.6mm; margin-top: 2.4mm; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { border-bottom: 1px solid #e3e7eb; padding: .6mm 1.2mm; text-align: left; vertical-align: top; }
+  th { font-size: 7.3pt; color: #5b6470; font-weight: 600; }
+  ul { margin: 0; padding-left: 3.4mm; }
+  li { margin-bottom: .6mm; }
+  .hint { font-size: 7.4pt; color: #5b6470; margin: 1mm 0 0; }
+  .ok { color: #15803d; font-weight: 700; } .bad { color: #b91c1c; font-weight: 700; }
+  code { font-family: Menlo, monospace; font-size: 7.4pt; background: #f1f3f5; padding: 0 .7mm; border-radius: .7mm; }
+  pre { margin: 0; font-family: Menlo, monospace; font-size: 7.1pt; line-height: 1.32; background: #f6f7f9; border-radius: 1.4mm; padding: 1.2mm 1.6mm; white-space: pre-wrap; }
+  td.k { font-weight: 700; white-space: nowrap; }
+
+  .sg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6mm; }
+  .sgb { background: #e6f5e9; border: 1.2px solid #7cc28a; border-radius: 1.8mm; padding: 1mm 1.6mm; }
+  .sgb > b { display: block; font-size: 8.2pt; margin-bottom: .4mm; }
+
+  .lb td { text-align: center; font-size: 7.4pt; }
+  .lb td:first-child { text-align: left; font-weight: 600; }
+  .vv { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4mm; }
+  .vvb { border-radius: 1.6mm; padding: 1mm 1.4mm; border: 1px solid #c9ced5; background: #f6f7f9; }
+  .vvb > b:first-child { display: block; }
+</style>
+</head>
+<body>
+
+<h1>Gestión de configuración <small>U6 · CM: líneas base, versiones, releases y nombres</small></h1>
+
+<div class="panel" style="margin-top:2.4mm">
+  <h2><span class="num">1</span> CM protege la INTEGRIDAD: saber exactamente qué tiene cada cliente y poder reconstruirlo</h2>
+  <div class="sg">
+    <div class="sgb"><b>SG1 Establecer líneas base</b>1.1 identificar EC, IDs, dueño · 1.2 sistema de CM (repositorio, permisos, backup) · 1.3 crear / liberar LB</div>
+    <div class="sgb"><b>SG2 Seguir y controlar cambios</b>2.1 seguir la petición de cambio hasta el cierre (cambio <b>ya aceptado</b>) · 2.2 autorizar, check-in/out, versión</div>
+    <div class="sgb"><b>SG3 Establecer la integridad</b>3.1 registros: qué versión de cada EC forma cada LB y diferencias entre LB · 3.2 auditorías</div>
+  </div>
+  <p class="hint">Nivel 2, área de soporte. Un EC puede agrupar varios productos de trabajo · "bajo CM" ≠ "control de versiones" (versionar los registros de otra área es la GP 2.6 de esa área).</p>
+</div>
+
+<div class="cols">
+  <div class="panel">
+    <h2><span class="num">2</span> Línea base</h2>
+    <p style="margin:0">Conjunto de productos <b>revisado y acordado formalmente</b>; sólo cambia por el <b>control de cambios</b>. Lo clave: <b>relaciona las versiones de los artefactos entre sí</b>.</p>
+    <table class="lb" style="margin-top:1mm">
+      <tr><th>Hito</th><th>ERS</th><th>Diseño</th><th>Código</th><th>Pruebas</th></tr>
+      <tr><td>Revisión de reqs</td><td>A</td><td></td><td></td><td></td></tr>
+      <tr><td>Revisión de diseño</td><td>B</td><td>A</td><td></td><td></td></tr>
+      <tr><td>Aceptación</td><td>D</td><td>C</td><td>B</td><td>B</td></tr>
+    </table>
+    <p class="hint">Tipos · guía: funcional, de desarrollo, de producto · CMMI: funcional, <b>asignada</b>, del producto. LB + cambios aprobados = configuración vigente.</p>
+    <p class="hint" style="color:#a3330f">⚠ BP AD 2024: cada artefacto versionado <b>sin relación con los demás</b> → falta la LB: no se puede volver a una versión anterior. "No hay repositorio organizacional" es el distractor (eso es OPD).</p>
+  </div>
+  <div class="panel">
+    <h2><span class="num">3</span> Versión, variante, release</h2>
+    <div class="vv">
+      <div class="vvb"><b>Versión</b>variación <b>temporal</b>: el mismo elemento evolucionado</div>
+      <div class="vvb"><b>Variante</b>variación <b>espacial</b>: otra plataforma, coexiste (Android 1.1 → 4.3 sin cambiar funciones)</div>
+      <div class="vvb"><b>Release</b>versión que <b>se hace pública</b></div>
+    </div>
+    <ul style="margin-top:1.2mm">
+      <li><b>Mayor</b> sube con funcionalidad nueva (o al pasar a definitiva) · <b>menor</b> con correcciones.</li>
+      <li><b>Releases mínimas:</b> cascada → <b>1</b> · incremental con n incrementos → <b>n</b> ("ALFA 3" con 4 incrementos → <b>4</b>; el 3 es nombre).</li>
+      <li><b>Política de versionado</b> = formato, valor inicial, cuándo sube cada número, si se reinician. <span class="bad">No</span> es la estructura del nombre del archivo.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="cols">
+  <div class="panel">
+    <h2><span class="num">4</span> ¿Cuántos años sobrevive un esquema?</h2>
+    <ol style="margin:0;padding-left:4mm">
+      <li>Contá los <b>valores</b> de cada número (2 dígitos desde 01 → 99; desde 00 → 100).</li>
+      <li>Fijá la <b>frecuencia anual</b> de cada uno (trimestral 4 · mensual 12 · quincenal 24–26).</li>
+      <li>Si el menor <b>se reinicia</b> con el mayor, verificá que no se desborde en un período del mayor. Si no, <b>manda el mayor</b>.</li>
+      <li>Años ≈ valores del mayor ÷ frecuencia del mayor.</li>
+    </ol>
+    <pre style="margin-top:1mm">&lt;x&gt;.&lt;y&gt; · x: funcionalidad, 01–99, cada trimestre
+          y: corrección quincenal, vuelve a 0 con x
+y por trimestre ≈ 6 → no se desborda → manda x
+99 ÷ 4 = 24,75 → <b>24 años</b></pre>
+    <p class="hint" style="color:#a3330f">⚠ Distractor: 99 ÷ 24 quincenas (como si y no se reiniciara) → menos de 4 años.</p>
+  </div>
+  <div class="panel">
+    <h2><span class="num">5</span> Nombres de archivo</h2>
+    <p style="margin:0">Cada <b>pregunta</b> que el nombre tiene que responder (¿qué producto? ¿qué módulo? ¿qué región? ¿qué versión?) es <b>una sección</b>, de lo general a lo particular, con sus separadores.</p>
+    <pre style="margin-top:1mm">Cátedra: MM-TTT-AAnn_nombre_vx_yy
+IS-ART-PP01_Plan_Proyecto_SP_v0_02.pdf
+x = 0 mientras no es definitiva · yy dos dígitos</pre>
+    <ul style="margin-top:1.2mm">
+      <li>Si los archivos <b>salen de la carpeta</b> y se modifican → el nombre tiene que llevar <b>la versión</b>. Valen todas las opciones que identifican documento + versión.</li>
+      <li>Nombre de un tipo de archivo (módulos <b>fuente</b>) → sólo <b>su</b> extensión (<code>fue</code>), no las de otros (<code>exe</code>, <code>pqt</code>).</li>
+    </ul>
+  </div>
+</div>
+
+<div class="cols">
+  <div class="panel">
+    <h2><span class="num">6</span> Repositorios y auditorías</h2>
+    <table>
+      <tr><td class="k">Dinámico</td><td>lo que se está creando · control de <b>versiones</b> del autor</td></tr>
+      <tr><td class="k">Máster</td><td>la LB actual y sus cambios · control de <b>configuración</b></td></tr>
+      <tr><td class="k">Estático</td><td>LB liberadas y archivadas</td></tr>
+      <tr><td class="k">Auditoría</td><td>que el EC / la LB esté <b>bien gestionado</b> (no evalúa el producto): FCA funcional · PCA física (construido = documentación) · de gestión (registros completos y exactos)</td></tr>
+    </table>
+  </div>
+  <div class="panel">
+    <h2><span class="num">7</span> CM vs áreas vecinas</h2>
+    <table>
+      <tr><td>Cambio que <b>todavía se evalúa</b></td><td class="k">REQM 1.3</td></tr>
+      <tr><td>Cambio <b>ya aceptado</b>, se tramitan los artefactos</td><td class="k">CM 2.1</td></tr>
+      <tr><td>Artefactos acordados formalmente como base</td><td class="k">CM 1.3</td></tr>
+      <tr><td>Documento de diferencias entre compilaciones</td><td class="k">CM 3.1</td></tr>
+      <tr><td>Nombres de archivo vs reglas del proyecto</td><td class="k">CM 3.2*</td></tr>
+      <tr><td>Externo controla un estándar de la org</td><td class="k">PPQA 1.2</td></tr>
+      <tr><td>Biblioteca / repositorio organizacional</td><td class="k">OPD</td></tr>
+    </table>
+    <p class="hint">* el cuestionario la dio como 3.2; el resumen y la wiki decían 2.2.</p>
+  </div>
+</div>
+
+</body>
+</html>
