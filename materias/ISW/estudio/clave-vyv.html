@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Verificación y validación</title>
+<style>
+  @page { size: A4; margin: 8mm 9mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Avenir Next", Helvetica, Arial, sans-serif; font-size: 8pt; color: #1d2329; line-height: 1.23; }
+  h1 { font-size: 15pt; margin: 0; letter-spacing: -.01em; }
+  h1 small { font-weight: 500; color: #5b6470; font-size: 9pt; margin-left: 2mm; }
+  h2 { font-size: 9.5pt; margin: 0 0 1.3mm; display: flex; align-items: center; gap: 1.8mm; }
+  .num { background: #1d2329; color: #fff; border-radius: 50%; width: 5mm; height: 5mm; display: inline-flex; align-items: center; justify-content: center; font-size: 7.8pt; flex: none; }
+  .panel { border: 1px solid #d4d9df; border-radius: 2.4mm; padding: 1.9mm 2.5mm; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2.4mm; margin-top: 2.2mm; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { border-bottom: 1px solid #e3e7eb; padding: .55mm 1.1mm; text-align: left; vertical-align: top; }
+  th { font-size: 7.2pt; color: #5b6470; font-weight: 600; }
+  td.k { font-weight: 700; white-space: nowrap; }
+  ul { margin: 0; padding-left: 3.3mm; }
+  li { margin-bottom: .5mm; }
+  .hint { font-size: 7.3pt; color: #5b6470; margin: .9mm 0 0; }
+  .warn { color: #a3330f; }
+  .ok { color: #15803d; font-weight: 700; } .bad { color: #b91c1c; font-weight: 700; }
+
+  .vv { display: grid; grid-template-columns: 1fr 1fr; gap: 2mm; }
+  .ver { background: #eef3fc; border: 1.2px solid #8eaee6; border-radius: 1.8mm; padding: 1.3mm 1.8mm; }
+  .val { background: #fff4e5; border: 1.2px solid #e9b26b; border-radius: 1.8mm; padding: 1.3mm 1.8mm; }
+  .ver > b.t, .val > b.t { display: block; font-size: 9pt; margin-bottom: .4mm; }
+  .q { border: 2px solid #1d2329; border-radius: 2mm; padding: .9mm 2mm; font-weight: 700; text-align: center; margin-bottom: 1.4mm; }
+</style>
+</head>
+<body>
+
+<h1>Verificación y validación <small>U5 · conceptos, niveles, tipos de prueba y revisiones</small></h1>
+
+<div class="panel" style="margin-top:2.2mm">
+  <h2><span class="num">1</span> VER o VAL: decide CONTRA QUÉ se compara y QUIÉN participa</h2>
+  <div class="q">No decide la fase, ni si el producto está terminado, ni si la prueba es dinámica</div>
+  <div class="vv">
+    <div class="ver"><b class="t">VER · "¿lo construí bien?"</b>
+      contra <b>otro documento del proyecto</b> (especificación, diseño, minutas, glosario, particiones) · lo juzga el <b>EQUIPO</b> · entorno de verificación
+      <ul style="margin-top:.6mm"><li>revisión entre pares (<b>siempre</b> VER), inspección</li><li>pruebas unitarias, de <b>integración</b> y de <b>sistema</b> (aunque sea el sistema completo)</li><li>estrés hecho por la propia SF · BD de prueba · casos de prueba, diagramas, modelo de datos, plan</li></ul></div>
+    <div class="val"><b class="t">VAL · "¿construí lo correcto?"</b>
+      contra la <b>necesidad real</b> en el <b>entorno previsto</b> · lo juzga el <b>CLIENTE / usuario</b>
+      <ul style="margin-top:.6mm"><li>prueba de <b>aceptación</b>, alfa, beta, piloto</li><li>demostrar un <b>prototipo</b> · revisar requisitos o minuta <b>con el cliente</b></li><li>software funcionando en el entorno real · manual de usuario · interfaces</li></ul></div>
+  </div>
+  <p class="hint"><b>Contra un estándar de la organización</b> → PPQA, no VER. <b>Validar requisitos</b> temprano con prototipo → RD 3.5; VAL valida el <b>producto</b>. <b>Ninguna</b>: BD de producción, herramientas, el repositorio. Lista de requisitos → <b>las dos</b>.</p>
+  <p class="hint warn">⚠ "Dinámica = validación" es falso como regla · la inspección es una técnica, no un área (la usan VER y PPQA) · VAL no tiene revisión entre pares.</p>
+</div>
+
+<div class="cols">
+  <div class="panel">
+    <h2><span class="num">2</span> Niveles de prueba (INTECO)</h2>
+    <table>
+      <tr><th>Nivel</th><th>Qué y quién</th><th>Área</th></tr>
+      <tr><td class="k">Unitarias</td><td>cada módulo aislado · el <b>desarrollador</b> · stubs y drivers</td><td>las dos</td></tr>
+      <tr><td class="k">Integración</td><td>interconexión entre módulos · se apoya en el <b>diseño</b></td><td>VER</td></tr>
+      <tr><td class="k">Sistema</td><td>comportamiento global vs la <b>ERS</b> · equipo independiente · caja negra</td><td>VER</td></tr>
+      <tr><td class="k">Aceptación</td><td>necesidades del usuario · el <b>cliente</b> · no busca errores: muestra que está listo</td><td>VAL</td></tr>
+    </table>
+    <p class="hint"><b>Modelo en V:</b> aceptación ↔ reqs de usuario · sistema ↔ ERS · integración ↔ diseño · unitarias ↔ código. Ningún nivel reemplaza a otro.</p>
+    <p class="hint"><b>Integración:</b> big-bang (todo junto, mala) · bottom-up (drivers) · top-down (stubs; detecta rápido errores de arquitectura).</p>
+  </div>
+  <div class="panel">
+    <h2><span class="num">3</span> Aceptación: alfa, beta, piloto</h2>
+    <table>
+      <tr><td class="k">Alfa</td><td>clientes preseleccionados, <b>invitados</b>, con un experto al lado · entorno de desarrollo</td></tr>
+      <tr><td class="k">Beta</td><td><b>después</b> de la alfa · el cliente <b>solo</b> con el producto · <b>su</b> entorno</td></tr>
+      <tr><td class="k">Piloto</td><td>algunos departamentos del cliente · sus instalaciones, ambiente de producción</td></tr>
+    </table>
+    <p class="hint">Un equipo de la empresa probando un prototipo <b>no</b> es alfa ni beta (las dos requieren al cliente): son internas, VER.</p>
+    <h2 style="margin-top:1.8mm"><span class="num">4</span> Regresión vs confirmación</h2>
+    <ul>
+      <li><b>Confirmación:</b> el defecto corregido se solucionó (misma prueba, mismos datos).</li>
+      <li><b>Regresión:</b> el arreglo no rompió otra cosa. 125 casos, 27 fallan → se corren los <b>125</b>: 27 confirmación + 98 regresión.</li>
+      <li>La regresión es la mejor candidata a <b>automatizar</b>.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="cols">
+  <div class="panel">
+    <h2><span class="num">5</span> Estáticas vs dinámicas · caja negra vs blanca</h2>
+    <table>
+      <tr><td class="k">Estática</td><td><b>no se ejecuta</b>: revisiones, inspecciones, análisis estático. Una reunión para evaluar la especificación es estática.</td></tr>
+      <tr><td class="k">Dinámica</td><td>se ejecuta el programa.</td></tr>
+      <tr><td class="k">Caja negra</td><td>sólo entradas y salidas: particiones, límites, tablas de decisión, transición de estados, casos de uso.</td></tr>
+      <tr><td class="k">Caja blanca</td><td>con el código: sentencia (la más débil) · decisión (V y F) · caminos (no todas las combinaciones). 100 % de sentencias no garantiza cero defectos.</td></tr>
+      <tr><td class="k">Experiencia</td><td>adivinación de errores, exploratorias: sin especificación o sin tiempo.</td></tr>
+    </table>
+    <p class="hint"><b>Prueba (Myers):</b> ejecutar un programa con la intención de <b>encontrar errores</b>. Falsas: "demostrar que no hay errores", "demostrar que funciona".</p>
+  </div>
+  <div class="panel">
+    <h2><span class="num">6</span> Revisiones</h2>
+    <table>
+      <tr><th>Tipo</th><th>Quién dirige · foco</th></tr>
+      <tr><td class="k">Informal</td><td>sin proceso ni roles</td></tr>
+      <tr><td class="k">Walkthrough</td><td><b>el autor</b> guía · entendimiento común</td></tr>
+      <tr><td class="k">Técnica</td><td>experto · busca <b>consenso</b> técnico</td></tr>
+      <tr><td class="k">Entre pares</td><td>colegas del proyecto · defectos temprano · <b>sin gerentes</b></td></tr>
+      <tr><td class="k">Inspección</td><td>moderador, <b>nunca el autor</b> · registra defectos · la más formal</td></tr>
+    </table>
+    <p style="margin:1mm 0 0"><b>5 roles:</b> <b>moderador</b> (lidera, marca el ritmo, hace el seguimiento y <b>almacena los datos</b>) · autor · documentador (anota los defectos) · revisor (busca defectos <b>antes</b> de la reunión) · supervisor (asigna el tiempo).</p>
+    <p class="hint">Cátedra, moderador: liderar la revisión, marcar el ritmo, almacenar los datos. <span class="bad">No</span> documentar ni identificar problemas.</p>
+  </div>
+</div>
+
+<div class="panel" style="margin-top:2.2mm">
+  <h2><span class="num">7</span> Sueltos que se preguntan</h2>
+  <ul style="columns:2;column-gap:5mm">
+    <li>Cuanto más tarde se detecta un defecto, <b>más caro</b>: los defectos se inyectan en <b>todas</b> las fases.</li>
+    <li>Objetivo de V&amp;V: <b>confianza</b> en que es adecuado para su uso, no cero defectos.</li>
+    <li>V&amp;V se planifica <b>desde el inicio</b>; "la validación empieza al final" es falso.</li>
+    <li>Los productos de análisis y diseño son la <b>base</b> de las pruebas, no al revés.</li>
+    <li>Prestaciones: carga (N usuarios) · capacidad (umbral) · estrés (sobrecarga) · estabilidad (en el tiempo).</li>
+    <li>Navegadores soportados → no funcional de <b>configuración</b>; navegabilidad → <b>usabilidad</b>.</li>
+  </ul>
+</div>
+
+</body>
+</html>
