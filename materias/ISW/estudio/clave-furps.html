@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>FURPS+</title>
+<style>
+  @page { size: A4; margin: 8mm 9mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Avenir Next", Helvetica, Arial, sans-serif; font-size: 8.2pt; color: #1d2329; line-height: 1.25; }
+  h1 { font-size: 15pt; margin: 0; letter-spacing: -.01em; }
+  h1 small { font-weight: 500; color: #5b6470; font-size: 9pt; margin-left: 2mm; }
+  h2 { font-size: 9.5pt; margin: 0 0 1.3mm; display: flex; align-items: center; gap: 1.8mm; }
+  .num { background: #1d2329; color: #fff; border-radius: 50%; width: 5mm; height: 5mm; display: inline-flex; align-items: center; justify-content: center; font-size: 7.8pt; flex: none; }
+  .panel { border: 1px solid #d4d9df; border-radius: 2.4mm; padding: 1.9mm 2.5mm; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2.4mm; margin-top: 2.2mm; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { border-bottom: 1px solid #e3e7eb; padding: .6mm 1.1mm; text-align: left; vertical-align: top; }
+  th { font-size: 7.2pt; color: #5b6470; font-weight: 600; }
+  td.k { font-weight: 700; white-space: nowrap; }
+  td.L { font-weight: 800; font-size: 14pt; text-align: center; width: 9mm; vertical-align: middle; }
+  td.c { text-align: center; font-weight: 700; }
+  ul, ol { margin: 0; padding-left: 3.6mm; }
+  li { margin-bottom: .6mm; }
+  .hint { font-size: 7.3pt; color: #5b6470; margin: .9mm 0 0; }
+  .warn { color: #a3330f; }
+  .q { border: 2px solid #1d2329; border-radius: 2mm; padding: 1mm 2mm; font-weight: 700; text-align: center; margin: 1.2mm 0; }
+  .ej { font-style: italic; color: #3a424c; }
+</style>
+</head>
+<body>
+
+<h1>FURPS+ <small>U2 · requerimientos · clasificación de atributos de calidad (RUP)</small></h1>
+
+<div class="panel" style="margin-top:2.2mm">
+  <h2><span class="num">1</span> Las letras</h2>
+  <table>
+    <tr><th></th><th>Significa</th><th>Incluye</th><th>Requisito de ejemplo</th></tr>
+    <tr><td class="L">F</td><td class="k">Funcionalidad</td><td>prestaciones, capacidades, generalidad, <b>seguridad</b> (permisos, autenticación, auditoría), reutilización</td><td class="ej">"Sólo el supervisor puede anular una venta"</td></tr>
+    <tr><td class="L">U</td><td class="k">Usabilidad</td><td>factores humanos, facilidad de uso y de aprendizaje, estética, <b>coherencia de la interfaz</b>, accesibilidad, ayuda, <b>documentación de usuario</b></td><td class="ej">"Un cajero nuevo opera el sistema tras 2 h de capacitación"</td></tr>
+    <tr><td class="L">R</td><td class="k">Fiabilidad<br><small>reliability</small></td><td>frecuencia y severidad de fallas, <b>disponibilidad</b>, tiempo medio entre fallas, <b>recuperación</b>, exactitud de resultados, previsibilidad</td><td class="ej">"Disponible 99,5 % del horario comercial; tras una caída, se recupera en 10 min sin perder ventas"</td></tr>
+    <tr><td class="L">P</td><td class="k">Rendimiento<br><small>performance</small></td><td><b>tiempo de respuesta</b>, velocidad, throughput, eficiencia, consumo de recursos (CPU, memoria), capacidad, <b>escalabilidad</b></td><td class="ej">"Responde en menos de 2 s con 500 usuarios concurrentes"</td></tr>
+    <tr><td class="L">S</td><td class="k">Soporte<br><small>supportability</small></td><td><b>adaptabilidad</b>, mantenibilidad, extensibilidad, configurabilidad, compatibilidad, <b>instalación</b>, testeabilidad, internacionalización, portabilidad</td><td class="ej">"Agregar un nuevo medio de pago no requiere modificar el módulo de ventas"</td></tr>
+    <tr><td class="L">+</td><td class="k">Restricciones</td><td><b>de diseño</b> (BD, arquitectura) · <b>de implementación</b> (lenguaje, normas, estándares) · <b>de interfaz</b> (con <b>otros sistemas</b>) · <b>físicas</b> (hardware, peso, espacio) · también legales y de licencias</td><td class="ej">"Se desarrolla en Java sobre PostgreSQL" · "Se integra con el webservice de AFIP"</td></tr>
+  </table>
+  <div class="q">F = lo funcional (qué hace) · URPS = atributos no funcionales (cómo lo hace) · + = restricciones, no son atributos de calidad</div>
+  <p class="hint warn">⚠ Única pregunta confirmada de parciales: <b>"la adaptabilidad se clasifica como Soporte (S)" → verdadero</b>. El resto sale de RUP y de un resumen de alumnos, no de la guía de la cátedra: justificá si aparece.</p>
+</div>
+
+<div class="cols">
+  <div class="panel">
+    <h2><span class="num">2</span> Cómo clasificar un requisito (en este orden)</h2>
+    <ol>
+      <li>¿Describe <b>qué hace</b> el sistema, o <b>quién puede</b> hacerlo? → <b>F</b></li>
+      <li>¿Limita las opciones del diseñador (lenguaje, BD, hardware, norma, otro sistema)? → <b>+</b></li>
+      <li>¿Habla de lo fácil que es <b>usarlo o aprenderlo</b>, de la pantalla o la ayuda? → <b>U</b></li>
+      <li>¿Habla de <b>fallas</b>, caídas, disponibilidad o resultados correctos? → <b>R</b></li>
+      <li>¿Habla de <b>tiempo</b>, volumen, cantidad de usuarios o recursos? → <b>P</b></li>
+      <li>¿Habla de <b>cambiarlo</b>, mantenerlo, instalarlo, adaptarlo, configurarlo o probarlo? → <b>S</b></li>
+    </ol>
+    <p class="hint">Truco: las frases <b>"facilidad de…"</b> se resuelven por el objeto. Facilidad de <b>uso</b> → U; facilidad de <b>cambio / corrección / adaptación</b> → S (mantenibilidad).</p>
+  </div>
+  <div class="panel">
+    <h2><span class="num">3</span> Palabra clave → letra</h2>
+    <table>
+      <tr><td>seguridad, permisos, auditoría, log de operaciones</td><td class="c">F</td><td>disponibilidad, recuperación, respaldo, exactitud</td><td class="c">R</td></tr>
+      <tr><td>accesibilidad, ayuda en línea, manual de usuario</td><td class="c">U</td><td>tiempo de respuesta, concurrencia, escalabilidad</td><td class="c">P</td></tr>
+      <tr><td>estética, consistencia de pantallas, mensajes de error</td><td class="c">U</td><td>adaptabilidad, portabilidad, compatibilidad</td><td class="c">S</td></tr>
+      <tr><td>lenguaje, motor de BD, arquitectura impuesta</td><td class="c">+</td><td>instalación, configuración, idioma (i18n)</td><td class="c">S</td></tr>
+      <tr><td>integración con otro sistema (interfaz)</td><td class="c">+</td><td>mantenibilidad, testeabilidad, extensibilidad</td><td class="c">S</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="cols">
+  <div class="panel">
+    <h2><span class="num">4</span> Trampas</h2>
+    <ul>
+      <li><b>Seguridad va en F</b> en FURPS+, aunque en la clasificación de la guía de la cátedra es no funcional "de producto". Si la consigna dice FURPS, es F.</li>
+      <li><b>Interfaz</b> en el "+" es la interfaz con <b>otros sistemas</b>; la interfaz con el usuario es <b>U</b>.</li>
+      <li><b>Disponibilidad es R</b>, no P: habla de fallas, no de velocidad.</li>
+      <li><b>Escalabilidad es P</b> (soportar más carga); <b>extensibilidad es S</b> (agregar funciones).</li>
+      <li><b>Documentación de usuario es U</b>; la documentación técnica para mantener es S.</li>
+      <li>El <b>"+"</b> no se mide como calidad: son restricciones (la guía: "limitan las opciones del diseñador").</li>
+    </ul>
+  </div>
+  <div class="panel">
+    <h2><span class="num">5</span> Cómo encaja con lo de la cátedra</h2>
+    <table>
+      <tr><th>Guía de la cátedra</th><th>FURPS+</th></tr>
+      <tr><td>Funcional: qué hace, "realiza el trabajo"</td><td class="c">F</td></tr>
+      <tr><td>No funcional <b>de producto</b>: usabilidad, eficiencia, fiabilidad, portabilidad, escalabilidad</td><td class="c">U · P · R · S</td></tr>
+      <tr><td>No funcional <b>organizacional</b>: entrega, implementación, estándares</td><td class="c">+</td></tr>
+      <tr><td>No funcional <b>externo</b>: interoperabilidad, legislación, privacidad</td><td class="c">+ (privacidad → F)</td></tr>
+      <tr><td>Restricciones (son no funcionales)</td><td class="c">+</td></tr>
+    </table>
+    <p class="hint"><b>ISO 9126</b> (conocimiento general): funcionalidad → F · usabilidad → U · fiabilidad → R · eficiencia → P · mantenibilidad y portabilidad → S. La calidad <b>interna</b> que el cliente no ve (mantenibilidad) cae casi toda en <b>S</b>.</p>
+  </div>
+</div>
+
+<div class="panel" style="margin-top:2.2mm">
+  <h2><span class="num">6</span> Práctica rápida (tapá la columna de la derecha)</h2>
+  <table>
+    <tr><th>Requisito</th><th class="c">Letra</th><th>Por qué</th></tr>
+    <tr><td>El sistema emite la factura electrónica al confirmar la venta.</td><td class="c">F</td><td>qué hace</td></tr>
+    <tr><td>El sistema debe poder migrarse de Windows a Linux sin reescribirse.</td><td class="c">S</td><td>portabilidad / adaptabilidad</td></tr>
+    <tr><td>El reporte mensual se genera en menos de 30 segundos.</td><td class="c">P</td><td>tiempo</td></tr>
+    <tr><td>Todas las pantallas usan la misma ubicación para los botones Aceptar y Cancelar.</td><td class="c">U</td><td>coherencia de la interfaz</td></tr>
+    <tr><td>Los totales calculados no pueden diferir en más de $0,01 de los contables.</td><td class="c">R</td><td>exactitud</td></tr>
+    <tr><td>Se registra quién modificó cada precio y cuándo.</td><td class="c">F</td><td>seguridad / auditoría</td></tr>
+    <tr><td>El sistema debe instalarse en una sucursal nueva en menos de una hora.</td><td class="c">S</td><td>instalación</td></tr>
+    <tr><td>La base de datos debe ser Oracle, porque la empresa ya tiene licencias.</td><td class="c">+</td><td>restricción de diseño</td></tr>
+    <tr><td>Si se corta la luz, al volver no se pierde ninguna venta confirmada.</td><td class="c">R</td><td>recuperación</td></tr>
+    <tr><td>Debe cumplir la Ley 25.326 de protección de datos personales.</td><td class="c">+</td><td>restricción legal</td></tr>
+  </table>
+</div>
+
+</body>
+</html>
