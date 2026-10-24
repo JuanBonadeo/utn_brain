@@ -9243,3 +9243,9 @@ métricas de proyecto vs producto — ver [Unidad 8](#unidad-8--medición-y-aná
   resuelto (8 consignas, 9 puntos) · 60 preguntas de `fuentes/Preguntas de Cuestionario.md`
   limpias y filtradas al temario, con respuestas al final (✅/⚠️). `scripts/resumen-pdf.js`: las
   tablas dentro de una pregunta ya no se pasan del margen.
+- 2026-10-24: parcial de Aprobación Directa del 24/10/2026 (EXAM336). Fotos en
+  `fuentes/parciales-ad/` (páginas 1, 3, 5 y 6). Consignas reconstruidas y resueltas en
+  `estudio/parcial-ad-2026-10-24.md`: activos/herramientas de CM, V/F de retrabajo, días de
+  comienzo con predecesoras (la resumen de RD dice 112 h y da 104 h), VER SP 2.2, "VER y VAL
+  cumplidos" sin pruebas con usuarios, tailoring con conjuntos A/B/C y REQM ante un cambio del
+  cliente.
