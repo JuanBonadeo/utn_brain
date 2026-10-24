@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Carillas AD de ISW</title>
+<style>
+  @page { size: A4; margin: 10mm 11mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Avenir Next", Helvetica, Arial, sans-serif; font-size: 9pt; color: #1d2329; line-height: 1.3; }
+  h1 { font-size: 20pt; margin: 0; letter-spacing: -.01em; }
+  .sub { color: #5b6470; margin: 1mm 0 4mm; font-size: 9.5pt; }
+  h2 { font-size: 11pt; margin: 0 0 2mm; }
+  .panel { border: 1px solid #d4d9df; border-radius: 2.6mm; padding: 2.6mm 3.2mm; margin-bottom: 3mm; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { border-bottom: 1px solid #e3e7eb; padding: 1mm 1.4mm; text-align: left; vertical-align: top; }
+  th { font-size: 8pt; color: #5b6470; font-weight: 600; }
+  td.p { font-weight: 700; text-align: center; width: 12mm; font-size: 10pt; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; }
+  ol, ul { margin: 0; padding-left: 4.5mm; }
+  li { margin-bottom: 1.2mm; }
+  .big li { font-size: 9.6pt; }
+</style>
+</head>
+<body>
+
+<h1>ISW · Aprobación Directa</h1>
+<p class="sub">Carillas para el examen a libro abierto · entran U1 a U6 · se aprueba con 60 %</p>
+
+<div class="panel">
+  <h2>Si la pregunta habla de… → andá a la página</h2>
+  <table>
+    <tr><th>La pregunta</th><th style="text-align:center">Pág.</th><th>Qué buscar ahí</th></tr>
+    <tr><td><b>"Relacione la actividad con el área y la práctica"</b></td><td class="p">2 · 4</td><td>árbol para el área; dorso del mapa para la SP exacta</td></tr>
+    <tr><td><b>"BP → ¿podrían surgir problemas de calidad?"</b></td><td class="p">5</td><td>método, chequeo de cada razón, señales por área, distractores (con la 2 para el área)</td></tr>
+    <tr><td>Niveles de madurez, componentes, SPEM, RUP, ciclos de vida, calidad</td><td class="p">6 · 3</td><td>reglas de niveles, requeridos/esperados/informativos, fases y disciplinas</td></tr>
+    <tr><td>Activo / producto de trabajo · qué va bajo configuración · plantillas vigentes</td><td class="p">7</td><td>qué pide la consigna, versión vigente en 4 pasos, "año X"</td></tr>
+    <tr><td>Líneas base, versiones, releases, nombres de archivo, años que dura un esquema</td><td class="p">8</td><td>CM: metas, cálculo de supervivencia, CM vs áreas vecinas</td></tr>
+    <tr><td>RD vs REQM vs CM, cambios, fuentes, roles, priorización, trazabilidad</td><td class="p">9</td><td>árbol "¿ya está acordado?", orden ante un cambio</td></tr>
+    <tr><td>Tablas de decisión · EDT · incrementos con "usa" · estrategias viable / no viable</td><td class="p">10</td><td>cómo contar condiciones, acciones y columnas</td></tr>
+    <tr><td>Gantt, camino crítico, duración vs esfuerzo, recursos, puntos de control</td><td class="p">11</td><td>método del camino crítico, ejercicio con y sin restricciones</td></tr>
+    <tr><td>Estimación (3 puntos, PF, 40-20-40) · riesgos · tipos de mantenimiento</td><td class="p">12</td><td>fórmulas de PF, RSKM vs PP 2.2 vs PMC 1.3</td></tr>
+    <tr><td>VER vs VAL · niveles de prueba · alfa / beta · regresión · revisiones y roles</td><td class="p">13</td><td>contra qué se compara y quién participa</td></tr>
+    <tr><td>Particiones de equivalencia y valores límite</td><td class="p">14</td><td>cortes del enunciado, recta con límites, mínimo de casos</td></tr>
+  </table>
+</div>
+
+<div class="cols">
+  <div class="panel">
+    <h2>Las 3 reglas que más te costaron</h2>
+    <ol class="big">
+      <li><b>En BP y selección múltiple, revisá TODAS las opciones.</b> En los simulacros había dos razones verdaderas y marcaste una. Una de menos también deja la pregunta en 0.</li>
+      <li><b>En relacionar área, subrayá la frase de tiempo</b> antes de mirar las opciones: "antes de", "en este momento", "ya se decidió", "ahora se evalúa si funcionó". Decide la práctica.</li>
+      <li><b>Desconfiá de la opción que dice algo cierto pero no responde la pregunta:</b> "se evalúan las metas", "los registros existen", "es una implementación correcta de X" con el área equivocada, o un requisito más estricto que el modelo.</li>
+    </ol>
+  </div>
+  <div class="panel">
+    <h2>Cómo encarar el examen</h2>
+    <ul>
+      <li><b>Primero</b> los cálculos y las grillas: son puntos seguros y en los simulacros no fallaste ninguno.</li>
+      <li><b>Después</b> relacionar área (árbol + dorso del mapa) y BP (carilla de BP).</li>
+      <li>NINGUNA es una respuesta real: si la práctica correcta no está entre las opciones, marcala.</li>
+      <li>Leé la sigla de la opción, no sólo el texto (VAL no tiene "revisiones entre pares").</li>
+      <li>En selección múltiple, una de más o una de menos = 0: marcá sólo lo que podés justificar.</li>
+      <li>Antes de entregar, buscá preguntas sin responder.</li>
+    </ul>
+  </div>
+</div>
+
+</body>
+</html>

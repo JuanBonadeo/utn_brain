@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Estimación y riesgos</title>
+<style>
+  @page { size: A4; margin: 8mm 9mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Avenir Next", Helvetica, Arial, sans-serif; font-size: 7.8pt; color: #1d2329; line-height: 1.22; }
+  h1 { font-size: 15pt; margin: 0; letter-spacing: -.01em; }
+  h1 small { font-weight: 500; color: #5b6470; font-size: 9pt; margin-left: 2mm; }
+  h2 { font-size: 9.3pt; margin: 0 0 1.2mm; display: flex; align-items: center; gap: 1.8mm; }
+  .num { background: #1d2329; color: #fff; border-radius: 50%; width: 5mm; height: 5mm; display: inline-flex; align-items: center; justify-content: center; font-size: 7.6pt; flex: none; }
+  .panel { border: 1px solid #d4d9df; border-radius: 2.4mm; padding: 1.8mm 2.4mm; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2.3mm; margin-top: 2.1mm; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { border-bottom: 1px solid #e3e7eb; padding: .5mm 1.1mm; text-align: left; vertical-align: top; }
+  th { font-size: 7pt; color: #5b6470; font-weight: 600; }
+  td.k { font-weight: 700; white-space: nowrap; }
+  td.c { text-align: center; }
+  ul { margin: 0; padding-left: 3.3mm; }
+  li { margin-bottom: .45mm; }
+  .hint { font-size: 7.1pt; color: #5b6470; margin: .8mm 0 0; }
+  .warn { color: #a3330f; }
+  pre { margin: .6mm 0 0; font-family: Menlo, monospace; font-size: 7pt; line-height: 1.3; background: #f6f7f9; border-radius: 1.4mm; padding: 1mm 1.4mm; white-space: pre-wrap; }
+</style>
+</head>
+<body>
+
+<h1>Estimación y riesgos <small>U3 · métodos, puntos función, RSKM, proyecto y mantenimiento</small></h1>
+
+<div class="cols" style="margin-top:2.1mm">
+  <div class="panel">
+    <h2><span class="num">1</span> Métodos de estimación</h2>
+    <table>
+      <tr><td class="k">3 puntos</td><td>optimista, normal, pesimista → <b>(O + 4N + P) / 6</b></td></tr>
+      <tr><td class="k">Delphi</td><td>expertos, <b>independiente y anónimo</b>, iterativo hasta converger. También sirve para identificar riesgos.</td></tr>
+      <tr><td class="k">Puntos función</td><td>tamaño <b>funcional</b>, independiente de la tecnología y de quién desarrolla; comparan productividad entre equipos</td></tr>
+      <tr><td class="k">Puntos de historia</td><td>estimación <b>relativa</b> de un equipo ágil; no comparable entre equipos</td></tr>
+      <tr><td class="k">40-20-40</td><td>40 % análisis y diseño · <b>20 % codificación</b> · 40 % pruebas. Reparte un total; no lo calcula.</td></tr>
+    </table>
+    <p class="hint warn">⚠ Tamaño no es esfuerzo: contar PF → <b>PP 1.2</b>; pasar a horas con la productividad histórica → <b>PP 1.4</b>. Usar el histórico de proyectos <b>parecidos</b>, no el promedio de todos.</p>
+  </div>
+  <div class="panel">
+    <h2><span class="num">2</span> Puntos función</h2>
+    <p style="margin:0">Transacciones: <b>entradas, salidas, consultas</b> · Datos: <b>FLI</b> (internos) y <b>FIE</b> (de otra aplicación).</p>
+    <table style="margin-top:.6mm">
+      <tr><th>Peso</th><th class="c">Baja</th><th class="c">Media</th><th class="c">Alta</th></tr>
+      <tr><td>Entradas</td><td class="c">3</td><td class="c">4</td><td class="c">6</td></tr>
+      <tr><td>Salidas</td><td class="c">4</td><td class="c">5</td><td class="c">7</td></tr>
+      <tr><td>Consultas</td><td class="c">3</td><td class="c">4</td><td class="c">6</td></tr>
+      <tr><td>FLI</td><td class="c">7</td><td class="c">10</td><td class="c">15</td></tr>
+      <tr><td>FIE</td><td class="c">5</td><td class="c">7</td><td class="c">10</td></tr>
+    </table>
+    <pre>PFD    = Σ funciones × peso
+TDI    = suma de 14 características (0 a 5) → 0 a 70
+Factor = (65 + TDI) / 100 → 0,65 a 1,35
+PF     = PFD × Factor   (200 PFD, TDI 42 → 1,07 → 214 PF)</pre>
+    <p class="hint"><b>Mejora:</b> añadida FI = 1 · eliminada 0,4 · modificada según % de cambio. PFM = (añadidos + modificados) × FA <b>después</b> + borrados × FA <b>antes</b>. Pruebas aparte (PFP).</p>
+  </div>
+</div>
+
+<div class="panel" style="margin-top:2.1mm">
+  <h2><span class="num">3</span> Riesgos (RSKM, nivel 3)</h2>
+  <div class="cols" style="margin-top:0">
+    <div>
+      <ul>
+        <li><b>Riesgo</b> = evento <b>incierto</b> con efecto positivo <b>o negativo</b> (una oportunidad también es riesgo). Componentes: evento, probabilidad, consecuencia.</li>
+        <li><b>Orden:</b> preparar (fuentes, parámetros, estrategia) → <b>identificar → analizar → priorizar</b> → mitigar. "Analizar antes de identificar" es falso.</li>
+        <li><b>Exposición</b> = probabilidad × impacto. Ej.: 0,70 × $20.000 = $14.000.</li>
+        <li><b>Umbral:</b> se actúa al superarlo, no ante cualquier desvío.</li>
+        <li><b>Mitigación</b> = antes, reduce probabilidad o impacto (capacitar un 2.º DBA) · <b>contingencia</b> = después, si ocurre (contratar consultora). Las dos se planifican.</li>
+      </ul>
+    </div>
+    <div>
+      <table>
+        <tr><th></th><th>CMMI</th><th>INTECO</th></tr>
+        <tr><td class="k">Opciones</td><td>evitar · controlar · transferir · monitorizar · aceptar</td><td>amenaza: evitar · transferir · mitigar; oportunidad: explotar · compartir · mejorar; aceptar</td></tr>
+        <tr><td class="k">Transferir</td><td>reasignar requerimientos</td><td>pasar a un tercero (seguro, contrato)</td></tr>
+        <tr><td class="k">Aceptar</td><td>sin acción</td><td>pasiva o activa (con reserva)</td></tr>
+      </table>
+      <p class="hint"><b>Reserva de contingencia</b> → riesgos conocidos aceptados y residuales · <b>reserva de gestión</b> → desconocidos · costo de mitigar → presupuesto (EDT).</p>
+    </div>
+  </div>
+  <table style="margin-top:1mm">
+    <tr><th>Actividad del enunciado</th><th>Área</th></tr>
+    <tr><td>identificar riesgos para el plan; acordar con los interesados el impacto documentado</td><td class="k">PP 2.2</td></tr>
+    <tr><td>revisar los riesgos contra el plan y comunicar su estado ("aumentaron las chances respecto de lo planificado")</td><td class="k">PMC 1.3</td></tr>
+    <tr><td>definir fuentes, categorías, parámetros, umbrales, estrategia; planes de mitigación y contingencia</td><td class="k">RSKM</td></tr>
+    <tr><td>el riesgo ya ocurrió: es un problema</td><td class="k">PMC 2.1</td></tr>
+  </table>
+  <p class="hint">RSKM casi nunca es la respuesta en relacionar área. En V/F "¿es un riesgo posible?": positivo o de baja probabilidad también es riesgo; es falso sólo si el enunciado lo descarta. BP: registrar riesgos recién cuando aparece el problema → <b>sí</b> hay problema.</p>
+</div>
+
+<div class="cols">
+  <div class="panel">
+    <h2><span class="num">4</span> Proyecto, proceso y definiciones</h2>
+    <table>
+      <tr><td class="k">Proyecto</td><td>único, con <b>inicio y fin</b>, restricciones de tiempo, costo y recursos; termina al lograr objetivos o al cancelarse</td></tr>
+      <tr><td class="k">Proceso</td><td>genérico, repetitivo, sin fechas, produce siempre el mismo producto</td></tr>
+      <tr><td class="k">Hito</td><td>marca de avance (producto terminado o aprobación); no consume tiempo</td></tr>
+      <tr><td class="k">Entregable</td><td>producto de trabajo para el cliente</td></tr>
+      <tr><td class="k">Compromiso</td><td>acuerdo con el cliente sobre algo fuera del alcance del proyecto (ej. entorno)</td></tr>
+      <tr><td class="k">Avance</td><td>esfuerzo consumido + restante + estado de los productos (uno solo no alcanza)</td></tr>
+    </table>
+    <p class="hint">Tener un Gantt no es tener un plan. Patrocinador = pone la plata; cliente / usuario = usa el producto.</p>
+  </div>
+  <div class="panel">
+    <h2><span class="num">5</span> Tipos de mantenimiento</h2>
+    <table>
+      <tr><td class="k">Correctivo</td><td>corregir errores</td></tr>
+      <tr><td class="k">Evolutivo</td><td>cambian las necesidades: funcionalidad o módulo nuevo</td></tr>
+      <tr><td class="k">Adaptativo</td><td>cambia el <b>entorno</b>: hardware, SO, motor de base, plataforma</td></tr>
+      <tr><td class="k">Perfectivo</td><td>mejorar la calidad interna (refactorizar) sin cambiar qué hace</td></tr>
+    </table>
+    <p class="hint">El mantenimiento es un proyecto aparte, no parte del desarrollo (≈ 20 % desarrollar, 80 % mantener). Traducir a otro idioma: discutido (adaptativo en dos resoluciones); justificá.</p>
+  </div>
+</div>
+
+</body>
+</html>

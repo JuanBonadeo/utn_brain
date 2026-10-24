@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Modelo CMMI y procesos</title>
+<style>
+  @page { size: A4; margin: 8mm 9mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Avenir Next", Helvetica, Arial, sans-serif; font-size: 7.8pt; color: #1d2329; line-height: 1.22; }
+  h1 { font-size: 15pt; margin: 0; letter-spacing: -.01em; }
+  h1 small { font-weight: 500; color: #5b6470; font-size: 9pt; margin-left: 2mm; }
+  h2 { font-size: 9.3pt; margin: 0 0 1.2mm; display: flex; align-items: center; gap: 1.8mm; }
+  .num { background: #1d2329; color: #fff; border-radius: 50%; width: 5mm; height: 5mm; display: inline-flex; align-items: center; justify-content: center; font-size: 7.6pt; flex: none; }
+  .panel { border: 1px solid #d4d9df; border-radius: 2.4mm; padding: 1.8mm 2.4mm; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2.3mm; margin-top: 2.1mm; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { border-bottom: 1px solid #e3e7eb; padding: .5mm 1.1mm; text-align: left; vertical-align: top; }
+  th { font-size: 7pt; color: #5b6470; font-weight: 600; }
+  td.k { font-weight: 700; white-space: nowrap; }
+  ul { margin: 0; padding-left: 3.3mm; }
+  li { margin-bottom: .45mm; }
+  .hint { font-size: 7.1pt; color: #5b6470; margin: .8mm 0 0; }
+  .warn { color: #a3330f; }
+</style>
+</head>
+<body>
+
+<h1>Modelo CMMI, calidad y procesos <small>U1 · U2 · niveles, componentes, SPEM, RUP y ciclos de vida</small></h1>
+
+<div class="cols" style="margin-top:2.1mm">
+  <div class="panel">
+    <h2><span class="num">1</span> Niveles: las reglas que resuelven los ejercicios</h2>
+    <ul>
+      <li><b>Acumulativo:</b> para estar en un nivel se cumplen <b>todas</b> las áreas de ese nivel y de los anteriores.</li>
+      <li>Falta <b>un área o una práctica de nivel 2</b> → queda en <b>nivel 1</b> (aunque cumpla todo el 3).</li>
+      <li>Falta una de <b>nivel 3</b> → queda <b>como máximo en nivel 2</b>.</li>
+      <li>Si falta una SP, su meta no se cumple: "se evalúan las metas" no la salva.</li>
+      <li>Se puede implementar un área de nivel superior; <b>saltear niveles</b> es contraproducente.</li>
+      <li>Nivel 2: cada proyecto con <b>su</b> proceso · nivel 3: los proyectos <b>adaptan el estándar</b> · nivel 4: <b>causas especiales</b>, estadística · nivel 5: <b>causas comunes</b>, cambia el proceso.</li>
+      <li><b>PPQA es de nivel 2</b>: "el aseguramiento de la calidad nace en nivel 3" es falso.</li>
+    </ul>
+    <p class="hint warn">⚠ Erratas de la traducción: OT es nivel 3 (no 4), OID 5 (no 3), RSKM 3 (no 2).</p>
+  </div>
+  <div class="panel">
+    <h2><span class="num">2</span> Componentes de un área y representaciones</h2>
+    <table>
+      <tr><td class="k">Requeridos</td><td><b>SG y GG</b> (las metas): lo que se evalúa</td></tr>
+      <tr><td class="k">Esperados</td><td><b>SP y GP</b>: se aceptan alternativas que logren la meta</td></tr>
+      <tr><td class="k">Informativos</td><td>subprácticas, productos típicos, declaración de propósito, notas introductorias, áreas relacionadas, ejemplos, ampliaciones</td></tr>
+    </table>
+    <p class="hint">Las <b>genéricas</b> tratan la <b>institucionalización</b> (GG2 en nivel 2, GG3 del 3 al 5). Las herramientas no son componentes. SP x.y: x = la meta, y = el orden (si un área tiene 2 SG, "SP 3.1" no existe).</p>
+    <table style="margin-top:.8mm">
+      <tr><th></th><th>Por etapas (madurez)</th><th>Continua (capacidad)</th></tr>
+      <tr><td class="k">Mide</td><td>la organización</td><td>un área por vez</td></tr>
+      <tr><td class="k">Escala</td><td>1 a 5 (Inicial…)</td><td>0 a 5 (Incompleto…) en v1.2</td></tr>
+      <tr><td class="k">Camino</td><td>predeterminado</td><td>lo elige la org (perfil objetivo)</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="cols">
+  <div class="panel">
+    <h2><span class="num">3</span> Calidad</h2>
+    <table>
+      <tr><td class="k">Interna</td><td>la que el cliente <b>no ve</b>: mantenibilidad, código, estándares. Se mide antes de probar.</td></tr>
+      <tr><td class="k">Externa</td><td>cumple los requerimientos acordados. Se mide con pruebas.</td></tr>
+      <tr><td class="k">De uso</td><td>"futura": aparece con el uso real en el entorno del cliente (satisfacción).</td></tr>
+    </table>
+    <table style="margin-top:.8mm">
+      <tr><td class="k">QA</td><td><b>preventivo</b>, orientado al <b>proceso</b>, de la organización: auditorías, definir procesos, formación</td></tr>
+      <tr><td class="k">QC</td><td><b>reactivo</b>, orientado al <b>producto</b>: revisiones, inspecciones, pruebas</td></tr>
+    </table>
+    <p class="hint">Calidad depende de procesos, herramientas, personas y métricas. La calidad del producto depende mucho de la del <b>proceso</b>. Principios que salen siempre: "haz de la calidad la razón de trabajar", "probar, probar y probar", "el compromiso del cliente es el factor más crítico". Distractores: "personas y tiempo son intercambiables", "primero rápido y después correcto".</p>
+  </div>
+  <div class="panel">
+    <h2><span class="num">4</span> SPEM</h2>
+    <p style="margin:0">Estándar de la OMG; es un <b>meta-modelo</b> para describir procesos <b>de software</b> ("lenguaje de modelado de procesos en general" es <span class="warn">falso</span>).</p>
+    <table style="margin-top:.6mm">
+      <tr><td class="k">¿Quién?</td><td><b>Rol</b></td><td class="k">¿Qué?</td><td><b>Producto de trabajo</b></td><td class="k">¿Cómo?</td><td><b>Tarea</b></td></tr>
+    </table>
+    <p style="margin:.6mm 0 0">Niveles de detalle, de mayor a menor: <b>delivery process</b> (proceso completo) → <b>capability pattern</b> (fragmento reutilizable) → <b>actividad</b> (agrupa) → <b>tarea</b> (unidad elemental).</p>
+    <h2 style="margin-top:1.4mm"><span class="num">5</span> RUP</h2>
+    <ul>
+      <li>Iterativo e incremental, adaptable, construido sobre SPEM. Cada fase termina en un <b>hito</b>; cada iteración, en una versión ejecutable.</li>
+      <li><b>4 fases</b> (ordenan el tiempo): <b>Concepción</b> (alcance, CU principales, costo global) · <b>Elaboración</b> (arquitectura estable, riesgos) · <b>Construcción</b> (toda la funcionalidad, alfa/beta) · <b>Transición</b> (beta, capacitación, despliegue).</li>
+      <li><b>9 disciplinas</b> (agrupan el trabajo): 6 de ingeniería (negocio, requisitos, análisis y diseño, implementación, prueba, despliegue) + 3 de soporte (configuración y cambios, gestión de proyectos, entorno).</li>
+      <li>Disciplina ⊃ actividad ⊃ tarea (horas a días, con un rol, entradas, salidas y guías).</li>
+      <li>Producto de trabajo: <b>artefacto</b> (tangible) · <b>resultado</b> (intangible) · <b>entregable</b> (empaquetado que se entrega).</li>
+      <li>Guías: plantilla, directriz, lista de comprobación, ejemplo, concepto, guía de herramienta… (de la org = <b>activos</b>).</li>
+    </ul>
+  </div>
+</div>
+
+<div class="panel" style="margin-top:2.1mm">
+  <h2><span class="num">6</span> Ciclos de vida: cuándo conviene cada uno</h2>
+  <table>
+    <tr><th>Ciclo</th><th>Cuándo</th><th>Contra / dato que se pregunta</th></tr>
+    <tr><td class="k">Cascada</td><td>requisitos claros y estables, proyectos chicos o cortos</td><td>el cliente no ve nada hasta el final; el que <b>menos sirve</b> con requisitos inestables; 1 release mínima</td></tr>
+    <tr><td class="k">Modelo en V</td><td>chico, requisitos claros, querer detectar defectos temprano</td><td>cada fase tiene su nivel de prueba planificado desde el inicio; rígido, sin prototipos</td></tr>
+    <tr><td class="k">Incremental</td><td>se necesita software operativo pronto; el problema se conoce y se divide</td><td>cada incremento es una cascada completa (análisis y prueba de sistema en todos); n incrementos → n releases</td></tr>
+    <tr><td class="k">Iterativo</td><td>requisitos poco claros, que se refinan</td><td>vuelve a pasar por los mismos requisitos; riesgo de arquitectura</td></tr>
+    <tr><td class="k">Espiral</td><td>largo, caro, complejo, misión crítica; <b>asume</b> incertidumbre</td><td>análisis de riesgos en cada vuelta; caro, malo para proyectos chicos</td></tr>
+    <tr><td class="k">Prototipado</td><td>objetivos generales sin requisitos detallados; dudas técnicas</td><td>es descartable; el cliente puede creer que el producto ya está; no reemplaza la especificación</td></tr>
+  </table>
+  <p class="hint">Elegir el ciclo de un proyecto → <b>PP 1.3</b> · definir las opciones de la SF → <b>OPD 1.2</b> · criterios para elegir entre ellas → <b>OPD 1.3</b>. Se justifica con datos del enunciado: estabilidad de los requisitos y necesidad de tener algo en producción pronto.</p>
+</div>
+
+</body>
+</html>
