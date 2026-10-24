@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Gantt y camino crítico</title>
+<style>
+  @page { size: A4; margin: 8mm 9mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Avenir Next", Helvetica, Arial, sans-serif; font-size: 8.1pt; color: #1d2329; line-height: 1.24; }
+  h1 { font-size: 15pt; margin: 0; letter-spacing: -.01em; }
+  h1 small { font-weight: 500; color: #5b6470; font-size: 9pt; margin-left: 2mm; }
+  h2 { font-size: 9.5pt; margin: 0 0 1.3mm; display: flex; align-items: center; gap: 1.8mm; }
+  .num { background: #1d2329; color: #fff; border-radius: 50%; width: 5mm; height: 5mm; display: inline-flex; align-items: center; justify-content: center; font-size: 7.8pt; flex: none; }
+  .panel { border: 1px solid #d4d9df; border-radius: 2.4mm; padding: 1.9mm 2.5mm; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2.4mm; margin-top: 2.2mm; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { border-bottom: 1px solid #e3e7eb; padding: .55mm 1.1mm; text-align: left; vertical-align: top; }
+  th { font-size: 7.2pt; color: #5b6470; font-weight: 600; }
+  td.k { font-weight: 700; white-space: nowrap; }
+  ul, ol { margin: 0; padding-left: 3.6mm; }
+  li { margin-bottom: .6mm; }
+  .hint { font-size: 7.3pt; color: #5b6470; margin: .9mm 0 0; }
+  .warn { color: #a3330f; }
+  code { font-family: Menlo, monospace; font-size: 7.4pt; }
+
+  /* Gantt dibujado */
+  .gantt { display: grid; grid-template-columns: 17mm repeat(11, 1fr); row-gap: .9mm; margin-top: 1mm; font-size: 7.2pt; }
+  .gantt .h { text-align: center; color: #5b6470; border-bottom: 1px solid #c9ced5; font-family: Menlo, monospace; font-size: 6.8pt; }
+  .gantt .lab { font-weight: 600; padding-right: 1mm; white-space: nowrap; }
+  .bar { border-radius: 1mm; height: 4mm; display: flex; align-items: center; justify-content: center; font-size: 6.8pt; font-weight: 700; border: 1.2px solid #1d2329; background: #fff; }
+  .bar.crit { background: #1d2329; color: #fff; }
+  .legend { display: flex; gap: 4mm; font-size: 7pt; color: #5b6470; margin-top: 1mm; align-items: center; }
+  .sw { display: inline-block; width: 5mm; height: 2.6mm; border: 1.2px solid #1d2329; border-radius: .6mm; vertical-align: -.4mm; margin-right: 1mm; }
+  .sw.crit { background: #1d2329; }
+  .steps { margin: 0; padding-left: 4mm; }
+</style>
+</head>
+<body>
+
+<h1>Gantt y camino crítico <small>U3 · PP SP 2.1 · los ejercicios de los finales</small></h1>
+
+<div class="cols" style="margin-top:2.2mm">
+  <div class="panel">
+    <h2><span class="num">1</span> Las tres cosas que se calculan</h2>
+    <table>
+      <tr><td class="k">Esfuerzo</td><td>horas o días-<b>persona</b> · <b>se suma todo</b> · no cambia por cómo se ordenen las tareas</td></tr>
+      <tr><td class="k">Duración</td><td>tiempo de <b>calendario</b> · sale del <b>camino crítico</b> · baja si hay tareas superpuestas</td></tr>
+      <tr><td class="k">Recursos</td><td>de cada rol = <b>máximo de tareas de ese rol superpuestas</b> en algún momento (2 análisis en paralelo → 2 analistas)</td></tr>
+    </table>
+    <p class="hint"><b>Única excepción del esfuerzo:</b> cuando una tarea abarata a otra (analizar C cuesta la mitad si A ya está analizado): ahí el orden sí cambia el esfuerzo.</p>
+    <p class="hint">Con 1 persona y una tarea a la vez: duración = esfuerzo. La duración puede ser <b>mayor</b> que el esfuerzo si hay inactividad (vacaciones, esperas).</p>
+  </div>
+  <div class="panel">
+    <h2><span class="num">2</span> Cómo sacar el camino crítico</h2>
+    <ol class="steps">
+      <li><b>Ordená por precedencia:</b> una tarea arranca cuando terminan <b>todas</b> sus predecesoras.</li>
+      <li><b>Calculá inicio y fin</b> de cada tarea: inicio = el mayor fin de sus predecesoras; fin = inicio + duración.</li>
+      <li>El <b>fin más grande</b> es la duración del proyecto.</li>
+      <li><b>Camino crítico</b> = la cadena que llega a ese fin sin huecos. Puede haber <b>dos</b> de igual largo.</li>
+      <li><b>Holgura</b> = cuánto puede atrasarse una tarea sin mover el fin. En el camino crítico es 0.</li>
+    </ol>
+    <p class="hint warn">⚠ En <b>cascada</b>, ninguna tarea de la etapa N+1 arranca hasta que termina <b>toda</b> la etapa N. En <b>incremental</b>, cada incremento es una cascada completa.</p>
+  </div>
+</div>
+
+<div class="panel" style="margin-top:2.2mm">
+  <h2><span class="num">3</span> Ejercicio tipo (final 20/12/2013): Gantt con y sin restricciones</h2>
+  <p style="margin:0">R1, R2, R3 con duración (u.t.) de Análisis / Diseño / Codificación / Prueba: <b>R1 2/2/1/2 · R2 2/1/1/2 · R3 3/3/2/2</b>. Restricciones: el <b>análisis de R2</b> espera a que terminen los análisis de R1 y R3; el <b>diseño de R1</b> espera al diseño de R3.</p>
+  <div class="gantt">
+    <div></div><div class="h">0–1</div><div class="h">1–2</div><div class="h">2–3</div><div class="h">3–4</div><div class="h">4–5</div><div class="h">5–6</div><div class="h">6–7</div><div class="h">7–8</div><div class="h">8–9</div><div class="h">9–10</div><div class="h">10–11</div>
+    <div class="lab" style="grid-row:2">R3</div><div class="bar crit" style="grid-row:2;grid-column:2/5">A 0–3</div><div class="bar crit" style="grid-row:2;grid-column:5/8">D 3–6</div><div class="bar" style="grid-row:2;grid-column:8/10">C 6–8</div><div class="bar" style="grid-row:2;grid-column:10/12">P 8–10</div>
+    <div class="lab" style="grid-row:3">R1</div><div class="bar" style="grid-row:3;grid-column:2/4">A 0–2</div><div class="bar crit" style="grid-row:3;grid-column:8/10">D 6–8</div><div class="bar crit" style="grid-row:3;grid-column:10/11">C</div><div class="bar crit" style="grid-row:3;grid-column:11/13">P 9–11</div>
+    <div class="lab" style="grid-row:4">R2</div><div class="bar" style="grid-row:4;grid-column:5/7">A 3–5</div><div class="bar" style="grid-row:4;grid-column:7/8">D</div><div class="bar" style="grid-row:4;grid-column:8/9">C</div><div class="bar" style="grid-row:4;grid-column:9/11">P 7–9</div>
+  </div>
+  <div class="legend"><span><i class="sw crit"></i>camino crítico</span><span><i class="sw"></i>con holgura</span></div>
+  <table style="margin-top:1.2mm">
+    <tr><td class="k">Sin restricciones</td><td>cada requisito en su cadena; la más larga es R3: 3 + 3 + 2 + 2 = <b>10</b></td></tr>
+    <tr><td class="k">Con restricciones</td><td>A-R3 → D-R3 → D-R1 → C-R1 → P-R1 = 3 + 3 + 2 + 1 + 2 = <b>11</b> (A-R2 arranca en 3 porque espera a A-R3)</td></tr>
+    <tr><td class="k">Esfuerzo</td><td><b>23 en los dos casos</b> (R1 7 + R2 6 + R3 10). Según Rozas, se pedía justamente para ver si se entiende que no cambia.</td></tr>
+  </table>
+</div>
+
+<div class="cols">
+  <div class="panel">
+    <h2><span class="num">4</span> Recursos y unidades</h2>
+    <p style="margin:0"><b>Final 24/09/2013:</b> análisis r1 40 · r2 20 · r3 10 · r4 10 h; r1 → r2 → r3 y r1 → r4.</p>
+    <ul style="margin-top:.8mm">
+      <li><b>Duración ≤ 70 → 2 analistas:</b> r1 (0–40), después r2 (40–60) en paralelo con r4 (40–50), r3 (60–70).</li>
+      <li><b>Duración ≥ 80 → 1 analista:</b> 40 + 20 + 10 + 10 = 80 (duración = esfuerzo).</li>
+    </ul>
+    <table style="margin-top:1mm">
+      <tr><td class="k">Conversión</td><td>1 semana = 5 días hábiles · 1 día = 8 h · 1 mes ≈ 20 días hábiles</td></tr>
+      <tr><td class="k">Ojo</td><td>10 semanas de <b>duración</b> = 50 días = 400 h de calendario; eso <b>no</b> es el esfuerzo. Leé si piden duración o esfuerzo.</td></tr>
+    </table>
+  </div>
+  <div class="panel">
+    <h2><span class="num">5</span> Ajustar el Gantt al plazo o al presupuesto</h2>
+    <table>
+      <tr><td class="k">Estrategias</td><td>aprovechar la <b>holgura</b> · <b>dividir</b> tareas · <b>sumar</b> recursos · <b>quitar</b> recursos. Cambian la duración o la carga semanal, no el esfuerzo total.</td></tr>
+      <tr><td class="k">No viable</td><td>media jornada (alarga) · horas extras planificadas · saltear pruebas</td></tr>
+      <tr><td class="k">Analizar</td><td>todo lo que reorganiza el trabajo: hay que rehacer el Gantt</td></tr>
+      <tr><td class="k">Tope semanal</td><td>si una semana supera el tope ($ u horas), se parte una tarea o se adelanta otra que tiene holgura, sin mover el fin</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="panel" style="margin-top:2.2mm">
+  <h2><span class="num">6</span> Lo que se pide alrededor del Gantt</h2>
+  <ul style="columns:2;column-gap:5mm">
+    <li><b>Puntos de control:</b> según los <b>riesgos</b> (más controles en el análisis de un requisito poco claro); sin riesgos, <b>semanal</b>. En una etapa <b>ya avanzada</b> y antes de que termine, diciendo qué se mide (% de CU terminados, horas vs presupuesto).</li>
+    <li><b>Compromisos</b> (entornos, infraestructura): ubicarlos <b>antes</b> de la tarea que los necesita, con la anticipación que lleva prepararlos. Ej.: entorno de diseño listo antes del primer diseño.</li>
+    <li><b>Línea base:</b> al fin del análisis, del diseño y de cada entrega.</li>
+    <li><b>Hito</b> = producto terminado o aprobación ("Especificación aprobada"); no consume tiempo.</li>
+    <li>Un requisito que recién aparece en el incremento 2 <b>no se controla</b> en el 1; los requisitos nuevos van a <b>otro incremento</b>.</li>
+    <li>El cronograma es PP <b>SP 2.1</b>; controlarlo contra lo real es PMC <b>SP 1.1</b>.</li>
+  </ul>
+</div>
+
+</body>
+</html>
