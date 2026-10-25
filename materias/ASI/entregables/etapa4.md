@@ -7,7 +7,7 @@
 > **Anexo I — Business Model Canvas.** Lámina A3 apaisada en archivo independiente:
 > `etapa4-canvas.html` → `etapa4-canvas.pdf`.
 >
-> **Estado al 2026-10-23** (versión 3: tributos en el 2.9). Las tres actividades de la consigna están desarrolladas y no queda
+> **Estado al 2026-10-25** (versión 4: equipo de cuatro cofundadores, por la corrección del profesor). Las tres actividades de la consigna están desarrolladas y no queda
 > nada pendiente de definición. Idea elegida por el grupo: plataforma de reclamos urbanos con
 > ruteo a municipio y prestadoras, app de cuadrilla y datos abiertos (candidata A).
 >
@@ -19,7 +19,7 @@
 > proyección y costos están marcados como hipótesis a validar con el MVP. No hay datos medidos.
 >
 > **Definido el 2026-10-20** (eran los dos ⚠ de la versión 1):
-> - Cinco roles, cada uno dueño de una hipótesis del MVP (tabla del 2.6). Los roles **no tienen
+> - Cuatro roles para las cinco hipótesis del MVP (tabla del 2.6); producto y operaciones lleva H1 y H2. Los roles **no tienen
 >   nombres asignados**: si el grupo los quiere, se agregan como columna en esa tabla.
 > - Pacto de socios con *vesting* a cuatro años con un mínimo de uno (riesgos del punto 1).
 > - 20% de la SAS al inversor por USD 70.000 (valuación posterior USD 350.000), en dos tramos de
@@ -59,7 +59,6 @@ Administración de Sistemas de Información — 4º Año Ingeniería en Sistemas
 
 - 53535, Bonadeo Juan Cruz, juancruzbonadeo04@gmail.com
 - 52674, Casermeiro Gonzalo, gonzacasermeiro@gmail.com
-- 53543, De la Rosa Valentín Yael, mferreyra079@gmail.com
 - 53215, Lezcano Diego, diegolezcano209@gmail.com
 - 52688, Lurati Ignacio, ignaciolurati2@gmail.com
 
@@ -72,6 +71,7 @@ Administración de Sistemas de Información — 4º Año Ingeniería en Sistemas
 | 1 | 14/10/2026 | Grupo N310 | Primera versión: idea de startup, Business Model Canvas con fuentes de ingreso y resumen para el inversor |
 | 2 | 20/10/2026 | Grupo N310 | Equipo fundador con un rol y una hipótesis del MVP por cofundador; pacto de socios con consolidación gradual de acciones; participación ofrecida al inversor, en dos tramos atados al piloto; resumen para el inversor ajustado a una página |
 | 3 | 23/10/2026 | Grupo N310 | Tributos en la estructura de costos y punto de equilibrio recalculado; precios expresados sin IVA |
+| 4 | 25/10/2026 | Grupo N310 | Equipo fundador de cuatro cofundadores, en línea con la carátula: producto y operaciones se unen en un solo rol y el retiro se reparte entre cuatro |
 
 ### ÍNDICE
 
@@ -176,7 +176,7 @@ Tomamos las causas de fracaso que la cátedra agrupa en la Unidad 6 y respondemo
 | Inflación y costos en dólares (la infraestructura en la nube se paga en dólares) | Precio fijado en dólares y cobrado en pesos al tipo de cambio oficial, con ajuste trimestral; infraestructura con costo por uso |
 | Competir con un gigante o con el sistema propio de una ciudad grande | No competimos con el 147 de Rosario: nos integramos. El conector suma a Rosario como cliente de integración y de tablero, no de reemplazo |
 | Solución a un problema inexistente | El MVP valida H1 a H5 antes de construir el motor completo, y la segunda mitad de la inversión se libera recién cuando el municipio piloto firma la suscripción (H4) |
-| Conflictos entre cofundadores | Pacto de socios en la constitución de la SAS: un rol y una hipótesis del MVP por cofundador (punto 2.6), dedicación y salida. Las acciones de cada cofundador se consolidan de forma gradual en cuatro años, con un mínimo de uno (*vesting*): quien se va antes del primer año no conserva acciones, y quien se va a los dos años conserva la mitad |
+| Conflictos entre cofundadores | Pacto de socios en la constitución de la SAS: un rol por cofundador, responsable de una o dos hipótesis del MVP (punto 2.6), dedicación y salida. Las acciones de cada cofundador se consolidan de forma gradual en cuatro años, con un mínimo de uno (*vesting*): quien se va antes del primer año no conserva acciones, y quien se va a los dos años conserva la mitad |
 
 ### Marco legal
 
@@ -300,11 +300,11 @@ Los precios se fijan en dólares porque el principal costo, la infraestructura e
 | Tipo | Recurso |
 |---|---|
 | Intelectuales | La plataforma de software (aplicaciones, motor de ruteo, conector); **la base de datos georreferenciada de reclamos y tiempos**, que crece con cada municipio y es la barrera de entrada; la marca y los casos de éxito |
-| Humanos | Los cinco cofundadores, estudiantes avanzados de Ingeniería en Sistemas, con un frente y una hipótesis del MVP cada uno (tabla siguiente); a partir del año 2, un desarrollador, que se suma a tecnología, y una persona de implementación y soporte, que se suma a operaciones |
+| Humanos | Los cuatro cofundadores, estudiantes avanzados de Ingeniería en Sistemas, con un frente y al menos una hipótesis del MVP cada uno (tabla siguiente); a partir del año 2, un desarrollador, que se suma a tecnología, y una persona de implementación y soporte, que se suma a producto y operaciones |
 | Financieros | Ronda inicial de USD 70.000 por el 20% de la SAS, que valúa la empresa en USD 350.000 después de la inversión. Entra en dos tramos de USD 35.000: el segundo se libera cuando el municipio piloto firma la suscripción (H4). Se complementa con aportes no reembolsables de los programas de emprendedores (ver punto 3) |
 | Físicos | Mínimos: notebooks y celulares de prueba. No hay hardware en la calle: el sensor es el celular del vecino y el de la cuadrilla |
 
-**Equipo fundador.** Cada cofundador lleva un frente del negocio y responde por una de las hipótesis del MVP (punto 1), de modo que cada resultado del piloto tiene un responsable.
+**Equipo fundador.** Cada cofundador lleva un frente del negocio y responde por una o dos de las hipótesis del MVP (punto 1), de modo que cada resultado del piloto tiene un responsable.
 
 <!-- cols: 22,56,22 -->
 
@@ -313,8 +313,7 @@ Los precios se fijan en dólares porque el principal costo, la infraestructura e
 | Dirección y municipios | Venta institucional a los municipios, negociación del piloto y relación con el inversor y con los programas de emprendedores | H4 — el municipio paga |
 | Prestadoras y alianzas | Venta a las prestadoras y licencias por cuadrilla; relación con Personal y con los socios del ecosistema. Sostiene el pivot previsto si H4 falla | H5 — las prestadoras aceptan los reclamos ruteados |
 | Tecnología | Plataforma, app de cuadrilla y medición de tiempos, conectores, seguridad y protección de los datos personales. El motor de ruteo se construye recién cuando el piloto valida la demanda | H3 — la trazabilidad acorta los tiempos |
-| Producto y datos | App del vecino, tablero público, conjunto de datos abiertos e informes | H1 — los vecinos usan el canal nuevo |
-| Operaciones e implementación | Ruteo manual de los reclamos durante el piloto, alta de cada municipio nuevo, capacitación de las cuadrillas y mesa de ayuda | H2 — buena parte de los reclamos son repetidos |
+| Producto y operaciones | App del vecino, tablero público, conjunto de datos abiertos e informes; ruteo manual de los reclamos durante el piloto, alta de cada municipio nuevo, capacitación de las cuadrillas y mesa de ayuda | H1 — los vecinos usan el canal nuevo; H2 — buena parte de los reclamos son repetidos |
 
 ### 2.7 Actividades clave
 
@@ -351,7 +350,7 @@ Cada socio aporta un recurso o hace una actividad que nosotros no hacemos.
 
 | Costos fijos mensuales (año 1) | Monto *(supuesto)* |
 |---|---|
-| Retiro de los cinco cofundadores (5 × USD 800) | USD 4.000 |
+| Retiro de los cuatro cofundadores (4 × USD 1.000) | USD 4.000 |
 | Infraestructura base en la nube (entornos, copias de seguridad, monitoreo) | USD 350 |
 | Herramientas y licencias de desarrollo y diseño | USD 150 |
 | Contador, sociedad y seguros | USD 250 |
@@ -391,6 +390,6 @@ Con la mezcla de clientes proyectada y descontados los tributos, el margen de co
 
 **Cómo se lleva a cabo.** Operamos con software, datos y personas, sin hardware en la calle: USD 5.500 de costos fijos por mes con el retiro de los socios, y equilibrio con unos seis municipios durante el año 2. Empezamos con un MVP de 90 días en un municipio piloto, con ruteo manual, para validar cinco hipótesis antes de automatizar, con el Polo Tecnológico Rosario, BCR Innova, la UTN FRRo y una prestadora local.
 
-**El equipo.** Cinco cofundadores, estudiantes avanzados de Ingeniería en Sistemas de la UTN FRRo, que ya planificaron una plataforma de órdenes de trabajo con app de campo para una empresa de telecomunicaciones. Cada uno lleva un frente y una hipótesis del piloto: dirección y municipios, prestadoras y alianzas, tecnología, producto y datos, y operaciones. El pacto de socios consolida sus acciones en cuatro años.
+**El equipo.** Cuatro cofundadores, estudiantes avanzados de Ingeniería en Sistemas de la UTN FRRo, que ya planificaron una plataforma de órdenes de trabajo con app de campo para una empresa de telecomunicaciones. Cada uno lleva un frente y responde por las hipótesis del piloto: dirección y municipios, prestadoras y alianzas, tecnología, y producto y operaciones. El pacto de socios consolida sus acciones en cuatro años.
 
 **Qué pedimos.** **USD 70.000** para 18 meses: 60% producto y equipo, 25% piloto y venta, 15% reserva. A cambio, el **20% de la SAS** en dos desembolsos de USD 35.000 por el 10% cada uno: el primero financia el piloto y el segundo se libera cuando el municipio firma la suscripción, al mes 6. Si el piloto falla, el inversor arriesgó la mitad. Se suman aportes no reembolsables de programas públicos.
