@@ -218,6 +218,10 @@
 ##### Fragmentación (MTU)
 - **MTU:** la mayor cantidad de datos que entra en una trama de esa red (Ethernet **1500 B**; Token Ring 8192 B). Si el próximo tramo tiene una MTU menor que el datagrama, **el router lo fragmenta**. Cada fragmento es un datagrama nuevo con **la misma Identificación**, su propio Offset y su propio MF.
 - **Solo el destino reensambla.** Los routers intermedios no lo hacen, porque les costaría trabajo y memoria. Los fragmentos pueden llegar desordenados sin problema. Si **DF = 1** y hace falta fragmentar, el router **descarta** el datagrama.
+- **Dos tipos de fragmentación entre redes de distinta tecnología** (Tanenbaum 5ª ed., §5.5.5; **lo tomó Medín en el 2do teórico de oct/2026**). Se distinguen por **dónde se reensambla**:
+  - **Transparente:** el router de entrada a la red de MTU chica fragmenta, y **todos los fragmentos salen por el mismo router de salida**, que los **reensambla** antes de pasar a la red siguiente. Las redes posteriores no se enteran. Problemas: el router de salida tiene que saber cuándo llegó todo (contador o bit de fin de paquete), las **rutas quedan restringidas**, los routers hacen mucho trabajo y gastan buffer, y si hay varias redes chicas se fragmenta y reensambla varias veces.
+  - **No transparente (la de IP):** cada fragmento viaja como un **datagrama independiente** y **solo el host destino reensambla**, usando Identificación, desplazamiento y MF. Ventajas: menos trabajo para los routers, se admiten fragmentos desordenados y refragmentar. Desventajas: más sobrecarga de headers, y si se pierde un fragmento se pierde el datagrama entero.
+  - **Alternativa actual, descubrimiento de la MTU de la ruta:** la fuente manda con DF = 1; el router que no puede pasar el paquete lo descarta y devuelve un error ICMP, y la fuente achica sus paquetes. Por eso TCP usa segmentos de hasta 1460 B.
 - *Ejemplo del apunte:* A manda **1400 B de datos** (1420 B en total, con un header de 20 B). Cruza la red 1 (MTU 1500) sin cambios, pero la red 2 tiene **MTU 620**:
 
 ```
@@ -902,6 +906,8 @@ Puerto     Prot.     Servicio
 - ⚠️ El apunte dice que en TCP "cada paquete debe ser confirmado antes de que se envíe el siguiente". Eso es **stop-and-wait**, y TCP no funciona así: usa **ventana deslizante** (ver *Ventana deslizante*). TCP es más lento por el handshake, los ACK y el control de congestión, no porque espere cada confirmación.
 
 #### Ejercicios resueltos tipo
+> 📌 **Parcial real de Medín de oct/2026 (otra comisión, poco antes del 27/10)** (`fuentes/Medin-2do-parcial/2do-parcial-teoria-medin-2026-10-otra-comision.png`). **5 preguntas para desarrollar, 60 min.** Corrige por pertinencia (40 %), vocabulario técnico (30 %), fundamentación (25 %) y ortografía (5 %). Preguntas: (1) enumere los **propósitos** de la capa de transporte y desarrolle uno; (2) cómo controla la congestión UDP; (3) qué pasa si UDP detecta un error, y si lo detecta TCP; (4) explique un tipo de **fragmentación** entre redes de distinta tecnología (**capa de red**, ver Unidad 2, *Fragmentación*); (5) diferencias entre TCP y UDP. Repite 4 de las 5 de 2024. Los **propósitos**, según el apunte de Puertos de Medín, son: **seguimiento de conversaciones individuales**, **segmentación de datos**, **reensamble de segmentos** e **identificación de las aplicaciones** (puertos). Todas respondidas para imprimir en `estudio/preguntas-parcial-medin.pdf`, junto con las de 2024 y las de los 1ros parciales de Medín.
+>
 > Estos 5 son **preguntas reales**: la parte de **teoría de Medín del 2do parcial del 29/10/2024**, com. 403; están en el resumen de Medín, `estudio/resumen-2do-parcial-medin.md` (`fuentes/Baro-2do-parcial/2º Parcial - 2024-10-29 - Baro y Medin.jpeg`; las respuestas vienen del documento de preguntas de Medín). Es el mejor indicio de que el **2do teórico de Medín (27/10/2026) es de Capa de Transporte** (a confirmar en clase). En 2024 fueron preguntas para desarrollar, no multiple choice.
 
 **1) ¿Qué responsabilidades tiene la capa de transporte?**
@@ -921,7 +927,8 @@ Comunicación **extremo a extremo** confiable y eficiente entre aplicaciones. Fu
 
 #### Dudas / pendientes
 - ~~(1) y (4) resueltos~~: el temario lo confirmó el mail de Medín (Transporte + Puertos + Firewall) y la versión 2026 de la diapositiva de UDP dice que "avisa a las capas superiores".
-- **Preguntarle a Medín:** (1) si el 2do teórico es solo Transporte o mezcla con Red; (2) si es multiple choice o para desarrollar; (3) si entra control de congestión de TCP (slow start, Tahoe/Reno, tasa justa); (4) qué espera en "¿qué hace UDP si detecta un error?": descartar o avisar a la capa superior (ver *Checksum y pseudoencabezado*).
+- ~~(2) formato~~: el parcial de oct/2026 a otra comisión fue para desarrollar (5 preguntas) y mezcló una pregunta de capa de red (fragmentación).
+- **Preguntarle a Medín:** (1) si el 2do teórico es solo Transporte o mezcla con Red; (3) si entra control de congestión de TCP (slow start, Tahoe/Reno, tasa justa); (4) qué espera en "¿qué hace UDP si detecta un error?": descartar o avisar a la capa superior (ver *Checksum y pseudoencabezado*).
 
 #### Fuentes
 - `fuentes/RD/Medin-1er-parcial/1 - Capa de Transporte - Servicios y Primitivas.pdf`
@@ -931,6 +938,7 @@ Comunicación **extremo a extremo** confiable y eficiente entre aplicaciones. Fu
 - `fuentes/Medin-2do-parcial/examen 2.rar` (apuntes del 2do teórico mandados por Medín: los 4 de transporte, Puertos y Firewall)
 - `fuentes/Medin-2do-parcial/4 - Capa de Transporte - Protocolo UDP (versión Medín 2026).pdf` (misma diapositiva; resuelve qué hace UDP ante un error)
 - `fuentes/Medin-2do-parcial/Capa de Transporte y Puertos-UTN.pdf` (puertos, tipos y estados, vulnerabilidades, VPN, QUIC)
+- `fuentes/Medin-2do-parcial/2do-parcial-teoria-medin-2026-10-otra-comision.png` (foto del 2do teórico real de oct/2026, otra comisión)
 - `fuentes/RD/Medin-1er-parcial/Preguntas y Respuestas Parciales de Medin.docx` (preguntas reales)
 - Tanenbaum & Wetherall, *Computer Networks*, 5th ed.
 
@@ -1029,3 +1037,4 @@ El firewall **inspecciona los headers** de cada paquete y lo compara con sus reg
 - 2026-10-12: Hoja de claves de Baró ampliada con fragmentación (receta + tabla del E8) y ping/ICMP (los 4 resultados posibles y diagnóstico), sin salir de una carilla.
 - 2026-10-13: `estudio/prompt-podcast-medin.md` — prompts de NotebookLM para el podcast de repaso del 2do teórico de Medín sobre `resumen-2do-parcial-medin.pdf`: episodio único y tres episodios (transporte + UDP, TCP a fondo, puertos + firewall), con las preguntas del parcial real de 2024 resueltas en voz alta y versiones cortas.
 - 2026-10-16: Ingesta de la **clase de consulta de Baró** (resumen y transcripción de Notion, `fuentes/Baro-2do-parcial/consulta-baro-2026-10-16.md`). Unidad 2: formato del parcial en el bloque de alcance (2 o 3 ejercicios de subnetting básicos, sin los de aplicación, y hasta 3 preguntas conceptuales; de ICMP, ARP y DHCP solo la finalidad). Se agregaron las explicaciones de Baró sobre el ToS en la práctica (3 o 5 niveles), la tabla estática vs. dinámica, la ruta default `0.0.0.0` vs. la difusión del switch, el AS como ISP, el switch de capa 3 vs. el router (BGP), protocolo vs. algoritmo, las métricas de OSPF y el conteo al infinito. Diferencia anotada: Baró dice que BGP es vector distancia y el libro, vector de ruta.
+- 2026-10-26: Ingesta de la **foto del 2do teórico de Medín de oct/2026** (otra comisión), en `fuentes/Medin-2do-parcial/`. Unidad 3: formato (5 preguntas para desarrollar, 60 min, criterios de corrección) y las 5 preguntas; los propósitos de la capa de transporte según el apunte de Puertos. Unidad 2 (*Fragmentación*): tipos transparente y no transparente y descubrimiento de la MTU de la ruta, del Tanenbaum §5.5.5. Nuevo `estudio/preguntas-parcial-medin.html` + pdf para imprimir: las preguntas de ese parcial, la de 2024 que no se repitió y las de los 1ros parciales de Medín, todas respondidas.

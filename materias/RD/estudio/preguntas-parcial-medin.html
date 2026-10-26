@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>RD — Preguntas de Medín</title>
+<style>
+  @page { size: A4; margin: 12mm 13mm 12mm 13mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 9.6pt; line-height: 1.38; color: #000; }
+  h1 { font-size: 15pt; text-align: center; margin: 0 0 1mm; }
+  .sub { text-align: center; font-size: 8.6pt; color: #333; margin: 0 0 3mm; }
+  .info { border: 1.2px solid #000; padding: 2mm 3mm; margin-bottom: 4mm; font-size: 8.8pt; }
+  .info p { margin: .4mm 0; }
+  h2 { font-size: 11.5pt; margin: 5mm 0 2mm; padding: 1mm 2mm; border-top: 2px solid #000; border-bottom: 1px solid #000; background: #e8e8e8; break-after: avoid; }
+  h2 small { font-weight: normal; font-size: 8.4pt; }
+  .q { border: 1px solid #000; margin: 0 0 3mm; }
+  .two .q, .q.keep { break-inside: avoid; }
+  .q.split { break-inside: auto; }
+  .q .enun { font-weight: bold; padding: 1.4mm 2.5mm; border-bottom: 1px solid #000; background: #f2f2f2; break-after: avoid; }
+  .q .enun .n { display: inline-block; min-width: 6mm; }
+  .q .enun .tag { float: right; font-weight: normal; font-size: 7.8pt; border: .8px solid #000; padding: 0 1.4mm; margin-left: 2mm; }
+  .q .resp { padding: 1.6mm 2.8mm 1.8mm; }
+  .resp > p:first-child, pre { break-inside: avoid; }
+  p { margin: .5mm 0 1.3mm; }
+  ol, ul { margin: .4mm 0 1.3mm; padding-left: 5mm; }
+  li { margin: 0 0 .7mm; }
+  .nota { font-size: 8.4pt; border-left: 2.5px solid #000; padding: .3mm 0 .3mm 2mm; margin: 1.5mm 0 .5mm; }
+  table { border-collapse: collapse; width: 100%; margin: 1mm 0 1.5mm; font-size: 8.8pt; }
+  th, td { border: .8px solid #000; padding: .7mm 1.6mm; text-align: left; vertical-align: top; }
+  th { background: #e8e8e8; }
+  td.c, th.c { text-align: center; }
+  pre { font-family: Menlo, Consolas, monospace; font-size: 8.2pt; line-height: 1.3; margin: 1mm 0 1.5mm; padding: 1.5mm 2mm; border: .8px dashed #000; white-space: pre; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 0 4mm; }
+  .mc td:first-child { width: 47%; font-weight: bold; }
+  .pb { break-before: page; }
+</style>
+</head>
+<body>
+
+<h1>Redes de Datos — Preguntas y respuestas de Medín</h1>
+<p class="sub">2do parcial de teoría · Com. 403 · Mg. Cristian Medín · Transporte (y lo que mezcla de Red)</p>
+
+<div class="info">
+  <p><b>Formato del parcial que tomó en octubre de 2026 a otra comisión:</b> 5 preguntas para desarrollar, 60 minutos.</p>
+  <p><b>Cómo corrige:</b> pertinencia de las respuestas de teoría <b>40 %</b> · vocabulario técnico adecuado <b>30 %</b> · solidez de la fundamentación <b>25 %</b> · ortografía <b>5 %</b>.</p>
+  <p><b>Para cada respuesta:</b> definí primero, después justificá el porqué y cerrá con un ejemplo. Usá los términos técnicos (segmento, extremo a extremo, checksum, ACK, temporizador, MTU, puerto). Cuando pida "enumere y desarrolle uno", enumerá todos y desarrollá bien uno solo.</p>
+  <p><b>Parte 1</b> = el parcial de la foto, que es lo más probable. <b>Parte 2</b> = la pregunta de 2024 que no se repitió. <b>Parte 3</b> = lo que tomó en los 1ros parciales (Red y Enlace), por si mezcla como hizo con la fragmentación.</p>
+</div>
+
+<!-- ======================= PARTE 1 ======================= -->
+<h2>Parte 1 — El parcial que tomó hace poco <small>(oct 2026, otra comisión: las preguntas 1, 2, 3 y 5 ya las había tomado en 2024)</small></h2>
+
+<div class="q">
+  <div class="enun"><span class="n">1.</span>Enumere los propósitos de la capa de transporte y desarrolle al menos uno de ellos.<span class="tag">2024 y 2026</span></div>
+  <div class="resp">
+    <p>La capa de transporte (capa 4) es la <b>primera que trabaja extremo a extremo</b>: comunica directamente la aplicación del host origen con la del host destino, mientras que las capas 1 a 3 trabajan salto a salto. Es el enlace entre la capa de aplicación y las capas inferiores. Según el apunte de Medín, sus propósitos son:</p>
+    <ol>
+      <li><b>Seguimiento de conversaciones individuales:</b> un host tiene muchas aplicaciones comunicándose a la vez, y la capa 4 mantiene separado cada flujo de comunicación entre ellas.</li>
+      <li><b>Segmentación de datos:</b> divide el flujo de datos de la aplicación en partes manejables, los <b>segmentos</b>, y le agrega a cada uno su encabezado de capa 4.</li>
+      <li><b>Reensamble de segmentos:</b> en el receptor, reconstruye el flujo completo y en orden antes de entregárselo a la aplicación.</li>
+      <li><b>Identificación de las aplicaciones:</b> mediante el <b>número de puerto</b>.</li>
+    </ol>
+    <p>A esto los teóricos suman los servicios que lo hacen posible: <b>control de errores</b> y <b>control de flujo</b> extremo a extremo, <b>multiplexación</b> de varias conexiones sobre una misma IP, establecimiento y liberación de conexiones, y <b>control de congestión</b> (en TCP, junto con la capa 3).</p>
+    <p><b>Desarrollo: identificación de las aplicaciones.</b> IP lleva el paquete hasta el host, pero no sabe a qué programa va. Para eso la capa 4 identifica cada aplicación con un <b>puerto</b>, un número de <b>16 bits</b> (0 a 65.535) que viaja en el encabezado de TCP y de UDP como puerto de origen y puerto de destino. La combinación <b>IP + puerto</b> se llama <b>socket</b> e identifica un extremo de la comunicación. La IANA divide los puertos en <b>conocidos</b> (0–1023, servicios estándar: HTTP 80, HTTPS 443, FTP 20/21, SMTP 25, DNS 53), <b>registrados</b> (1024–49.151) y <b>efímeros</b> (49.152–65.535, los que toma el cliente como origen). <i>Ejemplo:</i> al abrir una página, el segmento va a <code>IP del servidor : 443</code> y sale de <code>mi IP : 51.234</code>; la respuesta vuelve a ese puerto efímero, y así el sistema operativo sabe que es para el navegador y no para el mail o el Zoom, que usan la misma IP al mismo tiempo.</p>
+    <p class="nota">En 2024 la misma pregunta salió como "¿Qué <b>responsabilidades</b> tiene la capa de transporte?". El apunte de Medín presenta los propósitos justamente como "las responsabilidades principales que debe cumplir", así que se contesta igual.</p>
+  </div>
+</div>
+
+<div class="q">
+  <div class="enun"><span class="n">2.</span>¿Cómo controla la congestión el protocolo UDP?<span class="tag">2024 y 2026</span></div>
+  <div class="resp">
+    <p><b>No la controla.</b> Es una pregunta trampa. UDP es un protocolo <b>sin conexión</b> y de "mejor esfuerzo" (<i>best effort</i>) que no implementa <b>control de congestión ni control de flujo</b>: no tiene ventana, ni ACK, ni números de secuencia, así que no tiene forma de enterarse de que la red está saturada. Envía los datagramas <b>al ritmo que le marca la aplicación</b>, sin adaptarse al estado de la red, y por eso puede contribuir a saturarla.</p>
+    <p><b>Por qué es así:</b> UDP está pensado para aplicaciones donde importa más llegar a tiempo que llegar completo (voz, video en vivo, DNS). Bajar la velocidad o esperar confirmaciones agregaría retardo. Su encabezado de 8 bytes solo trae puertos, longitud y checksum: no hay ningún campo para regular el envío.</p>
+    <p><b>Si hace falta control, lo hace la aplicación.</b> <i>Ejemplo:</i> en streaming, <b>RTCP</b> (el protocolo de control de RTP, que viaja sobre UDP) da realimentación sobre la calidad de la recepción, y con eso la aplicación <b>baja la velocidad y la calidad</b> del video cuando la red tiene problemas.</p>
+    <p class="nota">Contraste con TCP, que sí controla la congestión: ventana de congestión, <i>slow start</i> (la ventana se duplica en cada RTT), incremento aditivo y, ante una pérdida, la ventana baja a la mitad (<b>AIMD</b>); variantes Tahoe y Reno. Mencionarlo suma fundamentación.</p>
+  </div>
+</div>
+
+<div class="q">
+  <div class="enun"><span class="n">3.</span>¿Qué sucede si UDP detecta un error? ¿Y si lo detecta TCP?<span class="tag">2024 y 2026</span></div>
+  <div class="resp">
+    <p>Los dos detectan errores con el <b>checksum</b>: una suma en complemento a uno de palabras de 16 bits, calculada sobre el encabezado, los datos y un <b>pseudoencabezado IP</b> (IP origen, IP destino, número de protocolo y longitud). El receptor la recalcula y, si no coincide, el segmento llegó dañado. La diferencia está en qué hace cada uno después.</p>
+    <p><b>UDP:</b> el checksum es <b>opcional</b> (si el emisor no lo calcula, el campo va en ceros y no hay control). Si detecta un error, <b>no lo corrige ni lo retransmite</b>, porque no tiene ACK, ni números de secuencia, ni temporizadores. Como dice la diapositiva de Medín: <b>"si detecta errores, no corrige pero avisa a las capas superiores"</b>, que son las que deciden qué hacer. En la práctica el datagrama dañado se <b>descarta</b>, y si la aplicación necesita ese dato, lo tiene que volver a pedir ella misma (por ejemplo, un cliente DNS que repite la consulta).</p>
+    <p><b>TCP:</b> el checksum es <b>obligatorio</b>. El receptor <b>descarta</b> el segmento dañado y <b>no lo confirma</b>. El emisor guarda una copia de todo lo enviado hasta recibir su ACK; como el ACK no llega, <b>retransmite</b> el segmento cuando vence el <b>temporizador de retransmisión</b>, o antes si recibe <b>3 ACK duplicados</b>. Es el mecanismo <b>ARQ</b> (<i>Automatic Repeat reQuest</i>): ventana deslizante + números de secuencia + reenvío por timeout. Gracias a los números de secuencia, el receptor reordena y entrega a la aplicación un flujo de bytes <b>completo, sin duplicados y en orden</b>. La aplicación nunca se entera del error.</p>
+    <p><b>En síntesis:</b> UDP detecta y deja la decisión a la capa superior; TCP detecta y recupera solo.</p>
+    <p class="nota">El documento de preguntas de Medín de 2024 decía "UDP simplemente lo descarta". La diapositiva que mandó para este parcial dice "avisa a las capas superiores". La respuesta de arriba cubre las dos: no corrige, avisa y el dato dañado no se usa.</p>
+  </div>
+</div>
+
+<div class="q split">
+  <div class="enun"><span class="n">4.</span>Explique al menos uno de los tipos de fragmentación que existen en una comunicación entre redes que tienen distintas tecnologías.<span class="tag">nueva · capa de red</span></div>
+  <div class="resp">
+    <p><b>El problema.</b> Cada tecnología de red tiene un tamaño máximo de paquete, la <b>MTU</b> (<i>Maximum Transmission Unit</i>): por ejemplo, 1500 bytes en Ethernet. Cuando un paquete grande pasa de una red con MTU grande a otra con MTU más chica, el router que las une tiene que <b>dividirlo en fragmentos</b>, cada uno enviado como un paquete aparte. Hay <b>dos tipos</b> de fragmentación, que se distinguen por <b>dónde se reensamblan los fragmentos</b>:</p>
+<pre>
+(a) TRANSPARENTE: se reensambla al salir de la red chica
+
+    Red 1 ──► [G1] ═ fragmentos ═ [G2] ──► Red 3 ──► [G3] ═ fragmentos ═ [G4] ──► destino
+              fragmenta          reensambla          fragmenta         reensambla
+
+(b) NO TRANSPARENTE (la que usa IP): solo reensambla el host destino
+
+    Red 1 ──► [G1] ═ fragmentos ═ [G2] ═ fragmentos ═ [G3] ═ fragmentos ═ host destino
+              fragmenta    los routers los reenvían como paquetes comunes    reensambla
+</pre>
+    <p><b>1) Fragmentación transparente.</b> El router de entrada a la red de paquetes chicos (G1) fragmenta, y <b>todos los fragmentos tienen que salir por el mismo router de salida</b> (G2), que los <b>vuelve a unir</b> antes de mandarlos a la red siguiente. El paso por la red chica es "transparente": las redes posteriores ni se enteran de que hubo fragmentación. <i>Desventajas:</i> el router de salida necesita saber cuándo llegaron todas las piezas (un contador o un bit de "fin de paquete"); las <b>rutas quedan restringidas</b>, porque todos los fragmentos deben ir al mismo router; los routers hacen <b>mucho trabajo</b> y gastan buffer; y si el paquete cruza varias redes chicas, se fragmenta y reensambla una y otra vez.</p>
+    <p><b>2) Fragmentación no transparente.</b> Es la que usa <b>IP</b>. Una vez fragmentado, <b>cada fragmento viaja como un datagrama independiente</b>, incluso por rutas distintas, y <b>solo el host destino lo reensambla</b>. Para poder rearmarlo, el encabezado IPv4 trae:</p>
+    <ul>
+      <li><b>Identificación:</b> el mismo número en todos los fragmentos del mismo datagrama.</li>
+      <li><b>Desplazamiento</b> (<i>fragment offset</i>, 13 bits): la posición del fragmento dentro de los datos originales, en unidades de 8 bytes.</li>
+      <li><b>MF</b> (<i>More Fragments</i>): vale 1 en todos los fragmentos menos en el último. <b>DF</b> (<i>Don't Fragment</i>): si vale 1, el router no fragmenta, descarta el paquete y avisa por ICMP.</li>
+    </ul>
+    <p><i>Ventajas:</i> los <b>routers trabajan menos</b>; los fragmentos pueden llegar <b>desordenados</b> (el destino los acomoda por el desplazamiento); un fragmento se puede <b>volver a fragmentar</b> si encuentra una red con MTU todavía menor. <i>Desventajas:</i> más sobrecarga, porque cada fragmento lleva su propio encabezado hasta el final; y si se pierde <b>un solo fragmento</b>, se pierde el datagrama entero: el destino arranca un <b>temporizador de reensamblado</b> y, si vence, descarta lo recibido.</p>
+    <p><i>Ejemplo:</i> un datagrama de 1400 B de datos (+20 B de encabezado) pasa a una red con MTU 620 B. Entran 600 B de datos por fragmento (múltiplo de 8):</p>
+    <table>
+      <tr><th class="c">Fragmento</th><th class="c">Longitud total</th><th class="c">Bytes de datos</th><th class="c">Desplazamiento (campo = bytes ÷ 8)</th><th class="c">MF</th></tr>
+      <tr><td class="c">1</td><td class="c">620</td><td class="c">0 – 599</td><td class="c">0</td><td class="c">1</td></tr>
+      <tr><td class="c">2</td><td class="c">620</td><td class="c">600 – 1199</td><td class="c">75</td><td class="c">1</td></tr>
+      <tr><td class="c">3</td><td class="c">220</td><td class="c">1200 – 1399</td><td class="c">150</td><td class="c">0</td></tr>
+    </table>
+    <p class="nota"><b>Para sumar:</b> hoy Internet trata de <b>evitar</b> la fragmentación con el <b>descubrimiento de la MTU de la ruta</b>. La fuente manda los paquetes con DF = 1; si un router no puede pasarlos, los descarta y devuelve un error ICMP con la MTU que acepta, y la fuente achica sus paquetes. Por eso TCP usa segmentos de hasta <b>1460 B</b> (1500 − 20 de IP − 20 de TCP): entran en una trama Ethernet sin fragmentar.<br>Fuente: Tanenbaum, 5ª ed., §5.5.5. El apunte de Medín solo trae los campos DF, MF y desplazamiento; la clasificación en transparente y no transparente es la del libro.</p>
+  </div>
+</div>
+
+<div class="q">
+  <div class="enun"><span class="n">5.</span>Mencione las principales diferencias entre TCP y UDP.<span class="tag">2024 y 2026</span></div>
+  <div class="resp">
+    <table>
+      <tr><th style="width:21%">Aspecto</th><th>TCP</th><th>UDP</th></tr>
+      <tr><td><b>Conexión</b></td><td>Orientado a conexión: establece con el <b>3-way handshake</b> y libera con FIN/ACK en cada sentido</td><td>Sin conexión: envía directamente</td></tr>
+      <tr><td><b>Confiabilidad</b></td><td>Confiable: confirma con ACK, retransmite lo perdido, ordena y descarta duplicados</td><td>No garantiza entrega, orden ni ausencia de duplicados (mejor esfuerzo)</td></tr>
+      <tr><td><b>Control de errores</b></td><td>Checksum <b>obligatorio</b> + retransmisión (ARQ)</td><td>Checksum <b>opcional</b>; no corrige, avisa a la capa superior</td></tr>
+      <tr><td><b>Control de flujo</b></td><td>Sí, con ventana deslizante (campo <i>Window Size</i>)</td><td>No</td></tr>
+      <tr><td><b>Control de congestión</b></td><td>Sí: slow start, AIMD, Tahoe/Reno</td><td>No; si hace falta, lo hace la aplicación</td></tr>
+      <tr><td><b>Encabezado</b></td><td><b>20 bytes</b> fijos + hasta 40 de opciones (secuencia, ACK, flags, ventana…)</td><td><b>8 bytes</b>: puerto origen, puerto destino, longitud y checksum</td></tr>
+      <tr><td><b>Tipo de servicio</b></td><td>Flujo de bytes (<i>byte stream</i>)</td><td>Mensajes independientes (datagramas)</td></tr>
+      <tr><td><b>Destinatarios</b></td><td>Solo unicast, full-duplex, punto a punto</td><td>Unicast, broadcast y multicast</td></tr>
+      <tr><td><b>Velocidad / costo</b></td><td>Más lento: handshake, ACK y control de congestión</td><td>Más rápido y liviano</td></tr>
+      <tr><td><b>Usos</b></td><td>Web (HTTP 80, HTTPS 443), correo (SMTP 25), FTP (20/21), SSH, transferencias bancarias</td><td>Voz y video en tiempo real (RTP), DNS (53), DHCP (67/68), juegos, VPN, QUIC/HTTP3</td></tr>
+    </table>
+    <p><b>Para cerrar la respuesta:</b> TCP se usa cuando no puede faltar ni desordenarse nada (un archivo o una transferencia bancaria); UDP, cuando importa más que llegue a tiempo que completo (en una videollamada, retransmitir un cuadro viejo no sirve).</p>
+  </div>
+</div>
+
+<!-- ======================= PARTE 2 ======================= -->
+<h2>Parte 2 — La otra pregunta del 2do parcial de 2024 <small>(29/10/2024, com. 403; las otras cuatro son las 1, 2, 3 y 5 de arriba)</small></h2>
+
+<div class="q">
+  <div class="enun"><span class="n">6.</span>Grafique un ejemplo de conexión 3-way handshake.<span class="tag">2024</span></div>
+  <div class="resp">
+<pre>
+      CLIENTE                                         SERVIDOR
+   (CONNECT)                                          (LISTEN: espera conexiones)
+       |                                                   |
+       | ---------- SYN = 1, ACK = 0, seq = x -----------> |   1) pide la conexión
+       |                                                   |
+       | <---- SYN = 1, ACK = 1, seq = y, ack = x + 1 ---- |   2) acepta y propone su nº
+       |                                                   |
+       | ---------- ACK = 1, seq = x + 1, ack = y + 1 ---> |   3) confirma
+       |                                                   |
+       | <============ CONEXIÓN ESTABLECIDA =============> |   datos en ambos sentidos
+</pre>
+    <ol>
+      <li>El servidor está en <b>LISTEN</b>. El cliente ejecuta <b>CONNECT</b> y envía un segmento con <b>SYN = 1</b> y su número de secuencia inicial <b>x</b> (además informa el puerto destino y el MSS).</li>
+      <li>El servidor responde con <b>SYN = 1 y ACK = 1</b> (SYN-ACK): confirma el número del cliente con <b>ack = x + 1</b> y propone su propio número de secuencia inicial <b>y</b>.</li>
+      <li>El cliente responde con <b>ACK = 1, ack = y + 1</b>. Desde ahí la conexión es <b>full-duplex</b>.</li>
+    </ol>
+    <p><b>Por qué tres pasos:</b> cada lado tiene que elegir su número de secuencia y que el otro se lo confirme. Así se evita que un segmento <b>duplicado y demorado</b> de una conexión vieja abra una conexión falsa (por ejemplo, repetir una transferencia bancaria). Los números de secuencia son de <b>32 bits</b> y el inicial es <b>aleatorio</b>, para que nadie pueda predecirlo.</p>
+    <p class="nota"><b>Si pide también la desconexión:</b> es <b>simétrica</b>: cada sentido se cierra por separado con <b>FIN</b> + <b>ACK</b> (4 segmentos). Por el <b>problema de los dos ejércitos</b> nunca se puede asegurar que el último mensaje llegó, así que cada lado termina de cerrar por <b>timeout</b>. <b>Ataque relacionado:</b> la <b>inundación SYN</b> manda muchos SYN y nunca completa el paso 3; el servidor se llena de conexiones a medio abrir (DoS). Se mitiga con <b>SYN cookies</b> y limitando las conexiones nuevas.</p>
+  </div>
+</div>
+
+<!-- ======================= PARTE 3 ======================= -->
+<h2>Parte 3 — Lo que tomó en los 1ros parciales <small>(Red y Enlace; por si mezcla, como hizo con la fragmentación)</small></h2>
+
+<p><b>1er parcial del 06/08/2024 — preguntas para desarrollar</b></p>
+
+<div class="q">
+  <div class="enun"><span class="n">7.</span>En una transmisión de datos analizada en la 3ra capa del modelo OSI existen distintas formas de transmitir un mensaje. Enumerar y desarrollar una.<span class="tag">2024</span></div>
+  <div class="resp">
+    <p>Son cuatro: <b>unicast</b>, <b>broadcast</b>, <b>multicast</b> y <b>anycast</b>.</p>
+    <ul>
+      <li><b>Unicast (uno a uno):</b> un emisor manda a un único receptor, identificado por su IP. Es lo más común, como navegar una web.</li>
+      <li><b>Broadcast (uno a todos):</b> el paquete va a todos los hosts de la red local, por ejemplo el DHCP Discover. Existe en IPv4.</li>
+      <li><b>Multicast (uno a muchos):</b> se envía a un grupo de receptores suscriptos a una dirección multicast, como un streaming a varios usuarios.</li>
+      <li><b>Anycast (uno al más cercano):</b> varios equipos comparten la misma dirección y la red entrega el paquete al más próximo según la métrica de ruteo. Se usa en IPv6 y en servidores DNS.</li>
+    </ul>
+    <p><i>Desarrollo (multicast):</i> el emisor manda <b>una sola copia</b> a la dirección del grupo, y los routers la replican solo en las ramas donde hay miembros (árbol de distribución). Así no se satura la red con una copia por receptor, como pasaría con unicast, ni se molesta a todos los hosts, como con broadcast.</p>
+  </div>
+</div>
+
+<div class="q">
+  <div class="enun"><span class="n">8.</span>Realice un diagrama de capa 3 donde se observen los distintos tipos de ISP que existen.<span class="tag">2024</span></div>
+  <div class="resp">
+<pre>
+            [Tier 1] ═══════ [Tier 1] ═══════ [Tier 1]      backbone global, peering sin costo
+              /    \            |                \
+        [Tier 2]  [Tier 2]   [Tier 2]          [Tier 2]      regionales / nacionales
+         /   \       |         /  \                |
+    [Tier 3] [T3]  [T3]     [T3]  [T3]           [T3]        ISP locales
+       |      |     |        |     |               |
+    hogares, empresas, cable, Ethernet, inalámbrico...       usuarios finales
+</pre>
+    <p><b>Tier 1:</b> los grandes proveedores que forman el backbone de Internet (EE.UU., Europa, enlaces con Asia); tienen alcance global y se interconectan entre sí sin pagar tránsito (<i>peering</i>). <b>Tier 2:</b> proveedores regionales o nacionales que compran acceso a los Tier 1 y lo revenden hacia abajo. <b>Tier 3:</b> ISP locales que dan servicio al usuario final y dependen de los Tier 2. Es un diagrama de capa 3 porque muestra cómo se interconectan los routers de los distintos proveedores hasta llegar al usuario.</p>
+  </div>
+</div>
+
+<div class="q">
+  <div class="enun"><span class="n">9.</span>Enumere las etapas del control de congestión y explique una de ellas.<span class="tag">2024</span></div>
+  <div class="resp">
+    <p>Van de la más preventiva (largo plazo) a la más reactiva (corto plazo):</p>
+    <ol>
+      <li><b>Planificación de la red</b> (<i>network provisioning</i>).</li>
+      <li><b>Ruteo según el tráfico</b> (<i>traffic-aware routing</i>).</li>
+      <li><b>Control de admisión</b> de circuitos virtuales (<i>admission control</i>).</li>
+      <li><b>Atenuación de las fuentes de tráfico</b> (<i>traffic throttling</i>).</li>
+      <li><b>Descarte de paquetes</b> (<i>load shedding</i>).</li>
+    </ol>
+    <p><i>Desarrollo (planificación):</i> consiste en anticipar los cuellos de botella y reforzar routers o enlaces con más capacidad <b>antes</b> de que aparezca la congestión. Es una medida preventiva y de largo plazo, basada en las tendencias de uso de la red.</p>
+  </div>
+</div>
+
+<div class="two">
+  <div class="q">
+    <div class="enun"><span class="n">10.</span>¿Qué protocolo da estos mensajes: destino inalcanzable, tiempo excedido, problema en parámetro, bajar tráfico de fuente, ruta alternativa?</div>
+    <div class="resp">
+      <p><b>ICMP</b> (<i>Internet Control Message Protocol</i>), de capa 3, que informa errores y sirve para diagnosticar IP. <i>Destino inalcanzable:</i> el router no puede entregar el paquete. <i>Tiempo excedido:</i> el TTL llegó a 0 (lo usa traceroute). <i>Problema en parámetro:</i> un campo del encabezado es inválido. <i>Bajar tráfico de fuente</i> (<i>source quench</i>): pedirle al emisor que reduzca la velocidad. <i>Ruta alternativa</i> (<i>redirect</i>): avisar que hay un camino mejor.</p>
+    </div>
+  </div>
+  <div class="q">
+    <div class="enun"><span class="n">11.</span>¿Para qué se emplean los protocolos de control ARP, ICMP y DHCP?</div>
+    <div class="resp">
+      <p><b>ARP:</b> traduce una <b>IP a la dirección MAC</b> dentro de la LAN, para saber a qué placa mandar la trama. <b>ICMP:</b> <b>informa errores</b> y permite diagnosticar la red (ping, traceroute). <b>DHCP:</b> <b>asigna automáticamente</b> la IP y los demás parámetros (máscara, puerta de enlace, DNS) a cada equipo que se conecta; usa UDP 67/68.</p>
+    </div>
+  </div>
+</div>
+
+<p><b>1er parcial del 28/07/2026 — multiple choice de 10 preguntas</b> (lo que se recuerda de cada una, con la respuesta correcta)</p>
+<table class="mc">
+  <tr><th>Tema de la pregunta</th><th>Respuesta</th></tr>
+  <tr><td>Tamaño del contador de secuencia respecto de la ventana deslizante</td><td>Debe ser el <b>doble</b> de la ventana, para que una retransmisión no se confunda con tramas nuevas (ventana 7 → contador hasta 14).</td></tr>
+  <tr><td>Diferencia del encabezado de un datagrama y de un circuito virtual</td><td>El <b>datagrama</b> lleva las direcciones IP de origen y destino completas; en un <b>circuito virtual</b> cada paquete lleva solo el <b>número de CV</b>.</td></tr>
+  <tr><td>A qué algoritmo pertenece el problema de la cuenta a infinito</td><td>Al de <b>vector distancia</b> (Bellman-Ford, RIP): las malas noticias se propagan lento. Estado de enlace (OSPF) no lo sufre.</td></tr>
+  <tr><td>Función del protocolo ARP</td><td>Resolver <b>IP → MAC</b> en la red local.</td></tr>
+  <tr><td>Función del protocolo ICMP</td><td><b>Informar errores</b> y diagnosticar (ping, traceroute).</td></tr>
+  <tr><td>Qué significa el valor 5 en el campo IHL del encabezado IPv4</td><td>Encabezado de <b>5 palabras de 32 bits = 20 bytes</b>: el mínimo, sin opciones (el máximo es 15 = 60 B).</td></tr>
+  <tr><td>Traceroute</td><td>Manda paquetes con <b>TTL = 1, 2, 3…</b>; cada router que lleva el TTL a 0 devuelve un ICMP <b>tiempo excedido</b> (tipo 11) y así revela su IP y arma el camino.</td></tr>
+  <tr><td>Cuál es la etapa 5 del control de congestión</td><td><b>Descarte de paquetes</b> (<i>load shedding</i>).</td></tr>
+  <tr><td>Qué hace la técnica <i>hop-by-hop backpressure</i></td><td>Es de la etapa 4: <b>cada router avisa al anterior</b> que baje el tráfico, salto a salto hacia la fuente. Es la que alivia más rápido, pero carga a los routers.</td></tr>
+</table>
+
+</body>
+</html>
