@@ -1,8 +1,8 @@
 ---
 title: "Pedidos de datos - TPI Subte Constitución"
 subject: "Simulación"
-status: "Los dos trámites formales ingresados el 05/10; esperando respuesta (≈ 27/10)"
-actualizado: 2026-10-05
+status: "SBASE pidió prórroga el 26/10 (respuesta ≈ 10/11); TAD sin novedad en el mail (revisar el buzón de TAD)"
+actualizado: 2026-10-26
 ---
 
 # Pedidos de datos
@@ -15,7 +15,7 @@ concreto se responde antes. Lo que no figura acá ya se pidió en los correos de
 
 | Organismo | Canal usado | Enviado | Respuesta | Qué falta |
 |---|---|---|---|---|
-| SBASE | correo `info@sbase.com.ar` (23/09); Ley 104 n.º 01084412/26 (05/10) | 23/09 y 05/10 | Pendiente | Esperar el mail de la DGAIGA (2 días hábiles) y la respuesta |
+| SBASE | correo `info@sbase.com.ar` (23/09); Ley 104 n.º 01084412/26 (05/10) | 23/09 y 05/10 | 26/10: usa la prórroga del art. 10 (nota IF-2026-47895115-GCABA-SBASE; expediente EX-2026-44567557-GCABA-DGAIGA) | Esperar la respuesta de fondo, ≈ 10/11 (10 hábiles más) |
 | Emova | correo `comunicaciones@emova.com.ar` | 23/09 | Ninguna | Emova es concesionaria privada y la Ley 104 no le alcanza directamente: su parte se pide a SBASE (§2, punto 4). Opcional: un recordatorio por correo |
 | Trenes Argentinos Operaciones (SOFSE) | correo (23/09); TAD EX-2026-96962531- -APN-DNPAIP#AAIP (05/10) | 23/09 y 05/10 | 25/09: derivó a TAD. TAD: pendiente | Revisar el buzón de TAD |
 
