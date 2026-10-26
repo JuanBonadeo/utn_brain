@@ -7,15 +7,24 @@
 > Resumen para estudiar de un solo archivo. Junta el resumen 2025 que pasó el curso, los apuntes de
 > clase y el material de cátedra 2026. Donde difieren, manda la cátedra: la **unidad 5** sigue el
 > apunte escrito sobre la **reforma de la Ley 27.802**, y la **unidad 6** sigue los artículos que
-> marca la guía (ley 11.291, **Estatuto** y **Código de Ética**). Para el detalle y los textos
-> completos está la wiki (`LEG.md`) y `fuentes/catedra/`.
+> dijo la Prof. Massachiodi en un audio del 26/10: **ley 11.291 y Código de Ética; el Estatuto no
+> entra**. Para el detalle y los textos completos está la wiki (`LEG.md`) y `fuentes/catedra/`.
 
 ## 1. El parcial
 
-Es **escrito** y entran las unidades 4, 5 y 6. En clase sólo se llegó a dar la 4. Los artículos
-**no se piden de memoria completos**: lo habitual es que pidan **unos pocos ejemplos** de un
-artículo ("dé 3 ejemplos del art. 6"). Por eso, de cada artículo marcado conviene saber **qué
-regula** y tener **tres ejemplos** listos. Esto hay que confirmarlo con la cátedra.
+Es **escrito** y entran las unidades 4, 5 y 6. En clase sólo se llegó a dar la 4.
+
+**Formato** (según el que circula en el curso, `fuentes/2026-10-26_formato-parcial2.md`):
+1. **Un caso práctico** de la unidad 4 **o** de la 6.
+2. **Verdadero o falso de la unidad 5**, sin justificar las falsas.
+3. Dos preguntas: una de la unidad 4 o 6, **la que no salió como caso práctico**, y otra de
+   derecho laboral.
+
+U4 y U6 hay que llevarlas para caso y para pregunta; U5 entra seguro, probablemente dos veces.
+
+Los artículos **no se piden de memoria**: la profesora lo dijo para la U6 ("nadie les va a tomar de
+memoria esa numeración"). Lo que sirve es saber **qué regula** cada uno, tener ejemplos listos y,
+en U6, poder usarlos para **analizar si una conducta es falta** en un caso.
 
 | Unidad | Norma | Artículos marcados |
 |---|---|---|
@@ -23,9 +32,13 @@ regula** y tener **tres ejemplos** listos. Esto hay que confirmarlo con la cáte
 | 4 | Ley de marcas 22.362 | **1, 2 y 3** (3 ejemplos del 2 y del 3) |
 | 4 | Ley 11.723 (propiedad intelectual) | **1, 2, 4, 5 y 59** |
 | 5 | Ley de Contrato de Trabajo 20.744, reformada por la 27.802 | No marca artículos: la guía de lectura pregunta por temas |
-| 6 | Ley 11.291 (creación del Colegio) | **1, 2, 3, 4, 6, 11, 18, 19 y 21** |
-| 6 | Estatuto del Colegio | **4 a 10, 12, 13, 22, 23, 49, 54 y 55** |
-| 6 | Código de Ética | **1, 2, 6 y 8** |
+| 6 | Ley 11.291 (creación del Colegio) | **1, 4 (incisos a, b, c, e, f, g, l, m, p), 11, 18, 19, 21 y 24** |
+| 6 | Estatuto del Colegio | **ninguno** |
+| 6 | Código de Ética | **2, 5 y 6** |
+
+Los artículos de U6 los dijo la profesora en un audio (`fuentes/2026-10-26_audio-massachiodi-articulos-u6.md`)
+y reemplazan a los de la guía. Los incisos del art. 4 salen de una transcripción automática:
+confirmarlos escuchando el audio (0:26 a 0:40).
 
 **Cómo encarar una pregunta de desarrollo.** Primero ubicar el tema (qué derecho, qué norma), después
 dar la definición con sus elementos, y recién ahí el ejemplo o el caso. En los casos prácticos,
@@ -431,9 +444,9 @@ más específica:
 2. **Estatuto** (Decreto 0601/99): la reglamenta.
 3. **Código de Ética Profesional y Disciplina** (Res. 28, texto de 2018).
 
-**Regla de la cátedra:** cuando la ley y el Estatuto regulan lo mismo —matriculación, cancelación,
-causales y tipos de sanción—, **se estudia y se responde con el Estatuto**, que es la norma más
-específica.
+**Para este parcial el Estatuto no entra.** La profesora pidió sólo artículos de la **ley** y del
+**Código**, así que las causales, las sanciones y la cancelación de la matrícula se responden con la
+ley (arts. 18, 19 y 24). La regla de que "donde se repiten vale el Estatuto" queda como contexto.
 
 Un **ingeniero especialista** es el de toda rama de la ingeniería que no tenga colegio propio. La
 de **Sistemas de Información** está incluida.
@@ -443,17 +456,16 @@ de **Sistemas de Información** está incluida.
 - **Art. 1 — Carácter.** Es **persona jurídica de derecho privado en ejercicio de funciones públicas**. No pertenece al Poder Judicial ni dicta sentencias judiciales. Controla el ejercicio de la profesión y tiene el poder disciplinario.
 - **Art. 2 — División.** Se divide en dos **Colegios de Distrito**: el **I, con sede en Santa Fe** (centro y norte de la provincia), y el **II, con sede en Rosario** (sur). Hay que matricularse donde se ejerce.
 - **Art. 3 — Normativa.** Se rige por la ley y su reglamentación, el **Estatuto**, el **Reglamento Interno** y el **Código de Ética**, más las resoluciones de sus órganos.
-- **Art. 4 — Finalidades.** La lista no es taxativa. Las principales:
-  - **controlar el ejercicio** de la profesión;
-  - **gobernar la matrícula**;
-  - ejercer el **poder disciplinario**;
-  - **velar porque nadie ejerza sin autorización** y combatir el ejercicio ilegal;
-  - dar intervención al **Ministerio Fiscal** ante delitos;
-  - **representar** a los colegiados;
-  - asesorar al Estado en proyectos de ley;
-  - fomentar la investigación;
-  - recaudar las cuotas;
-  - actuar como **árbitro**.
+- **Art. 4 — Finalidades y atribuciones.** La lista no es taxativa. Entran estos incisos:
+  - a) **controlar el ejercicio** de la profesión;
+  - b) **gobernar la matrícula**;
+  - c) ejercer el **poder disciplinario** sobre los colegiados;
+  - e) **velar porque nadie ejerza sin autorización** y combatir el ejercicio ilegal;
+  - f) dar intervención al **Ministerio Fiscal** ante delitos de acción pública;
+  - g) **representar** a los colegiados ante los Poderes Públicos;
+  - l) **colaborar con el Estado** en proyectos de ley y programas, asesorando;
+  - m) organizar o participar en **congresos, jornadas y cursos**;
+  - p) actuar como **árbitro** en cuestiones profesionales y evacuar consultas.
 - **Art. 6 — Autoridades:**
 
 | Nivel | Órganos |
@@ -467,6 +479,23 @@ de **Sistemas de Información** está incluida.
   - el **denunciante no es parte** del proceso;
   - nadie es sancionado **sin ser citado a defenderse en 7 días**;
   - el fallo es **fundado** y se dicta en **15 días hábiles**.
+- **Art. 18 — Causales de sanción:**
+  - a) **condena por delito doloso** o fallo judicial que inhabilite para ejercer;
+  - b) incumplir la **ley, el Estatuto** o los reglamentos;
+  - c) **negligencia reiterada, ineptitud manifiesta u omisiones** en los deberes;
+  - d) violar **incompatibilidades o inhabilidades**;
+  - e) incumplir el **Código de Ética**;
+  - f) actos que perjudiquen las **relaciones profesionales** o menoscaben la profesión;
+  - g) actos contra el **honor, el decoro y la dignidad** de la profesión;
+  - h) **faltar sin justificación** a 3 sesiones seguidas o 5 alternadas, si se integra un órgano directivo.
+- **Art. 19 — Sanciones**, graduadas según la falta, la reiteración y las circunstancias:
+  - a) **llamado de atención**;
+  - b) **apercibimiento** privado o público;
+  - c) **multa**;
+  - d) **suspensión de la matrícula**.
+
+  La multa y la suspensión se apelan en **5 días ante la Corte Suprema provincial**. El sancionado
+  **no puede ocupar cargos** en el Colegio mientras dure la sanción.
 - **Art. 21 — Matriculación.** Es el acto que **habilita** para ejercer en la provincia. Requisitos:
   - domicilio real, legal y profesional en Santa Fe;
   - título;
@@ -476,6 +505,17 @@ de **Sistemas de Información** está incluida.
   Además, la **reinscripción es anual**.
 - **Art. 22.** No se puede negar la matrícula por razones **ideológicas, políticas, raciales o religiosas**.
 - **Art. 20.** El Directorio puede **rehabilitar** a quien fue excluido de la matrícula, pasados **3 años** del fallo firme.
+- **Art. 24 — Suspensión y cancelación de la matrícula:**
+  - a) a **pedido** del colegiado;
+  - b) por **incompatibilidades**, mientras subsistan;
+  - c) por **enfermedad** física o mental que inhabilite, mientras dure;
+  - d) por **sanciones**, mientras duren;
+  - e) por estar en **proceso criminal** por hechos de la profesión, o penado por delitos contra **la propiedad, la salud de las personas o la fe pública**.
+
+  Pasados **3 años de la cancelación** se puede volver a pedir la inscripción, con **dictamen
+  favorable del Tribunal de Ética**.
+
+> **4.4 y 4.5 no entran en el parcial 2026** (el Estatuto quedó afuera). Quedan como contexto.
 
 ### 4.4 Estatuto: el ejercicio profesional
 
@@ -545,13 +585,17 @@ conciliación** o **rechazar de oficio** las denuncias notoriamente improcedente
 
 ### 4.6 Código de Ética
 
-- **Art. 1.** Los ingenieros especialistas deben ajustar su conducta al Código, al Estatuto y a las normas complementarias.
+Entran los **arts. 2, 5 y 6**. Son la base del caso práctico de U6.
+
 - **Art. 2 — Competencia del Tribunal.** Juzga:
   - las **faltas en el ejercicio** de la profesión;
   - la **inconducta que afecte el decoro**;
   - toda **violación de un principio ético**.
-- **Art. 5.** El profesional tiene deberes para con **la profesión, los colegas, los comitentes o empleadores y el Colegio**.
-- **Art. 6 — Actos contrarios a la ética.** La lista **no es taxativa**. Hay que tener **3 ejemplos de cada ámbito**:
+
+  Lo que importa, según la profesora: **alcanza a todos los profesionales, estén matriculados o no**.
+- **Art. 5 — Ante quién hay deberes.** El ejercicio impone deberes para con **la profesión, los
+  colegas, los comitentes o empleadores y el Colegio**. Incumplirlos es contrario a la ética.
+- **Art. 6 — Actos contrarios a la ética**, uno por cada ámbito del art. 5. La lista **no es taxativa**:
 
 | Ámbito | Ejemplos |
 |---|---|
@@ -559,6 +603,8 @@ conciliación** o **rechazar de oficio** las denuncias notoriamente improcedente
 | **Colegas** | Usar **trabajos ajenos** (proyectos, **documentos informáticos**) sin permiso ni cita · **difamar** colegas · **reemplazar** a un colega sin causa ni aviso · opinar sobre el trabajo de otro **a sus espaldas** · pagar **sueldos indignos** a colaboradores · cobrar **honorarios de miseria** · **competencia desleal** usando el cargo · **discriminar** |
 | **Comitentes o empleadores** | Aceptar **comisiones de proveedores** o contratistas · **revelar datos reservados** del cliente o empleador |
 | **Colegio** | Cumplir las normas de **matriculación** · acatar sus **resoluciones** · respetar la ley, el Estatuto y el Código · no **difamar a los directivos** · no caer en **inhabilitaciones** |
+
+El resto del Código no entra; queda como contexto:
 
 - **Art. 7.** Las faltas éticas **prescriben a los 2 años**.
 - **Art. 8 — Composición del Tribunal.** Tiene dos partes:
@@ -574,10 +620,20 @@ conciliación** o **rechazar de oficio** las denuncias notoriamente improcedente
 - **Art. 38 — Apelación.** Se apela en **10 días ante la Cámara**, y **sólo puede apelar el denunciado**.
 
 **Contradicción entre normas.** La **ley (art. 19)** dice que la multa y la suspensión se apelan en
-**5 días ante la Corte Suprema provincial**. El Código dice 10 días ante la Cámara. Por la regla de la
-norma específica, conviene responder con el **Código** y mencionar la diferencia.
+**5 días ante la Corte Suprema provincial**. El Código dice 10 días ante la Cámara. Como entra el
+art. 19 de la ley y no el 38 del Código, conviene responder con la **ley** y mencionar la diferencia.
 
 ### 4.7 Casos
+
+**Cómo encarar el caso práctico.** La profesora adelantó que el caso va a pedir **analizar si una
+conducta constituye o no una falta**. Un orden que funciona:
+1. **¿Lo alcanza el Código?** Sí: art. 2, esté matriculado o no.
+2. **¿Ante quién falló?** Art. 5: la profesión, los colegas, el comitente o empleador, el Colegio. Puede ser ante más de uno.
+3. **¿Qué conducta del art. 6 encaja?** Nombrar el ámbito y la conducta. Si ninguna encaja exacto, la lista no es taxativa.
+4. **Causal y sanción:** ley, art. 18 inc. e (incumplir el Código), y una sanción del art. 19 según la gravedad y la reiteración. Si la sanción o un proceso penal tocan la matrícula, art. 24.
+5. Si hay un daño a un cliente, sumar la **responsabilidad civil** (4.1).
+
+También puede pasar que **no haya falta**: decirlo y explicar por qué.
 
 **Un ingeniero en sistemas firma una auditoría que no hizo, y el cliente pierde la facturación de un mes.**
 - **En lo civil:** es responsabilidad **contractual**. Se dan los cuatro presupuestos:
@@ -585,16 +641,25 @@ norma específica, conviene responder con el **Código** y mencionar la diferenc
   - **culpa por negligencia**, valorada con rigor porque es profesional y no comprometió un resultado (art. 1768);
   - nexo causal;
   - daño **emergente** y **lucro cesante**.
-- **En lo ético:** viola el Código, art. 6, profesión, inciso c: autorizó lo que no revisó. Es la causal e) del art. 22 del Estatuto. Corresponde **apercibimiento o multa**.
+- **En lo ético:** falló **ante la profesión y ante el comitente** (art. 5). Encaja en el art. 6, profesión, inciso c: autorizó lo que no revisó, y en el inciso a, por negligencia. Es la causal e) del art. 18 de la ley. Corresponde **apercibimiento o multa** (art. 19).
 
 **Un matriculado le presta la firma a un técnico sin título para que presente un proyecto ante la
-municipalidad.** Viola el **art. 5 del Estatuto**, que prohíbe ceder la firma, y el **art. 6 del
-Código**, porque autorizó un trabajo ajeno. A su vez, el técnico **ejerce sin matrícula**: el
-Colegio tiene que combatir el ejercicio ilegal.
+municipalidad.** Falla **ante la profesión**: art. 6 del Código, porque autorizó un trabajo que no
+hizo ni revisó y figura junto a un no profesional. Causal: art. 18 e) de la ley. A su vez, el
+técnico **ejerce sin matrícula**: el Colegio tiene que combatir el ejercicio ilegal (art. 4 e) y,
+si hay delito, dar intervención al Ministerio Fiscal (art. 4 f).
 
-**¿Tiene que matricularse un ingeniero en sistemas que trabaja en relación de dependencia en un
-banco?** **Sí.** El art. 4 del Estatuto define el ejercicio profesional como libre **o en relación
-de dependencia**, y el art. 10 obliga a matricularse a quienes trabajan en dependencia.
+**Un desarrollador usa para un cliente nuevo el código que escribió un colega de otra consultora,
+sin permiso ni cita, y le pasa datos de la base de su cliente anterior.** Dos faltas:
+- **ante los colegas**: usar trabajos ajenos, incluidos documentos informáticos, sin consentimiento (art. 6, colegas, a);
+- **ante el comitente** anterior: revelar datos reservados (art. 6, comitentes, b).
+
+Lo alcanza aunque no esté matriculado (art. 2). Causal: art. 18 e) y f). Si lo suspenden, se
+suspende la matrícula mientras dure la sanción (art. 24 d).
+
+**Un ingeniero falta a 3 reuniones seguidas del Directorio de Distrito que integra, porque estaba
+enfermo y avisó.** **No hay falta**: el art. 18 h) exige que las inasistencias sean
+**injustificadas**.
 
 ## 5. Preguntas de la guía de lectura — Unidad 5
 
@@ -886,7 +951,8 @@ proporcionales**.
 ## 6. Preguntas guía del Colegio — Unidad 6
 
 Las preguntas guía de la cátedra para las tres normas del Colegio, respondidas. El desarrollo está
-en el capítulo 4. Recordar la regla: donde la ley y el Estatuto se repiten, **vale el Estatuto**.
+en el capítulo 4. **Para el parcial 2026 las del Estatuto (10 a 15) no entran**, y de la ley y el
+Código valen los artículos de la tabla del capítulo 1.
 
 ### Ley 11.291
 
@@ -907,18 +973,16 @@ de Ética Profesional**, además de las resoluciones y acuerdos de sus órganos 
 
 **4) ¿Cuáles son sus finalidades y atribuciones?**
 
-Están en el art. 4, que no es taxativo. Las principales:
-- controlar el **ejercicio de la profesión**;
-- gobernar la **matrícula**;
-- ejercer el **poder disciplinario**;
-- velar porque **nadie ejerza sin autorización** y combatir el ejercicio ilegal;
-- dar intervención al **Ministerio Fiscal** ante delitos;
-- **representar** y defender a los colegiados;
-- colaborar con el Estado en proyectos de ley;
-- fomentar la investigación;
-- recaudar las cuotas;
-- actuar como **árbitro**;
-- dictar sus reglamentos.
+Están en el art. 4, que no es taxativo. Los incisos que entran:
+- a) controlar el **ejercicio de la profesión**;
+- b) gobernar la **matrícula**;
+- c) ejercer el **poder disciplinario**;
+- e) velar porque **nadie ejerza sin autorización** y combatir el ejercicio ilegal;
+- f) dar intervención al **Ministerio Fiscal** ante delitos;
+- g) **representar** a los colegiados ante los Poderes Públicos;
+- l) colaborar con el Estado en proyectos de ley;
+- m) organizar congresos, jornadas y cursos;
+- p) actuar como **árbitro**.
 
 **5) ¿Quiénes son las autoridades del Colegio?**
 
@@ -943,7 +1007,7 @@ Además, el procedimiento tiene estas garantías:
 
 **7) ¿Cuáles son las causales de sanción?**
 
-Las enumera el art. 18 de la ley y las repite el **art. 22 del Estatuto**:
+Las enumera el **art. 18 de la ley** (el art. 22 del Estatuto las repite):
 - condena por **delito doloso**;
 - incumplir la **ley o el Estatuto**;
 - **negligencia reiterada o ineptitud manifiesta**;
@@ -955,12 +1019,14 @@ Las enumera el art. 18 de la ley y las repite el **art. 22 del Estatuto**:
 
 **8) ¿Cómo se aplican las sanciones, cuáles son y se pueden apelar?**
 
-Se gradúan según la **falta, la reiteración y las circunstancias**. Según el **Estatuto, art. 23**,
-son:
+Se gradúan según la **falta, la reiteración y las circunstancias**. Según la **ley, art. 19**, son:
 - llamado de atención;
 - apercibimiento privado o público;
-- **multa de hasta 20 veces** el derecho de inscripción anual;
-- **suspensión de hasta 3 años**.
+- **multa**;
+- **suspensión de la matrícula**.
+
+(El Estatuto, art. 23, les pone tope: multa de hasta 20 veces el derecho anual y suspensión de
+hasta 3 años. No entra.)
 
 **Sí, se pueden apelar**, pero las fuentes no coinciden en cómo:
 - La **ley (art. 19)** dice **5 días ante la Corte Suprema** provincial, para la multa y la suspensión.
@@ -975,8 +1041,21 @@ ley y **art. 10 del Estatuto**):
 - no estar en causal de **cancelación**;
 - pagar el **derecho de matriculación**.
 
-El Estatuto agrega que **deben matricularse todos los que ejercen**, también en relación de
-dependencia o como empresarios. La reinscripción es **anual**.
+La reinscripción es **anual**. (El Estatuto agrega que **deben matricularse todos los que
+ejercen**, también en relación de dependencia o como empresarios.)
+
+**9 bis) ¿Cuáles son las causas de suspensión y cancelación de la matrícula?** (art. 24, agregado
+por la profesora)
+
+- el **pedido** del colegiado;
+- las **incompatibilidades**, mientras subsistan;
+- una **enfermedad** física o mental que inhabilite, mientras dure;
+- las **sanciones**, mientras duren;
+- estar en **proceso criminal** por hechos de la profesión, o penado por delitos contra **la
+  propiedad, la salud de las personas o la fe pública**.
+
+A los **3 años de la cancelación** se puede pedir de nuevo la inscripción, con dictamen favorable
+del Tribunal de Ética.
 
 ### Estatuto (Decreto 0601/99)
 
@@ -1043,6 +1122,13 @@ Según el art. 2, conoce y juzga:
 - la **inconducta** que afecte su decoro;
 - todo caso en que se haya **violado un principio de ética profesional**.
 
+Alcanza a **todos los profesionales, estén matriculados o no**.
+
+**16 bis) ¿Ante quién tiene deberes el profesional?** (art. 5, agregado por la profesora)
+
+Ante **la profesión, los colegas, los comitentes o empleadores y el Colegio**. Incumplirlos es
+contrario a la ética y la disciplina profesional. Son los cuatro ámbitos del art. 6.
+
 **17) ¿Qué actos son contrarios a la ética, según el ámbito?**
 
 Están en el art. 6, que no es taxativo. Tres ejemplos de cada ámbito:
@@ -1062,7 +1148,7 @@ Están en el art. 6, que no es taxativo. Tres ejemplos de cada ámbito:
   - no acatar sus resoluciones;
   - difamar a sus directivos.
 
-**18) ¿Cómo está compuesto el Tribunal de Ética?**
+**18) ¿Cómo está compuesto el Tribunal de Ética?** (art. 8; no entra en 2026)
 
 Según el art. 8, tiene dos partes:
 - un **Juez unipersonal**, que **recibe la causa** y la prueba ofrecida, y la **desestima o la eleva** a juzgamiento;

@@ -3,9 +3,23 @@
 > **2do parcial: mié 28/10/2026, escrito.** Entran las **unidades 4, 5 y 6**. En 2026 sólo se dio
 > en clase la unidad 4. Fuentes: U4, el resumen 2025 y los apuntes de clase (la cátedra sólo pasó
 > la lista de leyes); **U5, el apunte de cátedra 2026** (está escrito sobre la reforma de la Ley
-> 27.802 y deja desactualizado al resumen 2025); **U6, la ley 11.291, el Estatuto y el Código de
-> Ética** con los artículos que marca la guía de la cátedra. Los artículos **no se piden completos**:
-> se piden unos pocos ejemplos (confirmar en clase). Resumen para estudiar: `estudio/resumen-2do-parcial.md`.
+> 27.802 y deja desactualizado al resumen 2025); **U6, la ley 11.291 y el Código de Ética** con los
+> artículos que dijo la Prof. Massachiodi en un audio del 2026-10-26 (**el Estatuto no entra**). La
+> numeración no se toma de memoria. Resumen para estudiar: `estudio/resumen-2do-parcial.md`.
+
+## Formato del 2do parcial
+
+Según un formato que le pasaron a Augusto (`fuentes/2026-10-26_formato-parcial2.md`):
+
+1. **Un caso práctico** de la unidad 4 **o** de la 6.
+2. **Verdadero o falso de la unidad 5.** No hay que justificar las falsas.
+3. Dos preguntas: una de la unidad 4 o 6, **la que no salió como caso práctico**, y otra de derecho
+   laboral.
+
+U4 y U6 hay que llevarlas para caso y para pregunta. U5 entra seguro, probablemente dos veces.
+En el caso de U6, la profesora adelantó qué se busca: **analizar si una conducta constituye o no
+una falta** y ante quién (la profesión, los colegas, el comitente o empleador, el Colegio), con los
+arts. 5 y 6 del Código.
 
 ## Índice
 1. Unidad 1 — _(sin desarrollar: no hay fuentes cargadas)_
@@ -19,18 +33,22 @@
 
 ## Para el parcial — qué artículos y cuántos ejemplos
 
-U4 sale de los apuntes de clase 2026; U6, de las preguntas guía de la cátedra
-(`fuentes/catedra/u6/preguntas-guia-colegio.md`). U5 no tiene artículos marcados: la guía de lectura
-pregunta por temas.
+U4 sale de los apuntes de clase 2026; U6, del audio de la Prof. Massachiodi
+(`fuentes/2026-10-26_audio-massachiodi-articulos-u6.md`), que reemplaza la lista de las preguntas
+guía (`fuentes/catedra/u6/preguntas-guia-colegio.md`; la lista vieja quedó en el Log). U5 no tiene
+artículos marcados: la guía de lectura pregunta por temas.
 
 | Unidad | Norma | Artículos | Qué se pide |
 |---|---|---|---|
 | 4 | Ley de patentes 24.481 | **6 y 7** | 3 ejemplos de cada uno |
 | 4 | Ley de marcas 22.362 | **1, 2 y 3** | el 1 para saber qué es registrable; **3 ejemplos del 2 y del 3** |
 | 4 | Ley 11.723 (propiedad intelectual) | **1, 2, 4, 5 y 59** | qué protege, facultades del autor, titulares, plazo |
-| 6 | Ley 11.291 (creación del Colegio) | **1, 2, 3, 4, 6, 11, 18, 19 y 21** | carácter, distritos, normativa, finalidades, autoridades, tribunal, causales, sanciones, matriculación |
-| 6 | Estatuto (Dec. 0601/99) | **4 a 10, 12, 13, 22, 23, 49, 54 y 55** | ejercicio profesional, uso del título, matrícula, inhabilitados, cancelación, causales y sanciones, tribunal. **Prevalece sobre la ley donde se repiten** |
-| 6 | Código de Ética | **1, 2, 6 y 8** | competencia del tribunal; art. 6: ejemplos por ámbito; art. 8: composición del tribunal |
+| 6 | Ley 11.291 (creación del Colegio) | **1, 4 (incisos a, b, c, e, f, g, l, m, p), 11, 18, 19, 21 y 24** | carácter, atribuciones, Tribunal, causales y sanciones, matriculación, suspensión y cancelación de la matrícula |
+| 6 | Estatuto (Dec. 0601/99) | **ninguno** | — |
+| 6 | Código de Ética | **2, 5 y 6** | competencia (alcanza a matriculados o no); ante quién hay deberes; conductas y faltas por ámbito |
+
+Los incisos del art. 4 salen de la transcripción automática del audio (0:26 a 0:40): confirmar
+escuchándolo.
 
 ## Desarrollo
 
@@ -404,6 +422,8 @@ Si se omite, se paga la **indemnización sustitutiva**. Si el despido sin preavi
 > (Res. 28, texto 2018). **Regla de la cátedra:** donde la ley y el Estatuto regulan lo mismo
 > (causales y tipos de sanción, matriculación, cancelación), **vale el Estatuto**, que es la norma
 > más específica. Más la parte de **responsabilidad civil** (diapositivas de la Prof. Massachiodi).
+> **Para el 2do parcial 2026 el Estatuto no entra** (audio de la profesora, 2026-10-26): se responde
+> con la ley y el Código, y la regla de la norma específica queda sólo como contexto.
 
 #### Conceptos clave
 - **Funciones de la responsabilidad**: la **civil** es **resarcitoria** (compensar a la víctima); la **penal** es **punitiva** (castigar; la multa va al Estado). La responsabilidad no surge de estar presente: hay que **atribuirla**. La penal exige un delito **tipificado** (taxativo).
@@ -444,24 +464,29 @@ Si se omite, se paga la **indemnización sustitutiva**. Si el despido sin preavi
 
 ##### Ley 11.291 — el Colegio
 
-Arts. fundamentales para la cátedra: **1, 2, 3, 4, 6, 11, 18, 19 y 21**.
+Entran (Prof. Massachiodi, 2026-10-26): **1, 4 (incisos a, b, c, e, f, g, l, m, p), 11, 18, 19, 21
+y 24**. Como el Estatuto no entra, las causales y la cancelación se responden con la ley (arts. 18 y
+24). Los demás artículos quedan como contexto.
 
 - **Art. 1 — Carácter**: persona jurídica de **derecho privado** en ejercicio de **funciones públicas**.
 - **Art. 2 — División**: dos **Colegios de Distrito**: **I con sede en Santa Fe** (norte: La Capital, General Obligado, Vera, 9 de Julio, San Javier, San Jerónimo, San Cristóbal, San Justo, Las Colonias, Garay, Castellano) y **II con sede en Rosario** (sur: Rosario, Belgrano, Iriondo, San Lorenzo, Gral. López, Caseros, Constitución, San Martín). Hay que matricularse donde se ejerce.
 - **Art. 3 — Normativa**: la ley y su reglamentación, el **Estatuto**, el **Reglamento Interno**, el **Código de Ética**, y las resoluciones y acuerdos de los órganos del Colegio.
-- **Art. 4 — Finalidades** (lista **no taxativa**). Las principales:
-  - a) **controlar el ejercicio** de la profesión;
-  - b) **gobernar la matrícula**;
-  - c) ejercer el **poder disciplinario**;
+- **Art. 4 — Finalidades** (lista **no taxativa**, inc. r). Los incisos que entran, marcados con 📌:
+  - 📌 a) **controlar el ejercicio** de la profesión;
+  - 📌 b) **gobernar la matrícula** profesional;
+  - 📌 c) ejercer el **poder disciplinario** sobre los colegiados;
   - d) vigilar que se cumplan la ley y las normas de la profesión;
-  - e) velar porque **nadie ejerza sin autorización**, y combatir el **ejercicio ilegal**;
-  - dar intervención al **Ministerio Fiscal** ante delitos de acción pública;
-  - representar y defender a los colegiados ante los poderes públicos;
-  - colaborar con el Estado en proyectos de ley;
-  - estimular la investigación y organizar congresos y cursos;
-  - recaudar matrícula, cuotas y multas;
-  - actuar como **árbitro**;
-  - elegir sus autoridades y dictar sus reglamentos.
+  - 📌 e) velar porque **nadie ejerza sin autorización**, y combatir el **ejercicio ilegal** dictaminando en los sumarios o promoviendo acciones;
+  - 📌 f) dar inmediata intervención al **Ministerio Fiscal** ante denuncias de delitos de acción pública;
+  - 📌 g) **representar a los colegiados ante los Poderes Públicos**;
+  - h) e i) proteger los derechos de los colegiados y defender el decoro y la independencia de la profesión;
+  - j) y k) mejoramiento profesional y estudio de los problemas del ejercicio;
+  - 📌 l) **colaborar con el Estado** en proyectos de ley, programas e iniciativas, asesorando;
+  - ll) estimular la investigación científica;
+  - 📌 m) organizar o participar en **congresos, jornadas, conferencias y cursos**;
+  - n) a o) vínculos con otras entidades, administrar bienes, recaudar matrícula, cuotas y multas;
+  - 📌 p) actuar como **árbitro** en cuestiones del ejercicio profesional y evacuar consultas;
+  - q) a t) elegir sus autoridades y dictar reglamentos, cláusula de que la lista no es taxativa, actos necesarios, delegaciones.
 - **Art. 6 — Autoridades**:
 
 | Nivel | Órganos de gobierno |
@@ -477,15 +502,32 @@ Arts. fundamentales para la cátedra: **1, 2, 3, 4, 6, 11, 18, 19 y 21**.
   - el **denunciante no es parte**, pero debe colaborar;
   - no hay sanción sin citar al inculpado a defenderse en **7 días** (ampliables al doble);
   - el fallo se dicta **fundado**, en **15 días hábiles**.
-- **Art. 18 — Causales de sanción**: ver la del Estatuto (art. 22), que es idéntica.
+- **Art. 18 — Causales de sanción** (idénticas al art. 22 del Estatuto):
+  - a) **condena criminal por delito doloso** o fallo judicial que inhabilite para ejercer;
+  - b) incumplir la **ley, su reglamento, el Estatuto** o los reglamentos internos;
+  - c) **negligencia reiterada, ineptitud manifiesta u omisiones** en los deberes profesionales;
+  - d) violar el régimen de **incompatibilidades o inhabilidades**;
+  - e) incumplir el **Código de Ética**;
+  - f) actos que afecten las **relaciones profesionales** o menoscaben la profesión o su libre ejercicio;
+  - g) actos que comprometan el **honor, el decoro y la dignidad** de la profesión;
+  - h) faltar sin justificar a **3 sesiones seguidas o 5 alternadas**, si se integra un órgano directivo.
 - **Art. 19 — Sanciones**: llamado de atención, apercibimiento privado o público, multa, suspensión de la matrícula. El sancionado no puede ocupar cargos directivos mientras dure la sanción.
 - **Art. 20**: el Directorio puede **rehabilitar** al excluido de la matrícula a los **3 años** del fallo firme.
 - **Art. 21 — Matriculación**: acto por el que el Colegio **habilita** para ejercer en la provincia. Requisitos: inscripción en el Registro Especial y a) domicilio real, legal y profesional en la provincia; b) título de ingeniero especialista; c) no estar en causal de cancelación; d) pagar el derecho. **Reinscripción anual**.
-- **Art. 22**: no se puede negar la matrícula por **discriminación**. **Art. 24**: causales de cancelación o suspensión (ver Estatuto, art. 13).
+- **Art. 22**: no se puede negar la matrícula por **discriminación**.
+- **Art. 24 — Suspensión y cancelación de la matrícula** (igual al art. 13 del Estatuto, salvo el inc. e):
+  - a) a **pedido** del colegiado;
+  - b) **incompatibilidades** previstas por la ley, mientras subsistan;
+  - c) **enfermedades** físicas o mentales que inhabiliten temporariamente, mientras duren;
+  - d) las **sanciones** aplicadas, por el tiempo que duren;
+  - e) estar sometido a **proceso criminal** por hechos del ejercicio profesional, o penas por delitos contra **la propiedad, la salud de las personas o la fe pública**.
+
+  Pasados **3 años de la cancelación**, se puede pedir de nuevo la inscripción, que se concede sólo con **dictamen favorable del Tribunal de Ética**.
 
 ##### Estatuto del Colegio (Decreto 0601/99)
 
-Arts. fundamentales para la cátedra: **4 a 10, 12, 13, 22, 23, 49, 54 y 55**.
+> **No entra en el 2do parcial 2026** (Prof. Massachiodi, 2026-10-26: "del Estatuto, nada"). Queda
+> como contexto. Antes la guía marcaba los arts. 4 a 10, 12, 13, 22, 23, 49, 54 y 55.
 
 - **Art. 4 — Ejercicio profesional**: toda actividad técnica, **pública o privada, libre o en relación de dependencia**, que según las incumbencias implique:
   - a) **ofrecer, contratar o prestar servicios** que requieran conocimientos de ingeniero especialista;
@@ -543,15 +585,18 @@ Arts. fundamentales para la cátedra: **4 a 10, 12, 13, 22, 23, 49, 54 y 55**.
 
 ##### Código de Ética Profesional y Disciplina (Res. 28, 2018)
 
-Arts. fundamentales para la cátedra: **1, 2, 6 y 8**.
+Entran (Prof. Massachiodi, 2026-10-26): **2, 5 y 6**. Son la herramienta del caso práctico: decidir
+si una conducta es falta y ante quién.
 
 - **Art. 1**: los ingenieros especialistas ajustan su conducta al **Código**, al **Estatuto** y a las normas complementarias.
-- **Art. 2 — Competencia del Tribunal**: conoce y juzga, en cuestiones de disciplina y ética:
+- 📌 **Art. 2 — Competencia del Tribunal**: conoce y juzga, en cuestiones de disciplina y ética:
   - las **faltas** cometidas en el ejercicio de la profesión;
   - la **inconducta** que afecte el decoro de la profesión;
   - todo caso en que se haya **violado un principio de ética** profesional.
-- **Art. 5**: el ejercicio impone deberes para con **la profesión, los colegas, los comitentes o empleadores y el Colegio**.
-- **Art. 6 — Actos contrarios a la ética** (lista **no taxativa**). Se piden **3 por ámbito**:
+
+  Según la profesora, lo que hay que sacar de acá es que **alcanza a todos los profesionales, estén matriculados o no**.
+- 📌 **Art. 5 — Ante quién hay deberes**: el ejercicio impone deberes para con **la profesión, los colegas, los comitentes o empleadores y el Colegio**, y **su incumplimiento es contrario a la ética** y la disciplina profesional. Son los cuatro ámbitos que ordena el art. 6.
+- 📌 **Art. 6 — Actos contrarios a la ética** (lista **no taxativa**), ordenados por los ámbitos del art. 5:
 
 | Ámbito | Incisos |
 |---|---|
@@ -576,23 +621,37 @@ Arts. fundamentales para la cátedra: **1, 2, 6 y 8**.
 
 #### Ejercicios resueltos tipo
 
+**Cómo encarar el caso práctico de U6.** (1) **¿Lo alcanza el Código?** Sí: art. 2, matriculado o
+no. (2) **¿Ante quién falló?** Art. 5: la profesión, los colegas, el comitente o empleador, el
+Colegio; puede ser ante más de uno. (3) **¿Qué inciso del art. 6 encaja?** Citar el ámbito y la
+conducta; si ninguno encaja exacto, la lista no es taxativa. (4) **Causal y sanción**: ley, art. 18
+inc. e (incumplir el Código) y las sanciones del art. 19 según gravedad y reiteración; si la sanción
+o un proceso penal afectan la matrícula, art. 24. (5) Si hay daño a un cliente, sumar la
+**responsabilidad civil**. También vale concluir que **no hay falta**, explicando por qué.
+
 **Caso: un ingeniero en sistemas firma la auditoría de un sistema que no revisó; por una falla, el cliente pierde la facturación de un mes.**
 - **Civil**: responsabilidad **contractual** (incumplió lo pactado). Antijuridicidad sin justificación. Factor **subjetivo**: **negligencia**, valorada con más rigor por ser profesional (no comprometió un resultado, art. 1768). Nexo causal con la pérdida. Daño **emergente** y **lucro cesante**.
-- **Ética**: Código, art. 6 I c) (firmar lo que no revisó) → sanción b) o c) según la correlación del art. 37. Causal del Estatuto, art. 22 e) (incumplir el Código).
+- **Ética**: falta **ante la profesión** y **ante el comitente** (Código, art. 5). Encaja en el art. 6 I c) (firmar lo que no revisó) y I a) (negligencia) → causal de la ley, art. 18 e) y c); sanción del art. 19 según gravedad (el art. 37 del Código sugiere apercibimiento o multa).
 
-**Caso: un ingeniero matriculado le "presta" la firma a un técnico sin título para que presente un proyecto ante la municipalidad.** → Viola el **art. 5 del Estatuto** (ejercicio personal, prohibido ceder la firma) y el **art. 6 I c) del Código** (autorizar un trabajo que no hizo ni visó). Además el técnico ejerce sin matrícula: el Colegio debe **combatir el ejercicio ilegal** (ley, art. 4).
+**Caso: un ingeniero matriculado le "presta" la firma a un técnico sin título para que presente un proyecto ante la municipalidad.** → Falta **ante la profesión** (Código, art. 6 I c: autorizar un trabajo que no hizo ni visó; I d: figurar con no profesionales generando confusión). Causal de la ley, art. 18 e). Además el técnico ejerce sin matrícula: el Colegio debe **combatir el ejercicio ilegal** (ley, art. 4 e) y, si hay delito, dar intervención al Ministerio Fiscal (art. 4 f). (El Estatuto, art. 5, también prohíbe ceder la firma, pero no entra.)
 
-**Caso: ¿tiene que matricularse un ingeniero en sistemas que trabaja en relación de dependencia en un banco?** → **Sí**: el Estatuto (art. 10 a) obliga a matricularse a todo el que ejerza, **también en relación de dependencia**, y el art. 4 define el ejercicio profesional "libre o en relación de dependencia".
+**Caso: un desarrollador usa en un proyecto para un cliente nuevo el código que escribió un colega de otra consultora, sin permiso ni cita, y además le pasa al cliente nuevo datos de la base del cliente anterior.** → Dos faltas: **ante los colegas**, art. 6 II a) (usar trabajos ajenos, incluidos documentos informáticos, sin consentimiento), y **ante el comitente** anterior, art. 6 III b) (revelar datos reservados). Causal: ley, art. 18 e) y f). Vale aunque no esté matriculado (art. 2). Sanción del art. 19 según gravedad; si se suspende la matrícula, art. 24 d).
+
+**Caso: un ingeniero no asiste a 3 reuniones seguidas del Directorio de Distrito que integra, porque estaba enfermo y lo avisó.** → **No hay falta**: el art. 18 h) exige inasistencias **injustificadas**.
+
+**Caso: ¿tiene que matricularse un ingeniero en sistemas que trabaja en relación de dependencia en un banco?** (con el Estatuto, que no entra en 2026) → **Sí**: el Estatuto (art. 10 a) obliga a matricularse a todo el que ejerza, **también en relación de dependencia**, y el art. 4 define el ejercicio profesional "libre o en relación de dependencia".
 
 **Caso: una consultora borra por error la base de un cliente a través de un empleado.** → El empleado responde **directa y subjetivamente** (negligencia); la consultora, como **principal**, **objetiva e indirectamente** (art. 1753), porque el daño ocurrió en ejercicio de las funciones encomendadas. Son **concurrentes**.
 
 #### Dudas / pendientes
-- **Apelación**: 5 días ante la Corte (ley) o 10 días ante la Cámara (Código). Confirmar en clase cuál piden.
+- **Incisos del art. 4 de la ley**: a, b, c, e, f, g, l, m y p según la transcripción automática del audio. Confirmar escuchando de 0:26 a 0:40.
+- **Apelación**: 5 días ante la Corte (ley) o 10 días ante la Cámara (Código). Como el Estatuto no entra y el art. 19 de la ley sí, si lo preguntan conviene dar el de la **ley** y mencionar el del Código.
 - **Inhabilidad para cargos** del sancionado: mientras dure la sanción (ley y Estatuto) o **5 años más** (Código, art. 37).
 - **Áreas del Directorio de Distrito**: la ley transcripta dice cuatro; el apunte de cátedra suma Sistemas de Información.
 - Las diapositivas de responsabilidad civil tienen 5 láminas que son sólo imagen y no se pudieron leer; su contenido parece estar en las láminas con texto.
 
 #### Fuentes
+- `fuentes/2026-10-26_audio-massachiodi-articulos-u6.md` (+ `.ogg`) — audio de la profesora al curso con los artículos que entran. Manda sobre la guía.
 - `fuentes/catedra/u6/preguntas-guia-colegio.md` — preguntas guía y artículos fundamentales de cada norma.
 - `fuentes/catedra/u6/apunte-colegio.md` — apunte de cátedra sobre la ley 11.291.
 - `fuentes/catedra/u6/ley-11291-creacion-colegio.md`, `estatuto-colegio.md`, `codigo-de-etica.md` — textos completos, transcriptos de los PDF escaneados.
@@ -650,3 +709,4 @@ Arts. fundamentales para la cátedra: **1, 2, 6 y 8**.
 - 2026-10-12: `estudio/resumen-2do-parcial` ampliado a 28 págs.: las dos guías de la cátedra respondidas completas (guía de lectura U5, 29 preguntas; preguntas guía U6 de ley, Estatuto y Código, 18 preguntas), detalles del apunte que faltaban (ámbito de la LCT, suspensión preventiva, días computables de vacaciones, pago digital, arts. 20 y 22 de la ley). PDF con títulos y tablas en color (`scripts/resumen-pdf.js --color`, opción nueva).
 - 2026-10-12: U4 — art. 59 de la 11.723 completado desde InfoLEG (registro de obras, arts. 57–63), más arts. 9 y 55 bis como alternativas si estaba mal anotado. Resumen actualizado.
 - 2026-10-12: `estudio/prompt-podcast.md` — prompts de NotebookLM para un podcast de repaso del 2do parcial: un episodio único (U4–U6) con versión corta, y tres episodios por unidad.
+- 2026-10-26: ingest de `fuentes/2026-10-26_formato-parcial2.md` (formato del 2do parcial: caso práctico de U4 o U6, V o F de U5 sin justificar, una pregunta de la unidad de U4/U6 que no fue caso y otra de laboral) y `fuentes/2026-10-26_audio-massachiodi-articulos-u6.md` (+ `.ogg`, audio de la profesora transcripto con Whisper). **U6 achicada**: ley 11.291 arts. 1, 4 (incisos a, b, c, e, f, g, l, m, p), 11, 18, 19, 21 y 24; Estatuto nada; Código arts. 2, 5 y 6. Lista anterior de la guía: ley 1, 2, 3, 4, 6, 11, 18, 19 y 21; Estatuto 4 a 10, 12, 13, 22, 23, 49, 54 y 55; Código 1, 2, 6 y 8. Desarrollados los arts. 18 y 24 de la ley (antes remitían al Estatuto), marcados los incisos del art. 4, método para el caso práctico y dos casos nuevos; los casos viejos ahora citan ley y Código en vez del Estatuto.
