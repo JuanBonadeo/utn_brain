@@ -1,4 +1,4 @@
-> Copia de augusto-wiki (`fuentes/facultad/2026-10-26_leg-audio-massachiodi_transcripcion.md`). Audio original al lado: `2026-10-26_audio-massachiodi-articulos-u6.ogg`.
+> Audio original al lado: `2026-10-26_audio-massachiodi-articulos-u6.ogg`.
 
 # Audio de la profesora Massachiodi sobre el 2do parcial de Legislación — transcripción
 

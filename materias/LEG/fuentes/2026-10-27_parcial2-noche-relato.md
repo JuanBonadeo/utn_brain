@@ -1,5 +1,3 @@
-> Copia de augusto-wiki (`fuentes/facultad/2026-10-27_leg-parcial2-noche_transcripcion.md`). Los audios originales quedan en la wiki.
-
 # Parcial 2 de Legislación de la comisión de la noche, relatado — transcripción
 
 Cuatro audios de WhatsApp en los que un compañero de la comisión de la noche le cuenta a Augusto el

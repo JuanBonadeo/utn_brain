@@ -1,6 +1,6 @@
 # Formato del 2do parcial 2026
 
-> Copia de augusto-wiki (`fuentes/facultad/2026-10-26_leg-formato-parcial2.md`). Quién lo armó no está anotado.
+> Formato que le pasaron a Augusto el 2026-10-26, copiado textual. Quién lo armó no está anotado.
 
 
 PREGUNTAS PARCIAL**
