@@ -376,12 +376,15 @@ assert ped_defaults['perfilPed15min']==main_defaults['perfil15min']
 assert ped_defaults['archivoSalidaPed']=='""'
 demo=next(e for e in experiments if e.findtext('Name')=='PeatonalDemo')
 assert float(demo.findtext('ModelTimeProperties/FinalTime'))==900
-# Franja completa con animación (diagnóstico T2.6 / exhibición T6.2): valores de prueba, sin archivo de salida.
+# Franja completa con animación (diagnóstico T2.6 / exhibición T6.2): desde el 2026-10-09 (142b949) usa el
+# escenario intermedio de PeatonalCorridasApareadas, sin archivo de salida.
 visuales={e.findtext('Name'):e for e in experiments if (e.findtext('Name') or '').startswith('PeatonalFranjaVisual')}
 assert set(visuales)=={'PeatonalFranjaVisualE0','PeatonalFranjaVisualE1'}
+intermedio={'proporcionRocaPed':'0.8','demoraAccesoRocaSeg':'106','duracionDescargaSeg':'145','servicioPedSeg':'2.4','servicioMinPedSeg':'1.8','servicioMaxPedSeg':'3.5'}
 for name,mol in (('PeatonalFranjaVisualE0','20'),('PeatonalFranjaVisualE1','22')):
  ps={x.findtext('ParameterName'):x.findtext('ParameterValue/Code') for x in visuales[name].findall('Parameters/Parameter')}
- assert ps['molinetesOperativosPed']==mol and ps['modoFranjaPed']=='true' and ps['pruebaSinteticaPed']=='true' and ps['archivoSalidaPed'] is None, name
+ assert ps['molinetesOperativosPed']==mol and ps['modoFranjaPed']=='true' and ps['pruebaSinteticaPed']=='false' and ps['archivoSalidaPed'] is None, name
+ assert all(ps[k]==v for k,v in intermedio.items()), f'{name}: escenario intermedio {[(k,ps[k]) for k in intermedio]}'
  assert float(visuales[name].findtext('ModelTimeProperties/FinalTime'))==17900  # margen bajo el tope de 5 h de PLE
 # Memoria de la JVM de cada experimento peatonal (T2.3): la franja no entra en 512-1024 MB.
 for e in r.iter():

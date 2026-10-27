@@ -2824,6 +2824,15 @@ Conclusiones:
 
 ## Log
 
+- **2026-10-27** (2): TPI subte, informe LaTeX — capítulos 1 a 7 redactados (introducción y pasos 1 a 6) en
+  `entregables/TPI/subte/informe/capitulos/`, con los datos vigentes (E1 = 22, perfil mar-jun de 18.532, escenario
+  intermedio) y no los del borrador `03-informe-tpi.md`, que quedó viejo. Nuevos: figura `figs/tpi-subte-perfil-demanda.png`
+  (perfil SBASE con los 47 arribos), diagrama conceptual en TikZ, cinco papers, OSM y la nota de SOFSE en
+  `referencias.bib`, y la macro `\pendiente{}` en rojo para lo que falta cerrar (respuesta de la cátedra, fecha de
+  entrega, caudal por ventana del escenario intermedio, respuesta de SBASE). La validación (paso 6) ya usa la respuesta de
+  Trenes Argentinos. Compila con tectonic usando un stub de citas (el biber local no es compatible con el biblatex
+  de tectonic); la compilación real sigue siendo Overleaf. Se corrigió `verificar_modelo.py`, que fallaba desde el
+  09/10 porque esperaba valores de prueba en `PeatonalFranjaVisualE0/E1`; ahora pasa completo.
 - **2026-10-27**: TPI subte, respuesta de Trenes Argentinos al pedido TAD (llegó el 26/10 por correo). Los
   originales están en `entregables/TPI/subte/datos/solicitudes/sofse-2026-10-26/`. Trae el plano DWG de la
   estación (SIENA, sin los accesos de la Línea C), las llegadas reales de cada tren de 07:00 a 09:30 entre marzo

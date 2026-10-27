@@ -1,0 +1,18 @@
+[0] Config.pm:329> INFO - This is Biber 2.22 running in TOOL mode
+[0] Config.pm:332> INFO - Logfile is '/Users/juanbonadeo/Desktop/UTN/materias/SIM/entregables/TPI/subte/informe/referencias.bib.blg'
+[21] biber:342> INFO - === Tue Oct 27, 2026, 18:06:49
+[32] Biber.pm:4676> INFO - Looking for bibtex file '/Users/juanbonadeo/Desktop/UTN/materias/SIM/entregables/TPI/subte/informe/referencias.bib'
+[33] bibtex.pm:1713> INFO - LaTeX decoding ...
+[38] bibtex.pm:1519> INFO - Found BibTeX data source '/Users/juanbonadeo/Desktop/UTN/materias/SIM/entregables/TPI/subte/informe/referencias.bib'
+[70] Biber.pm:1709> INFO - Datamodel validation starting
+[71] Biber.pm:1759> INFO - Datamodel validation complete
+[74] UCollate.pm:68> INFO - Overriding locale 'en_US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[74] UCollate.pm:68> INFO - Overriding locale 'en_US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[74] Biber.pm:4307> INFO - Sorting list 'tool/global//global/global/global' of type 'entry' with template 'tool' and locale 'en_US'
+[74] Biber.pm:4313> INFO - No sort tailoring available for locale 'en_US'
+[77] bibtex.pm:440> INFO - Writing '/dev/null' with encoding 'UTF-8'
+[77] bibtex.pm:481> INFO - Output to /dev/null
+[77] Biber.pm:132> WARN - Datamodel: report entry 'tcqsm2013' (/Users/juanbonadeo/Desktop/UTN/materias/SIM/entregables/TPI/subte/informe/referencias.bib): Invalid field 'edition' for entrytype 'report'
+[77] Biber.pm:132> WARN - Datamodel: report entry 'lu2012spsg' (/Users/juanbonadeo/Desktop/UTN/materias/SIM/entregables/TPI/subte/informe/referencias.bib): Missing mandatory field 'type'
+[77] Biber.pm:132> WARN - Datamodel: report entry 'cnrt2025amba' (/Users/juanbonadeo/Desktop/UTN/materias/SIM/entregables/TPI/subte/informe/referencias.bib): Missing mandatory field 'type'
+[77] Biber.pm:134> INFO - WARNINGS: 3

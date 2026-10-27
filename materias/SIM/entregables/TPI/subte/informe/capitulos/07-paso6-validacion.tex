@@ -1,5 +1,120 @@
 \section{Paso 6: validación del modelo programado}
 \label{sec:paso6-validacion}
-% Origen: 03 §7 y plan §6.2. Qué se valida (caudal, cota por molinete, reparto) y qué no (espera y cola reales).
-% Tarea: T5.3. Reglas: citas con \parencite, tablas con booktabs, figuras con \label, nada de Wikipedia.
-[PENDIENTE: T5.3.]
+% Origen: 07-plan-tpi.md §6.2, 02-modelo-anylogic.md (piloto del 05/10 y reproducción del 09/10) y 09-pedidos-de-datos.md (respuesta de Trenes Argentinos, 26/10).
+
+Validar es comprobar que el modelo representa el sistema real con la precisión que exige la pregunta
+\parencite{law2015}. La verificación (sección~\ref{sec:paso4-construccion-verificacion}) comprueba otra
+cosa: que el programa hace lo que el modelo especifica. Con los datos disponibles, el modelo puede
+contrastarse con la realidad en el caudal, en el uso de los molinetes y en la llegada de los trenes. No
+puede contrastarse en la espera ni en el largo de cola. La tabla~\ref{tab:validacion} resume cada control.
+
+\begin{table}[H]
+\centering
+\caption{Controles de validación}
+\label{tab:validacion}
+\small
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{3.3cm} X >{\raggedright\arraybackslash}p{2.6cm}@{}}
+\toprule
+Control & Contra qué se compara & Resultado \\
+\midrule
+Caudal por ventana & Validaciones simuladas frente al perfil de SBASE & Calibración, no validación (ver texto) \\
+Molinetes en uso & Molinetes con tráfico en \EO{} frente a los 19,5 activos observados & Consistente \\
+Reparto entre molinetes & Utilización por molinete frente al desbalance observado & Más parejo que la realidad \\
+Llegadas de los trenes & Horario oficial frente a llegadas reales & Atraso no modelado \\
+Volumen que llega en tren & Demanda del modelo frente a la matriz origen-destino del Roca & Verosímil \\
+Geometría del andén & Dispersión de la descarga frente al plano ferroviario & Del mismo orden \\
+Espera y cola & Sin observaciones publicadas & No validable \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Caudal por ventana}
+
+El modelo cuenta las validaciones simuladas en cada ventana de 15 minutos y las compara con el perfil de
+SBASE. Este control es en parte circular, porque la demanda se construye con ese mismo perfil. Por eso se
+presenta como calibración: comprueba que la demanda se reparte bien entre los trenes y que la congestión no
+retiene pasajeros de una ventana a la siguiente. Con valores de prueba, el caudal simulado quedó en su
+mayoría a menos del 6~\% del observado (sección~\ref{sec:paso5-pilotos}).
+\pendiente{registrar el caudal por ventana con el escenario intermedio (consola de PeatonalFranjaVisualE0).}
+
+Una validación no circular sería correr el modelo con el perfil de un subperíodo que no se usó para
+calibrarlo y comparar. Requiere que el perfil cambie entre réplicas, lo que el diseño actual no hace
+(supuesto~4 de la sección~\ref{sec:paso2-datos-modelo-conceptual}).
+
+\subsection{Uso de los molinetes}
+
+\textbf{Molinetes en uso.} En el piloto de \EO{} se usaron los 20 molinetes habilitados. Coincide con los 19,5 molinetes
+con tráfico por ventana que registra SBASE.
+
+\textbf{Reparto.} En la realidad, el molinete más usado procesa 11 veces más pasajeros que el menos usado
+\parencite{sbase2026molinetes}. En el piloto de \EO{}, las utilizaciones fueron de entre 17 y 52~\%, un
+factor de alrededor de 3. \textcite{seriani2025} validan su modelo justamente con esta comparación. El
+modelo reparte la carga más parejo que la realidad, y hay dos razones posibles:
+\begin{itemize}
+  \item la geometría es hipotética, y en la estación real algunos molinetes quedan lejos del recorrido
+        natural;
+  \item la regla de elección pondera la fila tanto como la distancia.
+\end{itemize}
+La consecuencia importa para la conclusión. Si los dos molinetes que agrega \EI{} quedaran, en la
+estación real, en una posición poco atractiva, se usarían menos que en el modelo. En ese caso, el modelo
+\emph{sobreestimaría} la mejora de \EI{}.
+
+\subsection{Llegadas reales de los trenes}
+
+Trenes Argentinos informó la llegada real de cada tren a Plaza Constitución entre el 02/03 y el 30/06/2026,
+de 07:00 a 09:30 \parencite{sofse2026nota}. Es el mismo período del perfil de SBASE. En los 76 días
+hábiles normales llegaron entre 43 y 52 trenes por día, con una media de 48,9. El modelo usa 47.
+Comparado con el horario vigente, el atraso tiene estas características:
+\begin{itemize}
+  \item mediana de $+4$~minutos;
+  \item percentil 10 de $-1$~minuto y percentil 90 de $+11$~minutos;
+  \item percentil 99 de $+24$~minutos.
+\end{itemize}
+Además, el tren 302, de larga distancia desde Mar del Plata, llega todos los días en la franja y no figura
+en los cuadros horarios usados.
+
+Un atraso parejo solo desplaza las oleadas en el tiempo. Un atraso variable, en cambio, junta trenes que
+el horario separa. Es esperable que eso produzca oleadas más grandes y más cola que las del modelo. El
+supuesto~5 (trenes en horario) es entonces probablemente optimista sobre la espera. Este dato permite
+reemplazar el horario por las llegadas reales de cada día, que es la extensión natural del modelo.
+
+\subsection{Volumen que llega en tren}
+
+La matriz origen-destino del Roca indica que entre el 44 y el 60~\% de los viajes de día hábil que salen
+de cada estación de la línea terminan en Constitución. Aplicada a los pasajeros que suben en cada estación
+entre las 07:00 y las 09:59, da unos \num{36000} pasajeros por día hábil que llegan a la terminal,
+cerca de 700 por tren. En el escenario intermedio, el modelo hace entrar por el vestíbulo Principal
+$0{,}80 \times \num{18532} \approx \num{14800}$ pasajeros desde los trenes. Haría falta que cerca del 40~\%
+de los que llegan pasen a la Línea~C. La proporción es verosímil para la principal conexión de la
+terminal con el centro, pero no la confirma ningún dato: Trenes Argentinos informó que no hay estudios de
+trasbordo. El valor de 0,80 queda como supuesto, ahora con un orden de magnitud que lo respalda.
+
+\subsection{Geometría del andén}
+
+El plano de la estación enviado por Trenes Argentinos muestra los paragolpes de todas las vías alineados y
+andenes útiles de entre 134 y 275~m. La dispersión de la descarga del escenario intermedio (145~s) supone
+un recorrido de unos 138~m entre el primer y el último coche, del mismo orden que los andenes más cortos.
+El plano no incluye los accesos ni el vestíbulo de la Línea~C, que pertenecen a SBASE, por lo que no sirve
+para validar la geometría del vestíbulo hipotético.
+
+\subsection{Reproducción en otra máquina}
+
+Los 30 pares de producción se repitieron el 09/10/2026 en otra computadora, con Windows, el mismo archivo
+del modelo y las mismas semillas. La demanda generada coincidió en las 60 corridas. El movimiento no fue
+idéntico bit a bit: las esperas difirieron en décimas de segundo, probablemente por la aritmética de coma
+flotante de la simulación peatonal. Las diferencias \EI{} $-$ \EO{} de las tres medidas primarias variaron
+menos de 0,15~s, y la proporción coincidió con tres decimales. Los resultados no dependen de la máquina.
+
+\subsection{Lo que no se puede validar}
+
+No hay observaciones publicadas de la espera ni del largo de cola en Constitución. Los molinetes registran
+a quien pasó, no a quien esperó. El grupo no pudo medir en el lugar, y el pedido a SBASE incluye
+mediciones de cola si existen. Es la limitación principal del estudio. Los valores absolutos de espera
+dependen de los supuestos de la tabla~\ref{tab:parametros} y de la geometría hipotética. La comparación
+entre escenarios es más robusta que los valores absolutos, porque los dos escenarios comparten todos esos
+supuestos. Aun así, el reparto más parejo del modelo puede inflar la diferencia.
+
+En síntesis, el modelo reproduce lo que el dato permite observar: el caudal, la cantidad de molinetes en
+uso y un volumen en tren compatible con la carga del Roca. Se aparta de la realidad en dos puntos
+identificados: reparte la carga más parejo y supone trenes en horario. Las conclusiones de las secciones
+siguientes se formulan como condicionales a esos supuestos.

@@ -1,5 +1,86 @@
 \section{Paso 3: validación del modelo conceptual}
 \label{sec:paso3-validacion-conceptual}
-% Origen: 03 §4. Supuestos revisados, límites (sin medición presencial) y consulta a la cátedra (08-consulta-catedra.md).
-% Tarea: T5.3. Reglas: citas con \parencite, tablas con booktabs, figuras con \label, nada de Wikipedia.
-[PENDIENTE: T5.3.]
+% Origen: 01-definicion-del-caso.md §7, 03-informe-tpi.md §4, 08-consulta-catedra.md, 10-antecedentes.md §2 y SIM.md (log del 20/09 y del 05/10).
+
+La validación conceptual busca establecer que los supuestos del modelo representan el sistema con el
+detalle que la pregunta exige, antes de programarlo \parencite{law2015}. Hubo tres instancias: la revisión
+con la cátedra, el contraste con la literatura y la revisión de los supuestos contra los datos
+disponibles.
+
+\subsection{Revisión con la cátedra}
+
+El tema fue aprobado por la cátedra el 20/09/2026, con el pedido de precisar la línea, la franja, los días
+y las medidas de rendimiento. El caso definido en la sección~\ref{sec:paso1-formulacion}, con el argumento
+de la congestión transitoria y la estructura en oleadas, se presentó en la reunión del 23/09. Después, la
+cátedra aprobó el uso de la Pedestrian Library para representar el vestíbulo y pidió solicitar los planos de la
+estación a los organismos responsables. Eso dio origen a los pedidos de información pública de la
+sección~\ref{sec:paso2-datos-modelo-conceptual}.
+
+Tres decisiones posteriores se tomaron de forma provisoria y se sometieron a la cátedra:
+\begin{enumerate}
+  \item redefinir \EI{} como los 22 molinetes del Principal en lugar de 28;
+  \item trabajar con rangos con fuente para los parámetros sin dato publicado;
+  \item dejar E2 y E3 como trabajo futuro.
+\end{enumerate}
+\pendiente{registrar la respuesta de la cátedra a estas tres decisiones.}
+
+\subsection{Contraste con la literatura}
+
+Cada supuesto de comportamiento se comparó con lo medido en estudios de estaciones de metro
+(tabla~\ref{tab:contraste}).
+
+\begin{table}[H]
+\centering
+\caption{Supuestos del modelo frente a la literatura}
+\label{tab:contraste}
+\small
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{2.6cm} >{\raggedright\arraybackslash}p{3.2cm} X@{}}
+\toprule
+Supuesto & Valor del modelo & Referencia y lectura \\
+\midrule
+Tiempo de validación & Triangular (1,8; 2,4; 3,5)~s, media 2,57~s &
+2~s en Valparaíso \parencite{seriani2025}; 2,91 a 3,49~s en Pekín \parencite{wang2024}. El valor
+intermedio cae dentro de lo observado y el contexto pesimista, con media 3,23~s, cubre el caso de Pekín \\
+Velocidad de marcha & Uniforme (1,1; 1,5)~m/s &
+Rango de la literatura y valor calibrado de 1,37~m/s \parencite{li2024}. Las normas con valores menores
+consideran pasajeros con equipaje, poco frecuentes en el pico de la mañana \parencite{tian2026} \\
+Elección de molinete & Desvío lateral más espera estimada &
+Fuerte sesgo por cercanía \parencite{seriani2025,tian2026} y peso de la fila \parencite{wang2024}.
+Confirma que el término de distancia es necesario. Advierte también que la ubicación de los molinetes que
+se agregan en \EI{} importa tanto como su cantidad \\
+Arribos & Oleadas por horario del Roca & El antecedente con datos abiertos de molinetes usa arribos de
+Poisson \parencite{zhen2024}. Las oleadas son la diferencia central de este modelo \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Revisión de los supuestos contra los datos}
+
+\begin{itemize}
+  \item \textbf{Cola por molinete, no cola única.} La primera versión lógica usaba una cola común con
+        servidores intercambiables. Ese esquema no puede reproducir el desbalance observado entre
+        molinetes (factor 11). Por eso el modelo principal usa una cola por molinete con elección
+        explícita, que es lo que se ve en una batería de molinetes.
+  \item \textbf{Volumen tomado de validaciones.} Usar las validaciones como demanda supone que los
+        molinetes no se saturan. En el pico, cada molinete activo procesa en promedio unos 114 pasajeros
+        por ventana, menos de la mitad de los 246 que llegó a registrar un molinete en una ventana. En
+        promedio sobre 15 minutos no hay saturación. Sí puede haberla durante pocos minutos después de
+        cada tren, y eso es lo que el modelo busca medir.
+  \item \textbf{Cola vacía a las 07:00.} A las 07:00 el flujo es un 30~\% menor que en el pico, y entre
+        trenes la capacidad sobra. Es razonable que la cola se vacíe entre oleadas al comienzo de la
+        franja, pero no hay medición que lo confirme.
+  \item \textbf{Molinetes de \EI{} disponibles.} Que los 22 identificadores correspondan a molinetes
+        habilitables para ingreso es un supuesto. Se pidió la correspondencia a SBASE.
+\end{itemize}
+
+\subsection{Límites de la validación conceptual}
+
+El grupo no pudo medir en Constitución ni consultar al personal operativo. Quedan sin confirmar:
+\begin{itemize}
+  \item el criterio real de habilitación de molinetes;
+  \item la proporción de pasajeros del Roca que pasa a la Línea~C;
+  \item la geometría del vestíbulo.
+\end{itemize}
+Por eso el modelo se considera validado conceptualmente en su estructura, que representa oleadas,
+caminata, elección y cola, pero no en sus valores. Las conclusiones sobre la espera quedan condicionadas a
+los rangos de la tabla~\ref{tab:parametros}.

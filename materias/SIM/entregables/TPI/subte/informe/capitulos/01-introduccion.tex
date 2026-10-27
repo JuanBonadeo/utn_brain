@@ -1,5 +1,75 @@
 \section{Introducción}
 \label{sec:introduccion}
-% Origen: 03 §1. Constitución, oleadas del Roca y por qué M/M/c falla ($\rho \approx 0{,}3$ con colas).
-% Tarea: T5.3. Reglas: citas con \parencite, tablas con booktabs, figuras con \label, nada de Wikipedia.
-[PENDIENTE: T5.3.]
+% Origen: 01-definicion-del-caso.md §2 y §4, 03-informe-tpi.md §1 y 10-antecedentes.md.
+
+Constitución es la estación más cargada del subte de Buenos Aires. En junio de 2026 sus molinetes
+registraron \num{1293543} ingresos, 2,3 veces los de la segunda estación de la red (Congreso de Tucumán,
+Línea~D). Además, las 14 ventanas de 15 minutos más cargadas de las seis líneas fueron de Constitución
+\parencite{sbase2026molinetes}. La razón es su ubicación: la estación de la Línea~C está debajo de la
+terminal Plaza Constitución del Ferrocarril Roca. En esa terminal se vende el 29,3~\% de los pasajes del
+Roca: 35,3 millones en 2024 \parencite[pp.~15 y 31]{cnrt2025amba}.
+
+Este trabajo estudia el ingreso al subte por la batería de molinetes del vestíbulo Principal de esa
+estación. El vestíbulo Principal da al hall ferroviario y concentra el 84,7~\% de los ingresos de la
+estación. El estudio cubre los días hábiles entre las 07:00 y las 09:30. La pregunta es operativa y de
+bajo costo: cuánto cambia la espera de los pasajeros si en el pico de la mañana se habilitan todos los
+molinetes del vestíbulo en lugar de los que se observan en uso.
+
+\subsection{Por qué el caso requiere simulación}
+
+Con los promedios, el problema parece no existir. En la ventana más cargada (08:15, promedio de marzo a
+junio de 2026) ingresan \num{2214} pasajeros en 15 minutos. Hay unos 19,5 molinetes con tráfico por
+ventana. Eso da 7,6 pasajeros por minuto y por molinete, uno cada 7,9 segundos. Una validación dura del
+orden de 2 a 3 segundos \parencite{tcqsm2013,seriani2025,wang2024}. Con una media de 2,57~s, la
+utilización por molinete es $\rho \approx 0{,}32$. Un modelo M/M/$c$ con $c = 20$ servidores y esa carga
+da una probabilidad de esperar del orden de $10^{-5}$: según la fórmula, no hay cola.
+
+Sin embargo, en Constitución la cola existe y se ve todos los días. Los pasajeros no llegan repartidos en
+el tiempo, sino en oleadas. En la franja estudiada arriban 47 trenes del Roca, uno cada tres minutos en
+mediana, y cada uno descarga cientos de personas que caminan juntas hacia los molinetes
+\parencite{trenes2026roca}. Después de cada arribo se forma una cola transitoria. Entre dos trenes, la
+capacidad queda en gran parte ociosa. Es un caso de \emph{congestión transitoria por arribos en lote sobre
+un sistema subutilizado en promedio}. Ahí los modelos analíticos estacionarios fallan, porque promedian
+justamente lo que se quiere medir. Por eso se usa simulación de eventos discretos.
+
+El tiempo que la oleada tarda en llegar a los molinetes también importa. Ese tiempo depende de la
+caminata por el andén y el hall, y de cómo se reparten las personas entre las colas. Por eso el modelo
+principal se construyó con la Pedestrian Library de AnyLogic \parencite{anylogic2026help}: cada pasajero
+camina por un vestíbulo, elige un molinete y espera en la cola de ese molinete.
+
+\subsection{Antecedentes}
+
+Varios estudios recientes simularon estaciones de metro con AnyLogic y midieron parámetros que este
+trabajo usa como referencia.
+\begin{itemize}
+  \item \textcite{seriani2025} observaron los molinetes de una estación del Metro de Valparaíso y midieron
+        un tiempo de paso medio de 2~s. Registraron además un sesgo fuerte por cercanía: el molinete
+        más próximo al recorrido es el más usado. Validaron su modelo comparando el uso simulado de cada
+        molinete con el observado.
+  \item \textcite{wang2024} midieron con video 813 pasos por molinete en Pekín, con medias de 2,91 a 3,49~s
+        según el medio de pago.
+  \item \textcite{tian2026} modelaron una estación de trasbordo que recibe pasajeros de un ferrocarril, la
+        situación análoga a la del Roca y la Línea~C. Encontraron que el 88,2~\% usa el grupo de molinetes
+        más cercano a la salida del tren.
+  \item \textcite{li2024} calibraron con video el modelo de fuerza social de AnyLogic y obtuvieron una
+        velocidad deseada de 1,37~m/s, dentro del rango de 1,1 a 1,5~m/s de la literatura.
+  \item \textcite{zhen2024} usaron datos abiertos de molinetes de Nueva York, como aquí los de SBASE, pero
+        con arribos de Poisson y sin oleadas.
+\end{itemize}
+Lo que agrega este trabajo es representar las oleadas a partir del horario real de los trenes y
+distribuir entre ellos la demanda observada por ventana.
+
+\subsection{Organización del informe}
+
+El informe sigue los diez pasos de un estudio de simulación de la consigna de la cátedra
+\parencite{utn2026consigna,law2015}. La sección~\ref{sec:paso1-formulacion} formula el problema y los
+escenarios. La sección~\ref{sec:paso2-datos-modelo-conceptual} describe los datos y el modelo conceptual.
+Las secciones~\ref{sec:paso3-validacion-conceptual} a~\ref{sec:paso6-validacion} cubren la validación
+conceptual, la construcción y verificación del programa, los pilotos y la validación del modelo
+programado. Las secciones~\ref{sec:paso7-diseno-experimentos} a~\ref{sec:paso10-conclusiones} presentan el
+diseño de experimentos, las corridas, el análisis estadístico y las conclusiones.
+
+Un aviso vale para todo el documento. El grupo reside en Rosario y no pudo medir en Constitución. Los
+parámetros que no tienen dato publicado se tomaron de fuentes técnicas citables, como rangos con un valor
+intermedio, y así se declaran. El plano del vestíbulo es hipotético hasta recibir el oficial, que se
+solicitó a SBASE. Las conclusiones sobre la espera valen dentro de esos supuestos.

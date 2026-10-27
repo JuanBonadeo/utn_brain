@@ -13,17 +13,24 @@
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{caption}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc}
 \usepackage[output-decimal-marker={,},group-separator={.},group-minimum-digits=4]{siunitx}
 \usepackage{csquotes}
 \usepackage[style=apa,backend=biber]{biblatex}
 \usepackage[hidelinks]{hyperref}
 
 \addbibresource{referencias.bib}
+% Identificadores largos en \texttt (molinetes de SBASE, bloques de AnyLogic): evita renglones desbordados.
+\setlength{\emergencystretch}{3em}
 % figs/ dentro del zip de Overleaf; ../../../../figs/ al compilar desde el repo.
 \graphicspath{{figs/}{../../../../figs/}}
 
 \newcommand{\EO}{\mbox{E0}}
 \newcommand{\EI}{\mbox{E1}}
+% Marca visible de lo que falta cerrar antes de entregar: grep 'pendiente{' antes de la versión final.
+\newcommand{\pendiente}[1]{\textcolor{red}{[PENDIENTE: #1]}}
 
 \begin{document}
 
