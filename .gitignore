@@ -57,3 +57,6 @@ materias/SIM/fuentes/Trabajo práctico integrador - Simulación de Hospital con 
 .pytest_cache/
 .coverage
 htmlcov/
+
+# Logs de biber/LaTeX
+*.blg
