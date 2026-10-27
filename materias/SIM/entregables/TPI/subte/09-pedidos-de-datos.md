@@ -1,8 +1,8 @@
 ---
 title: "Pedidos de datos - TPI Subte Constitución"
 subject: "Simulación"
-status: "SBASE pidió prórroga el 26/10 (respuesta ≈ 10/11); TAD sin novedad en el mail (revisar el buzón de TAD)"
-actualizado: 2026-10-26
+status: "Trenes Argentinos respondió el 26/10 (plano, llegadas reales y origen-destino); SBASE pidió prórroga (respuesta ≈ 10/11)"
+actualizado: 2026-10-27
 ---
 
 # Pedidos de datos
@@ -17,7 +17,7 @@ concreto se responde antes. Lo que no figura acá ya se pidió en los correos de
 |---|---|---|---|---|
 | SBASE | correo `info@sbase.com.ar` (23/09); Ley 104 n.º 01084412/26 (05/10) | 23/09 y 05/10 | 26/10: usa la prórroga del art. 10 (nota IF-2026-47895115-GCABA-SBASE; expediente EX-2026-44567557-GCABA-DGAIGA) | Esperar la respuesta de fondo, ≈ 10/11 (10 hábiles más) |
 | Emova | correo `comunicaciones@emova.com.ar` | 23/09 | Ninguna | Emova es concesionaria privada y la Ley 104 no le alcanza directamente: su parte se pide a SBASE (§2, punto 4). Opcional: un recordatorio por correo |
-| Trenes Argentinos Operaciones (SOFSE) | correo (23/09); TAD EX-2026-96962531- -APN-DNPAIP#AAIP (05/10) | 23/09 y 05/10 | 25/09: derivó a TAD. TAD: pendiente | Revisar el buzón de TAD |
+| Trenes Argentinos Operaciones (SOFSE) | correo (23/09); TAD EX-2026-96962531- -APN-DNPAIP#AAIP (05/10) | 23/09 y 05/10 | 25/09: derivó a TAD. **26/10: respondido** por correo (nota NO-2026-104102701-APN-UCIYT#SOFSE) | Nada: ver "Respuesta de Trenes Argentinos" abajo |
 
 Plazos legales: 15 días hábiles en los dos casos. La Nación admite una prórroga de 15 días (Ley 27.275) y
 la Ciudad, una de 10 (Ley 104). Si no responden, hay reclamo: ante la AAIP para Trenes Argentinos y ante
@@ -32,6 +32,38 @@ Registrar acá cada trámite apenas se cargue:
 
 Los comprobantes van en `datos/solicitudes/` en PDF o como captura, **sin CUIL ni DNI visibles**: el repo
 es público.
+
+## Respuesta de Trenes Argentinos (26/10)
+
+Llegó por correo desde `informacionpublica@trenesargentinos.gob.ar`, no por el buzón de TAD. Los originales,
+sin modificar, están en [`datos/solicitudes/sofse-2026-10-26/`](datos/solicitudes/sofse-2026-10-26/). Los dos
+Excel venían embebidos en el PDF de la nota y se sacaron con `pdfdetach -saveall`.
+
+| Punto pedido | Qué mandaron | Archivo |
+|---|---|---|
+| 1. Plano | Plano del sistema SIENA de la estación (cuadro de estación y superficies concesionadas), en DWG, en metros. Muestra el hall, los paragolpes y los andenes 2 a 14. **No marca los accesos de la Línea C** | `CONSTITUCION_NUEVO_FINAL.dwg` y `plano-cabecera-render.png` (render propio) |
+| 2. Pasajeros que bajan | No es el dato por tren. Mandaron una matriz origen-destino (marzo a junio, por día hábil, sábado y domingo) y los pasajeros por estación de origen en días hábiles de 07:00 a 09:59 (hoja `PPT FRANJA HORARIA`) | `origen-destino-lgr-mar-jun-2026.xlsx` |
+| 3. Llegadas efectivas | Llegada real de cada tren a Constitución, de 07:00 a 09:30, del 02/03 al 30/06/2026, con número de tren y ramal: 4816 filas, al minuto | `trenes-a-pc-mar-jun-2026.xlsx` |
+| 4. Estudios de trasbordo | "No se realizaron estudios en relación a lo solicitado" | — |
+
+Primera lectura (2026-10-27):
+
+- **Llegadas reales.** Hay 76 días hábiles normales, con 43 a 52 trenes cada uno (media 48,9). Los días
+  con menos trenes son feriados o tienen el servicio cortado. Comparado contra el horario vigente desde el
+  03/08 (47 trenes), el atraso real tiene mediana +4 min, p10 −1 min, p90 +11 min y p99 +24 min. El horario
+  de marzo a junio no es exactamente el del 03/08: el tren 302 (Mar del Plata) llega todos los días y no
+  figura en `arribos_roca_constitucion_habiles.csv`. El período es el mismo que el del perfil SBASE
+  (marzo-junio), así que cada réplica puede usar **un día real** (sus trenes y su perfil SBASE) en vez del
+  día medio.
+- **Carga del Roca hacia Constitución.** De cada estación sale entre un 44 y un 60 % de los viajes hacia
+  Constitución. Si eso se aplica a los pasajeros que suben de 07:00 a 09:59, llegan unos 2,9 M en el período,
+  o sea ≈ 36.000 por día hábil (≈ 700 por tren). Frente a los ≈ 14.800 ingresos a la Línea C que el modelo
+  atribuye al Roca (0,80 × 18.532), haría falta que trasborde un 40 % de los que llegan. Es verosímil, pero
+  **no fija la proporción**: el punto 4 dice que no hay estudios.
+- **Plano.** La fila de paragolpes está alineada (todas las vías terminan en el mismo x). Las vías tienen de
+  170 a 330 m y los andenes útiles, de 134 a 275 m. Sirve para comprobar la dispersión de la descarga
+  (145 s ≈ caminar un andén de 170 m) y la distancia que se midió en OSM desde los paragolpes. No sirve para
+  dibujar el vestíbulo de la Línea C, que es de SBASE.
 
 ---
 

@@ -2824,6 +2824,14 @@ Conclusiones:
 
 ## Log
 
+- **2026-10-27**: TPI subte, respuesta de Trenes Argentinos al pedido TAD (llegó el 26/10 por correo). Los
+  originales están en `entregables/TPI/subte/datos/solicitudes/sofse-2026-10-26/`. Trae el plano DWG de la
+  estación (SIENA, sin los accesos de la Línea C), las llegadas reales de cada tren de 07:00 a 09:30 entre marzo
+  y junio (76 días hábiles, ≈ 49 trenes por día, atraso con mediana +4 min y p90 +11 min contra el horario) y la
+  matriz origen-destino, con la que se estiman ≈ 36.000 pasajeros por día hábil hacia Constitución de 07:00 a
+  10:00. No hay estudios de trasbordo. SBASE pidió prórroga (respuesta ≈ 10/11). Primera lectura y propuesta de
+  uso en `09-pedidos-de-datos.md`. Todavía no se tocó el modelo.
+
 - **2026-10-20** (2): ingeridas las consignas de los TPs 1.1, 1.2, 2.1 y 2.2 (PDF en `fuentes/tps-2026/`) y la del
   TP 3 (texto pasado por el alumno, `fuentes/tps-2026/SIMULACIÓN_2026_TP3 - consigna.md`). Sección "TPs de
   práctica": lista de lo que cada consigna pedía y el informe no muestra. `estudio/repaso-tps.md` + pdf: resumen
