@@ -26,16 +26,18 @@ Los artículos **no se piden de memoria**: la profesora lo dijo para la U6 ("nad
 memoria esa numeración"). Lo que sirve es saber **qué regula** cada uno, tener ejemplos listos y,
 en U6, poder usarlos para **analizar si una conducta es falta** en un caso.
 
-**Lo que tomaron en la comisión de la noche** (relato de un compañero en audio, 27/10; puede no
-coincidir con lo que te toque):
-- **V o F de diez afirmaciones**, sin justificar.
-- **Caso corto que mezcla U4 y U6**: un software innovador **con hardware especializado** que
-  resuelve un problema de tráfico con clima adverso. Pedían qué derecho es (**patente de invención**,
-  **propiedad industrial**), ante quién se pide (**INPI**), requisitos (**novedad, mérito inventivo,
-  aplicación industrial**) y plazo (**20 años**). Después, el software genera un **riesgo vial** para
-  bajar costos: qué **función de la responsabilidad civil** entra en juego (la **preventiva**) y si hay
-  **falta de ética** y ante quién (ante la profesión y los usuarios; la juzga el **Tribunal de Ética**).
-- **Dos preguntas**: **trabajo de menores** (U5) y **responsabilidad civil del ingeniero** (U6).
+**Lo que tomaron en la comisión de la noche** (relatos de dos personas en audio, 27/10). Hubo **dos
+temas con la misma estructura**:
+
+| Parte | Tema A | Tema B |
+|---|---|---|
+| **Caso corto, U4 + U6** | Software con **hardware especializado** contra el tráfico con mal clima → **patente de invención**, INPI, requisitos, **20 años**, propiedad industrial. Riesgo vial → función **preventiva**; ¿falta ética y ante quién? | Invento de un ingeniero → **modelo de utilidad**, INPI, requisitos. El invento sale mal → ¿falta ética, por qué y ante quién?; ¿qué **función** de la responsabilidad civil aplica más? |
+| **V o F de 10** | "Muchas cosas que no estaban en los resúmenes" | LCT: **plazo fijo**, **propinas** con la reforma, **días de sanción**; U6: un **requisito de matriculación** |
+| **Dos preguntas** | **Trabajo de menores** · **responsabilidad civil del ingeniero** | **Remuneración** · el **daño** (patrimonial y extrapatrimonial) |
+
+Lo que se desprende: el caso es siempre **elegir el título de propiedad industrial** y después **ética
+y responsabilidad civil**; la responsabilidad civil aparece dos veces; U5 entra en el V o F y en una
+pregunta sobre un bloque entero.
 
 | Unidad | Norma | Artículos marcados |
 |---|---|---|
@@ -461,6 +463,10 @@ La responsabilidad civil puede ser **contractual**, si se incumple una obligaci�
      - **pérdida de chance**: las oportunidades perdidas.
    - **Moral**: el sufrimiento.
    - **Personal**: la salud y la calidad de vida.
+
+   Otra forma de agruparlo, que salió en el parcial de la noche: **patrimonial** (se mide en plata:
+   emergente, lucro cesante, chance; art. 1738 CCyC) y **extrapatrimonial** (el daño moral; art.
+   1741). *(Conocimiento general, no está en el material de cátedra.)*
 
 ### 4.2 Las normas del Colegio y cuál manda
 

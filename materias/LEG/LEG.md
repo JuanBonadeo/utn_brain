@@ -23,27 +23,42 @@ arts. 5 y 6 del Código.
 
 ## Lo que tomaron en la comisión de la noche (2026)
 
-Relato de un compañero de esa comisión, en audio (`fuentes/2026-10-27_parcial2-noche-relato.md`).
-Es de memoria, no el enunciado, y la comisión de Augusto puede tener otro tema.
+Dos personas de esa comisión lo contaron en audio: `fuentes/2026-10-27_parcial2-noche-relato.md`
+(tema A) y `fuentes/2026-10-27_parcial2-noche-relato-b.md` (tema B). Son relatos de memoria, no los
+enunciados. Hubo **dos temas distintos con la misma estructura**.
 
-1. **V o F de diez afirmaciones**, sin justificar. Muchas "no estaban en los resúmenes".
-2. **Caso corto (unas cinco oraciones) que mezcla U4 y U6.** Un ingeniero en sistemas o una empresa
-   de software desarrolla un **software innovador con hardware especializado** que resuelve un
-   problema de tráfico con clima adverso. Preguntas:
-   - ¿qué derecho es y qué título puede pedir? → **patente de invención**, propiedad industrial;
-   - ¿ante qué organismo? → **INPI**;
-   - ¿qué requisitos? → **novedad, actividad (mérito) inventiva y aplicación industrial**;
-   - ¿por cuántos años? → **20**, no renovable;
-   - segunda parte: para bajar costos, el software genera un **riesgo vial**. ¿Qué **función de la
-     responsabilidad civil** entra en juego? → la **preventiva** (evitar que el daño se produzca);
-   - ¿hay **falta de ética** del ingeniero y ante quién? → sí, ante la profesión y ante el comitente o
-     los usuarios (Código, arts. 5 y 6 I a: actos contra la buena técnica, aun por orden del
-     superior); la juzga el **Tribunal de Ética** del Colegio (ley, art. 11; Código, art. 2).
-3. **Dos preguntas a desarrollar:** **trabajo de menores** (U5) y **responsabilidad civil del
-   ingeniero** (U6).
+| Parte | Tema A | Tema B |
+|---|---|---|
+| **1. Caso corto** (unas 5 oraciones), U4 + U6 | Software innovador con **hardware especializado** que resuelve el tráfico con clima adverso | Un ingeniero en sistemas hace un **invento** |
+| Título | **Patente de invención** | **Modelo de utilidad** |
+| Además | INPI, requisitos, plazo (20 años), rama (propiedad industrial) | INPI y requisitos |
+| Segunda parte | Para bajar costos, el software genera un **riesgo vial**: qué **función** de la responsabilidad civil aplica y si hay **falta ética** y ante quién | El invento sale mal: si hay **falta ética**, por qué y ante quién; cuál de las **tres funciones** aplica más, a desarrollar |
+| **2. V o F de 10** | Sin ejemplos; "muchas cosas que no estaban en los resúmenes" | Casi todo LCT: si una actividad va con **contrato a plazo fijo**; si las **propinas** son remuneración con la nueva ley; **días de sanción** que puede dar el empleador. De U6: un **requisito para matricularse** en el Colegio |
+| **3. Dos preguntas** | **Trabajo de menores** y **responsabilidad civil del ingeniero** | **Remuneración** y el **daño** (patrimonial y extrapatrimonial) |
 
-El caso no fue de U4 **o** de U6 sino de las dos, y la pregunta de U6 fue de responsabilidad civil,
-no de los artículos del Colegio. Ver también "Software con hardware: ¿patente?" en la Unidad 4.
+**Respuestas esperadas del caso:**
+- Tema A: patente de invención; INPI; **novedad, actividad inventiva y aplicación industrial**; **20
+  años**, no renovable; propiedad industrial. Función **preventiva**: el riesgo vial todavía no es un
+  daño, hay que evitarlo. Falta ética ante la profesión y los usuarios o el comitente (Código, arts. 5
+  y 6 I a: actos contra la buena técnica, aun por orden del superior); la juzga el **Tribunal de
+  Ética** (ley, art. 11; Código, art. 2).
+- Tema B: modelo de utilidad; INPI; **novedad y aplicación industrial, sin mérito inventivo**; **10
+  años**. Si el invento ya causó un daño, la función que más aplica es la **resarcitoria**
+  (compensar); si el defecto todavía puede dañar, la **preventiva**. La **punitiva** es excepcional.
+  Falta ética por negligencia o actos contra la buena técnica (Código, art. 6 I a).
+
+**Conclusiones** (inferidas de los dos relatos):
+1. El caso no fue de U4 **o** de U6: fue de las dos. Primero propiedad industrial, después ética y
+   responsabilidad civil.
+2. De U4 lo central es **elegir el título** (patente, modelo de utilidad, diseño industrial o marca)
+   y dar organismo, requisitos, plazo y rama. Un tema salió patente y el otro modelo de utilidad.
+3. De U6 lo central es la **responsabilidad civil** (funciones, presupuestos, daño), en el caso y en
+   una pregunta, en los dos temas. La ética se pregunta como "¿hay falta y ante quién?". Del Colegio,
+   una afirmación de V o F sobre la matrícula. Del Estatuto, nada.
+4. U5 entra dos veces: el V o F con datos finos de la LCT y la reforma, y una pregunta sobre un
+   bloque entero (menores en un tema, remuneración en el otro).
+
+Ver también "Software con hardware: ¿patente?" en la Unidad 4.
 
 ## Índice
 1. Unidad 1 — _(sin desarrollar: no hay fuentes cargadas)_
@@ -505,6 +520,7 @@ Si se omite, se paga la **indemnización sustitutiva**. Si el despido sin preavi
    - **Material**: **daño emergente** (lo que se pierde), **lucro cesante** (lo que se deja de ganar), **pérdida de chance** (oportunidades perdidas).
    - **Moral**: aflicción, sufrimiento (difamación).
    - **Personal o a la salud**: lesiones que afectan la calidad de vida.
+   - **Patrimonial y extrapatrimonial** (salió como pregunta en el parcial de la noche 2026). *(Conocimiento general, no está en tus materiales:)* el Código Civil y Comercial agrupa el daño en **patrimonial**, que se mide en plata (daño emergente, lucro cesante, pérdida de chance; art. 1738), y **extrapatrimonial** o "consecuencias no patrimoniales" (art. 1741), que es el daño **moral**: el sufrimiento, la afectación de la persona. El daño a la salud tiene las dos caras: los gastos médicos son patrimoniales; el dolor, extrapatrimonial.
 
 ##### Ley 11.291 — el Colegio
 
@@ -756,3 +772,4 @@ o un proceso penal afectan la matrícula, art. 24. (5) Si hay daño a un cliente
 - 2026-10-26: ingest de `fuentes/2026-10-26_formato-parcial2.md` (formato del 2do parcial: caso práctico de U4 o U6, V o F de U5 sin justificar, una pregunta de la unidad de U4/U6 que no fue caso y otra de laboral) y `fuentes/2026-10-26_audio-massachiodi-articulos-u6.md` (+ `.ogg`, audio de la profesora transcripto con Whisper). **U6 achicada**: ley 11.291 arts. 1, 4 (incisos a, b, c, e, f, g, l, m, p), 11, 18, 19, 21 y 24; Estatuto nada; Código arts. 2, 5 y 6. Lista anterior de la guía: ley 1, 2, 3, 4, 6, 11, 18, 19 y 21; Estatuto 4 a 10, 12, 13, 22, 23, 49, 54 y 55; Código 1, 2, 6 y 8. Desarrollados los arts. 18 y 24 de la ley (antes remitían al Estatuto), marcados los incisos del art. 4, método para el caso práctico y dos casos nuevos; los casos viejos ahora citan ley y Código en vez del Estatuto.
 - 2026-10-26: `estudio/prompt-podcast.md` reescrito para el formato del parcial y los artículos de U6 de la profesora: cuatro episodios (U5 en dos partes orientadas al V o F, U6 orientado al caso de "¿es falta y ante quién?", sin Estatuto, y U4). Reemplaza al episodio único y los tres por unidad del 2026-10-12.
 - 2026-10-27: ingest de `fuentes/2026-10-27_parcial2-noche-relato.md` (relato en audio del 2do parcial de la comisión de la noche, transcripto con Whisper). Nueva sección "Lo que tomaron en la comisión de la noche": V o F de 10; caso corto que mezcla U4 (software con hardware → patente, INPI, requisitos, 20 años, propiedad industrial) y U6 (riesgo vial → función preventiva; falta ética y Tribunal); preguntas de trabajo de menores y responsabilidad civil del ingeniero. U4: nota sobre software con hardware patentable (conocimiento general, marcado). U5: trabajo de menores completo desde el apunte (7.2).
+- 2026-10-27: ingest de `fuentes/2026-10-27_parcial2-noche-relato-b.md` (+ audios `2026-10-27_leg-parcial2-noche-b_audio1..4.m4a`): segundo relato del parcial de la noche, de otro tema (modelo de utilidad; V o F de LCT con plazo fijo, propinas, días de sanción y un requisito de matriculación; preguntas de remuneración y daño). La sección del parcial de la noche quedó como tabla de los dos temas, con respuestas esperadas y conclusiones. U6: daño patrimonial y extrapatrimonial (conocimiento general, marcado). También se agregaron los audios del primer relato a `fuentes/` y se sacaron de las fuentes los encabezados que remitían a otro repositorio.
