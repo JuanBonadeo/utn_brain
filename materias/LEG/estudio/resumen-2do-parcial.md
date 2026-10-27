@@ -26,6 +26,17 @@ Los artículos **no se piden de memoria**: la profesora lo dijo para la U6 ("nad
 memoria esa numeración"). Lo que sirve es saber **qué regula** cada uno, tener ejemplos listos y,
 en U6, poder usarlos para **analizar si una conducta es falta** en un caso.
 
+**Lo que tomaron en la comisión de la noche** (relato de un compañero en audio, 27/10; puede no
+coincidir con lo que te toque):
+- **V o F de diez afirmaciones**, sin justificar.
+- **Caso corto que mezcla U4 y U6**: un software innovador **con hardware especializado** que
+  resuelve un problema de tráfico con clima adverso. Pedían qué derecho es (**patente de invención**,
+  **propiedad industrial**), ante quién se pide (**INPI**), requisitos (**novedad, mérito inventivo,
+  aplicación industrial**) y plazo (**20 años**). Después, el software genera un **riesgo vial** para
+  bajar costos: qué **función de la responsabilidad civil** entra en juego (la **preventiva**) y si hay
+  **falta de ética** y ante quién (ante la profesión y los usuarios; la juzga el **Tribunal de Ética**).
+- **Dos preguntas**: **trabajo de menores** (U5) y **responsabilidad civil del ingeniero** (U6).
+
 | Unidad | Norma | Artículos marcados |
 |---|---|---|
 | 4 | Ley de patentes 24.481 | **6 y 7** (3 ejemplos de cada uno) |
@@ -128,6 +139,13 @@ gravemente un río (ambiente); el genoma de una planta tal como existe en la nat
 
 En **1998** la **Ley 25.036** incorporó los **programas de computación**. Por eso el software se
 protege por **derecho de autor** y no por patente.
+
+**Ojo: software con hardware.** Lo que la ley de patentes excluye es el programa **en sí**. Si el
+caso es un software **combinado con hardware** que resuelve un **problema técnico** (como el del
+parcial de la noche: tráfico con clima adverso), es una invención y va por **patente**, siempre que
+cumpla los tres requisitos. *(Esto es conocimiento general, no está en el material de cátedra.)*
+Pista: si el caso habla de **solicitar un título**, es patente, porque el derecho de autor no
+necesita título para existir.
 
 - **Art. 1 — Qué protege.** Escritos de toda naturaleza, **programas de computación fuente y objeto**, **compilaciones de datos**, obras musicales, cinematográficas, plásticas, de arquitectura, planos, mapas, fotografías, "**en fin, toda producción científica, literaria, artística o didáctica**". La enumeración es **enunciativa, no taxativa**. Protege **la expresión** de las ideas, **no las ideas en sí**: el programa escrito, no la idea de hacerlo.
 - **Art. 2 — Facultades del autor.** Disponer de la obra, **publicarla**, ejecutarla, representarla, exponerla, **enajenarla**, **traducirla**, **adaptarla** y **reproducirla** en cualquier forma.
@@ -328,9 +346,17 @@ ser inculpable, incapacitante y aparecer durante la relación.
 - Si la despiden **7 meses y medio antes o después del parto**, se presume que fue por eso: **indemnización agravada de un año de sueldo**, además de la común.
 - Al volver, puede pedir **excedencia de 3 a 6 meses** sin sueldo si tiene un año de antigüedad.
 
-**Menores:**
-- Prohibido el trabajo antes de los **16**.
-- De 16 a 18: hasta **6 h diarias y 36 semanales**, sin trabajo nocturno.
+**Menores** (salió como pregunta a desarrollar en la comisión de la noche):
+- Prohibido el trabajo antes de los **16**, salvo en **empresas familiares** con autorización administrativa.
+- De 16 a 18 tienen **capacidad limitada** y protección especial:
+
+| Aspecto | Regla de 16 a 18 años |
+|---|---|
+| Jornada | Hasta **6 h diarias y 36 semanales**; con distribución desigual, hasta **7 h** un día |
+| Trabajo nocturno | **Prohibido** |
+| Descanso semanal | De las **13 del sábado a las 24 del domingo** |
+| Descanso al mediodía | **2 horas** si trabajan mañana y tarde |
+| Vacaciones | **No menos de 15 días** |
 
 ### 3.6 Remuneración
 

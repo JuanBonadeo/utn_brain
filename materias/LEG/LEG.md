@@ -21,6 +21,30 @@ En el caso de U6, la profesora adelantó qué se busca: **analizar si una conduc
 una falta** y ante quién (la profesión, los colegas, el comitente o empleador, el Colegio), con los
 arts. 5 y 6 del Código.
 
+## Lo que tomaron en la comisión de la noche (2026)
+
+Relato de un compañero de esa comisión, en audio (`fuentes/2026-10-27_parcial2-noche-relato.md`).
+Es de memoria, no el enunciado, y la comisión de Augusto puede tener otro tema.
+
+1. **V o F de diez afirmaciones**, sin justificar. Muchas "no estaban en los resúmenes".
+2. **Caso corto (unas cinco oraciones) que mezcla U4 y U6.** Un ingeniero en sistemas o una empresa
+   de software desarrolla un **software innovador con hardware especializado** que resuelve un
+   problema de tráfico con clima adverso. Preguntas:
+   - ¿qué derecho es y qué título puede pedir? → **patente de invención**, propiedad industrial;
+   - ¿ante qué organismo? → **INPI**;
+   - ¿qué requisitos? → **novedad, actividad (mérito) inventiva y aplicación industrial**;
+   - ¿por cuántos años? → **20**, no renovable;
+   - segunda parte: para bajar costos, el software genera un **riesgo vial**. ¿Qué **función de la
+     responsabilidad civil** entra en juego? → la **preventiva** (evitar que el daño se produzca);
+   - ¿hay **falta de ética** del ingeniero y ante quién? → sí, ante la profesión y ante el comitente o
+     los usuarios (Código, arts. 5 y 6 I a: actos contra la buena técnica, aun por orden del
+     superior); la juzga el **Tribunal de Ética** del Colegio (ley, art. 11; Código, art. 2).
+3. **Dos preguntas a desarrollar:** **trabajo de menores** (U5) y **responsabilidad civil del
+   ingeniero** (U6).
+
+El caso no fue de U4 **o** de U6 sino de las dos, y la pregunta de U6 fue de responsabilidad civil,
+no de los artículos del Colegio. Ver también "Software con hardware: ¿patente?" en la Unidad 4.
+
 ## Índice
 1. Unidad 1 — _(sin desarrollar: no hay fuentes cargadas)_
 2. Unidad 2 — _(sin desarrollar)_
@@ -115,6 +139,16 @@ escuchándolo.
 - La enumeración es **enunciativa, no taxativa**: lo que se parezca a lo listado también queda protegido ("en fin, toda producción…").
 - Protege la **expresión**, no la idea: "me protege el programa hecho, no la idea de hacerlo".
 - Por eso el software va por **derecho de autor** (11.723) y no por patente (art. 6 inc. c de la 24.481).
+
+**Software con hardware: ¿patente?** El caso del parcial de la noche (2026) fue un software innovador
+con **hardware especializado** que resolvía un problema técnico (tráfico con clima adverso), y la
+respuesta esperada era **patente de invención**. *(Conocimiento general, no está en tus materiales:)*
+lo que el art. 6 inc. c excluye es el programa de computación **en sí**. Una invención que combina
+software y hardware y resuelve un **problema técnico** con un **efecto técnico** es una invención
+como cualquier otra y puede patentarse si cumple novedad, actividad inventiva y aplicación
+industrial; el código, aparte, sigue protegido por la 11.723. Pista para el escrito: si el caso habla
+de "solicitar un título" y de una solución técnica con aparatos, va por patente; si es sólo un
+programa, va por derecho de autor.
 
 > **Art. 2 — Facultades del autor:** disponer de la obra, publicarla, ejecutarla, representarla y exponerla en público, enajenarla, traducirla, adaptarla o autorizar su traducción, y reproducirla en cualquier forma.
 
@@ -330,7 +364,17 @@ Los derechos de una parte son los deberes de la otra.
 - **Licencia por maternidad**: **45 días antes y 45 después** del parto (se puede reducir la previa a no menos de 10 y pasar el resto a después): **90 días** en total, con prohibición de trabajar. La asignación la paga ANSES.
 - La trabajadora debe **comunicar el embarazo** con certificado de la fecha probable de parto. Desde ahí tiene **estabilidad**. Si la despiden **7 meses y medio antes o después del parto**, se presume que fue por maternidad: **indemnización agravada de un año de sueldos** (13 con el SAC) además de la común (art. 181).
 - Al terminar la licencia puede: volver, rescindir (con 1 año de antigüedad), pedir **excedencia de 3 a 6 meses** sin sueldo (con 1 año de antigüedad) o no volver (rescisión tácita).
-- **Menores**: prohibido antes de los **16**. De **16 a 18**: hasta **6 h diarias y 36 semanales**, nada de trabajo nocturno, **15 días** mínimos de vacaciones.
+- **Menores** (apunte, punto 7.2; salió como pregunta a desarrollar en la comisión de la noche 2026):
+  - **Prohibido antes de los 16**, salvo el régimen especial de **empresas familiares**, con autorización administrativa.
+  - De **16 a 18** tienen **capacidad laboral limitada** y protección especial:
+
+  | Aspecto | Regla para adolescentes de 16 a 18 |
+  |---|---|
+  | Jornada | Hasta **6 h diarias y 36 semanales**; con distribución desigual, no más de **7 h** en un día |
+  | Trabajo nocturno | **Prohibido** |
+  | Descanso semanal | Desde las **13 del sábado hasta las 24 del domingo** |
+  | Descanso al mediodía | **2 horas** si trabajan mañana y tarde, salvo excepciones legales |
+  | Vacaciones | **No menos de 15 días** |
 
 ##### 5. Remuneración, suspensión, preaviso y extinción
 
@@ -711,3 +755,4 @@ o un proceso penal afectan la matrícula, art. 24. (5) Si hay daño a un cliente
 - 2026-10-12: `estudio/prompt-podcast.md` — prompts de NotebookLM para un podcast de repaso del 2do parcial: un episodio único (U4–U6) con versión corta, y tres episodios por unidad.
 - 2026-10-26: ingest de `fuentes/2026-10-26_formato-parcial2.md` (formato del 2do parcial: caso práctico de U4 o U6, V o F de U5 sin justificar, una pregunta de la unidad de U4/U6 que no fue caso y otra de laboral) y `fuentes/2026-10-26_audio-massachiodi-articulos-u6.md` (+ `.ogg`, audio de la profesora transcripto con Whisper). **U6 achicada**: ley 11.291 arts. 1, 4 (incisos a, b, c, e, f, g, l, m, p), 11, 18, 19, 21 y 24; Estatuto nada; Código arts. 2, 5 y 6. Lista anterior de la guía: ley 1, 2, 3, 4, 6, 11, 18, 19 y 21; Estatuto 4 a 10, 12, 13, 22, 23, 49, 54 y 55; Código 1, 2, 6 y 8. Desarrollados los arts. 18 y 24 de la ley (antes remitían al Estatuto), marcados los incisos del art. 4, método para el caso práctico y dos casos nuevos; los casos viejos ahora citan ley y Código en vez del Estatuto.
 - 2026-10-26: `estudio/prompt-podcast.md` reescrito para el formato del parcial y los artículos de U6 de la profesora: cuatro episodios (U5 en dos partes orientadas al V o F, U6 orientado al caso de "¿es falta y ante quién?", sin Estatuto, y U4). Reemplaza al episodio único y los tres por unidad del 2026-10-12.
+- 2026-10-27: ingest de `fuentes/2026-10-27_parcial2-noche-relato.md` (relato en audio del 2do parcial de la comisión de la noche, transcripto con Whisper). Nueva sección "Lo que tomaron en la comisión de la noche": V o F de 10; caso corto que mezcla U4 (software con hardware → patente, INPI, requisitos, 20 años, propiedad industrial) y U6 (riesgo vial → función preventiva; falta ética y Tribunal); preguntas de trabajo de menores y responsabilidad civil del ingeniero. U4: nota sobre software con hardware patentable (conocimiento general, marcado). U5: trabajo de menores completo desde el apunte (7.2).
