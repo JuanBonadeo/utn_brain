@@ -84,17 +84,61 @@
   <div class="enun"><span class="n">4.</span>Explique al menos uno de los tipos de fragmentación que existen en una comunicación entre redes que tienen distintas tecnologías.<span class="tag">nueva · capa de red</span></div>
   <div class="resp">
     <p><b>El problema.</b> Cada tecnología de red tiene un tamaño máximo de paquete, la <b>MTU</b> (<i>Maximum Transmission Unit</i>): por ejemplo, 1500 bytes en Ethernet. Cuando un paquete grande pasa de una red con MTU grande a otra con MTU más chica, el router que las une tiene que <b>dividirlo en fragmentos</b>, cada uno enviado como un paquete aparte. Hay <b>dos tipos</b> de fragmentación, que se distinguen por <b>dónde se reensamblan los fragmentos</b>:</p>
-<pre>
-(a) TRANSPARENTE: se reensambla al salir de la red chica
-
-    Red 1 ──► [G1] ═ fragmentos ═ [G2] ──► Red 3 ──► [G3] ═ fragmentos ═ [G4] ──► destino
-              fragmenta          reensambla          fragmenta         reensambla
-
-(b) NO TRANSPARENTE (la que usa IP): solo reensambla el host destino
-
-    Red 1 ──► [G1] ═ fragmentos ═ [G2] ═ fragmentos ═ [G3] ═ fragmentos ═ host destino
-              fragmenta    los routers los reenvían como paquetes comunes    reensambla
-</pre>
+<svg viewBox="0 0 720 274" width="100%" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif" style="margin:1mm 0 2mm">
+<text x="8" y="12" font-weight="bold" font-size="12">(a) TRANSPARENTE: el router de salida de la red chica reensambla</text>
+<rect x="78" y="24" width="150" height="58" rx="8" fill="#fff" stroke="#000" stroke-dasharray="4 3"/>
+<text x="153.0" y="36" text-anchor="middle" font-size="9.5">Red 1 · MTU 1500 B</text>
+<rect x="262" y="24" width="196" height="58" rx="8" fill="#e6e6e6" stroke="#000" stroke-dasharray="4 3"/>
+<text x="360.0" y="36" text-anchor="middle" font-size="9.5">Red 2 · MTU 620 B (red chica)</text>
+<rect x="492" y="24" width="150" height="58" rx="8" fill="#fff" stroke="#000" stroke-dasharray="4 3"/>
+<text x="567.0" y="36" text-anchor="middle" font-size="9.5">Red 3 · MTU 1500 B</text>
+<line x1="66" y1="62" x2="652" y2="62" stroke="#000" stroke-width="1.4"/>
+<rect x="6" y="48" width="60" height="28" fill="#fff" stroke="#000" stroke-width="1.4"/>
+<text x="36" y="66" text-anchor="middle" font-size="10.5" font-weight="bold">Origen</text>
+<rect x="652" y="48" width="60" height="28" fill="#fff" stroke="#000" stroke-width="1.4"/>
+<text x="682" y="66" text-anchor="middle" font-size="10.5" font-weight="bold">Destino</text>
+<circle cx="245" cy="62" r="15" fill="#fff" stroke="#000" stroke-width="1.6"/>
+<text x="245" y="66" text-anchor="middle" font-size="10.5" font-weight="bold">G1</text>
+<circle cx="475" cy="62" r="15" fill="#fff" stroke="#000" stroke-width="1.6"/>
+<text x="475" y="66" text-anchor="middle" font-size="10.5" font-weight="bold">G2</text>
+<rect x="119" y="45" width="68" height="13" fill="#bbb" stroke="#000"/><text x="153" y="55" text-anchor="middle" font-size="9">1400 B</text>
+<rect x="312" y="45" width="30" height="13" fill="#fff" stroke="#000"/><text x="327" y="55" text-anchor="middle" font-size="9">F1</text>
+<rect x="345" y="45" width="30" height="13" fill="#fff" stroke="#000"/><text x="360" y="55" text-anchor="middle" font-size="9">F2</text>
+<rect x="378" y="45" width="30" height="13" fill="#fff" stroke="#000"/><text x="393" y="55" text-anchor="middle" font-size="9">F3</text>
+<rect x="533" y="45" width="68" height="13" fill="#bbb" stroke="#000"/><text x="567" y="55" text-anchor="middle" font-size="9">1400 B</text>
+<text x="245" y="92" text-anchor="middle" font-size="9.5" font-weight="bold">fragmenta</text>
+<text x="475" y="92" text-anchor="middle" font-size="9.5" font-weight="bold">reensambla</text>
+<text x="682" y="92" text-anchor="middle" font-size="9.5" font-weight="bold">recibe 1 paquete</text>
+<text x="8" y="110" font-size="9.5" font-style="italic">Todos los fragmentos deben salir por G2. La Red 3 ni se entera de que hubo fragmentación.</text>
+<line x1="0" y1="148" x2="720" y2="148" stroke="#000" stroke-width=".6"/>
+<text x="8" y="168" font-weight="bold" font-size="12">(b) NO TRANSPARENTE (la de IP): solo el host destino reensambla</text>
+<rect x="78" y="180" width="150" height="58" rx="8" fill="#fff" stroke="#000" stroke-dasharray="4 3"/>
+<text x="153.0" y="192" text-anchor="middle" font-size="9.5">Red 1 · MTU 1500 B</text>
+<rect x="262" y="180" width="196" height="58" rx="8" fill="#e6e6e6" stroke="#000" stroke-dasharray="4 3"/>
+<text x="360.0" y="192" text-anchor="middle" font-size="9.5">Red 2 · MTU 620 B (red chica)</text>
+<rect x="492" y="180" width="150" height="58" rx="8" fill="#fff" stroke="#000" stroke-dasharray="4 3"/>
+<text x="567.0" y="192" text-anchor="middle" font-size="9.5">Red 3 · MTU 1500 B</text>
+<line x1="66" y1="218" x2="652" y2="218" stroke="#000" stroke-width="1.4"/>
+<rect x="6" y="204" width="60" height="28" fill="#fff" stroke="#000" stroke-width="1.4"/>
+<text x="36" y="222" text-anchor="middle" font-size="10.5" font-weight="bold">Origen</text>
+<rect x="652" y="204" width="60" height="28" fill="#fff" stroke="#000" stroke-width="1.4"/>
+<text x="682" y="222" text-anchor="middle" font-size="10.5" font-weight="bold">Destino</text>
+<circle cx="245" cy="218" r="15" fill="#fff" stroke="#000" stroke-width="1.6"/>
+<text x="245" y="222" text-anchor="middle" font-size="10.5" font-weight="bold">G1</text>
+<circle cx="475" cy="218" r="15" fill="#fff" stroke="#000" stroke-width="1.6"/>
+<text x="475" y="222" text-anchor="middle" font-size="10.5" font-weight="bold">G2</text>
+<rect x="119" y="201" width="68" height="13" fill="#bbb" stroke="#000"/><text x="153" y="211" text-anchor="middle" font-size="9">1400 B</text>
+<rect x="312" y="201" width="30" height="13" fill="#fff" stroke="#000"/><text x="327" y="211" text-anchor="middle" font-size="9">F1</text>
+<rect x="345" y="201" width="30" height="13" fill="#fff" stroke="#000"/><text x="360" y="211" text-anchor="middle" font-size="9">F2</text>
+<rect x="378" y="201" width="30" height="13" fill="#fff" stroke="#000"/><text x="393" y="211" text-anchor="middle" font-size="9">F3</text>
+<rect x="519" y="201" width="30" height="13" fill="#fff" stroke="#000"/><text x="534" y="211" text-anchor="middle" font-size="9">F1</text>
+<rect x="552" y="201" width="30" height="13" fill="#fff" stroke="#000"/><text x="567" y="211" text-anchor="middle" font-size="9">F2</text>
+<rect x="585" y="201" width="30" height="13" fill="#fff" stroke="#000"/><text x="600" y="211" text-anchor="middle" font-size="9">F3</text>
+<text x="245" y="248" text-anchor="middle" font-size="9.5" font-weight="bold">fragmenta</text>
+<text x="475" y="248" text-anchor="middle" font-size="9.5" font-weight="bold">solo reenvía</text>
+<text x="682" y="248" text-anchor="middle" font-size="9.5" font-weight="bold">reensambla</text>
+<text x="8" y="266" font-size="9.5" font-style="italic">Cada fragmento es un datagrama independiente (puede ir por otra ruta). Se rearma con Identificación, offset y MF.</text>
+</svg>
     <p><b>1) Fragmentación transparente.</b> El router de entrada a la red de paquetes chicos (G1) fragmenta, y <b>todos los fragmentos tienen que salir por el mismo router de salida</b> (G2), que los <b>vuelve a unir</b> antes de mandarlos a la red siguiente. El paso por la red chica es "transparente": las redes posteriores ni se enteran de que hubo fragmentación. <i>Desventajas:</i> el router de salida necesita saber cuándo llegaron todas las piezas (un contador o un bit de "fin de paquete"); las <b>rutas quedan restringidas</b>, porque todos los fragmentos deben ir al mismo router; los routers hacen <b>mucho trabajo</b> y gastan buffer; y si el paquete cruza varias redes chicas, se fragmenta y reensambla una y otra vez.</p>
     <p><b>2) Fragmentación no transparente.</b> Es la que usa <b>IP</b>. Una vez fragmentado, <b>cada fragmento viaja como un datagrama independiente</b>, incluso por rutas distintas, y <b>solo el host destino lo reensambla</b>. Para poder rearmarlo, el encabezado IPv4 trae:</p>
     <ul>
