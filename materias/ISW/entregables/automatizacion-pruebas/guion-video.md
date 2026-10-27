@@ -1,82 +1,109 @@
-# Guion del video — automatización de pruebas (ISW, parte práctica)
+# Guion del video — automatización de pruebas (ISW)
 
-Duración objetivo: **4 a 5 minutos**. Una sola toma de pantalla (VS Code + terminal integrada),
-con voz en off. Cada bloque indica qué mostrar y qué decir.
+Video del trabajo práctico de automatización de pruebas sobre la aplicación bancaria. Hay seis
+partes, una por integrante. Cada parte dice qué tiene que verse en pantalla, el texto a leer y
+los comandos. Duración aproximada: **5 minutos**.
 
-## Antes de grabar
+## Reparto
+
+| Integrante | Parte | Tiempo aprox. |
+|---|---|---|
+| Juan Cruz Bonadeo | 1. Presentación y sistema bajo prueba | 0:55 |
+| Luis Parmigiani | 2. Pruebas por valores límite | 0:55 |
+| Stéfano Conti | 3. Pruebas por tabla de decisión | 0:40 |
+| Martín Redaelli | 4. Ejecución y cobertura | 0:45 |
+| Agustín Dana | 5. Las pruebas detectan errores | 0:50 |
+| Gonzalo Casermeiro | 6. Herramientas y cierre | 0:40 |
+
+## Cómo grabarlo
+
+- **Opción A (recomendada):** una videollamada (Meet o Discord) grabada. Una sola persona
+  comparte la pantalla con VS Code y ejecuta todo lo que dice *En pantalla*; cada integrante
+  habla en su parte.
+- **Opción B:** cada uno graba su parte por separado con la pantalla de su compu y después se
+  unen los clips. En ese caso cada uno necesita el proyecto andando en su máquina.
+
+**Preparación de quien muestra la pantalla:**
 
 - Abrir la carpeta `automatizacion-pruebas/` en VS Code. Fuente del editor y de la terminal en
-  16–18 para que se lea en el video.
-- Activar el entorno: `source ../../../../.venv/bin/activate` (o `pip install -r requirements.txt`
-  en un venv nuevo). Probar una vez `pytest -q` para asegurarse de que corre.
-- Borrar cachés para que el árbol se vea limpio: `rm -rf .pytest_cache __pycache__ .coverage`.
-- Cerrar notificaciones (No molestar) y pestañas que no se usan.
-- Grabar con `Cmd + Shift + 5` → "Grabar toda la pantalla" (o una porción), con micrófono activado
-  en *Opciones*.
+  16–18, para que se lea en el video.
+- Instalar las dependencias: `pip install -r requirements.txt`. Correr `pytest -q` una vez para
+  confirmar que pasan las 60 pruebas.
+- Borrar las cachés para que el árbol de archivos se vea limpio:
+  `rm -rf .pytest_cache __pycache__ .coverage`.
+- Activar el modo No molestar y cerrar las pestañas que no se usan.
 
-## 1. Presentación — 0:00 a 0:30
+---
 
-**Pantalla:** el `README.md` en vista previa (`Cmd + Shift + V`).
+## Parte 1 — Juan Cruz Bonadeo: presentación y sistema bajo prueba
 
-> Este es el trabajo práctico de automatización de pruebas de Ingeniería y Calidad de Software.
-> Probamos el procedimiento de operaciones de la aplicación bancaria que ya habíamos usado en la
-> tarea de valores límite. Lo implementamos en Python y automatizamos las pruebas con pytest,
-> usando dos técnicas de caja negra: valores límite y tabla de decisión.
+*En pantalla:* el `README.md` en vista previa (`Cmd/Ctrl + Shift + V`). Después, `banco.py`:
+el comentario de arriba, y bajar hasta `validar_banco` (línea 57) y `procesar_operacion`
+(línea 114).
 
-## 2. El sistema bajo prueba — 0:30 a 1:15
+> Hola, este es nuestro trabajo práctico de automatización de pruebas de Ingeniería y Calidad de
+> Software. Probamos el procedimiento de operaciones de la aplicación bancaria que ya habíamos
+> usado en la tarea de valores límite. Lo implementamos en Python y automatizamos las pruebas con
+> pytest, con dos técnicas de caja negra: valores límite y tabla de decisión.
+>
+> El sistema recibe cinco campos: código de banco, sucursal, cuenta, clave personal y orden. Cada
+> campo tiene su regla. Por ejemplo, el código de banco puede ir en blanco o ser un número de tres
+> dígitos con el primero mayor que uno. Los campos se validan en orden y se informa el primer
+> error. Si todo es válido, según la orden se entrega el talonario, los movimientos o los dos.
+>
+> Luis nos muestra cómo armamos los casos por valores límite.
 
-**Pantalla:** `banco.py`. Mostrar el docstring de arriba y después bajar hasta `validar_banco`
-(línea 57) y `procesar_operacion`.
+## Parte 2 — Luis Parmigiani: pruebas por valores límite
 
-> El sistema recibe cinco campos: código de banco, sucursal, cuenta, clave personal y orden.
-> Cada campo tiene su regla: por ejemplo, el código de banco puede ir en blanco o ser un número de
-> tres dígitos con el primero mayor que uno. Los campos se validan en orden y se informa el
-> primer error. Si todo es válido, según la orden se entrega el talonario, los movimientos o ambos.
+*En pantalla:* `test_valores_limite.py`. Mostrar el diccionario `VALIDOS`, la función `casos()`
+y la lista `CODIGO_BANCO`.
 
-## 3. Pruebas por valores límite — 1:15 a 2:15
+> Son los 53 casos de la tarea anterior. En cada caso se varía un solo campo y el resto queda con
+> un valor válido fijo, que es este diccionario. Los casos están cargados como datos: cada fila
+> tiene número de caso, partición, entrada y salida esperada.
+>
+> Para el código del banco, el rango válido es de 200 a 999, así que probamos 200, 201, 998 y 999
+> como válidos, y 199 y 1000 como inválidos. Con `parametrize`, pytest convierte cada fila en una
+> prueba con su propio identificador, así que agregar un caso es agregar una fila.
+>
+> Stéfano sigue con la segunda técnica, la tabla de decisión.
 
-**Pantalla:** `test_valores_limite.py`. Mostrar `VALIDOS`, la función `casos()` y la lista
-`CODIGO_BANCO`.
+## Parte 3 — Stéfano Conti: pruebas por tabla de decisión
 
-> Son los 53 casos de la tarea anterior. Cada caso varía un solo campo y deja el resto con un
-> valor válido fijo, que es este diccionario. Los casos están cargados como datos: cada tupla es
-> número de caso, partición, entrada y salida esperada. Para el código del banco, el rango válido
-> es 200 a 999, así que probamos 200, 201, 998 y 999 como válidos, y 199 y 1000 como inválidos.
-> Con `parametrize`, pytest convierte cada fila en una prueba con su propio identificador, así que
-> agregar un caso es agregar una fila.
+*En pantalla:* primero la tabla de decisión del `README.md`; después `test_tabla_decision.py`.
 
-## 4. Pruebas por tabla de decisión — 2:15 a 2:50
+> La tabla tiene dos condiciones, si los datos de acceso son válidos y qué orden se pide, y cinco
+> reglas. Cada columna es un caso de prueba. En la regla 5 los datos son inválidos y la orden es
+> indiferente, así que la probamos con tres órdenes distintas para mostrar que el resultado no
+> cambia. En total son 7 casos.
+>
+> Martín los va a ejecutar.
 
-**Pantalla:** primero la tabla del `README.md`, después `test_tabla_decision.py`.
+## Parte 4 — Martín Redaelli: ejecución y cobertura
 
-> La segunda técnica es una tabla de decisión con dos condiciones —si los datos de acceso son
-> válidos y qué orden se pide— y cinco reglas. Cada columna es un caso de prueba. En la regla 5
-> la orden es indiferente, así que la probamos con tres órdenes distintas para demostrar que el
-> resultado no cambia. En total son 7 casos.
-
-## 5. Ejecución — 2:50 a 3:30
-
-**Pantalla:** terminal integrada (`Ctrl + ñ` o *Terminal → New Terminal*).
+*En pantalla:* abrir la terminal integrada de VS Code y correr:
 
 ```bash
 pytest -v
 ```
 
-Dejar que termine y subir un poco para mostrar los identificadores (`CP06-PI1-199`, `R4-…`).
+Cuando termine, subir un poco para que se vean los identificadores (`CP06-PI1-199`, `R4-…`).
 
-> Corremos las 60 pruebas. Cada una aparece con el identificador del caso, así que si una falla
+> Corremos las 60 pruebas. Cada una aparece con el identificador de su caso, así que si una falla
 > sabemos exactamente qué partición y qué valor la rompió. Pasan las 60.
 
 ```bash
 pytest --cov=banco --cov-branch
 ```
 
-> Además medimos la cobertura con pytest-cov: tenemos el 100 % de sentencias y de decisiones de
-> `banco.py`, o sea que las pruebas de caja negra también recorren todo el código.
+> También medimos la cobertura con pytest-cov. Llegamos al 100 % de sentencias y de decisiones de
+> `banco.py`: aunque diseñamos las pruebas como caja negra, recorren todo el código.
+>
+> Agustín va a mostrar que estas pruebas realmente encuentran errores.
 
-## 6. Las pruebas detectan errores — 3:30 a 4:20
+## Parte 5 — Agustín Dana: las pruebas detectan errores
 
-**Pantalla:** `banco.py`, línea 66. Cambiar `<= 1` por `< 1` y guardar.
+*En pantalla:* `banco.py`, línea 66. Cambiar `<= 1` por `< 1` y guardar.
 
 ```python
 if len(valor) != 3 or int(valor[0]) <= 1:   # original
@@ -84,31 +111,37 @@ if len(valor) != 3 or int(valor[0]) < 1:    # con el error
 ```
 
 > Para comprobar que las pruebas sirven, metemos a propósito un error típico de frontera:
-> cambiamos "menor o igual" por "menor". Ahora el sistema aceptaría un código de banco que
-> empieza con 1.
+> cambiamos "menor o igual" por "menor". Así, el sistema aceptaría un código de banco que empieza
+> con 1.
 
 ```bash
 pytest -q
 ```
 
-Debe salir **1 failed, 59 passed** con `CP06-PI1-199`.
+Tiene que salir **1 failed, 59 passed**, con `CP06-PI1-199`.
 
 > Falla exactamente el caso 6, la entrada 199, que es el valor límite inválido justo debajo del
-> rango. Las otras 59 siguen pasando. Esto es lo que justifica probar las fronteras.
+> rango. Las otras 59 siguen pasando. Por eso conviene probar las fronteras.
 
-Deshacer el cambio (`Cmd + Z`, guardar) y correr `pytest -q` otra vez: **60 passed**.
+Deshacer el cambio (`Cmd/Ctrl + Z`), guardar y correr `pytest -q` otra vez: **60 passed**.
 
-## 7. Herramientas y cierre — 4:20 a 4:50
+> Gonzalo cierra con las herramientas que usamos.
 
-**Pantalla:** tabla de herramientas del `README.md` (o `tabla-herramientas.png`).
+## Parte 6 — Gonzalo Casermeiro: herramientas y cierre
 
-> Usamos Python 3.12, pytest como framework, pytest-cov para la cobertura, VS Code como entorno
-> y Git para versionar los scripts junto con el código. Descartamos Selenium porque el sistema no
-> tiene interfaz web, y JUnit porque exige Java y más código para la misma prueba parametrizada.
-> Gracias.
+*En pantalla:* la tabla de herramientas del `README.md` (o `tabla-herramientas.png`).
 
-## Chequeo final
+> Usamos Python 3.12 como lenguaje, pytest como framework de pruebas, pytest-cov para la
+> cobertura, Visual Studio Code como entorno y Git para versionar los scripts junto con el código.
+> Descartamos Selenium porque el sistema no tiene interfaz web, y JUnit porque exige Java y más
+> código para la misma prueba parametrizada.
+>
+> Ese fue nuestro trabajo. Gracias.
 
-- [ ] Se lee el código y la salida de la terminal.
-- [ ] Se ven las 60 pasadas, el 100 % de cobertura y el fallo de CP06.
-- [ ] `banco.py` quedó como estaba (`git diff banco.py` vacío).
+---
+
+## Chequeo antes de entregar
+
+- [ ] Se leen el código y la salida de la terminal.
+- [ ] Se ven las 60 pruebas pasadas, el 100 % de cobertura y la falla de CP06.
+- [ ] `banco.py` quedó como estaba al final de la grabación.
