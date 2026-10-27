@@ -174,3 +174,38 @@ Versión corta (451 caracteres):
 ```text
 Podcast de repaso en español rioplatense, dos voces, para el 2do parcial de teoría de Redes (UTN). Sólo con el documento: secciones Puertos y Firewall. Clave: rangos IANA, puerto efímero, estados, SYN flood, predicción de secuencia, protección de puertos, reglas del firewall, denegar por defecto y regla de limpieza, stateless vs. stateful vs. proxy vs. NGFW y sus capas, DMZ, SNAT/DNAT. Definiciones precisas y contrastes; cerrá con las ideas clave.
 ```
+
+## Episodio 4 — El parcial de oct/2026 resuelto + 1 minuto de firewall
+
+Cargá **dos** fuentes: `preguntas-parcial-medin.pdf` (tiene las 5 respuestas desarrolladas) y
+`resumen-2do-parcial-medin.pdf` (de ahí sale el minuto de firewall). Es el episodio para escuchar
+antes de entrar: las 5 preguntas que Medín tomó a otra comisión en oct/2026, que repiten 4 de las de 2024.
+
+```text
+Generá un podcast de repaso para un estudiante de Ingeniería en Sistemas (UTN) que rinde hoy el 2do parcial de teoría de Redes de Datos con Medín. El formato del examen es de 5 preguntas para desarrollar en 60 minutos, y se corrige por pertinencia (40 %), vocabulario técnico (30 %), fundamentación (25 %) y ortografía (5 %). El episodio resuelve, una por una, las 5 preguntas del parcial que Medín tomó a otra comisión en octubre de 2026, y cierra con un minuto de firewall. Usá únicamente los documentos cargados: las respuestas están en "Preguntas y respuestas de Medín", y el firewall en el resumen.
+
+TONO Y FORMATO
+- Español rioplatense, dos voces. Una hace de alumno que lee la consigna en voz alta y arranca a responder como lo haría en el examen, a veces con un error típico; la otra corrige y completa hasta dejar la respuesta "de 10".
+- Para cada pregunta: (1) leer la consigna; (2) la respuesta corta en una frase; (3) el desarrollo con los términos técnicos exactos y la justificación; (4) un ejemplo concreto; (5) la trampa o lo que no hay que olvidar. Terminá cada pregunta diciendo en voz alta los términos que no pueden faltar en la hoja.
+- Decí qué significa cada sigla la primera vez que aparece.
+- Ritmo ágil, sin introducción larga ni relleno.
+
+LAS 5 PREGUNTAS, EN ESTE ORDEN
+1. "Enumere los propósitos de la capa de transporte y desarrolle al menos uno de ellos." Capa 4 como la primera extremo a extremo, frente al salto a salto de las capas 1 a 3. Los cuatro propósitos del apunte de Medín: seguimiento de conversaciones individuales, segmentación de datos, reensamble de segmentos e identificación de las aplicaciones. Desarrollar la identificación por puertos: 16 bits, socket = IP + puerto, rangos de la IANA, y el ejemplo del navegador que sale por un puerto efímero hacia el 443 mientras el Zoom usa la misma IP.
+2. "¿Cómo controla la congestión el protocolo UDP?" Es una pregunta trampa: no la controla. Explicar por qué (sin ventana, sin ACK, sin números de secuencia, header de 8 bytes), que manda al ritmo de la aplicación y puede saturar la red, que si hace falta lo hace la aplicación (RTCP en streaming), y contrastar con TCP: slow start, AIMD, Tahoe y Reno.
+3. "¿Qué sucede si UDP detecta un error? ¿Y si lo detecta TCP?" Los dos detectan con el checksum y el pseudoencabezado. UDP: checksum opcional, no corrige ni retransmite y avisa a las capas superiores, que deciden (versión de la diapositiva de Medín de 2026); en la práctica el datagrama se descarta. TCP: checksum obligatorio, descarta y no confirma, el emisor retransmite por timeout o por tres ACK duplicados (ARQ), y la aplicación recibe todo en orden sin enterarse. Cerrar con la síntesis: UDP detecta y deja decidir a la capa superior; TCP detecta y recupera solo.
+4. "Explique al menos uno de los tipos de fragmentación que existe en una comunicación entre redes que tienen distintas tecnologías." Aclarar que es de capa de red. La MTU y por qué el router fragmenta. Contar el diagrama para que se pueda dibujar: origen, red de MTU 1500, router G1, red chica de MTU 620, router G2, red de MTU 1500, destino. Transparente: G1 fragmenta y G2 reensambla, todos los fragmentos salen por G2, y la red siguiente no se entera; sus desventajas. No transparente, la de IP: cada fragmento es un datagrama independiente y solo reensambla el destino, usando Identificación, desplazamiento en unidades de 8 bytes y el bit MF; ventajas y desventajas. Repasar el ejemplo de 1400 bytes de datos con MTU 620: tres fragmentos de 600, 600 y 200 bytes de datos, desplazamientos 0, 75 y 150, MF 1, 1 y 0. Mencionar el descubrimiento de la MTU de la ruta con DF.
+5. "Mencione las principales diferencias entre TCP y UDP." Recorrer la tabla fila por fila: conexión, confiabilidad, control de errores, de flujo y de congestión, tamaño del encabezado (20 contra 8 bytes), flujo de bytes contra datagramas, unicast contra broadcast y multicast, velocidad y usos con sus puertos. Cerrar con la regla: TCP cuando no puede faltar nada (una transferencia bancaria), UDP cuando importa más llegar a tiempo (una videollamada).
+
+UN MINUTO DE FIREWALL (al final, corto y concreto)
+Qué es (filtra el tráfico entre redes según reglas; seguridad perimetral; el aduanero). Componentes de una regla: origen, destino, protocolo, puerto y acción. Denegar por defecto, el orden de lo más específico a lo más general y la regla de limpieza "denegar todo y registrar". Los cuatro tipos y su capa: stateless (capas 3 y 4), stateful (3 y 4, con tabla de conexiones), proxy (capa 7) y NGFW (3 a 7). El ejemplo clave: un paquete que llega al puerto 51.234 de tu PC; el stateless no sabe si es una respuesta o un ataque, el stateful sí. Una línea para la DMZ: la red intermedia donde van los servidores públicos.
+
+CIERRE
+Las cinco frases que hay que tener en la cabeza al entrar, una por pregunta, en formato "si te preguntan X, escribí Y", más una de firewall.
+```
+
+Versión corta (466 caracteres):
+
+```text
+Podcast en español rioplatense, dos voces (un alumno responde, el otro corrige), solo con los documentos. Resolvé las 5 preguntas del parcial de Medín de oct/2026: propósitos de la capa 4 (desarrollar puertos); UDP no controla la congestión; error en UDP (no corrige, avisa) vs TCP (retransmite, ARQ); fragmentación transparente vs no transparente con el ejemplo 1400 B / MTU 620; tabla TCP vs UDP. Cerrá con 1 minuto de firewall: reglas, stateless vs stateful, DMZ.
+```
