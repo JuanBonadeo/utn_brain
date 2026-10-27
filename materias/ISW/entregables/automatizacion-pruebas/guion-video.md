@@ -26,7 +26,7 @@ con voz en off. Cada bloque indica qué mostrar y qué decir.
 ## 2. El sistema bajo prueba — 0:30 a 1:15
 
 **Pantalla:** `banco.py`. Mostrar el docstring de arriba y después bajar hasta `validar_banco`
-(línea 59) y `procesar_operacion`.
+(línea 57) y `procesar_operacion`.
 
 > El sistema recibe cinco campos: código de banco, sucursal, cuenta, clave personal y orden.
 > Cada campo tiene su regla: por ejemplo, el código de banco puede ir en blanco o ser un número de
