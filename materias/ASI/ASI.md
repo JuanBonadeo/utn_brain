@@ -17,6 +17,7 @@
 6. Unidad 6 — Emprendedorismo
 7. TP Integrador — Personal (Telecom) / Proceso de instalación de fibra óptica
 8. Segundo parcial — qué se toma (clase de consulta 2026-09-08)
+9. Tercer parcial — qué se toma (clase de consulta 2026-10-28)
 
 ## Desarrollo
 
@@ -5966,7 +5967,31 @@ A **5 años**: **5.** Core Bancario Inteligente con IA y Big Data (Data Lake, ML
 
 ---
 
+### Tercer parcial — qué se toma (clase de consulta, 2026-10-28)
+
+> Fuente: `materias/ASI/fuentes/Parcial3/2026-10-28-clase-consulta-parcial3.md` (notas de la clase de consulta). Resumen de estudio completo, con ejemplos sobre Bancorp: `materias/ASI/estudio/resumen-parcial3.md`.
+
+- **Fecha:** las comisiones 3 y 4 rinden el jueves 2026-10-29.
+- **Contexto.** Proyectos (U5): sobre los **proyectos del 1er año de Bancorp** (ver la sección del 2º parcial). Emprendedorismo (U6): **tema bancario, pero desde afuera**, una app, un producto o un servicio que se le ofrece al banco: "ahí ya no somos el banco".
+- **Formato:** mezcla de desarrollo y probable multiple choice teórico (por ejemplo, "¿qué es la TIR?").
+- **Red y Gantt:** **no se dibujan** ("no hay tiempo"), pero hay que entenderlos para justificar. Podrían pedir completar algo y marcar el camino crítico.
+- **Convención de días del profe:** la primera tarea arranca el día 1, **FT = IT + duración − 1**, y la sucesora arranca al día siguiente. **Contradice** la convención desde 0 del caso de cátedra de U5 (§7 y caso Centro de Servicios). El profe dice que "es lo mismo", y efectivamente las holguras y el camino crítico no cambian.
+- **Holguras:** la que importa es la **total**. Sirven para **nivelar recursos**, y al consumirlas pueden aparecer caminos críticos nuevos.
+- **Valor ganado:** técnica de seguimiento. **SV = EV − PV y CV = EV − AC van de memoria.** El criterio para tareas en curso (0%, 100%, 20/80, 50/50) se fija al inicio; normalmente es 50/50. Hay que interpretar: atrasado/adelantado y eficiente/ineficiente.
+- **Evaluación económica:** no hacen falta las fórmulas, sí **qué mide y para qué sirve** cada indicador. Los que más pesan son **ROI, VA/VAN y TIR**, con ventajas y desventajas. La tasa de descuento es el costo de capital más un % de riesgo, sin inflación.
+- **Adquisiciones** ("tampoco es lo más crítico"): compra, alquiler o leasing; licitación, RFP o compra común; **qué costos entran en el TCO**; quién asume el riesgo en el contrato; **qué es** un RFI y una RFP (no se pide armarlos). Las matrices de comparación no importan.
+- **Canvas:** llevar la plantilla impresa por las dudas, pero lo probable es "**no el canvas, pero sí detallar parte del canvas**" en hoja. Lo que más interesa es la **relación propuesta de valor ↔ segmento**, con segmentos específicos. La misma solución vale distinto para cada segmento (ejemplo DeepAgro: plata para el productor, ambiente para la provincia, trabajo para la pulverizadora). No van a pedir el lienzo de propuesta de valor.
+- **Socios clave:** aquellos de los que **depende** el modelo, aunque no lo sepan (Vercel, API de Mercado Pago, NVIDIA, proveedor de IA). No son los socios de la SRL.
+- **Canales vs. relación:** los canales son cómo llega el producto y cómo se entera el cliente; la relación es marketing, con el doble embudo Get/Keep/Grow y el CAC (ejemplo de USD 100 contra USD 10 por cliente).
+- **Lean Startup:** ciclo crear → validar → aprender → cambiar (pivot), MVP, desarrollo de clientes y ajuste producto-mercado (ejemplos del robot de golf y de la herramienta agro).
+- **Lo que anotó el alumno sobre la forma probable** (con pinzas): un ejercicio de valor ganado con la planilla de valores, y una parte del Canvas para una idea de negocio dada. Además: saber leer Gantt y red, y decidir si un proyecto o emprendimiento es rentable.
+- **Consulta extra:** media hora el jueves a la mañana, coordinando con el docente por escrito.
+
+---
+
 ## Log
+
+- 2026-10-28: **tercer parcial (U5 + U6)**. Se copiaron las notas de la clase de consulta a `fuentes/Parcial3/` y se volcaron en una sección nueva ("Tercer parcial — qué se toma"). Se armó `estudio/resumen-parcial3.md` con los temas ordenados por prioridad: los proyectos del 1er año de Bancorp; red y Gantt con la convención del profe (días desde 1), resueltos sobre el proyecto de Omnicanalidad (18 días, camino crítico A-B-D-F-H); valor ganado con la planilla y un ejemplo resuelto al día 10 (SV −700, CV −500), además del resultado oficial de Pinaires (BAC 8.100, PV 2.400, EV 2.300, SV −100, CV −200), que se convirtió desde `fuentes/Campus/`; los indicadores de rentabilidad con su ejemplo sobre el Copiloto IA (TR 2,5 años, VAN > 0, TIR ≈ 21,9%), punto de equilibrio y CAC; un Canvas completo de una startup que le vende al banco desde afuera ("Norma", copiloto normativo), con tres segmentos específicos y una propuesta de valor por segmento; Lean Startup; adquisiciones; acta y objetivos; y una autoevaluación. **Contradicción registrada:** la convención de días del profe (desde 1, FT = IT + dur − 1) contra la del caso de cátedra (desde 0).
 
 - 2026-10-13: **ingerida la Unidad 6 — Emprendedorismo**, que era un stub. Se copiaron a `fuentes/Campus/ASI-Unidad6_Emprendimientos/` las cinco clases del portal (C1 Desarrollo Emprendedor · C2 Gestión del Negocio · C3 Producto y Clientes · C4 Funcionamiento · C5 Rentabilidad, 194 láminas) y las dos plantillas del Business Model Canvas. La unidad quedó con: definiciones (emprender, startup vs. empresa, Lean Startup, MVP, pivot), tipos de emprendedor de Freire, triple impacto y Movimiento B, emprender en Argentina (leyes de 2017 y 2020, sectores, contexto económico) y el **mapa del ecosistema de Rosario y Santa Fe**, causas de fracaso con los casos de la cátedra, desarrollo de clientes de Blank, tipos de MVP, **los nueve bloques del Canvas con las preguntas y opciones de la plantilla oficial**, lienzo de propuesta de valor, tamaño de mercado, roles paga/usa/decide/influye, tipos de mercado, canales y sus cinco fases, get/keep/grow con el cálculo de CAC, recursos y fuentes de financiamiento, categorías de actividades, tipos y riesgos de socios, costos fijos y variables, **punto de equilibrio** (ejemplo de las remeras batik), los siete modelos de cobro y las cinco reglas de precios. Se transcribió el único Canvas resuelto del material (porta celulares para bici, leído con visión porque la lámina es imagen) y se agregó la tabla consigna de la Etapa 4 → material. **Hallazgo:** en el ejemplo del punto de equilibrio la cátedra incluye el retiro de los socios dentro de los costos fijos. **Faltan:** sugerencias de cátedra para la Etapa 4, una guía de formato para el resumen de una página y el desarrollo de Design Thinking.
 - 2026-10-13: recibida la **consigna de la Etapa 4 del TPI — Emprendedorismo**, copiada a `fuentes/`. Tres actividades: proponer una startup que aplique TI para transformar una ciudad en inteligente (lista de ejes: TICs, residuos tóxicos, movilidad, sostenibilidad, planificación urbana, salud, seguridad, entorno social, transparencia, educación, open data), confeccionar el **Business Model Canvas** con fuentes de ingreso, y un **resumen de una página** para convencer a un inversor. Actualizada la tabla de estado del TPI: la Etapa 3 figuraba "en curso" y está entregada, corregida y expuesta. La Unidad 6 sigue sin desarrollar y es su sustento.
