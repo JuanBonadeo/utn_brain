@@ -47,11 +47,37 @@ El de la troqueladora: las horas bajan de 480 a 440. Como 440 está dentro del r
 
 Se pasa producción de tapa a cárter. Otro escenario posible: si la terminal sube el mínimo a 160 lotes, Z baja a 6000. Conviene aceptarlo solo si la terminal paga al menos $60.000 por cada lote extra.
 
-**2) ¿Cómo saben que la tabla final es óptima? ¿La solución es única?**
+**2) ¿Cómo llevaron el modelo a forma estándar?**
+
+A las restricciones de tipo ≤ (R1, R2 y R4) les sumamos una holgura: X₄, X₅ y X₆. A R3, que es de tipo ≥, le restamos un exceso (X₇) y le sumamos una artificial (X₈), que en la función objetivo lleva −M.
+
+- X₄: m² de corcho que sobran.
+- X₅: horas de troqueladora sin usar.
+- X₆: capacidad de despacho sin usar.
+- X₇: lotes por encima del mínimo del contrato.
+- X₈: no tiene significado en el problema, sirve solo para arrancar.
+
+**3) ¿Por qué hace falta la variable artificial? (clave)**
+
+El Simplex necesita arrancar con una variable básica en cada fila, con coeficiente +1 y valor ≥ 0. En R1, R2 y R4 eso lo da la holgura. En R3 el exceso tiene coeficiente −1: si fuera básica valdría −150, y eso no se puede. Por eso se agrega la artificial X₈, que al arrancar vale 150.
+
+Como X₈ no existe en la realidad, se la penaliza con −M para que el método la saque de la base. En la resolución se ve: la artificial valía 30 en I1 y 3,3 en I2, que eran los lotes que faltaban para cumplir el contrato. Salió en I3, cuando entró el cárter.
+
+**4) ¿Por qué la artificial lleva −M y no +M? ¿Qué pasa si no sale de la base?**
+
+Lleva −M porque maximizamos, y así la artificial empeora mucho la Z. En un problema de mínimo sería +M.
+
+Si al final la artificial sigue en la base con valor positivo, el problema no tiene solución factible. Si queda en la base pero con valor 0, la solución es factible y degenerada. En nuestro caso salió de la base, así que la solución es factible.
+
+**5) ¿Hay otra forma de resolverlo además de Big M?**
+
+Sí, el método de las dos fases. En la fase 1 se minimiza la suma de las artificiales para encontrar una base factible. En la fase 2 se sacan las artificiales y se optimiza la Z original. Llega al mismo resultado sin trabajar con M.
+
+**6) ¿Cómo saben que la tabla final es óptima? ¿La solución es única?**
 
 Es óptima porque todos los Cj − Zj son ≤ 0 (es un máximo) y la artificial salió de la base, así que la solución es factible. Es única porque ninguna variable no básica tiene Cj − Zj = 0.
 
-**3) ¿Por qué queda activo un mínimo si estamos maximizando?**
+**8) ¿Por qué queda activo un mínimo si estamos maximizando?**
 
 Porque el mínimo obliga a fabricar cárter, que es el producto que menos rinde por hora de troqueladora:
 
@@ -61,19 +87,19 @@ Porque el mínimo obliga a fabricar cárter, que es el producto que menos rinde 
 
 Si el mínimo bajara, el modelo dejaría de fabricar cárter y ganaría más. Por eso su precio sombra es negativo: cada lote más de contrato cuesta $60.000.
 
-**4) En la Etapa 1 dicen que el despacho vale $90.000 y en la Etapa 2, $30.000. ¿Cuál es el correcto?**
+**9) En la Etapa 1 dicen que el despacho vale $90.000 y en la Etapa 2, $30.000. ¿Cuál es el correcto?**
 
 $30.000. La fila Zj de la tabla final tiene un error de cuenta en A6: 50·1 + 30·(−2) + 40·1 = 30, no 90. Se comprueba con el dual: 480·20 + 200·30 − 150·60 = 6600 = Z*. Con 90 daría 18.600.
 
-**5) ¿Por qué el Cj − Zj de A7 es −60 y no −M−60?**
+**10) ¿Por qué el Cj − Zj de A7 es −60 y no −M−60?**
 
 Porque A7 es la variable de exceso y su costo es 0, así que 0 − 60 = −60. La M va en la artificial A8: su Cj − Zj es −M + 60. En el documento estas dos casillas estaban mal.
 
-**6) El texto dice "mínimo de juntas de tapa de cilindros", pero la restricción suma los tres productos.**
+**11) El texto dice "mínimo de juntas de tapa de cilindros", pero la restricción suma los tres productos.**
 
 Es un error de redacción. El contrato es por 150 lotes totales, como está en la Etapa 2.
 
-**7) ¿Por qué X₃ cuenta doble en el despacho?**
+**12) ¿Por qué X₃ cuenta doble en el despacho?**
 
 ⚠️ Acordar la respuesta con el grupo, porque no está justificado en el documento. Una respuesta posible: la junta de múltiple ocupa el doble de volumen de embalaje por lote.
 
