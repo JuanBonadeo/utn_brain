@@ -77,7 +77,7 @@ Sí, el método de las dos fases. En la fase 1 se minimiza la suma de las artifi
 
 Es óptima porque todos los Cj − Zj son ≤ 0 (es un máximo) y la artificial salió de la base, así que la solución es factible. Es única porque ninguna variable no básica tiene Cj − Zj = 0.
 
-**8) ¿Por qué queda activo un mínimo si estamos maximizando?**
+**7) ¿Por qué queda activo un mínimo si estamos maximizando?**
 
 Porque el mínimo obliga a fabricar cárter, que es el producto que menos rinde por hora de troqueladora:
 
@@ -87,19 +87,19 @@ Porque el mínimo obliga a fabricar cárter, que es el producto que menos rinde 
 
 Si el mínimo bajara, el modelo dejaría de fabricar cárter y ganaría más. Por eso su precio sombra es negativo: cada lote más de contrato cuesta $60.000.
 
-**9) En la Etapa 1 dicen que el despacho vale $90.000 y en la Etapa 2, $30.000. ¿Cuál es el correcto?**
+**8) En la Etapa 1 dicen que el despacho vale $90.000 y en la Etapa 2, $30.000. ¿Cuál es el correcto?**
 
 $30.000. La fila Zj de la tabla final tiene un error de cuenta en A6: 50·1 + 30·(−2) + 40·1 = 30, no 90. Se comprueba con el dual: 480·20 + 200·30 − 150·60 = 6600 = Z*. Con 90 daría 18.600.
 
-**10) ¿Por qué el Cj − Zj de A7 es −60 y no −M−60?**
+**9) ¿Por qué el Cj − Zj de A7 es −60 y no −M−60?**
 
 Porque A7 es la variable de exceso y su costo es 0, así que 0 − 60 = −60. La M va en la artificial A8: su Cj − Zj es −M + 60. En el documento estas dos casillas estaban mal.
 
-**11) El texto dice "mínimo de juntas de tapa de cilindros", pero la restricción suma los tres productos.**
+**10) El texto dice "mínimo de juntas de tapa de cilindros", pero la restricción suma los tres productos.**
 
 Es un error de redacción. El contrato es por 150 lotes totales, como está en la Etapa 2.
 
-**12) ¿Por qué X₃ cuenta doble en el despacho?**
+**11) ¿Por qué X₃ cuenta doble en el despacho?**
 
 ⚠️ Acordar la respuesta con el grupo, porque no está justificado en el documento. Una respuesta posible: la junta de múltiple ocupa el doble de volumen de embalaje por lote.
 
