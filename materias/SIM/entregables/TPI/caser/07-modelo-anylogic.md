@@ -1,8 +1,8 @@
 # TPI Caser — modelo en AnyLogic, Etapa 1 (horno con llegadas exógenas)
 
 > Archivo: [`modelo/CaserHorno.alp`](modelo/CaserHorno.alp), formato **AnyLogic 8.9.9** (PLE, Process Modeling
-> Library). Diseño: `05-respuestas-al-docente.md` §1-§5. Estado (2026-10-07): **verificado fuera del IDE,
-> todavía no abierto en AnyLogic**. Las entradas son reales (agregadas); los resultados no están validados.
+> Library). Diseño: `05-respuestas-al-docente.md` §1-§5. Estado (2026-10-28): **corrido en el IDE el 07/10 (M/M/1 ok, 120 corridas idénticas al verificador);
+> los parámetros del 07/10 y los costos del 09/10 todavía no se corrieron en el IDE**. Validación: `08-`.
 
 ## 1. Protocolo con el IDE (igual que el grupo del subte)
 

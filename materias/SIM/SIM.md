@@ -2527,7 +2527,25 @@ En el paso 9 de Weitz, la comparación de escenarios se plantea así:
   9. Análisis de los datos de salida
   10. Documentación, presentación y uso de resultados
 
-### Entregables (ambos al Classroom, o no se considera entregado)
+### Entrega final — consigna vigente (aviso del docente, 2026-10-28)
+
+> **Reemplaza a la del enunciado donde se contradicen.** El aviso dice "4 partes" pero enumera cinco.
+
+1. **`.alp` de AnyLogic**.
+2. **Informe PDF tipo paper**. Secciones indispensables: **abstract, objetivos, metodología, resultados y
+   conclusiones**. Los 10 pasos del estudio van **implícitos**, no como capítulos ni con referencia explícita
+   (el enunciado pedía lo contrario). Sigue valiendo hacerlo en LaTeX, con el test de medias y sin Wikipedia.
+3. **Planilla de cálculo** con los resultados de las corridas.
+4. **Link del modelo en AnyLogic Cloud**, con nombres y correos de los autores y, si hace falta, instrucciones
+   de uso.
+5. **Video breve** (link de YouTube) que explique el problema y la solución y muestre el modelo en uso.
+
+**Defensa presencial: 10 y 11 de noviembre**, en el horario habitual de clase. Va el grupo (no hace falta que
+estén todos) y muestra en vivo el escenario principal y, si se puede, los alternativos.
+
+Se evalúan: **objetivos, uso de datos reales, análisis y desarrollo del modelo en AnyLogic**.
+
+### Entregables según el enunciado original (ambos al Classroom, o no se considera entregado)
 
 **1. Informe PDF**
 - Hecho en **LaTeX** (mismas pautas que las entregas parciales).
@@ -2611,11 +2629,30 @@ Descartado explícitamente del alcance: flujo de caja y tiempo de supervivencia 
 una política es aritmética, no simulación; las salidas del modelo (compras, inventario, campañas, ventas por
 período) alimentan una proyección externa en planilla. Queda como trabajo futuro.
 
-**Estado (2026-10-07): Etapa 1 del modelo construida y verificada fuera del IDE** (el horno solo, con
-llegadas exógenas de ULI lavadas). Falta abrirla en AnyLogic: Build, M/M/1, corridas E0-E3 y comparación
-fila por fila con el CSV del verificador (checklist en `07-modelo-anylogic.md` §6). Después vienen la
-validación contra el registro (con el mismo período que las entradas) y la Etapa 2 (demanda, aguas arriba,
-zincado y nivel de servicio). La regla de fin de campaña quedó confirmada: el horno carga mientras haya cola.
+**Estado (2026-10-28): Etapa 1 corrida en AnyLogic, segunda validación con 4 de 6 métricas OK y costos en
+pesos incorporados. Sin trabajo desde el 09/10.** La Etapa 1 modela el horno solo, con llegadas exógenas de
+ULI lavadas.
+- 07/10: compiló en AnyLogic 8.9 PLE, el caso M/M/1 dio bien y las 120 corridas de `CorridasE0E3` coincidieron
+  campo por campo con el verificador.
+- Respuestas del encargado incorporadas: umbral 79, carga mientras haya cola, 48 h caliente sin carga,
+  `pPrioridad` 0,0054 y regresión de energía sin registros erróneos.
+- Segunda validación (`08-validacion-etapa1.md`), calculada **con el motor del verificador, todavía no con el
+  IDE**: t/mes, duración de campaña, espera media y kWh/mes dentro de tolerancia. Quedan afuera campañas/mes
+  (+15 %) y ULI por campaña (+22 %, n = 11, no significativa).
+- 08-09/10: GLP (≈130 kg por día caliente, compras 2024-2026) y costo en pesos: luz marginal 102 $/kWh, GLP
+  2.250 $/kg y capital inmovilizado a 4.467 $/kg al 2 % mensual. Estos cambios en el `.alp` todavía no se
+  corrieron en el IDE.
+
+**Pendiente para la entrega** (defensa 10-11/11, ver la consigna vigente arriba):
+1. Correr `CorridasE0E3` en el IDE con los parámetros actuales y comparar con `corridas_horno_harness.csv`
+   (que el resultado de la validación salga de AnyLogic y no solo del verificador).
+2. Pilotos: calentamiento con Welch, número de réplicas y valores definitivos de E1 (umbral 45) y E2 (espera
+   máxima 15 d), que hoy son provisorios.
+3. Statechart visual que refleje `estado`, para la defensa en vivo y el video.
+4. Planilla de resultados, informe tipo paper (LaTeX), subida a AnyLogic Cloud y video. No hay nada hecho de
+   ninguno de los cuatro.
+5. Etapa 2 (demanda, aguas arriba, zincado y nivel de servicio): no está construida. Con el plazo actual
+   conviene presentarla como trabajo futuro.
 
 Historial: el docente aprobó la propuesta el 27/09 y la especificación (entrega previa) se entregó ese día.
 La propuesta se envió el 16/09, el docente respondió con cinco preguntas de fondo (cómo se
@@ -2824,6 +2861,11 @@ Conclusiones:
 
 ## Log
 
+- **2026-10-28**: TPI, consigna de la entrega final (aviso del docente). Ahora son cinco partes: `.alp`, paper
+  con abstract, objetivos, metodología, resultados y conclusiones y los 10 pasos implícitos, planilla de
+  corridas, link de AnyLogic Cloud con autores y video. Defensa presencial el 10 y 11/11. Va en una sección
+  nueva, delante de la del enunciado original. TPI Caser: estado corregido (seguía en el 07/10, cuando el modelo
+  ya se había corrido en el IDE y el GLP y los costos estaban cargados) y lista de pendientes para la entrega.
 - **2026-10-27** (2): TPI subte, informe LaTeX — capítulos 1 a 7 redactados (introducción y pasos 1 a 6) en
   `entregables/TPI/subte/informe/capitulos/`, con los datos vigentes (E1 = 22, perfil mar-jun de 18.532, escenario
   intermedio) y no los del borrador `03-informe-tpi.md`, que quedó viejo. Nuevos: figura `figs/tpi-subte-perfil-demanda.png`
