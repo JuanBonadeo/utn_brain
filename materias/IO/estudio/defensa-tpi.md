@@ -77,7 +77,7 @@ Criterio: entra la de mayor $C_j - Z_j$ positivo; sale la de menor cociente $X_i
 |---|---|---|---|---|---|
 | I0 | A4, A5, A8, A6 | holguras + artificial = 150 | $-150M$ | entra **A1** ($50+M$), sale **A5** (cociente 120) | Arranca con la artificial: el mínimo todavía no se cumple. Tapa es la que más aporta y la limita la troqueladora (480/4 = 120). |
 | I1 | A4, A1, A8, A6 | $X_1 = 120$, artificial = 30 | $6000-30M$ | entra **A3** ($15+M/2$), sale **A6** (cociente 53,3) | Con todas las horas en tapa solo hay 120 lotes: faltan 30 para el mínimo. Entra múltiple, que da más lotes por hora. |
-| I2 | A4, A1, A8, A3 | $X_1 = 93,3$; $X_3 = 53,3$; artificial = 3,3 | $6800-3,3M$ | entra **A2** ($M/6-10$), sale **A8** (cociente 20) | Horas y despacho agotados y todavía faltan 3,3 lotes. Solo cárter puede completar el mínimo. |
+| I2 | A4, A1, A8, A3 | $X_1 = 93{,}3$; $X_3 = 53{,}3$; artificial = 3,3 | $6800-3{,}3M$ | entra **A2** ($M/6-10$), sale **A8** (cociente 20) | Horas y despacho agotados y todavía faltan 3,3 lotes. Solo cárter puede completar el mínimo. |
 | I3 | A4, A1, A2, A3 | (80; 20; 50), sobran 270 m² | **6600** | — óptimo | Todos los $C_j-Z_j \le 0$ y la artificial salió de la base: solución factible y óptima, única (ninguna no básica con $C_j-Z_j = 0$). |
 
 Detalle fino: en I2 el $C_j - Z_j$ de cárter es **negativo en pesos** (−10) pero lleva $+M/6$:
@@ -215,7 +215,7 @@ Rangos de todos los $b_i$:
 |---|---|---|
 | Corcho | 0 | $330 \le b_1 < \infty$ |
 | Horas | 20 | $400 \le b_2 \le 500$ |
-| Mínimo contractual | −60 | $146,7 \le b_3 \le 170$ |
+| Mínimo contractual | −60 | $146{,}7 \le b_3 \le 170$ |
 | Despacho | 30 | $150 \le b_4 \le 210$ |
 
 Dato lindo: el piso de 146,7 del mínimo contractual es exactamente la solución de la iteración
@@ -260,14 +260,14 @@ El lote restringido (1.098 m² de corcho + 255 L de sellador) se calculó para l
 los 60 m³. Después, el modelo aleatorio le suma 42 m² de stock de seguridad. Cuando llega un
 pedido, el stock máximo de corcho es **Q + SS**, no Q:
 
-$$0,05\cdot(1098 + 42) + 0,02\cdot255 = 57,0 + 5,1 = \mathbf{62,1\ m^3} > 60\ m^3$$
+$$0{,}05\cdot(1098 + 42) + 0{,}02\cdot255 = 57{,}0 + 5{,}1 = \mathbf{62{,}1\ m^3} > 60\ m^3$$
 
 Cada modelo está bien por separado, pero juntos la política no entra en el depósito. Eso es lo
 que el profe llamó resultado no integral.
 
 **La corrección:** reservar el espacio del colchón y volver a resolver Lagrange con lo que queda:
 
-$$0,05\,Q_1 + 0,02\,Q_2 \le 60 - 0,05\cdot41,6 = 57,92\ m^3$$
+$$0{,}05\,Q_1 + 0{,}02\,Q_2 \le 60 - 0{,}05\cdot41{,}6 = 57{,}92\ m^3$$
 
 | | Original | **Integrado** |
 |---|---|---|
@@ -304,8 +304,8 @@ pasa de ≈106 a **≈108 m³** (2.000 + 42 m² de corcho + 309 L de sellador).
   lote.
 - Lote con restricción: $Q_j = \sqrt{\dfrac{2D_jL_j}{C_j\,i + 2\lambda v_j}}$. λ es lo que bajaría
   el costo anual con 1 m³ más de depósito.
-- Aleatorio: $SS = z\,\sigma_d\sqrt{LT} = 1,645\cdot8\sqrt{10} = 41,6$ m²; $PP = \bar d\,LT + SS = 470,1 + 41,6 = 512$ m².
-- Mantener el SS cuesta $41,6\cdot2500\cdot0,28 \approx$ \$29.000 por año: es el precio del 95 %
+- Aleatorio: $SS = z\,\sigma_d\sqrt{LT} = 1{,}645\cdot8\sqrt{10} = 41{,}6$ m²; $PP = \bar d\,LT + SS = 470{,}1 + 41{,}6 = 512$ m².
+- Mantener el SS cuesta $41{,}6\cdot2500\cdot0{,}28 \approx$ \$29.000 por año: es el precio del 95 %
   de ciclos sin faltante.
 
 ---
