@@ -1,334 +1,248 @@
-# Defensa del TPI — Juntas de motor (Grupo 1, com. 402)
-
-Guía para el coloquio final. Está armada **desde las devoluciones del profe**: cada punto que
-marcó es una pregunta casi segura. Todos los números se recalcularon de forma exacta
-(enumeración de bases, Big M paso a paso y Lagrange por bisección), sin copiarlos de los
-documentos.
+# DEFENSA DEL TPI — JUNTAS DE MOTOR
 
-> Importes del modelo de producción en **miles de pesos**. Importes de stock en **pesos**.
+**Investigación Operativa · Comisión 402 · Grupo 1**
 
----
+Resumen de las tres etapas y posibles preguntas con su respuesta. Los importes del modelo de producción están en miles de pesos y los de stock en pesos.
 
-## 0. Ficha de memoria
+## Etapa 1 · Qué hicimos
 
-$$\max Z = 50X_1 + 30X_2 + 40X_3$$
+**El problema.** Una autopartista fabrica tres juntas de corcho para motores. Hay que decidir cuántos lotes fabricar por semana para maximizar el beneficio. Un lote son 100 juntas.
 
-| Restricción | Ecuación | En el óptimo | Precio sombra |
-|---|---|---|---|
-| R1 corcho (oferta) | $3X_1+2X_2+X_3 \le 600$ | 330 → **sobran 270 m²** | $u_1 = 0$ |
-| R2 horas troqueladora (oferta) | $4X_1+3X_2+2X_3 \le 480$ | 480 → activa | $u_2 = 20$ |
-| R3 mínimo contractual (demanda) | $X_1+X_2+X_3 \ge 150$ | 150 → activa | $u_3 = -60$ |
-| R4 despacho (capacidad) | $X_1+X_2+2X_3 \le 200$ | 200 → activa | $u_4 = 30$ |
+**Variables.** X₁ = lotes de tapa de cilindros, X₂ = lotes de cárter, X₃ = lotes de múltiple.
 
-- Óptimo: $X^* = (80;\ 20;\ 50)$ lotes, $Z^* = 6600$ → **\$6.600.000 por semana**.
-- Base óptima: $A_4$ (holgura del corcho), $A_1$, $A_2$, $A_3$.
-- Control: $W^* = 480\cdot20 + 200\cdot30 - 150\cdot60 = 9600+6000-9000 = 6600 = Z^*$.
+**Modelo.** Max Z = 50 X₁ + 30 X₂ + 40 X₃
 
-> Ojo con la numeración: en la **tabla Simplex** A6 es la holgura del **despacho** (R4) y A7
-> el exceso del **mínimo** (R3). En el **dual** de la Etapa 2 se ordenó distinto:
-> $U_3$ = despacho, $U_4$ = mínimo. Si te preguntan, aclaralo de entrada.
+| Restricción | Ecuación | Tipo |
+| --- | --- | --- |
+| R1 · Corcho (m²) | 3X₁ + 2X₂ + X₃ ≤ 600 | Oferta |
+| R2 · Horas de troqueladora | 4X₁ + 3X₂ + 2X₃ ≤ 480 | Oferta |
+| R3 · Mínimo contractual (lotes totales) | X₁ + X₂ + X₃ ≥ 150 | Demanda |
+| R4 · Capacidad de despacho | X₁ + X₂ + 2X₃ ≤ 200 | Capacidad |
 
----
+**Resolución.** Usamos Simplex con Big M. A4, A5 y A6 son las holguras de R1, R2 y R4. A7 es el exceso de R3 y A8 su artificial, con costo −M. Hicieron falta tres iteraciones:
 
-## 1. Etapa 1 — lo que van a preguntar
+| Iteración | Entra | Sale | Qué pasa |
+| --- | --- | --- | --- |
+| I0 → I1 | A1 (tapa) | A5 (horas) | Tapa es la que más aporta. Las horas alcanzan para 120 lotes. |
+| I1 → I2 | A3 (múltiple) | A6 (despacho) | Faltan 30 lotes para el mínimo. Múltiple es la que da más lotes por hora. |
+| I2 → I3 | A2 (cárter) | A8 (artificial) | Faltan 3,3 lotes y solo el cárter puede completarlos. |
 
-### 1.1 El escenario alternativo que faltó (pregunta casi segura)
+**Solución óptima.** X* = (80; 20; 50) lotes y Z* = 6600, o sea **$6.600.000 por semana**. Sobran 270 m² de corcho. Las horas, el despacho y el mínimo contractual quedan justos (activos).
 
-El profe lo marcó como incumplido y dijo que lo dejaba "para que piensen en ese punto". Hay
-que llevarlo resuelto. Los tres caen **dentro del rango de la base óptima**, así que se
-resuelven sin rehacer el Simplex: $X_B' = X_B + \Delta b\cdot(\text{columna de } B^{-1})$ y
-$Z' = Z^* + u_i\,\Delta b$. Los tres se verificaron resolviendo el modelo de nuevo.
+**Conclusión.** Los cuellos de botella son las horas de troqueladora y el despacho. El corcho no limita la producción.
 
-| Escenario | Cambio | Nuevo plan $(X_1;X_2;X_3)$ | $Z'$ | Decisión |
-|---|---|---|---|---|
-| **A. Se rompe una troqueladora** | $b_2$: 480 → 440 h | (40; 60; 50) | 5800 (−800) | Se pasa producción de tapa a cárter. Conviene tercerizar o pagar horas extra si cada hora cuesta **menos de \$20.000** (hasta 40 h, para volver a 480). |
-| **B. La terminal sube el mínimo** | $b_3$: 150 → 160 lotes | (40; 80; 40) | 6000 (−600) | Aceptarlo solo si la terminal compensa **al menos \$60.000 por lote** adicional (\$600.000 por semana). |
-| **C. Flete tercerizado** | $b_4$: 200 → 210 | (90; 0; 60) | 6900 (+300) | Conviene si cada unidad de despacho extra cuesta **menos de \$30.000**. Ojo: 210 es el tope del rango. |
+**Escenario alternativo (faltó en la entrega).** Si se rompe una troqueladora y quedan 440 horas, el plan pasa a (40; 60; 50) y el beneficio a $5.800.000, $800.000 menos. Conviene tercerizar horas si cada una cuesta menos de $20.000.
 
-Para defender el **A** con la mecánica (columna de $A_5$ en la tabla final):
-$X_1 = 80 + \Delta$, $X_2 = 20 - \Delta$, $X_3 = 50$, $X_4 = 270 - \Delta$, con $\Delta = -40$:
-$X_1 = 40$, $X_2 = 60$, $X_4 = 310$. Sobra más corcho porque se fabrica menos tapa.
+## Etapa 1 · Preguntas
 
-### 1.2 La tabla final tiene errores en la fila $Z_j$ (enterate antes que el profe)
+**1) ¿Qué escenario alternativo analizarían?**
 
-El cuerpo de la tabla (los $y_{ij}$ y los $X_i$) está **bien**. Las filas $Z_j$ y $C_j - Z_j$
-tienen tres errores:
+El de la troqueladora: las horas bajan de 480 a 440. Como 440 está dentro del rango de la base (400 a 500), no hace falta rehacer el Simplex. Se usa la columna de A5 de la tabla final:
 
-| Columna | En el documento | Correcto | Cuenta |
-|---|---|---|---|
-| A6 (holgura despacho) | $Z_j = 90$, $C_j-Z_j = -90$ | $Z_j = 30$, $C_j-Z_j = \mathbf{-30}$ | $50(1)+30(-2)+40(1) = 30$ |
-| A7 (exceso mínimo) | $C_j-Z_j = -M-60$ | $\mathbf{-60}$ | $C_7 = 0$, $Z_7 = 60$ → $0-60$ |
-| A8 (artificial) | $C_j-Z_j = 0$ | $\mathbf{-M+60}$ | $C_8=-M$, $Z_8 = -60$ → $-M+60$ |
+- X₁ = 80 + Δ = 40
+- X₂ = 20 − Δ = 60
+- X₃ = 50
+- Sobrante de corcho = 270 − Δ = 310
+- Z = 6600 + 20 · (−40) = 5800
 
-Por qué importa: la Etapa 2 usa $u_{\text{despacho}} = 30$, que es lo correcto, pero la tabla de
-la Etapa 1 dice 90. Si el profe pregunta por la diferencia: **"Fue un error de cuenta en la fila
-$Z_j$ de A6; el valor correcto es 30 y se verifica con $W^* = Z^*$: con 90 el dual daría 18.600,
-no 6.600."** Con el mismo argumento cae la interpretación de la Etapa 1 ("\$90.000 por unidad
-de despacho"): es \$30.000.
+Se pasa producción de tapa a cárter. Otro escenario posible: si la terminal sube el mínimo a 160 lotes, Z baja a 6000. Conviene aceptarlo solo si la terminal paga al menos $60.000 por cada lote extra.
 
-Regla para A7 y A8: la variable de exceso tiene costo 0, así que su $C_j - Z_j$ **no lleva M**. La
-M aparece en la artificial: su $C_j - Z_j$ es la del exceso con signo cambiado, más $-M$.
+**2) ¿Cómo saben que la tabla final es óptima? ¿La solución es única?**
 
-### 1.3 Las iteraciones (te pueden pedir que expliques cada una)
+Es óptima porque todos los Cj − Zj son ≤ 0 (es un máximo) y la artificial salió de la base, así que la solución es factible. Es única porque ninguna variable no básica tiene Cj − Zj = 0.
 
-Criterio: entra la de mayor $C_j - Z_j$ positivo; sale la de menor cociente $X_i / y_{ik}$.
+**3) ¿Por qué queda activo un mínimo si estamos maximizando?**
 
-| Iteración | Base | Solución | $Z$ | Entra / sale | Lectura |
-|---|---|---|---|---|---|
-| I0 | A4, A5, A8, A6 | holguras + artificial = 150 | $-150M$ | entra **A1** ($50+M$), sale **A5** (cociente 120) | Arranca con la artificial: el mínimo todavía no se cumple. Tapa es la que más aporta y la limita la troqueladora (480/4 = 120). |
-| I1 | A4, A1, A8, A6 | $X_1 = 120$, artificial = 30 | $6000-30M$ | entra **A3** ($15+M/2$), sale **A6** (cociente 53,3) | Con todas las horas en tapa solo hay 120 lotes: faltan 30 para el mínimo. Entra múltiple, que da más lotes por hora. |
-| I2 | A4, A1, A8, A3 | $X_1 = 93{,}3$; $X_3 = 53{,}3$; artificial = 3,3 | $6800-3{,}3M$ | entra **A2** ($M/6-10$), sale **A8** (cociente 20) | Horas y despacho agotados y todavía faltan 3,3 lotes. Solo cárter puede completar el mínimo. |
-| I3 | A4, A1, A2, A3 | (80; 20; 50), sobran 270 m² | **6600** | — óptimo | Todos los $C_j-Z_j \le 0$ y la artificial salió de la base: solución factible y óptima, única (ninguna no básica con $C_j-Z_j = 0$). |
+Porque el mínimo obliga a fabricar cárter, que es el producto que menos rinde por hora de troqueladora:
 
-Detalle fino: en I2 el $C_j - Z_j$ de cárter es **negativo en pesos** (−10) pero lleva $+M/6$:
-cárter entra solo porque hace falta para cumplir el contrato, no porque convenga.
+- Cárter: 30/3 = 10 por hora.
+- Tapa: 50/4 = 12,5 por hora.
+- Múltiple: 40/2 = 20 por hora.
 
-### 1.4 Otras preguntas de modelado
+Si el mínimo bajara, el modelo dejaría de fabricar cárter y ganaría más. Por eso su precio sombra es negativo: cada lote más de contrato cuesta $60.000.
 
-- **¿Por qué una restricción de mínimo queda activa en un problema de máximo?** Porque el mínimo
-  obliga a fabricar **cárter**, el que menos rinde por hora de troquelado (30/3 = 10 por hora,
-  contra 12,5 de tapa y 20 de múltiple). Si el mínimo bajara a 140, el óptimo deja de fabricar
-  cárter: (93,3; 0; 53,3) con $Z = 6800$. Por eso el precio sombra es **negativo**: cada lote
-  más de contrato cuesta \$60.000.
-- **El texto dice "mínimo de Juntas de Tapa de Cilindros" pero la restricción suma las tres.**
-  Es un error de redacción del documento: el contrato es por **150 lotes totales** (así está en
-  la Etapa 2). Admitirlo directo.
-- **¿Por qué $X_3$ pesa 2 en el despacho?** ⚠️ **Acordar la respuesta con el grupo antes de la
-  defensa.** No está justificado en los documentos. Una justificación razonable es que la junta
-  de múltiple ocupa el doble de volumen de embalaje por lote.
-- **"Las restricciones deben ser de oferta y demanda."** R1 y R2 son oferta (recursos propios),
-  R3 es demanda (contrato) y R4 es capacidad de salida. El modelo fue aprobado por formulario
-  antes de seguir.
+**4) En la Etapa 1 dicen que el despacho vale $90.000 y en la Etapa 2, $30.000. ¿Cuál es el correcto?**
 
----
+$30.000. La fila Zj de la tabla final tiene un error de cuenta en A6: 50·1 + 30·(−2) + 40·1 = 30, no 90. Se comprueba con el dual: 480·20 + 200·30 − 150·60 = 6600 = Z*. Con 90 daría 18.600.
 
-## 2. Etapa 2 — lo que van a preguntar
+**5) ¿Por qué el Cj − Zj de A7 es −60 y no −M−60?**
 
-### 2.1 El dual (en el documento estaba mal; en el video bien)
+Porque A7 es la variable de exceso y su costo es 0, así que 0 − 60 = −60. La M va en la artificial A8: su Cj − Zj es −M + 60. En el documento estas dos casillas estaban mal.
 
-Pedirán escribirlo en el pizarrón. Dos formas equivalentes:
+**6) El texto dice "mínimo de juntas de tapa de cilindros", pero la restricción suma los tres productos.**
 
-**Forma directa** (el signo de cada variable dual sale del tipo de restricción del primal):
+Es un error de redacción. El contrato es por 150 lotes totales, como está en la Etapa 2.
 
-$$\min W = 600u_1 + 480u_2 + 150u_3 + 200u_4$$
+**7) ¿Por qué X₃ cuenta doble en el despacho?**
 
-$$\begin{aligned}
-3u_1 + 4u_2 + u_3 + u_4 &\ge 50 \quad (X_1)\\
-2u_1 + 3u_2 + u_3 + u_4 &\ge 30 \quad (X_2)\\
-u_1 + 2u_2 + u_3 + 2u_4 &\ge 40 \quad (X_3)\\
-u_1, u_2, u_4 \ge 0, &\quad u_3 \le 0
-\end{aligned}$$
+⚠️ Acordar la respuesta con el grupo, porque no está justificado en el documento. Una respuesta posible: la junta de múltiple ocupa el doble de volumen de embalaje por lote.
 
-**Forma simétrica:** se pasa R3 a $\le$ multiplicando por −1 ($-X_1-X_2-X_3 \le -150$). Queda
-$u_3' \ge 0$ y en la función objetivo aparece $-150u_3'$, con $u_3' = -u_3 = 60$.
+## Etapa 2 · Qué hicimos
 
-Reglas para justificar cada cosa:
-- Primal max → dual min. Los $b_i$ del primal pasan a ser los coeficientes de $W$, y los $c_j$
-  los términos independientes del dual.
-- Una restricción dual por cada **variable** primal, de tipo $\ge$ porque $X_j \ge 0$.
-- Las **columnas** del primal pasan a ser las **filas** del dual.
-- $u_i \ge 0$ para las $\le$ de un max; $u_i \le 0$ para la $\ge$.
+**Modelo dual.** Min W = 600u₁ + 480u₂ + 150u₃ + 200u₄
 
-Solución: $u^* = (0;\ 20;\ -60;\ 30)$ en el orden R1, R2, R3, R4. Se lee en la fila
-$C_j - Z_j$ de la tabla final, columnas A4, A5, A7 y A6, con el signo cambiado.
+| Restricción dual | Viene de |
+| --- | --- |
+| 3u₁ + 4u₂ + u₃ + u₄ ≥ 50 | X₁ |
+| 2u₁ + 3u₂ + u₃ + u₄ ≥ 30 | X₂ |
+| u₁ + 2u₂ + u₃ + 2u₄ ≥ 40 | X₃ |
 
-**Holguras complementarias** (sirven de control):
-- $X_1, X_2, X_3 > 0$ → las tres restricciones duales se cumplen **con igualdad**.
-- Sobra corcho ($X_4 = 270 > 0$) → $u_1 = 0$.
-- $u_2, u_3, u_4 \ne 0$ → R2, R3 y R4 están activas.
+u₁, u₂, u₄ ≥ 0 y u₃ ≤ 0, porque R3 es de tipo ≥. Solución: u* = (0; 20; −60; 30) y W* = 6600 = Z*.
 
-### 2.2 "Faltó considerar los costos marginales"
+En la presentación el orden era distinto: U₃ era el despacho y U₄ el mínimo.
 
-En el apunte, *costo marginal* es sinónimo de precio sombra. Como los precios sombra estaban
-bien, lo más probable es que el profe se refiera a la **otra mitad del dual**: las holguras de
-las restricciones duales, es decir, el costo de oportunidad de cada producto. Hay que saber
-decirlo así:
+**Precios sombra.**
 
-> "Siempre que una actividad opere a nivel positivo, el costo marginal de los recursos que
-> consume es igual al beneficio que aporta." *(PLC5 §5.6)*
+| Recurso | Precio sombra | Rango donde vale |
+| --- | --- | --- |
+| Corcho | $0 (sobra) | 330 m² en adelante |
+| Horas de troqueladora | $20.000 por hora | 400 a 500 h |
+| Mínimo contractual | −$60.000 por lote | 146,7 a 170 lotes |
+| Despacho | $30.000 por unidad | 150 a 210 |
 
-| Producto | Recursos valorizados a precio sombra | $c_j$ | Holgura dual |
-|---|---|---|---|
-| Tapa | $0\cdot3 + 20\cdot4 - 60\cdot1 + 30\cdot1 = 50$ | 50 | 0 |
-| Cárter | $0\cdot2 + 20\cdot3 - 60\cdot1 + 30\cdot1 = 30$ | 30 | 0 |
-| Múltiple | $0\cdot1 + 20\cdot2 - 60\cdot1 + 30\cdot2 = 40$ | 40 | 0 |
+**Cambio en la ganancia del cárter (C₂).** El rango es −∞ < ΔC₂ ≤ 10, así que −∞ < C₂ ≤ 40. Con C₂ = 35 el plan no cambia y Z sube a 6700. Con C₂ = 42 hay que reoptimizar: el plan pasa a (0; 140; 30) y Z = 7080.
 
-Los tres se fabrican, así que cada uno "paga" exactamente lo que consume en recursos escasos:
-ninguno sobra ni falta, y por eso los tres tienen costo reducido 0.
+**Cambio en las horas (b₂).** El rango es −80 ≤ Δ ≤ 20, así que 400 ≤ b₂ ≤ 500. Con 500 horas el plan pasa a (100; 0; 50) y Z = 7000.
 
-Dos matices que conviene decir:
-- El precio sombra es lo **máximo que conviene pagar por encima del costo actual**, porque
-  $c_j$ ya es beneficio neto. Una hora de troqueladora conviene si su sobrecosto es menor a
-  \$20.000.
-- Solo vale **de a un cambio por vez** y **dentro del rango** (tabla de 2.4).
+**Producto nuevo: junta de bomba de agua.** Su costo de oportunidad es 0·2 + 20·3 + 30·2 − 60·1 = 60. Como deja 45, su costo reducido es 45 − 60 = −15: no conviene.
 
-### 2.3 Rango de $C_2$: la notación que mezclaron
+**Programación entera (mochila).** Cuatro pedidos especiales para usar los 270 m² de corcho que sobran, con variables Y₁ a Y₄ que valen 0 o 1. Se resolvió con Branch and Bound:
 
-Con $C_2 = 30 + \Delta$, la fila de $A_2$ en la tabla final da:
-$-20 + \Delta \le 0$, $-60 + 6\Delta \le 0$, $-30 + 2\Delta \le 0$ → $\Delta \le 10$.
+- La relajación da 349, que es la cota superior.
+- La rama Y₃ = 0 da la solución entera 345, con los pedidos 1, 2 y 4.
+- Las ramas de Y₃ = 1 dan cotas de 332 y 344, menores que 345, así que se podan.
 
-Escrito bien, **separando las dos variables**:
+Óptimo: aceptar los pedidos 1, 2 y 4, por **$345.000 más por semana**.
 
-$$-\infty < \Delta C_2 \le 10 \quad\Longrightarrow\quad -\infty < C_2 \le 40$$
+**Conclusión (faltó en el documento).** Las horas y el despacho valen la pena de ampliar solo si cuestan menos que su precio sombra. El corcho sobrante se aprovecha con los pedidos especiales. La bomba de agua no conviene salvo que deje más de $60.000 por lote.
 
-El error del documento fue escribir algo como "$\Delta C_2 \le 40$" o mezclar $\Delta$ y $C_2$ en
-el mismo intervalo. $\Delta$ es la **variación** y $C_2$ el **coeficiente**: se despeja primero
-$\Delta$ y recién después se suma 30.
+## Etapa 2 · Preguntas
 
-Pregunta trampa: **¿por qué no hay cota inferior?** Porque todos los $y_{2j}$ de las no básicas
-son negativos (−1, −6, −2), así que bajar $C_2$ nunca vuelve positivo un $C_j - Z_j$. La
-explicación económica: **sin cárter no se puede cumplir el contrato**. Con $X_2 = 0$, R3 y R4
-obligan a $X_3 \le 50$ y R3 y R2 a $X_3 \ge 60$: no hay solución. Cárter se fabrica aunque pierda
-plata.
+**1) Escriban el dual. ¿Por qué u₃ es ≤ 0?**
 
-Rangos de todos los $c_j$ (por si te piden otro):
+El primal es de máximo, así que el dual es de mínimo. Las reglas:
 
-| Coef. | Rango de $\Delta$ | Rango del coeficiente |
-|---|---|---|
-| $C_1 = 50$ | $-15 \le \Delta \le +\infty$ | $35 \le C_1 < \infty$ |
-| $C_2 = 30$ | $-\infty < \Delta \le 10$ | $-\infty < C_2 \le 40$ |
-| $C_3 = 40$ | $-30 \le \Delta \le +\infty$ | $10 \le C_3 < \infty$ |
+- Cada restricción del primal da una variable dual. Las de tipo ≤ dan una variable ≥ 0 y la de tipo ≥ da u₃ ≤ 0.
+- Cada variable del primal da una restricción dual de tipo ≥.
+- Los términos independientes del primal (600, 480, 150, 200) pasan a la función objetivo, y las ganancias (50, 30, 40) a los términos independientes del dual.
 
-Fuera del rango, con $C_2 = 42$: el nuevo óptimo es (0; 140; 30) y $Z = 7080$, verificado.
+Otra forma: multiplicar R3 por −1 para que quede de tipo ≤ (−X₁ − X₂ − X₃ ≤ −150). Así la variable dual queda ≥ 0 y en W aparece −150u₃'.
 
-### 2.4 Rango de $b_2$: el error en las inecuaciones
+**2) ¿Qué son los costos marginales? (el profe marcó que faltaron)**
 
-Con $b_2 = 480 + \Delta$, la columna de $A_5$ en la tabla final es $(-1;\ 1;\ -1;\ 0)$ en el
-orden A4, A1, A2, A3:
+Es lo que "cuestan" en recursos escasos los productos que fabricamos. Si un producto se fabrica, el valor de lo que consume (a precio sombra) tiene que ser igual a lo que aporta:
 
-$$\begin{aligned}
-X_4 &= 270 - \Delta \ge 0 &\Rightarrow&\ \Delta \le 270\\
-X_1 &= 80 + \Delta \ge 0 &\Rightarrow&\ \Delta \ge -80\\
-X_2 &= 20 - \Delta \ge 0 &\Rightarrow&\ -\Delta \ge -20 \Rightarrow \boxed{\Delta \le 20}\ \text{(se da vuelta la desigualdad)}\\
-X_3 &= 50 \ge 0 &&\ \text{siempre}
-\end{aligned}$$
+- Tapa: 20·4 − 60·1 + 30·1 = 50 = C₁
+- Cárter: 20·3 − 60·1 + 30·1 = 30 = C₂
+- Múltiple: 20·2 − 60·1 + 30·2 = 40 = C₃
 
-Intersección: $-80 \le \Delta \le 20$ → $400 \le b_2 \le 500$.
+Por eso los tres tienen costo reducido 0 y las holguras duales son 0.
 
-El error típico, y casi seguro el del documento, es multiplicar o dividir por −1 sin dar vuelta
-la desigualdad: $20 - \Delta \ge 0$ queda mal como $\Delta \ge 20$. Para la intersección: entre
-cotas superiores manda la **menor** (20 < 270), y entre inferiores la **mayor**.
+**3) ¿Qué significa que la hora de troqueladora valga $20.000?**
 
-Rangos de todos los $b_i$:
+Es lo máximo que conviene pagar por una hora extra, por encima de lo que ya cuesta. Vale de a un cambio por vez y entre 400 y 500 horas.
 
-| Recurso | $u_i$ | Rango de $b_i$ |
-|---|---|---|
-| Corcho | 0 | $330 \le b_1 < \infty$ |
-| Horas | 20 | $400 \le b_2 \le 500$ |
-| Mínimo contractual | −60 | $146{,}7 \le b_3 \le 170$ |
-| Despacho | 30 | $150 \le b_4 \le 210$ |
+**4) Escriban bien el rango de C₂.**
 
-Dato lindo: el piso de 146,7 del mínimo contractual es exactamente la solución de la iteración
-I2 (93,3 + 53,3).
+Primero se despeja la variación y después se suma el valor original, sin mezclarlos:
 
-### 2.5 Producto nuevo (bomba de agua)
+- Variación: −∞ < ΔC₂ ≤ 10
+- Coeficiente: −∞ < C₂ ≤ 40
 
-Costo de oportunidad: $0\cdot2 + 20\cdot3 + 30\cdot2 - 60\cdot1 = 60$. Costo reducido:
-$45 - 60 = -15$ → no conviene. Pregunta probable: **¿a qué precio conviene?** Con un beneficio
-de **más de \$60.000 por lote** entra a la base, y hay que reoptimizar para saber cuánto
-fabricar.
+El error del documento fue mezclar Δ y C₂ en el mismo intervalo.
 
-### 2.6 PEM (mochila sobre el corcho sobrante)
+**5) ¿Por qué C₂ no tiene cota inferior?**
 
-El profe lo elogió. Preguntas probables:
-- **¿Por qué la relajación es cota superior?** Porque la relajación tiene más soluciones
-  posibles que el problema entero, así que su óptimo no puede ser peor.
-- **¿Cuándo se poda?** Cuando la cota de la rama es ≤ la mejor solución entera ya encontrada
-  (345). Las dos ramas de $Y_3 = 1$ dan 332 y 344.
-- **¿Los pedidos no consumen horas ni despacho, que están agotados?** Es el supuesto del
-  submodelo: se atienden con capacidad aparte (por ejemplo, retiro por el cliente o un turno
-  extra). Si las consumieran, habría que meterlos en el modelo original como variables binarias
-  (opción B).
+Porque sin cárter no se puede cumplir el contrato. Con X₂ = 0, las restricciones R3 y R4 obligan a X₃ ≤ 50, y R3 y R2 obligan a X₃ ≥ 60: es imposible. El cárter se fabrica aunque deje poca ganancia.
 
-### 2.7 Conclusión de la Etapa 2 (faltó en el documento; tenerla para decir)
+**6) Hagan el rango de b₂ paso a paso.**
 
-> Las horas de troqueladora (\$20.000/h, válido entre 400 y 500 h) y el despacho (\$30.000 por
-> unidad, entre 150 y 210) son los cuellos de botella: ampliar conviene solo si el sobrecosto es
-> menor que el precio sombra. El corcho no limita (precio sombra 0, sobran 270 m²), y ese
-> sobrante se aprovecha con los pedidos 1, 2 y 4 (+\$345.000 por semana). El contrato mínimo
-> cuesta \$60.000 por lote porque obliga a fabricar cárter. El plan aguanta cualquier baja de la
-> ganancia del cárter y una suba hasta \$40.000. La bomba de agua no conviene salvo que deje más
-> de \$60.000 por lote.
+Con b₂ = 480 + Δ, todas las variables básicas tienen que seguir siendo ≥ 0:
 
----
+- X₁ = 80 + Δ ≥ 0, entonces Δ ≥ −80
+- X₂ = 20 − Δ ≥ 0, entonces −Δ ≥ −20, y al multiplicar por −1 **se da vuelta**: Δ ≤ 20
+- Sobrante de corcho = 270 − Δ ≥ 0, entonces Δ ≤ 270
 
-## 3. Etapa 3 — la "inconsistencia inherente" del stock aleatorio
+De las cotas superiores se queda la menor (20) y de las inferiores la mayor (−80). Resultado: 400 ≤ b₂ ≤ 500. El error del documento fue no dar vuelta la desigualdad.
 
-### 3.1 La lectura más probable: el stock de seguridad no entra en el depósito
+**7) ¿Con qué ganancia convendría la bomba de agua?**
 
-El lote restringido (1.098 m² de corcho + 255 L de sellador) se calculó para llenar **exactamente**
-los 60 m³. Después, el modelo aleatorio le suma 42 m² de stock de seguridad. Cuando llega un
-pedido, el stock máximo de corcho es **Q + SS**, no Q:
+Con más de $60.000 por lote, que es su costo de oportunidad. Si pasa eso, entra a la base y hay que reoptimizar.
 
-$$0{,}05\cdot(1098 + 42) + 0{,}02\cdot255 = 57{,}0 + 5{,}1 = \mathbf{62{,}1\ m^3} > 60\ m^3$$
+**8) ¿Por qué la relajación es una cota superior? ¿Cuándo se poda una rama?**
 
-Cada modelo está bien por separado, pero juntos la política no entra en el depósito. Eso es lo
-que el profe llamó resultado no integral.
+La relajación permite más soluciones que el problema entero, así que su óptimo no puede ser peor. Una rama se poda cuando su cota es menor o igual que la mejor solución entera encontrada (345).
 
-**La corrección:** reservar el espacio del colchón y volver a resolver Lagrange con lo que queda:
+**9) ¿Los pedidos especiales no usan horas ni despacho, que están agotados?**
 
-$$0{,}05\,Q_1 + 0{,}02\,Q_2 \le 60 - 0{,}05\cdot41{,}6 = 57{,}92\ m^3$$
+Es un supuesto del submodelo: se atienden con capacidad aparte. Si usaran horas o despacho, habría que agregarlos al modelo original como variables binarias.
 
-| | Original | **Integrado** |
-|---|---|---|
-| λ | \$5.813/m³ | **\$6.775/m³** |
-| Lote corcho | 1.098 m² | **1.059 m²** |
-| Lote sellador | 255 L | **249 L** |
-| Espacio con SS | 62,1 m³ ✗ | **60,0 m³** ✓ |
-| Pedidos de corcho por año | 15,6 (cada 23 días) | 16,2 (cada 22,5 días) |
-| Costo anual conjunto | \$46.306.000 | \$46.319.000 (**+\$13.000**) |
-| Punto de pedido | 512 m² | 512 m² (no cambia: depende de la demanda en el plazo de entrega) |
+## Etapa 3 · Qué hicimos
 
-Conclusión para decir: *"Integrando el stock de seguridad con la restricción de espacio, el lote
-baja a 1.059 m² y se pide cuando quedan 512 m². Cuesta solo \$13.000 más por año y la política
-entra en el depósito."* Con el mismo razonamiento, la ampliación para habilitar el descuento
-pasa de ≈106 a **≈108 m³** (2.000 + 42 m² de corcho + 309 L de sellador).
+**Insumo elegido.** El corcho. La demanda sale del plan óptimo: 330 m² por semana × 52 = **17.160 m² por año**. Sumamos el sellador porque comparte el depósito con el corcho.
 
-### 3.2 Otras lecturas posibles (tener respuesta igual)
+**1. Descuento por cantidad.** El metro cuadrado cuesta $2.500, o $2.350 si se piden 2.000 m² o más. Cada pedido cuesta $45.000 y mantener stock cuesta el 28 % anual del precio.
 
-- **Los pedidos especiales de la Etapa 2.** Si se aceptan, el corcho pasa de 330 a **600 m² por
-  semana**: exactamente el tope del proveedor. R1 queda activa y el corcho **deja de ser
-  gratis** (su precio sombra ya no sería 0). La demanda anual sube a 31.200 m² y la del plazo de
-  entrega a ≈855 m². El depósito sigue mandando: corcho ≈1.117 m² sin SS y ≈1.078 m² con SS. La
-  conclusión de fondo no cambia.
-- **Demanda aleatoria contra un plan de producción fijo.** La Etapa 1 fija 330 m² por semana, y
-  el modelo aleatorio dice que el consumo varía. Respuesta: el plan es el **valor medio**
-  planificado y lo que varía semana a semana es el mix real de pedidos. El desvío de 8 m² por día
-  es un supuesto, y el SS crece en proporción a él.
+- Con el precio con descuento, Q* = 1.532 m². No llega a 2.000, así que hay que comparar dos opciones.
+- Precio normal: Q* = 1.485 m², con un costo anual de $43.939.716.
+- Pedir justo 2.000 m² con descuento cuesta $41.370.100 por año.
+- Por costo conviene el descuento: ahorra unos $2.570.000 por año.
 
-### 3.3 Fórmulas de stock que pueden pedir de memoria
+**2. Restricción de espacio.** El depósito tiene 60 m³ y el corcho ocupa 0,05 m³ por m². Con los lotes sin restricción se necesitan 80,4 m³, así que no entran. Se resolvió con Lagrange. Para cada insumo queda Q = √(2·D·L / (C·i + 2·λ·v)), donde v es el espacio que ocupa cada unidad.
 
-- Lote óptimo: $Q^* = \sqrt{\dfrac{2DL}{C\,i}}$ → corcho 1.485 m², sellador 309 L.
-- Costo total con descuento: $CT = DC + \dfrac{D}{Q}L + \dfrac{Q}{2}C\,i$. La compra $DC$
-  entra porque el precio depende de Q. En Lagrange, con precio fijo, es constante y no afecta el
-  lote.
-- Lote con restricción: $Q_j = \sqrt{\dfrac{2D_jL_j}{C_j\,i + 2\lambda v_j}}$. λ es lo que bajaría
-  el costo anual con 1 m³ más de depósito.
-- Aleatorio: $SS = z\,\sigma_d\sqrt{LT} = 1{,}645\cdot8\sqrt{10} = 41{,}6$ m²; $PP = \bar d\,LT + SS = 470{,}1 + 41{,}6 = 512$ m².
-- Mantener el SS cuesta $41{,}6\cdot2500\cdot0{,}28 \approx$ \$29.000 por año: es el precio del 95 %
-  de ciclos sin faltante.
+- Con λ = $5.820 por m³ el depósito queda justo lleno.
+- Lotes: 1.098 m² de corcho y 255 L de sellador.
+- El lote de 2.000 m² ocupa 100 m³. Para aprovechar el descuento hay que ampliar el depósito a unos 106 m³.
 
----
+**3. Demanda aleatoria.** La demanda diaria es de 47 m² con un desvío de 8, y el proveedor tarda 10 días en entregar. Con un 5 % de riesgo de faltante (z = 1,645):
 
-## 4. Errores propios para admitir sin que te los saquen
+- Stock de seguridad: SS = 1,645 · 8 · √10 = **42 m²**
+- Punto de pedido: PP = 470 + 42 = **512 m²**
 
-1. Tabla final de la Etapa 1: filas $Z_j$ de A6, A7 y A8 (ver 1.2).
-2. Interpretación de la Etapa 1: "despacho \$90.000" → es **\$30.000**.
-3. Texto de R3: dice "tapa de cilindros", pero el contrato es por **lotes totales**.
-4. Etapa 2: portada y pie de página con "Etapa 1" y fecha de junio. Faltó la sección de
-   conclusiones.
-5. Etapa 3: el stock de seguridad no estaba integrado con el depósito (ver 3.1).
+**Política final.** Cuando el stock baja a 512 m², pedir 1.098 m² de corcho. Son unos 15,6 pedidos por año, uno cada 23 días.
 
-La actitud que suma: **reconocer el error, dar el valor correcto y mostrar cómo se verifica**.
-El criterio de evaluación 4 es "Evolución: correcciones entre etapas".
+## Etapa 3 · Preguntas
 
-## 5. Checklist para la noche anterior
+**1) ¿Cuál es la inconsistencia del modelo aleatorio? (lo que marcó el profe)**
 
-- [ ] Repetir sin mirar la ficha del punto 0.
-- [ ] Decir el escenario alternativo A en 30 segundos, con números.
-- [ ] Escribir el dual en las dos formas.
-- [ ] Hacer el rango de $b_2$ dando vuelta la desigualdad.
-- [ ] Decir la frase de costo marginal y la tabla de los tres productos.
-- [ ] Explicar por qué no hay cota inferior para $C_2$ y por qué el mínimo tiene precio negativo.
-- [ ] Explicar Q + SS > depósito y la corrección a 1.059 m².
-- [ ] Acordar con el grupo la justificación del 2 en $2X_3$ del despacho.
+El stock de seguridad no entra en el depósito. El lote de 1.098 m² se calculó para llenar justo los 60 m³. Pero cuando llega un pedido, en el depósito hay lote más stock de seguridad: 0,05 · (1.098 + 42) + 0,02 · 255 = 62,1 m³, más que los 60 disponibles.
+
+La corrección es reservar el lugar del stock de seguridad y volver a calcular con Lagrange con 60 − 2,1 = 57,9 m³:
+
+| | Antes | Corregido |
+| --- | --- | --- |
+| Lote de corcho | 1.098 m² | 1.059 m² |
+| Lote de sellador | 255 L | 249 L |
+| λ | $5.820 | $6.775 |
+| Espacio total con SS | 62,1 m³ | 60 m³ |
+| Punto de pedido | 512 m² | 512 m² |
+
+Cuesta solo $13.000 más por año y la política entra en el depósito.
+
+**2) ¿Y si se aceptan los pedidos especiales de la Etapa 2?**
+
+El consumo de corcho sube a 600 m² por semana, justo el máximo que entrega el proveedor. El corcho deja de sobrar y pasa a ser un recurso limitante. Igual el depósito sigue limitando el lote (unos 1.100 m²), así que la conclusión no cambia.
+
+**3) ¿Por qué se compara con exactamente 2.000 m² y no con un lote mayor?**
+
+Porque con el precio con descuento el mínimo de costo está en 1.532 m². Por encima de 2.000 el costo sube a medida que el lote se aleja de ese mínimo, así que el mejor lote con descuento es el propio umbral.
+
+**4) ¿Por qué en el descuento se suma el costo de compra y en Lagrange no?**
+
+En el descuento el precio depende del tamaño del lote, así que D·C cambia la decisión. En Lagrange el precio es fijo y D·C es una constante que no mueve el lote óptimo.
+
+**5) ¿Qué significa λ? ¿Por qué el tope para ampliar ($56.750 por m³) es mayor que λ?**
+
+λ es cuánto bajaría el costo anual con 1 m³ más de depósito. El tope es mayor porque ampliar 46 m³, además de dar espacio, habilita el salto de precio del descuento, y λ no captura ese salto.
+
+**6) ¿Por qué no hay stock de seguridad en los modelos determinísticos?**
+
+Porque la demanda y el plazo de entrega se conocen con certeza: el pedido llega justo cuando se termina el stock.
+
+**7) ¿Por qué el modelo aleatorio usa el lote del modelo con restricción?**
+
+Porque la aleatoriedad cambia cuándo pedir (el punto de pedido), no cuánto. Y el lote restringido es el único que entra en el depósito.
+
+**8) Si el plan de la Etapa 1 es fijo, ¿por qué la demanda es aleatoria?**
+
+Los 330 m² por semana son el promedio planificado. Lo que varía semana a semana es el mix real de pedidos. El desvío de 8 m² es un supuesto: si fuera mayor, el stock de seguridad crecería en la misma proporción.
