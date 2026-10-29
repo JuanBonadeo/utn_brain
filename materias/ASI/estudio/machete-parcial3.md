@@ -85,6 +85,54 @@ Errores típicos: sacar el PV del estado real o el EV del plan · equivocarse de
 - Tasa de descuento = costo de capital + % de riesgo. **No es la inflación.**
 - **Punto de equilibrio** (para el emprendimiento): **Q = CF / (P − CVu)**. El retiro de los socios va en los costos fijos.
 
+### Ejercicio tipo, explicado paso a paso
+
+**Los datos te los da el enunciado.** No se inventan.
+
+| Dato | Qué es |
+|---|---|
+| **Inversión** | Lo que cuesta hacer el proyecto, se paga hoy |
+| **Beneficio por año** | Lo que el banco gana o deja de gastar cada año (costos evitados + ingresos) |
+| **Vida útil** | Cuántos años da beneficios |
+| **Tasa (ej. 10%)** | Lo **mínimo** que el banco le exige a su plata: lo que ganaría en otro lado (por ejemplo, un plazo fijo) más un extra por riesgo. **El proyecto tiene que ganarle a esa tasa.** |
+
+> **Enunciado.** Bancorp evalúa el **Portal del Empleado**. La inversión es de **$100.000**, los beneficios de **$50.000 anuales** durante **3 años** y la tasa exigida del **10%**.
+> a) TR y ROI. b) VAN: ¿conviene? c) La TIR es 23,4%: interprétela. d) ¿Por qué no alcanza con el TR?
+
+**a) TR:** sumo beneficios hasta llegar a lo invertido.
+
+```
+Año 1: 50.000 → acumulado  50.000
+Año 2: 50.000 → acumulado 100.000  ← iguala la inversión → TR = 2 años
+```
+
+**ROI** = (beneficio total − inversión) / inversión = (150.000 − 100.000) / 100.000 = **50%**.
+→ "Recupera en 2 años. Por cada $100 invertidos gana $50 netos."
+
+**b) VAN:** paso cada beneficio a **pesos de hoy** (divido por 1,10 una vez por cada año de espera) y resto la inversión.
+
+```
+Año 1: 50.000 / 1,10  = 45.455
+Año 2: 50.000 / 1,21  = 41.322     (1,10 × 1,10)
+Año 3: 50.000 / 1,331 = 37.566     (1,10 × 1,10 × 1,10)
+                        ───────
+        Total hoy     = 124.343
+VAN = 124.343 − 100.000 = +24.343
+```
+
+¿Por qué divido? Porque $45.455 puestos hoy al 10% se convierten en $50.000 en un año. **Cobrar $50.000 dentro de un año equivale a tener $45.455 hoy.**
+→ "VAN > 0, **conviene**: recupera la inversión, rinde el 10% exigido y genera $24.343 extra en pesos de hoy."
+
+**c) TIR** (te la dan, no se calcula): "Es la tasa a la que rinde el proyecto, 23,4% anual. Supera el 10% exigido → **conviene**."
+
+**d)** "El TR solo dice **cuándo** recupero. No mira lo que pasa después del recupero ni el valor del dinero en el tiempo. El VAN y la TIR sí."
+
+**Cierre (siempre):** "El proyecto **conviene**: VAN positivo (+$24.343) y TIR (23,4%) mayor que la tasa exigida (10%). Recupera en 2 años con un ROI del 50%."
+
+**Si la pregunta es solo teórica:** "Se monetizan los beneficios (ingresos + costos evitados), se comparan contra la inversión y se calcula el VAN a la tasa exigida: si da > 0, conviene. Si la TIR supera esa tasa, conviene."
+
+**¿Proyecto o emprendimiento?** En un **proyecto**, como el anterior, deciden el VAN y la TIR. En un **emprendimiento** todavía no hay datos ciertos para un VAN creíble, así que se usan el **punto de equilibrio** (¿cuántos clientes necesito y es alcanzable?), el **CAC** y la **validación con un MVP** de que el cliente paga.
+
 ---
 
 ## U6 · 4. Segmentos ↔ Propuesta de valor ★★★
