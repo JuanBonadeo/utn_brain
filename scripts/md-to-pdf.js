@@ -69,7 +69,12 @@ function eyebrowFor(file) {
 
 const ROOT = path.resolve(__dirname, '..');
 const KATEX_CSS = path.join(ROOT, 'node_modules', 'katex', 'dist', 'katex.min.css');
-const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+// Mac primero; en Windows, Chrome o Edge. CHROME_PATH pisa la búsqueda.
+const CHROME = process.env.CHROME_PATH || [
+  '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+  'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+  'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',
+].find((p) => fs.existsSync(p)) || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 
 // ─────────────────────────────────────────── 1. extraer matemática
 
