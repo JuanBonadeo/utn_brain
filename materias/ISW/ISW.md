@@ -9249,3 +9249,4 @@ métricas de proyecto vs producto — ver [Unidad 8](#unidad-8--medición-y-aná
   comienzo con predecesoras (la resumen de RD dice 112 h y da 104 h), VER SP 2.2, "VER y VAL
   cumplidos" sin pruebas con usuarios, tailoring con conjuntos A/B/C y REQM ante un cambio del
   cliente.
+- 2026-10-29: `estudio/defensa-automatizacion-visual.pdf` (+ `.html` fuente, render con `scripts/formulario-pdf.js`, 6 págs.) para la defensa del TP de automatización de pruebas: argumentos a favor (A1–A8) y en contra (B1–B8) con fuente marcada (wiki / TP / general), cruce de ataques y respuestas, gráfico del punto de equilibrio, criterios de qué automatizar, preguntas probables y frases de cierre. Números del TP re-medidos: 60 tests en 0,02 s, 100 % cobertura (84 sentencias, 46 ramas), 192 líneas de test vs 128 de sistema.
