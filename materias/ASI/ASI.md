@@ -4528,6 +4528,18 @@ No se elige por moda, se justifica por la naturaleza de los requerimientos:
 | **Ágil** | Alta incertidumbre y necesidad de revisar prioridades frecuentemente |
 | **Híbrido** | Algunas etapas son previsibles y otras necesitan iteración |
 
+**Los modelos del apunte T1** (págs. 6 y 12–16). El ciclo de vida son las **fases que conectan el inicio con el fin** del proyecto; no hay uno ideal. Define qué trabajo técnico se hace en cada fase, cuándo se generan los entregables y cómo se validan, quién participa y cómo se controla y aprueba cada fase. **No confundir ciclo de vida con metodología de desarrollo.**
+
+| Modelo | Qué es | Cuándo |
+|---|---|---|
+| **Cascada** (Royce, 1970) | Etapas en secuencia, con revisión al terminar cada una; admite retroalimentación (el lineal no). El más sencillo, rígido, base del resto | Todos los requerimientos al inicio y estables. Contra: un error tardío es caro y el resultado se ve recién al final |
+| **Iterativo** | Varias cascadas: cada iteración entrega una versión **mejorada** que el cliente evalúa | Reducir el riesgo de malentender requerimientos. Ej.: migrar de a poco a otra arquitectura |
+| **Por prototipos** | Iterativo donde las versiones son prototipos antes del producto final | Innovación o tecnología nueva o poco probada |
+| **Incremental** | Construye **por módulos**, una cascada por funcionalidad. Si hay un error grave se descarta solo el último incremento | Cliente que necesita **entregas rápidas aunque parciales** |
+| **Espiral** (Boehm, 1988) | Ciclos repetitivos centrados en el **riesgo**: planificación → análisis de riesgos → implementación (prototipo) → evaluación del cliente | Requerimientos inciertos |
+
+> Iterativo **mejora** el mismo producto en cada vuelta; incremental le **agrega** un módulo. El apunte menciona además el Proceso Unificado, sin desarrollarlo.
+
 ##### 5. Fases y EDT / WBS
 
 **Fases tipo para una implementación de software** (ejemplo de cátedra): 1. Inicio — 2. Relevamiento y análisis — 3. Diseño — 4. Adquisición o configuración — 5. Desarrollo e integración — 6. Pruebas — 7. Capacitación y puesta en producción — 8. Cierre.
@@ -4734,6 +4746,18 @@ Formato de tabla sugerido por la cátedra:
 
 **Variables del TCO** — licencias o suscripciones · servicios de implementación y parametrización · integraciones y migración de datos · infraestructura o consumo cloud · capacitación · soporte y mantenimiento · actualizaciones y renovaciones · administración interna de la herramienta · escalabilidad y crecimiento · **costos de salida o cambio de proveedor**.
 
+**Fórmula del TCO de la cátedra** (DIAP T5, láminas 29–32; el docente la pide **de memoria** para el 3º parcial). Método "sencillo" para adquirir soluciones que incluye el aspecto financiero, administrativo y operativo:
+
+```
+TCO = CIS + CA + CO + CSU
+CIS = Ch + Cs + Cins + Ccon      (hardware + software + instalación + configuración iniciales)
+CA  = costo anual de un ingeniero × nº de ingenieros de planta × años en funcionamiento × % de tiempo dedicado
+CO  = incidentes promedio por año × años en funcionamiento × costo por hora de servicio × tiempo para reparar la falla
+CSU = incidentes promedio por año × años en funcionamiento × costo por hora de soporte × tiempo para dar el soporte
+```
+
+CO es reparar la falla; CSU es atender al usuario. En la evaluación de propuestas, el TCO va junto con la capacidad financiera del oferente.
+
 > El TCO **no** lo exige la Etapa 3 (pide "variables de costo" y "forma de adquisición"), pero la propia cátedra dice que puede enriquecerla. Para comparar desarrollo interno contra SaaS es la herramienta correcta.
 
 ##### 11. Costos
@@ -4768,7 +4792,9 @@ Costo total = RRHH + adquisiciones + servicios + indirectos + contingencia
 | 1 | **TR** — Tiempo de Recuperación | Cuántos años hasta que `Beneficios = Inversión` | Fácil de calcular y comprender | No considera beneficios posteriores al recupero, ni el momento en que se producen los flujos, ni el rendimiento de la inversión |
 | 2 | **TPR** — Tasa Promedio de Retorno | `Beneficio Promedio Anual ÷ Inversión Total`, con BPA = Beneficio Total ÷ Vida Útil | Fácil, y **sí considera la vida útil** | No considera el momento de los flujos ni el valor del dinero en el tiempo |
 | 3 | **VAN** — Valor Actual Neto | Valor neto de dinero que se espera obtener. **La inversión conviene si VAN > 0** | Considera el valor del dinero en el tiempo y la vida útil | Depende de elegir bien la **tasa de descuento**, y del costo de capital variable |
-| 4 | **TIR** — Tasa Interna de Retorno | La tasa a la que el VAN se hace cero | — | — |
+| 4 | **TIR** — Tasa Interna de Retorno | La tasa a la que el VAN se hace cero. Conviene si **TIR > tasa que usa la empresa** | Considera el valor del dinero y la vida útil; da una tasa en vez de $; no necesita tasa de descuento | Supone reinvertir los ingresos a la misma TIR; difícil de calcular a mano |
+| — | **ROI** — Retorno de la Inversión | `Beneficio neto ÷ Inversión`: cuánto beneficio da cada $ invertido | — | — |
+| — | **EVA** — Valor Agregado Económico | `Beneficio neto − Inversión × Costo de capital`. EVA > 0 es lo que el proyecto aporta a los beneficios de la compañía | — | — |
 
 **Valor del dinero en el tiempo** — el dinero vale más hoy que el mismo monto en el futuro, por su potencial de inversión, la inflación y el riesgo.
 
@@ -4779,6 +4805,26 @@ Costo total = RRHH + adquisiciones + servicios + indirectos + contingencia
 > El apunte aclara: **no confundir la tasa de descuento con la tasa de inflación**.
 
 > **Para la Etapa 3.** La consigna pide "variables para calcular los costos" y factibilidad económica — no exige VAN ni TIR. Con **SaaS** (costo recurrente por usuario, sin inversión inicial fuerte) el indicador que mejor muestra el peso real es el **TCO a 3 años**; el TR y el VAN sirven para contrastar el ahorro de horas contra la licencia acumulada.
+
+##### 11 ter. Control de costo y tiempo — Valor ganado
+
+DIAP T4, láminas 40–50. Bases: **BAC** (presupuesto total), **PV** (valor planificado al corte, BCWS, sale del plan), **EV** (valor ganado, BCWP: lo hecho a precio de presupuesto), **AC** (costo real, ACWP).
+
+| Indicador | Fórmula | Lectura |
+|---|---|---|
+| SV | EV − PV | < 0 atrasado · > 0 adelantado |
+| CV | EV − AC | < 0 ineficiente · > 0 eficiente |
+| SV % | SV / PV × 100 (sobre lo presupuestado) o SV / EV × 100 (sobre lo ya completado) | |
+| CV % | CV / EV × 100 | |
+| SPI | EV / PV | cuánto trabajo generó cada $ planificado |
+| CPI | EV / AC | grado de eficiencia |
+| ETC | BAC − EV | cuánto falta hacer, según presupuesto |
+| EAC₁ / EAC₂ / EAC₃ | AC + (BAC − EV) · AC + (BAC − EV)/CPI · BAC/CPI | costo final estimado (EAC₂ y EAC₃ son algebraicamente iguales) |
+| VAC | BAC − EAC | < 0 se pasa del presupuesto |
+| TPI | CPI × SPI | índice total del proyecto |
+| % terminado / % gastado | EV / BAC × 100 · AC / BAC × 100 | |
+
+Criterios para tareas en curso, fijados al inicio: 0% · 100% · 20/80 · 50/50. Ejemplo resuelto y hoja de práctica: `estudio/formulas-mc-parcial3.md` y `estudio/resumen-parcial3.md` §3.
 
 ##### 12. Análisis de Factibilidad
 
@@ -5987,10 +6033,22 @@ A **5 años**: **5.** Core Bancario Inteligente con IA y Big Data (Data Lake, ML
 - **Lo que anotó el alumno sobre la forma probable** (con pinzas): un ejercicio de valor ganado con la planilla de valores, y una parte del Canvas para una idea de negocio dada. Además: saber leer Gantt y red, y decidir si un proyecto o emprendimiento es rentable.
 - **Consulta extra:** media hora el jueves a la mañana, coordinando con el docente por escrito.
 
+#### Actualización 2026-10-29 — mensaje del docente (formato definitivo)
+
+> Fuente: `materias/ASI/fuentes/Parcial3/2026-10-29-mensaje-profe.md`. Hoja de estudio: `materias/ASI/estudio/formulas-mc-parcial3.md` + `.pdf`.
+
+- **12 multiple choice** de elección única, **0,5 pts** cada una (6 pts). Algunas son **aplicadas al contexto**.
+- **2 de desarrollo**, **2 pts** cada una (4 pts), "muy seguramente" **valor ganado** y **modelo de negocios**.
+- **De memoria**, también en el multiple choice: fórmulas de **valor ganado** y de **TCO** (`TCO = CIS + CA + CO + CSU`, ver U5 §10), y **qué representa** ROI, TIR y el resto de los indicadores de costos.
+- **Ciclos de vida:** solo en multiple choice, cuáles son y qué son por encima (U5 §4).
+- **El contexto no hace falta llevarlo.**
+- **Cambia respecto de la clase de consulta:** ahí se dijo que de evaluación económica no hacían falta las fórmulas; ahora el docente pide de memoria las de valor ganado **y las del TCO**, que la clase había dejado como "qué costos entran". Para ROI y TIR sigue pidiendo qué representan.
+
 ---
 
 ## Log
 
+- 2026-10-29: **formato definitivo del 3º parcial** (mensaje del docente, copiado a `fuentes/Parcial3/`): 12 multiple choice de 0,5 y 2 de desarrollo de 2 pts (valor ganado y modelo de negocios); fórmulas de valor ganado y TCO de memoria. Se volcó en la sección del 3º parcial y se completaron tres huecos de U5 contra las láminas: la **fórmula del TCO** de la cátedra (`CIS + CA + CO + CSU`, §10), los **ciclos de vida del apunte** (cascada, iterativo, prototipos, incremental, espiral, §4) y un apartado de **valor ganado** con todas las fórmulas del DIAP T4 (ETC, EAC, VAC, TPI, % terminado y gastado, §11 ter), más ROI y EVA en §11 bis. Hoja nueva `estudio/formulas-mc-parcial3.md` + `.pdf` con las fórmulas, qué representa cada indicador y 14 preguntas de práctica con respuestas.
 - 2026-10-29: **machete del 3º parcial** en `estudio/machete-parcial3.md` + `.pdf`. Concentra lo fundamental de U5 y U6 con ejemplos de los proyectos del 1er año de Bancorp: valor ganado (Omnicanalidad, SV −700 y CV −500), red y Gantt (HT contra HL, nivelación con la holgura total y su costo en riesgo), rentabilidad sobre el Portal del Empleado (TR 2 años, TPR y ROI 50%, VAN +24.343, TIR ≈ 23,4%), cuatro startups "desde afuera" con segmentos y propuestas de valor (ValidaYa, UnToken, Norma, Recibo+), el resto del Canvas, Lean, adquisiciones y acta.
 - 2026-10-28: **tercer parcial (U5 + U6)**. Se copiaron las notas de la clase de consulta a `fuentes/Parcial3/` y se volcaron en una sección nueva ("Tercer parcial — qué se toma"). Se armó `estudio/resumen-parcial3.md` con los temas ordenados por prioridad: los proyectos del 1er año de Bancorp; red y Gantt con la convención del profe (días desde 1), resueltos sobre el proyecto de Omnicanalidad (18 días, camino crítico A-B-D-F-H); valor ganado con la planilla y un ejemplo resuelto al día 10 (SV −700, CV −500), además del resultado oficial de Pinaires (BAC 8.100, PV 2.400, EV 2.300, SV −100, CV −200), que se convirtió desde `fuentes/Campus/`; los indicadores de rentabilidad con su ejemplo sobre el Copiloto IA (TR 2,5 años, VAN > 0, TIR ≈ 21,9%), punto de equilibrio y CAC; un Canvas completo de una startup que le vende al banco desde afuera ("Norma", copiloto normativo), con tres segmentos específicos y una propuesta de valor por segmento; Lean Startup; adquisiciones; acta y objetivos; y una autoevaluación. **Contradicción registrada:** la convención de días del profe (desde 1, FT = IT + dur − 1) contra la del caso de cátedra (desde 0).
 
