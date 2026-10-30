@@ -9,14 +9,39 @@
 
 ## Formato del 2do parcial
 
-Según un formato que le pasaron a Augusto (`fuentes/2026-10-26_formato-parcial2.md`):
+Dos fuentes: un formato escrito que le pasaron a Augusto (`fuentes/2026-10-26_formato-parcial2.md`)
+y la **profesora explicándolo en clase** (`fuentes/2026-10-22_audio-profesora-formato-parcial2.md`,
+audio con ruido; lo que no se entiende bien va marcado con "?").
 
-1. **Un caso práctico** de la unidad 4 **o** de la 6.
-2. **Verdadero o falso de la unidad 5.** No hay que justificar las falsas.
-3. Dos preguntas: una de la unidad 4 o 6, **la que no salió como caso práctico**, y otra de derecho
-   laboral.
+1. **Caso práctico** (de U4 o U6; **laboral no va como caso**: "no era algo que habíamos observado
+   mucho, tienen el apunte, no me quise arriesgar"). Primero una serie de **preguntas de respuesta
+   mínima** sobre el caso. Su ejemplo, si el caso es de una patente de invención: qué **título**
+   requiere o al que puede acceder la persona, el **plazo** de duración (?), la **autoridad** que lo
+   gestiona y los **requisitos** del invento ("pueden poner tres cuestiones"). Después **una pregunta
+   más intensa**, por ejemplo evaluar la **postura ética**.
+2. **Verdadero o falso, unos 10, sin fundamentar** ("creo que 10, no quiero mentir"). Según ella
+   "un poco de cada cosa", sobre todo laboral. Pidió **tomarse tiempo** en el V o F: es donde la gente
+   se apura.
+3. **Dos preguntas de desarrollo:**
+   - Una de **desarrollo total** sobre un bloque entero. Sus ejemplos: **trabajo de menores, trabajo
+     de mujeres, derechos intelectuales y sus campos, presupuestos de la responsabilidad**.
+   - Otra **más corta, de memoria**: un **concepto o característica** puntual.
+
+Por qué lo armó así: "si me falla el práctico, no me hunde", porque con el resto se salva. Son **dos
+páginas** (fotocopia), con **dos temas** repartidos al azar ("les puede quedar cualquier tema").
+
+El formato escrito dice que el V o F es todo de U5 y que la pregunta 3 se reparte en una de U4 o U6
+(la que no fue caso) y una de laboral. El audio no lo contradice, pero lo afloja: el V o F puede
+mezclar unidades (en la noche cayó uno sobre la matrícula del Colegio) y los ejemplos de desarrollo
+son de las tres unidades.
 
 U4 y U6 hay que llevarlas para caso y para pregunta. U5 entra seguro, probablemente dos veces.
+
+> En el mismo audio menciona **un práctico aparte, de pericia** (?), que se puede hacer con el
+> material **en papel**, marcado y subrayado, no en la compu, con **entrega hasta el 6 de
+> noviembre** ("post-recuperatorio, todo el mundo entrega"). No queda claro si es parte del parcial;
+> por el contexto, parece un trabajo separado. Conviene confirmarlo.
+
 En el caso de U6, la profesora adelantó qué se busca: **analizar si una conducta constituye o no
 una falta** y ante quién (la profesión, los colegas, el comitente o empleador, el Colegio), con los
 arts. 5 y 6 del Código.
@@ -773,4 +798,5 @@ o un proceso penal afectan la matrícula, art. 24. (5) Si hay daño a un cliente
 - 2026-10-26: `estudio/prompt-podcast.md` reescrito para el formato del parcial y los artículos de U6 de la profesora: cuatro episodios (U5 en dos partes orientadas al V o F, U6 orientado al caso de "¿es falta y ante quién?", sin Estatuto, y U4). Reemplaza al episodio único y los tres por unidad del 2026-10-12.
 - 2026-10-27: ingest de `fuentes/2026-10-27_parcial2-noche-relato.md` (relato en audio del 2do parcial de la comisión de la noche, transcripto con Whisper). Nueva sección "Lo que tomaron en la comisión de la noche": V o F de 10; caso corto que mezcla U4 (software con hardware → patente, INPI, requisitos, 20 años, propiedad industrial) y U6 (riesgo vial → función preventiva; falta ética y Tribunal); preguntas de trabajo de menores y responsabilidad civil del ingeniero. U4: nota sobre software con hardware patentable (conocimiento general, marcado). U5: trabajo de menores completo desde el apunte (7.2).
 - 2026-10-27: ingest de `fuentes/2026-10-27_parcial2-noche-relato-b.md` (+ audios `2026-10-27_leg-parcial2-noche-b_audio1..4.m4a`): segundo relato del parcial de la noche, de otro tema (modelo de utilidad; V o F de LCT con plazo fijo, propinas, días de sanción y un requisito de matriculación; preguntas de remuneración y daño). La sección del parcial de la noche quedó como tabla de los dos temas, con respuestas esperadas y conclusiones. U6: daño patrimonial y extrapatrimonial (conocimiento general, marcado). También se agregaron los audios del primer relato a `fuentes/` y se sacaron de las fuentes los encabezados que remitían a otro repositorio.
+- 2026-10-29: ingest de `fuentes/2026-10-22_audio-profesora-formato-parcial2.md` (+ `.ogg`, la profesora explicando el formato en clase, transcripto con Whisper large-v3). Sección "Formato del 2do parcial" reescrita: caso con preguntas cortas (título, plazo, autoridad, requisitos) y una más intensa (postura ética); laboral no va como caso; unos 10 V o F sin fundamentar, mezclados; un desarrollo total y uno corto de concepto; dos temas. Nota sobre un práctico de pericia con entrega hasta el 6/11, a confirmar.
 - 2026-10-27: `estudio/prompt-podcast.md` con la versión 2: ocho episodios más cortos, con repetición (cada idea tres veces), menos ejemplos y metadata de versión, número, unidad y parte; prioridad según lo que tomaron en la noche (título de propiedad industrial, responsabilidad civil, ética, después U5). La v1 queda abajo.
