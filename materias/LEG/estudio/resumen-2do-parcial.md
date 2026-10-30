@@ -14,13 +14,24 @@
 
 Es **escrito** y entran las unidades 4, 5 y 6. En clase sólo se llegó a dar la 4.
 
-**Formato** (según el que circula en el curso, `fuentes/2026-10-26_formato-parcial2.md`):
-1. **Un caso práctico** de la unidad 4 **o** de la 6.
-2. **Verdadero o falso de la unidad 5**, sin justificar las falsas.
-3. Dos preguntas: una de la unidad 4 o 6, **la que no salió como caso práctico**, y otra de
-   derecho laboral.
+**Formato**, según lo explicó la profesora en clase (audio del 22/10,
+`fuentes/2026-10-22_audio-profesora-formato-parcial2.md`) y el formato escrito que circula en el
+curso (`fuentes/2026-10-26_formato-parcial2.md`):
+1. **Caso práctico** de U4 o U6. **Laboral no va como caso.**
+   - Primero, **preguntas de respuesta corta**. Su ejemplo, con una patente: qué **título**
+     corresponde, el **plazo**, la **autoridad** que lo otorga (INPI) y los **requisitos** del invento.
+   - Después, **una pregunta más intensa**, por ejemplo evaluar la **postura ética**.
+2. **Unos 10 verdadero o falso**, sin justificar las falsas. Sobre todo de laboral, aunque la
+   profesora dijo "un poco de cada cosa". Es donde la gente se apura: leer cada afirmación entera.
+3. **Dos preguntas de desarrollo:**
+   - una de **desarrollo total** sobre un bloque entero (sus ejemplos: **trabajo de menores, trabajo
+     de mujeres, derechos intelectuales y sus campos, presupuestos de la responsabilidad**);
+   - otra **corta**, de un **concepto o característica**.
 
-U4 y U6 hay que llevarlas para caso y para pregunta; U5 entra seguro, probablemente dos veces.
+   Según el formato escrito, una es de U4 o U6 y la otra de laboral.
+
+Son **dos páginas**, con **dos temas**. U4 y U6 hay que llevarlas para caso y para pregunta; U5
+entra seguro, probablemente dos veces. Para practicar: `estudio/simulacro-2do-parcial.md`.
 
 Los artículos **no se piden de memoria**: la profesora lo dijo para la U6 ("nadie les va a tomar de
 memoria esa numeración"). Lo que sirve es saber **qué regula** cada uno, tener ejemplos listos y,
@@ -342,11 +353,29 @@ ser inculpable, incapacitante y aparecer durante la relación.
 - **Control médico:** el empleador puede hacerlo. Si discrepa con el certificado, decide una **junta médica oficial** o un instituto, que paga el empleador.
 - **Sueldo:** se cobra **3, 6 o 12 meses**; después, **un año de reserva del puesto** sin sueldo.
 
-**Maternidad:**
-- **90 días** de licencia, **45 antes y 45 después** del parto; la parte previa se puede reducir a 10 días.
-- La trabajadora debe **comunicar el embarazo**; desde ahí tiene **estabilidad**.
-- Si la despiden **7 meses y medio antes o después del parto**, se presume que fue por eso: **indemnización agravada de un año de sueldo**, además de la común.
-- Al volver, puede pedir **excedencia de 3 a 6 meses** sin sueldo si tiene un año de antigüedad.
+**Trabajo de mujeres: protección de la persona gestante** (apunte 7.1, arts. 177 a 186; la
+profesora lo dio como ejemplo de pregunta de desarrollo total):
+- **Licencia por maternidad.** La ley la llama **prohibición de trabajar**. Son **90 días**, **45
+  antes** de la fecha probable del parto y **45 después**. La parte anterior se puede reducir a **no
+  menos de 10 días**, y el resto se suma después del parto. Durante la licencia no se puede trabajar.
+- **Asignación por maternidad.** La paga la **ANSES**; el empleador la paga hasta que la licencia se
+  hace efectiva.
+- **Obligaciones de la trabajadora.** **Comunicar el embarazo** y presentar un **certificado médico
+  con la fecha probable del parto**.
+- **Estabilidad.** Desde que el empleador recibe la notificación, la trabajadora tiene estabilidad
+  durante toda la gestación.
+- **Presunción.** Si la despiden dentro de los **7 meses y medio anteriores o posteriores al parto**,
+  se presume, salvo prueba en contrario, que fue por el embarazo o la maternidad.
+- **Indemnización agravada.** Si el empleador no prueba una justa causa ajena al embarazo, paga **un
+  año de remuneraciones** (**13 sueldos**, porque se incluye el SAC), **además** de las
+  indemnizaciones comunes por despido sin causa.
+- **Opciones al terminar la licencia** (art. 183):
+  - a) **reincorporarse**;
+  - b) **rescindir** el contrato, en forma expresa o tácita, si tiene **un año de antigüedad**;
+  - c) quedar en **excedencia** de **3 a 6 meses**, eligiéndola **dentro de las 48 horas** antes de que termine la licencia;
+  - d) **no reincorporarse**, que se toma como rescisión tácita (art. 186).
+- **Excedencia.** Es un período de 3 a 6 meses **sin sueldo ni asignación**, en el que se suspenden
+  las obligaciones principales de las dos partes. Exige **un año de antigüedad**.
 
 **Menores** (salió como pregunta a desarrollar en la comisión de la noche):
 - Prohibido el trabajo antes de los **16**, salvo en **empresas familiares** con autorización administrativa.
