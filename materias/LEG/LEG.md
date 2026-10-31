@@ -85,6 +85,19 @@ enunciados. Hubo **dos temas distintos con la misma estructura**.
 
 Ver también "Software con hardware: ¿patente?" en la Unidad 4.
 
+## Parcial 2023 (referencia vieja)
+
+`fuentes/2023_parcial2-promocion-directa.md`. Es anterior a la reforma y tiene otro formato, pero
+se repiten los mismos temas:
+- **Completar:** carácter del Colegio, requisitos de matriculación, duración de la propiedad
+  intelectual, requisitos de la patente, actos contra la ética ante la profesión. Es el mismo tipo de
+  respuesta corta que la profesora describió para el caso.
+- **Caso laboral:** traslado lejos y cambio de horario después de una licencia por enfermedad
+  inculpable. Es **ius variandi abusivo** (arts. 66 y 69): intimación y despido indirecto. En 2026
+  laboral no va como caso, pero el tema puede caer en el V o F o en una pregunta.
+- **Desarrollo:** responsabilidad civil (contractual, extracontractual, factores de atribución) y
+  propiedad intelectual.
+
 ## Índice
 1. Unidad 1 — _(sin desarrollar: no hay fuentes cargadas)_
 2. Unidad 2 — _(sin desarrollar)_
@@ -803,3 +816,4 @@ o un proceso penal afectan la matrícula, art. 24. (5) Si hay daño a un cliente
 - 2026-10-29: `estudio/simulacro-2do-parcial.md` (+ .pdf) — simulacro con el formato del audio de la profesora: caso de derecho de autor + marca + titularidad del software del dependiente + falta ética y responsabilidad civil por una filtración; 10 V o F (9 de LCT, 1 de matrícula); desarrollo de trabajo de mujeres (apunte 7.1) y concepto de los arts. 6 y 7 de patentes. Respuestas al final.
 - 2026-10-29: `estudio/resumen-2do-parcial` (+ .pdf): formato del parcial actualizado con el audio de la profesora (caso con preguntas cortas y una de ética, laboral no va como caso, ~10 V o F mezclados, desarrollo total + concepto corto) y trabajo de mujeres completo desde el apunte 7.1 (ANSES, certificado con fecha probable, 13 sueldos, opciones del art. 183, excedencia).
 - 2026-10-31: `estudio/vof-practica.html` — práctica interactiva de V o F (78 afirmaciones: 55 de U5, 10 de U4, 13 de U6) con corrección y justificación al instante, filtro por unidad y repaso de las falladas. Publicada como artifact.
+- 2026-10-31: ingest de `fuentes/2023_parcial2-promocion-directa.md` (foto del 2do parcial 2023, transcripta). Nueva sección "Parcial 2023 (referencia vieja)". `estudio/vof-practica.html`: grilla de preguntas para navegar (verde, rojo, gris), modo de respuesta corta con 38 flashcards (U4, U6 y el caso laboral y los factores de atribución del 2023) y progreso guardado en el navegador.
