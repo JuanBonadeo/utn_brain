@@ -802,12 +802,22 @@ peatonales (moldes del ejemplo oficial *Stairs* de AnyLogic):
 | Elemento | Detalle |
 |---|---|
 | `nivelHall` (Z = 0) | Andenes `andenRoca0`-`6`, obstáculos `hall*`, boca `bocaB2Hall` (X = -160), CAD, `plano3D`, vías y `camaraHall` |
-| `nivelVestibulo` (Z = -5 m [SUP]) | Pasillo, escalera B2, vestíbulo, molinetes, colas, escalera B3 y salida |
+| `nivelVestibulo` (Z = -4,60 m: plaza de transbordo a nivel -4,60 m, [GCBA 2015](https://buenosaires.gob.ar/gcaba_historico/noticias/el-centro-de-transbordo-constitucion)) | Pasillo, escalera B2, vestíbulo, molinetes, colas, escalera B3 y salida |
 | `bajadaB2` (PedChangeLevel) | Entre `pedSource` y `pedMolinetes`: el pasajero camina hasta `bocaB2Hall` y sigue en `bocaB2Pasillo` (X = -146), arriba de la escalera |
-| `escaleraB2` | Área en pendiente (`Sloped`, sube 5 m hacia el oeste) de 9 m × 5 m en el arranque del pasillo (X -152 a -62), con velocidad máxima 0,54 m/s: 9 m en 16,7 s = 5 m de desnivel a 0,30 m/s (§5 del plan). La bajada se camina y puede congestionarse |
+| `escaleraB2` | Área en pendiente (`Sloped`, sube 4,6 m hacia el oeste) de 9 m × 5 m en el arranque del pasillo (X -152 a -62), con velocidad máxima 0,59 m/s: 9 m en 15,3 s = 4,6 m de desnivel a 0,30 m/s (§5 del plan). La bajada se camina y puede congestionarse |
 | Demora | 49 s → **33 s** (31 m / 0,95): la escalera salió de la demora porque ahora se camina |
 | Calle | Sin cambios: el pasajero de la calle aparece al pie de la escalera B3 (su tiempo de bajada no se modela; la tasa es la de llegada al vestíbulo) |
-| 3D | Piso de calle y hall abierto sobre el subsuelo (corte), losa del subsuelo a -5 m, escalones de B2 y B3, andenes de la Línea C a -10 m (nivel -2 [SUP]) |
+| 3D | Piso de calle y hall abierto sobre el subsuelo y la estación de la C (corte), losa del subsuelo a -4,60 m, escalones de B2 y B3, estación esquemática de la Línea C a -9,20 m (nivel -2 [SUP]: andén central y dos laterales de 7 m, dos vías, escalera desde la zona de escaleras del vestíbulo; la pared `paredDerechaCentro` sólo se dibuja en 2D para verla) |
 
 Los resultados de producción con 49 s ya estaban pendientes; con este cambio hay que correr el piloto y la producción
 igual. Diagrama de niveles: `figs/tpi-subte-estacion-niveles.png` (`datos/diagrama_estacion.py`).
+
+### Equipamiento 3D del vestíbulo (2026-11-02)
+
+`datos/vestibulo_3d.py` agrega el grupo `vestibulo3D` (sólo 3D) en `nivelVestibulo`, con objetos de la galería 3D de
+AnyLogic (`AutoScale`, colores leídos del `.dae`): 30 molinetes `turnstile_open` sobre los divisores (rotación 270°,
+como en el ejemplo oficial *Border Checkpoint*), tres puestos de boletería y la cabina de control (`cash_desk`), tres
+máquinas de carga (`ticket_vending_machine_1`) y seis coches `subway_car` detenidos en la estación de la C. No cambia la
+simulación: los molinetes siguen siendo el `ServiceWithLine` con los divisores como muros. Los `.dae` se copian con
+`datos/copiar_figuras_3d.py` (no van al repo). Escala y orientación de cada objeto son las del IDE y se ajustan a ojo.
+La profundidad de los andenes de la C no se encontró publicada: -9,20 m es un supuesto (un entrepiso más).

@@ -2,8 +2,8 @@
 """Diagrama de la estación Constitución tal como la representa el modelo: corte por el recorrido del pasajero del Roca
 y planta esquemática por niveles. Escribe materias/SIM/figs/tpi-subte-estacion-niveles.png. Requiere matplotlib.
 
-Medidas: las del modelo (02-modelo-anylogic.md, secciones del vestíbulo coherente y del subsuelo). Profundidades
-de 5 m (vestíbulo) y 10 m (andenes de la Línea C) son supuestos [SUP]; el resto sale del plano de Trenes Argentinos
+Medidas: las del modelo (02-modelo-anylogic.md, secciones del vestíbulo coherente y del subsuelo). Profundidades:
+-4,60 m (pasillo y vestíbulo, plaza de transbordo, GCBA 2015) y -9,20 m (andenes de la Línea C, supuesto [SUP]); el resto sale del plano de Trenes Argentinos
 georreferenciado con OpenStreetMap.
 """
 import math
@@ -61,12 +61,12 @@ def corte(ax):
     cota(x_esc, x_esc + 9, 2.6, 'B2\n9 m')
     cota(x_esc + 9, x_ves, -0.6, 'pasillo (se camina), 75 m × 5 m')
     cota(x_ves + 12, x_ves + 50, -0.6, 'vestíbulo Línea C, 50 m')
-    ax.text(x_esc + 11, -3.75, 'escalera B2 en pendiente: 0,54 m/s → 16,7 s', fontsize=8.5, va='bottom')
+    ax.text(x_esc + 11, -3.75, 'escalera B2 en pendiente: 0,59 m/s → 15,3 s', fontsize=8.5, va='bottom')
     ax.annotate('B3 desde la calle Brasil', xy=(x_ves + 6, -2.2), xytext=(x_ves + 6, 2.2), fontsize=8.5, ha='center',
                 arrowprops=dict(arrowstyle='-', color='#777', lw=.7))
     ax.text(x_ves + 19, -3.5, 'molinetes', fontsize=8, ha='center')
     ax.text(x_ves + 41, -12.6, 'andenes Línea C', fontsize=8.5, ha='center', color=LINEAC)
-    for y, t in ((0, 'nivel 0 · calle y hall'), (-5, 'nivel −1 · −5 m [SUP]'), (-10, 'nivel −2 · −10 m [SUP]')):
+    for y, t in ((0, 'nivel 0 · calle y hall'), (-5, 'nivel −1 · −4,60 m (GCBA)'), (-10, 'nivel −2 · −9,20 m [SUP]')):
         ax.axhline(y, color='#999', lw=.5, ls=':')
         ax.text(x_fin + 7, y + .2, t, fontsize=8.5, color='#555')
     ax.set_xlim(-8, x_fin + 40); ax.set_ylim(-13.4, 7.2); ax.set_aspect(2.2); ax.axis('off')
@@ -116,8 +116,8 @@ def planta(ax):
     ax.set_xlim(-152, 128); ax.set_ylim(-160, -15); ax.set_aspect('equal'); ax.axis('off')
     ax.set_title('Planta esquemática (m, coordenadas del modelo; norte a la derecha como en el plano)', fontsize=11, loc='left')
     leyenda = [mp.Patch(color=C0, label='nivel 0: calle, andenes y hall del Roca'),
-               mp.Patch(color=C1, label='nivel −1: pasillo y vestíbulo (−5 m)'),
-               mp.Patch(color=LINEAC, alpha=.6, label='nivel −2: andenes de la Línea C (−10 m)'),
+               mp.Patch(color=C1, label='nivel −1: pasillo y vestíbulo (−4,60 m)'),
+               mp.Patch(color=LINEAC, alpha=.6, label='nivel −2: andenes de la Línea C (−9,20 m)'),
                mp.Patch(color='#a89f92', label='escaleras'),
                plt_line(FLUJO, 'recorrido del pasajero del Roca')]
     ax.legend(handles=leyenda, loc='lower right', fontsize=8.5, frameon=True)

@@ -333,20 +333,32 @@ assert sources['pedSourceCalle']['onExit']=='ped.desdeRocaPed = false; registraI
 assert all(sources[k]['comfortableSpeed']=='uniform(1.1, 1.5, rngVelocidadPed)' for k in ('pedSource','pedSourceCalle'))
 conns={(c.findtext('SourceEmbeddedObjectReference/ItemName'),c.findtext('TargetEmbeddedObjectReference/ItemName')) for c in ped.findall('Connectors/Connector')}
 assert {('pedSource','bajadaB2'),('bajadaB2','pedMolinetes'),('pedSourceCalle','pedMolinetes'),('pedMolinetes','pedSalida'),('pedSalida','pedSink')}<=conns and ('pedSource','pedMolinetes') not in conns
-# Subsuelo (2026-11-02): hall del Roca a nivel de calle (nivelHall, Z 0) y pasillo + vestíbulo a -5 m (nivelVestibulo).
-# El Roca baja por la escalera B2: área en pendiente escaleraB2 (9 m, 5 m de desnivel, 0,54 m/s = 16,7 s) del subsuelo,
+# Subsuelo (2026-11-02): hall del Roca a nivel de calle (nivelHall, Z 0) y pasillo + vestíbulo a -4,60 m (nivelVestibulo;
+# plaza de transbordo a -4,60 m, GCBA 2015).
+# El Roca baja por la escalera B2: área en pendiente escaleraB2 (9 m, 4,6 m de desnivel, 0,59 m/s = 15,3 s) del subsuelo,
 # a la que llega con bajadaB2 (PedChangeLevel) desde la boca bocaB2Hall. La demora (33 s) ya no incluye la escalera.
 niveles={lv.findtext('Name'):lv for lv in ped.iter('Level')}
-assert set(niveles)=={'nivelHall','nivelVestibulo'} and niveles['nivelHall'].findtext('Z')=='0' and niveles['nivelVestibulo'].findtext('Z')=='-50'
+assert set(niveles)=={'nivelHall','nivelVestibulo'} and niveles['nivelHall'].findtext('Z')=='0' and niveles['nivelVestibulo'].findtext('Z')=='-46'
 en_nivel=lambda n: {c.findtext('Name') for c in niveles[n].find('Presentation')}
 assert {f'andenRoca{k}' for k in range(7)}|{'bocaB2Hall','hallEstructuraCentral','hallVestuarioSOFSE','hallBoleteriasSOFSE','plano3D','viasRoca','planoConstitucion'} <= en_nivel('nivelHall')
 assert {'escaleraB2','bocaB2Pasillo','pasilloRocaNorte','pasilloRocaSur','molinetesPeatonales','entradaCalle','salidaPeatonal'} <= en_nivel('nivelVestibulo')
+# Equipamiento 3D del vestíbulo (datos/vestibulo_3d.py): molinetes en los 30 divisores, boletería, cabina, máquinas y
+# coches de la Línea C; recursos registrados y listados en copiar_figuras_3d.py.
+vest3d=niveles['nivelVestibulo'].find("Presentation/Group[Name='vestibulo3D']")
+figs_v=list(vest3d.find('Presentation'))
+assert vest3d.findtext('DrawMode')=='SHAPE_DRAW_3D' and all(f.tag=='Figure3D' and f.findtext('DrawMode')=='SHAPE_DRAW_3D' for f in figs_v)
+usa={f.findtext('ResourceReference/ClassName') for f in figs_v}
+assert sum(f.findtext('ResourceReference/ClassName')=='3d/turnstile_open.dae' for f in figs_v)==30
+recursos={x.findtext('Path') for x in r.findall('Model/ModelResources/Resource')} if r.find('Model/ModelResources') is not None else {x.findtext('Path') for x in r.iter('Resource')}
+assert usa <= recursos, usa-recursos
+copia=open(Path(__file__).resolve().parent/'datos'/'copiar_figuras_3d.py',encoding='utf-8').read()
+assert all(u.split('/')[-1] in copia for u in usa)
 bajada={p.findtext('Name'):p.findtext('Value/Code') for p in ped.find("EmbeddedObjects/EmbeddedObject[Name='bajadaB2']").findall('Parameters/Parameter')}
 assert bajada['exitLine']=='bocaB2Hall' and bajada['entryLine']=='bocaB2Pasillo'
 esc=niveles['nivelVestibulo'].find("Presentation/RectangleNode[Name='escaleraB2']")
 esc_p={p.findtext('Name'):p.findtext('Value/Code') for p in esc.findall('EmbeddedObject/Parameters/Parameter')}
-assert esc_p['speedRestricted']=='true' and abs(float(esc_p['maxSpeed'])-9/(5/0.30))<0.01 and esc.findtext('Sloped')=='true'
-assert (esc.findtext('X'),esc.findtext('Y'),esc.findtext('Width'),esc.findtext('Height'),esc.findtext('Slope/Dz'))==('-152','949','90','50','50')
+assert esc_p['speedRestricted']=='true' and abs(float(esc_p['maxSpeed'])-9/(4.6/0.30))<0.01 and esc.findtext('Sloped')=='true'
+assert (esc.findtext('X'),esc.findtext('Y'),esc.findtext('Width'),esc.findtext('Height'),esc.findtext('Slope/Dz'))==('-152','949','90','50','46')
 # El horario embebido es exactamente el extraído de los PDFs oficiales del Roca.
 import csv as _csv
 horario=[r['segundos_desde_07'] for r in _csv.DictReader(open(p.parent/'datos'/'arribos_roca_constitucion_habiles.csv',encoding='utf-8'),delimiter=';')]

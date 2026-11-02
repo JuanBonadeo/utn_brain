@@ -40,8 +40,12 @@ PASO = 5                 # px: tramo de los escalonados oblicuos
 # Vías del plano en px del modelo (georref_plano_sofse.vias_plano, Y = 360 + 10 (y - 2726,9)).
 VIAS = [250, 379, 424, 553, 596, 725, 772, 902, 940, 1077, 1111, 1252, 1291]
 Z_VIA = -11
-Z_SUB = -50              # subsuelo (pasillo y vestíbulo de la Línea C), nivel nivelVestibulo
-Z_LINEA_C = -100         # andenes de la Línea C, nivel -2 [SUP]
+Z_SUB = -46              # subsuelo: plaza de transbordo a -4,60 m (GCBA 2015), pasillo y vestíbulo (nivelVestibulo)
+Z_LINEA_C = -92          # andenes de la Línea C, un entrepiso más abajo (-9,20 m) [SUP]
+# Estación de la Línea C (esquema [SUP], al este del vestíbulo): dos vías entre un andén central y dos laterales.
+ESTACION_C = (600, 195, 1250, 485)                      # x0, y0, x1, y1
+ANDENES_C = [(195, 265), (305, 375), (415, 485)]        # lateral norte, central, lateral sur (7 m)
+VIAS_C = [(265, 305), (375, 415)]
 X_PARAGOLPES = -830      # fin de las vías (los RailTrack terminan en X = -820)
 X_COLA = -2620           # cola del tren de 7 coches detenido (161 m) con margen
 X_INICIO_VIAS = -5000
@@ -56,7 +60,7 @@ COLOR = {
     'piso': argb(255, 214, 210, 200), 'lecho': argb(255, 92, 84, 76), 'anden': argb(255, 196, 190, 178),
     'borde': argb(255, 232, 196, 40), 'muro': argb(150, 150, 150, 158), 'bajo': argb(200, 110, 110, 118),
     'cordon': argb(255, 160, 160, 160), 'escalera': argb(255, 168, 160, 150), 'lineaC': argb(255, 160, 180, 205),
-    'vereda': argb(255, 200, 200, 196), 'subsuelo': argb(255, 226, 222, 214),
+    'vereda': argb(255, 200, 200, 196), 'subsuelo': argb(255, 226, 222, 214), 'riel': argb(255, 70, 70, 75),
 }
 
 
@@ -223,6 +227,12 @@ def corte_subsuelo():
     return unary_union([box(-152, 944, 35, 1004), box(-25, 330, 35, 1004), box(-25, 330, 85, 390), box(75, 185, 585, 535)])
 
 
+def corte_total():
+    """Corte del piso de la calle: subsuelo más la estación de la Línea C (ESTACION_C) y su escalera."""
+    from shapely.geometry import box
+    return corte_subsuelo().union(box(*ESTACION_C)).union(box(580, 295, 605, 425))
+
+
 def math_dist(a, b):
     return math.dist(a, b)
 
@@ -322,7 +332,7 @@ def main():
     # Piso de calle y hall (Z 0) con el corte del subsuelo abierto; losa del subsuelo a -5 m.
     from shapely.geometry import box
     calle = unary_union([box(X_HALL0, 120, 65, 1665), box(-1150, 1385, X_HALL0, 1665), box(-1150, 120, X_HALL0, 230),
-                         box(65, 100, 1250, 1660)]).difference(corte_subsuelo())
+                         box(65, 100, 1250, 1660)]).difference(corte_total())
     pisos = rectangulos(calle, 10)
     for c in pisos:
         g.rect('piso3D', *c, -1, 1, COLOR['piso'] if c[0] < 65 else COLOR['vereda'])
@@ -362,15 +372,23 @@ def main():
                 g.rect('escalera3D', x, y + i * hh / 4, w, hh / 4, 0, 3 * (i + 1), COLOR['escalera'])
     resumen['escaleras'] = len(esc)
 
-    # 4. Andenes de la Línea C (OSM).
-    nc = 0
-    for e in msp.query('LWPOLYLINE[layer=="LINEA_C_OSM"]'):
-        pts = [(p[0] * 10, -p[1] * 10) for p in e.get_points('xy')]
-        xs = [p[0] for p in pts]; yc = sum(p[1] for p in pts) / len(pts)
-        x0 = max(min(xs), 600)                           # el tramo bajo el vestíbulo (X 80-580) no se levanta
-        g.rect('andenLineaC3D', x0, yc - 6, max(xs) - x0, 12, Z_LINEA_C, 10, COLOR['lineaC'])   # nivel -2
-        nc += 1
-    resumen['lineaC'] = nc
+    # 4. Estación de la Línea C (nivel -2, esquema [SUP]): lecho de vías, andenes de 1 m, rieles y escalera desde la
+    # zona de escaleras del vestíbulo (X 520-580) hasta el andén central. Los coches van en vestibulo_3d.py.
+    x0, y0, x1, y1 = ESTACION_C
+    g.rect('lechoLineaC3D', x0, y0, x1 - x0, y1 - y0, Z_LINEA_C - 12, 2, COLOR['lecho'])
+    for ya, yb in ANDENES_C:
+        g.rect('andenLineaC3D', x0, ya, x1 - x0, yb - ya, Z_LINEA_C - 10, 10, COLOR['lineaC'])
+        g.rect('bordeLineaC3D', x0, ya if ya > y0 else yb - 5, x1 - x0, 5, Z_LINEA_C, 0.2, COLOR['borde'])
+        if ya > y0 and yb < y1:
+            g.rect('bordeLineaC3D', x0, yb - 5, x1 - x0, 5, Z_LINEA_C, 0.2, COLOR['borde'])
+    for ya, yb in VIAS_C:
+        for yr in (ya + 12, yb - 14):
+            g.rect('rielLineaC3D', x0, yr, x1 - x0, 1.5, Z_LINEA_C - 10, 0.6, COLOR['riel'])
+    # Escalera vestíbulo -> andén central: 10 escalones de 0,8 m, de Z_SUB (X 585) a Z_LINEA_C (X 665).
+    for i in range(10):
+        tope = Z_SUB + (Z_LINEA_C - Z_SUB) * (i + 1) / 10
+        g.rect('escaleraLineaC3D', 585 + 8 * i, 310, 8, 60, Z_LINEA_C - 10, tope - Z_LINEA_C + 10, COLOR['escalera'])
+    resumen['lineaC'] = len(ANDENES_C)
 
     SALIDA.write_text(g.grupo() + '\n', encoding='utf-8')
     print(f'{SALIDA.name}: {g.n} figuras', resumen)

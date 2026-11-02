@@ -10,7 +10,9 @@ import shutil, sys
 from pathlib import Path
 
 # Personas (agente Pasajero) y coche de pasajeros con su textura (agente CocheRoca, ejemplo "Railway Station").
-FIGURAS = ['ped_1_m.glb', 'office_1_m.glb', 'ped_sport_2_f.glb', 'ped_3_f.glb', 'passengercar.dae', 'passengercar.jpg']
+FIGURAS = ['ped_1_m.glb', 'office_1_m.glb', 'ped_sport_2_f.glb', 'ped_3_f.glb', 'passengercar.dae', 'passengercar.jpg',
+           # Equipamiento del vestíbulo y coches de la Línea C (vestibulo_3d.py), de la galería 3D del IDE.
+           'turnstile_open.dae', 'cash_desk.dae', 'ticket_vending_machine_1.dae', 'subway_car.dae']
 DESTINO = Path(__file__).resolve().parent.parent / '3d'
 RAICES = [Path(a) for a in sys.argv[1:]] or [
     Path('/Users/Shared/AnyLogic 8 PLE'), Path('/Applications/AnyLogic 8 PLE.app'),
