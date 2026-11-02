@@ -2892,6 +2892,12 @@ Conclusiones:
   corridas, link de AnyLogic Cloud con autores y video. Defensa presencial el 10 y 11/11. Va en una sección
   nueva, delante de la del enunciado original. TPI Caser: estado corregido (seguía en el 07/10, cuando el modelo
   ya se había corrido en el IDE y el GLP y los costos estaban cargados) y lista de pendientes para la entrega.
+- **2026-11-02**: TPI subte, paso A del plano: DWG de Trenes Argentinos georreferenciado con OSM
+  (`datos/georref_plano_sofse.py`, 13 paragolpes, escala 1,009, residuo rms 0,8 m). OSM muestra que la boca del hall
+  baja a un pasillo subterráneo de ~60 m hasta el extremo sur de los andenes de la Línea C: el vestíbulo no está bajo
+  el hall y el recorrido desde los paragolpes es de 156-179 m, no 85 m (demora intermedia 181-205 s en vez de 106 s).
+  Sostiene el acceso único del Roca y el acceso separado de la calle. Figura `figs/tpi-subte-plano-acceso.png`,
+  incorporada al paso 6 del informe; nota en la tabla de parámetros del paso 2. El modelo no se tocó (paso B).
 - **2026-10-27** (2): TPI subte, informe LaTeX — capítulos 1 a 7 redactados (introducción y pasos 1 a 6) en
   `entregables/TPI/subte/informe/capitulos/`, con los datos vigentes (E1 = 22, perfil mar-jun de 18.532, escenario
   intermedio) y no los del borrador `03-informe-tpi.md`, que quedó viejo. Nuevos: figura `figs/tpi-subte-perfil-demanda.png`

@@ -64,6 +64,13 @@ Primera lectura (2026-10-27):
   170 a 330 m y los andenes útiles, de 134 a 275 m. Sirve para comprobar la dispersión de la descarga
   (145 s ≈ caminar un andén de 170 m) y la distancia que se midió en OSM desde los paragolpes. No sirve para
   dibujar el vestíbulo de la Línea C, que es de SBASE.
+- **Plano georreferenciado (2026-11-02).** Con [`datos/georref_plano_sofse.py`](datos/georref_plano_sofse.py) los 13
+  paragolpes del DWG se ajustaron a los de OSM (escala 1,009, residuo medio 0,8 m) y se pasaron al plano las bocas,
+  escaleras, pasillos subterráneos y andenes de la Línea C de OSM (`datos/osm_hall.json`). Resultado: desde la boca
+  del hall una escalera baja a un pasillo de ~60 m bajo el edificio cabecera que llega al extremo sur de los andenes
+  de la C (esquina Brasil y Lima), donde estaría el vestíbulo. El recorrido paragolpes → vestíbulo es de 156 m
+  (recta por el hall) a 179 m (en L), no 85 m: la demora intermedia pasaría de 106 s a 181-205 s. El modelo no se
+  cambió (paso B pendiente). Figura: `figs/tpi-subte-plano-acceso.png`.
 
 ---
 
