@@ -217,6 +217,12 @@ Materias y un tema corto y específico.
   wiki se siguen usando `[[wikilinks]]` y rutas relativas.
 - No abras los archivos generados (PDF, docx, etc.) con `open` ni en el
   navegador: pasá solo el enlace clickeable y los abro yo.
+- Modelo AnyLogic del TPI de SIM (`materias/SIM/entregables/TPI/subte/SubteConstitucion.alp`):
+  el `.alp` se edita sólo con AnyLogic cerrado (`pgrep -f AnyLogic`; si está
+  abierto, pedime que lo cierre, no lo mates). Cada vez que termines un cambio
+  al modelo (verificador OK y commit hecho), abrilo vos:
+  `open -a "AnyLogic 8 PLE" materias/SIM/entregables/TPI/subte/SubteConstitucion.alp`
+  y recordame que al autosave le conteste que no.
 
 ## TONO
 Directo, riguroso, sin adornos. Si algo está mal resuelto, decilo claro
