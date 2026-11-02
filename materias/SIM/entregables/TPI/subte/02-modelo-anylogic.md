@@ -756,3 +756,20 @@ y no se carga en la planilla: la producción oficial sigue siendo `corridas_peat
   de actualización de los peatones). Esto no está confirmado con documentación de AnyLogic.
 - **Conclusión:** E1 reduce las tres primarias con IC lejos de 0 en las dos máquinas. El resultado no
   depende de la máquina en que se corre.
+
+## Pendiente: trenes del Roca con la Rail Library (diseño, 2026-11-02, sin implementar)
+
+Molde: ejemplos oficiales *Subway Platform* (`Railyard` > `RailTrack` > `RailStopline`; cadena `TrainSource` →
+`TrainMoveTo` → `Delay` → `TrainDispose`) y *Railway Station* (clases `Train`/`RailCar` con `3d/passengercar.dae` y
+`3d/locomotive.dae`, `carSetup = car.appearanceType = carindex`). Unidades: offset y largo de coche en metros; `Offset`
+de la `RailStopline` en píxeles. `TrainSource.track(T)` y `TrainMoveTo.targetTrack(T)` se evalúan por tren: alcanza
+con una sola cadena.
+
+- 7 vías horizontales, una por andén (`andenActualPed`): Y = 379, 553, 725, 902, 1077, 1252 y 1291; de X = -5000 a
+  X = -820 (paragolpes). Parada con la cabeza en X ≈ -830 (offset ≈ 4170 px desde el comienzo).
+- Tren de 7 coches de 23 m; aparece con la cabeza a 166 m del comienzo, a 12 m/s, frena a 1 m/s²: llega a la parada
+  en ≈ 27 s. Se inyecta en `max(0, llegada - 27)`, mismo andén que su pasaje (`j % 7`), sólo si su ingreso cae en la
+  franja. Espera `demoraAccesoRocaSeg + duracionDescargaSeg + 10` s y se descarta (no se modela la salida en reversa).
+- Requiere: `RequiredLibraryReference` de `com.anylogic.libraries.rail` (8.0.5), evento y cola `{instante, vía}`
+  propios, stubs en el arnés de `verificar_modelo.py` y sumar los bloques nuevos al control de `ped_blocks`.
+  Es sólo visual: no cambia la lógica peatonal ni los resultados.
