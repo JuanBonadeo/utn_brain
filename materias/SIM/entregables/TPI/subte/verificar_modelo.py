@@ -2,6 +2,7 @@
 """Verifica estructura y lógica del prototipo; no sustituye Build/Run en AnyLogic.
 Requiere AnyLogic 8 PLE instalado en /Applications (macOS).
 """
+import collections
 from pathlib import Path
 import xml.etree.ElementTree as E
 import subprocess, sys
@@ -306,6 +307,21 @@ assert ped_blocks=={'pedSource':'PedSource','pedSourceCalle':'PedSource','pedMol
 assert all(ped.find(f".//RailTrack[Name='viaRoca{k}']") is not None and ped.find(f".//RailStopline[Name='paradaRoca{k}']") is not None for k in range(7))
 assert {('trenesRocaFuente','trenesRocaAlAnden'),('trenesRocaAlAnden','trenesRocaDescarga'),('trenesRocaDescarga','trenesRocaFin')} <= {(c.findtext('SourceEmbeddedObjectReference/ItemName'),c.findtext('TargetEmbeddedObjectReference/ItemName')) for c in ped.findall('Connectors/Connector')}
 assert {x.findtext('Name') for x in r.findall('Model/ActiveObjectClasses/ActiveObjectClass')} >= {'TrenRoca','CocheRoca'}
+# Plano en 3D (datos/plano_3d.py): grupo plano3D de MainPeatonal, sólo 3D, rectángulos sin rotación; vías hundidas 1,1 m.
+plano3d=ped.find(".//Group[Name='plano3D']")
+assert plano3d is not None and plano3d.findtext('DrawMode')=='SHAPE_DRAW_3D'
+figs3d=list(plano3d.find('Presentation'))
+assert 500<=len(figs3d)<=1500 and all(f.tag=='Rectangle' and f.findtext('DrawMode')=='SHAPE_DRAW_3D' and f.findtext('Rotation')=='0.0' for f in figs3d)
+assert all(ped.find(f".//RailTrack[Name='viaRoca{k}']").findtext('Z')=='-11' for k in range(7))
+ids_3d=[plano3d.findtext('Id')]+[f.findtext('Id') for f in figs3d]
+ids_resto=collections.Counter(x.text for x in r.iter('Id'))
+assert len(set(ids_3d))==len(ids_3d) and all(ids_resto[i]==1 for i in ids_3d), 'Id del plano 3D repetido'
+def _caja(f): return tuple(float(f.findtext(k)) for k in ('X','Y','Width','Height'))
+def _pisa(c, x0, y0, x1, y1): return c[0] < x1 and c[0]+c[2] > x0 and c[1] < y1 and c[1]+c[3] > y0
+muros3d=[_caja(f) for f in figs3d if f.findtext('Name').startswith(('muro3D','bajo3D','escalera3D'))]
+# Ningún muro del plano dentro del pasillo, del vestíbulo ni de la circulación libre del hall (frente a la boca B2).
+for zona in ((-150,952,-22,996),(-18,340,28,996),(80,190,580,530),(-205,880,-160,1010),(-540,300,-420,1350)):
+ assert not any(_pisa(c,*zona) for c in muros3d), zona
 sources={x.findtext('Name'):{p.findtext('Name'):p.findtext('Value/Code') for p in x.findall('Parameters/Parameter')} for x in ped.findall('EmbeddedObjects/EmbeddedObject') if x.findtext('Name').startswith('pedSource')}
 # Roca: cada pasajero aparece en la cabecera del andén de su tren (andenActualPed, asignado por turno).
 assert sources['pedSource']['locationLine']==' : '.join(f'andenActualPed == {k} ? andenRoca{k}' for k in range(6))+' : andenRoca6'

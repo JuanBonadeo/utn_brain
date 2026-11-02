@@ -772,3 +772,23 @@ Molde: ejemplos oficiales *Subway Platform* (red, vía, parada y bloques) y *Rai
 
 Sólo en el modo franja; la demo corta no tiene trenes. Los nombres locales (`train`) y los tipos de los parámetros se
 tomaron de `RailLibrary.jar` (`library.xml`); los bloques usan los tipos `TrenRoca`/`CocheRoca`.
+
+## Plano en 3D (2026-11-02, sólo visual)
+
+El CAD Drawing es 2D, así que la volumetría del plano se genera aparte con `datos/plano_3d.py` (requiere `ezdxf`,
+`shapely`, `numpy` y `scipy`; `--insertar` reemplaza el grupo en el `.alp`, con AnyLogic cerrado). Resultado: grupo
+`plano3D` de `MainPeatonal`, sólo 3D, ~1080 rectángulos sin rotación (único formato de figura que AnyLogic ya
+guardó en este modelo; la unidad de `Rotation` no está confirmada).
+
+| Elemento | Cómo se arma |
+|---|---|
+| Niveles | Vías del Roca hundidas 1,1 m (`viaRoca*` con Z = -11) sobre un lecho de vías; piso del hall, de los andenes y del coche al mismo nivel (Z = 0), como en la estación terminal |
+| Andenes del Roca | Losas entre los pares de vías del plano (13 vías: una suelta y seis pares), de la cola del tren detenido (X = -2620) a los paragolpes (X = -830), con borde amarillo; coinciden con las 7 líneas `andenRoca*` |
+| Muros | Capas EDIFICIOS, LINE_02, MUROS-NUEVOS, MUROS1, HORM y LIMITE: grilla de 0,33 m, cierre morfológico (la doble línea del muro queda maciza), columnas chicas macizas y compactación en rectángulos; 2,5 m de alto y semitransparentes para no tapar el flujo |
+| Bajos | Barandas y molinetes del Roca (BARANDA, TMR) de 1 m; cordones (CALLES, sólo tramos rectos) de 0,15 m |
+| Escaleras | Escalones agrupados por cercanía; cada escalera es un bloque de 4 peldaños sobre su rectángulo envolvente |
+| Línea C | Andenes de OSM como losas de 1 m, sólo al este del vestíbulo (X ≥ 600): en la realidad están en el nivel -2 |
+| Recortes | Ningún muro del plano en el pasillo, el vestíbulo ni la circulación del hall; dentro de los obstáculos `hall*` del modelo se conserva el detalle del plano |
+
+Simplificación declarada: un único nivel peatonal (el pasillo real es subterráneo y la Línea C está en el nivel -2).
+`verificar_modelo.py` controla el grupo, los Id, la altura de las vías y que no haya muros en las zonas de circulación.
