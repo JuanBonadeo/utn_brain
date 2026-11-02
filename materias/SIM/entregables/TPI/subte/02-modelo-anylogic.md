@@ -821,3 +821,22 @@ máquinas de carga (`ticket_vending_machine_1`) y seis coches `subway_car` deten
 simulación: los molinetes siguen siendo el `ServiceWithLine` con los divisores como muros. Los `.dae` se copian con
 `datos/copiar_figuras_3d.py` (no van al repo). Escala y orientación de cada objeto son las del IDE y se ajustan a ojo.
 La profundidad de los andenes de la C no se encontró publicada: -9,20 m es un supuesto (un entrepiso más).
+
+## Descenso por las puertas y andén caminado (2026-11-02)
+
+Antes el pasaje aparecía en la cabecera del andén (`andenRoca0`-`6`) con una demora de 33 s y una dispersión de 145 s
+que resumían la caminata por el andén. Ahora el andén se simula:
+
+| Elemento | Detalle |
+|---|---|
+| Puertas | 21 por tren del lado del andén: 7 coches de 23 m (cabeza en X = -830) × 3 puertas a 1/6, 1/2 y 5/6 del coche (CSR del Roca: 3 puertas por lado). `xPuertaPed(puerta)` da X de -868 a -2402 |
+| Punto de descenso | `pedSource` con `locationType = LOCATION_POINT`, nivel `nivelHall`, X = `xPuertaPed((nDesdeRocaPed - 1) % 21)` (puertas por turno, sin números aleatorios: E0 y E1 siguen idénticos) e Y = `yPuertaPed(andenActualPed)`, 0,8 m adentro del borde del andén que da a la vía del tren |
+| Andenes | Muros `bordeAndenRoca0`-`6` (sólo 2D) en los bordes de los 7 andenes (X -2420 a -830), abiertos hacia la cabecera |
+| Cabeceras | `hallCabecera0`-`5`: siluetas del plano de los edificios alineados con los pares de vías (X -727 a -553); entre ellos sigue el pasillo de cada andén hacia el hall |
+| Obstáculos del hall | `hallVestuarioSOFSE`, `hallEstructuraCentral` (escaleras) y `hallBoleteriasSOFSE` redibujados con la silueta del plano (antes eran envolventes a mano) |
+| Parámetros | `demoraAccesoRocaSeg` 33 → **10 s** (arribo → apertura de puertas [SUP]); `duracionDescargaSeg` 145 → **30 s** (descenso por las 21 puertas [SUP]; rango 45/30/20) |
+| 3D | La circulación libre del hall arranca en los paragolpes (X -835): no hay muros del plano en el camino salvo dentro de los obstáculos `hall*` |
+
+La dispersión con la que la oleada llega a la cabecera ya no es un supuesto: sale de caminar de 0 a ~155 m a 1,1-1,5 m/s
+(0 a ~140 s, del orden de los 145 s que se usaban). Costo: más peatones simultáneos en los andenes; medir el tiempo de
+corrida en el piloto.

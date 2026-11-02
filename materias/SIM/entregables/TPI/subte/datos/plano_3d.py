@@ -70,9 +70,9 @@ def zonas_libres():
     from shapely.ops import unary_union
     pasillo = LineString([(-170, 974), (5, 974), (5, 360), (90, 360)]).buffer(31, cap_style='flat', join_style='mitre')
     vestibulo = box(75, 185, 585, 535)
-    # Circulación del hall: de los andenes (X -545) a la boca B2 (X -152, Y 949-999). Los obstáculos del modelo
-    # (hallEstructuraCentral, etc.) ya tienen muros propios; dentro de ellos se conserva el detalle del plano.
-    hall = box(-566, 275, -150, 1362)          # incluye la línea de cabecera de andenes (X -555)
+    # Circulación del hall: de los andenes (X -830) a la boca B2 (X -152, Y 949-999). Los obstáculos del modelo
+    # (hall*: cabeceras de andén, escaleras, vestuario y boletería) tienen muros propios; dentro se conserva el plano.
+    hall = box(-835, 275, -150, 1362)          # desde los paragolpes: la gente sale de los andenes y cruza la cabecera
     return unary_union([pasillo, vestibulo, hall])
 
 

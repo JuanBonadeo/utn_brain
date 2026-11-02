@@ -221,6 +221,10 @@ public static void main(String[] args) throws Exception {
  double total=0;for(double v:f.perfilPed15min)total+=v;
  ok(f.nDesdeRocaPed>0.97*0.8*total && f.nDesdeRocaPed<1.03*0.8*total,"Roca ~80% del perfil SBASE (acumulacion por ramal): "+f.nDesdeRocaPed);
  ok(Math.abs(f.nDesdeCallePed-0.2*total)<5*Math.sqrt(0.2*total),"calle ~20% del perfil SBASE: "+f.nDesdeCallePed);
+ // Puertas: 21 por tren, todas sobre el andén (X -2420 a -830) y distintas; Y a 0,8 m del borde de cada andén.
+ java.util.HashSet<Double> xs=new java.util.HashSet<Double>();for(int k=0;k<21;k++){double x=f.xPuertaPed(k);ok(x<-830&&x>-2420,"puerta en el anden: "+x);xs.add(x);}
+ ok(xs.size()==21 && Math.abs(f.xPuertaPed(0)+868.33)<0.01 && Math.abs(f.xPuertaPed(20)+2401.67)<0.01,"21 puertas de -868 a -2402");
+ ok(f.yPuertaPed(0)==354 && f.yPuertaPed(6)==1316,"descenso junto al borde del anden");
  double ultimo=0;for(String e:f.eventos){String[] x=e.split(";");ultimo=Math.max(ultimo,Double.parseDouble(x[0])+(Integer.parseInt(x[1])+Integer.parseInt(x[2])>0?0:-1e9));}
  ok(ultimo<9000,"ningun ingreso a partir de las 09:30: "+ultimo);
  ok(f.eventos.equals(f1.eventos),"E0 y E1 reciben exactamente los mismos ingresos (numeros aleatorios comunes)");
@@ -324,7 +328,9 @@ for zona in ((-150,952,-22,996),(-18,340,28,996),(80,190,580,530),(-205,880,-160
  assert not any(_pisa(c,*zona) for c in muros3d), zona
 sources={x.findtext('Name'):{p.findtext('Name'):p.findtext('Value/Code') for p in x.findall('Parameters/Parameter')} for x in ped.findall('EmbeddedObjects/EmbeddedObject') if x.findtext('Name').startswith('pedSource')}
 # Roca: cada pasajero aparece en la cabecera del andén de su tren (andenActualPed, asignado por turno).
-assert sources['pedSource']['locationLine']==' : '.join(f'andenActualPed == {k} ? andenRoca{k}' for k in range(6))+' : andenRoca6'
+# Roca (2026-11-02): cada pasajero baja por una de las 21 puertas de su tren (7 coches x 3 puertas por lado, CSR) y
+# camina el andén; la puerta va por turno (sin números aleatorios) y el andén lo fija andenActualPed.
+assert (sources['pedSource']['locationType'],sources['pedSource']['level'],sources['pedSource']['locationX'],sources['pedSource']['locationY'])==('self.LOCATION_POINT','nivelHall','xPuertaPed((nDesdeRocaPed - 1) % 21)','yPuertaPed(andenActualPed)')
 # Calle: una boca, la escalera B3 de la calle Brasil (OSM), que aterriza en X ~ 194 desde el lado este.
 assert sources['pedSourceCalle']['locationLine']=='entradaCalle'
 assert sources['pedSource']['onExit']=='ped.desdeRocaPed = true; registraIngresoPed(ped);'
@@ -340,7 +346,7 @@ assert {('pedSource','bajadaB2'),('bajadaB2','pedMolinetes'),('pedSourceCalle','
 niveles={lv.findtext('Name'):lv for lv in ped.iter('Level')}
 assert set(niveles)=={'nivelHall','nivelVestibulo'} and niveles['nivelHall'].findtext('Z')=='0' and niveles['nivelVestibulo'].findtext('Z')=='-46'
 en_nivel=lambda n: {c.findtext('Name') for c in niveles[n].find('Presentation')}
-assert {f'andenRoca{k}' for k in range(7)}|{'bocaB2Hall','hallEstructuraCentral','hallVestuarioSOFSE','hallBoleteriasSOFSE','plano3D','viasRoca','planoConstitucion'} <= en_nivel('nivelHall')
+assert {f'bordeAndenRoca{k}' for k in range(7)}|{f'hallCabecera{k}' for k in range(6)}|{'bocaB2Hall','hallEstructuraCentral','hallVestuarioSOFSE','hallBoleteriasSOFSE','plano3D','viasRoca','planoConstitucion'} <= en_nivel('nivelHall')
 assert {'escaleraB2','bocaB2Pasillo','pasilloRocaNorte','pasilloRocaSur','molinetesPeatonales','entradaCalle','salidaPeatonal'} <= en_nivel('nivelVestibulo')
 # Equipamiento 3D del vestíbulo (datos/vestibulo_3d.py): molinetes en los 30 divisores, boletería, cabina, máquinas y
 # coches de la Línea C; recursos registrados y listados en copiar_figuras_3d.py.
@@ -387,7 +393,7 @@ gates=svc.findall('Presentation/ServiceLine'); queues=svc.findall('Presentation/
 assert [g.findtext('Name') for g in gates]==[f'molinetePed{i:02d}' for i in range(1,29)]
 assert [q.findtext('Name') for q in queues]==[f'colaMolinete{i:02d}' for i in range(1,29)]
 assert not ped.findall('.//ServicePoint')
-entry_x=max(float(ped.find(f".//TargetLine[Name='andenRoca{k}']").findtext('X')) for k in range(7))
+entry_x=-868   # puerta más adelantada del tren (xPuertaPed(0))
 exit_x=float(ped.find(".//TargetLine[Name='salidaPeatonal']").findtext('X'))
 for g,q in zip(gates,queues):
  gx,gy=float(g.findtext('X')),float(g.findtext('Y'))
@@ -412,7 +418,9 @@ assert ped.find(".//*[Name='pasilloRocaFondo']") is None and ped.find(".//*[Name
 # El pasillo se abre al hall en la boca B2 (X = -152); el vestíbulo queda cerrado del lado de los andenes de la C.
 assert _abs('paredDerechaCentro')==[(580,290),(580,430)]
 # Descenso en las cabeceras de los 7 andenes (islas 2-3 ... 12-13 y 14) y obstáculos del hall medidos en el plano.
-assert [_abs(f'andenRoca{k}',1) for k in range(7)]==[[(-545,y-30),(-545,y+30)] for y in (314,489,661,837,1009,1181,1326)]
+assert ped.find(".//TargetLine[Name='andenRoca0']") is None
+assert [_abs(f'bordeAndenRoca{k}',1) for k in range(7)]==[[(-830,a),(-2420,a),(-2420,b),(-830,b)] for a,b in ((267,362),(441,536),(613,708),(789,885),(957,1060),(1128,1235),(1308,1366))]
+assert all(ped.find(f".//Wall[Name='bordeAndenRoca{k}']").findtext('DrawMode')=='SHAPE_DRAW_2D' for k in range(7))
 assert all(ped.find(f".//*[Name='{n}']") is not None for n in ('hallEstructuraCentral','hallVestuarioSOFSE','hallBoleteriasSOFSE'))
 assert _abs('paredIzquierdaNorte')==[(80,190),(80,335)] and _abs('paredIzquierdaSur')==[(80,385),(80,530)]
 # Disposición coherente con el plano georreferenciado (2026-11-02): pasillo del Roca en X = 80, escalera B3 en
@@ -463,7 +471,7 @@ assert float(demo.findtext('ModelTimeProperties/FinalTime'))==900
 # escenario intermedio de PeatonalCorridasApareadas, sin archivo de salida.
 visuales={e.findtext('Name'):e for e in experiments if (e.findtext('Name') or '').startswith('PeatonalFranjaVisual')}
 assert set(visuales)=={'PeatonalFranjaVisualE0','PeatonalFranjaVisualE1'}
-intermedio={'proporcionRocaPed':'0.8','demoraAccesoRocaSeg':'33','duracionDescargaSeg':'145','servicioPedSeg':'2.4','servicioMinPedSeg':'1.8','servicioMaxPedSeg':'3.5'}
+intermedio={'proporcionRocaPed':'0.8','demoraAccesoRocaSeg':'10','duracionDescargaSeg':'30','servicioPedSeg':'2.4','servicioMinPedSeg':'1.8','servicioMaxPedSeg':'3.5'}
 for name,mol in (('PeatonalFranjaVisualE0','20'),('PeatonalFranjaVisualE1','22')):
  ps={x.findtext('ParameterName'):x.findtext('ParameterValue/Code') for x in visuales[name].findall('Parameters/Parameter')}
  assert ps['molinetesOperativosPed']==mol and ps['modoFranjaPed']=='true' and ps['pruebaSinteticaPed']=='false' and ps['archivoSalidaPed'] is None, name
@@ -502,7 +510,7 @@ for name,(runs,modo,archivo,final) in {'PeatonalCorridasApareadas':('60','true',
  calib={k:free[k] for k in ('proporcionRocaPed','demoraAccesoRocaSeg','duracionDescargaSeg','servicioPedSeg','servicioMinPedSeg','servicioMaxPedSeg')}
  if name=='PeatonalCorridasApareadas':
   # Escenario intermedio (T3.4, 2026-10-05): rangos de la §5 del plan; demora con D = 85 m (OpenStreetMap) y h = 5 m.
-  assert calib=={'proporcionRocaPed':'0.8','demoraAccesoRocaSeg':'33','duracionDescargaSeg':'145','servicioPedSeg':'2.4','servicioMinPedSeg':'1.8','servicioMaxPedSeg':'3.5'}, calib
+  assert calib=={'proporcionRocaPed':'0.8','demoraAccesoRocaSeg':'10','duracionDescargaSeg':'30','servicioPedSeg':'2.4','servicioMinPedSeg':'1.8','servicioMaxPedSeg':'3.5'}, calib
   rng={ped_param_ids[x.findtext('Id')]:x.findtext('Expression/Code') for x in e.findall('RangeVariationParamValue')}
   assert all(rng[k]==v for k,v in calib.items()), 'freeform y range deben coincidir'
  else:

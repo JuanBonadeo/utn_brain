@@ -131,14 +131,14 @@ Tiempo de validación (s) & Triangular (1,5; 2,0; 3,0) & Triangular (1,8; 2,4; 3
 Moda: 2,4~s con tarjeta inteligente en Londres; 2,6 a 2,9~s en Nueva York \parencite[Exh.~10-27]{tcqsm2013}.
 Cota del propio dataset: hasta 246 pasajeros en 15 minutos por molinete, o sea una media sostenida
 $\le 900/246 = 3{,}66$~s. Asimetría a la derecha por fallas de lectura [supuesto] \\
-Dispersión de la descarga (s) & 220 & 145 & 110 &
-Recorrido entre el primer y el último coche de una formación de 7 coches, unos 138~m [supuesto], a 0,63,
-0,95 y 1,25~m/s \parencite{tcqsm2013}. Una descarga corta concentra la oleada y genera más cola \\
-Demora andén--vestíbulo (s) & 84 & 106 & 159 &
-$D/v + h/v_e$ con $D = 85$~m, mediana del recorrido desde los paragolpes de las 14 vías hasta la boca de
-la Línea~C (rango 69 a 112~m, \cite{osm2026}), y $h = 5$~m de desnivel [supuesto]. La
-superposición con el plano llevó a simular el hall, la escalera B2 y el pasillo; la demora cubre solo el
-andén hasta su cabecera, 33~s (sección~\ref{sec:paso6-validacion}) \\
+Descenso por las puertas (s) & 45 & 30 & 20 &
+Tiempo en que el pasaje de un tren sale por las 21 puertas del lado del andén (7 coches con 3 puertas
+por lado, \cite{wikicsr}): con 200 a 530 pasajeros por tren, unos 25 por puerta a 1 a 1,5 por segundo
+[supuesto]. El andén ya no entra acá: se camina. Una descarga corta concentra la oleada y genera más cola \\
+Demora hasta abrir las puertas (s) & 5 & 10 & 20 &
+Desde el arribo del horario hasta que se abren las puertas [supuesto]. Antes era la demora andén--vestíbulo,
+$D/v + h/v_e$ con $D = 85$~m (\cite{osm2026}); la superposición con el plano llevó a simular el andén, el
+hall, la escalera B2 y el pasillo, y la demora quedó solo para la apertura (sección~\ref{sec:paso6-validacion}) \\
 Proporción que llega en tren & 0,70 & 0,80 & 0,90 &
 Supuesto explícito: no hay estudio publicado de trasbordo del Roca a la Línea~C, y Trenes Argentinos
 confirmó que no lo tiene \parencite{sofse2026nota} \\
@@ -167,8 +167,8 @@ a sus trenes en la franja. Con este criterio, un tren que llega después de un i
 cargado, y dos trenes de ramales distintos que llegan juntos no se reparten la misma gente. El total de la
 franja coincide con el dato; ventana por ventana, el ingreso se corre hacia el tren siguiente.
 
-El pasaje de cada tren baja en la cabecera de su andén de forma pareja durante la dispersión de la
-descarga, y desde ahí camina el hall y el pasillo hasta el vestíbulo. El resto, $(1-p)\,d_k$, entra desde la
+El pasaje de cada tren baja por las 21 puertas de su lado del andén, de forma pareja durante el descenso,
+y desde ahí camina el andén, el hall, la escalera B2 y el pasillo hasta el vestíbulo. El resto, $(1-p)\,d_k$, entra desde la
 calle con llegadas de Poisson no homogéneas a la tasa de cada ventana. Solo se generan ingresos antes de las
 09:30.
 
@@ -212,7 +212,7 @@ La figura~\ref{fig:conceptual} resume el flujo.
 \end{tikzpicture}%
 }
 \caption{Modelo conceptual. Las oleadas salen del horario del Roca y el volumen, del perfil de SBASE. El
-pasaje de cada tren llega con una demora y se dispersa durante la descarga. Cada pasajero elige molinete
+pasaje de cada tren baja por las puertas y se dispersa al caminar el andén. Cada pasajero elige molinete
 según la distancia y la cola.}
 \label{fig:conceptual}
 \end{figure}

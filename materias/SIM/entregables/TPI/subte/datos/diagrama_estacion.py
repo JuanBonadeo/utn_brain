@@ -56,7 +56,7 @@ def corte(ax):
     def cota(x0, x1, y, txt):
         ax.annotate('', xy=(x0, y), xytext=(x1, y), arrowprops=dict(arrowstyle='<->', color='#333', lw=.8))
         ax.text((x0 + x1) / 2, y + .35, txt, ha='center', fontsize=8.5)
-    cota(0, x_hall, 5.0, 'andén hasta la cabecera\n31 m: demora 33 s')
+    cota(0, x_hall, 5.0, 'andén (se camina)\ndesde 21 puertas')
     cota(x_hall, x_esc, 5.0, f'hall del Roca (se camina)\n{min(HALL):.0f} a {max(HALL):.0f} m según el andén')
     cota(x_esc, x_esc + 9, 2.6, 'B2\n9 m')
     cota(x_esc + 9, x_ves, -0.6, 'pasillo (se camina), 75 m × 5 m')
@@ -82,8 +82,10 @@ def planta(ax):
     for y0, y1 in ((267, 362), (441, 536), (613, 708), (789, 885), (957, 1060), (1128, 1235), (1308, 1366)):
         R(-1500, y0, -830, y1, color=C0, ec='#a99f8c', lw=.6)
     R(-830, 230, -150, 1400, color=C0, ec='#a99f8c', lw=.8)                                   # hall
-    # Obstáculos del hall del modelo (envolventes de hallVestuarioSOFSE, hallEstructuraCentral y hallBoleteriasSOFSE).
-    R(-408, 680, -215, 987, color='#d6cdb9'); R(-300, 355, -210, 615, color='#d6cdb9'); R(-395, 1020, -230, 1285, color='#d6cdb9')
+    # Obstáculos del hall del modelo (envolventes de las siluetas hall* tomadas del plano).
+    R(-385, 675, -204, 1012, color='#d6cdb9'); R(-305, 368, -186, 629, color='#d6cdb9'); R(-376, 1055, -205, 1310, color='#d6cdb9')
+    for y0 in (370, 542, 714, 886, 1057, 1229):                                             # cabeceras (hallCabecera*)
+        R(-727, y0, -553, y0 + 84, color='#d6cdb9')
     # Subsuelo (nivel -1): escalera B2, pasillo y vestíbulo.
     R(-152, 949, -62, 999, color='#a89f92')
     for x0, y0, x1, y1 in ((-62, 949, 30, 999), (-20, 335, 30, 999), (-20, 335, 80, 385)):
@@ -97,12 +99,15 @@ def planta(ax):
     for y in (315, 330, 348):
         ax.plot([52, 122], [-y / 10, -y / 10], color=LINEAC, lw=3, alpha=.6)
     # Flujo.
-    for y in ANDENES_Y:
-        ax.plot([-54.5, -15.2], [-(y + 30) / 10, -97.4], color=FLUJO, lw=.8, alpha=.6)
+    # Puertas del tren (21 por tren, del lado del andén) y caminata por el andén y el hall hasta la B2.
+    for yb in (354, 528, 700, 877, 1052, 1227, 1316):
+        xs = [(-830 - 230 * (k // 3) - 230 * (2 * (k % 3) + 1) / 6) / 10 for k in range(21)]
+        ax.plot(xs, [-yb / 10] * 21, 'o', ms=1.6, color=FLUJO)
+        ax.plot([-150, -83, -54.5, -15.2], [-yb / 10, -yb / 10, -yb / 10, -97.4], color=FLUJO, lw=.8, alpha=.6)
     ax.plot([-15.2, 0.5, 0.5, 30], [-97.4, -97.4, -36, -36], color=FLUJO, lw=2, ls='--')
     ax.annotate('', xy=(56.8, -36), xytext=(32, -36), arrowprops=dict(arrowstyle='-|>', color=FLUJO, lw=2))
     t = dict(fontsize=8.5, ha='center')
-    ax.text(-115, -150, 'andenes del Roca\n(7 de 14, uno por vía modelada)', **t)
+    ax.text(-115, -150, 'andenes del Roca: se baja por las\n21 puertas del tren (puntos) y se camina', **t)
     ax.text(-49, -144, 'hall del Roca', **t)
     ax.text(-10.7, -103.5, 'escalera B2', **t)
     ax.text(10, -70, 'pasillo\n(nivel −1)', fontsize=8.5, ha='left')
