@@ -4278,6 +4278,22 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 						</ParameterEditor>
 					</Properties>                 
 				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1794000000500</Id>
+					<Name><![CDATA[ramalRocaPed]]></Name>
+					<Description><![CDATA[Ramal de cada tren de llegadasRocaSeg (mismo orden): 0 La Plata, 1 Bosques via Quilmes, 2 Bosques via Temperley, 3 Glew/A. Korn, 4 Ezeiza/Canuelas. Dato oficial: datos/arribos_roca_constitucion_habiles.csv.]]></Description>
+					<X>2350</X><Y>780</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>false</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="true" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[int[]]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[new int[] {2,3,1,4,2,3,4,2,3,0,4,2,1,3,2,3,4,2,0,3,4,2,3,1,2,4,0,3,4,2,3,1,4,2,0,3,4,2,3,1,4,2,0,3,4,2,3,4,2,0,3,4,2,3,1,4,2}]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
 				<Variable Class="Parameter">
 					<Id>1792000000400</Id>
 					<Name><![CDATA[pruebaSinteticaPed]]></Name>
@@ -5294,25 +5310,47 @@ return colas.get(mejor);]]></Body>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[// Roca: cada tren del horario oficial trae la parte de la demanda de su ventana que corresponde a los
-// trenes de esa ventana; su pasaje sale de la cabecera del anden hacia el hall de forma pareja durante
-// duracionDescargaSeg, a partir de demoraAccesoRocaSeg. Solo cuentan los ingresos anteriores al cierre (09:30).
+					<Body><![CDATA[// Roca: cada tren lleva la demanda acumulada desde el tren anterior de SU ramal (la gente espera en las
+// estaciones de su ramal: dos trenes que llegan juntos de ramales distintos no se reparten la misma gente).
+// La tasa es la del perfil SBASE en el instante de ingreso; antes de las 07:00 se extiende la de la primera
+// ventana. Cada ramal toma la parte de la demanda proporcional a sus trenes en la franja. El pasaje sale de la
+// cabecera del anden de forma pareja durante duracionDescargaSeg, a partir de demoraAccesoRocaSeg.
+// Solo cuentan los ingresos anteriores al cierre (09:30).
 double h = horizonteArribosPedSeg;
-int[] trenesPorVentana = new int[perfilPed15min.length];
-for (double t : llegadasRocaSeg) {
-    double ingreso = t + demoraAccesoRocaSeg;
-    if (ingreso >= 0 && ingreso < h) trenesPorVentana[(int)Math.floor(ingreso / 900.0)]++;
+java.util.function.DoubleUnaryOperator acumulada = s -> {
+    if (s < 0) return perfilPed15min[0] * s / 900.0;
+    double tope = Math.min(s, 900.0 * perfilPed15min.length);
+    int k = (int) Math.floor(tope / 900.0);
+    double a = 0;
+    for (int i = 0; i < k && i < perfilPed15min.length; i++) a += perfilPed15min[i];
+    if (k < perfilPed15min.length) a += perfilPed15min[k] * (tope - 900.0 * k) / 900.0;
+    return a;
+};
+int nRamales = 0;
+for (int b : ramalRocaPed) nRamales = Math.max(nRamales, b + 1);
+int[] trenesRamal = new int[nRamales];
+int enFranja = 0;
+for (int j = 0; j < llegadasRocaSeg.length; j++) {
+    double ingreso = llegadasRocaSeg[j] + demoraAccesoRocaSeg;
+    if (ingreso >= 0 && ingreso < h) { trenesRamal[ramalRocaPed[j]]++; enFranja++; }
 }
-// Cada tren descarga en un andén (islas 2-3 ... 12-13 y andén 14). No hay dato de andén por tren:
-// se asignan por turno, en el orden del horario [SUP].
-int indiceTren = -1;
-for (double t : llegadasRocaSeg) {
-    indiceTren++;
-    double ingreso = t + demoraAccesoRocaSeg;
+double[] ingresoAnterior = new double[nRamales];
+java.util.Arrays.fill(ingresoAnterior, Double.NaN);
+double[] resto = new double[nRamales];
+for (int j = 0; j < llegadasRocaSeg.length; j++) {
+    int b = ramalRocaPed[j];
+    double ingreso = llegadasRocaSeg[j] + demoraAccesoRocaSeg;
+    // Sin tren anterior del ramal en el horario cargado: se toman 15 minutos de acumulacion.
+    double desde = Double.isNaN(ingresoAnterior[b]) ? ingreso - 900.0 : ingresoAnterior[b];
+    ingresoAnterior[b] = ingreso;
     if (ingreso < 0 || ingreso >= h) continue;
-    int anden = indiceTren % 7;
-    int ventana = (int)Math.floor(ingreso / 900.0);
-    int n = (int)Math.round(factorDemandaPed * perfilPed15min[ventana] * proporcionRocaPed / trenesPorVentana[ventana]);
+    double carga = factorDemandaPed * proporcionRocaPed * trenesRamal[b] / enFranja
+        * (acumulada.applyAsDouble(ingreso) - acumulada.applyAsDouble(desde)) + resto[b];
+    int n = (int) Math.round(carga);
+    resto[b] = carga - n;
+    // Cada tren descarga en un anden (islas 2-3 ... 12-13 y anden 14). No hay dato de anden por tren:
+    // se asignan por turno, en el orden del horario [SUP].
+    int anden = j % 7;
     nTrenesPed++;
     for (int i = 0; i < n; i++) {
         double r = ingreso + (i + 0.5) * duracionDescargaSeg / n;

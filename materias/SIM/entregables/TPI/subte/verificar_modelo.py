@@ -216,7 +216,7 @@ public static void main(String[] args) throws Exception {
  ok(f.arribosCerradosPed && f.rocaCerradoPed && f.calleCerradaPed,"arribos cerrados al agotar horario y calle");
  ok(f.nInyectadosPed==f.nDesdeRocaPed+f.nDesdeCallePed && f.pedSource.injected==f.nDesdeRocaPed && f.pedSourceCalle.injected==f.nDesdeCallePed,"origenes");
  double total=0;for(double v:f.perfilPed15min)total+=v;
- ok(f.nDesdeRocaPed>0.97*0.8*total && f.nDesdeRocaPed<=0.8*total+trenes,"Roca ~80% del perfil SBASE: "+f.nDesdeRocaPed);
+ ok(f.nDesdeRocaPed>0.97*0.8*total && f.nDesdeRocaPed<1.03*0.8*total,"Roca ~80% del perfil SBASE (acumulacion por ramal): "+f.nDesdeRocaPed);
  ok(Math.abs(f.nDesdeCallePed-0.2*total)<5*Math.sqrt(0.2*total),"calle ~20% del perfil SBASE: "+f.nDesdeCallePed);
  double ultimo=0;for(String e:f.eventos){String[] x=e.split(";");ultimo=Math.max(ultimo,Double.parseDouble(x[0])+(Integer.parseInt(x[1])+Integer.parseInt(x[2])>0?0:-1e9));}
  ok(ultimo<9000,"ningun ingreso a partir de las 09:30: "+ultimo);
@@ -314,6 +314,11 @@ assert {('pedSource','pedMolinetes'),('pedSourceCalle','pedMolinetes'),('pedMoli
 import csv as _csv
 horario=[r['segundos_desde_07'] for r in _csv.DictReader(open(p.parent/'datos'/'arribos_roca_constitucion_habiles.csv',encoding='utf-8'),delimiter=';')]
 assert ped_defaults_early['llegadasRocaSeg']=='new double[] {'+','.join(horario)+'}', 'llegadasRocaSeg no coincide con datos/arribos_roca_constitucion_habiles.csv'
+# Ramal de cada tren (mismo orden): la carga de cada tren es la demanda acumulada desde el tren anterior de su ramal.
+_RAMALES=['La Plata','Bosques (vía Quilmes)','Bosques (vía Temperley)','Glew / A. Korn','Ezeiza / Cañuelas']
+_ramales=[str(_RAMALES.index(r['ramal'])) for r in _csv.DictReader(open(p.parent/'datos'/'arribos_roca_constitucion_habiles.csv',encoding='utf-8'),delimiter=';')]
+_ramal_var=next(v for v in ped.findall('Variables/Variable') if v.findtext('Name')=='ramalRocaPed')
+assert _ramal_var.findtext('Properties/InitialValue/Code')=='new int[] {'+','.join(_ramales)+'}', 'ramalRocaPed no coincide con el ramal del horario oficial'
 assert ped_defaults_early['factorDemandaPed']=='1.0'
 assert agents['Pasajero'] is not None
 assert any(e.findtext('Name')=='PeatonalDemo' and e.get('ActiveObjectClassId')==ped.findtext('Id') for e in experiments)
