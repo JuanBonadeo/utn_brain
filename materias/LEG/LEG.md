@@ -1,6 +1,6 @@
 # Legislación — Wiki
 
-> **2do parcial: mié 28/10/2026, escrito.** Entran las **unidades 4, 5 y 6**. En 2026 sólo se dio
+> **2do parcial: mié 4/11/2026, escrito** (se movió del 28/10). Entran las **unidades 4, 5 y 6**. En 2026 sólo se dio
 > en clase la unidad 4. Fuentes: U4, el resumen 2025 y los apuntes de clase (la cátedra sólo pasó
 > la lista de leyes); **U5, el apunte de cátedra 2026** (está escrito sobre la reforma de la Ley
 > 27.802 y deja desactualizado al resumen 2025); **U6, la ley 11.291 y el Código de Ética** con los
