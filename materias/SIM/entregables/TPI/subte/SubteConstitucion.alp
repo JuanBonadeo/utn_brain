@@ -4710,11 +4710,13 @@ if (drenadoPed()) emitirResultadoPed();]]></Action>
 						<Condition><![CDATA[false]]></Condition>
 					</Properties>
 					<Action><![CDATA[// Vista: cada tren del Roca aparece en su via (la misma que el anden de su pasaje) y frena junto a los paragolpes.
-while (!trenesRocaPed.isEmpty() && trenesRocaPed.peek()[0] <= time() + 1e-9) {
+// Un tren por ocurrencia: la fuente lee viaActualTrenPed recien cuando el tren sale, asi que dos inyecciones en el
+// mismo instante terminarian en la misma via. Los trenes simultaneos salen con 1 s de diferencia.
+if (!trenesRocaPed.isEmpty() && trenesRocaPed.peek()[0] <= time() + 1e-9) {
     viaActualTrenPed = (int) trenesRocaPed.poll()[1];
     trenesRocaFuente.inject();
 }
-if (!trenesRocaPed.isEmpty()) proximoTrenRocaPed.restart(trenesRocaPed.peek()[0] - time());]]></Action>
+if (!trenesRocaPed.isEmpty()) proximoTrenRocaPed.restart(Math.max(1, trenesRocaPed.peek()[0] - time()));]]></Action>
 				</Event>
 				<Event>
 					<Id>1792000000333</Id>
@@ -6554,7 +6556,7 @@ return String.join(",", partes);]]></Body>
 						<Parameter>
 							<Name><![CDATA[onExit]]></Name>
 							<Value Class="CodeValue">
-								<Code><![CDATA[train.via = viaActualTrenPed;]]></Code>
+								<Code><![CDATA[train.via = train.getTrack(true) == viaRoca0 ? 0 : train.getTrack(true) == viaRoca1 ? 1 : train.getTrack(true) == viaRoca2 ? 2 : train.getTrack(true) == viaRoca3 ? 3 : train.getTrack(true) == viaRoca4 ? 4 : train.getTrack(true) == viaRoca5 ? 5 : 6;]]></Code>
 							</Value>
 						</Parameter>
 						<Parameter>
