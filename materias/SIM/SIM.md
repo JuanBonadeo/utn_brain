@@ -56,6 +56,10 @@ fotocopiada en 2019). El cap. 2 de Ross es la base de la Unidad 6.
 > (`fuentes/Resumen Simulación.pdf`) con los parciales y finales viejos de `fuentes/examenes/`
 > y con las dos transcripciones de clase pre-examen (`fuentes/clase-preexamen/`).
 
+> 📌 **Para el parcial del 7/11/2026**: `estudio/resumen-parcial1.md` (todo lo que entra, en formato para multiple choice)
+> y `estudio/banco-preguntas.md` (el parcial 2025 con **la clave corregida**: el alumno erró 14 de 32, más
+> 25 preguntas de práctica del alcance 2026). El alcance de este año está en `estudio/parcial1-alcance-2026.md`.
+
 ### 🔴 Lo primero: el formato cambió en 2025
 
 **Confirmá con la cátedra qué formato se toma este año.** Los parciales guardados muestran dos
@@ -2861,6 +2865,11 @@ Conclusiones:
 
 ## Log
 
+- **2026-11-02**: parcial 1 en formato multiple choice. Se revisó el parcial 2025 contra las fotos y se armó
+  `estudio/banco-preguntas.md` con la clave corregida y justificada: las marcas del alumno fallan en 14 de 32, y la 1.10,
+  la 1.13, la 2.11 y la 2.13 son discutibles. El ejercicio 3 queda con dos supuestos explícitos, porque con 5 números no
+  cierra. Se sumaron 25 preguntas de práctica del alcance 2026 y el resumen único `estudio/resumen-parcial1.md`. El
+  Drive no trajo nada nuevo de SIM.
 - **2026-10-28**: TPI, consigna de la entrega final (aviso del docente). Ahora son cinco partes: `.alp`, paper
   con abstract, objetivos, metodología, resultados y conclusiones y los 10 pasos implícitos, planilla de
   corridas, link de AnyLogic Cloud con autores y video. Defensa presencial el 10 y 11/11. Va en una sección

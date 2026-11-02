@@ -232,14 +232,14 @@ forma de acordarse de cuál es cuál.
 | **Poisson** $\lambda$ | Nº de **eventos** en un intervalo, con tasa media $\lambda$ | $e^{-\lambda}\dfrac{\lambda^i}{i!}$ | $\lambda$ | $\lambda$ |
 | **Geométrica** $p$ | Nº de intentos **hasta el primer éxito** | $p\,(1-p)^{n-1}$ | $\dfrac{1}{p}$ | $\dfrac{1-p}{p^2}$ |
 | **Binomial negativa** (Pascal) | Nº de intentos **hasta el r-ésimo éxito** | $\binom{n-1}{r-1}p^r(1-p)^{n-r}$ | $\dfrac{r}{p}$ | $\dfrac{r(1-p)}{p^2}$ |
-| **Hipergeométrica** | Como la binomial pero **sin reemplazo** | $\dfrac{\binom{N}{i}\binom{M}{n-i}}{\binom{N+M}{n}}$ | $np$ | $np(1-p)\dfrac{N-n}{N-1}$ |
+| **Hipergeométrica** | Como la binomial pero **sin reemplazo** | $\dfrac{\binom{N}{i}\binom{M}{n-i}}{\binom{N+M}{n}}$ | $np$ | $np(1-p)\dfrac{N+M-n}{N+M-1}$, con $p=\frac{N}{N+M}$ |
 
 **Notas cortas sobre cada una:**
 
 - **Binomial**: $\binom{n}{i}$ es el **coeficiente binomial** — la cantidad de subconjuntos distintos de $i$ elementos que se pueden elegir de $n$. Una binomial es la **suma de $n$ Bernoulli IID**, y de ahí salen $E$ y $\mathrm{Var}$ directamente: $E[X] = \sum_{i=1}^n E[X_i] = np$, y lo mismo con la varianza. **Es la que más cayó** (2024 P7, Globalizador P2).
 - **Poisson**: la única con $E[X] = \mathrm{Var}(X) = \lambda$. Se deduce de la binomial haciendo $\lambda = np$: $E = np = \lambda$, y $\mathrm{Var} = np(1-p) \approx \lambda$ porque $p$ es chiquísima.
 - **Geométrica** (parcial 2025, pregunta 1.1): ojo que **hay dos convenciones** — Ross cuenta el **número del intento** en que ocurre el primer éxito (empieza en 1, $E = 1/p$); Naylor cuenta el **número de fracasos antes** del primer éxito (empieza en 0, $E = q/p$). **En el parcial usá la de Ross**, que es la del resumen.
-- **Hipergeométrica**: urna con $N+M$ bolas, $N$ claras y $M$ oscuras; se saca una muestra de $n$ **sin reponer**, y $X$ = cuántas claras salieron. Al no reponer, los intentos **no** son independientes, y por eso no es binomial. El factor $\frac{N-n}{N-1}$ es la corrección por población finita.
+- **Hipergeométrica**: urna con $N+M$ bolas, $N$ claras y $M$ oscuras; se saca una muestra de $n$ **sin reponer**, y $X$ = cuántas claras salieron. Al no reponer, los intentos **no** son independientes, y por eso no es binomial. El factor $\frac{N+M-n}{N+M-1}$ es la corrección por población finita: el tamaño de la urna es $N+M$, no $N$.
 
 ### 4.3 Continuas
 
