@@ -40,6 +40,8 @@ PASO = 5                 # px: tramo de los escalonados oblicuos
 # Vías del plano en px del modelo (georref_plano_sofse.vias_plano, Y = 360 + 10 (y - 2726,9)).
 VIAS = [250, 379, 424, 553, 596, 725, 772, 902, 940, 1077, 1111, 1252, 1291]
 Z_VIA = -11
+Z_SUB = -50              # subsuelo (pasillo y vestíbulo de la Línea C), nivel nivelVestibulo
+Z_LINEA_C = -100         # andenes de la Línea C, nivel -2 [SUP]
 X_PARAGOLPES = -830      # fin de las vías (los RailTrack terminan en X = -820)
 X_COLA = -2620           # cola del tren de 7 coches detenido (161 m) con margen
 X_INICIO_VIAS = -5000
@@ -54,7 +56,7 @@ COLOR = {
     'piso': argb(255, 214, 210, 200), 'lecho': argb(255, 92, 84, 76), 'anden': argb(255, 196, 190, 178),
     'borde': argb(255, 232, 196, 40), 'muro': argb(150, 150, 150, 158), 'bajo': argb(200, 110, 110, 118),
     'cordon': argb(255, 160, 160, 160), 'escalera': argb(255, 168, 160, 150), 'lineaC': argb(255, 160, 180, 205),
-    'vereda': argb(255, 200, 200, 196),
+    'vereda': argb(255, 200, 200, 196), 'subsuelo': argb(255, 226, 222, 214),
 }
 
 
@@ -173,7 +175,13 @@ def cajas_de_segmentos(h, v, ob, libre, conservar, oblicuos=True):
     jj, ii = np.meshgrid(np.arange(nx), np.arange(ny))
     cx, cy = gx0 + (jj + .5) * CELDA, gy0 + (ii + .5) * CELDA
     m &= ~shapely.contains_xy(libre, cx, cy)
-    # Compactación: corridas por fila, extendidas hacia abajo mientras la corrida se repite igual.
+    return compactar(m, gx0, gy0, CELDA)
+
+
+def compactar(m, gx0, gy0, celda):
+    """Grilla booleana -> rectángulos: corridas por fila, extendidas hacia abajo mientras la corrida se repite."""
+    import numpy as np
+    ny, nx = m.shape
     abiertos, cajas = {}, []
     for i in range(ny + 1):
         fila = m[i] if i < ny else np.zeros(nx, bool)
@@ -190,10 +198,29 @@ def cajas_de_segmentos(h, v, ob, libre, conservar, oblicuos=True):
         for key in list(abiertos):
             if key not in corridas:
                 i0 = abiertos.pop(key)
-                cajas.append((gx0 + key[0] * CELDA, gy0 + i0 * CELDA, (key[1] - key[0]) * CELDA, (i - i0) * CELDA))
+                cajas.append((gx0 + key[0] * celda, gy0 + i0 * celda, (key[1] - key[0]) * celda, (i - i0) * celda))
         for key in corridas:
             abiertos.setdefault(key, i)
     return cajas
+
+
+def rectangulos(poly, celda=10):
+    """Polígono shapely -> rectángulos alineados (grilla de `celda` px)."""
+    import numpy as np
+    import shapely
+    x0, y0, x1, y1 = poly.bounds
+    nx, ny = int(-(-(x1 - x0) // celda)), int(-(-(y1 - y0) // celda))
+    jj, ii = np.meshgrid(np.arange(nx), np.arange(ny))
+    m = shapely.contains_xy(poly, x0 + (jj + .5) * celda, y0 + (ii + .5) * celda)
+    return compactar(m, x0, y0, celda)
+
+
+def corte_subsuelo():
+    """Huella del subsuelo (pasillo, escalera B2, vestíbulo y escalera B3): ahí se abre el piso de la calle y del hall
+    para ver el nivel -1 en la vista 3D."""
+    from shapely.geometry import box
+    from shapely.ops import unary_union
+    return unary_union([box(-152, 944, 35, 1004), box(-25, 330, 35, 1004), box(-25, 330, 85, 390), box(75, 185, 585, 535)])
 
 
 def math_dist(a, b):
@@ -292,10 +319,25 @@ def main():
         for yb in (y0, y1 - 5):                          # línea amarilla de borde, 0,5 m
             g.rect('bordeAnden3D', X_COLA, yb, X_PARAGOLPES - X_COLA, 5, 0, 0.2, COLOR['borde'])
     resumen['andenes'] = len(andenes)
-    g.rect('pisoHall', X_HALL0, 120, 65 - X_HALL0, 1545, -1, 1, COLOR['piso'])
-    g.rect('pisoSudoeste', -1150, 1385, X_HALL0 + 1150, 280, -1, 1, COLOR['piso'])
-    g.rect('pisoNoroeste', -1150, 120, X_HALL0 + 1150, 110, -1, 1, COLOR['piso'])
-    g.rect('veredaBrasil', 65, 100, 1185, 1560, -1, 0.5, COLOR['vereda'])
+    # Piso de calle y hall (Z 0) con el corte del subsuelo abierto; losa del subsuelo a -5 m.
+    from shapely.geometry import box
+    calle = unary_union([box(X_HALL0, 120, 65, 1665), box(-1150, 1385, X_HALL0, 1665), box(-1150, 120, X_HALL0, 230),
+                         box(65, 100, 1250, 1660)]).difference(corte_subsuelo())
+    pisos = rectangulos(calle, 10)
+    for c in pisos:
+        g.rect('piso3D', *c, -1, 1, COLOR['piso'] if c[0] < 65 else COLOR['vereda'])
+    for c in rectangulos(corte_subsuelo(), 5):
+        g.rect('pisoSubsuelo3D', *c, Z_SUB - 1, 1, COLOR['subsuelo'])
+    resumen['pisos'] = len(pisos)
+    # Escalera B2 (hall -> pasillo): 10 escalones de 0,9 m, de Z 0 (oeste) a -5 m (este). Es el área en pendiente
+    # escaleraB2 del subsuelo, por donde la gente baja a 0,54 m/s.
+    for i in range(10):
+        tope = -Z_SUB * (10 - i) / 10 + Z_SUB
+        g.rect('escaleraB2_3D', -152 + 9 * i, 949, 9, 50, Z_SUB - 1, tope - Z_SUB + 1, COLOR['escalera'])
+    # Escalera B3 (calle Brasil -> vestíbulo): sube hacia el sur, de -5 m (Y 400) a la vereda (Y 455).
+    for i in range(10):
+        tope = Z_SUB - Z_SUB * (i + 1) / 10
+        g.rect('escaleraB3_3D', 183, 400 + 5.5 * i, 22, 5.5, Z_SUB - 1, tope - Z_SUB + 1, COLOR['escalera'])
 
     # 2. Muros del plano.
     h, v, ob = fusionar(segmentos(msp, MUROS))
@@ -326,7 +368,7 @@ def main():
         pts = [(p[0] * 10, -p[1] * 10) for p in e.get_points('xy')]
         xs = [p[0] for p in pts]; yc = sum(p[1] for p in pts) / len(pts)
         x0 = max(min(xs), 600)                           # el tramo bajo el vestíbulo (X 80-580) no se levanta
-        g.rect('andenLineaC3D', x0, yc - 6, max(xs) - x0, 12, 0, 10, COLOR['lineaC'])
+        g.rect('andenLineaC3D', x0, yc - 6, max(xs) - x0, 12, Z_LINEA_C, 10, COLOR['lineaC'])   # nivel -2
         nc += 1
     resumen['lineaC'] = nc
 

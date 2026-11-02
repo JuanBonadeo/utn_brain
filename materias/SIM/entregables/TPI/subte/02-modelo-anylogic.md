@@ -649,7 +649,7 @@ Orientación de la vista: arriba Oeste (calle Lima), abajo Este (Hornos), derech
 | Descenso del Roca | Siete líneas `andenRoca0`-`andenRoca6` en la cabecera de los andenes (islas 2-3, 4-5, 6-7, 8-9, 10-11, 12-13 y andén 14; X = -545, Y = 314, 489, 661, 837, 1009, 1181 y 1326, ±3 m). Cada tren descarga en un andén asignado por turno en el orden del horario (`indiceTren % 7`), porque no hay dato de andén por tren [SUP]. `liberacionesPed` guarda {instante, andén} y `andenActualPed` elige la línea de `pedSource` |
 | Hall del Roca | Se camina en la simulación, entre obstáculos medidos en el plano: `hallEstructuraCentral` (escaleras mecánicas), `hallVestuarioSOFSE` y `hallBoleteriasSOFSE`, con pasos de ~5 m entre ellos |
 | Pasillo del Roca | `pasilloRocaNorte/Sur`: desde la boca B2 del hall (X = -152, abierta hacia el hall) hasta la boca oeste del vestíbulo, L de 84 m × 5 m (ancho [SUP]) sobre la traza de OSM |
-| Demora | **49 s** = 31 m de andén hasta la cabecera / 0,95 + 5 m de desnivel de la escalera B2 / 0,30. El hall y el pasillo ya no están en la demora: se caminan |
+| Demora | **33 s** = 31 m de andén hasta la cabecera / 0,95. El hall, la escalera B2 y el pasillo ya no están en la demora: se caminan (ver *Subsuelo y escalera B2*) |
 | Vestíbulo | 50 m × 34 m (X 80-580, Y 190-530). El ancho real del pasillo no se conoce; 34 m alcanzan para 28 molinetes |
 | Zona no paga | X 80-220: boca del pasillo, escalera B3, boletería, máquinas de carga y dos columnas |
 | Calle | Una boca: `escaleraB3` (hueco de 2,6 × 6 m en X 181-207, Y 395-455, abierto hacia el oeste) con `entradaCalle` en Y = 399. Desplazada ~4 m al este del eje real para no caer en la boca del Roca [SUP] |
@@ -660,13 +660,14 @@ Orientación de la vista: arriba Oeste (calle Lima), abajo Este (Hornos), derech
 
 Historial del día: primero se usó la demora de 181 s sin pasillo; después, pasillo + dos bocas en la pared de arriba
 (incoherente: arriba es el lado de la calle Lima); después, el vestíbulo reordenado con la llegada al pie de la escalera
-B2 (demora 102 s); finalmente, el descenso en los andenes del Roca con el hall simulado (demora 49 s).
+B2 (demora 102 s); después, el descenso en los andenes del Roca con el hall simulado (demora 49 s); finalmente, el
+subsuelo con la escalera B2 caminada (demora 33 s).
 
 **Carga de cada tren (2026-11-02).** Cada tren lleva la demanda acumulada desde el tren anterior de su ramal
 (`ramalRocaPed`, constante con el ramal de cada tren de `llegadasRocaSeg`, del horario oficial). La tasa es la del perfil
 SBASE en el instante de ingreso (antes de las 07:00 se extiende la de la primera ventana) y cada ramal toma la parte
 proporcional a sus trenes en la franja. Con la demora de 49 s: 47 trenes, 14.852 pasajeros del Roca (100,2 % de
-0,8 × SBASE), entre 198 y 527 por tren, mediana 293. Antes se repartía la demanda de cada ventana en partes iguales
+0,8 × SBASE); con 33 s siguen siendo 47 trenes y ~14.850 pasajeros, entre 198 y 527 por tren, mediana 293. Antes se repartía la demanda de cada ventana en partes iguales
 entre sus trenes, lo que daba saltos de hasta 30 % entre trenes vecinos según la ventana en que caían. Ventana por
 ventana, el ingreso ya no coincide exactamente con SBASE (se corre hacia el tren siguiente); el total sí.
 
@@ -792,3 +793,21 @@ guardó en este modelo; la unidad de `Rotation` no está confirmada).
 
 Simplificación declarada: un único nivel peatonal (el pasillo real es subterráneo y la Línea C está en el nivel -2).
 `verificar_modelo.py` controla el grupo, los Id, la altura de las vías y que no haya muros en las zonas de circulación.
+
+## Subsuelo y escalera B2 (2026-11-02)
+
+El hall del Roca está a nivel de calle; el pasillo y el vestíbulo de la Línea C, abajo. El modelo pasó a dos niveles
+peatonales (moldes del ejemplo oficial *Stairs* de AnyLogic):
+
+| Elemento | Detalle |
+|---|---|
+| `nivelHall` (Z = 0) | Andenes `andenRoca0`-`6`, obstáculos `hall*`, boca `bocaB2Hall` (X = -160), CAD, `plano3D`, vías y `camaraHall` |
+| `nivelVestibulo` (Z = -5 m [SUP]) | Pasillo, escalera B2, vestíbulo, molinetes, colas, escalera B3 y salida |
+| `bajadaB2` (PedChangeLevel) | Entre `pedSource` y `pedMolinetes`: el pasajero camina hasta `bocaB2Hall` y sigue en `bocaB2Pasillo` (X = -146), arriba de la escalera |
+| `escaleraB2` | Área en pendiente (`Sloped`, sube 5 m hacia el oeste) de 9 m × 5 m en el arranque del pasillo (X -152 a -62), con velocidad máxima 0,54 m/s: 9 m en 16,7 s = 5 m de desnivel a 0,30 m/s (§5 del plan). La bajada se camina y puede congestionarse |
+| Demora | 49 s → **33 s** (31 m / 0,95): la escalera salió de la demora porque ahora se camina |
+| Calle | Sin cambios: el pasajero de la calle aparece al pie de la escalera B3 (su tiempo de bajada no se modela; la tasa es la de llegada al vestíbulo) |
+| 3D | Piso de calle y hall abierto sobre el subsuelo (corte), losa del subsuelo a -5 m, escalones de B2 y B3, andenes de la Línea C a -10 m (nivel -2 [SUP]) |
+
+Los resultados de producción con 49 s ya estaban pendientes; con este cambio hay que correr el piloto y la producción
+igual. Diagrama de niveles: `figs/tpi-subte-estacion-niveles.png` (`datos/diagrama_estacion.py`).

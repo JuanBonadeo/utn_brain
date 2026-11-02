@@ -301,7 +301,7 @@ for agent, min_x in ((a,1100),(ped,1000)):
   assert all(int(x.findtext('X'))>=min_x for x in technical)
 ped_defaults_early={v.findtext('Name'):v.findtext('Properties/DefaultValue/Code') for v in ped.findall("Variables/Variable[@Class='Parameter']")}
 ped_blocks={x.findtext('Name'):x.findtext('ActiveObjectClass/ClassName') for x in ped.findall('EmbeddedObjects/EmbeddedObject')}
-assert ped_blocks=={'pedSource':'PedSource','pedSourceCalle':'PedSource','pedMolinetes':'PedService','pedSalida':'PedGoTo','pedSink':'PedSink',
+assert ped_blocks=={'pedSource':'PedSource','bajadaB2':'PedChangeLevel','pedSourceCalle':'PedSource','pedMolinetes':'PedService','pedSalida':'PedGoTo','pedSink':'PedSink',
  # Trenes del Roca (sólo animación, Rail Library): fuente, avance al andén, descarga y fin.
  'trenesRocaFuente':'TrainSource','trenesRocaAlAnden':'TrainMoveTo','trenesRocaDescarga':'Delay','trenesRocaFin':'TrainDispose'}
 assert all(ped.find(f".//RailTrack[Name='viaRoca{k}']") is not None and ped.find(f".//RailStopline[Name='paradaRoca{k}']") is not None for k in range(7))
@@ -332,7 +332,21 @@ assert sources['pedSourceCalle']['onExit']=='ped.desdeRocaPed = false; registraI
 # Velocidad con generador propio (numeros aleatorios comunes E0/E1); el generador por defecto lo consume la libreria.
 assert all(sources[k]['comfortableSpeed']=='uniform(1.1, 1.5, rngVelocidadPed)' for k in ('pedSource','pedSourceCalle'))
 conns={(c.findtext('SourceEmbeddedObjectReference/ItemName'),c.findtext('TargetEmbeddedObjectReference/ItemName')) for c in ped.findall('Connectors/Connector')}
-assert {('pedSource','pedMolinetes'),('pedSourceCalle','pedMolinetes'),('pedMolinetes','pedSalida'),('pedSalida','pedSink')}<=conns
+assert {('pedSource','bajadaB2'),('bajadaB2','pedMolinetes'),('pedSourceCalle','pedMolinetes'),('pedMolinetes','pedSalida'),('pedSalida','pedSink')}<=conns and ('pedSource','pedMolinetes') not in conns
+# Subsuelo (2026-11-02): hall del Roca a nivel de calle (nivelHall, Z 0) y pasillo + vestíbulo a -5 m (nivelVestibulo).
+# El Roca baja por la escalera B2: área en pendiente escaleraB2 (9 m, 5 m de desnivel, 0,54 m/s = 16,7 s) del subsuelo,
+# a la que llega con bajadaB2 (PedChangeLevel) desde la boca bocaB2Hall. La demora (33 s) ya no incluye la escalera.
+niveles={lv.findtext('Name'):lv for lv in ped.iter('Level')}
+assert set(niveles)=={'nivelHall','nivelVestibulo'} and niveles['nivelHall'].findtext('Z')=='0' and niveles['nivelVestibulo'].findtext('Z')=='-50'
+en_nivel=lambda n: {c.findtext('Name') for c in niveles[n].find('Presentation')}
+assert {f'andenRoca{k}' for k in range(7)}|{'bocaB2Hall','hallEstructuraCentral','hallVestuarioSOFSE','hallBoleteriasSOFSE','plano3D','viasRoca','planoConstitucion'} <= en_nivel('nivelHall')
+assert {'escaleraB2','bocaB2Pasillo','pasilloRocaNorte','pasilloRocaSur','molinetesPeatonales','entradaCalle','salidaPeatonal'} <= en_nivel('nivelVestibulo')
+bajada={p.findtext('Name'):p.findtext('Value/Code') for p in ped.find("EmbeddedObjects/EmbeddedObject[Name='bajadaB2']").findall('Parameters/Parameter')}
+assert bajada['exitLine']=='bocaB2Hall' and bajada['entryLine']=='bocaB2Pasillo'
+esc=niveles['nivelVestibulo'].find("Presentation/RectangleNode[Name='escaleraB2']")
+esc_p={p.findtext('Name'):p.findtext('Value/Code') for p in esc.findall('EmbeddedObject/Parameters/Parameter')}
+assert esc_p['speedRestricted']=='true' and abs(float(esc_p['maxSpeed'])-9/(5/0.30))<0.01 and esc.findtext('Sloped')=='true'
+assert (esc.findtext('X'),esc.findtext('Y'),esc.findtext('Width'),esc.findtext('Height'),esc.findtext('Slope/Dz'))==('-152','949','90','50','50')
 # El horario embebido es exactamente el extraído de los PDFs oficiales del Roca.
 import csv as _csv
 horario=[r['segundos_desde_07'] for r in _csv.DictReader(open(p.parent/'datos'/'arribos_roca_constitucion_habiles.csv',encoding='utf-8'),delimiter=';')]
@@ -437,7 +451,7 @@ assert float(demo.findtext('ModelTimeProperties/FinalTime'))==900
 # escenario intermedio de PeatonalCorridasApareadas, sin archivo de salida.
 visuales={e.findtext('Name'):e for e in experiments if (e.findtext('Name') or '').startswith('PeatonalFranjaVisual')}
 assert set(visuales)=={'PeatonalFranjaVisualE0','PeatonalFranjaVisualE1'}
-intermedio={'proporcionRocaPed':'0.8','demoraAccesoRocaSeg':'49','duracionDescargaSeg':'145','servicioPedSeg':'2.4','servicioMinPedSeg':'1.8','servicioMaxPedSeg':'3.5'}
+intermedio={'proporcionRocaPed':'0.8','demoraAccesoRocaSeg':'33','duracionDescargaSeg':'145','servicioPedSeg':'2.4','servicioMinPedSeg':'1.8','servicioMaxPedSeg':'3.5'}
 for name,mol in (('PeatonalFranjaVisualE0','20'),('PeatonalFranjaVisualE1','22')):
  ps={x.findtext('ParameterName'):x.findtext('ParameterValue/Code') for x in visuales[name].findall('Parameters/Parameter')}
  assert ps['molinetesOperativosPed']==mol and ps['modoFranjaPed']=='true' and ps['pruebaSinteticaPed']=='false' and ps['archivoSalidaPed'] is None, name
@@ -476,7 +490,7 @@ for name,(runs,modo,archivo,final) in {'PeatonalCorridasApareadas':('60','true',
  calib={k:free[k] for k in ('proporcionRocaPed','demoraAccesoRocaSeg','duracionDescargaSeg','servicioPedSeg','servicioMinPedSeg','servicioMaxPedSeg')}
  if name=='PeatonalCorridasApareadas':
   # Escenario intermedio (T3.4, 2026-10-05): rangos de la §5 del plan; demora con D = 85 m (OpenStreetMap) y h = 5 m.
-  assert calib=={'proporcionRocaPed':'0.8','demoraAccesoRocaSeg':'49','duracionDescargaSeg':'145','servicioPedSeg':'2.4','servicioMinPedSeg':'1.8','servicioMaxPedSeg':'3.5'}, calib
+  assert calib=={'proporcionRocaPed':'0.8','demoraAccesoRocaSeg':'33','duracionDescargaSeg':'145','servicioPedSeg':'2.4','servicioMinPedSeg':'1.8','servicioMaxPedSeg':'3.5'}, calib
   rng={ped_param_ids[x.findtext('Id')]:x.findtext('Expression/Code') for x in e.findall('RangeVariationParamValue')}
   assert all(rng[k]==v for k,v in calib.items()), 'freeform y range deben coincidir'
  else:
