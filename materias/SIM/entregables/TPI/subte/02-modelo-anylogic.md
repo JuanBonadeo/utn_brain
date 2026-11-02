@@ -757,19 +757,18 @@ y no se carga en la planilla: la producción oficial sigue siendo `corridas_peat
 - **Conclusión:** E1 reduce las tres primarias con IC lejos de 0 en las dos máquinas. El resultado no
   depende de la máquina en que se corre.
 
-## Pendiente: trenes del Roca con la Rail Library (diseño, 2026-11-02, sin implementar)
+## Trenes del Roca con la Rail Library (2026-11-02, sólo animación)
 
-Molde: ejemplos oficiales *Subway Platform* (`Railyard` > `RailTrack` > `RailStopline`; cadena `TrainSource` →
-`TrainMoveTo` → `Delay` → `TrainDispose`) y *Railway Station* (clases `Train`/`RailCar` con `3d/passengercar.dae` y
-`3d/locomotive.dae`, `carSetup = car.appearanceType = carindex`). Unidades: offset y largo de coche en metros; `Offset`
-de la `RailStopline` en píxeles. `TrainSource.track(T)` y `TrainMoveTo.targetTrack(T)` se evalúan por tren: alcanza
-con una sola cadena.
+Molde: ejemplos oficiales *Subway Platform* (red, vía, parada y bloques) y *Railway Station* (clases de tren y coche con
+`3d/passengercar.dae`). No cambia la lógica peatonal ni los resultados: el pasaje sigue saliendo de `liberacionesPed`.
 
-- 7 vías horizontales, una por andén (`andenActualPed`): Y = 379, 553, 725, 902, 1077, 1252 y 1291; de X = -5000 a
-  X = -820 (paragolpes). Parada con la cabeza en X ≈ -830 (offset ≈ 4170 px desde el comienzo).
-- Tren de 7 coches de 23 m; aparece con la cabeza a 166 m del comienzo, a 12 m/s, frena a 1 m/s²: llega a la parada
-  en ≈ 27 s. Se inyecta en `max(0, llegada - 27)`, mismo andén que su pasaje (`j % 7`), sólo si su ingreso cae en la
-  franja. Espera `demoraAccesoRocaSeg + duracionDescargaSeg + 10` s y se descarta (no se modela la salida en reversa).
-- Requiere: `RequiredLibraryReference` de `com.anylogic.libraries.rail` (8.0.5), evento y cola `{instante, vía}`
-  propios, stubs en el arnés de `verificar_modelo.py` y sumar los bloques nuevos al control de `ped_blocks`.
-  Es sólo visual: no cambia la lógica peatonal ni los resultados.
+| Elemento | Detalle |
+|---|---|
+| Clases | `TrenRoca` (variable `via`) y `CocheRoca` (coche de pasajeros 3D, escala 8,5; sin locomotora: el Roca es eléctrico) |
+| Red | `viasRoca`: 7 vías `viaRoca0`-`viaRoca6` (Y = 379, 553, 725, 902, 1077, 1252, 1291, sobre las vías del plano), de X = -5000 a X = -820, cada una con su parada `paradaRoca0`-`paradaRoca6` junto a los paragolpes (X ~ -830) |
+| Bloques | `trenesRocaFuente` (7 coches de 23 m, cabeza a 357 m del comienzo, 12 m/s) → `trenesRocaAlAnden` (a la parada de su vía) → `trenesRocaDescarga` (espera `demoraAccesoRocaSeg + duracionDescargaSeg + 10` s) → `trenesRocaFin` (desaparece; no se modela la salida en reversa) |
+| Programación | En `programarDemandaFranjaPed`, cada tren con ingreso en la franja se agenda en `trenesRocaPed` a `llegada - 10 s`, con la vía = andén de su pasaje (`j % 7`); el evento `proximoTrenRocaPed` fija `viaActualTrenPed` e inyecta |
+| Recursos | `3d/passengercar.dae` y `.jpg`, copiados con `datos/copiar_figuras_3d.py` (no se suben al repo) |
+
+Sólo en el modo franja; la demo corta no tiene trenes. Los nombres locales (`train`) y los tipos de los parámetros se
+tomaron de `RailLibrary.jar` (`library.xml`); los bloques usan los tipos `TrenRoca`/`CocheRoca`.

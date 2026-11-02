@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Copia a ../3d/ las cuatro figuras humanas 3D que usa el agente Pasajero (vista 3D de MainPeatonal).
+"""Copia a ../3d/ las figuras 3D de la vista de MainPeatonal: cuatro personas (Pasajero) y el coche del Roca (CocheRoca).
 
 Son recursos de la instalación de AnyLogic (ejemplo "Subway Entrance Hall" y biblioteca de la interfaz): no se
 suben al repositorio público, así que cada máquina las copia de su propia instalación. Uso:
@@ -9,7 +9,8 @@ suben al repositorio público, así que cada máquina las copia de su propia ins
 import shutil, sys
 from pathlib import Path
 
-FIGURAS = ['ped_1_m.glb', 'office_1_m.glb', 'ped_sport_2_f.glb', 'ped_3_f.glb']
+# Personas (agente Pasajero) y coche de pasajeros con su textura (agente CocheRoca, ejemplo "Railway Station").
+FIGURAS = ['ped_1_m.glb', 'office_1_m.glb', 'ped_sport_2_f.glb', 'ped_3_f.glb', 'passengercar.dae', 'passengercar.jpg']
 DESTINO = Path(__file__).resolve().parent.parent / '3d'
 RAICES = [Path(a) for a in sys.argv[1:]] or [
     Path('/Users/Shared/AnyLogic 8 PLE'), Path('/Applications/AnyLogic 8 PLE.app'),

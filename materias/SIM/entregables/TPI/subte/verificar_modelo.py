@@ -115,7 +115,9 @@ static class ServiceStub { int calls, suspended; java.util.List<QueuePath> colas
 static class EngineStub { boolean finished; void finish(){finished=true;} }
 static class RandomStub extends java.util.Random { long seed=-1; public synchronized void setSeed(long s){seed=s;super.setSeed(s);} }
 PedSourceStub pedSource=new PedSourceStub(), pedSourceCalle=new PedSourceStub();
-EventStub proximaTandaPed=new EventStub(), cierreMetricasPed=new EventStub(), proximaLiberacionPed=new EventStub(), proximaLlegadaCallePed=new EventStub(), progresoPed=new EventStub();
+static class TrainSourceStub { int injected; void inject(){injected++;} }
+TrainSourceStub trenesRocaFuente=new TrainSourceStub();
+EventStub proximoTrenRocaPed=new EventStub(), proximaTandaPed=new EventStub(), cierreMetricasPed=new EventStub(), proximaLiberacionPed=new EventStub(), proximaLlegadaCallePed=new EventStub(), progresoPed=new EventStub();
 java.util.ArrayList<String> eventos=new java.util.ArrayList<String>();
 // Bucle de eventos minimo para la demanda de la franja (liberaciones del Roca y llegadas de calle).
 void correrDemanda(){ while(proximaLiberacionPed.at>=0||proximaLlegadaCallePed.at>=0){ boolean roca=proximaLlegadaCallePed.at<0||(proximaLiberacionPed.at>=0&&proximaLiberacionPed.at<=proximaLlegadaCallePed.at); EventStub e=roca?proximaLiberacionPed:proximaLlegadaCallePed; clock=e.at; e.at=-1; int r0=pedSource.injected,c0=pedSourceCalle.injected; if(roca)liberarPendientesPed(); else llegadaCallePed(); eventos.add(String.format(java.util.Locale.US,"%.6f;%d;%d",clock,pedSource.injected-r0,pedSourceCalle.injected-c0)); } }
@@ -298,7 +300,12 @@ for agent, min_x in ((a,1100),(ped,1000)):
   assert all(int(x.findtext('X'))>=min_x for x in technical)
 ped_defaults_early={v.findtext('Name'):v.findtext('Properties/DefaultValue/Code') for v in ped.findall("Variables/Variable[@Class='Parameter']")}
 ped_blocks={x.findtext('Name'):x.findtext('ActiveObjectClass/ClassName') for x in ped.findall('EmbeddedObjects/EmbeddedObject')}
-assert ped_blocks=={'pedSource':'PedSource','pedSourceCalle':'PedSource','pedMolinetes':'PedService','pedSalida':'PedGoTo','pedSink':'PedSink'}
+assert ped_blocks=={'pedSource':'PedSource','pedSourceCalle':'PedSource','pedMolinetes':'PedService','pedSalida':'PedGoTo','pedSink':'PedSink',
+ # Trenes del Roca (sólo animación, Rail Library): fuente, avance al andén, descarga y fin.
+ 'trenesRocaFuente':'TrainSource','trenesRocaAlAnden':'TrainMoveTo','trenesRocaDescarga':'Delay','trenesRocaFin':'TrainDispose'}
+assert all(ped.find(f".//RailTrack[Name='viaRoca{k}']") is not None and ped.find(f".//RailStopline[Name='paradaRoca{k}']") is not None for k in range(7))
+assert {('trenesRocaFuente','trenesRocaAlAnden'),('trenesRocaAlAnden','trenesRocaDescarga'),('trenesRocaDescarga','trenesRocaFin')} <= {(c.findtext('SourceEmbeddedObjectReference/ItemName'),c.findtext('TargetEmbeddedObjectReference/ItemName')) for c in ped.findall('Connectors/Connector')}
+assert {x.findtext('Name') for x in r.findall('Model/ActiveObjectClasses/ActiveObjectClass')} >= {'TrenRoca','CocheRoca'}
 sources={x.findtext('Name'):{p.findtext('Name'):p.findtext('Value/Code') for p in x.findall('Parameters/Parameter')} for x in ped.findall('EmbeddedObjects/EmbeddedObject') if x.findtext('Name').startswith('pedSource')}
 # Roca: cada pasajero aparece en la cabecera del andén de su tren (andenActualPed, asignado por turno).
 assert sources['pedSource']['locationLine']==' : '.join(f'andenActualPed == {k} ? andenRoca{k}' for k in range(6))+' : andenRoca6'
