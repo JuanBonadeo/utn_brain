@@ -419,7 +419,7 @@ assert ped.find(".//*[Name='pasilloRocaFondo']") is None and ped.find(".//*[Name
 assert _abs('paredDerechaCentro')==[(580,290),(580,430)]
 # Descenso en las cabeceras de los 7 andenes (islas 2-3 ... 12-13 y 14) y obstáculos del hall medidos en el plano.
 assert ped.find(".//TargetLine[Name='andenRoca0']") is None
-assert [_abs(f'bordeAndenRoca{k}',1) for k in range(7)]==[[(-830,a),(-2420,a),(-2420,b),(-830,b)] for a,b in ((267,362),(441,536),(613,708),(789,885),(957,1060),(1128,1235),(1308,1366))]
+assert [_abs(f'bordeAndenRoca{k}') for k in range(7)]==[[(-830,a),(-2420,a),(-2420,b),(-830,b)] for a,b in ((267,362),(441,536),(613,708),(789,885),(957,1060),(1128,1235),(1308,1366))]
 assert all(ped.find(f".//Wall[Name='bordeAndenRoca{k}']").findtext('DrawMode')=='SHAPE_DRAW_2D' for k in range(7))
 assert all(ped.find(f".//*[Name='{n}']") is not None for n in ('hallEstructuraCentral','hallVestuarioSOFSE','hallBoleteriasSOFSE'))
 assert _abs('paredIzquierdaNorte')==[(80,190),(80,335)] and _abs('paredIzquierdaSur')==[(80,385),(80,530)]
@@ -520,10 +520,19 @@ assert [(20260923+i//2, 20 if i%2==0 else 22) for i in range(4)]==[(20260923,20)
 pasajero_variable_names={x.findtext('Name') for x in agents['Pasajero'].findall('Variables/Variable')}
 assert {'tIngresoSistemaPed','enPicoPed','tInicioServicioPed','nombreMolinetePed','servicioAsignadoPed'} <= pasajero_variable_names
 libs={x.findtext('LibraryName') for x in r.findall('Model/RequiredLibraryReference')}
-# AnyLogic aborta al crear el modelo si un muro tiene dos puntos seguidos iguales ("Wall: The length is zero").
+# Muros: AnyLogic guarda 3 puntos por vértice (vértice, manija de entrada, manija de salida). Con 1 punto por vértice
+# los lee de a tres y arma tramos sin sentido o ninguno ("Wall: The length is zero" al crear el modelo).
 for w in r.iter('Wall'):
- pts=[(p.findtext('X'),p.findtext('Y')) for p in w.findall('Points/Point')]
- assert len(pts)>=2 and all(a!=b for a,b in zip(pts,pts[1:])), f"muro {w.findtext('Name')} con tramo de largo cero"
+ pts=[(float(p.findtext('X')),float(p.findtext('Y'))) for p in w.findall('Points/Point')]
+ nom=w.findtext('Name')
+ assert len(pts)>=6 and len(pts)%3==0, f"muro {nom}: {len(pts)} puntos, se esperan 3 por vértice"
+ v=pts[0::3]
+ assert all(a!=b for a,b in zip(v,v[1:])), f"muro {nom} con tramo de largo cero"
+ # Muros generados a mano: manija de salida sobre el tramo siguiente (tramo recto, sin arcos).
+ if nom.startswith(('hall','bordeAndenRoca')):
+  for k in range(len(v)-1):
+   (x0,y0),(x1,y1)=v[k],v[k+1]; hx,hy=pts[3*k+2]
+   assert abs((x1-x0)*(hy-y0)-(y1-y0)*(hx-x0))<1e-3*max(1,abs(x1-x0)+abs(y1-y0))*25, f"muro {nom}: manija fuera del tramo {k}"
 assert 'com.anylogic.libraries.pedestrian' in libs
 print('OK: XML, unique IDs, clean presentations, pedestrian KPIs, hypothetical plan with 28 linear gates, E0=20/E1=22 experiments, 4 GB, franja visual')
 # The CSV schema, the workbook and the loader share one field order.
