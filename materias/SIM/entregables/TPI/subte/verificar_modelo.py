@@ -380,7 +380,7 @@ assert float(demo.findtext('ModelTimeProperties/FinalTime'))==900
 # escenario intermedio de PeatonalCorridasApareadas, sin archivo de salida.
 visuales={e.findtext('Name'):e for e in experiments if (e.findtext('Name') or '').startswith('PeatonalFranjaVisual')}
 assert set(visuales)=={'PeatonalFranjaVisualE0','PeatonalFranjaVisualE1'}
-intermedio={'proporcionRocaPed':'0.8','demoraAccesoRocaSeg':'106','duracionDescargaSeg':'145','servicioPedSeg':'2.4','servicioMinPedSeg':'1.8','servicioMaxPedSeg':'3.5'}
+intermedio={'proporcionRocaPed':'0.8','demoraAccesoRocaSeg':'181','duracionDescargaSeg':'145','servicioPedSeg':'2.4','servicioMinPedSeg':'1.8','servicioMaxPedSeg':'3.5'}
 for name,mol in (('PeatonalFranjaVisualE0','20'),('PeatonalFranjaVisualE1','22')):
  ps={x.findtext('ParameterName'):x.findtext('ParameterValue/Code') for x in visuales[name].findall('Parameters/Parameter')}
  assert ps['molinetesOperativosPed']==mol and ps['modoFranjaPed']=='true' and ps['pruebaSinteticaPed']=='false' and ps['archivoSalidaPed'] is None, name
@@ -419,7 +419,7 @@ for name,(runs,modo,archivo,final) in {'PeatonalCorridasApareadas':('60','true',
  calib={k:free[k] for k in ('proporcionRocaPed','demoraAccesoRocaSeg','duracionDescargaSeg','servicioPedSeg','servicioMinPedSeg','servicioMaxPedSeg')}
  if name=='PeatonalCorridasApareadas':
   # Escenario intermedio (T3.4, 2026-10-05): rangos de la §5 del plan; demora con D = 85 m (OpenStreetMap) y h = 5 m.
-  assert calib=={'proporcionRocaPed':'0.8','demoraAccesoRocaSeg':'106','duracionDescargaSeg':'145','servicioPedSeg':'2.4','servicioMinPedSeg':'1.8','servicioMaxPedSeg':'3.5'}, calib
+  assert calib=={'proporcionRocaPed':'0.8','demoraAccesoRocaSeg':'181','duracionDescargaSeg':'145','servicioPedSeg':'2.4','servicioMinPedSeg':'1.8','servicioMaxPedSeg':'3.5'}, calib
   rng={ped_param_ids[x.findtext('Id')]:x.findtext('Expression/Code') for x in e.findall('RangeVariationParamValue')}
   assert all(rng[k]==v for k,v in calib.items()), 'freeform y range deben coincidir'
  else:

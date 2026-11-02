@@ -10110,7 +10110,7 @@ return String.join(",", partes);]]></Body>
 				<Parameter>
 					<ParameterName><![CDATA[demoraAccesoRocaSeg]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[106]]></Code>
+						<Code><![CDATA[181]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
@@ -10262,7 +10262,7 @@ return String.join(",", partes);]]></Body>
 				<Parameter>
 					<ParameterName><![CDATA[demoraAccesoRocaSeg]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[106]]></Code>
+						<Code><![CDATA[181]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
@@ -10547,7 +10547,7 @@ return String.join(",", partes);]]></Body>
 			<FreeformParamValue>	
 				<Id>1792000000302</Id>
 				<Expression Class="CodeValue">
-					<Code><![CDATA[106]]></Code>
+					<Code><![CDATA[181]]></Code>
 				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
@@ -10653,7 +10653,7 @@ return String.join(",", partes);]]></Body>
 				<Id>1792000000302</Id>
 				<Type>FIXED</Type>
 				<Expression Class="CodeValue">
-					<Code><![CDATA[106]]></Code>
+					<Code><![CDATA[181]]></Code>
 				</Expression>
 			</RangeVariationParamValue>
 			<RangeVariationParamValue>	

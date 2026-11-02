@@ -627,6 +627,16 @@ verifica contra las bibliotecas instaladas antes de abrir el IDE.
 - [Recursos — documentación oficial](https://anylogic.help/library-reference-guides/process-modeling-library/using-resources.html): unidades de recursos compartidos por procesos.
 
 
+## Demora corregida a 181 s (2026-11-02)
+
+El plano de Trenes Argentinos georreferenciado con OSM (`datos/georref_plano_sofse.py`, ver `09-pedidos-de-datos.md`)
+mostró que los 85 m medidos en octubre llegaban solo a la boca del hall: después hay una escalera y un pasillo
+subterráneo de ~60 m hasta el vestíbulo. Recorrido mediano en línea recta: 156 m, demora intermedia
+156/0,95 + 5/0,30 = **181 s** (antes 106 s; contextos 142 y 273 s). Se cambió en `PeatonalFranjaVisualE0/E1` y en
+`PeatonalCorridasApareadas`; `PeatonalFranjaPrueba` conserva sus 60 s de prueba. La geometría del vestíbulo no
+cambió: la abertura de 12 m del acceso oeste representa la boca del pasillo. La producción con 106 s quedó en
+`corridas-descartadas/2026-10-05_produccion_demora106.csv` (referencia para comparar, ya no se carga).
+
 ## Resultados de producción: escenario intermedio (2026-10-05)
 
 `PeatonalCorridasApareadas` corrió 30 pares E0-E1 con semillas comunes (20260923-20260952). Hubo 60 filas
