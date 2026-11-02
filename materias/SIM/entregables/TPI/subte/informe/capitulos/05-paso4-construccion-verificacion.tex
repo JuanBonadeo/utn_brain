@@ -30,18 +30,25 @@ verosímil, no una reproducción de Constitución, y la vista lo indica con un a
 (figura~\ref{fig:plano}). De fondo, la vista muestra el plano de la estación enviado por Trenes Argentinos y las
 capas de OSM, georreferenciados de modo que el pasillo del modelo coincide con el real. Tiene estas características:
 \begin{itemize}
-  \item Mide $70 \times 34$~m y tiene paredes físicas.
-  \item El pasaje del Roca llega por un pasillo en L de 75~m y 5~m de ancho, que sigue la traza del pasillo
-        subterráneo de OpenStreetMap y desemboca en la pared oeste. La calle entra por dos bocas en la
-        pared norte (sección~\ref{sec:paso6-validacion}).
-  \item La zona no paga tiene 42~m de profundidad, con boletería, máquinas de carga y columnas como
-        obstáculos.
-  \item La línea de molinetes está formada por dos bancos de 14 pasos de 1~m, separados por una cabina.
+  \item Mide $50 \times 34$~m y tiene paredes físicas. Se ubicó sobre su posición real: bajo la calle Brasil y
+        la plaza, en el extremo sur de los andenes de la Línea~C.
+  \item El pasaje del Roca llega por un pasillo en L de 75~m y 5~m de ancho que sigue la traza del pasillo
+        subterráneo de OpenStreetMap. El ancho es un supuesto.
+  \item La calle entra por la escalera B3 de la calle Brasil, que aterriza 11~m después de la boca del pasillo,
+        desde el lado este, como en OpenStreetMap.
+  \item La zona no paga va desde la boca del pasillo hasta las colas, con boletería, máquinas de carga y
+        columnas como obstáculos.
+  \item Los molinetes forman dos bancos de 14 pasos de 1~m, separados por una cabina. La zona paga empieza en
+        el punto donde el pasillo real se conecta con el andén de la Línea~C.
   \item Los molinetes son servicios lineales de 1,6~m que se atraviesan de la zona no paga a la paga. Cada
         uno tiene su propia cola de 6~m, con la cabeza a 2~m del paso, como en el ejemplo oficial
         \emph{Subway Entrance Hall} de AnyLogic.
-  \item Detrás de la batería, la zona paga tiene 26~m hasta las escaleras a los andenes.
+  \item La zona paga mide 26~m hasta las escaleras al andén, que quedan sobre los andenes de la Línea~C.
 \end{itemize}
+
+El ancho real del pasillo subterráneo no se conoce; los 34~m del vestíbulo son los que hacen falta para
+alojar 28 molinetes. Tampoco se modela la escalera B4, que baja del otro lado de la conexión con el andén:
+sin el plano de SBASE no se sabe qué molinetes usan sus pasajeros.
 
 El plano tiene 28 molinetes. Los 22 primeros representan los del vestíbulo Principal y los 6 restantes, la
 ampliación hipotética E1-b. Los escenarios no duplican la geometría: \EO{} suspende los molinetes 21 a 28 y

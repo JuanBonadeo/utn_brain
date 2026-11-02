@@ -627,23 +627,38 @@ verifica contra las bibliotecas instaladas antes de abrir el IDE.
 - [Recursos — documentación oficial](https://anylogic.help/library-reference-guides/process-modeling-library/using-resources.html): unidades de recursos compartidos por procesos.
 
 
-## Pasillo del Roca, dos bocas de la calle y plano de fondo (2026-11-02)
+## Vestíbulo coherente con el plano georreferenciado (2026-11-02)
 
-El plano de Trenes Argentinos georreferenciado con OSM (`datos/georref_plano_sofse.py`, ver `09-pedidos-de-datos.md`)
-mostró que la boca del hall baja por una escalera a un pasillo subterráneo de ~75 m que llega al vestíbulo, en el
-extremo sur de los andenes de la Línea C. Cambios en `MainPeatonal`:
+El plano de Trenes Argentinos georreferenciado con OSM (`datos/georref_plano_sofse.py`) da la secuencia real a lo largo
+del pasillo subterráneo, de sur a norte, en coordenadas del modelo (X = 80 - 10 (x + 2206), Y = 360 + 10 (y - 2726,9)):
 
-| Cambio | Detalle |
+| X del modelo | Elemento real (OSM sobre el plano) |
+|---:|---|
+| 80 | Fin del pasillo del Roca (boca oeste del vestíbulo) |
+| 194 | Pie de la escalera B3, que baja de la vereda de la calle Brasil desde el lado este |
+| 316 | Conexión del pasillo con el andén de la Línea C |
+| 335-1217 | Andenes de la Línea C (nivel -2), hacia el norte |
+| 461 | Pie de la escalera B4 (ya pasada la conexión con el andén) |
+| ~1180 | Boca del vestíbulo Plaza (fuera del alcance) |
+
+Orientación de la vista: arriba Oeste (calle Lima), abajo Este (Hornos), derecha Norte (andenes de la C), izquierda Sur
+(hall del Roca). La calle Brasil cruza de arriba abajo cerca de X = 170-230.
+
+| Elemento | Disposición |
 |---|---|
-| Pasillo del Roca | Paredes `pasilloRocaNorte`, `pasilloRocaSur` y `pasilloRocaFondo`: L de 75 m × 5 m (ancho [SUP]) desde el pie de la escalera de la boca del hall, X -58 a 80, Y 999 a 335, sobre la traza de OSM |
-| Llegada del Roca | `entradaPeatonal` pasa al pie de la escalera: X = -55, Y 951-997 |
-| Boca oeste | Angostada de 12 a 5 m (Y 335-385): `paredIzquierdaNorte` y `paredIzquierdaSur` se estiran |
-| Demora | **102 s** = (72 m de hall en línea recta + 9 m de escalera)/0,95 + 5/0,30. El pasillo ya no está en la demora: se camina. Entre el 2026-11-02 y este cambio se usó 181 s (todo el recorrido como demora); antes, 106 s |
-| Calle | Dos bocas en la pared norte: `entradaCalle` (X 345-395) y `entradaCalle2` (X 205-255, entre boletería y máquinas). `pedSourceCalle` alterna entre ellas (`nDesdeCallePed % 2`), sin azar. OSM las ubica a 11 y 38 m del pasillo; la segunda quedó a ~30 m para no caer sobre las colas [SUP] |
-| Elección de cola | El pasaje del Roca elige al aparecer, al pie del pasillo: el desvío se mide desde la boca oeste (`yReferencia = 335 + (Y - 949)`), conservando el carril |
+| Pasillo del Roca | `pasilloRocaNorte/Sur/Fondo`: L de 75 m × 5 m (ancho [SUP]) sobre la traza de OSM, X -58 a 80, Y 999 a 335 |
+| Llegada del Roca | `entradaPeatonal` al pie de la escalera de la boca del hall (X = -55, Y 951-997). Demora 102 s (hall + escalera) |
+| Vestíbulo | 50 m × 34 m (X 80-580, Y 190-530). El ancho real del pasillo no se conoce; 34 m alcanzan para 28 molinetes |
+| Zona no paga | X 80-220: boca del pasillo, escalera B3, boletería, máquinas de carga y dos columnas |
+| Calle | Una boca: `escaleraB3` (hueco de 2,6 × 6 m en X 181-207, Y 395-455, abierto hacia el oeste) con `entradaCalle` en Y = 399. Desplazada ~4 m al este del eje real para no caer en la boca del Roca [SUP] |
+| Colas y molinetes | Colas X 220-280, molinetes X 300-316: la zona paga empieza en la conexión real con el andén (X ~ 316) |
+| Zona paga y salida | X 316-580, escaleras al andén en X 520-580, sobre los andenes de la C |
+| B4 | No se modela: baja al otro lado de la conexión con el andén y sin el plano de SBASE no se sabe qué molinetes usa |
+| Elección de cola | El Roca elige al aparecer: el desvío se mide desde la boca oeste (`yReferencia = 335 + (Y - 949)`) |
 
-El interior del vestíbulo (28 molinetes, colas, zona paga) no cambió: sigue hipotético hasta el plano de SBASE.
-La producción con 106 s quedó en `corridas-descartadas/2026-10-05_produccion_demora106.csv`.
+Historial del día: primero se usó la demora de 181 s sin pasillo; después, pasillo + dos bocas en la pared de arriba
+(incoherente: arriba es el lado de la calle Lima); finalmente, esta disposición. La producción con 106 s quedó en
+`corridas-descartadas/2026-10-05_produccion_demora106.csv`.
 
 ### Plano de fondo como CAD Drawing
 
@@ -652,7 +667,7 @@ oficial en gris, capas de OSM (`LINEA_C_OSM`, `PASILLO_OSM`, `BOCAS_OSM`), `ROTU
 `MARCO` invisible que fija el recuadro. Está rotado 180° y trasladado para que el pasillo de OSM coincida con
 `pasilloRocaNorte/Sur` y la cruz caiga en la boca oeste del vestíbulo (X = 80, Y = 360). El norte queda a la derecha.
 
-En `MainPeatonal` es el `CADDrawing` `planoConstitucion` (X = -1150, Y = 0, 2400 × 1660 px, Z = -100, sólo 2D),
+En `MainPeatonal` es el `CADDrawing` `planoConstitucion` (X = -1150, Y = 0, 2400 × 1660 px, Z = -100, sólo 2D, fondo blanco),
 registrado en `ModelResources`. El formato XML se tomó del serializador de AnyLogic 8.9.10
 (`com.anylogic.serialization.PresentationGenerator`), porque ningún ejemplo instalado trae un CAD Drawing.
 **Control al abrir el IDE:** la cruz roja `REF (80, 360)` tiene que caer en la boca oeste del vestíbulo; si AnyLogic

@@ -131,15 +131,17 @@ Con este resultado se modificó el modelo (sección~\ref{sec:paso4-construccion-
         supuesto.
   \item La demora cubre solo el tramo previo, el hall y la escalera: $(72 + 9)/0{,}95 + 5/0{,}30 \approx
         102$~s.
-  \item La demanda de la calle entra por dos bocas sobre la calle Brasil, en lugar de una.
+  \item La demanda de la calle entra por la escalera B3 de la calle Brasil, en su posición real.
+  \item El vestíbulo se reordenó según la secuencia real del pasillo: los molinetes quedan justo antes del
+        punto donde el pasillo se conecta con el andén de la Línea~C, y la zona paga queda sobre los andenes.
 \end{itemize}
 El pasillo y su escalera dosifican la llegada de cada oleada, que es lo que representa la dispersión de la
 descarga, y ahora además pueden congestionarse.
 
 Hay dos reservas. Los pasillos subterráneos son datos voluntarios de OSM, no del plano oficial. Y el
-interior del vestíbulo (su forma y la batería de molinetes) sigue sin dato, por lo que solo se modificaron
-sus accesos. La segunda boca de la calle se ubicó a unos 30~m del pasillo y no a los 38~m que indica OSM,
-para que no cayera sobre las colas de los molinetes.
+interior del vestíbulo (su ancho, su forma y la batería de molinetes) sigue sin dato: se ubicaron sus
+accesos y sus zonas según el plano, pero las dimensiones son supuestas. La escalera B4 no se modela, porque
+baja del otro lado de la conexión con el andén y no se sabe qué molinetes usan sus pasajeros.
 \pendiente{repetir la producción con el pasillo y actualizar los resultados.}
 
 \subsection{Reproducción en otra máquina}

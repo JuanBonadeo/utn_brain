@@ -5666,7 +5666,7 @@ return String.join(",", partes);]]></Body>
 						<Parameter>
 							<Name><![CDATA[locationLine]]></Name>
 							<Value Class="CodeValue">
-								<Code><![CDATA[nDesdeCallePed % 2 == 0 ? entradaCalle2 : entradaCalle]]></Code>
+								<Code><![CDATA[entradaCalle]]></Code>
 							</Value>
 						</Parameter>
 						<Parameter>
@@ -6123,6 +6123,7 @@ return String.join(",", partes);]]></Body>
 						<PackageName><![CDATA[subteconstitucion]]></PackageName>
 						<ClassName><![CDATA[plano_constitucion_modelo.dxf]]></ClassName>
 					</ResourceReference>
+					<FillColor>-1</FillColor>
 					<InvertDefaultColors>false</InvertDefaultColors>
 					<UseAntialiasing>true</UseAntialiasing>
 					<Layers>
@@ -6248,7 +6249,7 @@ return String.join(",", partes);]]></Body>
 					<LineColor>-12490271</LineColor>
 					<LineMaterial>null</LineMaterial>
 					<LineStyle>SOLID</LineStyle>
-					<Width>700</Width>
+					<Width>500</Width>
 					<Height>340</Height>
 					<Rotation>0.0</Rotation>
 					<FillColor>-328966</FillColor>
@@ -6387,7 +6388,7 @@ return String.join(",", partes);]]></Body>
 				<Text>
 					<Id>1791000000028</Id>
 					<Name><![CDATA[etiquetaMolinetes]]></Name>
-					<X>400</X><Y>543</Y>
+					<X>260</X><Y>543</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -6425,7 +6426,7 @@ return String.join(",", partes);]]></Body>
 				<TargetLine>
 					<Id>1791000000107</Id>
 					<Name><![CDATA[salidaPeatonal]]></Name>
-					<X>768</X><Y>295</Y>
+					<X>568</X><Y>295</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -6441,7 +6442,7 @@ return String.join(",", partes);]]></Body>
 				<Rectangle>
 					<Id>1792000000100</Id>
 					<Name><![CDATA[zonaPaga]]></Name>
-					<X>516</X><Y>190</Y>
+					<X>316</X><Y>190</Y>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -6462,7 +6463,7 @@ return String.join(",", partes);]]></Body>
 				<Rectangle>
 					<Id>1792000000101</Id>
 					<Name><![CDATA[zonaEscaleras]]></Name>
-					<X>720</X><Y>290</Y>
+					<X>520</X><Y>290</Y>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -6483,7 +6484,7 @@ return String.join(",", partes);]]></Body>
 				<Text>
 					<Id>1791000000106</Id>
 					<Name><![CDATA[etiquetaSalida]]></Name>
-					<X>600</X><Y>280</Y>
+					<X>400</X><Y>280</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -6521,9 +6522,9 @@ return String.join(",", partes);]]></Body>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
 						<Point><X>-25</X><Y>0</Y><Z>0</Z></Point>
 						<Point><X>25</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>120</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>95</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>145</X><Y>0</Y><Z>0</Z></Point>
+						<Point><X>500</X><Y>0</Y><Z>0</Z></Point>
+						<Point><X>475</X><Y>0</Y><Z>0</Z></Point>
+						<Point><X>525</X><Y>0</Y><Z>0</Z></Point>
 					</Points>
 				</Wall>
 				<Wall>
@@ -6613,60 +6614,10 @@ return String.join(",", partes);]]></Body>
 						<Point><X>0</X><Y>75</Y><Z>0</Z></Point>
 					</Points>
 				</Wall>
-				<Wall>
-					<Id>1794000000003</Id>
-					<Name><![CDATA[paredNorteCentro]]></Name>
-					<X>260</X><Y>190</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<Z>0</Z>
-					<LineColor>-3308225</LineColor>
-					<LineWidth>2</LineWidth>
-					<LineMaterial>null</LineMaterial>
-					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>30</ZHeight>
-					<Closed>false</Closed>
-					<Points>
-						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>-25</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>25</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>80</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>55</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>105</X><Y>0</Y><Z>0</Z></Point>
-					</Points>
-				</Wall>
-				<Wall>
-					<Id>1792000000340</Id>
-					<Name><![CDATA[paredNorteEste]]></Name>
-					<X>400</X><Y>190</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<Z>0</Z>
-					<LineColor>-3308225</LineColor>
-					<LineWidth>2</LineWidth>
-					<LineMaterial>null</LineMaterial>
-					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>30</ZHeight>
-					<Closed>false</Closed>
-					<Points>
-						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>-25</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>25</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>380</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>355</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>405</X><Y>0</Y><Z>0</Z></Point>
-					</Points>
-				</Wall>
 				<TargetLine>
 					<Id>1792000000341</Id>
 					<Name><![CDATA[entradaCalle]]></Name>
-					<X>345</X><Y>196</Y>
+					<X>183</X><Y>399</Y>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -6675,28 +6626,13 @@ return String.join(",", partes);]]></Body>
 					<LineColor>-14774017</LineColor>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>50</X><Y>0</Y></Point>
-					</Points>
-				</TargetLine>
-				<TargetLine>
-					<Id>1794000000004</Id>
-					<Name><![CDATA[entradaCalle2]]></Name>
-					<X>205</X><Y>196</Y>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<Z>0</Z>
-					<LineColor>-14774017</LineColor>
-					<Points>
-						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>50</X><Y>0</Y></Point>
+						<Point><X>22</X><Y>0</Y></Point>
 					</Points>
 				</TargetLine>
 				<Text>
 					<Id>1792000000342</Id>
 					<Name><![CDATA[textoAccesoCalle]]></Name>
-					<X>205</X><Y>212</Y>
+					<X>150</X><Y>470</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -6706,7 +6642,7 @@ return String.join(",", partes);]]></Body>
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
 					<Color>-12490271</Color>
-					<Text><![CDATA[Bocas de la calle Brasil (2)]]></Text>
+					<Text><![CDATA[Escalera B3 (calle Brasil)]]></Text>
 					<Font>
 						<Name>SansSerif</Name>
 						<Size>11</Size>
@@ -6734,9 +6670,40 @@ return String.join(",", partes);]]></Body>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
 						<Point><X>-25</X><Y>0</Y><Z>0</Z></Point>
 						<Point><X>25</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>700</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>675</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>725</X><Y>0</Y><Z>0</Z></Point>
+						<Point><X>500</X><Y>0</Y><Z>0</Z></Point>
+						<Point><X>475</X><Y>0</Y><Z>0</Z></Point>
+						<Point><X>525</X><Y>0</Y><Z>0</Z></Point>
+					</Points>
+				</Wall>
+				<Wall>
+					<Id>1794000000200</Id>
+					<Name><![CDATA[escaleraB3]]></Name>
+					<X>181</X><Y>395</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<Z>0</Z>
+					<LineColor>-3308225</LineColor>
+					<LineWidth>2</LineWidth>
+					<LineMaterial>null</LineMaterial>
+					<FillingType>HATCHED_AREA</FillingType>
+					<ZHeight>12</ZHeight>
+					<Closed>false</Closed>
+					<Points>
+						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
+						<Point><X>0</X><Y>-25</Y><Z>0</Z></Point>
+						<Point><X>0</X><Y>25</Y><Z>0</Z></Point>
+						<Point><X>0</X><Y>60</Y><Z>0</Z></Point>
+						<Point><X>0</X><Y>35</Y><Z>0</Z></Point>
+						<Point><X>25</X><Y>60</Y><Z>0</Z></Point>
+						<Point><X>26</X><Y>60</Y><Z>0</Z></Point>
+						<Point><X>1</X><Y>60</Y><Z>0</Z></Point>
+						<Point><X>26</X><Y>35</Y><Z>0</Z></Point>
+						<Point><X>26</X><Y>0</Y><Z>0</Z></Point>
+						<Point><X>26</X><Y>25</Y><Z>0</Z></Point>
+						<Point><X>26</X><Y>-25</Y><Z>0</Z></Point>
 					</Points>
 				</Wall>
 				<Wall>
@@ -6792,7 +6759,7 @@ return String.join(",", partes);]]></Body>
 				<Wall>
 					<Id>1792000000106</Id>
 					<Name><![CDATA[paredDerechaNorte]]></Name>
-					<X>780</X><Y>190</Y>
+					<X>580</X><Y>190</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -6817,7 +6784,7 @@ return String.join(",", partes);]]></Body>
 				<Wall>
 					<Id>1792000000107</Id>
 					<Name><![CDATA[paredDerechaSur]]></Name>
-					<X>780</X><Y>430</Y>
+					<X>580</X><Y>430</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -6842,7 +6809,7 @@ return String.join(",", partes);]]></Body>
 				<Wall>
 					<Id>1792000000108</Id>
 					<Name><![CDATA[cierreMolinetesNorte]]></Name>
-					<X>500</X><Y>190</Y>
+					<X>300</X><Y>190</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -6867,7 +6834,7 @@ return String.join(",", partes);]]></Body>
 				<Wall>
 					<Id>1792000000109</Id>
 					<Name><![CDATA[cabinaControl]]></Name>
-					<X>500</X><Y>360</Y>
+					<X>300</X><Y>360</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -6892,7 +6859,7 @@ return String.join(",", partes);]]></Body>
 				<Wall>
 					<Id>1792000000110</Id>
 					<Name><![CDATA[cierreMolinetesSur]]></Name>
-					<X>500</X><Y>520</Y>
+					<X>300</X><Y>520</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -6917,7 +6884,7 @@ return String.join(",", partes);]]></Body>
 				<Wall>
 					<Id>1792000000111</Id>
 					<Name><![CDATA[divisorMolinete00]]></Name>
-					<X>500</X><Y>220</Y>
+					<X>300</X><Y>220</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -6942,7 +6909,7 @@ return String.join(",", partes);]]></Body>
 				<Wall>
 					<Id>1792000000112</Id>
 					<Name><![CDATA[divisorMolinete01]]></Name>
-					<X>500</X><Y>230</Y>
+					<X>300</X><Y>230</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -6967,7 +6934,7 @@ return String.join(",", partes);]]></Body>
 				<Wall>
 					<Id>1792000000113</Id>
 					<Name><![CDATA[divisorMolinete02]]></Name>
-					<X>500</X><Y>240</Y>
+					<X>300</X><Y>240</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -6992,7 +6959,7 @@ return String.join(",", partes);]]></Body>
 				<Wall>
 					<Id>1792000000114</Id>
 					<Name><![CDATA[divisorMolinete03]]></Name>
-					<X>500</X><Y>250</Y>
+					<X>300</X><Y>250</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7017,7 +6984,7 @@ return String.join(",", partes);]]></Body>
 				<Wall>
 					<Id>1792000000115</Id>
 					<Name><![CDATA[divisorMolinete04]]></Name>
-					<X>500</X><Y>260</Y>
+					<X>300</X><Y>260</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7042,7 +7009,7 @@ return String.join(",", partes);]]></Body>
 				<Wall>
 					<Id>1792000000116</Id>
 					<Name><![CDATA[divisorMolinete05]]></Name>
-					<X>500</X><Y>270</Y>
+					<X>300</X><Y>270</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7067,7 +7034,7 @@ return String.join(",", partes);]]></Body>
 				<Wall>
 					<Id>1792000000117</Id>
 					<Name><![CDATA[divisorMolinete06]]></Name>
-					<X>500</X><Y>280</Y>
+					<X>300</X><Y>280</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7092,7 +7059,7 @@ return String.join(",", partes);]]></Body>
 				<Wall>
 					<Id>1792000000118</Id>
 					<Name><![CDATA[divisorMolinete07]]></Name>
-					<X>500</X><Y>290</Y>
+					<X>300</X><Y>290</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7117,7 +7084,7 @@ return String.join(",", partes);]]></Body>
 				<Wall>
 					<Id>1792000000119</Id>
 					<Name><![CDATA[divisorMolinete08]]></Name>
-					<X>500</X><Y>300</Y>
+					<X>300</X><Y>300</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7142,7 +7109,7 @@ return String.join(",", partes);]]></Body>
 				<Wall>
 					<Id>1792000000120</Id>
 					<Name><![CDATA[divisorMolinete09]]></Name>
-					<X>500</X><Y>310</Y>
+					<X>300</X><Y>310</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7167,7 +7134,7 @@ return String.join(",", partes);]]></Body>
 				<Wall>
 					<Id>1792000000121</Id>
 					<Name><![CDATA[divisorMolinete10]]></Name>
-					<X>500</X><Y>320</Y>
+					<X>300</X><Y>320</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7192,7 +7159,7 @@ return String.join(",", partes);]]></Body>
 				<Wall>
 					<Id>1792000000122</Id>
 					<Name><![CDATA[divisorMolinete11]]></Name>
-					<X>500</X><Y>330</Y>
+					<X>300</X><Y>330</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7217,7 +7184,7 @@ return String.join(",", partes);]]></Body>
 				<Wall>
 					<Id>1792000000123</Id>
 					<Name><![CDATA[divisorMolinete12]]></Name>
-					<X>500</X><Y>340</Y>
+					<X>300</X><Y>340</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7242,7 +7209,7 @@ return String.join(",", partes);]]></Body>
 				<Wall>
 					<Id>1792000000124</Id>
 					<Name><![CDATA[divisorMolinete13]]></Name>
-					<X>500</X><Y>350</Y>
+					<X>300</X><Y>350</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7267,7 +7234,7 @@ return String.join(",", partes);]]></Body>
 				<Wall>
 					<Id>1792000000125</Id>
 					<Name><![CDATA[divisorMolinete14]]></Name>
-					<X>500</X><Y>360</Y>
+					<X>300</X><Y>360</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7292,7 +7259,7 @@ return String.join(",", partes);]]></Body>
 				<Wall>
 					<Id>1792000000126</Id>
 					<Name><![CDATA[divisorMolinete15]]></Name>
-					<X>500</X><Y>380</Y>
+					<X>300</X><Y>380</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7317,7 +7284,7 @@ return String.join(",", partes);]]></Body>
 				<Wall>
 					<Id>1792000000127</Id>
 					<Name><![CDATA[divisorMolinete16]]></Name>
-					<X>500</X><Y>390</Y>
+					<X>300</X><Y>390</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7342,7 +7309,7 @@ return String.join(",", partes);]]></Body>
 				<Wall>
 					<Id>1792000000128</Id>
 					<Name><![CDATA[divisorMolinete17]]></Name>
-					<X>500</X><Y>400</Y>
+					<X>300</X><Y>400</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7367,7 +7334,7 @@ return String.join(",", partes);]]></Body>
 				<Wall>
 					<Id>1792000000129</Id>
 					<Name><![CDATA[divisorMolinete18]]></Name>
-					<X>500</X><Y>410</Y>
+					<X>300</X><Y>410</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7392,7 +7359,7 @@ return String.join(",", partes);]]></Body>
 				<Wall>
 					<Id>1792000000130</Id>
 					<Name><![CDATA[divisorMolinete19]]></Name>
-					<X>500</X><Y>420</Y>
+					<X>300</X><Y>420</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7417,7 +7384,7 @@ return String.join(",", partes);]]></Body>
 				<Wall>
 					<Id>1792000000131</Id>
 					<Name><![CDATA[divisorMolinete20]]></Name>
-					<X>500</X><Y>430</Y>
+					<X>300</X><Y>430</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7442,7 +7409,7 @@ return String.join(",", partes);]]></Body>
 				<Wall>
 					<Id>1792000000132</Id>
 					<Name><![CDATA[divisorMolinete21]]></Name>
-					<X>500</X><Y>440</Y>
+					<X>300</X><Y>440</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7467,7 +7434,7 @@ return String.join(",", partes);]]></Body>
 				<Wall>
 					<Id>1792000000133</Id>
 					<Name><![CDATA[divisorMolinete22]]></Name>
-					<X>500</X><Y>450</Y>
+					<X>300</X><Y>450</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7492,7 +7459,7 @@ return String.join(",", partes);]]></Body>
 				<Wall>
 					<Id>1792000000134</Id>
 					<Name><![CDATA[divisorMolinete23]]></Name>
-					<X>500</X><Y>460</Y>
+					<X>300</X><Y>460</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7517,7 +7484,7 @@ return String.join(",", partes);]]></Body>
 				<Wall>
 					<Id>1792000000135</Id>
 					<Name><![CDATA[divisorMolinete24]]></Name>
-					<X>500</X><Y>470</Y>
+					<X>300</X><Y>470</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7542,7 +7509,7 @@ return String.join(",", partes);]]></Body>
 				<Wall>
 					<Id>1792000000136</Id>
 					<Name><![CDATA[divisorMolinete25]]></Name>
-					<X>500</X><Y>480</Y>
+					<X>300</X><Y>480</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7567,7 +7534,7 @@ return String.join(",", partes);]]></Body>
 				<Wall>
 					<Id>1792000000137</Id>
 					<Name><![CDATA[divisorMolinete26]]></Name>
-					<X>500</X><Y>490</Y>
+					<X>300</X><Y>490</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7592,7 +7559,7 @@ return String.join(",", partes);]]></Body>
 				<Wall>
 					<Id>1792000000138</Id>
 					<Name><![CDATA[divisorMolinete27]]></Name>
-					<X>500</X><Y>500</Y>
+					<X>300</X><Y>500</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7617,7 +7584,7 @@ return String.join(",", partes);]]></Body>
 				<Wall>
 					<Id>1792000000139</Id>
 					<Name><![CDATA[divisorMolinete28]]></Name>
-					<X>500</X><Y>510</Y>
+					<X>300</X><Y>510</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7642,7 +7609,7 @@ return String.join(",", partes);]]></Body>
 				<Wall>
 					<Id>1792000000140</Id>
 					<Name><![CDATA[divisorMolinete29]]></Name>
-					<X>500</X><Y>520</Y>
+					<X>300</X><Y>520</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7699,43 +7666,9 @@ return String.join(",", partes);]]></Body>
 					</Points>
 				</Wall>
 				<Wall>
-					<Id>1792000000142</Id>
-					<Name><![CDATA[maquinasCargaNorte]]></Name>
-					<X>260</X><Y>190</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<Z>0</Z>
-					<LineColor>-3308225</LineColor>
-					<LineWidth>2</LineWidth>
-					<LineMaterial>null</LineMaterial>
-					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>25</ZHeight>
-					<Closed>false</Closed>
-					<Points>
-						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>-25</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>25</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>60</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>35</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>60</X><Y>25</Y><Z>0</Z></Point>
-						<Point><X>60</X><Y>12</Y><Z>0</Z></Point>
-						<Point><X>60</X><Y>-13</Y><Z>0</Z></Point>
-						<Point><X>35</X><Y>12</Y><Z>0</Z></Point>
-						<Point><X>0</X><Y>12</Y><Z>0</Z></Point>
-						<Point><X>25</X><Y>12</Y><Z>0</Z></Point>
-						<Point><X>0</X><Y>-13</Y><Z>0</Z></Point>
-						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>0</X><Y>25</Y><Z>0</Z></Point>
-						<Point><X>0</X><Y>-25</Y><Z>0</Z></Point>
-					</Points>
-				</Wall>
-				<Wall>
 					<Id>1792000000143</Id>
 					<Name><![CDATA[maquinasCargaSur]]></Name>
-					<X>260</X><Y>518</Y>
+					<X>90</X><Y>518</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7769,7 +7702,7 @@ return String.join(",", partes);]]></Body>
 				<Wall>
 					<Id>1792000000144</Id>
 					<Name><![CDATA[columna1]]></Name>
-					<X>236</X><Y>276</Y>
+					<X>140</X><Y>276</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7803,7 +7736,7 @@ return String.join(",", partes);]]></Body>
 				<Wall>
 					<Id>1792000000145</Id>
 					<Name><![CDATA[columna2]]></Name>
-					<X>236</X><Y>436</Y>
+					<X>140</X><Y>436</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7905,7 +7838,7 @@ return String.join(",", partes);]]></Body>
 				<Wall>
 					<Id>1792000000148</Id>
 					<Name><![CDATA[columna5]]></Name>
-					<X>636</X><Y>246</Y>
+					<X>436</X><Y>246</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7939,7 +7872,7 @@ return String.join(",", partes);]]></Body>
 				<Wall>
 					<Id>1792000000149</Id>
 					<Name><![CDATA[columna6]]></Name>
-					<X>636</X><Y>466</Y>
+					<X>436</X><Y>466</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7973,7 +7906,7 @@ return String.join(",", partes);]]></Body>
 				<Text>
 					<Id>1792000000150</Id>
 					<Name><![CDATA[textoZonaNoPaga]]></Name>
-					<X>200</X><Y>506</Y>
+					<X>95</X><Y>506</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7994,7 +7927,7 @@ return String.join(",", partes);]]></Body>
 				<Text>
 					<Id>1792000000151</Id>
 					<Name><![CDATA[textoZonaPaga]]></Name>
-					<X>580</X><Y>506</Y>
+					<X>380</X><Y>506</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -8036,7 +7969,7 @@ return String.join(",", partes);]]></Body>
 				<Text>
 					<Id>1792000000153</Id>
 					<Name><![CDATA[textoCabina]]></Name>
-					<X>524</X><Y>369</Y>
+					<X>324</X><Y>369</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -8057,7 +7990,7 @@ return String.join(",", partes);]]></Body>
 				<Text>
 					<Id>1792000000154</Id>
 					<Name><![CDATA[textoPlano]]></Name>
-					<X>580</X><Y>530</Y>
+					<X>380</X><Y>530</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -8075,12 +8008,33 @@ return String.join(",", partes);]]></Body>
 					</Font>
 					<Alignment>LEFT</Alignment>
 				</Text>
+				<Text>
+					<Id>1794000000201</Id>
+					<Name><![CDATA[textoOrientacion]]></Name>
+					<X>80</X><Y>662</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-65536</Color>
+					<Text><![CDATA[Orientación del plano: arriba Oeste (calle Lima) · abajo Este (Hornos) · derecha Norte (andenes de la Línea C) · izquierda Sur (hall del Roca)]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>10</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
 				<ServiceWithLine>
 					<ServiceColor>-16744448</ServiceColor>
 					<Id>1791000000030</Id>
 					<Name><![CDATA[molinetesPeatonales]]></Name>
-					<X>420</X><Y>225</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>220</X><Y>225</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -8090,8 +8044,8 @@ return String.join(",", partes);]]></Body>
 				<PolygonNode>
 					<Id>1791000000031</Id>
 					<Name><![CDATA[areaEsperaMolinetes]]></Name>
-					<X>380</X><Y>340</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>180</X><Y>340</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -8141,7 +8095,7 @@ return String.join(",", partes);]]></Body>
 					<Slope>
 						<Id>1791000000034</Id>
 						<Name><![CDATA[areaEsperaMolinetes]]></Name>
-						<X>0</X><Y>10</Y>
+						<X>-200</X><Y>10</Y>
 						<PublicFlag>false</PublicFlag>
 						<PresentationFlag>true</PresentationFlag>
 						<ShowLabel>true</ShowLabel>
@@ -8163,8 +8117,8 @@ return String.join(",", partes);]]></Body>
 				<QueueLine>
 					<Id>1792000000155</Id>
 					<Name><![CDATA[colaMolinete01]]></Name>
-					<X>420</X><Y>225</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>220</X><Y>225</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -8186,8 +8140,8 @@ return String.join(",", partes);]]></Body>
 				<QueueLine>
 					<Id>1792000000156</Id>
 					<Name><![CDATA[colaMolinete02]]></Name>
-					<X>420</X><Y>235</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>220</X><Y>235</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -8209,8 +8163,8 @@ return String.join(",", partes);]]></Body>
 				<QueueLine>
 					<Id>1792000000157</Id>
 					<Name><![CDATA[colaMolinete03]]></Name>
-					<X>420</X><Y>245</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>220</X><Y>245</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -8232,8 +8186,8 @@ return String.join(",", partes);]]></Body>
 				<QueueLine>
 					<Id>1792000000158</Id>
 					<Name><![CDATA[colaMolinete04]]></Name>
-					<X>420</X><Y>255</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>220</X><Y>255</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -8255,8 +8209,8 @@ return String.join(",", partes);]]></Body>
 				<QueueLine>
 					<Id>1792000000159</Id>
 					<Name><![CDATA[colaMolinete05]]></Name>
-					<X>420</X><Y>265</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>220</X><Y>265</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -8278,8 +8232,8 @@ return String.join(",", partes);]]></Body>
 				<QueueLine>
 					<Id>1792000000160</Id>
 					<Name><![CDATA[colaMolinete06]]></Name>
-					<X>420</X><Y>275</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>220</X><Y>275</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -8301,8 +8255,8 @@ return String.join(",", partes);]]></Body>
 				<QueueLine>
 					<Id>1792000000161</Id>
 					<Name><![CDATA[colaMolinete07]]></Name>
-					<X>420</X><Y>285</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>220</X><Y>285</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -8324,8 +8278,8 @@ return String.join(",", partes);]]></Body>
 				<QueueLine>
 					<Id>1792000000162</Id>
 					<Name><![CDATA[colaMolinete08]]></Name>
-					<X>420</X><Y>295</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>220</X><Y>295</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -8347,8 +8301,8 @@ return String.join(",", partes);]]></Body>
 				<QueueLine>
 					<Id>1792000000163</Id>
 					<Name><![CDATA[colaMolinete09]]></Name>
-					<X>420</X><Y>305</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>220</X><Y>305</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -8370,8 +8324,8 @@ return String.join(",", partes);]]></Body>
 				<QueueLine>
 					<Id>1792000000164</Id>
 					<Name><![CDATA[colaMolinete10]]></Name>
-					<X>420</X><Y>315</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>220</X><Y>315</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -8393,8 +8347,8 @@ return String.join(",", partes);]]></Body>
 				<QueueLine>
 					<Id>1792000000165</Id>
 					<Name><![CDATA[colaMolinete11]]></Name>
-					<X>420</X><Y>325</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>220</X><Y>325</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -8416,8 +8370,8 @@ return String.join(",", partes);]]></Body>
 				<QueueLine>
 					<Id>1792000000166</Id>
 					<Name><![CDATA[colaMolinete12]]></Name>
-					<X>420</X><Y>335</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>220</X><Y>335</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -8439,8 +8393,8 @@ return String.join(",", partes);]]></Body>
 				<QueueLine>
 					<Id>1792000000167</Id>
 					<Name><![CDATA[colaMolinete13]]></Name>
-					<X>420</X><Y>345</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>220</X><Y>345</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -8462,8 +8416,8 @@ return String.join(",", partes);]]></Body>
 				<QueueLine>
 					<Id>1792000000168</Id>
 					<Name><![CDATA[colaMolinete14]]></Name>
-					<X>420</X><Y>355</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>220</X><Y>355</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -8485,8 +8439,8 @@ return String.join(",", partes);]]></Body>
 				<QueueLine>
 					<Id>1792000000169</Id>
 					<Name><![CDATA[colaMolinete15]]></Name>
-					<X>420</X><Y>385</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>220</X><Y>385</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -8508,8 +8462,8 @@ return String.join(",", partes);]]></Body>
 				<QueueLine>
 					<Id>1792000000170</Id>
 					<Name><![CDATA[colaMolinete16]]></Name>
-					<X>420</X><Y>395</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>220</X><Y>395</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -8531,8 +8485,8 @@ return String.join(",", partes);]]></Body>
 				<QueueLine>
 					<Id>1792000000171</Id>
 					<Name><![CDATA[colaMolinete17]]></Name>
-					<X>420</X><Y>405</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>220</X><Y>405</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -8554,8 +8508,8 @@ return String.join(",", partes);]]></Body>
 				<QueueLine>
 					<Id>1792000000172</Id>
 					<Name><![CDATA[colaMolinete18]]></Name>
-					<X>420</X><Y>415</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>220</X><Y>415</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -8577,8 +8531,8 @@ return String.join(",", partes);]]></Body>
 				<QueueLine>
 					<Id>1792000000173</Id>
 					<Name><![CDATA[colaMolinete19]]></Name>
-					<X>420</X><Y>425</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>220</X><Y>425</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -8600,8 +8554,8 @@ return String.join(",", partes);]]></Body>
 				<QueueLine>
 					<Id>1792000000174</Id>
 					<Name><![CDATA[colaMolinete20]]></Name>
-					<X>420</X><Y>435</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>220</X><Y>435</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -8623,8 +8577,8 @@ return String.join(",", partes);]]></Body>
 				<QueueLine>
 					<Id>1792000000175</Id>
 					<Name><![CDATA[colaMolinete21]]></Name>
-					<X>420</X><Y>445</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>220</X><Y>445</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -8646,8 +8600,8 @@ return String.join(",", partes);]]></Body>
 				<QueueLine>
 					<Id>1792000000176</Id>
 					<Name><![CDATA[colaMolinete22]]></Name>
-					<X>420</X><Y>455</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>220</X><Y>455</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -8669,8 +8623,8 @@ return String.join(",", partes);]]></Body>
 				<QueueLine>
 					<Id>1792000000177</Id>
 					<Name><![CDATA[colaMolinete23]]></Name>
-					<X>420</X><Y>465</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>220</X><Y>465</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -8692,8 +8646,8 @@ return String.join(",", partes);]]></Body>
 				<QueueLine>
 					<Id>1792000000178</Id>
 					<Name><![CDATA[colaMolinete24]]></Name>
-					<X>420</X><Y>475</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>220</X><Y>475</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -8715,8 +8669,8 @@ return String.join(",", partes);]]></Body>
 				<QueueLine>
 					<Id>1792000000179</Id>
 					<Name><![CDATA[colaMolinete25]]></Name>
-					<X>420</X><Y>485</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>220</X><Y>485</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -8738,8 +8692,8 @@ return String.join(",", partes);]]></Body>
 				<QueueLine>
 					<Id>1792000000180</Id>
 					<Name><![CDATA[colaMolinete26]]></Name>
-					<X>420</X><Y>495</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>220</X><Y>495</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -8761,8 +8715,8 @@ return String.join(",", partes);]]></Body>
 				<QueueLine>
 					<Id>1792000000181</Id>
 					<Name><![CDATA[colaMolinete27]]></Name>
-					<X>420</X><Y>505</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>220</X><Y>505</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -8784,8 +8738,8 @@ return String.join(",", partes);]]></Body>
 				<QueueLine>
 					<Id>1792000000182</Id>
 					<Name><![CDATA[colaMolinete28]]></Name>
-					<X>420</X><Y>515</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>220</X><Y>515</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -8807,8 +8761,8 @@ return String.join(",", partes);]]></Body>
 				<ServiceLine>
 					<Id>1791000000035</Id>
 					<Name><![CDATA[molinetePed01]]></Name>
-					<X>500</X><Y>225</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>300</X><Y>225</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -8823,8 +8777,8 @@ return String.join(",", partes);]]></Body>
 				<ServiceLine>
 					<Id>1791000000036</Id>
 					<Name><![CDATA[molinetePed02]]></Name>
-					<X>500</X><Y>235</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>300</X><Y>235</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -8839,8 +8793,8 @@ return String.join(",", partes);]]></Body>
 				<ServiceLine>
 					<Id>1791000000037</Id>
 					<Name><![CDATA[molinetePed03]]></Name>
-					<X>500</X><Y>245</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>300</X><Y>245</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -8855,8 +8809,8 @@ return String.join(",", partes);]]></Body>
 				<ServiceLine>
 					<Id>1791000000038</Id>
 					<Name><![CDATA[molinetePed04]]></Name>
-					<X>500</X><Y>255</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>300</X><Y>255</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -8871,8 +8825,8 @@ return String.join(",", partes);]]></Body>
 				<ServiceLine>
 					<Id>1791000000110</Id>
 					<Name><![CDATA[molinetePed05]]></Name>
-					<X>500</X><Y>265</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>300</X><Y>265</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -8887,8 +8841,8 @@ return String.join(",", partes);]]></Body>
 				<ServiceLine>
 					<Id>1791000000111</Id>
 					<Name><![CDATA[molinetePed06]]></Name>
-					<X>500</X><Y>275</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>300</X><Y>275</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -8903,8 +8857,8 @@ return String.join(",", partes);]]></Body>
 				<ServiceLine>
 					<Id>1791000000112</Id>
 					<Name><![CDATA[molinetePed07]]></Name>
-					<X>500</X><Y>285</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>300</X><Y>285</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -8919,8 +8873,8 @@ return String.join(",", partes);]]></Body>
 				<ServiceLine>
 					<Id>1791000000113</Id>
 					<Name><![CDATA[molinetePed08]]></Name>
-					<X>500</X><Y>295</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>300</X><Y>295</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -8935,8 +8889,8 @@ return String.join(",", partes);]]></Body>
 				<ServiceLine>
 					<Id>1791000000114</Id>
 					<Name><![CDATA[molinetePed09]]></Name>
-					<X>500</X><Y>305</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>300</X><Y>305</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -8951,8 +8905,8 @@ return String.join(",", partes);]]></Body>
 				<ServiceLine>
 					<Id>1791000000115</Id>
 					<Name><![CDATA[molinetePed10]]></Name>
-					<X>500</X><Y>315</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>300</X><Y>315</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -8967,8 +8921,8 @@ return String.join(",", partes);]]></Body>
 				<ServiceLine>
 					<Id>1791000000116</Id>
 					<Name><![CDATA[molinetePed11]]></Name>
-					<X>500</X><Y>325</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>300</X><Y>325</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -8983,8 +8937,8 @@ return String.join(",", partes);]]></Body>
 				<ServiceLine>
 					<Id>1791000000117</Id>
 					<Name><![CDATA[molinetePed12]]></Name>
-					<X>500</X><Y>335</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>300</X><Y>335</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -8999,8 +8953,8 @@ return String.join(",", partes);]]></Body>
 				<ServiceLine>
 					<Id>1791000000118</Id>
 					<Name><![CDATA[molinetePed13]]></Name>
-					<X>500</X><Y>345</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>300</X><Y>345</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -9015,8 +8969,8 @@ return String.join(",", partes);]]></Body>
 				<ServiceLine>
 					<Id>1791000000119</Id>
 					<Name><![CDATA[molinetePed14]]></Name>
-					<X>500</X><Y>355</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>300</X><Y>355</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -9031,8 +8985,8 @@ return String.join(",", partes);]]></Body>
 				<ServiceLine>
 					<Id>1791000000120</Id>
 					<Name><![CDATA[molinetePed15]]></Name>
-					<X>500</X><Y>385</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>300</X><Y>385</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -9047,8 +9001,8 @@ return String.join(",", partes);]]></Body>
 				<ServiceLine>
 					<Id>1791000000121</Id>
 					<Name><![CDATA[molinetePed16]]></Name>
-					<X>500</X><Y>395</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>300</X><Y>395</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -9063,8 +9017,8 @@ return String.join(",", partes);]]></Body>
 				<ServiceLine>
 					<Id>1791000000122</Id>
 					<Name><![CDATA[molinetePed17]]></Name>
-					<X>500</X><Y>405</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>300</X><Y>405</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -9079,8 +9033,8 @@ return String.join(",", partes);]]></Body>
 				<ServiceLine>
 					<Id>1791000000123</Id>
 					<Name><![CDATA[molinetePed18]]></Name>
-					<X>500</X><Y>415</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>300</X><Y>415</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -9095,8 +9049,8 @@ return String.join(",", partes);]]></Body>
 				<ServiceLine>
 					<Id>1791000000124</Id>
 					<Name><![CDATA[molinetePed19]]></Name>
-					<X>500</X><Y>425</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>300</X><Y>425</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -9111,8 +9065,8 @@ return String.join(",", partes);]]></Body>
 				<ServiceLine>
 					<Id>1791000000125</Id>
 					<Name><![CDATA[molinetePed20]]></Name>
-					<X>500</X><Y>435</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>300</X><Y>435</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -9127,8 +9081,8 @@ return String.join(",", partes);]]></Body>
 				<ServiceLine>
 					<Id>1791000000126</Id>
 					<Name><![CDATA[molinetePed21]]></Name>
-					<X>500</X><Y>445</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>300</X><Y>445</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -9143,8 +9097,8 @@ return String.join(",", partes);]]></Body>
 				<ServiceLine>
 					<Id>1791000000127</Id>
 					<Name><![CDATA[molinetePed22]]></Name>
-					<X>500</X><Y>455</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>300</X><Y>455</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -9159,8 +9113,8 @@ return String.join(",", partes);]]></Body>
 				<ServiceLine>
 					<Id>1791000000128</Id>
 					<Name><![CDATA[molinetePed23]]></Name>
-					<X>500</X><Y>465</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>300</X><Y>465</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -9175,8 +9129,8 @@ return String.join(",", partes);]]></Body>
 				<ServiceLine>
 					<Id>1791000000129</Id>
 					<Name><![CDATA[molinetePed24]]></Name>
-					<X>500</X><Y>475</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>300</X><Y>475</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -9191,8 +9145,8 @@ return String.join(",", partes);]]></Body>
 				<ServiceLine>
 					<Id>1791000000130</Id>
 					<Name><![CDATA[molinetePed25]]></Name>
-					<X>500</X><Y>485</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>300</X><Y>485</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -9207,8 +9161,8 @@ return String.join(",", partes);]]></Body>
 				<ServiceLine>
 					<Id>1791000000131</Id>
 					<Name><![CDATA[molinetePed26]]></Name>
-					<X>500</X><Y>495</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>300</X><Y>495</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -9223,8 +9177,8 @@ return String.join(",", partes);]]></Body>
 				<ServiceLine>
 					<Id>1791000000132</Id>
 					<Name><![CDATA[molinetePed27]]></Name>
-					<X>500</X><Y>505</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>300</X><Y>505</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -9239,8 +9193,8 @@ return String.join(",", partes);]]></Body>
 				<ServiceLine>
 					<Id>1791000000133</Id>
 					<Name><![CDATA[molinetePed28]]></Name>
-					<X>500</X><Y>515</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<X>300</X><Y>515</Y>
+					<Label><X>-190</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
@@ -9269,7 +9223,7 @@ return String.join(",", partes);]]></Body>
 			<Camera3D>
 					<Id>1794000000108</Id>
 					<Name><![CDATA[camaraGeneral]]></Name>
-					<X>430</X><Y>980</Y><Z>520</Z>
+					<X>330</X><Y>980</Y><Z>520</Z>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<ShowLabel>false</ShowLabel>
 					<RotationX>48</RotationX>
@@ -9278,7 +9232,7 @@ return String.join(",", partes);]]></Body>
 				<Camera3D>
 					<Id>1794000000109</Id>
 					<Name><![CDATA[camaraMolinetes]]></Name>
-					<X>330</X><Y>360</Y><Z>70</Z>
+					<X>120</X><Y>360</Y><Z>70</Z>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<ShowLabel>false</ShowLabel>
 					<RotationX>25</RotationX>
@@ -9296,7 +9250,7 @@ return String.join(",", partes);]]></Body>
 				<Camera3D>
 					<Id>1794000000111</Id>
 					<Name><![CDATA[camaraSuperior]]></Name>
-					<X>380</X><Y>620</Y><Z>1150</Z>
+					<X>280</X><Y>620</Y><Z>1150</Z>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<ShowLabel>false</ShowLabel>
 					<RotationX>90</RotationX>

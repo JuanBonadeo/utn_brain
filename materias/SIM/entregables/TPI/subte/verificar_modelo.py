@@ -301,8 +301,8 @@ ped_blocks={x.findtext('Name'):x.findtext('ActiveObjectClass/ClassName') for x i
 assert ped_blocks=={'pedSource':'PedSource','pedSourceCalle':'PedSource','pedMolinetes':'PedService','pedSalida':'PedGoTo','pedSink':'PedSink'}
 sources={x.findtext('Name'):{p.findtext('Name'):p.findtext('Value/Code') for p in x.findall('Parameters/Parameter')} for x in ped.findall('EmbeddedObjects/EmbeddedObject') if x.findtext('Name').startswith('pedSource')}
 assert sources['pedSource']['locationLine']=='entradaPeatonal'
-# Dos bocas de la calle Brasil (2026-11-02): se alternan sin azar para no alterar los números aleatorios comunes.
-assert sources['pedSourceCalle']['locationLine']=='nDesdeCallePed % 2 == 0 ? entradaCalle2 : entradaCalle'
+# Calle: una boca, la escalera B3 de la calle Brasil (OSM), que aterriza en X ~ 194 desde el lado este.
+assert sources['pedSourceCalle']['locationLine']=='entradaCalle'
 assert sources['pedSource']['onExit']=='ped.desdeRocaPed = true; registraIngresoPed(ped);'
 assert sources['pedSourceCalle']['onExit']=='ped.desdeRocaPed = false; registraIngresoPed(ped);'
 # Velocidad con generador propio (numeros aleatorios comunes E0/E1); el generador por defecto lo consume la libreria.
@@ -356,8 +356,15 @@ assert _abs('pasilloRocaSur')==[(-58,999),(30,999),(30,385),(80,385)]
 assert _abs('pasilloRocaFondo')==[(-58,949),(-58,999)]
 assert _abs('paredIzquierdaNorte')==[(80,190),(80,335)] and _abs('paredIzquierdaSur')==[(80,385),(80,530)]
 assert _abs('entradaPeatonal',1)==[(-55,951),(-55,997)]
-assert _abs('paredNorteOeste')==[(80,190),(200,190)] and _abs('paredNorteCentro')==[(260,190),(340,190)]
-assert _abs('entradaCalle',1)==[(345,196),(395,196)] and _abs('entradaCalle2',1)==[(205,196),(255,196)]
+# Disposición coherente con el plano georreferenciado (2026-11-02): pasillo del Roca en X = 80, escalera B3 en
+# X ~ 194, molinetes en X 300-316 (la zona paga empieza en la conexión real con el andén de la C, X ~ 316) y
+# escaleras al andén en X 520-580, sobre los andenes de la Línea C.
+assert _abs('paredNorteOeste')==[(80,190),(580,190)] and _abs('paredInferior')==[(80,530),(580,530)]
+assert ped.find(".//*[Name='paredNorteCentro']") is None and ped.find(".//*[Name='paredNorteEste']") is None
+assert _abs('escaleraB3')==[(181,395),(181,455),(207,455),(207,395)] and _abs('entradaCalle',1)==[(183,399),(205,399)]
+assert ped.find(".//*[Name='entradaCalle2']") is None
+assert all(float(g.findtext('X'))==300 for g in gates) and all(float(q.findtext('X'))==220 for q in queues)
+assert _abs('salidaPeatonal',1)==[(568,295),(568,425)] and _abs('paredDerechaNorte')==[(580,190),(580,290)]
 _eleccion=next(f for f in ped.findall('Functions/Function') if f.findtext('Name')=='elegirColaPed').findtext('Body')
 assert 'double yReferencia = ped.getY() > 900 ? 335 + (ped.getY() - 949) : ped.getY();' in _eleccion
 aviso=ped.find(".//Text[Name='avisoPeatonal']")
