@@ -124,20 +124,23 @@ La superposición corrige dos supuestos del modelo:
         intermedia sería de 181 a 205~s, en lugar de los 106~s usados.
 \end{itemize}
 
-La demora solo desplaza las oleadas en el tiempo. Con una demora mayor, el pasaje de cada tren llega
-75 a 100~s más tarde, y algunos trenes pasan a la ventana siguiente. El efecto esperado sobre la espera es
-chico, pero no se comprobó con corridas. Al mismo tiempo, la superposición sostiene dos rasgos del modelo:
+Con este resultado se modificó el modelo (sección~\ref{sec:paso4-construccion-verificacion}):
 \begin{itemize}
-  \item el pasaje del Roca entra al vestíbulo por un único acceso, el pasillo;
-  \item la demanda de la calle entra por otro.
+  \item El pasaje del Roca ya no aparece en la boca del vestíbulo. Aparece al pie de la escalera de la boca
+        del hall y camina un pasillo en L de 75~m, dibujado sobre la traza de OSM. El ancho de 5~m es un
+        supuesto.
+  \item La demora cubre solo el tramo previo, el hall y la escalera: $(72 + 9)/0{,}95 + 5/0{,}30 \approx
+        102$~s.
+  \item La demanda de la calle entra por dos bocas sobre la calle Brasil, en lugar de una.
 \end{itemize}
-El pasillo y su escalera también dosifican la llegada de cada oleada, que es lo que representa la
-dispersión de la descarga.
+El pasillo y su escalera dosifican la llegada de cada oleada, que es lo que representa la dispersión de la
+descarga, y ahora además pueden congestionarse.
 
 Hay dos reservas. Los pasillos subterráneos son datos voluntarios de OSM, no del plano oficial. Y el
-interior del vestíbulo (su forma, la batería de molinetes y la ubicación del acceso del pasillo) sigue
-sin dato, por lo que la geometría hipotética no se modificó.
-\pendiente{decidir si se rehace la producción con la demora corregida y el acceso por pasillo (paso B).}
+interior del vestíbulo (su forma y la batería de molinetes) sigue sin dato, por lo que solo se modificaron
+sus accesos. La segunda boca de la calle se ubicó a unos 30~m del pasillo y no a los 38~m que indica OSM,
+para que no cayera sobre las colas de los molinetes.
+\pendiente{repetir la producción con el pasillo y actualizar los resultados.}
 
 \subsection{Reproducción en otra máquina}
 

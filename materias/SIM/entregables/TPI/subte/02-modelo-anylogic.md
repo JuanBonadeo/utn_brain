@@ -627,15 +627,38 @@ verifica contra las bibliotecas instaladas antes de abrir el IDE.
 - [Recursos — documentación oficial](https://anylogic.help/library-reference-guides/process-modeling-library/using-resources.html): unidades de recursos compartidos por procesos.
 
 
-## Demora corregida a 181 s (2026-11-02)
+## Pasillo del Roca, dos bocas de la calle y plano de fondo (2026-11-02)
 
 El plano de Trenes Argentinos georreferenciado con OSM (`datos/georref_plano_sofse.py`, ver `09-pedidos-de-datos.md`)
-mostró que los 85 m medidos en octubre llegaban solo a la boca del hall: después hay una escalera y un pasillo
-subterráneo de ~60 m hasta el vestíbulo. Recorrido mediano en línea recta: 156 m, demora intermedia
-156/0,95 + 5/0,30 = **181 s** (antes 106 s; contextos 142 y 273 s). Se cambió en `PeatonalFranjaVisualE0/E1` y en
-`PeatonalCorridasApareadas`; `PeatonalFranjaPrueba` conserva sus 60 s de prueba. La geometría del vestíbulo no
-cambió: la abertura de 12 m del acceso oeste representa la boca del pasillo. La producción con 106 s quedó en
-`corridas-descartadas/2026-10-05_produccion_demora106.csv` (referencia para comparar, ya no se carga).
+mostró que la boca del hall baja por una escalera a un pasillo subterráneo de ~75 m que llega al vestíbulo, en el
+extremo sur de los andenes de la Línea C. Cambios en `MainPeatonal`:
+
+| Cambio | Detalle |
+|---|---|
+| Pasillo del Roca | Paredes `pasilloRocaNorte`, `pasilloRocaSur` y `pasilloRocaFondo`: L de 75 m × 5 m (ancho [SUP]) desde el pie de la escalera de la boca del hall, X -58 a 80, Y 999 a 335, sobre la traza de OSM |
+| Llegada del Roca | `entradaPeatonal` pasa al pie de la escalera: X = -55, Y 951-997 |
+| Boca oeste | Angostada de 12 a 5 m (Y 335-385): `paredIzquierdaNorte` y `paredIzquierdaSur` se estiran |
+| Demora | **102 s** = (72 m de hall en línea recta + 9 m de escalera)/0,95 + 5/0,30. El pasillo ya no está en la demora: se camina. Entre el 2026-11-02 y este cambio se usó 181 s (todo el recorrido como demora); antes, 106 s |
+| Calle | Dos bocas en la pared norte: `entradaCalle` (X 345-395) y `entradaCalle2` (X 205-255, entre boletería y máquinas). `pedSourceCalle` alterna entre ellas (`nDesdeCallePed % 2`), sin azar. OSM las ubica a 11 y 38 m del pasillo; la segunda quedó a ~30 m para no caer sobre las colas [SUP] |
+| Elección de cola | El pasaje del Roca elige al aparecer, al pie del pasillo: el desvío se mide desde la boca oeste (`yReferencia = 335 + (Y - 949)`), conservando el carril |
+
+El interior del vestíbulo (28 molinetes, colas, zona paga) no cambió: sigue hipotético hasta el plano de SBASE.
+La producción con 106 s quedó en `corridas-descartadas/2026-10-05_produccion_demora106.csv`.
+
+### Plano de fondo como CAD Drawing
+
+`datos/fondo_anylogic.py` genera `plano_constitucion_modelo.dxf` (R2000, metros): el hall y la cabecera del plano
+oficial en gris, más capas de OSM (`LINEA_C_OSM`, `PASILLO_OSM`, `BOCAS_OSM`), `ROTULOS` y una cruz `REFERENCIA`.
+Está rotado 180° y trasladado para que, con el origen del CAD en (0, 0) del modelo y 10 px = 1 m, la cruz caiga en la
+boca oeste del vestíbulo (X = 80, Y = 360) y el pasillo de OSM coincida con `pasilloRocaNorte/Sur`. El norte queda a la
+derecha. Se inserta desde el IDE (el formato XML del CAD Drawing no está en ningún ejemplo instalado):
+
+1. `MainPeatonal` → paleta **Presentation** → arrastrar **CAD Drawing** al lienzo.
+2. Archivo: `plano_constitucion_modelo.dxf` (está junto al `.alp`). Unidades: **metros**.
+3. Posición X = 0, Y = 0, rotación 0. Comprobar que la cruz roja `REF (80, 360)` cae en la boca oeste del
+   vestíbulo y el pasillo de OSM entre las paredes del pasillo; si no, corregir X/Y del CAD.
+4. Clic derecho → **Order → Send to Back**, para que quede detrás de paredes y peatones.
+5. Guardar en el IDE y avisar: se corre el verificador y se commitea.
 
 ## Resultados de producción: escenario intermedio (2026-10-05)
 

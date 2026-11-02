@@ -5248,12 +5248,16 @@ liberaAsignacionPed(ped);
 // sortea servicioAsignadoPed, y con 0 la fila no pesaba (piloto del 2026-10-05).
 if (ped.servicioAsignadoPed <= 0) eleccionesSinServicioPed++;
 double servicio = modoFranjaPed ? servicioPedSeg : servicioDemoSeg;
+// La eleccion se evalua al aparecer el pasajero. El pasaje del Roca aparece al pie del pasillo (Y 949-999) y
+// entra al vestibulo por la boca oeste (Y 335-385): el desvio se mide desde esa boca, conservando el carril
+// (quien camina por el lado norte del pasillo sale por el lado norte de la boca).
+double yReferencia = ped.getY() > 900 ? 335 + (ped.getY() - 949) : ped.getY();
 java.util.List<QueuePath> colas = molinetesPeatonales.getQueues();
 int mejor = -1;
 double mejorCosto = Double.MAX_VALUE;
 for (int i = 0; i < molinetesOperativosPed && i < colas.size(); i++) {
     QueuePath cola = colas.get(i);
-    double desvioSeg = Math.abs(ped.getY() - cola.getEndPoint().y) / 10.0 / 1.3;
+    double desvioSeg = Math.abs(yReferencia - cola.getEndPoint().y) / 10.0 / 1.3;
     double costo = desvioSeg + asignadosPed[i] * servicio;
     if (costo < mejorCosto) {
         mejorCosto = costo;
@@ -5662,7 +5666,7 @@ return String.join(",", partes);]]></Body>
 						<Parameter>
 							<Name><![CDATA[locationLine]]></Name>
 							<Value Class="CodeValue">
-								<Code><![CDATA[entradaCalle]]></Code>
+								<Code><![CDATA[nDesdeCallePed % 2 == 0 ? entradaCalle2 : entradaCalle]]></Code>
 							</Value>
 						</Parameter>
 						<Parameter>
@@ -6235,7 +6239,7 @@ return String.join(",", partes);]]></Body>
 				<Text>
 					<Id>1791000000027</Id>
 					<Name><![CDATA[etiquetaOrigen]]></Name>
-					<X>90</X><Y>288</Y>
+					<X>-150</X><Y>1030</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -6245,7 +6249,7 @@ return String.join(",", partes);]]></Body>
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
 					<Color>-12490271</Color>
-					<Text><![CDATA[Acceso desde el hall del Roca]]></Text>
+					<Text><![CDATA[Pasillo desde el hall del Roca (75 m, OSM; ancho 5 m supuesto)]]></Text>
 					<Font>
 						<Name>SansSerif</Name>
 						<Size>13</Size>
@@ -6278,7 +6282,7 @@ return String.join(",", partes);]]></Body>
 				<TargetLine>
 					<Id>1791000000029</Id>
 					<Name><![CDATA[entradaPeatonal]]></Name>
-					<X>86</X><Y>305</Y>
+					<X>-55</X><Y>951</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -6288,7 +6292,7 @@ return String.join(",", partes);]]></Body>
 					<LineColor>-14774017</LineColor>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>0</X><Y>110</Y></Point>
+						<Point><X>0</X><Y>46</Y></Point>
 					</Points>
 				</TargetLine>
 				<TargetLine>
@@ -6390,9 +6394,121 @@ return String.join(",", partes);]]></Body>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
 						<Point><X>-25</X><Y>0</Y><Z>0</Z></Point>
 						<Point><X>25</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>260</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>235</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>285</X><Y>0</Y><Z>0</Z></Point>
+						<Point><X>120</X><Y>0</Y><Z>0</Z></Point>
+						<Point><X>95</X><Y>0</Y><Z>0</Z></Point>
+						<Point><X>145</X><Y>0</Y><Z>0</Z></Point>
+					</Points>
+				</Wall>
+				<Wall>
+					<Id>1794000000001</Id>
+					<Name><![CDATA[pasilloRocaNorte]]></Name>
+					<X>-58</X><Y>949</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<Z>0</Z>
+					<LineColor>-3308225</LineColor>
+					<LineWidth>2</LineWidth>
+					<LineMaterial>null</LineMaterial>
+					<FillingType>HATCHED_AREA</FillingType>
+					<ZHeight>20</ZHeight>
+					<Closed>false</Closed>
+					<Points>
+						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
+						<Point><X>-25</X><Y>0</Y><Z>0</Z></Point>
+						<Point><X>25</X><Y>0</Y><Z>0</Z></Point>
+						<Point><X>38</X><Y>0</Y><Z>0</Z></Point>
+						<Point><X>13</X><Y>0</Y><Z>0</Z></Point>
+						<Point><X>38</X><Y>-25</Y><Z>0</Z></Point>
+						<Point><X>38</X><Y>-614</Y><Z>0</Z></Point>
+						<Point><X>38</X><Y>-589</Y><Z>0</Z></Point>
+						<Point><X>63</X><Y>-614</Y><Z>0</Z></Point>
+						<Point><X>138</X><Y>-614</Y><Z>0</Z></Point>
+						<Point><X>113</X><Y>-614</Y><Z>0</Z></Point>
+						<Point><X>163</X><Y>-614</Y><Z>0</Z></Point>
+					</Points>
+				</Wall>
+				<Wall>
+					<Id>1794000000002</Id>
+					<Name><![CDATA[pasilloRocaSur]]></Name>
+					<X>-58</X><Y>999</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<Z>0</Z>
+					<LineColor>-3308225</LineColor>
+					<LineWidth>2</LineWidth>
+					<LineMaterial>null</LineMaterial>
+					<FillingType>HATCHED_AREA</FillingType>
+					<ZHeight>20</ZHeight>
+					<Closed>false</Closed>
+					<Points>
+						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
+						<Point><X>-25</X><Y>0</Y><Z>0</Z></Point>
+						<Point><X>25</X><Y>0</Y><Z>0</Z></Point>
+						<Point><X>88</X><Y>0</Y><Z>0</Z></Point>
+						<Point><X>63</X><Y>0</Y><Z>0</Z></Point>
+						<Point><X>88</X><Y>-25</Y><Z>0</Z></Point>
+						<Point><X>88</X><Y>-614</Y><Z>0</Z></Point>
+						<Point><X>88</X><Y>-589</Y><Z>0</Z></Point>
+						<Point><X>113</X><Y>-614</Y><Z>0</Z></Point>
+						<Point><X>138</X><Y>-614</Y><Z>0</Z></Point>
+						<Point><X>113</X><Y>-614</Y><Z>0</Z></Point>
+						<Point><X>163</X><Y>-614</Y><Z>0</Z></Point>
+					</Points>
+				</Wall>
+				<Wall>
+					<Id>1794000000005</Id>
+					<Name><![CDATA[pasilloRocaFondo]]></Name>
+					<X>-58</X><Y>949</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<Z>0</Z>
+					<LineColor>-3308225</LineColor>
+					<LineWidth>2</LineWidth>
+					<LineMaterial>null</LineMaterial>
+					<FillingType>HATCHED_AREA</FillingType>
+					<ZHeight>20</ZHeight>
+					<Closed>false</Closed>
+					<Points>
+						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
+						<Point><X>0</X><Y>-25</Y><Z>0</Z></Point>
+						<Point><X>0</X><Y>25</Y><Z>0</Z></Point>
+						<Point><X>0</X><Y>50</Y><Z>0</Z></Point>
+						<Point><X>0</X><Y>25</Y><Z>0</Z></Point>
+						<Point><X>0</X><Y>75</Y><Z>0</Z></Point>
+					</Points>
+				</Wall>
+				<Wall>
+					<Id>1794000000003</Id>
+					<Name><![CDATA[paredNorteCentro]]></Name>
+					<X>260</X><Y>190</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<Z>0</Z>
+					<LineColor>-3308225</LineColor>
+					<LineWidth>2</LineWidth>
+					<LineMaterial>null</LineMaterial>
+					<FillingType>HATCHED_AREA</FillingType>
+					<ZHeight>20</ZHeight>
+					<Closed>false</Closed>
+					<Points>
+						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
+						<Point><X>-25</X><Y>0</Y><Z>0</Z></Point>
+						<Point><X>25</X><Y>0</Y><Z>0</Z></Point>
+						<Point><X>80</X><Y>0</Y><Z>0</Z></Point>
+						<Point><X>55</X><Y>0</Y><Z>0</Z></Point>
+						<Point><X>105</X><Y>0</Y><Z>0</Z></Point>
 					</Points>
 				</Wall>
 				<Wall>
@@ -6435,10 +6551,25 @@ return String.join(",", partes);]]></Body>
 						<Point><X>50</X><Y>0</Y></Point>
 					</Points>
 				</TargetLine>
+				<TargetLine>
+					<Id>1794000000004</Id>
+					<Name><![CDATA[entradaCalle2]]></Name>
+					<X>205</X><Y>196</Y>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<Z>0</Z>
+					<LineColor>-14774017</LineColor>
+					<Points>
+						<Point><X>0</X><Y>0</Y></Point>
+						<Point><X>50</X><Y>0</Y></Point>
+					</Points>
+				</TargetLine>
 				<Text>
 					<Id>1792000000342</Id>
 					<Name><![CDATA[textoAccesoCalle]]></Name>
-					<X>335</X><Y>212</Y>
+					<X>205</X><Y>212</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -6448,7 +6579,7 @@ return String.join(",", partes);]]></Body>
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
 					<Color>-12490271</Color>
-					<Text><![CDATA[Acceso desde la calle]]></Text>
+					<Text><![CDATA[Bocas de la calle Brasil (2)]]></Text>
 					<Font>
 						<Name>SansSerif</Name>
 						<Size>11</Size>
@@ -6501,15 +6632,15 @@ return String.join(",", partes);]]></Body>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
 						<Point><X>0</X><Y>-25</Y><Z>0</Z></Point>
 						<Point><X>0</X><Y>25</Y><Z>0</Z></Point>
-						<Point><X>0</X><Y>110</Y><Z>0</Z></Point>
-						<Point><X>0</X><Y>85</Y><Z>0</Z></Point>
-						<Point><X>0</X><Y>135</Y><Z>0</Z></Point>
+						<Point><X>0</X><Y>145</Y><Z>0</Z></Point>
+						<Point><X>0</X><Y>120</Y><Z>0</Z></Point>
+						<Point><X>0</X><Y>170</Y><Z>0</Z></Point>
 					</Points>
 				</Wall>
 				<Wall>
 					<Id>1792000000105</Id>
 					<Name><![CDATA[paredIzquierdaSur]]></Name>
-					<X>80</X><Y>420</Y>
+					<X>80</X><Y>385</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -6526,9 +6657,9 @@ return String.join(",", partes);]]></Body>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
 						<Point><X>0</X><Y>-25</Y><Z>0</Z></Point>
 						<Point><X>0</X><Y>25</Y><Z>0</Z></Point>
-						<Point><X>0</X><Y>110</Y><Z>0</Z></Point>
-						<Point><X>0</X><Y>85</Y><Z>0</Z></Point>
-						<Point><X>0</X><Y>135</Y><Z>0</Z></Point>
+						<Point><X>0</X><Y>145</Y><Z>0</Z></Point>
+						<Point><X>0</X><Y>120</Y><Z>0</Z></Point>
+						<Point><X>0</X><Y>170</Y><Z>0</Z></Point>
 					</Points>
 				</Wall>
 				<Wall>
@@ -10110,7 +10241,7 @@ return String.join(",", partes);]]></Body>
 				<Parameter>
 					<ParameterName><![CDATA[demoraAccesoRocaSeg]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[181]]></Code>
+						<Code><![CDATA[102]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
@@ -10262,7 +10393,7 @@ return String.join(",", partes);]]></Body>
 				<Parameter>
 					<ParameterName><![CDATA[demoraAccesoRocaSeg]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[181]]></Code>
+						<Code><![CDATA[102]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
@@ -10547,7 +10678,7 @@ return String.join(",", partes);]]></Body>
 			<FreeformParamValue>	
 				<Id>1792000000302</Id>
 				<Expression Class="CodeValue">
-					<Code><![CDATA[181]]></Code>
+					<Code><![CDATA[102]]></Code>
 				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
@@ -10653,7 +10784,7 @@ return String.join(",", partes);]]></Body>
 				<Id>1792000000302</Id>
 				<Type>FIXED</Type>
 				<Expression Class="CodeValue">
-					<Code><![CDATA[181]]></Code>
+					<Code><![CDATA[102]]></Code>
 				</Expression>
 			</RangeVariationParamValue>
 			<RangeVariationParamValue>	

@@ -27,11 +27,13 @@ lógica.
 
 El plano oficial del vestíbulo no estaba disponible al construir el modelo. Por eso se diseñó un vestíbulo
 verosímil, no una reproducción de Constitución, y la vista lo indica con un aviso permanente
-(figura~\ref{fig:plano}). Tiene estas características:
+(figura~\ref{fig:plano}). De fondo, la vista muestra el plano de la estación enviado por Trenes Argentinos y las
+capas de OSM, georreferenciados de modo que el pasillo del modelo coincide con el real. Tiene estas características:
 \begin{itemize}
   \item Mide $70 \times 34$~m y tiene paredes físicas.
-  \item El acceso desde el hall del Roca es una abertura de 12~m en la pared oeste. Hay además un acceso
-        desde la calle.
+  \item El pasaje del Roca llega por un pasillo en L de 75~m y 5~m de ancho, que sigue la traza del pasillo
+        subterráneo de OpenStreetMap y desemboca en la pared oeste. La calle entra por dos bocas en la
+        pared norte (sección~\ref{sec:paso6-validacion}).
   \item La zona no paga tiene 42~m de profundidad, con boletería, máquinas de carga y columnas como
         obstáculos.
   \item La línea de molinetes está formada por dos bancos de 14 pasos de 1~m, separados por una cabina.
@@ -53,6 +55,7 @@ vestíbulo y el mismo bloque.
 y escaleras a la Línea~C a la derecha. En rojo, los molinetes suspendidos en \EO{}.}
 \label{fig:plano}
 \end{figure}
+\pendiente{reemplazar la figura por una captura del modelo con el pasillo, las dos bocas y el plano de fondo.}
 
 \subsection{Lógica de la capa peatonal}
 

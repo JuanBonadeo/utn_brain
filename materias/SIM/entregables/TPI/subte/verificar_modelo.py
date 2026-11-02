@@ -300,7 +300,9 @@ ped_defaults_early={v.findtext('Name'):v.findtext('Properties/DefaultValue/Code'
 ped_blocks={x.findtext('Name'):x.findtext('ActiveObjectClass/ClassName') for x in ped.findall('EmbeddedObjects/EmbeddedObject')}
 assert ped_blocks=={'pedSource':'PedSource','pedSourceCalle':'PedSource','pedMolinetes':'PedService','pedSalida':'PedGoTo','pedSink':'PedSink'}
 sources={x.findtext('Name'):{p.findtext('Name'):p.findtext('Value/Code') for p in x.findall('Parameters/Parameter')} for x in ped.findall('EmbeddedObjects/EmbeddedObject') if x.findtext('Name').startswith('pedSource')}
-assert sources['pedSource']['locationLine']=='entradaPeatonal' and sources['pedSourceCalle']['locationLine']=='entradaCalle'
+assert sources['pedSource']['locationLine']=='entradaPeatonal'
+# Dos bocas de la calle Brasil (2026-11-02): se alternan sin azar para no alterar los números aleatorios comunes.
+assert sources['pedSourceCalle']['locationLine']=='nDesdeCallePed % 2 == 0 ? entradaCalle2 : entradaCalle'
 assert sources['pedSource']['onExit']=='ped.desdeRocaPed = true; registraIngresoPed(ped);'
 assert sources['pedSourceCalle']['onExit']=='ped.desdeRocaPed = false; registraIngresoPed(ped);'
 # Velocidad con generador propio (numeros aleatorios comunes E0/E1); el generador por defecto lo consume la libreria.
@@ -343,6 +345,21 @@ for g,q in zip(gates,queues):
  head=(qx+pts[-1][0],qy+pts[-1][1])
  assert entry_x < qx < head[0] < gx < gx+float(g.findtext('Dx')) < exit_x and abs(qy-gy)<1e-9 and 10 <= gx-head[0] <= 30, g.findtext('Name')
 assert len(ped.findall('.//Wall'))>=40
+# Pasillo del Roca (2026-11-02): L de 75 m x 5 m sobre el pasillo subterráneo de OSM, cerrado en el fondo, que
+# desemboca en la boca oeste angostada a 5 m (Y 335-385). La llegada es el pie de la escalera de la boca del hall.
+def _abs(nombre, paso=3):
+ el=ped.find(f".//*[Name='{nombre}']"); X,Y=float(el.findtext('X')),float(el.findtext('Y'))
+ pts=[(float(q.findtext('X')),float(q.findtext('Y'))) for q in el.iter('Point')][::paso]
+ return [(X+x,Y+y) for x,y in pts]
+assert _abs('pasilloRocaNorte')==[(-58,949),(-20,949),(-20,335),(80,335)]
+assert _abs('pasilloRocaSur')==[(-58,999),(30,999),(30,385),(80,385)]
+assert _abs('pasilloRocaFondo')==[(-58,949),(-58,999)]
+assert _abs('paredIzquierdaNorte')==[(80,190),(80,335)] and _abs('paredIzquierdaSur')==[(80,385),(80,530)]
+assert _abs('entradaPeatonal',1)==[(-55,951),(-55,997)]
+assert _abs('paredNorteOeste')==[(80,190),(200,190)] and _abs('paredNorteCentro')==[(260,190),(340,190)]
+assert _abs('entradaCalle',1)==[(345,196),(395,196)] and _abs('entradaCalle2',1)==[(205,196),(255,196)]
+_eleccion=next(f for f in ped.findall('Functions/Function') if f.findtext('Name')=='elegirColaPed').findtext('Body')
+assert 'double yReferencia = ped.getY() > 900 ? 335 + (ped.getY() - 949) : ped.getY();' in _eleccion
 aviso=ped.find(".//Text[Name='avisoPeatonal']")
 assert 'PLANO HIPOTÉTICO' in aviso.findtext('Text') and 'NO ES EL PLANO OFICIAL' in aviso.findtext('TextCode')
 assert ped.find(".//TargetLine[Name='salidaPeatonal']") is not None
@@ -380,7 +397,7 @@ assert float(demo.findtext('ModelTimeProperties/FinalTime'))==900
 # escenario intermedio de PeatonalCorridasApareadas, sin archivo de salida.
 visuales={e.findtext('Name'):e for e in experiments if (e.findtext('Name') or '').startswith('PeatonalFranjaVisual')}
 assert set(visuales)=={'PeatonalFranjaVisualE0','PeatonalFranjaVisualE1'}
-intermedio={'proporcionRocaPed':'0.8','demoraAccesoRocaSeg':'181','duracionDescargaSeg':'145','servicioPedSeg':'2.4','servicioMinPedSeg':'1.8','servicioMaxPedSeg':'3.5'}
+intermedio={'proporcionRocaPed':'0.8','demoraAccesoRocaSeg':'102','duracionDescargaSeg':'145','servicioPedSeg':'2.4','servicioMinPedSeg':'1.8','servicioMaxPedSeg':'3.5'}
 for name,mol in (('PeatonalFranjaVisualE0','20'),('PeatonalFranjaVisualE1','22')):
  ps={x.findtext('ParameterName'):x.findtext('ParameterValue/Code') for x in visuales[name].findall('Parameters/Parameter')}
  assert ps['molinetesOperativosPed']==mol and ps['modoFranjaPed']=='true' and ps['pruebaSinteticaPed']=='false' and ps['archivoSalidaPed'] is None, name
@@ -419,7 +436,7 @@ for name,(runs,modo,archivo,final) in {'PeatonalCorridasApareadas':('60','true',
  calib={k:free[k] for k in ('proporcionRocaPed','demoraAccesoRocaSeg','duracionDescargaSeg','servicioPedSeg','servicioMinPedSeg','servicioMaxPedSeg')}
  if name=='PeatonalCorridasApareadas':
   # Escenario intermedio (T3.4, 2026-10-05): rangos de la §5 del plan; demora con D = 85 m (OpenStreetMap) y h = 5 m.
-  assert calib=={'proporcionRocaPed':'0.8','demoraAccesoRocaSeg':'181','duracionDescargaSeg':'145','servicioPedSeg':'2.4','servicioMinPedSeg':'1.8','servicioMaxPedSeg':'3.5'}, calib
+  assert calib=={'proporcionRocaPed':'0.8','demoraAccesoRocaSeg':'102','duracionDescargaSeg':'145','servicioPedSeg':'2.4','servicioMinPedSeg':'1.8','servicioMaxPedSeg':'3.5'}, calib
   rng={ped_param_ids[x.findtext('Id')]:x.findtext('Expression/Code') for x in e.findall('RangeVariationParamValue')}
   assert all(rng[k]==v for k,v in calib.items()), 'freeform y range deben coincidir'
  else:
