@@ -344,6 +344,8 @@ $$\text{CTPM} = \underbrace{\frac{\sum (K + iZ)}{n}}_{\text{pedido}} + \underbra
 
 ## Preguntas de práctica — alcance 2026 *(no oficiales)*
 
+> P1 a P25 cubren Ross cap. 2, colas e inventario. P26 a P40 cubren lo que se sumó con el material del Classroom: los elementos de la simulación, la salida del inventario, M/G/c y AnyLogic.
+
 > Estas no son de la cátedra: las escribí yo con el estilo del 2025, para cubrir lo que **este año entra** (Ross cap. 2 §2.1 a §2.9 más Weitz) y en 2025 no se tomó. Las respuestas están al final.
 
 **P1)** La desigualdad de Markov establece que, si $X \ge 0$ y $a>0$:
@@ -417,6 +419,47 @@ A) el valor inicial que determina toda la sucesión · B) el módulo $m$ · C) e
 **P25)** Un GCL mixto $Z_i=(aZ_{i-1}+c) \bmod m$ tiene período completo si:
 A) $m$ y $c$ son primos relativos · B) todo primo que divide a $m$ divide a $a-1$ · C) si 4 divide a $m$, 4 divide a $a-1$ · D) solo si $c=0$ · E) A, B y C a la vez
 
+**P26)** Según las diapositivas de la cátedra, la **entidad** es:
+A) el lugar donde se detienen los clientes · B) el elemento responsable de que cambie el estado del sistema · C) el dispositivo que lleva a cabo un evento · D) una característica de un recurso · E) A y C
+
+**P27)** Las **localizaciones** y los **recursos** se diferencian en que:
+A) las localizaciones son estáticas (lugares donde las entidades se detienen) y los recursos dinámicos (llevan a cabo eventos) · B) son sinónimos · C) los recursos son estáticos · D) las localizaciones son atributos de la entidad · E) B y D
+
+**P28)** V o F: en el modelo de inventario de Law, al aumentar $S$ con $s$ fijo, el costo de pedido promedio **baja**.
+
+**P29)** En la salida de Law, la política (20, 60) tuvo el menor costo (122,74). La conclusión correcta es:
+A) es la política óptima · B) es la mejor solo si se repite la corrida con la misma semilla · C) es una estimación de una sola corrida y otra corrida podría cambiar el orden · D) las 9 políticas cuestan lo mismo · E) A y B
+
+**P30)** Sin simular, en el modelo de inventario se puede prever:
+A) la magnitud de cada componente de costo · B) la dirección en que se mueve cada componente, pero no su magnitud · C) cuál es la política óptima · D) nada · E) A y C
+
+**P31)** Para analizar una cola **M/G/c** hace falta, además de $\lambda$:
+A) solo la media del servicio · B) la media y el desvío estándar del tiempo de servicio · C) que el servicio sea exponencial · D) que la población sea finita · E) C y D
+
+**P32)** V o F: en el paso 2 de Weitz (generación del modelo base), los datos todavía no son importantes.
+
+**P33)** Según *AnyLogic in 3 Days*, la **dinámica de sistemas**:
+A) trabaja con agregados (stocks y flujos) y una abstracción alta · B) modela cada individuo · C) se usa para el detalle físico · D) fue creada por Gordon en 1961 · E) B y C
+
+**P34)** En DES, el primer software fue:
+A) AnyLogic · B) GPSS, de Geoffrey Gordon (IBM, 1961) · C) Arena · D) Excel · E) Mathematica
+
+**P35)** V o F: en un modelo basado en agentes, los agentes tienen que ser personas.
+
+**P36)** En la Process Modeling Library, el bloque que **libera** un recurso es:
+A) Seize · B) Delay · C) Release · D) Sink · E) Source
+
+**P37)** En AnyLogic, el tiempo de servicio de una M/M/1 se modela con:
+A) un Source con exponential(λ) · B) un Delay con exponential(μ) entre un Seize y un Release · C) un Sink · D) un ResourcePool sin bloques · E) A y C
+
+**P38)** En la traza de Law de la cola simple ($n=6$), la corrida termina:
+A) cuando sale el sexto cliente · B) cuando el sexto cliente **empieza** su servicio, porque ahí se completa la sexta demora · C) a tiempo fijo · D) cuando se vacía la cola · E) A y D
+
+**P39)** En un sistema de colas con capacidad limitada, el costo total incluye:
+A) solo servidores · B) servidores + espera + negación de servicio · C) solo espera · D) servidores + inventario · E) A y C
+
+**P40)** V o F: la simulación a eventos discretos es estocástica porque los tiempos de servicio y de llegada suelen ser aleatorios, y por eso hace falta correrla un tiempo suficiente o varias réplicas para obtener resultados con sentido.
+
 ## Respuestas
 
 | P | Clave | Por qué |
@@ -446,6 +489,21 @@ A) $m$ y $c$ son primos relativos · B) todo primo que divide a $m$ divide a $a-
 | 23 | **B** | A/**B**/c: llegadas / **servicio** / servidores. |
 | 24 | **A** | |
 | 25 | **E** | Teorema de Hull–Dobell: tienen que cumplirse las tres. |
+| 26 | **B** | Definición de la cátedra. A son las localizaciones y C los recursos. |
+| 27 | **A** | |
+| 28 | **V** | Lotes más grandes, menos pedidos y el fijo $K$ se paga menos veces (de 99,26 a 81,37). |
+| 29 | **C** | Es la conclusión de Law en §1.5.6. |
+| 30 | **B** | Sin simular se prevé la dirección, pero no la magnitud. Y el total tampoco. |
+| 31 | **B** | Un desvío de 0 equivale a un servicio determinístico. |
+| 32 | **V** | Así está en las diapositivas del profe. |
+| 33 | **A** | Forrester, años 50. D describe a GPSS y al DES. |
+| 34 | **B** | |
+| 35 | **F** | Pueden ser vehículos, máquinas, ideas o empresas. |
+| 36 | **C** | |
+| 37 | **B** | |
+| 38 | **B** | $T(6)=8{,}6$. |
+| 39 | **B** | Weitz 13.5. |
+| 40 | **V** | Texto de *AnyLogic in 3 Days* sobre DES. |
 
 ## Fuentes
 

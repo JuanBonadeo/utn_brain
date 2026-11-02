@@ -44,6 +44,7 @@ fotocopiada en 2019). El cap. 2 de Ross es la base de la Unidad 6.
 8. [Unidad 8 — Modelos analíticos de colas](#unidad-8--modelos-analíticos-de-colas)
 9. [Unidad 9 — Análisis de los datos de salida](#unidad-9--análisis-de-los-datos-de-salida)
 10. [Unidad 10 — Comparación de sistemas alternativos](#unidad-10--comparación-de-sistemas-alternativos)
+10b. [AnyLogic y modelado por procesos](#anylogic-y-modelado-por-procesos-bibliografía-de-práctica) — paradigmas, M/M/1 con bloques
 11. [TPs de práctica (1.1 a 3)](#tps-de-práctica-11-a-3) — resumen; el repaso completo está en `estudio/repaso-tps.md`
 12. [TPI — consigna y estado](#tpi--trabajo-práctico-integrador)
 13. [Dudas / pendientes](#dudas--pendientes)
@@ -56,6 +57,20 @@ fotocopiada en 2019). El cap. 2 de Ross es la base de la Unidad 6.
 > (`fuentes/Resumen Simulación.pdf`) con los parciales y finales viejos de `fuentes/examenes/`
 > y con las dos transcripciones de clase pre-examen (`fuentes/clase-preexamen/`).
 
+> 🟢 **Alcance oficial** (Guillermo Leale, Classroom, 31/10/2026). El parcial es **integrado, teórico-práctico**.
+>
+> - **Teoría**:
+>   - **Weitz** hasta antes del *Chapter 9* (Law cap. 1, cap. 1 en castellano con los elementos y los 10 pasos, y cap. 13 completo);
+>   - **Ross** hasta el Poisson no homogéneo.
+> - **Práctica**:
+>   - Naylor (lo visto en el TP 2.2);
+>   - *AnyLogic in Three Days*;
+>   - Gordon (no está subido al Classroom);
+>   - *The Art of Process-Centric Modeling*;
+>   - las referencias de los TP.
+>
+> El material del Classroom está en `fuentes/classroom-2026/`. **No entran** los caps. 9 y 10 (análisis de salida y comparación de sistemas).
+>
 > 📌 **Para el parcial del 7/11/2026**: `estudio/resumen-parcial1.md` (todo lo que entra, en formato para multiple choice)
 > y `estudio/banco-preguntas.md` (el parcial 2025 con **la clave corregida**: el alumno erró 14 de 32, más
 > 25 preguntas de práctica del alcance 2026). El alcance de este año está en `estudio/parcial1-alcance-2026.md`.
@@ -362,6 +377,28 @@ evento inicia el sistema. Para la cola simple:
 - El **Arribo** se llama a sí mismo (cada arribo programa el siguiente) → es el evento que inicia el sistema.
 - El Arribo dispara una **Partida** solo si el servidor está desocupado (`S='D'`).
 - La **Partida** se llama a sí misma solo si queda gente en cola (`n>0`).
+
+### Elementos de la simulación (diapositivas del profe y cap. 1 en castellano de Weitz)
+
+Son las definiciones con la redacción de la cátedra. Así aparecen en el multiple choice:
+
+| Elemento | Definición |
+|---|---|
+| **Sistema** | Conjunto de elementos. Define el alcance |
+| **Estado del sistema** | Condición del sistema en un momento determinado |
+| **Evento** | Cambio en el estado actual del sistema (en Law, una ocurrencia que **puede** cambiarlo) |
+| **Entidad** | Elemento responsable de que cambie el estado del sistema (por ejemplo, el cliente) |
+| **Localizaciones** | Lugares donde las entidades pueden detenerse. Son **estáticas** (la fila, la sala de espera) |
+| **Recursos** | Dispositivos para llevar a cabo un evento. Son **dinámicos** (el cajero, la máquina) |
+| **Atributo** | Característica de una entidad |
+| **Variables** | Condiciones cuyos valores se modifican |
+| **Reloj de la simulación** | Tiempo simulado |
+
+**Ejemplos de la clase 1**:
+
+- **Banco**: los clientes son las entidades y los cajeros los recursos; el tiempo de espera es la medida de rendimiento.
+- **Fábrica**: productos y máquinas; se mide la productividad.
+- **Red**: paquetes y routers; se miden la latencia y el *throughput*.
 
 ### Tipos de variables en un modelo (vocabulario de la cátedra)
 
@@ -925,6 +962,38 @@ Del final resuelto 2020-08-06:
 | CUI | $AIP \cdot h$ | Costo de las unidades en inventario (AIP = acumulado inventario positivo) |
 | CUP | $AIN \cdot \pi / \text{Reloj}$ | Costo de las unidades perdidas (AIN = acumulado inventario negativo) |
 | **CMP** | $CCP + CUI + CUP$ | **Costo mensual promedio** — es la medida que se compara entre políticas |
+
+### Salida y discusión (Law §1.5.6) — entra, está en las diapositivas del profe
+
+Corrida de 120 meses con $I(0)=60$, $K=32$, $i=3$, $h=1$ y $\pi=5$. Para cada una de las 9 políticas, el informe da el costo total promedio por mes y sus tres componentes:
+
+| (s, S) | Total | Pedido | Mantenimiento | Faltante |
+|---|---|---|---|---|
+| (20, 40) | 126,61 | 99,26 | 9,25 | 18,10 |
+| **(20, 60)** | **122,74** | 90,52 | 17,39 | 14,83 |
+| (20, 80) | 123,86 | 87,36 | 26,24 | 10,26 |
+| (20, 100) | 125,32 | 81,37 | 36,00 | 7,95 |
+| (40, 60) | 126,37 | 98,43 | 25,99 | 1,95 |
+| (40, 80) | 125,46 | 88,40 | 35,92 | 1,14 |
+| (40, 100) | 132,34 | 84,62 | 46,42 | 1,30 |
+| (60, 80) | 150,02 | 105,69 | 44,02 | 0,31 |
+| (60, 100) | 143,20 | 89,05 | 53,91 | 0,24 |
+
+**Lo que concluye Law:**
+
+1. **Con $s=20$ fijo, al subir $S$:**
+   - el mantenimiento sube;
+   - el faltante baja;
+   - el costo de pedido baja, porque se piden lotes más grandes, menos veces, y el fijo $K$ se paga menos veces.
+2. **Con $S=100$ fijo, al subir $s$:**
+   - el faltante baja;
+   - el mantenimiento sube, porque se deja caer menos el inventario.
+3. **La dirección de cada componente se podía prever; la magnitud no.** Y como los componentes van en sentidos opuestos, sin simular no se sabe ni para dónde va el total.
+4. **(20, 60) parece la mejor, pero es una sola corrida** (una muestra de tamaño 1, con mucha varianza). Con otros números aleatorios los valores, **y el orden de las políticas**, pueden cambiar.
+5. **Con la duración de la corrida fijada por el problema, una corrida por política no alcanza.** Cuántas corridas hacen falta lo trata el cap. 9.
+6. **Aun con el mismo generador, los resultados variaron entre lenguajes, compiladores y computadoras** (apéndice 1C).
+
+El dibujo del nivel de inventario y de los eventos está en `estudio/resumen-parcial1.md` §5 (figuras `figs/p1-inventario-*.png`).
 
 ### Ejercicio resuelto tipo — simulación numérica del inventario a mano
 
@@ -1942,6 +2011,18 @@ $$\boxed{P_d = 1 - \left(P_0 + P_1 + P_2 + \cdots + P_n\right)}$$
 
 Con $P_i = \rho^i P_0$ del M/M/1, queda una suma geométrica finita.
 
+### 8.9-bis M/G/c y otros modelos que se resuelven con software (Weitz 13.6)
+
+- **13.6.1 Población finita** (M/M/c/K, con K como tamaño de la población): la tasa de llegadas baja a medida que hay más clientes adentro.
+- **13.6.2 Capacidad de espera limitada** (M/M/c/K, con K como capacidad): los que llegan con el sistema lleno se pierden, y aparece la probabilidad de negación de servicio.
+- **13.6.3 M/G/c**: el servicio tiene una distribución **general**, no exponencial.
+  - Además de $\lambda$, hay que estimar la **media** y el **desvío estándar** del tiempo de servicio. Un desvío de 0 corresponde a un servicio **determinístico**, como una línea con ciclo fijo.
+  - En el libro se resuelve con el software STORM. Ejemplo: la oficina de registro de vehículos de Texas, con $\lambda = 46$/h, servicio de 5 ± 2 min y $\mu = 12$/h por servidor.
+    - Con 4 ventanillas, $W_q \approx 0{,}26$ h (16 min).
+    - Con 5 ventanillas, $W_q \approx 0{,}02$ h.
+    - Como el objetivo era menos de 10 min, se eligen 5.
+  - **No se piden fórmulas.**
+
 ### 8.10 Análisis económico de los sistemas de colas
 
 > Pregunta en 2023 P5 ("desarrolle brevemente algún aspecto"). La clase pre-examen lo marca dos veces
@@ -2497,6 +2578,57 @@ En el paso 9 de Weitz, la comparación de escenarios se plantea así:
 - `fuentes/clase-preexamen/Preguntas frecuentes.docx` — pregunta 1
 - `fuentes/examenes/parciales/2019/2019 - Parcial 2 - Weitz.txt`
 
+## AnyLogic y modelado por procesos (bibliografía de práctica)
+
+> Fuentes: `fuentes/classroom-2026/practica/anylogic_in_3_days.pdf` y `The Art of Process-Centric Modeling.pdf`.
+> Las dos entran en el parcial 1 de 2026. El resumen con dibujos está en `estudio/resumen-parcial1.md` §10.
+
+**Los tres métodos (paradigmas).** AnyLogic es **multimétodo**. Cada método sirve para un rango de niveles de abstracción:
+
+- **Dinámica de sistemas (SD).**
+  - Abstracción **alta**: modelos estratégicos y agregados, donde los ítems no se distinguen.
+  - Elementos: **stocks** (acumulaciones, "la memoria del sistema"), **flujos** (tasas) y lazos de **realimentación**.
+  - La creó Jay Forrester en el MIT en los años 50.
+  - Modelo del libro: **SEIR** (una epidemia), con experimentos de variación de parámetros y de calibración.
+- **Eventos discretos (DES).**
+  - Abstracción **media y media-baja**. El sistema se ve como un **proceso**: entidades que pasan por operaciones y compiten por recursos limitados, así que casi siempre hay colas.
+  - Se modela con un diagrama de flujo que empieza en un **Source** y termina en un **Sink**.
+  - El primer software fue **GPSS (Geoffrey Gordon, IBM, 1961)**.
+  - Salidas típicas: utilización, tiempo en el sistema, esperas, largo de colas, *throughput* y cuellos de botella.
+  - Modelo del libro: **Job Shop**.
+- **Basado en agentes (ABM).**
+  - Sirve para **cualquier** nivel de abstracción.
+  - Se modela el comportamiento de cada individuo, a menudo con **statecharts**, y el comportamiento global **emerge**.
+  - **Los agentes no tienen por qué ser personas**: pueden ser vehículos, máquinas, ideas o empresas. Tampoco son autómatas celulares.
+  - Modelo del libro: **Mercado** (publicidad y boca en boca).
+- **Peatones** (modelo *Airport*), Road Traffic, Rail, Fluid y Material Handling son **bibliotecas**, no paradigmas. **GIS** es un espacio de mapas **multicapa**.
+
+**Lo que se entregó en "Tutoriales AnyLogic"**:
+
+- SEIR, Job Shop y Airport, de *AnyLogic in 3 Days*;
+- Supply Chain GIS, Subway Entrance Hall e Intersection, de la ayuda de AnyLogic.
+
+**M/M/1 con la Process Modeling Library** (*Process-Centric Modeling*, cap. 2):
+
+- Bloques: **Source** con `exponential(λ)` → Queue → **Seize** (toma el recurso) → **Delay** con `exponential(μ)` → **Release** (lo libera) → **Sink**.
+- Un **ResourcePool** define la capacidad, y **TimeMeasureStart/End** miden el tiempo en el sistema.
+- Las fórmulas analíticas se usan para **comparar** con lo simulado.
+- El servicio exponencial se elige por **conveniencia matemática**, no por realismo.
+- El cap. 2 también trata:
+  - simulaciones terminales y no terminales;
+  - el período de calentamiento;
+  - la ley de Little en tres versiones;
+  - M/M/c.
+
+**Ventajas de simular, según *AnyLogic in 3 Days***:
+
+- resuelve donde fallan los métodos analíticos;
+- elegido el nivel de abstracción, suele ser más fácil de construir que un modelo analítico;
+- la estructura del modelo refleja la del sistema;
+- se puede medir cualquier cosa en cualquier momento;
+- la animación sirve para demostrar, verificar y depurar;
+- convence más que una planilla.
+
 ## TPs de práctica (1.1 a 3)
 
 > Grupo Brizio, Casermeiro, De la Rosa, Messina (el TP 3 ya sin De la Rosa). Informes entregados y código en
@@ -2878,6 +3010,14 @@ Conclusiones:
 
 ## Log
 
+- **2026-11-02**: material del Classroom en `fuentes/classroom-2026/`: diapositivas de teoría, Ross (en castellano y en inglés), *AnyLogic in 3 Days*, *Process-Centric Modeling* y Naylor. Se sumaron:
+  - en el Mapa, el alcance oficial del 31/10;
+  - en la Unidad 2, los elementos de la simulación;
+  - en la Unidad 4, la salida y discusión de Law (§1.5.6);
+  - en la Unidad 8, M/G/c y los otros modelos de 13.6;
+  - la sección nueva de AnyLogic.
+
+  `estudio/resumen-parcial1.md` se reescribió completo, con 15 figuras generadas por `scripts/sim-figs-parcial1.py`.
 - **2026-11-02**: ingerido `fuentes/resumenes/Resumen Simulación 2025 (con preguntas de parcial).docx`, el resumen de alumnos
   2025 con todo lo que entró. Unidad 7: RANDU, Mersenne Twister y los dos tipos de pruebas. Banco: 7 preguntas de
   parcial que no estaban en la foto, y la clave del resumen coincide con la corrección del banco. Resumen del parcial:
