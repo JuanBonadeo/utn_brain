@@ -104,7 +104,7 @@ def main():
     rot_modelo('N ->', 1130, 55, 3.2)
     rot_modelo('Calle Lima', 620, 150, 2.4)
     rot('Calle Brasil', -2214, 2775, 2.4, 90)
-    rot_modelo('Andenes de la Linea C (nivel -2, OpenStreetMap)', 640, 262, 2.2)
+    rot_modelo('Andenes Linea C (nivel -2, OSM)', 640, 262, 2.2)
     rot_modelo('Paragolpes del Roca', -1000, 1600, 2.4)
     # Cruz de control de la alineación (capa REFERENCIA, oculta en el modelo una vez verificada).
     cx, cy = 8, -36

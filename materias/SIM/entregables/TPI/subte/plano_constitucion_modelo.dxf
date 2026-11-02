@@ -445,7 +445,7 @@ $SKPOLY
   9
 $TDCREATE
  40
-2461347.496203704
+2461347.497175926
   9
 $TDUCREATE
  40
@@ -453,7 +453,7 @@ $TDUCREATE
   9
 $TDUPDATE
  40
-2461347.496203704
+2461347.497175926
   9
 $TDUUPDATE
  40
@@ -885,11 +885,11 @@ $PSTYLEMODE
   9
 $FINGERPRINTGUID
   2
-{A84B94DA-9216-4F30-9FCF-30D5A42BA01E}
+{90579E7D-3328-4552-B142-3B73EE4E83EC}
   9
 $VERSIONGUID
   2
-{9F7847D2-F721-4FE7-B0B1-AAEBB11DD74D}
+{B0293B85-6245-41F1-9F5B-2234D1ED071D}
   9
 $EXTNAMES
 290
@@ -1997,36 +1997,6 @@ AcDbSymbolTableRecord
 100
 AcDbLinetypeTableRecord
   2
-HIDDEN
- 70
-0
-  3
-__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __
- 72
-65
- 73
-2
- 40
-0.375
- 49
-0.25
- 74
-0
- 49
--0.125
- 74
-0
-  0
-LTYPE
-  5
-188F
-330
-2
-100
-AcDbSymbolTableRecord
-100
-AcDbLinetypeTableRecord
-  2
 HIDDEN2
  70
 0
@@ -2044,6 +2014,36 @@ Hidden (.5x) _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 0
  49
 -0.0625
+ 74
+0
+  0
+LTYPE
+  5
+188F
+330
+2
+100
+AcDbSymbolTableRecord
+100
+AcDbLinetypeTableRecord
+  2
+HIDDEN
+ 70
+0
+  3
+__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __
+ 72
+65
+ 73
+2
+ 40
+0.375
+ 49
+0.25
+ 74
+0
+ 49
+-0.125
  74
 0
   0
@@ -2117,249 +2117,7 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
-02
- 70
-0
- 62
-2
-  6
-CONTINUOUS
-370
--3
-390
-BD56
-  0
-LAYER
-  5
-187C
-330
-1
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-A-CARP
- 70
-0
- 62
-4
-  6
-CONTINUOUS
-370
--3
-390
-BD56
-  0
-LAYER
-  5
-187D
-330
-1
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-015
- 70
-0
- 62
-15
-  6
-CONTINUOUS
-370
--3
-390
-BD56
-  0
-LAYER
-  5
-187E
-330
-1
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-CALLES
- 70
-0
- 62
-2
-  6
-CONTINUOUS
-370
--3
-390
-BD56
-  0
-LAYER
-  5
-187F
-330
-1
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-LIMITE
- 70
-0
- 62
-2
-  6
-DASHDOT2
-370
--3
-390
-BD56
-  0
-LAYER
-  5
-1880
-330
-1
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-TMR
- 70
-0
- 62
-220
-  6
-CONTINUOUS
-370
--3
-390
-BD56
-  0
-LAYER
-  5
-1881
-330
-1
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-EDIFICIOS
- 70
-0
- 62
-4
-  6
-CONTINUOUS
-370
--3
-390
-BD56
-  0
-LAYER
-  5
-1882
-330
-1
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-CARPINTERIA
- 70
-0
- 62
-2
-  6
-CONTINUOUS
-370
--3
-390
-BD56
-  0
-LAYER
-  5
-1883
-330
-1
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-ESCALERA
- 70
-0
- 62
-4
-  6
-CONTINUOUS
-370
--3
-390
-BD56
-  0
-LAYER
-  5
-1884
-330
-1
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-ESCA
- 70
-0
- 62
-4
-  6
-CONTINUOUS
-370
--3
-390
-BD56
-  0
-LAYER
-  5
-1885
-330
-1
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-01
- 70
-0
- 62
-1
-  6
-CONTINUOUS
-370
--3
-390
-BD56
-  0
-LAYER
-  5
-1886
-330
-1
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-HORM
+MUROS-NUEVOS
  70
 0
  62
@@ -2373,7 +2131,7 @@ BD56
   0
 LAYER
   5
-1887
+187C
 330
 1
 100
@@ -2395,7 +2153,7 @@ BD56
   0
 LAYER
   5
-1888
+187D
 330
 1
 100
@@ -2403,29 +2161,7 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
-ADIF
- 70
-0
- 62
-150
-  6
-CONTINUOUS
-370
--3
-390
-BD56
-  0
-LAYER
-  5
-1889
-330
-1
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-BARANDA
+01
  70
 0
  62
@@ -2439,7 +2175,7 @@ BD56
   0
 LAYER
   5
-188A
+187E
 330
 1
 100
@@ -2447,11 +2183,11 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
-MUROS-NUEVOS
+CARPINTERIA
  70
 0
  62
-3
+2
   6
 CONTINUOUS
 370
@@ -2461,7 +2197,7 @@ BD56
   0
 LAYER
   5
-188B
+187F
 330
 1
 100
@@ -2469,11 +2205,11 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
-MUROS1
+CALLES
  70
 0
  62
-12
+2
   6
 CONTINUOUS
 370
@@ -2483,7 +2219,29 @@ BD56
   0
 LAYER
   5
-188C
+1880
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+015
+ 70
+0
+ 62
+15
+  6
+CONTINUOUS
+370
+-3
+390
+BD56
+  0
+LAYER
+  5
+1881
 330
 1
 100
@@ -2505,7 +2263,73 @@ BD56
   0
 LAYER
   5
-188D
+1882
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+ADIF
+ 70
+0
+ 62
+150
+  6
+CONTINUOUS
+370
+-3
+390
+BD56
+  0
+LAYER
+  5
+1883
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+TMR
+ 70
+0
+ 62
+220
+  6
+CONTINUOUS
+370
+-3
+390
+BD56
+  0
+LAYER
+  5
+1884
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+BARANDA
+ 70
+0
+ 62
+1
+  6
+CONTINUOUS
+370
+-3
+390
+BD56
+  0
+LAYER
+  5
+1885
 330
 1
 100
@@ -2520,6 +2344,182 @@ PROYEC
 2
   6
 HIDDEN
+370
+-3
+390
+BD56
+  0
+LAYER
+  5
+1886
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+MUROS1
+ 70
+0
+ 62
+12
+  6
+CONTINUOUS
+370
+-3
+390
+BD56
+  0
+LAYER
+  5
+1887
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+ESCA
+ 70
+0
+ 62
+4
+  6
+CONTINUOUS
+370
+-3
+390
+BD56
+  0
+LAYER
+  5
+1888
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+02
+ 70
+0
+ 62
+2
+  6
+CONTINUOUS
+370
+-3
+390
+BD56
+  0
+LAYER
+  5
+1889
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+EDIFICIOS
+ 70
+0
+ 62
+4
+  6
+CONTINUOUS
+370
+-3
+390
+BD56
+  0
+LAYER
+  5
+188A
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+A-CARP
+ 70
+0
+ 62
+4
+  6
+CONTINUOUS
+370
+-3
+390
+BD56
+  0
+LAYER
+  5
+188B
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+HORM
+ 70
+0
+ 62
+3
+  6
+CONTINUOUS
+370
+-3
+390
+BD56
+  0
+LAYER
+  5
+188C
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+LIMITE
+ 70
+0
+ 62
+2
+  6
+DASHDOT2
+370
+-3
+390
+BD56
+  0
+LAYER
+  5
+188D
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+ESCALERA
+ 70
+0
+ 62
+4
+  6
+CONTINUOUS
 370
 -3
 390
@@ -166209,7 +166209,7 @@ AcDbText
  40
 2.2
   1
-Andenes de la Linea C (nivel -2, OpenStreetMap)
+Andenes Linea C (nivel -2, OSM)
  11
 64.0
  21
@@ -167461,7 +167461,7 @@ DictionaryVariables
 280
 0
   1
-1.4.2 @ 2026-11-02T14:54:32.622266+00:00
+1.4.2 @ 2026-11-02T14:55:56.207591+00:00
   0
 VISUALSTYLE
   5
@@ -168173,7 +168173,7 @@ DictionaryVariables
 280
 0
   1
-1.4.2 @ 2026-11-02T14:54:32.727837+00:00
+1.4.2 @ 2026-11-02T14:55:56.313478+00:00
   0
 ENDSEC
   0
