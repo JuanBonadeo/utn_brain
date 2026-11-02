@@ -6997,7 +6997,7 @@ return String.join(",", partes);]]></Body>
 						<Parameter>
 							<Name><![CDATA[delayTime]]></Name>
 							<Value Class="CodeUnitValue">
-								<Code><![CDATA[demoraAccesoRocaSeg + duracionDescargaSeg + 10]]></Code>
+								<Code><![CDATA[Math.max(demoraAccesoRocaSeg + duracionDescargaSeg + 10, 600)]]></Code>
 								<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
 							</Value>
 						</Parameter>

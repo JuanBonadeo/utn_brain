@@ -767,7 +767,7 @@ Molde: ejemplos oficiales *Subway Platform* (red, vía, parada y bloques) y *Rai
 |---|---|
 | Clases | `TrenRoca` (variable `via`) y `CocheRoca` (coche de pasajeros 3D, escala 8,5; sin locomotora: el Roca es eléctrico) |
 | Red | `viasRoca`: 7 vías `viaRoca0`-`viaRoca6` (Y = 379, 553, 725, 902, 1077, 1252, 1291, sobre las vías del plano), de X = -5000 a X = -820, cada una con su parada `paradaRoca0`-`paradaRoca6` junto a los paragolpes (X ~ -830) |
-| Bloques | `trenesRocaFuente` (7 coches de 23 m, cabeza a 357 m del comienzo, 12 m/s) → `trenesRocaAlAnden` (a la parada de su vía) → `trenesRocaDescarga` (espera `demoraAccesoRocaSeg + duracionDescargaSeg + 10` s) → `trenesRocaFin` (desaparece; no se modela la salida en reversa) |
+| Bloques | `trenesRocaFuente` (7 coches de 23 m, cabeza a 357 m del comienzo, 12 m/s) → `trenesRocaAlAnden` (a la parada de su vía) → `trenesRocaDescarga` (espera `max(demoraAccesoRocaSeg + duracionDescargaSeg + 10, 600)` s: 10 min detenido en la terminal [SUP], para que se vea; el mínimo entre dos trenes de la misma vía es 17 min) → `trenesRocaFin` (desaparece; no se modela la salida en reversa) |
 | Programación | En `programarDemandaFranjaPed`, cada tren con ingreso en la franja se agenda en `trenesRocaPed` a `llegada - 10 s`, con la vía = andén de su pasaje (`j % 7`); el evento `proximoTrenRocaPed` fija `viaActualTrenPed` e inyecta |
 | Recursos | `3d/passengercar.dae` y `.jpg`, copiados con `datos/copiar_figuras_3d.py` (no se suben al repo) |
 

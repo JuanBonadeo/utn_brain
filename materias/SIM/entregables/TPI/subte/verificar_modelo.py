@@ -310,6 +310,13 @@ assert ped_blocks=={'pedSource':'PedSource','bajadaB2':'PedChangeLevel','pedSour
  'trenesRocaFuente':'TrainSource','trenesRocaAlAnden':'TrainMoveTo','trenesRocaDescarga':'Delay','trenesRocaFin':'TrainDispose'}
 assert all(ped.find(f".//RailTrack[Name='viaRoca{k}']") is not None and ped.find(f".//RailStopline[Name='paradaRoca{k}']") is not None for k in range(7))
 assert {('trenesRocaFuente','trenesRocaAlAnden'),('trenesRocaAlAnden','trenesRocaDescarga'),('trenesRocaDescarga','trenesRocaFin')} <= {(c.findtext('SourceEmbeddedObjectReference/ItemName'),c.findtext('TargetEmbeddedObjectReference/ItemName')) for c in ped.findall('Connectors/Connector')}
+# Permanencia del tren en el andén (sólo animación): 10 min como mínimo, menos que los 17 min entre dos trenes de la misma
+# vía (j % 7 sobre el horario). Con 50 s, a 30x el tren se veía 2 s.
+_dw=[e for e in ped.findall('.//EmbeddedObject') if e.findtext('Name')=='trenesRocaDescarga'][0]
+assert [q.findtext('Value/Code') for q in _dw.findall('Parameters/Parameter') if q.findtext('Name')=='delayTime']==['Math.max(demoraAccesoRocaSeg + duracionDescargaSeg + 10, 600)']
+import csv as _c
+_t=[float(x['segundos_desde_07']) for x in _c.DictReader(open(p.parent/'datos'/'arribos_roca_constitucion_habiles.csv',encoding='utf-8'),delimiter=';')]
+assert min(b-a for a,b in zip(_t,_t[7:])) > 600+20, 'un tren llegaría a una vía todavía ocupada'
 assert {x.findtext('Name') for x in r.findall('Model/ActiveObjectClasses/ActiveObjectClass')} >= {'TrenRoca','CocheRoca'}
 # Plano en 3D (datos/plano_3d.py): grupo plano3D de MainPeatonal, sólo 3D, rectángulos sin rotación; vías hundidas 1,1 m.
 plano3d=ped.find(".//Group[Name='plano3D']")
