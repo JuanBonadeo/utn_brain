@@ -11,7 +11,8 @@ termine en la boca oeste del vestíbulo hipotético y llegue a ella moviéndose 
     u = -(x - X0) + 8,   v = -(y - Y0) - 36        (u, v en metros; y del CAD hacia arriba)
 equivale en el modelo (10 px = 1 m, Y hacia abajo) a  X = 10 u,  Y = -10 v.  Con el origen del CAD en (0, 0) del
 modelo, la cruz REFERENCIA cae en la boca oeste del vestíbulo (X = 80, Y = 360). El norte queda a la derecha.
-Capas: plano oficial (las del DWG útiles), LINEA_C_OSM, PASILLO_OSM, BOCAS_OSM, ROTULOS y REFERENCIA.
+Capas: plano oficial (las del DWG útiles), LINEA_C_OSM, PASILLO_OSM, BOCAS_OSM, ROTULOS, REFERENCIA y MARCO.
+El marco fija el recuadro del dibujo: en el .alp el CADDrawing va en X = -1150, Y = 0, Width = 2400, Height = 1660.
 """
 import json, math, sys
 from pathlib import Path
@@ -22,6 +23,8 @@ X0, Y0 = -2206.0, 2726.9
 PX0, PX1, PY0, PY1 = -2335.0, -2085.0, 2690.0, 2855.0          # recorte del DWG (m)
 CAPAS = {'EDIFICIOS', 'ESCALERA', 'VIAS', 'CALLES', 'BARANDA', 'CARPINTERIA', 'LIMITE', 'MUROS-NUEVOS', 'MUROS1',
          'HORM', 'ESCA', 'A-CARP', 'LOCALES', '01', '02', '03', '015', 'TMR', 'PROYEC', 'LINE_02', 'ADIF'}
+# Marco del CAD en metros (u0, u1, v0, v1): en el modelo, X = -1150, Y = 0, ancho 2400, alto 1660 px.
+MARCO = (-115.0, 125.0, -166.0, 0.0)
 TIPOS = {'LINE', 'ARC', 'CIRCLE', 'LWPOLYLINE', 'POLYLINE', 'SPLINE', 'ELLIPSE', 'SOLID'}
 
 
@@ -99,6 +102,11 @@ def main():
     out.add_line((cx - 1.5, cy), (cx + 1.5, cy), dxfattribs={'layer': 'REFERENCIA'})
     out.add_line((cx, cy - 1.5), (cx, cy + 1.5), dxfattribs={'layer': 'REFERENCIA'})
     rot('REF (80, 360)', X0 - 1.0, Y0 + 1.0, 1.0)
+    # Marco fijo: AnyLogic ajusta el CAD a su recuadro, así que el recuadro tiene que ser conocido y exacto.
+    if 'MARCO' not in dst.layers:
+        dst.layers.add('MARCO', color=9)
+    out.add_lwpolyline([(MARCO[0], MARCO[2]), (MARCO[1], MARCO[2]), (MARCO[1], MARCO[3]), (MARCO[0], MARCO[3])],
+                       close=True, dxfattribs={'layer': 'MARCO'})
     dst.saveas(SALIDA)
     ext = bbox.extents(out)
     print(f'{SALIDA}: {len(elegidas)} entidades del plano; extensión u {ext.extmin.x:.1f}..{ext.extmax.x:.1f} m, '

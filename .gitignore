@@ -60,3 +60,6 @@ htmlcov/
 
 # Logs de biber/LaTeX
 *.blg
+
+# Figuras 3D de AnyLogic (recursos de la instalación; se copian con datos/copiar_figuras_3d.py)
+materias/SIM/entregables/TPI/subte/3d/

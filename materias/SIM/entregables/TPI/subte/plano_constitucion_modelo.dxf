@@ -445,7 +445,7 @@ $SKPOLY
   9
 $TDCREATE
  40
-2461347.4315162036
+2461347.4375925926
   9
 $TDUCREATE
  40
@@ -453,7 +453,7 @@ $TDUCREATE
   9
 $TDUPDATE
  40
-2461347.4315162036
+2461347.4375925926
   9
 $TDUUPDATE
  40
@@ -505,7 +505,7 @@ $SPLINESEGS
   9
 $HANDSEED
   5
-18B6
+18B8
   9
 $SURFTAB1
  70
@@ -885,11 +885,11 @@ $PSTYLEMODE
   9
 $FINGERPRINTGUID
   2
-{2C97BF06-9AF1-4151-B5AB-4196FCBC98EA}
+{D07FB4D4-7725-4845-B68A-CCE6DBF32BFC}
   9
 $VERSIONGUID
   2
-{14DA6C55-4BA9-4D1E-999C-13D3BD0D5102}
+{EE7A86F8-A89B-4E89-A5DA-729D398602CD}
   9
 $EXTNAMES
 290
@@ -2059,7 +2059,7 @@ LAYER
 100
 AcDbSymbolTable
  70
-26
+27
   0
 LAYER
   5
@@ -2117,13 +2117,13 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
-HORM
+LIMITE
  70
 0
  62
-3
+2
   6
-CONTINUOUS
+DASHDOT2
 370
 -3
 390
@@ -2132,226 +2132,6 @@ BD56
 LAYER
   5
 187C
-330
-1
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-01
- 70
-0
- 62
-1
-  6
-CONTINUOUS
-370
--3
-390
-BD56
-  0
-LAYER
-  5
-187D
-330
-1
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-LINE_02
- 70
-0
- 62
-2
-  6
-CONTINUOUS
-370
--3
-390
-BD56
-  0
-LAYER
-  5
-187E
-330
-1
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-ADIF
- 70
-0
- 62
-150
-  6
-CONTINUOUS
-370
--3
-390
-BD56
-  0
-LAYER
-  5
-187F
-330
-1
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-02
- 70
-0
- 62
-2
-  6
-CONTINUOUS
-370
--3
-390
-BD56
-  0
-LAYER
-  5
-1880
-330
-1
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-EDIFICIOS
- 70
-0
- 62
-4
-  6
-CONTINUOUS
-370
--3
-390
-BD56
-  0
-LAYER
-  5
-1881
-330
-1
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-MUROS1
- 70
-0
- 62
-12
-  6
-CONTINUOUS
-370
--3
-390
-BD56
-  0
-LAYER
-  5
-1882
-330
-1
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-LOCALES
- 70
-0
- 62
-1
-  6
-CONTINUOUS
-370
--3
-390
-BD56
-  0
-LAYER
-  5
-1883
-330
-1
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-ESCALERA
- 70
-0
- 62
-4
-  6
-CONTINUOUS
-370
--3
-390
-BD56
-  0
-LAYER
-  5
-1884
-330
-1
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-PROYEC
- 70
-0
- 62
-2
-  6
-HIDDEN
-370
--3
-390
-BD56
-  0
-LAYER
-  5
-1885
-330
-1
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-MUROS-NUEVOS
- 70
-0
- 62
-3
-  6
-CONTINUOUS
-370
--3
-390
-BD56
-  0
-LAYER
-  5
-1886
 330
 1
 100
@@ -2373,7 +2153,7 @@ BD56
   0
 LAYER
   5
-1887
+187D
 330
 1
 100
@@ -2381,7 +2161,7 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
-A-CARP
+ESCALERA
  70
 0
  62
@@ -2395,7 +2175,7 @@ BD56
   0
 LAYER
   5
-1888
+187E
 330
 1
 100
@@ -2403,11 +2183,11 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
-TMR
+MUROS-NUEVOS
  70
 0
  62
-220
+3
   6
 CONTINUOUS
 370
@@ -2417,7 +2197,7 @@ BD56
   0
 LAYER
   5
-1889
+187F
 330
 1
 100
@@ -2425,7 +2205,7 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
-ESCA
+EDIFICIOS
  70
 0
  62
@@ -2439,7 +2219,29 @@ BD56
   0
 LAYER
   5
-188A
+1880
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+ADIF
+ 70
+0
+ 62
+150
+  6
+CONTINUOUS
+370
+-3
+390
+BD56
+  0
+LAYER
+  5
+1881
 330
 1
 100
@@ -2461,7 +2263,183 @@ BD56
   0
 LAYER
   5
-188B
+1882
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+02
+ 70
+0
+ 62
+2
+  6
+CONTINUOUS
+370
+-3
+390
+BD56
+  0
+LAYER
+  5
+1883
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+LOCALES
+ 70
+0
+ 62
+1
+  6
+CONTINUOUS
+370
+-3
+390
+BD56
+  0
+LAYER
+  5
+1884
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+A-CARP
+ 70
+0
+ 62
+4
+  6
+CONTINUOUS
+370
+-3
+390
+BD56
+  0
+LAYER
+  5
+1885
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+01
+ 70
+0
+ 62
+1
+  6
+CONTINUOUS
+370
+-3
+390
+BD56
+  0
+LAYER
+  5
+1886
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+TMR
+ 70
+0
+ 62
+220
+  6
+CONTINUOUS
+370
+-3
+390
+BD56
+  0
+LAYER
+  5
+1887
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+LINE_02
+ 70
+0
+ 62
+2
+  6
+CONTINUOUS
+370
+-3
+390
+BD56
+  0
+LAYER
+  5
+1888
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+PROYEC
+ 70
+0
+ 62
+2
+  6
+HIDDEN
+370
+-3
+390
+BD56
+  0
+LAYER
+  5
+1889
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+HORM
+ 70
+0
+ 62
+3
+  6
+CONTINUOUS
+370
+-3
+390
+BD56
+  0
+LAYER
+  5
+188A
 330
 1
 100
@@ -2483,6 +2461,28 @@ BD56
   0
 LAYER
   5
+188B
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+MUROS1
+ 70
+0
+ 62
+12
+  6
+CONTINUOUS
+370
+-3
+390
+BD56
+  0
+LAYER
+  5
 188C
 330
 1
@@ -2491,13 +2491,13 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
-LIMITE
+BARANDA
  70
 0
  62
-2
+1
   6
-DASHDOT2
+CONTINUOUS
 370
 -3
 390
@@ -2513,11 +2513,11 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
-BARANDA
+ESCA
  70
 0
  62
-1
+4
   6
 CONTINUOUS
 370
@@ -2628,6 +2628,28 @@ REFERENCIA
 0
  62
 1
+  6
+Continuous
+370
+-3
+390
+13
+  0
+LAYER
+  5
+18B3
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+MARCO
+ 70
+0
+ 62
+9
   6
 Continuous
 370
@@ -3435,7 +3457,7 @@ ACAD
   0
 APPID
   5
-18B3
+18B5
 330
 3
 100
@@ -3449,7 +3471,7 @@ HATCHBACKGROUNDCOLOR
   0
 APPID
   5
-18B4
+18B6
 330
 3
 100
@@ -166521,6 +166543,38 @@ REF (80, 360)
 100
 AcDbText
   0
+LWPOLYLINE
+  5
+18B4
+330
+17
+100
+AcDbEntity
+  8
+MARCO
+100
+AcDbPolyline
+ 90
+4
+ 70
+1
+ 10
+-115.0
+ 20
+-166.0
+ 10
+125.0
+ 20
+-166.0
+ 10
+125.0
+ 20
+0.0
+ 10
+-115.0
+ 20
+0.0
+  0
 ENDSEC
   0
 SECTION
@@ -167611,7 +167665,7 @@ CREATED_BY_EZDXF
   3
 WRITTEN_BY_EZDXF
 350
-18B5
+18B7
   0
 DICTIONARYVAR
   5
@@ -167623,7 +167677,7 @@ DictionaryVariables
 280
 0
   1
-1.4.2 @ 2026-11-02T13:21:23.776099+00:00
+1.4.2 @ 2026-11-02T13:30:08.536560+00:00
   0
 VISUALSTYLE
   5
@@ -168327,7 +168381,7 @@ X-Ray
   0
 DICTIONARYVAR
   5
-18B5
+18B7
 330
 2D
 100
@@ -168335,7 +168389,7 @@ DictionaryVariables
 280
 0
   1
-1.4.2 @ 2026-11-02T13:21:23.878481+00:00
+1.4.2 @ 2026-11-02T13:30:08.947505+00:00
   0
 ENDSEC
   0

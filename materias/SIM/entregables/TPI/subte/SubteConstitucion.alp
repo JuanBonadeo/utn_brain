@@ -6105,6 +6105,133 @@ return String.join(",", partes);]]></Body>
 					<LevelVisibility>DIM_NON_CURRENT</LevelVisibility>
 
 			<Presentation>
+				<CADDrawing>
+					<Id>1794000000010</Id>
+					<Name><![CDATA[planoConstitucion]]></Name>
+					<X>-1150</X><Y>0</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>-100</Z>
+					<Width>2400</Width>
+					<Height>1660</Height>
+					<Rotation>0.0</Rotation>
+					<ResourceReference>
+						<PackageName><![CDATA[subteconstitucion]]></PackageName>
+						<ClassName><![CDATA[plano_constitucion_modelo.dxf]]></ClassName>
+					</ResourceReference>
+					<InvertDefaultColors>false</InvertDefaultColors>
+					<UseAntialiasing>true</UseAntialiasing>
+					<Layers>
+						<Layer>
+							<Visible>true</Visible>
+							<Name><![CDATA[0]]></Name>
+						</Layer>
+						<Layer>
+							<Visible>true</Visible>
+							<Name><![CDATA[01]]></Name>
+						</Layer>
+						<Layer>
+							<Visible>true</Visible>
+							<Name><![CDATA[015]]></Name>
+						</Layer>
+						<Layer>
+							<Visible>true</Visible>
+							<Name><![CDATA[02]]></Name>
+						</Layer>
+						<Layer>
+							<Visible>true</Visible>
+							<Name><![CDATA[A-CARP]]></Name>
+						</Layer>
+						<Layer>
+							<Visible>true</Visible>
+							<Name><![CDATA[ADIF]]></Name>
+						</Layer>
+						<Layer>
+							<Visible>true</Visible>
+							<Name><![CDATA[BARANDA]]></Name>
+						</Layer>
+						<Layer>
+							<Visible>true</Visible>
+							<Name><![CDATA[CALLES]]></Name>
+						</Layer>
+						<Layer>
+							<Visible>true</Visible>
+							<Name><![CDATA[CARPINTERIA]]></Name>
+						</Layer>
+						<Layer>
+							<Visible>true</Visible>
+							<Name><![CDATA[EDIFICIOS]]></Name>
+						</Layer>
+						<Layer>
+							<Visible>true</Visible>
+							<Name><![CDATA[ESCA]]></Name>
+						</Layer>
+						<Layer>
+							<Visible>true</Visible>
+							<Name><![CDATA[ESCALERA]]></Name>
+						</Layer>
+						<Layer>
+							<Visible>true</Visible>
+							<Name><![CDATA[HORM]]></Name>
+						</Layer>
+						<Layer>
+							<Visible>true</Visible>
+							<Name><![CDATA[LIMITE]]></Name>
+						</Layer>
+						<Layer>
+							<Visible>true</Visible>
+							<Name><![CDATA[LINE_02]]></Name>
+						</Layer>
+						<Layer>
+							<Visible>true</Visible>
+							<Name><![CDATA[LOCALES]]></Name>
+						</Layer>
+						<Layer>
+							<Visible>true</Visible>
+							<Name><![CDATA[MUROS-NUEVOS]]></Name>
+						</Layer>
+						<Layer>
+							<Visible>true</Visible>
+							<Name><![CDATA[MUROS1]]></Name>
+						</Layer>
+						<Layer>
+							<Visible>true</Visible>
+							<Name><![CDATA[PROYEC]]></Name>
+						</Layer>
+						<Layer>
+							<Visible>true</Visible>
+							<Name><![CDATA[TMR]]></Name>
+						</Layer>
+						<Layer>
+							<Visible>true</Visible>
+							<Name><![CDATA[LINEA_C_OSM]]></Name>
+						</Layer>
+						<Layer>
+							<Visible>true</Visible>
+							<Name><![CDATA[PASILLO_OSM]]></Name>
+						</Layer>
+						<Layer>
+							<Visible>true</Visible>
+							<Name><![CDATA[BOCAS_OSM]]></Name>
+						</Layer>
+						<Layer>
+							<Visible>true</Visible>
+							<Name><![CDATA[ROTULOS]]></Name>
+						</Layer>
+						<Layer>
+							<Visible>true</Visible>
+							<Name><![CDATA[REFERENCIA]]></Name>
+						</Layer>
+						<Layer>
+							<Visible>false</Visible>
+							<Name><![CDATA[MARCO]]></Name>
+						</Layer>
+					</Layers>
+				</CADDrawing>
 				<Rectangle>
 					<Id>1791000000023</Id>
 					<Name><![CDATA[areaVestibulo]]></Name>
@@ -6135,7 +6262,7 @@ return String.join(",", partes);]]></Body>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
 					<EmbeddedIcon>false</EmbeddedIcon>
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
@@ -6156,7 +6283,7 @@ return String.join(",", partes);]]></Body>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
 					<EmbeddedIcon>false</EmbeddedIcon>
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
@@ -6178,7 +6305,7 @@ return String.join(",", partes);]]></Body>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
 					<EmbeddedIcon>false</EmbeddedIcon>
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
@@ -6200,7 +6327,7 @@ return String.join(",", partes);]]></Body>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
 					<EmbeddedIcon>false</EmbeddedIcon>
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
@@ -6222,7 +6349,7 @@ return String.join(",", partes);]]></Body>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
 					<EmbeddedIcon>false</EmbeddedIcon>
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
@@ -6244,7 +6371,7 @@ return String.join(",", partes);]]></Body>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
 					<EmbeddedIcon>false</EmbeddedIcon>
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
@@ -6265,7 +6392,7 @@ return String.join(",", partes);]]></Body>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
 					<EmbeddedIcon>false</EmbeddedIcon>
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
@@ -6361,7 +6488,7 @@ return String.join(",", partes);]]></Body>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
 					<EmbeddedIcon>false</EmbeddedIcon>
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
@@ -6388,7 +6515,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>30</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -6413,7 +6540,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>30</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -6444,7 +6571,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>30</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -6475,7 +6602,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>30</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -6500,7 +6627,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>30</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -6525,7 +6652,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>30</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -6574,7 +6701,7 @@ return String.join(",", partes);]]></Body>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
 					<EmbeddedIcon>false</EmbeddedIcon>
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
@@ -6601,7 +6728,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>30</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -6626,7 +6753,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>30</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -6651,7 +6778,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>30</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -6676,7 +6803,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>30</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -6701,7 +6828,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>30</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -6726,7 +6853,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>25</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -6751,7 +6878,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>25</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -6776,7 +6903,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>25</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -6801,7 +6928,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>10</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -6826,7 +6953,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>10</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -6851,7 +6978,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>10</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -6876,7 +7003,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>10</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -6901,7 +7028,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>10</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -6926,7 +7053,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>10</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -6951,7 +7078,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>10</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -6976,7 +7103,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>10</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -7001,7 +7128,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>10</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -7026,7 +7153,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>10</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -7051,7 +7178,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>10</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -7076,7 +7203,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>10</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -7101,7 +7228,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>10</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -7126,7 +7253,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>10</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -7151,7 +7278,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>10</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -7176,7 +7303,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>10</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -7201,7 +7328,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>10</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -7226,7 +7353,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>10</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -7251,7 +7378,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>10</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -7276,7 +7403,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>10</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -7301,7 +7428,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>10</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -7326,7 +7453,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>10</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -7351,7 +7478,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>10</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -7376,7 +7503,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>10</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -7401,7 +7528,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>10</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -7426,7 +7553,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>10</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -7451,7 +7578,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>10</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -7476,7 +7603,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>10</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -7501,7 +7628,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>10</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -7526,7 +7653,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>10</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -7551,7 +7678,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>25</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -7585,7 +7712,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>25</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -7619,7 +7746,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>25</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -7653,7 +7780,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>30</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -7687,7 +7814,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>30</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -7721,7 +7848,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>30</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -7755,7 +7882,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>30</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -7789,7 +7916,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>30</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -7823,7 +7950,7 @@ return String.join(",", partes);]]></Body>
 					<LineWidth>2</LineWidth>
 					<LineMaterial>null</LineMaterial>
 					<FillingType>HATCHED_AREA</FillingType>
-					<ZHeight>20</ZHeight>
+					<ZHeight>30</ZHeight>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
@@ -7851,7 +7978,7 @@ return String.join(",", partes);]]></Body>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
 					<EmbeddedIcon>false</EmbeddedIcon>
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
@@ -7872,7 +7999,7 @@ return String.join(",", partes);]]></Body>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
 					<EmbeddedIcon>false</EmbeddedIcon>
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
@@ -7893,7 +8020,7 @@ return String.join(",", partes);]]></Body>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
 					<EmbeddedIcon>false</EmbeddedIcon>
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
@@ -7914,7 +8041,7 @@ return String.join(",", partes);]]></Body>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
 					<EmbeddedIcon>false</EmbeddedIcon>
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
@@ -7935,7 +8062,7 @@ return String.join(",", partes);]]></Body>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
 					<EmbeddedIcon>false</EmbeddedIcon>
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
@@ -9139,7 +9266,141 @@ return String.join(",", partes);]]></Body>
 					<WaitForExit>false</WaitForExit>
 					<QueueChoicePolicy>CLOSEST_QUEUE_STRICT</QueueChoicePolicy>
 				</ServiceWithLine>
-			</Presentation>
+			<Camera3D>
+					<Id>1794000000108</Id>
+					<Name><![CDATA[camaraGeneral]]></Name>
+					<X>430</X><Y>980</Y><Z>520</Z>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<ShowLabel>false</ShowLabel>
+					<RotationX>48</RotationX>
+					<RotationZ>-90</RotationZ>
+				</Camera3D>
+				<Camera3D>
+					<Id>1794000000109</Id>
+					<Name><![CDATA[camaraMolinetes]]></Name>
+					<X>330</X><Y>360</Y><Z>70</Z>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<ShowLabel>false</ShowLabel>
+					<RotationX>25</RotationX>
+					<RotationZ>0</RotationZ>
+				</Camera3D>
+				<Camera3D>
+					<Id>1794000000110</Id>
+					<Name><![CDATA[camaraPasillo]]></Name>
+					<X>5</X><Y>1080</Y><Z>45</Z>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<ShowLabel>false</ShowLabel>
+					<RotationX>12</RotationX>
+					<RotationZ>-90</RotationZ>
+				</Camera3D>
+				<Camera3D>
+					<Id>1794000000111</Id>
+					<Name><![CDATA[camaraSuperior]]></Name>
+					<X>380</X><Y>620</Y><Z>1150</Z>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<ShowLabel>false</ShowLabel>
+					<RotationX>90</RotationX>
+					<RotationZ>-90</RotationZ>
+				</Camera3D>
+				<Control Type="Window3D">
+					<Id>1794000000112</Id>
+					<Name><![CDATA[ventana3D]]></Name>
+					<X>1300</X><Y>150</Y>
+					<Width>900</Width>
+					<Height>560</Height>
+					<MakeDefaultViewArea>false</MakeDefaultViewArea>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<ShowLabel>false</ShowLabel>
+					<FollowCamera>false</FollowCamera>
+					<NavigationType>limitedToZAboveZero</NavigationType>
+					<FarClippingDistance>4000</FarClippingDistance>
+					<Camera>camaraGeneral</Camera>
+				</Control>
+				<Control Type="Button">
+				 	<EmbeddedIcon>false</EmbeddedIcon>
+					<Id>1794000000113</Id>
+					<Name><![CDATA[botonCamaraGeneral]]></Name>
+					<X>1300</X><Y>725</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<BasicProperties Width="150" Height="30">
+                        <EmbeddedIcon>false</EmbeddedIcon>
+						<TextColor>-16777216</TextColor>
+						<Enabled>true</Enabled>
+						<ActionCode><![CDATA[ventana3D.setCamera(camaraGeneral, false, 800);]]></ActionCode>
+					</BasicProperties>
+					<ExtendedProperties>
+						<Font Name="Dialog" Size="11" Style="0"/>
+						<LabelText><![CDATA[Vista general]]></LabelText>
+					</ExtendedProperties>
+				</Control>
+				<Control Type="Button">
+				 	<EmbeddedIcon>false</EmbeddedIcon>
+					<Id>1794000000114</Id>
+					<Name><![CDATA[botonCamaraMolinetes]]></Name>
+					<X>1465</X><Y>725</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<BasicProperties Width="150" Height="30">
+                        <EmbeddedIcon>false</EmbeddedIcon>
+						<TextColor>-16777216</TextColor>
+						<Enabled>true</Enabled>
+						<ActionCode><![CDATA[ventana3D.setCamera(camaraMolinetes, false, 800);]]></ActionCode>
+					</BasicProperties>
+					<ExtendedProperties>
+						<Font Name="Dialog" Size="11" Style="0"/>
+						<LabelText><![CDATA[Molinetes]]></LabelText>
+					</ExtendedProperties>
+				</Control>
+				<Control Type="Button">
+				 	<EmbeddedIcon>false</EmbeddedIcon>
+					<Id>1794000000115</Id>
+					<Name><![CDATA[botonCamaraPasillo]]></Name>
+					<X>1630</X><Y>725</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<BasicProperties Width="150" Height="30">
+                        <EmbeddedIcon>false</EmbeddedIcon>
+						<TextColor>-16777216</TextColor>
+						<Enabled>true</Enabled>
+						<ActionCode><![CDATA[ventana3D.setCamera(camaraPasillo, false, 800);]]></ActionCode>
+					</BasicProperties>
+					<ExtendedProperties>
+						<Font Name="Dialog" Size="11" Style="0"/>
+						<LabelText><![CDATA[Pasillo del Roca]]></LabelText>
+					</ExtendedProperties>
+				</Control>
+				<Control Type="Button">
+				 	<EmbeddedIcon>false</EmbeddedIcon>
+					<Id>1794000000116</Id>
+					<Name><![CDATA[botonCamaraSuperior]]></Name>
+					<X>1795</X><Y>725</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<BasicProperties Width="150" Height="30">
+                        <EmbeddedIcon>false</EmbeddedIcon>
+						<TextColor>-16777216</TextColor>
+						<Enabled>true</Enabled>
+						<ActionCode><![CDATA[ventana3D.setCamera(camaraSuperior, false, 800);]]></ActionCode>
+					</BasicProperties>
+					<ExtendedProperties>
+						<Font Name="Dialog" Size="11" Style="0"/>
+						<LabelText><![CDATA[Vista superior]]></LabelText>
+					</ExtendedProperties>
+				</Control>
+				</Presentation>
 
 				</Level>
 			</Presentation>
@@ -9149,6 +9410,10 @@ return String.join(",", partes);]]></Body>
 		<ActiveObjectClass>
 			<Id>1791000000050</Id>
 			<Name><![CDATA[Pasajero]]></Name>
+			<StartupCode><![CDATA[// Vista 3D: deja sólo la figura de este pasajero (aparienciaPed no usa números aleatorios).
+Shape figura = (Shape) figurasPed.get(aparienciaPed);
+figurasPed.clear();
+figurasPed.add(figura);]]></StartupCode>
 			<Generic>false</Generic>
 			<GenericParameter>
 				<Id>1791000000051</Id>
@@ -9357,6 +9622,36 @@ return String.join(",", partes);]]></Body>
 					</Properties>
 				</Variable>
 				<Variable Class="PlainVariable">
+					<Id>1794000000106</Id>
+					<Name><![CDATA[posesPed]]></Name>
+					<X>40</X><Y>215</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>false</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="true" AccessType="public" StaticVariable="true">
+						<Type><![CDATA[String[]]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[{ "idle", "walk_left", "idle", "walk_right" }]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1794000000107</Id>
+					<Name><![CDATA[aparienciaPed]]></Name>
+					<X>40</X><Y>235</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>false</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="default" StaticVariable="false">
+						<Type><![CDATA[int]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[Math.abs(System.identityHashCode(this)) % 4]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
 					<Id>1792000000028</Id>
 					<Name><![CDATA[servicioAsignadoPed]]></Name>
 					<X>40</X><Y>190</Y>
@@ -9411,7 +9706,7 @@ return String.join(",", partes);]]></Body>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
 					<EmbeddedIcon>false</EmbeddedIcon>
 					<Z>0</Z>
 					<ZHeight>10</ZHeight>
@@ -9425,6 +9720,291 @@ return String.join(",", partes);]]></Body>
 					<FillColor>-14774017</FillColor>
 					<FillMaterial>null</FillMaterial>
 				</Rectangle>
+				<Group>
+					<Id>1794000000105</Id>
+					<Name><![CDATA[figurasPed]]></Name>
+					<X>0</X><Y>0</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_3D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+
+			<Presentation>
+				<Figure3D>
+					<Id>1794000000101</Id>
+					<Name><![CDATA[figuraPed0]]></Name>
+					<X>0</X><Y>0</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_3D</DrawMode>
+					<X>0</X><Y>0</Y><Z>0</Z>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<ResourceReference>
+						<PackageName><![CDATA[subteconstitucion]]></PackageName>
+						<ClassName><![CDATA[3d/ped_1_m.glb]]></ClassName>
+					</ResourceReference>
+					<ColorTable>
+						<ColorMapping>
+							<Name><![CDATA[body]]></Name>
+							<OriginalColor>30108474</OriginalColor>
+						</ColorMapping>
+						<ColorMapping>
+							<Name><![CDATA[eyes]]></Name>
+							<OriginalColor>33554431</OriginalColor>
+						</ColorMapping>
+						<ColorMapping>
+							<Name><![CDATA[hair]]></Name>
+							<OriginalColor>18026251</OriginalColor>
+						</ColorMapping>
+						<ColorMapping>
+							<Name><![CDATA[hoodie]]></Name>
+							<OriginalColor>18355738</OriginalColor>
+						</ColorMapping>
+						<ColorMapping>
+							<Name><![CDATA[pants]]></Name>
+							<OriginalColor>17435146</OriginalColor>
+						</ColorMapping>
+						<ColorMapping>
+							<Name><![CDATA[shoes]]></Name>
+							<OriginalColor>18355738</OriginalColor>
+						</ColorMapping>
+					</ColorTable>
+					<AutoScale>false</AutoScale>
+					<Scale>1.0</Scale>
+					<Rotation>0.0</Rotation>
+					<AxisOrder>YZX_AXIS_ORDER</AxisOrder>
+					<SelectedAnimationPose>idle</SelectedAnimationPose>
+					<AnimationPose><![CDATA[carry]]></AnimationPose>
+					<AnimationPose><![CDATA[drive]]></AnimationPose>
+					<AnimationPose><![CDATA[idle]]></AnimationPose>
+					<AnimationPose><![CDATA[lie]]></AnimationPose>
+					<AnimationPose><![CDATA[lie_side]]></AnimationPose>
+					<AnimationPose><![CDATA[run_right]]></AnimationPose>
+					<AnimationPose><![CDATA[run_left]]></AnimationPose>
+					<AnimationPose><![CDATA[sit_desk]]></AnimationPose>
+					<AnimationPose><![CDATA[sit]]></AnimationPose>
+					<AnimationPose><![CDATA[stand_desk]]></AnimationPose>
+					<AnimationPose><![CDATA[stand]]></AnimationPose>
+					<AnimationPose><![CDATA[walk_right]]></AnimationPose>
+					<AnimationPose><![CDATA[walk_left]]></AnimationPose>
+					<ApplyShading>true</ApplyShading>
+					<InternalLighting>OFF</InternalLighting>
+					<IgnoreSceneLights>false</IgnoreSceneLights>
+					<SelectedAnimationPoseCode><![CDATA[selectWalkAnimationPose(this, posesPed[0], posesPed)]]></SelectedAnimationPoseCode>
+</Figure3D>
+				<Figure3D>
+					<Id>1794000000102</Id>
+					<Name><![CDATA[figuraPed1]]></Name>
+					<X>0</X><Y>0</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_3D</DrawMode>
+					<X>0</X><Y>0</Y><Z>0</Z>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<ResourceReference>
+						<PackageName><![CDATA[subteconstitucion]]></PackageName>
+						<ClassName><![CDATA[3d/office_1_m.glb]]></ClassName>
+					</ResourceReference>
+					<ColorTable>
+						<ColorMapping>
+							<Name><![CDATA[body]]></Name>
+							<OriginalColor>30108474</OriginalColor>
+						</ColorMapping>
+						<ColorMapping>
+							<Name><![CDATA[eyes]]></Name>
+							<OriginalColor>33554431</OriginalColor>
+						</ColorMapping>
+						<ColorMapping>
+							<Name><![CDATA[hair]]></Name>
+							<OriginalColor>18026251</OriginalColor>
+						</ColorMapping>
+						<ColorMapping>
+							<Name><![CDATA[jacket]]></Name>
+							<OriginalColor>17435146</OriginalColor>
+						</ColorMapping>
+						<ColorMapping>
+							<Name><![CDATA[shirt]]></Name>
+							<OriginalColor>33554431</OriginalColor>
+						</ColorMapping>
+						<ColorMapping>
+							<Name><![CDATA[shoes]]></Name>
+							<OriginalColor>16777216</OriginalColor>
+						</ColorMapping>
+						<ColorMapping>
+							<Name><![CDATA[tie]]></Name>
+							<OriginalColor>16777216</OriginalColor>
+						</ColorMapping>
+						<ColorMapping>
+							<Name><![CDATA[trousers]]></Name>
+							<OriginalColor>17435146</OriginalColor>
+						</ColorMapping>
+					</ColorTable>
+					<AutoScale>false</AutoScale>
+					<Scale>1.0</Scale>
+					<Rotation>0.0</Rotation>
+					<AxisOrder>YZX_AXIS_ORDER</AxisOrder>
+					<SelectedAnimationPose>idle</SelectedAnimationPose>
+					<AnimationPose><![CDATA[carry]]></AnimationPose>
+					<AnimationPose><![CDATA[drive]]></AnimationPose>
+					<AnimationPose><![CDATA[idle]]></AnimationPose>
+					<AnimationPose><![CDATA[lie]]></AnimationPose>
+					<AnimationPose><![CDATA[lie_side]]></AnimationPose>
+					<AnimationPose><![CDATA[run_right]]></AnimationPose>
+					<AnimationPose><![CDATA[run_left]]></AnimationPose>
+					<AnimationPose><![CDATA[sit_desk]]></AnimationPose>
+					<AnimationPose><![CDATA[sit]]></AnimationPose>
+					<AnimationPose><![CDATA[stand_desk]]></AnimationPose>
+					<AnimationPose><![CDATA[stand]]></AnimationPose>
+					<AnimationPose><![CDATA[walk_right]]></AnimationPose>
+					<AnimationPose><![CDATA[walk_left]]></AnimationPose>
+					<ApplyShading>true</ApplyShading>
+					<InternalLighting>OFF</InternalLighting>
+					<IgnoreSceneLights>false</IgnoreSceneLights>
+					<SelectedAnimationPoseCode><![CDATA[selectWalkAnimationPose(this, posesPed[0], posesPed)]]></SelectedAnimationPoseCode>
+</Figure3D>
+				<Figure3D>
+					<Id>1794000000103</Id>
+					<Name><![CDATA[figuraPed2]]></Name>
+					<X>0</X><Y>0</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_3D</DrawMode>
+					<X>0</X><Y>0</Y><Z>0</Z>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<ResourceReference>
+						<PackageName><![CDATA[subteconstitucion]]></PackageName>
+						<ClassName><![CDATA[3d/ped_sport_2_f.glb]]></ClassName>
+					</ResourceReference>
+					<ColorTable>
+						<ColorMapping>
+							<Name><![CDATA[body]]></Name>
+							<OriginalColor>30108474</OriginalColor>
+						</ColorMapping>
+						<ColorMapping>
+							<Name><![CDATA[eyes]]></Name>
+							<OriginalColor>33554431</OriginalColor>
+						</ColorMapping>
+						<ColorMapping>
+							<Name><![CDATA[hair.002]]></Name>
+							<OriginalColor>18026251</OriginalColor>
+						</ColorMapping>
+						<ColorMapping>
+							<Name><![CDATA[helmet]]></Name>
+							<OriginalColor>16777216</OriginalColor>
+						</ColorMapping>
+						<ColorMapping>
+							<Name><![CDATA[shirt]]></Name>
+							<OriginalColor>17108568</OriginalColor>
+						</ColorMapping>
+						<ColorMapping>
+							<Name><![CDATA[shoes]]></Name>
+							<OriginalColor>18355738</OriginalColor>
+						</ColorMapping>
+						<ColorMapping>
+							<Name><![CDATA[shorts]]></Name>
+							<OriginalColor>17435146</OriginalColor>
+						</ColorMapping>
+					</ColorTable>
+					<AutoScale>false</AutoScale>
+					<Scale>1.0</Scale>
+					<Rotation>0.0</Rotation>
+					<AxisOrder>YZX_AXIS_ORDER</AxisOrder>
+					<SelectedAnimationPose>idle</SelectedAnimationPose>
+					<AnimationPose><![CDATA[carry]]></AnimationPose>
+					<AnimationPose><![CDATA[drive]]></AnimationPose>
+					<AnimationPose><![CDATA[idle]]></AnimationPose>
+					<AnimationPose><![CDATA[lie]]></AnimationPose>
+					<AnimationPose><![CDATA[lie_side]]></AnimationPose>
+					<AnimationPose><![CDATA[run_right]]></AnimationPose>
+					<AnimationPose><![CDATA[run_left]]></AnimationPose>
+					<AnimationPose><![CDATA[sit_desk]]></AnimationPose>
+					<AnimationPose><![CDATA[sit]]></AnimationPose>
+					<AnimationPose><![CDATA[stand_desk]]></AnimationPose>
+					<AnimationPose><![CDATA[stand]]></AnimationPose>
+					<AnimationPose><![CDATA[walk_right]]></AnimationPose>
+					<AnimationPose><![CDATA[walk_left]]></AnimationPose>
+					<ApplyShading>true</ApplyShading>
+					<InternalLighting>OFF</InternalLighting>
+					<IgnoreSceneLights>false</IgnoreSceneLights>
+					<SelectedAnimationPoseCode><![CDATA[selectWalkAnimationPose(this, posesPed[0], posesPed)]]></SelectedAnimationPoseCode>
+</Figure3D>
+				<Figure3D>
+					<Id>1794000000104</Id>
+					<Name><![CDATA[figuraPed3]]></Name>
+					<X>0</X><Y>0</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_3D</DrawMode>
+					<X>0</X><Y>0</Y><Z>0</Z>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<ResourceReference>
+						<PackageName><![CDATA[subteconstitucion]]></PackageName>
+						<ClassName><![CDATA[3d/ped_3_f.glb]]></ClassName>
+					</ResourceReference>
+					<ColorTable>
+						<ColorMapping>
+							<Name><![CDATA[body]]></Name>
+							<OriginalColor>30108474</OriginalColor>
+						</ColorMapping>
+						<ColorMapping>
+							<Name><![CDATA[eyes]]></Name>
+							<OriginalColor>33554431</OriginalColor>
+						</ColorMapping>
+						<ColorMapping>
+							<Name><![CDATA[hair]]></Name>
+							<OriginalColor>18026251</OriginalColor>
+						</ColorMapping>
+						<ColorMapping>
+							<Name><![CDATA[pants]]></Name>
+							<OriginalColor>18355738</OriginalColor>
+						</ColorMapping>
+						<ColorMapping>
+							<Name><![CDATA[shoes]]></Name>
+							<OriginalColor>22029840</OriginalColor>
+						</ColorMapping>
+						<ColorMapping>
+							<Name><![CDATA[tshirt]]></Name>
+							<OriginalColor>30198988</OriginalColor>
+						</ColorMapping>
+					</ColorTable>
+					<AutoScale>false</AutoScale>
+					<Scale>1.0</Scale>
+					<Rotation>0.0</Rotation>
+					<AxisOrder>YZX_AXIS_ORDER</AxisOrder>
+					<SelectedAnimationPose>idle</SelectedAnimationPose>
+					<AnimationPose><![CDATA[carry]]></AnimationPose>
+					<AnimationPose><![CDATA[drive]]></AnimationPose>
+					<AnimationPose><![CDATA[idle]]></AnimationPose>
+					<AnimationPose><![CDATA[lie]]></AnimationPose>
+					<AnimationPose><![CDATA[lie_side]]></AnimationPose>
+					<AnimationPose><![CDATA[run_right]]></AnimationPose>
+					<AnimationPose><![CDATA[run_left]]></AnimationPose>
+					<AnimationPose><![CDATA[sit_desk]]></AnimationPose>
+					<AnimationPose><![CDATA[sit]]></AnimationPose>
+					<AnimationPose><![CDATA[stand_desk]]></AnimationPose>
+					<AnimationPose><![CDATA[stand]]></AnimationPose>
+					<AnimationPose><![CDATA[walk_right]]></AnimationPose>
+					<AnimationPose><![CDATA[walk_left]]></AnimationPose>
+					<ApplyShading>true</ApplyShading>
+					<InternalLighting>OFF</InternalLighting>
+					<IgnoreSceneLights>false</IgnoreSceneLights>
+					<SelectedAnimationPoseCode><![CDATA[selectWalkAnimationPose(this, posesPed[0], posesPed)]]></SelectedAnimationPoseCode>
+</Figure3D>
+			</Presentation>
+
+				</Group>
 			</Presentation>
 
 				</Level>
@@ -11365,6 +11945,38 @@ return String.join(",", partes);]]></Body>
 			</ReplicationsProperties>
 		</ParamVariationExperiment>	
 	</Experiments>
+	<ModelResources>
+		<Resource>
+			<Id>1794000000011</Id>
+			<Path><![CDATA[plano_constitucion_modelo.dxf]]></Path>
+			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+			<Location>FILE_SYSTEM</Location>
+		</Resource>
+		<Resource>
+			<Id>1794000000117</Id>
+			<Path><![CDATA[3d/ped_1_m.glb]]></Path>
+			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+			<Location>FILE_SYSTEM</Location>
+		</Resource>
+		<Resource>
+			<Id>1794000000118</Id>
+			<Path><![CDATA[3d/office_1_m.glb]]></Path>
+			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+			<Location>FILE_SYSTEM</Location>
+		</Resource>
+		<Resource>
+			<Id>1794000000119</Id>
+			<Path><![CDATA[3d/ped_sport_2_f.glb]]></Path>
+			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+			<Location>FILE_SYSTEM</Location>
+		</Resource>
+		<Resource>
+			<Id>1794000000120</Id>
+			<Path><![CDATA[3d/ped_3_f.glb]]></Path>
+			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+			<Location>FILE_SYSTEM</Location>
+		</Resource>
+	</ModelResources>
     <RequiredLibraryReference>
 		<LibraryName><![CDATA[com.anylogic.libraries.modules.markup_descriptors]]></LibraryName>
 		<VersionMajor>1</VersionMajor>

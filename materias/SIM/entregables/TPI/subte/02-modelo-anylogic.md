@@ -648,17 +648,28 @@ La producción con 106 s quedó en `corridas-descartadas/2026-10-05_produccion_d
 ### Plano de fondo como CAD Drawing
 
 `datos/fondo_anylogic.py` genera `plano_constitucion_modelo.dxf` (R2000, metros): el hall y la cabecera del plano
-oficial en gris, más capas de OSM (`LINEA_C_OSM`, `PASILLO_OSM`, `BOCAS_OSM`), `ROTULOS` y una cruz `REFERENCIA`.
-Está rotado 180° y trasladado para que, con el origen del CAD en (0, 0) del modelo y 10 px = 1 m, la cruz caiga en la
-boca oeste del vestíbulo (X = 80, Y = 360) y el pasillo de OSM coincida con `pasilloRocaNorte/Sur`. El norte queda a la
-derecha. Se inserta desde el IDE (el formato XML del CAD Drawing no está en ningún ejemplo instalado):
+oficial en gris, capas de OSM (`LINEA_C_OSM`, `PASILLO_OSM`, `BOCAS_OSM`), `ROTULOS`, una cruz `REFERENCIA` y un
+`MARCO` invisible que fija el recuadro. Está rotado 180° y trasladado para que el pasillo de OSM coincida con
+`pasilloRocaNorte/Sur` y la cruz caiga en la boca oeste del vestíbulo (X = 80, Y = 360). El norte queda a la derecha.
 
-1. `MainPeatonal` → paleta **Presentation** → arrastrar **CAD Drawing** al lienzo.
-2. Archivo: `plano_constitucion_modelo.dxf` (está junto al `.alp`). Unidades: **metros**.
-3. Posición X = 0, Y = 0, rotación 0. Comprobar que la cruz roja `REF (80, 360)` cae en la boca oeste del
-   vestíbulo y el pasillo de OSM entre las paredes del pasillo; si no, corregir X/Y del CAD.
-4. Clic derecho → **Order → Send to Back**, para que quede detrás de paredes y peatones.
-5. Guardar en el IDE y avisar: se corre el verificador y se commitea.
+En `MainPeatonal` es el `CADDrawing` `planoConstitucion` (X = -1150, Y = 0, 2400 × 1660 px, Z = -100, sólo 2D),
+registrado en `ModelResources`. El formato XML se tomó del serializador de AnyLogic 8.9.10
+(`com.anylogic.serialization.PresentationGenerator`), porque ningún ejemplo instalado trae un CAD Drawing.
+**Control al abrir el IDE:** la cruz roja `REF (80, 360)` tiene que caer en la boca oeste del vestíbulo; si AnyLogic
+ancla el dibujo de otra forma, se corrige X/Y del CAD y se guarda.
+
+### Vista 3D (2026-11-02)
+
+- `ventana3D` (X = 1300, Y = 150, 900 × 560, a la derecha del plano) con cuatro cámaras y botones: vista general,
+  molinetes, pasillo del Roca y vista superior.
+- `Pasajero`: grupo `figurasPed` con cuatro figuras humanas animadas (`3d/*.glb`, sólo en 3D; caminan o esperan con
+  `selectWalkAnimationPose`). Cada pasajero conserva una sola (`aparienciaPed`, sin números aleatorios: no altera los
+  números aleatorios comunes). En 2D sigue el cuadrado `cuerpoPasajero`.
+- Alturas (sólo visuales): perímetro, pasillo y columnas 3 m; separadores de molinetes 1 m; cabina, boletería y
+  máquinas 2,5 m. Los textos del vestíbulo pasaron a sólo 2D para no aparecer en el piso de la vista 3D.
+- Las figuras no se suben al repo (recursos de AnyLogic): `python3 datos/copiar_figuras_3d.py` las copia a `3d/`
+  desde la instalación de cada máquina. Sin ellas el modelo abre, pero los peatones no se ven en 3D.
+- No hay molinetes ni escaleras 3D instalados (la galería de objetos 3D de AnyLogic se descarga desde el IDE).
 
 ## Resultados de producción: escenario intermedio (2026-10-05)
 
