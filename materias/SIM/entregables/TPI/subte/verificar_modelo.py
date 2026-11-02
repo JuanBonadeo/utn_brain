@@ -100,8 +100,8 @@ for f in ped_agent.findall('Functions/Function'):
  ped_functions.append(f'public {f.findtext("ReturnType")} {f.findtext("Name")}({args}) {{\n{f.findtext("Body")}\n}}')
 ped_check='''public class SubtePedLogicCheck {
 static class Pasajero {
- double tEntradaColaPed, tIngresoSistemaPed, tInicioServicioPed, servicioAsignadoPed, y;
- double getY(){return y;}
+ double tEntradaColaPed, tIngresoSistemaPed, tInicioServicioPed, servicioAsignadoPed, y, x=200;
+ double getY(){return y;} double getX(){return x;}
  boolean enColaPed, enPicoPed, desdeRocaPed=true;
  String nombreMolinetePed=""; int colaElegidaPed=-1;
 }
@@ -300,7 +300,8 @@ ped_defaults_early={v.findtext('Name'):v.findtext('Properties/DefaultValue/Code'
 ped_blocks={x.findtext('Name'):x.findtext('ActiveObjectClass/ClassName') for x in ped.findall('EmbeddedObjects/EmbeddedObject')}
 assert ped_blocks=={'pedSource':'PedSource','pedSourceCalle':'PedSource','pedMolinetes':'PedService','pedSalida':'PedGoTo','pedSink':'PedSink'}
 sources={x.findtext('Name'):{p.findtext('Name'):p.findtext('Value/Code') for p in x.findall('Parameters/Parameter')} for x in ped.findall('EmbeddedObjects/EmbeddedObject') if x.findtext('Name').startswith('pedSource')}
-assert sources['pedSource']['locationLine']=='entradaPeatonal'
+# Roca: cada pasajero aparece en la cabecera del andén de su tren (andenActualPed, asignado por turno).
+assert sources['pedSource']['locationLine']==' : '.join(f'andenActualPed == {k} ? andenRoca{k}' for k in range(6))+' : andenRoca6'
 # Calle: una boca, la escalera B3 de la calle Brasil (OSM), que aterriza en X ~ 194 desde el lado este.
 assert sources['pedSourceCalle']['locationLine']=='entradaCalle'
 assert sources['pedSource']['onExit']=='ped.desdeRocaPed = true; registraIngresoPed(ped);'
@@ -332,7 +333,7 @@ gates=svc.findall('Presentation/ServiceLine'); queues=svc.findall('Presentation/
 assert [g.findtext('Name') for g in gates]==[f'molinetePed{i:02d}' for i in range(1,29)]
 assert [q.findtext('Name') for q in queues]==[f'colaMolinete{i:02d}' for i in range(1,29)]
 assert not ped.findall('.//ServicePoint')
-entry_x=float(ped.find(".//TargetLine[Name='entradaPeatonal']").findtext('X'))
+entry_x=max(float(ped.find(f".//TargetLine[Name='andenRoca{k}']").findtext('X')) for k in range(7))
 exit_x=float(ped.find(".//TargetLine[Name='salidaPeatonal']").findtext('X'))
 for g,q in zip(gates,queues):
  gx,gy=float(g.findtext('X')),float(g.findtext('Y'))
@@ -351,11 +352,15 @@ def _abs(nombre, paso=3):
  el=ped.find(f".//*[Name='{nombre}']"); X,Y=float(el.findtext('X')),float(el.findtext('Y'))
  pts=[(float(q.findtext('X')),float(q.findtext('Y'))) for q in el.iter('Point')][::paso]
  return [(X+x,Y+y) for x,y in pts]
-assert _abs('pasilloRocaNorte')==[(-58,949),(-20,949),(-20,335),(80,335)]
-assert _abs('pasilloRocaSur')==[(-58,999),(30,999),(30,385),(80,385)]
-assert _abs('pasilloRocaFondo')==[(-58,949),(-58,999)]
+assert _abs('pasilloRocaNorte')==[(-152,949),(-20,949),(-20,335),(80,335)]
+assert _abs('pasilloRocaSur')==[(-152,999),(30,999),(30,385),(80,385)]
+assert ped.find(".//*[Name='pasilloRocaFondo']") is None and ped.find(".//*[Name='entradaPeatonal']") is None
+# El pasillo se abre al hall en la boca B2 (X = -152); el vestíbulo queda cerrado del lado de los andenes de la C.
+assert _abs('paredDerechaCentro')==[(580,290),(580,430)]
+# Descenso en las cabeceras de los 7 andenes (islas 2-3 ... 12-13 y 14) y obstáculos del hall medidos en el plano.
+assert [_abs(f'andenRoca{k}',1) for k in range(7)]==[[(-545,y-30),(-545,y+30)] for y in (314,489,661,837,1009,1181,1326)]
+assert all(ped.find(f".//*[Name='{n}']") is not None for n in ('hallEstructuraCentral','hallVestuarioSOFSE','hallBoleteriasSOFSE'))
 assert _abs('paredIzquierdaNorte')==[(80,190),(80,335)] and _abs('paredIzquierdaSur')==[(80,385),(80,530)]
-assert _abs('entradaPeatonal',1)==[(-55,951),(-55,997)]
 # Disposición coherente con el plano georreferenciado (2026-11-02): pasillo del Roca en X = 80, escalera B3 en
 # X ~ 194, molinetes en X 300-316 (la zona paga empieza en la conexión real con el andén de la C, X ~ 316) y
 # escaleras al andén en X 520-580, sobre los andenes de la Línea C.
@@ -366,7 +371,7 @@ assert ped.find(".//*[Name='entradaCalle2']") is None
 assert all(float(g.findtext('X'))==300 for g in gates) and all(float(q.findtext('X'))==220 for q in queues)
 assert _abs('salidaPeatonal',1)==[(568,295),(568,425)] and _abs('paredDerechaNorte')==[(580,190),(580,290)]
 _eleccion=next(f for f in ped.findall('Functions/Function') if f.findtext('Name')=='elegirColaPed').findtext('Body')
-assert 'double yReferencia = ped.getY() > 900 ? 335 + (ped.getY() - 949) : ped.getY();' in _eleccion
+assert 'double yReferencia = ped.getX() < 80 ? 335 + (((ped.getY() % 50) + 50) % 50) : ped.getY();' in _eleccion
 aviso=ped.find(".//Text[Name='avisoPeatonal']")
 assert 'PLANO HIPOTÉTICO' in aviso.findtext('Text') and 'NO ES EL PLANO OFICIAL' in aviso.findtext('TextCode')
 assert ped.find(".//TargetLine[Name='salidaPeatonal']") is not None
@@ -404,7 +409,7 @@ assert float(demo.findtext('ModelTimeProperties/FinalTime'))==900
 # escenario intermedio de PeatonalCorridasApareadas, sin archivo de salida.
 visuales={e.findtext('Name'):e for e in experiments if (e.findtext('Name') or '').startswith('PeatonalFranjaVisual')}
 assert set(visuales)=={'PeatonalFranjaVisualE0','PeatonalFranjaVisualE1'}
-intermedio={'proporcionRocaPed':'0.8','demoraAccesoRocaSeg':'102','duracionDescargaSeg':'145','servicioPedSeg':'2.4','servicioMinPedSeg':'1.8','servicioMaxPedSeg':'3.5'}
+intermedio={'proporcionRocaPed':'0.8','demoraAccesoRocaSeg':'49','duracionDescargaSeg':'145','servicioPedSeg':'2.4','servicioMinPedSeg':'1.8','servicioMaxPedSeg':'3.5'}
 for name,mol in (('PeatonalFranjaVisualE0','20'),('PeatonalFranjaVisualE1','22')):
  ps={x.findtext('ParameterName'):x.findtext('ParameterValue/Code') for x in visuales[name].findall('Parameters/Parameter')}
  assert ps['molinetesOperativosPed']==mol and ps['modoFranjaPed']=='true' and ps['pruebaSinteticaPed']=='false' and ps['archivoSalidaPed'] is None, name
@@ -443,7 +448,7 @@ for name,(runs,modo,archivo,final) in {'PeatonalCorridasApareadas':('60','true',
  calib={k:free[k] for k in ('proporcionRocaPed','demoraAccesoRocaSeg','duracionDescargaSeg','servicioPedSeg','servicioMinPedSeg','servicioMaxPedSeg')}
  if name=='PeatonalCorridasApareadas':
   # Escenario intermedio (T3.4, 2026-10-05): rangos de la §5 del plan; demora con D = 85 m (OpenStreetMap) y h = 5 m.
-  assert calib=={'proporcionRocaPed':'0.8','demoraAccesoRocaSeg':'102','duracionDescargaSeg':'145','servicioPedSeg':'2.4','servicioMinPedSeg':'1.8','servicioMaxPedSeg':'3.5'}, calib
+  assert calib=={'proporcionRocaPed':'0.8','demoraAccesoRocaSeg':'49','duracionDescargaSeg':'145','servicioPedSeg':'2.4','servicioMinPedSeg':'1.8','servicioMaxPedSeg':'3.5'}, calib
   rng={ped_param_ids[x.findtext('Id')]:x.findtext('Expression/Code') for x in e.findall('RangeVariationParamValue')}
   assert all(rng[k]==v for k,v in calib.items()), 'freeform y range deben coincidir'
  else:

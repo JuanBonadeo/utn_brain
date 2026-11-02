@@ -646,18 +646,26 @@ Orientación de la vista: arriba Oeste (calle Lima), abajo Este (Hornos), derech
 
 | Elemento | Disposición |
 |---|---|
-| Pasillo del Roca | `pasilloRocaNorte/Sur/Fondo`: L de 75 m × 5 m (ancho [SUP]) sobre la traza de OSM, X -58 a 80, Y 999 a 335 |
-| Llegada del Roca | `entradaPeatonal` al pie de la escalera de la boca del hall (X = -55, Y 951-997). Demora 102 s (hall + escalera) |
+| Descenso del Roca | Siete líneas `andenRoca0`-`andenRoca6` en la cabecera de los andenes (islas 2-3, 4-5, 6-7, 8-9, 10-11, 12-13 y andén 14; X = -545, Y = 314, 489, 661, 837, 1009, 1181 y 1326, ±3 m). Cada tren descarga en un andén asignado por turno en el orden del horario (`indiceTren % 7`), porque no hay dato de andén por tren [SUP]. `liberacionesPed` guarda {instante, andén} y `andenActualPed` elige la línea de `pedSource` |
+| Hall del Roca | Se camina en la simulación, entre obstáculos medidos en el plano: `hallEstructuraCentral` (escaleras mecánicas), `hallVestuarioSOFSE` y `hallBoleteriasSOFSE`, con pasos de ~5 m entre ellos |
+| Pasillo del Roca | `pasilloRocaNorte/Sur`: desde la boca B2 del hall (X = -152, abierta hacia el hall) hasta la boca oeste del vestíbulo, L de 84 m × 5 m (ancho [SUP]) sobre la traza de OSM |
+| Demora | **49 s** = 31 m de andén hasta la cabecera / 0,95 + 5 m de desnivel de la escalera B2 / 0,30. El hall y el pasillo ya no están en la demora: se caminan |
 | Vestíbulo | 50 m × 34 m (X 80-580, Y 190-530). El ancho real del pasillo no se conoce; 34 m alcanzan para 28 molinetes |
 | Zona no paga | X 80-220: boca del pasillo, escalera B3, boletería, máquinas de carga y dos columnas |
 | Calle | Una boca: `escaleraB3` (hueco de 2,6 × 6 m en X 181-207, Y 395-455, abierto hacia el oeste) con `entradaCalle` en Y = 399. Desplazada ~4 m al este del eje real para no caer en la boca del Roca [SUP] |
 | Colas y molinetes | Colas X 220-280, molinetes X 300-316: la zona paga empieza en la conexión real con el andén (X ~ 316) |
-| Zona paga y salida | X 316-580, escaleras al andén en X 520-580, sobre los andenes de la C |
+| Zona paga y salida | X 316-580, escaleras al andén en X 520-580, sobre los andenes de la C. Pared `paredDerechaCentro` cerrada: la salida es la línea interior `salidaPeatonal` (así nadie entra al vestíbulo rodeándolo por afuera) |
 | B4 | No se modela: baja al otro lado de la conexión con el andén y sin el plano de SBASE no se sabe qué molinetes usa |
-| Elección de cola | El Roca elige al aparecer: el desvío se mide desde la boca oeste (`yReferencia = 335 + (Y - 949)`) |
+| Elección de cola | El Roca elige al aparecer, en el hall (X < 80): el desvío se mide desde la boca oeste, Y 335-385, repartiendo los carriles según la posición de aparición |
 
 Historial del día: primero se usó la demora de 181 s sin pasillo; después, pasillo + dos bocas en la pared de arriba
-(incoherente: arriba es el lado de la calle Lima); finalmente, esta disposición. La producción con 106 s quedó en
+(incoherente: arriba es el lado de la calle Lima); después, el vestíbulo reordenado con la llegada al pie de la escalera
+B2 (demora 102 s); finalmente, el descenso en los andenes del Roca con el hall simulado (demora 49 s).
+
+**Lienzo de `MainPeatonal`.** Izquierda: plano de fondo con el hall, el pasillo y el vestíbulo. Derecha (X 1300-2200):
+título y aviso, `ventana3D` con cinco cámaras (general, molinetes, pasillo, superior y hall), indicadores, orientación y,
+debajo, los bloques del diagrama de flujo. Los íconos técnicos (parámetros, variables, funciones y eventos) están en
+X 2350-3300. La producción con 106 s quedó en
 `corridas-descartadas/2026-10-05_produccion_demora106.csv`.
 
 ### Plano de fondo como CAD Drawing
