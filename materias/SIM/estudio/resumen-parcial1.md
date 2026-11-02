@@ -11,7 +11,7 @@
 - **Ross cap. 2, §2.1 a §2.9.** No entran: las variables gamma, §2.10, los ejercicios del libro ni el cap. 1.
 - **Todo lo visto antes en el apunte de Weitz**: Law cap. 1 (sistema, modelo, DES, cola simple, inventario), los 10 pasos y Weitz cap. 13 (colas).
 - **No entra el análisis de resultados.** Va en la entrega final del TPI.
-- **Duda abierta**: si entra generación de números aleatorios (Unidad 7). En 2025 hubo 3 preguntas conceptuales sobre eso y el ejercicio usa transformada inversa, así que **estudialo a nivel concepto** (§8).
+- **Números aleatorios (Naylor cap. 4 y pseudoaleatorios) y AnyLogic**: el resumen de los alumnos de 2025, *"tiene todo lo que entra"*, incluye las dos cosas. Además, en las preguntas reales que recopilaron, **la mitad son de números aleatorios**. **Tomalos como que entran**, a nivel concepto (§8 y §9).
 
 **El formato 2025**, el único multiple choice que tenemos:
 
@@ -20,6 +20,8 @@
 - 1 ejercicio numérico de inventario.
 
 De las 32 preguntas: 8 de colas, 11 de Law cap. 1, 4 de probabilidad y proceso de Poisson, 3 de números aleatorios, 1 de inventario y **5 de "cultura de cátedra"** (AnyLogic, GIS, LaTeX, POO, historia).
+
+**También entran preguntas de estadística básica** que no están en ninguna unidad: media y frecuencia absoluta y relativa (§9).
 
 **Reglas para el multiple choice** (salen de los errores del 2025):
 
@@ -356,7 +358,9 @@ Resuelto con los datos de 2025, y las dudas de ese enunciado, en `banco-pregunta
 
 - **M/M/c**: $c$ servidores en paralelo y **una sola cola**. Estable si $\lambda<c\mu$. **Solo concepto, sin fórmulas.**
 - **Cola finita**, denegación de servicio: $p_{\text{rechazo}} = 1-(P_0+\dots+P_K)$, por complemento.
-- **Análisis económico**: el costo total es el costo de servicio más el costo de espera, y se busca el $c$ que lo minimiza.
+- **Análisis económico** (Weitz 13.5): el costo total es $c_s\cdot c + c_w\cdot L$, o sea el costo de los servidores más el de la espera. Con **cola limitada** (M/M/c/K) se suma el **costo de negación**: costo por rechazo × llegadas × probabilidad de rechazo. Se busca el $c$ que minimiza el total.
+- **Fases** de todo sistema de colas: **transitoria**, que depende de las condiciones iniciales, y **estado estable**. Las fórmulas valen **solo en estado estable**.
+- ⚠️ El resumen 2025 dice "población **finita**" para M/M/1. **Está mal: es infinita.** No te dejes llevar si aparece así.
 
 ## 8. Números aleatorios (concepto)
 
@@ -389,13 +393,41 @@ Resuelto con los datos de 2025, y las dudas de ese enunciado, en `banco-pregunta
   2. Todo primo que divide a $m$ divide a $a-1$.
   3. Si 4 divide a $m$, 4 divide a $a-1$.
 
+**Generadores famosos**:
+
+- **RANDU** (años 60 y 70): un GCL malo. Las ternas consecutivas caen en **pocos planos**, o sea que tienen correlación.
+- **Todo GCL** tiene el mismo defecto: en dimensiones altas los puntos quedan sobre pocos hiperplanos.
+- **`rand` de Matlab** hasta 1995: era un GCL multiplicativo, $7^5$ módulo $2^{31}-1$.
+- **Mersenne Twister** (Matsumoto y Nishimura, **1997**): período $2^{19937}-1$, mejor distribución en varias dimensiones y pasa los tests. Es el de **Python, R, Ruby, C++, Excel y Matlab**, el estándar actual.
+
+**Pruebas de aleatoriedad**:
+
+- Hay **dos tipos**:
+  - **empíricas**: se hacen sobre los números generados;
+  - **teóricas**: se hacen sobre los parámetros del generador, sin generar números.
+- Chi-cuadrado, series, corridas, póker y Kolmogórov-Smirnov son **pruebas concretas**, no tipos.
+- **Hay que testear un generador antes de usarlo** (V).
+- El ojo humano no distingue bien qué es aleatorio, y por eso se usan tests.
+
 **Transformada inversa**: si $U\sim U(0,1)$, entonces $X=F^{-1}(U)$ tiene distribución $F$.
 
 - **Exponencial**: $X=-\frac1\lambda\ln U$. Vale con $U$ o con $1-U$, porque tienen la misma distribución.
 - **Discreta**: $X=x_j$ si $F(x_{j-1})\le U<F(x_j)$.
 - **Uniforme** $(a,b)$: $X=a+(b-a)U$.
 
-## 9. Cultura de cátedra: AnyLogic, GIS, LaTeX, historia
+**Los tres métodos de Naylor (cap. 4) y cuándo se usa cada uno**:
+
+| Método | Idea | Cuándo |
+|---|---|---|
+| **Transformada inversa** | $X=F^{-1}(U)$ | la inversa de la FDA es **fácil de obtener** (exponencial, uniforme, discretas) |
+| **Rechazo** | generar candidatos y aceptarlos o rechazarlos según la densidad objetivo | la inversa **no tiene forma cerrada** |
+| **Composición** (mezclas) | combinar distribuciones más simples | la densidad es una mezcla |
+
+- **Normal**: no tiene inversa cerrada. Se genera con **Box-Muller** (exacto), con el **TCL** (sumar $K$ uniformes, por ejemplo 12, y restar 6) o con rechazo.
+- Naylor también genera gamma, chi-cuadrado, lognormal, geométrica, Pascal, binomial, hipergeométrica, Poisson y **empíricas** (con una tabla de frecuencias observadas). Los **procesos de Markov** se simulan con una **matriz de transición**.
+- **Montecarlo** se asocia con la simulación de procesos **estocásticos**, aunque en su origen también se aplicaba a problemas determinísticos.
+
+## 9. Cultura de cátedra: AnyLogic, GIS, LaTeX, historia y estadística básica
 
 > *(Conocimiento general. Salvo lo que se tomó en 2025, no está en la wiki.)*
 
@@ -407,7 +439,31 @@ Resuelto con los datos de 2025, y las dudas de ese enunciado, en `banco-pregunta
 | **Basado en agentes** (ABM) | individuos con comportamiento propio | agentes, **statecharts**, entorno; ejemplo: difusión de un producto |
 | **Dinámica de sistemas** (SD) | agregados continuos | **stocks** (niveles), **flows** (flujos), variables auxiliares, lazos de realimentación; ecuaciones diferenciales |
 
-- **Peatones, Road Traffic, Rail, Fluid y Material Handling son bibliotecas**, no paradigmas.
+- **Peatones, Road Traffic, Rail, Fluid y Material Handling son bibliotecas**, no paradigmas. Tampoco son paradigmas "GIS" ni "sistemas en tiempo real".
+
+**M/M/1 en AnyLogic** (*The Art of Process-Centric Modeling*, en el resumen 2025):
+
+| Bloque | Qué hace |
+|---|---|
+| **Source** | genera las llegadas; tiempo entre llegadas `exponential(λ)`, que es un proceso de Poisson |
+| **Queue** | la cola de espera |
+| **Seize** | **captura** un recurso, el servidor |
+| **Delay** | el tiempo de servicio, `exponential(μ)` |
+| **Release** | **libera** el recurso |
+| **ResourcePool** | el conjunto de servidores: define la capacidad |
+| **Sink** | la salida del sistema |
+| **TimeMeasureStart / TimeMeasureEnd** | miden el tiempo en el sistema y en la cola |
+
+- Los promedios de cantidad en el sistema y en cola se llevan con variables o con objetos *Statistics*, que se actualizan en los *On enter / On exit*.
+- Las fórmulas de M/M/1 se incluyen **para compararlas con la simulación**.
+- El **servicio exponencial no es realista**: se usa **por conveniencia matemática**, porque da solución cerrada.
+- La exponencial es **la única continua sin memoria**.
+
+**Estadística básica**, que se tomó:
+
+- **Media aritmética**: medida de tendencia central, es "el promedio". **V.**
+- **Frecuencia absoluta** $f_i$: cantidad de veces que se repite un valor o evento en la muestra. **V.**
+- **Frecuencia relativa**: el **cociente** $f_i/N$. Si el enunciado dice "suma", es **F**.
 - **GIS** es un *espacio* de AnyLogic para poner agentes sobre mapas reales.
 - **GIS**, Sistema de Información Geográfica, es **multicapa**: superpone capas de datos georreferenciados. Por eso "monocapa" es **falso**.
 - **LaTeX**: sistema de composición tipográfica de alta calidad, muy usado en artículos y libros científicos con matemática. **V.**
@@ -435,7 +491,7 @@ Resuelto con los datos de 2025, y las dudas de ese enunciado, en `banco-pregunta
 13. **Paso 2 de Weitz**: modelo de simulación **base**. Recolección de datos es el paso 3.
 14. La **simulación no reemplaza** a la solución analítica. **La analítica es exacta.**
 15. Con $\lambda>\mu$ **se puede simular**. Con $\lambda<\mu$ **hay** solución analítica.
-16. **Ciclo completo** quiere decir $p=m$. La parte media del cuadrado **no está vigente**.
+16. **Ciclo completo** quiere decir $p=m$. La parte media del cuadrado **no está vigente**. Hay **dos tipos** de prueba: empíricas y teóricas.
 17. Los **pseudoaleatorios** se prefieren a los verdaderos por velocidad y reproducibilidad.
 18. Los **eventos** de la cola son arribo y partida. "Servidor ocupado" es un estado.
 19. $\mathrm{Var}(aX+b)=a^2\mathrm{Var}X$, y $\mathrm{Var}(\bar X)=\sigma^2/n$ **necesita independencia**.
@@ -448,3 +504,4 @@ Resuelto con los datos de 2025, y las dudas de ese enunciado, en `banco-pregunta
 - `estudio/banco-preguntas.md` (parcial 2025 con la clave corregida).
 - `estudio/resumen-probabilidad.md`, `resumen-colas.md`, `resumen-inventario.md`.
 - Weitz cap. 13: `fuentes/txt/apuntes-catedra__Weitz__p41-60.md`.
+- Resumen de alumnos 2025: `fuentes/resumenes/Resumen Simulación 2025 (con preguntas de parcial).docx`.

@@ -12,6 +12,7 @@
   - ● **firme**: sale textual de la bibliografía.
   - ◐ **discutible**: hay dos lecturas razonables. Explico cuál elegir y por qué.
 - Las marcadas por el alumno van como *"alumno: X"*. ❌ quiere decir que esa respuesta está mal.
+- **Validación externa**: el resumen de alumnos 2025 (`fuentes/resumenes/Resumen Simulación 2025 (con preguntas de parcial).docx`) trae varias de estas mismas preguntas con sus respuestas: 2.1, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 2.10, 2.12, 2.14, 2.16 y 2.17. **Coinciden todas con esta clave**, incluidas las que el alumno de la foto erró: 2.1, 2.6, 2.9, 2.10, 2.12 y 2.17. Para la 2.11 también ponen A, C y D, con un "ni idea, ponele".
 
 ## Clave rápida
 
@@ -206,10 +207,66 @@ Se puede simular igual: la cola crece sin límite y no se alcanza el estado esta
 Es justamente al revés: con $\rho<1$ valen las fórmulas de M/M/1.
 
 **2.16 Paradigmas explicados en *AnyLogic en 3 días*.** → ✅ **A, B y C**
-Basado en agentes, dinámica de sistemas y eventos discretos son **los tres paradigmas** de AnyLogic. Peatones, caminos (Road Traffic) y GIS son **bibliotecas o espacios**, no paradigmas.
+Basado en agentes, dinámica de sistemas y eventos discretos son **los tres paradigmas** de AnyLogic. Peatones, caminos (Road Traffic) y GIS son **bibliotecas o espacios**, no paradigmas. En otra versión de la pregunta aparece también "Sistemas en tiempo real", que es otro distractor. La fuente es la pág. 13 de *AnyLogic in 3 days*: *"There are three methods: System Dynamics, Discrete Event Modeling and Agent-Based Modeling"*.
 
 **2.17 GIS es un sistema geográfico monocapa para analizar cuestiones de una zona particular.** → ✅ **F**
 Un Sistema de Información Geográfica es justamente **multicapa**: superpone capas de datos georreferenciados, como calles, población y redes. El alumno marcó V: error. *(Conocimiento general.)*
+
+## Parte 2 bis — Otras preguntas reales de parcial (7)
+
+El resumen de alumnos 2025 trae estas preguntas en su lista de "Preguntas Parciales" y **no están en la foto del tema 404**. Probablemente salen de otro tema o de otra fecha. La respuesta que daban los alumnos va entre paréntesis.
+
+**2b.1 ¿Cuáles son algunas características de los generadores aleatorios verdaderos?**
+A) solo generan conjuntos finitos · B) en general son menos prácticos que otros generadores · C) el tiempo de generación importa más que la calidad · D) están basados en algoritmos procesados en computadoras
+✅ **B** (ellos: B). Son caros, lentos y no reproducibles. D describe a los **pseudo**aleatorios.
+
+**2b.2 V/F: la frecuencia relativa se calcula como la *suma* de la frecuencia absoluta de algún valor entre el total de valores de la población o muestra.** → ✅ **F** (ellos: F)
+La definición es el **cociente** $f_r = f_i/N$. El enunciado cambia "cociente" por "suma". Es una trampa de una sola palabra: leé cada palabra.
+
+**2b.3 ¿Cuáles son los *tipos* de pruebas de aleatoriedad?**
+A) empíricas · B) póker · C) bondad de ajuste · D) tests de Cooper · E) subidas y bajadas · F) teóricas · G) prueba de espera
+✅ **A y F** (ellos: A y F). Law §7.4 dice que hay **dos tipos**:
+- **Empíricas**: se aplican sobre los $U_i$ generados (chi-cuadrado, series, corridas, Kolmogórov-Smirnov).
+- **Teóricas**: se aplican sobre los **parámetros** del generador, sin generar ningún número.
+Póker, corridas o espera son **pruebas**, no tipos.
+
+**2b.4 V/F: la media o promedio es una medida de tendencia central; la media aritmética es el promedio estándar.** → ✅ **V**
+
+**2b.5 V/F: hacer tests sobre los valores de un generador pseudoaleatorio es obligatorio antes de usarlo en simulación.** → ✅ **V** (ellos: V)
+Los generadores básicos caen en patrones o ciclos. Por eso existen los tests, y la pregunta frecuente #2 apunta a lo mismo.
+
+**2b.6 V/F: se espera que los números pseudoaleatorios tengan un "comportamiento" similar al de los aleatorios verdaderos.** → ✅ **V**
+Es el objetivo: que imiten las propiedades estadísticas de una muestra i.i.d. $U(0,1)$.
+
+**2b.7 V/F: la frecuencia absoluta de un evento es el número de veces que se repite durante un experimento o muestra.** → ✅ **V**
+
+> **Lección**: entran **preguntas de estadística básica** (media, frecuencia absoluta y relativa) que no están en ninguna unidad. Repasá esas definiciones exactas (§9 del resumen).
+
+## Parte 2 ter — Preguntas inventadas por los alumnos de 2025, corregidas
+
+Están en el mismo resumen bajo "Preguntas Extra (inventadas por nosotros)". **No son oficiales**, pero muestran qué consideraban probable. Van con la clave revisada. **Dos de sus respuestas estaban mal y las corregí.**
+
+| # | Pregunta | Clave |
+|---|---|---|
+| E1 | El **Mersenne Twister** se destaca porque: A) período extremadamente largo · B) lo diseñó von Neumann en 1946 · C) es más lento que los GCL · D) está implementado en Python, R y Excel | **A y D**. Es de 1997, de Matsumoto y Nishimura |
+| E2 | Característica deseable de un generador: A) período corto · B) patrones claros para depurar · C) alta velocidad · D) no reproducible | **C** |
+| E3 | ¿Qué problema tenía **RANDU**? A) ceros perpetuos · B) las ternas caían en pocos planos · C) período infinito pero lento · D) no reproducible | **B**. A es el defecto de la parte media del cuadrado |
+| E4 | El **método de rechazo** se usa cuando: A) la inversa de la FDA no tiene forma cerrada · B) la densidad es uniforme · C) se quiere reducir el cómputo · D) todas | **A** |
+| E5 | El **método de composición**: A) usa trigonometría · B) combina distribuciones simples para formar una más compleja · C) es la transformada inversa · D) solo para exponenciales | **B** |
+| E6 | La **exponencial**: A) modela tiempos entre eventos independientes · B) no tiene memoria · C) es la única continua sin memoria · D) solo para tiempos de servicio realistas | **A, B y C**. D es falsa: para servicio se usa **por conveniencia matemática**, no por realismo |
+| E7 | ¿Cuáles son **discretas**? Normal · Binomial · Poisson · Hipergeométrica | **Binomial, Poisson e hipergeométrica** |
+| E8 | La **normal** se genera con: A) transformada inversa · B) Box-Muller · C) TCL (sumar uniformes) · D) rechazo | ⚠️ Los alumnos ponían **B y C**. **También D es válida**: Ross genera la normal por rechazo con una exponencial. La A **no**, porque $\Phi$ no tiene inversa cerrada. Si es de opción única, B |
+| E9 | Estabilidad M/M/1: A) λ>μ · B) λ<μ · C) λ=μ · D) siempre | **B** |
+| E10 | En AnyLogic, **Source**: A) genera llegadas · B) es la cola · C) libera recursos · D) mide el tiempo en el sistema | **A** |
+| E11 | Para medir el **tiempo en el sistema** en AnyLogic se usan: A) TimeMeasureStart y TimeMeasureEnd · B) ResourcePool · C) Delay con histogramas · D) Sink | **A** |
+| E12 | **Seize** en AnyLogic: A) genera llegadas · B) registra esperas · C) captura un recurso (servidor) · D) libera al servidor | **C**. D es **Release** |
+| E13 | **Montecarlo** se asocia principalmente con: A) procesos determinísticos · B) procesos estocásticos complejos · C) GIS · D) POO | ⚠️ Los alumnos ponían **A**, y está mal según su propio texto: *"el término Monte Carlo se asocia con la simulación de procesos estocásticos, aunque **originalmente** también se aplicaba a problemas determinísticos"*. **Clave: B** |
+| E14 | Ventaja de los pseudoaleatorios frente a los verdaderos: A) más realistas · B) reproducibles y eficientes · C) no requieren semilla · D) nunca muestran patrones | **B** |
+| E15 | Los **procesos de Markov** en simulación se representan con: A) tablas de frecuencias · B) matrices de transición de estados · C) uniformes · D) GIS | **B** |
+| E16 | Un buen generador es: A) lento y preciso · B) rápido, reproducible y con buen comportamiento estadístico · C) basado en fenómenos físicos · D) de período corto | **B** |
+| E17 | Característica de los **verdaderamente** aleatorios: A) algoritmos determinísticos · B) reproducibles con semilla · C) basados en fenómenos físicos como los cuánticos · D) ciclos cortos | **C** |
+| E18 | ¿Qué condición **NO** es necesaria para el período completo de un GCL mixto? A) $m$ y $c$ primos relativos · B) $a-1$ divisible por todos los primos que dividen a $m$ · C) si 4 divide a $m$, 4 divide a $a-1$ · D) el multiplicador debe ser primo | **D**. Ojo: el resumen redacta mal la B, al revés. Lo correcto es "**todo primo que divide a $m$ divide a $a-1$**" |
+| E19 | La **transformada inversa** se usa cuando: A) la inversa de la FDA es fácil de obtener · B) no hay inversa cerrada · C) se mezclan distribuciones · D) se aceptan o rechazan candidatos | **A**. B lleva a rechazo, C es composición y D es rechazo |
 
 ## Parte 3 — El ejercicio de inventario
 

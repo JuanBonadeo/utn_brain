@@ -59,6 +59,9 @@ fotocopiada en 2019). El cap. 2 de Ross es la base de la Unidad 6.
 > 📌 **Para el parcial del 7/11/2026**: `estudio/resumen-parcial1.md` (todo lo que entra, en formato para multiple choice)
 > y `estudio/banco-preguntas.md` (el parcial 2025 con **la clave corregida**: el alumno erró 14 de 32, más
 > 25 preguntas de práctica del alcance 2026). El alcance de este año está en `estudio/parcial1-alcance-2026.md`.
+> **Lo que entró en 2025** se ve en `fuentes/resumenes/Resumen Simulación 2025 (con preguntas de parcial).docx`. Es el resumen de
+> alumnos del año pasado: Law cap. 1, Weitz 1.5 y 13, Ross cap. 2, **números pseudoaleatorios, Naylor cap. 4 y AnyLogic
+> (process-centric)**. Trae una lista de preguntas reales de parcial con sus respuestas, ya integradas al banco.
 
 ### 🔴 Lo primero: el formato cambió en 2025
 
@@ -1471,6 +1474,15 @@ El período $p$ es el mínimo $h > 0$ tal que $Z_h = Z_0$. Como $Z_i \le m$ para
 > ⚠️ En el parcial 2021-12-02 resuelto figura "$a = 7^5 = 1608$" — **es un error de tipeo**, el valor
 > correcto es **16807**.
 
+#### Generadores famosos: el malo y el estándar actual
+
+Del resumen 2025 de alumnos, que se toma como referencia de lo que entra:
+
+- **RANDU** (IBM, décadas del 60 y 70): un GCL multiplicativo **muy usado y malo**. Si se grafican ternas consecutivas $(U_i, U_{i+1}, U_{i+2})$, los puntos **caen en pocos planos (15)**. Muestra una correlación fuerte que los tests de una dimensión no detectan.
+- **Defecto estructural de todo GCL**: en dimensiones altas los puntos quedan sobre **pocos hiperplanos**, el resultado de Marsaglia. Son eficientes cuando $m$ es potencia de 2, porque el módulo se calcula truncando bits.
+- **Mersenne Twister** (Matsumoto y Nishimura, **1997**): período $2^{19937}-1$, mejor distribución multidimensional y pasa las baterías de tests. Es el generador por defecto de **Python, R, Ruby, C++, Excel y Matlab**. Hoy es el estándar, y le gana a los GCL en período, en uniformidad en varias dimensiones y en calidad estadística.
+- **Tipos de pruebas de aleatoriedad**: hay **dos tipos**, empíricas y teóricas (Law §7.4). Chi-cuadrado, póker, corridas, series y "espera" son **pruebas concretas**, no tipos. Esto se tomó como pregunta.
+
 ### 7.5 Tests de aleatoriedad
 
 Pregunta frecuente #2: *"¿Cómo me doy cuenta de que la generación de números aleatorios no me sirve?"*
@@ -1694,6 +1706,7 @@ se aplica $x_i = a + (b-a)\,r_i$ con los $a$ y $b$ que dé la consigna.
 - `fuentes/apuntes-catedra/Números pseudoaleatorios.pdf` — **apunte oficial de cátedra** (middle square, GCL, en R)
 - `fuentes/apuntes-extra/Números aleatorios.pdf` (Lascano, UTN Rosario) — GCL, período completo, tests
 - `fuentes/resumenes/Resumen 5.pdf` — Naylor caps. 3 y 4 resumidos
+- `fuentes/resumenes/Resumen Simulación 2025 (con preguntas de parcial).docx` — 7.1 números pseudoaleatorios (RANDU, Mersenne Twister, tipos de prueba) y Naylor cap. 4 en resumen
 - `fuentes/examenes/` — prácticamente todos
 
 ---
@@ -2865,6 +2878,10 @@ Conclusiones:
 
 ## Log
 
+- **2026-11-02**: ingerido `fuentes/resumenes/Resumen Simulación 2025 (con preguntas de parcial).docx`, el resumen de alumnos
+  2025 con todo lo que entró. Unidad 7: RANDU, Mersenne Twister y los dos tipos de pruebas. Banco: 7 preguntas de
+  parcial que no estaban en la foto, y la clave del resumen coincide con la corrección del banco. Resumen del parcial:
+  números aleatorios y AnyLogic pasan a "entra".
 - **2026-11-02**: parcial 1 en formato multiple choice. Se revisó el parcial 2025 contra las fotos y se armó
   `estudio/banco-preguntas.md` con la clave corregida y justificada: las marcas del alumno fallan en 14 de 32, y la 1.10,
   la 1.13, la 2.11 y la 2.13 son discutibles. El ejercicio 3 queda con dos supuestos explícitos, porque con 5 números no
