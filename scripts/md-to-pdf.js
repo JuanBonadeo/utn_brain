@@ -212,6 +212,106 @@ body = body.replace(
   (_m, open, rest, ws) => `${open} data-stick${rest}${ws}`,
 );
 
+// Un título nunca debe quedar solo al pie de página. Chrome respeta mal el
+// break-after:avoid cuando lo que sigue es una figura grande que no entra: la
+// figura salta y el título (más la línea de "Fuentes") queda huérfano. Se
+// agrupa cada cadena de títulos —con los párrafos cortos que haya entre
+// ellos— junto con el primer bloque de contenido (figura, tabla corta,
+// párrafo o lista breve) en un div que no se corta.
+body = keepHeadingsWithNext(body);
+
+function splitTopLevel(html) {
+  const blocks = [];
+  let i = 0;
+  while (i < html.length) {
+    const ws = html.slice(i).match(/^\s+/);
+    if (ws) { i += ws[0].length; continue; }
+    if (html[i] !== '<') {
+      const j = html.indexOf('<', i);
+      const end = j === -1 ? html.length : j;
+      blocks.push({ tag: '#text', html: html.slice(i, end) });
+      i = end;
+      continue;
+    }
+    const m = html.slice(i).match(/^<([a-zA-Z0-9]+)\b[^>]*?(\/?)>/);
+    if (!m) { blocks.push({ tag: '#raw', html: html.slice(i) }); break; }
+    const tag = m[1].toLowerCase();
+    if (m[2] === '/' || /^(hr|br|img)$/.test(tag)) {
+      blocks.push({ tag, html: m[0] });
+      i += m[0].length;
+      continue;
+    }
+    // buscar el cierre balanceado del mismo tag
+    const re = new RegExp(`<(/?)${tag}\\b[^>]*>`, 'gi');
+    re.lastIndex = i;
+    let depth = 0, end = -1, t;
+    while ((t = re.exec(html))) {
+      depth += t[1] ? -1 : 1;
+      if (depth === 0) { end = re.lastIndex; break; }
+    }
+    if (end === -1) { blocks.push({ tag: '#raw', html: html.slice(i) }); break; }
+    blocks.push({ tag, html: html.slice(i, end) });
+    i = end;
+  }
+  return blocks;
+}
+
+function keepHeadingsWithNext(html) {
+  const blocks = splitTopLevel(html);
+  const textLen = (b) => b.html.replace(/<[^>]+>/g, '').length;
+  const isHeading = (b) => /^h[2-4]$/.test(b.tag);
+  const isFigure = (b) => b.tag === 'p' && /^<p[^>]*>\s*<img\b/.test(b.html);
+  const isShortP = (b) => b.tag === 'p' && !isFigure(b) && textLen(b) <= 320;
+  const out = [];
+  const isIntro = (b) => b.tag === 'p' && !isFigure(b) && textLen(b) <= 220 &&
+    /:\s*$/.test(b.html.replace(/<[^>]+>/g, '').trim());
+  for (let k = 0; k < blocks.length; k++) {
+    // "Tres cosas que se toman:" + su lista (o tabla corta) van juntas
+    if (isIntro(blocks[k]) && k + 1 < blocks.length) {
+      const nx = blocks[k + 1];
+      const okList = ['ul', 'ol'].includes(nx.tag) && textLen(nx) <= 1200;
+      const okTable = nx.tag === 'div' && /^<div class="tw keep"/.test(nx.html);
+      if (okList || okTable) {
+        out.push(`<div class="keepnext">\n${blocks[k].html}\n${nx.html}\n</div>`);
+        k++;
+        continue;
+      }
+    }
+    if (!isHeading(blocks[k])) { out.push(blocks[k].html); continue; }
+    const group = [blocks[k].html];
+    let j = k + 1;
+    // más títulos y párrafos cortos (p. ej. la línea de "Fuentes")
+    while (j < blocks.length && (isHeading(blocks[j]) || isShortP(blocks[j]))) {
+      // un párrafo corto seguido de contenido largo ya cuenta como contenido
+      if (isShortP(blocks[j]) && !(j + 1 < blocks.length && isHeading(blocks[j + 1])) &&
+          !(j + 1 < blocks.length && (isFigure(blocks[j + 1]) || /tw keep/.test(blocks[j + 1].html.slice(0, 40))))) {
+        break;
+      }
+      group.push(blocks[j].html);
+      j++;
+    }
+    // primer bloque de contenido: se incluye si es figura, tabla corta o algo breve
+    if (j < blocks.length) {
+      const b = blocks[j];
+      const shortTable = b.tag === 'div' && /^<div class="tw keep"/.test(b.html);
+      const brief = ['p', 'ul', 'ol', 'blockquote', 'pre'].includes(b.tag) && textLen(b) <= 900;
+      if (isFigure(b) || shortTable || brief) {
+        group.push(b.html);
+        j++;
+        // si ese bloque presenta una lista corta ("Supuestos:"), la lista también
+        if (isIntro(b) && j < blocks.length && ['ul', 'ol'].includes(blocks[j].tag) &&
+            textLen(blocks[j]) <= 1200) {
+          group.push(blocks[j].html);
+          j++;
+        }
+      }
+    }
+    out.push(`<div class="keepnext">\n${group.join('\n')}\n</div>`);
+    k = j - 1;
+  }
+  return out.join('\n');
+}
+
 // ─────────────────────────────────────────────────── 4. índice
 
 let toc = '';
@@ -375,6 +475,8 @@ h2{
   break-inside:avoid;
 }
 h2:first-of-type{ margin-top:17pt; }
+.keepnext{ break-inside:avoid; }
+.keepnext > h2:first-of-type{ margin-top:23pt; }
 h3{
   font-family:"Avenir Next","Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size:10.6pt;
