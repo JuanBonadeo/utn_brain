@@ -445,7 +445,7 @@ $SKPOLY
   9
 $TDCREATE
  40
-2461347.4375925926
+2461347.4756712965
   9
 $TDUCREATE
  40
@@ -453,7 +453,7 @@ $TDUCREATE
   9
 $TDUPDATE
  40
-2461347.4375925926
+2461347.4756712965
   9
 $TDUUPDATE
  40
@@ -505,7 +505,7 @@ $SPLINESEGS
   9
 $HANDSEED
   5
-18B8
+18B7
   9
 $SURFTAB1
  70
@@ -885,11 +885,11 @@ $PSTYLEMODE
   9
 $FINGERPRINTGUID
   2
-{D07FB4D4-7725-4845-B68A-CCE6DBF32BFC}
+{B882C74E-3382-482D-8F8C-4D0F43A4FE86}
   9
 $VERSIONGUID
   2
-{EE7A86F8-A89B-4E89-A5DA-729D398602CD}
+{97D55E1B-24D8-4FCB-A1FA-C04FD9F3838F}
   9
 $EXTNAMES
 290
@@ -2117,13 +2117,13 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
-LIMITE
+PROYEC
  70
 0
  62
 2
   6
-DASHDOT2
+HIDDEN
 370
 -3
 390
@@ -2139,11 +2139,11 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
-CALLES
+BARANDA
  70
 0
  62
-2
+1
   6
 CONTINUOUS
 370
@@ -2154,226 +2154,6 @@ BD56
 LAYER
   5
 187D
-330
-1
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-ESCALERA
- 70
-0
- 62
-4
-  6
-CONTINUOUS
-370
--3
-390
-BD56
-  0
-LAYER
-  5
-187E
-330
-1
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-MUROS-NUEVOS
- 70
-0
- 62
-3
-  6
-CONTINUOUS
-370
--3
-390
-BD56
-  0
-LAYER
-  5
-187F
-330
-1
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-EDIFICIOS
- 70
-0
- 62
-4
-  6
-CONTINUOUS
-370
--3
-390
-BD56
-  0
-LAYER
-  5
-1880
-330
-1
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-ADIF
- 70
-0
- 62
-150
-  6
-CONTINUOUS
-370
--3
-390
-BD56
-  0
-LAYER
-  5
-1881
-330
-1
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-015
- 70
-0
- 62
-15
-  6
-CONTINUOUS
-370
--3
-390
-BD56
-  0
-LAYER
-  5
-1882
-330
-1
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-02
- 70
-0
- 62
-2
-  6
-CONTINUOUS
-370
--3
-390
-BD56
-  0
-LAYER
-  5
-1883
-330
-1
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-LOCALES
- 70
-0
- 62
-1
-  6
-CONTINUOUS
-370
--3
-390
-BD56
-  0
-LAYER
-  5
-1884
-330
-1
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-A-CARP
- 70
-0
- 62
-4
-  6
-CONTINUOUS
-370
--3
-390
-BD56
-  0
-LAYER
-  5
-1885
-330
-1
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-01
- 70
-0
- 62
-1
-  6
-CONTINUOUS
-370
--3
-390
-BD56
-  0
-LAYER
-  5
-1886
-330
-1
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-TMR
- 70
-0
- 62
-220
-  6
-CONTINUOUS
-370
--3
-390
-BD56
-  0
-LAYER
-  5
-1887
 330
 1
 100
@@ -2395,7 +2175,7 @@ BD56
   0
 LAYER
   5
-1888
+187E
 330
 1
 100
@@ -2403,13 +2183,13 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
-PROYEC
+ADIF
  70
 0
  62
-2
+150
   6
-HIDDEN
+CONTINUOUS
 370
 -3
 390
@@ -2417,7 +2197,161 @@ BD56
   0
 LAYER
   5
-1889
+187F
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+TMR
+ 70
+0
+ 62
+220
+  6
+CONTINUOUS
+370
+-3
+390
+BD56
+  0
+LAYER
+  5
+1880
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+EDIFICIOS
+ 70
+0
+ 62
+4
+  6
+CONTINUOUS
+370
+-3
+390
+BD56
+  0
+LAYER
+  5
+1881
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+CARPINTERIA
+ 70
+0
+ 62
+2
+  6
+CONTINUOUS
+370
+-3
+390
+BD56
+  0
+LAYER
+  5
+1882
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+ESCA
+ 70
+0
+ 62
+4
+  6
+CONTINUOUS
+370
+-3
+390
+BD56
+  0
+LAYER
+  5
+1883
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+A-CARP
+ 70
+0
+ 62
+4
+  6
+CONTINUOUS
+370
+-3
+390
+BD56
+  0
+LAYER
+  5
+1884
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+01
+ 70
+0
+ 62
+1
+  6
+CONTINUOUS
+370
+-3
+390
+BD56
+  0
+LAYER
+  5
+1885
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+LOCALES
+ 70
+0
+ 62
+1
+  6
+CONTINUOUS
+370
+-3
+390
+BD56
+  0
+LAYER
+  5
+1886
 330
 1
 100
@@ -2439,6 +2373,72 @@ BD56
   0
 LAYER
   5
+1887
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+LIMITE
+ 70
+0
+ 62
+2
+  6
+DASHDOT2
+370
+-3
+390
+BD56
+  0
+LAYER
+  5
+1888
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+015
+ 70
+0
+ 62
+15
+  6
+CONTINUOUS
+370
+-3
+390
+BD56
+  0
+LAYER
+  5
+1889
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+02
+ 70
+0
+ 62
+2
+  6
+CONTINUOUS
+370
+-3
+390
+BD56
+  0
+LAYER
+  5
 188A
 330
 1
@@ -2447,11 +2447,11 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
-CARPINTERIA
+ESCALERA
  70
 0
  62
-2
+4
   6
 CONTINUOUS
 370
@@ -2491,11 +2491,11 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
-BARANDA
+MUROS-NUEVOS
  70
 0
  62
-1
+3
   6
 CONTINUOUS
 370
@@ -2513,11 +2513,11 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
-ESCA
+CALLES
  70
 0
  62
-4
+2
   6
 CONTINUOUS
 370
@@ -2637,7 +2637,7 @@ Continuous
   0
 LAYER
   5
-18B3
+18B2
 330
 1
 100
@@ -3457,7 +3457,7 @@ ACAD
   0
 APPID
   5
-18B5
+18B4
 330
 3
 100
@@ -3471,7 +3471,7 @@ HATCHBACKGROUNDCOLOR
   0
 APPID
   5
-18B6
+18B5
 330
 3
 100
@@ -166263,19 +166263,19 @@ ROTULOS
 100
 AcDbText
  10
--63.0
+-112.0
  20
--109.09999999999991
+-5.5
  30
 0.0
  40
-2.2
+2.4
   1
-HALL DEL ROCA - plano de Trenes Argentinos
+HALL DEL ROCA - plano de Trenes Argentinos (2026)
  11
--63.0
+-112.0
  21
--109.09999999999991
+-5.5
  31
 0.0
 100
@@ -166293,19 +166293,19 @@ ROTULOS
 100
 AcDbText
  10
--86.0
+114.0
  20
--154.0999999999999
+-5.5
  30
 0.0
  40
-1.6
+2.4
   1
-Paragolpes
+N ->
  11
--86.0
+114.0
  21
--154.0999999999999
+-5.5
  31
 0.0
 100
@@ -166323,19 +166323,19 @@ ROTULOS
 100
 AcDbText
  10
-37.0
+62.0
  20
--27.09999999999991
+-15.0
  30
 0.0
  40
 1.6
   1
-Andenes Linea C (nivel -2, OpenStreetMap)
+Calle Lima
  11
-37.0
+62.0
  21
--27.09999999999991
+-15.0
  31
 0.0
 100
@@ -166355,7 +166355,7 @@ AcDbText
  10
 16.0
  20
--69.09999999999991
+-79.09999999999991
  30
 0.0
  40
@@ -166367,7 +166367,7 @@ Calle Brasil
  11
 16.0
  21
--69.09999999999991
+-79.09999999999991
  31
 0.0
 100
@@ -166385,19 +166385,19 @@ ROTULOS
 100
 AcDbText
  10
--48.0
+64.0
  20
--5.099999999999909
+-26.5
  30
 0.0
  40
 1.6
   1
-Calle Lima
+Andenes de la Linea C (nivel -2, OpenStreetMap)
  11
--48.0
+64.0
  21
--5.099999999999909
+-26.5
  31
 0.0
 100
@@ -166415,51 +166415,19 @@ ROTULOS
 100
 AcDbText
  10
-2.0
+-100.0
  20
--74.09999999999991
+-160.0
  30
 0.0
  40
-1.4
+1.6
   1
-Pasillo subterraneo (OSM)
- 50
-90.0
+Paragolpes
  11
-2.0
+-100.0
  21
--74.09999999999991
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-18AF
-330
-17
-100
-AcDbEntity
-  8
-ROTULOS
-100
-AcDbText
- 10
--98.0
- 20
--6.099999999999909
- 30
-0.0
- 40
-2.0
-  1
-N ->
- 11
--98.0
- 21
--6.099999999999909
+-160.0
  31
 0.0
 100
@@ -166467,7 +166435,7 @@ AcDbText
   0
 LINE
   5
-18B0
+18AF
 330
 17
 100
@@ -166491,7 +166459,7 @@ AcDbLine
   0
 LINE
   5
-18B1
+18B0
 330
 17
 100
@@ -166515,13 +166483,13 @@ AcDbLine
   0
 TEXT
   5
-18B2
+18B1
 330
 17
 100
 AcDbEntity
   8
-ROTULOS
+REFERENCIA
 100
 AcDbText
  10
@@ -166545,7 +166513,7 @@ AcDbText
   0
 LWPOLYLINE
   5
-18B4
+18B3
 330
 17
 100
@@ -167665,7 +167633,7 @@ CREATED_BY_EZDXF
   3
 WRITTEN_BY_EZDXF
 350
-18B7
+18B6
   0
 DICTIONARYVAR
   5
@@ -167677,7 +167645,7 @@ DictionaryVariables
 280
 0
   1
-1.4.2 @ 2026-11-02T13:30:08.536560+00:00
+1.4.2 @ 2026-11-02T14:24:58.429547+00:00
   0
 VISUALSTYLE
   5
@@ -168381,7 +168349,7 @@ X-Ray
   0
 DICTIONARYVAR
   5
-18B7
+18B6
 330
 2D
 100
@@ -168389,7 +168357,7 @@ DictionaryVariables
 280
 0
   1
-1.4.2 @ 2026-11-02T13:30:08.947505+00:00
+1.4.2 @ 2026-11-02T14:24:58.532226+00:00
   0
 ENDSEC
   0

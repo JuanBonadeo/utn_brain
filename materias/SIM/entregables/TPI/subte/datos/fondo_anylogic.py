@@ -88,20 +88,23 @@ def main():
         elif tg.get('tunnel') == 'yes' or tg.get('layer') == '-1' or tg.get('highway') == 'steps':
             out.add_lwpolyline(pts, dxfattribs={'layer': 'PASILLO_OSM'})
 
-    def rot(texto, x, y, h=1.6, ang=0):
-        out.add_text(texto, height=h, rotation=ang, dxfattribs={'layer': 'ROTULOS'}).set_placement(uv(x, y))
-    rot('HALL DEL ROCA - plano de Trenes Argentinos', -2135, 2800, 2.2)
-    rot('Paragolpes', -2112, 2845)
-    rot('Andenes Linea C (nivel -2, OpenStreetMap)', -2235, 2718)
-    rot('Calle Brasil', -2214, 2760, 1.6, 90)
-    rot('Calle Lima', -2150, 2696)
-    rot('Pasillo subterraneo (OSM)', -2200, 2765, 1.4, 90)
-    rot('N ->', -2100, 2697, 2.0)
-    # Cruz de control: tiene que caer en la boca oeste del vestíbulo (X = 80, Y = 360 del modelo).
+    def rot(texto, x, y, h=1.6, ang=0, capa='ROTULOS'):
+        out.add_text(texto, height=h, rotation=ang, dxfattribs={'layer': capa}).set_placement(uv(x, y))
+
+    def rot_modelo(texto, X, Y, h=1.6, capa='ROTULOS'):  # posición dada en píxeles del modelo
+        out.add_text(texto, height=h, dxfattribs={'layer': capa}).set_placement((X / 10, -Y / 10))
+    # Rótulos en zonas libres, sin pisar el modelo (vestíbulo X 80-580, pasillo, hall y panel).
+    rot_modelo('HALL DEL ROCA - plano de Trenes Argentinos (2026)', -1120, 55, 2.4)
+    rot_modelo('N ->', 1140, 55, 2.4)
+    rot_modelo('Calle Lima', 620, 150)
+    rot('Calle Brasil', -2214, 2770, 1.6, 90)
+    rot_modelo('Andenes de la Linea C (nivel -2, OpenStreetMap)', 640, 265, 1.6)
+    rot_modelo('Paragolpes', -1000, 1600, 1.6)
+    # Cruz de control de la alineación (capa REFERENCIA, oculta en el modelo una vez verificada).
     cx, cy = 8, -36
     out.add_line((cx - 1.5, cy), (cx + 1.5, cy), dxfattribs={'layer': 'REFERENCIA'})
     out.add_line((cx, cy - 1.5), (cx, cy + 1.5), dxfattribs={'layer': 'REFERENCIA'})
-    rot('REF (80, 360)', X0 - 1.0, Y0 + 1.0, 1.0)
+    rot('REF (80, 360)', X0 - 1.0, Y0 + 1.0, 1.0, capa='REFERENCIA')
     # Marco fijo: AnyLogic ajusta el CAD a su recuadro, así que el recuadro tiene que ser conocido y exacto.
     if 'MARCO' not in dst.layers:
         dst.layers.add('MARCO', color=9)

@@ -662,10 +662,19 @@ Historial del día: primero se usó la demora de 181 s sin pasillo; después, pa
 (incoherente: arriba es el lado de la calle Lima); después, el vestíbulo reordenado con la llegada al pie de la escalera
 B2 (demora 102 s); finalmente, el descenso en los andenes del Roca con el hall simulado (demora 49 s).
 
+**Carga de cada tren (2026-11-02).** Cada tren lleva la demanda acumulada desde el tren anterior de su ramal
+(`ramalRocaPed`, constante con el ramal de cada tren de `llegadasRocaSeg`, del horario oficial). La tasa es la del perfil
+SBASE en el instante de ingreso (antes de las 07:00 se extiende la de la primera ventana) y cada ramal toma la parte
+proporcional a sus trenes en la franja. Con la demora de 49 s: 47 trenes, 14.852 pasajeros del Roca (100,2 % de
+0,8 × SBASE), entre 198 y 527 por tren, mediana 293. Antes se repartía la demanda de cada ventana en partes iguales
+entre sus trenes, lo que daba saltos de hasta 30 % entre trenes vecinos según la ventana en que caían. Ventana por
+ventana, el ingreso ya no coincide exactamente con SBASE (se corre hacia el tren siguiente); el total sí.
+
 **Lienzo de `MainPeatonal`.** Izquierda: plano de fondo con el hall, el pasillo y el vestíbulo. Derecha (X 1300-2200):
 título y aviso, `ventana3D` con cinco cámaras (general, molinetes, pasillo, superior y hall), indicadores, orientación y,
-debajo, los bloques del diagrama de flujo. Los íconos técnicos (parámetros, variables, funciones y eventos) están en
-X 2350-3300. La producción con 106 s quedó en
+debajo, los bloques del diagrama de flujo. Los íconos técnicos están en una grilla ordenada por tipo desde X = 2350
+(variables, funciones y eventos; 32 filas por columna). Los rótulos del plano de fondo quedan en zonas libres y la capa
+`REFERENCIA` está oculta. La producción con 106 s quedó en
 `corridas-descartadas/2026-10-05_produccion_demora106.csv`.
 
 ### Plano de fondo como CAD Drawing

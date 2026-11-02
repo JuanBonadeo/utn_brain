@@ -159,13 +159,18 @@ Es un supuesto: ninguno de los estudios citados lo informa.
 \textbf{Entidades.} Cada pasajero es un agente con su velocidad, su instante de ingreso, su tiempo de
 validación y su molinete elegido. Los molinetes son servidores paralelos, cada uno con su propia cola.
 
-\textbf{Generación de la demanda.} La demanda de cada ventana $k$ es la media observada $d_k$. Una
-fracción $p$ (la proporción que llega en tren) se reparte en partes iguales entre los trenes cuyo pasaje
-ingresa al vestíbulo en esa ventana, es decir, con arribo $+$ demora dentro de la ventana. Así, los trenes
-del pico traen más gente que los del borde de la franja. El pasaje de cada tren ingresa por el acceso
-desde el hall ferroviario de forma pareja durante la dispersión de la descarga. El resto, $(1-p)\,d_k$,
-entra desde la calle con llegadas de Poisson no homogéneas a la tasa de cada ventana. Solo se generan
-ingresos antes de las 09:30.
+\textbf{Generación de la demanda.} La demanda de cada ventana $k$ es la media observada $d_k$, y define
+una tasa de llegada a lo largo de la franja. Una fracción $p$ (la proporción que llega en tren) viaja en los
+trenes del Roca. La gente espera en las estaciones de su ramal, así que cada tren lleva la demanda que se
+acumuló desde el tren anterior \emph{de su mismo ramal}. Cada ramal toma la parte de la demanda proporcional
+a sus trenes en la franja. Con este criterio, un tren que llega después de un intervalo largo viene más
+cargado, y dos trenes de ramales distintos que llegan juntos no se reparten la misma gente. El total de la
+franja coincide con el dato; ventana por ventana, el ingreso se corre hacia el tren siguiente.
+
+El pasaje de cada tren baja en la cabecera de su andén de forma pareja durante la dispersión de la
+descarga, y desde ahí camina el hall y el pasillo hasta el vestíbulo. El resto, $(1-p)\,d_k$, entra desde la
+calle con llegadas de Poisson no homogéneas a la tasa de cada ventana. Solo se generan ingresos antes de las
+09:30.
 
 \textbf{Servicio y elección de molinete.} Cada pasajero elige, entre los molinetes habilitados, el que
 minimiza un costo: el desvío lateral respecto de su recorrido, convertido a tiempo a 1,3~m/s, más la
