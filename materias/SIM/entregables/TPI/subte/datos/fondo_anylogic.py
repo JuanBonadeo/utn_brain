@@ -59,7 +59,7 @@ def main():
     for e in dst.modelspace():
         e.transform(m)
         e.dxf.color = 8          # gris: el plano es fondo
-    for nombre, color in (('LINEA_C_OSM', 5), ('PASILLO_OSM', 30), ('BOCAS_OSM', 30), ('ROTULOS', 8), ('REFERENCIA', 1)):
+    for nombre, color in (('LINEA_C_OSM', 5), ('PASILLO_OSM', 30), ('BOCAS_OSM', 30), ('ROTULOS', 250), ('REFERENCIA', 1)):
         if nombre not in dst.layers:
             dst.layers.add(nombre, color=color)
     out = dst.modelspace()
@@ -76,16 +76,22 @@ def main():
         w = (en(lat, lon) - t) / k
         return uv(w.real, w.imag)
 
+    # Sólo lo que hace al recorrido modelado: boca B2 del hall, escalera B3 de la calle Brasil y el pasillo
+    # subterráneo hasta los andenes. Las demás escaleras y caminos de OSM (vestíbulo Plaza, calle Lima) se omiten.
+    BOCAS = {1978947865, 3111585574}                                    # B2 (hall) y B3 (calle Brasil)
+    PASILLO = {187138350, 187138351, 306291532, 306291537, 923613081, 306291540, 1331110731}
     for e in osm.values():
         tg = e.get('tags', {})
-        if e['type'] == 'node' and tg.get('railway') == 'subway_entrance':
+        if e['type'] == 'node' and e['id'] in BOCAS:
             out.add_circle(p(e['lat'], e['lon']), 0.8, dxfattribs={'layer': 'BOCAS_OSM'})
         if 'geometry' not in e:
             continue
         pts = [p(q['lat'], q['lon']) for q in e['geometry']]
         if tg.get('railway') == 'platform' and tg.get('layer') == '-2':
-            out.add_lwpolyline(pts, dxfattribs={'layer': 'LINEA_C_OSM', 'const_width': 1.2})
-        elif tg.get('tunnel') == 'yes' or tg.get('layer') == '-1' or tg.get('highway') == 'steps':
+            # Andenes rectos: OSM los trae con un leve quiebre; se dibujan horizontales a su altura media.
+            us = [q[0] for q in pts]; vm = sum(q[1] for q in pts) / len(pts)
+            out.add_lwpolyline([(min(us), vm), (max(us), vm)], dxfattribs={'layer': 'LINEA_C_OSM', 'const_width': 1.2})
+        elif e['id'] in PASILLO:
             out.add_lwpolyline(pts, dxfattribs={'layer': 'PASILLO_OSM'})
 
     def rot(texto, x, y, h=1.6, ang=0, capa='ROTULOS'):
@@ -94,12 +100,12 @@ def main():
     def rot_modelo(texto, X, Y, h=1.6, capa='ROTULOS'):  # posición dada en píxeles del modelo
         out.add_text(texto, height=h, dxfattribs={'layer': capa}).set_placement((X / 10, -Y / 10))
     # Rótulos en zonas libres, sin pisar el modelo (vestíbulo X 80-580, pasillo, hall y panel).
-    rot_modelo('HALL DEL ROCA - plano de Trenes Argentinos (2026)', -1120, 55, 2.4)
-    rot_modelo('N ->', 1140, 55, 2.4)
-    rot_modelo('Calle Lima', 620, 150)
-    rot('Calle Brasil', -2214, 2770, 1.6, 90)
-    rot_modelo('Andenes de la Linea C (nivel -2, OpenStreetMap)', 640, 265, 1.6)
-    rot_modelo('Paragolpes', -1000, 1600, 1.6)
+    rot_modelo('HALL DEL ROCA - plano de Trenes Argentinos (2026)', -1120, 55, 3.2)
+    rot_modelo('N ->', 1130, 55, 3.2)
+    rot_modelo('Calle Lima', 620, 150, 2.4)
+    rot('Calle Brasil', -2214, 2775, 2.4, 90)
+    rot_modelo('Andenes de la Linea C (nivel -2, OpenStreetMap)', 640, 262, 2.2)
+    rot_modelo('Paragolpes del Roca', -1000, 1600, 2.4)
     # Cruz de control de la alineación (capa REFERENCIA, oculta en el modelo una vez verificada).
     cx, cy = 8, -36
     out.add_line((cx - 1.5, cy), (cx + 1.5, cy), dxfattribs={'layer': 'REFERENCIA'})

@@ -3753,6 +3753,22 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 						</InitialValue>
 					</Properties>
 				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1794000000500</Id>
+					<Name><![CDATA[ramalRocaPed]]></Name>
+					<Description><![CDATA[Ramal de cada tren de llegadasRocaSeg (mismo orden): 0 La Plata, 1 Bosques via Quilmes, 2 Bosques via Temperley, 3 Glew/A. Korn, 4 Ezeiza/Canuelas. Dato oficial: datos/arribos_roca_constitucion_habiles.csv.]]></Description>
+					<X>2630</X><Y>810</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>false</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="true" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[int[]]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[new int[] {2,3,1,4,2,3,4,2,3,0,4,2,1,3,2,3,4,2,0,3,4,2,3,1,2,4,0,3,4,2,3,1,4,2,0,3,4,2,3,1,4,2,0,3,4,2,3,4,2,0,3,4,2,3,1,4,2}]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
 				<Variable Class="Parameter">
 					<Id>1791000000007</Id>
 					<Name><![CDATA[tamanoTandaDemo]]></Name>
@@ -4278,22 +4294,6 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 						</ParameterEditor>
 					</Properties>                 
 				</Variable>
-				<Variable Class="PlainVariable">
-					<Id>1794000000500</Id>
-					<Name><![CDATA[ramalRocaPed]]></Name>
-					<Description><![CDATA[Ramal de cada tren de llegadasRocaSeg (mismo orden): 0 La Plata, 1 Bosques via Quilmes, 2 Bosques via Temperley, 3 Glew/A. Korn, 4 Ezeiza/Canuelas. Dato oficial: datos/arribos_roca_constitucion_habiles.csv.]]></Description>
-					<X>2630</X><Y>810</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>false</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" Constant="true" AccessType="public" StaticVariable="false">
-						<Type><![CDATA[int[]]]></Type>        
-						<InitialValue Class="CodeValue">
-							<Code><![CDATA[new int[] {2,3,1,4,2,3,4,2,3,0,4,2,1,3,2,3,4,2,0,3,4,2,3,1,2,4,0,3,4,2,3,1,4,2,0,3,4,2,3,1,4,2,0,3,4,2,3,4,2,0,3,4,2,3,1,4,2}]]></Code>
-						</InitialValue>
-					</Properties>
-				</Variable>
 				<Variable Class="Parameter">
 					<Id>1792000000400</Id>
 					<Name><![CDATA[pruebaSinteticaPed]]></Name>
@@ -4423,7 +4423,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Connector>
 					<Id>1792000000339</Id>
 					<Name><![CDATA[conPedSourceCalleServicio]]></Name>
-					<X>0</X><Y>20</Y>
+					<X>1360</X><Y>1060</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -4449,10 +4449,10 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 						<ItemName><![CDATA[in]]></ItemName>
 					</TargetConnectableItemReference>
 					<Points>
-						<Point><X>330</X><Y>30</Y></Point>
-						<Point><X>400</X><Y>30</Y></Point>
-						<Point><X>400</X><Y>80</Y></Point>
-						<Point><X>450</X><Y>90</Y></Point>
+						<Point><X>0</X><Y>0</Y></Point>
+						<Point><X>20</X><Y>0</Y></Point>
+						<Point><X>100</X><Y>0</Y></Point>
+						<Point><X>140</X><Y>-30</Y></Point>
 					</Points>
 				</Connector>
 			</Connectors>
@@ -6174,10 +6174,9 @@ return String.join(",", partes);]]></Body>
 					<ShowLabel>false</ShowLabel>
 					<DrawMode>SHAPE_DRAW_2D</DrawMode>
 					<EmbeddedIcon>false</EmbeddedIcon>
-					<Z>-100</Z>
 					<Width>2400</Width>
 					<Height>1660</Height>
-					<Rotation>0.0</Rotation>
+
 					<ResourceReference>
 						<PackageName><![CDATA[subteconstitucion]]></PackageName>
 						<ClassName><![CDATA[plano_constitucion_modelo.dxf]]></ClassName>
@@ -6189,106 +6188,132 @@ return String.join(",", partes);]]></Body>
 						<Layer>
 							<Visible>true</Visible>
 							<Name><![CDATA[0]]></Name>
+							<Color/>
 						</Layer>
 						<Layer>
 							<Visible>true</Visible>
 							<Name><![CDATA[01]]></Name>
+							<Color/>
 						</Layer>
 						<Layer>
 							<Visible>true</Visible>
 							<Name><![CDATA[015]]></Name>
+							<Color/>
 						</Layer>
 						<Layer>
 							<Visible>true</Visible>
 							<Name><![CDATA[02]]></Name>
+							<Color/>
 						</Layer>
 						<Layer>
 							<Visible>true</Visible>
 							<Name><![CDATA[A-CARP]]></Name>
+							<Color/>
 						</Layer>
 						<Layer>
 							<Visible>true</Visible>
 							<Name><![CDATA[ADIF]]></Name>
+							<Color/>
 						</Layer>
 						<Layer>
 							<Visible>true</Visible>
 							<Name><![CDATA[BARANDA]]></Name>
+							<Color/>
 						</Layer>
 						<Layer>
 							<Visible>true</Visible>
 							<Name><![CDATA[CALLES]]></Name>
+							<Color/>
 						</Layer>
 						<Layer>
 							<Visible>true</Visible>
 							<Name><![CDATA[CARPINTERIA]]></Name>
+							<Color/>
 						</Layer>
 						<Layer>
 							<Visible>true</Visible>
 							<Name><![CDATA[EDIFICIOS]]></Name>
+							<Color/>
 						</Layer>
 						<Layer>
 							<Visible>true</Visible>
 							<Name><![CDATA[ESCA]]></Name>
+							<Color/>
 						</Layer>
 						<Layer>
 							<Visible>true</Visible>
 							<Name><![CDATA[ESCALERA]]></Name>
+							<Color/>
 						</Layer>
 						<Layer>
 							<Visible>true</Visible>
 							<Name><![CDATA[HORM]]></Name>
+							<Color/>
 						</Layer>
 						<Layer>
 							<Visible>true</Visible>
 							<Name><![CDATA[LIMITE]]></Name>
+							<Color/>
 						</Layer>
 						<Layer>
 							<Visible>true</Visible>
 							<Name><![CDATA[LINE_02]]></Name>
+							<Color/>
 						</Layer>
 						<Layer>
 							<Visible>true</Visible>
 							<Name><![CDATA[LOCALES]]></Name>
+							<Color/>
 						</Layer>
 						<Layer>
 							<Visible>true</Visible>
 							<Name><![CDATA[MUROS-NUEVOS]]></Name>
+							<Color/>
 						</Layer>
 						<Layer>
 							<Visible>true</Visible>
 							<Name><![CDATA[MUROS1]]></Name>
+							<Color/>
 						</Layer>
 						<Layer>
 							<Visible>true</Visible>
 							<Name><![CDATA[PROYEC]]></Name>
+							<Color/>
 						</Layer>
 						<Layer>
 							<Visible>true</Visible>
 							<Name><![CDATA[TMR]]></Name>
+							<Color/>
 						</Layer>
 						<Layer>
 							<Visible>true</Visible>
 							<Name><![CDATA[LINEA_C_OSM]]></Name>
+							<Color/>
 						</Layer>
 						<Layer>
 							<Visible>true</Visible>
 							<Name><![CDATA[PASILLO_OSM]]></Name>
+							<Color/>
 						</Layer>
 						<Layer>
 							<Visible>true</Visible>
 							<Name><![CDATA[BOCAS_OSM]]></Name>
+							<Color/>
 						</Layer>
 						<Layer>
 							<Visible>true</Visible>
 							<Name><![CDATA[ROTULOS]]></Name>
+							<Color/>
 						</Layer>
 						<Layer>
 							<Visible>false</Visible>
 							<Name><![CDATA[REFERENCIA]]></Name>
+							<Color/>
 						</Layer>
 						<Layer>
 							<Visible>false</Visible>
 							<Name><![CDATA[MARCO]]></Name>
+							<Color/>
 						</Layer>
 					</Layers>
 				</CADDrawing>
@@ -6960,7 +6985,7 @@ return String.join(",", partes);]]></Body>
 				<Wall>
 					<Id>1794000000302</Id>
 					<Name><![CDATA[hallEstructuraCentral]]></Name>
-					<X>-200</X><Y>676</Y>
+					<X>-240</X><Y>647</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -6994,7 +7019,7 @@ return String.join(",", partes);]]></Body>
 				<Wall>
 					<Id>1794000000303</Id>
 					<Name><![CDATA[hallVestuarioSOFSE]]></Name>
-					<X>-181</X><Y>369</Y>
+					<X>-210</X><Y>355</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7009,7 +7034,7 @@ return String.join(",", partes);]]></Body>
 					<Closed>false</Closed>
 					<Points>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>25</X><Y>0</Y><Z>0</Z></Point>
+						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
 						<Point><X>-25</X><Y>0</Y><Z>0</Z></Point>
 						<Point><X>-124</X><Y>0</Y><Z>0</Z></Point>
 						<Point><X>-99</X><Y>0</Y><Z>0</Z></Point>
@@ -7022,13 +7047,13 @@ return String.join(",", partes);]]></Body>
 						<Point><X>0</X><Y>232</Y><Z>0</Z></Point>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
 						<Point><X>0</X><Y>25</Y><Z>0</Z></Point>
-						<Point><X>0</X><Y>-25</Y><Z>0</Z></Point>
+						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
 					</Points>
 				</Wall>
 				<Wall>
 					<Id>1794000000304</Id>
 					<Name><![CDATA[hallBoleteriasSOFSE]]></Name>
-					<X>-206</X><Y>1068</Y>
+					<X>-230</X><Y>1020</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7045,15 +7070,15 @@ return String.join(",", partes);]]></Body>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
 						<Point><X>25</X><Y>0</Y><Z>0</Z></Point>
 						<Point><X>-25</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>-99</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>-74</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>-99</X><Y>25</Y><Z>0</Z></Point>
-						<Point><X>-99</X><Y>248</Y><Z>0</Z></Point>
-						<Point><X>-99</X><Y>223</Y><Z>0</Z></Point>
-						<Point><X>-74</X><Y>248</Y><Z>0</Z></Point>
-						<Point><X>0</X><Y>248</Y><Z>0</Z></Point>
-						<Point><X>-25</X><Y>248</Y><Z>0</Z></Point>
-						<Point><X>0</X><Y>223</Y><Z>0</Z></Point>
+						<Point><X>-170</X><Y>0</Y><Z>0</Z></Point>
+						<Point><X>-145</X><Y>0</Y><Z>0</Z></Point>
+						<Point><X>-170</X><Y>25</Y><Z>0</Z></Point>
+						<Point><X>-170</X><Y>250</Y><Z>0</Z></Point>
+						<Point><X>-170</X><Y>225</Y><Z>0</Z></Point>
+						<Point><X>-145.043</X><Y>251.468</Y><Z>0</Z></Point>
+						<Point><X>0</X><Y>260</Y><Z>0</Z></Point>
+						<Point><X>-24.957</X><Y>258.532</Y><Z>0</Z></Point>
+						<Point><X>0</X><Y>235</Y><Z>0</Z></Point>
 						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
 						<Point><X>0</X><Y>25</Y><Z>0</Z></Point>
 						<Point><X>0</X><Y>-25</Y><Z>0</Z></Point>
@@ -9519,14 +9544,14 @@ return String.join(",", partes);]]></Body>
 					<WaitForExit>false</WaitForExit>
 					<QueueChoicePolicy>CLOSEST_QUEUE_STRICT</QueueChoicePolicy>
 				</ServiceWithLine>
-			<Camera3D>
+				<Camera3D>
 					<Id>1794000000108</Id>
 					<Name><![CDATA[camaraGeneral]]></Name>
 					<X>330</X><Y>980</Y><Z>520</Z>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<ShowLabel>false</ShowLabel>
-					<RotationX>48</RotationX>
-					<RotationZ>-90</RotationZ>
+					<RotationX>48.0</RotationX>
+					<RotationZ>-90.0</RotationZ>
 				</Camera3D>
 				<Camera3D>
 					<Id>1794000000109</Id>
@@ -9534,8 +9559,8 @@ return String.join(",", partes);]]></Body>
 					<X>120</X><Y>360</Y><Z>70</Z>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<ShowLabel>false</ShowLabel>
-					<RotationX>25</RotationX>
-					<RotationZ>0</RotationZ>
+					<RotationX>25.0</RotationX>
+					<RotationZ>0.0</RotationZ>
 				</Camera3D>
 				<Camera3D>
 					<Id>1794000000110</Id>
@@ -9543,8 +9568,8 @@ return String.join(",", partes);]]></Body>
 					<X>5</X><Y>1080</Y><Z>45</Z>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<ShowLabel>false</ShowLabel>
-					<RotationX>12</RotationX>
-					<RotationZ>-90</RotationZ>
+					<RotationX>12.0</RotationX>
+					<RotationZ>-90.0</RotationZ>
 				</Camera3D>
 				<Camera3D>
 					<Id>1794000000111</Id>
@@ -9552,8 +9577,8 @@ return String.join(",", partes);]]></Body>
 					<X>280</X><Y>620</Y><Z>1150</Z>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<ShowLabel>false</ShowLabel>
-					<RotationX>90</RotationX>
-					<RotationZ>-90</RotationZ>
+					<RotationX>90.0</RotationX>
+					<RotationZ>-90.0</RotationZ>
 				</Camera3D>
 				<Camera3D>
 					<Id>1794000000402</Id>
@@ -9561,8 +9586,8 @@ return String.join(",", partes);]]></Body>
 					<X>-330</X><Y>1560</Y><Z>420</Z>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<ShowLabel>false</ShowLabel>
-					<RotationX>45</RotationX>
-					<RotationZ>-90</RotationZ>
+					<RotationX>45.0</RotationX>
+					<RotationZ>-90.0</RotationZ>
 				</Camera3D>
 				<Control Type="Window3D">
 					<Id>1794000000112</Id>
@@ -9579,7 +9604,7 @@ return String.join(",", partes);]]></Body>
 					<Camera>camaraGeneral</Camera>
 				</Control>
 				<Control Type="Button">
-				 	<EmbeddedIcon>false</EmbeddedIcon>
+				 	<EmbeddedIcon>false</EmbeddedIcon>				
 					<Id>1794000000113</Id>
 					<Name><![CDATA[botonCamaraGeneral]]></Name>
 					<X>1300</X><Y>725</Y>
@@ -9587,9 +9612,9 @@ return String.join(",", partes);]]></Body>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
 					<BasicProperties Width="150" Height="30">
-                        <EmbeddedIcon>false</EmbeddedIcon>
+                        <EmbeddedIcon>false</EmbeddedIcon>	
 						<TextColor>-16777216</TextColor>
 						<Enabled>true</Enabled>
 						<ActionCode><![CDATA[ventana3D.setCamera(camaraGeneral, false, 800);]]></ActionCode>
@@ -9600,7 +9625,7 @@ return String.join(",", partes);]]></Body>
 					</ExtendedProperties>
 				</Control>
 				<Control Type="Button">
-				 	<EmbeddedIcon>false</EmbeddedIcon>
+				 	<EmbeddedIcon>false</EmbeddedIcon>				
 					<Id>1794000000114</Id>
 					<Name><![CDATA[botonCamaraMolinetes]]></Name>
 					<X>1465</X><Y>725</Y>
@@ -9608,9 +9633,9 @@ return String.join(",", partes);]]></Body>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
 					<BasicProperties Width="150" Height="30">
-                        <EmbeddedIcon>false</EmbeddedIcon>
+                        <EmbeddedIcon>false</EmbeddedIcon>	
 						<TextColor>-16777216</TextColor>
 						<Enabled>true</Enabled>
 						<ActionCode><![CDATA[ventana3D.setCamera(camaraMolinetes, false, 800);]]></ActionCode>
@@ -9621,7 +9646,7 @@ return String.join(",", partes);]]></Body>
 					</ExtendedProperties>
 				</Control>
 				<Control Type="Button">
-				 	<EmbeddedIcon>false</EmbeddedIcon>
+				 	<EmbeddedIcon>false</EmbeddedIcon>				
 					<Id>1794000000115</Id>
 					<Name><![CDATA[botonCamaraPasillo]]></Name>
 					<X>1630</X><Y>725</Y>
@@ -9629,9 +9654,9 @@ return String.join(",", partes);]]></Body>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
 					<BasicProperties Width="150" Height="30">
-                        <EmbeddedIcon>false</EmbeddedIcon>
+                        <EmbeddedIcon>false</EmbeddedIcon>	
 						<TextColor>-16777216</TextColor>
 						<Enabled>true</Enabled>
 						<ActionCode><![CDATA[ventana3D.setCamera(camaraPasillo, false, 800);]]></ActionCode>
@@ -9642,7 +9667,7 @@ return String.join(",", partes);]]></Body>
 					</ExtendedProperties>
 				</Control>
 				<Control Type="Button">
-				 	<EmbeddedIcon>false</EmbeddedIcon>
+				 	<EmbeddedIcon>false</EmbeddedIcon>				
 					<Id>1794000000116</Id>
 					<Name><![CDATA[botonCamaraSuperior]]></Name>
 					<X>1795</X><Y>725</Y>
@@ -9650,9 +9675,9 @@ return String.join(",", partes);]]></Body>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
 					<BasicProperties Width="150" Height="30">
-                        <EmbeddedIcon>false</EmbeddedIcon>
+                        <EmbeddedIcon>false</EmbeddedIcon>	
 						<TextColor>-16777216</TextColor>
 						<Enabled>true</Enabled>
 						<ActionCode><![CDATA[ventana3D.setCamera(camaraSuperior, false, 800);]]></ActionCode>
@@ -9663,7 +9688,7 @@ return String.join(",", partes);]]></Body>
 					</ExtendedProperties>
 				</Control>
 				<Control Type="Button">
-				 	<EmbeddedIcon>false</EmbeddedIcon>
+				 	<EmbeddedIcon>false</EmbeddedIcon>				
 					<Id>1794000000403</Id>
 					<Name><![CDATA[botonCamaraHall]]></Name>
 					<X>1960</X><Y>725</Y>
@@ -9671,9 +9696,9 @@ return String.join(",", partes);]]></Body>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
 					<BasicProperties Width="150" Height="30">
-                        <EmbeddedIcon>false</EmbeddedIcon>
+                        <EmbeddedIcon>false</EmbeddedIcon>	
 						<TextColor>-16777216</TextColor>
 						<Enabled>true</Enabled>
 						<ActionCode><![CDATA[ventana3D.setCamera(camaraHall, false, 800);]]></ActionCode>
@@ -9683,7 +9708,7 @@ return String.join(",", partes);]]></Body>
 						<LabelText><![CDATA[Hall del Roca]]></LabelText>
 					</ExtendedProperties>
 				</Control>
-				</Presentation>
+			</Presentation>
 
 				</Level>
 			</Presentation>
@@ -10080,7 +10105,7 @@ figurasPed.add(figura);]]></StartupCode>
 					<InternalLighting>OFF</InternalLighting>
 					<IgnoreSceneLights>false</IgnoreSceneLights>
 					<SelectedAnimationPoseCode><![CDATA[selectWalkAnimationPose(this, posesPed[0], posesPed)]]></SelectedAnimationPoseCode>
-</Figure3D>
+				</Figure3D>
 				<Figure3D>
 					<Id>1794000000102</Id>
 					<Name><![CDATA[figuraPed1]]></Name>
@@ -10152,7 +10177,7 @@ figurasPed.add(figura);]]></StartupCode>
 					<InternalLighting>OFF</InternalLighting>
 					<IgnoreSceneLights>false</IgnoreSceneLights>
 					<SelectedAnimationPoseCode><![CDATA[selectWalkAnimationPose(this, posesPed[0], posesPed)]]></SelectedAnimationPoseCode>
-</Figure3D>
+				</Figure3D>
 				<Figure3D>
 					<Id>1794000000103</Id>
 					<Name><![CDATA[figuraPed2]]></Name>
@@ -10220,7 +10245,7 @@ figurasPed.add(figura);]]></StartupCode>
 					<InternalLighting>OFF</InternalLighting>
 					<IgnoreSceneLights>false</IgnoreSceneLights>
 					<SelectedAnimationPoseCode><![CDATA[selectWalkAnimationPose(this, posesPed[0], posesPed)]]></SelectedAnimationPoseCode>
-</Figure3D>
+				</Figure3D>
 				<Figure3D>
 					<Id>1794000000104</Id>
 					<Name><![CDATA[figuraPed3]]></Name>
@@ -10284,7 +10309,7 @@ figurasPed.add(figura);]]></StartupCode>
 					<InternalLighting>OFF</InternalLighting>
 					<IgnoreSceneLights>false</IgnoreSceneLights>
 					<SelectedAnimationPoseCode><![CDATA[selectWalkAnimationPose(this, posesPed[0], posesPed)]]></SelectedAnimationPoseCode>
-</Figure3D>
+				</Figure3D>
 			</Presentation>
 
 				</Group>
