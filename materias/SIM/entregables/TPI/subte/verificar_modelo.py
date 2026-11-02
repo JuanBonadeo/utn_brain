@@ -520,6 +520,10 @@ assert [(20260923+i//2, 20 if i%2==0 else 22) for i in range(4)]==[(20260923,20)
 pasajero_variable_names={x.findtext('Name') for x in agents['Pasajero'].findall('Variables/Variable')}
 assert {'tIngresoSistemaPed','enPicoPed','tInicioServicioPed','nombreMolinetePed','servicioAsignadoPed'} <= pasajero_variable_names
 libs={x.findtext('LibraryName') for x in r.findall('Model/RequiredLibraryReference')}
+# AnyLogic aborta al crear el modelo si un muro tiene dos puntos seguidos iguales ("Wall: The length is zero").
+for w in r.iter('Wall'):
+ pts=[(p.findtext('X'),p.findtext('Y')) for p in w.findall('Points/Point')]
+ assert len(pts)>=2 and all(a!=b for a,b in zip(pts,pts[1:])), f"muro {w.findtext('Name')} con tramo de largo cero"
 assert 'com.anylogic.libraries.pedestrian' in libs
 print('OK: XML, unique IDs, clean presentations, pedestrian KPIs, hypothetical plan with 28 linear gates, E0=20/E1=22 experiments, 4 GB, franja visual')
 # The CSV schema, the workbook and the loader share one field order.
