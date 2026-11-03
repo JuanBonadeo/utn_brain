@@ -3,7 +3,7 @@
 Guía completa de la Práctica 3 (`PL3UTN.pdf`): cómo se ejecuta el Simplex —tablas y
 matricial—, el tratamiento de variables ficticias, y los seis ejercicios resueltos.
 Contrastado con la resolución oficial de la cátedra (`PL3UTNresol.pdf` y
-`PL3UTNresol (1).pdf`) y con el **capítulo 3 del apunte** (PLC3, secciones 3.2 a 3.6).
+`PL3UTNresol-2021.pdf`) y con el **capítulo 3 del apunte** (PLC3, secciones 3.2 a 3.6).
 
 > **Los resultados de esta guía están verificados por enumeración exacta.** Se enumeraron
 > con fracciones exactas las $\binom{n}{m}$ bases de cada programa y se comparó el óptimo

@@ -935,7 +935,7 @@ Comunicación **extremo a extremo** confiable y eficiente entre aplicaciones. Fu
 - `fuentes/RD/Medin-1er-parcial/2 - Capa de Transporte - Características de transporte.pdf`
 - `fuentes/RD/Medin-1er-parcial/3 - Capa de Transporte - Protocolo TCP.pdf`
 - `fuentes/Medin-2do-parcial/4 - Protocolo UDP.pdf` (diapositiva de la cátedra: header, checksum, pseudoencabezado, RPC, RTP/RTCP; del Drive)
-- `fuentes/Medin-2do-parcial/examen 2.rar` (apuntes del 2do teórico mandados por Medín: los 4 de transporte, Puertos y Firewall)
+- Apuntes del 2do teórico mandados por Medín (venían en `examen 2.rar`, ya desarmado: los 4 de transporte, Puertos y Firewall están sueltos en `fuentes/Medin-1er-parcial/` y `fuentes/Medin-2do-parcial/`, más los `.docx` de Puertos y Firewall)
 - `fuentes/Medin-2do-parcial/4 - Capa de Transporte - Protocolo UDP (versión Medín 2026).pdf` (misma diapositiva; resuelve qué hace UDP ante un error)
 - `fuentes/Medin-2do-parcial/Capa de Transporte y Puertos-UTN.pdf` (puertos, tipos y estados, vulnerabilidades, VPN, QUIC)
 - `fuentes/Medin-2do-parcial/2do-parcial-teoria-medin-2026-10-otra-comision.png` (foto del 2do teórico real de oct/2026, otra comisión)
@@ -1017,7 +1017,7 @@ El firewall **inspecciona los headers** de cada paquete y lo compara con sus reg
 - La fuente es solo un temario: si Medín da más detalle en clase (por ejemplo, la definición formal de DMZ o ejemplos de reglas), sumarlo acá.
 
 #### Fuentes
-- `fuentes/Medin-2do-parcial/Clase sobre Firewall.pdf` (temario de la clase, dentro de `examen 2.rar`)
+- `fuentes/Medin-2do-parcial/Clase sobre Firewall.pdf` (temario de la clase, venía en `examen 2.rar`)
 
 ## Log
 - 2026-07-21: Ingesta inicial del material del 1er parcial de Medin (10 PDFs de teórico + doc de preguntas). Se crearon las 3 unidades (Enlace, Red, Transporte) y el índice. Fuentes en `fuentes/RD/Medin-1er-parcial/`. Ajuste: parcial de Medin es conceptual → ejercicios tipo = preguntas reales; cálculos numéricos marcados como poco probables.
@@ -1038,3 +1038,4 @@ El firewall **inspecciona los headers** de cada paquete y lo compara con sus reg
 - 2026-10-13: `estudio/prompt-podcast-medin.md` — prompts de NotebookLM para el podcast de repaso del 2do teórico de Medín sobre `resumen-2do-parcial-medin.pdf`: episodio único y tres episodios (transporte + UDP, TCP a fondo, puertos + firewall), con las preguntas del parcial real de 2024 resueltas en voz alta y versiones cortas.
 - 2026-10-16: Ingesta de la **clase de consulta de Baró** (resumen y transcripción de Notion, `fuentes/Baro-2do-parcial/consulta-baro-2026-10-16.md`). Unidad 2: formato del parcial en el bloque de alcance (2 o 3 ejercicios de subnetting básicos, sin los de aplicación, y hasta 3 preguntas conceptuales; de ICMP, ARP y DHCP solo la finalidad). Se agregaron las explicaciones de Baró sobre el ToS en la práctica (3 o 5 niveles), la tabla estática vs. dinámica, la ruta default `0.0.0.0` vs. la difusión del switch, el AS como ISP, el switch de capa 3 vs. el router (BGP), protocolo vs. algoritmo, las métricas de OSPF y el conteo al infinito. Diferencia anotada: Baró dice que BGP es vector distancia y el libro, vector de ruta.
 - 2026-10-26: Ingesta de la **foto del 2do teórico de Medín de oct/2026** (otra comisión), en `fuentes/Medin-2do-parcial/`. Unidad 3: formato (5 preguntas para desarrollar, 60 min, criterios de corrección) y las 5 preguntas; los propósitos de la capa de transporte según el apunte de Puertos. Unidad 2 (*Fragmentación*): tipos transparente y no transparente y descubrimiento de la MTU de la ruta, del Tanenbaum §5.5.5. Nuevo `estudio/preguntas-parcial-medin.html` + pdf para imprimir: las preguntas de ese parcial, la de 2024 que no se repitió y las de los 1ros parciales de Medín, todas respondidas.
+- 2026-11-03: limpieza. Se desarmó `examen 2.rar`: sus 6 PDFs ya estaban sueltos en `fuentes/`; se extrajeron los 2 `.docx` que no estaban (Puertos y Firewall, en `Medin-2do-parcial/`). Se borraron 4 figuras de `figs/` que no usaba nadie (`fig_handshake`, `fig_ipv4_hdr`, `fig_tcp_hdr`, `fig_tiers`).

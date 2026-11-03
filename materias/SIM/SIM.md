@@ -2580,7 +2580,7 @@ En el paso 9 de Weitz, la comparación de escenarios se plantea así:
 
 ## AnyLogic y modelado por procesos (bibliografía de práctica)
 
-> Fuentes: `fuentes/classroom-2026/practica/anylogic_in_3_days.pdf` y `The Art of Process-Centric Modeling.pdf`.
+> Fuentes: `fuentes/classroom-2026/practica/anylogic_in_3_days.pdf` y `The Art of Process-Centric Modeling.pdf` (dentro de `the-art-of-process-centric-modeling-with-anylogic.zip`).
 > Las dos entran en el parcial 1 de 2026. El resumen con dibujos está en `estudio/resumen-parcial1.md` §10.
 
 **Los tres métodos (paradigmas).** AnyLogic es **multimétodo**. Cada método sirve para un rango de niveles de abstracción:
@@ -3010,6 +3010,7 @@ Conclusiones:
 
 ## Log
 
+- **2026-11-03**: limpieza de `fuentes/`: se borraron duplicados exactos (`resumenes/viejos/Resumen Simulación 4.pdf` = `Resumen 4.pdf`; `Resumen Simulación (para rendir).pdf` = `Resumen 2.pdf`, con sus `.md` espejo en `txt/`), `Simulación clase 2 2025.pdf` (igual a la de 2026 salvo el año), el PDF suelto de *The Art of Process-Centric Modeling* (está dentro del `.zip`), el `.md` de `2024-sfm-calibration-yolov5` (era el XML sin convertir) y 5 conversiones vacías en `txt/` (Weitz, Naylor cap. 4 y Flamini parte 1 siguen en sus versiones por páginas; Gordon y Plantilla Inventario quedan sin conversión).
 - **2026-11-02**: material del Classroom en `fuentes/classroom-2026/`: diapositivas de teoría, Ross (en castellano y en inglés), *AnyLogic in 3 Days*, *Process-Centric Modeling* y Naylor. Se sumaron:
   - en el Mapa, el alcance oficial del 31/10;
   - en la Unidad 2, los elementos de la simulación;

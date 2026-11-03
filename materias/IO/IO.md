@@ -1240,7 +1240,7 @@ bajo las columnas $A_3$, $A_4$, $A_5$ — que es lo que después se usa en las U
 
 - `Material de cursado (2023)/Teoría/PLC3.pdf` — **ingerido** (secciones 3.1 a 3.6)
 - `Material de cursado (2023)/Teoría/Método Simplex.pdf` — mismo contenido en PPT, sin agregados
-- `Material de cursado (2023)/Práctica/PL3UTN.pdf` y sus resoluciones `Resuelta/PL3UTNresol.pdf` (8 pág.) y `Resuelta/PL3UTNresol (1).pdf` (27 pág., incluye el algoritmo matricial)
+- `Material de cursado (2023)/Práctica/PL3UTN.pdf` y sus resoluciones `Resuelta/PL3UTNresol.pdf` (8 pág.) y `Resuelta/PL3UTNresol-2021.pdf` (27 pág., incluye el algoritmo matricial)
 - `resumen-primer-parcial.docx`
 - Derivados: [[practica-3-simplex]] y [[machete-metodo-simplex]]
 
@@ -1803,6 +1803,7 @@ Los resultados de los Ej. 1 y 2 fueron verificados por enumeración.
 
 ## Log
 
+- 2026-11-03: limpieza. `Resuelta/PL3UTNresol (1).pdf` se renombró a `PL3UTNresol-2021.pdf`; se borraron la `Presentacion_v2` y el `Guion` original de la etapa 2 (quedan la v3 y el `Guion_v2`, que es lo entregado) y la primera versión del cuadro de diagnóstico del simplex (la versión sobria quedó como `cuadro-simplex-diagnostico.png`).
 - 2026-10-28: Se generó [[defensa-tpi]] en `estudio/`: guía para la defensa final del TPI armada desde las devoluciones de las tres etapas. Incluye escenarios alternativos de la Etapa 1, errores detectados en la fila $Z_j$ de la tabla final (A6, A7, A8), las iteraciones Big M reconstruidas, el dual en sus dos formas, los costos marginales, los rangos de todos los $c_j$ y $b_i$, y la corrección del stock de seguridad integrado con la restricción de depósito (lote de 1.059 m²). Todo verificado por cálculo exacto.
 - 2026-10-28: Se generó `estudio/defensa-tpi-visual.pdf` (+ `.html` fuente, render con `scripts/formulario-pdf.js`): resumen gráfico de las tres etapas para la defensa. Incluye modelo primal, forma estándar y por qué la artificial, tablas I0 e I3 anotadas, restricciones activas, dual y precios sombra, rangos de C₂ y b₂ en recta numérica, bomba de agua, árbol de Branch and Bound, los cuatro modelos de stock con gráficos y la corrección del stock de seguridad.
 - 2026-10-01: Se generó [[resumen-prioritario-parcial]] en `estudio/`, ordenado por prioridad según la clase de consulta del 2026-09-30/10-01: Simplex, dualidad, sensibilidad, stock, programación entera, transporte/asignación/transbordo, redes y conceptos básicos. Fusiona wiki curada, banco de preguntas y material confirmado; marca cautelas donde el banco aún requiere verificación.

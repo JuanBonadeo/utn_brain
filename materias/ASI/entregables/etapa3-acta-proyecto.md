@@ -6,7 +6,7 @@
 > y se regenera — no se edita el `.docx` a mano.
 >
 > Estructura tomada del **Anexo I de cátedra**
-> (`fuentes/ASI/Campus/ASI-Unidad5_Adm_Recursos_en_ProyectosIT/ASI-5-T1-Proyectos_AnexoI_ActaProyecto.doc`),
+> (`fuentes/Ejercitación/ASI-5-T1-Proyectos_AnexoI_ActaProyecto.doc`),
 > con las instrucciones campo por campo del apunte T2. Ver Unidad 5 §6 de la wiki.
 >
 > **Estado al 2026-08-23: borrador actualizado.** El docente validó el punto 3 el

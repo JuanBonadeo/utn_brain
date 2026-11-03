@@ -449,3 +449,4 @@ cuando el comprobante sale vacío.
   `scripts/bpm-dump.py` para leer la estructura de un `.bpm` sin abrir Bizagi.
   **Corregido el caso 3B de la unidad 1**: la solución oficial usa paralelo +
   exclusivo, no inclusivo.
+- 2026-11-03: limpieza de nombres en `fuentes/`: `tarea1 (1).pdf` → `tarea1.pdf` y `tarea5a (1).pdf` → `tarea5a.pdf`.
