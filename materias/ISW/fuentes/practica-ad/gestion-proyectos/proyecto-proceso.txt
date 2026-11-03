@@ -1,0 +1,5 @@
+Proyecto:
+es un conjunto de actividades coordinadas y controladas con fecha de inicio y fin definidas, encaminado a la creacion de un servicio o producto único y conforme a unos requisitos especificos, incluyendo limitaciones de tiempo costo y recursos.
+
+Proceso:
+es un conjunto de actividades planificadas que consumen recursos tiempos etc, y que estan organizadas para cumplir un determinado objetivo

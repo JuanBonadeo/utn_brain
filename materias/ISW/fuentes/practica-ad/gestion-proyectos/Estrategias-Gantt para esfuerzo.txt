@@ -1,0 +1,11 @@
+Estrategias:
+
+(en gantt para reducir esfuerzo en una semana)
+
+*aprovechar la holgura
+
+*dividir tareas
+
+*incorporar recursos
+
+*quitar recursos

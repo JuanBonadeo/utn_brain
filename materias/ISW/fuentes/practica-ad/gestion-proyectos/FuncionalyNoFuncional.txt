@@ -1,0 +1,29 @@
+Requerimientos funcionales.
+Son declaraciones de los servicios que debe proporcionar el sistema, de la manera en que éste debe reaccionar a entradas particulares y de cómo se debe comportar en situaciones particulares.
+Estos requerimientos dependen del tipo de software que se desarrolle, de los posibles usuarios del software y del enfoque general 
+tomado por la organización al redactar requerimientos.
+
+Ejemplo: Para un sistema de biblioteca universitarios, denominados LIBSYS, 
+utilizado por estudiantes y personal docente que solicitan libros y documentos de otras bibliotecas.
+
+1. El usuario deberá tener la posibilidad de buscar en el conjunto inicial de la base de datos o seleccionar un subconjunto de ella.
+
+2. El sistema deberá proporcionar visores adecuados para que el usuario lea documentos en el almacén de documentos.
+
+3. A cada pedido se le deberá asignar un identificador único (ID_PEDIDO), que el usuario podrá copiar al área de almacenamiento 
+permanente de la cuenta
+
+
+Requerimientos no funcionales
+Son restricciones de los servicios o funciones ofrecidos por el sistema. Incluyen restricciones de tiempo, 
+sobre el proceso de desarrollo y estándares. 
+Los requerimientos no funcionales, como su nombre sugiere, son aquellos requerimientos que no se refieren 
+directamente a las funciones específicas que proporciona el sistema, sino a las propiedades emergentes de éste 
+como la fiabilidad, el tiempo de respuesta y la capacidad de almacenamiento. De forma alternativa, definen las 
+restricciones del sistema como la capacidad de los dispositivos de entrada/salida y las representaciones de datos 
+que se utilizan en las interfaces del sistema.
+
+
+Por ejemplo: 
+si un sistema de vuelo no cumple sus requerimientos de fiabilidad, no se certificará como seguro para el funcionamiento; 
+si un sistema de control de tiempo real no cumple sus requerimientos de rendimiento, las funciones de control no funcionarán correctamente.

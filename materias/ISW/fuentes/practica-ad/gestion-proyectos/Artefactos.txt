@@ -1,0 +1,58 @@
+ARTEFACTOS CON LOS QUE SE DEBE CONTAR O QUE SE PRODUCIRAN
+
+*bosquejos de interfaces
+
+*casos de uso
+
+-Checklist de diseño de interfaz o ...lo que sea
+
+-codigo de la aplicacion a probar
+
+-aplicacion programada e instalada en el entorno de prueba
+
+-tabla de usuarios-roles
+
+-tabla de roles-permisos
+
+-listado de usuarios y constraseñas.
+
+
+*dfd (diagramas de flujo de datos)
+
+*diagrama de clases
+
+*diagramas de secuencia 
+
+*diccionario de datos
+
+*diseño de interfaces
+
+*especificicacion de GUI
+
+*estandares de especificaciones de diseños para aplicaciones
+
+*lista de perfiles de usuarios
+
+*lista de requerimientos
+
+*mapa canonico
+
+*mapa de navegacion
+
+*maquina de estados de objetos
+
+*matriz CRUD o de trazabilidad
+
+*mini-especificaciones/contratos
+
+*modelo de dominio
+
+*storyboards
+
+*tabla de actores
+
+*reglas de negocio
+
+-Entradas de datos--> informe de pruebas realizadas, inf. de errores detectados, modulo de intefaz de suuario corregido.
+-Navegabilidad e/ interfaces --> Informe de pruebas de navegabilidad, Informe de errores detectados, modulo de navegabilidad probado.
+-Permisos de usuarios --> Informe de pruebas de permisos de ususarios, Informe de errores deltectados, Porducto con permisos probados.

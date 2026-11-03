@@ -1,0 +1,56 @@
+Los proyectos pueden ser de 3 tipos:
+
+Desarrollo.
+
+Mantenimiento
+
+Mantener y mejorar el software para solventar errores descubiertos y tratar con nuevos
+requisitos. 
+El mantenimiento puede ser de cuatro tipos: 
+	perfectivo (mejorar la calidad interna de los sistemas), 
+
+	evolutivo (incorporaciones, modificaciones y eliminaciones necesarias en un producto software para cubrir la expansión o cambio en las 				necesidades del usuario),
+
+	adaptativo (modificaciones que afectan a los entornos en los que el sistema opera, por ejemplo, cambios de configuración del hardware, 				software de base, gestores de base de datos, comunicaciones)
+
+	correctivo (corrección de errores).
+
+Operacion: una vez instalado, instalacion y configuracion, excluye manuales.
+
+Ciclos de vida.
+
+Cascada: El inicio de cada etapa debe esperar a la finalizacion de la inmediatamente anterior. Es secuencial, requisito, diseño, implementacion, pruebas, mantenimiento.
+
+Ventajas: es apropiado para proyectos estables, que no tienen  	requisitos cambiantes y es posible predecir totalmente areas de problemas.
+
+Inconvenientes: en la vida real es dificil que un proyecto siga una secuencia lineal. Dificilmente un cliente va a establecer al principio todos los requisitos necesarios, por lo que provoca un gran atraso trabajando en este modelo.
+
+Modelo en V: nos dice que las pruebas necesitan empezarse lo mas pronto posble en el ciclo de vida. Estas actividades deberian ser llevadas a cabo en paralelo con las actividades de desarrollo.
+
+Ventajas: simple y facil de utilizar, en cada fase hay entregables especificos, tiene alta oportunidad de exito sobre el modelo en cascada, funciona bien en proyectos pequeños donde los requisitos son entendidos facilmente.
+
+Inconvenientes: es rigido como el cascada, poca flexibilidad, no se producen prototipos de software.
+
+Iterativo: consiste en la iteracion de varios ciclos de vida en cascada. Al final de cada iteracion se le entrega al cliente una version mejorada o con mayores funcionalidades del producto. El cliente es quien desp de cada iteracion evalua el producto y lo corrige o propone mejoras.
+
+Ventajas: no hace falta que los requisitos esten totalmente definidos al inicio del desarrollo, sino que se pueden ir reinando en cada una de las iteraciones. Permite gestionar mejor los riesgos y las entregas.
+
+Inconvenientes: al no estar los requisitos definidos desde un principio pueden surgir problemas relacionados con la arquitectura.
+
+Incremental: combina el modelo en cascada con el modelo iterativo.Aplica secuencias lineales en forma escalonada construyendo algo que incremente sus funcionalidades en cada iteracion. El modelo se centra en la entrega de un producto operativo con cada incremento.
+
+Ventajas: se genera software operativo de forma rapida, reduce el coste en el cambio de alcance y requisitos, es mas facil de probar y depurar, mas facil de gestionar riesgo.
+
+Inconvenientes: se requiere mucha experiencia para definir los incrementos, cada fase es rigida y no se superponen con otras, pueden surgir problemas referidos a la arquitectura.
+
+Espiral: las actividades se conforman en un espiral, cada bucle representa un conjunto de actividades. Las actividades no estan fijadas a priori, sino que las siguientes se eligen en funcion del analisis de riesgos, comenzando por el bucle anterior. Se utiliza en proyectos grandes y complejos (desarrollo de un SO).
+
+Ventajas: el analisis de riesgos se hace de forma clara y explicita, es posible tener en cuenta mejoras y nuevos requerimientos sin romper con el modelo.
+
+Inconvenientes: se genera mucho trabajo adicional, requiere mucha experiencia y cierta habilidad en los analisis de riegos. Costoso.
+
+Prototipos: se construyen prototipos que son evaluados por el cliente/usuario y se utiliza para refinar los requisitos del software a desarrollar. La iteracion ocurre cuando el prototipo se pone a punto para satisfacer las necesidades del cliente, permitiendo al mismo tiempo que el desarrollador comprenda mejor lo que se necesita hacer.
+
+Ventajas: ofrece visibilidad del producto desde el inicio del ciclo de vida con el primer prototipo, lo que ayuda al cliente a definir mejor los requisitos y ver las necesidades reales del producto. Permite introducir cambios en las iteraciones siguientes del ciclo y permite la realimentacion continua del cliente.
+
+Inconvenientes: desarrollo lento. Mucha inversion en un producto desechable.
