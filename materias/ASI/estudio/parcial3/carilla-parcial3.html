@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>ASI — Carilla 3º parcial</title>
+<style>
+@page{size:A4;margin:7mm}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#fff;font-family:"Helvetica Neue",Arial,sans-serif;font-size:6.7pt;line-height:1.28;color:#151515}
+header{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1.4pt solid #151515;padding-bottom:1.6mm;margin-bottom:2mm}
+header h1{font-size:11.5pt;letter-spacing:-.2pt}
+header p{font-size:6.8pt;color:#333;text-align:right}
+.cols{column-count:3;column-gap:3.2mm;column-rule:.4pt solid #ccc}
+section{break-inside:avoid;margin-bottom:2mm}
+h2{font-size:8.2pt;text-transform:uppercase;letter-spacing:.4pt;color:#fff;background:#1d3f6e;padding:.5mm 1.4mm;margin-bottom:1mm}
+h2.r{background:#9c2a22}h2.g{background:#2e5e2f}h2.k{background:#555}
+h3{font-size:7.8pt;color:#1d3f6e;margin:1.1mm 0 .4mm}
+.f{font-family:Menlo,"Courier New",monospace;font-size:5.8pt;background:#f0f2f5;padding:.6mm 1.2mm;margin:.4mm 0;white-space:pre-wrap;line-height:1.35;overflow-wrap:anywhere}
+ul{padding-left:3mm}li{margin:.2mm 0}
+b{font-weight:700}
+table{border-collapse:collapse;width:100%;font-size:6.1pt;margin:.5mm 0}
+td,th{border:.4pt solid #bbb;padding:.35mm .8mm;text-align:left;vertical-align:top}
+th{background:#eceef2}
+.box{border:.6pt solid #9c2a22;background:#fbf1f0;padding:.8mm 1.2mm;margin:.6mm 0}
+.mut{color:#555}
+</style></head><body>
+<div class="cols">
+
+<section><h2 class="r">1 · Valor ganado ★★★ (desarrollo)</h2>
+<p>Sirve para saber, en un día dado (el <b>corte</b>), si el proyecto va <b>atrasado</b> y si está <b>gastando de más</b>. Todo se mide en plata.</p>
+<table>
+<tr><th>Sigla</th><th>Qué es</th><th>De dónde la saco</th></tr>
+<tr><td><b>BAC</b> <span class="mut">Budget At Completion</span></td><td>Presupuesto total</td><td>Sumo el presupuesto de todas las tareas</td></tr>
+<tr><td><b>PV</b> <span class="mut">Planned Value</span></td><td>Lo que <b>tendría</b> que estar hecho</td><td>Del <b>plan</b>: el Gantt en el día de corte</td></tr>
+<tr><td><b>EV</b> <span class="mut">Earned Value</span></td><td>Lo que <b>está</b> hecho, valuado con el presupuesto</td><td>Del <b>estado real</b> de cada tarea</td></tr>
+<tr><td><b>AC</b> <span class="mut">Actual Cost</span></td><td>Lo que <b>gasté</b> de verdad</td><td>Lo da el enunciado</td></tr>
+</table>
+<div class="f">SV  = EV − PV   ¿voy atrasado?   &lt;0 ATRASADO
+CV  = EV − AC   ¿gasto de más?   &lt;0 INEFICIENTE
+SPI = EV / PV   CPI = EV / AC    &lt;1 va mal
+SV% = SV / PV   CV% = CV / EV
+ETC = BAC − EV        cuánto falta hacer
+EAC₁ = AC + BAC − EV  costo final, si el
+                      desvío fue puntual
+EAC₃ = BAC / CPI      costo final, si sigo
+                      gastando igual
+VAC = BAC − EAC       &lt;0 me voy a pasar
+TPI = CPI × SPI
+% terminado = EV/BAC  % gastado = AC/BAC</div>
+<p class="mut">Truco: todas las fórmulas arrancan con EV.</p>
+<h3>Tareas a medio hacer</h3>
+<p>Se cuentan con el criterio que se fijó al empezar el proyecto. El habitual es <b>50/50</b>: terminada vale 100%, en curso 50% y sin empezar 0. Otros: 0%, 100% y 20/80.</p>
+<h3>Cómo resolver el ejercicio</h3>
+<div class="f">Tarea│Presup│Plan│$plan│Real│$real
+     │BAC=Σ │    │PV=Σ │    │EV=Σ</div>
+<ol style="padding-left:3.5mm">
+<li>Sumo los presupuestos: <b>BAC</b>.</li>
+<li>En el Gantt, al <b>final</b> del día de corte, veo si cada tarea debería estar terminada, en curso o sin empezar. La paso a plata y sumo: <b>PV</b>.</li>
+<li>Hago lo mismo con el estado real del enunciado: <b>EV</b>.</li>
+<li>Con el AC calculo <b>SV y CV</b>.</li>
+<li>Escribo qué significa y lo justifico con la red.</li>
+</ol>
+<p>La plata del plan sale del plan; la del real, del real. El AC no va en la planilla.</p>
+<div class="box"><b>Frase modelo:</b> «Está <b>atrasado</b> (SV = −350: se hizo USD 350 menos de lo planificado) y es <b>ineficiente</b> (CV = −550: lo hecho costó USD 550 más de lo presupuestado).»</div>
+<h3>Justificar con la red</h3>
+<ul>
+<li>Si la tarea atrasada es <b>crítica</b> (HT = 0), se atrasa el proyecto.</li>
+<li>Si no es crítica, comparo su atraso <b>d</b> con sus holguras: si d ≤ HL, no afecta a nadie. Si d ≤ HT, atrasa a la siguiente pero no al proyecto. Si d &gt; HT, el proyecto se atrasa d − HT días.</li>
+<li>Atraso = día de corte − día en que debía terminar. Margen que le queda = HT − atraso.</li>
+<li>Un SV negativo no siempre atrasa la fecha final: puede venir de tareas no críticas, y puede haber tareas adelantadas que lo compensan.</li>
+<li><b>Errores típicos:</b> leer SV &lt; 0 como «gasté menos» (es «hice menos») y sacar el PV del estado real.</li>
+</ul></section>
+
+<section><h2 class="k">Red y Gantt (para justificar)</h2>
+<div class="f">IT  = (FT de la predecesora que
+       termina más tarde) + 1
+FT  = IT + duración − 1
+FTa = (ITa de la sucesora que
+       empieza antes) − 1
+ITa = FTa − duración + 1
+HT  = ITa − IT
+HL  = (IT de la sucesora más
+       temprana) − FT − 1</div>
+<p><b>HT:</b> cuánto se puede atrasar sin atrasar el proyecto. <b>HL:</b> cuánto, sin atrasar a la tarea siguiente. <b>Camino crítico:</b> las tareas con HT = 0, que forman el camino más largo. Para acortar el proyecto: <b>fast tracking</b> (hacer en paralelo, más riesgo) o <b>crashing</b> (sumar recursos, más costo).</p></section>
+
+<section><h2 class="r">2 · TCO ★★★ (de memoria)</h2>
+<p><b>TCO = Total Cost of Ownership</b> (costo total de propiedad): lo que cuesta <b>tener y usar</b> un sistema durante toda su vida útil, no solo comprarlo. Sirve para comparar proveedores: el más barato al comprar puede ser el más caro al usar.</p>
+<div class="f">TCO = CIS + CA + CO + CSU</div>
+<table>
+<tr><th>Sigla</th><th>Cómo se calcula</th></tr>
+<tr><td><b>CIS</b> Costo Inicial de la Solución</td><td>Ch (hardware) + Cs (software) + Cins (instalación) + Ccon (configuración)</td></tr>
+<tr><td><b>CA</b> Costo de Administración</td><td>sueldo anual de un ingeniero × cantidad de ingenieros × años × % de su tiempo dedicado al sistema</td></tr>
+<tr><td><b>CO</b> Costo de Operación</td><td>incidentes por año × años × costo por hora de <b>servicio técnico</b> × horas para <b>reparar</b></td></tr>
+<tr><td><b>CSU</b> Costo de Soporte a Usuarios</td><td>incidentes por año × años × costo por hora de <b>soporte</b> × horas para <b>atender al usuario</b></td></tr>
+</table>
+<p><b>Para no confundirlas:</b> CA son los ingenieros que lo administran. CO es arreglar la falla. CSU es ayudar al usuario. Todo, menos el CIS, se multiplica por los años.</p>
+<p class="mut">Costos a nombrar en un desarrollo: licencias · implementación · integraciones y migración · infraestructura o nube · capacitación · soporte y mantenimiento · actualizaciones · administración interna · crecimiento · costo de cambiar de proveedor.</p></section>
+
+<section><h2>3 · Indicadores económicos ★★</h2>
+<table>
+<tr><th>Sigla</th><th>Qué pregunta responde</th><th>Conviene</th><th>¿Tiempo?*</th></tr>
+<tr><td><b>TR</b> Tiempo de Recuperación</td><td>¿En cuánto tiempo recupero lo que invertí?</td><td>menor</td><td>No</td></tr>
+<tr><td><b>TPR</b> Tasa Promedio de Retorno</td><td>¿Qué % de la inversión me vuelve por año? = BPA (Beneficio Promedio Anual) / Inversión. Usa la vida útil.</td><td>mayor</td><td>No</td></tr>
+<tr><td><b>ROI</b> Return On Investment (Retorno de la Inversión)</td><td>¿Cuánto gano por cada $1 invertido? = Beneficio neto / Inversión</td><td>mayor</td><td>No</td></tr>
+<tr><td><b>VF</b> Valor Futuro</td><td>¿Cuánto valdrá mañana la plata de hoy? = C × (1 + i)ⁿ</td><td></td><td></td></tr>
+<tr><td><b>VA</b> Valor Actual</td><td>¿Cuánto vale hoy la plata que cobro más adelante? = C / (1 + i)ⁿ</td><td></td><td></td></tr>
+<tr><td><b>VAN</b> Valor Actual Neto</td><td>¿Cuánto gano en total, en plata de hoy? = VA de los beneficios − Inversión</td><td><b>&gt; 0</b></td><td>Sí</td></tr>
+<tr><td><b>TIR</b> Tasa Interna de Retorno</td><td>¿A qué tasa rinde el proyecto? Es la tasa con la que el VAN da 0.</td><td><b>&gt; tasa de la empresa</b></td><td>Sí</td></tr>
+<tr><td><b>EVA</b> Economic Value Added (Valor Económico Agregado)</td><td>¿Cuánto gano después de pagar lo que me cuesta el capital? = Beneficio neto − Inversión × costo de capital</td><td>&gt; 0</td><td></td></tr>
+<tr><td><b>PE</b> Punto de Equilibrio</td><td>¿Cuántas unidades tengo que vender para no perder? Q = CF (costos fijos) / (P (precio) − CVu (costo variable por unidad))</td><td>alcanzable</td><td></td></tr>
+</table>
+<p class="mut">* ¿Tiene en cuenta que la plata vale distinto según cuándo llega? Solo VAN y TIR.</p>
+<ul>
+<li><b>Beneficio</b> = ingresos nuevos + costos que me ahorro, siempre en plata.</li>
+<li><b>i (tasa de descuento)</b> = costo del capital + un % por el riesgo. <b>No es la inflación.</b></li>
+<li><b>VAN y TIR dicen lo mismo:</b> si con la tasa de la empresa el VAN da positivo, la TIR es mayor que esa tasa. Si el VAN da 0, son iguales.</li>
+</ul></section>
+
+<section><h2 class="k">Adquisiciones</h2>
+<ul>
+<li><b>Cómo conseguir un bien:</b> comprarlo, alquilarlo o <b>leasing</b> (lo alquilo y al final puedo comprarlo a un precio pactado).</li>
+<li><b>RFI</b> (pedido de información): lo mando primero, para conocer qué hay en el mercado. <b>RFP</b> (pedido de propuesta): pido precio, plazo y solución para algo ya definido. <b>RFQ</b>: pido solo el precio.</li>
+<li><b>Quién corre el riesgo:</b> precio fijo → el <b>proveedor</b>. Costo reembolsable (pago lo que cueste) → el <b>cliente</b>. Por hora o con premios → los dos.</li>
+</ul></section>
+
+<section><h2 class="g">4 · Canvas ★★★ (desarrollo)</h2>
+<p>En el parcial sos <b>una startup que le vende algo al banco</b>, no el banco. Llenalo en este orden: segmentos → propuesta <b>para cada segmento</b> → canales, relación e ingresos (marcando S1, S2…) → recursos, actividades y socios → costos.</p>
+<h3>Segmento y propuesta: lo que más pesa</h3>
+<ul>
+<li><b>El segmento tiene que ser concreto</b>, que te puedas imaginar al cliente: dónde está, qué tamaño tiene, qué usa hoy y qué le duele. Mal: «bancos». Bien: «bancos privados nacionales de 30 a 80 sucursales con filas largas los días de cobro».</li>
+<li>Si le vendés a una empresa, separá quién lo <b>usa</b>, quién <b>decide</b> y quién <b>paga</b>. Nombrá a los primeros que te van a comprar (<b>early adopters</b>). Si alguien lo usa sin pagar pero sin él no funciona, es un <b>actor crítico</b>.</li>
+</ul>
+<div class="f">(S1) [lo que gana el cliente],
+     PORQUE [lo que hoy le duele a S1]</div>
+<ul>
+<li><b>Escribí lo que el cliente gana, no lo que vendés.</b> Mal: «app de turnos». Bien: «esperar la mitad en los días de más gente».</li>
+<li><b>Una propuesta por segmento.</b> Lo mismo le sirve distinto a cada uno: DeepAgro le da plata al productor, ambiente a la provincia y trabajo a la pulverizadora.</li>
+</ul>
+<h3>El resto de los bloques</h3>
+<ul>
+<li><b>Canales:</b> cómo se entera el cliente y cómo le llega el producto, desde que lo conoce hasta la posventa.</li>
+<li><b>Relación:</b> cómo consigo, mantengo y hago crecer clientes (<b>Get / Keep / Grow</b>). CAC = lo que gasto en conseguir un cliente.</li>
+<li><b>Ingresos:</b> uno por segmento. Venta, cobro por uso, suscripción, alquiler, licencia, comisión o publicidad. El precio sale de cuánto lo valora el cliente.</li>
+<li><b>Recursos:</b> físicos, intelectuales (datos, marca), humanos y financieros. <b>La plata de los fundadores va acá.</b></li>
+<li><b>Actividades:</b> lo que tengo que hacer bien sí o sí.</li>
+<li><b>Socios clave:</b> de quienes <b>depende</b> el negocio (proveedor de IA, nube, API de pagos, RENAPER), no los dueños. Decí qué pasa si fallan y cómo lo cubrís.</li>
+<li><b>Costos:</b> fijos (sueldos, retiro de los socios, plan base) y variables (crecen con los clientes: tokens, comisiones, impuestos). Ninguno en las dos columnas.</li>
+<li><b>Coherencia:</b> todo lo que prometés a la derecha necesita una actividad, un recurso y un costo a la izquierda.</li>
+</ul></section>
+
+<section><h2 class="g">Lean Startup</h2>
+<p>Probar la idea con clientes reales antes de invertir fuerte: <b>crear → medir → aprender → cambiar</b>. El <b>MVP</b> es la versión mínima que ya funciona y sale a la calle para validar; un prototipo, en cambio, no funciona. Ejemplos: una landing page o un «Mago de Oz» (por detrás se hace todo a mano). <b>Iterar</b> es un ajuste chico. <b>Pivotar</b> es un cambio grande (de cliente o de forma de cobrar) sin abandonar la idea. La startup todavía <b>busca</b> cómo ganar plata de forma repetible; la empresa ya lo sabe y lo <b>ejecuta</b>.</p></section>
+
+<section><h2 class="k">Ciclos de vida (multiple choice)</h2>
+<p>Son las etapas que llevan el proyecto del inicio al fin. No hay uno ideal, y no es lo mismo que una metodología.</p>
+<ul>
+<li><b>Cascada:</b> una etapa detrás de otra. Para requisitos claros y fijos desde el inicio. Un error que aparece tarde sale caro.</li>
+<li><b>Iterativo:</b> cada vuelta <b>mejora</b> el mismo producto.</li>
+<li><b>Incremental:</b> cada vuelta <b>le agrega</b> un módulo nuevo. Sirve para entregar partes rápido.</li>
+<li><b>Por prototipos:</b> para tecnología nueva o poco probada.</li>
+<li><b>Espiral</b> (Boehm): en cada vuelta se <b>analizan los riesgos</b>. Para proyectos con mucha incertidumbre.</li>
+<li>También: ágil (requisitos que cambian) e híbrido.</li>
+</ul></section>
+
+</div></body></html>

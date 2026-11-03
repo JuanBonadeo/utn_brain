@@ -833,4 +833,4 @@ Son preguntas que en 2025 fueron 5 de 32:
 - **Alcance**: aviso de Guillermo Leale del 31/10 en el Classroom, y la clase del 14/10 (`estudio/parcial1-alcance-2026.md`).
 - **Parcial 2025 y resumen de alumnos 2025**: `estudio/banco-preguntas.md` y `fuentes/resumenes/Resumen Simulación 2025 (con preguntas de parcial).docx`.
 - **Consignas de los TP 2026**: `fuentes/tps-2026/`.
-- Las figuras se generan con `scripts/sim-figs-parcial1.py`.
+- Las figuras se generan con `scripts/sim/sim-figs-parcial1.py`.

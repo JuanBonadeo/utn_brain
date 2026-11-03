@@ -100,10 +100,10 @@ es Franck, el que diseña el instrumento.
 #### Ejercicios resueltos tipo
 - **Ensayo TP módulo "Tecnología, Ciencia y Sociedad"** (3-4 págs., puntos de
   encuentro entre la película y el texto de Toffler):
-  [`ensayo-recursos-humanos-toffler.md`](ensayo-recursos-humanos-toffler.md).
+  [`entregables/ensayo-recursos-humanos-toffler.md`](entregables/ensayo-recursos-humanos-toffler.md).
 
 #### Dudas / pendientes
-- **Falta el cuadernillo** *Tecnología, Ciencia y Sociedad* en `fuentes/IYS/`.
+- **Falta el cuadernillo** *Tecnología, Ciencia y Sociedad* en `fuentes/`.
   Sin él, el ensayo cita a Toffler por el marco general de *La tercera ola* y no
   por página del fragmento asignado. Subirlo para: (a) confirmar qué recorta
   exactamente el fragmento "Teoría social y esquema de olas", (b) poner citas
@@ -235,7 +235,7 @@ desregulación del consumidor · felicidad paradójica · sociedad de la decepci
 - 2026-08-11: se creó la Unidad 1 (Tecnología, Ciencia y Sociedad) con el
   esquema de olas de Toffler, ficha de la película *Recursos Humanos* y tabla de
   cruce película↔texto. Se resolvió el TP del módulo (ensayo de 3-4 págs.) en
-  `ensayo-recursos-humanos-toffler.md`. Sin fuentes crudas en `fuentes/IYS/`:
+  `ensayo-recursos-humanos-toffler.md`. Sin fuentes crudas en `fuentes/`:
   Toffler se desarrolló desde conocimiento general de *La tercera ola*, no desde
   el cuadernillo de la cátedra.
 - 2026-09-20: se creó la Unidad 2 (Sociedad de consumo e hiperconsumo) con las
@@ -255,3 +255,4 @@ desregulación del consumidor · felicidad paradójica · sociedad de la decepci
   Anexo II, versión breve del guion en Anexo I, sección 7 reescrita, conclusión
   sexta nueva). Fecha de entrega 22/09/2026. Docente: Vanina López.
   Listo para entregar.
+- 2026-11-03: corregidos un link roto al ensayo de Toffler y las rutas viejas `fuentes/IYS/`.

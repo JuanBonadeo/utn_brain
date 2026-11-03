@@ -4,7 +4,7 @@
 > Responde los tres puntos que pidió por mail el 2026-09-20: qué línea en específico, qué franja
 > horaria y días, y cuáles son en concreto las medidas de rendimiento.
 > Todos los números de este documento salen del perfilado propio del dataset de SBASE (§6), no de
-> estimaciones. El script que los reproduce es [`scripts/sbase-perfil.py`](../../../../../scripts/sbase-perfil.py).
+> estimaciones. El script que los reproduce es [`scripts/sim/sbase-perfil.py`](../../../../../scripts/sim/sbase-perfil.py).
 
 ---
 

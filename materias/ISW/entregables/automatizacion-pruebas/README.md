@@ -4,7 +4,7 @@
 
 **Software probado.** El procedimiento de operaciones de la *aplicación bancaria* del enunciado
 que ya usamos en la tarea de casos de prueba por valores límite
-(`../tarea-casos-prueba-valores-limite.md`). Se implementó en `banco.py`: recibe código del
+(`../casos-prueba-valores-limite/tarea-casos-prueba-valores-limite.md`). Se implementó en `banco.py`: recibe código del
 banco, código de sucursal, número de cuenta, clave personal y orden; valida cada campo y devuelve
 si la operación se acepta, el mensaje y los documentos a entregar.
 

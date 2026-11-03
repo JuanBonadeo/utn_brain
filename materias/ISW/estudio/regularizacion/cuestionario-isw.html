@@ -1,0 +1,1316 @@
+<title>Banco ISW</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+:root{
+  --bg:#eef1f5; --surface:#ffffff; --surface-2:#f5f7fa; --line:#d5dbe4; --line-strong:#b9c2cf;
+  --text:#152033; --muted:#58647a; --accent:#2446b0; --accent-ink:#ffffff; --accent-soft:#e2e8f9;
+  --ok:#1b7548; --ok-soft:#e0f1e7; --bad:#ad3627; --bad-soft:#f8e3df; --warn:#8f5c00; --warn-soft:#f6ecd6;
+  --shadow:0 1px 2px rgba(21,32,51,.06),0 6px 24px -12px rgba(21,32,51,.18);
+  --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --cond:"IBM Plex Sans Condensed","Arial Narrow",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0d1219; --surface:#151c27; --surface-2:#1a2330; --line:#2a3444; --line-strong:#3a4659;
+    --text:#e4e9f1; --muted:#97a2b5; --accent:#89a4ff; --accent-ink:#0d1219; --accent-soft:#1e2946;
+    --ok:#5cc28e; --ok-soft:#152f22; --bad:#f1806e; --bad-soft:#3a1d19; --warn:#e2aa47; --warn-soft:#33270f;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 28px -14px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0d1219; --surface:#151c27; --surface-2:#1a2330; --line:#2a3444; --line-strong:#3a4659;
+  --text:#e4e9f1; --muted:#97a2b5; --accent:#89a4ff; --accent-ink:#0d1219; --accent-soft:#1e2946;
+  --ok:#5cc28e; --ok-soft:#152f22; --bad:#f1806e; --bad-soft:#3a1d19; --warn:#e2aa47; --warn-soft:#33270f;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 28px -14px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.55;padding-inline:16px;padding-block:20px 48px}
+.wrap{max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* header */
+.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--cond);font-weight:700;font-size:clamp(2rem,5vw,2.6rem);line-height:1;margin:6px 0 8px;letter-spacing:-.01em}
+.sub{margin:0;color:var(--muted);max-width:62ch}
+.sub b{color:var(--text);font-weight:600}
+.modes{display:inline-flex;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:3px;gap:3px}
+.modes button{border:0;background:transparent;padding:8px 16px;border-radius:7px;cursor:pointer;font-weight:500;color:var(--muted)}
+.modes button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+
+/* filters */
+.filters{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;padding:12px 14px;background:var(--surface);border:1px solid var(--line);border-radius:12px}
+.fgroup{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.flabel{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-right:4px}
+.chip{border:1px solid var(--line-strong);background:transparent;border-radius:999px;padding:4px 11px;font-size:14px;cursor:pointer;color:var(--muted);display:inline-flex;gap:6px;align-items:baseline}
+.chip .n{font-family:var(--mono);font-size:12px;opacity:.8}
+.chip[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--text)}
+.count{margin-left:auto;font-family:var(--mono);font-size:13px;color:var(--muted)}
+
+/* layout */
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:18px;align-items:start}
+@media (max-width:880px){.layout{grid-template-columns:minmax(0,1fr)}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:22px clamp(16px,3vw,30px) 24px;min-width:0}
+.side{display:flex;flex-direction:column;gap:14px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 14px)}
+@media (max-width:880px){.side{position:static}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.panel h3{margin:0 0 10px;font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+/* question */
+.qhead{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;margin-bottom:14px}
+.utag{font-family:var(--mono);font-size:12px;font-weight:500;background:var(--text);color:var(--surface);padding:2px 7px;border-radius:5px}
+.topic{font-size:14px;color:var(--muted);margin-right:auto}
+.badge{font-family:var(--mono);font-size:11.5px;padding:2px 8px;border-radius:5px;border:1px solid var(--line-strong);color:var(--muted);white-space:nowrap}
+.badge.ok{border-color:transparent;background:var(--ok-soft);color:var(--ok)}
+.badge.ded{border-color:transparent;background:var(--warn-soft);color:var(--warn)}
+.badge.new{border-color:transparent;background:var(--accent-soft);color:var(--accent)}
+.qnum{font-family:var(--mono);font-size:12.5px;color:var(--muted);margin-bottom:6px}
+.ctx{margin:0 0 14px;padding:12px 14px;background:var(--surface-2);border:1px solid var(--line);border-radius:8px;font-size:15px}
+.ctx p{margin:0}
+.tblwrap{overflow-x:auto;margin:10px 0 2px}
+.ctx table{border-collapse:collapse;font-size:13.5px;font-variant-numeric:tabular-nums;min-width:100%}
+.ctx th,.ctx td{border:1px solid var(--line);padding:4px 8px;text-align:left;white-space:nowrap}
+.ctx th{font-weight:600;background:var(--surface)}
+.stem{font-size:1.14rem;font-weight:500;line-height:1.45;margin:0 0 6px;text-wrap:pretty}
+.hint{font-size:13.5px;color:var(--muted);margin:0 0 14px}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{display:grid;grid-template-columns:auto auto 1fr auto;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;cursor:pointer;background:var(--surface);transition:border-color .12s,background-color .12s}
+.opt:hover{border-color:var(--line-strong)}
+.opt input{margin:0;accent-color:var(--accent);width:17px;height:17px}
+.opt .key{font-family:var(--mono);font-size:12px;color:var(--muted);width:1.2em}
+.opt .mark{font-family:var(--mono);font-size:11.5px;white-space:nowrap}
+.opt:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
+.opt.is-ans{border-color:var(--ok);background:var(--ok-soft)}
+.opt.is-ans .mark{color:var(--ok)}
+.opt.is-wrong{border-color:var(--bad);background:var(--bad-soft)}
+.opt.is-wrong .mark{color:var(--bad)}
+.opt:has(input:disabled){cursor:default}
+
+/* matrix */
+.matrix{display:flex;flex-direction:column;gap:10px}
+.mrow{display:flex;flex-direction:column;gap:7px;padding:10px 12px;border:1px solid var(--line);border-radius:10px}
+.mrow.r-ok{border-color:var(--ok)}
+.mrow.r-bad{border-color:var(--bad)}
+.mtext{font-size:15px}
+.mcols{display:flex;flex-wrap:wrap;gap:6px}
+.seg{position:relative;display:inline-flex}
+.seg input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.seg span{display:inline-block;padding:5px 11px;border:1px solid var(--line-strong);border-radius:7px;font-size:14px;color:var(--muted);background:var(--surface)}
+.seg input:checked + span{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.seg input:focus-visible + span{outline:2px solid var(--accent);outline-offset:2px}
+.seg.seg-ans span{border-color:var(--ok);color:var(--ok);background:var(--ok-soft)}
+.seg.seg-ans input:checked + span{background:var(--ok);border-color:var(--ok);color:var(--surface)}
+.seg.seg-wrong input:checked + span{background:var(--bad);border-color:var(--bad);color:var(--surface)}
+.seg input:disabled{cursor:default}
+
+/* actions & feedback */
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;align-items:center}
+.btn{border:1px solid var(--line-strong);background:var(--surface);border-radius:9px;padding:9px 16px;cursor:pointer;font-weight:500}
+.btn:hover:not(:disabled){border-color:var(--text)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.primary:hover:not(:disabled){filter:brightness(1.08);border-color:var(--accent)}
+.btn.ghost{border-color:transparent;color:var(--muted);padding-inline:10px}
+.btn.small{padding:6px 11px;font-size:14px}
+.spacer{flex:1}
+.fb{margin-top:18px;padding:14px 16px;border-radius:10px;border:1px solid var(--line)}
+.fb.good{background:var(--ok-soft);border-color:transparent}
+.fb.bad{background:var(--bad-soft);border-color:transparent}
+.fb.part{background:var(--warn-soft);border-color:transparent}
+.fb .verdict{font-family:var(--cond);font-weight:700;font-size:1.15rem;margin-bottom:4px}
+.fb.good .verdict{color:var(--ok)} .fb.bad .verdict{color:var(--bad)} .fb.part .verdict{color:var(--warn)}
+.fb p{margin:6px 0 0}
+.fb .answer{font-weight:500}
+.fb .ded{font-size:13.5px;color:var(--warn);margin-top:8px}
+.fb .src{font-size:13px;color:var(--muted);margin-top:8px;font-family:var(--mono)}
+
+/* side panel */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.stat{display:flex;flex-direction:column}
+.stat b{font-family:var(--cond);font-size:1.6rem;line-height:1.1;font-variant-numeric:tabular-nums}
+.stat span{font-size:12px;color:var(--muted)}
+.ubars{display:flex;flex-direction:column;gap:7px;margin-bottom:6px}
+.ubar{display:grid;grid-template-columns:34px 1fr 52px;gap:8px;align-items:center;font-size:12.5px}
+.ubar .code{font-family:var(--mono)}
+.ubar .track{height:6px;background:var(--surface-2);border:1px solid var(--line);border-radius:99px;overflow:hidden}
+.ubar .fill{height:100%;background:var(--ok);border-radius:99px}
+.ubar .val{font-family:var(--mono);color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(32px,1fr));gap:5px}
+.sq{height:32px;border:1px solid var(--line);border-radius:6px;background:var(--surface);font-family:var(--mono);font-size:11.5px;color:var(--muted);cursor:pointer;padding:0;font-variant-numeric:tabular-nums}
+.sq.done{background:var(--accent-soft);border-color:var(--accent);color:var(--text)}
+.sq.ok{background:var(--ok-soft);border-color:var(--ok);color:var(--ok)}
+.sq.bad{background:var(--bad-soft);border-color:var(--bad);color:var(--bad)}
+.sq.part{background:var(--warn-soft);border-color:var(--warn);color:var(--warn)}
+.sq.cur{outline:2px solid var(--text);outline-offset:1px}
+.legend{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12px;color:var(--muted);margin-top:10px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px;border:1px solid}
+.sidebtns{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.note{font-size:13.5px;color:var(--muted);margin:0}
+
+/* exam */
+.intro h2{font-family:var(--cond);font-size:1.6rem;margin:0 0 8px}
+.intro ul{margin:8px 0 18px;padding-left:20px;color:var(--muted)}
+.intro li{margin:3px 0}
+.result{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;padding:16px 18px;border-radius:12px;background:var(--surface);border:1px solid var(--line)}
+.result .score{font-family:var(--cond);font-size:2.4rem;font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
+.result .score small{font-size:1rem;color:var(--muted);font-weight:600}
+.pill{font-family:var(--mono);font-size:12.5px;padding:4px 10px;border-radius:99px;font-weight:500}
+.pill.pass{background:var(--ok-soft);color:var(--ok)}
+.pill.fail{background:var(--bad-soft);color:var(--bad)}
+.result p{margin:0;color:var(--muted);font-size:14px;flex-basis:100%}
+.empty{padding:30px 6px;text-align:center;color:var(--muted)}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <div class="eyebrow">ICS · Ingeniería y Calidad de Software</div>
+      <h1>Banco ISW</h1>
+      <p class="sub">Parcial de regularización: <b>sábado 26/09, 9:30</b>, aulas 210 a 213. Entran <b>U1, U2, U3 y U5</b>, sin libro abierto. Se aprueba con el <b>60 %</b>.</p>
+    </div>
+    <div class="modes" role="group" aria-label="Modo">
+      <button type="button" data-act="mode" data-mode="practice" aria-pressed="true">Práctica</button>
+      <button type="button" data-act="mode" data-mode="exam" aria-pressed="false">Simulacro</button>
+    </div>
+  </header>
+
+  <section class="filters" id="filters" aria-label="Filtros"></section>
+  <div id="banner"></div>
+
+  <main class="layout">
+    <article class="card" id="card" aria-live="polite"></article>
+    <aside class="side" id="side"></aside>
+  </main>
+</div>
+
+<script>
+/* ============ DATOS ============
+   ans: índice, texto exacto o prefijo único de la opción correcta.
+   Multi: array. Matriz: rows + cols + rans (una columna por fila).
+   src 'Parcial …' / 'Cuestionario' = ya existían; 'Nueva' = creadas con el mismo formato.
+   conf 'ded' = el formulario original no mostraba la clave; está deducida. */
+
+const AREAS = ['VER (Verificación)','VAL (Validación)','OT (Formación organizativa)','PMC (Monitorización y control del proyecto)','OPD (Definición de procesos de la organización)','PP (Planificación de proyecto)','OPF (Enfoque en procesos de la organización)','NINGUNA de las otras áreas'];
+const RELA = 'Relacione la actividad descripta con el área de proceso que corresponda (sólo una), o indique NINGUNA si no encuadra con ninguna de las opciones.';
+const RELSP = 'Relacione la actividad descripta con el área de proceso y práctica específica que corresponda (sólo una), o indique NINGUNA si no encuadra con ninguna de las opciones.';
+const XOPTS = ['REQM / SP 1.2 Obtener el compromiso sobre los requerimientos','REQM / SP 1.3 Gestionar los cambios de los requerimientos','CM / SP 1.3 Crear o liberar líneas base','CM / SP 2.1 Seguir las peticiones de cambio','CM / SP 2.2 Controlar los elementos de configuración','CM / SP 3.1 Establecer registros de gestión de configuración','PPQA / SP 1.2 Evaluar objetivamente los productos de trabajo y los servicios','PPQA / SP 2.1 Comunicar y asegurar la resolución de las no conformidades','VER / SP 3.1 Realizar la verificación','NINGUNA de las otras opciones'];
+const VF = ['Verdadero','Falso'];
+const NIV = ['Nivel 1','Nivel 2','Nivel 3','Nivel 4','Nivel 5'];
+
+const Q = [
+/* ---------------- U1 ---------------- */
+{id:'u1-req',u:'U1',t:'Componentes de un área de proceso',src:'Parcial 2012 · 2020 · 2021 · 2024',conf:'ok',
+ q:'Son componentes requeridos de un Área de Proceso CMMI:',
+ opts:['Metas específicas','Metas genéricas','Prácticas genéricas','Sub-prácticas genéricas','Herramientas'],ans:['Metas específicas','Metas genéricas'],
+ exp:'Requeridos = **sólo las metas** (SG y GG). Las prácticas (SP y GP) son **esperadas**; subprácticas, productos de trabajo típicos, ejemplos y ampliaciones son **informativos**. Las herramientas ni siquiera son componentes del modelo.'},
+{id:'u1-spob',u:'U1',t:'Componentes de un área de proceso',src:'Parcial 2025',conf:'ded',fixed:true,
+ q:'«CMMI considera como elemento obligatorio las prácticas específicas en las áreas de proceso.»',opts:['Sí','No'],ans:'No',
+ exp:'Las SP son **esperadas**, no requeridas: la organización puede implementar prácticas alternativas siempre que satisfaga la meta. Lo obligatorio son las **metas**.'},
+{id:'u1-ma',u:'U1',t:'Niveles de madurez',src:'Parcial 2025',conf:'ded',fixed:true,
+ ctx:'Una software factory lleva varios años en el mercado, cumple con las áreas de proceso de nivel 3 y con las áreas de nivel 2, excepto el área de proceso MA, que también corresponde al nivel 2.',
+ q:'Determine el nivel de madurez de la software factory.',opts:NIV,ans:'Nivel 1',
+ exp:'Modelo escalonado: para estar en un nivel hay que cumplir **todas** las áreas de ese nivel y de los anteriores. Falta MA (nivel 2) → no alcanza el 2, y sin el 2 no hay 3. Queda en **nivel 1**, el nivel por defecto.'},
+{id:'u1-estim',u:'U1',t:'Niveles de madurez',src:'Parcial 2025',conf:'ok',fixed:true,
+ ctx:'Cierto gerente afirmó que una vez que se alcanza el nivel 3 ya no es necesario cumplir con la meta «Establecer estimaciones». De hecho: «nosotros dejamos de hacerlo».',
+ q:'¿En cuáles niveles de madurez NO nos encontramos?',opts:NIV,ans:['Nivel 2','Nivel 3','Nivel 4','Nivel 5'],
+ exp:'«Establecer estimaciones» es la SG 1 de **PP (nivel 2)**. Si la dejó de cumplir, se cae del nivel 2 y de todo lo que está arriba: la organización está en **nivel 1**. Alcanzar un nivel superior no exime de las áreas inferiores.'},
+{id:'u1-inst',u:'U1',t:'Componentes de un área de proceso',src:'Cuestionario',conf:'ok',
+ q:'Determine los elementos que tratan en CMMI la institucionalización de un proceso:',
+ opts:['Metas genéricas','Metas específicas','Prácticas genéricas','Prácticas específicas','Ninguna de las mencionadas'],ans:['Metas genéricas','Prácticas genéricas'],
+ exp:'Las **metas y prácticas genéricas** tratan la institucionalización. «Genérico» significa que la misma declaración se aplica a múltiples áreas de proceso. Las específicas tratan lo particular de cada área.'},
+{id:'u1-atodo',u:'U1',t:'Niveles de madurez',src:'Cuestionario',conf:'ok',fixed:true,
+ ctx:'La software factory «ATodooNada» tiene todas las áreas de proceso de nivel 3 implementadas; sólo le falta el área de PMC, que no es de nivel 3.',
+ q:'¿Cuál es el nivel de madurez de la software factory?',opts:NIV,ans:'Nivel 1',
+ exp:'PMC es de **nivel 2**. Sin una sola área de nivel 2 no se alcanza el nivel 2, y sin el 2 no hay 3. Queda en **nivel 1**.'},
+{id:'u1-n2',u:'U1',t:'Áreas por nivel',src:'Cuestionario',conf:'ok',
+ q:'Determine el/las área/s de proceso que son necesarias para alcanzar el nivel de madurez 2 de CMMI:',opts:['PP','PMC','OPD','VER'],ans:['PP','PMC'],
+ exp:'**PP y PMC** son nivel 2. OPD y VER son nivel 3.'},
+{id:'u1-sfn2',u:'U1',t:'Niveles de madurez',src:'Cuestionario',conf:'ok',
+ q:'Estoy en una software factory con nivel de madurez 2. Esto es importante porque voy a encontrar en cada proyecto:',
+ opts:['Un cronograma del proyecto','Un proceso de prueba definido a nivel organización','Un plan de proyecto','Una lista de puntos de control del cronograma del proyecto','Estándares de la organización'],
+ ans:['Un cronograma del proyecto','Un plan de proyecto','Una lista de puntos de control'],
+ exp:'Cronograma, plan y puntos de control salen de **PP / PMC (nivel 2)**. Un proceso definido **a nivel organización** y los estándares son de **OPD (nivel 3)**: en nivel 2 cada proyecto puede tener procesos bastante distintos.'},
+{id:'u1-ppqa',u:'U1',t:'Áreas por nivel',src:'Cuestionario',conf:'ok',fixed:true,
+ q:'«El nivel de madurez al que corresponde el aseguramiento de la calidad, y en el cual nace, es el nivel 3.»',opts:VF,ans:'Falso',
+ exp:'**PPQA** es un área de soporte de **nivel 2**. No confundir con VER y VAL, que son nivel 3.'},
+{id:'u1-princ',u:'U1',t:'Ingeniería de software',src:'Parcial 2012 · 2013 · 2015',conf:'ok',
+ q:'Entre los principios de la Ingeniería de Software están:',
+ opts:['Las personas y el tiempo son intercambiables','Haz de la calidad la razón de trabajar','Primero hazlo rápido, luego hazlo correcto','Probar, probar y probar'],ans:['Haz de la calidad','Probar, probar'],
+ exp:'Las personas y el tiempo **no** son intercambiables: sumar gente no acelera linealmente (coordinación, comunicación, curva de aprendizaje). «Rápido primero» es lo opuesto a un enfoque disciplinado.'},
+{id:'u1-etapa',u:'U1',t:'Ingeniería de software',src:'Parcial 2013',conf:'ok',fixed:true,
+ q:'Etapa que consiste en comprobar que el software realiza correctamente las tareas indicadas en la especificación:',
+ opts:['Análisis de requerimientos','Planificación','Diseño','Prueba','Mantenimiento'],ans:'Prueba',
+ exp:'Es la **Prueba**. Etapas: análisis de requisitos → especificación → diseño y arquitectura → programación → prueba → mantenimiento.'},
+{id:'u1-adapt',u:'U1',t:'Tipos de mantenimiento',src:'Parcial 2016',conf:'ok',
+ q:'Tipo de mantenimiento que comprende las modificaciones que afectan a los entornos en los que opera el sistema (hardware, software de base, gestores de base de datos, comunicaciones):',
+ opts:['Correctivo','Evolutivo','Adaptativo','Perfectivo'],ans:'Adaptativo',
+ exp:'**Adaptativo** = cambios por el **entorno**. Correctivo corrige errores; evolutivo agrega, modifica o elimina por cambios en las necesidades del usuario; perfectivo mejora la calidad interna.'},
+{id:'u1-soft',u:'U1',t:'Ingeniería de software',src:'Parcial 2012',conf:'ok',fixed:true,
+ q:'El software está compuesto por:',opts:['Programas','Programas y datos','Programas, datos y documentos','Programas, datos, documentos y hardware'],ans:'Programas, datos y documentos',
+ exp:'Software = **programas + datos + documentos**. En clase se agregó «procedimientos», pero en el parcial 2012 la respuesta esperada fue esta.'},
+{id:'n-u1-heroe',u:'U1',t:'Niveles de madurez',src:'Nueva',fixed:true,
+ q:'Nivel de madurez en el que el éxito depende de la competencia y heroicidad del personal, se abandonan los procesos en momentos de crisis y la organización es incapaz de repetir sus éxitos:',
+ opts:['Nivel 1 — Inicial','Nivel 2 — Gestionado','Nivel 3 — Definido','Nivel 4 — Gestionado cuantitativamente','Nivel 5 — En optimización'],ans:'Nivel 1',
+ exp:'**Nivel 1 (Inicial)**. Ojo: el modelo dice que estas organizaciones **a menudo producen productos que funcionan**, pero exceden el presupuesto y no cumplen el calendario. En nivel 2 la disciplina se mantiene incluso bajo estrés.'},
+{id:'n-u1-4v5',u:'U1',t:'Niveles de madurez',src:'Nueva',
+ q:'¿Qué distingue al nivel de madurez 5 del nivel 4?',
+ opts:['El nivel 5 trata las causas comunes de variación y cambia el proceso para mejorar su rendimiento; el 4 trata las causas especiales','El nivel 5 trata las causas especiales de variación; el 4 trata las causas comunes','El nivel 5 exige el conjunto de procesos estándar de la organización; el 4 no lo exige','El nivel 5 fija objetivos cuantitativos; el 4 sólo cualitativos','Ninguna de las opciones'],ans:0,
+ exp:'Nivel 4: **causas especiales**, predictibilidad estadística. Nivel 5: **causas comunes**, mejora continua incremental e innovadora del proceso. La opción invertida es la trampa. El conjunto de procesos estándar existe desde el nivel 3, y los objetivos cuantitativos ya aparecen en el 4.'},
+{id:'n-u1-2v3',u:'U1',t:'Niveles de madurez',src:'Nueva',
+ q:'La diferencia principal entre el nivel 2 y el nivel 3 de madurez es que en el nivel 3:',
+ opts:['Los procesos de cada proyecto se adaptan desde el conjunto de procesos estándar de la organización, por lo que son consistentes entre proyectos','Los proyectos planifican y se monitorizan según políticas','El rendimiento del proceso es predecible estadísticamente','Se identifican y corrigen las causas especiales de variación'],ans:0,
+ exp:'2 vs 3 es **alcance y consistencia**. En nivel 2 los procesos pueden ser bastante distintos en cada proyecto; en nivel 3 se **adaptan desde el conjunto estándar** según las guías de adaptación. Planificar y monitorizar ya es nivel 2; lo estadístico es nivel 4.'},
+{id:'n-u1-comp',u:'U1',t:'Componentes de un área de proceso',src:'Nueva',
+ q:'Clasifique cada componente de un área de proceso:',cols:['Requerido','Esperado','Informativo'],
+ rows:['Metas genéricas','Prácticas específicas','Subprácticas','Productos de trabajo típicos','Prácticas genéricas','Declaración de propósito'],
+ rans:['Requerido','Esperado','Informativo','Informativo','Esperado','Informativo'],
+ exp:'Requeridos = metas (SG, GG). Esperados = prácticas (SP, GP). Todo lo demás (subprácticas, productos típicos, propósito, notas introductorias, ejemplos, ampliaciones) es informativo.'},
+{id:'n-u1-num',u:'U1',t:'Componentes de un área de proceso',src:'Nueva',
+ q:'En la notación de CMMI, «SP 2.3» identifica a:',
+ opts:['La práctica específica número 3 de la meta específica 2','La práctica específica número 2 de la meta específica 3','La subpráctica 3 de la práctica genérica 2','La práctica específica 3 del nivel de madurez 2'],ans:0,
+ exp:'SP x.y → **x = número de la meta** a la que pertenece, **y = número de secuencia** dentro de esa meta. Ej.: PMC SP 2.1 Analizar problemas es la primera práctica de la SG 2.'},
+{id:'n-u1-ot',u:'U1',t:'Niveles de madurez',src:'Nueva',fixed:true,
+ ctx:'Una software factory cumple todas las áreas de proceso de nivel 2 y todas las de nivel 3 excepto OT. Además implementó OPP y QPM, que son de nivel 4.',
+ q:'¿Cuál es su nivel de madurez?',opts:NIV,ans:'Nivel 2',
+ exp:'OT es **nivel 3** (en la edición castellana del CMMI la carátula de OT dice «nivel 4», pero es una errata: las tablas del mismo libro y la PPT de cátedra la ponen en 3). Falta un área de nivel 3 → se queda en **nivel 2**. Las áreas de nivel 4 no suman.'},
+{id:'n-u1-cal',u:'U1',t:'Calidad de producto',src:'Nueva',
+ q:'Clasifique el tipo de calidad de producto al que corresponde cada ejemplo:',cols:['Interna','Externa','De uso'],
+ rows:['Facilidad de mantenimiento del código','Cumplimiento de los requerimientos','El sistema anda, pero a la media hora de uso real aparece un problema que nadie había previsto','Respeto de los estándares de codificación','Accesibilidad'],
+ rans:['Interna','Externa','De uso','Interna','Externa'],
+ exp:'**Interna**: la que el cliente no percibe (mantenibilidad, claridad del código, estándares, reusabilidad). **Externa**: la que se ve desde afuera (requerimientos, accesibilidad). **De uso**: la «calidad futura» que aparece recién con el uso real.'},
+{id:'n-u1-mant',u:'U1',t:'Tipos de mantenimiento',src:'Nueva',
+ q:'Relacione cada situación con el tipo de mantenimiento:',cols:['Correctivo','Evolutivo','Adaptativo','Perfectivo'],
+ rows:['Migrar el sistema de SQL Server a PostgreSQL por decisión del cliente','Corregir el cálculo del IVA, que da mal en las facturas B','Agregar un reporte de ventas por sucursal que el usuario ahora necesita','Reestructurar el código del módulo de stock para hacerlo más mantenible, sin cambiar su funcionalidad'],
+ rans:['Adaptativo','Correctivo','Evolutivo','Perfectivo'],
+ exp:'Adaptativo = cambio de **entorno** (el gestor de base de datos). Correctivo = error. Evolutivo = cambio en las **necesidades del usuario**. Perfectivo = mejora de la **calidad interna**, según la tabla de la U1.'},
+{id:'n-u1-car',u:'U1',t:'Ingeniería de software',src:'Nueva',
+ q:'¿Cuáles de las siguientes son características del software según la Guía de Ingeniería del Software?',
+ opts:['Se desarrolla, no se fabrica','No se estropea, pero se deteriora','Las personas y el tiempo son intercambiables','La reutilización ya alcanzó su máximo potencial','Es un elemento lógico, no físico'],
+ ans:['Se desarrolla','No se estropea','Es un elemento lógico'],
+ exp:'Se **desarrolla** (no hay línea de producción: cada producto es único) y **se deteriora** porque cada cambio de mantenimiento puede introducir defectos. Es un elemento **lógico**. Personas y tiempo **no** son intercambiables, y la reutilización está **lejos** de su potencial.'},
+{id:'n-u1-capas',u:'U1',t:'Ingeniería de software',src:'Nueva',
+ q:'En la tecnología multicapa de la ingeniería del software, ¿qué sirve de base sobre la que se apoyan procesos, métodos y herramientas?',
+ opts:['El compromiso con la calidad','El ciclo de vida del proyecto','Las herramientas CASE','La gestión de proyectos'],ans:0,
+ exp:'Base: **compromiso con la calidad** → Procesos (marco de trabajo) → Métodos (el «cómo» técnico) → Herramientas (automatización).'},
+{id:'n-u1-madcap',u:'U1',t:'Madurez y capacidad',src:'Nueva',
+ q:'Indique si cada afirmación es verdadera o falsa:',cols:VF,
+ rows:['La madurez es de la organización entera y se razona por etapas','La capacidad se mide por área de proceso individual','Una organización nivel 5 ya no necesita ejecutar PP ni PMC','Una organización puede instanciar un área de un nivel superior al suyo si el contexto de negocio lo justifica'],
+ rans:['Verdadero','Verdadero','Falso','Verdadero'],
+ exp:'Los niveles son **acumulativos**: una organización nivel 5 sigue haciendo PP y PMC todos los días. Instanciar un área superior se puede, con el riesgo de no tener la base institucional que la sostenga cuando aparece el estrés.'},
+{id:'n-u1-ieee',u:'U1',t:'Ingeniería de software',src:'Nueva',
+ q:'Según la IEEE, la ingeniería del software es la aplicación de un enfoque ______ al desarrollo, operación y mantenimiento del software.',
+ opts:['sistemático, disciplinado y cuantificable','ágil, iterativo e incremental','creativo, flexible y adaptable','formal, matemático y demostrable'],ans:0,
+ exp:'Definición IEEE: enfoque **sistemático, disciplinado y cuantificable**.'},
+{id:'n-u1-gest',u:'U1',t:'Calidad de producto',src:'Nueva',fixed:true,
+ q:'De los tres niveles de gestión de la calidad, ¿en cuál se ubica CMMI?',opts:['Producto','Proyecto','Proceso','Ninguno de los tres'],ans:'Proceso',
+ exp:'Producto (pruebas en paralelo a cada etapa) · Proyecto (controlar fases y áreas de gestión) · **Proceso** (gestionar las áreas de proceso de toda la organización mediante una metodología). Ahí juega CMMI.'},
+{id:'n-u1-n4',u:'U1',t:'Niveles de madurez',src:'Nueva',fixed:true,
+ q:'¿A partir de qué nivel de madurez el rendimiento de los procesos es predecible cuantitativamente, y no sólo cualitativamente?',opts:NIV,ans:'Nivel 4',
+ exp:'En **nivel 4** el rendimiento es predecible **cuantitativamente** (medidas analizadas estadísticamente). En nivel 3, sólo **cualitativamente**.'},
+
+/* ---------------- U2 ---------------- */
+{id:'u2-fyd',u:'U2',t:'OPF',src:'Parcial 2015 · 2016 · 2020 · 2022',conf:'ok',
+ q:'Área de proceso cuyo propósito se basa en la comprensión de las fortalezas y debilidades actuales de los procesos de la organización:',opts:['OPD','OT','OPF','PP'],ans:'OPF',
+ exp:'**OPF** diagnostica y planifica la mejora. OPD define y guarda los activos. Es la pregunta más repetida de toda la serie de parciales.'},
+{id:'u2-bench',u:'U2',t:'OPF',src:'Parcial 2021',conf:'ok',
+ q:'¿Qué área se encarga de evaluar los procesos de la organización contra los de otras organizaciones?',opts:['VER','VAL','OT','OPF','OPD','PP'],ans:'OPF',
+ exp:'El **benchmarking** frente a otras organizaciones está entre las fuentes de mejoras candidatas de **OPF**.'},
+{id:'u2-repo',u:'U2',t:'OPD',src:'Parcial 2022 · 2024',conf:'ok',
+ q:'¿Cuál es el área que mantiene el repositorio de medidas de producto y proceso relacionadas con el conjunto de procesos estándar de la organización?',
+ opts:['MA','OPD','PMC','PP','OPF','OPP','Ninguna de las opciones'],ans:'OPD',
+ exp:'**OPD / SP 1.4 Establecer el repositorio de medición de la organización**. La trampa es **MA**: es nivel 2 y mide **el proyecto**. Si dice «de la organización» o «procesos estándar», es OPD.'},
+{id:'u2-metr',u:'U2',t:'OPD',src:'Parcial 2021',conf:'ok',
+ q:'Cuando se almacenan las métricas de un proyecto en el repositorio de mediciones de la software factory, ¿qué área(s) de CMMI intervienen?',opts:['OT','PP','OPF','OPD'],ans:'OPD',
+ exp:'El repositorio es un **activo de la organización** → OPD (SP 1.4).'},
+{id:'u2-spopf',u:'U2',t:'OPF',src:'Parcial 2012',conf:'ok',
+ q:'Son prácticas específicas del área OPF:',
+ opts:['Establecer el repositorio de medición de la organización','Establecer planes de acción de procesos','Especificar el proceso de negocio principal','Incorporar las experiencias relativas al proceso en los activos de proceso de la organización'],
+ ans:['Establecer planes de acción','Incorporar las experiencias'],
+ exp:'OPF SP 2.1 y SP 3.4. El repositorio de medición es **OPD** SP 1.4. «Especificar el proceso de negocio principal» no es de ninguna área.'},
+{id:'u2-spopd',u:'U2',t:'OPD',src:'Parcial 2013',conf:'ok',
+ q:'Son prácticas específicas del área OPD:',
+ opts:['Establecer el repositorio de medición de la organización','Establecer las descripciones de los modelos de ciclo de vida','Especificar el proceso de negocio principal','Incorporar las experiencias relativas al proceso en los activos de proceso de la organización'],
+ ans:['Establecer el repositorio','Establecer las descripciones'],
+ exp:'OPD SP 1.4 y SP 1.2. «Incorporar las experiencias…» es de **OPF** (SP 3.4). Es la misma lista que la pregunta de OPF de 2012, con la consigna invertida.'},
+{id:'u2-ot',u:'U2',t:'OT',src:'Parcial 2013',conf:'ok',
+ q:'Área cuyo propósito es desarrollar las habilidades y el conocimiento de las personas para que puedan realizar sus roles de manera eficaz y eficiente:',opts:['OPD','OPF','OT','RD'],ans:'OT',
+ exp:'**OT (Formación organizativa)**, nivel 3.'},
+{id:'u2-n3',u:'U2',t:'Áreas por nivel',src:'Parcial 2016',conf:'ded',
+ q:'Áreas de proceso que corresponden al nivel de madurez 3:',opts:['VAL','PMC','VER','PP','OPF'],ans:['VAL','VER','OPF'],
+ exp:'VAL, VER y OPF son nivel 3. PMC y PP son nivel 2.'},
+{id:'u2-ptorg',u:'U2',t:'OPD',src:'Cuestionario',conf:'ok',
+ q:'¿Cuál es el/las área(s) de CMMI que se encarga de verificar y almacenar los productos de trabajo a nivel organizacional (es decir, los que se usan en todos los proyectos)?',
+ opts:['PP','OPF','PMC','OPD','OT','NINGUNA de las anteriores'],ans:'NINGUNA',
+ exp:'Trampa: «verificar», «almacenar» y «nivel organizacional» empujan a OPD, pero los **productos de trabajo** surgen de cada proyecto (código fuente, minutas). Si dijera **activos**, sería OPD.'},
+{id:'u2-excep',u:'U2',t:'OPD',src:'Cuestionario',conf:'ok',inst:RELSP,
+ q:'Escribir el procedimiento por el cual deberá pedirse la excepción en un proyecto en particular, indicando motivos justificados, para no incluir Testing Automatizado (a diferencia de lo determinado por el proceso establecido).',
+ opts:['OPD / SP 1.1 Establecer los procesos estándar','OPD / SP 1.2 Establecer las descripciones de los modelos de ciclo de vida','OPD / SP 1.3 Establecer los criterios y las guías de adaptación','PP / SP 1.3 Definir el ciclo de vida del proyecto','OPF / SP 1.2 Evaluar los procesos de la organización','OT / SP 1.4 Establecer la capacidad de formación','NINGUNA de las otras opciones'],
+ ans:'OPD / SP 1.3',
+ exp:'Apartarse del proceso estándar con motivos justificados = **guías de adaptación** → **OPD / SP 1.3**. Misma respuesta para la variante «no incluir un Diseñador Gráfico».'},
+{id:'u2-modneg',u:'U2',t:'OPD',src:'Cuestionario',conf:'ok',inst:RELA,opts:AREAS,ans:'OPD',
+ q:'Detallar en qué tipo de proyectos puede no realizarse el Modelado de Negocio (apartándose del proceso estándar), invocando causas justificadas.',
+ exp:'Es definir **criterios y guías de adaptación** del proceso estándar → **OPD** (SP 1.3).'},
+{id:'u2-lecc',u:'U2',t:'OPF',src:'Cuestionario',conf:'ok',inst:RELA,opts:AREAS,ans:'OPF',
+ q:'Analizar tendencias en los informes de lecciones aprendidas de los proyectos terminados, para detectar cambios que podrían introducirse en los procesos.',
+ exp:'Las lecciones aprendidas son fuente de **mejoras candidatas** → **OPF**. Si el enunciado plantea un problema de un proyecto específico, difícilmente sea OPD, OPF u OT; acá se mira a toda la organización.'},
+{id:'u2-nc',u:'U2',t:'OPF',src:'Cuestionario',conf:'ok',inst:RELA,opts:AREAS,ans:'OPF',
+ q:'Revisar los informes de no conformidad de procesos, generados por el área de SQA, para diseñar posibles cambios a la plantilla de casos de uso.',
+ exp:'Cadena: **PPQA** emite y documenta las no conformidades → **OPF** las revisa y propone la mejora → **OPD** materializa el cambio en el activo.'},
+{id:'u2-gerqa',u:'U2',t:'OPF',src:'Cuestionario',conf:'ok',inst:RELA,opts:AREAS,ans:'OPF',
+ q:'El gerente de QA de la software factory decidió impulsar un proceso de evaluación de la forma en que trabaja la misma, para determinar cuáles son los puntos sólidos y cuáles los endebles. Para eso presenta en la reunión de gerencia los objetivos, la dedicación necesaria del personal y los plazos de la iniciativa, con el fin de lograr el consenso necesario.',
+ exp:'Evaluar los procesos para entender **fortalezas y debilidades** → **OPF** (SP 1.2 Evaluar los procesos de la organización).'},
+{id:'u2-3pm',u:'U2',t:'OPD',src:'Cuestionario',conf:'ok',inst:RELA,opts:AREAS,ans:'OPD',
+ q:'Realizar una reunión con 3 Project Managers para analizar el procedimiento definido (y aún no publicado) para el seguimiento de los proyectos, con el objetivo de encontrar y eliminar probables inconsistencias y/o errores. Dicho procedimiento fue redactado por otro Project Manager que colabora con la redacción de procedimientos iniciales.',
+ exp:'La fuente la resuelve como **OPD**: se está estableciendo un **activo de proceso de la organización** (un procedimiento). Es discutible, porque revisar entre pares se parece a VER; la fuente decide por el **contenido** del artefacto, que es organizacional y no un producto de un proyecto.'},
+{id:'u2-act1',u:'U2',t:'Activo vs producto de trabajo',src:'Parcial 2022 · 2024',conf:'ok',
+ q:'Indique si cada elemento es un activo, un producto de trabajo, o ambos:',cols:['Activo','Producto de trabajo','Ambos'],
+ rows:['Plantilla de Casos de Uso','Manual de usuario del compilador Java','Regla de Negocio','Plantilla de Manual de Instalación','Directrices para conformar el Equipo del Proyecto','Descripción del flujo del Proceso de Negocio del Cliente','Manual de Instalación del sistema desarrollado para el cliente'],
+ rans:['Activo','Activo','Producto de trabajo','Activo','Activo','Producto de trabajo','Producto de trabajo'],
+ exp:'**Activo**: lo que la organización tiene para usar en sus proyectos (plantilla, guía, directriz, y también la documentación de herramientas que adquiere). **Producto de trabajo**: el resultado concreto de una tarea del proyecto («del cliente», «del sistema desarrollado», una regla de negocio). En los ítems confirmados de tres años, «Ambos» nunca fue la respuesta.'},
+{id:'u2-act2',u:'U2',t:'Activo vs producto de trabajo',src:'Parcial 2025',conf:'ok',
+ q:'Indique si cada elemento es un activo, un producto de trabajo, o ambos:',cols:['Activo','Producto de trabajo','Ambos'],
+ rows:['Plantilla para la presentación de la Reunión de Lanzamiento de Proyecto','Guía para confeccionar el Manual de Usuario','Descripción del Proceso de Negocio del Cliente','Manual de Usuario del sistema desarrollado para el cliente'],
+ rans:['Activo','Activo','Producto de trabajo','Producto de trabajo'],
+ exp:'El molde es de la organización (**activo**); lo moldeado es del proyecto (**producto de trabajo**). «Plantilla» y «guía» son señales de activo; «del cliente» y «del sistema desarrollado», de producto de trabajo.'},
+{id:'u2-spem',u:'U2',t:'SPEM',src:'Parcial 2015',conf:'ok',
+ q:'En la representación de un proceso según SPEM, relacione cada elemento con la pregunta que responde:',cols:['Quién','Qué','Cómo'],
+ rows:['Rol','Producto de trabajo','Tarea'],rans:['Quién','Qué','Cómo'],
+ exp:'**Rol** = quién hace el trabajo. **Producto de trabajo** = qué (entradas y salidas de las tareas). **Tarea** = cómo (el esfuerzo a realizar).'},
+{id:'n-u2-otsp',u:'U2',t:'OT',src:'Nueva',
+ q:'Son prácticas específicas del área OT:',
+ opts:['Establecer las necesidades de formación estratégicas','Establecer un plan táctico de formación organizativa','Evaluar la eficacia de la formación','Establecer planes de acción de procesos','Establecer la biblioteca de activos de proceso de la organización'],
+ ans:['Establecer las necesidades','Establecer un plan táctico','Evaluar la eficacia'],
+ exp:'OT SP 1.1, SP 1.3 y SP 2.3. «Planes de acción de procesos» es de **OPF** (SP 2.1); la biblioteca de activos es de **OPD** (SP 1.5).'},
+{id:'n-u2-otresp',u:'U2',t:'OT',src:'Nueva',
+ q:'Una necesidad de formación específica de un único proyecto (por ejemplo, un framework que sólo usa ese cliente):',
+ opts:['La identifica y trata el propio proyecto; la organización puede cubrirla sólo si se acuerda','La trata siempre la organización, porque OT es responsable de toda la formación','Nunca puede cubrirla la organización','La trata el área de PPQA'],ans:0,
+ exp:'La organización trata las necesidades **comunes**; los proyectos y grupos de soporte, las **específicas**. Que la organización cubra una necesidad particular es posible, pero **debe acordarse**.'},
+{id:'n-u2-estr',u:'U2',t:'OT',src:'Nueva',fixed:true,
+ q:'Las necesidades de formación estratégicas de la organización miran hacia adelante un horizonte de:',opts:['El próximo proyecto','6 meses','2 a 5 años','10 años o más'],ans:'2 a 5 años',
+ exp:'**2 a 5 años**, para introducir nuevas tecnologías o cambios organizativos importantes.'},
+{id:'n-u2-plan',u:'U2',t:'OT',src:'Nueva',inst:RELA,opts:AREAS,ans:'OT',
+ q:'Armar el cronograma de cursos del próximo semestre (Java, testing automatizado y escritura de casos de uso) que se dictarán a todo el personal de la software factory, con instructores, aulas y fechas.',
+ exp:'Formación **común a toda la organización** → **OT** (SP 1.3 Establecer un plan táctico de formación organizativa).'},
+{id:'n-u2-bibl',u:'U2',t:'OPD',src:'Nueva',inst:RELA,opts:AREAS,ans:'OPD',
+ q:'Definir qué contenido y qué organización tendrá la biblioteca de activos de proceso de la software factory (políticas, plantillas, procedimientos de estimación, lecciones aprendidas) y dónde se alojará.',
+ exp:'**OPD / SP 1.5 Establecer la biblioteca de activos de proceso de la organización**. No confundir con el repositorio de medición (SP 1.4).'},
+{id:'n-u2-piloto',u:'U2',t:'OPF',src:'Nueva',inst:RELA,opts:AREAS,ans:'OPF',
+ q:'Probar el nuevo procedimiento de estimación por puntos función en un proyecto piloto y monitorear sus resultados antes de decidir si se despliega a toda la organización.',
+ exp:'Es la excepción típica: aunque ocurre en un proyecto, es el seguimiento de una **mejora de proceso en un piloto** → **OPF** (planes piloto y de despliegue).'},
+{id:'n-u2-puesto',u:'U2',t:'OPD',src:'Nueva',inst:RELA,opts:AREAS,ans:'OPD',
+ q:'Definir la configuración estándar de hardware y software de los puestos de trabajo de los desarrolladores, junto con el proceso para solicitar y aprobar excepciones.',
+ exp:'**OPD / SP 1.6 Establecer los estándares del entorno de trabajo**, que incluyen hardware y software de puesto estándar y el proceso para pedir excepciones.'},
+{id:'n-u2-regf',u:'U2',t:'OT',src:'Nueva',inst:RELA,opts:AREAS,ans:'OT',
+ q:'Registrar qué empleados completaron el curso de testing automatizado y con qué calificación, para que quede constancia de su formación.',
+ exp:'**OT / SP 2.2 Establecer los registros de formación**.'},
+{id:'n-u2-spemniv',u:'U2',t:'SPEM',src:'Nueva',
+ q:'Relacione cada elemento de SPEM con su descripción:',cols:['Delivery Process','Capability Pattern','Activity','Task'],
+ rows:['Un proceso completo, tan complejo como se necesite','Fragmento de proceso reutilizable más de una vez dentro de un proceso','Elemento central para organizar los elementos básicos de proceso','Unidad elemental de trabajo del modelo'],
+ rans:['Delivery Process','Capability Pattern','Activity','Task'],
+ exp:'Ejemplo en RUP: ciclo vital típico (delivery process) → disciplina Entorno → actividad «Preparar el entorno para el proyecto» → tarea «Personalizar el proceso de desarrollo para el proyecto».'},
+{id:'n-u2-spemvf',u:'U2',t:'SPEM',src:'Nueva',
+ q:'Indique si cada afirmación sobre SPEM es verdadera o falsa:',cols:VF,
+ rows:['Es un estándar de la OMG, el mismo consorcio que UML','Es un lenguaje de modelado de procesos de cualquier tipo, no sólo de software','Su alcance se limita a los elementos mínimos necesarios para definir procesos','RUP está basado en SPEM'],
+ rans:['Verdadero','Falso','Verdadero','Verdadero'],
+ exp:'SPEM está **orientado a procesos de software y sistemas**; no es un lenguaje general de modelado de procesos. Se limita a los elementos mínimos, sin agregar características de un dominio particular.'},
+{id:'n-u2-tipopt',u:'U2',t:'RUP',src:'Nueva',
+ q:'Clasifique cada producto de trabajo según su tipo en RUP:',cols:['Artefacto','Resultado','Entregable'],
+ rows:['Documento de Visión del proyecto','El estado «entorno de desarrollo configurado»','Paquete con el ejecutable, el manual de instalación y las notas de versión que se entrega al cliente','Modelo de casos de uso'],
+ rans:['Artefacto','Resultado','Entregable','Artefacto'],
+ exp:'**Artefacto** = producto tangible, no trivial. **Resultado** = intangible (un resultado o un estado). **Entregable** = empaquetado de otros productos de trabajo para entregar a una parte interna o externa.'},
+{id:'n-u2-guias',u:'U2',t:'RUP',src:'Nueva',
+ q:'Relacione cada descripción con el tipo de guía de RUP:',cols:['Plantilla','Directriz','Lista de comprobación','Ejemplo','Informe'],
+ rows:['Estructura de secciones y formato estandarizado de un documento de caso de uso','Indicaciones sobre cómo llevar a cabo una entrevista con el usuario','Ítems a verificar durante la inspección de un diseño','Un caso de uso de muestra, parcialmente completado','Resultado generado automáticamente por una herramienta a partir de otros productos'],
+ rans:['Plantilla','Directriz','Lista de comprobación','Ejemplo','Informe'],
+ exp:'Plantilla = estructura. Directriz = cómo manejar un elemento concreto. Lista de comprobación = ítems a completar o verificar, usada en revisiones. Ejemplo = instancia parcialmente completa. Informe = salida automática de una herramienta.'},
+{id:'n-u2-jer',u:'U2',t:'RUP',src:'Nueva',
+ q:'Según RUP, ¿cuál es la relación correcta entre disciplina, actividad y tarea?',
+ opts:['Una disciplina tiene una o más actividades, y una actividad tiene una o más tareas','Una tarea tiene una o más actividades, y una actividad agrupa varias disciplinas','Una actividad tiene una o más disciplinas, y cada disciplina tiene una o más tareas','Disciplina, actividad y tarea son sinónimos en RUP'],ans:0,
+ exp:'**Disciplina ⊃ actividades ⊃ tareas**. La disciplina categoriza tareas por la similitud de sus preocupaciones; la actividad agrupa lógicamente; la tarea es la unidad de trabajo.'},
+{id:'n-u2-gran',u:'U2',t:'RUP',src:'Nueva',fixed:true,
+ q:'La granularidad de una tarea en RUP oscila entre:',opts:['Unos minutos y unas horas','Unas horas y unos días','Unos días y unas semanas','Una fase completa'],ans:1,
+ exp:'**Unas horas y unos días**. La llevan a cabo roles específicos, suele afectar a uno o pocos productos de trabajo y puede desglosarse en pasos.'},
+{id:'n-u2-fase',u:'U2',t:'RUP',src:'Nueva',
+ q:'En RUP, una fase es:',
+ opts:['Un período de tiempo entre dos objetivos importantes','Una categorización de tareas según la similitud de sus preocupaciones','Un conjunto de habilidades, competencias y responsabilidades','Una unidad elemental de trabajo'],ans:0,
+ exp:'Fase = **período entre dos objetivos importantes** (Concepción, Elaboración, Construcción, Transición). La segunda opción define disciplina; la tercera, rol; la cuarta, tarea.'},
+{id:'n-u2-act3',u:'U2',t:'Activo vs producto de trabajo',src:'Nueva',
+ q:'Indique si cada elemento es un activo, un producto de trabajo, o ambos:',cols:['Activo','Producto de trabajo','Ambos'],
+ rows:['Checklist de inspección de código de la software factory','Minuta de la reunión de relevamiento del proyecto «Farmacia Online»','Procedimiento de estimación de la organización','Cronograma del proyecto «Turnos Online»','Manual del IDE adquirido por la software factory'],
+ rans:['Activo','Producto de trabajo','Activo','Producto de trabajo','Activo'],
+ exp:'Checklist, procedimiento y la documentación de una herramienta adquirida son **activos**: la organización los tiene para usar en todos sus proyectos. La minuta y el cronograma de un proyecto puntual son **productos de trabajo**.'},
+{id:'n-u2-planacc',u:'U2',t:'OPF',src:'Nueva',
+ q:'En OPF, el plan que resulta de la evaluación de procesos y documenta cómo se implementarán las mejoras que atacan las debilidades detectadas es el:',
+ opts:['Plan de mejora de procesos','Plan de evaluación','Plan de acción de procesos','Plan de despliegue','Plan de proyecto'],ans:'Plan de acción',
+ exp:'Cadena de OPF: plan de mejora (general) → plan de evaluación (alcance, modelo de referencia) → **plan de acción de procesos** (resulta de la evaluación) → plan piloto → plan de despliegue. La aceptación ganada en una evaluación se deteriora rápido si no la sigue un plan de acción.'},
+{id:'n-u2-dim',u:'U2',t:'Gestión de procesos',src:'Nueva',
+ q:'Las tres dimensiones críticas sobre las que una organización puede centrarse para mejorar son:',
+ opts:['Personas','Métodos y procedimientos','Herramientas y equipamiento','Presupuesto','Clientes'],ans:['Personas','Métodos','Herramientas'],
+ exp:'Personas · métodos y procedimientos · herramientas y equipamiento. Los **procesos** son los que sustentan el conjunto.'},
+{id:'n-u2-avz',u:'U2',t:'Gestión de procesos',src:'Nueva',
+ q:'Las áreas de gestión de procesos de CMMI se dividen en básicas y avanzadas. Son avanzadas:',opts:['OPF y OPD','OPP y OID','OT y OPF','OPD y OT','CAR y DAR'],ans:'OPP y OID',
+ exp:'Básicas: **OPF, OPD (+IPPD) y OT**. Avanzadas: **OPP y OID**.'},
+{id:'n-u2-adap',u:'U2',t:'OPD',src:'Nueva',
+ q:'Son acciones de adaptación válidas al crear el proceso definido de un proyecto a partir de las guías de adaptación:',
+ opts:['Modificar un modelo de ciclo de vida','Combinar elementos de modelos de ciclo de vida distintos','Reemplazar o reordenar elementos del proceso','Omitir partes del proceso estándar sin documentarlo'],
+ ans:['Modificar','Combinar','Reemplazar'],
+ exp:'Las guías describen qué es obligatorio, qué opciones hay y **cómo documentar** la adaptación. Buscan equilibrar flexibilidad y consistencia; apartarse sin documentar no es adaptar.'},
+{id:'n-u2-elem',u:'U2',t:'OPD',src:'Nueva',
+ q:'Son atributos críticos de un elemento de proceso:',opts:['Criterios de entrada','Criterios de salida','Roles','Nombre del cliente','Presupuesto del proyecto'],ans:['Criterios de entrada','Criterios de salida','Roles'],
+ exp:'Roles, estándares aplicables, procedimientos y herramientas, objetivos de rendimiento, **criterios de entrada**, entradas, medidas, puntos de verificación, salidas, interfaces y **criterios de salida**. El cliente y el presupuesto son datos de un proyecto, no de un elemento de proceso.'},
+
+/* ---------------- U3 ---------------- */
+{id:'u3-ctrl',u:'U3',t:'PMC',src:'Parcial 2020 · 2021',conf:'ok',fixed:true,
+ q:'¿En qué momento del ciclo de vida de un proyecto definiría los controles (puntos de control y monitoreo)?',opts:['Inicio','Planificación','Fin','Ejecución'],ans:'Planificación',
+ exp:'Los puntos de control y los hitos se definen **al planificar**, en la EDT/WBS. En ejecución se **usan**, no se definen.'},
+{id:'u3-desv',u:'U3',t:'PMC',src:'Parcial 2020 · 2021',conf:'ok',fixed:true,
+ q:'«Cualquier desvío encontrado dentro del control y monitoreo de un proyecto debe ser resuelto.»',opts:VF,ans:'Falso',
+ exp:'Sólo se actúa sobre las **desviaciones significativas**: las que, sin resolver, **impiden al proyecto cumplir sus objetivos**.'},
+{id:'u3-replan',u:'U3',t:'PMC',src:'Cuestionario',conf:'ded',fixed:true,
+ q:'Cuando el estado real de un proyecto se desvía significativamente de los valores esperados, se llevan a cabo acciones correctivas, que pueden llevar a replanificar. Si esto sucede, ¿se deben redefinir los controles (puntos de control y monitoreo) del proyecto?',opts:VF,ans:'Verdadero',
+ exp:'La replanificación puede corregir el plan original, fijar nuevos acuerdos o agregar actividades de mitigación. Si el plan cambia, los puntos de control deben reflejar el plan nuevo. La fuente no muestra la clave: está deducida.'},
+{id:'u3-planinc',u:'U3',t:'PP',src:'Parcial 2012 · 2015',conf:'ok',
+ q:'La planificación de un proyecto incluye:',
+ opts:['La estimación de las tareas','La determinación de los recursos','El pago a los recursos','La identificación de riesgos','La especificación detallada de la arquitectura del software a construir'],
+ ans:['La estimación','La determinación','La identificación'],
+ exp:'PP estima, determina recursos, arma el calendario e **identifica riesgos**. Pagar no es planificar, y la arquitectura detallada es de **TS** (Solución técnica).'},
+{id:'u3-gp',u:'U3',t:'Gestión de proyectos',src:'Parcial 2012',conf:'ok',
+ q:'Las siguientes actividades/procesos pueden formar parte de la gestión de proyectos:',
+ opts:['Definir las actividades del proyecto','Estimar la duración de las actividades del proyecto','Elaborar presupuestos de proyecto','Definir el equipo de proyecto'],ans:[0,1,2,3],
+ exp:'**Todas**. Alcance (definir actividades), tiempo (estimar duración), costes (presupuestos) y personal (definir el equipo) son grupos de procesos de la gestión de proyectos.'},
+{id:'u3-equipo',u:'U3',t:'Gestión de proyectos',src:'Parcial 2012',conf:'ok',
+ q:'Forma parte de lo que se realiza en el proceso «Definir el Equipo del Proyecto»:',
+ opts:['Determinar roles del proyecto','Estimar el esfuerzo previsto para cada rol','Determinar las responsabilidades para cada rol','Controlar el cronograma para cada rol'],ans:['Determinar roles','Determinar las responsabilidades'],
+ exp:'«La definición del equipo de proyecto consiste en determinar los **roles y las responsabilidades** del proyecto.» Estimar esfuerzo y controlar el cronograma son de otros grupos.'},
+{id:'u3-tiempo',u:'U3',t:'Gestión de proyectos',src:'Parcial 2013',conf:'ok',
+ q:'Son procesos relacionados con el tiempo en la gestión de proyectos:',
+ opts:['Definir las actividades','Establecer la secuencia de actividades','Estimar la duración de actividades','Controlar el cronograma'],ans:['Establecer','Estimar','Controlar'],
+ exp:'Distractor clásico: «Definir las actividades» suena a cronograma pero es del grupo **Alcance**. Tiempo = secuencia, duración, desarrollar y controlar el cronograma.'},
+{id:'u3-coord',u:'U3',t:'Gestión de proyectos',src:'Parcial 2015',conf:'ok',
+ q:'Son procesos relacionados con la coordinación en la gestión de proyectos:',
+ opts:['Desarrollar el plan del proyecto','Establecer la secuencia de actividades','Estimar la duración de actividades','Supervisar el trabajo del proyecto'],ans:['Desarrollar','Supervisar'],
+ exp:'Coordinación: iniciar, desarrollar el plan, gestionar la ejecución, **supervisar el trabajo**, control integrado de cambios, cerrar. Secuencia y duración son de **Tiempo**.'},
+{id:'u3-vf22',u:'U3',t:'Gestión de proyectos',src:'Parcial 2022',conf:'ok',
+ q:'Indique si cada afirmación es verdadera o falsa:',cols:VF,
+ rows:['La planificación de un proyecto es un área de proceso que se cumple desde el nivel 2 de maduración del CMMI','Un proyecto puede no tener fin','Los proyectos de software son sólo de desarrollo','Decir «tengo un plan de proyecto» es decir «tengo un diagrama de Gantt»'],
+ rans:['Verdadero','Falso','Falso','Falso'],
+ exp:'Un proyecto tiene **inicio y fin definidos**. Hay proyectos de desarrollo, mantenimiento y despliegue. El Gantt es una **vista** del cronograma; el plan incluye alcance, estimaciones, recursos, riesgos, calidad y comunicación.'},
+{id:'u3-esf',u:'U3',t:'Esfuerzo y EDT',src:'Parcial 2022',conf:'ok',
+ ctx:'Dos módulos independientes, X y B. Duración y esfuerzo expresados en días; el esfuerzo se interpreta como días-persona. Un día-persona = 8 horas. Ciclo de vida cascada.',
+ table:{head:['Tarea','Duración','Esfuerzo'],rows:[['Analizar X','3 días','3 días'],['Diseñar X','5 días','5 días'],['Codificar X','4 días','4 días'],['Probar X','5 días','5 días'],['Analizar B','2 días','3 días'],['Diseñar B','4 días','5 días'],['Codificar B','3 días','6 días'],['Probar B','3 días','5 días']]},
+ q:'Determine el esfuerzo de la fase de análisis en horas-persona.',opts:['24','48','3','6','29','136'],ans:'48',
+ exp:'Analizar X (3) + Analizar B (3) = 6 días-persona × 8 h = **48 h**. La trampa es la columna: Analizar B **dura 2 días** pero consume **3 días-persona**. El esfuerzo se suma; la duración no. 24 es sumar un solo módulo y 136 es todo el proyecto.'},
+{id:'u3-edt1',u:'U3',t:'Esfuerzo y EDT',src:'Parcial 2024',conf:'ok',
+ ctx:'El producto final está compuesto por 3 módulos independientes: X, Y y Z. Tareas de la EDT, para cada módulo: Analizar, Diseñar, Codificar y Probar. Sólo se consideran predecesoras directas.',
+ q:'Predecesora(s) directa(s) de «Codificar X»:',opts:['Analizar X','Diseñar X','Probar X','Diseñar Y','Ninguna de las opciones'],ans:['Diseñar X'],
+ exp:'Directa = la inmediatamente anterior. Analizar X precede a Diseñar X, que precede a Codificar X, pero **Analizar X no es predecesora directa** de Codificar X.'},
+{id:'u3-edt2',u:'U3',t:'Esfuerzo y EDT',src:'Parcial 2024',conf:'ok',
+ ctx:'El producto final está compuesto por 3 módulos independientes: X, Y y Z. Tareas de la EDT, para cada módulo: Analizar, Diseñar, Codificar y Probar.',
+ q:'Tarea(s) que dan inicio al proyecto:',opts:['Analizar X','Analizar Y','Analizar Z','Diseñar X','Probar Z'],ans:['Analizar X','Analizar Y','Analizar Z'],
+ exp:'Los módulos son **independientes**: los tres análisis arrancan en paralelo. Son **tres** tareas de inicio, no una.'},
+{id:'u3-pmcprop',u:'U3',t:'PMC',src:'Parcial 2012',conf:'ok',
+ q:'Área cuyo propósito es «proporcionar una comprensión del progreso del proyecto para que se puedan tomar acciones correctivas apropiadas cuando el rendimiento se desvíe significativamente del plan»:',opts:['PP','PMC','PPQA','MA','OPF'],ans:'PMC',
+ exp:'Es la definición textual de **PMC (Monitorización y control del proyecto)**, nivel 2.'},
+{id:'u3-sgpmc',u:'U3',t:'PMC',src:'Parcial 2016',conf:'ok',
+ q:'Son metas específicas del área PMC:',
+ opts:['Obtener el compromiso con el plan','Monitorizar el proyecto frente al plan','Gestionar las acciones correctivas hasta su cierre','Monitorizar los criterios y las guías de adaptación'],ans:['Monitorizar el proyecto','Gestionar las acciones'],
+ exp:'PMC: **SG 1 Monitorizar el proyecto frente al plan** y **SG 2 Gestionar las acciones correctivas hasta su cierre**. «Obtener el compromiso con el plan» es SG 3 de **PP**.'},
+{id:'u3-srv1',u:'U3',t:'PP vs PMC',src:'Cuestionario',conf:'ok',inst:RELSP,
+ q:'El cliente informó que el server destinado al ambiente de producción, que compró recientemente, estará disponible con 10 días de retraso respecto a lo acordado en la reunión de lanzamiento del proyecto. Por lo tanto, en este momento el equipo del proyecto está determinando si es necesario tomar medidas para compensar dicho retraso.',
+ opts:['PP / SP 3.3 Obtener el compromiso con el plan','PP / SP 2.4 Planificar los recursos del proyecto','PMC / SP 1.5 Monitorizar la involucración de las partes interesadas','PMC / SP 2.1 Analizar problemas','OPD / SP 1.3 Establecer los criterios y las guías de adaptación','VER / SP 1.2 Establecer el entorno de verificación','NINGUNA de las otras opciones'],
+ ans:'PMC / SP 2.1',
+ exp:'La reunión de lanzamiento **ya ocurrió** → estoy monitorizando. Recoger y analizar el problema y determinar las acciones correctivas → **PMC / SP 2.1 Analizar problemas**.'},
+{id:'u3-srv2',u:'U3',t:'PP vs PMC',src:'Cuestionario',conf:'ok',inst:RELSP,
+ q:'El cliente informó que el server del ambiente de producción estará disponible con 10 días de retraso respecto a lo acordado en la primera conversación al respecto. En este momento el equipo está determinando si es necesario tomar medidas para compensarlo, de manera de informarlo en la reunión donde se reunirá a todo el equipo de trabajo por primera vez para establecer el compromiso sobre roles, objetivos y plazos del proyecto.',
+ opts:['PP / SP 3.3 Obtener el compromiso con el plan','PP / SP 2.4 Planificar los recursos del proyecto','PMC / SP 1.2 Monitorizar los compromisos','PMC / SP 2.1 Analizar problemas','PP / SP 1.1 Estimar el alcance del proyecto','NINGUNA de las otras opciones'],
+ ans:'PP / SP 2.4',
+ exp:'La reunión de lanzamiento está **en el futuro** → todavía estoy planificando → **PP**. Se está retocando la planificación de recursos por el retraso del server: **SP 2.4 Planificar los recursos del proyecto**.'},
+{id:'u3-fila',u:'U3',t:'PP vs PMC',src:'Cuestionario',conf:'ok',inst:RELA,opts:AREAS,ans:'PP',
+ q:'En el proyecto «Fila de espera virtual», luego de una charla donde el responsable de TI del cliente informó que hasta el tercer mes del proyecto no estará disponible el equipo para manejar los monitores de la sala de espera, el PM está modificando las fechas de la etapa de capacitación e implementación, previstas originalmente para el fin del segundo mes. La modificación se está documentando en el producto de trabajo que será presentado la semana que viene, en la reunión donde se informará a todo el equipo de proyecto las actividades a realizar.',
+ exp:'La reunión donde se presenta el plan al equipo es **la semana que viene** → sigo en **PP**.'},
+{id:'u3-usu',u:'U3',t:'PP vs PMC',src:'Cuestionario',conf:'ok',inst:RELA,opts:AREAS,ans:'PMC',
+ q:'En la última reunión de avance quedó claro que hay un retraso respecto a lo planificado en el relevamiento del proceso de ventas. La causa es el desconocimiento del usuario clave respecto del proceso del cual es responsable, por lo que debe reemplazarse por otra persona con más experiencia. En este momento se realiza una reunión con el usuario clave y el jefe del sector para confirmar que el usuario clave actual se desvincula del proyecto y que el jefe del sector participará en las reuniones semanales de relevamiento.',
+ exp:'La reunión de avance **ya pasó** y se está corrigiendo un desvío en la involucración de las partes interesadas → **PMC** (SP 1.5, apoyada en GP 2.7).'},
+{id:'u3-mails',u:'U3',t:'PP vs PMC',src:'Cuestionario',conf:'ok',inst:RELA,opts:AREAS,ans:'PMC',
+ q:'Corroborar si los usuarios clave, que forman parte del equipo de proyecto, están respondiendo los mails que envía el analista para confirmar la exactitud del contenido de las minutas de reunión publicadas. Estas reuniones fueron convocadas de acuerdo con la agenda de trabajo previamente pactada con el cliente.',
+ exp:'La agenda **ya estaba pactada**: el plan está fijado y ahora se controla su cumplimiento → **PMC** (SP 1.2 Monitorizar los compromisos o SP 1.5 Monitorizar la involucración de las partes interesadas).'},
+{id:'u3-evid',u:'U3',t:'PMC',src:'Cuestionario',conf:'ok',
+ ctx:'Al monitorear una tarea, aproximadamente al 50 % de su avance, el responsable del proyecto encuentra que el esfuerzo se cumplió y los profesionales trabajaron, pero no existe evidencia documental del trabajo. Cada tarea dura 20 días, con jornada completa de 8 horas.',
+ q:'Determine en cuáles tareas existen elementos para presumir un problema:',cols:['Con problemas','Sin problemas'],
+ rows:['La tarea es de análisis','La tarea es de codificación','La tarea es de prueba'],rans:['Con problemas','Con problemas','Con problemas'],
+ exp:'En **las tres**. Una tarea no está hecha si no tiene su evidencia documental. El error conceptual es creer que el trabajo técnico alcanza y la documentación es opcional.'},
+{id:'n-u3-apf',u:'U3',t:'Puntos función',src:'Nueva',
+ ctx:'Se relevaron los componentes de un sistema: 3 entradas de complejidad baja, 2 salidas de complejidad media, 1 consulta de complejidad alta, 1 fichero lógico interno de complejidad media y 1 fichero de interfaz externo de complejidad baja. La suma de las 14 características del entorno (TDI) da 45.',
+ table:{head:['Componente','Baja','Media','Alta'],rows:[['Entradas','3','4','6'],['Salidas','4','5','7'],['Consultas','3','4','6'],['FLI','7','10','15'],['FIE','5','7','10']]},
+ q:'¿Cuántos puntos función ajustados tiene el sistema?',opts:['40','44','49,5','58','26'],ans:'44',
+ exp:'PFD = 3×3 + 2×5 + 1×6 + 1×10 + 1×5 = 9 + 10 + 6 + 10 + 5 = **40**. Factor de ajuste = 0,65 + 45/100 = **1,10**. PF = 40 × 1,10 = **44**. (La fórmula del factor es la de IFPUG; la wiki la reconstruyó porque el apunte llegó cortado.)'},
+{id:'n-u3-fa',u:'U3',t:'Puntos función',src:'Nueva',fixed:true,
+ q:'El factor de ajuste de los puntos función puede tomar valores entre:',opts:['0 y 1','0,65 y 1,35','0,5 y 1,5','0 y 70'],ans:'0,65 y 1,35',
+ exp:'14 características calificadas de 0 a 5 → TDI entre 0 y 70. Factor = 0,65 + TDI/100 → entre **0,65 y 1,35**: el ajuste mueve el tamaño ±35 %. 0 a 70 es el rango del TDI, no del factor.'},
+{id:'n-u3-comp',u:'U3',t:'Puntos función',src:'Nueva',
+ q:'Relacione cada definición con el tipo de componente de APF:',cols:['Entrada','Salida','Consulta','FLI','FIE'],
+ rows:['Datos que cruzan el límite del sistema hacia adentro','Datos que cruzan el límite del sistema hacia afuera','Combinación de entrada y salida para obtener datos','Datos que residen dentro de la aplicación y son actualizados por las entradas','Datos que residen fuera de la aplicación y son mantenidos por otra aplicación'],
+ rans:['Entrada','Salida','Consulta','FLI','FIE'],
+ exp:'Antes de clasificar hay que fijar el **límite del sistema**. FLI = fichero lógico interno; FIE = fichero de interfaz externo, mantenido por **otra** aplicación.'},
+{id:'n-u3-apfobj',u:'U3',t:'Puntos función',src:'Nueva',
+ q:'El Análisis de Puntos Función mide el tamaño del software desde una perspectiva:',
+ opts:['Funcional, independiente de la tecnología','Técnica, según las líneas de código','Económica, según el costo por hora','Estructural, según la complejidad ciclomática'],ans:0,
+ exp:'Perspectiva **funcional**, independiente de la tecnología. Por eso sirve para comparar productividad entre lenguajes o entornos y para seguir los cambios de alcance entre fases.'},
+{id:'n-u3-402040',u:'U3',t:'Estimación',src:'Nueva',
+ ctx:'Se estimó un esfuerzo total de 600 horas-persona para un proyecto de desarrollo y se reparte con la distribución 40-20-40.',
+ q:'¿Cuántas horas corresponden a la codificación?',opts:['120','240','200','60','300'],ans:'120',
+ exp:'40 % análisis y diseño = 240 h · **20 % codificación = 120 h** · 40 % pruebas = 240 h. Codificar es la quinta parte del proyecto.'},
+{id:'n-u3-esf2',u:'U3',t:'Esfuerzo y EDT',src:'Nueva',
+ ctx:'Dos módulos independientes, A y C. Duración y esfuerzo en días; el esfuerzo se interpreta como días-persona. Un día-persona = 8 horas.',
+ table:{head:['Tarea','Duración','Esfuerzo'],rows:[['Analizar A','2 días','2 días'],['Diseñar A','3 días','4 días'],['Codificar A','5 días','5 días'],['Probar A','4 días','6 días'],['Analizar C','2 días','3 días'],['Diseñar C','3 días','3 días'],['Codificar C','4 días','8 días'],['Probar C','3 días','3 días']]},
+ q:'Determine el esfuerzo de la fase de prueba en horas-persona.',opts:['72','56','9','48','272','40'],ans:'72',
+ exp:'Probar A (6) + Probar C (3) = 9 días-persona × 8 h = **72 h**. Si sumás la **duración** (4 + 3 = 7 días) te da 56, que es la trampa. 272 es el esfuerzo de todo el proyecto.'},
+{id:'n-u3-edt3',u:'U3',t:'Esfuerzo y EDT',src:'Nueva',
+ ctx:'El producto se compone de 2 módulos independientes, M y N. Tareas de la EDT, para cada módulo: Analizar, Diseñar, Codificar y Probar. Al final, «Integrar M y N», que requiere ambos módulos probados. Sólo se consideran predecesoras directas.',
+ q:'Predecesora(s) directa(s) de «Integrar M y N»:',opts:['Probar M','Probar N','Codificar M','Codificar N','Analizar M'],ans:['Probar M','Probar N'],
+ exp:'Integrar requiere los dos módulos **probados**: sus predecesoras directas son **Probar M y Probar N**. Codificar es predecesora de Probar, no directa de Integrar.'},
+{id:'n-u3-atraso',u:'U3',t:'PP vs PMC',src:'Nueva',inst:RELSP,
+ q:'En la reunión de avance de ayer se detectó que la codificación del módulo de Stock lleva 5 días de atraso respecto al cronograma. Hoy el PM está evaluando si puede compensarse con horas extra o si hay que replanificar.',
+ opts:['PMC / SP 1.1 Monitorizar los parámetros de planificación','PMC / SP 2.1 Analizar problemas','PMC / SP 2.2 Llevar a cabo las acciones correctivas','PP / SP 2.1 Establecer el presupuesto y el calendario','PP / SP 3.3 Obtener el compromiso con el plan','NINGUNA de las otras opciones'],
+ ans:'PMC / SP 2.1',
+ exp:'El desvío ya se detectó (la reunión de avance pasó) y ahora se **determina qué acción correctiva tomar** → **PMC / SP 2.1 Analizar problemas**. SP 2.2 sería ejecutar la acción ya decidida.'},
+{id:'n-u3-ries',u:'U3',t:'PP vs PMC',src:'Nueva',inst:RELSP,
+ q:'El lunes próximo es la reunión de lanzamiento del proyecto. Hoy el PM está armando la lista de riesgos (rotación de personal, demora en la compra del servidor) con su probabilidad e impacto, para incluirla en el plan.',
+ opts:['PP / SP 2.2 Identificar los riesgos del proyecto','PMC / SP 1.3 Monitorizar los riesgos del proyecto','PP / SP 2.7 Establecer el plan de proyecto','PMC / SP 2.1 Analizar problemas','NINGUNA de las otras opciones'],
+ ans:'PP / SP 2.2',
+ exp:'La reunión de lanzamiento es **futura** → PP. Identificar riesgos es **PP / SP 2.2**. Monitorizar los riesgos (PMC / SP 1.3) corresponde cuando el plan ya está en ejecución.'},
+{id:'n-u3-comp3',u:'U3',t:'PP vs PMC',src:'Nueva',inst:RELSP,
+ q:'Terminada la presentación del plan en la reunión de lanzamiento de hoy, el PM obtiene la firma del sponsor y la confirmación de cada integrante del equipo de que se comprometen con las fechas y roles asignados.',
+ opts:['PP / SP 3.3 Obtener el compromiso con el plan','PP / SP 2.6 Planificar la involucración de las partes interesadas','PMC / SP 1.2 Monitorizar los compromisos','PMC / SP 1.5 Monitorizar la involucración de las partes interesadas','NINGUNA de las otras opciones'],
+ ans:'PP / SP 3.3',
+ exp:'Cierra la planificación: **PP / SP 3.3 Obtener el compromiso con el plan** (SG 3). Monitorizar los compromisos es controlar después que se cumplan.'},
+{id:'n-u3-monit',u:'U3',t:'PP vs PMC',src:'Nueva',inst:RELSP,
+ q:'Cada viernes, el PM compara las horas consumidas y el avance real de cada tarea contra lo previsto en el plan de proyecto aprobado.',
+ opts:['PMC / SP 1.1 Monitorizar los parámetros de planificación','PMC / SP 2.1 Analizar problemas','PP / SP 1.4 Determinar las estimaciones de esfuerzo y de coste','PP / SP 2.1 Establecer el presupuesto y el calendario','NINGUNA de las otras opciones'],
+ ans:'PMC / SP 1.1',
+ exp:'Comparar esfuerzo, coste y calendario reales contra el plan es **PMC / SP 1.1 Monitorizar los parámetros de planificación**. Todavía no hay un problema para analizar.'},
+{id:'n-u3-grupos',u:'U3',t:'Gestión de proyectos',src:'Nueva',
+ q:'Relacione cada proceso con su grupo en la Guía práctica de gestión de proyectos:',cols:['Coordinación','Alcance','Tiempo','Costes','Personal'],
+ rows:['Elaborar los presupuestos','Definir el equipo del proyecto','Desarrollar el cronograma','Definir las actividades','Control integrado de cambios'],
+ rans:['Costes','Personal','Tiempo','Alcance','Coordinación'],
+ exp:'«Definir las actividades» es de **Alcance** aunque suene a cronograma. El control integrado de cambios es de **Coordinación**.'},
+{id:'n-u3-crit',u:'U3',t:'Gestión de proyectos',src:'Nueva',
+ q:'El proceso «Desarrollar el cronograma» debe identificar explícitamente:',
+ opts:['El camino crítico','Las reservas para contingencias de gestión','Los roles y las responsabilidades','El plan de comunicaciones'],ans:0,
+ exp:'El **camino crítico** es el de mayor duración en la red de actividades; de ahí salen las actividades críticas y los hitos. Las reservas para contingencias van en «Elaborar los presupuestos».'},
+{id:'n-u3-reserv',u:'U3',t:'Gestión de proyectos',src:'Nueva',
+ q:'El proceso «Elaborar los presupuestos» debe incluir:',
+ opts:['Las reservas para contingencias de gestión','El camino crítico','El plan de gestión de personal','Los riesgos aceptados'],ans:0,
+ exp:'Los presupuestos deben incluir las **reservas para contingencias de gestión**.'},
+{id:'n-u3-signif',u:'U3',t:'PMC',src:'Nueva',
+ q:'En PMC, una desviación es significativa cuando:',
+ opts:['Si se deja sin resolver, impide al proyecto cumplir sus objetivos','Supera el 10 % de lo planificado','La detecta el cliente','Afecta una tarea del camino crítico, aunque el proyecto igual cumpla sus objetivos'],ans:0,
+ exp:'Definición del CMMI: significativa = la que, **sin resolver, impide cumplir los objetivos** del proyecto. No hay un porcentaje fijo.'},
+{id:'n-u3-accorr',u:'U3',t:'PMC',src:'Nueva',
+ q:'Ante una desviación significativa, son acciones correctivas posibles según PMC:',
+ opts:['Replanificar, con o sin corrección del plan original','Establecer nuevos acuerdos','Incluir actividades adicionales de mitigación dentro del plan actual','Bajar el nivel de madurez de la organización'],ans:['Replanificar','Establecer nuevos','Incluir'],
+ exp:'Las tres primeras son las que enumera el CMMI. La cuarta no tiene sentido: el nivel de madurez no es una acción correctiva de un proyecto.'},
+{id:'n-u3-sgpp',u:'U3',t:'PP',src:'Nueva',
+ q:'Son metas específicas del área PP:',
+ opts:['Establecer estimaciones','Desarrollar un plan de proyecto','Obtener el compromiso con el plan','Monitorizar el proyecto frente al plan','Gestionar las acciones correctivas hasta su cierre'],
+ ans:['Establecer estimaciones','Desarrollar un plan','Obtener el compromiso'],
+ exp:'PP: SG 1 Establecer estimaciones · SG 2 Desarrollar un plan de proyecto · SG 3 Obtener el compromiso con el plan. Las otras dos son las metas de **PMC**.'},
+{id:'n-u3-spon',u:'U3',t:'Gestión de proyectos',src:'Nueva',
+ q:'En la Guía práctica de gestión de proyectos, el participante que provee los recursos financieros del proyecto es el:',
+ opts:['Patrocinador (sponsor)','Influyente','Jefe de proyecto','Usuario clave'],ans:0,
+ exp:'**Patrocinador**. Los **influyentes** no están directamente relacionados con el proyecto pero pueden influir positiva o negativamente.'},
+{id:'n-u3-delphi',u:'U3',t:'Estimación',src:'Nueva',
+ q:'Método de estimación grupal en el que expertos estiman de forma independiente y, en vueltas sucesivas en las que se suma información, se busca la convergencia:',
+ opts:['Delphi','Valor esperado (tres puntos)','Puntos de función','Distribución 40-20-40'],ans:'Delphi',
+ exp:'**Delphi**: grupal, independiente e **iterativo**. Conviene cuando no hay datos históricos pero sí gente con experiencia.'},
+{id:'n-u3-ve',u:'U3',t:'Estimación',src:'Nueva',
+ ctx:'Para la tarea «Codificar el módulo de facturación» se estimaron 10 h (optimista), 16 h (normal) y 28 h (pesimista).',
+ q:'Aplicando la técnica de tres puntos con la ponderación (O + 4N + P) / 6, el valor esperado es:',opts:['17 h','18 h','16 h','54 h'],ans:'17 h',
+ exp:'(10 + 4×16 + 28) / 6 = 102 / 6 = **17 h**. 18 h es el promedio simple. Ojo: la clase sólo nombró los tres escenarios; la ponderación 1-4-1 es la estándar, confirmá cuál usa la cátedra.'},
+{id:'n-u3-proy',u:'U3',t:'Gestión de proyectos',src:'Nueva',
+ q:'Indique si cada afirmación es verdadera o falsa:',cols:VF,
+ rows:['Un proceso es repetitivo y produce siempre el mismo producto; un proyecto es único','La duración se expresa en días o meses, y el esfuerzo en horas de trabajo','El tiempo dedicado a gestionar un proyecto es una pérdida que conviene minimizar','El plan de proyecto puede necesitar corregirse por cambios en los requerimientos o estimaciones inexactas'],
+ rans:['Verdadero','Verdadero','Falso','Verdadero'],
+ exp:'La guía dice que el tiempo dedicado a gestionar **nunca es una pérdida**: es imprescindible para la calidad del resultado. El plan se corrige a lo largo del proyecto.'},
+
+/* ---------------- U5 ---------------- */
+{id:'u5-dif',u:'U5',t:'VER vs VAL',src:'Parcial 2025',conf:'ok',
+ q:'¿Cuál es la diferencia entre Verificación y Validación?',
+ opts:['VER asegura que el producto cumple con lo especificado; VAL asegura que el producto satisface la necesidad del usuario','VER mide la satisfacción del usuario; VAL el cumplimiento de las especificaciones','VAL es opcional y VER obligatorio','VER es opcional y VAL obligatorio','VER y VAL son equivalentes: ambas miden defectos'],ans:0,
+ exp:'VER: «¿estoy construyendo el producto **correctamente**?», contra la especificación. VAL: «¿estoy construyendo el producto **correcto**?», contra la necesidad del usuario en su entorno. Ninguna es opcional.'},
+{id:'u5-3acc',u:'U5',t:'VER vs VAL',src:'Parcial 2025',conf:'ok',
+ q:'Relacione cada acción con el área que corresponde:',cols:['VER','VAL'],
+ rows:['Implementar revisiones de los documentos de requisitos y de diseño','Ejecutar pruebas de sistema para verificar el cumplimiento de las especificaciones','Organizar pilotos con usuarios finales para confirmar que el producto satisface sus necesidades'],
+ rans:['VER','VER','VAL'],
+ exp:'La trampa es la 2: «pruebas de sistema» suena a producto terminado, pero se contrasta **contra la especificación** → VER. Lo que define VAL es **quién juzga**: el usuario, contra su necesidad.'},
+{id:'u5-banco',u:'U5',t:'VER vs VAL',src:'Parcial 2025',conf:'ok',
+ ctx:'En un proyecto bancario: 1) se realizan inspecciones de requisitos y revisiones de diseño; 2) luego se ejecutan pruebas de aceptación con clientes reales.',
+ q:'¿Qué afirmación es correcta?',opts:['La primera es VER y la segunda es VAL','Ambas son VER','Ambas son VAL','La primera es VAL y la segunda es VER'],ans:0,
+ exp:'Inspección y revisión son técnicas **estáticas** → VER. Aceptación **con clientes reales** → VAL.'},
+{id:'u5-qa',u:'U5',t:'VER vs VAL',src:'Parcial 2025',conf:'ok',
+ ctx:'El equipo de QA ejecuta pruebas para comprobar que cada requisito funcional fue implementado. El objetivo es asegurar que «lo construido» cumpla con «lo especificado».',
+ q:'¿A qué área de proceso corresponde?',opts:['OT','VAL','OPD','VER','Ninguna de las opciones'],ans:'VER',
+ exp:'Que lo haga «el equipo de QA» no lo convierte en PPQA: se contrasta el producto contra **su especificación** → **VER**.'},
+{id:'u5-rev',u:'U5',t:'Técnicas estáticas',src:'Parcial 2016',conf:'ok',fixed:true,
+ q:'¿En cuáles momentos puede realizarse una Revisión?',
+ opts:['En la primera entrevista con el cliente, antes de haber escrito la primera minuta','En la etapa de Análisis','Al estar cerca de terminar la etapa de Programación','En la etapa de Diseño','Todas las anteriores'],ans:'Todas',
+ exp:'Las revisiones son la **primera forma de prueba aplicable** y se pueden hacer **en cualquier momento** del ciclo, a diferencia de las pruebas dinámicas, que necesitan el sistema andando.'},
+{id:'u5-valase',u:'U5',t:'VER vs VAL',src:'Cuestionario',conf:'ok',
+ q:'La actividad de Validación intenta asegurar que:',
+ opts:['Estamos construyendo el producto correctamente','El software se ajusta a su especificación','El producto o componente se ajusta a su uso previsto cuando se sitúa en su entorno previsto','El software hace lo que el usuario (cliente) requiere','Estamos construyendo el producto correcto'],
+ ans:['El producto o componente','El software hace lo que','Estamos construyendo el producto correcto'],
+ exp:'VAL = uso previsto en el entorno previsto · lo que el usuario necesita · «el producto correcto». Las otras dos opciones definen **VER**.'},
+{id:'u5-verase',u:'U5',t:'VER vs VAL',src:'Cuestionario',conf:'ok',
+ q:'La actividad de Verificación intenta asegurar que:',
+ opts:['El software hace lo que el usuario (cliente) requiere','Los productos de trabajo seleccionados cumplen sus requerimientos especificados','Estamos construyendo el producto correctamente','El software se ajusta a su especificación','Estamos construyendo el producto correcto'],
+ ans:['Los productos de trabajo','Estamos construyendo el producto correctamente','El software se ajusta'],
+ exp:'VER = productos de trabajo contra requerimientos especificados · «construir correctamente». Lo del usuario y «el producto correcto» es **VAL**.'},
+{id:'u5-dist1',u:'U5',t:'Discriminar VER / VAL',src:'Cuestionario',conf:'ok',inst:RELSP,
+ q:'En el marco del proyecto «Reserva de hoteles on-line», distribuir entre los analistas elegidos para participar de la reunión la descripción del último caso de uso, que acaba de terminar otro analista y que será chequeada en dicha reunión.',
+ opts:['VAL / SP 1.2 Establecer el entorno de validación','VER / SP 2.2 Llevar a cabo las revisiones entre pares','VER / SP 2.3 Analizar los datos de la revisión entre pares','VER / SP 3.1 Realizar la verificación','VER / SP 2.1 Preparar las revisiones con usuarios','VAL / SP 2.1 Preparar las revisiones entre pares','PMC / SP 1.2 Monitorizar los compromisos','NINGUNA de las otras opciones'],
+ ans:'NINGUNA',
+ exp:'Lo correcto sería **VER / SP 2.1 Preparar las revisiones entre pares** (pares + chequeo futuro), pero no está: una opción lo pone en **VAL** (que no tiene revisiones entre pares) y otra dice «revisiones con usuarios». Leé la sigla y el texto completos → **NINGUNA**.'},
+{id:'u5-dist2',u:'U5',t:'Discriminar VER / VAL',src:'Cuestionario',conf:'ok',inst:RELSP,
+ q:'En el marco del proyecto «Autoconsulta servicios de larga distancia», distribuir entre los analistas elegidos para participar de la reunión la descripción del último caso de uso, que acaba de terminar otro analista y que será chequeada en dicha reunión.',
+ opts:['VER / SP 2.1 Preparar las revisiones entre pares','VER / SP 2.2 Llevar a cabo las revisiones entre pares','VER / SP 1.2 Establecer el entorno de verificación','VAL / SP 2.1 Realizar la validación','PMC / SP 1.5 Monitorizar la involucración de las partes interesadas','NINGUNA de las otras opciones'],
+ ans:'VER / SP 2.1',
+ exp:'Son **pares** (analistas revisando a otro analista) y el chequeo es **futuro** → **VER / SP 2.1 Preparar las revisiones entre pares**.'},
+{id:'u5-cheq',u:'U5',t:'Discriminar VER / VAL',src:'Cuestionario',conf:'ok',inst:RELSP,
+ q:'En el marco del proyecto «Autoconsulta servicios de larga distancia», dos analistas elegidos para participar de la reunión chequean el último caso de uso que acaba de terminar otro analista, planteando las observaciones pertinentes.',
+ opts:['VER / SP 2.1 Preparar las revisiones entre pares','VER / SP 2.2 Llevar a cabo las revisiones entre pares','VER / SP 2.3 Analizar los datos de la revisión entre pares','VER / SP 3.1 Realizar la verificación','VAL / SP 2.1 Realizar la validación','NINGUNA de las otras opciones'],
+ ans:'VER / SP 2.2',
+ exp:'Pares, en **presente**: **VER / SP 2.2 Llevar a cabo las revisiones entre pares**.'},
+{id:'u5-almac',u:'U5',t:'Discriminar VER / VAL',src:'Cuestionario',conf:'ok',inst:RELSP,
+ q:'Ayer se realizó una reunión con 2 analistas para controlar los C.U. escritos por otro analista; detectaron problemas que deben corregirse para que el software cumpla con las minutas y las reglas de negocio ya aprobadas por el cliente. Ya se documentaron los hallazgos y se enviaron al autor. En este momento se está almacenando la información de las identidades de los analistas involucrados en una parte del repositorio a la que sólo accede personal de Calidad; en la parte pública sólo queda la información de los problemas a corregir.',
+ opts:['VER / SP 2.2 Llevar a cabo las revisiones entre pares','VER / SP 2.3 Analizar los datos de la revisión entre pares','VER / SP 3.2 Analizar los resultados de la verificación','PPQA / SP 2.2 Establecer registros','VAL / SP 2.2 Analizar los resultados de la validación','NINGUNA de las otras opciones'],
+ ans:'VER / SP 2.3',
+ exp:'La revisión ya se hizo; ahora se **almacenan los datos para futura referencia y análisis** → **VER / SP 2.3 Analizar los datos de la revisión entre pares**.'},
+{id:'u5-cumin',u:'U5',t:'Discriminar VER / VAL',src:'Cuestionario',conf:'ok',inst:RELSP,
+ q:'En el marco del proyecto «Liquidación y Cobranza a Obras Sociales», personal del equipo de proyecto de la software factory realiza un control respecto a si el contenido de los casos de uso cumple con lo documentado en las Minutas de Relevamiento.',
+ opts:['VER / SP 3.1 Realizar la verificación','VER / SP 2.2 Llevar a cabo las revisiones entre pares','VAL / SP 2.1 Realizar la validación','PPQA / SP 1.2 Evaluar objetivamente los productos de trabajo y los servicios','RD / SP 3.5 Validar los requerimientos','NINGUNA de las otras opciones'],
+ ans:'VER / SP 3.1',
+ exp:'No es VAL (no participa el cliente) ni PPQA (no se chequea un estándar de la organización). Se compara un producto contra **otro artefacto del proyecto**, en presente → **VER / SP 3.1**.'},
+{id:'u5-glos',u:'U5',t:'Discriminar VER / VAL',src:'Cuestionario',conf:'ok',inst:RELSP,
+ q:'Realizar un control respecto a si los nombres de las etiquetas de los campos de ingreso por pantalla cumplen las definiciones estándar planteadas en el Glosario, en el marco del proyecto «Liquidación y Cobranza a Obras Sociales».',
+ opts:['VER / SP 2.1 Preparar las revisiones entre pares','VER / SP 3.1 Realizar la verificación','VER / SP 3.2 Analizar los resultados de la verificación','VAL / SP 2.1 Realizar la validación','OPD / SP 1.6 Establecer los estándares del entorno de trabajo','NINGUNA de las otras áreas'],
+ ans:'VER / SP 3.1',
+ exp:'El glosario es **del proyecto**, no un estándar organizacional → no es PPQA ni OPD. Se controla ahora → **VER / SP 3.1**.'},
+{id:'u5-etiq',u:'U5',t:'Discriminar VER / VAL',src:'Cuestionario',conf:'ok',inst:RELSP,
+ q:'Realizar un control con el usuario respecto a si los nombres de las etiquetas de los campos de ingreso por pantalla se entienden adecuadamente y si se corresponden con los conceptos de negocio correctos, en el marco del proyecto «Liquidación y Cobranza a Obras Sociales».',
+ opts:['VER / SP 3.1 Realizar la verificación','VAL / SP 2.1 Realizar la validación','VAL / SP 1.2 Establecer el entorno de validación','VAL / SP 2.2 Analizar los resultados de la validación','PMC / SP 1.5 Monitorizar la involucración de las partes interesadas','NINGUNA de las otras áreas'],
+ ans:'VAL / SP 2.1',
+ exp:'Participa el **usuario** y se chequea contra el **negocio** → **VAL / SP 2.1 Realizar la validación**.'},
+{id:'u5-agenda',u:'U5',t:'Discriminar VER / VAL',src:'Cuestionario',conf:'ok',inst:RELSP,
+ q:'Coordinar con precisión la agenda de horarios en que puede utilizarse el server en instalaciones del cliente para realizar la prueba de aceptación.',
+ opts:['VAL / SP 1.2 Establecer el entorno de validación','VAL / SP 2.1 Realizar la validación','VER / SP 1.2 Establecer el entorno de verificación','PP / SP 2.1 Establecer el presupuesto y el calendario','PP / SP 2.4 Planificar los recursos del proyecto','NINGUNA de las otras opciones'],
+ ans:'VAL / SP 1.2',
+ exp:'Prueba de **aceptación** → VAL; se está preparando el entorno → **SP 1.2**. Si dijera **prueba de sistema**, sería VER.'},
+{id:'u5-agenda2',u:'U5',t:'Discriminar VER / VAL',src:'Cuestionario',conf:'ok',inst:RELA,opts:AREAS,ans:'VAL',
+ q:'Coordinar con antelación la agenda en que serán citados los usuarios clave para realizar la prueba de aceptación.',
+ exp:'Prueba de **aceptación** con usuarios clave → **VAL**.'},
+{id:'u5-insp',u:'U5',t:'Discriminar VER / VAL',src:'Cuestionario',conf:'ok',inst:RELA,opts:AREAS,ans:'VER',
+ q:'Determinar que se controlarán mediante Inspección los diagramas de secuencia del proyecto «Aplicativo para Gestión on-line de solicitudes de Compra de Moneda Extranjera».',
+ exp:'La inspección es un tipo de revisión → técnica **estática** → vinculada a **VER**.'},
+{id:'u5-t1',u:'U5',t:'Partición de equivalencia',src:'Parcial 2022',conf:'ded',
+ ctx:'Un termómetro mide grados centígrados enteros cada 1 minuto. Si la temperatura sube por encima de 25, se activa la refrigeración. Si cae por debajo de 20, se apaga. Capacidad de medición: 0 a 53 grados.',
+ q:'¿Cuáles valores son la mejor elección para cubrir todas las particiones válidas?',opts:['19, 33','0, 20, 25, 53','3, 23, 33','13, 23','17, 18, 19','20, 25'],ans:'3, 23, 33',
+ exp:'Tres particiones válidas: 0–19 (se apaga), **20–25 (zona muerta, no pasa nada)** y 26–53 (se activa). Un representante por partición: **3, 23, 33**. «0, 20, 25, 53» son valores límite, no representantes de partición. Olvidar la zona muerta es el error clásico.'},
+{id:'u5-t2',u:'U5',t:'Partición de equivalencia',src:'Parcial 2020',conf:'ded',
+ ctx:'Un termómetro mide grados centígrados enteros. Si la temperatura cae por debajo de 18, se activa la calefacción. Si pasa los 23, se apaga.',
+ q:'¿Cuáles valores son la mejor elección para cubrir todas las particiones válidas?',opts:['15, 19, 25','17, 18, 19','18, 20, 22','16, 26, 32'],ans:'15, 19, 25',
+ exp:'Particiones: ≤ 17 · 18–23 · ≥ 24. **15, 19, 25** cae uno en cada una. «18, 20, 22» cae entero en la zona muerta; «16, 26, 32» deja afuera la zona 18–23.'},
+{id:'u5-antig',u:'U5',t:'Partición de equivalencia',src:'Parcial 2024',conf:'ok',fixed:true,
+ ctx:'La antigüedad se mide en categorías: 2 años o menos; más de 2 y menos de 5; 5 o más y menos de 10; 10 o más. Se sabe además que la edad de jubilación es 65 años y que el período de prueba inicial es de hasta 6 meses.',
+ q:'¿Cuántos casos de prueba son necesarios si sólo se necesitan las particiones de equivalencia válidas para probar el cálculo del adicional por antigüedad?',
+ opts:['0 (las pruebas exhaustivas son imposibles)','1','2','3','4','5'],ans:'4',
+ exp:'Una partición válida por categoría → **4**. La jubilación y el período de prueba son **ruido**. La opción «0» es verdadera como frase y falsa como respuesta: justamente por eso se particiona.'},
+{id:'u5-tec',u:'U5',t:'Técnicas de prueba',src:'Parcial 2025',conf:'ok',
+ q:'Relacione cada acción con la técnica de prueba que corresponde:',cols:['Valores límite','Tablas de decisión','Transición de estados'],
+ rows:['Diseñar casos con valores válidos e inválidos en el campo «número de legajo» (8 dígitos)','Verificar las reglas de promoción (aprobado con 4 o más) representando todas las combinaciones de notas y estados en una matriz','Ejecutar casos que simulen la secuencia de estados de un alumno: Inscripto → Cursando → Aprobado/Desaprobado'],
+ rans:['Valores límite','Tablas de decisión','Transición de estados'],
+ exp:'Campo con rango o longitud → **valores límite**. «Todas las combinaciones», matriz, reglas cruzadas → **tablas de decisión**. Secuencia de estados → **transición de estados**.'},
+{id:'u5-gym',u:'U5',t:'Tablas de decisión',src:'Parcial 2024',conf:'ok',fixed:true,
+ ctx:'Un gimnasio tiene tres categorías de socio: Coulson (inicial), IronMan (10 % de descuento) y Hulk (15 % de descuento). Además, si al comprar tiene la cuota al día, recibe un 5 % adicional. Los descuentos son acumulables. El sistema calcula el porcentaje de descuento a aplicar.',
+ q:'Con una tabla de decisión, determine:',cols:['2','3','4','5','6','8'],
+ rows:['Cantidad de acciones a colocar','Cantidad de columnas que quedan después de simplificar la tabla','Cantidad de casos de prueba válidos (sin condiciones incompatibles)'],
+ rans:['4','6','6'],
+ exp:'**4 acciones**: aplicar 0 %, 10 %, 15 % y el 5 % adicional. **6 columnas**: la categoría no es binaria, es una condición de 3 valores; 3 × 2 estados de cuota = 6. **6 casos**: ninguna combinación es imposible.'},
+{id:'u5-aero',u:'U5',t:'Tablas de decisión',src:'Parcial 2022',conf:'ded',fixed:true,
+ ctx:'El sistema solicita usuario y contraseña, valida si son correctos y, de ser así, muestra el historial de vuelo. Caso contrario rechaza el ingreso (el rechazo se produce si el usuario no existe, o si existe y la contraseña no coincide). Adicionalmente, si el usuario tiene puntos suficientes, ofrece viajes de recompensa.',
+ q:'Con una tabla de decisión, determine:',cols:['1','2','3','4','8'],
+ rows:['Cantidad de condiciones','Cantidad de acciones','Cantidad de casos de prueba','Casos de prueba con todas las condiciones verdaderas'],
+ rans:['3','3','4','1'],
+ exp:'Condiciones: ¿existe el usuario?, ¿coincide la contraseña?, ¿tiene puntos? → **3** (confirmado). Acciones: mostrar historial, rechazar, ofrecer recompensa → 3. Si el usuario no existe, lo demás es irrelevante: 8 combinaciones se reducen a **4** casos, y sólo **1** tiene todo verdadero. Salvo las condiciones, la clave es deducida.'},
+{id:'u5-cv1',u:'U5',t:'Ciclos de vida',src:'Cuestionario',conf:'ok',
+ q:'El ciclo de vida que mejora las posibilidades de salir antes a producción con un producto de software es:',opts:['Cascada','Iterativo','Incremental'],ans:'Incremental',
+ exp:'**Incremental**: después del primer incremento ya se puede entregar una porción de la funcionalidad planificada.'},
+{id:'u5-cv2',u:'U5',t:'Ciclos de vida',src:'Cuestionario',conf:'ok',
+ q:'El ciclo de vida de desarrollo de software que permite trabajar con requerimientos no estabilizados es:',opts:['Cascada','Incremental','Iterativo'],ans:'Iterativo',
+ exp:'**Iterativo**: busca reducir el riesgo entre las necesidades del usuario y el producto final por malentendidos en la recolección de requisitos.'},
+{id:'u5-cv3',u:'U5',t:'Ciclos de vida',src:'Cuestionario',conf:'ok',
+ q:'El ciclo de vida que menos colabora con un desarrollo de software cuando los requerimientos son inestables es:',opts:['Cascada','Incremental','Iterativo'],ans:'Cascada',
+ exp:'En **cascada**, cerrada la etapa de análisis, los cambios en los requisitos no se contemplan hasta terminar la etapa de prueba.'},
+{id:'u5-cv4',u:'U5',t:'Ciclos de vida',src:'Cuestionario',conf:'ok',
+ q:'¿Cuál es el ciclo de vida que permite, al ser usado como base para un proyecto, reducir el riesgo de subestimación del esfuerzo?',opts:['Cascada','Iterativo','Incremental','Prototipado'],ans:'Prototipado',
+ exp:'Al construir la pantalla del **prototipo** se entiende mejor el requerimiento, y eso mejora la estimación. El incremental no ayuda: si subestimaste el último módulo te enterás recién cuando lo hacés.'},
+{id:'u5-cv5',u:'U5',t:'Ciclos de vida',src:'Cuestionario',conf:'ok',
+ ctx:'Proyecto de mantenimiento correctivo. Se estimó que la funcionalidad estará en un par de semanas. Las correcciones son ajustes a requerimientos que ya están implementados.',
+ q:'Determine el ciclo que más se ajusta a la situación:',opts:['Cascada','Iterativo','Incremental','Prototipado'],ans:'Cascada',
+ exp:'Prevalecen programación y prueba, y dura un par de semanas: no vale la pena armar incrementos de 3 días con su versionado y despliegue → **Cascada**.'},
+{id:'u5-cv6',u:'U5',t:'Ciclos de vida',src:'Cuestionario',conf:'ok',
+ q:'Señale el/los ciclos de vida que se usan como base en proyectos de desarrollo donde los requerimientos son conocidos y estables:',opts:['Cascada','Incremental','Iterativo','Ninguno de los mencionados'],ans:['Cascada','Incremental'],
+ exp:'Con requisitos estables sirven **cascada** (entrega todo al final) **e incremental** (divide en versiones). Iterativo y prototipado se justifican cuando hay inestabilidad.'},
+{id:'u5-cv7',u:'U5',t:'Ciclos de vida',src:'Cuestionario',conf:'ok',
+ ctx:'Un cliente nos convocó para desarrollar un sistema de información web. Necesita salir al mercado lo antes posible: por la pandemia, sus sistemas actuales no están adaptados para el home office.',
+ q:'Determine el ciclo que más se adecua a las necesidades planteadas:',opts:['Cascada','Prototipado','Incremental','Iterativo'],ans:'Incremental',
+ exp:'La variable decisiva es **salir antes a producción** → **Incremental**, con entregas tempranas y parciales.'},
+{id:'u5-incr',u:'U5',t:'Ciclos de vida',src:'Cuestionario',conf:'ok',
+ q:'En un proyecto basado en un ciclo de vida incremental, indique si cada afirmación es verdadera o falsa:',cols:VF,
+ rows:['El análisis se realiza sólo en el primer incremento','La prueba de sistema se realiza sólo en el último incremento','La prueba unitaria se realiza en cada incremento','La prueba de aceptación aplica al último incremento, pero no a los anteriores'],
+ rans:['Falso','Falso','Verdadero','Falso'],
+ exp:'Cada incremento es una **mini-cascada** con análisis, diseño, codificación y prueba, y se plantea para terminar en un producto funcional: se hacen todas las pruebas en todos los incrementos.'},
+{id:'u5-incrsis',u:'U5',t:'Ciclos de vida',src:'Cuestionario',conf:'ok',fixed:true,
+ q:'En un proyecto basado en un ciclo de vida incremental con X incrementos, ¿en cuáles incrementos se deben disponer pruebas de sistema?',
+ opts:['Todos','En los últimos','En los incrementos pares','En el último incremento','En ninguno, la prueba de sistema no hace falta'],ans:'Todos',
+ exp:'**En todos**: cada incremento termina en un producto funcional.'},
+{id:'u5-vars',u:'U5',t:'Ciclos de vida',src:'Cuestionario',conf:'ok',
+ q:'¿Cuál/cuáles de las siguientes variables inciden sobre la elección de un ciclo de vida genérico de desarrollo, como base para nuestro proyecto?',
+ opts:['Necesidad de poner en producción el producto de software, incluso antes de estar terminado','Estabilidad en los requerimientos','Disponibilidad presupuestaria del cliente','Cantidad de recursos disponibles para el desarrollo','Tipo de lenguaje de programación','Ninguna de las mencionadas'],
+ ans:['Necesidad de poner','Estabilidad'],
+ exp:'La rapidez con la que hay que desplegar y la **estabilidad de los requerimientos** determinan el ciclo. Presupuesto, recursos y lenguaje no.'},
+{id:'u5-manual',u:'U5',t:'Ciclos de vida',src:'Cuestionario',conf:'ok',fixed:true,
+ q:'En un proyecto basado en un ciclo de vida cascada, ¿en cuál fase se confecciona el manual de usuario?',opts:['Análisis','Diseño','Codificación','Prueba'],ans:'Prueba',
+ exp:'El proceso de pruebas contempla, además de definir, elaborar, ejecutar y evaluar pruebas, la **elaboración de la documentación de usuario** (manuales de usuario y de administración).'},
+{id:'u5-artman',u:'U5',t:'Ciclos de vida',src:'Cuestionario',conf:'ok',
+ q:'Indique qué artefactos revisten importancia para realizar el manual de usuario:',opts:['GUI','Caso de uso','Código fuente','Informe de pruebas unitarias realizadas'],ans:['GUI','Caso de uso'],
+ exp:'La **GUI** y el **caso de uso** determinan lo que ve el usuario y el paso a paso. El código fuente y el informe de pruebas unitarias no le sirven a quien usa el sistema.'},
+{id:'u5-vfvv',u:'U5',t:'Grados de confianza',src:'Cuestionario',conf:'ok',
+ q:'Indique si cada afirmación es verdadera o falsa:',cols:VF,
+ rows:['Una compañía de software puede decidir lanzar al mercado un programa antes de estar plenamente probado y depurado','El objetivo final de V&V es establecer confianza de que el sistema de software es adecuado','Algunas pruebas funcionales pueden realizarse sin conocimiento de cómo funciona el programa','Para probar si un requerimiento se cumple alcanza con armar un caso de prueba'],
+ rans:['Verdadero','Verdadero','Verdadero','Falso'],
+ exp:'Con pocos competidores se puede lanzar antes. V&V buscan **confianza** de que el sistema es adecuado para su uso previsto. Caja negra = sin conocer el funcionamiento interno. Un solo caso de prueba no alcanza para un requerimiento.'},
+{id:'u5-edadpeso',u:'U5',t:'Partición de equivalencia',src:'Cuestionario',conf:'ok',
+ ctx:'Un sistema de entrenamiento emite una calificación (de Bajo a Excelente) según la edad y el peso que se ingresan. El criterio es el de la tabla.',
+ table:{head:['Edad','Excelente','Muy bueno','Bueno','Regular','Bajo'],rows:[['7','27-31','32','33-34','35-37','> 37 y < 27'],['8','30-34','35','36-40','41-42','> 42 y < 30'],['9','34-39','40-41','42-45','46-47','> 47 y < 34'],['10','40-46','47-50','51-55','56-58','> 58 y < 40'],['11','42-46','47-50','51-52','53-55','> 55 y < 42'],['12','45-52','53','54-55','56-60','> 60 y < 45'],['13','55-59','60','61-62','63-65','> 65 y < 55'],['14','60-65','66-67','68-72','73-75','> 75 y < 60']]},
+ q:'¿Cuáles de las siguientes premisas son verdaderas?',
+ opts:['Para la edad hay una sola partición de equivalencia, que contiene los valores 7 a 14','Para la edad hay 8 particiones de equivalencia','Tablas de decisión sería una técnica más apropiada en este caso','Para la edad 11, algunos de los valores límite de peso son 41, 42, 46, 47, 55, 56','Para la edad 11, algunos de los valores límite de peso son 40, 42, 47, 55, 57'],
+ ans:['Para la edad hay 8','Tablas de decisión','Para la edad 11, algunos de los valores límite de peso son 41'],
+ exp:'El criterio cambia con cada edad → **8 particiones** para la edad. Hay dos condiciones (edad y peso) que combinadas dan la calificación → **tablas de decisión**. Para 11: bordes 41|42, 46|47, 55|56.'},
+{id:'u5-pan',u:'U5',t:'Partición de equivalencia',src:'Cuestionario',conf:'ok',
+ ctx:'Un sistema de pedidos de materia prima para panaderías acepta pedidos de distintos productos. La cantidad de pedido válida más pequeña es 0,5 y la más grande es 25. La precisión del campo es de 0,1.',
+ q:'¿Cuál de los siguientes es un conjunto mínimo de valores de entrada que cubre las particiones de equivalencia del campo?',
+ opts:['10; 28','0,2; 0,9; 29,5','12,3','0,4; 0,5; 25; 25,1'],ans:'0,2; 0,9; 29,5',
+ exp:'Particiones: PI1 x < 0,5 · PV 0,5 ≤ x ≤ 25 · PI2 x > 25. **0,2 (inválido) · 0,9 (válido) · 29,5 (inválido)**, uno por partición. «0,4; 0,5; 25; 25,1» son valores límite: cubren, pero no es el conjunto mínimo.'},
+{id:'u5-e18',u:'U5',t:'Partición de equivalencia',src:'Cuestionario',conf:'ok',
+ ctx:'Si la edad es menor a 18, se rechaza el ingreso. Entre 18 y 30 se admite y se asigna un 20 % de descuento. Con más de 30 se admite el ingreso, pero sin descuento.',
+ q:'¿Cuáles de los siguientes valores están dentro de la misma partición de equivalencia?',opts:['17, 29, 31','17, 18, 19','29, 30, 31','18, 29, 30'],ans:'18, 29, 30',
+ exp:'Particiones: < 18 · **18 a 30** · > 30. Sólo 18, 29 y 30 caen en la misma.'},
+{id:'u5-regr',u:'U5',t:'Estrategias de prueba',src:'Parcial 2016 (era a desarrollar)',conf:'ok',
+ q:'El objetivo de la prueba de regresión es:',
+ opts:['Verificar que lo que antes funcionaba sigue funcionando después de un cambio o corrección','Verificar que el defecto corregido realmente se solucionó','Probar el sistema con el usuario final en su entorno','Probar los módulos aislados con stubs y drivers'],ans:0,
+ exp:'Regresión = que el arreglo **no rompió otra cosa**. Verificar que el defecto se solucionó es la prueba de **confirmación**.'},
+{id:'n-u5-myers',u:'U5',t:'Principios de Myers',src:'Nueva',
+ q:'Según los principios de prueba de Myers, indique si cada afirmación es verdadera o falsa:',cols:VF,
+ rows:['Un desarrollador debe evitar probar su propio programa','Una parte necesaria de un caso de prueba es la definición del resultado esperado','La probabilidad de encontrar errores adicionales en una sección es inversamente proporcional a la cantidad de errores ya encontrados en ella','Los casos de prueba deben escribirse tanto para condiciones de entrada esperadas como no esperadas','Conviene planificar el esfuerzo de pruebas suponiendo que no se encontrarán errores'],
+ rans:['Verdadero','Verdadero','Falso','Verdadero','Falso'],
+ exp:'La probabilidad es **proporcional** a los errores ya encontrados (principio 9). **No** se planifica suponiendo que no habrá errores (principio 8). Sin resultado esperado no hay caso de prueba (principio 1).'},
+{id:'n-u5-myers9',u:'U5',t:'Principios de Myers',src:'Nueva',
+ ctx:'En las pruebas de un sistema de facturación se encontraron 14 defectos en el módulo de Notas de Crédito y 2 en el de Clientes.',
+ q:'Según los principios de Myers, ¿dónde es más probable encontrar errores adicionales?',opts:['En Notas de Crédito','En Clientes','La probabilidad es la misma en ambos','No puede saberse sin nuevas pruebas'],ans:0,
+ exp:'Principio 9: la probabilidad de encontrar errores adicionales es **proporcional** a los ya encontrados en esa sección. Conviene concentrar el esfuerzo en **Notas de Crédito**.'},
+{id:'n-u5-niv',u:'U5',t:'Niveles de prueba',src:'Nueva',
+ q:'Relacione cada descripción con el nivel de prueba:',cols:['Unitaria','Integración','Sistema','Aceptación'],
+ rows:['La hace el propio desarrollador, aislando el componente con stubs y drivers','Busca defectos de interconexión entre módulos; toma como referencia el diseño','Prueba el comportamiento global contra requisitos funcionales y no funcionales, con un equipo independiente','La realiza un usuario o cliente para confirmar que satisface sus necesidades'],
+ rans:['Unitaria','Integración','Sistema','Aceptación'],
+ exp:'Ningún nivel reemplaza a otro. La prueba de sistema usa técnicas de **caja negra** en un entorno lo más parecido posible a producción.'},
+{id:'n-u5-top',u:'U5',t:'Niveles de prueba',src:'Nueva',
+ q:'Estrategia de integración que descubre rápidamente los errores de arquitectura y requiere stubs que simulen los módulos inferiores:',opts:['Top-down','Bottom-up','Big-bang','Regresión'],ans:'Top-down',
+ exp:'**Top-down**: de arriba hacia abajo, con **stubs**. Bottom-up usa **test-drivers** y no encuentra problemas de diseño hasta muy avanzado. Big-bang no simula nada pero descubre todo al final.'},
+{id:'n-u5-bot',u:'U5',t:'Niveles de prueba',src:'Nueva',
+ q:'La integración bottom-up:',
+ opts:['Requiere test-drivers en cada nivel y no encuentra problemas de diseño hasta muy avanzado','Requiere stubs y descubre rápido los errores de arquitectura','No requiere simular nada, pero descubre los problemas al final','Sólo es aplicable a sistemas sin componentes críticos'],ans:0,
+ exp:'Bottom-up: **test-drivers**, problemas de diseño tardíos; es apropiada para orientado a objetos y **necesaria para componentes críticos**.'},
+{id:'n-u5-prest',u:'U5',t:'Tipos de prueba',src:'Nueva',
+ q:'Relacione cada objetivo con el tipo de prueba de prestaciones:',cols:['Carga','Capacidad','Estrés','Estabilidad','Escalabilidad'],
+ rows:['Validar que el tiempo de respuesta no supere 2 segundos con 300 usuarios, en escenarios realistas','Aumentar la carga hasta encontrar el punto a partir del cual las prestaciones se degradan','Exceder los límites de procesamiento y almacenamiento, observando la integridad del sistema','Mantener carga normal durante 72 horas para detectar mala liberación de recursos','Verificar que el sistema pueda absorber requisitos mayores de prestaciones'],
+ rans:['Carga','Capacidad','Estrés','Estabilidad','Escalabilidad'],
+ exp:'Carga = validar requisitos definidos · Capacidad = **punto umbral** · Estrés = **sobrecarga**, foco en integridad · Estabilidad = **en el tiempo** · Escalabilidad = absorber requisitos mayores.'},
+{id:'n-u5-acep',u:'U5',t:'Niveles de prueba',src:'Nueva',
+ q:'Relacione cada modalidad de prueba de aceptación:',cols:['Alfa','Beta','Piloto'],
+ rows:['Un conjunto acotado de clientes preseleccionados, en un entorno controlado como las oficinas de la empresa','Un conjunto más amplio de clientes, en o fuera de sus instalaciones, con algún control','Un conjunto reducido de departamentos del cliente, en sus instalaciones y en ambiente de producción'],
+ rans:['Alfa','Beta','Piloto'],
+ exp:'Alfa: acotado y controlado. Beta: más amplio. Piloto: departamentos del cliente, **en producción**.'},
+{id:'n-u5-conf',u:'U5',t:'Estrategias de prueba',src:'Nueva',
+ ctx:'Se corrigió un defecto en el cálculo de intereses. El tester ejecuta exactamente la misma prueba, con los mismos datos y condiciones, que había detectado el fallo.',
+ q:'Esa prueba es de:',opts:['Confirmación','Regresión','Aceptación','Integración'],ans:'Confirmación',
+ exp:'**Confirmación**: verifica que el defecto corregido se solucionó (misma prueba, mismos datos). La **regresión** verifica que el arreglo no rompió otra cosa. Se usan juntas.'},
+{id:'n-u5-regt',u:'U5',t:'Estrategias de prueba',src:'Nueva',
+ q:'Relacione cada situación con el tipo de regresión:',cols:['Local','De exposición','Remota'],
+ rows:['Al corregir el cálculo de descuentos se introduce un error nuevo en ese mismo cálculo','El cambio en el módulo de facturación rompe el módulo de stock','La corrección deja al descubierto un error que ya existía y estaba enmascarado'],
+ rans:['Local','Remota','De exposición'],
+ exp:'Local = el arreglo crea un error nuevo ahí mismo. Remota = rompe **otra área**. De exposición = revela errores **que ya existían**.'},
+{id:'n-u5-revt',u:'U5',t:'Técnicas estáticas',src:'Nueva',
+ q:'Relacione cada descripción con el tipo de revisión:',cols:['Revisión informal','Walkthrough','Revisión técnica','Inspección'],
+ rows:['La dirige el propio autor; busca entendimiento común y discutir alternativas','La dirige un moderador formado que no es el autor; registra defectos y tiene seguimiento formal con criterios de salida','Busca consenso técnico entre expertos (arquitectos, usuarios clave), no encontrar defectos','«¿Te parece bien este código?», sin proceso ni roles definidos'],
+ rans:['Walkthrough','Inspección','Revisión técnica','Revisión informal'],
+ exp:'La **inspección** es la de máxima formalidad y **no la dirige el autor**. El **walkthrough** sí lo dirige el autor.'},
+{id:'n-u5-roles',u:'U5',t:'Técnicas estáticas',src:'Nueva',
+ q:'En una revisión, el rol que decide destinar tiempo del proyecto a las revisiones y determina si se cumplieron sus objetivos es el:',opts:['Supervisor','Moderador','Autor','Revisor','Documentador'],ans:'Supervisor',
+ exp:'El **supervisor** asigna tiempo, evalúa si se cumplieron los objetivos y atiende pedidos de formación. El **moderador** dirige el proceso de la revisión.'},
+{id:'n-u5-estat',u:'U5',t:'Técnicas estáticas',src:'Nueva',
+ q:'Son defectos que puede detectar el análisis estático:',
+ opts:['Variables no inicializadas','Código inalcanzable','Variables declaradas y no utilizadas','Tiempo de respuesta excesivo bajo carga','Violaciones de los estándares de programación'],
+ ans:['Variables no inicializadas','Código inalcanzable','Variables declaradas','Violaciones'],
+ exp:'El análisis estático no ejecuta el código: no puede medir tiempos de respuesta, que es una prueba **dinámica** de prestaciones.'},
+{id:'n-u5-cc',u:'U5',t:'Técnicas estáticas',src:'Nueva',fixed:true,
+ ctx:'Un método tiene 3 sentencias IF y 1 WHILE, todas con condiciones simples (binarias).',
+ q:'Su complejidad ciclomática es:',opts:['3','4','5','6'],ans:'5',
+ exp:'Complejidad ciclomática = decisiones binarias + 1 = 4 + 1 = **5**. Sirve para estimar cuántas pruebas necesita el componente.'},
+{id:'n-u5-dec',u:'U5',t:'Técnicas dinámicas',src:'Nueva',
+ q:'La técnica de caja blanca que exige evaluar cada IF-THEN-ELSE y cada DO-WHILE tanto en verdadero como en falso es la prueba de:',opts:['Sentencia','Decisión','Caminos','Partición de equivalencia'],ans:'Decisión',
+ exp:'**Decisión**. Sentencia = ejecutar cada sentencia al menos una vez. Caminos = cada camino independiente (no todas las combinaciones). Partición es de caja negra.'},
+{id:'n-u5-cuo1',u:'U5',t:'Partición de equivalencia',src:'Nueva',fixed:true,
+ q:'Campo «cantidad de cuotas»: entero de 1 a 12. Aplicando la directriz de rango, ¿cuántas particiones de equivalencia (válidas más inválidas) surgen?',opts:['1','2','3','12','14'],ans:'3',
+ exp:'Rango → **1 válida** (1 a 12) + **2 inválidas** (menor que 1 y mayor que 12) = 3.'},
+{id:'n-u5-cuo2',u:'U5',t:'Valores límite',src:'Nueva',
+ q:'Campo «cantidad de cuotas»: entero de 1 a 12. ¿Cuál es el conjunto de valores límite a probar?',opts:['0, 1, 12, 13','1, 12','1, 6, 12','0, 13','2, 11'],ans:'0, 1, 12, 13',
+ exp:'Los extremos del rango y sus vecinos de afuera: **0, 1, 12, 13** (igual que el ejemplo 10–100 → 9, 10, 100, 101).'},
+{id:'n-u5-tarj',u:'U5',t:'Partición de equivalencia',src:'Nueva',
+ q:'Campo «tipo de tarjeta» que admite VISA, MASTER o AMEX; el sistema trata a las tres de la misma forma. Según la directriz de conjuntos de valores, se identifican:',
+ opts:['1 partición válida y 1 inválida','3 particiones válidas y 1 inválida','1 partición válida y 2 inválidas','3 válidas y 3 inválidas'],ans:0,
+ exp:'Conjunto de valores discretos → **1 válida + 1 inválida** (todo lo demás). Dos inválidas es la directriz de **rango**. Si cada tarjeta tuviera un comportamiento distinto, habría una partición por valor.'},
+{id:'n-u5-estac',u:'U5',t:'Partición de equivalencia',src:'Nueva',
+ ctx:'Un estacionamiento cobra por horas enteras, de 1 a 24. Hasta 2 horas es gratis; de 3 a 6 horas se cobra la tarifa A; más de 6 horas, la tarifa B.',
+ q:'¿Cuáles valores son la mejor elección para cubrir todas las particiones válidas?',opts:['1, 4, 10','1, 2, 3','3, 5','2, 6','5, 10, 25','0, 1, 24'],ans:'1, 4, 10',
+ exp:'Particiones válidas: 1–2 · 3–6 · 7–24. **1, 4, 10** pone un representante en cada una. «5, 10, 25» y «0, 1, 24» meten valores inválidos y dejan una partición afuera.'},
+{id:'n-u5-envio',u:'U5',t:'Tablas de decisión',src:'Nueva',fixed:true,
+ ctx:'Tienda online: si el cliente es Premium, el envío es gratis. Si no es Premium y la compra supera $50.000, el envío también es gratis; en otro caso se cobra el envío. Además, si paga con la tarjeta de la casa, suma puntos.',
+ q:'Con una tabla de decisión, determine:',cols:['2','3','4','6','8'],
+ rows:['Cantidad de condiciones','Cantidad de acciones','Columnas antes de simplificar','Columnas después de simplificar'],
+ rans:['3','3','8','6'],
+ exp:'Condiciones: ¿Premium?, ¿supera $50.000?, ¿tarjeta de la casa? → **3**. Acciones: envío gratis, cobrar envío, sumar puntos → **3**. 2³ = **8** columnas. Si es Premium el monto es indiferente: sus 4 columnas se reducen a 2 → 2 + 4 = **6**.'},
+{id:'n-u5-atm',u:'U5',t:'Técnicas de prueba',src:'Nueva',
+ ctx:'Un cajero automático: tarjeta insertada → PIN ingresado → operando. Si el PIN se ingresa mal 3 veces, la tarjeta queda retenida.',
+ q:'La técnica más apropiada para diseñar los casos de prueba es:',opts:['Transición de estados','Valores límite','Tablas de decisión','Caja blanca: prueba de sentencia'],ans:'Transición de estados',
+ exp:'La salida ante la misma entrada depende del **estado anterior** (el tercer PIN erróneo no se comporta como el primero). Una prueba completa incluye **transiciones no válidas** y eventos no especificados, como cancelar.'},
+{id:'n-u5-tec2',u:'U5',t:'Técnicas de prueba',src:'Nueva',
+ q:'Relacione cada situación con la técnica de prueba más apropiada:',cols:['Valores límite','Tablas de decisión','Transición de estados','Casos de uso'],
+ rows:['Campo CUIT de 11 dígitos, con casos válidos e inválidos','Descuento que depende de la combinación de tipo de cliente, medio de pago y monto','Recorrer el flujo básico y los flujos alternativos de «Registrar venta»','Pedido que pasa de Pendiente a Pagado, Enviado y Entregado, o a Cancelado'],
+ rans:['Valores límite','Tablas de decisión','Casos de uso','Transición de estados'],
+ exp:'Flujo básico + alternativos → derivar escenarios → **un caso de prueba por escenario**: es la técnica de **casos de uso**.'},
+{id:'n-u5-vv2',u:'U5',t:'VER vs VAL',src:'Nueva',
+ q:'Relacione cada acción con el área que corresponde:',cols:['VER','VAL'],
+ rows:['Beta de la app con 200 clientes para ver si les resuelve la gestión de turnos','Revisar que el diseño de clases cubra todos los casos de uso especificados','Ejecutar pruebas de integración tomando como referencia el documento de diseño','Mostrar un prototipo de pantallas al usuario clave para confirmar que es lo que necesita','Inspeccionar el documento de especificación de requisitos buscando contradicciones'],
+ rans:['VAL','VER','VER','VAL','VER'],
+ exp:'Juzga el **usuario** contra su necesidad → VAL (beta, prototipo). Se contrasta contra **artefactos especificados** → VER (diseño vs CU, integración vs diseño, inspección).'},
+{id:'n-u5-entv',u:'U5',t:'Discriminar VER / VAL',src:'Nueva',inst:RELSP,
+ q:'El líder de testing está preparando el ambiente para las pruebas de sistema del mes próximo: servidor separado de producción, base de datos con datos de prueba y herramienta de registro de defectos.',
+ opts:['VER / SP 1.2 Establecer el entorno de verificación','VAL / SP 1.2 Establecer el entorno de validación','VER / SP 3.1 Realizar la verificación','VER / SP 1.3 Establecer los procedimientos y los criterios de verificación','PP / SP 2.4 Planificar los recursos del proyecto','NINGUNA de las otras opciones'],
+ ans:'VER / SP 1.2',
+ exp:'Prueba de **sistema** → contra la especificación → VER. Se está armando el ambiente → **SP 1.2 Establecer el entorno de verificación**. Si fuera la prueba de aceptación, sería VAL / SP 1.2.'},
+{id:'n-u5-realv',u:'U5',t:'Discriminar VER / VAL',src:'Nueva',inst:RELSP,
+ q:'Los usuarios clave ejecutan hoy, en sus instalaciones, la prueba de aceptación del módulo de liquidación de sueldos.',
+ opts:['VAL / SP 2.1 Realizar la validación','VAL / SP 1.2 Establecer el entorno de validación','VER / SP 3.1 Realizar la verificación','VAL / SP 2.2 Analizar los resultados de la validación','NINGUNA de las otras opciones'],
+ ans:'VAL / SP 2.1',
+ exp:'Aceptación con usuarios, en **presente** → **VAL / SP 2.1 Realizar la validación**.'},
+{id:'n-u5-anv',u:'U5',t:'Discriminar VER / VAL',src:'Nueva',inst:RELSP,
+ q:'Terminada la ejecución de las pruebas de sistema, el equipo compara los resultados obtenidos con los esperados, identifica los defectos y registra las acciones a tomar.',
+ opts:['VER / SP 3.2 Analizar los resultados de la verificación','VER / SP 2.3 Analizar los datos de la revisión entre pares','VAL / SP 2.2 Analizar los resultados de la validación','VER / SP 3.1 Realizar la verificación','NINGUNA de las otras opciones'],
+ ans:'VER / SP 3.2',
+ exp:'Prueba de sistema → VER; ya se ejecutó y ahora se analiza → **SP 3.2**. No es SP 2.3 porque no hubo revisión entre pares: fue una prueba dinámica.'},
+{id:'n-u5-selv',u:'U5',t:'Discriminar VER / VAL',src:'Nueva',inst:RELSP,
+ q:'Al inicio del proyecto se decide qué se validará con el cliente: el prototipo de pantallas, el manual de usuario y el material de capacitación.',
+ opts:['VAL / SP 1.1 Seleccionar los productos para la validación','VER / SP 1.1 Seleccionar los productos de trabajo para la verificación','VAL / SP 2.1 Realizar la validación','PP / SP 2.7 Establecer el plan de proyecto','NINGUNA de las otras opciones'],
+ ans:'VAL / SP 1.1',
+ exp:'Con el cliente → VAL. Se elige **qué** validar → **SP 1.1**. Interfaces de usuario, manuales y materiales de formación son justamente productos validables.'},
+{id:'n-u5-reqv',u:'U5',t:'Ciclos de vida',src:'Nueva',
+ q:'Relacione cada verificación sobre el documento de especificación de requisitos:',cols:['Validez','Consistencia','Completitud','Realismo','Verificabilidad'],
+ rows:['Que los requisitos no se contradigan entre sí','Que estén todas las funciones y restricciones propuestas','Que puedan implementarse con el presupuesto y la planificación disponibles','Que se pueda construir un conjunto de pruebas que demuestre que cada requisito se cumple','Que las funciones pedidas sean realmente las que se necesitan'],
+ rans:['Consistencia','Completitud','Realismo','Verificabilidad','Validez'],
+ exp:'La **verificabilidad** reduce las discusiones entre cliente y contratista: si se puede probar, se puede demostrar que se cumplió.'},
+{id:'n-u5-modv',u:'U5',t:'Ciclos de vida',src:'Nueva',
+ q:'En el modelo en V, relacione cada nivel de prueba con el producto que le sirve de base:',cols:['Requisitos de usuario','Especificación de requisitos software','Diseño'],
+ rows:['Pruebas de integración','Pruebas de sistema y rendimiento','Pruebas de aceptación'],
+ rans:['Diseño','Especificación de requisitos software','Requisitos de usuario'],
+ exp:'Integración ↔ diseño · sistema ↔ especificación de requisitos software · aceptación ↔ requisitos de usuario. Las unitarias se hacen a medida que se genera el código.'},
+{id:'n-u5-estdin',u:'U5',t:'Técnicas de prueba',src:'Nueva',
+ q:'Sobre técnicas estáticas y dinámicas:',
+ opts:['Las estáticas no ejecutan código y buscan defectos; las dinámicas ejecutan el código y buscan fallos; son complementarias','Las estáticas ejecutan el código; las dinámicas no','Las dinámicas reemplazan a las estáticas cuando hay tiempo suficiente','Las estáticas sólo pueden aplicarse al código fuente'],ans:0,
+ exp:'Estáticas → **defectos**, sin ejecutar (se aplican también a requisitos y diseños). Dinámicas → **fallos**, ejecutando. Son **complementarias**.'},
+{id:'n-u5-conf2',u:'U5',t:'Grados de confianza',src:'Nueva',
+ q:'Indique si cada afirmación es verdadera o falsa:',cols:VF,
+ rows:['V&V buscan demostrar la ausencia total de defectos','En ciertos sistemas, V&V superan la mitad del presupuesto total de desarrollo','Las pruebas sólo pueden demostrar la presencia de errores, no su ausencia','Un prototipo requiere el mismo grado de confianza que un sistema crítico'],
+ rans:['Falso','Verdadero','Verdadero','Falso'],
+ exp:'V&V buscan que el software sea **suficientemente bueno para su uso previsto**. El grado de confianza depende del propósito (crítico vs prototipo), de las expectativas del usuario y del mercado.'},
+{id:'n-u5-esp',u:'U5',t:'Ciclos de vida',src:'Nueva',
+ q:'El riesgo típico del ciclo de vida en espiral es:',
+ opts:['Entregar como producto final un prototipo que no está listo, por presión de tiempo','No poder incorporar cambios una vez cerrado el análisis','Detectar los defectos recién al final, con alto costo de corrección','Exigir requisitos estables desde el inicio'],ans:0,
+ exp:'En espiral, prueba, rediseño y prototipado son continuos; el riesgo es **entregar el prototipo como producto final**. Las opciones 2 y 3 describen la cascada.'},
+{id:'n-u5-proto',u:'U5',t:'Ciclos de vida',src:'Nueva',
+ ctx:'El cliente define los objetivos generales del sistema, pero no logra identificar los requisitos detallados de entradas, procesamiento ni salidas.',
+ q:'Ciclo de vida más adecuado:',opts:['Prototipado','Cascada','Incremental','Modelo en V'],ans:'Prototipado',
+ exp:'Es la definición del caso de uso del **prototipado**: recolección de requisitos → diseño rápido → prototipo → evaluación del cliente → refinamiento.'},
+{id:'n-u5-cp',u:'U5',t:'Técnicas de prueba',src:'Nueva',
+ q:'Un caso de prueba debe incluir:',opts:['Entradas','Condiciones de ejecución','Resultado esperado','Nombre del desarrollador que escribió el código','Precondiciones'],ans:['Entradas','Condiciones','Resultado','Precondiciones'],
+ exp:'Caso de prueba = **entradas, condiciones de ejecución y resultados esperados**, con precondiciones y postcondiciones definidas.'},
+{id:'n-u5-bp',u:'U5',t:'Técnicas de prueba',src:'Nueva',
+ q:'Sobre buenas prácticas de prueba, indique si cada afirmación es verdadera o falsa:',cols:VF,
+ rows:['Las pruebas nunca se ejecutan en el ambiente de producción','Cada caso de prueba debe estar asociado al menos a un requisito','Si hay pruebas de integración, las unitarias se pueden omitir','Los elementos de prueba construidos van al repositorio de gestión de configuración'],
+ rans:['Verdadero','Verdadero','Falso','Verdadero'],
+ exp:'El entorno de pruebas debe estar **físicamente separado** de producción. La asociación caso–requisito da **trazabilidad**. Ningún nivel de prueba reemplaza a otro.'},
+
+/* ---------------- Fuera de temario 2026 ---------------- */
+{id:'x-ppqa1',u:'X',t:'PPQA',src:'Cuestionario',conf:'ok',inst:RELSP,opts:XOPTS,ans:'PPQA / SP 1.2',
+ q:'En el marco del proyecto «Liquidación y Cobranza a Obras Sociales», personal de la software factory externo al equipo de proyecto realiza un control respecto a si el contenido de los casos de uso cumple con las directrices de escritura de C.U. de la software factory.',
+ exp:'Dos señales: **externo al proyecto** (independencia) + **estándar organizacional** → **PPQA / SP 1.2**.'},
+{id:'x-escal',u:'X',t:'PPQA',src:'Cuestionario',conf:'ok',inst:RELSP,opts:XOPTS,ans:'PPQA / SP 2.1',
+ q:'Se detectó que en el proyecto «Turnos de Clínica online» se introdujeron cambios a los requerimientos sin ejecutar el workflow de Gestión de Requerimientos, violando la política de la Software Factory. A pesar de haberse enviado al equipo tres informes observando dicha práctica, la situación no cambió. Por lo tanto, se eleva un informe al Gerente General.',
+ exp:'La no conformidad no se resolvió en el proyecto y se **escala** → **PPQA / SP 2.1 Comunicar y asegurar la resolución de las no conformidades**.'},
+{id:'x-nombres',u:'X',t:'CM',src:'Cuestionario',conf:'ok',inst:RELSP,opts:XOPTS,ans:'CM / SP 2.2',
+ q:'Realizar un control respecto a si los nombres de los archivos de los artefactos generados cumplen con las reglas de nombres definidas en el proyecto «Liquidación y Cobranza a Obras Sociales».',
+ exp:'La nomenclatura es **del proyecto**, no un estándar organizacional → **CM / SP 2.2 Controlar los elementos de configuración**.'},
+{id:'x-linea',u:'X',t:'CM',src:'Cuestionario',conf:'ok',inst:RELSP,opts:XOPTS,ans:'CM / SP 1.3',
+ q:'En el proyecto «Alta de denuncias por celular», establecer que un conjunto de artefactos (desarrollados como parte de la especificación de requisitos y la planificación), luego de revisados y acordados formalmente, constituyen a partir de ese momento el basamento sobre el cual se realizará el resto de las actividades del desarrollo.',
+ exp:'«Basamento sobre el cual se realizará el resto» = **línea base** → **CM / SP 1.3**.'},
+{id:'x-reqm',u:'X',t:'REQM vs CM',src:'Cuestionario',conf:'ok',inst:RELSP,opts:XOPTS,ans:'REQM / SP 1.3',
+ q:'En la última reunión de avance, el cliente solicitó incorporar una nueva variante para calcular el descuento de un producto en línea de caja, que no estaba en el esquema acordado para el software «Puesto de Venta de Supermercado». En este momento se está chequeando con el contador del supermercado cómo afecta al esquema impositivo previsto.',
+ exp:'Todavía se **evalúa el impacto** del cambio → **REQM / SP 1.3 Gestionar los cambios de los requerimientos**.'},
+{id:'x-cm21',u:'X',t:'REQM vs CM',src:'Cuestionario',conf:'ok',inst:RELSP,opts:XOPTS,ans:'CM / SP 2.1',
+ q:'Mismo caso del «Puesto de Venta de Supermercado»: ya se decidió aceptar la nueva variante de descuento. En este momento se están chequeando las modificaciones a realizar en los C.U. para incorporar los caminos alternativos correspondientes.',
+ exp:'El cambio **ya se aceptó** y ahora se tramita → **CM / SP 2.1 Seguir las peticiones de cambio**.'},
+{id:'x-sponsor',u:'X',t:'REQM',src:'Cuestionario',conf:'ok',inst:RELSP,opts:XOPTS,ans:'REQM / SP 1.2',
+ q:'Realizar una reunión con el Sponsor del proyecto para acordar fehacientemente que la fecha de implementación debe posponerse 3 semanas respecto a lo fijado en el plan, para incorporar los cambios pedidos por el Gerente de Ventas al cálculo de comisiones. Sin la aprobación del Sponsor, el proyecto sigue como estaba y no incluye el nuevo cálculo.',
+ exp:'Se busca el **compromiso** sobre el cambio de requerimientos → **REQM / SP 1.2 Obtener el compromiso sobre los requerimientos**.'},
+{id:'x-compil',u:'X',t:'CM',src:'Cuestionario',conf:'ok',inst:RELSP,opts:XOPTS,ans:'CM / SP 3.1',
+ q:'En el proyecto «Gestión Mensual de Crédito Hipotecario», cada vez que se genera una nueva compilación del ejecutable se genera un documento con las modificaciones realizadas respecto a la compilación anterior.',
+ exp:'Registrar qué cambió entre versiones → **CM / SP 3.1 Establecer registros de gestión de configuración**.'},
+{id:'x-ma',u:'X',t:'MA',src:'Cuestionario',conf:'ok',
+ ctx:'Métricas: (1) porcentaje de cumplimiento de hitos de entrega; (2) tasa de defectos encontrados en producción; (3) costo total de horas invertidas por iteración; (4) cobertura de pruebas unitarias automatizadas.',
+ q:'¿Cuál opción clasifica correctamente las métricas en métricas de proyecto y de producto?',
+ opts:['Proyecto: 1, 2, 3 · Producto: 4','Proyecto: 1, 3 · Producto: 2, 4','Proyecto: 2, 4 · Producto: 1, 3','Proyecto: 1, 4 · Producto: 2, 3'],ans:'Proyecto: 1, 3',
+ exp:'**Proyecto** = progreso, esfuerzo, costo, planificación (hitos, horas). **Producto** = calidad o desempeño del software (defectos, cobertura).'},
+{id:'x-ries',u:'X',t:'RSKM',src:'Cuestionario',conf:'ok',
+ q:'Sobre riesgos, indique si cada afirmación es verdadera o falsa:',cols:VF,
+ rows:['La actividad de hacer análisis de riesgos es previa a su identificación','La probabilidad de un riesgo es un parámetro de riesgo','Cualquier desvío en un riesgo habilita la realización de actividades de tratamiento','Los riesgos se identifican desde la planificación del proyecto'],
+ rans:['Falso','Verdadero','Falso','Verdadero'],
+ exp:'Orden: **identificar → analizar → priorizar**. Hay riesgos aceptados y vigilados: el tratamiento se dispara al superar un **umbral**, no ante cualquier desvío.'},
+{id:'x-cmtest',u:'X',t:'CM',src:'Cuestionario',conf:'ok',
+ q:'Desde una perspectiva de testing, ¿cuáles son los principales propósitos de la Gestión de la Configuración?',
+ opts:['Controlar la versión de los casos de prueba','Desarrollar nuevos casos de prueba','Identificar la versión del software que se está probando','Hacer el seguimiento de los cambios a los casos de prueba','Detectar la necesidad de nuevos casos de prueba'],
+ ans:['Controlar la versión','Identificar la versión','Hacer el seguimiento'],
+ exp:'CM controla versiones y cambios. Desarrollar casos o detectar que hacen falta nuevos no es tarea de CM.'},
+{id:'x-ppqaex',u:'X',t:'PPQA',src:'Cuestionario',conf:'ok',
+ q:'Se decidió ampliar el rol de los empleados de la software factory para que cumplan funciones de evaluadores de PPQA. ¿Qué característica excluye a un profesional de evaluar determinados productos de trabajo?',
+ opts:['Haber participado en el armado del producto de trabajo que se evalúa','Tener escasa experiencia en el área de proceso PPQA','Ser nuevo en la organización','Haber usado el producto de trabajo en otros proyectos'],ans:['Haber participado'],
+ exp:'La objetividad exige **independencia**: quien evalúa debe estar separado de quien desarrolló el producto. La falta de experiencia se resuelve con formación, no excluye.'}
+];
+
+/* ============ MOTOR ============ */
+const UNITS = {U1:'Modelos de calidad y CMMI',U2:'Gestión de procesos',U3:'Gestión de proyectos',U5:'Verificación y validación',X:'Fuera de temario'};
+const UCODE = {U1:'U1',U2:'U2',U3:'U3',U5:'U5',X:'Extra'};
+const KINDS = {parcial:'Parciales',cuest:'Cuestionario',nueva:'Nuevas'};
+const PIN = /^(Ninguna|NINGUNA|Todas)/;
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const md = s => esc(s).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+
+function resolveOne(list,a){
+  if(typeof a==='number') return a<list.length?a:-1;
+  const i=list.indexOf(a); if(i>=0) return i;
+  const m=[]; list.forEach((o,j)=>{ if(o.startsWith(a)) m.push(j); });
+  return m.length===1?m[0]:-1;
+}
+Q.forEach(q=>{
+  q.type = q.cols ? 'matrix' : (Array.isArray(q.ans) ? 'multi' : 'single');
+  q.k = q.src.startsWith('Parcial') ? 'parcial' : (q.src.startsWith('Cuestionario') ? 'cuest' : 'nueva');
+  if(q.type==='matrix') q.a = q.rans.map(x=>resolveOne(q.cols,x));
+  else if(q.type==='multi') q.a = q.ans.map(x=>resolveOne(q.opts,x));
+  else q.a = resolveOne(q.opts,q.ans);
+  if([].concat(q.a).some(x=>x<0) || (q.type==='matrix' && q.rows.length!==q.rans.length)){ q.broken=true; console.warn('Clave sin resolver:',q.id); }
+});
+const QS = Q.filter(q=>!q.broken);
+const QM = {}; QS.forEach(q=>QM[q.id]=q);
+
+function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+function makePerm(q){
+  if(q.type==='matrix'){ const r=q.rows.map((_,i)=>i); return q.fixed?r:shuffle(r); }
+  const idx=q.opts.map((_,i)=>i);
+  if(q.fixed) return idx;
+  return shuffle(idx.filter(i=>!PIN.test(q.opts[i]))).concat(idx.filter(i=>PIN.test(q.opts[i])));
+}
+let PERM={}; QS.forEach(q=>PERM[q.id]=makePerm(q));
+
+const HKEY='isw-banco-v1';
+let H={}; try{ H=JSON.parse(localStorage.getItem(HKEY)||'{}')||{}; }catch(e){ H={}; }
+function saveH(){ try{ localStorage.setItem(HKEY,JSON.stringify(H)); }catch(e){} }
+
+const S = { mode:'practice', units:new Set(['U1','U2','U3','U5']), kinds:new Set(['parcial','cuest','nueva']), status:'all', shuffle:false,
+  list:[], idx:0, resp:{}, exam:null, confirm:null };
+
+function newResp(q){ return {sel: q.type==='single'?null:(q.type==='multi'?[]:q.rows.map(()=>null)), checked:false, score:null}; }
+function answered(q,r){ if(!r) return false; if(q.type==='single') return r.sel!==null; if(q.type==='multi') return r.sel.length>0; return r.sel.every(x=>x!==null); }
+function grade(q,r){
+  if(q.type==='single') return r.sel===q.a?1:0;
+  if(q.type==='multi'){ const a=new Set(q.a), s=new Set(r.sel); return (a.size===s.size && [...a].every(x=>s.has(x)))?1:0; }
+  let c=0; q.a.forEach((x,i)=>{ if(r.sel[i]===x) c++; }); return c/q.a.length;
+}
+function ctx(){
+  if(S.mode==='exam' && S.exam) return {ids:S.exam.ids, idx:S.exam.idx, resp:S.exam.resp, reveal:id=>S.exam.done};
+  return {ids:S.list, idx:S.idx, resp:S.resp, reveal:id=>!!(S.resp[id]&&S.resp[id].checked)};
+}
+function setIdx(i){ if(S.mode==='exam'&&S.exam) S.exam.idx=i; else S.idx=i; }
+function curQ(){ const c=ctx(); const q=QM[c.ids[c.idx]]; if(!q) return {}; if(!c.resp[q.id]) c.resp[q.id]=newResp(q); return {q, r:c.resp[q.id], c}; }
+
+function buildList(keepId){
+  let l=QS.filter(q=>S.units.has(q.u)&&S.kinds.has(q.k));
+  if(S.status==='new') l=l.filter(q=>!H[q.id]);
+  if(S.status==='bad') l=l.filter(q=>H[q.id]&&!H[q.id].ok);
+  if(S.shuffle) l=shuffle(l);
+  S.list=l.map(q=>q.id);
+  const k=keepId?S.list.indexOf(keepId):-1;
+  S.idx = k>=0 ? k : 0;
+}
+
+/* ---------- render: filtros ---------- */
+function renderFilters(){
+  const f=$('#filters');
+  if(S.mode==='exam'){ f.hidden=true; return; }
+  f.hidden=false;
+  const base=QS.filter(q=>S.kinds.has(q.k));
+  const uc=u=>base.filter(q=>q.u===u).length;
+  const kbase=QS.filter(q=>S.units.has(q.u));
+  const kc=k=>kbase.filter(q=>q.k===k).length;
+  const bad=QS.filter(q=>H[q.id]&&!H[q.id].ok&&S.units.has(q.u)&&S.kinds.has(q.k)).length;
+  f.innerHTML =
+   `<div class="fgroup"><span class="flabel">Unidad</span>${Object.keys(UNITS).map(u=>`<button type="button" class="chip" data-act="unit" data-u="${u}" aria-pressed="${S.units.has(u)}" title="${esc(UNITS[u])}">${UCODE[u]} <span class="n">${uc(u)}</span></button>`).join('')}</div>
+    <div class="fgroup"><span class="flabel">Origen</span>${Object.keys(KINDS).map(k=>`<button type="button" class="chip" data-act="kind" data-k="${k}" aria-pressed="${S.kinds.has(k)}">${KINDS[k]} <span class="n">${kc(k)}</span></button>`).join('')}</div>
+    <div class="fgroup"><span class="flabel">Mostrar</span>
+      <button type="button" class="chip" data-act="status" data-s="all" aria-pressed="${S.status==='all'}">Todas</button>
+      <button type="button" class="chip" data-act="status" data-s="new" aria-pressed="${S.status==='new'}">Sin practicar</button>
+      <button type="button" class="chip" data-act="status" data-s="bad" aria-pressed="${S.status==='bad'}">Falladas <span class="n">${bad}</span></button>
+      <button type="button" class="chip" data-act="shuffle" aria-pressed="${S.shuffle}">Mezclar orden</button></div>
+    <span class="count">${S.list.length} preguntas</span>`;
+}
+
+/* ---------- render: pregunta ---------- */
+function srcBadges(q){
+  let b=`<span class="badge">${esc(q.src)}</span>`;
+  if(q.k==='nueva') b+=`<span class="badge new">nueva</span>`;
+  else if(q.conf==='ded') b+=`<span class="badge ded">clave deducida</span>`;
+  else b+=`<span class="badge ok">clave confirmada</span>`;
+  return b;
+}
+function hintFor(q){
+  if(q.type==='multi') return 'Puede haber más de una correcta. Si marcás de más, se pierde el punto.';
+  if(q.type==='matrix') return 'Una respuesta por fila. Cada fila suma por separado.';
+  return 'Elegí una opción.';
+}
+function answerText(q){
+  if(q.type==='single') return q.opts[q.a];
+  if(q.type==='multi') return q.a.map(i=>q.opts[i]).join(' · ');
+  return null;
+}
+function renderCard(){
+  const card=$('#card');
+  if(S.mode==='exam' && !S.exam){ card.innerHTML=examIntro(); return; }
+  const c=ctx();
+  if(!c.ids.length){
+    card.innerHTML=`<div class="empty"><p>No hay preguntas con estos filtros.</p>${S.status==='bad'?'<p>Todavía no fallaste ninguna, o ya las limpiaste.</p>':''}<button type="button" class="btn" data-act="reset-filters">Ver todas</button></div>`;
+    return;
+  }
+  const {q,r}=curQ(); const reveal=c.reveal(q.id); const perm=PERM[q.id];
+  let h=`<div class="qhead"><span class="utag">${UCODE[q.u]}</span><span class="topic">${esc(UNITS[q.u])} · ${esc(q.t)}</span>${srcBadges(q)}</div>`;
+  h+=`<div class="qnum">Pregunta ${c.idx+1} de ${c.ids.length}</div>`;
+  if(q.ctx||q.table){
+    h+=`<div class="ctx">${q.ctx?`<p>${md(q.ctx)}</p>`:''}`;
+    if(q.table) h+=`<div class="tblwrap"><table><thead><tr>${q.table.head.map(x=>`<th>${esc(x)}</th>`).join('')}</tr></thead><tbody>${q.table.rows.map(row=>`<tr>${row.map(x=>`<td>${esc(x)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+    h+=`</div>`;
+  }
+  h+=`<p class="stem">${md(q.q)}</p>`;
+  h+=`<p class="hint">${q.inst?esc(q.inst)+' ':''}${hintFor(q)}</p>`;
+  if(q.type==='matrix'){
+    h+=`<div class="matrix">`+perm.map(ri=>{
+      const sel=r.sel[ri]; const rc=reveal?(sel===q.a[ri]?' r-ok':' r-bad'):'';
+      return `<div class="mrow${rc}"><div class="mtext">${md(q.rows[ri])}</div><div class="mcols" role="radiogroup" aria-label="${esc(q.rows[ri])}">`+
+        q.cols.map((cn,ci)=>{
+          let sc='seg'; if(reveal&&ci===q.a[ri]) sc+=' seg-ans'; if(reveal&&sel===ci&&ci!==q.a[ri]) sc+=' seg-wrong';
+          return `<label class="${sc}"><input type="radio" id="m-${q.id}-${ri}-${ci}" name="m-${q.id}-${ri}" data-ri="${ri}" data-ci="${ci}" ${sel===ci?'checked':''} ${reveal?'disabled':''}><span>${esc(cn)}</span></label>`;
+        }).join('')+`</div></div>`;
+    }).join('')+`</div>`;
+  } else {
+    const single=q.type==='single';
+    h+=`<div class="opts">`+perm.map((oi,pos)=>{
+      const chk= single? r.sel===oi : r.sel.includes(oi);
+      const isAns= single? q.a===oi : q.a.includes(oi);
+      let cls='opt', mark='';
+      if(reveal){ if(isAns){ cls+=' is-ans'; mark='correcta'; } else if(chk){ cls+=' is-wrong'; mark='tu respuesta'; } }
+      return `<label class="${cls}"><input type="${single?'radio':'checkbox'}" id="o-${q.id}-${oi}" name="o-${q.id}" data-oi="${oi}" ${chk?'checked':''} ${reveal?'disabled':''}><span class="key">${String.fromCharCode(65+pos)}</span><span class="otext">${md(q.opts[oi])}</span><span class="mark">${mark}</span></label>`;
+    }).join('')+`</div>`;
+  }
+  // acciones
+  const last=c.idx>=c.ids.length-1;
+  h+=`<div class="actions"><button type="button" class="btn ghost" data-act="prev" ${c.idx===0?'disabled':''}>← Anterior</button><span class="spacer"></span>`;
+  if(S.mode==='practice'){
+    if(!reveal) h+=`<button type="button" class="btn primary" id="btn-check" data-act="check" ${answered(q,r)?'':'disabled'}>Corregir</button>`;
+    else h+=`<button type="button" class="btn" data-act="retry">Reintentar</button>`;
+    h+=`<button type="button" class="btn ${reveal?'primary':''}" data-act="next" ${last?'disabled':''}>Siguiente →</button>`;
+  } else {
+    if(!S.exam.done && last) h+=`<button type="button" class="btn primary" data-act="submit">Entregar</button>`;
+    else h+=`<button type="button" class="btn primary" data-act="next" ${last?'disabled':''}>Siguiente →</button>`;
+  }
+  h+=`</div>`;
+  if(reveal) h+=feedback(q,r);
+  card.innerHTML=h;
+}
+function feedback(q,r){
+  const s=r.score!==null&&r.score!==undefined?r.score:grade(q,r);
+  const unans=!answered(q,r)&&s===0;
+  let cls,verdict;
+  if(s===1){cls='good';verdict='Correcto';}
+  else if(s===0){cls='bad';verdict=unans?'Sin responder':'Incorrecto';}
+  else {cls='part';verdict=`Parcial: ${Math.round(s*q.a.length)} de ${q.a.length} filas`;}
+  const ans=answerText(q);
+  return `<div class="fb ${cls}" id="fb"><div class="verdict">${verdict}</div>`+
+    (ans?`<p class="answer">Respuesta: ${md(ans)}</p>`:'')+
+    `<p>${md(q.exp)}</p>`+
+    (q.conf==='ded'?`<p class="ded">Clave deducida: el formulario original no mostraba la respuesta correcta.</p>`:'')+
+    `</div>`;
+}
+
+/* ---------- render: panel lateral ---------- */
+function sqClass(q,r,reveal,isCur){
+  let c='sq';
+  if(r&&reveal){ const s=r.score!==null&&r.score!==undefined?r.score:grade(q,r); c+= s===1?' ok':(s===0?' bad':' part'); }
+  else if(r&&answered(q,r)&&S.mode==='exam') c+=' done';
+  if(isCur) c+=' cur';
+  return c;
+}
+function gridHTML(){
+  const c=ctx();
+  return `<div class="grid">`+c.ids.map((id,i)=>{ const q=QM[id]; const r=c.resp[id]; return `<button type="button" class="${sqClass(q,r,c.reveal(id),i===c.idx)}" data-act="goto" data-i="${i}" aria-label="Pregunta ${i+1}">${i+1}</button>`; }).join('')+`</div>`;
+}
+function unitBars(ids,resp){
+  return `<div class="ubars">`+['U1','U2','U3','U5','X'].map(u=>{
+    const qs=ids.map(id=>QM[id]).filter(q=>q.u===u&&resp[q.id]&&(resp[q.id].checked||(S.exam&&S.exam.done&&S.mode==='exam')));
+    if(!qs.length) return '';
+    const pts=qs.reduce((a,q)=>a+grade(q,resp[q.id]),0); const pct=Math.round(pts/qs.length*100);
+    return `<div class="ubar"><span class="code">${UCODE[u]}</span><span class="track"><span class="fill" style="width:${pct}%"></span></span><span class="val">${pct} %</span></div>`;
+  }).join('')+`</div>`;
+}
+function renderSide(){
+  const side=$('#side');
+  if(S.mode==='practice'){
+    const done=S.list.filter(id=>S.resp[id]&&S.resp[id].checked);
+    const pts=done.reduce((a,id)=>a+grade(QM[id],S.resp[id]),0);
+    const pct=done.length?Math.round(pts/done.length*100):0;
+    const hist=Object.keys(H).length, hbad=Object.values(H).filter(x=>!x.ok).length;
+    side.innerHTML=`<div class="panel"><h3>Esta sesión</h3>
+      <div class="stats"><div class="stat"><b>${done.length}</b><span>corregidas</span></div><div class="stat"><b>${pts%1?pts.toFixed(1).replace('.',','):pts}</b><span>puntos</span></div><div class="stat"><b>${pct}%</b><span>acierto</span></div></div>
+      ${done.length?unitBars(S.list,S.resp):'<p class="note">Respondé y corregí para ver el acierto por unidad.</p>'}
+    </div>
+    <div class="panel"><h3>Preguntas</h3>${gridHTML()}
+      <div class="legend"><span><i style="background:var(--ok-soft);border-color:var(--ok)"></i>bien</span><span><i style="background:var(--warn-soft);border-color:var(--warn)"></i>parcial</span><span><i style="background:var(--bad-soft);border-color:var(--bad)"></i>mal</span></div>
+      <div class="sidebtns"><button type="button" class="btn small" data-act="reset-session">Reiniciar sesión</button>
+      <button type="button" class="btn small ghost" data-act="forget">${S.confirm==='forget'?'¿Seguro? Tocá de nuevo':'Olvidar historial'}</button></div>
+      <p class="note" style="margin-top:10px">Historial en este navegador: ${hist} practicadas, ${hbad} para repasar.</p>
+    </div>`;
+    return;
+  }
+  if(!S.exam){ side.innerHTML=`<div class="panel"><h3>Cómo es el parcial</h3><p class="note">Hoy el parcial es todo multiple choice y matrices, sin desarrollo. «Ninguna de las opciones» es una opción real. En las de selección múltiple, marcar de más te hace perder el punto.</p></div>`; return; }
+  const E=S.exam; const n=E.ids.length;
+  if(!E.done){
+    const ans=E.ids.filter(id=>answered(QM[id],E.resp[id])).length;
+    side.innerHTML=`<div class="panel"><h3>Simulacro en curso</h3><div class="stats"><div class="stat"><b>${ans}/${n}</b><span>respondidas</span></div></div>${gridHTML()}
+      <div class="sidebtns"><button type="button" class="btn small primary" data-act="submit">${S.confirm==='submit'?`Faltan ${n-ans}. ¿Entregar igual?`:'Entregar'}</button><button type="button" class="btn small ghost" data-act="abort">Abandonar</button></div></div>`;
+  } else {
+    side.innerHTML=`<div class="panel"><h3>Revisión</h3>${unitBars(E.ids,E.resp)}${gridHTML()}
+      <div class="legend"><span><i style="background:var(--ok-soft);border-color:var(--ok)"></i>bien</span><span><i style="background:var(--warn-soft);border-color:var(--warn)"></i>parcial</span><span><i style="background:var(--bad-soft);border-color:var(--bad)"></i>mal</span></div>
+      <div class="sidebtns"><button type="button" class="btn small primary" data-act="start-exam">Nuevo simulacro</button></div></div>`;
+  }
+}
+function renderBanner(){
+  const b=$('#banner');
+  if(!(S.mode==='exam'&&S.exam&&S.exam.done)){ b.innerHTML=''; return; }
+  const E=S.exam; const n=E.ids.length;
+  const pts=E.ids.reduce((a,id)=>a+grade(QM[id],E.resp[id]),0);
+  const pct=Math.round(pts/n*100); const pass=pts>=n*0.6;
+  const fmt=x=>(Math.round(x*10)/10).toString().replace('.',',');
+  b.innerHTML=`<div class="result"><div class="score">${fmt(pts)} <small>/ ${n}</small></div><span class="pill ${pass?'pass':'fail'}">${pct} % · ${pass?'aprobado':'no alcanza'}</span>
+   <p>Se aprueba con ${fmt(n*0.6)} puntos (60 %). Las matrices suman por fila, como en el formulario. Recorré las preguntas para ver cada corrección.</p></div>`;
+}
+function examIntro(){
+  const pool=QS.filter(q=>q.u!=='X').length;
+  return `<div class="intro"><h2>Simulacro de 13 preguntas</h2>
+   <p class="note">Como el parcial 2024: 13 puntos, se aprueba con 8.</p>
+   <ul><li>3 preguntas al azar de cada unidad (U1, U2, U3, U5) y 1 más de cualquiera, de un banco de ${pool}.</li>
+   <li>No hay corrección hasta que entregás.</li>
+   <li>Una pregunta simple vale 1 punto; una matriz reparte su punto entre las filas.</li>
+   <li>Las que falles quedan marcadas para repasar en el modo Práctica.</li></ul>
+   <button type="button" class="btn primary" data-act="start-exam">Empezar simulacro</button></div>`;
+}
+function renderAll(){ renderFilters(); renderBanner(); renderCard(); renderSide();
+  document.querySelectorAll('.modes button').forEach(b=>b.setAttribute('aria-pressed', String(b.dataset.mode===S.mode))); }
+
+/* ---------- acciones ---------- */
+function startExam(){
+  const byU={}; QS.filter(q=>q.u!=='X').forEach(q=>(byU[q.u]=byU[q.u]||[]).push(q.id));
+  let ids=[]; Object.keys(byU).forEach(u=>{ ids=ids.concat(shuffle(byU[u]).slice(0,3)); });
+  const rest=shuffle(QS.filter(q=>q.u!=='X'&&!ids.includes(q.id)).map(q=>q.id));
+  ids=shuffle(ids.concat(rest.slice(0,1)));
+  ids.forEach(id=>PERM[id]=makePerm(QM[id]));
+  S.exam={ids, idx:0, resp:{}, done:false}; S.confirm=null;
+}
+function record(q,s){ const prev=H[q.id]||{n:0}; H[q.id]={n:prev.n+1, ok:s===1}; }
+function scrollToCard(){
+  const el=$('#card'); const top=el.getBoundingClientRect().top;
+  if(top<0) el.scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth', block:'start'});
+}
+
+document.addEventListener('click', e=>{
+  const b=e.target.closest('[data-act]'); if(!b||b.disabled) return;
+  const act=b.dataset.act;
+  if(act!=='forget'&&act!=='submit') S.confirm=null;
+  switch(act){
+    case 'mode': S.mode=b.dataset.mode; S.confirm=null; renderAll(); break;
+    case 'unit': { const u=b.dataset.u; if(S.units.has(u)){ if(S.units.size>1) S.units.delete(u); } else S.units.add(u); buildList(); renderAll(); break; }
+    case 'kind': { const k=b.dataset.k; if(S.kinds.has(k)){ if(S.kinds.size>1) S.kinds.delete(k); } else S.kinds.add(k); buildList(); renderAll(); break; }
+    case 'status': S.status=b.dataset.s; buildList(); renderAll(); break;
+    case 'shuffle': S.shuffle=!S.shuffle; buildList(); renderAll(); break;
+    case 'reset-filters': S.units=new Set(['U1','U2','U3','U5']); S.kinds=new Set(['parcial','cuest','nueva']); S.status='all'; buildList(); renderAll(); break;
+    case 'prev': { const c=ctx(); if(c.idx>0){ setIdx(c.idx-1); renderCard(); renderSide(); scrollToCard(); } break; }
+    case 'next': { const c=ctx(); if(c.idx<c.ids.length-1){ setIdx(c.idx+1); renderCard(); renderSide(); scrollToCard(); } break; }
+    case 'goto': setIdx(+b.dataset.i); renderCard(); renderSide(); scrollToCard(); break;
+    case 'check': { const {q,r}=curQ(); if(!answered(q,r)) break; r.checked=true; r.score=grade(q,r); record(q,r.score); saveH(); renderCard(); renderSide(); renderFilters(); const fb=$('#fb'); if(fb&&fb.getBoundingClientRect().bottom>innerHeight) fb.scrollIntoView({behavior:'smooth',block:'nearest'}); break; }
+    case 'retry': { const {q}=curQ(); S.resp[q.id]=newResp(q); PERM[q.id]=makePerm(q); renderCard(); renderSide(); break; }
+    case 'reset-session': S.resp={}; QS.forEach(q=>PERM[q.id]=makePerm(q)); S.idx=0; renderAll(); break;
+    case 'forget': if(S.confirm==='forget'){ H={}; saveH(); S.confirm=null; buildList(); renderAll(); } else { S.confirm='forget'; renderSide(); } break;
+    case 'start-exam': S.mode='exam'; startExam(); renderAll(); scrollToCard(); break;
+    case 'abort': S.exam=null; renderAll(); break;
+    case 'submit': {
+      const E=S.exam; const missing=E.ids.filter(id=>!answered(QM[id],E.resp[id])).length;
+      if(missing>0 && S.confirm!=='submit'){ S.confirm='submit'; renderSide(); break; }
+      E.ids.forEach(id=>{ const q=QM[id]; if(!E.resp[id]) E.resp[id]=newResp(q); const r=E.resp[id]; r.score=grade(q,r); record(q,r.score); });
+      saveH(); E.done=true; E.idx=0; S.confirm=null; renderAll(); window.scrollTo({top:0,behavior:'smooth'}); break;
+    }
+  }
+});
+document.addEventListener('change', e=>{
+  const t=e.target; if(!t.closest('#card')) return;
+  const {q,r}=curQ(); if(!q) return;
+  if(t.dataset.oi!==undefined){ const oi=+t.dataset.oi;
+    if(q.type==='single') r.sel=oi;
+    else r.sel = t.checked ? [...new Set(r.sel.concat(oi))] : r.sel.filter(x=>x!==oi);
+  } else if(t.dataset.ri!==undefined){ r.sel[+t.dataset.ri]=+t.dataset.ci; }
+  const bc=$('#btn-check'); if(bc) bc.disabled=!answered(q,r);
+  if(S.mode==='exam') renderSide();
+});
+
+buildList(); renderAll();
+</script>

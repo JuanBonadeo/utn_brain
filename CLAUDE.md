@@ -30,8 +30,10 @@ de materia fuera de ahí.
     ├── fuentes/         ← originales crudos que subo. Inmutables.
     ├── archivo/         ← dump heredado del drive de la facu (ver abajo)
     ├── estudio/         ← derivados que generamos: resumen.md,
-    │                      banco-preguntas.md, machetes + sus .docx/.pdf
+    │   └── <evaluación>/  banco-preguntas.md, machetes + sus .docx/.pdf,
+    │                      agrupados por evaluación (parcial1/, parcial3/, ad/…)
     ├── entregables/     ← TPs, informes, ensayos, prototipos + sus exports
+    │   └── <trabajo>/     una carpeta por trabajo (etapa3/, TP3/, informe2-wifi7/…)
     └── figs/            ← imágenes usadas por [CÓDIGO].md y por estudio/
 
 - `fuentes/` → lo que subo yo para ingerir (PDF, apuntes, enunciados).
@@ -72,12 +74,30 @@ de materia fuera de ahí.
     ingerirlo. No ingieras nada sin que lo confirme.
   - Pedimelo explícitamente o proponelo en un LINT: no lo corras solo al
     iniciar la sesión, porque lista cientos de carpetas.
-- Ojo: los archivos de `estudio/` y `entregables/` están un nivel más abajo
-  que `figs/`. Las imágenes se referencian como `../figs/x.png` desde ahí, y
-  como `figs/x.png` solo desde `[CÓDIGO].md`.
-- Fuera de `materias/` solo hay: `CLAUDE.md`, `scripts/`, el toolchain de
-  node (`package.json`, `node_modules/`) y `_drive/` (dos PDFs sueltos del
-  drive, gitignorados, no son de ninguna materia).
+- **Cómo se agrupa.** En `estudio/`, una subcarpeta por evaluación cuando la
+  materia tiene material de más de una (`ASI/estudio/parcial2/`,
+  `ISW/estudio/ad/`, `RD/estudio/parcial2-baro/`); lo que no es de ninguna en
+  particular puede quedar suelto. En `entregables/`, una subcarpeta por
+  trabajo con el `.md` y todos sus exports juntos. Nada suelto en la raíz de
+  la materia salvo `[CÓDIGO].md`. Antes de crear un archivo nuevo, fijate en
+  qué subcarpeta va.
+- Ojo con la profundidad para las imágenes: se referencian como `figs/x.png`
+  desde `[CÓDIGO].md`, `../figs/x.png` desde un archivo suelto en `estudio/`
+  y `../../figs/x.png` desde una subcarpeta (`estudio/parcial1/`,
+  `entregables/etapa3/`).
+- Los HTML de `estudio/` están gitignorados porque md-to-pdf deja ahí su HTML
+  intermedio. Un HTML **escrito a mano** (carilla, simulacro interactivo) se
+  versiona con `git add -f`; si no, sólo existe en esta máquina.
+- Fuera de `materias/` solo hay: `CLAUDE.md`, `AGENTS.md`, `scripts/`, el
+  toolchain de node (`package.json`, `package-lock.json`, `node_modules/`),
+  `.venv/` (Python, gitignorado) y config de herramientas (`.claude/`,
+  `.obsidian/`, `.impeccable/`, `.mcp.json`, `.gitmodules`).
+- `scripts/` tiene en la raíz las herramientas generales (las de abajo, más
+  `md-to-pdf.js`, `resumen-pdf.js`, `formulario-pdf.js`, `build-docx.js`,
+  `guion-timing.py`, `bpm-dump.py`, `svg-to-png.js`) y en `scripts/<materia>/`
+  los generadores atados a un entregable puntual (`asi/`, `rd/`, `sgd/`,
+  `sim/`). Un script nuevo de un solo trabajo va en la carpeta de su materia;
+  si calcula la raíz del repo, sube tres niveles (`parents[2]`, `"..", "..", ".."`).
 - `scripts/templates/tp.md` → plantilla para arrancar cualquier TP. Se copia a
   `materias/[CÓDIGO]/entregables/`, se completa el frontmatter y se genera el
   PDF con `node scripts/monografia-pdf.js <archivo.md>`: sale con carátula,

@@ -13,7 +13,7 @@ _(sin unidades cargadas todavía)_
 - **Deck: Serverless** → `entregables/serverless/presentacion-serverless.pptx`
   14 láminas, 15 min, 4 expositores. Guion con notas por lámina y preguntas
   probables en `guion-presentacion.md` (+ `.docx`). Generador en
-  `scripts/pptx-sgd-serverless/`.
+  `scripts/sgd/pptx-serverless/`.
 - **Informe: Serverless** → `entregables/serverless/informe-serverless.md` (+ `.pdf`)
   Versión para entregar del informe de investigación: 12 págs., carátula,
   sin las notas internas. Profes: Torres y Castagnino.
@@ -39,3 +39,4 @@ _(sin unidades cargadas todavía)_
   desde el informe de investigación y alineado con el deck (punto de cruce 34 %).
 - 2026-11-03: se documenta el submódulo Spine-Guard en Entregables; se borran
   las opciones A/B/C descartadas del deck de serverless y sus generadores.
+- 2026-11-03: el generador del deck pasó a `scripts/sgd/pptx-serverless/`.

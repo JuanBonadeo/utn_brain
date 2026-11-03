@@ -1,7 +1,7 @@
 # Serverless — guion de la presentación
 
 > Notas internas (no salen en el docx). Este archivo es la fuente de las notas
-> del orador: `scripts/pptx-sgd-serverless/build.js` lo lee y pone cada bloque
+> del orador: `scripts/sgd/pptx-serverless/build.js` lo lee y pone cada bloque
 > `## Lámina N` como nota de la diapositiva N. Si se cambia el texto acá, se
 > regenera el pptx. Duración hablada: `.venv/bin/python scripts/guion-timing.py
 > materias/SGD/entregables/serverless/guion-presentacion.md`.

@@ -618,7 +618,7 @@ Propiedades contrastadas con `library.xml` de **ProcessModelingLibrary.jar 8.9.9
 localmente, y estructura del `.alp` basada en el modelo local `TP_Colas.alp`.
 
 La etapa espacial también se contrastó con `PedestrianLibrary.jar` (8.9.9 y, desde el 2026-09-24, 8.9.10), con el tutorial local
-`fuentes/Tutoriales/Airport/Airport.alp` de la cátedra y con el ejemplo instalado
+`entregables/tutoriales-anylogic/Airport/Airport.alp` de la cátedra y con el ejemplo instalado
 `Subway Entrance Hall.alp`. La activación 20/22 usa `ServiceBase.setServiceSuspended(...)`, cuya firma se
 verifica contra las bibliotecas instaladas antes de abrir el IDE.
 

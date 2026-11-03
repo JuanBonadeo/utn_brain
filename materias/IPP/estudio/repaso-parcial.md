@@ -368,7 +368,7 @@ Se reutiliza **sin cambios**: la arquitectura de páginas con `Open Link`; varia
 
 **[NUESTRO]**
 
-1. **Entregar un `.rp` que no abra.** `entregables/prototipoRegistrarPrestamo.rp` está guardado con **RP 11**, y **RP 9 no abre archivos de RP 11**. Si el docente abre con RP 9 no ve nada: es un cero de hecho. **Confirmá la versión antes de arrancar**; si tenés la VM con RP 9, usá la VM.
+1. **Entregar un `.rp` que no abra.** `entregables/cu-registrar-prestamo/prototipoRegistrarPrestamo.rp` está guardado con **RP 11**, y **RP 9 no abre archivos de RP 11**. Si el docente abre con RP 9 no ve nada: es un cero de hecho. **Confirmá la versión antes de arrancar**; si tenés la VM con RP 9, usá la VM.
 2. **`Sort as: Number` para Titulo.** El error específico de este parcial, porque en el hotel los cuatro eran Number y la mano va sola.
 3. **Olvidar `Remove Sort → All`** antes de cada `Add Sort`. Va en los cuatro casos.
 4. **Poner el botón Comprar FUERA del ítem del repeater.** Si no está adentro, `[[Item.Titulo]]` no resuelve, `[[Item.Existencia - 1]]` tampoco y `Rows: This` no tiene fila actual. **Se cae todo el paso 2 junto.** Es el error más caro.

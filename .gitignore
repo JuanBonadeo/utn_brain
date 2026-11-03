@@ -25,11 +25,13 @@ node_modules/
 # autosaves viejos renombrados por el protocolo del IDE (T1.1)
 *.autosave.bak
 
-# HTML intermedio de md-to-pdf (referencia fuentes de KaTeX por ruta local, no es portable)
-materias/*/estudio/*.html
+# HTML intermedio de md-to-pdf (referencia fuentes de KaTeX por ruta local, no es portable).
+# Ojo: también tapa los HTML escritos a mano (carillas, simulacros, preguntero). Esos se
+# versionan con `git add -f`; si no, se pierden (pasó con LEG/estudio/vof-practica.html).
+materias/*/estudio/**/*.html
 
 # Figuras rasterizadas para el .pptx — derivadas del anexo gráfico, se regeneran
-# con scripts/pptx-asi-etapa3/render-figs.py + Chrome headless
+# con scripts/asi/pptx-etapa3/render-figs.py + Chrome headless
 materias/*/figs/presentacion/
 
 # IPP: instaladores de Bizagi (389MB de .exe, se bajan de bizagi.com)

@@ -1,0 +1,251 @@
+<title>Preguntero ASI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: una columna de lectura (máx. 760px), barra de control fija arriba con puntaje y filtros, tarjetas de pregunta apiladas */
+:root{
+  --bg:#f3f6f5; --surface:#ffffff; --ink:#14211f; --muted:#5a6b67; --line:#d6dfdc;
+  --accent:#0f6e66; --accent-soft:#e2f0ee;
+  --ok:#2c7a3a; --ok-soft:#e6f3e8; --bad:#b23a2e; --bad-soft:#f8e7e4;
+  --font-body:"Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-mono:"IBM Plex Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0e1615; --surface:#15211f; --ink:#e4eeeb; --muted:#93a6a1; --line:#2a3b38;
+    --accent:#52c2b4; --accent-soft:#1b3330;
+    --ok:#74c784; --ok-soft:#1a3020; --bad:#f08273; --bad-soft:#3a1e1a;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0e1615; --surface:#15211f; --ink:#e4eeeb; --muted:#93a6a1; --line:#2a3b38;
+  --accent:#52c2b4; --accent-soft:#1b3330;
+  --ok:#74c784; --ok-soft:#1a3020; --bad:#f08273; --bad-soft:#3a1e1a;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.5;margin:0}
+.wrap{max-width:760px;margin:0 auto;padding-inline:16px;padding-block:24px 64px}
+h1{font-size:1.75rem;line-height:1.15;margin:0 0 4px;letter-spacing:-.01em;text-wrap:balance}
+.lede{color:var(--muted);margin:0 0 20px;max-width:62ch}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px;border-bottom:1px solid var(--line);margin-bottom:20px;display:flex;flex-direction:column;gap:10px}
+.score{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 18px;font-variant-numeric:tabular-nums}
+.score strong{font-size:1.35rem}
+.score .lbl{color:var(--muted);font-size:.85rem}
+.meter{height:6px;border-radius:3px;background:var(--line);overflow:hidden}
+.meter span{display:block;height:100%;background:var(--accent);transform-origin:left;transform:scaleX(0);transition:transform .25s}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip,.btn{font:inherit;font-size:.85rem;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:5px 12px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+.chip .n{opacity:.7;font-variant-numeric:tabular-nums}
+.btn{border-radius:8px}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--surface);font-weight:600}
+.actions{display:flex;flex-wrap:wrap;gap:8px}
+.chip:focus-visible,.btn:focus-visible,.opt:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.exam-note{background:var(--accent-soft);border-radius:8px;padding:10px 14px;font-size:.92rem}
+.exam-note b{font-variant-numeric:tabular-nums}
+.list{display:flex;flex-direction:column;gap:14px}
+.q{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px;min-width:0}
+.q header{display:flex;justify-content:space-between;gap:10px;font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.q header .pt{font-family:var(--font-mono);text-transform:none;letter-spacing:0}
+.q p.stem{margin:0 0 12px;font-weight:500}
+.q .data{font-family:var(--font-mono);font-size:.88rem;background:var(--bg);border-radius:6px;padding:6px 10px;margin:-4px 0 12px;overflow-x:auto;white-space:pre}
+.opts{display:flex;flex-direction:column;gap:6px}
+.opt{font:inherit;text-align:left;display:flex;gap:10px;align-items:flex-start;width:100%;padding:9px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--accent)}
+.opt .k{font-family:var(--font-mono);color:var(--muted);flex:none}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.fb{margin-top:10px;font-size:.92rem;padding:8px 12px;border:1px solid var(--ok);background:var(--ok-soft);border-radius:8px}
+.fb.no{border-color:var(--bad);background:var(--bad-soft)}
+.fb b{display:block}
+.empty{color:var(--muted);text-align:center;padding:30px 0}
+@media (prefers-reduced-motion: reduce){.meter span{transition:none}}
+</style>
+
+<div class="wrap">
+  <h1>Preguntero ASI · 3º parcial</h1>
+  <p class="lede">45 preguntas de opción única sobre valor ganado, TCO, indicadores económicos, adquisiciones, Canvas, Lean Startup y ciclos de vida. Algunas están aplicadas a Bancorp, como en el parcial. Elegí una opción y vas a ver la respuesta correcta y por qué.</p>
+
+  <div class="bar">
+    <div class="score">
+      <span><strong id="ok">0</strong> <span class="lbl">correctas</span></span>
+      <span><strong id="done">0</strong><span class="lbl"> / <span id="tot">45</span> respondidas</span></span>
+      <span><strong id="pct">–</strong> <span class="lbl">de acierto</span></span>
+    </div>
+    <div class="meter" aria-hidden="true"><span id="meter"></span></div>
+    <div class="chips" id="chips" role="group" aria-label="Filtrar por tema"></div>
+    <div class="actions">
+      <button class="btn primary" id="exam" type="button">Simulacro: 12 al azar</button>
+      <button class="btn" id="wrongOnly" type="button" aria-pressed="false">Solo las que erré</button>
+      <button class="btn" id="reset" type="button">Borrar respuestas</button>
+    </div>
+  </div>
+
+  <div class="exam-note" id="examNote" hidden></div>
+  <div class="list" id="list"></div>
+</div>
+
+<script>
+const Q = [
+// ── Valor ganado (12)
+{t:"Valor ganado",q:"Al día de corte, SV = −300 y CV = +150. El proyecto está:",o:["Adelantado e ineficiente","Atrasado y eficiente","Atrasado e ineficiente","Adelantado y eficiente"],a:1,e:"SV < 0 es atrasado: se hizo menos de lo planificado. CV > 0 es eficiente: lo hecho costó menos de lo presupuestado."},
+{t:"Valor ganado",q:"El PV (valor planificado) se obtiene:",o:["Del estado real de cada tarea por su presupuesto","De lo que realmente se gastó hasta el corte","De lo que el plan (Gantt) dice que debería estar hecho al corte, valuado a presupuesto","Restando el EV al BAC"],a:2,e:"El PV sale del plan. El EV sale del estado real. El AC lo da el enunciado. BAC − EV es el ETC."},
+{t:"Valor ganado",q:"El EV (valor ganado) de una tarea terminada se valúa:",o:["A lo que realmente costó","A su precio de presupuesto","Al precio de mercado actual","Al BAC dividido por la cantidad de tareas"],a:1,e:"El EV es el trabajo hecho a precio de presupuesto. Lo que costó en realidad es el AC, y por eso tiene sentido comparar EV contra AC."},
+{t:"Valor ganado",q:"Con estos datos, el SV es:",d:"BAC = 20.000   PV = 8.000   EV = 6.000   AC = 7.500",o:["−1.500","+2.000","−2.000","−500"],a:2,e:"SV = EV − PV = 6.000 − 8.000 = −2.000. Está atrasado."},
+{t:"Valor ganado",q:"Con los mismos datos, el CV es:",d:"BAC = 20.000   PV = 8.000   EV = 6.000   AC = 7.500",o:["−1.500","+1.500","−2.000","+500"],a:0,e:"CV = EV − AC = 6.000 − 7.500 = −1.500. Es ineficiente: lo hecho costó 1.500 más de lo presupuestado."},
+{t:"Valor ganado",q:"Con los mismos datos, el CPI y su lectura son:",d:"BAC = 20.000   PV = 8.000   EV = 6.000   AC = 7.500",o:["1,25: eficiente","0,75: atrasado","0,80: ineficiente","0,80: atrasado"],a:2,e:"CPI = EV / AC = 6.000 / 7.500 = 0,80. Por cada $1 gastado se hicieron $0,80 de trabajo. El CPI mide costo, no tiempo: el 0,75 es el SPI."},
+{t:"Valor ganado",q:"Con los mismos datos, ¿qué porcentaje del presupuesto ya se gastó?",d:"BAC = 20.000   PV = 8.000   EV = 6.000   AC = 7.500",o:["30%","40%","75%","37,5%"],a:3,e:"% gastado = AC / BAC = 7.500 / 20.000 = 37,5%. El 30% es el % terminado (EV / BAC). Gastó más de lo que avanzó, otra señal de ineficiencia."},
+{t:"Valor ganado",q:"Con los mismos datos, si se sigue gastando igual que hasta ahora, el costo final estimado (EAC) es:",d:"BAC = 20.000   PV = 8.000   EV = 6.000   AC = 7.500",o:["21.500","25.000","20.000","27.500"],a:1,e:"EAC = BAC / CPI = 20.000 / 0,80 = 25.000, así que VAC = −5.000. El 21.500 es AC + (BAC − EV): supone que el desvío fue puntual."},
+{t:"Valor ganado",q:"Con los mismos datos, ¿cuánto trabajo falta hacer, a precio de presupuesto (ETC)?",d:"BAC = 20.000   PV = 8.000   EV = 6.000   AC = 7.500",o:["12.000","12.500","14.000","13.500"],a:2,e:"ETC = BAC − EV = 20.000 − 6.000 = 14.000. Se resta lo hecho (EV), no lo gastado (AC)."},
+{t:"Valor ganado",q:"Con criterio 50/50, una tarea en curso con un presupuesto de 1.200 suma al EV:",o:["0","600","1.200","240"],a:1,e:"Con 50/50, una tarea en curso vale la mitad: 600. Terminada vale 1.200 y no iniciada, 0. El 240 sería un 20/80 aplicado a una tarea poco avanzada."},
+{t:"Valor ganado",q:"Un SV negativo significa que:",o:["Se gastó menos de lo presupuestado","Se hizo menos trabajo del que se había planificado","El proyecto va a costar más de lo previsto","El proyecto no es rentable"],a:1,e:"El SV mide tiempo, aunque esté expresado en plata. Si es negativo, se hizo menos de lo planificado. Lo de gastar de más lo dice el CV."},
+{t:"Valor ganado",q:"Bancorp, proyecto Omnicanalidad. Al corte, SV = −400. Todo el atraso está en una tarea no crítica con HT = 5 que lleva 2 días de atraso. ¿Qué se puede afirmar?",o:["El proyecto va a terminar 2 días tarde","El proyecto está atrasado en valor ganado, pero por ahora no se compromete la fecha de fin","Como el SV es negativo, el proyecto es ineficiente","Hay que aplicar crashing de inmediato"],a:1,e:"El SV es un neto en plata y no distingue tareas críticas. Un atraso de 2 días en una tarea con HT = 5 no mueve la fecha de fin, aunque le queden solo 3 días de margen. La ineficiencia la mide el CV, no el SV."},
+// ── TCO (6)
+{t:"TCO",q:"El TCO (costo total de propiedad) de una solución es:",o:["Su precio de compra","El costo de poseerla y operarla durante toda su vida útil","La inversión inicial menos los beneficios","El costo anual de las licencias"],a:1,e:"TCO = CIS + CA + CO + CSU a lo largo de la vida útil. El precio de compra es solo parte del CIS."},
+{t:"TCO",q:"La fórmula del TCO que da la cátedra es:",o:["TCO = CIS + CA + CO + CSU","TCO = CIS × años","TCO = Hardware + Software","TCO = CA + CO − CSU"],a:0,e:"Costo Inicial de la Solución + Costo de Administración + Costo de Operación + Costo de Soporte a Usuarios."},
+{t:"TCO",q:"¿Cuál de estos costos NO forma parte del CIS (costo inicial de la solución)?",o:["Hardware requerido","Servicios iniciales de instalación","Soporte a usuarios durante los 3 años de uso","Servicios iniciales de configuración"],a:2,e:"CIS = hardware + software + instalación + configuración iniciales. El soporte a usuarios en el tiempo es el CSU."},
+{t:"TCO",q:"«Nº de incidentes por año × años en funcionamiento × costo por hora de servicio × tiempo para reparar la falla» corresponde a:",o:["CA","CSU","CIS","CO"],a:3,e:"Es el Costo de Operación: reparar la falla con costo por hora de servicio. El CSU también va por incidentes, pero es atender al usuario, con costo por hora de soporte."},
+{t:"TCO",q:"Un ingeniero cuesta 24.000 por año. Hay 2 en planta, el sistema funciona 3 años y le dedican el 25% de su tiempo. El CA es:",o:["36.000","144.000","18.000","48.000"],a:0,e:"CA = 24.000 × 2 × 3 × 0,25 = 36.000. El CA es la única componente que va por ingenieros y % de dedicación."},
+{t:"TCO",q:"Bancorp compara dos plataformas para su Billetera Virtual. Una es 30% más barata en licencias, pero tiene el doble de incidentes por año. ¿Qué conviene hacer?",o:["Elegir la más barata, porque el precio es lo que importa","Comparar el TCO de las dos durante su vida útil","Elegir la cara, porque siempre es mejor","Comparar solo el CIS"],a:1,e:"Más incidentes suben el CO y el CSU en cada año de uso. Para eso existe el TCO: la más barata en precio puede salir más cara en todo el ciclo de vida."},
+// ── Indicadores (9)
+{t:"Indicadores",q:"Un ROI del 25% significa que:",o:["La inversión se recupera en 0,25 años","Por cada $1 invertido se obtienen $0,25 de beneficio neto","El VAN es el 25% de la inversión","El proyecto rinde un 25% por encima de la inflación"],a:1,e:"ROI = Beneficio neto / Inversión. No considera el valor del dinero en el tiempo."},
+{t:"Indicadores",q:"¿Qué representa la TIR?",o:["La tasa que usa la empresa para descontar los flujos","La inflación esperada","La tasa de descuento que hace que el VAN sea cero","El porcentaje de la inversión que vuelve por año"],a:2,e:"La TIR es la tasa a la que el VAN da 0. Se compara contra la tasa de la empresa: conviene si la TIR es mayor. El % que vuelve por año es la TPR."},
+{t:"Indicadores",q:"Bancorp evalúa el Copiloto de IA con una tasa del 15% y obtiene un VAN de +40.000. Entonces la TIR:",o:["Es menor al 15%","Es igual al 15%","No se puede saber nada","Es mayor al 15%"],a:3,e:"Si a la tasa de la empresa el VAN es positivo, la tasa que lo lleva a cero tiene que ser más alta. VAN > 0 ⇔ TIR > tasa."},
+{t:"Indicadores",q:"¿Qué indicadores consideran el valor del dinero en el tiempo?",o:["TR y ROI","VAN y TIR","TPR y TR","ROI y TPR"],a:1,e:"VAN y TIR descuentan los flujos. TR, TPR y ROI no lo hacen. La TPR sí usa la vida útil, pero sin descontar."},
+{t:"Indicadores",q:"¿Cuál es la principal desventaja del TR (tiempo de recuperación)?",o:["Es muy difícil de calcular","No considera los beneficios que llegan después de recuperar la inversión","Necesita una tasa de descuento","Da el resultado en porcentaje"],a:1,e:"El TR solo dice cuándo se recupera la inversión. No ve lo que pasa después ni el valor del dinero en el tiempo. Su ventaja es que es simple."},
+{t:"Indicadores",q:"La tasa de descuento que se usa para calcular el VAN es:",o:["La inflación anual","La TIR del proyecto","El costo de capital más un porcentaje de riesgo","Siempre el 10%"],a:2,e:"Costo de capital + % de riesgo. La cátedra aclara que no es la inflación."},
+{t:"Indicadores",q:"En la evaluación económica de un proyecto, los beneficios son:",o:["Solo los ingresos nuevos","Los ingresos nuevos más los costos evitados, monetizados","Los ingresos menos la inversión","Las mejoras cualitativas, como la satisfacción del cliente"],a:1,e:"Beneficios = ingresos + costos evitados, siempre pasados a plata. Por ejemplo, horas de la Mesa de Ayuda que se dejan de pagar."},
+{t:"Indicadores",q:"Recibir $11.000 dentro de un año, con una tasa del 10%, equivale hoy a:",o:["$11.000","$12.100","$9.900","$10.000"],a:3,e:"VA = 11.000 / (1 + 0,10) = 10.000. Es descontar. Capitalizar va al revés: 10.000 × 1,10 = 11.000."},
+{t:"Indicadores",q:"Una startup tiene costos fijos de USD 9.000 por mes, cobra USD 150 por sucursal y tiene un costo variable de USD 30 por sucursal. Su punto de equilibrio es:",o:["60 sucursales","75 sucursales","50 sucursales","300 sucursales"],a:1,e:"Q = CF / (P − CVu) = 9.000 / (150 − 30) = 75. El 60 sale de dividir solo por el precio, que es el error típico."},
+// ── Adquisiciones (3)
+{t:"Adquisiciones",q:"El leasing es:",o:["Una compra en cuotas","Un alquiler con opción de compra al final por un importe preestablecido","Un alquiler sin posibilidad de comprar","Una licitación con sobre cerrado"],a:1,e:"En palabras de la cátedra, «no es un alquiler ni una compra»: se usa el bien y al final se puede comprar por un valor fijado de antemano."},
+{t:"Adquisiciones",q:"Bancorp quiere saber qué proveedores de token unificado existen y qué ofrecen, antes de definir el requerimiento. ¿Qué envía?",o:["Una RFP","Una RFI","Una orden de compra","Una RFQ"],a:1,e:"El RFI pide información para conocer el mercado y va primero. La RFP pide una propuesta con precio y plazos para un requerimiento ya definido. La RFQ pide solo una cotización."},
+{t:"Adquisiciones",q:"Bancorp contrata una consultora con un alcance poco definido, bajo un contrato de costo reembolsable (costo + ganancia). ¿Quién asume el riesgo?",o:["La consultora","Bancorp, el cliente","Se comparte siempre en partes iguales","El patrocinador del proyecto"],a:1,e:"En un contrato de costo reembolsable paga el cliente lo que cueste. En uno de precio fijo, el riesgo lo asume el proveedor. Tiempo y materiales y los contratos con incentivos lo comparten."},
+// ── Canvas (8)
+{t:"Canvas",q:"En el Canvas, los socios clave son:",o:["Los socios de la SRL","Los clientes que más pagan","Aquellos de los que depende el modelo de negocio","Los inversores que aportan capital"],a:2,e:"Son los socios de los que depende el modelo, aunque no sepan que lo son: el proveedor de IA, la nube o la API de pagos. Los dueños y los inversores no van acá."},
+{t:"Canvas",q:"¿En qué bloque del Canvas va el capital que ponen los fundadores?",o:["Socios clave","Fuentes de ingreso","Recursos clave (financieros)","Estructura de costos"],a:2,e:"Es un recurso financiero. No es un socio clave ni un ingreso."},
+{t:"Canvas",q:"Fila Cero es una startup de turnos y fila virtual para sucursales. ¿Cuál es la mejor propuesta de valor para el segmento «bancos medianos»?",o:["Una app de turnos con dashboard en tiempo real","Software en la nube con inteligencia artificial","Bajar a la mitad la espera en los días pico, porque hoy asignan cajeros a ciegas y la fila genera reclamos","La mejor tecnología del mercado al mejor precio"],a:2,e:"La propuesta es el beneficio para ese segmento, con su dolor específico. La app con dashboard y el software con IA describen el producto. «La mejor tecnología al mejor precio» es genérica: le sirve a cualquiera."},
+{t:"Canvas",q:"¿Cuál de estos segmentos está bien definido?",o:["Bancos","Jóvenes que usan el celular","Bancos privados de capital nacional con 30 a 80 sucursales y picos de fila los días de cobro de haberes","Todas las personas con cuenta bancaria"],a:2,e:"Un segmento se tiene que poder «ver»: tamaño, ubicación, comportamiento y necesidad. Los demás son tan genéricos que «es tirar el tiro al aire»."},
+{t:"Canvas",q:"«Piloto gratis de 60 días y un Customer Success asignado después de la venta» corresponde al bloque:",o:["Canales","Relación con clientes (Get / Keep)","Fuentes de ingreso","Actividades clave"],a:1,e:"La relación es marketing: cómo conseguís (Get), mantenés (Keep) y hacés crecer (Grow) a los clientes. Los canales son cómo se entera el cliente y cómo le llega el producto."},
+{t:"Canvas",q:"Para una startup con IA generativa, el costo de los tokens por cada consulta es:",o:["Un costo fijo","Un costo variable","Un recurso clave","Un socio clave"],a:1,e:"Crece con el uso, así que es variable. El proveedor del modelo sí es un socio clave: si cambia sus precios, cambian los costos."},
+{t:"Canvas",q:"En Fila Cero, el cliente del banco saca turno desde el celular pero no paga nada. ¿Cómo se lo trata en el Canvas?",o:["No se incluye, porque no paga","Como un socio clave","Como un actor crítico: usa el servicio y sin él el modelo no funciona","Como un recurso humano"],a:2,e:"Un actor crítico no paga, pero si no adopta el producto, el banco no ve el beneficio. Hay que nombrarlo y darle su propia propuesta de valor."},
+{t:"Canvas",q:"Si la propuesta de valor promete soporte 24×7, la regla de consistencia del Canvas exige:",o:["Cobrarlo como un ingreso aparte","Que haya una actividad (soporte), un recurso (técnicos) y un costo (sueldos) que lo sostengan","Nombrar un socio clave que lo dé gratis","Nada: la propuesta es independiente del resto"],a:1,e:"Lo que se promete a la derecha del Canvas tiene que estar sostenido a la izquierda y en los costos."},
+// ── Lean Startup (3)
+{t:"Lean Startup",q:"Un MVP es:",o:["Un prototipo no funcional para mostrar la idea","La versión mínima funcional que se lanza al mercado para validar hipótesis con el menor esfuerzo","La versión final con todas las funcionalidades","Un plan de negocios para inversores"],a:1,e:"El MVP es funcional; el prototipo no. Ejemplos: una landing page o un «Mago de Oz», donde por detrás se hace todo a mano."},
+{t:"Lean Startup",q:"Pivotar significa:",o:["Abandonar la idea y empezar otra","Hacer un ajuste menor en el producto","Hacer un cambio sustancial (de segmento, de propuesta o de modelo de ingresos) sin abandonar la visión","Bajar el precio"],a:2,e:"Iterar es un ajuste menor. Pivotar es un cambio sustancial sin dejar la visión. Ejemplo del profe: el robot cortacésped que pasa a venderse a countries y a alquilarse a canchas."},
+{t:"Lean Startup",q:"La diferencia entre una startup y una empresa es que la startup:",o:["Tiene menos de 10 empleados","Busca un modelo de negocio repetible y escalable; la empresa ya lo ejecuta","No tiene clientes","Siempre es de tecnología"],a:1,e:"La startup está en búsqueda del modelo; la empresa lo ejecuta. Por eso el Canvas de una startup está lleno de hipótesis que hay que validar."},
+// ── Ciclos de vida (4)
+{t:"Ciclos de vida",q:"El ciclo de vida que incorpora explícitamente el análisis de riesgos en cada vuelta es:",o:["Cascada","Incremental","Espiral","Iterativo"],a:2,e:"Espiral (Boehm): planificación → análisis de riesgos → implementación → evaluación del cliente, en cada vuelta."},
+{t:"Ciclos de vida",q:"Bancorp quiere salir rápido con transferencias en la Billetera Virtual y sumar después pagos con QR e inversiones, cada módulo con su propio ciclo. Corresponde:",o:["Cascada","Incremental","Espiral","Por prototipos"],a:1,e:"El incremental agrega un módulo nuevo en cada vuelta y permite entregas parciales rápidas. El iterativo, en cambio, mejora el mismo producto en cada vuelta."},
+{t:"Ciclos de vida",q:"Un proyecto con requisitos fijados por una normativa del BCRA, completos y estables desde el inicio, se adapta mejor a:",o:["Cascada","Espiral","Ágil","Por prototipos"],a:0,e:"La cascada sirve cuando los requisitos están completos y estables desde el inicio. Su contra: un error detectado tarde sale caro y el resultado se ve recién al final."},
+{t:"Ciclos de vida",q:"El ciclo por prototipos conviene cuando:",o:["Los requisitos son estables","Se trabaja con tecnología nueva o poco probada","El proyecto es muy chico","El cliente no quiere participar"],a:1,e:"Es un iterativo donde las versiones son prototipos antes del producto final. Se usa para innovación o tecnología poco probada."}
+];
+
+const LETTERS = ["a","b","c","d"];
+function rng(seed){ return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const ORDER = Q.map((x, i) => { const r = rng(i * 7919 + 31), p = x.o.map((_, j) => j); for (let k = p.length - 1; k > 0; k--) { const j = Math.floor(r() * (k + 1)); [p[k], p[j]] = [p[j], p[k]]; } return p; });
+const KEY = "preguntero-asi-p3";
+let answers = {};
+try { answers = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { answers = {}; }
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(answers)); } catch (e) {} }
+
+let topic = "Todas", wrongOnly = false, examSet = null;
+const topics = ["Todas", ...new Set(Q.map(x => x.t))];
+const $ = id => document.getElementById(id);
+
+function renderChips(){
+  $("chips").innerHTML = topics.map(t => {
+    const n = t === "Todas" ? Q.length : Q.filter(x => x.t === t).length;
+    return `<button class="chip" type="button" data-t="${t}" aria-pressed="${t === topic && !examSet}">${t} <span class="n">${n}</span></button>`;
+  }).join("");
+}
+
+function visible(){
+  return Q.map((x, i) => ({...x, i})).filter(x => {
+    if (examSet) return examSet.includes(x.i);
+    if (topic !== "Todas" && x.t !== topic) return false;
+    if (wrongOnly) return answers[x.i] !== undefined && answers[x.i] !== x.a;
+    return true;
+  });
+}
+
+function renderList(){
+  const items = visible();
+  if (!items.length) {
+    $("list").innerHTML = `<p class="empty">${wrongOnly ? "No tenés respuestas erradas en este tema. Volvé a «Todas» o respondé más preguntas." : "No hay preguntas para mostrar."}</p>`;
+    return;
+  }
+  $("list").innerHTML = items.map((x, n) => {
+    const chosen = answers[x.i];
+    const done = chosen !== undefined;
+    const order = ORDER[x.i];
+    const opts = order.map((j, pos) => {
+      let cls = "opt";
+      if (done && j === x.a) cls += " right";
+      else if (done && j === chosen) cls += " wrong";
+      return `<button class="${cls}" type="button" data-q="${x.i}" data-o="${j}" ${done ? "disabled" : ""}><span class="k">${LETTERS[pos]})</span><span>${x.o[j]}</span></button>`;
+    }).join("");
+    const fb = done ? `<div class="fb ${chosen === x.a ? "" : "no"}"><b>${chosen === x.a ? "Correcta." : "Incorrecta: era la " + LETTERS[order.indexOf(x.a)] + ")."}</b>${x.e}</div>` : "";
+    return `<article class="q" id="q${x.i}"><header><span>${examSet ? "Pregunta " + (n + 1) + " · " : ""}${x.t}</span><span class="pt">0,5 pt</span></header><p class="stem">${x.q}</p>${x.d ? `<div class="data">${x.d}</div>` : ""}<div class="opts">${opts}</div>${fb}</article>`;
+  }).join("");
+}
+
+function renderScore(){
+  const pool = examSet ? examSet : Q.map((_, i) => i);
+  const done = pool.filter(i => answers[i] !== undefined);
+  const ok = done.filter(i => answers[i] === Q[i].a);
+  $("ok").textContent = ok.length;
+  $("done").textContent = done.length;
+  $("tot").textContent = pool.length;
+  $("pct").textContent = done.length ? Math.round(ok.length / done.length * 100) + "%" : "–";
+  $("meter").style.transform = "scaleX(" + (done.length / pool.length) + ")";
+  if (examSet) {
+    const nota = (ok.length * 0.5).toFixed(1).replace(".", ",");
+    $("examNote").hidden = false;
+    $("examNote").innerHTML = done.length < pool.length
+      ? `Simulacro del multiple choice: 12 preguntas de 0,5 pt. Llevás <b>${done.length}/12</b> respondidas. <button class="btn" type="button" id="leave">Salir del simulacro</button>`
+      : `Simulacro terminado: <b>${ok.length}/12 correctas = ${nota} de 6 pt</b> del multiple choice. <button class="btn" type="button" id="again">Otro simulacro</button> <button class="btn" type="button" id="leave">Salir</button>`;
+  } else {
+    $("examNote").hidden = true;
+  }
+  $("wrongOnly").setAttribute("aria-pressed", String(wrongOnly));
+}
+
+function render(){ renderChips(); renderList(); renderScore(); }
+
+function startExam(){
+  const idx = Q.map((_, i) => i);
+  for (let i = idx.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [idx[i], idx[j]] = [idx[j], idx[i]]; }
+  examSet = idx.slice(0, 12);
+  examSet.forEach(i => delete answers[i]);
+  save(); wrongOnly = false; render();
+  window.scrollTo({top: 0});
+}
+
+document.addEventListener("click", ev => {
+  const opt = ev.target.closest(".opt");
+  if (opt && !opt.disabled) {
+    answers[+opt.dataset.q] = +opt.dataset.o; save();
+    renderList(); renderScore();
+    const card = document.getElementById("q" + opt.dataset.q);
+    if (card) { const b = card.querySelector(".opt"); if (b) b.focus({preventScroll: true}); }
+    return;
+  }
+  const chip = ev.target.closest(".chip");
+  if (chip) { topic = chip.dataset.t; examSet = null; render(); return; }
+  if (ev.target.id === "exam" || ev.target.id === "again") { startExam(); return; }
+  if (ev.target.id === "leave") { examSet = null; render(); return; }
+  if (ev.target.id === "wrongOnly") { wrongOnly = !wrongOnly; examSet = null; render(); return; }
+  if (ev.target.id === "reset") {
+    const b = ev.target;
+    if (b.dataset.armed) { answers = {}; save(); examSet = null; wrongOnly = false; delete b.dataset.armed; b.textContent = "Borrar respuestas"; render(); }
+    else { b.dataset.armed = "1"; b.textContent = "¿Seguro? Tocá de nuevo"; setTimeout(() => { if (b.dataset.armed) { delete b.dataset.armed; b.textContent = "Borrar respuestas"; } }, 3000); }
+  }
+});
+
+render();
+</script>

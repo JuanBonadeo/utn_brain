@@ -163,7 +163,7 @@ cualquier momento.
 #### Conceptos clave
 
 La cátedra trabaja con **Axure RP 9** (v9.0.0.3727, feb 2021), con licencia UTN y
-una VM preparada. Ojo: `entregables/prototipoRegistrarPrestamo.rp` está guardado
+una VM preparada. Ojo: `entregables/cu-registrar-prestamo/prototipoRegistrarPrestamo.rp` está guardado
 con **Axure RP 11** — RP 9 no abre archivos de RP 11.
 
 Un prototipo sin interacciones es un dibujo. El TP se construye sobre cuatro
@@ -260,7 +260,7 @@ panel Style, y tildar **Fit to Content in HTML**.
 Columnas del DATA: `Ciudad, Denominacion, Direccion, Foto, Estrellas, Precio`.
 La primera se renombra desde `Column0`; el resto con `Add Column`.
 
-**Dataset de la cátedra** (`entregables/hoteles-repeater.csv`):
+**Dataset de la cátedra** (`entregables/cu-reservar-habitacion/hoteles-repeater.csv`):
 
 | Ciudad | Denominacion | Direccion | Estrellas | Precio |
 |---|---|---|---|---|
@@ -418,8 +418,8 @@ cuando el comprobante sale vacío.
 #### Fuentes
 - `fuentes/Axure_RP9/Caso_Reservar_Habitacion/TP_Repeater_CU_Reservar_habitacion_v1_02.pdf` ✅
 - `fuentes/Axure_RP9/Caso_Reservar_Habitacion/Axure_RP9_CU_Reservar_Habitacion_v1_02.pdf` ✅ (leído con visión)
-- `entregables/hoteles-repeater.csv` — dataset real de la cátedra
-- `entregables/prototipoRegistrarPrestamo.rp` (Axure RP 11)
+- `entregables/cu-reservar-habitacion/hoteles-repeater.csv` — dataset real de la cátedra
+- `entregables/cu-registrar-prestamo/prototipoRegistrarPrestamo.rp` (Axure RP 11)
 
 ## Log
 - Archivo creado.
@@ -450,3 +450,4 @@ cuando el comprobante sale vacío.
   **Corregido el caso 3B de la unidad 1**: la solución oficial usa paralelo +
   exclusivo, no inclusivo.
 - 2026-11-03: limpieza de nombres en `fuentes/`: `tarea1 (1).pdf` → `tarea1.pdf` y `tarea5a (1).pdf` → `tarea5a.pdf`.
+- 2026-11-03: reorganización de `entregables/` por caso de uso (`cu-pedir-un-libro/` con el `.rp` y el BPMN que estaban en la raíz de la materia, `cu-registrar-prestamo/`, `cu-reservar-habitacion/`).

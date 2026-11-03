@@ -316,6 +316,6 @@ técnicas de simulación a un caso real*. Consigna de cátedra.
 - Cargador de corridas: `cargar_corridas.py`.
 - Horarios oficiales del Roca y arribos extraídos: `datos/roca/`, `datos/extraer_arribos_roca.py` y
   `datos/arribos_roca_constitucion_habiles.csv`.
-- Script de perfilado: `scripts/sbase-perfil.py`.
+- Script de perfilado: `scripts/sim/sbase-perfil.py`.
 - Checklist operativo y esquema de salida: `06-checklist-cierre.md`.
 - Presentación editable del video: `TPI_Subte_Presentacion.pptx`.

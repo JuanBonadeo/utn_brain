@@ -5,7 +5,7 @@ Cuenta solo el texto que se dice: saltea titulos, citas, tablas y listas. El
 ritmo por defecto son 145 palabras por minuto, que es una lectura academica
 clara en castellano; se puede cambiar con el segundo argumento.
 
-    .venv/bin/python scripts/guion-timing.py materias/ASI/entregables/etapa3-guion.md
+    .venv/bin/python scripts/guion-timing.py materias/ASI/entregables/etapa3/etapa3-guion.md
 """
 import re
 import sys

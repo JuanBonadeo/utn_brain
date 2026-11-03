@@ -2833,7 +2833,7 @@ actual puede validarse el caudal agregado, pero no la espera ni la cola real.
 
 **Archivos de trabajo:**
 
-- Formulario v2: [`entregables/TPI/formulario-eleccion-tema.md`](entregables/TPI/formulario-eleccion-tema.md)
+- Formulario v2: [`entregables/TPI/subte/formulario-eleccion-tema.md`](entregables/TPI/subte/formulario-eleccion-tema.md)
 - Definición del caso: [`entregables/TPI/subte/01-definicion-del-caso.md`](entregables/TPI/subte/01-definicion-del-caso.md)
 - Modelo inicial: [`entregables/TPI/subte/SubteConstitucion.alp`](entregables/TPI/subte/SubteConstitucion.alp)
 - Guía del modelo: [`entregables/TPI/subte/02-modelo-anylogic.md`](entregables/TPI/subte/02-modelo-anylogic.md)
@@ -2866,7 +2866,7 @@ al TPI.
 | Tiempo de servicio del molinete | no existe en ningún dataset | ⏳ medición en campo |
 | Estructura de las tandas (arribos del Roca) | el agregado de 15 min la borra | ⏳ medición en campo, o GTFS de Trenes Argentinos |
 
-Perfilado reproducible con [`scripts/sbase-perfil.py`](../../scripts/sbase-perfil.py). Los CSV no se commitean.
+Perfilado reproducible con [`scripts/sim/sbase-perfil.py`](../../scripts/sim/sbase-perfil.py). Los CSV no se commitean.
 
 **El hallazgo que sostiene el caso**: en el pico cada molinete recibe un pasajero cada 8,5 s contra un tiempo
 de validación de 2-3 s, o sea ρ ≈ 0,3. Un modelo analítico M/M/c concluiría que **no hay cola**, y sin embargo
@@ -2959,7 +2959,7 @@ Conclusiones:
   E2 cuenta el desvío pero todavía no simula la cola de Plaza.
 - ~~**Formulario**: editar el último envío con el tema del subte.~~ Hecho el 2026-09-22: `formulario-eleccion-tema.md`
   reescrito v2 y `TPI_Simulacion_Propuesta_de_Tema.docx` regenerado con ese contenido
-  (`scripts/build-tpi-formulario-docx.py`). Falta reenviarlo en el envío real (Classroom/mail al docente).
+  (`scripts/sim/build-tpi-formulario-docx.py`). Falta reenviarlo en el envío real (Classroom/mail al docente).
 - Conseguir los horarios oficiales de arribo del Roca a Constitución y solicitar a SBASE/Emova y Trenes
   Argentinos datos de mayor granularidad sobre servicio y arribos.
 - **Solicitudes de datos**: correos enviados el 2026-09-23 a SBASE, Emova y Trenes Argentinos. Al 05/10 solo
@@ -2977,7 +2977,7 @@ Conclusiones:
 ### Fuentes
 
 - `fuentes/TPI Simulación - Enunciado.md`
-- Perfilado de datos propio (2026-07-29), ver anexo de `entregables/TPI/formulario-eleccion-tema.md`
+- Perfilado de datos propio (2026-07-29), ver anexo de `entregables/TPI/subte/formulario-eleccion-tema.md`
 
 ---
 
@@ -3010,6 +3010,7 @@ Conclusiones:
 
 ## Log
 
+- **2026-11-03**: reorganización. `fuentes/Tutoriales/` pasó a `entregables/tutoriales-anylogic/` (era la entrega propia, no material de cátedra); el formulario y la propuesta de tema del TPI, a `entregables/TPI/subte/`; los scripts de SIM, a `scripts/sim/`. Rutas actualizadas.
 - **2026-11-03**: limpieza de `fuentes/`: se borraron duplicados exactos (`resumenes/viejos/Resumen Simulación 4.pdf` = `Resumen 4.pdf`; `Resumen Simulación (para rendir).pdf` = `Resumen 2.pdf`, con sus `.md` espejo en `txt/`), `Simulación clase 2 2025.pdf` (igual a la de 2026 salvo el año), el PDF suelto de *The Art of Process-Centric Modeling* (está dentro del `.zip`), el `.md` de `2024-sfm-calibration-yolov5` (era el XML sin convertir) y 5 conversiones vacías en `txt/` (Weitz, Naylor cap. 4 y Flamini parte 1 siguen en sus versiones por páginas; Gordon y Plantilla Inventario quedan sin conversión).
 - **2026-11-02**: material del Classroom en `fuentes/classroom-2026/`: diapositivas de teoría, Ross (en castellano y en inglés), *AnyLogic in 3 Days*, *Process-Centric Modeling* y Naylor. Se sumaron:
   - en el Mapa, el alcance oficial del 31/10;
@@ -3018,7 +3019,7 @@ Conclusiones:
   - en la Unidad 8, M/G/c y los otros modelos de 13.6;
   - la sección nueva de AnyLogic.
 
-  `estudio/resumen-parcial1.md` se reescribió completo, con 15 figuras generadas por `scripts/sim-figs-parcial1.py`.
+  `estudio/resumen-parcial1.md` se reescribió completo, con 15 figuras generadas por `scripts/sim/sim-figs-parcial1.py`.
 - **2026-11-02**: ingerido `fuentes/resumenes/Resumen Simulación 2025 (con preguntas de parcial).docx`, el resumen de alumnos
   2025 con todo lo que entró. Unidad 7: RANDU, Mersenne Twister y los dos tipos de pruebas. Banco: 7 preguntas de
   parcial que no estaban en la foto, y la clave del resumen coincide con la corrección del banco. Resumen del parcial:
@@ -3436,8 +3437,8 @@ Conclusiones:
   instalados) en vez de estimado, y confirmado el plazo del zincado tercerizado con dos fuentes cruzables
   (`Seguimiento TR ulis` y `ENVASADO 2022`/LATAS).
 - **2026-09-22**: TPI, grupo 1 (Bonadeo + Estevez). Regenerado el formulario de propuesta de tema:
-  `entregables/TPI/formulario-eleccion-tema.md` v2 (tema del subte) y su `.docx` correspondiente
-  (`TPI_Simulacion_Propuesta_de_Tema.docx`), con script nuevo `scripts/build-tpi-formulario-docx.py`
+  `entregables/TPI/subte/formulario-eleccion-tema.md` v2 (tema del subte) y su `.docx` correspondiente
+  (`TPI_Simulacion_Propuesta_de_Tema.docx`), con script nuevo `scripts/sim/build-tpi-formulario-docx.py`
   (mismo estilo que la ficha de reunión de `subte/`). Falta reenviar el formulario en el canal real
   (Classroom/mail).
 - **2026-09-22** (2): TPI, grupo Bonadeo + Estevez. Corregida la estrategia de datos para el avance del 23/09:
@@ -3453,7 +3454,7 @@ Conclusiones:
 - **2026-09-13**: TPI, grupo 2 (Casermeiro). Creada `entregables/TPI/caser/` con contexto de la empresa, cuatro opciones de estudio mapeadas a bloques y ejemplos oficiales de AnyLogic (verificados en AnyLogic Cloud: Job Shop, Supply Chain, Flexible Manufacturing Supply Chain, Maintenance), y pedido de datos para el ABM. Agregado puntero en la sección TPI.
 - **2026-08-25**: ingesta masiva de todo el material de `archivo/`. Se copiaron a `fuentes/` los tres apuntes oficiales de cátedra (Weitz, Naylor cap. 4, Números pseudoaleatorios), la teoría de Flamini, los apuntes extra, los 13 resúmenes viejos, los 6 ejercicios resueltos de práctica, los modelos de AnyLogic y Mathematica, los 5 TPs y **todos los exámenes** (7 parciales, 6 finales, 1 globalizador). Todo convertido a markdown en `fuentes/txt/`, incluyendo la transcripción por visión de los PDFs y fotos escaneados (Weitz 79 pág., Naylor 29 pág., Flamini 24 pág., 7 exámenes en imagen). Wiki **reescrita completa**: de 3 secciones a 10 unidades más un mapa del parcial. Unidades nuevas: 4 (inventarios), 5 (10 pasos, las dos listas), 6 (probabilidad), 7 (generación de números y variables aleatorias), 8 (colas analíticas), 9 (análisis de salidas), 10 (comparación de sistemas). Hallazgos: el resumen del parcial **no cubre** generación de variables aleatorias, análisis de salidas ni comparación de sistemas; las preguntas 8/9/10 se repiten casi textuales en 2022-2023-2024; y el parcial **2025 cambió a multiple choice** con preguntas de AnyLogic y LaTeX.
 
-- **2026-07-31**: armado el entregable en Word (`entregables/TPI/TPI_Simulacion_Propuesta_de_Tema.docx`) reutilizando carátula, estilos, header/footer y logo del informe de RD. Grupo actualizado a Bonadeo + Estevez (sale Casermeiro) y la propuesta reducida a 2 temas (Ecobici y emergencias); molinetes queda como reserva documentada.
-- **2026-07-29**: redactado el formulario de elección de tema (`entregables/TPI/formulario-eleccion-tema.md`) con los 3 candidatos: Ecobici (prioritario), despacho de emergencias SF y molinetes de subte. Perfilados y verificados los datasets: Ecobici 2024 (3.559.284 viajes, 395 estaciones) + capacidad por GBFS, y DataSF `nuek-vuh3` (7,39 M registros, muestra semanal). Detectado el desbalance intradiario reversible de Ecobici, que es el fenómeno que justifica el escenario de rebalanceo. Documentadas las limitaciones a declarar (solo viajes exitosos, 9,11% de viajes <1 min, 13,47% origen=destino).
+- **2026-07-31**: armado el entregable en Word (`entregables/TPI/subte/TPI_Simulacion_Propuesta_de_Tema.docx`) reutilizando carátula, estilos, header/footer y logo del informe de RD. Grupo actualizado a Bonadeo + Estevez (sale Casermeiro) y la propuesta reducida a 2 temas (Ecobici y emergencias); molinetes queda como reserva documentada.
+- **2026-07-29**: redactado el formulario de elección de tema (`entregables/TPI/subte/formulario-eleccion-tema.md`) con los 3 candidatos: Ecobici (prioritario), despacho de emergencias SF y molinetes de subte. Perfilados y verificados los datasets: Ecobici 2024 (3.559.284 viajes, 395 estaciones) + capacidad por GBFS, y DataSF `nuek-vuh3` (7,39 M registros, muestra semanal). Detectado el desbalance intradiario reversible de Ecobici, que es el fenómeno que justifica el escenario de rebalanceo. Documentadas las limitaciones a declarar (solo viajes exitosos, 9,11% de viajes <1 min, 13,47% origen=destino).
 - **2026-07-29**: ingerido el enunciado del TP Integrador (`fuentes/TPI Simulación - Enunciado.md`). Se creó la sección 3 (TPI) con consigna, entregables, causales de recuperatorio, criterios de selección de tema y primera actividad. Pendiente: elegir los 3 temas candidatos.
 - **2026-07-08**: ingerido el contenido de la wiki anterior de SIM (construida a partir de `Simulación_clase_2_2026.pdf`, `Simulacion_Intro_Completa.pdf`, `Resumen_de_Simulación.pdf`). Se creó el índice (Unidades 1 y 2) y se desarrollaron ambas unidades. Falta cargar el programa completo de la materia para completar el índice (Unidades 3+).

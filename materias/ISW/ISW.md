@@ -9156,7 +9156,7 @@ métricas de proyecto vs producto — ver [Unidad 8](#unidad-8--medición-y-aná
   inválida `X ≥ 31` pisando la válida `21 ≤ X ≤ 31`.
 - 2026-09-20: se copiaron los 9 parciales de regularización de `archivo/` a
   `fuentes/parciales-regularizacion/` (2012, 2013, 2015, 2016, 2020, 2021, 2022, 2024, 2025) y
-  se armó `estudio/banco-preguntas.md`: ~45 preguntas agrupadas por tema, con las respuestas
+  se armó `estudio/regularizacion/banco-preguntas.md`: ~45 preguntas agrupadas por tema, con las respuestas
   leídas de los formularios corregidos y de las marcas del profesor en los de papel. Las que el
   alumno erró quedan marcadas como deducidas. Los de 2012-2016 no tienen texto extraíble (son
   fotos): se leyeron como imagen.
@@ -9168,7 +9168,7 @@ métricas de proyecto vs producto — ver [Unidad 8](#unidad-8--medición-y-aná
   por fase, hitos) y el artefacto Plan de Proyecto + informe de avance. Erratas de numeración
   de la fuente corregidas y marcadas (PP SG1, PPQA SG2, MA SP1.1). Contradicción anotada: la
   fuente agrega "procedimientos" a los componentes del software.
-- 2026-09-20: `estudio/resumen.md` (+ .pdf) — resumen de estudio de las cinco unidades, escrito
+- 2026-09-20: `estudio/regularizacion/resumen.md` (+ .pdf) — resumen de estudio de las cinco unidades, escrito
   como bibliografía y no como machete: 17 capítulos en orden temático, cada uno abriendo con el
   porqué del tema antes de las definiciones, prosa corrida y tablas sólo donde hay algo que
   comparar. Cierra con las 12 confusiones conceptuales más frecuentes. 22 páginas.
@@ -9185,7 +9185,7 @@ métricas de proyecto vs producto — ver [Unidad 8](#unidad-8--medición-y-aná
   las metas y prácticas específicas oficiales de **OPF** y **OT** (no estaban) y se completó **OPD**
   (faltaba SP 1.5, biblioteca de activos). PP, PMC, VER y VAL ya coincidían con el texto oficial.
   **U1:** documentada la errata de la edición castellana que rotula OT como nivel 4.
-- 2026-09-21: `estudio/resumen-agregados.md` (+ .pdf, 6 págs.) — agregados para intercalar en la
+- 2026-09-21: `estudio/regularizacion/resumen-agregados.md` (+ .pdf, 6 págs.) — agregados para intercalar en la
   versión impresa anterior del resumen (22 págs.), con su numeración: una hoja para el frente
   (temario + instrucciones) y cinco que reemplazan la pág. 6 (5.4, capítulo 6 nuevo, 6 bis SPEM y
   RUP, agregados a 8.3 y 9.2). Instrucciones para simple y doble faz.
@@ -9211,30 +9211,30 @@ métricas de proyecto vs producto — ver [Unidad 8](#unidad-8--medición-y-aná
   18-36. **U5**: guía de V&V de INTECO (ya no "no ingerida"), recetas de particiones/valores límite
   y de derivación desde CU, ejercicios 20-42 (resoluciones de alumnos corregidas). **U4, U6, U7,
   U8**: agregados puntuales desde los resúmenes de alumnos y la práctica. U9 sin cambios.
-- 2026-10-05: `estudio/resumen-ad-extendido.md` (+ .pdf, 101 págs.; originalmente `resumen-ad.md`) — resumen de estudio para el **parcial de
+- 2026-10-05: `estudio/ad/resumen-ad-extendido.md` (+ .pdf, 101 págs.; originalmente `resumen-ad.md`) — resumen de estudio para el **parcial de
   Aprobación Directa**, con el mismo estilo que el de Regularización (prosa, el porqué antes de las
   definiciones, tablas sólo para comparar). 26 capítulos en orden temático sobre las 9 unidades: los
   del resumen de Regularización ampliados con la bibliografía oficial ingerida después, y nuevos
   para riesgos, requerimientos, configuración, PPQA, medición y pericias. Dos capítulos de consulta
   para usar durante el parcial: **24** (cómo reconocer el área de proceso en un enunciado) y **25**
   (cómo resolver las preguntas BP). Cierra con las confusiones frecuentes agrupadas por tema.
-- 2026-10-05: `estudio/resumen-ad.md` (+ .pdf, **57 págs.**) — versión condensada del resumen AD, con
+- 2026-10-05: `estudio/ad/resumen-ad.md` (+ .pdf, **57 págs.**) — versión condensada del resumen AD, con
   la misma proporción que el de Regularización (unas 9-10 págs. por cada 100 de bibliografía). Los
   capítulos 2 a 19 vuelven al texto del resumen de Regularización más lo nuevo que pesa en el AD; los
   nuevos (riesgos, requerimientos, configuración, PPQA, medición, pericias) quedan acotados; los
   criterios de discriminación y el método BP se concentran en los capítulos 24 y 25. La de 101 págs.
   queda como `resumen-ad-extendido.md`.
-- 2026-10-05: podcasts de repaso para el AD — `estudio/podcast-ad/` con seis PDFs recortados de
+- 2026-10-05: podcasts de repaso para el AD — `estudio/ad/podcast/` con seis PDFs recortados de
   `resumen-ad.md` (ep. 1 requerimientos, cambios y configuración · 2 PPQA, medición y pericias ·
   3 proyecto, estimación, riesgos y ciclos de vida · 4 V&V y pruebas · 5 calidad, CMMI y procesos ·
   6 simulacro, con un anexo de todas las preguntas de los AD 2024 y 2025) y
-  `estudio/prompt-podcast-ad.md` con un prompt por episodio para NotebookLM, orientado a razonar y
+  `estudio/ad/prompt-podcast-ad.md` con un prompt por episodio para NotebookLM, orientado a razonar y
   decidir (el parcial es a libro abierto), más versiones cortas de menos de 500 caracteres.
-- 2026-10-06: `estudio/resumen-ad-extendido.epub` — la versión de 101 págs. del resumen AD en EPUB
+- 2026-10-06: `estudio/ad/resumen-ad-extendido.epub` — la versión de 101 págs. del resumen AD en EPUB
   para leer en el Kindle (26 capítulos con índice navegable), generada con `scripts/md-to-epub.js`.
-- 2026-10-12: `estudio/resumen-ad.epub` — la versión condensada (57 págs.) del resumen AD en EPUB
+- 2026-10-12: `estudio/ad/resumen-ad.epub` — la versión condensada (57 págs.) del resumen AD en EPUB
   para el Kindle (26 capítulos con índice navegable), generada con `scripts/md-to-epub.js`.
-- 2026-10-21: `estudio/guia-recu-regularizacion.md` + `.pdf` (48 págs.) para el recuperatorio del
+- 2026-10-21: `estudio/regularizacion/guia-recu-regularizacion.md` + `.pdf` (48 págs.) para el recuperatorio del
   24/10: guía teórica de U1, U2, U3 y U5 traída por el alumno, revisada contra la wiki y el banco
   (8 correcciones: puntaje 2026, "Ninguna" sí puede ser correcta, grilla activo/producto/**ambos**,
   informativos con declaración de propósito, dinámicas ↔ VAL es tendencia de INTECO, regresión
@@ -9245,8 +9245,9 @@ métricas de proyecto vs producto — ver [Unidad 8](#unidad-8--medición-y-aná
   tablas dentro de una pregunta ya no se pasan del margen.
 - 2026-10-24: parcial de Aprobación Directa del 24/10/2026 (EXAM336). Fotos en
   `fuentes/parciales-ad/` (páginas 1, 3, 5 y 6). Consignas reconstruidas y resueltas en
-  `estudio/parcial-ad-2026-10-24.md`: activos/herramientas de CM, V/F de retrabajo, días de
+  `estudio/ad/parcial-ad-2026-10-24.md`: activos/herramientas de CM, V/F de retrabajo, días de
   comienzo con predecesoras (la resumen de RD dice 112 h y da 104 h), VER SP 2.2, "VER y VAL
   cumplidos" sin pruebas con usuarios, tailoring con conjuntos A/B/C y REQM ante un cambio del
   cliente.
-- 2026-10-29: `estudio/defensa-automatizacion-visual.pdf` (+ `.html` fuente, render con `scripts/formulario-pdf.js`, 6 págs.) para la defensa del TP de automatización de pruebas: argumentos a favor (A1–A8) y en contra (B1–B8) con fuente marcada (wiki / TP / general), cruce de ataques y respuestas, gráfico del punto de equilibrio, criterios de qué automatizar, preguntas probables y frases de cierre. Números del TP re-medidos: 60 tests en 0,02 s, 100 % cobertura (84 sentencias, 46 ramas), 192 líneas de test vs 128 de sistema.
+- 2026-10-29: `entregables/automatizacion-pruebas/defensa-automatizacion-visual.pdf` (+ `.html` fuente, render con `scripts/formulario-pdf.js`, 6 págs.) para la defensa del TP de automatización de pruebas: argumentos a favor (A1–A8) y en contra (B1–B8) con fuente marcada (wiki / TP / general), cruce de ataques y respuestas, gráfico del punto de equilibrio, criterios de qué automatizar, preguntas probables y frases de cierre. Números del TP re-medidos: 60 tests en 0,02 s, 100 % cobertura (84 sentencias, 46 ramas), 192 líneas de test vs 128 de sistema.
+- 2026-11-03: reorganización. `estudio/` se separó en `regularizacion/` y `ad/` (con `ad/podcast/` y `ad/carillas/`: las `clave-*`, los mapas de CMMI y el PDF de carillas en blanco y negro). En `entregables/` hay una carpeta por trabajo, y la defensa visual se movió a `automatizacion-pruebas/`. Se versionó `cuestionario-isw.html`, que estaba ignorado por la regla de HTML de `estudio/`.

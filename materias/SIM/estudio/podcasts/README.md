@@ -1,7 +1,7 @@
 # Podcasts SIM — cómo usarlos en NotebookLM
 
 Este archivo **no se sube**: es la guía. Se suben los ocho `0N-*.md`, uno por episodio.
-Se regeneran desde el resumen y el banco con `python3 scripts/sim-podcasts.py`.
+Se regeneran desde el resumen y el banco con `python3 scripts/sim/sim-podcasts.py`.
 
 ## Armado
 

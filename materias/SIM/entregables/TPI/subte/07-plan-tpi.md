@@ -99,7 +99,7 @@ Lo único que bloquea de verdad es **la cadena F2 → F4**. Los organismos exter
   - (a) mantener ene-jun;
   - (b) usar mar-jun;
   - (c) usar mar-jun y además un factor de sensibilidad.
-- **Recomendación:** (b). Reprocesar con `scripts/sbase-perfil.py` y citar el período exacto. `factorDemandaPed` queda para sensibilidad.
+- **Recomendación:** (b). Reprocesar con `scripts/sim/sbase-perfil.py` y citar el período exacto. `factorDemandaPed` queda para sensibilidad.
 
 **D4 — Métricas primarias y alfa.**
 
@@ -291,7 +291,7 @@ Estas tareas usan los valores de prueba de `PeatonalFranjaPrueba` (80 % / 60 / 1
 
 - **T3.1 Reprocesar el perfil SBASE** según D3 (mar-jun) y fijar `perfilPed15min`/`perfil15min`.
   - Responsable: Claude.
-  - Archivos: `scripts/sbase-perfil.py` (sólo un parámetro de período), 01, 02 y el `.alp`.
+  - Archivos: `scripts/sim/sbase-perfil.py` (sólo un parámetro de período), 01, 02 y el `.alp`.
   - Aceptación:
     - tabla por ventana con n días, media y CV;
     - total de la franja citado con su período;

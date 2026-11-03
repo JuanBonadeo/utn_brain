@@ -14,7 +14,7 @@ como completa por haber funcionado con la demostración sintética.
 | Bloque | Estado | Evidencia o condición de cierre |
 |---|---|---|
 | Tema, alcance y escenario base | Hecho | Vestíbulo Principal, días hábiles 07:00-09:30, E0 contra E1 |
-| Perfilado de SBASE | Hecho | 117 días hábiles y diez ventanas de 15 minutos reproducibles con `scripts/sbase-perfil.py` |
+| Perfilado de SBASE | Hecho | 117 días hábiles y diez ventanas de 15 minutos reproducibles con `scripts/sim/sbase-perfil.py` |
 | Modelo lógico E0-E3 | Hecho como prototipo | Conservación, cierre 09:30, drenaje y métricas verificados |
 | Capa peatonal E0-E1 | Hecho como prototipo | 28 puestos dibujados (23-28 hipotéticos), configuración 20/22, misma semilla y salida `CSV_PEATONAL` |
 | Compilación AnyLogic 8.9.9 | Hecho | Build correcto el 2026-09-24 |
