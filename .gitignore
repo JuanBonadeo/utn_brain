@@ -69,3 +69,6 @@ materias/SIM/entregables/TPI/subte/al_internal/
 # SIM TPI (subte): salidas de datos/plano_3d.py (se regeneran; el grupo ya queda dentro del .alp)
 materias/SIM/entregables/TPI/subte/datos/plano3d_grupo.xml
 materias/SIM/entregables/TPI/subte/datos/plano3d_control.png
+
+# Obsidian: estado de la interfaz (pestañas abiertas), no se versiona
+.obsidian/workspace.json

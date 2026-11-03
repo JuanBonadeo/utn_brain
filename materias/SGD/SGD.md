@@ -20,6 +20,9 @@ _(sin unidades cargadas todavía)_
 - **Cuestionario: Serverless** → `entregables/serverless/cuestionario.md`
   10 preguntas (8 opción múltiple, 2 V/F) para la clase, con clave. El Google
   Form se genera con `cuestionario-form.gs` (Apps Script).
+- **Proyecto: Spine-Guard** → `entregables/Spine-Guard/` (submódulo git,
+  repo propio en github.com/JuanBonadeo/Spine-Guard). Monitor de postura con
+  webcam (OpenCV + MediaPipe).
 
 ## Log
 - Archivo creado.
@@ -34,3 +37,5 @@ _(sin unidades cargadas todavía)_
   + script de Apps Script que arma el Google Form en modo cuestionario.
 - 2026-10-09: informe de serverless para entregar (pdf con carátula), armado
   desde el informe de investigación y alineado con el deck (punto de cruce 34 %).
+- 2026-11-03: se documenta el submódulo Spine-Guard en Entregables; se borran
+  las opciones A/B/C descartadas del deck de serverless y sus generadores.
