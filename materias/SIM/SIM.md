@@ -2839,7 +2839,7 @@ actual puede validarse el caudal agregado, pero no la espera ni la cola real.
 - Guía del modelo: [`entregables/TPI/subte/02-modelo-anylogic.md`](entregables/TPI/subte/02-modelo-anylogic.md)
 - Informe técnico en construcción: [`entregables/TPI/subte/03-informe-tpi.md`](entregables/TPI/subte/03-informe-tpi.md)
 - Ficha para la reunión: [`entregables/TPI/subte/TPI_Subte_Definicion_y_Modelo_Inicial.docx`](entregables/TPI/subte/TPI_Subte_Definicion_y_Modelo_Inicial.docx)
-- Versión PDF: [`../../../../output/pdf/TPI_Subte_Definicion_y_Modelo_Inicial.pdf`](../../../../output/pdf/TPI_Subte_Definicion_y_Modelo_Inicial.pdf)
+- Versión PDF: [`entregables/TPI/subte/TPI_Subte_Definicion_y_Modelo_Inicial.pdf`](entregables/TPI/subte/TPI_Subte_Definicion_y_Modelo_Inicial.pdf)
 
 #### Skills disponibles para trabajar con AnyLogic
 
