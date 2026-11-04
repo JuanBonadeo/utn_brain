@@ -44,7 +44,10 @@ def main(archivo='corridas_peatonales.csv', alfa=0.05):
             r = linea.strip().split(';')
             d.setdefault(int(r[2]), {})[r[1]] = dict(zip(CAMPOS, map(float, r[3:])))
     alternativas = [a for a in ALTERNATIVAS if any({'E0', a} <= set(v) for v in d.values())]
-    k = sum(1 for *_, p in MEDIDAS if p) * len(alternativas)
+    # Bonferroni sobre la familia planificada (3 primarias x 3 comparaciones), aunque falte alguna alternativa.
+    k = sum(1 for *_, p in MEDIDAS if p) * len(ALTERNATIVAS)
+    if len(alternativas) < len(ALTERNATIVAS):
+        print(f'Aviso: faltan {set(ALTERNATIVAS) - set(alternativas)}; k se mantiene en {k} (familia planificada).')
     for alt in alternativas:
         pares = sorted(s for s in d if {'E0', alt} <= set(d[s]))
         n = len(pares)

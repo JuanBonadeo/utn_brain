@@ -222,7 +222,7 @@ public static void main(String[] args) throws Exception {
  ok(f.arribosCerradosPed && f.rocaCerradoPed && f.calleCerradaPed,"arribos cerrados al agotar horario y calle");
  ok(f.nInyectadosPed==f.nDesdeRocaPed+f.nDesdeCallePed && f.pedSource.injected==f.nDesdeRocaPed && f.pedSourceCalle.injected==f.nDesdeCallePed,"origenes");
  double total=0;for(double v:f.perfilPed15min)total+=v;
- ok(f.nDesdeRocaPed>0.97*0.8*total && f.nDesdeRocaPed<1.03*0.8*total,"Roca ~80% del perfil SBASE (acumulacion por ramal): "+f.nDesdeRocaPed);
+ ok(Math.abs(f.nDesdeRocaPed-0.8*total)<=1,"Roca = 80% del perfil SBASE (acumulacion por ramal reescalada al total): "+f.nDesdeRocaPed);
  ok(Math.abs(f.nDesdeCallePed-0.2*total)<5*Math.sqrt(0.2*total),"calle ~20% del perfil SBASE: "+f.nDesdeCallePed);
  // Puertas: 21 por tren, todas sobre el andén (X -2420 a -830) y distintas; Y a 0,8 m del borde de cada andén.
  java.util.HashSet<Double> xs=new java.util.HashSet<Double>();for(int k=0;k<21;k++){double x=f.xPuertaPed(k);ok(x<-830&&x>-2420,"puerta en el anden: "+x);xs.add(x);}
@@ -306,7 +306,21 @@ public static void main(String[] args) throws Exception {
   ok(r0.llegadasDiasPed.length==r0.perfilesDiasPed.length && r0.ramalesDiasPed.length==r0.perfilesDiasPed.length,"llegadas alineadas con los dias");
   double totDia=0;for(double v:r0.perfilEfectivoPed)totDia+=v;ok(Math.abs(r0.nDesdeRocaPed-0.8*totDia)<0.05*0.8*totDia,"Roca ~80% del dia con llegadas reales: "+r0.nDesdeRocaPed);}
  for(int dd=0;dd<new SubtePedLogicCheck().perfilesDiasPed.length;dd++){SubtePedLogicCheck r=franjaReal(20,2.4,1.8,3.5,dd);
-  ok(r.trazas.stream().noneMatch(t->t.startsWith("ADVERTENCIA: tren")),"dia "+dd+": un tren en una via ocupada");}
+  ok(r.trazas.stream().noneMatch(t->t.startsWith("ADVERTENCIA: tren")),"dia "+dd+": un tren en una via ocupada");
+  double tot=0;for(double v:r.perfilEfectivoPed)tot+=v;
+  // Poisson: el total del dia es Poisson(0,8 x total) salvo el redondeo: dentro de 4 desvios.
+  ok(Math.abs(r.nDesdeRocaPed-0.8*tot)<4*Math.sqrt(0.8*tot)+1,"dia "+dd+": Roca "+r.nDesdeRocaPed+" vs 80% = "+0.8*tot);}
+ // Sin Poisson, el total del Roca coincide con el dato en todos los dias (a menos del redondeo por ramal).
+ for(int dd=0;dd<new SubtePedLogicCheck().perfilesDiasPed.length;dd++){SubtePedLogicCheck r=new SubtePedLogicCheck();r.modoFranjaPed=true;r.proporcionRocaPed=0.8;r.demoraAccesoRocaSeg=10;r.duracionDescargaSeg=30;r.servicioPedSeg=2.4;r.diaSbasePed=dd;r.llegadasRealesPed=true;r.inicializarPed();r.programarDemandaFranjaPed();r.correrDemanda();
+  double tot=0;for(double v:r.perfilEfectivoPed)tot+=v;ok(Math.abs(r.nDesdeRocaPed-0.8*tot)<=6,"dia "+dd+" sin Poisson: Roca "+r.nDesdeRocaPed+" vs "+0.8*tot);}
+ // Numeros comunes en la validacion: el mismo uniforme por pasajero en los 4 escenarios (inversa triangular monotona):
+ // E0 = E1 y E3 = E13 valor a valor, y E0 y E3 con el mismo orden entre pasajeros.
+ {double[][] sv=new double[4][3000];SubtePedLogicCheck[] es={b0,b1,b3,b13};
+  for(int e=0;e<4;e++)for(int k=0;k<3000;k++){Pasajero x=new Pasajero();es[e].registraIngresoPed(x);sv[e][k]=x.servicioAsignadoPed;}
+  ok(java.util.Arrays.equals(sv[0],sv[1]) && java.util.Arrays.equals(sv[2],sv[3]),"E0=E1 y E3=E13 en el servicio pasajero a pasajero");
+  boolean mismoOrden=true;for(int k=1;k<3000;k++)if(Double.compare(sv[0][k],sv[0][k-1])!=Double.compare(sv[2][k],sv[2][k-1]))mismoOrden=false;
+  ok(mismoOrden,"E0 y E3 reciben el mismo uniforme por pasajero (mismo orden de servicios)");
+  double m3=0;for(double v:sv[2])m3+=v;ok(Math.abs(m3/3000-(1.5+1.8+2.5)/3)<0.03,"media triangular E3 (1,5+1,8+2,5)/3: "+m3/3000);}
  ok(franja(20,1.0).trazas.stream().noneMatch(t->t.startsWith("ADVERTENCIA: tren")),"horario oficial: via j % 7 siempre libre");
  ok(b3.filaVentanasPed().split(";").length==23 && b3.filaVentanasPed().startsWith("E3;20260923;"+b3.diaEfectivoPed+";"),"fila de ventanas: "+b3.filaVentanasPed());
 

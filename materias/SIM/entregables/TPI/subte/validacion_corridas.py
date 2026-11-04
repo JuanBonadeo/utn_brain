@@ -19,7 +19,8 @@ VENTANAS = ['07:00', '07:15', '07:30', '07:45', '08:00', '08:15', '08:30', '08:4
 
 def cv_sbase():
     filas = list(csv.DictReader(open(AQUI / 'datos' / 'sbase_molinetes.csv', encoding='utf-8'), delimiter=';'))
-    x = [float(f['pax_franja_media_dia']) for f in filas]
+    # Mismo criterio que scripts/sim/sbase-perfil.py: molinetes con participación >= 0,5 % (tráfico real).
+    x = [float(f['pax_franja_media_dia']) for f in filas if float(f['participacion']) >= 0.005]
     m = st.fmean(x)
     return math.sqrt(sum((v - m) ** 2 for v in x) / len(x)) / m, len(x), max(x) / min(x)
 
@@ -27,7 +28,14 @@ def cv_sbase():
 def main(archivo='corridas_peatonales.csv'):
     ruta = Path(archivo)
     ventanas = ruta.with_name(ruta.stem + '_ventanas.csv')
-    filas = [l.strip().split(';') for l in open(ventanas, encoding='utf-8') if l.startswith('VENTANAS_PEATONAL;')]
+    # El archivo se escribe en modo append: si se relanzó el experimento sin borrarlo, cada (escenario, semilla)
+    # se cuenta una sola vez (la última).
+    unicas = {}
+    for l in open(ventanas, encoding='utf-8'):
+        if l.startswith('VENTANAS_PEATONAL;'):
+            f = l.strip().split(';')
+            unicas[(f[1], f[2])] = f
+    filas = list(unicas.values())
     e0 = [f for f in filas if f[1] == 'E0']
     print(f'## Caudal por ventana (E0, {len(e0)} réplicas; sim - obs del mismo día)')
     print('| Ventana | obs medio | sim medio | sesgo medio | sesgo % | |sim - obs| máx |\n|---|---:|---:|---:|---:|---:|')
@@ -38,8 +46,8 @@ def main(archivo='corridas_peatonales.csv'):
         print(f'| {nombre} | {st.fmean(obs):.0f} | {st.fmean(sim):.0f} | {st.fmean(dif):+.1f} | '
               f'{100 * st.fmean(dif) / st.fmean(obs):+.1f} % | {max(abs(x) for x in dif):.0f} |')
     cv_obs, n_obs, maxmin = cv_sbase()
-    cvs = [float(l.strip().split(';')[20]) for l in open(ruta, encoding='utf-8')
-           if l.startswith('CSV_PEATONAL;E0;')]
+    cvs = list({l.split(';')[2]: float(l.strip().split(';')[20]) for l in open(ruta, encoding='utf-8')
+                if l.startswith('CSV_PEATONAL;E0;')}.values())
     print(f'\n## Reparto entre molinetes\nSBASE: CV = {cv_obs:.3f} entre {n_obs} molinetes (máx/mín = {maxmin:.1f})')
     if cvs:
         m = st.fmean(cvs); s = st.stdev(cvs) if len(cvs) > 1 else 0

@@ -5820,15 +5820,31 @@ for (int j = 0; j < llegadas.length; j++) {
 double[] ingresoAnterior = new double[nRamales];
 java.util.Arrays.fill(ingresoAnterior, Double.NaN);
 double[] resto = new double[nRamales];
+// Primera pasada: media de cada tren = demanda acumulada de su ramal desde el tren anterior del mismo ramal.
+// Si el atraso invierte dos trenes de un ramal, el anterior no retrocede (no se cuenta dos veces ni se pierde).
+double[] mediaTren = new double[llegadas.length];
+double sumaMedias = 0;
 for (int j = 0; j < llegadas.length; j++) {
     int b = ramales[j];
     double ingreso = llegadas[j] + atrasoTren[j] + demoraAccesoRocaSeg;
     // Sin tren anterior del ramal en el horario cargado: se toman 15 minutos de acumulacion.
-    double desde = Double.isNaN(ingresoAnterior[b]) ? ingreso - 900.0 : ingresoAnterior[b];
-    ingresoAnterior[b] = ingreso;
+    double desde = Double.isNaN(ingresoAnterior[b]) ? ingreso - 900.0 : Math.min(ingresoAnterior[b], ingreso);
+    ingresoAnterior[b] = Double.isNaN(ingresoAnterior[b]) ? ingreso : Math.max(ingresoAnterior[b], ingreso);
     if (ingreso < 0 || ingreso >= h) continue;
-    double media = factorDemandaPed * proporcionRocaPed * trenesRamal[b] / enFranja
+    mediaTren[j] = factorDemandaPed * proporcionRocaPed * trenesRamal[b] / enFranja
         * Math.max(0, acumulada.applyAsDouble(ingreso) - acumulada.applyAsDouble(desde));
+    sumaMedias += mediaTren[j];
+}
+// El total del Roca en la franja es el del dato (proporcionRocaPed del perfil del dia hasta el cierre): la
+// acumulacion por ramal pierde la gente que llega despues del ultimo tren de cada ramal y da 15 min al primero,
+// asi que se reescala. La forma (que tren viene mas cargado) no cambia.
+double objetivoRoca = factorDemandaPed * proporcionRocaPed * (acumulada.applyAsDouble(h) - acumulada.applyAsDouble(0));
+double escalaRoca = sumaMedias > 0 ? objetivoRoca / sumaMedias : 0;
+for (int j = 0; j < llegadas.length; j++) {
+    int b = ramales[j];
+    double ingreso = llegadas[j] + atrasoTren[j] + demoraAccesoRocaSeg;
+    if (ingreso < 0 || ingreso >= h) continue;
+    double media = mediaTren[j] * escalaRoca;
     int n;
     if (cargaTrenPoissonPed) {
         // Pasaje del tren aleatorio [SUP]: Poisson con la demanda acumulada como media (sin arrastre).
