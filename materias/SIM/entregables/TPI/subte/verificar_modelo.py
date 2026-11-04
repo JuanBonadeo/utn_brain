@@ -123,6 +123,7 @@ java.util.ArrayList<String> eventos=new java.util.ArrayList<String>();
 // Bucle de eventos minimo para la demanda de la franja (liberaciones del Roca y llegadas de calle).
 void correrDemanda(){ while(proximaLiberacionPed.at>=0||proximaLlegadaCallePed.at>=0){ boolean roca=proximaLlegadaCallePed.at<0||(proximaLiberacionPed.at>=0&&proximaLiberacionPed.at<=proximaLlegadaCallePed.at); EventStub e=roca?proximaLiberacionPed:proximaLlegadaCallePed; clock=e.at; e.at=-1; int r0=pedSource.injected,c0=pedSourceCalle.injected; if(roca)liberarPendientesPed(); else llegadaCallePed(); eventos.add(String.format(java.util.Locale.US,"%.6f;%d;%d",clock,pedSource.injected-r0,pedSourceCalle.injected-c0)); } }
 static SubtePedLogicCheck franja(int molinetes,double factor){ SubtePedLogicCheck f=new SubtePedLogicCheck(); f.modoFranjaPed=true; f.molinetesOperativosPed=molinetes; f.proporcionRocaPed=0.8; f.demoraAccesoRocaSeg=60; f.duracionDescargaSeg=120; f.servicioPedSeg=3; f.servicioMinPedSeg=2; f.servicioMaxPedSeg=5; f.factorDemandaPed=factor; f.inicializarPed(); f.programarDemandaFranjaPed(); f.correrDemanda(); return f; }
+static SubtePedLogicCheck franjaReal(int molinetes,double moda,double min,double max,int dia){ SubtePedLogicCheck f=new SubtePedLogicCheck(); f.modoFranjaPed=true; f.molinetesOperativosPed=molinetes; f.proporcionRocaPed=0.8; f.demoraAccesoRocaSeg=10; f.duracionDescargaSeg=30; f.servicioPedSeg=moda; f.servicioMinPedSeg=min; f.servicioMaxPedSeg=max; f.diaSbasePed=dia; f.llegadasRealesPed=true; f.cargaTrenPoissonPed=true; f.inicializarPed(); f.programarDemandaFranjaPed(); f.correrDemanda(); return f; }
 static SubtePedLogicCheck franjaVar(int molinetes,double moda,double min,double max){ SubtePedLogicCheck f=new SubtePedLogicCheck(); f.modoFranjaPed=true; f.molinetesOperativosPed=molinetes; f.proporcionRocaPed=0.8; f.demoraAccesoRocaSeg=10; f.duracionDescargaSeg=30; f.servicioPedSeg=moda; f.servicioMinPedSeg=min; f.servicioMaxPedSeg=max; f.diaSbasePed=-2; f.atrasoMaxRocaSeg=120; f.cargaTrenPoissonPed=true; f.inicializarPed(); f.programarDemandaFranjaPed(); f.correrDemanda(); return f; }
 ServiceStub molinetesPeatonales=new ServiceStub(); EngineStub engine=new EngineStub(); RandomStub rng=new RandomStub();
 Object molinetePed21=new Object(), molinetePed22=new Object(), molinetePed23=new Object(), molinetePed24=new Object();
@@ -295,6 +296,18 @@ public static void main(String[] args) throws Exception {
   ok(x.transitosRocaPed.size()==1,"la calle no cuenta en el transito del Roca");
   x.molinetesOperativosPed=2;eq(x.cvValidacionesMolinetePed(),0,"dos molinetes con una validacion cada uno: CV 0");
   x.molinetesOperativosPed=4;eq(x.cvValidacionesMolinetePed(),1,"1,1,0,0: CV 1");}
+
+ // Llegadas reales del dia (Trenes Argentinos): los trenes son los de ese dia, iguales en los 4 escenarios, y nunca
+ // dos trenes en la misma via a la vez (en ninguno de los dias embebidos).
+ {SubtePedLogicCheck r0=franjaReal(20,2.4,1.8,3.5,-2), r13=franjaReal(22,1.8,1.5,2.5,-2);
+  int esperados=0;for(double t:r0.llegadasDiasPed[r0.diaEfectivoPed])if(t+10>=0&&t+10<9000)esperados++;
+  ok(r0.nTrenesPed==esperados && esperados>=40,"trenes reales del dia "+r0.diaEfectivoPed+": "+r0.nTrenesPed+" de "+esperados);
+  ok(r0.eventos.equals(r13.eventos),"E0 y E13 reciben los mismos ingresos con llegadas reales");
+  ok(r0.llegadasDiasPed.length==r0.perfilesDiasPed.length && r0.ramalesDiasPed.length==r0.perfilesDiasPed.length,"llegadas alineadas con los dias");
+  double totDia=0;for(double v:r0.perfilEfectivoPed)totDia+=v;ok(Math.abs(r0.nDesdeRocaPed-0.8*totDia)<0.05*0.8*totDia,"Roca ~80% del dia con llegadas reales: "+r0.nDesdeRocaPed);}
+ for(int dd=0;dd<new SubtePedLogicCheck().perfilesDiasPed.length;dd++){SubtePedLogicCheck r=franjaReal(20,2.4,1.8,3.5,dd);
+  ok(r.trazas.stream().noneMatch(t->t.startsWith("ADVERTENCIA: tren")),"dia "+dd+": un tren en una via ocupada");}
+ ok(franja(20,1.0).trazas.stream().noneMatch(t->t.startsWith("ADVERTENCIA: tren")),"horario oficial: via j % 7 siempre libre");
  ok(b3.filaVentanasPed().split(";").length==23 && b3.filaVentanasPed().startsWith("E3;20260923;"+b3.diaEfectivoPed+";"),"fila de ventanas: "+b3.filaVentanasPed());
 
  System.out.println("OK: pedestrian demo, Roca timetable + street demand, triangular service, common random numbers, 09:30 cut, drain and CSV output");
@@ -551,9 +564,11 @@ for name,(runs,modo,archivo,final) in {'PeatonalCorridasApareadas':('120','true'
  # Apareadas (2026-11-04): 4 escenarios por día (index % 4 = E0, E1, E3, E13) con el mismo día SBASE y la misma semilla.
  assert free['semillaPed']==('20260923L + index / 4' if name=='PeatonalCorridasApareadas' else '20260923L + index / 2')
  assert free['molinetesOperativosPed']=='index % 2 == 0 ? 20 : 22'
- nuevos={k:free[k] for k in ('diaSbasePed','atrasoMaxRocaSeg','cargaTrenPoissonPed')}
- assert nuevos==({'diaSbasePed':'-2','atrasoMaxRocaSeg':'120','cargaTrenPoissonPed':'true'} if name=='PeatonalCorridasApareadas'
-                 else {'diaSbasePed':None,'atrasoMaxRocaSeg':None,'cargaTrenPoissonPed':None}), (name,nuevos)
+ # Día hábil real (perfil SBASE y llegadas reales del Roca de ese día, Trenes Argentinos) y carga Poisson; el atraso
+ # uniforme queda en 0 (sólo para sensibilidad, con el horario oficial).
+ nuevos={k:free[k] for k in ('diaSbasePed','atrasoMaxRocaSeg','cargaTrenPoissonPed','llegadasRealesPed')}
+ assert nuevos==({'diaSbasePed':'-2','atrasoMaxRocaSeg':'0','cargaTrenPoissonPed':'true','llegadasRealesPed':'true'} if name=='PeatonalCorridasApareadas'
+                 else {'diaSbasePed':None,'atrasoMaxRocaSeg':None,'cargaTrenPoissonPed':None,'llegadasRealesPed':None}), (name,nuevos)
  assert free['modoFranjaPed']==modo and free['archivoSalidaPed']==archivo
  calib={k:free[k] for k in ('proporcionRocaPed','demoraAccesoRocaSeg','duracionDescargaSeg','servicioPedSeg','servicioMinPedSeg','servicioMaxPedSeg')}
  if name=='PeatonalCorridasApareadas':
