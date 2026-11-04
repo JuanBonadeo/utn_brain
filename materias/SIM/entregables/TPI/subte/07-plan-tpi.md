@@ -144,6 +144,20 @@ Lo único que bloquea de verdad es **la cadena F2 → F4**. Los organismos exter
 4. ¿Hay plantilla LaTeX o "pautas de entregas parciales" 2026? ¿Hay avances parciales obligatorios?
 5. ¿La carátula lleva docentes? ¿Cómo se escribe la comisión (401 o 4K01)?
 
+### D7 — Días reales, trenes reales y escenarios E3/E13 (aprobado 2026-11-04)
+
+- **Réplica = día hábil real** (bootstrap con reposición de 75 días mar-jun con servicio normal): perfil SBASE
+  y llegadas reales del Roca de ese día (Trenes Argentinos). Se excluyen 5 días con < 40 trenes.
+- **Carga por tren Poisson** [SUP]; el atraso uniforme 0-120 s que se había elegido se reemplazó por las
+  llegadas reales al encontrar el dato (queda para sensibilidad con el horario oficial, 0 y 240 s).
+- **Escenarios:** E0 (20; 1,8/2,4/3,5 s), E1 (22), E3 (20; 1,5/1,8/2,5 s EMV/QR [SUP]), E13 (22; rápida).
+  Comparaciones contra E0 con Bonferroni k = 3 × 3 = 9. Sin análisis factorial (la wiki no lo cubre): la
+  interacción se muestra descriptiva.
+- **Validación:** caudal por ventana contra el mismo día (no independiente) y CV entre molinetes contra SBASE
+  (independiente). La regla de elección se recalibra sólo si la brecha de CV es grande, con un parámetro.
+- **Proporción del Roca:** no identificable con SBASE × horario; queda 0,80 [SUP].
+- Versión previa etiquetada `tpi-subte-defensa-1`. Detalle: `02-modelo-anylogic.md`, sección del 2026-11-04.
+
 ## 4. Fases y tareas
 
 Formato de cada tarea: **Responsable · Depende de · Archivos · Aceptación observable · Esfuerzo**. Responsables posibles: Juan, Matías, Claude o externo. Toda edición del `.alp` la hace **un solo dueño a la vez** (ver T1.1).

@@ -141,7 +141,8 @@ $D/v + h/v_e$ con $D = 85$~m (\cite{osm2026}); la superposición con el plano ll
 hall, la escalera B2 y el pasillo, y la demora quedó solo para la apertura (sección~\ref{sec:paso6-validacion}) \\
 Proporción que llega en tren & 0,70 & 0,80 & 0,90 &
 Supuesto explícito: no hay estudio publicado de trasbordo del Roca a la Línea~C, y Trenes Argentinos
-confirmó que no lo tiene \parencite{sofse2026nota} \\
+confirmó que no lo tiene \parencite{sofse2026nota}. Se intentó estimarla cruzando el dato de SBASE con
+las llegadas de trenes por ventana; no es identificable (sección~\ref{sec:paso6-validacion}) \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -159,12 +160,23 @@ Es un supuesto: ninguno de los estudios citados lo informa.
 \textbf{Entidades.} Cada pasajero es un agente con su velocidad, su instante de ingreso, su tiempo de
 validación y su molinete elegido. Los molinetes son servidores paralelos, cada uno con su propia cola.
 
-\textbf{Generación de la demanda.} La demanda de cada ventana $k$ es la media observada $d_k$, y define
-una tasa de llegada a lo largo de la franja. Una fracción $p$ (la proporción que llega en tren) viaja en los
+\textbf{Día de cada réplica.} Cada réplica representa un día hábil real, sorteado con reposición
+entre los 75 días hábiles de marzo a junio de 2026 con servicio normal del Roca (bootstrap de días). Del
+día sorteado se toman las validaciones de SBASE por ventana, $d_k$, y las llegadas reales de cada tren a
+Plaza Constitución que informó Trenes Argentinos \parencite{sofse2026nota}. Así la réplica conserva la
+variación real entre días (el volumen del pico cambia del orden del 25~\% de un día a otro) y la
+irregularidad real de los trenes (atraso con mediana de $+4$~minutos), sin suponer una distribución para
+ninguna de las dos. Se excluyeron cinco días con el servicio del Roca interrumpido (menos de 40 trenes en la
+franja, frente a una mediana de 49). En cada par de escenarios el día es el mismo.
+
+\textbf{Generación de la demanda.} La demanda de cada ventana $k$ es la observada $d_k$ del día de la
+réplica, y define una tasa de llegada a lo largo de la franja. Una fracción $p$ (la proporción que llega en tren) viaja en los
 trenes del Roca. La gente espera en las estaciones de su ramal, así que cada tren lleva la demanda que se
 acumuló desde el tren anterior \emph{de su mismo ramal}. Cada ramal toma la parte de la demanda proporcional
 a sus trenes en la franja. Con este criterio, un tren que llega después de un intervalo largo viene más
-cargado, y dos trenes de ramales distintos que llegan juntos no se reparten la misma gente. El total de la
+cargado, y dos trenes de ramales distintos que llegan juntos no se reparten la misma gente. Esa demanda
+acumulada es la media del pasaje del tren: la cantidad efectiva se sortea con una distribución de Poisson
+[supuesto], porque la carga de cada formación varía aunque la tasa sea la misma. El total de la
 franja coincide con el dato; ventana por ventana, el ingreso se corre hacia el tren siguiente.
 
 El pasaje de cada tren baja por las 21 puertas de su lado del andén, de forma pareja durante el descenso,
@@ -225,10 +237,11 @@ Además de los rangos de la tabla~\ref{tab:parametros}, el modelo adopta estos s
   \item Los molinetes funcionan solo en sentido de ingreso durante la franja, y los habilitados están
         disponibles todo el período.
   \item Nadie abandona la cola ni cambia de molinete una vez elegido.
-  \item El volumen de cada ventana es la media de los días hábiles; todas las réplicas usan el mismo perfil.
-  \item Los trenes llegan a la hora del horario oficial.
+  \item El volumen de cada ventana y los trenes son los de un día hábil real con servicio normal; los días
+        con el servicio del Roca interrumpido quedan fuera del estudio.
+  \item El pasaje de cada tren es una variable de Poisson cuya media es la demanda acumulada de su ramal.
   \item El vestíbulo tiene la geometría hipotética descripta en la sección~\ref{sec:paso4-construccion-verificacion},
         porque el plano oficial no está disponible.
 \end{enumerate}
-Los supuestos 4 y 5 se discuten en la validación: los datos reales de llegadas permiten cuantificar el
-atraso que el supuesto 5 ignora.
+El supuesto~4 reemplaza a dos versiones anteriores (perfil medio en todas las réplicas y trenes en
+horario), que la validación mostró optimistas: un atraso variable junta trenes que el horario separa.

@@ -36,19 +36,21 @@ SBASE. Este control es en parte circular, porque la demanda se construye con ese
 presenta como calibración: comprueba que la demanda se reparte bien entre los trenes y que la congestión no
 retiene pasajeros de una ventana a la siguiente. Con valores de prueba, el caudal simulado quedó en su
 mayoría a menos del 6~\% del observado (sección~\ref{sec:paso5-pilotos}).
-\pendiente{registrar el caudal por ventana con el escenario intermedio (consola de PeatonalFranjaVisualE0).}
-
-Una validación no circular sería correr el modelo con el perfil de un subperíodo que no se usó para
-calibrarlo y comparar. Requiere que el perfil cambie entre réplicas, lo que el diseño actual no hace
-(supuesto~4 de la sección~\ref{sec:paso2-datos-modelo-conceptual}).
+Desde que cada réplica usa un día real, la comparación se hace contra el perfil de ese mismo día: el
+experimento escribe las validaciones simuladas y observadas por ventana (archivo de ventanas, analizado con
+\texttt{validacion\_corridas.py}). Sigue sin ser independiente, porque el día es la entrada del modelo, pero
+mide si la cola corre pasajeros de una ventana a la siguiente en días cargados.
+\pendiente{registrar el sesgo por ventana de la producción con días reales.}
 
 \subsection{Uso de los molinetes}
 
 \textbf{Molinetes en uso.} En el piloto de \EO{} se usaron los 20 molinetes habilitados. Coincide con los 19,5 molinetes
 con tráfico por ventana que registra SBASE.
 
-\textbf{Reparto.} En la realidad, el molinete más usado procesa 11 veces más pasajeros que el menos usado
-\parencite{sbase2026molinetes}. En el piloto de \EO{}, las utilizaciones fueron de entre 17 y 52~\%, un
+\textbf{Reparto.} En la realidad, el molinete más usado procesa 13,6 veces más pasajeros que el menos usado,
+y el coeficiente de variación de la carga entre los 21 molinetes del vestíbulo Principal es 0,56
+\parencite{sbase2026molinetes}. Esta es la única comparación independiente de las entradas: el reparto no
+se carga en el modelo, sale de la regla de elección. El modelo informa el mismo coeficiente por réplica. En el piloto de \EO{}, las utilizaciones fueron de entre 17 y 52~\%, un
 factor de alrededor de 3. \textcite{seriani2025} validan su modelo justamente con esta comparación. El
 modelo reparte la carga más parejo que la realidad, y hay dos razones posibles:
 \begin{itemize}
@@ -76,8 +78,11 @@ en los cuadros horarios usados.
 
 Un atraso parejo solo desplaza las oleadas en el tiempo. Un atraso variable, en cambio, junta trenes que
 el horario separa. Es esperable que eso produzca oleadas más grandes y más cola que las del modelo. El
-supuesto~5 (trenes en horario) es entonces probablemente optimista sobre la espera. Este dato permite
-reemplazar el horario por las llegadas reales de cada día, que es la extensión natural del modelo.
+supuesto de trenes en horario era entonces probablemente optimista sobre la espera. Por eso el modelo
+usa ahora las llegadas reales: cada réplica toma los trenes de su día. Como el horario de marzo a junio no
+es exactamente el vigente desde el 03/08, las llegadas reales además corrigen esa diferencia (por
+ejemplo, el tren 302). Cada tren se asigna a la primera vía libre: con llegadas reales llegan hasta siete
+trenes en diez minutos.
 
 \subsection{Volumen que llega en tren}
 
@@ -89,6 +94,13 @@ $0{,}80 \times \num{18532} \approx \num{14800}$ pasajeros desde los trenes. Har�
 de los que llegan pasen a la Línea~C. La proporción es verosímil para la principal conexión de la
 terminal con el centro, pero no la confirma ningún dato: Trenes Argentinos informó que no hay estudios de
 trasbordo. El valor de 0,80 queda como supuesto, ahora con un orden de magnitud que lo respalda.
+
+Se intentó estimar la proporción con los datos, mediante una regresión de las validaciones por ventana
+contra la cantidad de trenes que llegan en esa ventana, con un efecto fijo por día
+(\texttt{datos/estimar\_proporcion\_roca.py}). No es identificable. El horario es casi el mismo todos los
+días, así que la cantidad de trenes por ventana varía sólo entre 4 y 5 y se confunde con la forma del pico:
+la estimación da 0,15 con un intervalo del 95~\% de $[0{,}00;\ 0{,}28]$, cambia a 0,44 según el rezago de
+caminata que se suponga y cambia de signo si se controla la forma del pico. Por eso no se usa.
 
 \subsection{Geometría del andén y del acceso}
 
@@ -169,5 +181,5 @@ supuestos. Aun así, el reparto más parejo del modelo puede inflar la diferenci
 
 En síntesis, el modelo reproduce lo que el dato permite observar: el caudal, la cantidad de molinetes en
 uso y un volumen en tren compatible con la carga del Roca. Se aparta de la realidad en dos puntos
-identificados: reparte la carga más parejo y supone trenes en horario. Las conclusiones de las secciones
+identificados: reparte la carga más parejo y supone la proporción que llega en tren. Las conclusiones de las secciones
 siguientes se formulan como condicionales a esos supuestos.

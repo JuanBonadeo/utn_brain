@@ -1,5 +1,91 @@
 \section{Paso 7: diseño de experimentos}
 \label{sec:paso7-diseno-experimentos}
-% Origen: 03 §8 y plan §7. E0 contra E1, contextos de sensibilidad, sistema terminal y drenaje, semillas, $n_0$ y $\beta$, $\alpha$ y Bonferroni.
-% Tarea: T5.3. Reglas: citas con \parencite, tablas con booktabs, figuras con \label, nada de Wikipedia.
-[PENDIENTE: T5.3.]
+% Origen: plan §7 (2026-11-04). Reglas: citas con \parencite, tablas con booktabs, figuras con \label, nada de Wikipedia.
+
+\subsection{Escenarios}
+
+Se comparan cuatro configuraciones del vestíbulo Principal (tabla~\ref{tab:escenarios}). Cruzan los dos
+factores que la cátedra y el caso dejan en manos del operador: cuántos molinetes se habilitan y qué tan
+rápido valida cada pasajero.
+
+\begin{table}[H]
+\centering
+\caption{Escenarios del experimento}
+\label{tab:escenarios}
+\small
+\begin{tabularx}{\textwidth}{@{}l l l X@{}}
+\toprule
+Escenario & Molinetes & Validación (s) & Qué representa \\
+\midrule
+\EO{} & 20 & Triangular (1,8; 2,4; 3,5) & Situación actual: los molinetes que el dato muestra en uso \\
+\EI{} & 22 & Triangular (1,8; 2,4; 3,5) & Habilitar los 22 molinetes del vestíbulo Principal \\
+\ET{} & 20 & Triangular (1,5; 1,8; 2,5) & Validación sin contacto (EMV o QR) con los molinetes actuales [supuesto] \\
+\EIT{} & 22 & Triangular (1,5; 1,8; 2,5) & Las dos medidas juntas \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+La validación rápida toma como moda el extremo optimista del rango de la tabla~\ref{tab:parametros}
+\parencite[Exh.~10-27]{tcqsm2013}. No hay medición propia del molinete EMV/QR que ya existe en la estación,
+así que \ET{} y \EIT{} se leen como ``qué pasaría si la validación bajara a ese rango''.
+
+\subsection{Tipo de simulación y réplicas}
+
+El sistema es terminal \parencite{law2015}: arranca vacío a las 07:00 y termina cuando sale el último
+pasajero que ingresó antes de las 09:30. No hay período de calentamiento. Cada réplica es un día hábil real
+sorteado entre los 75 disponibles (sección~\ref{sec:paso2-datos-modelo-conceptual}), con su semilla
+propia, y produce un único valor de cada medida. Los intervalos se arman con esos valores por réplica,
+nunca con las esperas individuales de una misma mañana, que están correlacionadas.
+
+\subsection{Números aleatorios comunes}
+
+Los cuatro escenarios de una réplica usan la misma semilla y el mismo día: reciben exactamente los mismos
+trenes, la misma gente con las mismas velocidades y los mismos sorteos de la validación base. Cada fuente
+de azar (calle, validación, velocidad, carga de los trenes y día) tiene su propio generador, para que el
+escenario no altere el orden de los sorteos. El verificador comprueba que \EO{}, \EI{}, \ET{} y \EIT{}
+generan los mismos ingresos con la misma semilla. Con números comunes,
+\[
+\operatorname{Var}(X_{a}-X_{\EO{}}) = \operatorname{Var}(X_{a}) + \operatorname{Var}(X_{\EO{}})
+  - 2\operatorname{Cov}(X_{a}, X_{\EO{}}),
+\]
+y la covarianza positiva (un día cargado es malo para todos los escenarios) achica el intervalo de la
+diferencia.
+
+\subsection{Comparación y control del error}
+
+Cada alternativa $a \in \{\EI{}, \ET{}, \EIT{}\}$ se compara contra \EO{} con el intervalo $t$ apareado.
+Para la réplica $j$ y la medida $X$, $Z_j = X_{a,j} - X_{\EO{},j}$, y
+\[
+\bar Z(n) \pm t_{n-1,\,1-\alpha_s/2}\sqrt{\frac{\sum_{j=1}^{n}\left[Z_j-\bar Z(n)\right]^2}{n(n-1)}} .
+\]
+Las medidas primarias son tres: el percentil 90 de la espera en la franja, la proporción de pasajeros que
+esperan más de 30~s y el percentil 90 de la espera de quienes llegan entre las 08:15 y las 08:45. Con tres
+primarias y tres comparaciones contra \EO{}, la desigualdad de Bonferroni con $\alpha = 0{,}05$ fija
+$\alpha_s = 0{,}05/9$ para que la confianza conjunta sea al menos del 95~\%. Las demás medidas (espera
+media, largo de cola, cola máxima, utilización, tránsito del Roca hasta la cola y coeficiente de variación
+entre molinetes) son descriptivas, con intervalos individuales del 95~\%.
+
+\subsection{Cantidad de réplicas}
+
+Se corre un piloto de $n_0 = 10$ réplicas y, para cada primaria y comparación, se calcula
+\[
+n^{*}_a(\beta) = \min\left\{ i \ge n_0 : t_{i-1,\,1-\alpha_s/2}\sqrt{S^2(n_0)/i} \le \beta \right\},
+\]
+con un semiancho tolerable fijado antes de ver los datos: $\beta = 1$~s para los percentiles y
+$\beta = 0{,}01$ para la proporción. Se usa precisión absoluta porque la relativa se indefine si la
+diferencia real es casi cero. El diseño de referencia es de 30 réplicas por escenario (120 corridas).
+
+\subsection{Regla de decisión}
+
+Se fija antes de correr. Si el intervalo de una primaria queda entero por debajo de cero, la alternativa
+mejora esa medida con evidencia estadística, y la mejora se informa con el intervalo, no solo con la
+media. Si contiene al cero, no hay evidencia de diferencia con ese $n$; si además es angosto (semiancho
+$\le \beta$), cualquier diferencia es despreciable en la práctica. Si las primarias no coinciden, se
+describe el compromiso y no se declara una mejora global. Entre las alternativas que mejoran, se
+recomienda la de menor percentil 90 si su intervalo frente a las otras también lo sostiene.
+
+\subsection{Sensibilidad}
+
+Fuera de la familia principal se corren los contextos optimista y pesimista de la
+tabla~\ref{tab:parametros} y, con el horario oficial, un atraso uniforme de los trenes de 0 y 240~s, para
+ver si la conclusión cambia de signo.

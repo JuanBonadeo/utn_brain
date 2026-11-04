@@ -3011,6 +3011,7 @@ Conclusiones:
 ---
 
 ## Log
+- **2026-11-04**: TPI subte — réplicas con día hábil real (SBASE + llegadas reales del Roca, 75 días), carga Poisson por tren, escenarios E3/E13 (validación EMV/QR), planilla con Bonferroni k = 9 y script de validación; proporción del Roca no identificable con los datos.
 - **2026-11-04**: TPs 1.1 a 3, guía visual de defensa en `estudio/defensa-tps/` (html + pdf, mismo formato que la defensa del TPI de IO), armada desde `estudio/repaso-tps.md`.
 
 - **2026-11-03** (2): TPI subte. Revisión del estado antes de la reunión con el docente del 04/11 y guion de demo de 10 min en `entregables/TPI/subte/11-guion-demo-avance.md`. Hallazgos: la planilla de resultados es del 05/10 (demora 106 s) y el modelo cambió el 02/11, así que hay que re-correr; los pasos 7-10 del informe siguen vacíos; E1 figura como 22 en el checklist y como 28 en el guion de video y esta wiki; el aviso del 28/10 pide informe tipo paper y link de AnyLogic Cloud.

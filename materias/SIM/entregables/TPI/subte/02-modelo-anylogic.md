@@ -840,3 +840,37 @@ que resumían la caminata por el andén. Ahora el andén se simula:
 La dispersión con la que la oleada llega a la cabecera ya no es un supuesto: sale de caminar de 0 a ~155 m a 1,1-1,5 m/s
 (0 a ~140 s, del orden de los 145 s que se usaban). Costo: más peatones simultáneos en los andenes; medir el tiempo de
 corrida en el piloto.
+
+## Días reales, trenes reales y escenarios E3/E13 (2026-11-04)
+
+Cada réplica de `PeatonalCorridasApareadas` es ahora **un día hábil real** y no el día promedio. Los resultados
+de producción anteriores no valen para este modelo; la planilla se regeneró vacía con el formato nuevo.
+
+| Elemento | Qué hace |
+|---|---|
+| `diaSbasePed` (parámetro) | -1 = perfil medio `perfilPed15min` (como antes; lo usan las franjas visuales); -2 = día sorteado con la semilla (`mezclarSemillaPed(semilla, 4)` módulo 75), el mismo en los cuatro escenarios del par; >= 0 = día fijo |
+| `perfilesDiasPed`, `fechasDiasPed` | Validaciones SBASE por ventana de los 75 días hábiles de mar-jun con servicio normal del Roca. Las embebe `datos/embeber_dias_sbase.py` desde `datos/sbase_dias_ventanas.csv` (que genera `scripts/sim/sbase-perfil.py --exportar-dias`) |
+| `llegadasRealesPed` (parámetro) + `llegadasDiasPed`, `ramalesDiasPed` | Con un día SBASE, los trenes son las llegadas reales de ese día (Trenes Argentinos, `datos/solicitudes/sofse-2026-10-26/trenes-a-pc-mar-jun-2026.xlsx`, al minuto). Ramal 5 = Mar del Plata (tren 302). Se excluyen los 5 días con menos de 40 trenes (servicio interrumpido: 23/03, 07/04, 13/04, 26/05, 18/06) |
+| `cargaTrenPoissonPed` (parámetro) | El pasaje de cada tren es Poisson con media igual a la demanda acumulada de su ramal [SUP] (`poissonTrenPed`, generador `rngTrenesPed`). Con false, redondeo con arrastre como antes |
+| `atrasoMaxRocaSeg` (parámetro) | Atraso uniforme [0, máx] sobre el horario oficial. Sólo para sensibilidad: con llegadas reales queda en 0 |
+| Vía de cada tren | La primera libre a partir de `j % 7`; un tren ocupa la vía desde que aparece hasta que se retira (permanencia + 15 s). Con el horario oficial siempre queda la vía `j % 7`; con llegadas reales llegan hasta 7 trenes en 10 min. El verificador recorre los 75 días y ninguno pone dos trenes en la misma vía |
+| `escenarioPed()` | E0 = 20, E1 = 22, E1B = 28; con validación rápida (moda < 2 s) E3 = 20 y E13 = 22 |
+| Salida | `filaResultadoPed` suma día SBASE, P90 de tránsito del Roca hasta la cola (embudo B2/pasillo) y CV de validaciones entre molinetes (20 campos). Las validaciones por ventana, simuladas y observadas del día, van a `<salida>_ventanas.csv` (filas `VENTANAS_PEATONAL`) |
+
+**Experimento.** `PeatonalCorridasApareadas`: 120 corridas = 30 días × 4 escenarios (`index % 4`: E0, E1, E3,
+E13), semilla `20260923 + index / 4`, `diaSbasePed = -2`, `llegadasRealesPed = true`, `cargaTrenPoissonPed = true`,
+`atrasoMaxRocaSeg = 0`. Validación rápida de E3/E13: triangular (1,5; 1,8; 2,5) s [SUP].
+
+**Análisis.** `cargar_corridas.py` carga cada alternativa en su hoja (`Corridas`/`Resumen` para E1,
+`Corridas E3`/`Resumen E3`, `Corridas E13`/`Resumen E13`), exige el mismo día y la misma demanda en el par y
+calcula los IC con Bonferroni k = 3 primarias × 3 comparaciones = 9. `analisis_corridas.py` imprime las tres
+comparaciones y la covarianza E0-alternativa. `validacion_corridas.py` compara el caudal por ventana con el
+día observado y el CV entre molinetes con SBASE (CV 0,56, máx/mín 13,6 entre los 21 molinetes del Principal).
+
+**Proporción del Roca.** Se intentó estimar con `datos/estimar_proporcion_roca.py` (validaciones por ventana
+contra trenes por ventana, con efecto fijo de día). No es identificable: el horario es casi igual todos los
+días, los trenes por ventana sólo varían entre 4 y 5 y se confunden con la forma del pico (0,15, IC 95 %
+[0,00; 0,28], 0,15-0,44 según el rezago, cambia de signo con tendencia cuadrática). Queda 0,80 [SUP].
+
+**Pendiente.** Correr en el IDE: franja visual (ahora sigue con el perfil medio y el horario oficial) y un par
+de `PeatonalCorridasApareadas`; medir el tiempo por corrida, que con 120 corridas manda en el cronograma.
