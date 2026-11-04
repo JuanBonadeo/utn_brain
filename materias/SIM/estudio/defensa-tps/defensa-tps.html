@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Defensa TPs · Simulación</title>
+<style>
+:root{
+  --ink:#1f2733; --muted:#6b7480; --line:#e3e6ea; --soft:#f6f7f9;
+  --e1:#2456c9; --e1s:#eef3fd; --e1m:#c9d8f6;
+  --e2:#0f8a7e; --e2s:#ebf6f4; --e2m:#bfe3de;
+  --e3:#c26a0a; --e3s:#fdf4e8; --e3m:#f1d5b0;
+  --ok:#1d9a52; --bad:#d23c3c; --warn:#d9730d;
+}
+@page{ size:A4; margin:13mm 14mm 14mm; }
+*{ box-sizing:border-box; }
+html{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+body{ margin:0; background:#fff; color:var(--ink);
+  font-family:"Avenir Next","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size:9.6pt; line-height:1.48; font-feature-settings:"tnum"; }
+p{ margin:0 0 6px; }
+ul{ margin:2px 0 6px; padding-left:17px; }
+li{ margin-bottom:2px; }
+b,strong{ font-weight:650; }
+h1,h2,h3{ margin:0; font-weight:700; letter-spacing:-.01em; }
+.muted{ color:var(--muted); }
+.small{ font-size:8.6pt; }
+.nb{ white-space:nowrap; }
+.gen{ display:inline-block; font-size:7.2pt; font-weight:700; letter-spacing:.05em; text-transform:uppercase;
+  color:var(--muted); border:1px solid var(--line); border-radius:20px; padding:0 6px; vertical-align:1px; }
+
+/* ---------- portada ---------- */
+.cover{ border-radius:14px; padding:18px 22px 16px; color:#fff;
+  background:linear-gradient(120deg,#1d2b45 0%,#24406f 55%,#2456c9 100%); margin-bottom:14px; }
+.cover .kicker{ font-size:8.5pt; letter-spacing:.14em; text-transform:uppercase; opacity:.75; }
+.cover h1{ font-size:22pt; margin:4px 0 2px; }
+.cover .sub{ opacity:.85; font-size:10pt; }
+.road{ display:grid; grid-template-columns:1fr 26px 1fr 26px 1fr; align-items:stretch; margin:0 0 8px; }
+.road .st{ border-radius:11px; padding:10px 12px; border:1.5px solid; background:#fff; }
+.road .st .n{ font-size:7.8pt; font-weight:700; letter-spacing:.12em; text-transform:uppercase; }
+.road .st h3{ font-size:11pt; margin:2px 0 3px; }
+.road .st .r{ font-size:8.8pt; border-top:1px dashed var(--line); padding-top:5px; margin-top:4px; }
+.road .st .r div{ margin-bottom:3px; }
+.road .arr{ display:flex; align-items:center; justify-content:center; color:#aab2bd; font-size:16pt; }
+.road .s1{ border-color:var(--e1m); } .road .s1 .n{ color:var(--e1); }
+.road .s2{ border-color:var(--e2m); } .road .s2 .n{ color:var(--e2); }
+.road .s3{ border-color:var(--e3m); } .road .s3 .n{ color:var(--e3); }
+.tp{ display:inline-block; font-size:7.6pt; font-weight:800; border-radius:5px; padding:0 5px; margin-right:4px; }
+.s1 .tp{ background:var(--e1s); color:var(--e1); } .s2 .tp{ background:var(--e2s); color:var(--e2); } .s3 .tp{ background:var(--e3s); color:var(--e3); }
+
+/* ---------- secciones de TP ---------- */
+.stage{ break-before:page; }
+.band{ display:flex; gap:14px; align-items:center; border-radius:12px; padding:12px 16px; margin:0 0 12px; color:#fff; }
+.band .num{ font-size:28pt; font-weight:800; line-height:1; opacity:.95; min-width:58px; }
+.band .k{ font-size:8pt; letter-spacing:.14em; text-transform:uppercase; opacity:.8; }
+.band h2{ font-size:15.5pt; }
+.s1 .band{ background:linear-gradient(110deg,#1e48ad,#2f6ae0); }
+.s2 .band{ background:linear-gradient(110deg,#0b7268,#14a394); }
+.s3 .band{ background:linear-gradient(110deg,#a85a06,#dd8a1f); }
+
+.sec{ margin:14px 0 8px; display:flex; align-items:center; gap:8px; break-after:avoid; }
+.sec .dot{ width:22px; height:22px; border-radius:50%; color:#fff; font-weight:700; font-size:9pt;
+  display:flex; align-items:center; justify-content:center; flex:none; }
+.sec h3{ font-size:12pt; }
+.s1 .dot{ background:var(--e1); } .s2 .dot{ background:var(--e2); } .s3 .dot{ background:var(--e3); }
+.s1 .sec h3{ color:#1a3d8f; } .s2 .sec h3{ color:#0b6b62; } .s3 .sec h3{ color:#94520a; }
+
+.keep{ break-inside:avoid; }
+.grid2{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.grid3{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; }
+.g-7-5{ display:grid; grid-template-columns:7.2fr 4.8fr; gap:14px; align-items:start; }
+
+.card{ border:1px solid var(--line); border-radius:10px; padding:9px 12px; background:#fff; break-inside:avoid; }
+.card.tint1{ background:var(--e1s); border-color:var(--e1m); }
+.card.tint2{ background:var(--e2s); border-color:var(--e2m); }
+.card.tint3{ background:var(--e3s); border-color:var(--e3m); }
+.card h4{ margin:0 0 4px; font-size:9.8pt; }
+.fig{ border:1px solid var(--line); border-radius:10px; padding:8px 10px 7px; break-inside:avoid; }
+.fig img{ width:100%; display:block; border-radius:6px; }
+.fig .cap{ font-size:8.4pt; color:var(--muted); margin-top:4px; }
+.fig .ttl{ font-size:9pt; font-weight:700; margin-bottom:4px; }
+
+.callout{ border:1px solid; border-radius:10px; padding:9px 12px; margin:8px 0; break-inside:avoid; }
+.callout .h{ font-weight:700; margin-bottom:3px; }
+.callout.criollo{ background:#fff8e6; border-color:#f0d58a; }
+.callout.criollo .h::before{ content:"En criollo · "; color:#a77b00; }
+.callout.prof{ background:#fdf1f1; border-color:#f1c3c3; }
+.callout.prof .h::before{ content:"Lo que nos pueden marcar · "; color:var(--bad); }
+.callout.idea{ background:var(--soft); border-color:var(--line); }
+
+.ask{ display:grid; grid-template-columns:1fr 1fr; gap:4px 16px; font-size:9pt; }
+.ask div{ position:relative; padding-left:13px; }
+.ask div::before{ content:"▸"; color:#aab2bd; position:absolute; left:0; top:0; }
+
+/* tablas */
+table{ border-collapse:collapse; width:100%; }
+table.t{ font-size:9pt; }
+table.t th{ text-align:left; font-size:7.9pt; letter-spacing:.04em; text-transform:uppercase; color:var(--muted);
+  font-weight:700; border-bottom:1.5px solid var(--line); padding:4px 6px; }
+table.t td{ border-bottom:1px solid var(--line); padding:4px 6px; vertical-align:top; }
+table.t tr:last-child td{ border-bottom:none; }
+table.t td.c, table.t th.c{ text-align:center; }
+table.t td.n{ white-space:nowrap; font-weight:600; }
+table.t tr.hl td{ background:#fff8e6; }
+.ok{ color:var(--ok); font-weight:800; } .bad{ color:var(--bad); font-weight:800; } .warn{ color:var(--warn); font-weight:800; }
+
+.fobj{ text-align:center; font-size:12.5pt; font-weight:650; padding:8px; border-radius:10px; background:var(--soft); margin:6px 0 8px; }
+.calc{ font-size:9.5pt; background:var(--soft); border-radius:8px; padding:6px 10px; margin:4px 0; }
+.big{ font-size:15pt; font-weight:800; }
+
+/* indicadores */
+.kpis{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:6px 0 8px; }
+.kpi{ border-radius:10px; padding:8px 10px; text-align:center; border:1px solid var(--line); }
+.kpi .v{ font-size:13.5pt; font-weight:800; line-height:1.15; }
+.kpi .l{ font-size:8pt; color:var(--muted); }
+.s1 .kpi{ background:var(--e1s); border-color:var(--e1m); } .s1 .kpi .v{ color:var(--e1); }
+.s2 .kpi{ background:var(--e2s); border-color:var(--e2m); } .s2 .kpi .v{ color:var(--e2); }
+.s3 .kpi{ background:var(--e3s); border-color:var(--e3m); } .s3 .kpi .v{ color:var(--e3); }
+
+/* barras */
+.gauge{ display:grid; grid-template-columns:78px 1fr 132px; gap:8px; align-items:center; margin:5px 0; font-size:9pt; }
+.gauge .bar{ position:relative; height:16px; border-radius:8px; background:#eef0f3; overflow:hidden; }
+.gauge .fill{ position:absolute; left:0; top:0; bottom:0; border-radius:8px; }
+.gauge .fill.r{ background:linear-gradient(90deg,#e45a5a,#d23c3c); }
+.gauge .fill.o{ background:linear-gradient(90deg,#f0a24b,#d9730d); }
+.gauge .fill.g{ background:linear-gradient(90deg,#4fbf7e,#1d9a52); }
+.gauge .lab{ position:absolute; left:8px; top:0; line-height:16px; font-size:8pt; font-weight:700; color:#fff; }
+.gauge .st{ font-size:8.6pt; text-align:right; }
+
+/* ciclo */
+.cycle{ display:flex; align-items:center; justify-content:center; gap:6px; margin:6px 0 2px; }
+.cycle .nd{ border:1.5px solid #f2bcbc; background:#fff5f5; color:var(--bad); font-weight:800; border-radius:8px; padding:3px 10px; font-size:11pt; }
+.cycle .ar{ color:#aab2bd; font-size:13pt; }
+.cycle .back{ font-size:8.4pt; color:var(--muted); margin-left:4px; }
+
+/* métodos */
+.meth{ border-radius:10px; padding:8px 11px; background:var(--e2s); border:1px solid var(--e2m); break-inside:avoid; }
+.meth .h{ font-size:8pt; letter-spacing:.06em; text-transform:uppercase; color:var(--e2); font-weight:800; }
+.meth .d{ font-weight:700; margin:1px 0 3px; }
+.meth .w{ font-size:8.7pt; color:var(--muted); }
+
+.policy{ border-radius:12px; padding:12px 16px; background:linear-gradient(110deg,#a85a06,#dd8a1f); color:#fff; break-inside:avoid; margin:10px 0; }
+.policy .big{ font-size:13pt; }
+.policy .row{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:8px; }
+.policy .row div{ background:rgba(255,255,255,.16); border-radius:8px; padding:6px 9px; font-size:8.6pt; }
+.policy .row b{ display:block; font-size:12pt; }
+
+.result{ display:flex; gap:10px; align-items:center; border-radius:10px; padding:9px 12px; margin:8px 0; break-inside:avoid; }
+.result .ic{ font-size:16pt; }
+.s1 .result{ background:var(--e1s); } .s2 .result{ background:var(--e2s); } .s3 .result{ background:var(--e3s); }
+
+/* preguntas */
+.qa{ margin-top:12px; border-radius:12px; padding:10px 14px 4px; }
+.s1 .qa{ background:var(--e1s); } .s2 .qa{ background:var(--e2s); } .s3 .qa{ background:var(--e3s); }
+.qa > h3{ font-size:11pt; margin-bottom:6px; break-after:avoid; }
+.s1 .qa > h3{ color:#1a3d8f; } .s2 .qa > h3{ color:#0b6b62; } .s3 .qa > h3{ color:#94520a; }
+.q{ background:#fff; border-radius:9px; padding:7px 11px; margin-bottom:7px; break-inside:avoid; }
+.q .p{ font-weight:700; margin-bottom:2px; }
+.s1 .q .p{ color:#1a3d8f; } .s2 .q .p{ color:#0b6b62; } .s3 .q .p{ color:#94520a; }
+
+.final{ break-inside:avoid; margin-top:14px; border-radius:12px; padding:12px 14px; background:#1d2b45; color:#fff; }
+.final h3{ font-size:12pt; margin-bottom:8px; }
+.final .grid3 div{ background:rgba(255,255,255,.08); border-radius:9px; padding:8px 10px; font-size:8.9pt; }
+.final .grid3 b{ display:block; font-size:8pt; letter-spacing:.1em; text-transform:uppercase; margin-bottom:3px; }
+.final .c1{ color:#9cb8f5; } .final .c2{ color:#7fd8cd; } .final .c3{ color:#f4c27f; }
+code{ font-family:"SF Mono",Menlo,Consolas,monospace; font-size:8.4pt; background:var(--soft); border-radius:4px; padding:0 4px; }
+table.cmd code{ background:none; padding:0; }
+</style>
+</head>
+<body>
+
+<!-- ======================================================= PORTADA -->
+<div class="cover">
+  <div class="kicker">Simulación · UTN FRRO · 2026 · TP 1.1 a TP 3</div>
+  <h1>Defensa de los TPs de práctica</h1>
+  <div class="sub">Qué hicimos en cada TP, qué números hay que tener en la cabeza, qué mostrar y qué nos pueden marcar.</div>
+</div>
+
+<div class="road">
+  <div class="st s1"><div class="n">Bloque 1 · TP 1.1 y 1.2</div><h3>Simular el azar</h3>
+    <div class="r">
+      <div><span class="tp">1.1</span>La ruleta confirma la ley de los grandes números y el TCL.</div>
+      <div><span class="tp">1.2</span>Ninguna estrategia le gana a la casa: cada apuesta pierde <b>1/37</b>.</div>
+    </div></div>
+  <div class="arr">›</div>
+  <div class="st s2"><div class="n">Bloque 2 · TP 2.1 y 2.2</div><h3>Fabricar el azar</h3>
+    <div class="r">
+      <div><span class="tp">2.1</span>Cómo se generan números U(0,1) y cómo se prueba que sirven.</div>
+      <div><span class="tp">2.2</span>Cómo convertirlos en <b>9 distribuciones</b> distintas.</div>
+    </div></div>
+  <div class="arr">›</div>
+  <div class="st s3"><div class="n">Bloque 3 · TP 3</div><h3>Usar el azar en un modelo</h3>
+    <div class="r">
+      <div><span class="tp">3</span>Colas M/M/1 e inventario (s, S) en Python y AnyLogic, contra la teoría.</div>
+      <div>Política óptima <b>(30, 60)</b>, costo <b>≈ 119,4</b>.</div>
+    </div></div>
+</div>
+
+<div class="callout idea">
+  <div class="h">El hilo que une los cinco TPs (para arrancar la defensa)</div>
+  <p style="margin:0">Primero <b>simulamos el azar</b> con una ruleta. Después <b>apostamos</b> sobre ella y vimos que la casa siempre gana. Después aprendimos a <b>fabricar el azar</b> (generadores de U(0,1)) y a <b>darle forma</b> (distribuciones). Al final usamos todo eso para mover <b>modelos de eventos discretos</b> (colas e inventario). Los cinco siguen el mismo patrón: <b>lo simulado se compara contra lo teórico, con varias corridas independientes</b>.</p>
+</div>
+
+<table class="t keep" style="margin-top:8px">
+  <tr><th style="width:7%">TP</th><th style="width:24%">Tema</th><th style="width:17%">Herramienta</th><th>Qué demuestra</th><th class="c" style="width:16%">Repeticiones</th></tr>
+  <tr><td class="n">1.1</td><td>Ruleta europea</td><td>Python + Matplotlib</td><td>Ley de los grandes números y teorema central del límite</td><td class="c">30 corridas × 1000</td></tr>
+  <tr><td class="n">1.2</td><td>Estrategias de apuesta</td><td>Python (+ web en Flask)</td><td>Ninguna estrategia cambia la esperanza negativa</td><td class="c">30 corridas × 1000</td></tr>
+  <tr><td class="n">2.1</td><td>Generadores pseudoaleatorios</td><td>Python</td><td>Cómo se fabrica U(0,1) y cómo se valida (6 tests)</td><td class="c">10 000 valores</td></tr>
+  <tr><td class="n">2.2</td><td>Variables aleatorias</td><td>Python</td><td>Cómo pasar de U(0,1) a 9 distribuciones</td><td class="c">10 000 valores</td></tr>
+  <tr><td class="n">3</td><td>M/M/1, M/M/1/K e inventario</td><td>Python + AnyLogic</td><td>Eventos discretos validados contra la teoría y entre herramientas</td><td class="c">≥ 10 réplicas, IC 95 %</td></tr>
+</table>
+
+<div class="grid3" style="margin-top:10px">
+  <div class="card"><h4>Cómo leer esta guía</h4>Cada TP arranca con el resumen <b>en criollo</b> (la versión para contarlo en 30 segundos). Después vienen lo que pedía la consigna, lo que hicimos y los números clave.</div>
+  <div class="card"><h4 style="color:var(--bad)">Recuadros rojos</h4>Lo que el informe no muestra o tiene mal. Conviene conocerlo <b>antes</b> de que lo marquen, con la respuesta preparada.</div>
+  <div class="card"><h4><span class="gen">fuera del informe</span></h4>Explicaciones que no están en los informes ni en las consignas: son contexto agregado para poder defenderlos.</div>
+</div>
+
+<!-- ======================================================= TP 1.1 -->
+<section class="stage s1">
+<div class="band"><div class="num">1.1</div><div><div class="k">Bloque 1 · Simular el azar</div>
+  <h2>Simulación de una ruleta</h2></div></div>
+
+<div class="callout criollo">
+  <div class="h">qué hicimos</div>
+  Hicimos una ruleta en Python que tira números del 0 al 36 y miramos cómo se comportan las cuentas tirada a tirada. Al principio es un caos: el 17 sale dos veces seguidas o no sale nunca. Con mil tiradas todo se acomoda a lo que dice la teoría: cada número sale 1 de cada 37 veces y el promedio da 18. Y si repetís el experimento 30 veces, los 30 promedios quedan amontonados alrededor de 18, en forma de campana. Es la <b>ley de los grandes números</b> y el <b>teorema central del límite</b>, vistos con los ojos.
+</div>
+
+<div class="sec"><div class="dot">1</div><h3>Qué pedía la consigna</h3></div>
+<div class="ask">
+  <div>Programa en Python: <code>python programa.py -c XXX -n YYY -e ZZ</code> (corridas, tiradas, número elegido).</div>
+  <div>Cuatro gráficas de una corrida contra su valor esperado: frecuencia relativa, promedio, <b>desvío</b> y varianza.</div>
+  <div>Varias corridas en gráficas simultáneas, con la cantidad justificada (mínimo 8 gráficas).</div>
+  <div>Justificar con la teoría (TCL, estadísticos) e informe en LaTeX con formato de paper.</div>
+</div>
+
+<div class="sec"><div class="dot">2</div><h3>Qué hicimos</h3></div>
+<div class="g-7-5">
+  <div>
+    <p>Una ruleta europea tiene <b>37 casilleros</b> (del 0 al 36). Cada tirada es una uniforme discreta, generada con <code>random.randint(0, 36)</code>. Se corrió con <b>c = 30</b> corridas, <b>n = 1000</b> tiradas y el número <b>e = 17</b>.</p>
+    <p>Tirada a tirada, y en forma acumulada, el programa calcula la frecuencia absoluta y relativa del 17, la media, la varianza y el desvío. Sin NumPy: son bucles explícitos.</p>
+  </div>
+  <table class="t">
+    <tr><th>Estadístico</th><th class="c">Teórico</th></tr>
+    <tr><td>P(X = 17)</td><td class="c n">1/37 ≈ 0,027</td></tr>
+    <tr><td>Media μ</td><td class="c n">18</td></tr>
+    <tr><td>Varianza σ²</td><td class="c n">(37² − 1)/12 ≈ 114,33</td></tr>
+    <tr><td>Desvío σ</td><td class="c n">≈ 10,69</td></tr>
+    <tr><td>Error estándar (n = 1000)</td><td class="c n">σ/√n ≈ 0,338</td></tr>
+  </table>
+</div>
+
+<div class="sec"><div class="dot">3</div><h3>Resultados: dos teoremas, dos escalas</h3></div>
+<div class="grid2">
+  <div class="card tint1"><h4 style="color:var(--e1)">Dentro de cada corrida → ley de los grandes números</h4>Los estadísticos arrancan muy volátiles: la frecuencia relativa llega a 0,14, la media arranca en ≈ 31 y la varianza pica en ≈ 190. A partir de las <b>300 o 400 tiradas</b> se estabilizan cerca del valor teórico.</div>
+  <div class="card tint1"><h4 style="color:var(--e1)">Entre corridas → teorema central del límite</h4>Las 30 medias finales caen entre <b>17,4 y 18,6</b>, dentro del 18 ± 2σ/√n = 18 ± 0,676 que predice el TCL, y su histograma tiene forma de campana.</div>
+</div>
+<p class="small muted" style="margin-top:6px">Extra: sobre las 30 000 tiradas, los 37 números quedan con frecuencias entre 0,025 y 0,029. El generador de Python se comporta como uniforme.</p>
+
+<div class="grid2" style="margin-top:6px">
+  <div class="fig"><div class="ttl">Mostrar: el embudo</div><img src="../../figs/tps-11-frec-relativa-corridas.png"><div class="cap">Frecuencia relativa del 17 en las 30 corridas: arrancan dispersas y terminan pegadas a 1/37.</div></div>
+  <div class="fig"><div class="ttl">Mostrar: la campana</div><img src="../../figs/tps-11-histograma-medias.png"><div class="cap">Histograma de las 30 medias finales, centrado en 18. Con estas dos gráficas se cuentan los dos teoremas.</div></div>
+</div>
+
+<div class="callout prof">
+  <div class="h">falta la gráfica del desvío</div>
+  La consigna pide el <b>desvío</b> contra n y el informe no lo grafica (tiene frecuencia absoluta, relativa, media y varianza). El mínimo de 8 gráficas sí se cumple (hay 9). <b>Respuesta:</b> el desvío es la raíz de la varianza, así que converge igual que ella, a 10,69.
+</div>
+<div class="callout prof">
+  <div class="h">el orden de convergencia está contradicho</div>
+  El informe dice que converge primero la media (n ≈ 200), después la frecuencia relativa (n ≈ 400) y "finalmente" la varianza, pero a la varianza le asigna n ≈ 300. Medido en error relativo, el orden real es <b>media → varianza → frecuencia relativa</b>. Con n = 1000 la media tiene ≈ 1,9 % de error, la varianza ≈ 2,8 % y la frecuencia de un número puntual ≈ 19 %, porque p = 1/37 es muy chica. <span class="gen">fuera del informe</span>
+</div>
+
+<div class="qa">
+  <h3>Preguntas probables · TP 1.1</h3>
+  <div class="q"><div class="p">¿Por qué 30 corridas y no una sola muy larga?</div>Una corrida larga muestra la convergencia (ley de los grandes números). Varias corridas independientes muestran cuánto varía el resultado de una réplica a otra y permiten armar un intervalo de confianza (TCL).</div>
+  <div class="q"><div class="p">¿Cuál es la diferencia entre la ley de los grandes números y el TCL?</div>La ley dice <b>a dónde</b> va el promedio: al valor esperado. El TCL dice <b>cómo se reparten</b> los promedios alrededor de ese valor: en forma normal, con desvío σ/√n.</div>
+  <div class="q"><div class="p">¿Por qué la frecuencia del 17 tarda tanto en estabilizarse?</div>Porque es un evento raro (p = 1/37). Su error relativo es mucho más grande que el de la media, que usa la información de todas las tiradas.</div>
+</div>
+</section>
+
+<!-- ======================================================= TP 1.2 -->
+<section class="stage s1">
+<div class="band"><div class="num">1.2</div><div><div class="k">Bloque 1 · Simular el azar</div>
+  <h2>Estrategias de apuesta: ¿se le puede ganar a la casa?</h2></div></div>
+
+<div class="callout criollo">
+  <div class="h">qué hicimos</div>
+  Agarramos la ruleta del 1.1 y nos pusimos a apostar con las "estrategias para ganarle al casino" que andan por internet: Martingala (duplicar cuando perdés), D'Alembert (subir de a uno), Fibonacci (seguir la sucesión) y la de Winograd, el argentino que hizo saltar la banca en Mar del Plata. Conclusión: <b>ninguna le gana a la casa</b>. Por culpa del cero, cada peso apostado pierde en promedio 2,7 centavos, y eso no lo cambia ninguna estrategia: solo cambia <b>cuándo y cómo</b> perdés. Con plata limitada, la Martingala te funde en 2 de cada 3 sesiones.
+</div>
+
+<div class="sec"><div class="dot">1</div><h3>Qué pedía la consigna</h3></div>
+<div class="ask">
+  <div>Simular las apuestas siguiendo el flujo de caja y explicar los pagos (color, fila, número).</div>
+  <div>Martingala, D'Alembert, Fibonacci y una estrategia elegida por el grupo, con fuentes.</div>
+  <div>Cada una con capital infinito y con capital acotado; en el acotado, contar las quiebras.</div>
+  <div>Parámetros nuevos <code>-s</code> (m, d, f, o) y <code>-a</code> (i, f); al menos 3 gráficas por estrategia.</div>
+</div>
+
+<div class="sec"><div class="dot">2</div><h3>La idea central (hay que decirla sí o sí)</h3></div>
+<p>En chance simple (rojo/negro, par/impar) hay 18 números que ganan y 19 que pierden, contando el cero:</p>
+<div class="fobj">E = a · 18/37 − a · 19/37 = <span style="color:var(--bad)">−a/37 ≈ −0,027 · a</span></div>
+<p>Cada apuesta pierde en promedio <b>1/37 de lo apostado</b>, sea cual sea la estrategia. Las estrategias cambian <b>cuánto</b> y <b>cuándo</b> se apuesta, no el signo de la esperanza.</p>
+
+<div class="sec"><div class="dot">3</div><h3>Qué hicimos y qué dio</h3></div>
+<p>30 corridas de 1000 tiradas con semilla 42. Capital finito: <b>C₀ = 1000</b>, apuesta mínima 1. Martingala, D'Alembert y Fibonacci apuestan a chance simple (paga 1 a 1); Winograd pone una ficha a cada número del 22 al 36 en todas las tiradas. Hay además una página web en Flask para correrlo desde el navegador.</p>
+<table class="t keep">
+  <tr><th style="width:15%">Estrategia</th><th style="width:30%">Regla</th><th class="c">Capital ∞ (media)</th><th class="c">Capital finito (media)</th><th class="c">Quiebras</th></tr>
+  <tr><td><b>Martingala</b></td><td>pierde → duplica; gana → vuelve a 1</td><td class="c n">+472,07</td><td class="c n">−342,60</td><td class="c n bad">20/30</td></tr>
+  <tr><td><b>D'Alembert</b></td><td>pierde → +1; gana → −1</td><td class="c n">−737,87</td><td class="c n">−501,53</td><td class="c n bad">17/30</td></tr>
+  <tr><td><b>Winograd</b></td><td>una ficha del 22 al 36 (15 por tirada)</td><td class="c n">−416,40</td><td class="c n">−415,00</td><td class="c n warn">10/30</td></tr>
+  <tr><td><b>Fibonacci</b></td><td>pierde → avanza 1; gana → retrocede 2</td><td class="c n">+167,57</td><td class="c n">−17,00</td><td class="c n ok">5/30</td></tr>
+</table>
+
+<div class="g-7-5" style="margin-top:10px">
+  <div class="card keep">
+    <div class="ttl" style="font-weight:700;margin-bottom:4px">Quiebras con capital finito: siguen a lo agresiva que es la progresión</div>
+    <div class="gauge"><b>Martingala</b><div class="bar"><div class="fill r" style="width:66.7%"></div></div><div class="st"><b>66,7 %</b> · crece exponencial</div></div>
+    <div class="gauge"><b>D'Alembert</b><div class="bar"><div class="fill r" style="width:56.7%"></div></div><div class="st"><b>56,7 %</b> · crece lineal</div></div>
+    <div class="gauge"><b>Winograd</b><div class="bar"><div class="fill o" style="width:33.3%"></div></div><div class="st"><b>33,3 %</b> · apuesta fija</div></div>
+    <div class="gauge"><b>Fibonacci</b><div class="bar"><div class="fill g" style="width:16.7%"></div></div><div class="st"><b>16,7 %</b> · la más lenta</div></div>
+  </div>
+  <div>
+    <div class="card tint1"><h4 style="color:var(--e1)">Martingala aguanta solo 9 pérdidas seguidas</h4>1 + 2 + … + 256 = 511. La décima apuesta (512) ya no entra en los 1000. En 1000 tiradas, una racha así es esperable.</div>
+  </div>
+</div>
+<div class="callout idea"><div class="h">Winograd sirve para validar el modelo</div>Apuesta fija, así que se puede calcular a mano. Teoría: 21·15/37 − 15·22/37 = −15/37 ≈ −0,405 por tirada → <b>−405,4</b> en 1000 tiradas. Simulación: <b>−416,4</b>. Coinciden.</div>
+
+<div class="fig" style="margin-top:8px">
+  <div class="ttl">Mostrar: Martingala con capital finito</div>
+  <img src="../../figs/tps-12-martingala-finito.png" style="width:80%;margin:0 auto">
+  <div class="cap">La escalera sube +1 por ciclo ganado y cae a pique cuando llega la racha larga (20 quiebras en 30). Esa sola gráfica resume el TP.</div>
+</div>
+
+<div class="callout prof">
+  <div class="h">diferencias menores con la consigna</div>
+  <ul style="margin:0">
+    <li>La gráfica de barras muestra la <b>ganancia en plata</b> de cada tirada, no la "frecuencia relativa de obtener la apuesta favorable" del boceto.</li>
+    <li>La estrategia propia se elige con <code>-s w</code>, no con <code>-s o</code>.</li>
+    <li>No hay tabla de pagos por tipo de apuesta: solo aparecen chance simple (1 a 1) y pleno (35 a 1).</li>
+  </ul>
+  <p style="margin:4px 0 0">Lo central sí está: las cuatro estrategias, los dos tipos de capital, las quiebras y las 3 gráficas por estrategia.</p>
+</div>
+
+<div class="qa">
+  <h3>Preguntas probables · TP 1.2</h3>
+  <div class="q"><div class="p">Si la esperanza es negativa, ¿por qué la Martingala "gana" +472 con capital infinito?</div>Porque el resultado es muy asimétrico. Casi todas las corridas ganan ≈ +1 por ciclo (unas +480 en 1000 tiradas), y una fracción minúscula pierde fortunas: una racha de 20 pérdidas cuesta ≈ 2²⁰, un millón. Con 30 corridas ese caso casi nunca aparece, y por eso la media muestral sale positiva. Lo mismo vale para el +167 de Fibonacci. <span class="gen">fuera del informe</span></div>
+  <div class="q"><div class="p">¿Por qué D'Alembert pierde más con capital infinito que con finito?</div>Con capital finito la corrida se corta al quebrar, y la pérdida queda acotada por los 1000 iniciales. Con capital infinito sigue apostando montos crecientes y la pérdida no tiene techo.</div>
+  <div class="q"><div class="p">¿Qué hace el cero?</div>Es el casillero que no es ni rojo ni negro: hace que perder (19/37) sea un poco más probable que ganar (18/37). De ahí sale toda la ventaja de la casa.</div>
+</div>
+</section>
+
+<!-- ======================================================= TP 2.1 -->
+<section class="stage s2">
+<div class="band"><div class="num">2.1</div><div><div class="k">Bloque 2 · Fabricar el azar</div>
+  <h2>Generadores pseudoaleatorios y cómo se testean</h2></div></div>
+
+<div class="callout criollo">
+  <div class="h">qué hicimos</div>
+  La compu no puede tirar dados: los números "al azar" salen de una fórmula que, arrancando de una semilla, siempre da la misma secuencia. Programamos dos de esas fórmulas (el GCL y los cuadrados medios de von Neumann), las comparamos con la de Python y las pasamos por <b>seis pruebas</b> para ver si los números parecen azar de verdad. El GCL y el de Python aprueban todo. Cuadrados medios, al rato de arrancar, <b>se queda trabado repitiendo los mismos cuatro números</b>, y las pruebas lo agarran.
+</div>
+
+<div class="sec"><div class="dot">1</div><h3>Qué pedía la consigna</h3></div>
+<p>Investigar generadores reales y pseudoaleatorios y los tests para evaluarlos. Programar al menos <b>dos generadores</b>, uno de ellos un GCL, y testear el GCL con al menos <b>cuatro pruebas</b>. Compararlos con el de Python, idealmente en una tabla.</p>
+
+<div class="sec"><div class="dot">2</div><h3>Los tres generadores (n = 10 000, semilla 5731)</h3></div>
+<div class="grid3">
+  <div class="card tint2"><h4 style="color:var(--e2)">GCL (congruencial lineal mixto)</h4>Xᵢ₊₁ = (a·Xᵢ + c) mod m &nbsp;·&nbsp; Uᵢ = Xᵢ/m<br><span class="small">a = 1 103 515 245 · c = 12 345 · m = 2³¹</span></div>
+  <div class="card tint2"><h4 style="color:var(--e2)">Cuadrados medios (von Neumann)</h4>Se eleva el número al cuadrado y se toman los <b>4 dígitos del centro</b> como el siguiente.</div>
+  <div class="card tint2"><h4 style="color:var(--e2)">Python <code>random.random()</code></h4>Mersenne Twister. Lo usamos como <b>referencia</b> de un generador bueno.</div>
+</div>
+
+<div class="sec"><div class="dot">3</div><h3>Seis tests con α = 0,05</h3></div>
+<table class="t keep">
+  <tr><th style="width:30%">Test (aprueba si…)</th><th>Qué mira</th><th class="c" style="width:12%">GCL</th><th class="c" style="width:14%">Cuad. medios</th><th class="c" style="width:12%">Python</th></tr>
+  <tr><td>Media (Z &lt; 1,96)</td><td>que el promedio dé 0,5</td><td class="c"><span class="ok">0,044 ✓</span></td><td class="c"><span class="bad">3,32 ✗</span></td><td class="c"><span class="ok">0,886 ✓</span></td></tr>
+  <tr><td>Varianza (Z &lt; 1,96)</td><td>que la varianza dé 1/12</td><td class="c"><span class="ok">0,017 ✓</span></td><td class="c"><span class="bad">27,99 ✗</span></td><td class="c"><span class="ok">0,240 ✓</span></td></tr>
+  <tr><td>χ², 10 intervalos (&lt; 16,919)</td><td>que cada intervalo tenga el 10 %</td><td class="c"><span class="ok">3,15 ✓</span></td><td class="c"><span class="bad">14 795 ✗</span></td><td class="c"><span class="ok">4,70 ✓</span></td></tr>
+  <tr><td>Kolmogorov-Smirnov (&lt; 0,0136)</td><td>que la acumulada sea la de U(0,1)</td><td class="c"><span class="ok">0,0049 ✓</span></td><td class="c"><span class="bad">0,2078 ✗</span></td><td class="c"><span class="ok">0,0090 ✓</span></td></tr>
+  <tr><td>Corridas arriba/abajo de 0,5</td><td>que no haya rachas raras</td><td class="c"><span class="ok">0,997 ✓</span></td><td class="c"><span class="ok">0,060 ✓</span></td><td class="c"><span class="ok">0,434 ✓</span></td></tr>
+  <tr><td>Autocorrelación de lag 1</td><td>que un valor no anticipe al siguiente</td><td class="c"><span class="ok">1,259 ✓</span></td><td class="c"><span class="ok">0,182 ✓</span></td><td class="c"><span class="ok">0,121 ✓</span></td></tr>
+</table>
+<div class="result"><div class="ic">◎</div><div>El <b>GCL y Python pasan los seis tests</b>. Cuadrados medios falla los cuatro que miran la distribución (media, varianza, χ² y KS).</div></div>
+
+<div class="sec"><div class="dot">4</div><h3>Por qué falla cuadrados medios <span class="gen">fuera del informe · verificado corriendo el código</span></h3></div>
+<div class="g-7-5">
+  <div>
+    <p>Con semilla 5731, en el <b>paso 71</b> cae en este ciclo y no sale más:</p>
+    <div class="cycle"><span class="nd">6100</span><span class="ar">→</span><span class="nd">2100</span><span class="ar">→</span><span class="nd">4100</span><span class="ar">→</span><span class="nd">8100</span><span class="back">↺ vuelve a 6100</span></div>
+    <p class="small muted" style="text-align:center">6100² = 3<b>7210</b>000 → 2100 · 2100² = 0<b>4410</b>000 → 4100 · …</p>
+    <p>De los 10 000 valores, <b>solo 75 son distintos</b>; el resto repite 0,61 / 0,21 / 0,41 / 0,81. Eso explica toda la tabla:</p>
+    <ul>
+      <li><b>χ² y KS enormes:</b> el 99 % de los valores cae en 4 de los 10 intervalos.</li>
+      <li><b>Media rechazada:</b> el ciclo promedia 0,51 en vez de 0,50.</li>
+      <li><b>Pasa corridas y autocorrelación de casualidad:</b> el ciclo queda arriba, abajo, abajo, arriba de 0,5 (justo lo que se espera del azar) y su autocorrelación de lag 1 da exactamente 0.</li>
+    </ul>
+  </div>
+  <div class="fig"><div class="ttl">Mostrar: el histograma</div><img src="../../figs/tps-21-histograma-generadores.png"><div class="cap">Las cuatro barras de cuadrados medios son el TP: casi todo cae en cuatro valores.</div></div>
+</div>
+<div class="callout idea">
+  <div class="h">La moraleja</div>
+  Cada test mira <b>una sola propiedad</b>. Por eso se aplica una batería de tests y no uno suelto: un generador roto puede aprobar algunos de casualidad.
+</div>
+
+<div class="qa">
+  <h3>Preguntas probables · TP 2.1</h3>
+  <div class="q"><div class="p">¿Qué hace que el GCL tenga período completo?</div>El teorema del GCL mixto (Unidad 7.4 de la wiki): c y m coprimos, a − 1 divisible por todos los primos de m, y por 4 si 4 divide a m. Con m = 2³¹, c impar y a − 1 múltiplo de 4, el período es <b>2³¹</b>. Son los parámetros del <code>rand()</code> de ANSI C.</div>
+  <div class="q"><div class="p">¿El GCL tiene alguna debilidad?</div>Sí: sus bits bajos tienen período corto, y en varias dimensiones los puntos caen sobre hiperplanos. Para este TP no molesta. <span class="gen">fuera del informe</span></div>
+  <div class="q"><div class="p">¿Pseudoaleatorio no es un defecto?</div>Al contrario: que la secuencia sea reproducible con la misma semilla permite repetir un experimento y comparar escenarios con los mismos números.</div>
+</div>
+<p class="small muted" style="margin-top:6px">Consigna cumplida con más de lo pedido: tres generadores y seis tests donde se pedían dos y cuatro.</p>
+</section>
+
+<!-- ======================================================= TP 2.2 -->
+<section class="stage s2">
+<div class="band"><div class="num">2.2</div><div><div class="k">Bloque 2 · Fabricar el azar</div>
+  <h2>De U(0,1) a nueve distribuciones</h2></div></div>
+
+<div class="callout criollo">
+  <div class="h">qué hicimos</div>
+  El generador te da números entre 0 y 1, todos con la misma chance. Pero para simular necesitás otras formas de azar: tiempos entre llegadas (exponencial), medidas que se amontonan en el medio (normal), cuántos clientes llegan en una hora (Poisson). Este TP es <b>el recetario para transformar esos uniformes en nueve distribuciones</b>, siguiendo el libro de Naylor, y comprobar que lo que sale tiene la media, la varianza y la forma que tiene que tener. Las nueve dieron bien.
+</div>
+
+<div class="sec"><div class="dot">1</div><h3>Qué pedía la consigna</h3></div>
+<div class="ask">
+  <div>Para cada distribución: teoría, acumulada y su inversa paso a paso, programa en Python y test.</div>
+  <div>El código dentro del informe.</div>
+  <div>Transformada inversa para las 9 y <b>método de rechazo para la uniforme, la exponencial y la normal</b>.</div>
+  <div>Test al menos para uniforme, exponencial, normal, binomial, Poisson y empírica.</div>
+</div>
+
+<div class="sec"><div class="dot">2</div><h3>La idea fuerte: cada distribución pide su método</h3></div>
+<div class="grid3">
+  <div class="meth"><div class="h">Transformada inversa</div><div class="d">X = F⁻¹(U)</div><div class="w">Cuando F tiene inversa cerrada: uniforme, exponencial X = −ln(1 − U)/λ, empírica (con acumuladas).</div></div>
+  <div class="meth"><div class="h">Suma de exponenciales</div><div class="d">Gamma = Erlang con k entero</div><div class="w">Su F no se invierte en forma cerrada, pero es la suma de k exponenciales.</div></div>
+  <div class="meth"><div class="h">Box-Muller</div><div class="d">Z = √(−2 ln U₁) · cos(2π U₂)</div><div class="w">La acumulada de la normal no tiene inversa elemental. Dos uniformes dan dos normales independientes.</div></div>
+  <div class="meth"><div class="h">Simular el experimento</div><div class="d">Ensayos de Bernoulli</div><div class="w">Binomial (contar éxitos en m), Pascal (hasta r éxitos), hipergeométrica (sin reemplazo).</div></div>
+  <div class="meth"><div class="h">Multiplicativo</div><div class="d">Poisson: multiplicar U hasta &lt; e^(−λ)</div><div class="w">Multiplicar uniformes equivale a sumar −ln U, que son tiempos exponenciales: cuenta llegadas en un intervalo de largo 1.</div></div>
+  <div class="meth" style="background:#fff;border-style:dashed"><div class="h" style="color:var(--muted)">Rechazo (solo explicado)</div><div class="d">Sortear y aceptar o descartar</div><div class="w">Se explicó en general pero no se aplicó. Ver el recuadro rojo.</div></div>
+</div>
+
+<div class="sec"><div class="dot">3</div><h3>Resultados (10 000 valores, semilla 42)</h3></div>
+<table class="t keep">
+  <tr><th style="width:30%">Distribución</th><th class="c">Media obs / teo</th><th class="c">Varianza obs / teo</th><th class="c">Ajuste</th></tr>
+  <tr><td>Uniforme (a = 2, b = 8)</td><td class="c n">5,002 / 5</td><td class="c n">2,98 / 3</td><td class="c"><span class="ok">KS 0,006 ✓</span></td></tr>
+  <tr><td>Exponencial (λ = 1,5)</td><td class="c n">0,670 / 0,667</td><td class="c n">0,435 / 0,444</td><td class="c"><span class="ok">KS 0,010 ✓</span></td></tr>
+  <tr><td>Gamma / Erlang (k = 3, λ = 1,2)</td><td class="c n">2,488 / 2,5</td><td class="c n">2,061 / 2,083</td><td class="c"><span class="ok">KS 0,010 ✓</span></td></tr>
+  <tr><td>Normal (μ = 10, σ = 2)</td><td class="c n">10,028 / 10</td><td class="c n">3,996 / 4</td><td class="c"><span class="ok">KS 0,010 ✓</span></td></tr>
+  <tr><td>Pascal (r = 4, p = 0,35)</td><td class="c n">7,423 / 7,429</td><td class="c n">20,91 / 21,22</td><td class="c"><span class="ok">χ² 31,2 &lt; 40,1 ✓</span></td></tr>
+  <tr><td>Binomial (m = 12, p = 0,4)</td><td class="c n">4,772 / 4,8</td><td class="c n">2,839 / 2,88</td><td class="c"><span class="ok">χ² 8,8 &lt; 18,3 ✓</span></td></tr>
+  <tr><td>Hipergeométrica (N = 50, K = 18, n = 10)</td><td class="c n">3,604 / 3,6</td><td class="c n">1,902 / 1,881</td><td class="c"><span class="ok">χ² 4,7 &lt; 15,5 ✓</span></td></tr>
+  <tr><td>Poisson (λ = 4)</td><td class="c n">4,005 / 4</td><td class="c n">3,976 / 4</td><td class="c"><span class="ok">χ² 13,1 &lt; 21,0 ✓</span></td></tr>
+  <tr><td>Empírica (1…5 con 0,10/0,20/0,35/0,25/0,10)</td><td class="c n">3,056 / 3,05</td><td class="c n">1,245 / 1,248</td><td class="c"><span class="ok">χ² 2,6 &lt; 9,5 ✓</span></td></tr>
+</table>
+
+<div class="g-7-5" style="margin-top:8px">
+  <div class="fig"><div class="ttl">Mostrar: una continua</div><img src="../../figs/tps-22-normal-box-muller.png"><div class="cap">Normal N(10, 2²) generada por Box-Muller: histograma contra la densidad teórica.</div></div>
+  <div class="result" style="margin:0;flex-direction:column;align-items:flex-start"><div><b>Las nueve pasan.</b></div><div>Las medias quedan a menos del <b>1 %</b> de la teórica y las varianzas a menos del <b>2,5 %</b>. La mayor diferencia es la de la exponencial.</div></div>
+</div>
+
+<div class="callout prof">
+  <div class="h">no se aplicó el método de rechazo</div>
+  La tabla guía lo pedía para la uniforme, la exponencial y la normal. El informe lo explica en general (sección 2.1) pero no lo aplica a ninguna. Es la diferencia más visible con la consigna. <b>Respuesta:</b> priorizamos los métodos directos, que son más simples y no descartan números. Con rechazo, para una densidad acotada en (a, b): se sortea x = a + (b − a)·U₁ y se acepta si U₂ ≤ f(x)/máx f; si no, se repite. Para la exponencial y la normal hay que truncar el soporte, porque no es acotado.
+</div>
+
+<div class="qa">
+  <h3>Preguntas probables · TP 2.2</h3>
+  <div class="q"><div class="p">¿Por qué Box-Muller y no la transformada inversa para la normal?</div>Porque la acumulada de la normal no tiene inversa elemental. Box-Muller transforma dos uniformes en dos normales independientes con una fórmula cerrada.</div>
+  <div class="q"><div class="p">¿Por qué KS para las continuas y χ² para las discretas?</div>KS compara acumuladas y supone una F continua. χ² trabaja por categorías, que es lo natural para una variable discreta. En χ² se agrupan las categorías con frecuencia esperada menor a 5, y por eso cada distribución tiene sus propios grados de libertad.</div>
+  <div class="q"><div class="p">¿Por qué usaron <code>random.random()</code> y no el GCL del TP 2.1?</div>Porque el 2.1 mostró que los dos pasan los tests: cualquiera de los dos sirve como fuente de U(0,1).</div>
+</div>
+</section>
+
+<!-- ======================================================= TP 3 -->
+<section class="stage s3">
+<div class="band"><div class="num">3</div><div><div class="k">Bloque 3 · Usar el azar en un modelo</div>
+  <h2>M/M/1, M/M/1/K e inventario (s, S)</h2></div></div>
+
+<div class="callout criollo">
+  <div class="h">qué hicimos</div>
+  Juntamos todo en dos modelos clásicos y los programamos dos veces, en Python y en AnyLogic. El primero es <b>una cola con un solo cajero</b> (M/M/1): cuánta gente hay, cuánto espera y qué tan ocupado está el cajero, comparado con las fórmulas. Mientras lleguen menos de los que se atienden, la simulación clava la teoría. Si llegan igual o más, la cola crece sin parar. Con sala de espera limitada a algunos los rebotan, y si llegan más de los que se atienden, agrandar la sala no sirve: igual rebotás el 20 %. El segundo es <b>un depósito</b> con política (s, S): cuando el stock baja de s, se pide lo que falta para llegar a S. Probamos la grilla y la más barata fue <b>pedir cuando quedan 30 o menos, hasta completar 60</b>.
+</div>
+
+<div class="sec"><div class="dot">1</div><h3>Qué pedía la consigna y cómo lo encaramos</h3></div>
+<div class="grid2">
+  <div class="card"><h4>Consigna</h4>
+    <ul style="margin:0">
+      <li><b>M/M/1:</b> L, Lq, W, Wq, utilización, P(n en cola) y denegación con cola 0, 2, 5, 10 y 50.</li>
+      <li>Tasas de arribo del 25, 50, 75, 100 y 125 % de la de servicio.</li>
+      <li><b>Inventario:</b> costos de orden, mantenimiento, faltante y total.</li>
+      <li>Todo final y <b>en función del tiempo</b>, con ≥ 10 corridas, contra teoría, Python y AnyLogic.</li>
+    </ul></div>
+  <div class="card tint3"><h4 style="color:#94520a">Cómo lo hicimos</h4>
+    <ul style="margin:0">
+      <li>Dos simuladores de <b>eventos discretos</b> en Python, que avanzan de evento en evento, y los mismos modelos en AnyLogic (<code>TP_Colas.alp</code>).</li>
+      <li>≥ 10 réplicas por experimento, con media ± IC 95 % (1,96·s/√n).</li>
+      <li>Las medidas que se promedian en el tiempo, como <b>área bajo la curva</b> sobre el tiempo simulado.</li>
+      <li>Parámetros por línea de comando, para <b>cambiarlos en vivo</b>.</li>
+    </ul></div>
+</div>
+
+<div class="sec"><div class="dot">2</div><h3>M/M/1 con cola infinita</h3></div>
+<p>μ = 1 fijo y λ = 0,25 a 1,25, así que ρ = λ/μ va del 25 % al 125 %. Diez corridas de 20 000 unidades de tiempo por punto.</p>
+<div class="fobj" style="font-size:10.5pt">L = ρ/(1−ρ) &nbsp;·&nbsp; Lq = ρ²/(1−ρ) &nbsp;·&nbsp; W = 1/(μ−λ) &nbsp;·&nbsp; Wq = ρ/(μ−λ) &nbsp;·&nbsp; U = ρ &nbsp;·&nbsp; P(n) = (1−ρ)·ρⁿ</div>
+<div class="g-7-5">
+  <table class="t">
+    <tr><th class="c">ρ</th><th class="c">L sim / teo</th><th class="c">Lq sim / teo</th><th class="c">W sim / teo</th><th class="c">U</th></tr>
+    <tr><td class="c n">0,25</td><td class="c">0,329 / 0,333</td><td class="c">0,083 / 0,083</td><td class="c">1,313 / 1,333</td><td class="c">0,249</td></tr>
+    <tr><td class="c n">0,50</td><td class="c">1,006 / 1,000</td><td class="c">0,500 / 0,500</td><td class="c">2,012 / 2,000</td><td class="c">0,505</td></tr>
+    <tr><td class="c n">0,75</td><td class="c">2,863 / 3,000</td><td class="c">2,113 / 2,250</td><td class="c">3,838 / 4,000</td><td class="c">0,748</td></tr>
+    <tr class="hl"><td class="c n">1,00</td><td class="c">106,9 ± 40 / ∞</td><td class="c">— / ∞</td><td class="c">106,9 / ∞</td><td class="c">≈ 1</td></tr>
+    <tr class="hl"><td class="c n">1,25</td><td class="c">2486 ± 55 / ∞</td><td class="c">— / ∞</td><td class="c">2000 / ∞</td><td class="c">≈ 1</td></tr>
+  </table>
+  <div class="fig"><img src="../../figs/tps-3-convergencia-L.png"><div class="cap">Con ρ &lt; 1, L se aplana; con ρ = 1 crece lento; con ρ = 1,25 crece en línea recta.</div></div>
+</div>
+<p style="margin-top:6px">Con ρ &lt; 1 la simulación coincide con la teoría, se cumple la ley de Little (L = λW) y la P(n) simulada reproduce la geométrica: el simulador captura <b>la distribución completa</b>, no solo los promedios. Con ρ ≥ 1 <b>no hay estado estacionario</b>: L no converge y crece con el tiempo simulado.</p>
+
+<div class="sec"><div class="dot">3</div><h3>M/M/1/K: el hallazgo del TP</h3></div>
+<p>Con cola finita K, la capacidad del sistema es C = K + 1. P₀ = (1−ρ)/(1−ρ^(C+1)), Pₙ = P₀·ρⁿ y la probabilidad de rechazo es P_C. Este sistema es estable siempre, incluso con ρ ≥ 1.</p>
+<div class="g-7-5">
+  <table class="t">
+    <tr><th class="c">K</th><th class="c">ρ = 0,75<br><span style="text-transform:none">Py / teo / AL</span></th><th class="c">ρ = 1,00<br><span style="text-transform:none">Py / teo / AL</span></th><th class="c">ρ = 1,25<br><span style="text-transform:none">Py / teo / AL</span></th></tr>
+    <tr><td class="c n">0</td><td class="c">0,426 / 0,429 / 0,431</td><td class="c">0,499 / 0,500 / 0,494</td><td class="c">0,557 / 0,556 / 0,560</td></tr>
+    <tr><td class="c n">2</td><td class="c">0,152 / 0,154 / 0,151</td><td class="c">0,250 / 0,250 / 0,244</td><td class="c">0,338 / 0,339 / 0,338</td></tr>
+    <tr><td class="c n">5</td><td class="c">0,050 / 0,051 / 0,053</td><td class="c">0,140 / 0,143 / 0,143</td><td class="c">0,251 / 0,253 / 0,246</td></tr>
+    <tr><td class="c n">10</td><td class="c">0,011 / 0,011 / 0,010</td><td class="c">0,081 / 0,083 / 0,080</td><td class="c">0,213 / 0,215 / 0,221</td></tr>
+    <tr><td class="c n">50</td><td class="c ok">0,000 / 0,000 / 0,000</td><td class="c">0,017 / 0,019 / 0,021</td><td class="c bad">0,195 / 0,200 / 0,191</td></tr>
+  </table>
+  <div class="fig"><img src="../../figs/tps-3-denegacion.png"><div class="cap">Con ρ = 1,25 el rechazo se clava en el 20 %.</div></div>
+</div>
+<div class="result"><div class="ic">◎</div><div>Con ρ &lt; 1, agrandar la cola <b>elimina</b> el rechazo. Con ρ &gt; 1 no: el rechazo tiende a <b>1 − 1/ρ</b> (0,20 para ρ = 1,25) por más grande que sea K. <b>El problema es de capacidad de servicio, no de tamaño de cola.</b></div></div>
+
+<div class="sec"><div class="dot">4</div><h3>Inventario (s, S) con revisión periódica</h3></div>
+<div class="g-7-5">
+  <div>
+    <p>Parámetros de Law &amp; Kelton (el caso canónico de la Unidad 4 de la wiki):</p>
+    <ul>
+      <li><b>Demanda:</b> Poisson de tasa 10, con tamaño 1, 2, 3 o 4 (probabilidades 1/6, 1/3, 1/3, 1/6; media 2,5).</li>
+      <li><b>Costos:</b> pedir cuesta 32 fijo + 3 por unidad; mantener cuesta h = 1 y el faltante p = 5, ambos por unidad y por unidad de tiempo.</li>
+      <li><b>Demora de entrega:</b> Uniforme(0,5; 1).</li>
+      <li><b>Faltantes:</b> quedan pendientes (inventario negativo).</li>
+      <li><b>Grilla:</b> s de 10 a 50 × S de 40 a 90, con 10 réplicas por política.</li>
+    </ul>
+  </div>
+  <div class="fig"><img src="../../figs/tps-3-mapa-calor.png"><div class="cap">Mapa de calor del costo total: dónde está el óptimo.</div></div>
+</div>
+
+<div class="policy">
+  <div class="small" style="opacity:.85;letter-spacing:.1em;text-transform:uppercase;font-weight:700">Política óptima de la grilla</div>
+  <div class="big">Cuando el stock baja a 30, pedir hasta completar 60 → costo total ≈ 119,4</div>
+  <div class="row">
+    <div><b>92,8</b>orden (Python) · 93,0 en AnyLogic</div>
+    <div><b>20,9</b>mantenimiento · 20,9 en AnyLogic</div>
+    <div><b>5,7</b>faltante · 5,4 en AnyLogic</div>
+    <div><b>119,4</b>total · 119,3 en AnyLogic</div>
+  </div>
+</div>
+<div class="g-7-5">
+  <div class="fig"><img src="../../figs/tps-3-desglose-costos.png"><div class="cap">Con S = 60 fijo: el total es el compromiso entre los tres costos.</div></div>
+  <div>
+    <p><b>Por qué el óptimo está ahí:</b> subir s baja el faltante, pero sube el mantenimiento y la orden. El mínimo del total es el punto de equilibrio.</p>
+    <p>No hay fórmula cerrada para el óptimo, así que en el inventario la comparación es <b>Python contra AnyLogic</b>, y dan prácticamente lo mismo.</p>
+  </div>
+</div>
+
+<div class="sec"><div class="dot">5</div><h3>Las tres fuentes juntas (ρ = 0,75)</h3></div>
+<table class="t keep">
+  <tr><th>Métrica</th><th class="c">Teórico</th><th class="c">Python</th><th class="c">AnyLogic</th></tr>
+  <tr><td>L</td><td class="c n">3,000</td><td class="c">2,863</td><td class="c">3,104</td></tr>
+  <tr><td>Lq</td><td class="c n">2,250</td><td class="c">2,113</td><td class="c">2,347</td></tr>
+  <tr><td>W</td><td class="c n">4,000</td><td class="c">3,838</td><td class="c">4,068</td></tr>
+  <tr><td>U</td><td class="c n">0,750</td><td class="c">0,748</td><td class="c">0,757</td></tr>
+  <tr><td>Rechazo (K = 5)</td><td class="c n">0,051</td><td class="c">0,050</td><td class="c">0,053</td></tr>
+</table>
+
+<div class="callout prof">
+  <div class="h">"error inferior al 5 %" no es cierto para Lq</div>
+  Con ρ = 0,75, Lq da 2,113 contra 2,250: un <b>6,1 %</b> (L da 4,6 % y W 4,1 %). <b>Respuesta:</b> con ρ = 0,75 los valores consecutivos están muy correlacionados y 10 corridas de 20 000 quedan justas; con más corridas o más horizonte la diferencia se cierra. Una corrida suelta de 20 000 con semilla 1 da L = 3,003.
+</div>
+<div class="callout prof">
+  <div class="h">tres cosas del M/M/1 que la consigna pedía y no están</div>
+  <ul style="margin:0">
+    <li><b>Wq no está en las tablas.</b> Sale por Little, Wq = Lq/λ: con ρ = 0,75 da 2,82 en Python y 3,13 en AnyLogic, contra 3,00 teórico.</li>
+    <li><b>P(n clientes en cola):</b> se graficó la de n en el <b>sistema</b>. Es la misma distribución corrida un lugar: con el servidor ocupado, los que esperan son N − 1. La fórmula es P(Nq = n) = (1 − ρ)·ρⁿ⁺¹.</li>
+    <li><b>"En función del tiempo":</b> solo hay gráfica de convergencia para L y para el costo total. Las demás se comportan igual; para mostrarlo en vivo alcanza con correr <code>experimentos_mm1.py</code>.</li>
+  </ul>
+</div>
+
+<div class="qa">
+  <h3>Preguntas probables · TP 3</h3>
+  <div class="q"><div class="p">Si con ρ = 1 llegan tantos como se atienden, ¿por qué el sistema es inestable?</div>Porque la variabilidad no se compensa. Cada rato en que el servidor queda ocioso es capacidad perdida para siempre, y la cola se comporta como un paseo al azar que se aleja del cero. Con ρ = 1, L crece como √t (dio ≈ 107 a T = 20 000). Con ρ = 1,25 la cola crece 0,25 por unidad de tiempo, así que el promedio es ≈ 0,25 · 20 000 / 2 = 2500 (dio 2486). <span class="gen">fuera del informe</span></div>
+  <div class="q"><div class="p">¿Por qué con ρ = 1,25 el rechazo no baja del 20 % aunque K = 50?</div>Con la cola llena, el servidor atiende a μ = 1 y llegan λ = 1,25. El excedente, (λ − μ)/λ = 1 − 1/ρ = 0,20, se rechaza sí o sí: agrandar la sala de espera solo demora el rechazo.</div>
+  <div class="q"><div class="p">¿Usaron período de calentamiento (warm-up)?</div>No en la versión entregada. Nos apoyamos en un horizonte largo (20 000) frente a un transitorio corto, como muestra la gráfica de convergencia. Es la Unidad 9.7 de la wiki (condiciones iniciales).</div>
+  <div class="q"><div class="p">¿Por qué el costo de orden es el más grande?</div>Porque incluye la compra de la mercadería: 3 por unidad × 25 unidades demandadas por unidad de tiempo = 75, que no depende de la política. Lo que se juega la política es el costo fijo de pedir (≈ 18), el mantenimiento y el faltante. <span class="gen">fuera del informe</span></div>
+  <div class="q"><div class="p">¿(30, 60) es realmente mejor que (20, 60)?</div>Están prácticamente empatadas (≈ 119,4 contra ≈ 119,7). Con 10 réplicas la diferencia cae dentro del ruido; para afirmarlo haría falta un intervalo de confianza de la diferencia con t apareado y números aleatorios comunes (Unidad 10 de la wiki). Lo honesto es decir: "(30, 60) fue la de menor costo medio de la grilla; el valle está en s = 20–30, S = 60–70".</div>
+</div>
+
+<div class="sec" style="margin-top:16px"><div class="dot">▶</div><h3>Si piden correrlo en vivo</h3></div>
+<table class="t cmd keep">
+  <tr><th style="width:9%">TP</th><th>Comando (desde la carpeta de cada TP)</th><th style="width:34%">Ojo</th></tr>
+  <tr><td class="n">1.1</td><td><code>python simulacion_ruleta.py -c 30 -n 1000 -e 17</code></td><td>genera las 9 gráficas en <code>graficas/</code></td></tr>
+  <tr><td class="n">1.2</td><td><code>python apuestas.py -c 30 -n 1000 -s m -a f --capital 1000 --semilla 42</code></td><td>sin <code>--capital 1000</code> usa 100 y no coincide con el informe; necesita <code>TP1.1</code> al lado</td></tr>
+  <tr><td class="n">1.2 web</td><td><code>python app.py</code> → localhost:5000</td><td>necesita <code>apuestas.py</code> y <code>templates/</code> al lado</td></tr>
+  <tr><td class="n">2.1</td><td><code>python tp2_1_simulacion.py</code></td><td>imprime la tabla de los 6 tests</td></tr>
+  <tr><td class="n">2.2</td><td><code>python tp2_2_simulacion.py</code></td><td>gráficas + <code>resultados_tp22.csv</code></td></tr>
+  <tr><td class="n">3</td><td><code>python simulacion_mm1.py --lambda 0.75 --mu 1 --tiempo 20000</code></td><td><code>--cola 5</code> para M/M/1/K</td></tr>
+  <tr><td class="n">3</td><td><code>python simulacion_inventario.py --s 30 --S 60 --tiempo 1200</code></td><td>da ≈ 119,9 (informe: 119,4)</td></tr>
+</table>
+
+<div class="final">
+  <h3>Las ideas para llevarse</h3>
+  <div class="grid3">
+    <div><b class="c1">Bloque 1 · Ruleta</b>Una corrida larga muestra a dónde converge (ley de los grandes números); muchas corridas muestran cómo se reparte (TCL). Y ninguna estrategia cambia el −1/37 por apuesta.</div>
+    <div><b class="c2">Bloque 2 · Generadores</b>Un generador se valida con una batería de tests, porque cada uno mira una sola propiedad. Y cada distribución pide su método para salir de U(0,1).</div>
+    <div><b class="c3">Bloque 3 · Modelos</b>Teoría ≈ Python ≈ AnyLogic. Con ρ &gt; 1 el problema es de capacidad, no de cola. En inventario, (30, 60) equilibra orden, mantenimiento y faltante.</div>
+  </div>
+</div>
+</section>
+
+</body>
+</html>
