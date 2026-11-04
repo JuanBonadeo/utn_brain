@@ -62,7 +62,12 @@ FAMILIAS = {
     'Pasajeros de la cohorte pico':        ('Secundaria', 'Igual', 'pasajeros'),
     'Espera media de la cohorte pico':     ('Secundaria', 'Menor', 's'),
     'P90 de la cohorte pico':              ('Primaria',   'Menor', 's'),
+    'Día SBASE':                           ('Control',    'Igual', 'día'),
+    'P90 de tránsito del Roca a la cola':  ('Secundaria', 'Menor', 's'),
+    'CV de validaciones entre molinetes':  ('Secundaria', 'Menor', 'adim.'),
 }
+# Comparaciones contra E0 (2026-11-04): E1, E3 y E13. Bonferroni cubre 3 primarias x 3 comparaciones.
+N_COMPARACIONES = len(cc.ALTERNATIVAS)
 assert set(FAMILIAS) == set(cc.CAMPOS), 'FAMILIAS debe cubrir exactamente cc.CAMPOS'
 
 AZUL_OSCURO = 'FF17365D'
@@ -86,16 +91,16 @@ def _borde_fila() -> Border:
     return Border(bottom=delgado)
 
 
-def construir_corridas(libro: openpyxl.Workbook, max_pares: int, semilla_inicial: int) -> None:
-    ws = libro.create_sheet(cc.HOJA)
+def construir_corridas(libro: openpyxl.Workbook, max_pares: int, semilla_inicial: int, alt: str = 'E1') -> None:
+    ws = libro.create_sheet(cc.hojas(alt)[0])
     ws.sheet_properties.tabColor = AZUL_TAB
     ultima_fila = cc.PRIMERA_FILA + max_pares - 1
 
-    ws['A2'] = 'Corridas apareadas E0-E1'
+    ws['A2'] = f'Corridas apareadas E0-{alt}'
     ws['A2'].font = Font(name=FUENTE, size=14, bold=True, color=AZUL_OSCURO)
     ws['A3'] = ('Cargar únicamente resultados de producción calibrados. '
                 'Las columnas amarillas son entradas; las grises se calculan.')
-    ws['A4'] = 'La misma fila debe usar la misma semilla y las mismas entradas aleatorias en E0 y E1.'
+    ws['A4'] = f'La misma fila debe usar la misma semilla, el mismo día SBASE y las mismas entradas aleatorias en E0 y {alt}.'
     ws['A5'] = ('Carga reproducible: python3 cargar_corridas.py corridas_peatonales.csv --escribir '
                 '(valida pares, semillas y conservación antes de escribir).')
     ws['A6'] = (f'n de pares variable (T1.5): esta hoja admite hasta {max_pares} pares con semillas '
@@ -118,7 +123,7 @@ def construir_corridas(libro: openpyxl.Workbook, max_pares: int, semilla_inicial
     for i, nombre in enumerate(cc.CAMPOS):
         c0, c1, cd = cc.columnas(i)
         ws.cell(cc.FILA_ENCABEZADO, c0, f'E0 {nombre}')
-        ws.cell(cc.FILA_ENCABEZADO, c1, f'E1 {nombre}')
+        ws.cell(cc.FILA_ENCABEZADO, c1, f'{alt} {nombre}')
         ws.cell(cc.FILA_ENCABEZADO, cd, f'Diferencia {nombre}')
         ancho = get_column_letter(c0)
         ws.column_dimensions[ancho].width = 16
@@ -159,14 +164,16 @@ def construir_corridas(libro: openpyxl.Workbook, max_pares: int, semilla_inicial
             cell_d.border = borde
 
 
-def construir_resumen(libro: openpyxl.Workbook, max_pares: int) -> None:
-    ws = libro.create_sheet(cc.HOJA_RESUMEN, 0)  # Resumen va primero, como en la planilla anterior
+def construir_resumen(libro: openpyxl.Workbook, max_pares: int, alt: str = 'E1') -> None:
+    hoja_corridas, hoja_resumen = cc.hojas(alt)
+    # Los resúmenes van primero (E1, E3, E13), como en la planilla anterior.
+    ws = libro.create_sheet(hoja_resumen, cc.ALTERNATIVAS.index(alt))
     ws.sheet_properties.tabColor = AZUL_OSCURO
     ultima_fila_corridas = cc.PRIMERA_FILA + max_pares - 1
 
-    ws['A2'] = 'Comparación apareada E0-E1'
+    ws['A2'] = f'Comparación apareada E0-{alt}'
     ws['A2'].font = Font(name=FUENTE, size=14, bold=True, color=AZUL_OSCURO)
-    ws['A3'] = ('Cada diferencia se calcula como E1 menos E0. Un valor negativo mejora las medidas '
+    ws['A3'] = (f'Cada diferencia se calcula como {alt} menos E0. Un valor negativo mejora las medidas '
                 'cuyo criterio es Menor.')
     ws['A3'].font = Font(name=FUENTE, size=10, italic=True, color=GRIS_ITALICA)
 
@@ -183,12 +190,13 @@ def construir_resumen(libro: openpyxl.Workbook, max_pares: int) -> None:
 
     ws['A6'] = 'Nivel de confianza familiar'
     ws['B6'] = NIVEL_CONFIANZA_FAMILIAR
-    ws['D6'] = ('t crítico calculado con T.INV.2T(alfa, n-1): alfa_s = alfa/k (Bonferroni, k = '
-                'comparaciones primarias) para las tres primarias, y 1 - nivel de confianza (individual, '
+    ws['D6'] = ('t crítico calculado con T.INV.2T(alfa, n-1): alfa_s = alfa/k (Bonferroni, k = 3 primarias '
+                'x 3 comparaciones contra E0: E1, E3 y E13 = 9) para las tres primarias, y 1 - nivel de confianza (individual, '
                 'descriptivo) para las secundarias y los controles de verificación.')
 
     ws['A7'] = 'Comparaciones primarias'
-    ws['B7'] = '=COUNTIF(B11:B{0},"Primaria")'.format(10 + len(cc.CAMPOS))
+    # k = primarias de esta hoja x comparaciones contra E0 (E1, E3, E13): la familia Bonferroni es la del estudio.
+    ws['B7'] = '=COUNTIF(B11:B{0},"Primaria")*{1}'.format(10 + len(cc.CAMPOS), N_COMPARACIONES)
     ws['A8'] = 'Alfa por comparación primaria'
     ws['B8'] = '=(1-B6)/B7'
 
@@ -206,7 +214,7 @@ def construir_resumen(libro: openpyxl.Workbook, max_pares: int) -> None:
         ws[coord].font = Font(name=FUENTE, size=10, bold=True, color=GRIS_TEXTO)
         ws[coord].fill = _fill(AMARILLO)
 
-    encabezados = ['Medida', 'Familia', 'Criterio', 'Unidad', 'n pares', 'Media E0', 'Media E1',
+    encabezados = ['Medida', 'Familia', 'Criterio', 'Unidad', 'n pares', 'Media E0', f'Media {alt}',
                    'Diferencia media', 'Desvío de diferencias', 'Error estándar', 't crítico',
                    'IC inferior', 'IC superior', 'Conclusión']
     fila_encabezado = 10
@@ -226,7 +234,7 @@ def construir_resumen(libro: openpyxl.Workbook, max_pares: int) -> None:
         familia, criterio, unidad = FAMILIAS[nombre]
         c0, c1, cd = cc.columnas(i)
         l0, l1, ld = get_column_letter(c0), get_column_letter(c1), get_column_letter(cd)
-        rango = lambda letra: f'Corridas!${letra}$8:${letra}${ultima_fila_corridas}'
+        rango = lambda letra: f"'{hoja_corridas}'!${letra}$8:${letra}${ultima_fila_corridas}"
 
         ws.cell(fila, 1, nombre)
         ws.cell(fila, 2, familia)
@@ -266,8 +274,9 @@ def construir_resumen(libro: openpyxl.Workbook, max_pares: int) -> None:
 def construir(max_pares: int, semilla_inicial: int, salida: Path) -> None:
     libro = openpyxl.Workbook()
     libro.remove(libro.active)
-    construir_corridas(libro, max_pares, semilla_inicial)
-    construir_resumen(libro, max_pares)
+    for alt in cc.ALTERNATIVAS:
+        construir_corridas(libro, max_pares, semilla_inicial, alt)
+        construir_resumen(libro, max_pares, alt)
     libro.active = libro.sheetnames.index(cc.HOJA_RESUMEN)
     libro.save(salida)
 

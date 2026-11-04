@@ -123,6 +123,7 @@ java.util.ArrayList<String> eventos=new java.util.ArrayList<String>();
 // Bucle de eventos minimo para la demanda de la franja (liberaciones del Roca y llegadas de calle).
 void correrDemanda(){ while(proximaLiberacionPed.at>=0||proximaLlegadaCallePed.at>=0){ boolean roca=proximaLlegadaCallePed.at<0||(proximaLiberacionPed.at>=0&&proximaLiberacionPed.at<=proximaLlegadaCallePed.at); EventStub e=roca?proximaLiberacionPed:proximaLlegadaCallePed; clock=e.at; e.at=-1; int r0=pedSource.injected,c0=pedSourceCalle.injected; if(roca)liberarPendientesPed(); else llegadaCallePed(); eventos.add(String.format(java.util.Locale.US,"%.6f;%d;%d",clock,pedSource.injected-r0,pedSourceCalle.injected-c0)); } }
 static SubtePedLogicCheck franja(int molinetes,double factor){ SubtePedLogicCheck f=new SubtePedLogicCheck(); f.modoFranjaPed=true; f.molinetesOperativosPed=molinetes; f.proporcionRocaPed=0.8; f.demoraAccesoRocaSeg=60; f.duracionDescargaSeg=120; f.servicioPedSeg=3; f.servicioMinPedSeg=2; f.servicioMaxPedSeg=5; f.factorDemandaPed=factor; f.inicializarPed(); f.programarDemandaFranjaPed(); f.correrDemanda(); return f; }
+static SubtePedLogicCheck franjaVar(int molinetes,double moda,double min,double max){ SubtePedLogicCheck f=new SubtePedLogicCheck(); f.modoFranjaPed=true; f.molinetesOperativosPed=molinetes; f.proporcionRocaPed=0.8; f.demoraAccesoRocaSeg=10; f.duracionDescargaSeg=30; f.servicioPedSeg=moda; f.servicioMinPedSeg=min; f.servicioMaxPedSeg=max; f.diaSbasePed=-2; f.atrasoMaxRocaSeg=120; f.cargaTrenPoissonPed=true; f.inicializarPed(); f.programarDemandaFranjaPed(); f.correrDemanda(); return f; }
 ServiceStub molinetesPeatonales=new ServiceStub(); EngineStub engine=new EngineStub(); RandomStub rng=new RandomStub();
 Object molinetePed21=new Object(), molinetePed22=new Object(), molinetePed23=new Object(), molinetePed24=new Object();
 Object molinetePed25=new Object(), molinetePed26=new Object(), molinetePed27=new Object(), molinetePed28=new Object();
@@ -192,7 +193,8 @@ public static void main(String[] args) throws Exception {
  ok(m.utilizacionPorMolinetePed().contains("molinetePed01=0.005"),"utilizacion por puesto");
  m.nProcesadosHorizontePed=1;
  ok(m.filaResultadoPed().startsWith("E0;20260923;1;0;1;"),"fila");
- ok(m.filaResultadoPed().split(";").length==17,"17 campos");
+ ok(m.filaResultadoPed().split(";").length==20,"20 campos (17 + dia SBASE, P90 de transito del Roca y CV entre molinetes)");
+ {String[] c=m.filaResultadoPed().split(";");ok(c[17].equals("-1") && c[18].equals("0.000000") && Math.abs(Double.parseDouble(c[19])-Math.sqrt(19))<1e-5,"demo: dia -1, transito 0, CV de 1 validacion en 20 molinetes = raiz(19): "+m.filaResultadoPed());}
  Pasajero tarde=new Pasajero();tarde.nombreMolinetePed="molinetePed01";tarde.tInicioServicioPed=599;
  m.clock=605;m.terminaServicioPed(tarde);
  eq(m.ocupacionPorMolinetePed.get("molinetePed01"),4,"ocupacion recortada al corte");
@@ -260,7 +262,41 @@ public static void main(String[] args) throws Exception {
  ok(h.trazas.get(h.trazas.size()-2).contains("enTransitoHallMax="),"la corrida incompleta tambien imprime el resumen");
  SubtePedLogicCheck lbl=new SubtePedLogicCheck();lbl.molinetesOperativosPed=22;ok(lbl.filaResultadoPed().startsWith("E1;"),"22 molinetes = E1");
  lbl.molinetesOperativosPed=28;ok(lbl.filaResultadoPed().startsWith("E1B;"),"28 molinetes = ampliacion E1B");
- salida.delete();
+ salida.delete();new java.io.File(salida.getPath().replaceFirst("(\\\\.csv)?$","_ventanas.csv")).delete();
+ // --- 2026-11-04: dia SBASE (bootstrap), trenes con atraso y carga Poisson, escenarios E3/E13 y metricas nuevas ---
+ {SubtePedLogicCheck base=franja(20,1.0);ok(base.perfilEfectivoPed==base.perfilPed15min && base.diaEfectivoPed==-1,"diaSbasePed=-1 usa el perfil medio");}
+ ok(new SubtePedLogicCheck().perfilesDiasPed.length>=60,"perfilesDiasPed embebido (datos/embeber_dias_sbase.py)");
+ SubtePedLogicCheck b0=franjaVar(20,2.4,1.8,3.5), b1=franjaVar(22,2.4,1.8,3.5), b3=franjaVar(20,1.8,1.5,2.5), b13=franjaVar(22,1.8,1.5,2.5);
+ ok(b0.diaEfectivoPed>=0 && b0.diaEfectivoPed<b0.perfilesDiasPed.length && b0.perfilEfectivoPed==b0.perfilesDiasPed[b0.diaEfectivoPed],"dia sorteado en rango");
+ ok(b0.diaEfectivoPed==b1.diaEfectivoPed && b0.diaEfectivoPed==b3.diaEfectivoPed && b0.diaEfectivoPed==b13.diaEfectivoPed,"los 4 escenarios del par usan el mismo dia");
+ ok(b0.eventos.equals(b1.eventos) && b0.eventos.equals(b3.eventos) && b0.eventos.equals(b13.eventos),"E0, E1, E3 y E13 reciben los mismos ingresos con atraso y Poisson (numeros aleatorios comunes)");
+ ok(!b0.eventos.equals(franja(20,1.0).eventos),"el dia sorteado, el atraso y la Poisson cambian la demanda");
+ ok(b0.escenarioPed().equals("E0") && b1.escenarioPed().equals("E1") && b3.escenarioPed().equals("E3") && b13.escenarioPed().equals("E13"),"etiquetas E0, E1, E3, E13");
+ {java.util.HashSet<Integer> dias=new java.util.HashSet<Integer>();for(int k=0;k<30;k++){SubtePedLogicCheck x=new SubtePedLogicCheck();x.modoFranjaPed=true;x.proporcionRocaPed=0.8;x.demoraAccesoRocaSeg=10;x.duracionDescargaSeg=30;x.servicioPedSeg=2.4;x.diaSbasePed=-2;x.semillaPed=20260923L+k;x.inicializarPed();dias.add(x.diaEfectivoPed);}
+  ok(dias.size()>=18,"30 semillas sortean dias distintos (con reposicion): "+dias.size());}
+ {SubtePedLogicCheck x=new SubtePedLogicCheck();x.modoFranjaPed=true;x.proporcionRocaPed=0.8;x.demoraAccesoRocaSeg=10;x.duracionDescargaSeg=30;x.servicioPedSeg=2.4;x.diaSbasePed=3;x.inicializarPed();
+  ok(x.diaEfectivoPed==3 && x.perfilEfectivoPed==x.perfilesDiasPed[3],"dia fijo");
+  x.diaSbasePed=x.perfilesDiasPed.length;try{x.inicializarPed();throw new AssertionError("dia fuera de rango aceptado");}catch(IllegalArgumentException expected){}
+  x.diaSbasePed=-3;try{x.inicializarPed();throw new AssertionError("diaSbasePed=-3 aceptado");}catch(IllegalArgumentException expected){}
+  x.diaSbasePed=-1;x.atrasoMaxRocaSeg=-1;try{x.inicializarPed();throw new AssertionError("atraso negativo aceptado");}catch(IllegalArgumentException expected){}}
+ // La demanda total del Roca sigue al perfil del dia (80 %): la Poisson y el atraso no la sesgan.
+ {double totDia=0;for(double v:b0.perfilEfectivoPed)totDia+=v;ok(Math.abs(b0.nDesdeRocaPed-0.8*totDia)<0.05*0.8*totDia,"Roca ~80% del dia sorteado: "+b0.nDesdeRocaPed+" vs "+0.8*totDia);}
+ {SubtePedLogicCheck x=new SubtePedLogicCheck();x.rngTrenesPed.setSeed(7);int N=20000;double su=0,s2=0;for(int k=0;k<N;k++){int v=x.poissonTrenPed(40.0);su+=v;s2+=v*(double)v;}
+  double med=su/N,var=s2/N-med*med;ok(Math.abs(med-40)<0.3 && Math.abs(var-40)<4,"Poisson(40): media "+med+" varianza "+var);
+  ok(x.poissonTrenPed(0)==0 && x.poissonTrenPed(-1)==0,"Poisson con media <= 0 es 0");
+  int grande=x.poissonTrenPed(900);ok(grande>780 && grande<1020,"Poisson(900) sin desborde: "+grande);}
+ // Atraso: ningun tren antes de su horario, ninguno con mas de atrasoMaxRocaSeg.
+ {SubtePedLogicCheck x=franjaVar(20,2.4,1.8,3.5);java.util.ArrayList<double[]> t=new java.util.ArrayList<double[]>(x.trenesRocaPed);
+  ok(t.size()==x.nTrenesPed && t.size()>=45,"un tren animado por tren del horario: "+t.size());}
+ // Transito del Roca y CV entre molinetes.
+ {SubtePedLogicCheck x=new SubtePedLogicCheck();x.inicializarPed();Pasajero pr=new Pasajero();x.clock=0;x.registraIngresoPed(pr);x.clock=100;pr.tEntradaColaPed=100;x.entraColaPed(pr);
+  x.clock=130;pr.nombreMolinetePed="molinetePed01";x.comienzaServicioPed(pr);eq(x.p90TransitoRocaPed(),100,"transito del Roca hasta la cola");
+  Pasajero calle=new Pasajero();calle.desdeRocaPed=false;x.clock=140;x.registraIngresoPed(calle);x.clock=150;calle.nombreMolinetePed="molinetePed02";x.comienzaServicioPed(calle);
+  ok(x.transitosRocaPed.size()==1,"la calle no cuenta en el transito del Roca");
+  x.molinetesOperativosPed=2;eq(x.cvValidacionesMolinetePed(),0,"dos molinetes con una validacion cada uno: CV 0");
+  x.molinetesOperativosPed=4;eq(x.cvValidacionesMolinetePed(),1,"1,1,0,0: CV 1");}
+ ok(b3.filaVentanasPed().split(";").length==23 && b3.filaVentanasPed().startsWith("E3;20260923;"+b3.diaEfectivoPed+";"),"fila de ventanas: "+b3.filaVentanasPed());
+
  System.out.println("OK: pedestrian demo, Roca timetable + street demand, triangular service, common random numbers, 09:30 cut, drain and CSV output");
 }
 }'''
@@ -316,7 +352,7 @@ _dw=[e for e in ped.findall('.//EmbeddedObject') if e.findtext('Name')=='trenesR
 assert [q.findtext('Value/Code') for q in _dw.findall('Parameters/Parameter') if q.findtext('Name')=='delayTime']==['Math.max(demoraAccesoRocaSeg + duracionDescargaSeg + 10, 600)']
 import csv as _c
 _t=[float(x['segundos_desde_07']) for x in _c.DictReader(open(p.parent/'datos'/'arribos_roca_constitucion_habiles.csv',encoding='utf-8'),delimiter=';')]
-assert min(b-a for a,b in zip(_t,_t[7:])) > 600+20, 'un tren llegaría a una vía todavía ocupada'
+assert min(b-a for a,b in zip(_t,_t[7:])) > 600+120+20, 'un tren llegaría a una vía todavía ocupada (10 min detenido + atraso de hasta 120 s)'
 assert {x.findtext('Name') for x in r.findall('Model/ActiveObjectClasses/ActiveObjectClass')} >= {'TrenRoca','CocheRoca'}
 # Plano en 3D (datos/plano_3d.py): grupo plano3D de MainPeatonal, sólo 3D, rectángulos sin rotación; vías hundidas 1,1 m.
 plano3d=ped.find(".//Group[Name='plano3D']")
@@ -503,7 +539,7 @@ assert pvs['PeatonalFranjaPrueba'].findtext('NumberOfRuns')=='2' and float(pvs['
 assert prueba['horizonteArribosPedSeg']=='1800'
 assert ped_defaults_early['pruebaSinteticaPed']=='false'
 pvs={k:v for k,v in pvs.items() if k!='PeatonalFranjaPrueba'}
-for name,(runs,modo,archivo,final) in {'PeatonalCorridasApareadas':('60','true','"corridas_peatonales.csv"','17900'),
+for name,(runs,modo,archivo,final) in {'PeatonalCorridasApareadas':('120','true','"corridas_peatonales.csv"','17900'),
                                        'PeatonalCorridasDemo':('6','false','"corridas_peatonales_demo.csv"','900')}.items():
  e=pvs[name]
  assert e.get('ActiveObjectClassId')==ped.findtext('Id')
@@ -512,18 +548,26 @@ for name,(runs,modo,archivo,final) in {'PeatonalCorridasApareadas':('60','true',
  assert float(e.findtext('ModelTimeProperties/FinalTime'))<18000, 'PLE limita la Pedestrian Library a 5 h de modelo'
  free={ped_param_ids[x.findtext('Id')]:x.findtext('Expression/Code') for x in e.findall('FreeformParamValue')}
  assert set(free)==set(ped_param_ids.values())
- assert free['semillaPed']=='20260923L + index / 2' and free['molinetesOperativosPed']=='index % 2 == 0 ? 20 : 22'
+ # Apareadas (2026-11-04): 4 escenarios por día (index % 4 = E0, E1, E3, E13) con el mismo día SBASE y la misma semilla.
+ assert free['semillaPed']==('20260923L + index / 4' if name=='PeatonalCorridasApareadas' else '20260923L + index / 2')
+ assert free['molinetesOperativosPed']=='index % 2 == 0 ? 20 : 22'
+ nuevos={k:free[k] for k in ('diaSbasePed','atrasoMaxRocaSeg','cargaTrenPoissonPed')}
+ assert nuevos==({'diaSbasePed':'-2','atrasoMaxRocaSeg':'120','cargaTrenPoissonPed':'true'} if name=='PeatonalCorridasApareadas'
+                 else {'diaSbasePed':None,'atrasoMaxRocaSeg':None,'cargaTrenPoissonPed':None}), (name,nuevos)
  assert free['modoFranjaPed']==modo and free['archivoSalidaPed']==archivo
  calib={k:free[k] for k in ('proporcionRocaPed','demoraAccesoRocaSeg','duracionDescargaSeg','servicioPedSeg','servicioMinPedSeg','servicioMaxPedSeg')}
  if name=='PeatonalCorridasApareadas':
   # Escenario intermedio (T3.4, 2026-10-05): rangos de la §5 del plan; demora con D = 85 m (OpenStreetMap) y h = 5 m.
-  assert calib=={'proporcionRocaPed':'0.8','demoraAccesoRocaSeg':'10','duracionDescargaSeg':'30','servicioPedSeg':'2.4','servicioMinPedSeg':'1.8','servicioMaxPedSeg':'3.5'}, calib
+  # E3 y E13 (validación EMV/QR, [SUP]): triangular 1,5 / 1,8 / 2,5 s en lugar de 1,8 / 2,4 / 3,5 s.
+  assert calib=={'proporcionRocaPed':'0.8','demoraAccesoRocaSeg':'10','duracionDescargaSeg':'30','servicioPedSeg':'index % 4 >= 2 ? 1.8 : 2.4',
+                 'servicioMinPedSeg':'index % 4 >= 2 ? 1.5 : 1.8','servicioMaxPedSeg':'index % 4 >= 2 ? 2.5 : 3.5'}, calib
   rng={ped_param_ids[x.findtext('Id')]:x.findtext('Expression/Code') for x in e.findall('RangeVariationParamValue')}
-  assert all(rng[k]==v for k,v in calib.items()), 'freeform y range deben coincidir'
+  assert all(rng[k]==calib[k] for k in ('proporcionRocaPed','demoraAccesoRocaSeg','duracionDescargaSeg')), 'freeform y range deben coincidir'
+  assert all(rng[k]==v for k,v in nuevos.items()), 'freeform y range deben coincidir (día, atraso, Poisson)'
  else:
   assert all(calib[k] is None for k in ('proporcionRocaPed','demoraAccesoRocaSeg','duracionDescargaSeg','servicioPedSeg'))
-# Par i -> semilla 20260923+i, E0 en índice par y E1 en el siguiente.
-assert [(20260923+i//2, 20 if i%2==0 else 22) for i in range(4)]==[(20260923,20),(20260923,22),(20260924,20),(20260924,22)]
+# Índice i -> semilla 20260923 + i // 4; i % 4 = 0 E0 (20; 2,4 s), 1 E1 (22; 2,4 s), 2 E3 (20; 1,8 s), 3 E13 (22; 1,8 s).
+assert [(20260923+i//4, 20 if i%2==0 else 22, 1.8 if i%4>=2 else 2.4) for i in range(5)]==[(20260923,20,2.4),(20260923,22,2.4),(20260923,20,1.8),(20260923,22,1.8),(20260924,20,2.4)]
 pasajero_variable_names={x.findtext('Name') for x in agents['Pasajero'].findall('Variables/Variable')}
 assert {'tIngresoSistemaPed','enPicoPed','tInicioServicioPed','nombreMolinetePed','servicioAsignadoPed'} <= pasajero_variable_names
 libs={x.findtext('LibraryName') for x in r.findall('Model/RequiredLibraryReference')}
@@ -549,7 +593,8 @@ sys.path.insert(0, str(p.parent))
 import cargar_corridas as cc
 import openpyxl
 book=openpyxl.load_workbook(cc.PLANILLA_OFICIAL)
-cc.verificar_encabezados(book[cc.HOJA])
+for _alt in cc.ALTERNATIVAS:
+ cc.verificar_encabezados(book[cc.hojas(_alt)[0]], _alt)
 capacidad=cc.leer_capacidad(book[cc.HOJA])
 assert list(capacidad)==list(range(cc.SEMILLA_INICIAL, cc.SEMILLA_INICIAL+len(capacidad))), \
     'las semillas de la planilla deben ser contiguas desde SEMILLA_INICIAL'
@@ -564,7 +609,7 @@ with tempfile.TemporaryDirectory(prefix='subte-carga-') as tmp, contextlib.redir
  rows=[]
  for i in range(30):
   for esc,esp in (('E0',40+i),('E1',20+i)):
-   rows.append(f'CSV_PEATONAL_DEMO;{esc};{cc.SEMILLA_INICIAL+i};480;0;470;480;{esp}.5;{esp+10};0.25;3.5;60;120.0;0.4;0.05;0;0;0')
+   rows.append(f'CSV_PEATONAL_DEMO;{esc};{cc.SEMILLA_INICIAL+i};480;0;470;480;{esp}.5;{esp+10};0.25;3.5;60;120.0;0.4;0.05;0;0;0;-1;150.0;0.5')
  log.write_text('ruido de consola\n'+'\n'.join(rows)+'\n')
  assert cc.main([str(log),'--demo'])==0
  assert cc.main([str(log),'--demo','--escribir'])==1, 'demo no puede escribir la planilla oficial'
@@ -583,11 +628,23 @@ with tempfile.TemporaryDirectory(prefix='subte-carga-') as tmp, contextlib.redir
  (tmp/'desbalance.txt').write_text(rows[0]+'\n'+rows[1].replace(';480;0;470;480;',';481;0;470;481;')+'\n')
  assert cc.main([str(tmp/'desbalance.txt'),'--demo'])==1
  # El modelo en main etiqueta 20->E0, 22->E1, 28->E1B (D1): la planilla solo carga E0/E1.
- (tmp/'e1b.txt').write_text(f'CSV_PEATONAL_DEMO;E1B;{cc.SEMILLA_INICIAL};480;0;470;480;40.5;50;0.25;3.5;60;120.0;0.4;0.05;0;0;0\n')
+ (tmp/'e1b.txt').write_text(f'CSV_PEATONAL_DEMO;E1B;{cc.SEMILLA_INICIAL};480;0;470;480;40.5;50;0.25;3.5;60;120.0;0.4;0.05;0;0;0;-1;150.0;0.5\n')
  salida_e1b=io.StringIO()
  with contextlib.redirect_stderr(salida_e1b):
   assert cc.main([str(tmp/'e1b.txt'),'--demo'])==1, 'E1B no debe cargarse en la planilla'
  assert 'E1B' in salida_e1b.getvalue(), 'el rechazo de E1B debe explicar el motivo'
+ # 2026-11-04: E3 y E13 se cargan en sus hojas; el día SBASE debe coincidir en el par; producción exige día.
+ fila_e=lambda esc,sem,dia,p90: f'CSV_PEATONAL_DEMO;{esc};{sem};480;0;470;480;5.0;{p90};0.25;3.5;60;120.0;0.4;0.05;100;20.0;30.0;{dia};150.0;0.5'
+ (tmp/'cuatro.txt').write_text('\n'.join(fila_e(e,cc.SEMILLA_INICIAL,7,p) for e,p in (('E0',40),('E1',38),('E3',30),('E13',28)))+'\n')
+ copia4=tmp/'copia4.xlsx'
+ assert cc.main([str(tmp/'cuatro.txt'),'--demo','--escribir','--planilla',str(vacia),'--salida',str(copia4)])==0
+ libro4=openpyxl.load_workbook(copia4)
+ assert libro4['Corridas']['S8'].value==38 and libro4['Corridas E3']['R8'].value==40 and libro4['Corridas E3']['S8'].value==30 and libro4['Corridas E13']['S8'].value==28, 'P90 en R (E0) y S (alternativa)'
+ assert libro4['Corridas E13']['AV8'].value==7, 'día SBASE cargado'
+ (tmp/'otro_dia.txt').write_text(fila_e('E0',cc.SEMILLA_INICIAL,7,40)+'\n'+fila_e('E3',cc.SEMILLA_INICIAL,8,30)+'\n')
+ assert cc.main([str(tmp/'otro_dia.txt'),'--demo'])==1, 'E0 y E3 con días distintos no son un par'
+ (tmp/'sin_dia.txt').write_text('\n'.join(fila_e(e,cc.SEMILLA_INICIAL,-1,40).replace('CSV_PEATONAL_DEMO','CSV_PEATONAL') for e in ('E0','E1'))+'\n')
+ assert cc.main([str(tmp/'sin_dia.txt')])==1, 'producción sin día SBASE'
 # Las pruebas del cargador no tocan la planilla oficial (que desde 2026-10-05 tiene los 30 pares de producción).
 assert hashlib.sha256(Path(cc.PLANILLA_OFICIAL).read_bytes()).hexdigest()==_hash_planilla, 'las pruebas modificaron la planilla oficial'
 
@@ -657,13 +714,13 @@ else:
    e0_pico=32+rnd.uniform(-5,5); e1_pico=e0_pico+rnd.uniform(-9,3)
    z[5].append(e1_p90-e0_p90); z[6].append(e1_prop-e0_prop); z[14].append(e1_pico-e0_pico)
    for esc,p90,prop,pico in (('E0',e0_p90,e0_prop,e0_pico), ('E1',e1_p90,e1_prop,e1_pico)):
-    campos=[480,0,470,480,5.0,p90,prop,3.5,60,120.0,0.4,0.05,100,20.0,pico]
+    campos=[480,0,470,480,5.0,p90,prop,3.5,60,120.0,0.4,0.05,100,20.0,pico,-1,150.0,0.5]
     filas.append(f'CSV_PEATONAL_DEMO;{esc};{cc.SEMILLA_INICIAL+j};'+';'.join(str(x) for x in campos))
   return filas, z
 
  def ic_esperado(zvals, primaria=True):
   n=len(zvals); media=statistics.fmean(zvals); sd=statistics.stdev(zvals); se=sd/math.sqrt(n)
-  alfa=(0.05/3) if primaria else 0.05
+  alfa=(0.05/9) if primaria else 0.05   # 3 primarias x 3 comparaciones contra E0 (E1, E3, E13)
   t=t_inv_2t(alfa, n-1)
   return n, media, sd, se, t, media-t*se, media+t*se
 
@@ -693,6 +750,6 @@ else:
     assert n_c==n_e==n_prueba
     for calc, esp in ((h_c,h_e),(i_c,i_e),(j_c,j_e),(k_c,k_e),(l_c,l_e),(m_c,m_e)):
      assert abs(calc-esp)<1e-6, (fila_hoja, calc, esp)
- autoprueba_ic = 'coincide a 1e-6 con Python (T.INV.2T, n y k reales) para n=12 y n=30 en las tres primarias D4'
+ autoprueba_ic = 'coincide a 1e-6 con Python (T.INV.2T, n y k = 9 reales) para n=12 y n=30 en las tres primarias D4'
 print(f'OK: CSV_PEATONAL order matches 04-resultados-corridas.xlsx, the loader rejects demo, incomplete, '
-      f'unpaired or E1B runs, and the Resumen IC {autoprueba_ic}')
+      f'unpaired, E1B or mismatched-day runs, loads E1/E3/E13 sheets, and the Resumen IC {autoprueba_ic}')

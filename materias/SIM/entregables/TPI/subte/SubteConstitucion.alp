@@ -4270,6 +4270,186 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 					</Properties>                 
 				</Variable>
 				<Variable Class="Parameter">
+					<Id>1800000000001</Id>
+					<Name><![CDATA[diaSbasePed]]></Name>
+					<Description><![CDATA[Dia habil SBASE de la replica: -1 perfil medio mar-jun (perfilPed15min); -2 dia sorteado con la semilla (bootstrap de los dias depurados de perfilesDiasPed, el mismo para todos los escenarios de un par); >= 0 dia fijo.]]></Description>
+					<X>2630</X><Y>790</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>false</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[int]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[-1]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1800000000002</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1800000000003</Id>
+					<Name><![CDATA[atrasoMaxRocaSeg]]></Name>
+					<Description><![CDATA[Atraso de cada tren del Roca respecto del horario oficial, uniforme en [0, atrasoMaxRocaSeg] s [SUP]: no hay dato publicado de puntualidad. 0 = trenes a horario.]]></Description>
+					<X>2630</X><Y>820</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>false</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[0]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1800000000004</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1800000000005</Id>
+					<Name><![CDATA[cargaTrenPoissonPed]]></Name>
+					<Description><![CDATA[true: el pasaje de cada tren se sortea con una Poisson cuya media es la demanda acumulada desde el tren anterior de su ramal [SUP]; false: se redondea con arrastre del resto (deterministico).]]></Description>
+					<X>2630</X><Y>850</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>false</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[boolean]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[false]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1800000000006</Id>
+							<EditorContolType>CHECK_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1800000000007</Id>
+					<Name><![CDATA[rngTrenesPed]]></Name>
+					<X>2350</X><Y>790</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>false</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="default" StaticVariable="false">
+						<Type><![CDATA[java.util.Random]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[new java.util.Random(5)]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1800000000008</Id>
+					<Name><![CDATA[perfilEfectivoPed]]></Name>
+					<X>2350</X><Y>820</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>false</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="default" StaticVariable="false">
+						<Type><![CDATA[double[]]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[null]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1800000000009</Id>
+					<Name><![CDATA[diaEfectivoPed]]></Name>
+					<X>2350</X><Y>850</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>false</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="default" StaticVariable="false">
+						<Type><![CDATA[int]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[-1]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1800000000010</Id>
+					<Name><![CDATA[perfilesDiasPed]]></Name>
+					<X>2350</X><Y>880</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>false</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="default" StaticVariable="false">
+						<Type><![CDATA[double[][]]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[new double[][] {{1340,1203,1117,2270,1666,2225,2330,1051,1603,1727}, {1124,1672,1648,1710,1858,2140,1575,2162,1898,1365}, {1482,982,1539,1405,1991,2494,1459,2216,2090,1732}, {970,1390,1823,1660,1820,2232,2273,1722,1889,1338}, {1297,1586,1929,1375,1150,2526,2052,1230,1789,1732}, {1299,1766,2053,1549,1835,2250,1014,2448,1839,1886}, {1389,1698,1921,1440,1984,2449,2343,1446,1593,1750}, {1331,1703,1806,1700,1557,2206,2310,1651,1816,1711}, {894,1618,1774,1985,1105,2358,2232,1722,1569,1279}, {601,2039,1868,1970,2170,1799,2091,1236,1468,1617}, {1713,1807,1014,2251,1898,2206,2432,1385,1867,1628}, {1491,1836,1075,2379,1770,2716,1953,2315,1256,1714}, {1650,1057,1620,2288,2113,2297,2563,1878,1443,1921}, {1569,1507,1748,2300,1165,2901,2629,1289,1507,1904}, {1354,1739,1704,1752,1312,2058,2365,1742,1322,1628}, {663,606,1156,605,1154,1295,1071,447,892,598}, {1115,2049,2272,2514,1629,2540,1634,578,2881,2569}, {1573,1380,1885,2382,1432,2810,2290,2071,1678,1085}, {1474,2061,1290,1780,1870,2189,2107,1496,1539,1798}, {1776,1592,1991,2237,1568,2606,1788,1668,1864,1925}, {1908,1687,1772,2001,1658,1846,2046,2479,1844,1734}, {1564,1751,1951,2006,1171,2606,2446,1854,1274,1913}, {896,2278,1734,2502,1511,2242,2267,1817,1415,1726}, {1538,1560,1942,1404,1556,2602,2094,2296,1581,1782}, {1484,2167,1949,2209,1168,3158,2720,1779,1808,1797}, {1358,1801,2437,2375,2170,3051,2798,1386,1844,1824}, {2148,1937,1802,1476,2075,2469,2773,235,2632,1686}, {1450,1243,928,1112,1111,1681,2101,2727,2143,1699}, {1618,2147,2621,2178,2547,2160,2398,1578,2047,1886}, {1452,1889,1401,1929,1606,2476,2158,1754,1039,2157}, {1205,2029,2197,2080,2266,2265,2568,2366,1885,2257}, {1254,2576,2316,1477,2083,2218,2084,1922,1532,1721}, {1294,2660,2251,1833,2504,1976,2435,1879,1582,1728}, {1525,2234,1659,1962,2515,2234,1939,2091,1887,1757}, {2064,685,1697,1803,2028,1666,2849,3181,1408,2134}, {1868,1969,2031,2112,2528,1449,2114,3153,2048,1674}, {1522,1545,1481,2575,2648,2312,1415,2430,1381,1567}, {1469,1586,2129,2428,1707,2235,2575,1771,1376,1616}, {1747,1805,1624,2598,2177,2000,720,1845,2733,2008}, {1504,1349,2068,2026,1927,2287,2306,1899,1849,1635}, {1605,1416,2313,2542,1405,2134,2752,1754,1758,1980}, {1753,1604,1696,2214,2142,2671,2353,1514,1491,1772}, {1851,1775,1479,1812,2521,2014,2637,2228,1610,1436}, {1530,2011,1603,1885,2322,2691,1943,2317,1084,1812}, {1606,1392,1703,2236,2311,1606,2068,1984,1475,1507}, {1724,1971,1332,2220,2093,2346,2133,1998,1015,2193}, {1169,1934,2443,1778,2565,2444,1381,2743,1766,1429}, {2476,1564,1570,1921,2035,2543,2625,2022,1537,1574}, {1783,1925,1949,2018,2186,1648,2187,2984,1917,1793}, {2147,1594,2018,2219,1032,2751,2778,1948,2049,1418}, {1142,1509,1755,2339,1379,2618,1420,1614,2535,1536}, {1067,1920,1875,1629,2409,2399,2052,2409,1406,1493}, {2084,1645,2249,1307,2612,2424,2278,2238,820,2191}, {1744,905,2252,2474,1669,2528,2406,2551,1403,2075}, {2432,1765,1799,1915,1773,2639,2491,2227,1372,1962}, {1308,944,2049,2410,1599,2247,2314,1706,966,1846}, {1159,1468,1330,1167,2306,1581,2218,1845,1958,1532}, {2066,1079,1562,2963,2480,2026,1544,1968,2381,1788}, {1720,1333,2266,2143,875,2581,1692,1715,2069,2124}, {1704,1507,667,2223,2536,2232,2175,1452,1589,1657}, {1914,1672,2129,1694,2201,2641,1183,1993,1876,2225}, {1750,1698,1814,2161,1418,2529,2450,1725,1675,1827}, {1254,1521,2376,2359,1486,3037,1821,1425,2352,1668}, {1578,2069,993,2244,2245,1952,2025,1505,1740,1108}, {1574,1819,2078,1727,1767,2048,1606,1031,2617,1763}, {1530,2030,1975,2420,2111,1705,2682,2083,1728,1577}, {1634,1984,1789,2084,1508,2831,2010,1931,1418,1616}, {1666,1878,2149,1731,1656,1616,2247,2472,1908,1698}, {1884,1557,1795,2025,1733,1005,2432,2274,1897,1812}, {2013,1285,2600,2058,1255,2381,3045,2304,1207,2022}, {1469,1693,935,2389,2059,2258,2381,2071,1385,1685}, {450,1354,1083,1381,302,156,125,205,204,192}, {1657,1746,1976,1817,1949,1486,2273,1486,1800,1893}, {1485,1931,1596,1452,2773,1551,2284,1406,1671,1525}, {2008,1812,1543,1993,2357,2315,2321,2211,1846,1872}, {2583,2541,1804,2066,2561,2226,2301,2050,1774,1975}, {1099,1889,2591,2379,2167,1754,2739,2086,2028,1454}, {1563,1852,1461,2238,1649,2228,2463,1236,1723,1824}, {1751,1372,2076,1836,1979,2294,1886,2451,1514,1901}, {1619,1303,2415,1756,2407,1793,2796,1590,2290,1693}}]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1800000000011</Id>
+					<Name><![CDATA[fechasDiasPed]]></Name>
+					<X>2350</X><Y>910</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>false</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="default" StaticVariable="false">
+						<Type><![CDATA[String[]]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[new String[] {"2026-03-02","2026-03-03","2026-03-04","2026-03-05","2026-03-06","2026-03-09","2026-03-10","2026-03-11","2026-03-12","2026-03-13","2026-03-16","2026-03-17","2026-03-18","2026-03-19","2026-03-20","2026-03-23","2026-03-25","2026-03-26","2026-03-27","2026-03-30","2026-03-31","2026-04-01","2026-04-06","2026-04-07","2026-04-08","2026-04-09","2026-04-10","2026-04-13","2026-04-14","2026-04-15","2026-04-16","2026-04-17","2026-04-20","2026-04-21","2026-04-22","2026-04-23","2026-04-24","2026-04-27","2026-04-28","2026-04-29","2026-04-30","2026-05-04","2026-05-05","2026-05-06","2026-05-07","2026-05-08","2026-05-11","2026-05-12","2026-05-13","2026-05-14","2026-05-15","2026-05-18","2026-05-19","2026-05-20","2026-05-21","2026-05-22","2026-05-26","2026-05-27","2026-05-28","2026-05-29","2026-06-02","2026-06-03","2026-06-04","2026-06-05","2026-06-08","2026-06-09","2026-06-10","2026-06-11","2026-06-12","2026-06-16","2026-06-17","2026-06-18","2026-06-19","2026-06-22","2026-06-23","2026-06-24","2026-06-25","2026-06-26","2026-06-29","2026-06-30"}]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1800000000012</Id>
+					<Name><![CDATA[transitosRocaPed]]></Name>
+					<X>2350</X><Y>940</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>false</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="default" StaticVariable="false">
+						<Type><![CDATA[java.util.ArrayList<Double>]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[new java.util.ArrayList<Double>()]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1800000000013</Id>
+					<Name><![CDATA[validacionesPorMolinetePed]]></Name>
+					<X>2350</X><Y>970</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>false</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="default" StaticVariable="false">
+						<Type><![CDATA[java.util.HashMap<String, Integer>]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[new java.util.HashMap<String, Integer>()]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="Parameter">
 					<Id>1792000000312</Id>
 					<Name><![CDATA[llegadasRocaSeg]]></Name>
 					<Description><![CDATA[Arribos habiles a Pza. Constitucion (s desde las 07:00), horarios oficiales vigentes desde 03/08/2026; ver datos/.]]></Description>
@@ -4954,6 +5134,11 @@ esperasPed.add(espera);
 if (espera > 30) nMas30Ped++;
 if (ped.enPicoPed) esperasPicoPed.add(espera);
 ped.tInicioServicioPed = time();
+// Transito del Roca: desde que baja del tren hasta que llega a la cola (o al molinete, si no hizo cola). Si la boca
+// B2 o el pasillo hacen de embudo, la espera se corre ahi y este tiempo crece.
+if (ped.desdeRocaPed) transitosRocaPed.add((hizoCola ? ped.tEntradaColaPed : time()) - ped.tIngresoSistemaPed);
+Integer previasMolinete = validacionesPorMolinetePed.get(ped.nombreMolinetePed);
+validacionesPorMolinetePed.put(ped.nombreMolinetePed, previasMolinete == null ? 1 : previasMolinete + 1);
 int ventana = (int)Math.floor(time() / 900.0);
 if (ventana >= 0 && ventana < validacionesPorVentanaPed.length) validacionesPorVentanaPed[ventana]++;
 actualizarTransitoPed();]]></Body>
@@ -5170,7 +5355,10 @@ return acumulada/fin;]]></Body>
  + "; corteSeg=" + horizonteCortePed + "; trenes=" + nTrenesPed + "; tandas=" + nTandasPed + "; inyectados=" + nInyectadosPed
  + "; desdeRoca=" + nDesdeRocaPed + "; desdeCalle=" + nDesdeCallePed
  + "; generados=" + nGeneradosPed + "; procesados=" + nProcesadosPed
- + "; molinetesOperativos=" + molinetesOperativosPed
+ + "; escenario=" + escenarioPed() + "; molinetesOperativos=" + molinetesOperativosPed
+ + "; diaSbase=" + diaEfectivoPed + (diaEfectivoPed >= 0 && diaEfectivoPed < fechasDiasPed.length ? " (" + fechasDiasPed[diaEfectivoPed] + ")" : "")
+ + "; atrasoMaxRocaSeg=" + atrasoMaxRocaSeg + "; cargaTrenPoisson=" + cargaTrenPoissonPed
+ + "; transitoRocaP90Seg=" + p90TransitoRocaPed() + "; cvValidacionesMolinete=" + cvValidacionesMolinetePed()
  + "; esperaMediaSeg=" + esperaMediaPed() + "; p90Seg=" + percentil90Ped()
  + "; proporcionMas30=" + proporcionMas30Ped() + "; esperaMaxSeg=" + esperaMaxPed
  + "; qMax=" + qMaxPed + "; Lq=" + lqPed()
@@ -5192,10 +5380,8 @@ return acumulada/fin;]]></Body>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[String escenarioPed = molinetesOperativosPed == 20 ? "E0" : (molinetesOperativosPed == 22 ? "E1"
-    : (molinetesOperativosPed == 28 ? "E1B" : "M" + molinetesOperativosPed));
-return String.join(";",
-    escenarioPed,
+					<Body><![CDATA[return String.join(";",
+    escenarioPed(),
     Long.toString(semillaPed),
     Integer.toString(nGeneradosPed),
     "0",
@@ -5211,7 +5397,10 @@ return String.join(";",
     String.format(java.util.Locale.US, "%.6f", dispersionUtilizacionPed()),
     Integer.toString(esperasPicoPed.size()),
     String.format(java.util.Locale.US, "%.6f", esperaMediaPicoPed()),
-    String.format(java.util.Locale.US, "%.6f", p90PicoPed()));]]></Body>
+    String.format(java.util.Locale.US, "%.6f", p90PicoPed()),
+    Integer.toString(diaEfectivoPed),
+    String.format(java.util.Locale.US, "%.6f", p90TransitoRocaPed()),
+    String.format(java.util.Locale.US, "%.6f", cvValidacionesMolinetePed()));]]></Body>
 				</Function>
 				<Function AccessType="public" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
@@ -5232,6 +5421,11 @@ String linea = prefijoResultadoPed() + ";" + filaResultadoPed();
 traceln(resumenPeatonal());
 traceln(linea);
 escribirFilaPed(linea);
+if (modoFranjaPed && archivoSalidaPed != null && !archivoSalidaPed.trim().isEmpty()) {
+    String ventanas = "VENTANAS_PEATONAL;" + filaVentanasPed();
+    traceln(ventanas);
+    escribirLineaPed(archivoSalidaPed.replaceFirst("(\\.csv)?$", "_ventanas.csv"), ventanas);
+}
 if (modoFranjaPed) getEngine().finish();]]></Body>
 				</Function>
 				<Function AccessType="public" StaticFunction="false">
@@ -5286,6 +5480,26 @@ if (modoFranjaPed) {
         throw new IllegalArgumentException("perfilPed15min: diez ventanas de 15 minutos");
     for (double v : perfilPed15min)
         if (!Double.isFinite(v) || v < 0) throw new IllegalArgumentException("perfilPed15min invalido");
+    // Dia de la replica (bootstrap): -1 perfil medio; -2 un dia habil real sorteado con la semilla, el mismo para
+    // todos los escenarios del par (numeros aleatorios comunes); >= 0 dia fijo de perfilesDiasPed.
+    if (diaSbasePed == -1) {
+        diaEfectivoPed = -1;
+        perfilEfectivoPed = perfilPed15min;
+    } else {
+        if (diaSbasePed < -2) throw new IllegalArgumentException("diaSbasePed: -1, -2 o un dia >= 0");
+        if (perfilesDiasPed == null || perfilesDiasPed.length == 0)
+            throw new IllegalArgumentException("perfilesDiasPed vacio: correr datos/embeber_dias_sbase.py");
+        diaEfectivoPed = diaSbasePed >= 0 ? diaSbasePed
+            : (int) Math.floorMod(mezclarSemillaPed(semillaPed, 4), (long) perfilesDiasPed.length);
+        if (diaEfectivoPed >= perfilesDiasPed.length) throw new IllegalArgumentException("diaSbasePed fuera de rango");
+        perfilEfectivoPed = perfilesDiasPed[diaEfectivoPed];
+        if (perfilEfectivoPed == null || perfilEfectivoPed.length != 10)
+            throw new IllegalArgumentException("perfilesDiasPed: diez ventanas por dia");
+        for (double v : perfilEfectivoPed)
+            if (!Double.isFinite(v) || v < 0) throw new IllegalArgumentException("perfilesDiasPed invalido");
+    }
+    if (!(atrasoMaxRocaSeg >= 0) || atrasoMaxRocaSeg > 300)
+        throw new IllegalArgumentException("atrasoMaxRocaSeg debe estar en [0, 300] s");
     if (llegadasRocaSeg == null) throw new IllegalArgumentException("llegadasRocaSeg: falta el horario del Roca");
     for (double t : llegadasRocaSeg)
         if (!Double.isFinite(t)) throw new IllegalArgumentException("llegadasRocaSeg invalido");
@@ -5294,6 +5508,8 @@ if (modoFranjaPed) {
     if (tamanoTandaDemo < 0 || intervaloTandaDemoSeg <= 0 || cantidadTandasDemo <= 0 || servicioDemoSeg <= 0)
         throw new IllegalArgumentException("Parametros de la demo peatonal invalidos");
     horizonteCortePed = horizonteMetricasPedSeg;
+    diaEfectivoPed = -1;
+    perfilEfectivoPed = perfilPed15min;
 }
 // La semilla efectiva es semillaPed. La calle y el servicio usan generadores propios para que E0 y E1
 // reciban exactamente los mismos arribos y tiempos de validacion (numeros aleatorios comunes).
@@ -5305,6 +5521,8 @@ rngServicioPed.setSeed(mezclarSemillaPed(semillaPed, 2));
 // La velocidad de cada peaton usa su propio generador: el generador por defecto lo consume tambien
 // la Pedestrian Library, en un orden que depende del escenario, y rompia los numeros comunes E0/E1.
 rngVelocidadPed.setSeed(mezclarSemillaPed(semillaPed, 3));
+// Atraso y carga de los trenes: flujo propio, sorteado en el orden del horario (igual en todos los escenarios).
+rngTrenesPed.setSeed(mezclarSemillaPed(semillaPed, 5));
 inicioRealMsPed = System.currentTimeMillis();
 inicializadoPed = true;]]></Body>
 				</Function>
@@ -5347,18 +5565,7 @@ inicializadoPed = true;]]></Body>
 						<Type><![CDATA[String]]></Type>
 					</Parameter>
 					<Body><![CDATA[if (archivoSalidaPed == null || archivoSalidaPed.trim().isEmpty()) return;
-// Con evaluaciones en paralelo varias corridas pueden terminar a la vez: se serializa la escritura
-// con un monitor unico del JVM para que ninguna linea se intercale con otra.
-synchronized (java.nio.file.Files.class) {
-try {
-    java.nio.file.Path ruta = java.nio.file.Paths.get(archivoSalidaPed).toAbsolutePath();
-    java.nio.file.Files.write(ruta, java.util.Collections.singletonList(linea), java.nio.charset.StandardCharsets.UTF_8,
-        java.nio.file.StandardOpenOption.CREATE, java.nio.file.StandardOpenOption.APPEND);
-    traceln("Fila agregada a " + ruta);
-} catch (java.io.IOException e) {
-    throw new RuntimeException("No se pudo escribir " + archivoSalidaPed, e);
-}
-}]]></Body>
+escribirLineaPed(archivoSalidaPed, linea);]]></Body>
 				</Function>
 				<Function AccessType="public" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
@@ -5510,23 +5717,28 @@ return colas.get(mejor);]]></Body>
 // La tasa es la del perfil SBASE en el instante de ingreso; antes de las 07:00 se extiende la de la primera
 // ventana. Cada ramal toma la parte de la demanda proporcional a sus trenes en la franja. El pasaje sale de la
 // cabecera del anden de forma pareja durante duracionDescargaSeg, a partir de demoraAccesoRocaSeg.
-// Solo cuentan los ingresos anteriores al cierre (09:30).
+// Solo cuentan los ingresos anteriores al cierre (09:30). Con atrasoMaxRocaSeg > 0 cada tren llega tarde un
+// tiempo uniforme [SUP]; con cargaTrenPoissonPed su pasaje es Poisson. El perfil es el del dia de la replica.
 double h = horizonteArribosPedSeg;
 java.util.function.DoubleUnaryOperator acumulada = s -> {
-    if (s < 0) return perfilPed15min[0] * s / 900.0;
-    double tope = Math.min(s, 900.0 * perfilPed15min.length);
+    if (s < 0) return perfilEfectivoPed[0] * s / 900.0;
+    double tope = Math.min(s, 900.0 * perfilEfectivoPed.length);
     int k = (int) Math.floor(tope / 900.0);
     double a = 0;
-    for (int i = 0; i < k && i < perfilPed15min.length; i++) a += perfilPed15min[i];
-    if (k < perfilPed15min.length) a += perfilPed15min[k] * (tope - 900.0 * k) / 900.0;
+    for (int i = 0; i < k && i < perfilEfectivoPed.length; i++) a += perfilEfectivoPed[i];
+    if (k < perfilEfectivoPed.length) a += perfilEfectivoPed[k] * (tope - 900.0 * k) / 900.0;
     return a;
 };
+// Atraso de cada tren [SUP] (uniforme en [0, atrasoMaxRocaSeg]); se sortea para todo el horario, en orden.
+double[] atrasoTren = new double[llegadasRocaSeg.length];
+for (int j = 0; j < llegadasRocaSeg.length; j++)
+    atrasoTren[j] = atrasoMaxRocaSeg > 0 ? atrasoMaxRocaSeg * rngTrenesPed.nextDouble() : 0;
 int nRamales = 0;
 for (int b : ramalRocaPed) nRamales = Math.max(nRamales, b + 1);
 int[] trenesRamal = new int[nRamales];
 int enFranja = 0;
 for (int j = 0; j < llegadasRocaSeg.length; j++) {
-    double ingreso = llegadasRocaSeg[j] + demoraAccesoRocaSeg;
+    double ingreso = llegadasRocaSeg[j] + atrasoTren[j] + demoraAccesoRocaSeg;
     if (ingreso >= 0 && ingreso < h) { trenesRamal[ramalRocaPed[j]]++; enFranja++; }
 }
 double[] ingresoAnterior = new double[nRamales];
@@ -5534,21 +5746,28 @@ java.util.Arrays.fill(ingresoAnterior, Double.NaN);
 double[] resto = new double[nRamales];
 for (int j = 0; j < llegadasRocaSeg.length; j++) {
     int b = ramalRocaPed[j];
-    double ingreso = llegadasRocaSeg[j] + demoraAccesoRocaSeg;
+    double ingreso = llegadasRocaSeg[j] + atrasoTren[j] + demoraAccesoRocaSeg;
     // Sin tren anterior del ramal en el horario cargado: se toman 15 minutos de acumulacion.
     double desde = Double.isNaN(ingresoAnterior[b]) ? ingreso - 900.0 : ingresoAnterior[b];
     ingresoAnterior[b] = ingreso;
     if (ingreso < 0 || ingreso >= h) continue;
-    double carga = factorDemandaPed * proporcionRocaPed * trenesRamal[b] / enFranja
-        * (acumulada.applyAsDouble(ingreso) - acumulada.applyAsDouble(desde)) + resto[b];
-    int n = (int) Math.round(carga);
-    resto[b] = carga - n;
+    double media = factorDemandaPed * proporcionRocaPed * trenesRamal[b] / enFranja
+        * Math.max(0, acumulada.applyAsDouble(ingreso) - acumulada.applyAsDouble(desde));
+    int n;
+    if (cargaTrenPoissonPed) {
+        // Pasaje del tren aleatorio [SUP]: Poisson con la demanda acumulada como media (sin arrastre).
+        n = poissonTrenPed(media);
+    } else {
+        double carga = media + resto[b];
+        n = (int) Math.round(carga);
+        resto[b] = carga - n;
+    }
     // Cada tren descarga en un anden (islas 2-3 ... 12-13 y anden 14). No hay dato de anden por tren:
     // se asignan por turno, en el orden del horario [SUP].
     int anden = j % 7;
     nTrenesPed++;
     // Vista: el tren aparece 10 s antes de su llegada, 60 m antes de la parada (solo animacion, no cambia la demanda).
-    trenesRocaPed.add(new double[] {Math.max(0, llegadasRocaSeg[j] - 10), anden});
+    trenesRocaPed.add(new double[] {Math.max(0, llegadasRocaSeg[j] + atrasoTren[j] - 10), anden});
     for (int i = 0; i < n; i++) {
         double r = ingreso + (i + 0.5) * duracionDescargaSeg / n;
         if (r < h) liberacionesPed.add(new double[] {r, anden});
@@ -5562,6 +5781,135 @@ if (liberacionesPed.isEmpty()) {
     proximaLiberacionPed.restart(Math.max(0, liberacionesPed.peek()[0] - time()));
 }
 programarLlegadaCallePed(time());]]></Body>
+				</Function>
+				<Function AccessType="public" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[int]]></ReturnType>
+					<Id>1800000000014</Id>
+					<Name><![CDATA[poissonTrenPed]]></Name>
+					<X>3190</X><Y>190</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>false</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Parameter>
+						<Name><![CDATA[media]]></Name>
+						<Type><![CDATA[double]]></Type>
+					</Parameter>
+					<Body><![CDATA[// Poisson(media) contando llegadas de un proceso de tasa 1 en [0, media] (sin desborde para medias grandes).
+if (!(media > 0)) return 0;
+int k = 0;
+double t = -Math.log(1 - rngTrenesPed.nextDouble());
+while (t <= media) {
+    k++;
+    t += -Math.log(1 - rngTrenesPed.nextDouble());
+}
+return k;]]></Body>
+				</Function>
+				<Function AccessType="public" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1800000000015</Id>
+					<Name><![CDATA[p90TransitoRocaPed]]></Name>
+					<X>3190</X><Y>215</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>false</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[if (transitosRocaPed.isEmpty()) return 0;
+java.util.ArrayList<Double> ordenados = new java.util.ArrayList<Double>(transitosRocaPed);
+java.util.Collections.sort(ordenados);
+return ordenados.get(Math.max(0, (int)Math.ceil(0.9 * ordenados.size()) - 1));]]></Body>
+				</Function>
+				<Function AccessType="public" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1800000000016</Id>
+					<Name><![CDATA[cvValidacionesMolinetePed]]></Name>
+					<X>3190</X><Y>240</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>false</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[// Coeficiente de variacion de las validaciones entre los molinetes habilitados (se compara con SBASE).
+if (molinetesOperativosPed <= 0) return 0;
+double suma = 0, suma2 = 0;
+for (int i = 1; i <= molinetesOperativosPed; i++) {
+    Integer v = validacionesPorMolinetePed.get(String.format("molinetePed%02d", i));
+    double x = v == null ? 0 : v;
+    suma += x;
+    suma2 += x * x;
+}
+double media = suma / molinetesOperativosPed;
+if (media <= 0) return 0;
+return Math.sqrt(Math.max(0, suma2 / molinetesOperativosPed - media * media)) / media;]]></Body>
+				</Function>
+				<Function AccessType="public" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[String]]></ReturnType>
+					<Id>1800000000017</Id>
+					<Name><![CDATA[escenarioPed]]></Name>
+					<X>3190</X><Y>265</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>false</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[// E0 = 20 molinetes, E1 = 22, E1B = 28 (ampliacion hipotetica); con validacion rapida (moda < 2 s, EMV/QR) E3 = 20
+// y E13 = 22. La moda intermedia es 2,4 s y la de E3 1,8 s.
+boolean rapida = modoFranjaPed && servicioPedSeg > 0 && servicioPedSeg < 2.0;
+String base = molinetesOperativosPed == 20 ? "E0" : (molinetesOperativosPed == 22 ? "E1"
+    : (molinetesOperativosPed == 28 ? "E1B" : "M" + molinetesOperativosPed));
+if (!rapida) return base;
+return molinetesOperativosPed == 20 ? "E3" : (molinetesOperativosPed == 22 ? "E13" : base + "R");]]></Body>
+				</Function>
+				<Function AccessType="public" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[String]]></ReturnType>
+					<Id>1800000000018</Id>
+					<Name><![CDATA[filaVentanasPed]]></Name>
+					<X>3190</X><Y>290</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>false</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[// Validaciones simuladas y observadas (perfil del dia de la replica) por ventana de 15 min, para la validacion.
+StringBuilder sb = new StringBuilder();
+sb.append(escenarioPed()).append(';').append(semillaPed).append(';').append(diaEfectivoPed);
+for (int w = 0; w < validacionesPorVentanaPed.length; w++) sb.append(';').append(validacionesPorVentanaPed[w]);
+for (int w = 0; w < validacionesPorVentanaPed.length; w++)
+    sb.append(';').append(String.format(java.util.Locale.US, "%.1f", w < perfilEfectivoPed.length ? factorDemandaPed * perfilEfectivoPed[w] : 0));
+return sb.toString();]]></Body>
+				</Function>
+				<Function AccessType="public" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[void]]></ReturnType>
+					<Id>1800000000019</Id>
+					<Name><![CDATA[escribirLineaPed]]></Name>
+					<X>3190</X><Y>315</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>false</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Parameter>
+						<Name><![CDATA[archivo]]></Name>
+						<Type><![CDATA[String]]></Type>
+					</Parameter>
+					<Parameter>
+						<Name><![CDATA[linea]]></Name>
+						<Type><![CDATA[String]]></Type>
+					</Parameter>
+					<Body><![CDATA[// Con evaluaciones en paralelo varias corridas pueden terminar a la vez: se serializa la escritura
+// con un monitor unico del JVM para que ninguna linea se intercale con otra.
+synchronized (java.nio.file.Files.class) {
+try {
+    java.nio.file.Path ruta = java.nio.file.Paths.get(archivo).toAbsolutePath();
+    java.nio.file.Files.write(ruta, java.util.Collections.singletonList(linea), java.nio.charset.StandardCharsets.UTF_8,
+        java.nio.file.StandardOpenOption.CREATE, java.nio.file.StandardOpenOption.APPEND);
+    traceln("Fila agregada a " + ruta);
+} catch (java.io.IOException e) {
+    throw new RuntimeException("No se pudo escribir " + archivo, e);
+}
+}]]></Body>
 				</Function>
 				<Function AccessType="public" StaticFunction="false">
 					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
@@ -5668,7 +6016,7 @@ programarLlegadaCallePed(time());]]></Body>
 					</Parameter>
 					<Body><![CDATA[// Poisson no homogeneo por adelgazamiento: la tasa de cada ventana es la parte de calle del perfil SBASE.
 double tasaMax = 0;
-for (double v : perfilPed15min) tasaMax = Math.max(tasaMax, factorDemandaPed * v * (1 - proporcionRocaPed) / 900.0);
+for (double v : perfilEfectivoPed) tasaMax = Math.max(tasaMax, factorDemandaPed * v * (1 - proporcionRocaPed) / 900.0);
 if (tasaMax <= 0) {
     calleCerradaPed = true;
     cerrarArribosSiCorrespondePed();
@@ -5682,8 +6030,8 @@ while (true) {
         cerrarArribosSiCorrespondePed();
         return;
     }
-    int ventana = Math.min(perfilPed15min.length - 1, (int)Math.floor(t / 900.0));
-    double tasa = factorDemandaPed * perfilPed15min[ventana] * (1 - proporcionRocaPed) / 900.0;
+    int ventana = Math.min(perfilEfectivoPed.length - 1, (int)Math.floor(t / 900.0));
+    double tasa = factorDemandaPed * perfilEfectivoPed[ventana] * (1 - proporcionRocaPed) / 900.0;
     if (rngCallePed.nextDouble() * tasaMax <= tasa) break;
 }
 proximaLlegadaCallePed.restart(t - time());]]></Body>
@@ -5729,10 +6077,10 @@ return u < corte ? a + Math.sqrt(u * (b - a) * (c - a)) : b - Math.sqrt((1 - u) 
 					<ShowLabel>true</ShowLabel>
 					<Body><![CDATA[// Validaciones simuladas por ventana de 15 minutos frente al perfil SBASE escalado (control de calibracion).
 java.util.ArrayList<String> partes = new java.util.ArrayList<String>();
-for (int w = 0; w < validacionesPorVentanaPed.length && w < perfilPed15min.length; w++) {
+for (int w = 0; w < validacionesPorVentanaPed.length && w < perfilEfectivoPed.length; w++) {
     int minutos = 7 * 60 + 15 * w;
     partes.add(String.format(java.util.Locale.US, "%02d:%02d sim=%d obs=%.0f", minutos / 60, minutos % 60,
-        validacionesPorVentanaPed[w], factorDemandaPed * perfilPed15min[w]));
+        validacionesPorVentanaPed[w], factorDemandaPed * perfilEfectivoPed[w]));
 }
 return String.join(",", partes);]]></Body>
 				</Function>
@@ -42670,6 +43018,15 @@ figurasPed.add(figura);]]></StartupCode>
 				<Parameter>
 					<ParameterName><![CDATA[pruebaSinteticaPed]]></ParameterName>
 				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[diaSbasePed]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[atrasoMaxRocaSeg]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[cargaTrenPoissonPed]]></ParameterName>
+				</Parameter>
 			</Parameters>
 			<PresentationProperties>
 				<EnableZoomAndPanning>true</EnableZoomAndPanning>
@@ -42797,6 +43154,15 @@ figurasPed.add(figura);]]></StartupCode>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[pruebaSinteticaPed]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[diaSbasePed]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[atrasoMaxRocaSeg]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[cargaTrenPoissonPed]]></ParameterName>
 				</Parameter>
 			</Parameters>
 			<PresentationProperties>
@@ -42950,6 +43316,15 @@ figurasPed.add(figura);]]></StartupCode>
 						<Code><![CDATA[false]]></Code>
 					</ParameterValue>
 				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[diaSbasePed]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[atrasoMaxRocaSeg]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[cargaTrenPoissonPed]]></ParameterName>
+				</Parameter>
 			</Parameters>
 			<PresentationProperties>
 				<EnableZoomAndPanning>true</EnableZoomAndPanning>
@@ -43102,6 +43477,15 @@ figurasPed.add(figura);]]></StartupCode>
 						<Code><![CDATA[false]]></Code>
 					</ParameterValue>
 				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[diaSbasePed]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[atrasoMaxRocaSeg]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[cargaTrenPoissonPed]]></ParameterName>
+				</Parameter>
 			</Parameters>
 			<PresentationProperties>
 				<EnableZoomAndPanning>true</EnableZoomAndPanning>
@@ -43230,6 +43614,15 @@ figurasPed.add(figura);]]></StartupCode>
 				<Parameter>
 					<ParameterName><![CDATA[pruebaSinteticaPed]]></ParameterName>
 				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[diaSbasePed]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[atrasoMaxRocaSeg]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[cargaTrenPoissonPed]]></ParameterName>
+				</Parameter>
 			</Parameters>
 			<PresentationProperties>
 				<EnableZoomAndPanning>true</EnableZoomAndPanning>
@@ -43275,7 +43668,7 @@ figurasPed.add(figura);]]></StartupCode>
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
 					<Color>-12490271</Color>
-					<Text><![CDATA[Subte Constitución - 30 pares E0-E1 (franja, requiere calibración)]]></Text>
+					<Text><![CDATA[Subte Constitución - 30 días x 4 escenarios (E0, E1, E3, E13), día SBASE sorteado]]></Text>
 					<Font>
 						<Name>SansSerif</Name>
 						<Size>24</Size>
@@ -43287,7 +43680,7 @@ figurasPed.add(figura);]]></StartupCode>
 
 			<AllowParallelEvaluations>false</AllowParallelEvaluations>
 			<UseFreeformParameters>true</UseFreeformParameters>
-			<NumberOfRuns>60</NumberOfRuns>
+			<NumberOfRuns>120</NumberOfRuns>
 			<FreeformParamValue>	
 				<Id>1791000000007</Id>
 			</FreeformParamValue>
@@ -43318,7 +43711,7 @@ figurasPed.add(figura);]]></StartupCode>
 			<FreeformParamValue>	
 				<Id>1791000000179</Id>
 				<Expression Class="CodeValue">
-					<Code><![CDATA[20260923L + index / 2]]></Code>
+					<Code><![CDATA[20260923L + index / 4]]></Code>
 				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
@@ -43333,7 +43726,7 @@ figurasPed.add(figura);]]></StartupCode>
 			<FreeformParamValue>	
 				<Id>1792000000011</Id>
 				<Expression Class="CodeValue">
-					<Code><![CDATA[2.4]]></Code>
+					<Code><![CDATA[index % 4 >= 2 ? 1.8 : 2.4]]></Code>
 				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
@@ -43366,13 +43759,13 @@ figurasPed.add(figura);]]></StartupCode>
 			<FreeformParamValue>	
 				<Id>1792000000306</Id>
 				<Expression Class="CodeValue">
-					<Code><![CDATA[1.8]]></Code>
+					<Code><![CDATA[index % 4 >= 2 ? 1.5 : 1.8]]></Code>
 				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1792000000308</Id>
 				<Expression Class="CodeValue">
-					<Code><![CDATA[3.5]]></Code>
+					<Code><![CDATA[index % 4 >= 2 ? 2.5 : 3.5]]></Code>
 				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
@@ -43384,7 +43777,25 @@ figurasPed.add(figura);]]></StartupCode>
 			<FreeformParamValue>	
 				<Id>1792000000400</Id>
 			</FreeformParamValue>
-			<RangeVariationParamValue>	
+<FreeformParamValue>	
+				<Id>1800000000001</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[-2]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1800000000003</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[120]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1800000000005</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[true]]></Code>
+				</Expression>
+			</FreeformParamValue>
+						<RangeVariationParamValue>	
 				<Id>1791000000007</Id>
 				<Type>FIXED</Type>
 			</RangeVariationParamValue>
@@ -43496,6 +43907,27 @@ figurasPed.add(figura);]]></StartupCode>
 				<Id>1792000000400</Id>
 				<Type>FIXED</Type>
 			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1800000000001</Id>
+				<Type>FIXED</Type>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[-2]]></Code>
+				</Expression>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1800000000003</Id>
+				<Type>FIXED</Type>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[120]]></Code>
+				</Expression>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1800000000005</Id>
+				<Type>FIXED</Type>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[true]]></Code>
+				</Expression>
+			</RangeVariationParamValue>
 			<ModelTimeProperties>
 				<StopOption><![CDATA[Stop at specified time]]></StopOption>
 				<InitialDate><![CDATA[1789984800000]]></InitialDate>	
@@ -43505,7 +43937,7 @@ figurasPed.add(figura);]]></StartupCode>
 			</ModelTimeProperties>
 			<PresentationProperties>
 				<EnableZoomAndPanning>false</EnableZoomAndPanning>
-				<Title><![CDATA[Subte Constitución - 30 pares E0-E1 (franja, requiere calibración)]]></Title>
+				<Title><![CDATA[Subte Constitución - 30 días x 4 escenarios (E0, E1, E3, E13), día SBASE sorteado]]></Title>
 				<EnableDeveloperPanel>true</EnableDeveloperPanel>
 				<ShowDeveloperPanelOnStart>false</ShowDeveloperPanelOnStart>
 			</PresentationProperties>
@@ -43638,7 +44070,16 @@ figurasPed.add(figura);]]></StartupCode>
 			<FreeformParamValue>	
 				<Id>1792000000400</Id>
 			</FreeformParamValue>
-			<RangeVariationParamValue>	
+<FreeformParamValue>	
+				<Id>1800000000001</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1800000000003</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1800000000005</Id>
+			</FreeformParamValue>
+						<RangeVariationParamValue>	
 				<Id>1791000000007</Id>
 				<Type>FIXED</Type>
 			</RangeVariationParamValue>
@@ -43730,6 +44171,18 @@ figurasPed.add(figura);]]></StartupCode>
 			</RangeVariationParamValue>
 			<RangeVariationParamValue>	
 				<Id>1792000000400</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1800000000001</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1800000000003</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1800000000005</Id>
 				<Type>FIXED</Type>
 			</RangeVariationParamValue>
 			<ModelTimeProperties>
@@ -43898,7 +44351,16 @@ figurasPed.add(figura);]]></StartupCode>
 					<Code><![CDATA[true]]></Code>
 				</Expression>
 			</FreeformParamValue>
-			<RangeVariationParamValue>	
+<FreeformParamValue>	
+				<Id>1800000000001</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1800000000003</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1800000000005</Id>
+			</FreeformParamValue>
+						<RangeVariationParamValue>	
 				<Id>1791000000007</Id>
 				<Type>FIXED</Type>
 			</RangeVariationParamValue>
@@ -44015,6 +44477,18 @@ figurasPed.add(figura);]]></StartupCode>
 				<Expression Class="CodeValue">
 					<Code><![CDATA[true]]></Code>
 				</Expression>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1800000000001</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1800000000003</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1800000000005</Id>
+				<Type>FIXED</Type>
 			</RangeVariationParamValue>
 			<ModelTimeProperties>
 				<StopOption><![CDATA[Stop at specified time]]></StopOption>

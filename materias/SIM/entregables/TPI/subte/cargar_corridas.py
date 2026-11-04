@@ -13,7 +13,11 @@ Reglas de seguridad:
 - Las filas CSV_PEATONAL_DEMO solo se aceptan con --demo y nunca se escriben sobre la planilla
   oficial: exigen --salida hacia otra copia.
 - Una fila CSV_PEATONAL_INCOMPLETO (corrida que no drenó) bloquea la carga.
-- Cada semilla debe tener E0 y E1, con igual cantidad de pasajeros generados.
+- Cada semilla debe tener E0 y al menos una alternativa (E1, E3, E13), todas con igual cantidad de
+  pasajeros generados y el mismo día SBASE (números aleatorios comunes).
+- Escenarios (2026-11-04): E0 = 20 molinetes, E1 = 22, E3 = 20 con validación rápida (EMV/QR), E13 = 22 con
+  validación rápida. Cada alternativa se compara contra E0 en su propia hoja (Corridas / Corridas E3 /
+  Corridas E13 y Resumen / Resumen E3 / Resumen E13); Bonferroni cubre las 3 primarias x 3 comparaciones.
 - No se sobrescriben celdas cargadas con otro valor salvo con --sobrescribir.
 
 n de pares variable (T1.5): la planilla no tiene un tamaño fijo de 30 pares. El cargador
@@ -41,7 +45,18 @@ COLUMNA_SEMILLA = 2
 MIN_PARES = 10       # n mínimo para habilitar el IC en la hoja Resumen (n0, §7.3 del plan)
 OBJETIVO_PARES = 30  # tamaño de diseño de referencia (no es un mínimo fijo)
 
-# Orden exacto de los campos 3..17 de filaResultadoPed() y de los bloques de la hoja Corridas.
+ALTERNATIVAS = ('E1', 'E3', 'E13')
+ESCENARIOS = ('E0',) + ALTERNATIVAS
+
+
+def hojas(alternativa: str) -> tuple[str, str]:
+    """Hojas (corridas, resumen) de la comparación alternativa - E0. E1 conserva los nombres históricos."""
+    if alternativa == 'E1':
+        return HOJA, HOJA_RESUMEN
+    return f'{HOJA} {alternativa}', f'{HOJA_RESUMEN} {alternativa}'
+
+
+# Orden exacto de los campos 3..20 de filaResultadoPed() y de los bloques de cada hoja Corridas.
 CAMPOS = [
     'Pasajeros generados',
     'Pasajeros desviados',
@@ -58,8 +73,12 @@ CAMPOS = [
     'Pasajeros de la cohorte pico',
     'Espera media de la cohorte pico',
     'P90 de la cohorte pico',
+    'Día SBASE',
+    'P90 de tránsito del Roca a la cola',
+    'CV de validaciones entre molinetes',
 ]
-ENTEROS = {0, 1, 2, 3, 8, 12}
+ENTEROS = {0, 1, 2, 3, 8, 12, 15}
+CAMPO_DIA = 15       # -1 = perfil medio (sólo demo); en producción es el día sorteado, igual en todo el par
 FRACCIONES = {6, 10}
 PREFIJO = re.compile(r'^(CSV_PEATONAL(?:_DEMO|_INCOMPLETO)?);(.*)$')
 
@@ -97,16 +116,16 @@ def convertir(origen: str, campos: list[str]) -> tuple[str, int, list[float]]:
     escenario = campos[0]
     if escenario == 'E1B':
         raise ErrorCarga(f'{origen}: escenario E1B (28 molinetes, ampliación hipotética) no se carga '
-                          f'en esta planilla; solo se cargan E0 (20) y E1 (22)')
-    if escenario not in ('E0', 'E1'):
-        raise ErrorCarga(f'{origen}: escenario {escenario!r}; solo se cargan E0 (20) y E1 (22)')
+                          f'en esta planilla; solo se cargan {", ".join(ESCENARIOS)}')
+    if escenario not in ESCENARIOS:
+        raise ErrorCarga(f'{origen}: escenario {escenario!r}; solo se cargan {", ".join(ESCENARIOS)}')
     try:
         semilla = int(campos[1])
         valores = [float(x) for x in campos[2:]]
     except ValueError as exc:
         raise ErrorCarga(f'{origen}: valor no numérico ({exc})') from None
     for i, v in enumerate(valores):
-        if not math.isfinite(v) or v < 0:
+        if not math.isfinite(v) or v < (-1 if i == CAMPO_DIA else 0):
             raise ErrorCarga(f'{origen}: {CAMPOS[i]} inválido ({v})')
         if i in ENTEROS and v != int(v):
             raise ErrorCarga(f'{origen}: {CAMPOS[i]} debe ser entero ({v})')
@@ -123,6 +142,8 @@ def convertir(origen: str, campos: list[str]) -> tuple[str, int, list[float]]:
         raise ErrorCarga(f'{origen}: cohorte pico mayor que el total generado')
     if MODO_PRODUCCION and valores[12] == 0:
         raise ErrorCarga(f'{origen}: cohorte pico vacía (sus medidas valdrían 0); la franja debe cubrir 08:15-08:45')
+    if MODO_PRODUCCION and valores[CAMPO_DIA] < 0:
+        raise ErrorCarga(f'{origen}: producción sin día SBASE (diaSbasePed = -2 en PeatonalCorridasApareadas)')
     return escenario, semilla, valores
 
 
@@ -142,19 +163,24 @@ def armar_pares(filas: list[tuple[str, list[str]]]) -> dict[int, dict[str, list[
               f'({", ".join(repetidas[:3])}{"…" if len(repetidas) > 3 else ""}). '
               'Borrar el archivo de corridas antes de relanzar el experimento.')
     for semilla, par in sorted(pares.items()):
-        faltan = {'E0', 'E1'} - set(par)
-        if faltan:
-            raise ErrorCarga(f'semilla {semilla}: falta {", ".join(sorted(faltan))}; el par está incompleto')
-        if par['E0'][0] != par['E1'][0]:
-            raise ErrorCarga(f'semilla {semilla}: E0 y E1 generaron distinta demanda '
-                             f'({par["E0"][0]:.0f} vs {par["E1"][0]:.0f}); no son corridas apareadas')
+        if 'E0' not in par or len(par) < 2:
+            faltan = 'E0' if 'E0' not in par else 'una alternativa (E1, E3 o E13)'
+            raise ErrorCarga(f'semilla {semilla}: falta {faltan}; el par está incompleto')
+        for alt in ALTERNATIVAS:
+            if alt not in par:
+                continue
+            if par['E0'][0] != par[alt][0]:
+                raise ErrorCarga(f'semilla {semilla}: E0 y {alt} generaron distinta demanda '
+                                 f'({par["E0"][0]:.0f} vs {par[alt][0]:.0f}); no son corridas apareadas')
+            if par['E0'][CAMPO_DIA] != par[alt][CAMPO_DIA]:
+                raise ErrorCarga(f'semilla {semilla}: E0 y {alt} usan días SBASE distintos; no son corridas apareadas')
     return pares
 
 
-def verificar_encabezados(hoja) -> None:
+def verificar_encabezados(hoja, alternativa: str = 'E1') -> None:
     for i, nombre in enumerate(CAMPOS):
         c0, c1, cd = columnas(i)
-        esperados = (f'E0 {nombre}', f'E1 {nombre}', f'Diferencia {nombre}')
+        esperados = (f'E0 {nombre}', f'{alternativa} {nombre}', f'Diferencia {nombre}')
         reales = tuple(hoja.cell(FILA_ENCABEZADO, c).value for c in (c0, c1, cd))
         if reales != esperados:
             raise ErrorCarga(f'La planilla no coincide con CSV_PEATONAL en el campo {i + 3}: {reales} != {esperados}')
@@ -191,23 +217,28 @@ def cargar(pares, planilla: Path, salida: Path, sobrescribir: bool) -> int:
     import openpyxl
 
     libro = openpyxl.load_workbook(planilla)
-    hoja = libro[HOJA]
-    verificar_encabezados(hoja)
-    fila_por_semilla = leer_capacidad(hoja)
     escritas = 0
-    for semilla, par in sorted(pares.items()):
-        fila = fila_por_semilla.get(semilla)
-        if fila is None:
-            raise ErrorCarga(f'semilla {semilla} no figura en la columna Semilla de la planilla')
-        for i in range(len(CAMPOS)):
-            for escenario, col in zip(('E0', 'E1'), columnas(i)[:2]):
-                valor = par[escenario][i]
-                valor = int(valor) if i in ENTEROS else valor
-                celda = hoja.cell(fila, col)
-                if celda.value not in (None, '') and celda.value != valor and not sobrescribir:
-                    raise ErrorCarga(f'{celda.coordinate} ya contiene {celda.value}; use --sobrescribir si corresponde')
-                celda.value = valor
-        escritas += 1
+    for alt in ALTERNATIVAS:
+        con_alt = {s: par for s, par in pares.items() if alt in par}
+        if not con_alt:
+            continue
+        hoja = libro[hojas(alt)[0]]
+        verificar_encabezados(hoja, alt)
+        fila_por_semilla = leer_capacidad(hoja)
+        for semilla, par in sorted(con_alt.items()):
+            fila = fila_por_semilla.get(semilla)
+            if fila is None:
+                raise ErrorCarga(f'semilla {semilla} no figura en la columna Semilla de {hoja.title}')
+            for i in range(len(CAMPOS)):
+                for escenario, col in zip(('E0', alt), columnas(i)[:2]):
+                    valor = par[escenario][i]
+                    valor = int(valor) if i in ENTEROS else valor
+                    celda = hoja.cell(fila, col)
+                    if celda.value not in (None, '') and celda.value != valor and not sobrescribir:
+                        raise ErrorCarga(f'{hoja.title}!{celda.coordinate} ya contiene {celda.value}; '
+                                         'use --sobrescribir si corresponde')
+                    celda.value = valor
+        escritas = max(escritas, len(con_alt))
     libro.save(salida)
     return escritas
 
@@ -237,8 +268,10 @@ def main(argv=None) -> int:
         if not filas:
             raise ErrorCarga(f'no se encontraron filas {tipo}')
         pares = armar_pares(filas)
-        print(f'{len(filas)} filas {tipo} leídas; {len(pares)} pares E0-E1 completos '
-              f'(semillas {min(pares)}..{max(pares)})')
+        por_alt = {alt: sum(1 for par in pares.values() if alt in par) for alt in ALTERNATIVAS}
+        print(f'{len(filas)} filas {tipo} leídas; {len(pares)} semillas con E0 '
+              f'(semillas {min(pares)}..{max(pares)}); pares por alternativa: '
+              + ', '.join(f'{a} {n}' for a, n in por_alt.items()))
         if len(pares) < MIN_PARES:
             print(f'Aviso: faltan al menos {MIN_PARES - len(pares)} pares para alcanzar el mínimo '
                   f'n = {MIN_PARES} (el IC de la hoja Resumen no se habilita antes).')
