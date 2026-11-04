@@ -875,3 +875,24 @@ días, los trenes por ventana sólo varían entre 4 y 5 y se confunden con la fo
 
 **Pendiente.** Correr en el IDE: franja visual (ahora sigue con el perfil medio y el horario oficial) y un par
 de `PeatonalCorridasApareadas`; medir el tiempo por corrida, que con 120 corridas manda en el cronograma.
+
+## Accesos reales al subsuelo: escaleras del bloque central (2026-11-04)
+
+La boca B2 (una escalera de 5 m al comienzo del pasillo) era un supuesto del grupo. El plano de Trenes Argentinos
+dibuja escaleras mecánicas y fijas en el bloque central del hall, justo al oeste de donde arranca el pasillo
+subterráneo de OSM: son los accesos reales a la plaza de transbordo (inferencia; el plano no rotula los destinos
+y no hay plano del subsuelo). El piloto con días reales lo confirmaba: con una sola escalera el hall llegaba a
+~2000 personas esperando y el caudal de 08:30-08:45 quedaba 13-33 % por debajo del observado.
+
+| Elemento | Qué es |
+|---|---|
+| `escaleraNorte`, `escaleraSur` (nivelVestibulo) | Áreas en pendiente de 4,5 m × 10 m (X −270 a −225; Y 670-770 y 900-1000), 4,6 m de desnivel, `maxSpeed` 0,652 m/s = 10 m a 0,30 m/s vertical (mecánica + fija juntas, [SUP]). La norte tiene su tope al norte y la sur al sur |
+| `bocaNorteHall`, `bocaSurHall` (nivelHall) | Líneas apenas afuera del bloque central (Y 658 y 1020), entre el bloque y el vestuario o la boletería |
+| `bocaNortePlaza`, `bocaSurPlaza` (nivelVestibulo) | Líneas a 0,6 m del tope de cada escalera, donde aparece quien baja |
+| `plazaTransbordo` (muro, nivelVestibulo) | Plaza supuesta debajo del bloque (X −280 a −152, Y 660-1010), abierta al pasillo en X −152 entre Y 949 y 999 |
+| `bajadaHall` (PedChangeLevel, antes `bajadaB2`) | Líneas dinámicas: `ped.accesoNortePed ? bocaNorteHall : bocaSurHall` y `... ? bocaNortePlaza : bocaSurPlaza` |
+| `Pasajero.accesoNortePed` | Se fija al salir de `pedSource`: `ped.getY() < 840` (andenes al norte del centro del bloque: islas 2-3 a 8-9) |
+| 3D (`datos/plano_3d.py`) | Escalones `escaleraNorte3D`/`escaleraSur3D`, piso `plazaTransbordo3D` y el piso del hall abierto sobre las escaleras |
+
+La escalera curva del medio del bloque no se modela (no se sabe si baja). Hay que repetir el piloto: el tránsito
+del Roca y el caudal por ventana deberían mejorar.

@@ -64,13 +64,19 @@ COLOR = {
 }
 
 
+# Escaleras de los accesos reales (bloque central del hall): x0, y0, x1, y1 en px. Coinciden con escaleraNorte y
+# escaleraSur del modelo; la norte tiene su tope al norte y la sur al sur.
+ESC_NORTE, ESC_SUR = (-270, 670, -225, 770), (-270, 900, -225, 1000)
+PLAZA = (-280, 660, -152, 1010)
+
+
 def zonas_libres():
     """Polígonos (px) donde camina la gente del modelo: ahí no se levantan muros del plano."""
     from shapely.geometry import LineString, box
     from shapely.ops import unary_union
     pasillo = LineString([(-170, 974), (5, 974), (5, 360), (90, 360)]).buffer(31, cap_style='flat', join_style='mitre')
     vestibulo = box(75, 185, 585, 535)
-    # Circulación del hall: de los andenes (X -830) a la boca B2 (X -152, Y 949-999). Los obstáculos del modelo
+    # Circulación del hall: de los andenes (X -830) a las escaleras del bloque central. Los obstáculos del modelo
     # (hall*: cabeceras de andén, escaleras, vestuario y boletería) tienen muros propios; dentro se conserva el plano.
     hall = box(-835, 275, -150, 1362)          # desde los paragolpes: la gente sale de los andenes y cruza la cabecera
     return unary_union([pasillo, vestibulo, hall])
@@ -220,11 +226,13 @@ def rectangulos(poly, celda=10):
 
 
 def corte_subsuelo():
-    """Huella del subsuelo (pasillo, escalera B2, vestíbulo y escalera B3): ahí se abre el piso de la calle y del hall
-    para ver el nivel -1 en la vista 3D."""
+    """Huella del subsuelo que se ve desde arriba (pasillo, escaleras norte y sur del bloque central, vestíbulo y
+    escalera B3): ahí se abre el piso de la calle y del hall para ver el nivel -1 en la vista 3D. La plaza de
+    transbordo queda tapada por el hall, salvo sobre las escaleras."""
     from shapely.geometry import box
     from shapely.ops import unary_union
-    return unary_union([box(-152, 944, 35, 1004), box(-25, 330, 35, 1004), box(-25, 330, 85, 390), box(75, 185, 585, 535)])
+    return unary_union([box(-152, 944, 35, 1004), box(-25, 330, 35, 1004), box(-25, 330, 85, 390), box(75, 185, 585, 535),
+                        box(*ESC_NORTE), box(*ESC_SUR)])
 
 
 def corte_total():
@@ -339,11 +347,15 @@ def main():
     for c in rectangulos(corte_subsuelo(), 5):
         g.rect('pisoSubsuelo3D', *c, Z_SUB - 1, 1, COLOR['subsuelo'])
     resumen['pisos'] = len(pisos)
-    # Escalera B2 (hall -> pasillo): 10 escalones de 0,9 m, de Z 0 (oeste) a -5 m (este). Es el área en pendiente
-    # escaleraB2 del subsuelo, por donde la gente baja a 0,54 m/s.
+    # Plaza de transbordo (subsuelo, debajo del bloque central) y escaleras norte y sur: 10 escalones de 1 m cada
+    # una, de Z 0 en su tope a -4,6 m. Son las áreas en pendiente escaleraNorte/escaleraSur del modelo.
+    g.rect('plazaTransbordo3D', PLAZA[0], PLAZA[1], PLAZA[2] - PLAZA[0], PLAZA[3] - PLAZA[1], Z_SUB - 1, 1, COLOR['subsuelo'])
     for i in range(10):
-        tope = -Z_SUB * (10 - i) / 10 + Z_SUB
-        g.rect('escaleraB2_3D', -152 + 9 * i, 949, 9, 50, Z_SUB - 1, tope - Z_SUB + 1, COLOR['escalera'])
+        tope = -Z_SUB * (10 - i) / 10 + Z_SUB          # escalón i: el 0 está en el tope (nivel del hall)
+        x0, y0, x1, y1 = ESC_NORTE
+        g.rect('escaleraNorte3D', x0, y0 + 10 * i, x1 - x0, 10, Z_SUB - 1, tope - Z_SUB + 1, COLOR['escalera'])
+        x0, y0, x1, y1 = ESC_SUR
+        g.rect('escaleraSur3D', x0, y1 - 10 * (i + 1), x1 - x0, 10, Z_SUB - 1, tope - Z_SUB + 1, COLOR['escalera'])
     # Escalera B3 (calle Brasil -> vestíbulo): sube hacia el sur, de -5 m (Y 400) a la vereda (Y 455).
     for i in range(10):
         tope = Z_SUB - Z_SUB * (i + 1) / 10

@@ -138,7 +138,7 @@ por lado, \cite{wikicsr}): con 200 a 530 pasajeros por tren, unos 25 por puerta 
 Demora hasta abrir las puertas (s) & 5 & 10 & 20 &
 Desde el arribo del horario hasta que se abren las puertas [supuesto]. Antes era la demora andén--vestíbulo,
 $D/v + h/v_e$ con $D = 85$~m (\cite{osm2026}); la superposición con el plano llevó a simular el andén, el
-hall, la escalera B2 y el pasillo, y la demora quedó solo para la apertura (sección~\ref{sec:paso6-validacion}) \\
+hall, las escaleras al subsuelo y el pasillo, y la demora quedó solo para la apertura (sección~\ref{sec:paso6-validacion}) \\
 Proporción que llega en tren & 0,70 & 0,80 & 0,90 &
 Supuesto explícito: no hay estudio publicado de trasbordo del Roca a la Línea~C, y Trenes Argentinos
 confirmó que no lo tiene \parencite{sofse2026nota}. Se intentó estimarla cruzando el dato de SBASE con
@@ -180,7 +180,8 @@ acumulada es la media del pasaje del tren: la cantidad efectiva se sortea con un
 franja coincide con el dato; ventana por ventana, el ingreso se corre hacia el tren siguiente.
 
 El pasaje de cada tren baja por las 21 puertas de su lado del andén, de forma pareja durante el descenso,
-y desde ahí camina el andén, el hall, la escalera B2 y el pasillo hasta el vestíbulo. El resto, $(1-p)\,d_k$, entra desde la
+y desde ahí camina el andén y el hall, baja por la escalera del bloque central que le queda de su lado y sigue
+por la plaza de transbordo y el pasillo hasta el vestíbulo. El resto, $(1-p)\,d_k$, entra desde la
 calle con llegadas de Poisson no homogéneas a la tasa de cada ventana. Solo se generan ingresos antes de las
 09:30.
 

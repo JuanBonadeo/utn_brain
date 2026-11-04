@@ -368,7 +368,7 @@ for agent, min_x in ((a,1100),(ped,1000)):
   assert all(int(x.findtext('X'))>=min_x for x in technical)
 ped_defaults_early={v.findtext('Name'):v.findtext('Properties/DefaultValue/Code') for v in ped.findall("Variables/Variable[@Class='Parameter']")}
 ped_blocks={x.findtext('Name'):x.findtext('ActiveObjectClass/ClassName') for x in ped.findall('EmbeddedObjects/EmbeddedObject')}
-assert ped_blocks=={'pedSource':'PedSource','bajadaB2':'PedChangeLevel','pedSourceCalle':'PedSource','pedMolinetes':'PedService','pedSalida':'PedGoTo','pedSink':'PedSink',
+assert ped_blocks=={'pedSource':'PedSource','bajadaHall':'PedChangeLevel','pedSourceCalle':'PedSource','pedMolinetes':'PedService','pedSalida':'PedGoTo','pedSink':'PedSink',
  # Trenes del Roca (sólo animación, Rail Library): fuente, avance al andén, descarga y fin.
  'trenesRocaFuente':'TrainSource','trenesRocaAlAnden':'TrainMoveTo','trenesRocaDescarga':'Delay','trenesRocaFin':'TrainDispose'}
 assert all(ped.find(f".//RailTrack[Name='viaRoca{k}']") is not None and ped.find(f".//RailStopline[Name='paradaRoca{k}']") is not None for k in range(7))
@@ -403,21 +403,23 @@ sources={x.findtext('Name'):{p.findtext('Name'):p.findtext('Value/Code') for p i
 assert (sources['pedSource']['locationType'],sources['pedSource']['level'],sources['pedSource']['locationX'],sources['pedSource']['locationY'])==('self.LOCATION_POINT','nivelHall','xPuertaPed((nDesdeRocaPed - 1) % 21)','yPuertaPed(andenActualPed)')
 # Calle: una boca, la escalera B3 de la calle Brasil (OSM), que aterriza en X ~ 194 desde el lado este.
 assert sources['pedSourceCalle']['locationLine']=='entradaCalle'
-assert sources['pedSource']['onExit']=='ped.desdeRocaPed = true; registraIngresoPed(ped);'
+# Accesos (2026-11-04): los andenes al norte del centro del bloque central (Y < 840) bajan por la escalera norte.
+assert sources['pedSource']['onExit']=='ped.desdeRocaPed = true; ped.accesoNortePed = ped.getY() < 840; registraIngresoPed(ped);'
 assert sources['pedSourceCalle']['onExit']=='ped.desdeRocaPed = false; registraIngresoPed(ped);'
 # Velocidad con generador propio (numeros aleatorios comunes E0/E1); el generador por defecto lo consume la libreria.
 assert all(sources[k]['comfortableSpeed']=='uniform(1.1, 1.5, rngVelocidadPed)' for k in ('pedSource','pedSourceCalle'))
 conns={(c.findtext('SourceEmbeddedObjectReference/ItemName'),c.findtext('TargetEmbeddedObjectReference/ItemName')) for c in ped.findall('Connectors/Connector')}
-assert {('pedSource','bajadaB2'),('bajadaB2','pedMolinetes'),('pedSourceCalle','pedMolinetes'),('pedMolinetes','pedSalida'),('pedSalida','pedSink')}<=conns and ('pedSource','pedMolinetes') not in conns
+assert {('pedSource','bajadaHall'),('bajadaHall','pedMolinetes'),('pedSourceCalle','pedMolinetes'),('pedMolinetes','pedSalida'),('pedSalida','pedSink')}<=conns and ('pedSource','pedMolinetes') not in conns
 # Subsuelo (2026-11-02): hall del Roca a nivel de calle (nivelHall, Z 0) y pasillo + vestíbulo a -4,60 m (nivelVestibulo;
 # plaza de transbordo a -4,60 m, GCBA 2015).
-# El Roca baja por la escalera B2: área en pendiente escaleraB2 (9 m, 4,6 m de desnivel, 0,59 m/s = 15,3 s) del subsuelo,
-# a la que llega con bajadaB2 (PedChangeLevel) desde la boca bocaB2Hall. La demora (33 s) ya no incluye la escalera.
+# Accesos reales (2026-11-04, reemplazan a la boca B2 inventada): escaleras norte y sur del bloque central del hall
+# (escalera mecánica + fija, plano de Trenes Argentinos), cada una un área en pendiente de 4,5 m x 10 m y 4,6 m de
+# desnivel a 0,30 m/s vertical, que desembocan en la plaza de transbordo del subsuelo (supuesta) y de ahí al pasillo.
 niveles={lv.findtext('Name'):lv for lv in ped.iter('Level')}
 assert set(niveles)=={'nivelHall','nivelVestibulo'} and niveles['nivelHall'].findtext('Z')=='0' and niveles['nivelVestibulo'].findtext('Z')=='-46'
 en_nivel=lambda n: {c.findtext('Name') for c in niveles[n].find('Presentation')}
-assert {f'bordeAndenRoca{k}' for k in range(7)}|{f'hallCabecera{k}' for k in range(6)}|{'bocaB2Hall','hallEstructuraCentral','hallVestuarioSOFSE','hallBoleteriasSOFSE','plano3D','viasRoca','planoConstitucion'} <= en_nivel('nivelHall')
-assert {'escaleraB2','bocaB2Pasillo','pasilloRocaNorte','pasilloRocaSur','molinetesPeatonales','entradaCalle','salidaPeatonal'} <= en_nivel('nivelVestibulo')
+assert {f'bordeAndenRoca{k}' for k in range(7)}|{f'hallCabecera{k}' for k in range(6)}|{'bocaNorteHall','bocaSurHall','hallEstructuraCentral','hallVestuarioSOFSE','hallBoleteriasSOFSE','plano3D','viasRoca','planoConstitucion'} <= en_nivel('nivelHall')
+assert {'escaleraNorte','escaleraSur','bocaNortePlaza','bocaSurPlaza','plazaTransbordo','pasilloRocaNorte','pasilloRocaSur','molinetesPeatonales','entradaCalle','salidaPeatonal'} <= en_nivel('nivelVestibulo')
 # Equipamiento 3D del vestíbulo (datos/vestibulo_3d.py): molinetes en los 30 divisores, boletería, cabina, máquinas y
 # coches de la Línea C; recursos registrados y listados en copiar_figuras_3d.py.
 vest3d=niveles['nivelVestibulo'].find("Presentation/Group[Name='vestibulo3D']")
@@ -429,12 +431,21 @@ recursos={x.findtext('Path') for x in r.findall('Model/ModelResources/Resource')
 assert usa <= recursos, usa-recursos
 copia=open(Path(__file__).resolve().parent/'datos'/'copiar_figuras_3d.py',encoding='utf-8').read()
 assert all(u.split('/')[-1] in copia for u in usa)
-bajada={p.findtext('Name'):p.findtext('Value/Code') for p in ped.find("EmbeddedObjects/EmbeddedObject[Name='bajadaB2']").findall('Parameters/Parameter')}
-assert bajada['exitLine']=='bocaB2Hall' and bajada['entryLine']=='bocaB2Pasillo'
-esc=niveles['nivelVestibulo'].find("Presentation/RectangleNode[Name='escaleraB2']")
-esc_p={p.findtext('Name'):p.findtext('Value/Code') for p in esc.findall('EmbeddedObject/Parameters/Parameter')}
-assert esc_p['speedRestricted']=='true' and abs(float(esc_p['maxSpeed'])-9/(4.6/0.30))<0.01 and esc.findtext('Sloped')=='true'
-assert (esc.findtext('X'),esc.findtext('Y'),esc.findtext('Width'),esc.findtext('Height'),esc.findtext('Slope/Dz'))==('-152','949','90','50','46')
+bajada={p.findtext('Name'):p.findtext('Value/Code') for p in ped.find("EmbeddedObjects/EmbeddedObject[Name='bajadaHall']").findall('Parameters/Parameter')}
+assert bajada['exitLine']=='ped.accesoNortePed ? bocaNorteHall : bocaSurHall' and bajada['entryLine']=='ped.accesoNortePed ? bocaNortePlaza : bocaSurPlaza'
+assert 'accesoNortePed' in {x.findtext('Name') for x in agents['Pasajero'].findall('Variables/Variable')}
+def _linea(nivel, n):
+ t=niveles[nivel].find(f"Presentation/TargetLine[Name='{n}']"); x,y=float(t.findtext('X')),float(t.findtext('Y'))
+ return [(x+float(q.findtext('X')),y+float(q.findtext('Y'))) for q in t.findall('Points/Point')]
+for nombre,y,dy,tope,boca_hall,boca_plaza in (('escaleraNorte','670','-100',670,'bocaNorteHall','bocaNortePlaza'),('escaleraSur','900','100',1000,'bocaSurHall','bocaSurPlaza')):
+ esc=niveles['nivelVestibulo'].find(f"Presentation/RectangleNode[Name='{nombre}']")
+ esc_p={q.findtext('Name'):q.findtext('Value/Code') for q in esc.findall('EmbeddedObject/Parameters/Parameter')}
+ assert esc_p['speedRestricted']=='true' and abs(float(esc_p['maxSpeed'])-10/(4.6/0.30))<0.01 and esc.findtext('Sloped')=='true', nombre
+ assert (esc.findtext('X'),esc.findtext('Y'),esc.findtext('Width'),esc.findtext('Height'),esc.findtext('Slope/Dx'),esc.findtext('Slope/Dy'),esc.findtext('Slope/Dz'))==('-270',y,'45','100','0',dy,'46'), nombre
+ # La línea del subsuelo queda dentro de la escalera, a menos de 1 m de su tope (donde aparece quien baja).
+ lp=_linea('nivelVestibulo',boca_plaza); assert all(-270<=x<=-225 and abs(yy-tope)<=10 for x,yy in lp), (boca_plaza,lp)
+ # La línea del hall queda fuera del bloque central (obstáculo) y a menos de 3 m del tope.
+ lh=_linea('nivelHall',boca_hall); assert all(-270<=x<=-225 and 10<=abs(yy-tope)<=30 for x,yy in lh), (boca_hall,lh)
 # El horario embebido es exactamente el extraído de los PDFs oficiales del Roca.
 import csv as _csv
 horario=[r['segundos_desde_07'] for r in _csv.DictReader(open(p.parent/'datos'/'arribos_roca_constitucion_habiles.csv',encoding='utf-8'),delimiter=';')]
@@ -483,9 +494,10 @@ def _abs(nombre, paso=3):
  pts=[(float(q.findtext('X')),float(q.findtext('Y'))) for q in el.iter('Point')][::paso]
  return [(X+x,Y+y) for x,y in pts]
 assert _abs('pasilloRocaNorte')==[(-152,949),(-20,949),(-20,335),(80,335)]
+assert _abs('plazaTransbordo')==[(-152,949),(-152,660),(-280,660),(-280,1010),(-152,1010),(-152,999)], _abs('plazaTransbordo')
 assert _abs('pasilloRocaSur')==[(-152,999),(30,999),(30,385),(80,385)]
 assert ped.find(".//*[Name='pasilloRocaFondo']") is None and ped.find(".//*[Name='entradaPeatonal']") is None
-# El pasillo se abre al hall en la boca B2 (X = -152); el vestíbulo queda cerrado del lado de los andenes de la C.
+# El pasillo arranca en la plaza de transbordo (X = -152); el vestíbulo queda cerrado del lado de los andenes de la C.
 assert _abs('paredDerechaCentro')==[(580,290),(580,430)]
 # Descenso en las cabeceras de los 7 andenes (islas 2-3 ... 12-13 y 14) y obstáculos del hall medidos en el plano.
 assert ped.find(".//TargetLine[Name='andenRoca0']") is None
