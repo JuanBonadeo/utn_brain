@@ -896,3 +896,25 @@ y no hay plano del subsuelo). El piloto con días reales lo confirmaba: con una 
 
 La escalera curva del medio del bloque no se modela (no se sabe si baja). Hay que repetir el piloto: el tránsito
 del Roca y el caudal por ventana deberían mejorar.
+
+## Vista de MainPeatonal en 4 bloques (consigna del docente, 2026-11-04)
+
+El docente pidió presentar el modelo en cuatro bloques: arriba, en una fila, **1 Variables**, **2 Medidas de
+rendimiento** y **3 Lógica**; abajo y grande, **4** todo lo demás (la simulación animada). Cada bloque tiene un
+recuadro de color con número, título y una línea que explica qué contiene; cada elemento tiene al lado qué es.
+
+| Bloque | Ubicación (px) | Contenido |
+|---|---|---|
+| Título y guía de lectura | Y −1380 a −1180 | Nombre del modelo, cómo leerlo y el aviso sobre el plano |
+| 1 Variables (azul) | X −2650 a −1150, Y −1240 a −120 | Escenario (molinetes, validación); configuración de la corrida; demo; demanda y trenes (datos reales); generadores aleatorios; supuestos [SUP]; estado interno |
+| 2 Medidas de rendimiento (verde) | X −1110 a 390 | Primarias (P90, > 30 s, P90 del pico); secundarias; validación y salida; datos que se acumulan; **panel en vivo** (día, escenario, hora, P90, % > 30 s, cola, gente en tránsito, tránsito P90, validados) y los KPI que ya existían |
+| 3 Lógica (naranja) | X 430 a 2230 | Diagrama de flujo del pasajero con una leyenda bajo cada bloque; trenes del Roca; eventos; funciones "al empezar" y "durante la corrida" |
+| 4 Modelo espacial (gris) | X −2650 a 2230, Y −100 a 1780 | La animación sin cambios: andenes y trenes, hall, escaleras, subsuelo, pasillo, vestíbulo, ventana 3D y botones de cámara |
+
+Lo arma un script de una sola vez (sólo mueve elementos y agrega recuadros y textos; no cambia la lógica). El
+verificador exige que todo parámetro, variable, función, evento y bloque quede dentro del recuadro de su bloque y
+arriba de la animación, y compila y ejecuta los textos del panel en vivo.
+
+**Pendiente en el IDE (opcional, 1 minuto):** agregar cuatro *View Areas* (paleta Presentación) sobre los bloques,
+para saltar entre ellos durante la defensa. No se escriben a mano porque ningún ejemplo de AnyLogic trae una para
+copiar el formato. Durante la corrida, el panel en vivo queda arriba de la animación: se ve desplazando la vista.

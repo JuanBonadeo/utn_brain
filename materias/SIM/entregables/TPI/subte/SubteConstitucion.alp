@@ -3141,7 +3141,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1791000000011</Id>
 					<Name><![CDATA[nGeneradosPed]]></Name>
-					<X>2350</X><Y>60</Y>
+					<X>-1612</X><Y>-892</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3156,7 +3156,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1791000000012</Id>
 					<Name><![CDATA[nProcesadosPed]]></Name>
-					<X>2350</X><Y>85</Y>
+					<X>-1612</X><Y>-836</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3171,7 +3171,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1791000000074</Id>
 					<Name><![CDATA[nTandasPed]]></Name>
-					<X>2350</X><Y>110</Y>
+					<X>-1612</X><Y>-696</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3186,7 +3186,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1791000000075</Id>
 					<Name><![CDATA[nEsperandoPed]]></Name>
-					<X>2350</X><Y>135</Y>
+					<X>-1612</X><Y>-668</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3201,7 +3201,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1791000000076</Id>
 					<Name><![CDATA[qMaxPed]]></Name>
-					<X>2350</X><Y>160</Y>
+					<X>-342</X><Y>-906</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3216,7 +3216,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1791000000077</Id>
 					<Name><![CDATA[sumaEsperaPed]]></Name>
-					<X>2350</X><Y>185</Y>
+					<X>-342</X><Y>-1018</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3231,7 +3231,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1791000000078</Id>
 					<Name><![CDATA[nEsperasPed]]></Name>
-					<X>2350</X><Y>210</Y>
+					<X>-342</X><Y>-990</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3246,7 +3246,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1791000000079</Id>
 					<Name><![CDATA[esperaMaxPed]]></Name>
-					<X>2350</X><Y>235</Y>
+					<X>-342</X><Y>-962</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3261,7 +3261,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1791000000080</Id>
 					<Name><![CDATA[areaColaPed]]></Name>
-					<X>2350</X><Y>260</Y>
+					<X>-342</X><Y>-878</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3276,7 +3276,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1791000000081</Id>
 					<Name><![CDATA[tAreaColaPed]]></Name>
-					<X>2350</X><Y>285</Y>
+					<X>-20</X><Y>-1102</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3291,7 +3291,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1791000000082</Id>
 					<Name><![CDATA[tiempoUltimaTandaPed]]></Name>
-					<X>2350</X><Y>310</Y>
+					<X>-1362</X><Y>-612</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3306,7 +3306,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1791000000083</Id>
 					<Name><![CDATA[ultimaDisipacionPed]]></Name>
-					<X>2350</X><Y>335</Y>
+					<X>-20</X><Y>-990</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3321,7 +3321,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1791000000156</Id>
 					<Name><![CDATA[esperasPed]]></Name>
-					<X>2350</X><Y>360</Y>
+					<X>-342</X><Y>-1102</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3336,7 +3336,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1791000000157</Id>
 					<Name><![CDATA[nMas30Ped]]></Name>
-					<X>2350</X><Y>385</Y>
+					<X>-342</X><Y>-934</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3351,7 +3351,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1791000000158</Id>
 					<Name><![CDATA[esperasPicoPed]]></Name>
-					<X>2350</X><Y>410</Y>
+					<X>-342</X><Y>-1074</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3366,7 +3366,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1791000000159</Id>
 					<Name><![CDATA[ocupacionPorMolinetePed]]></Name>
-					<X>2350</X><Y>435</Y>
+					<X>-20</X><Y>-1074</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3381,7 +3381,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1791000000178</Id>
 					<Name><![CDATA[nProcesadosHorizontePed]]></Name>
-					<X>2350</X><Y>460</Y>
+					<X>-1612</X><Y>-808</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3396,7 +3396,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1791000000185</Id>
 					<Name><![CDATA[resultadoEmitidoPed]]></Name>
-					<X>2350</X><Y>485</Y>
+					<X>-1362</X><Y>-696</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3411,7 +3411,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1792000000019</Id>
 					<Name><![CDATA[nInyectadosPed]]></Name>
-					<X>2350</X><Y>510</Y>
+					<X>-1612</X><Y>-864</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3426,7 +3426,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1792000000020</Id>
 					<Name><![CDATA[arribosCerradosPed]]></Name>
-					<X>2350</X><Y>535</Y>
+					<X>-1362</X><Y>-780</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3441,7 +3441,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1792000000021</Id>
 					<Name><![CDATA[horizonteCortePed]]></Name>
-					<X>2350</X><Y>560</Y>
+					<X>-1362</X><Y>-640</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3456,7 +3456,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1792000000033</Id>
 					<Name><![CDATA[inicializadoPed]]></Name>
-					<X>2350</X><Y>585</Y>
+					<X>-1362</X><Y>-668</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3471,7 +3471,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1792000000314</Id>
 					<Name><![CDATA[rocaCerradoPed]]></Name>
-					<X>2350</X><Y>610</Y>
+					<X>-1362</X><Y>-752</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3486,7 +3486,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1792000000315</Id>
 					<Name><![CDATA[calleCerradaPed]]></Name>
-					<X>2350</X><Y>635</Y>
+					<X>-1362</X><Y>-724</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3501,7 +3501,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1792000000316</Id>
 					<Name><![CDATA[liberacionesPed]]></Name>
-					<X>2350</X><Y>660</Y>
+					<X>-1362</X><Y>-892</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3516,7 +3516,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1794000000312</Id>
 					<Name><![CDATA[andenActualPed]]></Name>
-					<X>2350</X><Y>685</Y>
+					<X>-1612</X><Y>-612</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3531,7 +3531,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1792000000317</Id>
 					<Name><![CDATA[rngCallePed]]></Name>
-					<X>2350</X><Y>710</Y>
+					<X>-2112</X><Y>-752</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3546,7 +3546,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1792000000318</Id>
 					<Name><![CDATA[rngServicioPed]]></Name>
-					<X>2350</X><Y>735</Y>
+					<X>-2112</X><Y>-724</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3561,7 +3561,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1793000000037</Id>
 					<Name><![CDATA[rngVelocidadPed]]></Name>
-					<X>2350</X><Y>760</Y>
+					<X>-2112</X><Y>-696</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3576,7 +3576,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1792000000319</Id>
 					<Name><![CDATA[nDesdeRocaPed]]></Name>
-					<X>2350</X><Y>785</Y>
+					<X>-1612</X><Y>-780</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3591,7 +3591,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1792000000320</Id>
 					<Name><![CDATA[nDesdeCallePed]]></Name>
-					<X>2350</X><Y>810</Y>
+					<X>-1612</X><Y>-752</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3606,7 +3606,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1792000000321</Id>
 					<Name><![CDATA[nTrenesPed]]></Name>
-					<X>2350</X><Y>835</Y>
+					<X>-1612</X><Y>-724</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3621,7 +3621,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1792000000322</Id>
 					<Name><![CDATA[validacionesPorVentanaPed]]></Name>
-					<X>2630</X><Y>60</Y>
+					<X>-20</X><Y>-1018</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3636,7 +3636,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1793000000034</Id>
 					<Name><![CDATA[asignadosPed]]></Name>
-					<X>2630</X><Y>85</Y>
+					<X>-1612</X><Y>-556</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3651,7 +3651,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1793000000039</Id>
 					<Name><![CDATA[eleccionesSinServicioPed]]></Name>
-					<X>2630</X><Y>110</Y>
+					<X>-1362</X><Y>-556</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3666,7 +3666,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1793000000001</Id>
 					<Name><![CDATA[nLlegadosMolinetePed]]></Name>
-					<X>2630</X><Y>135</Y>
+					<X>-1612</X><Y>-640</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3681,7 +3681,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1793000000002</Id>
 					<Name><![CDATA[hallMaxPed]]></Name>
-					<X>2630</X><Y>160</Y>
+					<X>-20</X><Y>-962</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3696,7 +3696,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1793000000003</Id>
 					<Name><![CDATA[tHallMaxPed]]></Name>
-					<X>2630</X><Y>185</Y>
+					<X>-20</X><Y>-934</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3711,7 +3711,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1793000000004</Id>
 					<Name><![CDATA[pagaMaxPed]]></Name>
-					<X>2630</X><Y>210</Y>
+					<X>-20</X><Y>-906</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3726,7 +3726,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1793000000005</Id>
 					<Name><![CDATA[hallAlCortePed]]></Name>
-					<X>2630</X><Y>235</Y>
+					<X>-20</X><Y>-878</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3741,7 +3741,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1793000000006</Id>
 					<Name><![CDATA[inicioRealMsPed]]></Name>
-					<X>2630</X><Y>260</Y>
+					<X>-1362</X><Y>-584</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3757,7 +3757,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 					<Id>1794000000500</Id>
 					<Name><![CDATA[ramalRocaPed]]></Name>
 					<Description><![CDATA[Ramal de cada tren de llegadasRocaSeg (mismo orden): 0 La Plata, 1 Bosques via Quilmes, 2 Bosques via Temperley, 3 Glew/A. Korn, 4 Ezeiza/Canuelas. Dato oficial: datos/arribos_roca_constitucion_habiles.csv.]]></Description>
-					<X>2630</X><Y>810</Y>
+					<X>-2112</X><Y>-878</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3773,7 +3773,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 					<Id>1791000000007</Id>
 					<Name><![CDATA[tamanoTandaDemo]]></Name>
 					<Description><![CDATA[Tanda sintetica para verificar movimiento espacial; no es una medicion.]]></Description>
-					<X>2630</X><Y>285</Y>
+					<X>-2617</X><Y>-626</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3798,7 +3798,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 					<Id>1791000000009</Id>
 					<Name><![CDATA[servicioDemoSeg]]></Name>
 					<Description><![CDATA[Duracion sintetica del servicio, en segundos.]]></Description>
-					<X>2630</X><Y>310</Y>
+					<X>-2617</X><Y>-598</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3823,7 +3823,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 					<Id>1791000000100</Id>
 					<Name><![CDATA[molinetesOperativosPed]]></Name>
 					<Description><![CDATA[Cantidad de molinetes habilitados en la capa peatonal: 20 para E0 y 28 para E1.]]></Description>
-					<X>2630</X><Y>335</Y>
+					<X>-2617</X><Y>-1102</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3848,7 +3848,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 					<Id>1791000000070</Id>
 					<Name><![CDATA[intervaloTandaDemoSeg]]></Name>
 					<Description><![CDATA[Intervalo sintetico entre tandas.]]></Description>
-					<X>2630</X><Y>360</Y>
+					<X>-2617</X><Y>-570</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3873,7 +3873,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 					<Id>1791000000072</Id>
 					<Name><![CDATA[cantidadTandasDemo]]></Name>
 					<Description><![CDATA[Cantidad sintetica de tandas.]]></Description>
-					<X>2630</X><Y>385</Y>
+					<X>-2617</X><Y>-542</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3898,7 +3898,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 					<Id>1791000000150</Id>
 					<Name><![CDATA[inicioPicoPedSeg]]></Name>
 					<Description><![CDATA[Inicio de la cohorte pico 08:15, en segundos desde las 07:00.]]></Description>
-					<X>2630</X><Y>410</Y>
+					<X>-2617</X><Y>-836</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3923,7 +3923,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 					<Id>1791000000152</Id>
 					<Name><![CDATA[finPicoPedSeg]]></Name>
 					<Description><![CDATA[Fin exclusivo de la cohorte pico 08:45.]]></Description>
-					<X>2630</X><Y>435</Y>
+					<X>-2617</X><Y>-808</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3948,7 +3948,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 					<Id>1791000000154</Id>
 					<Name><![CDATA[horizonteMetricasPedSeg]]></Name>
 					<Description><![CDATA[Horizonte usado como denominador de utilizacion en la demo.]]></Description>
-					<X>2630</X><Y>460</Y>
+					<X>-2617</X><Y>-780</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3973,7 +3973,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 					<Id>1791000000179</Id>
 					<Name><![CDATA[semillaPed]]></Name>
 					<Description><![CDATA[Semilla declarada para identificar y aparear la corrida; debe coincidir con la del experimento.]]></Description>
-					<X>2630</X><Y>485</Y>
+					<X>-2617</X><Y>-920</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3998,7 +3998,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 					<Id>1792000000001</Id>
 					<Name><![CDATA[modoFranjaPed]]></Name>
 					<Description><![CDATA[false: demo sintetica de seis tandas; true: franja 07:00-09:30 con entradas que deben cargarse desde mediciones o rangos aprobados.]]></Description>
-					<X>2630</X><Y>510</Y>
+					<X>-2617</X><Y>-892</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -4023,7 +4023,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 					<Id>1792000000003</Id>
 					<Name><![CDATA[horizonteArribosPedSeg]]></Name>
 					<Description><![CDATA[Cierre de arribos de la franja (09:30 = 9000 s); admite (0, 9000] para pilotos.]]></Description>
-					<X>2630</X><Y>535</Y>
+					<X>-2617</X><Y>-864</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -4048,7 +4048,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 					<Id>1792000000011</Id>
 					<Name><![CDATA[servicioPedSeg]]></Name>
 					<Description><![CDATA[PENDIENTE DE CALIBRACION: tiempo de validacion en el molinete, segundos.]]></Description>
-					<X>2630</X><Y>560</Y>
+					<X>-2617</X><Y>-1074</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -4073,7 +4073,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 					<Id>1792000000015</Id>
 					<Name><![CDATA[perfilPed15min]]></Name>
 					<Description><![CDATA[Validaciones medias por ventana, vestibulo Principal, dias habiles marzo-junio 2026 (SBASE, n=80 dias; total 18.532). Forma temporal, no arribos medidos.]]></Description>
-					<X>2630</X><Y>585</Y>
+					<X>-2112</X><Y>-1018</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -4098,7 +4098,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 					<Id>1792000000017</Id>
 					<Name><![CDATA[archivoSalidaPed]]></Name>
 					<Description><![CDATA[Si no esta vacio, agrega cada fila CSV_PEATONAL* a este archivo (ruta relativa al directorio de ejecucion).]]></Description>
-					<X>2630</X><Y>610</Y>
+					<X>-2617</X><Y>-752</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -4123,7 +4123,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 					<Id>1792000000300</Id>
 					<Name><![CDATA[proporcionRocaPed]]></Name>
 					<Description><![CDATA[PENDIENTE DE CALIBRACION: fraccion de la demanda que llega en trenes del Roca; el resto entra desde la calle.]]></Description>
-					<X>2630</X><Y>635</Y>
+					<X>-1612</X><Y>-1102</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -4148,7 +4148,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 					<Id>1792000000302</Id>
 					<Name><![CDATA[demoraAccesoRocaSeg]]></Name>
 					<Description><![CDATA[PENDIENTE DE CALIBRACION: segundos entre el arribo del tren y el ingreso del primer pasajero al vestibulo.]]></Description>
-					<X>2630</X><Y>660</Y>
+					<X>-1612</X><Y>-1074</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -4173,7 +4173,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 					<Id>1792000000304</Id>
 					<Name><![CDATA[duracionDescargaSeg]]></Name>
 					<Description><![CDATA[PENDIENTE DE CALIBRACION: segundos en que termina de ingresar el pasaje de un tren (escaleras y hall).]]></Description>
-					<X>2630</X><Y>685</Y>
+					<X>-1612</X><Y>-1046</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -4198,7 +4198,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 					<Id>1792000000306</Id>
 					<Name><![CDATA[servicioMinPedSeg]]></Name>
 					<Description><![CDATA[Opcional: minimo del servicio triangular; -1 = servicio constante igual a servicioPedSeg.]]></Description>
-					<X>2630</X><Y>710</Y>
+					<X>-2617</X><Y>-1046</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -4223,7 +4223,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 					<Id>1792000000308</Id>
 					<Name><![CDATA[servicioMaxPedSeg]]></Name>
 					<Description><![CDATA[Opcional: maximo del servicio triangular; -1 = servicio constante igual a servicioPedSeg.]]></Description>
-					<X>2630</X><Y>735</Y>
+					<X>-2617</X><Y>-1018</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -4248,7 +4248,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 					<Id>1792000000310</Id>
 					<Name><![CDATA[factorDemandaPed]]></Name>
 					<Description><![CDATA[Escala del perfil SBASE: 1 reproduce las validaciones medias observadas por ventana.]]></Description>
-					<X>2630</X><Y>760</Y>
+					<X>-2112</X><Y>-850</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -4273,7 +4273,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 					<Id>1800000000001</Id>
 					<Name><![CDATA[diaSbasePed]]></Name>
 					<Description><![CDATA[Dia habil SBASE de la replica: -1 perfil medio mar-jun (perfilPed15min); -2 dia sorteado con la semilla (bootstrap de los dias depurados de perfilesDiasPed, el mismo para todos los escenarios de un par); >= 0 dia fijo.]]></Description>
-					<X>2630</X><Y>790</Y>
+					<X>-2112</X><Y>-1102</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -4298,7 +4298,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 					<Id>1800000000003</Id>
 					<Name><![CDATA[atrasoMaxRocaSeg]]></Name>
 					<Description><![CDATA[Atraso de cada tren del Roca respecto del horario oficial, uniforme en [0, atrasoMaxRocaSeg] s [SUP]: no hay dato publicado de puntualidad. 0 = trenes a horario.]]></Description>
-					<X>2630</X><Y>820</Y>
+					<X>-1612</X><Y>-990</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -4323,7 +4323,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 					<Id>1800000000005</Id>
 					<Name><![CDATA[cargaTrenPoissonPed]]></Name>
 					<Description><![CDATA[true: el pasaje de cada tren se sortea con una Poisson cuya media es la demanda acumulada desde el tren anterior de su ramal [SUP]; false: se redondea con arrastre del resto (deterministico).]]></Description>
-					<X>2630</X><Y>850</Y>
+					<X>-1612</X><Y>-1018</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -4347,7 +4347,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1800000000007</Id>
 					<Name><![CDATA[rngTrenesPed]]></Name>
-					<X>2350</X><Y>790</Y>
+					<X>-2112</X><Y>-668</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -4362,7 +4362,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1800000000008</Id>
 					<Name><![CDATA[perfilEfectivoPed]]></Name>
-					<X>2350</X><Y>820</Y>
+					<X>-1362</X><Y>-836</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -4377,7 +4377,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1800000000009</Id>
 					<Name><![CDATA[diaEfectivoPed]]></Name>
-					<X>2350</X><Y>850</Y>
+					<X>-1362</X><Y>-808</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -4392,7 +4392,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1800000000010</Id>
 					<Name><![CDATA[perfilesDiasPed]]></Name>
-					<X>2350</X><Y>880</Y>
+					<X>-2112</X><Y>-1074</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -4407,7 +4407,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1800000000011</Id>
 					<Name><![CDATA[fechasDiasPed]]></Name>
-					<X>2350</X><Y>910</Y>
+					<X>-2112</X><Y>-1046</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -4422,7 +4422,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1800000000012</Id>
 					<Name><![CDATA[transitosRocaPed]]></Name>
-					<X>2350</X><Y>940</Y>
+					<X>-342</X><Y>-1046</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -4437,7 +4437,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1800000000013</Id>
 					<Name><![CDATA[validacionesPorMolinetePed]]></Name>
-					<X>2350</X><Y>970</Y>
+					<X>-20</X><Y>-1046</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -4453,7 +4453,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 					<Id>1800000000101</Id>
 					<Name><![CDATA[llegadasRealesPed]]></Name>
 					<Description><![CDATA[true: con un dia SBASE (diaSbasePed >= 0 o -2) los trenes del Roca son las llegadas reales de ese dia (Trenes Argentinos, NO-2026-104102701-APN-UCIYT-SOFSE, al minuto); false: horario oficial llegadasRocaSeg.]]></Description>
-					<X>2630</X><Y>880</Y>
+					<X>-2112</X><Y>-990</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -4477,7 +4477,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1800000000103</Id>
 					<Name><![CDATA[llegadasDiasPed]]></Name>
-					<X>2350</X><Y>1000</Y>
+					<X>-2112</X><Y>-962</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -4492,7 +4492,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1800000000104</Id>
 					<Name><![CDATA[ramalesDiasPed]]></Name>
-					<X>2350</X><Y>1030</Y>
+					<X>-2112</X><Y>-934</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -4508,7 +4508,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 					<Id>1792000000312</Id>
 					<Name><![CDATA[llegadasRocaSeg]]></Name>
 					<Description><![CDATA[Arribos habiles a Pza. Constitucion (s desde las 07:00), horarios oficiales vigentes desde 03/08/2026; ver datos/.]]></Description>
-					<X>2630</X><Y>785</Y>
+					<X>-2112</X><Y>-906</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -4533,7 +4533,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 					<Id>1792000000400</Id>
 					<Name><![CDATA[pruebaSinteticaPed]]></Name>
 					<Description><![CDATA[true: la franja corre con valores de prueba; las filas salen como CSV_PEATONAL_DEMO y no se cargan en la planilla.]]></Description>
-					<X>2630</X><Y>835</Y>
+					<X>-2617</X><Y>-724</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -4557,7 +4557,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1795000000040</Id>
 					<Name><![CDATA[viaActualTrenPed]]></Name>
-					<X>3750</X><Y>60</Y>
+					<X>-1612</X><Y>-584</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -4572,7 +4572,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1795000000041</Id>
 					<Name><![CDATA[trenesRocaPed]]></Name>
-					<X>3750</X><Y>85</Y>
+					<X>-1362</X><Y>-864</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -4615,8 +4615,8 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 						<ItemName><![CDATA[in]]></ItemName>
 					</TargetConnectableItemReference>
 					<Points>
-						<Point><X>1350</X><Y>990</Y></Point>
-						<Point><X>1395</X><Y>990</Y></Point>
+						<Point><X>535</X><Y>-1040</Y></Point>
+						<Point><X>765</X><Y>-1040</Y></Point>
 					</Points>
 				</Connector>
 				<Connector>
@@ -4648,14 +4648,16 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 						<ItemName><![CDATA[in]]></ItemName>
 					</TargetConnectableItemReference>
 					<Points>
-						<Point><X>1435</X><Y>990</Y></Point>
-						<Point><X>1480</X><Y>1020</Y></Point>
+						<Point><X>805</X><Y>-1040</Y></Point>
+						<Point><X>940</X><Y>-1040</Y></Point>
+						<Point><X>940</X><Y>-990</Y></Point>
+						<Point><X>1075</X><Y>-990</Y></Point>
 					</Points>
 				</Connector>
 				<Connector>
 					<Id>1791000000014</Id>
 					<Name><![CDATA[conPedServicioSalida]]></Name>
-					<X>0</X><Y>20</Y>
+					<X>0</X><Y>0</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -4681,14 +4683,14 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 						<ItemName><![CDATA[in]]></ItemName>
 					</TargetConnectableItemReference>
 					<Points>
-						<Point><X>490</X><Y>90</Y></Point>
-						<Point><X>600</X><Y>90</Y></Point>
+						<Point><X>1115</X><Y>-990</Y></Point>
+						<Point><X>1385</X><Y>-990</Y></Point>
 					</Points>
 				</Connector>
 				<Connector>
 					<Id>1791000000103</Id>
 					<Name><![CDATA[conPedSalidaSink]]></Name>
-					<X>0</X><Y>20</Y>
+					<X>0</X><Y>0</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -4714,14 +4716,14 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 						<ItemName><![CDATA[in]]></ItemName>
 					</TargetConnectableItemReference>
 					<Points>
-						<Point><X>640</X><Y>90</Y></Point>
-						<Point><X>760</X><Y>80</Y></Point>
+						<Point><X>1425</X><Y>-990</Y></Point>
+						<Point><X>1685</X><Y>-990</Y></Point>
 					</Points>
 				</Connector>
 				<Connector>
 					<Id>1792000000339</Id>
 					<Name><![CDATA[conPedSourceCalleServicio]]></Name>
-					<X>1360</X><Y>1060</Y>
+					<X>0</X><Y>0</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -4747,10 +4749,10 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 						<ItemName><![CDATA[in]]></ItemName>
 					</TargetConnectableItemReference>
 					<Points>
-						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>20</X><Y>0</Y></Point>
-						<Point><X>100</X><Y>0</Y></Point>
-						<Point><X>140</X><Y>-30</Y></Point>
+						<Point><X>535</X><Y>-940</Y></Point>
+						<Point><X>805</X><Y>-940</Y></Point>
+						<Point><X>805</X><Y>-990</Y></Point>
+						<Point><X>1075</X><Y>-990</Y></Point>
 					</Points>
 				</Connector>
 				<Connector>
@@ -4782,6 +4784,8 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 						<ItemName><![CDATA[in]]></ItemName>
 					</TargetConnectableItemReference>
 					<Points>
+						<Point><X>535</X><Y>-765</Y></Point>
+						<Point><X>795</X><Y>-765</Y></Point>
 					</Points>
 				</Connector>
 				<Connector>
@@ -4813,6 +4817,8 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 						<ItemName><![CDATA[in]]></ItemName>
 					</TargetConnectableItemReference>
 					<Points>
+						<Point><X>835</X><Y>-765</Y></Point>
+						<Point><X>1095</X><Y>-765</Y></Point>
 					</Points>
 				</Connector>
 				<Connector>
@@ -4844,6 +4850,8 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 						<ItemName><![CDATA[in]]></ItemName>
 					</TargetConnectableItemReference>
 					<Points>
+						<Point><X>1135</X><Y>-765</Y></Point>
+						<Point><X>1395</X><Y>-765</Y></Point>
 					</Points>
 				</Connector>
 			</Connectors>
@@ -4851,7 +4859,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Event>
 					<Id>1791000000092</Id>
 					<Name><![CDATA[proximaTandaPed]]></Name>
-					<X>3470</X><Y>60</Y>
+					<X>463</X><Y>-477</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -4883,7 +4891,7 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 				<Event>
 					<Id>1791000000182</Id>
 					<Name><![CDATA[cierreMetricasPed]]></Name>
-					<X>3470</X><Y>85</Y>
+					<X>463</X><Y>-533</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -4918,7 +4926,7 @@ if (drenadoPed()) emitirResultadoPed();]]></Action>
 				<Event>
 					<Id>1792000000331</Id>
 					<Name><![CDATA[proximaLiberacionPed]]></Name>
-					<X>3470</X><Y>110</Y>
+					<X>463</X><Y>-617</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -4950,7 +4958,7 @@ if (drenadoPed()) emitirResultadoPed();]]></Action>
 				<Event>
 					<Id>1795000000042</Id>
 					<Name><![CDATA[proximoTrenRocaPed]]></Name>
-					<X>3750</X><Y>110</Y>
+					<X>463</X><Y>-561</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -4989,7 +4997,7 @@ if (!trenesRocaPed.isEmpty()) proximoTrenRocaPed.restart(Math.max(1, trenesRocaP
 				<Event>
 					<Id>1792000000333</Id>
 					<Name><![CDATA[proximaLlegadaCallePed]]></Name>
-					<X>3470</X><Y>135</Y>
+					<X>463</X><Y>-589</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -5021,7 +5029,7 @@ if (!trenesRocaPed.isEmpty()) proximoTrenRocaPed.restart(Math.max(1, trenesRocaP
 				<Event>
 					<Id>1793000000020</Id>
 					<Name><![CDATA[progresoPed]]></Name>
-					<X>3470</X><Y>160</Y>
+					<X>463</X><Y>-505</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -5061,7 +5069,7 @@ if (!resultadoEmitidoPed) progresoPed.restart(intervaloProgresoPed());]]></Actio
 					<ReturnType><![CDATA[void]]></ReturnType>
 					<Id>1791000000084</Id>
 					<Name><![CDATA[actualizarAreaColaPed]]></Name>
-					<X>2910</X><Y>60</Y>
+					<X>1333</X><Y>-309</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -5075,7 +5083,7 @@ tAreaColaPed = ahora;]]></Body>
 					<ReturnType><![CDATA[void]]></ReturnType>
 					<Id>1791000000085</Id>
 					<Name><![CDATA[entraColaPed]]></Name>
-					<X>2910</X><Y>85</Y>
+					<X>1333</X><Y>-393</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -5096,7 +5104,7 @@ if (time() < horizonteCortePed) qMaxPed = Math.max(qMaxPed, nEsperandoPed);]]></
 					<ReturnType><![CDATA[long]]></ReturnType>
 					<Id>1793000000038</Id>
 					<Name><![CDATA[mezclarSemillaPed]]></Name>
-					<X>2910</X><Y>110</Y>
+					<X>463</X><Y>-239</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -5120,7 +5128,7 @@ return z ^ (z >>> 31);]]></Body>
 					<ReturnType><![CDATA[void]]></ReturnType>
 					<Id>1793000000036</Id>
 					<Name><![CDATA[liberaAsignacionPed]]></Name>
-					<X>2910</X><Y>135</Y>
+					<X>1333</X><Y>-421</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -5140,7 +5148,7 @@ if (ped.colaElegidaPed >= 0) {
 					<ReturnType><![CDATA[void]]></ReturnType>
 					<Id>1791000000160</Id>
 					<Name><![CDATA[registraIngresoPed]]></Name>
-					<X>2910</X><Y>160</Y>
+					<X>1333</X><Y>-505</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -5161,7 +5169,7 @@ actualizarTransitoPed();]]></Body>
 					<ReturnType><![CDATA[void]]></ReturnType>
 					<Id>1791000000086</Id>
 					<Name><![CDATA[comienzaServicioPed]]></Name>
-					<X>2910</X><Y>185</Y>
+					<X>1333</X><Y>-365</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -5203,7 +5211,7 @@ actualizarTransitoPed();]]></Body>
 					<ReturnType><![CDATA[void]]></ReturnType>
 					<Id>1791000000161</Id>
 					<Name><![CDATA[terminaServicioPed]]></Name>
-					<X>2910</X><Y>210</Y>
+					<X>1333</X><Y>-337</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -5223,7 +5231,7 @@ ocupacionPorMolinetePed.put(ped.nombreMolinetePed, (previo == null ? 0 : previo)
 					<ReturnType><![CDATA[void]]></ReturnType>
 					<Id>1791000000087</Id>
 					<Name><![CDATA[generarTandaPed]]></Name>
-					<X>2910</X><Y>235</Y>
+					<X>1333</X><Y>-197</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -5245,7 +5253,7 @@ else arribosCerradosPed = true;]]></Body>
 					<ReturnType><![CDATA[void]]></ReturnType>
 					<Id>1791000000088</Id>
 					<Name><![CDATA[salePed]]></Name>
-					<X>2910</X><Y>260</Y>
+					<X>1333</X><Y>-253</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -5262,7 +5270,7 @@ if (drenadoPed()) {
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1791000000089</Id>
 					<Name><![CDATA[esperaMediaPed]]></Name>
-					<X>2910</X><Y>285</Y>
+					<X>-1077</X><Y>-948</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -5274,7 +5282,7 @@ if (drenadoPed()) {
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1791000000162</Id>
 					<Name><![CDATA[percentil90Ped]]></Name>
-					<X>2910</X><Y>310</Y>
+					<X>-1077</X><Y>-1102</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -5290,7 +5298,7 @@ return ordenadas.get(posicion);]]></Body>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1791000000163</Id>
 					<Name><![CDATA[proporcionMas30Ped]]></Name>
-					<X>2910</X><Y>335</Y>
+					<X>-1077</X><Y>-1074</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -5302,7 +5310,7 @@ return ordenadas.get(posicion);]]></Body>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1791000000164</Id>
 					<Name><![CDATA[esperaMediaPicoPed]]></Name>
-					<X>2910</X><Y>360</Y>
+					<X>-1077</X><Y>-920</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -5317,7 +5325,7 @@ return suma/esperasPicoPed.size();]]></Body>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1791000000165</Id>
 					<Name><![CDATA[p90PicoPed]]></Name>
-					<X>2910</X><Y>385</Y>
+					<X>-1077</X><Y>-1046</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -5333,7 +5341,7 @@ return ordenadas.get(posicion);]]></Body>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1791000000166</Id>
 					<Name><![CDATA[utilizacionMediaPed]]></Name>
-					<X>2910</X><Y>410</Y>
+					<X>-1077</X><Y>-864</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -5348,7 +5356,7 @@ return ocupacion/(horizonteCortePed*molinetesOperativosPed);]]></Body>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1791000000167</Id>
 					<Name><![CDATA[dispersionUtilizacionPed]]></Name>
-					<X>2910</X><Y>435</Y>
+					<X>-1077</X><Y>-836</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -5368,7 +5376,7 @@ return Math.sqrt(suma/molinetesOperativosPed);]]></Body>
 					<ReturnType><![CDATA[String]]></ReturnType>
 					<Id>1791000000168</Id>
 					<Name><![CDATA[utilizacionPorMolinetePed]]></Name>
-					<X>2910</X><Y>460</Y>
+					<X>-1077</X><Y>-808</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -5386,7 +5394,7 @@ return String.join(",", partes);]]></Body>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1791000000090</Id>
 					<Name><![CDATA[lqPed]]></Name>
-					<X>2910</X><Y>485</Y>
+					<X>-1077</X><Y>-892</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -5401,7 +5409,7 @@ return acumulada/fin;]]></Body>
 					<ReturnType><![CDATA[String]]></ReturnType>
 					<Id>1791000000091</Id>
 					<Name><![CDATA[resumenPeatonal]]></Name>
-					<X>2910</X><Y>510</Y>
+					<X>-1077</X><Y>-458</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -5430,7 +5438,7 @@ return acumulada/fin;]]></Body>
 					<ReturnType><![CDATA[String]]></ReturnType>
 					<Id>1791000000181</Id>
 					<Name><![CDATA[filaResultadoPed]]></Name>
-					<X>2910</X><Y>535</Y>
+					<X>-1077</X><Y>-598</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -5462,7 +5470,7 @@ return acumulada/fin;]]></Body>
 					<ReturnType><![CDATA[void]]></ReturnType>
 					<Id>1791000000184</Id>
 					<Name><![CDATA[emitirResultadoPed]]></Name>
-					<X>2910</X><Y>560</Y>
+					<X>-1077</X><Y>-542</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -5488,7 +5496,7 @@ if (modoFranjaPed) getEngine().finish();]]></Body>
 					<ReturnType><![CDATA[void]]></ReturnType>
 					<Id>1791000000102</Id>
 					<Name><![CDATA[configurarMolinetesPed]]></Name>
-					<X>2910</X><Y>585</Y>
+					<X>463</X><Y>-267</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -5511,7 +5519,7 @@ molinetesPeatonales.setServiceSuspended(molinetePed28, molinetesOperativosPed < 
 					<ReturnType><![CDATA[void]]></ReturnType>
 					<Id>1792000000022</Id>
 					<Name><![CDATA[inicializarPed]]></Name>
-					<X>2910</X><Y>610</Y>
+					<X>463</X><Y>-379</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -5596,7 +5604,7 @@ inicializadoPed = true;]]></Body>
 					<ReturnType><![CDATA[boolean]]></ReturnType>
 					<Id>1792000000024</Id>
 					<Name><![CDATA[drenadoPed]]></Name>
-					<X>2910</X><Y>635</Y>
+					<X>-1077</X><Y>-486</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -5608,7 +5616,7 @@ inicializadoPed = true;]]></Body>
 					<ReturnType><![CDATA[String]]></ReturnType>
 					<Id>1792000000025</Id>
 					<Name><![CDATA[prefijoResultadoPed]]></Name>
-					<X>2910</X><Y>660</Y>
+					<X>-1077</X><Y>-430</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -5620,7 +5628,7 @@ inicializadoPed = true;]]></Body>
 					<ReturnType><![CDATA[void]]></ReturnType>
 					<Id>1792000000026</Id>
 					<Name><![CDATA[escribirFilaPed]]></Name>
-					<X>2910</X><Y>685</Y>
+					<X>-1077</X><Y>-402</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -5637,7 +5645,7 @@ escribirLineaPed(archivoSalidaPed, linea);]]></Body>
 					<ReturnType><![CDATA[void]]></ReturnType>
 					<Id>1792000000027</Id>
 					<Name><![CDATA[emitirIncompletoPed]]></Name>
-					<X>2910</X><Y>710</Y>
+					<X>-1077</X><Y>-514</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -5656,7 +5664,7 @@ escribirFilaPed(linea);]]></Body>
 					<ReturnType><![CDATA[int]]></ReturnType>
 					<Id>1793000000010</Id>
 					<Name><![CDATA[hallPed]]></Name>
-					<X>2910</X><Y>735</Y>
+					<X>-1077</X><Y>-346</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -5670,7 +5678,7 @@ return nGeneradosPed - nLlegadosMolinetePed;]]></Body>
 					<ReturnType><![CDATA[int]]></ReturnType>
 					<Id>1793000000011</Id>
 					<Name><![CDATA[pagaPed]]></Name>
-					<X>2910</X><Y>760</Y>
+					<X>-1077</X><Y>-318</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -5683,7 +5691,7 @@ return nEsperasPed - nProcesadosPed;]]></Body>
 					<ReturnType><![CDATA[void]]></ReturnType>
 					<Id>1793000000012</Id>
 					<Name><![CDATA[actualizarTransitoPed]]></Name>
-					<X>2910</X><Y>785</Y>
+					<X>1333</X><Y>-281</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -5700,7 +5708,7 @@ pagaMaxPed = Math.max(pagaMaxPed, pagaPed());]]></Body>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1793000000013</Id>
 					<Name><![CDATA[segundosRealesPed]]></Name>
-					<X>2910</X><Y>810</Y>
+					<X>-1077</X><Y>-290</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -5713,7 +5721,7 @@ return inicioRealMsPed <= 0 ? 0 : (System.currentTimeMillis() - inicioRealMsPed)
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1793000000014</Id>
 					<Name><![CDATA[intervaloProgresoPed]]></Name>
-					<X>2910</X><Y>835</Y>
+					<X>-1077</X><Y>-262</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -5725,7 +5733,7 @@ return inicioRealMsPed <= 0 ? 0 : (System.currentTimeMillis() - inicioRealMsPed)
 					<ReturnType><![CDATA[QueuePath]]></ReturnType>
 					<Id>1792000000183</Id>
 					<Name><![CDATA[elegirColaPed]]></Name>
-					<X>3190</X><Y>60</Y>
+					<X>1333</X><Y>-449</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -5772,7 +5780,7 @@ return colas.get(mejor);]]></Body>
 					<ReturnType><![CDATA[void]]></ReturnType>
 					<Id>1792000000324</Id>
 					<Name><![CDATA[programarDemandaFranjaPed]]></Name>
-					<X>3190</X><Y>85</Y>
+					<X>463</X><Y>-351</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -5887,7 +5895,7 @@ programarLlegadaCallePed(time());]]></Body>
 					<ReturnType><![CDATA[int]]></ReturnType>
 					<Id>1800000000014</Id>
 					<Name><![CDATA[poissonTrenPed]]></Name>
-					<X>3190</X><Y>190</Y>
+					<X>463</X><Y>-323</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -5911,7 +5919,7 @@ return k;]]></Body>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1800000000015</Id>
 					<Name><![CDATA[p90TransitoRocaPed]]></Name>
-					<X>3190</X><Y>215</Y>
+					<X>-1077</X><Y>-780</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -5926,7 +5934,7 @@ return ordenados.get(Math.max(0, (int)Math.ceil(0.9 * ordenados.size()) - 1));]]
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1800000000016</Id>
 					<Name><![CDATA[cvValidacionesMolinetePed]]></Name>
-					<X>3190</X><Y>240</Y>
+					<X>-1077</X><Y>-752</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -5949,7 +5957,7 @@ return Math.sqrt(Math.max(0, suma2 / molinetesOperativosPed - media * media)) / 
 					<ReturnType><![CDATA[String]]></ReturnType>
 					<Id>1800000000017</Id>
 					<Name><![CDATA[escenarioPed]]></Name>
-					<X>3190</X><Y>265</Y>
+					<X>-1077</X><Y>-570</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -5967,7 +5975,7 @@ return molinetesOperativosPed == 20 ? "E3" : (molinetesOperativosPed == 22 ? "E1
 					<ReturnType><![CDATA[String]]></ReturnType>
 					<Id>1800000000018</Id>
 					<Name><![CDATA[filaVentanasPed]]></Name>
-					<X>3190</X><Y>290</Y>
+					<X>-1077</X><Y>-626</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -5985,7 +5993,7 @@ return sb.toString();]]></Body>
 					<ReturnType><![CDATA[void]]></ReturnType>
 					<Id>1800000000019</Id>
 					<Name><![CDATA[escribirLineaPed]]></Name>
-					<X>3190</X><Y>315</Y>
+					<X>-1077</X><Y>-374</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -6016,7 +6024,7 @@ try {
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1799000000021</Id>
 					<Name><![CDATA[xPuertaPed]]></Name>
-					<X>3190</X><Y>140</Y>
+					<X>1333</X><Y>-589</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -6035,7 +6043,7 @@ return -830 - 230 * coche - 230 * (2 * k + 1) / 6.0;]]></Body>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1799000000022</Id>
 					<Name><![CDATA[yPuertaPed]]></Name>
-					<X>3190</X><Y>165</Y>
+					<X>1333</X><Y>-561</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -6053,7 +6061,7 @@ return borde[anden];]]></Body>
 					<ReturnType><![CDATA[void]]></ReturnType>
 					<Id>1792000000325</Id>
 					<Name><![CDATA[liberarPendientesPed]]></Name>
-					<X>3190</X><Y>110</Y>
+					<X>1333</X><Y>-617</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -6084,7 +6092,7 @@ if (liberacionesPed.isEmpty()) {
 					<ReturnType><![CDATA[void]]></ReturnType>
 					<Id>1792000000326</Id>
 					<Name><![CDATA[llegadaCallePed]]></Name>
-					<X>3190</X><Y>135</Y>
+					<X>1333</X><Y>-533</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -6105,7 +6113,7 @@ programarLlegadaCallePed(time());]]></Body>
 					<ReturnType><![CDATA[void]]></ReturnType>
 					<Id>1792000000327</Id>
 					<Name><![CDATA[programarLlegadaCallePed]]></Name>
-					<X>3190</X><Y>160</Y>
+					<X>463</X><Y>-295</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -6141,7 +6149,7 @@ proximaLlegadaCallePed.restart(t - time());]]></Body>
 					<ReturnType><![CDATA[void]]></ReturnType>
 					<Id>1792000000328</Id>
 					<Name><![CDATA[cerrarArribosSiCorrespondePed]]></Name>
-					<X>3190</X><Y>185</Y>
+					<X>1333</X><Y>-225</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -6153,7 +6161,7 @@ proximaLlegadaCallePed.restart(t - time());]]></Body>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1792000000329</Id>
 					<Name><![CDATA[tiempoServicioPed]]></Name>
-					<X>3190</X><Y>210</Y>
+					<X>1333</X><Y>-477</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -6170,7 +6178,7 @@ return u < corte ? a + Math.sqrt(u * (b - a) * (c - a)) : b - Math.sqrt((1 - u) 
 					<ReturnType><![CDATA[String]]></ReturnType>
 					<Id>1792000000330</Id>
 					<Name><![CDATA[caudalPorVentanaPed]]></Name>
-					<X>3190</X><Y>235</Y>
+					<X>-1077</X><Y>-654</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -6190,7 +6198,7 @@ return String.join(",", partes);]]></Body>
 				<EmbeddedObject>
 					<Id>1791000000015</Id>
 					<Name><![CDATA[pedSource]]></Name>
-					<X>1330</X><Y>990</Y>
+					<X>515</X><Y>-1040</Y>
 					<Label><X>-15</X><Y>-30</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -6395,7 +6403,7 @@ return String.join(",", partes);]]></Body>
 				<EmbeddedObject>
 					<Id>1797000000006</Id>
 					<Name><![CDATA[bajadaHall]]></Name>
-					<X>1415</X><Y>990</Y>
+					<X>785</X><Y>-1040</Y>
 					<Label><X>-30</X><Y>45</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -6489,7 +6497,7 @@ return String.join(",", partes);]]></Body>
 				<EmbeddedObject>
 					<Id>1792000000335</Id>
 					<Name><![CDATA[pedSourceCalle]]></Name>
-					<X>1330</X><Y>1060</Y>
+					<X>515</X><Y>-940</Y>
 					<Label><X>-15</X><Y>-30</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -6685,7 +6693,7 @@ return String.join(",", partes);]]></Body>
 				<EmbeddedObject>
 					<Id>1791000000019</Id>
 					<Name><![CDATA[pedMolinetes]]></Name>
-					<X>1500</X><Y>1020</Y>
+					<X>1095</X><Y>-990</Y>
 					<Label><X>-20</X><Y>-25</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -6798,7 +6806,7 @@ return String.join(",", partes);]]></Body>
 				<EmbeddedObject>
 					<Id>1791000000104</Id>
 					<Name><![CDATA[pedSalida]]></Name>
-					<X>1650</X><Y>1020</Y>
+					<X>1405</X><Y>-990</Y>
 					<Label><X>-20</X><Y>-30</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -6886,7 +6894,7 @@ return String.join(",", partes);]]></Body>
 				<EmbeddedObject>
 					<Id>1791000000021</Id>
 					<Name><![CDATA[pedSink]]></Name>
-					<X>1800</X><Y>1020</Y>
+					<X>1705</X><Y>-990</Y>
 					<Label><X>-20</X><Y>-30</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -6938,7 +6946,7 @@ return String.join(",", partes);]]></Body>
 				<EmbeddedObject>
 					<Id>1795000000033</Id>
 					<Name><![CDATA[trenesRocaFuente]]></Name>
-					<X>1330</X><Y>1150</Y>
+					<X>515</X><Y>-765</Y>
 					<Label><X>-15</X><Y>-30</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7259,7 +7267,7 @@ return String.join(",", partes);]]></Body>
 				<EmbeddedObject>
 					<Id>1795000000034</Id>
 					<Name><![CDATA[trenesRocaAlAnden]]></Name>
-					<X>1450</X><Y>1150</Y>
+					<X>815</X><Y>-765</Y>
 					<Label><X>-25</X><Y>-20</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7422,7 +7430,7 @@ return String.join(",", partes);]]></Body>
 				<EmbeddedObject>
 					<Id>1795000000035</Id>
 					<Name><![CDATA[trenesRocaDescarga]]></Name>
-					<X>1580</X><Y>1150</Y>
+					<X>1115</X><Y>-765</Y>
 					<Label><X>-15</X><Y>-10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7532,7 +7540,7 @@ return String.join(",", partes);]]></Body>
 				<EmbeddedObject>
 					<Id>1795000000036</Id>
 					<Name><![CDATA[trenesRocaFin]]></Name>
-					<X>1710</X><Y>1150</Y>
+					<X>1415</X><Y>-765</Y>
 					<Label><X>-30</X><Y>-30</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -37046,6 +37054,3384 @@ return String.join(",", partes);]]></Body>
 
 			<Presentation>
 				<Rectangle>
+					<Id>1800000000301</Id>
+					<Name><![CDATA[bloque1]]></Name>
+					<X>-2650</X><Y>-1240</Y>
+					<Label><X>10</X><Y>10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<ZHeight>10</ZHeight>
+					<LineWidth>2</LineWidth>
+					<LineColor>-13734492</LineColor>
+					<LineMaterial>null</LineMaterial>
+					<LineStyle>SOLID</LineStyle>
+					<Width>1500</Width>
+					<Height>1120</Height>
+					<Rotation>0.0</Rotation>
+					<FillColor>-1380107</FillColor>
+					<FillMaterial>null</FillMaterial>
+				</Rectangle>
+				<Rectangle>
+					<Id>1800000000302</Id>
+					<Name><![CDATA[bloque1Titulo]]></Name>
+					<X>-2650</X><Y>-1240</Y>
+					<Label><X>10</X><Y>10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<ZHeight>10</ZHeight>
+					<LineWidth>2</LineWidth>
+					<LineColor>-13734492</LineColor>
+					<LineMaterial>null</LineMaterial>
+					<LineStyle>SOLID</LineStyle>
+					<Width>1500</Width>
+					<Height>64</Height>
+					<Rotation>0.0</Rotation>
+					<FillColor>-13734492</FillColor>
+					<FillMaterial>null</FillMaterial>
+				</Rectangle>
+				<Text>
+					<Id>1800000000303</Id>
+					<Name><![CDATA[bloque1Nombre]]></Name>
+					<X>-2632</X><Y>-1230</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-1</Color>
+					<Text><![CDATA[1. VARIABLES]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>24</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000304</Id>
+					<Name><![CDATA[texto3]]></Name>
+					<X>-2630</X><Y>-1198</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-1</Color>
+					<Text><![CDATA[Las entradas del modelo: qué se compara, qué datos reales usa y qué se supone]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>12</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Rectangle>
+					<Id>1800000000305</Id>
+					<Name><![CDATA[bloque2]]></Name>
+					<X>-1110</X><Y>-1240</Y>
+					<Label><X>10</X><Y>10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<ZHeight>10</ZHeight>
+					<LineWidth>2</LineWidth>
+					<LineColor>-12808896</LineColor>
+					<LineMaterial>null</LineMaterial>
+					<LineStyle>SOLID</LineStyle>
+					<Width>1500</Width>
+					<Height>1120</Height>
+					<Rotation>0.0</Rotation>
+					<FillColor>-1313813</FillColor>
+					<FillMaterial>null</FillMaterial>
+				</Rectangle>
+				<Rectangle>
+					<Id>1800000000306</Id>
+					<Name><![CDATA[bloque2Titulo]]></Name>
+					<X>-1110</X><Y>-1240</Y>
+					<Label><X>10</X><Y>10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<ZHeight>10</ZHeight>
+					<LineWidth>2</LineWidth>
+					<LineColor>-12808896</LineColor>
+					<LineMaterial>null</LineMaterial>
+					<LineStyle>SOLID</LineStyle>
+					<Width>1500</Width>
+					<Height>64</Height>
+					<Rotation>0.0</Rotation>
+					<FillColor>-12808896</FillColor>
+					<FillMaterial>null</FillMaterial>
+				</Rectangle>
+				<Text>
+					<Id>1800000000307</Id>
+					<Name><![CDATA[bloque2Nombre]]></Name>
+					<X>-1092</X><Y>-1230</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-1</Color>
+					<Text><![CDATA[2. MEDIDAS DE RENDIMIENTO]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>24</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000308</Id>
+					<Name><![CDATA[texto7]]></Name>
+					<X>-1090</X><Y>-1198</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-1</Color>
+					<Text><![CDATA[Lo que se mide en cada corrida y se compara entre escenarios]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>12</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Rectangle>
+					<Id>1800000000309</Id>
+					<Name><![CDATA[bloque3]]></Name>
+					<X>430</X><Y>-1240</Y>
+					<Label><X>10</X><Y>10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<ZHeight>10</ZHeight>
+					<LineWidth>2</LineWidth>
+					<LineColor>-4036066</LineColor>
+					<LineMaterial>null</LineMaterial>
+					<LineStyle>SOLID</LineStyle>
+					<Width>1800</Width>
+					<Height>1120</Height>
+					<Rotation>0.0</Rotation>
+					<FillColor>-462616</FillColor>
+					<FillMaterial>null</FillMaterial>
+				</Rectangle>
+				<Rectangle>
+					<Id>1800000000310</Id>
+					<Name><![CDATA[bloque3Titulo]]></Name>
+					<X>430</X><Y>-1240</Y>
+					<Label><X>10</X><Y>10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<ZHeight>10</ZHeight>
+					<LineWidth>2</LineWidth>
+					<LineColor>-4036066</LineColor>
+					<LineMaterial>null</LineMaterial>
+					<LineStyle>SOLID</LineStyle>
+					<Width>1800</Width>
+					<Height>64</Height>
+					<Rotation>0.0</Rotation>
+					<FillColor>-4036066</FillColor>
+					<FillMaterial>null</FillMaterial>
+				</Rectangle>
+				<Text>
+					<Id>1800000000311</Id>
+					<Name><![CDATA[bloque3Nombre]]></Name>
+					<X>448</X><Y>-1230</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-1</Color>
+					<Text><![CDATA[3. LÓGICA]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>24</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000312</Id>
+					<Name><![CDATA[texto11]]></Name>
+					<X>450</X><Y>-1198</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-1</Color>
+					<Text><![CDATA[Cómo se mueve un pasajero, de qué depende y qué eventos lo disparan]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>12</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Rectangle>
+					<Id>1800000000313</Id>
+					<Name><![CDATA[bloque4]]></Name>
+					<X>-2650</X><Y>-100</Y>
+					<Label><X>10</X><Y>10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<ZHeight>10</ZHeight>
+					<LineWidth>3</LineWidth>
+					<LineColor>-11904406</LineColor>
+					<LineMaterial>null</LineMaterial>
+					<LineStyle>SOLID</LineStyle>
+					<Width>4880</Width>
+					<Height>1880</Height>
+					<Rotation>0.0</Rotation>
+					<FillColor/>
+					<FillMaterial>null</FillMaterial>
+				</Rectangle>
+				<Rectangle>
+					<Id>1800000000314</Id>
+					<Name><![CDATA[bloque4Titulo]]></Name>
+					<X>-2650</X><Y>-100</Y>
+					<Label><X>10</X><Y>10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<ZHeight>10</ZHeight>
+					<LineWidth>2</LineWidth>
+					<LineColor>-11904406</LineColor>
+					<LineMaterial>null</LineMaterial>
+					<LineStyle>SOLID</LineStyle>
+					<Width>4880</Width>
+					<Height>64</Height>
+					<Rotation>0.0</Rotation>
+					<FillColor>-11904406</FillColor>
+					<FillMaterial>null</FillMaterial>
+				</Rectangle>
+				<Text>
+					<Id>1800000000315</Id>
+					<Name><![CDATA[bloque4Nombre]]></Name>
+					<X>-2632</X><Y>-90</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-1</Color>
+					<Text><![CDATA[4. MODELO ESPACIAL]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>24</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000316</Id>
+					<Name><![CDATA[texto15]]></Name>
+					<X>-2630</X><Y>-58</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-1</Color>
+					<Text><![CDATA[La simulación animada: andenes y trenes del Roca (izquierda), hall y escaleras al subsuelo, pasillo y vestíbulo con los molinetes (derecha). Vista 3D a la derecha.]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>12</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000317</Id>
+					<Name><![CDATA[tituloModelo]]></Name>
+					<X>-2650</X><Y>-1380</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-15255971</Color>
+					<Text><![CDATA[Molinetes de Constitución, Línea C — acceso desde el Roca al vestíbulo Principal]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>30</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000318</Id>
+					<Name><![CDATA[guiaModelo]]></Name>
+					<X>-2650</X><Y>-1332</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[Cómo leer este modelo: arriba, de izquierda a derecha, (1) las entradas, (2) lo que se mide y (3) cómo funciona; abajo (4), la simulación en movimiento. Cada elemento tiene al lado qué es.]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>14</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000319</Id>
+					<Name><![CDATA[texto18]]></Name>
+					<X>-2625</X><Y>-1150</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-13734492</Color>
+					<Text><![CDATA[Escenario: lo que se compara]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>15</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000320</Id>
+					<Name><![CDATA[texto19]]></Name>
+					<X>-2625</X><Y>-1130</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[E0 = 20 molinetes · E1 = 22 · E3 y E13 = validación rápida]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>2</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000321</Id>
+					<Name><![CDATA[texto20]]></Name>
+					<X>-2395</X><Y>-1109</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[molinetes habilitados (20 o 22)]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000322</Id>
+					<Name><![CDATA[texto21]]></Name>
+					<X>-2395</X><Y>-1081</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[validación: moda (2,4 s; E3 1,8 s)]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000323</Id>
+					<Name><![CDATA[texto22]]></Name>
+					<X>-2395</X><Y>-1053</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[validación: mínimo (1,8 s; E3 1,5 s)]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000324</Id>
+					<Name><![CDATA[texto23]]></Name>
+					<X>-2395</X><Y>-1025</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[validación: máximo (3,5 s; E3 2,5 s)]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000325</Id>
+					<Name><![CDATA[texto24]]></Name>
+					<X>-2625</X><Y>-968</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-13734492</Color>
+					<Text><![CDATA[Configuración de la corrida]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>15</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000326</Id>
+					<Name><![CDATA[texto25]]></Name>
+					<X>-2625</X><Y>-948</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[Semilla, franja 07:00-09:30 y salida de resultados]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>2</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000327</Id>
+					<Name><![CDATA[texto26]]></Name>
+					<X>-2395</X><Y>-927</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[semilla (igual en los 4 escenarios)]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000328</Id>
+					<Name><![CDATA[texto27]]></Name>
+					<X>-2395</X><Y>-899</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[franja real (true) o demo]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000329</Id>
+					<Name><![CDATA[texto28]]></Name>
+					<X>-2395</X><Y>-871</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[cierre de ingresos: 9000 s = 09:30]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000330</Id>
+					<Name><![CDATA[texto29]]></Name>
+					<X>-2395</X><Y>-843</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[inicio del pico: 08:15]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000331</Id>
+					<Name><![CDATA[texto30]]></Name>
+					<X>-2395</X><Y>-815</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[fin del pico: 08:45]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000332</Id>
+					<Name><![CDATA[texto31]]></Name>
+					<X>-2395</X><Y>-787</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[corte de la demo]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000333</Id>
+					<Name><![CDATA[texto32]]></Name>
+					<X>-2395</X><Y>-759</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[CSV donde se escribe la fila]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000334</Id>
+					<Name><![CDATA[texto33]]></Name>
+					<X>-2395</X><Y>-731</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[marca de prueba (no es resultado)]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000335</Id>
+					<Name><![CDATA[texto34]]></Name>
+					<X>-2625</X><Y>-674</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-13734492</Color>
+					<Text><![CDATA[Demo sintética]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>15</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000336</Id>
+					<Name><![CDATA[texto35]]></Name>
+					<X>-2625</X><Y>-654</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[Sólo para el experimento PeatonalDemo]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>2</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000337</Id>
+					<Name><![CDATA[texto36]]></Name>
+					<X>-2395</X><Y>-633</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[pasajeros por tanda]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000338</Id>
+					<Name><![CDATA[texto37]]></Name>
+					<X>-2395</X><Y>-605</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[validación (s)]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000339</Id>
+					<Name><![CDATA[texto38]]></Name>
+					<X>-2395</X><Y>-577</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[cada cuánto llega una tanda]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000340</Id>
+					<Name><![CDATA[texto39]]></Name>
+					<X>-2395</X><Y>-549</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[cantidad de tandas]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000341</Id>
+					<Name><![CDATA[texto40]]></Name>
+					<X>-2120</X><Y>-1150</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-13734492</Color>
+					<Text><![CDATA[Demanda y trenes: datos reales]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>15</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000342</Id>
+					<Name><![CDATA[texto41]]></Name>
+					<X>-2120</X><Y>-1130</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[SBASE (molinetes) y Trenes Argentinos (llegadas), marzo-junio 2026]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>2</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000343</Id>
+					<Name><![CDATA[texto42]]></Name>
+					<X>-1890</X><Y>-1109</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[día de la réplica (-2 = sorteo)]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000344</Id>
+					<Name><![CDATA[texto43]]></Name>
+					<X>-1890</X><Y>-1081</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[validaciones por 15 min de 75 días]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000345</Id>
+					<Name><![CDATA[texto44]]></Name>
+					<X>-1890</X><Y>-1053</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[fecha de cada día]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000346</Id>
+					<Name><![CDATA[texto45]]></Name>
+					<X>-1890</X><Y>-1025</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[perfil medio (franja visual)]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000347</Id>
+					<Name><![CDATA[texto46]]></Name>
+					<X>-1890</X><Y>-997</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[usar las llegadas reales del día]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000348</Id>
+					<Name><![CDATA[texto47]]></Name>
+					<X>-1890</X><Y>-969</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[hora real de cada tren, por día]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000349</Id>
+					<Name><![CDATA[texto48]]></Name>
+					<X>-1890</X><Y>-941</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[ramal de cada tren, por día]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000350</Id>
+					<Name><![CDATA[texto49]]></Name>
+					<X>-1890</X><Y>-913</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[horario oficial del Roca]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000351</Id>
+					<Name><![CDATA[texto50]]></Name>
+					<X>-1890</X><Y>-885</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[ramal de cada tren del horario]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000352</Id>
+					<Name><![CDATA[texto51]]></Name>
+					<X>-1890</X><Y>-857</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[escala de la demanda (1 = dato)]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000353</Id>
+					<Name><![CDATA[texto52]]></Name>
+					<X>-2120</X><Y>-800</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-13734492</Color>
+					<Text><![CDATA[Números aleatorios: un generador por fuente]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>15</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000354</Id>
+					<Name><![CDATA[texto53]]></Name>
+					<X>-2120</X><Y>-780</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[Así los 4 escenarios reciben exactamente los mismos sorteos]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>2</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000355</Id>
+					<Name><![CDATA[texto54]]></Name>
+					<X>-1890</X><Y>-759</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[llegadas desde la calle]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000356</Id>
+					<Name><![CDATA[texto55]]></Name>
+					<X>-1890</X><Y>-731</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[tiempo de validación]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000357</Id>
+					<Name><![CDATA[texto56]]></Name>
+					<X>-1890</X><Y>-703</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[velocidad de caminata]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000358</Id>
+					<Name><![CDATA[texto57]]></Name>
+					<X>-1890</X><Y>-675</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[pasaje de cada tren]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000359</Id>
+					<Name><![CDATA[texto58]]></Name>
+					<X>-1620</X><Y>-1150</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-13734492</Color>
+					<Text><![CDATA[Supuestos sin dato publicado [SUP]]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>15</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000360</Id>
+					<Name><![CDATA[texto59]]></Name>
+					<X>-1620</X><Y>-1130</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[Valor intermedio; extremos en la sensibilidad]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>2</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000361</Id>
+					<Name><![CDATA[texto60]]></Name>
+					<X>-1420</X><Y>-1109</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[parte que llega en tren (0,8)]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000362</Id>
+					<Name><![CDATA[texto61]]></Name>
+					<X>-1420</X><Y>-1081</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[arribo a abrir puertas (10 s)]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000363</Id>
+					<Name><![CDATA[texto62]]></Name>
+					<X>-1420</X><Y>-1053</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[descenso del tren (30 s)]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000364</Id>
+					<Name><![CDATA[texto63]]></Name>
+					<X>-1420</X><Y>-1025</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[pasaje por tren: Poisson]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000365</Id>
+					<Name><![CDATA[texto64]]></Name>
+					<X>-1420</X><Y>-997</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[atraso extra (sensibilidad)]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000366</Id>
+					<Name><![CDATA[texto65]]></Name>
+					<X>-1620</X><Y>-940</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-13734492</Color>
+					<Text><![CDATA[Estado interno de la simulación]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>15</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000367</Id>
+					<Name><![CDATA[texto66]]></Name>
+					<X>-1620</X><Y>-920</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[Contadores y colas que usa la lógica (no hace falta tocarlos)]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>2</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000368</Id>
+					<Name><![CDATA[texto67]]></Name>
+					<X>-1085</X><Y>-1150</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-12808896</Color>
+					<Text><![CDATA[Medidas primarias (test de medias)]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>15</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000369</Id>
+					<Name><![CDATA[texto68]]></Name>
+					<X>-1085</X><Y>-1130</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[Se comparan E1, E3 y E13 contra E0 con t apareado y Bonferroni]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>2</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000370</Id>
+					<Name><![CDATA[texto69]]></Name>
+					<X>-885</X><Y>-1109</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[P90 de la espera en la cola (s)]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000371</Id>
+					<Name><![CDATA[texto70]]></Name>
+					<X>-885</X><Y>-1081</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[proporción que espera más de 30 s]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000372</Id>
+					<Name><![CDATA[texto71]]></Name>
+					<X>-885</X><Y>-1053</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[P90 de quienes llegan de 08:15 a 08:45]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000373</Id>
+					<Name><![CDATA[texto72]]></Name>
+					<X>-1085</X><Y>-996</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-12808896</Color>
+					<Text><![CDATA[Medidas secundarias]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>15</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000374</Id>
+					<Name><![CDATA[texto73]]></Name>
+					<X>-1085</X><Y>-976</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[Describen el sistema; intervalo individual del 95 %]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>2</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000375</Id>
+					<Name><![CDATA[texto74]]></Name>
+					<X>-885</X><Y>-955</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[espera media (s)]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000376</Id>
+					<Name><![CDATA[texto75]]></Name>
+					<X>-885</X><Y>-927</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[espera media en el pico (s)]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000377</Id>
+					<Name><![CDATA[texto76]]></Name>
+					<X>-885</X><Y>-899</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[largo medio de la cola (personas)]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000378</Id>
+					<Name><![CDATA[texto77]]></Name>
+					<X>-885</X><Y>-871</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[utilización media de los molinetes]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000379</Id>
+					<Name><![CDATA[texto78]]></Name>
+					<X>-885</X><Y>-843</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[desvío de la utilización]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000380</Id>
+					<Name><![CDATA[texto79]]></Name>
+					<X>-885</X><Y>-815</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[utilización de cada molinete]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000381</Id>
+					<Name><![CDATA[texto80]]></Name>
+					<X>-885</X><Y>-787</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[P90 del tren a la cola (embudo de escaleras)]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000382</Id>
+					<Name><![CDATA[texto81]]></Name>
+					<X>-885</X><Y>-759</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[reparto entre molinetes (se compara con SBASE)]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000383</Id>
+					<Name><![CDATA[texto82]]></Name>
+					<X>-1085</X><Y>-702</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-12808896</Color>
+					<Text><![CDATA[Validación y salida]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>15</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000384</Id>
+					<Name><![CDATA[texto83]]></Name>
+					<X>-1085</X><Y>-682</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[Controles contra el dato y escritura de resultados]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>2</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000385</Id>
+					<Name><![CDATA[texto84]]></Name>
+					<X>-885</X><Y>-661</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[validaciones por 15 min: modelo vs SBASE]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000386</Id>
+					<Name><![CDATA[texto85]]></Name>
+					<X>-885</X><Y>-633</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[fila de ventanas para validacion_corridas.py]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000387</Id>
+					<Name><![CDATA[texto86]]></Name>
+					<X>-885</X><Y>-605</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[fila del CSV con todas las medidas]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000388</Id>
+					<Name><![CDATA[texto87]]></Name>
+					<X>-885</X><Y>-577</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[etiqueta E0 / E1 / E3 / E13]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000389</Id>
+					<Name><![CDATA[texto88]]></Name>
+					<X>-885</X><Y>-549</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[escribe la fila al terminar]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000390</Id>
+					<Name><![CDATA[texto89]]></Name>
+					<X>-885</X><Y>-521</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[avisa si la corrida no drenó]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000391</Id>
+					<Name><![CDATA[texto90]]></Name>
+					<X>-885</X><Y>-493</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[salió todo el que entró antes de las 09:30]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000392</Id>
+					<Name><![CDATA[texto91]]></Name>
+					<X>-885</X><Y>-465</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[resumen de la corrida en la consola]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000393</Id>
+					<Name><![CDATA[texto92]]></Name>
+					<X>-350</X><Y>-1150</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-12808896</Color>
+					<Text><![CDATA[Datos que se acumulan]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>15</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000394</Id>
+					<Name><![CDATA[texto93]]></Name>
+					<X>-350</X><Y>-1130</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[Cada pasajero deja su espera acá; de esto salen las medidas]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>2</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Rectangle>
+					<Id>1800000000395</Id>
+					<Name><![CDATA[panelEnVivo]]></Name>
+					<X>-350</X><Y>-818</Y>
+					<Label><X>10</X><Y>10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<ZHeight>10</ZHeight>
+					<LineWidth>2</LineWidth>
+					<LineColor>-12808896</LineColor>
+					<LineMaterial>null</LineMaterial>
+					<LineStyle>SOLID</LineStyle>
+					<Width>715</Width>
+					<Height>520</Height>
+					<Rotation>0.0</Rotation>
+					<FillColor>-1</FillColor>
+					<FillMaterial>null</FillMaterial>
+				</Rectangle>
+				<Text>
+					<Id>1800000000396</Id>
+					<Name><![CDATA[texto95]]></Name>
+					<X>-335</X><Y>-806</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-12808896</Color>
+					<Text><![CDATA[Panel en vivo]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>18</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000397</Id>
+					<Name><![CDATA[texto96]]></Name>
+					<X>-335</X><Y>-780</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[Se actualiza mientras corre la simulación]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>2</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000398</Id>
+					<Name><![CDATA[vivoDia]]></Name>
+					<X>-335</X><Y>-748</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-14606047</Color>
+					<Text><![CDATA[vivoDia]]></Text>
+					<TextCode><![CDATA["Día: " + (diaEfectivoPed >= 0 && diaEfectivoPed < fechasDiasPed.length ? fechasDiasPed[diaEfectivoPed] + (llegadasRealesPed ? " (trenes reales)" : "") : "perfil medio")]]></TextCode>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>15</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000399</Id>
+					<Name><![CDATA[vivoEscenario]]></Name>
+					<X>-335</X><Y>-718</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-14606047</Color>
+					<Text><![CDATA[vivoEscenario]]></Text>
+					<TextCode><![CDATA["Escenario: " + escenarioPed() + " (" + molinetesOperativosPed + " molinetes, validación " + String.format("%.1f", servicioPedSeg) + " s)"]]></TextCode>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>15</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000400</Id>
+					<Name><![CDATA[vivoHora]]></Name>
+					<X>-335</X><Y>-688</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-14606047</Color>
+					<Text><![CDATA[vivoHora]]></Text>
+					<TextCode><![CDATA[String.format("Hora: %02d:%02d", 7 + (int)(time() / 3600), (int)(time() % 3600) / 60)]]></TextCode>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>15</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000401</Id>
+					<Name><![CDATA[vivoP90]]></Name>
+					<X>-335</X><Y>-658</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-14606047</Color>
+					<Text><![CDATA[vivoP90]]></Text>
+					<TextCode><![CDATA[String.format("P90 de espera: %.1f s", percentil90Ped())]]></TextCode>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>15</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000402</Id>
+					<Name><![CDATA[vivoMas30]]></Name>
+					<X>-335</X><Y>-628</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-14606047</Color>
+					<Text><![CDATA[vivoMas30]]></Text>
+					<TextCode><![CDATA[String.format("Esperan más de 30 s: %.1f %%", 100 * proporcionMas30Ped())]]></TextCode>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>15</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000403</Id>
+					<Name><![CDATA[vivoCola]]></Name>
+					<X>-335</X><Y>-598</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-14606047</Color>
+					<Text><![CDATA[vivoCola]]></Text>
+					<TextCode><![CDATA["En cola ahora: " + nEsperandoPed + " (máx. " + qMaxPed + ")"]]></TextCode>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>15</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000404</Id>
+					<Name><![CDATA[vivoHall]]></Name>
+					<X>-335</X><Y>-568</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-14606047</Color>
+					<Text><![CDATA[vivoHall]]></Text>
+					<TextCode><![CDATA["Caminando del tren a la cola: " + hallPed()]]></TextCode>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>15</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000405</Id>
+					<Name><![CDATA[vivoTransito]]></Name>
+					<X>-335</X><Y>-538</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-14606047</Color>
+					<Text><![CDATA[vivoTransito]]></Text>
+					<TextCode><![CDATA[String.format("Tren a cola (P90): %.0f s", p90TransitoRocaPed())]]></TextCode>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>15</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000406</Id>
+					<Name><![CDATA[vivoProcesados]]></Name>
+					<X>-335</X><Y>-508</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-14606047</Color>
+					<Text><![CDATA[vivoProcesados]]></Text>
+					<TextCode><![CDATA["Validaron: " + nProcesadosPed + " de " + nGeneradosPed + " ingresados"]]></TextCode>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>15</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000407</Id>
+					<Name><![CDATA[texto106]]></Name>
+					<X>455</X><Y>-1150</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-4036066</Color>
+					<Text><![CDATA[Recorrido de un pasajero (diagrama de flujo)]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>15</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000408</Id>
+					<Name><![CDATA[texto107]]></Name>
+					<X>455</X><Y>-1130</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[Cada bloque es un paso; las flechas indican el orden]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>2</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000409</Id>
+					<Name><![CDATA[texto108]]></Name>
+					<X>465</X><Y>-1012</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-14606047</Color>
+					<Text><![CDATA[Baja del tren]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>12</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000410</Id>
+					<Name><![CDATA[texto109]]></Name>
+					<X>465</X><Y>-996</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[por una de las 21 puertas]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000411</Id>
+					<Name><![CDATA[texto110]]></Name>
+					<X>735</X><Y>-1012</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-14606047</Color>
+					<Text><![CDATA[Baja al subsuelo]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>12</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000412</Id>
+					<Name><![CDATA[texto111]]></Name>
+					<X>735</X><Y>-996</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[escalera norte o sur]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000413</Id>
+					<Name><![CDATA[texto112]]></Name>
+					<X>1045</X><Y>-962</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-14606047</Color>
+					<Text><![CDATA[Molinete]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>12</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000414</Id>
+					<Name><![CDATA[texto113]]></Name>
+					<X>1045</X><Y>-946</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[elige, hace cola y valida]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000415</Id>
+					<Name><![CDATA[texto114]]></Name>
+					<X>1355</X><Y>-962</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-14606047</Color>
+					<Text><![CDATA[Sale a la Línea C]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>12</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000416</Id>
+					<Name><![CDATA[texto115]]></Name>
+					<X>1355</X><Y>-946</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[escaleras al andén]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000417</Id>
+					<Name><![CDATA[texto116]]></Name>
+					<X>1655</X><Y>-962</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-14606047</Color>
+					<Text><![CDATA[Fin]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>12</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000418</Id>
+					<Name><![CDATA[texto117]]></Name>
+					<X>1655</X><Y>-946</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[se registra su espera]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000419</Id>
+					<Name><![CDATA[texto118]]></Name>
+					<X>465</X><Y>-912</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-14606047</Color>
+					<Text><![CDATA[Llega de la calle]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>12</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000420</Id>
+					<Name><![CDATA[texto119]]></Name>
+					<X>465</X><Y>-896</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[por la escalera B3 (Poisson)]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000421</Id>
+					<Name><![CDATA[texto120]]></Name>
+					<X>455</X><Y>-850</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-4036066</Color>
+					<Text><![CDATA[Trenes del Roca (animación de las llegadas)]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>15</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000422</Id>
+					<Name><![CDATA[texto121]]></Name>
+					<X>455</X><Y>-830</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[El tren aparece, frena en el andén, espera y se retira; los pasajeros los genera la lógica de abajo]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>2</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000423</Id>
+					<Name><![CDATA[texto122]]></Name>
+					<X>465</X><Y>-737</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-14606047</Color>
+					<Text><![CDATA[Aparece]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>12</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000424</Id>
+					<Name><![CDATA[texto123]]></Name>
+					<X>465</X><Y>-721</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[en su vía]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000425</Id>
+					<Name><![CDATA[texto124]]></Name>
+					<X>765</X><Y>-737</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-14606047</Color>
+					<Text><![CDATA[Frena]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>12</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000426</Id>
+					<Name><![CDATA[texto125]]></Name>
+					<X>765</X><Y>-721</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[en los paragolpes]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000427</Id>
+					<Name><![CDATA[texto126]]></Name>
+					<X>1065</X><Y>-737</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-14606047</Color>
+					<Text><![CDATA[Espera]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>12</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000428</Id>
+					<Name><![CDATA[texto127]]></Name>
+					<X>1065</X><Y>-721</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[10 min detenido]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000429</Id>
+					<Name><![CDATA[texto128]]></Name>
+					<X>1365</X><Y>-737</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-14606047</Color>
+					<Text><![CDATA[Se retira]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>12</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000430</Id>
+					<Name><![CDATA[texto129]]></Name>
+					<X>1365</X><Y>-721</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000431</Id>
+					<Name><![CDATA[texto130]]></Name>
+					<X>455</X><Y>-665</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-4036066</Color>
+					<Text><![CDATA[Eventos: lo que pasa en un instante]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>15</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000432</Id>
+					<Name><![CDATA[texto131]]></Name>
+					<X>455</X><Y>-645</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[Cada uno se reprograma solo para la próxima vez]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>2</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000433</Id>
+					<Name><![CDATA[texto132]]></Name>
+					<X>685</X><Y>-624</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[baja la próxima tanda de un tren]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000434</Id>
+					<Name><![CDATA[texto133]]></Name>
+					<X>685</X><Y>-596</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[llega el próximo de la calle]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000435</Id>
+					<Name><![CDATA[texto134]]></Name>
+					<X>685</X><Y>-568</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[aparece el próximo tren (animación)]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000436</Id>
+					<Name><![CDATA[texto135]]></Name>
+					<X>685</X><Y>-540</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[09:30: corta la medición]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000437</Id>
+					<Name><![CDATA[texto136]]></Name>
+					<X>685</X><Y>-512</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[avance en la consola cada 15 min]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000438</Id>
+					<Name><![CDATA[texto137]]></Name>
+					<X>685</X><Y>-484</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[tandas de la demo]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000439</Id>
+					<Name><![CDATA[texto138]]></Name>
+					<X>455</X><Y>-427</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-4036066</Color>
+					<Text><![CDATA[Al empezar]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>15</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000440</Id>
+					<Name><![CDATA[texto139]]></Name>
+					<X>455</X><Y>-407</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[Prepara el día, la demanda y los molinetes]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>2</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000441</Id>
+					<Name><![CDATA[texto140]]></Name>
+					<X>710</X><Y>-386</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[valida entradas y elige el día]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000442</Id>
+					<Name><![CDATA[texto141]]></Name>
+					<X>710</X><Y>-358</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[arma las tandas de cada tren]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000443</Id>
+					<Name><![CDATA[texto142]]></Name>
+					<X>710</X><Y>-330</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[sortea el pasaje de un tren]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000444</Id>
+					<Name><![CDATA[texto143]]></Name>
+					<X>710</X><Y>-302</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[programa la calle (Poisson)]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000445</Id>
+					<Name><![CDATA[texto144]]></Name>
+					<X>710</X><Y>-274</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[habilita 20 o 22 molinetes]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000446</Id>
+					<Name><![CDATA[texto145]]></Name>
+					<X>710</X><Y>-246</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[semilla de cada generador]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000447</Id>
+					<Name><![CDATA[texto146]]></Name>
+					<X>1325</X><Y>-665</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-4036066</Color>
+					<Text><![CDATA[Durante la corrida]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>15</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000448</Id>
+					<Name><![CDATA[texto147]]></Name>
+					<X>1325</X><Y>-645</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[Lo que se ejecuta con cada pasajero]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>2</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000449</Id>
+					<Name><![CDATA[texto148]]></Name>
+					<X>1575</X><Y>-624</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[hace bajar a los pasajeros del tren]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000450</Id>
+					<Name><![CDATA[texto149]]></Name>
+					<X>1575</X><Y>-596</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[posición de cada puerta del tren]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000451</Id>
+					<Name><![CDATA[texto150]]></Name>
+					<X>1575</X><Y>-568</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[andén donde baja]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000452</Id>
+					<Name><![CDATA[texto151]]></Name>
+					<X>1575</X><Y>-540</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[genera un pasajero de la calle]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000453</Id>
+					<Name><![CDATA[texto152]]></Name>
+					<X>1575</X><Y>-512</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[anota su ingreso y sortea su validación]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000454</Id>
+					<Name><![CDATA[texto153]]></Name>
+					<X>1575</X><Y>-484</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[tiempo de validación (triangular)]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000455</Id>
+					<Name><![CDATA[texto154]]></Name>
+					<X>1575</X><Y>-456</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[elige molinete: distancia + cola]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000456</Id>
+					<Name><![CDATA[texto155]]></Name>
+					<X>1575</X><Y>-400</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[entra a la cola]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000457</Id>
+					<Name><![CDATA[texto156]]></Name>
+					<X>1575</X><Y>-372</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[empieza a validar: mide su espera]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000458</Id>
+					<Name><![CDATA[texto157]]></Name>
+					<X>1575</X><Y>-344</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[termina de validar]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000459</Id>
+					<Name><![CDATA[texto158]]></Name>
+					<X>1575</X><Y>-260</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[sale; si no queda nadie, termina]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000460</Id>
+					<Name><![CDATA[texto159]]></Name>
+					<X>1575</X><Y>-204</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-10526881</Color>
+					<Text><![CDATA[tanda de la demo]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Rectangle>
 					<Id>1791000000023</Id>
 					<Name><![CDATA[areaVestibulo]]></Name>
 					<X>80</X><Y>190</Y>
@@ -37068,30 +40454,9 @@ return String.join(",", partes);]]></Body>
 					<FillMaterial>null</FillMaterial>
 				</Rectangle>
 				<Text>
-					<Id>1791000000024</Id>
-					<Name><![CDATA[tituloPeatonal]]></Name>
-					<X>1300</X><Y>40</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D</DrawMode>
-					<EmbeddedIcon>false</EmbeddedIcon>
-					<Z>0</Z>
-					<Rotation>0.0</Rotation>
-					<Color>-12490271</Color>
-					<Text><![CDATA[Constitución, Línea C - acceso desde el Roca al vestíbulo Principal]]></Text>
-					<Font>
-						<Name>SansSerif</Name>
-						<Size>24</Size>
-						<Style>1</Style>
-					</Font>
-					<Alignment>LEFT</Alignment>
-				</Text>
-				<Text>
 					<Id>1791000000025</Id>
 					<Name><![CDATA[avisoPeatonal]]></Name>
-					<X>1300</X><Y>75</Y>
+					<X>-2650</X><Y>-1302</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -37113,7 +40478,7 @@ return String.join(",", partes);]]></Body>
 				<Text>
 					<Id>1791000000026</Id>
 					<Name><![CDATA[kpiPeatonal]]></Name>
-					<X>1300</X><Y>790</Y>
+					<X>-335</X><Y>-468</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -37135,7 +40500,7 @@ return String.join(",", partes);]]></Body>
 				<Text>
 					<Id>1791000000096</Id>
 					<Name><![CDATA[kpiEsperaPeatonal]]></Name>
-					<X>1300</X><Y>820</Y>
+					<X>-335</X><Y>-444</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -37157,7 +40522,7 @@ return String.join(",", partes);]]></Body>
 				<Text>
 					<Id>1791000000177</Id>
 					<Name><![CDATA[kpiUtilizacionPeatonal]]></Name>
-					<X>1300</X><Y>850</Y>
+					<X>-335</X><Y>-420</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -38797,27 +42162,6 @@ return String.join(",", partes);]]></Body>
 					<Rotation>0.0</Rotation>
 					<Color>-65536</Color>
 					<Text><![CDATA[Orientación del plano: arriba Oeste (calle Lima) · abajo Este (Hornos) · derecha Norte (andenes de la Línea C) · izquierda Sur (hall del Roca)]]></Text>
-					<Font>
-						<Name>SansSerif</Name>
-						<Size>10</Size>
-						<Style>0</Style>
-					</Font>
-					<Alignment>LEFT</Alignment>
-				</Text>
-				<Text>
-					<Id>1794000000600</Id>
-					<Name><![CDATA[textoDiagrama]]></Name>
-					<X>1300</X><Y>935</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D</DrawMode>
-					<EmbeddedIcon>false</EmbeddedIcon>
-					<Z>0</Z>
-					<Rotation>0.0</Rotation>
-					<Color>-12566464</Color>
-					<Text><![CDATA[Diagrama de flujo: llegada (Roca y calle) → molinetes → salida al andén]]></Text>
 					<Font>
 						<Name>SansSerif</Name>
 						<Size>10</Size>

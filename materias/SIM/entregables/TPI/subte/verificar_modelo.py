@@ -99,6 +99,9 @@ ped_functions=[]
 for f in ped_agent.findall('Functions/Function'):
  args=', '.join(x.findtext('Type')+' '+x.findtext('Name') for x in f.findall('Parameter'))
  ped_functions.append(f'public {f.findtext("ReturnType")} {f.findtext("Name")}({args}) {{\n{f.findtext("Body")}\n}}')
+# Textos dinámicos de la vista (panel en vivo y KPI): se compilan como métodos para detectar errores antes del IDE.
+ped_textos=[f'String _texto{i}() {{ return String.valueOf({c}); }}' for i,c in enumerate([t.findtext('TextCode') for t in ped_agent.iter('Text') if t.findtext('TextCode')])]
+assert len(ped_textos)>=10, 'panel en vivo y KPI'
 ped_check='''public class SubtePedLogicCheck {
 static class Pasajero {
  double tEntradaColaPed, tIngresoSistemaPed, tInicioServicioPed, servicioAsignadoPed, y, x=200;
@@ -131,7 +134,7 @@ Object molinetePed25=new Object(), molinetePed26=new Object(), molinetePed27=new
 java.util.ArrayList<String> trazas=new java.util.ArrayList<String>();
 double clock; double time(){return clock;} void traceln(String s){trazas.add(s);}
 EngineStub getEngine(){return engine;} java.util.Random getDefaultRandomGenerator(){return rng;}
-'''+ '\n'.join(ped_fields+ped_functions) + '''
+'''+ '\n'.join(ped_fields+ped_functions+ped_textos) + '''
 static void ok(boolean c,String m){if(!c)throw new AssertionError(m);}
 static void eq(double a,double b,String m){ok(Math.abs(a-b)<1e-9,m+": "+a+" != "+b);}
 public static void main(String[] args) throws Exception {
@@ -324,6 +327,7 @@ public static void main(String[] args) throws Exception {
  ok(franja(20,1.0).trazas.stream().noneMatch(t->t.startsWith("ADVERTENCIA: tren")),"horario oficial: via j % 7 siempre libre");
  ok(b3.filaVentanasPed().split(";").length==23 && b3.filaVentanasPed().startsWith("E3;20260923;"+b3.diaEfectivoPed+";"),"fila de ventanas: "+b3.filaVentanasPed());
 
+ {SubtePedLogicCheck tv=franjaReal(20,2.4,1.8,3.5,-2);tv.clock=4500;for(java.lang.reflect.Method mt:SubtePedLogicCheck.class.getDeclaredMethods())if(mt.getName().startsWith("_texto")){Object v=mt.invoke(tv);ok(v!=null&&!v.toString().isEmpty(),mt.getName());}}
  System.out.println("OK: pedestrian demo, Roca timetable + street demand, triangular service, common random numbers, 09:30 cut, drain and CSV output");
 }
 }'''
@@ -361,11 +365,29 @@ assert main.findtext('CurrentLevel')=='1783514567443'
 main_level=main.find('Presentation/Level')
 assert main_level is not None and main_level.findtext('Id')=='1783514567443'
 assert main_level.find("Presentation/Rectangle[Name='panelTablero']") is not None
-for agent, min_x in ((a,1100),(ped,1000)):
- for section in ('Variables','Functions','Events'):
-  technical=agent.findall(f'{section}/*')
-  assert all(x.findtext('PresentationFlag')=='false' for x in technical)
-  assert all(int(x.findtext('X'))>=min_x for x in technical)
+for section in ('Variables','Functions','Events'):
+ technical=a.findall(f'{section}/*')
+ assert all(x.findtext('PresentationFlag')=='false' for x in technical)
+ assert all(int(x.findtext('X'))>=1100 for x in technical)
+# MainPeatonal en 4 bloques (consigna del docente, 2026-11-04): arriba 1 Variables, 2 Medidas, 3 Lógica; abajo
+# 4 Modelo espacial. Ningún elemento técnico invisible en la corrida queda sobre la animación (Y < -120) y cada uno
+# cae dentro del recuadro de su bloque.
+_lvv=next(l for l in ped.find('Presentation') if l.findtext('Name')=='nivelVestibulo')
+_bl={x.findtext('Name'):tuple(float(x.findtext(k)) for k in ('X','Y','Width','Height')) for x in _lvv.findall('Presentation/Rectangle') if (x.findtext('Name') or '') in ('bloque1','bloque2','bloque3','bloque4')}
+assert set(_bl)=={'bloque1','bloque2','bloque3','bloque4'}
+_dentro=lambda b,x,y: b[0]<=x<=b[0]+b[2] and b[1]<=y<=b[1]+b[3]
+for section in ('Variables','Functions','Events','EmbeddedObjects'):
+ for x in ped.findall(f'{section}/*'):
+  if section!='EmbeddedObjects': assert x.findtext('PresentationFlag')=='false', x.findtext('Name')
+  xx,yy=float(x.findtext('X')),float(x.findtext('Y'))
+  assert yy<-120 and any(_dentro(_bl[b],xx,yy) for b in ('bloque1','bloque2','bloque3')), (x.findtext('Name'),xx,yy)
+for n in ('molinetesOperativosPed','servicioPedSeg','diaSbasePed','proporcionRocaPed'):
+ v=ped.find(f"Variables/Variable[Name='{n}']"); assert _dentro(_bl['bloque1'],float(v.findtext('X')),float(v.findtext('Y'))), n
+for n in ('percentil90Ped','proporcionMas30Ped','p90PicoPed'):
+ v=ped.find(f"Functions/Function[Name='{n}']"); assert _dentro(_bl['bloque2'],float(v.findtext('X')),float(v.findtext('Y'))), n
+for n in ('pedSource','bajadaHall','pedMolinetes','trenesRocaFuente'):
+ v=ped.find(f"EmbeddedObjects/EmbeddedObject[Name='{n}']"); assert _dentro(_bl['bloque3'],float(v.findtext('X')),float(v.findtext('Y'))), n
+assert _bl['bloque4'][1]<0 and _bl['bloque4'][1]+_bl['bloque4'][3]>=1700, 'el bloque 4 enmarca la animación'
 ped_defaults_early={v.findtext('Name'):v.findtext('Properties/DefaultValue/Code') for v in ped.findall("Variables/Variable[@Class='Parameter']")}
 ped_blocks={x.findtext('Name'):x.findtext('ActiveObjectClass/ClassName') for x in ped.findall('EmbeddedObjects/EmbeddedObject')}
 assert ped_blocks=={'pedSource':'PedSource','bajadaHall':'PedChangeLevel','pedSourceCalle':'PedSource','pedMolinetes':'PedService','pedSalida':'PedGoTo','pedSink':'PedSink',
