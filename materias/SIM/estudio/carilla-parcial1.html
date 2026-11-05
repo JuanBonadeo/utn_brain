@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>SIM — Carilla Parcial 1</title>
+<style>
+  @page { size: A4; margin: 5mm 6mm 4mm 6mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 7.75pt; line-height: 1.22; color: #111; }
+  h1 { font-size: 10.5pt; margin: 0 0 1.2mm; display: flex; justify-content: space-between; align-items: baseline; }
+  h1 small { font-size: 6.8pt; font-weight: normal; color: #444; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; border-top: 1.1px solid #111; border-left: 1.1px solid #111; }
+  .box { border-right: 1.1px solid #111; border-bottom: 1.1px solid #111; padding: .9mm 1.6mm 1mm; }
+  .full { grid-column: 1 / -1; }
+  .box h2 { font-size: 8.5pt; margin: 0 0 .5mm; }
+  .box h2 .tag { font-weight: normal; font-size: 6.6pt; color: #444; margin-left: 1mm; }
+  ul { margin: 0; padding-left: 3mm; }
+  li { margin: 0 0 .25mm; }
+  p { margin: 0 0 .4mm; }
+  b { font-weight: 700; }
+  .t { font-weight: 700; text-decoration: underline; }      /* trampa */
+  .f { font-family: "Courier New", monospace; font-size: 7.4pt; background: #f1f1f1; padding: 0 .6mm; white-space: nowrap; }
+  table { border-collapse: collapse; width: 100%; margin: .3mm 0 .5mm; font-size: 7.3pt; }
+  th, td { border: .7px solid #888; padding: .2mm .8mm; text-align: left; vertical-align: top; }
+  th { background: #e9e9e9; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6mm; }
+  .rules { display: grid; grid-template-columns: repeat(4, 1fr); gap: .4mm 2mm; }
+</style>
+</head>
+<body>
+<h1>SIM · Carilla Parcial 1 <small>sáb 7/11 · Weitz (Law cap. 1, cap. 13) · Ross cap. 2 · Naylor cap. 4 · AnyLogic · <span class="t">subrayado</span> = trampa</small></h1>
+
+<div class="grid">
+
+  <div class="box full">
+    <h2>Reglas del choice <span class="tag">(errores del parcial 2025)</span></h2>
+    <div class="rules">
+      <p>1. «A y B» casi nunca: verificá que B sea verdadera <b>sola</b>.</p>
+      <p>2. Absolutos (siempre, solo, totalmente, nunca) → casi siempre F.</p>
+      <p>3. «Según el texto» = definición textual.</p>
+      <p>4. Dato de entrada ≠ medida; cambio de estado ≠ evento.</p>
+      <p>5. Selección múltiple: marcar de menos también resta.</p>
+      <p>6. Leé cada palabra («cociente» vs «suma»).</p>
+      <p>7. Doble negación: «la POO <b>no</b> es imprescindible» = V.</p>
+      <p>8. Ningún tema pesa de más: repartí el tiempo.</p>
+    </div>
+  </div>
+
+  <div class="box">
+    <h2>U1–U2 · Qué es simular y elementos</h2>
+    <ul>
+      <li><b>Sistema</b>: entidades que actúan e interactúan hacia un fin lógico; lo recorta el <b>objetivo</b>. <b>Modelo</b>: supuestos (abstracción, siempre menos complejo). <b>Simulación</b>: imitar en el tiempo → historia artificial → <b>estimar</b>.</li>
+      <li><b>Estado</b>: variables necesarias en un instante <b>según los objetivos</b>.</li>
+      <li>Ejes: estático/dinámico · determ./estocástico · continuo/discreto. Cola e inventario: <b>dinámicos, estocásticos, discretos</b>. Montecarlo: <b>estático</b>. <span class="t">Modelo discreto NO exige sistema discreto</span>.</li>
+      <li>Analítica = <b>exacta</b>; simulación = estimación. <span class="t">No la reemplaza: complementarias</span>. Para optimizar, mejor analítica.</li>
+      <li>Hace falta: <b>datos o estimaciones</b>. NO hace falta: POO, modelo «totalmente testeado», computadora para todo.</li>
+      <li>Desventaja n.º 1: <b>cada corrida es una estimación</b>. Riesgo: concluir con una sola corrida.</li>
+      <li><b>Entidad</b> = hace cambiar el estado (cliente) · <b>Recurso</b> = dinámico (cajero) · <b>Localización</b> = estática (fila) · <b>Atributo</b> = de la entidad (tipo de trámite).</li>
+      <li>Variables: <b>exógenas</b> entran (A, S) · <b>de estado</b> (B, Q, arribos en cola) · <b>endógenas</b> salen (d, q, u).</li>
+      <li>Evento (Law): instantáneo, <span class="t">PUEDE</span> cambiar el estado (fin de simulación no lo cambia).</li>
+    </ul>
+  </div>
+
+  <div class="box">
+    <h2>U3–U4 · DES y cola simple (Law)</h2>
+    <ul>
+      <li><b>Next-event</b>: el reloj salta al próximo evento; ventaja = <span class="t">saltear la inactividad</span> (no «más fácil»). <b>Incremento fijo</b>: procesa al <b>final</b> del Δt (error, desempates).</li>
+      <li>Motor: estado, reloj, <b>LEV</b> (próximo instante de cada tipo; libre → D = ∞), contadores, inicialización, <b>temporización</b> (elige y salta), rutinas de evento, librería (genera VA), reportes, programa principal.</li>
+      <li>Eventos: <span class="t">solo arribo y partida</span> («ocupado» es estado, «inicio» es rutina).</li>
+      <li><b>Arribo</b>: SIEMPRE programa el próximo arribo; si libre → demora 0 y programa su partida. <b>Partida</b>: si hay cola, pasa el 1.º (demora = reloj − arribo) y programa su partida; si no, libre.</li>
+    </ul>
+    <table>
+      <tr><th>medida</th><th>qué</th><th>se divide por</th></tr>
+      <tr><td>d(n)</td><td>demora <b>en cola</b> (sin servicio; los 0 cuentan)</td><td><b>n</b></td></tr>
+      <tr><td>q(n)</td><td>área bajo Q(t)</td><td><b>T(n)</b></td></tr>
+      <tr><td>u(n)</td><td>área bajo B(t)</td><td><b>T(n)</b></td></tr>
+    </table>
+    <ul>
+      <li><b>T(n)</b> = cuando el cliente n <span class="t">EMPIEZA</span> el servicio (aleatorio). Áreas con el <b>valor viejo</b>: <span class="f">área += (reloj − t_ant)·Q_viejo</span>.</li>
+      <li>Números: <b>A</b> = 1 (init) + 1 por arribo procesado · <b>S</b> = 1 por cada inicio de servicio.</li>
+      <li>Law: d = 5,7/6 = 0,95 · q = 9,9/8,6 = 1,15 · u = 7,7/8,6 = 0,90. «Tiempo de servicio» = dato de entrada.</li>
+    </ul>
+  </div>
+
+  <div class="box">
+    <h2>U5 · Inventario (s, S) <span class="tag">(ejercicio numérico)</span></h2>
+    <ul>
+      <li>Revisión <b>periódica</b> (inicio de mes): si <b>I &lt; s</b> → Z = S − I; si I ≥ s → nada <span class="t">ni K</span>. <span class="t">No garantiza s ≤ I ≤ S</span>: puede ser negativo (backlog).</li>
+      <li>I⁺ = max(I, 0) en depósito · I⁻ = max(−I, 0) debido. El pedido cubre primero el backlog.</li>
+    </ul>
+    <p class="f" style="display:block;white-space:normal;margin:.4mm 0">CTPM = Σ(K + i·Z)/n + h·(área I⁺)/n + π·(área I⁻)/n &nbsp;&nbsp; n = MESES</p>
+    <ul>
+      <li><b>h</b> con I⁺ (incluye costo de oportunidad) · <b>π</b> con I⁻ · i = costo unitario.</li>
+      <li>Prioridad: <b>1</b> llegada pedido (no programa nada) · <b>2</b> demanda (programa la próxima) · <b>3</b> fin (t = n) · <b>4</b> evaluación (siempre programa t+1; si pide, llegada en t+L).</li>
+      <li>Generadores con r: <span class="f">−media·ln r</span> · <span class="f">a + (b−a)·r</span> · tamaño: tramo de la acumulada (r &lt; F). Tabla de cada r en sus 3 usos.</li>
+      <li>Law (s = 20, S ↑ 40→100): ↑ mantenimiento, ↓ faltante, <span class="t">↓ pedido</span> (menos K). Mejor (20, 60) = 122,74, pero <b>1 corrida no alcanza</b>.</li>
+    </ul>
+  </div>
+
+  <div class="box">
+    <h2>U6 · Los 10 pasos de Weitz</h2>
+    <p><b>D</b>ibu <b>M</b>essi <b>R</b>omero <b>M</b>olina ¡<b>V</b>amos <b>V</b>amos! <b>M</b>ac Allister <b>D</b>e Paul <b>Á</b>lvarez <b>D</b>i María</p>
+    <p>1 Definición · <b>2 Modelo BASE</b> (sin datos) · 3 Recolección de datos · 4 Modelo preliminar · 5 Verificación · 6 Validación (con el cliente) · 7 Modelo final (escenario raíz) · 8 Escenarios (optim./pesim./interm.) · 9 Sensibilidad (¿diferencia significativa? IC) · 10 Documentación.</p>
+    <ul>
+      <li><b>Verificar</b> = ¿el programa hace lo que quise? (debugging). <b>Validar</b> = ¿representa la realidad?</li>
+      <li><span class="t">Paso 2 ≠ recolección</span> (eso es el 2 de <b>Law</b>). Law valida en <b>3</b> (documento de supuestos) y <b>6</b>; corridas piloto = Law 5.</li>
+    </ul>
+  </div>
+
+  <div class="box">
+    <h2>U7 · Teoría de colas (Weitz cap. 13)</h2>
+    <ul>
+      <li><b>A/S/c/K/L</b>: llegadas / <span class="t">servicio</span> / servidores / capacidad del <span class="t">SISTEMA</span> (cola + servicio) / población. Omitido = ∞.</li>
+      <li><b>Población finita</b>: λ <b>baja</b> al subir los clientes adentro (depende del estado). Se deduce: pocos clientes que vuelven.</li>
+      <li><b>Little (universal)</b>: <span class="f">L = λW</span> <span class="f">Lq = λWq</span> <span class="f">W = Wq + 1/μ</span> → L − Lq = λ/μ.</li>
+      <li><b>M/M/1</b> (población infinita): ρ = λ/μ &lt; 1 · <span class="f">P0 = 1−ρ</span> <span class="f">pw = U = ρ</span> <span class="f">L = ρ/(1−ρ)</span> <span class="f">Lq = ρ²/(1−ρ)</span> <span class="f">Pn = (1−ρ)ρⁿ</span></li>
+      <li><span class="t">λ ≥ μ SÍ se simula</span> (no hay estado estable); λ &lt; μ sí hay analítica. Fórmulas solo en estado estable.</li>
+      <li><b>M/M/c</b>: 1 cola, c idénticos, estable si λ &lt; cμ, ρ = λ/(cμ). <b>M/G/c</b>: media y desvío (σ = 0 → determinístico).</li>
+      <li><b>Costo</b> = cs·c + cw·<b>L</b> <span class="t">+ cd·λ·Pd</span> si capacidad limitada (Pd = sistema lleno). Forma de U. Weavers: c = 9, $1128,63/h.</li>
+    </ul>
+  </div>
+
+  <div class="box">
+    <h2>U8 · Probabilidad (Ross cap. 2)</h2>
+    <ul>
+      <li><b>Poisson homogéneo</b>: N(0) = 0 · incrementos <b>independientes</b> · <b>estacionarios</b> (solo el largo) · P(1 en h) ≈ λh · P(≥ 2 en h) ≈ 0.</li>
+      <li>N(t) ~ <b>Poisson(λt)</b> cuenta · tiempos entre eventos ~ <b>Exp(media 1/λ)</b>. <span class="t">«Entre arribos Poisson» = F</span>.</li>
+      <li><b>No homogéneo</b> λ(t): pierde <span class="t">SOLO la estacionariedad</span>; N(t+s) − N(t) ~ Poisson(m(t+s) − m(t)), m = ∫λ.</li>
+      <li><span class="f">E[aX+b] = aE+b</span> <span class="f">Var(aX+b) = a²Var</span> <span class="f">Var = E[X²] − E²</span>; E de la suma siempre, Var de la suma <b>solo si independientes</b>.</li>
+      <li>Bernoulli p · Binomial = suma de Bernoulli (np, np(1−p)) · <b>Geométrica</b> = n.º del intento del 1.er éxito, E = 1/p · Pascal r/p · Hipergeom. = sin reposición · <b>Poisson E = Var = λ</b>. Binom → Poisson λ = np <span class="t">sin umbral</span>. Recurrencias: por costo de cálculo (AnyLogic).</li>
+      <li>Unif(a,b): (a+b)/2, (b−a)²/12 · Normal: aX+b normal, Z = (X−μ)/σ · <b>Exp</b>: sin memoria (<span class="t">única continua</span>), cX → tasa λ/c, mín. de exp → suma de tasas, en colas por conveniencia.</li>
+      <li><b>TCL</b>: (X̄−μ)/(σ/√n) ≈ N(0,1), Xᵢ i.i.d. <span class="t">cualquier distribución</span>, aproximado. LGN: X̄ → μ cuando <b>n</b> → ∞ (no el tiempo).</li>
+    </ul>
+  </div>
+
+  <div class="box">
+    <h2>U9 · Números aleatorios y generación</h2>
+    <ul>
+      <li><b>Verdaderos</b>: fuente física (cuántica, caótica; random.org), lentos, caros, <b>no reproducibles</b>. <b>Pseudo</b>: algoritmo determinístico, rápidos, <b>reproducibles</b> con semilla → <b>se prefieren</b>.</li>
+      <li>Buen generador: uniforme, independiente, reproducible, período largo, rápido, poca memoria. <b>Testear antes de usar</b>.</li>
+      <li><b>GCL</b> <span class="f">Zᵢ = (aZᵢ₋₁ + c) mod m</span>, U = Z/m. <b>Período completo</b> = p = m (<span class="t">no «repite el mismo»</span>). <b>Hull–Dobell</b>: mcd(m, c) = 1 · primos de m dividen a a−1 · si 4 | m, 4 | a−1.</li>
+      <li>Cuadrados centrales (1946) <span class="t">NO vigente</span> (ciclos, cero) · RANDU: ternas en pocos planos · <b>Mersenne Twister</b> (1997) estándar.</li>
+      <li>Pruebas: <b>2 tipos</b>, empíricas y teóricas (<span class="t">chi², póker, corridas son pruebas, no tipos</span>).</li>
+      <li>Inversa (F⁻¹ fácil) · rechazo (sin forma cerrada) · composición (mezcla). Normal: Box-Muller, Σ12U − 6, rechazo; <span class="t">no por inversa</span>. Erlang = Σ exp · Binomial = Σ Bernoulli · Poisson = contar exp en 1 unidad.</li>
+    </ul>
+  </div>
+
+  <div class="box">
+    <h2>U10 · AnyLogic y cultura de cátedra</h2>
+    <ul>
+      <li><b>3 paradigmas</b>: agentes · dinámica de sistemas · eventos discretos. <span class="t">Peatones, GIS, Road Traffic, Fluid = bibliotecas</span>.</li>
+      <li><b>DS</b> (Forrester, 50s): agregados, stocks, flujos, realimentación → SEIR. <b>DES</b> (GPSS, Gordon, IBM 1961): proceso, recursos, colas → Job Shop. <b>Agentes</b>: individuos, comportamiento emergente → mercado; <span class="t">no tienen que ser personas</span>.</li>
+      <li>Bloques: Source (exponential(λ) = Poisson) → Queue → <b>Seize</b> (toma) → Delay (servicio) → <b>Release</b> (libera) → Sink · ResourcePool = c · TimeMeasureStart/End = tiempo en sistema.</li>
+      <li>Terminal (horizonte finito) vs no terminal (estado estable, descartar <b>calentamiento</b>).</li>
+      <li><b>GIS multicapa</b> (<span class="t">monocapa = F</span>) · LaTeX = composición tipográfica · simulación desde los <b>40</b> (<span class="t">«últimos 30 años» = F</span>) · Montecarlo: estocástico, estático.</li>
+      <li>Frec. relativa = <span class="t">COCIENTE</span> fᵢ/N · ruleta → 1/37 (LGN) · TPs: se simulan, tienen analítica, se comparan y dan parecido.</li>
+    </ul>
+  </div>
+
+</div>
+</body>
+</html>
