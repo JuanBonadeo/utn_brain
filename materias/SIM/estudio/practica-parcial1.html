@@ -2523,9 +2523,10 @@ function renderMap(){
 }
 
 /* ───── question card ───── */
-function card(q, chosen, reveal, num, total, pending){
-  const p = perm(q), ms = q.t==="ms";
-  const sel = ms ? (reveal ? (chosen||[]) : (pending||[])) : null;
+function card(q, chosen, reveal, num, total, pending, ctx){
+  const p = perm(q), ms = q.t==="ms", exam = ctx==="exam";
+  /* en el simulacro la selección vive en la respuesta guardada; en práctica, en la selección pendiente */
+  const sel = ms ? ((reveal||exam) ? (Array.isArray(chosen)?chosen:[]) : (pending||[])) : null;
   const opts = p.map((orig,k)=>{
     let c = ms?"ms ":"", tag="";
     if(reveal){
@@ -2546,6 +2547,8 @@ function card(q, chosen, reveal, num, total, pending){
     else verdict=`<div class="verdict bad"><span class="dot"></span>Incorrecta · marcaste ${ms?listLetters(chosen.map(letter).sort()):"la "+letter(chosen)}; ${lbl} ${right}</div>`;
     explain=`<div class="explain"><h4>Justificación</h4><p>${fmt(q.why)}</p>
       <p class="src">Fuente: ${esc(q.src||"")}${q.gen?" · No está textual en el resumen: es un razonamiento armado sobre su contenido.":""}</p></div>`;
+  } else if(ms && exam){
+    confirm=`<div class="confirm-row"><span class="hint">${sel.length} marcada${sel.length===1?"":"s"} · tocá de nuevo una opción para desmarcarla</span></div>`;
   } else if(ms && pending!==undefined){
     confirm=`<div class="confirm-row"><button class="btn primary" id="confirm" ${sel.length?"":"disabled"}>Confirmar respuesta</button><span class="hint">${sel.length} marcada${sel.length===1?"":"s"} · <kbd>Enter</kbd> confirma</span></div>`;
   }
@@ -2594,7 +2597,7 @@ function renderExam(){
   const bar = `<div class="exam-bar"><span class="clock" id="clock">${examClock()}</span>
     <span>${E.done?"Revisión del simulacro":"Respondidas "+answered+"/"+E.ids.length}</span>
     <span class="sp">${E.done?`<button class="btn" id="to-res">Ver resultados</button>`:`<button class="btn ghost" id="abandon">Abandonar</button><button class="btn primary" id="submit">Entregar</button>`}</span></div>`;
-  $("main").innerHTML = bar + card(q,E.ans[id],E.done,E.pos+1,E.ids.length) + `<div class="nav">
+  $("main").innerHTML = bar + card(q,E.ans[id],E.done,E.pos+1,E.ids.length,undefined,"exam") + `<div class="nav">
     <button class="btn" id="prev" ${E.pos===0?"disabled":""}>← Anterior</button><span class="sp"></span>${HINT}
     <button class="btn primary" id="next" ${E.pos===E.ids.length-1?"disabled":""}>Siguiente →</button></div>`;
 }
