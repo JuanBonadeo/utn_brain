@@ -19,12 +19,9 @@
   tbody td { height: 8.1mm; }
   tbody td.ev { text-align: left; padding-left: 1.5mm; color: #777; font-size: 8pt; }
   .thick-l { border-left: 1.8px solid #111 !important; }
-  .bottom { display: grid; grid-template-columns: 1.35fr 1fr; gap: 5mm; margin-top: 3mm; }
+  .bottom { margin-top: 3mm; }
   .bottom table td { height: 6.8mm; }
   .bottom th { font-size: 8.4pt; }
-  .box { border: .8px solid #333; padding: 1.6mm 2.2mm; font-size: 8.6pt; line-height: 1.45; }
-  .box b { font-size: 9pt; }
-  .f { font-family: "Courier New", monospace; }
 </style>
 </head>
 <body>
@@ -79,24 +76,17 @@
 
 <div class="bottom">
   <table>
-    <colgroup><col style="width:12%"><col style="width:12%"><col style="width:26%"><col style="width:12%"><col style="width:12%"><col style="width:26%"></colgroup>
+    <colgroup><col style="width:9%"><col style="width:7%"><col style="width:17.33%"><col style="width:9%"><col style="width:7%"><col style="width:17.33%"><col style="width:9%"><col style="width:7%"><col style="width:17.33%"></colgroup>
     <thead>
-      <tr><th>r</th><th>A o S</th><th>valor = −media · ln r</th><th>r</th><th>A o S</th><th>valor = −media · ln r</th></tr>
+      <tr><th>r</th><th>A o S</th><th>valor generado</th><th>r</th><th>A o S</th><th>valor generado</th><th>r</th><th>A o S</th><th>valor generado</th></tr>
     </thead>
     <tbody>
-      <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-      <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-      <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-      <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-      <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
     </tbody>
   </table>
-  <div class="box">
-    <b>En cada evento</b>: 1) áreas con el valor <b>anterior</b>: <span class="f">área += (reloj − reloj_ant) · valor_ant</span> · 2) actualizar el estado · 3) programar eventos · 4) saltar al menor de la LEV.<br>
-    <b>Llegada</b>: siempre programa la próxima llegada; si B = 0 → demora 0 y programa su salida. <b>Salida</b>: si Q &gt; 0 → pasa el primero (demora = reloj − su llegada) y programa su salida; si no, B = 0 y salida = ∞.<br>
-    <b>Fin</b>: cuando se completa la n-ésima demora → <b>T(n)</b> = ese reloj.<br>
-    <span class="f">d(n) = demora total / n</span> &nbsp;·&nbsp; <span class="f">q(n) = área Q / T(n)</span> &nbsp;·&nbsp; <span class="f">u(n) = área B / T(n)</span>
-  </div>
 </div>
 
 </body>
