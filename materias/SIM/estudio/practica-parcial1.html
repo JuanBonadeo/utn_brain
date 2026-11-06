@@ -172,6 +172,7 @@ details.mapbox[open] summary{margin-bottom:12px}
         <button id="l-2" aria-pressed="true">Nivel parcial</button>
         <button id="l-1" aria-pressed="false">Base</button>
         <button id="l-3" aria-pressed="false">Extra U8</button>
+        <button id="l-4" aria-pressed="false">Parcial 2025 real</button>
       </div>
       <p class="hint" id="lvl-hint" style="margin:10px 0 0"></p>
     </div>
@@ -187,7 +188,7 @@ details.mapbox[open] summary{margin-bottom:12px}
         <label class="tg" for="t-sho">Mezclar opciones <input type="checkbox" id="t-sho" checked></label>
       </div>
       <div id="exam-opts" hidden>
-        <p class="hint" style="margin:12px 0 10px">15 preguntas repartidas parejo entre las unidades elegidas. Ves las respuestas recién al entregar, como en el parcial 2025.</p>
+        <p class="hint" id="exam-hint" style="margin:12px 0 10px">15 preguntas repartidas parejo entre las unidades elegidas. Ves las respuestas recién al entregar, como en el parcial 2025.</p>
         <button class="btn primary full" id="exam-start">Empezar simulacro</button>
       </div>
     </div>
@@ -2439,14 +2440,147 @@ const Q6 = [
  n:["No.","","Al revés.","No.","Es justamente donde existe."],
  src:"Resumen §10.2"},
 ];
+// ═════════ Parcial real 2025-10-04 (tema 404) · clave corregida (banco-preguntas.md) ═════════
+const P25 = "Parcial 2025-10-04 · ";
+const Q7 = [
+{u:8, n0:"1.1", q:"¿Qué propiedad caracteriza a una variable aleatoria geométrica?",
+ o:["Representa el número de ensayos necesarios para obtener el primer éxito","Su media es 1/p y su varianza es (1−p)/p²","Es la suma de variables aleatorias de Bernoulli independientes","Las opciones A y B son correctas","Todas las opciones anteriores son correctas"],
+ a:3, why:"A y B son la definición de Ross y sus momentos. C es falsa: la suma de Bernoulli independientes es la **binomial**, no la geométrica. Por eso «todas» también es falsa.",
+ n:["Verdadera, pero B también.","Verdadera, pero A también.","Falsa: eso es la binomial.","","C es falsa."], src:P25+"P1.1 · Resumen §8.3"},
+
+{u:4, n0:"1.2", q:"En el sistema de colas de un solo servidor, ¿cuáles son las tres medidas de rendimiento principales que se estiman?",
+ o:["Tiempo promedio de servicio, número promedio de clientes en el sistema, utilización del servidor","Retraso promedio en cola, número promedio de clientes en cola, proporción de tiempo que el servidor está ocupado","Tiempo promedio de llegada, tiempo promedio de salida, longitud promedio de la cola","Solo el retraso promedio en cola y la utilización del servidor","Las opciones A y B son correctas"],
+ a:1, why:"Son las tres de Law: d(n), q(n) y u(n). A es la trampa: el tiempo de servicio es un **dato de entrada** y Law mide en la **cola**, no en el sistema. El alumno marcó E.",
+ n:["Tiempo de servicio es entrada; y es «en el sistema», no en cola.","","No son medidas de Law.","Falta q(n).","A es falsa."], src:P25+"P1.2 · Resumen §4.2"},
+
+{u:5, n0:"1.3", q:"En el sistema de inventario, ¿qué representa la política (s, S)?",
+ o:["Una política donde se ordena una cantidad fija s cuando el inventario llega a S","Una política donde se ordena hasta S si el inventario I es menor que s, y no se ordena nada si I ≥ s","Una política donde se ordena s unidades cada S períodos","Una política que asegura que el inventario siempre está entre s y S unidades","Las opciones B y D son correctas"],
+ a:1, why:"B es la definición: Z = S − I si I < s. D es falsa: entre revisiones el inventario puede caer muy por debajo de s y hasta quedar negativo. El alumno marcó E.",
+ n:["No: se pide Z = S − I.","","No.","Falsa: «asegura» es absoluto y hay backlog.","D es falsa."], src:P25+"P1.3 · Resumen §5.1"},
+
+{u:1, n0:"1.4", q:"Según el texto, ¿cuál es la definición de un sistema en el contexto de simulación?",
+ o:["Un conjunto de ecuaciones matemáticas que describen un proceso","Una colección de entidades que actúan e interactúan juntas hacia el logro de algún fin lógico","Un modelo computacional que imita el comportamiento de un proceso real","Un algoritmo que genera números aleatorios para simular eventos","Todas las opciones anteriores son correctas"],
+ a:1, why:"«Según el texto» = definición textual de Law. A es un **modelo** y C una **simulación**. El alumno marcó E.",
+ n:["Eso es un modelo.","","Eso es una simulación.","Eso es un generador.","No."], src:P25+"P1.4 · Resumen §1.1"},
+
+{u:8, n0:"1.5", q:"En un proceso de Poisson homogéneo con tasa λ, ¿cuál de las siguientes condiciones define correctamente el proceso?",
+ o:["N(0) = 0 y los números de eventos en intervalos disjuntos son independientes","La distribución del número de eventos depende solo de la longitud del intervalo","lim P{N(h) = 1}/h = λ cuando h → 0","Todas las opciones anteriores son correctas","Solo las opciones A y C son correctas"],
+ a:3, why:"A, B y C son tres de las cinco condiciones de Ross. B (incrementos estacionarios) es justo la que hace **homogéneo** al proceso, así que «solo A y C» queda corta.",
+ n:["Condición, pero no la única.","Condición: estacionariedad.","Condición.","","Deja afuera B, que es condición."], src:P25+"P1.5 · Resumen §8.5"},
+
+{u:7, n0:"1.6", q:"En los modelos de colas con población de clientes finita, la tasa de llegada...",
+ o:["...varía con el tiempo","...aumenta conforme aumenta el número de clientes en el sistema","...disminuye conforme aumenta el número de clientes en el sistema","...es constante","Las opciones A y C son correctas"],
+ a:2, why:"Textual de Weitz: con población finita la tasa **disminuye** a medida que hay más clientes en el sistema. Depende del **estado**, no del reloj; por eso A no es la característica. El alumno marcó A.",
+ n:["Depende del estado, no del tiempo.","Al revés.","","Eso es población infinita.","A no es la característica."], src:P25+"P1.6 · Resumen §7.1"},
+
+{u:7, n0:"1.7", q:"¿Qué representa la intensidad de tráfico (ρ) en un sistema de colas?",
+ o:["El número promedio de clientes en el sistema","El cociente de la tasa de llegadas (λ) entre la tasa de servicio (μ)","El tiempo promedio de espera en la cola","La probabilidad de que el sistema esté vacío","Las opciones B y D son correctas"],
+ a:1, why:"ρ = λ/μ. D es falsa: la probabilidad de sistema vacío es P0 = 1 − ρ.",
+ n:["Eso es L.","","Eso es Wq.","Eso es P0 = 1 − ρ.","D es falsa."], src:P25+"P1.7 · Resumen §7.3"},
+
+{u:7, n0:"1.8", q:"¿Qué condición debe cumplirse para que un sistema M/M/1 alcance el estado estable?",
+ o:["La tasa de llegadas debe ser mayor que la tasa de servicio","La tasa de servicio (μ) debe ser mayor que la tasa de llegadas (λ)","El número de servidores debe ser mayor que 1","La capacidad del sistema debe ser finita","Las opciones A y C son correctas"],
+ a:1, why:"μ > λ, o sea ρ < 1. Si λ ≥ μ la cola crece sin límite.",
+ n:["Al revés.","","M/M/1 tiene uno.","Es de capacidad infinita.","No."], src:P25+"P1.8 · Resumen §7.4"},
+
+{u:3, n0:"1.9", q:"¿Cuál es la principal ventaja de usar el enfoque «next-event time advance» en simulación?",
+ o:["Proporciona mayor precisión en los cálculos","Permite saltar períodos de inactividad, ahorrando tiempo de computación","Es más fácil de programar que otros enfoques","Genera resultados más estables","Las opciones B y C son correctas"],
+ a:1, why:"Law nunca dice que sea «más fácil de programar». La ventaja es saltear la inactividad. Con «principal ventaja» la respuesta es una sola. El alumno marcó E.",
+ n:["No.","","Law no lo dice.","No.","C es falsa."], src:P25+"P1.9 · Resumen §3.1"},
+
+{u:6, n0:"1.10", q:"¿Cuál es la principal diferencia entre la verificación y la validación del modelo en un estudio de simulación?",
+ o:["La verificación comprueba que el modelo funcione correctamente, mientras que la validación compara el modelo con la realidad","La verificación se realiza antes de la validación","La verificación utiliza información de entrada real, mientras que la validación utiliza datos simulados","La verificación es opcional, mientras que la validación es obligatoria","Las opciones A y B son correctas"],
+ a:0, why:"Clave discutible (◐). A es la **diferencia** conceptual. B es cierta en Weitz (paso 5 antes del 6), así que E es defendible, pero la pregunta pide «la principal diferencia», y eso es A. Si te pidieran «afirmaciones verdaderas», E.",
+ n:["","Cierta en Weitz, pero no es la «diferencia».","Al revés.","Ninguna es opcional.","Defendible, pero la pregunta pide la diferencia."], src:P25+"P1.10 · Resumen §6 · clave discutible"},
+
+{u:3, n0:"1.11", q:"En el mecanismo de avance de tiempo «next-event time advance», ¿qué sucede con los períodos de inactividad?",
+ o:["Se procesan paso a paso con incrementos fijos de tiempo","Se saltan completamente, avanzando directamente al siguiente evento","Se simulan con mayor detalle para obtener mayor precisión","Se registran pero no se procesan","Las opciones A y C son correctas"],
+ a:1, why:"El reloj salta directo al próximo evento. A describe el incremento fijo.",
+ n:["Eso es incremento fijo.","","No.","No.","No."], src:P25+"P1.11 · Resumen §3.1"},
+
+{u:8, n0:"1.12", q:"¿Cuál es la relación entre las variables aleatorias binomial y Poisson cuando n es grande y p es pequeño?",
+ o:["La distribución binomial se aproxima a la distribución Poisson con parámetro λ = np","Ambas distribuciones tienen la misma varianza","La distribución Poisson es siempre una aproximación exacta de la binomial","Solo cuando n > 100 y p < 0.1","Las opciones A y D son correctas"],
+ a:0, why:"Ross: n grande, p chico, λ = np, **sin umbral**. D es falsa por el «solo». B es falsa: np(1−p) ≠ np. C, por «siempre exacta». El alumno marcó E.",
+ n:["","np(1−p) ≠ np.","«Siempre exacta» es falso.","No hay umbral fijo.","D es falsa."], src:P25+"P1.12 · Resumen §8.3"},
+
+{u:8, n0:"1.13", q:"En un proceso de Poisson no homogéneo, ¿qué característica lo diferencia del proceso homogéneo?",
+ o:["La tasa λ varía en función del tiempo","Los intervalos entre eventos no son exponenciales","La propiedad de incrementos independientes no se mantiene","Las opciones A y B son correctas","Todas las opciones anteriores son correctas"],
+ a:0, why:"Clave discutible (◐). A es la definición de Ross. C es **falsa**: los incrementos siguen independientes. B es técnicamente cierta pero el profe no la dio; marcá A. «Todas» es seguro falsa por C.",
+ n:["","Técnicamente cierta, pero no es lo que se tomó.","Falsa: siguen independientes.","Defendible solo si B cuenta.","C es falsa."], src:P25+"P1.13 · Resumen §8.5 · clave discutible"},
+
+{u:9, n0:"1.14", q:"En el contexto de simulación, ¿cuál es el propósito principal de los «números aleatorios»?",
+ o:["Generar valores de variables aleatorias con distribuciones arbitrarias","Simular posibles ocurrencias del modelo probabilístico","Proporcionar la base para estudios de simulación","Las opciones A y B son correctas","Todas las opciones anteriores son correctas"],
+ a:4, why:"Las tres son ciertas: toda VA sale de una U(0,1) transformada, se simulan las ocurrencias del modelo y son la base de toda simulación estocástica. Esta vez «todas» es la correcta.",
+ n:["Cierta.","Cierta.","Cierta.","Falta C.",""], src:P25+"P1.14 · Resumen §9.1"},
+
+{u:6, n0:"1.15", q:"¿Cuál es el segundo paso en un estudio de simulación?",
+ o:["Recolección y análisis de datos","Generación del modelo de simulación base","Validación del modelo","Determinación de escenarios","Las opciones A y B son correctas"],
+ a:1, why:"Lista de Weitz: 1 definición, **2 modelo base**, 3 recolección… «Recolección» es el paso 3 de Weitz y parte del paso 2 de Law: por eso es la trampa.",
+ n:["Paso 3 de Weitz.","","Paso 6.","Paso 8.","A es falsa."], src:P25+"P1.15 · Resumen §6"},
+
+{u:1, n0:"2.1", t:"vf", q:"La simulación reemplaza a la solución analítica como método de resolución de problemas complejos con solución.", o:VF, a:1,
+ why:"Falso. Si hay solución analítica, se usa esa; los enfoques son complementarios. El alumno marcó V.", n:["",""], src:P25+"P2.1 · Resumen §1.2"},
+{u:1, n0:"2.2", t:"vf", q:"Para poder simular es necesario contar con información de funcionamiento de la realidad o estimaciones del mismo.", o:VF, a:0,
+ why:"Verdadero. Sin datos o estimaciones no hay distribuciones de entrada.", n:["",""], src:P25+"P2.2 · Resumen §1.4"},
+{u:1, n0:"2.3", t:"vf", q:"Un modelo es un recorte de características observables de la realidad y solo puede ser usado si está totalmente testeado.", o:VF, a:1,
+ why:"Falso por el «totalmente»: ningún modelo está totalmente testeado; se usa una vez validado para el objetivo.", n:["",""], src:P25+"P2.3 · Resumen §1.4"},
+{u:1, n0:"2.4", t:"vf", q:"Para la construcción de modelos es necesario herramientas informáticas siempre.", o:VF, a:1,
+ why:"Falso: hay modelos físicos y modelos matemáticos que se resuelven a mano.", n:["",""], src:P25+"P2.4 · Resumen §1.4"},
+{u:10, n0:"2.5", t:"vf", q:"La simulación por computadora surgió en los últimos 30 años.", o:VF, a:1,
+ why:"Falso: viene de los años 40 (Montecarlo, Proyecto Manhattan).", n:["",""], src:P25+"P2.5 · Resumen §10.3"},
+{u:10, n0:"2.6", t:"vf", q:"La programación orientada a objetos no es imprescindible para realizar simulaciones.", o:VF, a:0,
+ why:"Verdadero (doble negación). Se simula en FORTRAN, en C, en planilla o a mano. El alumno marcó F.", n:["",""], src:P25+"P2.6 · Resumen §10.3"},
+{u:1, n0:"2.7", t:"vf", q:"La solución analítica es exacta.", o:VF, a:0,
+ why:"Verdadero: la analítica es exacta; la simulación da estimaciones.", n:["",""], src:P25+"P2.7 · Resumen §1.2"},
+{u:10, n0:"2.8", t:"vf", q:"LaTeX es un sistema de composición de textos, orientado a la creación de documentos escritos que presenten una alta calidad tipográfica. Por sus características y posibilidades, es usado de forma especialmente intensa en la generación de artículos y libros científicos que incluyen, entre otros elementos, expresiones matemáticas.", o:VF, a:0,
+ why:"Verdadero.", n:["",""], src:P25+"P2.8 · Resumen §10.3"},
+
+{u:9, n0:"2.9", t:"ms", q:"Sobre los números pseudoaleatorios...",
+ o:["Se generan de manera secuencial con un algoritmo determinístico.","Se denomina de ciclo completo cuando el conjunto de números pseudoaleatorios generados repite siempre el mismo número, luego de generar un gran conjunto de números distintos.","El método de la parte media del cuadrado es un método vigente para la generación de números pseudoaleatorios.","Los números pseudoaleatorios pueden generarse con cualquier computadora a altas velocidades."],
+ a:[0,3], why:"A y D. B describe una **degeneración**, no el período completo (p = m: recorre todos los valores). C: los cuadrados centrales no están vigentes. El alumno marcó A, B y C.",
+ n:["Verdadera.","Falsa: período completo es p = m.","Falsa: no está vigente.","Verdadera."], src:P25+"P2.9 · Resumen §9.1"},
+
+{u:9, n0:"2.10", t:"ms", q:"Verdaderos números aleatorios.",
+ o:["Es preferible en simulaciones de alto rendimiento usar un conjunto de números aleatorios y no pseudoaleatorios.","En general los números aleatorios se basan en alguna fuente de aleatoriedad física que puede ser teóricamente impredecible (cuántica) o prácticamente impredecible (caótica)."],
+ a:[1], why:"Solo B. Los verdaderos son lentos, caros y no reproducibles: para simular se prefieren los pseudoaleatorios. El alumno marcó A y B.",
+ n:["Falsa.","Verdadera."], src:P25+"P2.10 · Resumen §9.1"},
+
+{u:10, n0:"2.11", t:"ms", q:"Los modelos de la cola simple y de inventario empleados durante los TPI de clase...",
+ o:["Son modelos simples que pueden ser simulados y que también se cuenta con la solución analítica de los mismos.","Solo pueden ser simulados si se tiene la solución analítica.","La solución analítica puede ser comparada con las respuestas obtenidas de las simulaciones.","Las respuestas obtenidas mediante simulaciones son generalmente similares al de la solución analítica."],
+ a:[0,2,3], why:"A, C y D (◐: la duda es si la cátedra considera analítico al inventario). Para simular no hace falta la analítica. El alumno marcó solo A: marcar de menos también resta.",
+ n:["Verdadera.","Falsa.","Verdadera.","Verdadera."], src:P25+"P2.11 · Resumen §10.3"},
+
+{u:4, n0:"2.12", t:"ms", q:"Los eventos a tratar en el modelo de cola simple, en el paradigma de simulación basado en eventos discretos, son...",
+ o:["Arribo.","Partida.","Inicio.","Finalización.","Poner el servidor ocupado/desocupado."],
+ a:[0,1], why:"Arribo y partida. E es un **cambio de estado**, no un evento. Inicio es la rutina de inicialización, y en Law la cola corta por n demoras, sin evento de fin. El alumno marcó A, B y E.",
+ n:["Evento.","Evento.","Rutina de inicialización.","No en el modelo de Law.","Es un estado."], src:P25+"P2.12 · Resumen §4.1"},
+
+{u:4, n0:"2.13", t:"ms", q:"Las medidas de rendimiento más importantes a calcular en el problema de cola simple son...",
+ o:["Tiempo de espera en el servidor.","Tiempo de arribo.","Cantidad de veces que el cliente paso por el servidor.","Utilización del servidor."],
+ a:[0,3], why:"A y D (◐). A está mal redactada pero apunta a la demora en cola d(n); D es u(n). B es un **dato de entrada**. El alumno marcó A, B y D.",
+ n:["Apunta a d(n).","Dato de entrada.","No tiene sentido.","u(n)."], src:P25+"P2.13 · Resumen §4.2"},
+
+{u:7, n0:"2.14", t:"vf", q:"Si la tasa de arribos es mayor que la tasa de servicio no es posible realizar la simulación.", o:VF, a:1,
+ why:"Falso. Se simula igual: la cola crece sin límite. Lo que no existe es la solución analítica de estado estable.", n:["",""], src:P25+"P2.14 · Resumen §7.4"},
+{u:7, n0:"2.15", t:"vf", q:"Si la tasa de arribos es menor que la tasa de servicio no es posible obtener una solución analítica.", o:VF, a:1,
+ why:"Falso: con ρ < 1 valen las fórmulas de M/M/1.", n:["",""], src:P25+"P2.15 · Resumen §7.4"},
+
+{u:10, n0:"2.16", t:"ms", q:"¿Cuáles paradigmas de simulación son los explicados en AnyLogic en 3 días?",
+ o:["Basado en agentes.","Sistemas dinámicos.","Eventos discretos.","Peatones.","Caminos.","GIS."],
+ a:[0,1,2], why:"Los tres paradigmas: agentes, dinámica de sistemas y eventos discretos. Peatones, caminos (Road Traffic) y GIS son bibliotecas o espacios.",
+ n:["Sí.","Sí.","Sí.","Biblioteca.","Biblioteca.","Espacio."], src:P25+"P2.16 · Resumen §10.1"},
+
+{u:10, n0:"2.17", t:"vf", q:"GIS es un sistema geográfico monocapa para analizar cuestiones concretas de una zona particular.", o:VF, a:1,
+ why:"Falso: GIS es **multicapa**. El alumno marcó V.", n:["",""], src:P25+"P2.17 · Resumen §10.3"},
+].map(q=>({...q, fix:true, q:q.n0+" · "+q.q}));
 const EXTRA_U8 = new Set(["1tl3yst","p1vj1j","kl6wvt","1aa2wy2","1s0l0tf","6tp7v9","hvdsob","mjifo1","hqhmhr","1tc4649","1b5knz3","114cu3r","1lr24wv","o6nb2a","1uhig0s","10dmpht","luohb7","f42t0g","1qxlut5","17mbnpv","yxvzad","12ur1qi","1xc92y2","b13pwz","1g4gbx5","13wdwol","1h9yv2j","xjx8ei","kdtx7z","1kjhxhi","mwpz4l","gus6s","1nn3gam","1r4nxll","o5dvtf","1mu8dby"]);
 
 const UN = {1:"Qué es simular",2:"Elementos",3:"Eventos discretos",4:"Cola simple",5:"Inventario (s, S)",6:"Pasos de Weitz",7:"Teoría de colas",8:"Probabilidad",9:"Aleatorios y generación",10:"AnyLogic y cátedra"};
 const ALLU=[1,2,3,4,5,6,7,8,9,10];
-const L = ["A","B","C","D","E"];
+const L = ["A","B","C","D","E","F"];
 const TYPE = {mc:"Opción múltiple", vf:"Verdadero o falso", ms:"Selección múltiple · marcá todas las correctas"};
 function hash(s){let x=2166136261;for(const c of s){x^=c.codePointAt(0);x=Math.imul(x,16777619)}return x>>>0}
-const QS = [...[...Q1,...Q2,...Q3,...Q6].map(q=>({...q,lvl:1})), ...[...Q4,...Q5].map(q=>({...q,lvl:2}))]
+const QS = [...[...Q1,...Q2,...Q3,...Q6].map(q=>({...q,lvl:1})), ...[...Q4,...Q5].map(q=>({...q,lvl:2})), ...Q7.map(q=>({...q,lvl:4}))]
   .map((q,i)=>({t:"mc",...q,id:(q.lvl===1?hash(q.q):hash("2|"+q.q)).toString(36),idx:i}))
   .map(q=>EXTRA_U8.has(q.id)?{...q,lvl:3}:q);
 const BY = Object.fromEntries(QS.map(q=>[q.id,q]));
@@ -2496,13 +2630,15 @@ function renderUnits(){
       <span class="bar"><span class="g" style="width:${ok*100/tot}%"></span><span class="r" style="width:${bad*100/tot}%"></span></span></button>`}).join("");
 }
 function renderSide(){
-  const NAMES={1:"Base",2:"Nivel parcial",3:"Extra U8"};
-  [1,2,3].forEach(l=>{$("l-"+l).setAttribute("aria-pressed",S.lvl===l); $("l-"+l).textContent=NAMES[l]+" · "+QS.filter(q=>q.lvl===l).length});
+  const NAMES={1:"Base",2:"Nivel parcial",3:"Extra U8",4:"Parcial 2025 real"};
+  [1,2,3,4].forEach(l=>{$("l-"+l).setAttribute("aria-pressed",S.lvl===l); $("l-"+l).textContent=NAMES[l]+" · "+QS.filter(q=>q.lvl===l).length});
   $("lvl-hint").textContent = S.lvl===2? "Más difícil y con el formato del parcial 2025: combinadas, verdadero o falso y selección múltiple." :
     S.lvl===1? "Más directas: una sola respuesta correcta por pregunta." :
+    S.lvl===4? "Las 32 preguntas reales del 4/10/2025, textuales y en orden, con la clave corregida. El simulacro las toma todas, como en el examen." :
     "Probabilidad de menor prioridad: desigualdades, leyes de los grandes números, axiomas y cuentas sueltas de distribuciones. En los exámenes viejos casi no cayó.";
   $("m-prac").setAttribute("aria-pressed",!examMode()); $("m-exam").setAttribute("aria-pressed",examMode());
-  $("prac-opts").hidden = examMode(); $("exam-opts").hidden = !examMode() || !!(S.exam&&!S.exam.done);
+  $("prac-opts").hidden = examMode();
+  $("exam-hint").textContent = S.lvl===4 ? "Las 32 preguntas del parcial 2025, en orden. Ves las respuestas recién al entregar." : "15 preguntas repartidas parejo entre las unidades elegidas. Ves las respuestas recién al entregar, como en el parcial 2025."; $("exam-opts").hidden = !examMode() || !!(S.exam&&!S.exam.done);
   $("filter-box").hidden = examMode();
   $("t-shq").checked=S.shq; $("t-sho").checked=S.sho;
   document.querySelectorAll("#filters .chip").forEach(c=>c.setAttribute("aria-pressed",c.dataset.f===S.f));
@@ -2586,9 +2722,9 @@ function renderExam(){
   const E=S.exam;
   if(!E){
     const n=QS.filter(inScope).length;
-    $("main").innerHTML=`<div class="card"><div class="meta"><span class="pill u">Simulacro</span><span class="pill type">${({1:"Base",2:"Nivel parcial",3:"Extra U8"})[S.lvl]}</span></div>
-      <p class="stem">15 preguntas al azar, sin ver la justificación hasta entregar.</p>
-      <p style="color:var(--muted);margin:0 0 18px;max-width:62ch">Se reparten parejo entre las unidades marcadas a la izquierda (${n} preguntas disponibles): ninguna unidad pesa más que otra. Podés cambiar una respuesta hasta entregar. En selección múltiple la respuesta cuenta solo si marcaste exactamente las correctas: marcar de menos también resta, como en el parcial.</p>
+    $("main").innerHTML=`<div class="card"><div class="meta"><span class="pill u">Simulacro</span><span class="pill type">${({1:"Base",2:"Nivel parcial",3:"Extra U8",4:"Parcial 2025 real"})[S.lvl]}</span></div>
+      <p class="stem">${S.lvl===4?"El parcial 2025 completo: 32 preguntas en el orden original, sin ver la justificación hasta entregar.":"15 preguntas al azar, sin ver la justificación hasta entregar."}</p>
+      <p style="color:var(--muted);margin:0 0 18px;max-width:62ch">${S.lvl===4?"15 de opción múltiple y 17 de verdadero o falso y selección múltiple. En selección múltiple cuenta solo si marcás exactamente las correctas, como en el examen. Las claves discutibles (1.10, 1.13, 2.11, 2.13) lo explican en la justificación.":`Se reparten parejo entre las unidades marcadas a la izquierda (${n} preguntas disponibles): ninguna unidad pesa más que otra. Podés cambiar una respuesta hasta entregar. En selección múltiple la respuesta cuenta solo si marcaste exactamente las correctas: marcar de menos también resta, como en el parcial.`}</p>
       <button class="btn primary" id="exam-start-2" ${n?"":"disabled"}>Empezar simulacro</button></div>`; return;
   }
   const answered = E.ids.filter(id=>given(E.ans[id])).length;
@@ -2649,6 +2785,7 @@ function jump(j){
 function toTop(){const r=$("main").getBoundingClientRect(); if(r.top<70||r.top>innerHeight*.6) window.scrollTo({top:Math.max(0,scrollY+r.top-80),behavior:"smooth"})}
 function shuf(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 function startExam(){
+  if(S.lvl===4){ S.exam={ids:QS.filter(q=>q.lvl===4).map(q=>q.id),ans:{},pos:0,t0:Date.now(),t1:null,done:false}; S.examView="q"; save(); render(); toTop(); return; }
   /* parejo por unidad: una vuelta por cada unidad elegida, en orden al azar, hasta juntar 15 */
   const pools=shuf(S.units.map(u=>shuf(QS.filter(q=>inScope(q)&&q.u===u).map(q=>q.id))).filter(p=>p.length));
   if(!pools.length) return;
@@ -2678,6 +2815,7 @@ document.addEventListener("click",e=>{
     case "l-1": return setLvl(1);
     case "l-2": return setLvl(2);
     case "l-3": return setLvl(3);
+    case "l-4": return setLvl(4);
     case "m-prac": S.mode="prac"; save(); render(); return;
     case "m-exam": S.mode="exam"; save(); render(); return;
     case "u-all": S.units=ALLU.slice(); save(); render(); return;
@@ -2699,7 +2837,7 @@ document.addEventListener("keydown",e=>{
   if(e.target.closest("input,textarea,select")) return;
   const q=currentQ(); const k=e.key.toLowerCase();
   if(q && k.length===1){
-    let idx="abcde".indexOf(k); if(idx<0) idx="12345".indexOf(k);
+    let idx="abcdef".indexOf(k); if(idx<0) idx="12345".indexOf(k);
     if(q.t==="vf"){ if(k==="v") idx=0; if(k==="f") idx=1; }
     if(idx>=0 && idx<q.o.length){ e.preventDefault(); answer(perm(q)[idx]); return }
   }
