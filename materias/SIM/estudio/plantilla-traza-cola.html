@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>SIM — Plantilla de traza de la cola simple</title>
+<style>
+  @page { size: A4 landscape; margin: 8mm 9mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 9pt; color: #111; }
+  .head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2.5mm; gap: 6mm; }
+  h1 { font-size: 13pt; margin: 0; }
+  .datos { display: flex; gap: 5mm; font-size: 9.5pt; }
+  .datos span { white-space: nowrap; }
+  .blank { display: inline-block; border-bottom: .8px solid #111; width: 16mm; height: 4mm; vertical-align: bottom; }
+  table { border-collapse: collapse; width: 100%; table-layout: fixed; }
+  th, td { border: .8px solid #333; text-align: center; }
+  thead th { background: #e4e4e4; font-size: 8.6pt; padding: 1mm .5mm; }
+  thead tr.grp th { background: #cfcfcf; font-size: 9pt; letter-spacing: .04em; text-transform: uppercase; }
+  tbody td { height: 8.1mm; }
+  tbody td.ev { text-align: left; padding-left: 1.5mm; color: #777; font-size: 8pt; }
+  .thick-l { border-left: 1.8px solid #111 !important; }
+  .bottom { display: grid; grid-template-columns: 1.35fr 1fr; gap: 5mm; margin-top: 3mm; }
+  .bottom table td { height: 6.8mm; }
+  .bottom th { font-size: 8.4pt; }
+  .box { border: .8px solid #333; padding: 1.6mm 2.2mm; font-size: 8.6pt; line-height: 1.45; }
+  .box b { font-size: 9pt; }
+  .f { font-family: "Courier New", monospace; }
+</style>
+</head>
+<body>
+
+<div class="head">
+  <h1>Traza de la cola simple</h1>
+  <div class="datos">
+    <span>Media entre arribos: <span class="blank"></span></span>
+    <span>Media de servicio: <span class="blank"></span></span>
+    <span>n (demoras): <span class="blank"></span></span>
+  </div>
+</div>
+
+<table>
+  <colgroup>
+    <col style="width:9%"><col style="width:7%">
+    <col style="width:4%"><col style="width:4%"><col style="width:16%">
+    <col style="width:10.5%"><col style="width:10.5%">
+    <col style="width:9.5%"><col style="width:10.5%"><col style="width:9.5%"><col style="width:9.5%">
+  </colgroup>
+  <thead>
+    <tr class="grp">
+      <th colspan="2"></th>
+      <th colspan="3" class="thick-l">Estado</th>
+      <th colspan="2" class="thick-l">Lista de eventos</th>
+      <th colspan="4" class="thick-l">Contadores</th>
+    </tr>
+    <tr>
+      <th>Evento</th><th>Reloj</th>
+      <th class="thick-l">B</th><th>Q</th><th>Llegadas en cola</th>
+      <th class="thick-l">Próx. llegada</th><th>Próx. salida</th>
+      <th class="thick-l">Demorados</th><th>Demora total</th><th>Área Q</th><th>Área B</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td class="ev">Inicio</td><td></td><td class="thick-l"></td><td></td><td></td><td class="thick-l"></td><td></td><td class="thick-l"></td><td></td><td></td><td></td></tr>
+    <tr><td class="ev"></td><td></td><td class="thick-l"></td><td></td><td></td><td class="thick-l"></td><td></td><td class="thick-l"></td><td></td><td></td><td></td></tr>
+    <tr><td class="ev"></td><td></td><td class="thick-l"></td><td></td><td></td><td class="thick-l"></td><td></td><td class="thick-l"></td><td></td><td></td><td></td></tr>
+    <tr><td class="ev"></td><td></td><td class="thick-l"></td><td></td><td></td><td class="thick-l"></td><td></td><td class="thick-l"></td><td></td><td></td><td></td></tr>
+    <tr><td class="ev"></td><td></td><td class="thick-l"></td><td></td><td></td><td class="thick-l"></td><td></td><td class="thick-l"></td><td></td><td></td><td></td></tr>
+    <tr><td class="ev"></td><td></td><td class="thick-l"></td><td></td><td></td><td class="thick-l"></td><td></td><td class="thick-l"></td><td></td><td></td><td></td></tr>
+    <tr><td class="ev"></td><td></td><td class="thick-l"></td><td></td><td></td><td class="thick-l"></td><td></td><td class="thick-l"></td><td></td><td></td><td></td></tr>
+    <tr><td class="ev"></td><td></td><td class="thick-l"></td><td></td><td></td><td class="thick-l"></td><td></td><td class="thick-l"></td><td></td><td></td><td></td></tr>
+    <tr><td class="ev"></td><td></td><td class="thick-l"></td><td></td><td></td><td class="thick-l"></td><td></td><td class="thick-l"></td><td></td><td></td><td></td></tr>
+    <tr><td class="ev"></td><td></td><td class="thick-l"></td><td></td><td></td><td class="thick-l"></td><td></td><td class="thick-l"></td><td></td><td></td><td></td></tr>
+    <tr><td class="ev"></td><td></td><td class="thick-l"></td><td></td><td></td><td class="thick-l"></td><td></td><td class="thick-l"></td><td></td><td></td><td></td></tr>
+    <tr><td class="ev"></td><td></td><td class="thick-l"></td><td></td><td></td><td class="thick-l"></td><td></td><td class="thick-l"></td><td></td><td></td><td></td></tr>
+    <tr><td class="ev"></td><td></td><td class="thick-l"></td><td></td><td></td><td class="thick-l"></td><td></td><td class="thick-l"></td><td></td><td></td><td></td></tr>
+    <tr><td class="ev"></td><td></td><td class="thick-l"></td><td></td><td></td><td class="thick-l"></td><td></td><td class="thick-l"></td><td></td><td></td><td></td></tr>
+  </tbody>
+</table>
+
+<div class="bottom">
+  <table>
+    <colgroup><col style="width:12%"><col style="width:12%"><col style="width:26%"><col style="width:12%"><col style="width:12%"><col style="width:26%"></colgroup>
+    <thead>
+      <tr><th>r</th><th>A o S</th><th>valor = −media · ln r</th><th>r</th><th>A o S</th><th>valor = −media · ln r</th></tr>
+    </thead>
+    <tbody>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    </tbody>
+  </table>
+  <div class="box">
+    <b>En cada evento</b>: 1) áreas con el valor <b>anterior</b>: <span class="f">área += (reloj − reloj_ant) · valor_ant</span> · 2) actualizar el estado · 3) programar eventos · 4) saltar al menor de la LEV.<br>
+    <b>Llegada</b>: siempre programa la próxima llegada; si B = 0 → demora 0 y programa su salida. <b>Salida</b>: si Q &gt; 0 → pasa el primero (demora = reloj − su llegada) y programa su salida; si no, B = 0 y salida = ∞.<br>
+    <b>Fin</b>: cuando se completa la n-ésima demora → <b>T(n)</b> = ese reloj.<br>
+    <span class="f">d(n) = demora total / n</span> &nbsp;·&nbsp; <span class="f">q(n) = área Q / T(n)</span> &nbsp;·&nbsp; <span class="f">u(n) = área B / T(n)</span>
+  </div>
+</div>
+
+</body>
+</html>
