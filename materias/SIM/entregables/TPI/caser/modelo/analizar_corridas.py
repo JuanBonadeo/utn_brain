@@ -26,10 +26,12 @@ COMPARAR = Path(_args[1]) if "--comparar" in sys.argv and len(_args) > 1 else No
 
 # Primarias de la Etapa 1 (05- §3.4; sin demanda ni nivel de servicio, que entran en la Etapa 2): costo relevante
 # del año = energía (luz marginal + gas) + costo financiero del producto parado antes del horno, y sus dos partes.
-PRIMARIAS = [("costoTotal", "costo relevante del año ($)"), ("costoEnergia", "energía: luz + gas ($)"),
-             ("costoCapital", "capital parado al 2 % mensual ($)")]
-SECUNDARIAS = [("esperaMediaDias", "espera media en cola (días)"), ("esperaP90Dias", "espera p90 (días)"),
-               ("colaMediaKg", "kg promedio en cola"), ("kWhPorKg", "kWh por kg tratado"), ("glpKg", "GLP del año (kg)"),
+# Primarias (2026-11-07, las del informe): el costo relevante y las dos caras del servicio del horno. Energía y capital
+# van como secundarias porque el costo relevante ya es su suma.
+PRIMARIAS = [("costoTotal", "costo relevante del año ($)"), ("esperaMediaDias", "espera media en cola (días)"),
+             ("colaMediaKg", "kg promedio en cola")]
+SECUNDARIAS = [("costoEnergia", "energía: luz + gas ($)"), ("costoCapital", "capital parado al 2 % mensual ($)"),
+               ("esperaP90Dias", "espera p90 (días)"), ("kWhPorKg", "kWh por kg tratado"), ("glpKg", "GLP del año (kg)"),
                ("campanasPorMes", "campañas por mes"), ("nEncendidosPrioridad", "encendidos por prioridad"),
                ("uliPorCampanaMedia", "ULI por campaña"), ("fraccionCaliente", "fracción del tiempo a temperatura")]
 DERIVADAS = {"costoEnergia": lambda f: float(f["costoLuz"]) + float(f["costoGLP"])}
