@@ -6,7 +6,7 @@ Cambios: umbral 79 (promedio real, sin producto retenido ni registros erróneos)
 (confirmado), encendidos anticipados que tratan toda la cola, `pPrioridad` 0,0054, regresión de energía sin
 registros erróneos. La espera se compara solo con ULI que no quedaron retenidas a propósito (≤ 30 días: el 8 %
 espera más por falta de demanda). Números del motor mínimo del verificador, que con los parámetros anteriores
-coincidió byte a byte con AnyLogic; falta confirmarlos corriendo `CorridasE0E3` en el IDE.
+coincidió byte a byte con AnyLogic; **confirmado el 07/11**: las 120 corridas de `CorridasE0E3` en el IDE son idénticas byte a byte a las del verificador.
 
 | Métrica | Registro | Modelo | Error | Tolerancia | Veredicto |
 |---|---:|---:|---:|---:|---|

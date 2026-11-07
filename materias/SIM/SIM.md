@@ -2787,12 +2787,11 @@ ULI lavadas.
   campo por campo con el verificador.
 - Respuestas del encargado incorporadas: umbral 79, carga mientras haya cola, 48 h caliente sin carga,
   `pPrioridad` 0,0054 y regresión de energía sin registros erróneos.
-- Segunda validación (`08-validacion-etapa1.md`), calculada **con el motor del verificador, todavía no con el
-  IDE**: t/mes, duración de campaña, espera media y kWh/mes dentro de tolerancia. Quedan afuera campañas/mes
+- Segunda validación (`08-validacion-etapa1.md`), confirmada en AnyLogic el 07/11 (las 120 corridas
+  del IDE son idénticas byte a byte a las del verificador): t/mes, duración de campaña, espera media y kWh/mes dentro de tolerancia. Quedan afuera campañas/mes
   (+15 %) y ULI por campaña (+22 %, n = 11, no significativa).
 - 08-09/10: GLP (≈130 kg por día caliente, compras 2024-2026) y costo en pesos: luz marginal 102 $/kWh, GLP
-  2.250 $/kg y capital inmovilizado a 4.467 $/kg al 2 % mensual. Estos cambios en el `.alp` todavía no se
-  corrieron en el IDE.
+  2.250 $/kg y capital inmovilizado a 4.467 $/kg al 2 % mensual. Corridos en el IDE el 07/11.
 
 **Avance del 07/11** (la Etapa 2 queda como trabajo futuro, acordado con el grupo):
 - **Resultados** (120 corridas del verificador, que reproduce a AnyLogic): **E3, apagar apenas se vacía la cola,
@@ -2813,8 +2812,8 @@ ULI lavadas.
   grupo**: [`estudio/tpi-caser/guia-tpi-caser.pdf`](estudio/tpi-caser/guia-tpi-caser.pdf).
 
 **Pendiente para la entrega** (defensa 10-11/11):
-1. Correr `CorridasE0E3` en el IDE con los parámetros actuales. Con ese CSV se regeneran la planilla
-   (`construir_planilla.py --verificar`), los gráficos (`graficos_informe.py`) y los números del paper.
+1. ~~Correr `CorridasE0E3` en el IDE~~ hecho el 07/11: `modelo/corridas_horno.csv` es idéntico byte a byte a
+   `corridas_horno_harness.csv`; la planilla ya sale del CSV de AnyLogic.
 2. Correos de los cinco autores y legajos de Constantini, Messina y Navos.
 3. Subida a AnyLogic Cloud y link en el paper. Video en YouTube.
 
