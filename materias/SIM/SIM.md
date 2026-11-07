@@ -2794,16 +2794,29 @@ ULI lavadas.
   2.250 $/kg y capital inmovilizado a 4.467 $/kg al 2 % mensual. Estos cambios en el `.alp` todavía no se
   corrieron en el IDE.
 
-**Pendiente para la entrega** (defensa 10-11/11, ver la consigna vigente arriba):
-1. Correr `CorridasE0E3` en el IDE con los parámetros actuales y comparar con `corridas_horno_harness.csv`
-   (que el resultado de la validación salga de AnyLogic y no solo del verificador).
-2. Pilotos: calentamiento con Welch, número de réplicas y valores definitivos de E1 (umbral 45) y E2 (espera
-   máxima 15 d), que hoy son provisorios.
-3. Statechart visual que refleje `estado`, para la defensa en vivo y el video.
-4. Planilla de resultados, informe tipo paper (LaTeX), subida a AnyLogic Cloud y video. No hay nada hecho de
-   ninguno de los cuatro.
-5. Etapa 2 (demanda, aguas arriba, zincado y nivel de servicio): no está construida. Con el plazo actual
-   conviene presentarla como trabajo futuro.
+**Avance del 07/11** (la Etapa 2 queda como trabajo futuro, acordado con el grupo):
+- **Resultados** (120 corridas del verificador, que reproduce a AnyLogic): **E3, apagar apenas se vacía la cola,
+  ahorra 18,0 ± 1,8 M$/año (−21,5 %)** a cambio de +1,1 días de espera media. E1 (umbral 45) y E2 (espera máxima
+  15 d) bajan la espera pero cuestan 4,8 y 2,9 M$/año más. La plata está en el horno caliente y vacío: en E0 está
+  a temperatura el 38,7 % del año y procesa el 29 %.
+- **Sensibilidad de costos** (`modelo/sensibilidad_costos.py`, exacta sin volver a simular porque los precios no
+  tocan la dinámica): E3 ahorra entre 15,6 y 33,5 M$ en todos los casos. Para anular el ahorro, el desgaste por
+  encendido tendría que costar 14,2 M$.
+- **Pilotos** (`09-pilotos.md`, `modelo/pilotos.py`): con Welch, el transitorio dura 1 mes (la primera campaña),
+  así que los 90 días alcanzan. Con 30 réplicas, los nueve intervalos primarios excluyen el 0, y el costo E3 − E0
+  queda con 9,9 % de precisión relativa.
+- Primarias: costo relevante, espera media y kg en cola, con Bonferroni (antes el script usaba costo, energía y
+  capital, una familia redundante).
+- **Paper** LaTeX en `informe/tpi-caser.tex` (+ PDF, 10 páginas). Compila con tectonic
+  (`C:\Users\gonza\tools\tectonic`) y con pdfLaTeX + BibTeX en Overleaf. **Planilla**:
+  `TPI_Caser_Resultados_Corridas.xlsx` (fórmulas vivas, verificada contra el script). **Guía explicativa para el
+  grupo**: [`estudio/tpi-caser/guia-tpi-caser.pdf`](estudio/tpi-caser/guia-tpi-caser.pdf).
+
+**Pendiente para la entrega** (defensa 10-11/11):
+1. Correr `CorridasE0E3` en el IDE con los parámetros actuales. Con ese CSV se regeneran la planilla
+   (`construir_planilla.py --verificar`), los gráficos (`graficos_informe.py`) y los números del paper.
+2. Correos de los cinco autores y legajos de Constantini, Messina y Navos.
+3. Subida a AnyLogic Cloud y link en el paper. Video en YouTube.
 
 Historial: el docente aprobó la propuesta el 27/09 y la especificación (entrega previa) se entregó ese día.
 La propuesta se envió el 16/09, el docente respondió con cinco preguntas de fondo (cómo se
@@ -3011,6 +3024,11 @@ Conclusiones:
 ---
 
 ## Log
+- **2026-11-07**: TPI Caser, cierre de la Etapa 1. Pilotos (Welch: transitorio de 1 mes, los 90 días alcanzan;
+  30 réplicas alcanzan para decidir), sensibilidad de costos, primarias alineadas (costo, espera y kg en cola),
+  planilla de corridas, gráficos, paper LaTeX con los 10 pasos implícitos (borrador completo, faltan correos,
+  Cloud y video) y guía explicativa a color para el grupo (`estudio/tpi-caser/`). Resultado: E3 (apagar apenas
+  se vacía la cola) ahorra 18 M$/año (−21,5 %) con +1,1 días de espera. Nuevo `scripts/html-to-pdf.js`.
 - **2026-11-04**: TPI subte — réplicas con día hábil real (SBASE + llegadas reales del Roca, 75 días), carga Poisson por tren, escenarios E3/E13 (validación EMV/QR), planilla con Bonferroni k = 9 y script de validación; proporción del Roca no identificable con los datos.
 - **2026-11-04**: TPs 1.1 a 3, guía visual de defensa en `estudio/defensa-tps/` (html + pdf, mismo formato que la defensa del TPI de IO), armada desde `estudio/repaso-tps.md`.
 

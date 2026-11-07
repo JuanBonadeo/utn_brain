@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Guía del TPI Caser · Simulación</title>
+<style>
+:root{
+  --ink:#1f2733; --muted:#6b7480; --line:#e3e6ea; --soft:#f6f7f9;
+  --a:#2456c9; --as:#eef3fd; --am:#c9d8f6;
+  --b:#0f8a7e; --bs:#ebf6f4; --bm:#bfe3de;
+  --c:#c26a0a; --cs:#fdf4e8; --cm:#f1d5b0;
+  --d:#7b3fc4; --ds:#f4effc; --dm:#dccbf3;
+  --ok:#1d9a52; --bad:#d23c3c; --warn:#d9730d;
+}
+@page{ size:A4; margin:13mm 14mm 14mm; }
+*{ box-sizing:border-box; }
+html{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+body{ margin:0; background:#fff; color:var(--ink);
+  font-family:"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size:9.6pt; line-height:1.5; font-feature-settings:"tnum"; }
+p{ margin:0 0 6px; }
+ul,ol{ margin:2px 0 6px; padding-left:18px; }
+li{ margin-bottom:2px; }
+b,strong{ font-weight:650; }
+h1,h2,h3,h4{ margin:0; font-weight:700; letter-spacing:-.01em; }
+.muted{ color:var(--muted); } .small{ font-size:8.6pt; } .nb{ white-space:nowrap; }
+code{ font-family:Consolas,"SF Mono",monospace; font-size:8.6pt; background:var(--soft); border-radius:4px; padding:0 3px; }
+
+.cover{ border-radius:14px; padding:20px 24px 18px; color:#fff;
+  background:linear-gradient(120deg,#3a1c0b 0%,#8a3d0b 45%,#d9730d 100%); margin-bottom:14px; }
+.cover .kicker{ font-size:8.5pt; letter-spacing:.14em; text-transform:uppercase; opacity:.8; }
+.cover h1{ font-size:23pt; margin:4px 0 2px; }
+.cover .sub{ opacity:.9; font-size:10.5pt; }
+.answer{ display:grid; grid-template-columns:auto 1fr; gap:14px; align-items:center; margin-top:12px;
+  background:rgba(255,255,255,.13); border-radius:10px; padding:10px 14px; }
+.answer .v{ font-size:25pt; font-weight:800; line-height:1; }
+.answer .t{ font-size:10pt; }
+
+.part{ break-before:page; }
+.band{ display:flex; gap:14px; align-items:center; border-radius:12px; padding:11px 16px; margin:0 0 12px; color:#fff; }
+.band .num{ font-size:27pt; font-weight:800; line-height:1; min-width:52px; }
+.band .k{ font-size:8pt; letter-spacing:.14em; text-transform:uppercase; opacity:.85; }
+.band h2{ font-size:15pt; }
+.pa .band{ background:linear-gradient(110deg,#1e48ad,#2f6ae0); }
+.pb .band{ background:linear-gradient(110deg,#0b7268,#14a394); }
+.pc .band{ background:linear-gradient(110deg,#a85a06,#dd8a1f); }
+.pd .band{ background:linear-gradient(110deg,#5b2aa0,#8d55d6); }
+
+.sec{ margin:13px 0 7px; display:flex; align-items:center; gap:8px; break-after:avoid; }
+.sec .dot{ width:22px; height:22px; border-radius:50%; color:#fff; font-weight:700; font-size:9pt;
+  display:flex; align-items:center; justify-content:center; flex:none; }
+.sec h3{ font-size:12pt; }
+.pa .dot{ background:var(--a); } .pb .dot{ background:var(--b); } .pc .dot{ background:var(--c); } .pd .dot{ background:var(--d); }
+.pa .sec h3{ color:#1a3d8f; } .pb .sec h3{ color:#0b6b62; } .pc .sec h3{ color:#94520a; } .pd .sec h3{ color:#4e2391; }
+
+.grid2{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.grid3{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; }
+.card{ border:1px solid var(--line); border-radius:10px; padding:9px 12px; background:#fff; break-inside:avoid; }
+.card h4{ margin:0 0 4px; font-size:9.8pt; }
+.tA{ background:var(--as); border-color:var(--am); } .tB{ background:var(--bs); border-color:var(--bm); }
+.tC{ background:var(--cs); border-color:var(--cm); } .tD{ background:var(--ds); border-color:var(--dm); }
+.fig{ border:1px solid var(--line); border-radius:10px; padding:8px 10px 7px; break-inside:avoid; margin:8px 0; }
+.fig img{ width:100%; display:block; border-radius:6px; }
+.fig .cap{ font-size:8.4pt; color:var(--muted); margin-top:4px; }
+
+.callout{ border:1px solid; border-radius:10px; padding:9px 12px; margin:8px 0; break-inside:avoid; }
+.callout .h{ font-weight:700; margin-bottom:3px; }
+.criollo{ background:#fff8e6; border-color:#f0d58a; } .criollo .h::before{ content:"En criollo · "; color:#a77b00; }
+.prof{ background:#fdf1f1; border-color:#f1c3c3; } .prof .h::before{ content:"Lo que nos pueden preguntar · "; color:var(--bad); }
+.ojo{ background:#f1f6fd; border-color:#c9d8f6; } .ojo .h::before{ content:"Ojo · "; color:var(--a); }
+
+table{ border-collapse:collapse; width:100%; }
+table.t{ font-size:9pt; }
+table.t th{ text-align:left; font-size:7.9pt; letter-spacing:.04em; text-transform:uppercase; color:var(--muted);
+  font-weight:700; border-bottom:1.5px solid var(--line); padding:4px 6px; }
+table.t td{ border-bottom:1px solid var(--line); padding:4px 6px; vertical-align:top; }
+table.t tr:last-child td{ border-bottom:none; }
+table.t td.r, table.t th.r{ text-align:right; white-space:nowrap; }
+table.t tr.hl td{ background:#fff8e6; }
+.ok{ color:var(--ok); font-weight:800; } .bad{ color:var(--bad); font-weight:800; } .warn{ color:var(--warn); font-weight:800; }
+
+.kpis{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:6px 0 8px; }
+.kpi{ border-radius:10px; padding:8px 10px; text-align:center; border:1px solid var(--line); }
+.kpi .v{ font-size:14pt; font-weight:800; line-height:1.15; }
+.kpi .l{ font-size:8pt; color:var(--muted); }
+.pc .kpi{ background:var(--cs); border-color:var(--cm); } .pc .kpi .v{ color:var(--c); }
+
+.timeline{ display:grid; grid-template-columns:repeat(7,1fr); gap:3px; margin:6px 0; font-size:8pt; }
+.timeline div{ border-radius:6px; padding:5px 4px; text-align:center; color:#fff; font-weight:600; }
+.s-ap{ background:#9aa3ae; } .s-ac{ background:#6b7480; } .s-ca{ background:#e0731a; } .s-pr{ background:#2456c9; }
+.s-va{ background:#7fa6e6; } .s-en{ background:#14a394; }
+
+.steps{ display:grid; grid-template-columns:28px 1fr 1.25fr; gap:0; font-size:9pt; border:1px solid var(--line); border-radius:10px; overflow:hidden; }
+.steps > div{ padding:5px 8px; border-bottom:1px solid var(--line); }
+.steps .n{ background:var(--d); color:#fff; font-weight:800; text-align:center; }
+.steps .h{ background:var(--ds); font-weight:650; }
+.steps .last{ border-bottom:none; }
+
+.flow{ display:flex; align-items:center; gap:6px; margin:8px 0; flex-wrap:nowrap; }
+.flow .blk{ border:1.5px solid var(--am); background:var(--as); border-radius:8px; padding:6px 8px; text-align:center; font-size:8.6pt; flex:1; }
+.flow .blk b{ display:block; color:var(--a); font-size:9.4pt; }
+.flow .arr{ color:#aab2bd; font-size:14pt; }
+
+.check{ list-style:none; padding-left:0; }
+.check li{ padding-left:22px; position:relative; margin-bottom:4px; }
+.check li::before{ position:absolute; left:0; top:0; font-weight:800; }
+.check li.si::before{ content:"✔"; color:var(--ok); }
+.check li.no::before{ content:"☐"; color:var(--bad); }
+.check li.med::before{ content:"◐"; color:var(--warn); }
+.foot{ margin-top:10px; font-size:8pt; color:var(--muted); border-top:1px solid var(--line); padding-top:5px; }
+</style>
+</head>
+<body>
+
+<!-- ====================================================================== PORTADA -->
+<div class="cover">
+  <div class="kicker">Simulación 2026 · TPI · grupo Brizio, Casermeiro, Constantini, Messina, Navos</div>
+  <h1>¿Cuándo encender el horno?</h1>
+  <div class="sub">Guía para entender todo el TPI de punta a punta: el problema, el modelo, los datos, los experimentos, los resultados y qué defender el 10-11/11.</div>
+  <div class="answer">
+    <div class="v">−18 M$</div>
+    <div class="t"><b>La respuesta en una línea:</b> si el horno se apaga apenas se vacía la cola (en vez de esperarlo caliente 48 h),
+    la fábrica ahorra unos 18 millones de pesos por año (−21,5 % del costo de operarlo), a cambio de que el material espere en promedio 1,1 días más.</div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card tA">
+    <h4>Cómo leer esta guía</h4>
+    <ol class="small">
+      <li><b>El problema</b> (azul): qué es el horno y qué se decide.</li>
+      <li><b>El modelo y los datos</b> (verde): cómo lo armamos en AnyLogic y de dónde sale cada número.</li>
+      <li><b>Experimentos y resultados</b> (naranja): escenarios, réplicas, test de medias y qué dio.</li>
+      <li><b>La defensa</b> (violeta): los 10 pasos, preguntas probables y la lista de lo que falta.</li>
+    </ol>
+    <p class="small muted">Si tenés 5 minutos: leé esta página y la parte 3. Si tenés 30: todo.</p>
+  </div>
+  <div class="card tC">
+    <h4>Qué se entrega (consigna del 28/10)</h4>
+    <ul class="check small">
+      <li class="med"><b>.alp</b> de AnyLogic: hecho; falta correrlo una vez con los parámetros finales.</li>
+      <li class="med"><b>Paper en PDF</b> (abstract, objetivos, metodología, resultados, conclusiones; los 10 pasos implícitos): borrador completo en LaTeX.</li>
+      <li class="si"><b>Planilla</b> con los resultados de las corridas: hecha (se regenera con la corrida final).</li>
+      <li class="no"><b>Link de AnyLogic Cloud</b> con nombres y correos de los autores.</li>
+      <li class="no"><b>Video</b> en YouTube: problema, solución y el modelo andando.</li>
+      <li class="no"><b>Defensa en vivo</b> 10 u 11/11: mostrar E0 corriendo y, si se puede, E3.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="callout criollo">
+  <div class="h">el TPI en un párrafo</div>
+  El horno de la fábrica tarda un día y medio en calentarse y dos días en enfriarse, y mientras está caliente gasta luz y gas aunque no tenga nada adentro.
+  Por eso no se prende para cada cajón de tornillos: se espera a juntar unos 80 y se hace una "campaña". La pregunta que nos hizo la empresa fue
+  <b>cuántos cajones conviene esperar</b>. Armamos un modelo del horno en AnyLogic con datos reales, lo comparamos contra la historia para ver que se
+  comporta como el real, y probamos cuatro reglas distintas 30 veces cada una. Resultado: cambiar el umbral no conviene, lo que sí conviene es
+  <b>no dejarlo prendido esperando</b>.
+</div>
+
+<!-- ====================================================================== PARTE 1 -->
+<div class="part pa">
+<div class="band"><div class="num">1</div><div><div class="k">Parte 1</div><h2>El problema: un horno que cuesta prender</h2></div></div>
+
+<div class="grid2">
+  <div>
+    <div class="sec"><div class="dot">a</div><h3>Qué es cada cosa</h3></div>
+    <table class="t">
+      <tr><td><b>ULI</b></td><td>"Unidad de transporte interno": un cajón de ~140 kg de tornillos ya estampados, laminados y lavados. Es la <b>entidad</b> del modelo.</td></tr>
+      <tr><td><b>Horno</b></td><td>Eléctrico, de cinta continua, 27 resistencias. Hace cementación + temple (endurece la superficie del tornillo). Tiene un generador que quema GLP (propano) para la atmósfera.</td></tr>
+      <tr><td><b>Campaña</b></td><td>El período entre que se prende y se apaga. <b>No es una entidad</b>: es un estado del horno.</td></tr>
+      <tr><td><b>Umbral</b></td><td>Cuántas ULI tienen que estar esperando para prenderlo. Hoy: ~79 (el encargado dice 70-80).</td></tr>
+    </table>
+  </div>
+  <div>
+    <div class="sec"><div class="dot">b</div><h3>Los números del horno</h3></div>
+    <div class="grid2">
+      <div class="card tA" style="text-align:center"><div style="font-size:18pt;font-weight:800;color:var(--a)">36 h</div><div class="small">calentar, sin poder cargar nada</div></div>
+      <div class="card tA" style="text-align:center"><div style="font-size:18pt;font-weight:800;color:var(--a)">48 h</div><div class="small">enfriar después de la última ULI</div></div>
+      <div class="card tA" style="text-align:center"><div style="font-size:18pt;font-weight:800;color:var(--a)">85 min</div><div class="small">por ULI (17 por día, 3 turnos)</div></div>
+      <div class="card tA" style="text-align:center"><div style="font-size:18pt;font-weight:800;color:var(--a)">4,8</div><div class="small">ULI lavadas por día, en promedio</div></div>
+    </div>
+    <p class="small" style="margin-top:6px">Llegan ~5 ULI por día y el horno puede tratar 17: está <b>subutilizado</b> (procesa el 29 % del año). Por eso se prende por campañas.</p>
+  </div>
+</div>
+
+<div class="sec"><div class="dot">c</div><h3>Una campaña típica, día por día (regla actual)</h3></div>
+<div class="timeline">
+  <div class="s-ac">Lun-Vie<br>se juntan ULI</div>
+  <div class="s-ac">... hasta 79<br>en cola</div>
+  <div class="s-ca">Calentando<br>36 h</div>
+  <div class="s-pr">Procesando<br>17 ULI/día</div>
+  <div class="s-pr">Procesando<br>(entran las nuevas)</div>
+  <div class="s-va">Caliente vacío<br>hasta 48 h</div>
+  <div class="s-en">Enfriando<br>48 h</div>
+</div>
+<p class="small">Cuando la cola llega a 79 se prende. Mientras calienta, siguen llegando ULI. Después carga una cada 85 min y <b>también carga las que llegan durante la campaña</b> (lo confirmó el encargado el 07/10). Cuando se vacía la cola, lo deja caliente hasta 48 h "por si llega algo". Si no llega nada, lo apaga.</p>
+
+<div class="grid2">
+  <div class="callout criollo">
+    <div class="h">el dilema</div>
+    Esperar <b>más</b> ULI antes de prender: el costo de calentar se reparte entre más kilos (más barato por kilo), pero el material espera más,
+    hay más plata parada en cajones y las entregas se demoran. Esperar <b>menos</b>: al revés. No hay una respuesta obvia; hay que medirla.
+  </div>
+  <div class="callout ojo">
+    <div class="h">por qué no alcanza una fórmula</div>
+    Existe teoría para esto (colas con "política N", Yadin y Naor 1963; Heyman 1968), pero supone llegadas Poisson y arranques cortos. Acá las llegadas
+    son muy irregulares (la mitad de los días no se lava nada), el arranque dura días y los costos salen de facturas reales. Por eso <b>se simula</b>.
+  </div>
+</div>
+
+<div class="sec"><div class="dot">d</div><h3>Las cuatro reglas que comparamos (escenarios)</h3></div>
+<table class="t">
+  <tr><th></th><th>Regla</th><th class="r">Umbral</th><th class="r">Espera máxima</th><th class="r">Caliente en vacío</th><th>Idea</th></tr>
+  <tr><td><b>E0</b></td><td>Regla actual</td><td class="r">79</td><td class="r">—</td><td class="r">48 h</td><td>La base: el sistema tal como está hoy.</td></tr>
+  <tr><td><b>E1</b></td><td>Umbral bajo</td><td class="r">45</td><td class="r">—</td><td class="r">48 h</td><td>Prender antes para que el material espere menos.</td></tr>
+  <tr><td><b>E2</b></td><td>Espera máxima</td><td class="r">79</td><td class="r">15 días</td><td class="r">48 h</td><td>Si la ULI más vieja ya lleva 15 días, se prende igual.</td></tr>
+  <tr class="hl"><td><b>E3</b></td><td>Apagar enseguida</td><td class="r">79</td><td class="r">—</td><td class="r">0 h</td><td>No esperarlo caliente: se apaga apenas se vacía la cola.</td></tr>
+</table>
+<p class="small muted">En los cuatro, si llega un pedido urgente el horno se prende aunque no haya 79 (pasa ~4-5 veces por año).</p>
+</div>
+
+<!-- ====================================================================== PARTE 2 -->
+<div class="part pb">
+<div class="band"><div class="num">2</div><div><div class="k">Parte 2</div><h2>El modelo en AnyLogic y los datos reales</h2></div></div>
+
+<div class="sec"><div class="dot">a</div><h3>Los bloques (Process Modeling Library)</h3></div>
+<div class="flow">
+  <div class="blk"><b>Source</b>crea una ULI cuando el calendario de lavado lo dice</div><div class="arr">→</div>
+  <div class="blk"><b>Wait</b> (colaHorno)<br>la cola del horno; nadie sale solo</div><div class="arr">→</div>
+  <div class="blk"><b>Delay</b> (horno)<br>capacidad 1, 85 min por ULI</div><div class="arr">→</div>
+  <div class="blk"><b>Sink</b><br>registra espera, kg, etc.</div>
+</div>
+<div class="grid2">
+  <div class="card tB">
+    <h4>¿Por qué <code>Wait</code> y no <code>Queue</code>?</h4>
+    <p class="small">Un <code>Queue</code> deja pasar la ULI apenas el horno está libre. Pero el horno no solo tiene que estar libre: tiene que estar <b>caliente</b>.
+    Con <code>Wait</code>, una función (<code>despachar()</code>) decide <b>si</b> carga (solo en el estado Procesando) y <b>cuál</b> (urgentes primero, después la más vieja), y la libera con <code>free()</code>.</p>
+  </div>
+  <div class="card tB">
+    <h4>¿Por qué no <code>Batch</code>?</h4>
+    <p class="small">Porque el horno <b>no</b> mete 80 ULI juntas: las trata de a una. Si agrupáramos en un lote de 80, perderíamos lo que queremos medir: que la primera ULI espera semanas y la última horas, y que las que llegan con el horno prendido se suman a la campaña.</p>
+  </div>
+</div>
+
+<div class="sec"><div class="dot">b</div><h3>Los estados del horno (la variable <code>estado</code> y el statechart)</h3></div>
+<table class="t">
+  <tr><th>Estado</th><th>Entra cuando…</th><th>Sale cuando…</th></tr>
+  <tr><td><b style="color:#6b7480">0 Apagado</b></td><td>arranca el modelo; termina de enfriar</td><td>llega una ULI → Acumulando</td></tr>
+  <tr><td><b style="color:#6b7480">1 Acumulando</b></td><td>primera ULI en cola</td><td>cola ≥ umbral, o llega una urgente, o vence la espera máxima → Calentando</td></tr>
+  <tr><td><b style="color:#e0731a">2 Calentando</b></td><td>se prende</td><td>pasan 36 h → Procesando</td></tr>
+  <tr><td><b style="color:#2456c9">3 Procesando</b></td><td>llegó a temperatura</td><td>la cola queda vacía durante la espera en vacío (48 h en E0, 0 h en E3) → Enfriando</td></tr>
+  <tr><td><b style="color:#14a394">4 Enfriando</b></td><td>fin de la campaña</td><td>pasan 48 h → Apagado</td></tr>
+</table>
+
+<div class="callout ojo">
+  <div class="h">semillas y números aleatorios comunes (clave para el test)</div>
+  Cada fuente de azar (llegadas, peso, urgencias, ciclo) tiene <b>su propio generador</b>, creado con <code>semilla × 10 + k</code>. Ninguno depende de lo que hace el horno.
+  Resultado: con la semilla 7, los cuatro escenarios reciben <b>exactamente las mismas ULI a la misma hora</b>. Lo único que cambia es la regla. Eso es lo que permite comparar "apareado" (parte 3).
+</div>
+
+<div class="sec"><div class="dot">c</div><h3>De dónde sale cada número (se evalúa el "uso de datos reales")</h3></div>
+<table class="t">
+  <tr><th>Entrada</th><th>Valor</th><th>Fuente real y cómo se usó</th></tr>
+  <tr><td><b>Llegadas de ULI</b></td><td>33,6 por semana</td><td>Seguimiento de ULI del sistema de gestión (11.353 ULI, 2024-2026); se usan los últimos 12 meses. <b>Bootstrap por semanas</b>: cada lunes el modelo sortea una de las 52 semanas reales y la repite. ¿Por qué no una distribución teórica? Porque el 49 % de los días hábiles no se lava nada, hay picos de 10-20 y los días de una misma semana están correlacionados (0,43). Ninguna Poisson ni binomial negativa respeta eso.</td></tr>
+  <tr><td><b>Peso por ULI</b></td><td>media 140,9 kg</td><td>Distribución empírica (101 cuantiles) de las mismas ULI, muestreada por transformada inversa.</td></tr>
+  <tr><td><b>Umbral</b></td><td>79 ULI</td><td>Promedio de la cola al encender en las campañas largas reales (el encargado dijo 70-80: coincide).</td></tr>
+  <tr><td><b>Urgencias</b></td><td>0,54 %</td><td>10 encendidos anticipados reales / 1.857 ULI que llegaron con el horno apagado.</td></tr>
+  <tr><td><b>Luz</b></td><td>2.402 kWh/día caliente<br>+ 2.303 kWh/encendido</td><td>Regresión de las facturas de luz del medidor exclusivo del horno (R² = 0,90). Tarifa <b>marginal</b> 102 $/kWh (pendiente importe vs. kWh, R² = 0,95): el cargo fijo de potencia se paga igual con cualquier regla, no se cuenta.</td></tr>
+  <tr><td><b>Gas (GLP)</b></td><td>130 kg/día caliente</td><td>Facturas de YPF Gas + estadística de compras 2024-2026 (R² = 0,92); 2.250 $/kg con impuestos.</td></tr>
+  <tr><td><b>Capital parado</b></td><td>4.467 $/kg al 2 % mensual</td><td>Lista de precios × factor de costo, ponderado por la mezcla; tasa que usa la empresa. Es una cota superior.</td></tr>
+</table>
+<p class="small muted">Todos los números están en el modelo como parámetros y se pueden mirar en AnyLogic. Los datos crudos de la empresa no están en el repo (quedaron en una carpeta local ignorada): solo los agregados.</p>
+</div>
+
+<!-- ====================================================================== PARTE 2b: verificación y validación -->
+<div class="part pb">
+<div class="band"><div class="num">2+</div><div><div class="k">Parte 2, segunda mitad</div><h2>¿El modelo está bien hecho? Verificación y validación</h2></div></div>
+
+<div class="grid2">
+  <div class="callout criollo">
+    <div class="h">verificar ≠ validar</div>
+    <b>Verificar</b> = ¿el programa hace lo que dijimos que iba a hacer? (¿está bien programado?).<br>
+    <b>Validar</b> = ¿lo que dijimos se parece a la realidad? (¿es el modelo correcto?).<br>
+    Un modelo puede estar perfectamente programado y ser un mal modelo del horno real. Hay que probar las dos cosas.
+  </div>
+  <div class="card tB">
+    <h4>Cómo lo verificamos</h4>
+    <ul class="small">
+      <li><b>Compilación</b> del código del .alp contra la API real de AnyLogic.</li>
+      <li><b>Trazas</b> con resultado conocido: umbral, calentamiento, enfriamiento, espera máxima, urgencias.</li>
+      <li><b>Conservación</b>: ULI que entran = tratadas + en cola + en el horno.</li>
+      <li><b>Caso M/M/1</b> (abajo) y comparación campo por campo de las 120 corridas de AnyLogic con un motor independiente.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="sec"><div class="dot">a</div><h3>El caso degenerado M/M/1 (el truco clásico de verificación)</h3></div>
+<p>Si ponemos umbral 1, calentamiento y enfriamiento 0, llegadas Poisson (λ = 0,7/h) y ciclo exponencial (μ = 1/h), el horno <b>se convierte en una cola M/M/1</b>, que tiene fórmula. Si el modelo está bien programado, tiene que dar lo de la fórmula:</p>
+<table class="t" style="width:70%">
+  <tr><th>Medida</th><th class="r">Modelo</th><th class="r">Fórmula</th><th class="r">Error</th></tr>
+  <tr><td>Lq = ρ²/(1−ρ) (ULI en cola)</td><td class="r">1,632</td><td class="r">1,633</td><td class="r">−0,09 %</td></tr>
+  <tr><td>W = 1/(μ−λ) (horas en el sistema)</td><td class="r">3,331</td><td class="r">3,333</td><td class="r">−0,09 %</td></tr>
+  <tr><td>ρ = λ/μ (utilización)</td><td class="r">0,700</td><td class="r">0,700</td><td class="r">−0,02 %</td></tr>
+</table>
+
+<div class="sec"><div class="dot">b</div><h3>Validación contra la historia real (mismo período que los datos)</h3></div>
+<table class="t">
+  <tr><th>Medida</th><th class="r">Real</th><th class="r">Modelo</th><th class="r">Error</th><th class="r">Tolerancia</th><th></th></tr>
+  <tr><td>Toneladas tratadas por mes</td><td class="r">21,6</td><td class="r">21,1</td><td class="r">−2,5 %</td><td class="r">10 %</td><td class="ok">OK</td></tr>
+  <tr><td>Duración de la campaña (días)</td><td class="r">9,82</td><td class="r">9,68</td><td class="r">−1,4 %</td><td class="r">10 %</td><td class="ok">OK</td></tr>
+  <tr><td>Espera media antes del horno (días)</td><td class="r">7,38</td><td class="r">6,52</td><td class="r">−11,7 %</td><td class="r">15 %</td><td class="ok">OK</td></tr>
+  <tr><td>kWh del horno por mes</td><td class="r">38.000</td><td class="r">33.500</td><td class="r">−11,8 %</td><td class="r">15 %</td><td class="ok">OK</td></tr>
+  <tr><td>Campañas por mes</td><td class="r">0,94</td><td class="r">1,08</td><td class="r">+15,3 %</td><td class="r">10 %</td><td class="bad">fuera</td></tr>
+  <tr><td>ULI por campaña</td><td class="r">114</td><td class="r">139</td><td class="r">+21,9 %</td><td class="r">10 %</td><td class="warn">fuera, no signif.</td></tr>
+</table>
+<div class="grid2">
+  <div class="callout prof">
+    <div class="h">"¿y las dos que dan fuera?"</div>
+    El modelo prende el horno algo más seguido que la realidad. Con solo 11 campañas en el período, la diferencia de ULI por campaña no es estadísticamente significativa (el intervalo de Welch contiene al 0).
+    Y como el sesgo es el mismo en los cuatro escenarios, casi no afecta la <b>comparación</b> entre ellos, que es lo que usamos para recomendar.
+  </div>
+  <div class="callout prof">
+    <div class="h">"¿no ajustaron parámetros hasta que diera?"</div>
+    No: <b>calibrar no es validar</b>. Las tolerancias se fijaron antes de correr y ninguna de estas medidas se usó para fijar un parámetro.
+    Cuando algo no daba, se le preguntó al encargado (así se corrigió que las ULI que llegan con el horno prendido <i>sí</i> se cargan).
+  </div>
+</div>
+</div>
+
+<!-- ====================================================================== PARTE 3 -->
+<div class="part pc">
+<div class="band"><div class="num">3</div><div><div class="k">Parte 3</div><h2>Experimentos y resultados</h2></div></div>
+
+<div class="sec"><div class="dot">a</div><h3>Cómo se corre: 4 escenarios × 30 réplicas = 120 corridas</h3></div>
+<div class="grid3">
+  <div class="card tC"><h4>No terminante</h4><p class="small">El horno no tiene un "fin del día" natural. Cada corrida descarta un <b>calentamiento</b> (el modelo arranca vacío y apagado, lo que no es típico) y después mide <b>365 días</b>.</p></div>
+  <div class="card tC"><h4>Calentamiento: Welch</h4><p class="small">Pilotos de 3 años sin calentamiento, promediados entre réplicas mes a mes y suavizados con media móvil. Solo el <b>mes 1</b> está bajo (la primera campaña recién arranca al día 16). El modelo descarta <b>90 días</b>, tres veces eso.</p></div>
+  <div class="card tC"><h4>30 réplicas por escenario</h4><p class="small">Con semillas 1 a 30, <b>las mismas en los cuatro escenarios</b>. En AnyLogic es el experimento <code>CorridasE0E3</code> (Parameters Variation con la semilla como parámetro).</p></div>
+</div>
+
+<div class="fig"><img src="../../figs/tpi-caser-welch.png" style="width:60%;margin:0 auto"><div class="cap">Welch con 10 réplicas (izquierda: puro ruido, no se puede decidir) y con 100 (derecha: se ve que solo el primer mes es distinto). La verde es el corte real (1 mes); la negra, los 90 días que usa el modelo.</div></div>
+<div class="callout prof">
+  <div class="h">"¿por qué 30 réplicas?"</div>
+  Con 30, todos los intervalos de las medidas principales excluyen al 0: el sentido de cada efecto está claro. Y la diferencia que decide la recomendación (costo E3 − E0) ya tiene ±10 % de precisión (9,9 %). Para tener ±10 % en las diferencias chicas (por ejemplo, −0,96 días de espera en E2) harían falta cientos de réplicas, y no cambiaría ninguna conclusión.
+</div>
+
+<div class="sec part" style="break-before:page"><div class="dot">b</div><h3>El test de medias apareado, con un ejemplo</h3></div>
+<div class="grid2">
+  <div>
+    <p>Tomemos la <b>semilla 7</b>. Los cuatro escenarios reciben exactamente las mismas ULI. Costo del año:</p>
+    <table class="t">
+      <tr><th>Semilla 7</th><th class="r">E0</th><th class="r">E3</th><th class="r">D = E3 − E0</th></tr>
+      <tr><td>Costo del año</td><td class="r">101,7 M$</td><td class="r">82,2 M$</td><td class="r"><b>−19,5 M$</b></td></tr>
+    </table>
+    <p class="small" style="margin-top:6px">Eso se repite para las 30 semillas: 30 diferencias D₁…D₃₀. Después:</p>
+    <div style="background:var(--soft);border-radius:8px;padding:7px 10px;font-size:9.5pt">
+      <span style="text-decoration:overline">D</span> = promedio de las 30 diferencias<br>
+      s_D = desvío de las 30 diferencias<br>
+      <b>IC = <span style="text-decoration:overline">D</span> ± t · s_D / √30</b>
+    </div>
+    <p class="small" style="margin-top:6px">Para E3 − E0 da <b>−18,0 ± 1,8 M$</b>: el intervalo va de −19,8 a −16,2. <b>No contiene al 0</b> → la diferencia es significativa.</p>
+  </div>
+  <div>
+    <div class="callout criollo">
+      <div class="h">por qué apareado</div>
+      Hay años "buenos" (llega mucho material) y "malos". Si comparáramos E0 de un año con E3 de otro, esa variación taparía la diferencia.
+      Apareando por semilla, cada par vive <b>el mismo año</b>: la diferencia D solo refleja la regla. Por eso los intervalos apareados son mucho más angostos que los de cada media sola.
+    </div>
+    <div class="callout ojo">
+      <div class="h">Bonferroni</div>
+      Miramos 3 medidas principales a la vez (costo, espera media y kilos en cola). Para que la conclusión <b>conjunta</b> siga siendo al 95 %, cada intervalo se hace al 1 − 0,05/3 = 98,3 % (t = 2,541 en vez de 2,045).
+    </div>
+  </div>
+</div>
+
+<div class="sec"><div class="dot">c</div><h3>Qué dio</h3></div>
+<div class="kpis">
+  <div class="kpi"><div class="v">83,7 M$</div><div class="l">costo del año hoy (E0)</div></div>
+  <div class="kpi"><div class="v">65,7 M$</div><div class="l">costo con E3</div></div>
+  <div class="kpi"><div class="v">−21,5 %</div><div class="l">ahorro de E3</div></div>
+  <div class="kpi"><div class="v">+1,1 días</div><div class="l">espera media extra con E3</div></div>
+</div>
+<div class="fig"><img src="../../figs/tpi-caser-costos.png"><div class="cap">Costo relevante del año por escenario: luz + gas + capital parado. El capital es chico: lo que pesa es la energía.</div></div>
+</div>
+
+<div class="part pc">
+<div class="grid2">
+  <div class="fig"><img src="../../figs/tpi-caser-compromiso.png"><div class="cap">Costo contra espera. E1 y E2 bajan la espera pero suben el costo. E3 baja mucho el costo y sube un poco la espera.</div></div>
+  <div>
+    <table class="t">
+      <tr><th>Contra E0 (98,3 %)</th><th class="r">Costo M$/año</th><th class="r">Espera (días)</th></tr>
+      <tr><td><b>E1</b> umbral 45</td><td class="r bad">+4,8 ± 1,7</td><td class="r ok">−2,6 ± 0,4</td></tr>
+      <tr><td><b>E2</b> espera máx.</td><td class="r bad">+2,9 ± 0,8</td><td class="r ok">−1,0 ± 0,4</td></tr>
+      <tr class="hl"><td><b>E3</b> apagar ya</td><td class="r ok">−18,0 ± 1,8</td><td class="r bad">+1,1 ± 0,3</td></tr>
+    </table>
+    <p class="small" style="margin-top:6px">Todas las diferencias son significativas (ningún intervalo contiene al 0).</p>
+  </div>
+</div>
+
+<div class="sec"><div class="dot">d</div><h3>Cómo se explica cada resultado</h3></div>
+<div class="grid2">
+  <div class="card tC">
+    <h4>E1 y E2: esperan menos, pero cuestan más</h4>
+    <p class="small">Prender antes significa más encendidos (16 por año en vez de 13) y más tiempo caliente con poca carga. Se ahorra algo de capital parado (1,9 M$ en E1), pero se gasta mucho más en energía (6,7 M$). <b>Solo convendría si entregar más rápido valiera más de 3-5 M$ por año</b> (eso lo mediría la Etapa 2, que queda como trabajo futuro).</p>
+  </div>
+  <div class="card tC">
+    <h4>E3: la plata estaba en el horno caliente y vacío</h4>
+    <p class="small">En E0 el horno está caliente el <b>38,7 %</b> del año pero procesando solo el <b>29 %</b>: una cuarta parte del tiempo caliente está <b>esperando vacío</b>. E3 elimina eso: unas <b>850 horas menos de horno caliente por año</b>. A cambio, la ULI que llega justo después de apagarlo espera a la próxima campaña (+1,1 días de media, 1,3 encendidos más por año).</p>
+  </div>
+</div>
+
+<div class="sec"><div class="dot">e</div><h3>¿Y si los costos están mal estimados? Sensibilidad</h3></div>
+<p class="small">Los precios no cambian lo que pasa en la simulación (cuándo se prende el horno, cuánto espera cada ULI): solo entran en la cuenta del final. Por eso se recalcula el costo con otros valores sobre las mismas 120 corridas, de forma exacta.</p>
+<table class="t">
+  <tr><th>Caso</th><th class="r">E3 − E0 (M$/año)</th></tr>
+  <tr><td>Base</td><td class="r">−18,0 ± 1,8</td></tr>
+  <tr><td>Consumo por encendido = 0 / = techo teórico (5.220 kWh)</td><td class="r">−18,3 / −17,6</td></tr>
+  <tr><td>GLP 100 kg/día en vez de 130</td><td class="r">−15,6 ± 1,6</td></tr>
+  <tr><td>Tarifa promedio con cargo fijo (290 $/kWh)</td><td class="r">−33,5 ± 3,3</td></tr>
+  <tr><td>Capital al 1 % / al 4 % mensual</td><td class="r">−18,4 / −17,2</td></tr>
+  <tr><td>Desgaste de 1 M$ por cada encendido</td><td class="r">−16,7 ± 1,7</td></tr>
+</table>
+<div class="callout criollo">
+  <div class="h">la frase para la defensa</div>
+  "En todos los casos E3 ahorra entre 15 y 33 millones por año. Para que el ahorro desaparezca, cada encendido tendría que costar 14 millones de desgaste, lo que cuesta operar el horno un mes entero."
+</div>
+</div>
+
+<!-- ====================================================================== PARTE 4 -->
+<div class="part pd">
+<div class="band"><div class="num">4</div><div><div class="k">Parte 4</div><h2>La defensa: los 10 pasos, preguntas y lo que falta</h2></div></div>
+
+<div class="sec"><div class="dot">a</div><h3>Los 10 pasos del estudio y dónde está cada uno</h3></div>
+<p class="small">En el paper van <b>implícitos</b> (la consigna lo pide así), pero en la defensa conviene saber dónde está cada uno.</p>
+<div class="steps">
+  <div class="n">1</div><div class="h">Formulación del problema</div><div>¿Cuántas ULI esperar? Objetivos, costo relevante como medida. (Introducción y Objetivos)</div>
+  <div class="n">2</div><div class="h">Datos y modelo conceptual</div><div>Seguimiento de ULI, facturas de luz y GLP, entrevistas al encargado; estados del horno. (Metodología: sistema y datos)</div>
+  <div class="n">3</div><div class="h">Validación conceptual</div><div>Supuestos revisados con el encargado antes de programar; se corrigió "las que llegan con el horno prendido se cargan igual".</div>
+  <div class="n">4</div><div class="h">Construcción y verificación</div><div>AnyLogic (Source → Wait → Delay → Sink), trazas, conservación, M/M/1.</div>
+  <div class="n">5</div><div class="h">Corridas piloto</div><div>Welch para el calentamiento y cuántas réplicas hacen falta.</div>
+  <div class="n">6</div><div class="h">Validación del modelo programado</div><div>Tabla contra el registro real: 4 de 6 dentro de tolerancia.</div>
+  <div class="n">7</div><div class="h">Diseño de experimentos</div><div>E0-E3, 30 réplicas, semillas comunes, test apareado con Bonferroni.</div>
+  <div class="n">8</div><div class="h">Corridas de producción</div><div>Las 120 corridas de <code>CorridasE0E3</code>.</div>
+  <div class="n">9</div><div class="h">Análisis de salida</div><div>Medias, intervalos apareados, sensibilidad de costos. (Resultados + planilla)</div>
+  <div class="n last">10</div><div class="h last">Documentación y presentación</div><div class="last">Paper, planilla, AnyLogic Cloud, video y defensa en vivo.</div>
+</div>
+
+<div class="sec"><div class="dot">b</div><h3>Preguntas probables del profe (y qué contestar)</h3></div>
+<div class="grid2">
+  <div class="callout prof"><div class="h">"¿Por qué no ajustaron una distribución a las llegadas?"</div>Porque ninguna teórica respeta los días sin lavado (49 %), los picos y la correlación dentro de la semana. El bootstrap por semanas reales reproduce todo eso y es un método estándar cuando hay datos suficientes (52 semanas).</div>
+  <div class="callout prof"><div class="h">"¿Cuál es la variable aleatoria del modelo?"</div>Las llegadas (qué semana real se sortea y la hora de cada ULI), el peso de cada ULI y si es urgente. El horno en sí es determinístico: 36 h, 85 min, 48 h.</div>
+  <div class="callout prof"><div class="h">"¿Por qué el capital es tan chico?"</div>Porque la cola promedio es de ~4.400 kg, unos 20 M$ de material, y al 2 % mensual da ~4,8 M$ por año. La energía de mantener un horno de 100 kW caliente pesa mucho más.</div>
+  <div class="callout prof"><div class="h">"¿Por qué no contaron el desgaste?"</div>No hay registro de mantenimiento por encendido. Lo tratamos con sensibilidad: el punto de equilibrio es de 14 M$ por encendido, imposible en la práctica.</div>
+  <div class="callout prof"><div class="h">"Si apagar enseguida es mejor, ¿por qué el encargado lo deja prendido?"</div>Cuando había mucha producción, casi siempre llegaba carga antes de que conviniera apagar. Con el volumen actual (5 ULI/día contra 17 de capacidad), lo que llega en esas 48 h no paga el gasto de esperarlo.</div>
+  <div class="callout prof"><div class="h">"¿Qué significa que el IC no contenga al 0?"</div>Que con 98,3 % de confianza la diferencia real entre las reglas es distinta de cero y está dentro de ese rango. Si lo contuviera, la conclusión válida sería "no hay evidencia de diferencia".</div>
+</div>
+
+<div class="sec"><div class="dot">c</div><h3>Qué mostrar en vivo</h3></div>
+<ol class="small">
+  <li>Abrir <code>CaserHorno.alp</code> y correr el experimento <b>Visual</b> (E0, semilla 1): se ve la cola crecer de lunes a viernes, el horno pasar por Acumulando → Calentando → Procesando → Enfriando y los gráficos de cola y energía en vivo.</li>
+  <li>Mostrar los parámetros (umbral, espera en vacío) y cambiar <code>horasEnVacio</code> a 0 para mostrar E3: el horno se apaga apenas se vacía la cola.</li>
+  <li>Mostrar la planilla con el test E3 − E0 y el gráfico de costos.</li>
+</ol>
+
+<div class="sec"><div class="dot">d</div><h3>Lo que falta y quién</h3></div>
+<ul class="check small">
+  <li class="no"><b>Correr en AnyLogic</b> <code>CorridasE0E3</code> con los parámetros finales y pasar el CSV (regenera planilla, gráficos y números del paper).</li>
+  <li class="no"><b>Correos de los cinco</b> y legajos de Constantini, Messina y Navos (paper y Cloud).</li>
+  <li class="no"><b>Subir a AnyLogic Cloud</b> desde el IDE (cuenta gratis) y pasar el link.</li>
+  <li class="no"><b>Grabar el video</b>: problema → escenarios → resultado → AnyLogic corriendo.</li>
+  <li class="no"><b>Definir quiénes van</b> a la defensa (10 u 11/11) y practicar la demo.</li>
+</ul>
+<div class="foot">Fuentes: <code>materias/SIM/entregables/TPI/caser/</code> (07-modelo-anylogic.md, 08-validacion-etapa1.md, informe/tpi-caser.tex, TPI_Caser_Resultados_Corridas.xlsx). Números de las 120 corridas del verificador, que reproduce campo por campo a AnyLogic; se actualizan con la corrida final del IDE.</div>
+</div>
+
+</body>
+</html>
