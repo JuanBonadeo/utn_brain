@@ -317,11 +317,32 @@ E3 & Apagar apenas se vacía la cola & 79 & --- & 0 h \\
 
 \textbf{Horizonte y calentamiento.} El sistema no tiene un instante natural de fin, por lo que se trata como no
 terminante: cada réplica descarta un período de calentamiento y mide 365 días. El período se determinó con el
-método gráfico de \citet{welch1983} sobre corridas piloto sin calentamiento \pendiente{resultado de Welch: corte y
-justificación de los 90 días; figura tpi-caser-welch.png}.
+método gráfico de \citet{welch1983} \citep[cap.~9]{law2015} sobre corridas piloto de tres años sin
+calentamiento, con la serie mensual de los kilos en cola, las horas a temperatura y el costo
+(figura~\ref{fig:welch}). Con 10 réplicas la variabilidad mensual (coeficiente de variación de un 13\,\%) es del
+mismo orden que el transitorio y no permite decidir, por lo que el análisis se repitió con 100 réplicas. Lo
+único que se aparta del régimen es el primer mes: arrancando con la cola vacía, la primera campaña se enciende
+recién a los 16 días y ese mes tiene un cuarto menos de horas a temperatura. Desde el segundo mes todas las
+medidas quedan entre el 97 y el 103\,\% de su nivel estable, y una prueba $t$ mes a mes contra ese nivel solo
+detecta el mes~1. Las medias móviles se aplanan más tarde (mes 4 con $w = 3$, mes 7 con $w = 6$) porque la
+ventana arrastra el primer mes $w$ períodos hacia adelante. El transitorio dura, entonces, un ciclo de campaña.
+El modelo descarta 90 días, tres veces ese transitorio. Como control, un año de E0 medido tras 90 o 180 días de calentamiento
+no difiere significativamente del medido tras 365 días (costo: $+1{,}1 \pm 4{,}1$ y $+2{,}5 \pm 2{,}7$~M\$).
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.86\textwidth]{tpi-caser-welch.png}
+\caption{Método de Welch sobre E0 sin calentamiento: media entre réplicas por mes y medias móviles ($w = 3$ y
+$w = 6$), con 10 réplicas (izquierda) y 100 réplicas (derecha).}
+\label{fig:welch}
+\end{figure}
 
 \textbf{Réplicas y números aleatorios comunes.} Cada escenario se corre con 30 réplicas; la réplica $j$ usa la
-semilla $j$ en los cuatro escenarios \pendiente{precisión relativa lograda con 30 réplicas}. En AnyLogic las
+semilla $j$ en los cuatro escenarios. Con 30 réplicas, los nueve intervalos de las medidas primarias excluyen
+al cero, de modo que el signo de cada efecto queda establecido. La diferencia que sostiene la recomendación, el
+costo de E3 contra E0, alcanza una precisión relativa del 9,9\,\% (semiamplitud sobre $|\bar{D}|$). Llevar a
+$\pm 10$\,\% las diferencias más chicas, como la espera en E2 ($-0{,}96$ días), exigiría cientos de réplicas, según
+$n^{*} = n\,(h/h^{*})^{2}$, sin cambiar ninguna conclusión. En AnyLogic las
 120 corridas se ejecutan con un experimento de variación de parámetros, con la semilla como parámetro y no
 con la opción de replicaciones del experimento, que asigna semillas al azar.
 

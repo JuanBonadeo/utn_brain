@@ -145,10 +145,11 @@ Cada corrida escribe una fila con 33 campos (`encabezado()` en `Main`) y la impr
 .venv/Scripts/python.exe -I materias/SIM/entregables/TPI/caser/modelo/analizar_corridas.py materias/SIM/entregables/TPI/caser/modelo/corridas_horno.csv
 ```
 
-Primarias (Bonferroni, α = 0,05/3): kWh por kg, kg promedio en cola (producto inmovilizado antes del horno) y
-espera media. Secundarias al 95 %: espera p90, campañas por mes, encendidos por prioridad, ULI por campaña,
-fracción del tiempo a temperatura y $ de energía por kg. El nivel de servicio y el capital en pesos entran en la
-Etapa 2.
+Primarias (Bonferroni, α = 0,05/3; las del informe desde el 07/11): costo relevante del año (luz + GLP + capital),
+espera media y kg promedio en cola. Secundarias al 95 %: energía, capital, espera p90, kWh por kg, GLP, campañas
+por mes, encendidos por prioridad, ULI por campaña y fracción del tiempo a temperatura. El nivel de servicio queda
+para la Etapa 2 (trabajo futuro). Pilotos (calentamiento y réplicas): `09-pilotos.md`. Sensibilidad de costos:
+`modelo/sensibilidad_costos.py`. Planilla: `modelo/construir_planilla.py --verificar`.
 
 ## 6. Primera sesión en el IDE (checklist)
 

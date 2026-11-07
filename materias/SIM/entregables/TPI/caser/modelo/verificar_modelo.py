@@ -20,101 +20,100 @@ import subprocess
 import sys
 import tempfile
 import xml.etree.ElementTree as ET
+from types import SimpleNamespace
 from pathlib import Path
 
 sys.stdout.reconfigure(encoding="utf-8")
 AQUI = Path(__file__).resolve().parent
-args = [a for a in sys.argv[1:] if not a.startswith("--")]
-LARGO = "--largo" in sys.argv
-ALP = Path(args[0]).resolve() if args else AQUI / "CaserHorno.alp"
 AL = Path(os.environ.get("ANYLOGIC_HOME", r"D:\AnyLogic 8.9 Personal Learning Edition"))
 JAVAC, JAVA = AL / "jre" / "bin" / "javac.exe", AL / "jre" / "bin" / "java.exe"
-if not JAVAC.exists():
-    sys.exit(f"No encuentro javac en {JAVAC}. Definir ANYLOGIC_HOME.")
+
+
+def jdk():
+    if not JAVAC.exists():
+        sys.exit(f"No encuentro javac en {JAVAC}. Definir ANYLOGIC_HOME.")
 
 
 def code(e):
     return (e.text or "").strip() if e is not None else ""
 
 
-# ------------------------------------------------------------------ 1. estructura
-root = ET.parse(ALP).getroot()
-model = root.find("Model")
-clases = {c.findtext("Name"): c for c in model.findall("ActiveObjectClasses/ActiveObjectClass")}
-assert set(clases) == {"Main", "ULI"}, clases.keys()
-main, uli = clases["Main"], clases["ULI"]
-assert model.findtext("ModelTimeUnit") == "Hour"
-refs = {id(i) for tag in ("FreeformParamValue", "RangeVariationParamValue") for v in root.iter(tag) for i in v.findall("Id")}
-ids = [(i.text or "").strip() for i in root.iter("Id") if id(i) not in refs]
-dup = {i for i in ids if ids.count(i) > 1}
-assert not dup, f"Ids duplicados: {dup}"
-assert main.findtext("CurrentLevel") == main.find("Presentation/Level").findtext("Id"), "Main necesita un Level con el Id de CurrentLevel"
-bloques = {b.findtext("Name"): b for b in main.findall("EmbeddedObjects/EmbeddedObject")}
-assert {n: b.findtext("ActiveObjectClass/ClassName") for n, b in bloques.items()} == \
-    {"source": "Source", "colaHorno": "Wait", "horno": "Delay", "sink": "Sink"}
-bp = {n: {p.findtext("Name"): p for p in b.findall("Parameters/Parameter")} for n, b in bloques.items()}
-assert code(bp["horno"]["capacity"].find("Value/Code")) == "1"
-assert bp["horno"]["delayTime"].findtext("Value/Unit") == "HOUR"
-assert bp["source"]["newEntity"].findtext("Value/EntityEmbeddedObject/ActiveObjectClass/ClassName") == "ULI"
-conns = {(c.findtext("SourceEmbeddedObjectReference/ItemName"), c.findtext("TargetEmbeddedObjectReference/ItemName"))
-         for c in main.findall("Connectors/Connector")}
-assert conns == {("source", "colaHorno"), ("colaHorno", "horno"), ("horno", "sink")}, conns
-params = {v.findtext("Name"): v for v in main.findall("Variables/Variable[@Class='Parameter']")}
-pid = {v.findtext("Id"): n for n, v in params.items()}
-for e in model.findall("Experiments/*"):
-    if e.tag == "SimulationExperiment":
-        assert {p.findtext("ParameterName") for p in e.findall("Parameters/Parameter")} == set(params), e.findtext("Name")
-    else:
-        assert {pid[f.findtext("Id")] for f in e.findall("FreeformParamValue")} == set(params), e.findtext("Name")
-exps = {e.findtext("Name"): e for e in model.findall("Experiments/*")}
-assert set(exps) == {"Visual", "VerificacionMM1", "CorridasE0E3"}
-cor = {pid[f.findtext("Id")]: f.findtext("Expression/Code") for f in exps["CorridasE0E3"].findall("FreeformParamValue")}
-assert exps["CorridasE0E3"].findtext("NumberOfRuns") == "120" and cor["semilla"] == "1 + index % 30"
-assert all(r.findtext("ReturnModificator") in ("VOID", "RETURNS_VALUE") for r in main.findall("Functions/Function"))
-# Los eventos se programan solo con restart(): tienen que ser "User control". Con "occuresOnce" el motor los
-# agenda al arrancar el agente y pisa el restart(0) de inicializar() (07/10/2026: sin llegadas en el IDE).
-modos = {e.findtext("Name"): e.find("Properties").get("Mode") for e in main.findall("Events/Event")}
-assert all(m == "userControls" for m in modos.values()), f"eventos que no son userControls: {modos}"
-print("OK 1/3: XML bien formado, Ids unicos, Source->Wait->Delay(1)->Sink, experimentos completos")
+def extraer(alp):
+    """1. Estructura del .alp (asserts) y extracción del Java de Main/ULI. Devuelve todo lo extraído."""
+    # ------------------------------------------------------------------ 1. estructura
+    root = ET.parse(alp).getroot()
+    model = root.find("Model")
+    clases = {c.findtext("Name"): c for c in model.findall("ActiveObjectClasses/ActiveObjectClass")}
+    assert set(clases) == {"Main", "ULI"}, clases.keys()
+    main, uli = clases["Main"], clases["ULI"]
+    assert model.findtext("ModelTimeUnit") == "Hour"
+    refs = {id(i) for tag in ("FreeformParamValue", "RangeVariationParamValue") for v in root.iter(tag) for i in v.findall("Id")}
+    ids = [(i.text or "").strip() for i in root.iter("Id") if id(i) not in refs]
+    dup = {i for i in ids if ids.count(i) > 1}
+    assert not dup, f"Ids duplicados: {dup}"
+    assert main.findtext("CurrentLevel") == main.find("Presentation/Level").findtext("Id"), "Main necesita un Level con el Id de CurrentLevel"
+    bloques = {b.findtext("Name"): b for b in main.findall("EmbeddedObjects/EmbeddedObject")}
+    assert {n: b.findtext("ActiveObjectClass/ClassName") for n, b in bloques.items()} == \
+        {"source": "Source", "colaHorno": "Wait", "horno": "Delay", "sink": "Sink"}
+    bp = {n: {p.findtext("Name"): p for p in b.findall("Parameters/Parameter")} for n, b in bloques.items()}
+    assert code(bp["horno"]["capacity"].find("Value/Code")) == "1"
+    assert bp["horno"]["delayTime"].findtext("Value/Unit") == "HOUR"
+    assert bp["source"]["newEntity"].findtext("Value/EntityEmbeddedObject/ActiveObjectClass/ClassName") == "ULI"
+    conns = {(c.findtext("SourceEmbeddedObjectReference/ItemName"), c.findtext("TargetEmbeddedObjectReference/ItemName"))
+             for c in main.findall("Connectors/Connector")}
+    assert conns == {("source", "colaHorno"), ("colaHorno", "horno"), ("horno", "sink")}, conns
+    params = {v.findtext("Name"): v for v in main.findall("Variables/Variable[@Class='Parameter']")}
+    pid = {v.findtext("Id"): n for n, v in params.items()}
+    for e in model.findall("Experiments/*"):
+        if e.tag == "SimulationExperiment":
+            assert {p.findtext("ParameterName") for p in e.findall("Parameters/Parameter")} == set(params), e.findtext("Name")
+        else:
+            assert {pid[f.findtext("Id")] for f in e.findall("FreeformParamValue")} == set(params), e.findtext("Name")
+    exps = {e.findtext("Name"): e for e in model.findall("Experiments/*")}
+    assert set(exps) == {"Visual", "VerificacionMM1", "CorridasE0E3"}
+    cor = {pid[f.findtext("Id")]: f.findtext("Expression/Code") for f in exps["CorridasE0E3"].findall("FreeformParamValue")}
+    assert exps["CorridasE0E3"].findtext("NumberOfRuns") == "120" and cor["semilla"] == "1 + index % 30"
+    assert all(r.findtext("ReturnModificator") in ("VOID", "RETURNS_VALUE") for r in main.findall("Functions/Function"))
+    # Los eventos se programan solo con restart(): tienen que ser "User control". Con "occuresOnce" el motor los
+    # agenda al arrancar el agente y pisa el restart(0) de inicializar() (07/10/2026: sin llegadas en el IDE).
+    modos = {e.findtext("Name"): e.find("Properties").get("Mode") for e in main.findall("Events/Event")}
+    assert all(m == "userControls" for m in modos.values()), f"eventos que no son userControls: {modos}"
 
-# ------------------------------------------------------------------ extracción de Java
-campos = []
-for v in main.findall("Variables/Variable"):
-    pr = v.find("Properties")
-    val = code(pr.find("DefaultValue/Code")) if v.get("Class") == "Parameter" else code(pr.find("InitialValue/Code"))
-    campos.append(f"{pr.findtext('Type')} {v.findtext('Name')} = {val};")
-funcs = []
-for f in main.findall("Functions/Function"):
-    a = ", ".join(p.findtext("Type") + " " + p.findtext("Name") for p in f.findall("Parameter"))
-    funcs.append(f"public {f.findtext('ReturnType')} {f.findtext('Name')}({a}) {{\n{code(f.find('Body'))}\n}}")
-eventos = [(e.findtext("Name"), code(e.find("Action"))) for e in main.findall("Events/Event")]
-uli_campos = [f"{v.findtext('Properties/Type')} {v.findtext('Name')} = {code(v.find('Properties/InitialValue/Code'))};"
-              for v in uli.findall("Variables/Variable")]
-on_cola = code(bp["colaHorno"]["onEnter"].find("Value/Code"))
-on_sink = code(bp["sink"]["onEnter"].find("Value/Code"))
-delay_expr = code(bp["horno"]["delayTime"].find("Value/Code"))
-startup = code(main.find("StartupCode"))
-# Expresiones de la presentación, el statechart y los gráficos: se compilan contra la API (no se ejecutan).
-expr_pres = []
-for el in main.find("Presentation").iter():
-    if el.tag in ("XCode", "YCode", "VisibleCode", "FillColorCode", "LineColorCode", "TextCode", "ColorCode", "WidthCode", "HeightCode"):
-        expr_pres.append(code(el))
-    elif el.tag == "ReplicationCode":
-        expr_pres.append("(int) (" + code(el.find("Code")) + ")")
-    elif el.tag == "Expression2":
-        expr_pres.append("(double) (" + code(el) + ")")
-for t in main.findall("StatechartElements/StatechartElement[@Class='Transition']"):
-    expr_pres.append("(boolean) (" + code(t.find("Properties/Condition")) + ")")
-presentacion = "void presentacion(int index) {" + " ".join(f"Object p{i} = {e};" for i, e in enumerate(expr_pres)) + "}"
-cuerpo = "\n".join(campos + funcs)
+    # ------------------------------------------------------------------ extracción de Java
+    campos = []
+    for v in main.findall("Variables/Variable"):
+        pr = v.find("Properties")
+        val = code(pr.find("DefaultValue/Code")) if v.get("Class") == "Parameter" else code(pr.find("InitialValue/Code"))
+        campos.append(f"{pr.findtext('Type')} {v.findtext('Name')} = {val};")
+    funcs = []
+    for f in main.findall("Functions/Function"):
+        a = ", ".join(p.findtext("Type") + " " + p.findtext("Name") for p in f.findall("Parameter"))
+        funcs.append(f"public {f.findtext('ReturnType')} {f.findtext('Name')}({a}) {{\n{code(f.find('Body'))}\n}}")
+    eventos = [(e.findtext("Name"), code(e.find("Action"))) for e in main.findall("Events/Event")]
+    uli_campos = [f"{v.findtext('Properties/Type')} {v.findtext('Name')} = {code(v.find('Properties/InitialValue/Code'))};"
+                  for v in uli.findall("Variables/Variable")]
+    on_cola = code(bp["colaHorno"]["onEnter"].find("Value/Code"))
+    on_sink = code(bp["sink"]["onEnter"].find("Value/Code"))
+    delay_expr = code(bp["horno"]["delayTime"].find("Value/Code"))
+    startup = code(main.find("StartupCode"))
+    # Expresiones de la presentación, el statechart y los gráficos: se compilan contra la API (no se ejecutan).
+    expr_pres = []
+    for el in main.find("Presentation").iter():
+        if el.tag in ("XCode", "YCode", "VisibleCode", "FillColorCode", "LineColorCode", "TextCode", "ColorCode", "WidthCode", "HeightCode"):
+            expr_pres.append(code(el))
+        elif el.tag == "ReplicationCode":
+            expr_pres.append("(int) (" + code(el.find("Code")) + ")")
+        elif el.tag == "Expression2":
+            expr_pres.append("(double) (" + code(el) + ")")
+    for t in main.findall("StatechartElements/StatechartElement[@Class='Transition']"):
+        expr_pres.append("(boolean) (" + code(t.find("Properties/Condition")) + ")")
+    presentacion = "void presentacion(int index) {" + " ".join(f"Object p{i} = {e};" for i, e in enumerate(expr_pres)) + "}"
+    cuerpo = "\n".join(campos + funcs)
+    return SimpleNamespace(**locals())
 
-tmp = tempfile.TemporaryDirectory(prefix="caser-check-")
-d = Path(tmp.name)
-jars = [str(j) for j in (AL / "plugins").rglob("*.jar") if "anylogic" in str(j).lower()]
-cp = ";".join(jars)
 
 # ------------------------------------------------------------------ 2. compilación contra la API
-api = """import com.anylogic.engine.*;
+API = """import com.anylogic.engine.*;
 import com.anylogic.engine.analysis.*;
 import com.anylogic.libraries.processmodeling.*;
 public class CaserApiCheck extends Agent {
@@ -124,21 +123,18 @@ EventTimeout %EVENTOS%;
 %CUERPO%
 void callbacks(Agent agent) { %ONCOLA% %ONSINK% double dt = %DELAY%; %STARTUP% %ACCIONES% }
 %PRESENTACION%
-}""".replace("%ULI%", " ".join(uli_campos)).replace("%EVENTOS%", ", ".join(n for n, _ in eventos)) \
-   .replace("%CUERPO%", cuerpo).replace("%ONCOLA%", on_cola).replace("%ONSINK%", on_sink) \
-   .replace("%DELAY%", delay_expr).replace("%STARTUP%", startup).replace("%ACCIONES%", " ".join(a for _, a in eventos))    .replace("%PRESENTACION%", presentacion)
-(d / "CaserApiCheck.java").write_text(api, encoding="utf-8")
-# El classpath completo supera el largo máximo de una línea de comando en Windows: va en un @argfile.
-(d / "javac.args").write_text('-cp "' + cp.replace("\\", "/") + '"', encoding="utf-8")
-r = subprocess.run([str(JAVAC), "-encoding", "UTF-8", "-nowarn", "@" + str(d / "javac.args"), "-d", str(d), str(d / "CaserApiCheck.java")],
-                   capture_output=True, text=True)
-if r.returncode:
-    print(r.stdout, r.stderr)
-    sys.exit("FALLA 2/3: las funciones no compilan contra la API de AnyLogic")
-print(f"OK 2/3: funciones, eventos, callbacks y {len(expr_pres)} expresiones de presentacion/statechart compilan contra la API de AnyLogic 8.9")
+}"""
+
+
+def fuente_api(x):
+    return (API.replace("%ULI%", " ".join(x.uli_campos)).replace("%EVENTOS%", ", ".join(n for n, _ in x.eventos))
+            .replace("%CUERPO%", x.cuerpo).replace("%ONCOLA%", x.on_cola).replace("%ONSINK%", x.on_sink)
+            .replace("%DELAY%", x.delay_expr).replace("%STARTUP%", x.startup).replace("%ACCIONES%", " ".join(a for _, a in x.eventos))
+            .replace("%PRESENTACION%", x.presentacion))
+
 
 # ------------------------------------------------------------------ 3. motor mínimo + pruebas
-harness = r"""import java.util.*;
+HARNESS = r"""import java.util.*;
 public class CaserLogicCheck {
 static class Agent {}
 static class ULI extends Agent { %ULI% }
@@ -288,26 +284,64 @@ public static void main(String[] a) {
   }
 }
 }"""
-acciones_decl = ", ".join(n for n, _ in eventos)
-acciones_init = " ".join(f"{n} = new EventTimeout(); {n}.accion = () -> {{ {a} }};" for n, a in eventos)
-harness = (harness.replace("%ULI%", " ".join(uli_campos)).replace("%DELAY%", delay_expr).replace("%ONCOLA%", on_cola)
-           .replace("%ONSINK%", on_sink).replace("%EVENTOS_DECL%", acciones_decl).replace("%EVENTOS_INIT%", acciones_init)
-           .replace("%STARTUP%", startup).replace("%CUERPO%", cuerpo).replace("%DIAS_LARGO%", "40000" if LARGO else "12000")
-           .replace("%CORRIDAS%", " ".join(f"m.{k} = {v};" for k, v in cor.items() if v and k != "archivoSalida")))
-(d / "CaserLogicCheck.java").write_text(harness, encoding="utf-8")
-r = subprocess.run([str(JAVAC), "-encoding", "UTF-8", "-nowarn", "-d", str(d), str(d / "CaserLogicCheck.java")], capture_output=True, text=True)
-if r.returncode:
-    print(r.stdout, r.stderr)
-    sys.exit("FALLA: el harness no compila")
-CSV_H = AQUI / "corridas_horno_harness.csv"
-r = subprocess.run([str(JAVA), "-Xss8m", "-cp", str(d), "CaserLogicCheck", str(CSV_H)], capture_output=True, text=True)
-print(r.stdout, end="")
-if r.returncode:
-    print(r.stderr)
-    sys.exit("FALLA 3/3: pruebas de logica")
-r = subprocess.run([sys.executable, "-I", str(AQUI / "analizar_corridas.py"), str(CSV_H)], capture_output=True, text=True, encoding="utf-8")
-if r.returncode:
-    print(r.stdout, r.stderr)
-    sys.exit("FALLA: el analizador no procesa el CSV del harness")
-print(f"OK: {CSV_H.name} (120 corridas del harness con las expresiones de CorridasE0E3) y analizar_corridas.py lo procesa.")
-print("    Ese CSV es la referencia para comparar fila por fila con el de AnyLogic; no es un resultado del TPI.")
+
+
+def fuente_harness(x, largo=False):
+    """Fuente Java de CaserLogicCheck: el motor mínimo con las funciones del .alp y las pruebas (main)."""
+    acciones_decl = ", ".join(n for n, _ in x.eventos)
+    acciones_init = " ".join(f"{n} = new EventTimeout(); {n}.accion = () -> {{ {a} }};" for n, a in x.eventos)
+    return (HARNESS.replace("%ULI%", " ".join(x.uli_campos)).replace("%DELAY%", x.delay_expr).replace("%ONCOLA%", x.on_cola)
+            .replace("%ONSINK%", x.on_sink).replace("%EVENTOS_DECL%", acciones_decl).replace("%EVENTOS_INIT%", acciones_init)
+            .replace("%STARTUP%", x.startup).replace("%CUERPO%", x.cuerpo).replace("%DIAS_LARGO%", "40000" if largo else "12000")
+            .replace("%CORRIDAS%", " ".join(f"m.{k} = {v};" for k, v in x.cor.items() if v and k != "archivoSalida")))
+
+
+def compilar_harness(x, d, largo=False):
+    """Escribe y compila CaserLogicCheck en la carpeta d (lo reusa pilotos.py)."""
+    (d / "CaserLogicCheck.java").write_text(fuente_harness(x, largo), encoding="utf-8")
+    r = subprocess.run([str(JAVAC), "-encoding", "UTF-8", "-nowarn", "-d", str(d), str(d / "CaserLogicCheck.java")], capture_output=True, text=True)
+    if r.returncode:
+        print(r.stdout, r.stderr)
+        sys.exit("FALLA: el harness no compila")
+
+
+def main():
+    jdk()
+    args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    LARGO = "--largo" in sys.argv
+    ALP = Path(args[0]).resolve() if args else AQUI / "CaserHorno.alp"
+    x = extraer(ALP)
+    print("OK 1/3: XML bien formado, Ids unicos, Source->Wait->Delay(1)->Sink, experimentos completos")
+
+    tmp = tempfile.TemporaryDirectory(prefix="caser-check-")
+    d = Path(tmp.name)
+    jars = [str(j) for j in (AL / "plugins").rglob("*.jar") if "anylogic" in str(j).lower()]
+    cp = ";".join(jars)
+
+    (d / "CaserApiCheck.java").write_text(fuente_api(x), encoding="utf-8")
+    # El classpath completo supera el largo máximo de una línea de comando en Windows: va en un @argfile.
+    (d / "javac.args").write_text('-cp "' + cp.replace("\\", "/") + '"', encoding="utf-8")
+    r = subprocess.run([str(JAVAC), "-encoding", "UTF-8", "-nowarn", "@" + str(d / "javac.args"), "-d", str(d), str(d / "CaserApiCheck.java")],
+                       capture_output=True, text=True)
+    if r.returncode:
+        print(r.stdout, r.stderr)
+        sys.exit("FALLA 2/3: las funciones no compilan contra la API de AnyLogic")
+    print(f"OK 2/3: funciones, eventos, callbacks y {len(x.expr_pres)} expresiones de presentacion/statechart compilan contra la API de AnyLogic 8.9")
+
+    compilar_harness(x, d, LARGO)
+    CSV_H = AQUI / "corridas_horno_harness.csv"
+    r = subprocess.run([str(JAVA), "-Xss8m", "-cp", str(d), "CaserLogicCheck", str(CSV_H)], capture_output=True, text=True)
+    print(r.stdout, end="")
+    if r.returncode:
+        print(r.stderr)
+        sys.exit("FALLA 3/3: pruebas de logica")
+    r = subprocess.run([sys.executable, "-I", str(AQUI / "analizar_corridas.py"), str(CSV_H)], capture_output=True, text=True, encoding="utf-8")
+    if r.returncode:
+        print(r.stdout, r.stderr)
+        sys.exit("FALLA: el analizador no procesa el CSV del harness")
+    print(f"OK: {CSV_H.name} (120 corridas del harness con las expresiones de CorridasE0E3) y analizar_corridas.py lo procesa.")
+    print("    Ese CSV es la referencia para comparar fila por fila con el de AnyLogic; no es un resultado del TPI.")
+
+
+if __name__ == "__main__":
+    main()
