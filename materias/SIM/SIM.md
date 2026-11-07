@@ -2814,7 +2814,7 @@ ULI lavadas.
 **Pendiente para la entrega** (defensa 10-11/11):
 1. ~~Correr `CorridasE0E3` en el IDE~~ hecho el 07/11: `modelo/corridas_horno.csv` es idéntico byte a byte a
    `corridas_horno_harness.csv`; la planilla ya sale del CSV de AnyLogic.
-2. Correos de los cinco autores y legajos de Constantini, Messina y Navos.
+2. ~~Correos y legajos~~ cargados en el paper el 07/11.
 3. Subida a AnyLogic Cloud y link en el paper. Video en YouTube.
 
 Historial: el docente aprobó la propuesta el 27/09 y la especificación (entrega previa) se entregó ese día.
