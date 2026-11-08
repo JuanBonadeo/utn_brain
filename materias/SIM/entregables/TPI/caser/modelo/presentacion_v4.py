@@ -142,7 +142,8 @@ def radio(name, X, Y, w, h, opciones, action, default):
 VARS = [("visHoras", "double[]", "new double[6]"), ("visAreaKg", "double", "0"), ("visEncendidos", "int", "0"),
         ("visSumaEspera", "double", "0"), ("visNEspera", "int", "0"), ("tUltimoVis", "double", "0"),
         ("histEstado", "int[]", "new int[360]"), ("histIdx", "int", "0"), ("histTick", "int", "0"),
-        ("visTratadas", "int", "0"), ("visKg", "double", "0"), ("kgSalidaTotal", "double", "0")]
+        ("visTratadas", "int", "0"), ("visKg", "double", "0"), ("kgSalidaTotal", "double", "0"),
+        ("tInicioVis", "double", "0")]
 xml_vars = ""
 for k, (n, t, v) in enumerate(VARS):
     xml_vars += (f'<Variable Class="PlainVariable"><Id>{nid()}</Id><Name>{n}</Name><X>1400</X><Y>{1200 + 22 * k}</Y>'
@@ -213,6 +214,9 @@ FUNCS = [
      "java.time.LocalDate d = java.time.LocalDate.of(2025, 8, 18).plusDays((long) Math.floor(time() / 24));\n"
      "String f = d.format(java.time.format.DateTimeFormatter.ofPattern(\"EEEE d 'de' MMMM 'de' yyyy\", new java.util.Locale(\"es\", \"AR\")));\n"
      "return f.substring(0, 1).toUpperCase() + f.substring(1) + String.format(\"  ·  %02d:00 h\", (int) Math.floor(time() % 24));"),
+    ("fechaCorta", "String", [("t", "double")],
+     "return java.time.LocalDateTime.of(2025, 8, 18, 0, 0).plusMinutes(Math.round(t * 60))"
+     ".format(java.time.format.DateTimeFormatter.ofPattern(\"EEE dd/MM HH:mm\", new java.util.Locale(\"es\", \"AR\")));"),
     ("plata", "String", [("pesos", "double")],
      "return String.format(new java.util.Locale(\"es\", \"AR\"), \"$ %.1f M\", pesos / 1e6);"),
     ("descEscenario", "String", [],
@@ -227,7 +231,7 @@ FUNCS = [
      "return escenario.equals(\"E1\") ? 1 : escenario.equals(\"E2\") ? 2 : escenario.equals(\"E3\") ? 3 : 0;"),
     ("resetVis", "void", [],
      "acumularVis();\nfor (int k = 0; k < 6; k++) visHoras[k] = 0;\n"
-     "visAreaKg = 0; visEncendidos = 0; visSumaEspera = 0; visNEspera = 0; visTratadas = 0; visKg = 0;"),
+     "visAreaKg = 0; visEncendidos = 0; visSumaEspera = 0; visNEspera = 0; visTratadas = 0; visKg = 0;\ntInicioVis = time();"),
     ("cambiarEscenario", "void", [("v", "int")],
      "// Solo para la animación: cambia la regla en vivo y reinicia los contadores de presentación.\n"
      "acumularVis();\n"
@@ -309,7 +313,7 @@ add(text("titulo", 24, 12, "Caser · Horno de cementación y temple", color=WHIT
 add(text("txtEscenario", 24, 42, "escenario", color=HEAD2, size=12, code="descEscenario()"))
 add(text("txtFecha", W - 24, 12, "fecha", color=WHITE, size=16, bold=True, align="RIGHT", code="fechaTexto()"))
 add(text("txtDia", W - 24, 42, "día", color=HEAD2, size=12, align="RIGHT",
-         code='"día " + (int) Math.floor(time() / 24 + 1) + " de simulación  ·  velocidad: " + '
+         code='"día " + (int) Math.floor(time() / 24 + 1) + " de 730  ·  contadores desde " + fechaCorta(tInicioVis) + " (" + escenario + ")  ·  velocidad: " + '
               '(getEngine().getRealTimeScale() >= 1000 ? "máxima" : getEngine().getRealTimeScale() >= 100 ? '
               '"1 semana por segundo" : getEngine().getRealTimeScale() >= 20 ? "1 día por segundo" : '
               'String.format("%.0f h por segundo", getEngine().getRealTimeScale()))'))
@@ -462,6 +466,8 @@ add(text("txtGrafico", 432, 490, "ULI en cola contra el umbral", color=INK, size
 PX0, PY0, PW, PHh = 904, 482, 472, 230
 add(rect("zonaPlata", PX0, PY0, PW, PHh, fill=WHITE, line=LINE, radius=10))
 add(text("txtPlata", PX0 + 12, PY0 + 8, "¿Dónde se va la plata?", color=INK, size=13, bold=True))
+add(text("txtPlataDesde", PX0 + PW - 12, PY0 + 10, "", color=MUTED, size=10, align="RIGHT",
+         code='"desde " + fechaCorta(tInicioVis) + " · " + escenario'))
 add(text("txtPlataTiempo", PX0 + 12, PY0 + 30, "En qué estuvo el horno (% del tiempo)", color=MUTED, size=11, bold=True))
 BX, BY, BW, BH = PX0 + 12, PY0 + 48, PW - 24, 24
 add(rect("barraFondo", BX, BY, BW, BH, fill="#eceef1", line=None))
