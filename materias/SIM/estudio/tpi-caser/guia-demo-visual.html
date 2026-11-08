@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Guía de la animación · TPI Caser</title>
+<style>
+:root{ --ink:#1f2733; --muted:#6b7480; --line:#e3e6ea; --soft:#f6f7f9;
+  --a:#2456c9; --as:#eef3fd; --am:#c9d8f6; --b:#0f8a7e; --bs:#ebf6f4; --bm:#bfe3de;
+  --c:#c26a0a; --cs:#fdf4e8; --cm:#f1d5b0; --d:#7b3fc4; --ds:#f4effc; --dm:#dccbf3;
+  --ok:#15803d; --bad:#b91c1c; }
+@page{ size:A4; margin:13mm 14mm 14mm; }
+*{ box-sizing:border-box; }
+html{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+body{ margin:0; color:var(--ink); font-family:"Segoe UI","Helvetica Neue",Arial,sans-serif; font-size:9.6pt; line-height:1.5; }
+p{ margin:0 0 6px; } ul,ol{ margin:2px 0 6px; padding-left:18px; } li{ margin-bottom:2px; }
+b{ font-weight:650; } h1,h2,h3,h4{ margin:0; }
+.small{ font-size:8.6pt; } .muted{ color:var(--muted); }
+code{ font-family:Consolas,monospace; font-size:8.6pt; background:var(--soft); border-radius:4px; padding:0 3px; }
+.cover{ border-radius:14px; padding:18px 22px; color:#fff; background:linear-gradient(120deg,#1d2b45,#24406f 55%,#2456c9); margin-bottom:12px; }
+.cover .k{ font-size:8.5pt; letter-spacing:.14em; text-transform:uppercase; opacity:.8; }
+.cover h1{ font-size:22pt; margin:4px 0 2px; } .cover .s{ opacity:.9; font-size:10.5pt; }
+.part{ break-before:page; }
+.band{ display:flex; gap:14px; align-items:center; border-radius:12px; padding:10px 16px; margin:0 0 10px; color:#fff; }
+.band .n{ font-size:26pt; font-weight:800; line-height:1; min-width:46px; } .band .k{ font-size:8pt; letter-spacing:.14em; text-transform:uppercase; opacity:.85; }
+.band h2{ font-size:15pt; }
+.pa .band{ background:linear-gradient(110deg,#1e48ad,#2f6ae0); } .pb .band{ background:linear-gradient(110deg,#0b7268,#14a394); }
+.pc .band{ background:linear-gradient(110deg,#a85a06,#dd8a1f); } .pd .band{ background:linear-gradient(110deg,#5b2aa0,#8d55d6); }
+.fig{ border:1px solid var(--line); border-radius:10px; padding:6px; margin:6px 0 8px; break-inside:avoid; }
+.fig img{ width:100%; display:block; border-radius:6px; } .fig .cap{ font-size:8.4pt; color:var(--muted); margin-top:4px; }
+.w{ display:grid; grid-template-columns:30px 1fr; gap:0 10px; border:1px solid var(--line); border-radius:10px; padding:8px 10px; margin-bottom:7px; break-inside:avoid; }
+.w .num{ width:26px; height:26px; border-radius:50%; background:var(--a); color:#fff; font-weight:800; display:flex; align-items:center; justify-content:center; }
+.w h4{ font-size:10.4pt; margin-bottom:2px; }
+.w .say{ background:#fff8e6; border-left:3px solid #e0b43a; padding:3px 8px; margin-top:4px; font-size:9pt; }
+.w .say::before{ content:"Qué decir: "; font-weight:700; color:#a77b00; }
+.tag{ display:inline-block; font-size:7.5pt; font-weight:800; border-radius:10px; padding:0 7px; margin-left:6px; vertical-align:2px; }
+.t-clave{ background:#dcfce7; color:#166534; } .t-apoyo{ background:var(--soft); color:var(--muted); border:1px solid var(--line); }
+table{ border-collapse:collapse; width:100%; } table.t{ font-size:9pt; }
+table.t th{ text-align:left; font-size:7.9pt; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); border-bottom:1.5px solid var(--line); padding:4px 6px; }
+table.t td{ border-bottom:1px solid var(--line); padding:4px 6px; vertical-align:top; } table.t tr:last-child td{ border-bottom:none; }
+table.t tr.hl td{ background:#fff8e6; }
+.chip{ display:inline-block; width:11px; height:11px; border-radius:2px; vertical-align:-1px; margin-right:4px; }
+.step{ display:grid; grid-template-columns:96px 1fr; gap:0 12px; border-left:3px solid var(--c); padding:4px 0 8px 12px; margin-left:6px; break-inside:avoid; }
+.step .when{ font-weight:800; color:var(--c); font-size:9.2pt; } .step .what b{ color:var(--ink); }
+.step.key{ border-left-color:var(--bad); background:#fdf1f1; border-radius:0 8px 8px 0; }
+.step.key .when{ color:var(--bad); }
+.btn{ display:inline-block; font-size:8.4pt; font-weight:700; background:#e5e7eb; border:1px solid #c3c8cf; border-radius:4px; padding:0 6px; }
+.callout{ border:1px solid; border-radius:10px; padding:8px 12px; margin:8px 0; break-inside:avoid; }
+.callout .h{ font-weight:700; margin-bottom:3px; }
+.c1{ background:#fff8e6; border-color:#f0d58a; } .c2{ background:#fdf1f1; border-color:#f1c3c3; } .c3{ background:var(--as); border-color:var(--am); }
+.grid2{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="k">Simulación 2026 · TPI Caser · para el video y la defensa en vivo</div>
+  <h1>Guía de la animación</h1>
+  <div class="s">Qué es cada panel, qué decir de cada uno y el guion de la demo con lo que pasa, día por día, en la corrida de siempre (semilla 1).</div>
+</div>
+
+<div class="fig"><img src="../../figs/tpi-caser-visual.png"><div class="cap">La pantalla del experimento <code>Visual</code>. Los números de la parte 1 siguen el orden de lectura: de arriba a abajo y de izquierda a derecha.</div></div>
+
+<div class="callout c3">
+  <div class="h">Antes de empezar: la corrida es siempre la misma</div>
+  El experimento <code>Visual</code> usa la <b>semilla 1 fija</b>. Las llegadas, los pesos y las urgencias salen de generadores que arrancan siempre igual, así que <b>cada vez que lo corrés pasa exactamente lo mismo en las mismas fechas</b>. Por eso el guion de la parte 3 tiene fechas: podés ensayar y saber qué va a aparecer y cuándo. La animación muestra <b>una</b> historia posible; los números del estudio (las tarjetas de abajo) salen de <b>120 corridas de un año</b> con semillas distintas.
+</div>
+
+<!-- ============================================================ PARTE 1 -->
+<div class="part pa">
+<div class="band"><div class="n">1</div><div><div class="k">Parte 1</div><h2>Qué es cada cosa en la pantalla</h2></div></div>
+
+<div class="w"><div class="num">1</div><div>
+  <h4>Encabezado <span class="tag t-apoyo">contexto</span></h4>
+  La <b>fecha simulada</b> (el modelo arranca el lunes 18/08/2025, la primera semana de los datos reales de lavado), el día de simulación, la velocidad y, abajo a la izquierda, <b>el escenario activo</b> con su regla.
+  <div class="say">"Estamos simulando la planta desde el 18 de agosto de 2025, con la regla actual de la empresa."</div>
+</div></div>
+
+<div class="w"><div class="num">2</div><div>
+  <h4>Seis indicadores <span class="tag t-clave">clave</span></h4>
+  <b>Campañas</b> (veces que se prendió) · <b>ULI tratadas</b> · <b>espera media</b> antes del horno · <b>cuánto lleva la ULI más vieja</b> en la cola (la marquita de color sigue la misma escala que la cola) · <b>kWh por kg</b> (aparece desde las 5 t tratadas) · <b>costo acumulado</b> de luz, gas y capital. Cuentan desde el inicio o desde el último cambio de escenario.
+  <div class="say">"Arriba tenemos lo que medimos: cuántas veces se prende, cuánto espera el material y cuánto cuesta."</div>
+</div></div>
+
+<div class="w"><div class="num">3</div><div>
+  <h4>Lavado <span class="tag t-apoyo">entrada</span></h4>
+  ULI lavadas hasta ahora y la <b>semana real sorteada</b>: cada lunes el modelo elige una de las 52 semanas reales de lavado y la repite (bootstrap). Es la forma en que entran los datos reales.
+  <div class="say">"Las llegadas no son inventadas: cada semana se sortea una de las 52 semanas reales del registro de la empresa."</div>
+</div></div>
+
+<div class="w"><div class="num">4</div><div>
+  <h4>Cola del horno <span class="tag t-clave">clave</span></h4>
+  Un cuadradito por ULI esperando, <b>pintado según cuánto lleva</b>: <span class="chip" style="background:#6fbf80"></span>&lt; 3 días · <span class="chip" style="background:#f2c94c"></span>3–7 · <span class="chip" style="background:#f2994a"></span>7–14 · <span class="chip" style="background:#d64545"></span>&gt; 14. <span class="chip" style="background:#7c3aed"></span><b>Violeta = urgente</b> (pedido comprometido). Los casilleros punteados son los que <b>faltan para el umbral</b>, y el recuadro rojo marca la ULI número 79: cuando se llena, se prende el horno.
+  <div class="say">"Cada cuadradito es un cajón de unos 140 kg. Se van poniendo rojos mientras esperan; cuando se llena el casillero rojo, se prende el horno."</div>
+</div></div>
+
+<div class="w"><div class="num">5</div><div>
+  <h4>Horno <span class="tag t-clave">clave</span></h4>
+  El color y el texto dicen el <b>estado</b> (parte 2). La barra blanca avanza en las fases con tiempo (calentando, caliente sin carga, enfriando; en Acumulando muestra cuánto falta para el umbral). En la cinta se ve la ULI que se está tratando, con su color. Las resistencias y el termómetro suben y bajan con la temperatura, que es <b>ilustrativa</b> (≈ 900 °C a régimen). Abajo, la campaña en curso.
+  <div class="say">"El horno tarda 36 horas en calentarse y 48 en enfriarse; mientras está caliente gasta luz y gas aunque no tenga nada adentro."</div>
+</div></div>
+
+<div class="w"><div class="num">6</div><div>
+  <h4>Salida <span class="tag t-apoyo">salida</span></h4>
+  ULI tratadas y toneladas. Después del horno viene el zincado, que queda fuera del modelo.
+</div></div>
+
+<div class="w"><div class="num">7</div><div>
+  <h4>Lógica en AnyLogic <span class="tag t-apoyo">para el profe</span></h4>
+  Los bloques reales de la Process Modeling Library con sus contadores: <code>Source</code> crea las ULI, <code>Wait</code> es la cola (solo deja salir una ULI cuando el horno está caliente; urgentes primero), <code>Delay</code> es el horno (capacidad 1, 85 min por ULI) y <code>Sink</code> la salida. Lo que se ve arriba es la animación de estos bloques.
+  <div class="say">"Por dentro es Source, Wait, Delay y Sink. Usamos Wait y no Queue porque el horno decide cuándo carga: solo con temperatura."</div>
+</div></div>
+
+<div class="w"><div class="num">8</div><div>
+  <h4>Statechart del horno <span class="tag t-clave">clave</span></h4>
+  Los seis estados y sus transiciones; el estado actual queda marcado en rojo. Refleja la variable <code>estado</code> del modelo (no decide nada: la lógica está en las funciones).
+  <div class="say">"Este es el ciclo del horno: apagado, acumulando, calentando, procesando y enfriando."</div>
+</div></div>
+
+<div class="w"><div class="num">9</div><div>
+  <h4>Cinta de tiempo · últimos 60 días <span class="tag t-clave">clave</span></h4>
+  Una franja de color cada 4 horas con el estado del horno: se leen de un vistazo las campañas, los encendidos por urgencia y, sobre todo, <b>las manchas salmón: horno caliente sin nada adentro</b>.
+  <div class="say">"Cada mancha salmón es el horno caliente esperando algo que no llega. Es plata que se va sin producir."</div>
+</div></div>
+
+<div class="w"><div class="num">10</div><div>
+  <h4>ULI en cola contra el umbral <span class="tag t-apoyo">apoyo</span></h4>
+  La cola en los últimos 60 días (naranja) contra el umbral de 79 (rojo). Se ve el diente de sierra: la cola sube hasta el umbral, se prende el horno y la cola baja.
+</div></div>
+
+<div class="w"><div class="num">11</div><div>
+  <h4>¿Dónde se va la plata? <span class="tag t-clave">clave</span></h4>
+  <b>Arriba</b>, en qué estuvo el horno, como porcentaje del tiempo (mismos colores que la cinta). <b>Abajo</b>, cuánto costó hasta ahora: luz (tarifa marginal), gas y capital inmovilizado, con su total. <b>El recuadro salmón</b> suma las horas de horno caliente sin carga y lo que costaron: es exactamente el gasto que evita E3.
+  <div class="say">"Este recuadro es el corazón del trabajo: lo que cuesta tener el horno caliente sin carga. Ese es el ahorro de E3."</div>
+</div></div>
+
+<div class="w"><div class="num">12</div><div>
+  <h4>Escenarios y velocidad <span class="tag t-clave">clave</span></h4>
+  Las cuatro tarjetas son los escenarios, con el <b>resultado del estudio contra E0</b> (30 réplicas de un año cada uno): costo por año y días de espera. El botón de cada tarjeta <b>cambia la regla en vivo</b> y reinicia los contadores; la tarjeta activa queda resaltada en azul. A la derecha, la velocidad: <span class="btn">Ver una campaña · 1 día/s</span> <span class="btn">Ver meses · 1 semana/s</span> <span class="btn">Avanzar rápido</span> y <span class="btn">Reiniciar contadores</span>.
+  <div class="say">"Probamos cuatro reglas. Bajar el umbral o poner una espera máxima cuesta más; apagar el horno apenas se vacía la cola ahorra 18 millones por año."</div>
+</div></div>
+
+<div class="callout c1">
+  <div class="h">¿Sobra algún panel?</div>
+  Revisados uno por uno, todos cumplen una función. Los <span class="tag t-clave">clave</span> cuentan la conclusión y no se tocan. Los de <span class="tag t-apoyo">apoyo</span> se pueden saltear al explicar: el gráfico de la cola repite en el tiempo lo que ya muestra la cola, y la salida repite el contador del <code>Sink</code>. El panel de la lógica conviene dejarlo porque se evalúa el desarrollo del modelo en AnyLogic.
+</div>
+</div>
+
+<!-- ============================================================ PARTE 2 -->
+<div class="part pb">
+<div class="band"><div class="n">2</div><div><div class="k">Parte 2</div><h2>Los estados del horno</h2></div></div>
+<table class="t">
+  <tr><th>Estado</th><th>Qué pasa</th><th>Cuánto dura</th></tr>
+  <tr><td><span class="chip" style="background:#c8ccd2"></span><b>Apagado</b></td><td>Horno frío, cola vacía.</td><td>Hasta que llega una ULI.</td></tr>
+  <tr><td><span class="chip" style="background:#f0dc82"></span><b>Acumulando</b></td><td>Horno frío, se juntan ULI.</td><td>Hasta 79 ULI, o hasta que llega una urgente (o, en E2, hasta que la más vieja cumple 15 días).</td></tr>
+  <tr><td><span class="chip" style="background:#ffa53c"></span><b>Calentando</b></td><td>Sube la temperatura; todavía no puede cargar.</td><td>36 h fijas.</td></tr>
+  <tr><td><span class="chip" style="background:#eb5a32"></span><b>Procesando</b> (Cargando)</td><td>Entra una ULI cada 85 min, urgentes primero; también las que llegan durante la campaña.</td><td>Mientras haya cola.</td></tr>
+  <tr class="hl"><td><span class="chip" style="background:#f59678"></span><b>Caliente sin carga</b></td><td>Cola vacía, horno caliente "por si llega algo". Si llega una ULI, vuelve a cargar.</td><td>Hasta 48 h en E0, E1 y E2; 0 h en E3.</td></tr>
+  <tr><td><span class="chip" style="background:#96b4e6"></span><b>Enfriando</b></td><td>No puede cargar.</td><td>48 h fijas. Después, Apagado (o Acumulando si ya hay ULI).</td></tr>
+</table>
+<div class="callout c3" style="margin-top:10px">
+  <div class="h">Encendido por urgencia</div>
+  Si llega una ULI urgente (violeta) con el horno apagado, el encargado lo prende aunque no haya 79. Pasa con el 0,54 % de las ULI que llegan con el horno apagado (unos 4 o 5 encendidos por año), calibrado con el registro real. En esas campañas se carga toda la cola, no solo la urgente: lo confirmó el encargado.
+</div>
+</div>
+
+<!-- ============================================================ PARTE 3 -->
+<div class="part pc">
+<div class="band"><div class="n">3</div><div><div class="k">Parte 3</div><h2>Guion de la demo (semilla 1, E0)</h2></div></div>
+<p class="small muted">Fechas de la corrida de siempre, sacadas con <code>modelo/cronologia_visual.py</code>. Arrancá con <span class="btn">Ver una campaña · 1 día/s</span>.</p>
+
+<div class="step"><div class="when">18/08 → 20/08</div><div class="what">Empiezan a llegar ULI (verdes). El horno pasa de <b>Apagado</b> a <b>Acumulando</b>.</div></div>
+<div class="step"><div class="when">mié 20/08 21:45</div><div class="what">Llega una <b>urgente</b> (la ULI 24, violeta) → <b>Calentando por prioridad</b> con solo 24 en cola. <i>Decir: "este encendido fue por un pedido urgente".</i></div></div>
+<div class="step"><div class="when">vie 22/08 09:45</div><div class="what">Llega a temperatura → <b>Procesando</b>: 27 ULI en cola. Las ULI cruzan la cinta y se va vaciando la cola.</div></div>
+<div class="step key"><div class="when">lun 25/08 02:45</div><div class="what"><b>Momento clave.</b> La cola se vacía → <b>Caliente sin carga</b> (salmón). <b>Pausá</b> y mostrá el recuadro salmón del panel de la plata. Ese lunes llegan unas pocas ULI (las carga en dos tandas cortas) y después nada: el horno espera caliente hasta el <b>miércoles 27/08 a las 18:15</b> y recién ahí enfría. En total, <b>55 h</b> de horno caliente sin carga en esta campaña.</div></div>
+<div class="step key"><div class="when">acá: apretá E3</div><div class="what">Con el horno caliente sin carga, apretá <span class="btn">E3 · Apagar enseguida</span>: pasa <b>directo a Enfriando</b>. <i>Decir: "con E3 el horno se apaga apenas no tiene carga; esas horas salmón no existen".</i> Volvé a <span class="btn">E0 · Regla actual</span> o seguí en E3.</div></div>
+<div class="step"><div class="when">mié 03/09</div><div class="what">Otra <b>urgente</b>: se prende con solo 7 en cola. Campaña corta y otra vez 48 h de salmón.</div></div>
+<div class="step"><div class="when">11/09 → 13/10</div><div class="what">Pasá a <span class="btn">Ver meses · 1 semana/s</span>. Un mes entero <b>acumulando</b>: la cola crece y los cuadraditos se ponen naranjas y rojos (la ULI más vieja llega a esperar más de un mes). <i>Decir: "esta es la otra cara: esperar a juntar 79 cajones demora el material semanas".</i></div></div>
+<div class="step"><div class="when">lun 13/10 06:45</div><div class="what">Se llena el casillero rojo → se prende <b>por umbral</b>. Al llegar a temperatura ya hay <b>110 ULI</b>: campaña larga de unos 8 días.</div></div>
+<div class="step"><div class="when">diciembre</div><div class="what">Con <span class="btn">Avanzar rápido</span>: en diciembre llega material de a poco y el horno pasa casi dos semanas yendo y viniendo entre <b>Procesando</b> y <b>Caliente sin carga</b>: la cinta de tiempo se llena de salmón.</div></div>
+
+<div class="callout c2">
+  <div class="h">Comparación limpia en vivo (si hay tiempo)</div>
+  Primeros 120 días, misma semilla: con <b>E0</b> el horno pasa <b>297 h caliente sin carga</b> y el costo acumulado llega a <b>26,7 M$</b>; con <b>E3</b> son <b>0 h</b> y <b>18,7 M$</b> (con un encendido más). Para mostrarlo: corré E0 con <span class="btn">Avanzar rápido</span> hasta mediados de diciembre y anotá el costo; después pará, volvé a correr, apretá <span class="btn">E3</span> al principio y avanzá hasta la misma fecha.
+</div>
+</div>
+
+<!-- ============================================================ PARTE 4 -->
+<div class="part pd">
+<div class="band"><div class="n">4</div><div><div class="k">Parte 4</div><h2>Para el video y la defensa</h2></div></div>
+<div class="grid2">
+  <div class="callout c1">
+    <div class="h">El problema en tres frases</div>
+    El horno tarda 36 h en calentar y 48 en enfriar, y caliente gasta luz y gas aunque esté vacío. Por eso se prende por campañas, cuando se juntan unos 80 cajones. La empresa preguntó cuántos cajones conviene esperar.
+  </div>
+  <div class="callout c1">
+    <div class="h">La respuesta en tres frases</div>
+    Cambiar el umbral no conviene: prender antes cuesta más. Lo que sí conviene es no dejar el horno caliente esperando: apagarlo apenas se vacía la cola ahorra unos 18 millones por año (−21,5 %), a cambio de 1,1 días más de espera.
+  </div>
+</div>
+<h3 style="font-size:11.5pt;margin:8px 0 4px">Preguntas probables sobre la animación</h3>
+<table class="t">
+  <tr><td><b>"¿Por qué prendió con 24 y no con 79?"</b></td><td>Llegó una ULI urgente (violeta). El encargado adelanta el encendido por pedidos comprometidos; está calibrado con el registro.</td></tr>
+  <tr><td><b>"¿Por qué siempre pasa lo mismo?"</b></td><td>La animación usa la semilla 1 fija, para que sea reproducible. El estudio usa 30 semillas por escenario.</td></tr>
+  <tr><td><b>"¿Los números de las tarjetas salen de esta corrida?"</b></td><td>No: salen de 120 corridas de un año (30 por escenario) con el test apareado. Esta corrida es una sola historia de ejemplo.</td></tr>
+  <tr><td><b>"¿La temperatura es real?"</b></td><td>No, es ilustrativa: una rampa lineal hasta unos 900 °C para que se vea la fase. El modelo no la usa; usa los tiempos de 36 y 48 h.</td></tr>
+  <tr><td><b>"¿Por qué el costo de capital es tan chico?"</b></td><td>La cola promedio es de unos 4.400 kg (≈ 20 M$ de material) al 2 % mensual. La energía de mantener caliente un horno de ~100 kW pesa mucho más.</td></tr>
+  <tr><td><b>"¿Qué pasa si cambio de escenario a la mitad?"</b></td><td>La regla cambia en el momento y los contadores se reinician, para que lo que se ve corresponda a la regla nueva.</td></tr>
+</table>
+</div>
+
+</body>
+</html>
