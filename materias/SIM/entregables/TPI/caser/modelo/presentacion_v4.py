@@ -221,6 +221,8 @@ FUNCS = [
      "return \"Escenario \" + escenario + \" · \" + e + \":  enciende con \" + umbralULI + \" ULI  ·  \""
      " + (Double.isInfinite(esperaMaxDias) ? \"sin espera máxima\" : \"o si la más vieja lleva \" + (int) esperaMaxDias + \" días\")"
      " + \"  ·  \" + (horasEnVacio > 0 ? \"caliente sin carga hasta \" + (int) horasEnVacio + \" h\" : \"se apaga apenas se vacía la cola\");"),
+    ("nombreEstadoVis", "String", [("k", "int")],
+     "String[] n = {\"Apagado\", \"Acumulando\", \"Calentando\", \"Procesando\", \"Caliente sin carga\", \"Enfriando\"};\nreturn n[k];"),
     ("escenarioIndice", "int", [],
      "return escenario.equals(\"E1\") ? 1 : escenario.equals(\"E2\") ? 2 : escenario.equals(\"E3\") ? 3 : 0;"),
     ("resetVis", "void", [],
@@ -460,7 +462,8 @@ add(text("txtGrafico", 432, 490, "ULI en cola contra el umbral", color=INK, size
 PX0, PY0, PW, PHh = 904, 482, 472, 230
 add(rect("zonaPlata", PX0, PY0, PW, PHh, fill=WHITE, line=LINE, radius=10))
 add(text("txtPlata", PX0 + 12, PY0 + 8, "¿Dónde se va la plata?", color=INK, size=13, bold=True))
-BX, BY, BW, BH = PX0 + 12, PY0 + 38, PW - 24, 24
+add(text("txtPlataTiempo", PX0 + 12, PY0 + 30, "En qué estuvo el horno (% del tiempo)", color=MUTED, size=11, bold=True))
+BX, BY, BW, BH = PX0 + 12, PY0 + 48, PW - 24, 24
 add(rect("barraFondo", BX, BY, BW, BH, fill="#eceef1", line=None))
 for pos in range(6):
     add(rect(f"barra{pos}", BX, BY, 0, BH, fill="#c8ccd2", line=WHITE, lw=1,
@@ -468,11 +471,12 @@ for pos in range(6):
              fillcode=f"colorEstado(ordenEstado({pos}))"))
     add(text(f"txtBarra{pos}", BX, BY + 6, "", color="#14181d", size=10, bold=True, align="CENTER",
              XCode=f"{BX} + {BW} * (fracAcumulada({pos}) + fracEstado(ordenEstado({pos})) / 2)",
-             code=f'Math.round(100 * fracEstado(ordenEstado({pos}))) + " %"',
+             code=f'(fracEstado(ordenEstado({pos})) * {BW} > nombreEstadoVis(ordenEstado({pos})).length() * 6.5 + 36 ? nombreEstadoVis(ordenEstado({pos})) + " " : "") + Math.round(100 * fracEstado(ordenEstado({pos}))) + " %"',
              VisibleCode=f"fracEstado(ordenEstado({pos})) > 0.06"))
 COST = [("Luz (marginal)", "visLuz()", "#2a78d6"), ("Gas (GLP)", "visGas()", "#eb6834"),
         ("Capital inmovilizado", "visCapital()", "#1baf7a")]
 CY0 = BY + 52
+add(text("txtPlataCosto", BX, CY0 - 20, "Cuánto costó hasta ahora", color=MUTED, size=11, bold=True))
 for k, (lab, fn, col) in enumerate(COST):
     Y = CY0 + k * 20
     add(text(f"txtCosto{k}", BX, Y, lab, color=INK, size=11))
@@ -487,21 +491,31 @@ add(text("txtDesperdicio", BX + 10, CY0 + 92, "", color="#9a3412", size=12, bold
          code='"Horno caliente sin carga: " + String.format("%.0f h", visHorasEstado(4)) + "  →  " + plata(visDesperdicio())'))
 add(text("txtDesperdicio2", BX + 10, CY0 + 109, "es el gasto que evita E3 (apagar apenas se vacía la cola)", color="#9a3412", size=10))
 
-# Barra inferior: escenario y velocidad
-FY = 724
-add(rect("zonaControles", 24, FY, 1352, 84, fill=PANEL, line=LINE, radius=10))
-add(text("txtCtrlEsc", 38, FY + 9, "Escenario", color=INK, size=12, bold=True))
-add(radio("radioEscenario", 38, FY + 30, 600, 24,
-          ["E0 regla actual", "E1 umbral 45", "E2 espera máx. 15 d", "E3 apagar enseguida"],
-          "cambiarEscenario(value);", "escenarioIndice()"))
-add(text("txtCtrlEsc2", 38, FY + 60, "", color=MUTED, size=10,
-         code='"Ahora: " + descEscenario().replace("Escenario ", "")'))
-add(text("txtCtrlVel", 680, FY + 9, "Velocidad", color=INK, size=12, bold=True))
-VEL = [("btnCampana", "Ver una campaña", 24), ("btnMes", "Ver meses", 168), ("btnRapido", "Avanzar rápido", 2000)]
+# Barra inferior: tarjetas de escenario (con el resultado del estudio) y velocidad
+FY = 722
+add(rect("zonaControles", 24, FY, 1352, 92, fill=PANEL, line=LINE, radius=10))
+add(text("txtCtrlEsc", 38, FY + 6, "Escenarios: resultado del estudio contra E0 (30 réplicas por escenario) · clic para aplicarlo en vivo",
+         color=MUTED, size=11, bold=True))
+ESC = [("E0 · Regla actual", "79 ULI · caliente sin carga 48 h", "base de comparación", INK),
+       ("E1 · Umbral bajo", "enciende con 45 ULI", "+4,8 M$/año · −2,6 días", "#b91c1c"),
+       ("E2 · Espera máxima", "79 ULI o 15 días la más vieja", "+2,9 M$/año · −1,0 días", "#b91c1c"),
+       ("E3 · Apagar enseguida", "se apaga al vaciarse la cola", "−18,0 M$/año · +1,1 días", "#15803d")]
+EW, EG = 212, 8
+for k, (lab, desc, res, col) in enumerate(ESC):
+    X = 38 + k * (EW + EG)
+    add(rect(f"tarjetaEsc{k}", X, FY + 24, EW, 62, fill=WHITE, line=LINE, lw=2, radius=8,
+             fillcode=f"escenarioIndice() == {k} ? new java.awt.Color(238, 243, 253) : java.awt.Color.WHITE",
+             linecode=f"escenarioIndice() == {k} ? new java.awt.Color(36, 86, 201) : new java.awt.Color(217, 221, 227)"))
+    add(button(f"btnEsc{k}", X + 8, FY + 30, EW - 16, 22, lab, f"cambiarEscenario({k});"))
+    add(text(f"txtEscDesc{k}", X + 10, FY + 56, desc, color=MUTED, size=10))
+    add(text(f"txtEscRes{k}", X + 10, FY + 69, res, color=col, size=11, bold=True))
+add(text("txtCtrlVel", 932, FY + 6, "Velocidad", color=MUTED, size=11, bold=True))
+VEL = [("btnCampana", "Ver una campaña · 1 día/s", 24), ("btnMes", "Ver meses · 1 semana/s", 168),
+       ("btnRapido", "Avanzar rápido", 2000)]
 for k, (nm, lab, esc) in enumerate(VEL):
-    add(button(nm, 680 + k * 150, FY + 30, 140, 28, lab,
+    add(button(nm, 932 + (k % 2) * 218, FY + 28 + (k // 2) * 32, 210, 26, lab,
                f"getEngine().setRealTimeMode(true);\ngetEngine().setRealTimeScale({esc});"))
-add(button("btnReiniciar", 1140, FY + 30, 220, 28, "Reiniciar contadores", "resetVis();"))
+add(button("btnReiniciar", 1150, FY + 60, 210, 26, "Reiniciar contadores", "resetVis();"))
 
 for pieza in P:
     try:

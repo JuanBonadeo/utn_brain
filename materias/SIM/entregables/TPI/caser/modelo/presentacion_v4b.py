@@ -15,7 +15,7 @@ from xml.sax.saxutils import escape
 
 ALP = Path(__file__).resolve().parent / "CaserHorno.alp"
 s = ALP.read_text(encoding="utf-8")
-if "Resultado del estudio" in s:
+if "presentacion v4b" in s:
     sys.exit("Los ajustes v4b ya están aplicados.")
 LOC = 'new java.util.Locale("es", "AR"), '
 
@@ -38,11 +38,6 @@ s = s[:lvl] + bloque + s[fin:]
 viejo = ('String.format(' + LOC + '"%.2f kWh/kg", (kWhPorEncendido * visEncendidos + kWhPorDiaCaliente / 24 * visHorasCaliente()) '
          '/ Math.max(1, visKg))')
 rep(escape(viejo), escape('visKg < 5000 ? "–" : ' + viejo.replace("Math.max(1, visKg)", "visKg")))
-
-# Resultado del estudio en lugar de la repetición del escenario
-rep(escape("\"Ahora: \" + descEscenario().replace(\"Escenario \", \"\")"),
-    escape('"Resultado del estudio (30 réplicas por escenario, contra E0):  E1 +4,8 M$/año  ·  E2 +2,9 M$/año  ·  '
-           'E3 −18,0 M$/año con +1,1 días de espera"'))
 
 # Bloques más separados dentro del panel de la lógica (LX = 1134, PY = 144)
 for nm, X in {"source": 1134 + 16, "colaHorno": 1134 + 84, "horno": 1134 + 152, "sink": 1134 + 220}.items():
