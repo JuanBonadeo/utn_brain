@@ -108,6 +108,9 @@ table.t tr.hl td{ background:#fff8e6; }
 .check li.no::before{ content:"☐"; color:var(--bad); }
 .check li.med::before{ content:"◐"; color:var(--warn); }
 .foot{ margin-top:10px; font-size:8pt; color:var(--muted); border-top:1px solid var(--line); padding-top:5px; }
+.mono{ font-family:Consolas,"SF Mono",monospace; font-size:8.6pt; background:var(--soft); border:1px solid var(--line); border-radius:8px; padding:7px 10px; white-space:pre; margin:4px 0 6px; line-height:1.45; }
+.dado{ display:grid; grid-template-columns:34px 1fr; gap:0 8px; align-items:start; }
+.dado .ic{ font-size:20pt; line-height:1; }
 </style>
 </head>
 <body>
@@ -128,7 +131,7 @@ table.t tr.hl td{ background:#fff8e6; }
   <div class="card tA">
     <h4>Cómo leer esta guía</h4>
     <ol class="small">
-      <li><b>El problema</b> (azul): qué es el horno y qué se decide.</li>
+      <li><b>El problema</b> (azul): qué es el horno, qué se decide y cómo funciona la simulación, en criollo.</li>
       <li><b>El modelo y los datos</b> (verde): cómo lo armamos en AnyLogic y de dónde sale cada número.</li>
       <li><b>Experimentos y resultados</b> (naranja): escenarios, réplicas, test de medias y qué dio.</li>
       <li><b>La defensa</b> (violeta): los 10 pasos, preguntas probables y la lista de lo que falta.</li>
@@ -217,6 +220,58 @@ table.t tr.hl td{ background:#fff8e6; }
   <tr class="hl"><td><b>E3</b></td><td>Apagar enseguida</td><td class="r">79</td><td class="r">—</td><td class="r">0 h</td><td>No esperarlo caliente: se apaga apenas se vacía la cola.</td></tr>
 </table>
 <p class="small muted">En los cuatro, si llega un pedido urgente el horno se prende aunque no haya 79 (pasa ~4-5 veces por año).</p>
+</div>
+
+<!-- ====================================================================== PARTE 1+: la simulación en criollo -->
+<div class="part pa">
+<div class="band"><div class="num">1+</div><div><div class="k">Parte 1, segunda mitad</div><h2>Cómo funciona la simulación, en criollo</h2></div></div>
+
+<div class="sec"><div class="dot">a</div><h3>No repetimos el año real: lo usamos para fabricar años posibles</h3></div>
+<p>Tenemos el registro real de un año: qué día se lavó cada ULI, cuánto pesaba y cuándo entró al horno. Lo más simple sería "pasar la película" de ese año con otra regla. Pero eso es <b>una sola historia</b>: si ese año justo hubo pocas urgencias o una semana rara, la conclusión depende de esa casualidad. Y la cátedra pide <b>varias corridas y un test de medias</b>. Por eso los datos reales se usan para armar unos <b>"dados"</b> que generan años parecidos al real, pero distintos entre sí.</p>
+
+<div class="sec"><div class="dot">b</div><h3>Los tres dados: todo lo aleatorio sale de datos reales</h3></div>
+<div class="grid3">
+  <div class="card tA dado"><div class="ic">🎟️</div><div><h4>Qué llega cada semana</h4><p class="small">Una bolsa con <b>52 papelitos</b>, uno por cada semana real del registro. Cada lunes se saca uno al azar, se copia lo que pasó esa semana ("lunes 0 ULI, martes 9, miércoles 0, jueves 14, viernes 3") y se devuelve a la bolsa. La hora de cada ULI se sortea entre las 6 y las 22.</p></div></div>
+  <div class="card tA dado"><div class="ic">⚖️</div><div><h4>Cuánto pesa cada ULI</h4><p class="small">Se sortea de la distribución real de pesos de esas mismas ULI (media de 141 kg, mediana de 132 kg).</p></div></div>
+  <div class="card tA dado"><div class="ic">🪙</div><div><h4>Si es urgente</h4><p class="small">Una moneda muy cargada: <b>0,54 %</b> de las ULI que llegan con el horno apagado son urgentes, sacado del registro (10 encendidos anticipados en 1.857 ULI).</p></div></div>
+</div>
+<div class="callout criollo"><div class="h">por qué papelitos y no una fórmula</div>Con la bolsa de semanas se conservan solos los días sin lavado (la mitad de los días hábiles), los picos y las semanas flojas. Una distribución teórica no respeta eso.</div>
+
+<div class="sec"><div class="dot">c</div><h3>El horno no tiene azar: sigue reglas fijas</h3></div>
+<div class="mono">36 h calentando → 1 ULI cada 85 min mientras haya cola → hasta 48 h caliente esperando → 48 h enfriando
+Se prende con 79 ULI en cola, o antes si llega una urgente.</div>
+<p class="small">Lo único que cambia entre escenarios es <b>la regla</b>: umbral 45 (E1), espera máxima de 15 días (E2) o 0 h caliente esperando (E3).</p>
+
+<div class="sec"><div class="dot">d</div><h3>Cómo avanza el reloj: de evento en evento</h3></div>
+<div class="grid2">
+  <div class="mono">mié 21:45  llega una ULI urgente (24 en cola) → se prende
+vie 09:45  termina de calentar → entra la primera ULI
+vie 11:10  sale esa ULI → entra la siguiente
+   ...
+lun 02:45  no queda nadie → caliente esperando (48 h)
+mié 18:15  no llegó nada más → empieza a enfriar</div>
+  <p class="small">La computadora no simula minuto a minuto: <b>salta de un evento al siguiente</b> (llega una ULI, termina el calentamiento, sale una ULI…). Entre evento y evento no pasa nada, así que lo saltea. Por eso un año entero se simula en milisegundos, y en la animación lo frenamos para poder verlo. Es una <b>simulación de eventos discretos</b>.</p>
+</div>
+
+<div class="sec"><div class="dot">e</div><h3>Mientras corre, anota todo y lo pasa a pesos</h3></div>
+<p class="small">Cuánto esperó <b>cada ULI</b>, cuántas horas estuvo el horno en <b>cada estado</b> y cuántas veces <b>se prendió</b>. Con eso calcula la plata usando los números de las <b>facturas reales</b>: kWh por día caliente y por encendido, tarifa marginal, kg de gas por día caliente y costo del capital al 2 % mensual.</p>
+
+<div style="break-inside:avoid">
+<div class="sec"><div class="dot">f</div><h3>Una corrida es un año posible; hacemos 30 por regla, siempre los mismos 30</h3></div>
+<div class="grid2">
+  <div>
+    <p class="small">La <b>semilla</b> decide qué papelitos salen: la 1 da un año, la 2 otro, la 30 otro. Son 30 años distintos y todos creíbles. A las cuatro reglas les tocan <b>los mismos 30 años</b>: el año 7 con E0 y el año 7 con E3 reciben exactamente las mismas ULI, el mismo día, con el mismo peso. La única diferencia es la regla.</p>
+    <p class="small">Cada corrida descarta los primeros <b>90 días</b> (el modelo arranca vacío y apagado, que no es lo normal) y mide <b>365</b>.</p>
+  </div>
+  <div class="mono">año 7:  E0 101,7 M$   E3 82,2 M$   → −19,5
+año 8:  E0  97,7 M$   E3 71,8 M$   → −26,0
+  ...
+30 diferencias → promedio −18,0 ± 1,8 M$
+el intervalo no incluye el 0 → E3 ahorra de verdad</div>
+</div>
+</div>
+
+<div class="callout ojo"><div class="h">la frase para el video</div>"Con los datos reales armamos un generador de años posibles; corrimos 30 años con cada regla, siempre los mismos 30, y comparamos año contra año: apagar el horno apenas se vacía la cola ahorra 18 millones por año."</div>
 </div>
 
 <!-- ====================================================================== PARTE 2 -->
@@ -457,10 +512,12 @@ table.t tr.hl td{ background:#fff8e6; }
 
 <div class="sec"><div class="dot">c</div><h3>Qué mostrar en vivo</h3></div>
 <ol class="small">
-  <li>Abrir <code>CaserHorno.alp</code> y correr el experimento <b>Visual</b> (E0, semilla 1): se ve la cola crecer de lunes a viernes, el horno pasar por Acumulando → Calentando → Procesando → Enfriando y los gráficos de cola y energía en vivo.</li>
-  <li>Mostrar los parámetros (umbral, espera en vacío) y cambiar <code>horasEnVacio</code> a 0 para mostrar E3: el horno se apaga apenas se vacía la cola.</li>
-  <li>Mostrar la planilla con el test E3 − E0 y el gráfico de costos.</li>
+  <li>Abrir <code>CaserHorno.alp</code> y correr el experimento <b>Visual</b> (semilla 1, siempre la misma historia). Arrancar con <b>Ver una campaña · 1 día/s</b>.</li>
+  <li>Mostrar el encendido por urgencia del miércoles 20/08 (la ULI violeta) y la campaña.</li>
+  <li>El lunes 25/08 a las 02:45 el horno queda <b>caliente sin carga</b> (salmón): mostrar el recuadro del panel de la plata y apretar <b>E3 · Apagar enseguida</b>, que lo pasa directo a Enfriando.</li>
+  <li>Cerrar con las tarjetas de escenario: el resultado del estudio contra E0.</li>
 </ol>
+<p class="small muted">El guion completo, con fechas y qué decir de cada panel, está en <code>guia-demo-visual.pdf</code>.</p>
 
 <div class="sec"><div class="dot">d</div><h3>Lo que falta y quién</h3></div>
 <ul class="check small">
