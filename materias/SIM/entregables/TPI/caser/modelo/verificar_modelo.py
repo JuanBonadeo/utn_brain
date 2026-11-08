@@ -98,16 +98,21 @@ def extraer(alp):
     startup = code(main.find("StartupCode"))
     # Expresiones de la presentación, el statechart y los gráficos: se compilan contra la API (no se ejecutan).
     expr_pres = []
+    acciones_pres = []  # código de botones y selectores (presentación v4): se compila, no se ejecuta
     for el in main.find("Presentation").iter():
-        if el.tag in ("XCode", "YCode", "VisibleCode", "FillColorCode", "LineColorCode", "TextCode", "ColorCode", "WidthCode", "HeightCode"):
+        if el.tag in ("XCode", "YCode", "VisibleCode", "FillColorCode", "LineColorCode", "TextCode", "ColorCode", "WidthCode", "HeightCode",
+                      "LabelCode", "DefaultValueCode"):
             expr_pres.append(code(el))
+        elif el.tag == "ActionCode":
+            acciones_pres.append(code(el))
         elif el.tag == "ReplicationCode":
             expr_pres.append("(int) (" + code(el.find("Code")) + ")")
         elif el.tag == "Expression2":
             expr_pres.append("(double) (" + code(el) + ")")
     for t in main.findall("StatechartElements/StatechartElement[@Class='Transition']"):
         expr_pres.append("(boolean) (" + code(t.find("Properties/Condition")) + ")")
-    presentacion = "void presentacion(int index) {" + " ".join(f"Object p{i} = {e};" for i, e in enumerate(expr_pres)) + "}"
+    presentacion = ("void presentacion(int index) {" + " ".join(f"Object p{i} = {e};" for i, e in enumerate(expr_pres)) + "}\n"
+                    + "void controles(int value) {" + " ".join("{ " + a + " }" for a in acciones_pres) + "}")
     cuerpo = "\n".join(campos + funcs)
     return SimpleNamespace(**locals())
 
