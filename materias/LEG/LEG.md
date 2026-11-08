@@ -1,5 +1,9 @@
 # Legislación — Wiki
 
+> **Recuperatorio del 2do parcial: un miércoles, fecha sin confirmar.** El parcial del 4/11/2026 se
+> desaprobó. El recuperatorio es **en su mayoría preguntas a desarrollar**, no caso + V o F +
+> preguntas como el parcial (lo contó un alumno el 8/11).
+>
 > **2do parcial: mié 4/11/2026, escrito** (se movió del 28/10). Entran las **unidades 4, 5 y 6**. En 2026 sólo se dio
 > en clase la unidad 4. Fuentes: U4, el resumen 2025 y los apuntes de clase (la cátedra sólo pasó
 > la lista de leyes); **U5, el apunte de cátedra 2026** (está escrito sobre la reforma de la Ley
