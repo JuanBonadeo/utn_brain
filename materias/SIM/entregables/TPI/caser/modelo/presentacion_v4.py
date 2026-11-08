@@ -341,13 +341,10 @@ add(line("flecha3", 944, PY + PH / 2, 20, 0, arrow=True))
 # Lavado
 add(rect("zonaLavado", 24, PY, 150, PH, fill="#e3edf9", line="#b6cbe8", radius=10))
 add(text("txtLavado", 36, PY + 12, "LAVADO", color="#1a3d8f", size=13, bold=True))
-add(text("txtLavado2", 36, PY + 34, "llegan ULI de lunes", color=MUTED, size=11))
-add(text("txtLavado3", 36, PY + 49, "a viernes, 6 a 22 h", color=MUTED, size=11))
-add(text("txtLavado4", 36, PY + 76, "0", color=INK, size=20, bold=True, code="String.valueOf(nCreadas)"))
-add(text("txtLavado5", 36, PY + 102, "ULI lavadas", color=MUTED, size=11))
-add(text("txtLavado6", 36, PY + 132, "semana real", color=MUTED, size=10))
-add(text("txtLavado7", 36, PY + 146, "sorteada:", color=MUTED, size=10))
-add(text("txtLavado8", 36, PY + 162, "n.º", color="#1a3d8f", size=12, bold=True,
+add(text("txtLavado4", 36, PY + 44, "0", color=INK, size=24, bold=True, code="String.valueOf(nCreadas)"))
+add(text("txtLavado5", 36, PY + 76, "ULI lavadas", color=MUTED, size=11))
+add(text("txtLavado6", 36, PY + 138, "semana real sorteada", color=MUTED, size=10))
+add(text("txtLavado8", 36, PY + 154, "n.º", color="#1a3d8f", size=12, bold=True,
          code='"n.º " + (semanaActual + 1) + " de " + (llegadasSemanas.length / 5)'))
 # Cola
 CX, CW = 194, 400
@@ -361,7 +358,7 @@ add(rect("casilleroVacio", GX, GY, SQ, SQ, fill=WHITE, line="#c3c8cf", style="DA
 add(rect("uliEnCola", GX, GY, SQ, SQ, fill="#6fbf80", line="#5b6470",
          XCode=f"{GX} + (index % {COLS}) * {ST}", YCode=f"{GY} + (index / {COLS}) * {ST}",
          rep=f"Math.min(colaHorno.size(), {MAXC})",
-         fillcode="colorEdad(((ULI) colaHorno.get(index)).tLlegada)",
+         fillcode="((ULI) colaHorno.get(index)).urgente ? new java.awt.Color(124, 58, 237) : colorEdad(((ULI) colaHorno.get(index)).tLlegada)",
          linecode="((ULI) colaHorno.get(index)).urgente ? new java.awt.Color(110, 40, 170) : new java.awt.Color(91, 100, 112)"))
 add(rect("marcaUmbral", GX, GY, SQ + 4, SQ + 4, fill=None, line="#d23c3c", lw=2,
          XCode=f"{GX} + ((umbralULI - 1) % {COLS}) * {ST} - 2", YCode=f"{GY} + ((umbralULI - 1) / {COLS}) * {ST} - 2",
@@ -371,8 +368,6 @@ add(text("txtColaMas", CX + CW - 12, PY + 10, "+", color="#d23c3c", size=11, bol
 LY = PY + PH - 22
 leyenda = [("<3 d", "#6fbf80"), ("3–7", "#f2c94c"), ("7–14", "#f2994a"), (">14 d", "#d64545")]
 lx = CX + 14
-add(text("txtEdad", lx, LY + 1, "espera:", color=MUTED, size=10))
-lx += 44
 for k, (lab, col) in enumerate(leyenda):
     add(rect(f"leyEdad{k}", lx, LY + 2, 11, 11, fill=col, line=None))
     add(text(f"txtLeyEdad{k}", lx + 15, LY + 1, lab, color=MUTED, size=10))
@@ -381,6 +376,8 @@ add(rect("leyVacio", lx, LY + 2, 11, 11, fill=WHITE, line="#c3c8cf", style="DASH
 add(text("txtLeyVacio", lx + 15, LY + 1, "falta", color=MUTED, size=10))
 add(rect("leyUmbral", lx + 54, LY + 1, 13, 13, fill=None, line="#d23c3c", lw=2))
 add(text("txtLeyUmbral", lx + 72, LY + 1, "umbral", color=MUTED, size=10, code='"umbral " + umbralULI'))
+add(rect("leyUrgente", lx + 136, LY + 2, 11, 11, fill="#7c3aed", line=None))
+add(text("txtLeyUrgente", lx + 151, LY + 1, "urgente", color=MUTED, size=10))
 # Horno
 HX, HW = 614, 330
 add(rect("cuerpoHorno", HX, PY, HW, PH, fill="#c8ccd2", line="#3b4048", lw=2, fillcode="colorHorno()", radius=10))
@@ -395,17 +392,15 @@ for k in range(9):
     add(rect(f"rodillo{k}", HX + 18 + k * 30, PY + 110, 14, 4, fill="#2b2f35", line=None))
 add(rect("uliEnCinta", HX + 16, PY + 83, 20, 20, fill="#f2994a", line="#5b6470",
          XCode=f"{HX + 16} + 234 * progresoCiclo()", VisibleCode="ocupado",
-         fillcode="uliEnHorno == null ? new java.awt.Color(242, 153, 74) : colorEdad(uliEnHorno.tLlegada)"))
+         fillcode="uliEnHorno == null ? new java.awt.Color(242, 153, 74) : uliEnHorno.urgente ? new java.awt.Color(124, 58, 237) : colorEdad(uliEnHorno.tLlegada)"))
 add(rect("resistencia", HX + 14, PY + 124, 22, 7, fill="#555555", line="#2b2f35",
          XCode=f"{HX + 14} + index * 29", rep="9", fillcode="colorTemperatura()"))
-add(text("txtResist", HX + 12, PY + 136, "27 resistencias", color="#30353c", size=10))
 add(text("txtCampana", HX + 12, PY + 160, "campaña", color="#14181d", size=11, bold=True,
          code='estado == 3 ? "Campaña: " + ulisCampana + " ULI  ·  " + String.format("%.1f t", kgCampana / 1000)'
               ' + "  ·  hace " + Math.round((time() - tEncendido) / 24) + " días" : '
               'estado == 2 ? "El horno todavía no puede cargar" : estado == 4 ? "Disponible otra vez al terminar de enfriar" : '
               '"Sin campaña en curso"'))
-add(text("txtCampana2", HX + 12, PY + 176, "", color="#30353c", size=10,
-         code='"temperatura ilustrativa (≈ 900 °C a régimen)"'))
+add(text("termoNota", HX + 304, PY + 172, "ilustrativa", color="#30353c", size=9, align="CENTER"))
 # Termómetro (ilustrativo)
 TX, TY, TH = HX + 296, PY + 66, 84
 add(rect("termoTubo", TX, TY, 16, TH, fill=WHITE, line="#3b4048", radius=8))
@@ -418,11 +413,9 @@ add(text("termoValor", TX + 8, TY + TH + 6, "25 °C", color="#14181d", size=11, 
 SX = 964
 add(rect("zonaSalida", SX, PY, 150, PH, fill="#e3f4e6", line="#b7dcc0", radius=10))
 add(text("txtSalida", SX + 12, PY + 12, "SALIDA", color="#0b6b3a", size=13, bold=True))
-add(text("txtSalida2", SX + 12, PY + 34, "revenido (algunos),", color=MUTED, size=11))
-add(text("txtSalida3", SX + 12, PY + 49, "zincado y envasado", color=MUTED, size=11))
-add(text("txtSalida4", SX + 12, PY + 76, "0", color=INK, size=20, bold=True, code="String.valueOf(nSalidasTotal)"))
-add(text("txtSalida5", SX + 12, PY + 102, "ULI tratadas", color=MUTED, size=11))
-add(text("txtSalida6", SX + 12, PY + 132, "0 t", color="#0b6b3a", size=12, bold=True,
+add(text("txtSalida4", SX + 12, PY + 44, "0", color=INK, size=24, bold=True, code="String.valueOf(nSalidasTotal)"))
+add(text("txtSalida5", SX + 12, PY + 76, "ULI tratadas", color=MUTED, size=11))
+add(text("txtSalida6", SX + 12, PY + 150, "0 t", color="#0b6b3a", size=12, bold=True,
          code='String.format("%.1f toneladas", kgSalidaTotal / 1000)'))
 # Panel de la lógica (los bloques se mueven adentro)
 LX = 1134
@@ -430,16 +423,12 @@ add(rect("zonaLogica", LX, PY, 242, PH, fill=None, line=LINE, radius=10))
 add(text("txtLogica", LX + 12, PY + 10, "Lógica en AnyLogic", color=INK, size=12, bold=True))
 add(text("txtLogica2", LX + 12, PY + 27, "Process Modeling Library", color=MUTED, size=10))
 add(text("txtLogica3", LX + 12, PY + 132, "Source → Wait → Delay → Sink", color=INK, size=10, bold=True))
-add(text("txtLogica4", LX + 12, PY + 148, "el Wait libera una ULI solo", color=MUTED, size=10))
-add(text("txtLogica5", LX + 12, PY + 162, "con el horno caliente (urgentes", color=MUTED, size=10))
-add(text("txtLogica6", LX + 12, PY + 176, "primero); el Delay tiene capacidad 1", color=MUTED, size=10))
 
 # Statechart (se conserva en su lugar; solo marco y título)
 add(rect("zonaStatechart", 24, 350, 380, 322, fill=None, line=LINE, radius=10))
 add(text("txtStatechart", 122, 356, "Estado del horno (statechart)", color=INK, size=12, bold=True))
 add(guardados["marcoProcesando"])
 add(text("txtProcesando", 290, 614, "Procesando", color="#6b7480", size=10))
-add(text("txtStatechart2", 36, 654, "Refleja la variable estado; no decide nada.", color=MUTED, size=10))
 
 # Cinta de tiempo
 GX0, GY0, GWD = 420, 350, 956
@@ -462,9 +451,6 @@ for k, lab in enumerate(["hace 60 días", "hace 45 días", "hace 30 días", "hac
     add(line(f"tick{k}", X, GY0 + 78, 0, 5, color="#9aa3ae", lw=1))
     add(text(f"txtTick{k}", X, GY0 + 85, lab, color=MUTED, size=10, align="LEFT" if k == 0 else "CENTER"))
 add(text("txtTickHoy", SX0 + SW, GY0 + 85, "ahora", color=INK, size=10, bold=True, align="RIGHT"))
-add(text("txtCintaNota", GX0 + 12, GY0 + 101, "", color=MUTED, size=10,
-         code='"Cada franja son 4 horas. Lo salmón es el horno caliente sin nada adentro: "'
-              ' + String.format("%.0f", visHorasEstado(4)) + " h desde el inicio."'))
 
 # Gráfico de la cola
 add(g)
@@ -474,9 +460,7 @@ add(text("txtGrafico", 432, 490, "ULI en cola contra el umbral", color=INK, size
 PX0, PY0, PW, PHh = 904, 482, 472, 230
 add(rect("zonaPlata", PX0, PY0, PW, PHh, fill=WHITE, line=LINE, radius=10))
 add(text("txtPlata", PX0 + 12, PY0 + 8, "¿Dónde se va la plata?", color=INK, size=13, bold=True))
-add(text("txtPlata2", PX0 + 12, PY0 + 27, "tiempo del horno por estado, desde el inicio o el último cambio de escenario",
-         color=MUTED, size=10))
-BX, BY, BW, BH = PX0 + 12, PY0 + 46, PW - 24, 24
+BX, BY, BW, BH = PX0 + 12, PY0 + 38, PW - 24, 24
 add(rect("barraFondo", BX, BY, BW, BH, fill="#eceef1", line=None))
 for pos in range(6):
     add(rect(f"barra{pos}", BX, BY, 0, BH, fill="#c8ccd2", line=WHITE, lw=1,
@@ -486,8 +470,6 @@ for pos in range(6):
              XCode=f"{BX} + {BW} * (fracAcumulada({pos}) + fracEstado(ordenEstado({pos})) / 2)",
              code=f'Math.round(100 * fracEstado(ordenEstado({pos}))) + " %"',
              VisibleCode=f"fracEstado(ordenEstado({pos})) > 0.06"))
-add(text("txtBarraNota", BX, BY + 30, "", color=MUTED, size=10,
-         code='"procesando " + Math.round(100 * fracEstado(3)) + " %   ·   caliente sin carga " + Math.round(100 * fracEstado(4)) + " %"'))
 COST = [("Luz (marginal)", "visLuz()", "#2a78d6"), ("Gas (GLP)", "visGas()", "#eb6834"),
         ("Capital inmovilizado", "visCapital()", "#1baf7a")]
 CY0 = BY + 52
@@ -508,7 +490,7 @@ add(text("txtDesperdicio2", BX + 10, CY0 + 109, "es el gasto que evita E3 (apaga
 # Barra inferior: escenario y velocidad
 FY = 724
 add(rect("zonaControles", 24, FY, 1352, 84, fill=PANEL, line=LINE, radius=10))
-add(text("txtCtrlEsc", 38, FY + 9, "Escenario (cambia en vivo y reinicia los contadores)", color=INK, size=12, bold=True))
+add(text("txtCtrlEsc", 38, FY + 9, "Escenario", color=INK, size=12, bold=True))
 add(radio("radioEscenario", 38, FY + 30, 600, 24,
           ["E0 regla actual", "E1 umbral 45", "E2 espera máx. 15 d", "E3 apagar enseguida"],
           "cambiarEscenario(value);", "escenarioIndice()"))
@@ -520,10 +502,6 @@ for k, (nm, lab, esc) in enumerate(VEL):
     add(button(nm, 680 + k * 150, FY + 30, 140, 28, lab,
                f"getEngine().setRealTimeMode(true);\ngetEngine().setRealTimeScale({esc});"))
 add(button("btnReiniciar", 1140, FY + 30, 220, 28, "Reiniciar contadores", "resetVis();"))
-add(text("txtCtrlVel2", 680, FY + 62, "1 día por segundo: se sigue cada ULI  ·  1 semana por segundo: campañas enteras"
-         "  ·  rápido: los gráficos", color=MUTED, size=10))
-add(text("aviso", W - 24, FY + 92, "Entradas: datos reales de la empresa (12 meses). Validación y resultados: ver el informe.",
-         color="#9aa3ae", size=9, align="RIGHT"))
 
 for pieza in P:
     try:
