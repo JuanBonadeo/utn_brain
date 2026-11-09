@@ -235,7 +235,8 @@ FUNCS = [
      "acumularVis();\nfor (int k = 0; k < 6; k++) visHoras[k] = 0;\n"
      "visAreaKg = 0; visEncendidos = 0; visSumaEspera = 0; visNEspera = 0; visTratadas = 0; visKg = 0;\ntInicioVis = time();"),
     ("cambiarEscenario", "void", [("v", "int")],
-     "// Solo para la animación: cambia la regla en vivo y reinicia los contadores de presentación.\n"
+     "// Solo para la animación: cambia la regla en vivo. Los contadores siguen sumando (se ve cómo dejan de\n"
+     "// crecer con la regla nueva); para empezar de cero está el botón Reiniciar contadores.\n"
      "acumularVis();\n"
      "escenario = v == 1 ? \"E1\" : v == 2 ? \"E2\" : v == 3 ? \"E3\" : \"E0\";\n"
      "umbralULI = v == 1 ? 45 : 79;\n"
@@ -246,7 +247,6 @@ FUNCS = [
      "    else eEsperaMax.restart(Math.max(0, esperaMaxDias * 24 - (time() - llegadaMasVieja())));\n"
      "}\n"
      "if (estado == 3 && enVacio) eVacio.restart(Math.max(0, Math.min(eVacio.getRest(), horasEnVacio)));\n"
-     "resetVis();\n"
      "evaluarEncendido();"),
 ]
 xml_f = ""
@@ -316,7 +316,7 @@ add(text("txtEscenario", 24, 42, "escenario", color=HEAD2, size=12, code="descEs
 add(text("txtFecha", W - 24, 12, "fecha", color=WHITE, size=16, bold=True, align="RIGHT", code="fechaTexto()"))
 add(text("txtDia", W - 24, 42, "día", color=HEAD2, size=12, align="RIGHT",
          code='"día " + (int) Math.floor(time() / 24 + 1) + " de " + (int) Math.round(calentamientoModeloDias + horizonteDias)'
-              ' + "  ·  contadores desde " + fechaCorta(tInicioVis) + " (" + escenario + ")  ·  velocidad: " + '
+              ' + "  ·  contadores desde " + fechaCorta(tInicioVis) + "  ·  velocidad: " + '
               '(!getEngine().getRealTimeMode() ? "máxima" : getEngine().getRealTimeScale() < 24 ? '
               'String.format("%.0f h por segundo", getEngine().getRealTimeScale()) : '
               '(Math.round(getEngine().getRealTimeScale() / 24) == 1 ? "1 día por segundo" : '
@@ -470,7 +470,7 @@ PX0, PY0, PW, PHh = 904, 482, 472, 230
 add(rect("zonaPlata", PX0, PY0, PW, PHh, fill=WHITE, line=LINE, radius=10))
 add(text("txtPlata", PX0 + 12, PY0 + 8, "¿Dónde se va la plata?", color=INK, size=13, bold=True))
 add(text("txtPlataDesde", PX0 + PW - 12, PY0 + 10, "", color=MUTED, size=10, align="RIGHT",
-         code='"desde " + fechaCorta(tInicioVis) + " · " + escenario'))
+         code='"desde " + fechaCorta(tInicioVis)'))
 add(text("txtPlataTiempo", PX0 + 12, PY0 + 30, "En qué estuvo el horno (% del tiempo)", color=MUTED, size=11, bold=True))
 BX, BY, BW, BH = PX0 + 12, PY0 + 48, PW - 24, 24
 add(rect("barraFondo", BX, BY, BW, BH, fill="#eceef1", line=None))
@@ -504,7 +504,7 @@ add(text("txtDesperdicio2", BX + 10, CY0 + 109, "es el gasto que evita E3 (apaga
 # Barra inferior: tarjetas de escenario (con el resultado del estudio) y velocidad
 FY = 722
 add(rect("zonaControles", 24, FY, 1352, 92, fill=PANEL, line=LINE, radius=10))
-add(text("txtCtrlEsc", 38, FY + 6, "Escenarios: resultado del estudio contra E0 (30 réplicas por escenario) · clic para aplicarlo en vivo",
+add(text("txtCtrlEsc", 38, FY + 6, "Escenarios: resultado del estudio contra E0 (30 réplicas por escenario) · clic para cambiar la regla en vivo",
          color=MUTED, size=11, bold=True))
 ESC = [("E0 · Regla actual", "79 ULI · caliente sin carga 48 h", "base de comparación", INK),
        ("E1 · Umbral bajo", "enciende con 45 ULI", "+4,8 M$/año · −2,6 días", "#b91c1c"),

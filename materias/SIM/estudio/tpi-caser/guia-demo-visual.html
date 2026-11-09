@@ -77,7 +77,7 @@ table.t tr.hl td{ background:#fff8e6; }
 
 <div class="w"><div class="num">2</div><div>
   <h4>Seis indicadores <span class="tag t-clave">clave</span></h4>
-  <b>Campañas</b> (veces que se prendió) · <b>ULI tratadas</b> · <b>espera media</b> antes del horno · <b>cuánto lleva la ULI más vieja</b> en la cola (la marquita de color sigue la misma escala que la cola) · <b>kWh por kg</b> (aparece desde las 5 t tratadas) · <b>costo acumulado</b> de luz, gas y capital. Cuentan desde el inicio o desde el último cambio de escenario.
+  <b>Campañas</b> (veces que se prendió) · <b>ULI tratadas</b> · <b>espera media</b> antes del horno · <b>cuánto lleva la ULI más vieja</b> en la cola (la marquita de color sigue la misma escala que la cola) · <b>kWh por kg</b> (aparece desde las 5 t tratadas) · <b>costo acumulado</b> de luz, gas y capital. Cuentan desde el inicio (o desde que se aprieta "Reiniciar contadores").
   <div class="say">"Arriba tenemos lo que medimos: cuántas veces se prende, cuánto espera el material y cuánto cuesta."</div>
 </div></div>
 
@@ -135,7 +135,7 @@ table.t tr.hl td{ background:#fff8e6; }
 
 <div class="w"><div class="num">12</div><div>
   <h4>Escenarios y velocidad <span class="tag t-clave">clave</span></h4>
-  Las cuatro tarjetas son los escenarios, con el <b>resultado del estudio contra E0</b> (30 réplicas de un año cada uno): costo por año y días de espera. El botón de cada tarjeta <b>cambia la regla en vivo</b> y reinicia los contadores; la tarjeta activa queda resaltada en azul. A la derecha, la velocidad: <span class="btn">Ver una campaña · 1 día/s</span> <span class="btn">Ver meses · 1 semana/s</span> <span class="btn">Avanzar rápido</span> y <span class="btn">Reiniciar contadores</span>.
+  Las cuatro tarjetas son los escenarios, con el <b>resultado del estudio contra E0</b> (30 réplicas de un año cada uno): costo por año y días de espera. El botón de cada tarjeta <b>cambia la regla en vivo</b>, sin borrar los contadores (se ve cómo dejan de crecer con la regla nueva); la tarjeta activa queda resaltada en azul. A la derecha, la velocidad: <span class="btn">Ver una campaña · 1 día/s</span> <span class="btn">Ver meses · 1 semana/s</span> <span class="btn">Avanzar rápido</span> y <span class="btn">Reiniciar contadores</span>.
   <div class="say">"Probamos cuatro reglas. Bajar el umbral o poner una espera máxima cuesta más; apagar el horno apenas se vacía la cola ahorra 18 millones por año."</div>
 </div></div>
 
@@ -204,7 +204,7 @@ table.t tr.hl td{ background:#fff8e6; }
   <tr><td><b>"¿Los números de las tarjetas salen de esta corrida?"</b></td><td>No: salen de 120 corridas de un año (30 por escenario) con el test apareado. Esta corrida es una sola historia de ejemplo.</td></tr>
   <tr><td><b>"¿La temperatura es real?"</b></td><td>No, es ilustrativa: una rampa lineal hasta unos 900 °C para que se vea la fase. El modelo no la usa; usa los tiempos de 36 y 48 h.</td></tr>
   <tr><td><b>"¿Por qué el costo de capital es tan chico?"</b></td><td>La cola promedio es de unos 4.400 kg (≈ 20 M$ de material) al 2 % mensual. La energía de mantener caliente un horno de ~100 kW pesa mucho más.</td></tr>
-  <tr><td><b>"¿Qué pasa si cambio de escenario a la mitad?"</b></td><td>La regla cambia en el momento y los contadores se reinician, para que lo que se ve corresponda a la regla nueva.</td></tr>
+  <tr><td><b>"¿Qué pasa si cambio de escenario a la mitad?"</b></td><td>La regla cambia en el momento y los contadores siguen sumando: se ve cómo el gasto deja de crecer con la regla nueva. Para empezar de cero está "Reiniciar contadores".</td></tr>
 </table>
 </div>
 
