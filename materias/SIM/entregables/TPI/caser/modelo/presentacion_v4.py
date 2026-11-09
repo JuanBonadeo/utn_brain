@@ -537,11 +537,24 @@ s = s[:lvl_open + len("<Presentation>")] + nuevo + s[lvl_close:]
 
 # Bloques de la PML dentro del panel de la lógica
 # En escalera: los contadores de salida de un bloque y de entrada del siguiente quedan a distinta altura.
-for nm, (X, Y) in {"source": (LX + 24, PY + 68), "colaHorno": (LX + 88, PY + 93), "horno": (LX + 152, PY + 118),
-                   "sink": (LX + 214, PY + 143)}.items():
+POS_PML = {"source": (LX + 24, PY + 68), "colaHorno": (LX + 88, PY + 93), "horno": (LX + 152, PY + 118),
+           "sink": (LX + 214, PY + 143)}
+for nm, (X, Y) in POS_PML.items():
     s, n = re.subn(rf"(<EmbeddedObject><Id>\d+</Id><Name>{nm}</Name>)<X>-?\d+</X><Y>-?\d+</Y>",
                    rf"\g<1><X>{X}</X><Y>{Y}</Y>", s, count=1)
     assert n == 1, nm
+# Conexiones en escalón (horizontal, vertical, horizontal) para no pasar por encima de los contadores de los
+# puertos. Los puertos de la PML están a ±10 px del bloque: out en (X + 10, Y), in en (X − 10, Y).
+for origen, destino in (("source", "colaHorno"), ("colaHorno", "horno"), ("horno", "sink")):
+    (xa, ya), (xb, yb) = POS_PML[origen], POS_PML[destino]
+    x0, y0, dx, dy = xa + 10, ya, (xb - 10) - (xa + 10), yb - ya
+    codo = dx - 12  # baja cerca del bloque destino, lejos del contador de salida del origen
+    pts = f"<Point><X>0</X><Y>0</Y></Point><Point><X>{codo}</X><Y>0</Y></Point><Point><X>{codo}</X><Y>{dy}</Y></Point><Point><X>{dx}</X><Y>{dy}</Y></Point>"
+    dentro = r"(?:(?!</Connector>).)*?"  # sin salir de esta conexión
+    patron = (rf"(<Connector><Id>\d+</Id><Name>\w+</Name>)<X>-?\d+</X><Y>-?\d+</Y>({dentro}<ItemName>{origen}</ItemName></SourceEmbeddedObjectReference>"
+              rf"{dentro}<ItemName>{destino}</ItemName></TargetEmbeddedObjectReference>{dentro})<Points>{dentro}</Points>")
+    s, n = re.subn(patron, rf"\g<1><X>{x0}</X><Y>{y0}</Y>\g<2><Points>{pts}</Points>", s, count=1, flags=re.S)
+    assert n == 1, (origen, destino)
 
 # ---------------------------------------------------------------- 3. experimento Visual y ventana
 vi = s.index("<Name>Visual</Name>")
