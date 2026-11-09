@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>IO — Hoja de fórmulas del recuperatorio</title>
 <style>
-  @page { size: A4; margin: 8mm 8.5mm 7mm 8.5mm; }
+  @page { size: A4; margin: 7mm 8.5mm 6mm 8.5mm; }
   * { box-sizing: border-box; }
   body { margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 8.6pt; line-height: 1.3; color: #111; }
   .page { break-after: page; }
@@ -82,7 +82,6 @@
       <div>
         \[ z' = z + \theta_j\,(c_j - z_j) \qquad x_i' = x_i - \theta_j\,y_{ij} \]
         <p>Coeficiente de sustitución: \(-y_{ij}\) = cuánto cambia la básica \(x_i\) por unidad de \(x_j\) que entra.</p>
-        <p>Desempate: entra el de menor subíndice; sale el de mayor subíndice (y la próxima SBF es degenerada).</p>
         <p class="ojo">Un \(c_j - z_j = 0\) en una no básica indica alternativas <b>sólo si la tabla ya es óptima</b>.</p>
       </div>
     </div>
@@ -257,8 +256,7 @@
 
   <div class="box st">
     <h2>Revisión periódica <span class="note">(se revisa cada \(T\))</span></h2>
-    \[ SS = z \cdot S_d \sqrt{T + LT} \]
-    \[ Q = \bar d\,(T + LT) + SS - q_r - q_{pe} \]
+    \[ SS = z\,S_d \sqrt{T + LT} \quad\; Q = \bar d\,(T + LT) + SS - q_r - q_{pe} \]
     <p>\(q_r\): existencias al revisar · \(q_{pe}\): pedidos pendientes.</p>
     <table>
       <tr><th></th><th>Punto de pedido</th><th>Rev. periódica</th></tr>
