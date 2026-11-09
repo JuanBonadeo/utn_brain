@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>IO — Hoja de fórmulas del recuperatorio</title>
+<style>
+  @page { size: A4; margin: 8mm 8.5mm 7mm 8.5mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 8.6pt; line-height: 1.3; color: #111; }
+  .page { break-after: page; }
+  .page:last-child { break-after: auto; }
+  h1 { font-size: 13.5pt; text-align: center; margin: 0 0 2mm; letter-spacing: .02em; }
+  h1 small { display: block; font-size: 7.6pt; font-weight: normal; color: #555; letter-spacing: 0; margin-top: .5mm; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; border-top: 1.2px solid #111; border-left: 1.2px solid #111; }
+  .g3 { grid-template-columns: 1fr 1fr 1fr; }
+  .box { border-right: 1.2px solid #111; border-bottom: 1.2px solid #111; padding: 1.5mm 2.2mm 1.7mm; break-inside: avoid; }
+  .full { grid-column: 1 / -1; }
+  .box h2 { font-size: 9.4pt; margin: 0 0 1mm; padding: .4mm 1.2mm; background: #e8eefc; border-left: 2.5px solid #2563eb; }
+  .box.st h2 { background: #e7f6ec; border-left-color: #16a34a; }
+  .box.ot h2 { background: #f1f1f1; border-left-color: #6b7280; }
+  ol, ul { margin: .3mm 0 .6mm; padding-left: 4.2mm; }
+  li { margin: 0 0 .45mm; }
+  p { margin: .3mm 0 .7mm; }
+  .katex { font-size: 1.02em; }
+  .katex-display { margin: .8mm 0; }
+  .note { font-size: 8pt; color: #333; }
+  .ojo { font-size: 8pt; border-left: 2px solid #dc2626; padding-left: 1.6mm; margin-top: .9mm; }
+  table { border-collapse: collapse; width: 100%; margin: .7mm 0; font-size: 8.2pt; }
+  th, td { border: .8px solid #888; padding: .45mm 1.2mm; text-align: left; vertical-align: top; }
+  th { background: #ececec; font-weight: bold; }
+  td.c, th.c { text-align: center; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5mm; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════ PÁGINA 1 — PROGRAMACIÓN LINEAL ═══════════════════════════ -->
+<section class="page">
+<h1>Programación lineal: fórmulas y procedimientos<small>IO · recuperatorio 19/11 · notación de la cátedra: \(c_j - z_j\), ficticias con Gran M</small></h1>
+
+<div class="grid">
+
+  <div class="box">
+    <h2>Método gráfico</h2>
+    <ol>
+      <li>Cada restricción como recta; semiplano probando el \((0;0)\). La <b>RF</b> es la intersección en el 1.er cuadrante.</li>
+      <li>Calcular los vértices (sistema de las dos rectas que se cortan) y evaluar \(z\) en cada uno. El mejor es el óptimo.</li>
+    </ol>
+    <table>
+      <tr><th>Pregunta</th><th>Cómo</th></tr>
+      <tr><td>¿Punto factible?</td><td>cumple <b>todas</b>, también \(x \geq 0\)</td></tr>
+      <tr><td>Holgura (\(\leq\)) / exceso (\(\geq\))</td><td>\(b_i - a_ix\) / \(a_ix - b_i\)</td></tr>
+      <tr><td>Restricción activa</td><td>holgura o exceso \(= 0\) en el óptimo</td></tr>
+      <tr><td>¿Alternativas?</td><td>\(c_1/c_2 = a_{i1}/a_{i2}\) de una activa</td></tr>
+    </table>
+    <p class="ojo">RF no acotada ≠ solución no acotada. RF vacía → no factible.</p>
+  </div>
+
+  <div class="box">
+    <h2>Forma estándar y base inicial</h2>
+    <table>
+      <tr><th>Restricción</th><th>Se agrega</th><th>En el funcional</th></tr>
+      <tr><td>\(\leq\)</td><td>\(+\) holgura</td><td>\(0\)</td></tr>
+      <tr><td>\(\geq\)</td><td>\(-\) exceso \(+\) ficticia</td><td>\(0\) y \(\mp M\)</td></tr>
+      <tr><td>\(=\)</td><td>\(+\) ficticia</td><td>\(\mp M\)</td></tr>
+    </table>
+    <p>Ficticia: <b>MAX \(-M\), MIN \(+M\)</b>. Base inicial = holguras y ficticias (forman la identidad). Si \(b_i < 0\), multiplicar la fila por \(-1\) antes.</p>
+  </div>
+
+  <div class="box full">
+    <h2>Una iteración del simplex</h2>
+    <div class="two">
+      <div>
+        <ol>
+          <li>\(z_j = c_B \cdot Y_j\) (\(c_B\) por la columna \(j\)) y \(c_j - z_j\).</li>
+          <li><b>¿Es óptima?</b> Max: todos \(c_j - z_j \leq 0\). Min: todos \(\geq 0\).</li>
+          <li><b>Entra</b> Max: el mayor \(c_j - z_j > 0\). Min: el menor \(c_j - z_j < 0\).</li>
+          <li><b>Sale</b> el menor \(\theta = x_i / y_{ij}\), <b>sólo con \(y_{ij} > 0\)</b>. Si no hay ninguno: no acotada.</li>
+          <li><b>Pivotear</b>: la fila del pivote ÷ pivote; en las demás filas, restar un múltiplo para dejar ceros en la columna que entró.</li>
+        </ol>
+      </div>
+      <div>
+        \[ z' = z + \theta_j\,(c_j - z_j) \qquad x_i' = x_i - \theta_j\,y_{ij} \]
+        <p>Coeficiente de sustitución: \(-y_{ij}\) = cuánto cambia la básica \(x_i\) por unidad de \(x_j\) que entra.</p>
+        <p>Desempate: entra el de menor subíndice; sale el de mayor subíndice (y la próxima SBF es degenerada).</p>
+        <p class="ojo">Un \(c_j - z_j = 0\) en una no básica indica alternativas <b>sólo si la tabla ya es óptima</b>.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="box">
+    <h2>Diagnóstico en la tabla óptima</h2>
+    <table>
+      <tr><th>Caso</th><th>Señal</th></tr>
+      <tr><td>Única</td><td>todas las <b>no básicas</b> con \(c_j - z_j \neq 0\)</td></tr>
+      <tr><td>Alternativas</td><td>una <b>no básica</b> con \(c_j - z_j = 0\)</td></tr>
+      <tr><td>Degenerada</td><td>una <b>básica</b> vale \(0\)</td></tr>
+      <tr><td>No acotada</td><td>entra \(x_j\) y su columna no tiene \(y_{ij} > 0\)</td></tr>
+      <tr><td>No factible</td><td>queda una <b>ficticia básica</b> con valor \(> 0\)</td></tr>
+    </table>
+  </div>
+
+  <div class="box">
+    <h2>Dónde se lee cada cosa (tabla óptima)</h2>
+    <ul>
+      <li>\(x_B = B^{-1}b\): columna \(X\). Las no básicas valen 0. \(z^* = c_B\,x_B\).</li>
+      <li>\(B^{-1}\): debajo de las columnas que <b>al inicio eran la identidad</b> (holguras y ficticias), en el orden de las restricciones.</li>
+      <li>Valores implícitos: \(u = c_B B^{-1}\) = los \(z_j\) de esas mismas columnas. Para una holgura, \(u_i = -(c_j - z_j)\).</li>
+      <li>Costo reducido de un producto: su \(c_j - z_j\).</li>
+    </ul>
+    <p class="ojo">No borres la columna de la ficticia: es la columna de \(B^{-1}\) de su restricción. (Exceso = ficticia con el signo cambiado.)</p>
+  </div>
+
+  <div class="box">
+    <h2>Rango de un \(c_k\) <span class="note">(se rompe la optimalidad)</span></h2>
+    <p><b>\(x_k\) no básica</b>: sólo cambia su \(c_k - z_k\). Max: \(\Delta c_k \leq -(c_k - z_k)\). Min: \(\Delta c_k \geq -(c_k - z_k)\).</p>
+    <p><b>\(x_k\) básica</b>: usar la <b>fila</b> de \(x_k\), columnas no básicas (sin ficticias). Max:</p>
+    \[ \max_{y_{kj}>0} \frac{c_j - z_j}{y_{kj}} \;\leq\; \Delta c_k \;\leq\; \min_{y_{kj}<0} \frac{c_j - z_j}{y_{kj}} \]
+    <p>Min: se invierten los grupos. Grupo vacío → \(\pm\infty\). Dentro del rango, \(x^*\) no cambia y \(z^{*\prime} = z^* + \Delta c_k\, x_k^*\).</p>
+  </div>
+
+  <div class="box">
+    <h2>Rango de un \(b_k\) <span class="note">(se rompe la factibilidad)</span></h2>
+    <p>Usar la <b>columna \(k\) de \(B^{-1}\)</b> (holgura de \(k\), o ficticia si es \(\geq\) / \(=\)); sus elementos son \(r_{ik}\).</p>
+    \[ \max_{r_{ik}>0} \frac{-x_i}{r_{ik}} \;\leq\; \Delta b_k \;\leq\; \min_{r_{ik}<0} \frac{-x_i}{r_{ik}} \]
+    <p>Igual en Max y en Min. Dentro del rango la base es la misma, pero:</p>
+    \[ x_i' = x_i + r_{ik}\,\Delta b_k \qquad z^{*\prime} = z^* + u_k\,\Delta b_k \]
+  </div>
+
+  <div class="box full">
+    <h2>Valor implícito \(u_i\) y producto nuevo</h2>
+    <div class="two">
+      <div>
+        <p>Cuánto cambia \(z^*\) si \(b_i\) sube <b>una unidad</b>, mientras \(b_i\) siga en su rango.</p>
+        <ul>
+          <li><b>Recurso</b> (\(\leq\)): <b>precio sombra</b> = lo máximo que conviene pagar por una unidad más.</li>
+          <li><b>Requerimiento</b> (\(\geq\)): <b>valor marginal</b> = cuánto cambia \(z^*\) por cada unidad más exigida.</li>
+          <li>Restricción con holgura → \(u_i = 0\). \(u_i \neq 0\) → recurso agotado.</li>
+        </ul>
+      </div>
+      <div>
+        <table>
+          <tr><th>Signo</th><th class="c">\(\leq\)</th><th class="c">\(\geq\)</th><th class="c">\(=\)</th></tr>
+          <tr><td>Max</td><td class="c">\(u_i \geq 0\)</td><td class="c">\(u_i \leq 0\)</td><td class="c">libre</td></tr>
+          <tr><td>Min</td><td class="c">\(u_i \leq 0\)</td><td class="c">\(u_i \geq 0\)</td><td class="c">libre</td></tr>
+        </table>
+        <p><b>Producto nuevo</b> \((c_n, A_n)\): \(z_n = \sum_i u_i\,a_{in}\). Max: \(c_n - z_n > 0\) conviene · \(= 0\) alternativa · \(< 0\) no conviene.</p>
+        <p><b>Restricción nueva</b>: si el óptimo actual la cumple, no cambia nada.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="box full">
+    <h2>Dualidad</h2>
+    <div class="two">
+      <div>
+        <p><b>Armado</b> (primal Max → dual Min): los \(b_i\) al funcional, los \(c_j\) a la derecha, la matriz transpuesta.</p>
+        <table>
+          <tr><th>Primal Max</th><th>Dual Min</th></tr>
+          <tr><td>restricción \(\leq\) / \(\geq\) / \(=\)</td><td>\(u_i \geq 0\) / \(u_i \leq 0\) / libre</td></tr>
+          <tr><td>\(x_j \geq 0\) / libre</td><td>restricción \(\geq\) / \(=\)</td></tr>
+        </table>
+        <p class="note">Primal Min: al revés (\(\geq \to u_i \geq 0\), \(\leq \to u_i \leq 0\), \(x_j \geq 0 \to\) restricción \(\leq\)).</p>
+      </div>
+      <div>
+        <p><b>Teorema fundamental</b>: \(u^* = c_B B^{-1}\) y \(w^* = z^*\) (control obligatorio).</p>
+        <p><b>Holguras complementarias</b>: en cada par, uno vale cero. \(x_j\) ↔ exceso dual \(j = -(c_j - z_j)\); holgura \(i\) ↔ \(u_i\).</p>
+        <p><b>Relaciones</b>: óptimo finito ↔ óptimo finito, mismo valor · primal no acotado → dual no factible · alternativas ↔ degenerado.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- ═══════════════════════════ PÁGINA 2 — STOCK Y OTROS MODELOS ═══════════════════════════ -->
+<section class="page">
+<h1>Stock y otros modelos: fórmulas y procedimientos<small>\(D\) demanda · \(L\) costo de una orden · \(C\) precio unitario · \(i\) tasa de mantenimiento · \(LT\) plazo de entrega · todo en la <b>misma unidad de tiempo</b></small></h1>
+
+<div class="grid">
+
+  <div class="box st">
+    <h2>Modelo básico</h2>
+    \[ CT(Q) = C + \frac{L}{Q} + \frac{C\,i\,Q}{2D} \quad \text{(\$ por unidad)} \]
+    \[ Q^* = \sqrt{\frac{2DL}{C\,i}} \qquad T^* = \frac{Q^*}{D} \qquad n^* = \frac{D}{Q^*} \qquad PP = D \cdot LT \]
+    <ul>
+      <li>En \(Q^*\): costo de pedir = costo de mantener. Costo del período \(= CT \cdot D\).</li>
+      <li>Por cajas de \(k\): evaluar \(CT\) en los múltiplos de \(k\) vecinos a \(Q^*\).</li>
+    </ul>
+  </div>
+
+  <div class="box st">
+    <h2>Consumo durante el ingreso <span class="note">(se fabrica a ritmo \(V\))</span></h2>
+    \[ Q^* = \sqrt{\frac{2DL}{C\,i\,(1 - D/V)}} \qquad M = Q\left(1 - \frac{D}{V}\right) \qquad \theta = \frac{Q}{V} \]
+    <p>Requiere \(V > D\). Si \(V \to D\), \(Q^* \to \infty\). El lote sale <b>más grande</b> que en el básico.</p>
+  </div>
+
+  <div class="box st">
+    <h2>Descuentos</h2>
+    <p><b>Escalón</b> (si \(Q \geq a\), todo el lote a \(C_2\)):</p>
+    <ol>
+      <li>\(Q_2^* = \sqrt{2DL/(C_2\,i)}\). Si \(Q_2^* \geq a\), es el óptimo.</li>
+      <li>Si no, comparar \(CT_1(Q_1^*)\) con \(CT_2(a)\): gana el menor.</li>
+    </ol>
+    <p><b>Excedente</b> (sólo lo que pasa de \(a\) se paga \(C_2\)):</p>
+    \[ C(Q) = C_2 + \frac{k}{Q},\;\; k = (C_1 - C_2)\,a \qquad Q^* = \sqrt{\frac{2D\,(L + k)}{C_2\,i}} \;\;(\text{si} > a) \]
+    <p class="note">\(C(Q) \to C_2\) sin alcanzarlo. Comparar con el tramo 1 y quedarse con el menor \(CT\).</p>
+  </div>
+
+  <div class="box st">
+    <h2>Período común y ABC</h2>
+    \[ T^* = \sqrt{\frac{2L}{S}} \qquad S = \sum_j \delta_j\,D_j \qquad Q_j^* = D_j\,T^* \]
+    <p>\(L\) = costo de la orden conjunta. \(\delta_j = C_j\,i\) si se compra; \(C_j\,i\,(1 - D_j/V_j)\) si se fabrica.</p>
+    <p><b>ABC</b> por \(C_jD_j\) acumulado de mayor a menor: A hasta 75 %, B hasta 95 %, C el resto (C → revisión periódica).</p>
+  </div>
+
+  <div class="box st full">
+    <h2>Restricciones: Lagrange</h2>
+    <div class="two">
+      <div>
+        <ol>
+          <li>Calcular cada \(Q_j^*\) sin restricción (\(\lambda = 0\)).</li>
+          <li>Ver cuánto recurso usan. Si alcanza, se terminó.</li>
+          <li>Si no, subir \(\lambda\) hasta que la restricción se cumpla <b>con igualdad</b>.</li>
+        </ol>
+        <table>
+          <tr><th>Recurso</th><th>Restricción</th><th>Lote</th></tr>
+          <tr><td>Capital</td><td>\(\sum C_jQ_j/2 \leq I_0\)</td><td>\(\sqrt{\dfrac{2D_jL_j}{C_j(i + \lambda)}}\)</td></tr>
+          <tr><td>Espacio</td><td>\(\sum v_jQ_j \leq E_0\)</td><td>\(\sqrt{\dfrac{2D_jL_j}{C_j\,i + 2\lambda v_j}}\)</td></tr>
+          <tr><td>Preparación</td><td>\(\sum (D_j/Q_j)\,\tau_j \leq P_0\)</td><td>\(\sqrt{\dfrac{2D_j(L_j + \lambda\tau_j)}{C_j\,i\,(1 - D_j/V_j)}}\)</td></tr>
+        </table>
+      </div>
+      <div>
+        <p><b>Atajo para el capital</b> (todos los lotes se achican igual):</p>
+        \[ \lambda = i\left[\left(\frac{I(0)}{I_0}\right)^2 - 1\right] \qquad Q_j = Q_j^*\sqrt{\frac{i}{i + \lambda}} \]
+        <p>\(I(0)\) = inversión media con los lotes sin restricción.</p>
+        <p><b>¿Conviene un crédito?</b> Con \(i = i_1 + i_2\) (\(i_1\): costo del capital), conviene si la tasa del crédito es menor que \(i_1 + \lambda\) (apunte).</p>
+        <p class="ojo">Muchos comparan sólo con \(\lambda\). Escribí el criterio y aclará el supuesto.</p>
+        <p class="note">\(\lambda\): capital → tasa (1/tiempo); espacio → $/(volumen·tiempo); preparación → $/hora.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="box st">
+    <h2>Demanda aleatoria: punto de pedido</h2>
+    \[ PP = \bar d \cdot LT + SS \qquad SS = z \cdot S_d \sqrt{LT} \]
+    <table>
+      <tr><th>RF</th><td class="c">1 %</td><td class="c">2 %</td><td class="c">3 %</td><td class="c">5 %</td><td class="c">10 %</td></tr>
+      <tr><th>\(z\)</th><td class="c">2,33</td><td class="c">2,05</td><td class="c">1,88</td><td class="c">1,645</td><td class="c">1,28</td></tr>
+    </table>
+    <ul>
+      <li>Se pide cuando existencias + pendientes \(\leq PP\). \(Q^*\) del básico con \(\bar d\).</li>
+      <li>Costo anual del SS \(= SS \cdot C \cdot i\). SS redondeado hacia arriba.</li>
+      <li>El desvío crece con <b>la raíz</b> del tiempo. Servicio 95 % → RF 5 %.</li>
+    </ul>
+  </div>
+
+  <div class="box st">
+    <h2>Revisión periódica <span class="note">(se revisa cada \(T\))</span></h2>
+    \[ SS = z \cdot S_d \sqrt{T + LT} \]
+    \[ Q = \bar d\,(T + LT) + SS - q_r - q_{pe} \]
+    <p>\(q_r\): existencias al revisar · \(q_{pe}\): pedidos pendientes.</p>
+    <table>
+      <tr><th></th><th>Punto de pedido</th><th>Rev. periódica</th></tr>
+      <tr><td>Dispara</td><td>la demanda</td><td>el tiempo</td></tr>
+      <tr><td>\(Q\) / momento</td><td>fijo / variable</td><td>variable / fijo</td></tr>
+      <tr><td>SS cubre</td><td>\(LT\)</td><td>\(T + LT\) (más SS)</td></tr>
+    </table>
+  </div>
+
+</div>
+
+<div class="grid g3" style="margin-top:2mm">
+  <div class="box ot">
+    <h2>Transporte y asignación</h2>
+    <ul>
+      <li>Balanceado: \(\sum a_i = \sum b_j\). Si no, fuente o destino <b>ficticio</b> con costo 0.</li>
+      <li>Básicas: \(m + n - 1\). Menos positivas → degenerada.</li>
+      <li>Ofertas y demandas enteras → óptimo entero.</li>
+      <li>Asignación: ofertas y demandas = 1. Transbordo: entra = sale en cada nodo intermedio.</li>
+    </ul>
+  </div>
+  <div class="box ot">
+    <h2>Entera: ramificación y poda</h2>
+    <ol>
+      <li>Resolver el relajado (cota: superior en Max).</li>
+      <li>Si \(x_k = v\) es fraccionaria, ramas \(x_k \leq \lfloor v \rfloor\) y \(x_k \geq \lfloor v \rfloor + 1\).</li>
+      <li>Podar: no factible, entera (nueva cota) o peor que la cota.</li>
+    </ol>
+    <p class="note">Binarias: costo fijo \(x \leq M y\); excluyentes \(y_A + y_B \leq 1\); B sólo si A \(y_B \leq y_A\).</p>
+  </div>
+  <div class="box ot">
+    <h2>Redes</h2>
+    <ul>
+      <li><b>Árbol mínimo</b>: desde un nodo, agregar el arco más corto a un nodo nuevo; \(n - 1\) arcos.</li>
+      <li><b>Ruta más corta</b> (Dijkstra): etiquetas [distancia, previo]; fijar la menor y reetiquetar.</li>
+      <li><b>Flujo máximo</b>: trayectorias en aumento hasta que no quede capacidad.</li>
+    </ul>
+  </div>
+</div>
+</section>
+
+</body>
+</html>
