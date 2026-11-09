@@ -15,6 +15,18 @@
 11. Unidad 11 — Gestión de stocks _(sin desarrollar)_
 12. Unidad 12 — Programación no lineal _(sin desarrollar)_
 
+> 📌 **Recuperatorio: jueves 2026-11-19, 16:00 h, en la mesa de IO** (aviso de Guillermo Leale
+> en el Classroom, 14/10). Si no se aprueba, globalizador el 2027-02-25. Para estudiar:
+> `estudio/recuperatorio/resumen-recuperatorio.md` (+ `.pdf`), con 17 figuras, el parcial del
+> 2026-10-03 resuelto entero y ejercicios de práctica verificados. El mapa de qué tomaron 46
+> exámenes viejos está en `estudio/recuperatorio/mapa-examenes.md`.
+>
+> **Cómo fue el parcial del 2026-10-03** (`fuentes/parciales/2026-10-03/`, foto del Tema 1):
+> tres ejercicios con preguntas de "valor más cercano" (opción múltiple). 1) Método gráfico de un
+> Min con óptimos alternativos. 2) Refinería Max con una $\geq$ y una tabla simplex intermedia:
+> entra/sale, precio sombra, rango de $c_j$, dual, costo reducido. 3) Stock con restricción de
+> capital (Lagrange) y "¿conviene un crédito al 12 %?". No hubo transporte, entera ni redes.
+
 > **Régimen 2026 — un solo parcial, el 2026-10-03.** A diferencia de 2025 (donde había un
 > primer parcial acotado a las Unidades 1–5), en 2026 hay **un único parcial** y el alcance
 > es **todo el programa**. Lo respaldan los dos materiales de circulación entre alumnos
@@ -1802,6 +1814,9 @@ Los resultados de los Ej. 1 y 2 fueron verificados por enumeración.
 ---
 
 ## Log
+
+- 2026-11-09: Se bajó el material del **Classroom IO 402 2026** a `fuentes/classroom-2026/`: pizarras de clase (factibilidad, pasos del simplex, coeficientes de sustitución, transporte), diapositivas de conceptos básicos y de dualidad, el libro *Programación Lineal* de Torrent, las prácticas 1 y 2 de 2026 (distintas de las de 2023) y la resolución de la Práctica 7 en Excel (`RESOLSTOCK.xlsx`). No se bajaron los PLC ni las prácticas 5 a 7 porque son idénticos a los de `Material de cursado (2023)`. La transcripción de las pizarras quedó en `fuentes/classroom-2026/transcripcion-pizarras.md`; confirma que la cátedra usa $c_j - z_j$, sólo Gran M, "coeficiente de sustitución" $= -y_{ij}$ y "costo marginal" $= c_B B^{-1} = z_j$. Del Drive de la facu llegaron dos archivos nuevos, copiados a `fuentes/`: el resumen de alumnos 2026 (`resumen-alumnos-2026.pdf`) y la Práctica 4 de 2026. El parcial del 2026-10-03 (Tema 1), que estaba en `archivo/`, se copió a `fuentes/parciales/2026-10-03/`.
+- 2026-11-09: Se generó `estudio/recuperatorio/resumen-recuperatorio.md` (+ PDF de 37 páginas): todo el programa ordenado por prioridad para el recuperatorio, con 17 figuras (`scripts/io/io-figs-recuperatorio.py`, `figs/r-*.png`). Incluye el parcial del 2026-10-03 resuelto y verificado, el mapa de frecuencias de 46 exámenes, la teoría que más se repite, 30 trampas y seis ejercicios de práctica de exámenes reales. Dos hallazgos: la tabla del ejercicio 2 del parcial **no era óptima** (entra $A_3$, sale $A_4$; el óptimo es $Z^* = 126.666{,}67$), y en el ejercicio 3 el capital $I_0$ se lee 23.000 pero podría ser 28.000 (se resolvieron los dos casos). Las Unidades 9 (redes) y 11 (stock) siguen sin desarrollar en la wiki; su contenido está en el resumen §8 y §11.
 
 - 2026-11-03: reorganización de `estudio/` en `parcial/` (todo lo del parcial único), `practicas/` y `defensa-tpi/`. Rutas de la wiki actualizadas.
 - 2026-11-03: limpieza. `Resuelta/PL3UTNresol (1).pdf` se renombró a `PL3UTNresol-2021.pdf`; se borraron la `Presentacion_v2` y el `Guion` original de la etapa 2 (quedan la v3 y el `Guion_v2`, que es lo entregado) y la primera versión del cuadro de diagnóstico del simplex (la versión sobria quedó como `cuadro-simplex-diagnostico.png`).
