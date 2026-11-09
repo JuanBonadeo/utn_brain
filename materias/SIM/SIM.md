@@ -3023,6 +3023,7 @@ Conclusiones:
 ---
 
 ## Log
+- **2026-11-09**: TPI subte, guion del video reescrito al modelo actual (E0/E1/E3/E13, E1 = 22, día real, Bonferroni k = 9; 2:32 sin los corchetes). Pendiente para grabar: repetir el piloto con los accesos nuevos, correr las 40 corridas y cargar resultados; la presentación sigue vieja.
 - **2026-11-07**: TPI Caser, cierre de la Etapa 1. Pilotos (Welch: transitorio de 1 mes, los 90 días alcanzan;
   30 réplicas alcanzan para decidir), sensibilidad de costos, primarias alineadas (costo, espera y kg en cola),
   planilla de corridas, gráficos, paper LaTeX con los 10 pasos implícitos (borrador completo, faltan correos,
