@@ -39,10 +39,7 @@ viejo = ('String.format(' + LOC + '"%.2f kWh/kg", (kWhPorEncendido * visEncendid
          '/ Math.max(1, visKg))')
 rep(escape(viejo), escape('visKg < 5000 ? "–" : ' + viejo.replace("Math.max(1, visKg)", "visKg")))
 
-# Bloques más separados dentro del panel de la lógica (LX = 1134, PY = 144)
-for nm, X in {"source": 1134 + 16, "colaHorno": 1134 + 84, "horno": 1134 + 152, "sink": 1134 + 220}.items():
-    s, n = re.subn(rf"(<EmbeddedObject><Id>\d+</Id><Name>{nm}</Name>)<X>-?\d+</X>", rf"\g<1><X>{X}</X>", s, count=1)
-    assert n == 1, nm
+# (La posición de los bloques de la PML la fija presentacion_v4.py, en escalera.)
 
 ET.fromstring(s.encode("utf-8"))
 ALP.write_text(s, encoding="utf-8", newline="\n")

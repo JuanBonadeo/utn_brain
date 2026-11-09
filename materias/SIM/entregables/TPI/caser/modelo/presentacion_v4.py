@@ -218,6 +218,8 @@ FUNCS = [
      "return java.time.LocalDateTime.of(2025, 8, 18, 0, 0).plusMinutes(Math.round(t * 60))"
      ".format(java.time.format.DateTimeFormatter.ofPattern(\"EEE dd/MM HH:mm\", new java.util.Locale(\"es\", \"AR\")));"),
     ("plata", "String", [("pesos", "double")],
+     "// Por debajo del millón, en miles: así el número no queda en \"$ 0,0 M\" al lado de una barra visible.\n"
+     "if (Math.abs(pesos) < 1e6) return String.format(new java.util.Locale(\"es\", \"AR\"), \"$ %,.0f mil\", pesos / 1e3);\n"
      "return String.format(new java.util.Locale(\"es\", \"AR\"), \"$ %.1f M\", pesos / 1e6);"),
     ("descEscenario", "String", [],
      "String e = escenario.equals(\"E1\") ? \"umbral bajo\" : escenario.equals(\"E2\") ? \"umbral con espera máxima\""
@@ -429,7 +431,6 @@ LX = 1134
 add(rect("zonaLogica", LX, PY, 242, PH, fill=None, line=LINE, radius=10))
 add(text("txtLogica", LX + 12, PY + 10, "Lógica en AnyLogic", color=INK, size=12, bold=True))
 add(text("txtLogica2", LX + 12, PY + 27, "Process Modeling Library", color=MUTED, size=10))
-add(text("txtLogica3", LX + 12, PY + 132, "Source → Wait → Delay → Sink", color=INK, size=10, bold=True))
 
 # Statechart (se conserva en su lugar; solo marco y título)
 add(rect("zonaStatechart", 24, 350, 380, 322, fill=None, line=LINE, radius=10))
@@ -533,8 +534,9 @@ nuevo = "".join(P)
 s = s[:lvl_open + len("<Presentation>")] + nuevo + s[lvl_close:]
 
 # Bloques de la PML dentro del panel de la lógica
-for nm, (X, Y) in {"source": (LX + 28, PY + 82), "colaHorno": (LX + 88, PY + 82), "horno": (LX + 148, PY + 82),
-                   "sink": (LX + 208, PY + 82)}.items():
+# En escalera: los contadores de salida de un bloque y de entrada del siguiente quedan a distinta altura.
+for nm, (X, Y) in {"source": (LX + 24, PY + 58), "colaHorno": (LX + 88, PY + 84), "horno": (LX + 152, PY + 110),
+                   "sink": (LX + 214, PY + 136)}.items():
     s, n = re.subn(rf"(<EmbeddedObject><Id>\d+</Id><Name>{nm}</Name>)<X>-?\d+</X><Y>-?\d+</Y>",
                    rf"\g<1><X>{X}</X><Y>{Y}</Y>", s, count=1)
     assert n == 1, nm
