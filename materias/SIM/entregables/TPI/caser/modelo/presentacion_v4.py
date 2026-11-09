@@ -313,10 +313,11 @@ add(text("titulo", 24, 12, "Caser · Horno de cementación y temple", color=WHIT
 add(text("txtEscenario", 24, 42, "escenario", color=HEAD2, size=12, code="descEscenario()"))
 add(text("txtFecha", W - 24, 12, "fecha", color=WHITE, size=16, bold=True, align="RIGHT", code="fechaTexto()"))
 add(text("txtDia", W - 24, 42, "día", color=HEAD2, size=12, align="RIGHT",
-         code='"día " + (int) Math.floor(time() / 24 + 1) + " de 730  ·  contadores desde " + fechaCorta(tInicioVis) + " (" + escenario + ")  ·  velocidad: " + '
-              '(getEngine().getRealTimeScale() >= 1000 ? "máxima" : getEngine().getRealTimeScale() >= 100 ? '
-              '"1 semana por segundo" : getEngine().getRealTimeScale() >= 20 ? "1 día por segundo" : '
-              'String.format("%.0f h por segundo", getEngine().getRealTimeScale()))'))
+         code='"día " + (int) Math.floor(time() / 24 + 1) + " de " + (int) Math.round(calentamientoModeloDias + horizonteDias)'
+              ' + "  ·  contadores desde " + fechaCorta(tInicioVis) + " (" + escenario + ")  ·  velocidad: " + '
+              '(!getEngine().getRealTimeMode() ? "máxima" : getEngine().getRealTimeScale() < 24 ? '
+              'String.format("%.0f h por segundo", getEngine().getRealTimeScale()) : '
+              'String.format(new java.util.Locale("es", "AR"), "%.0f días por segundo", getEngine().getRealTimeScale() / 24))'))
 
 # Indicadores
 KPIS = [
