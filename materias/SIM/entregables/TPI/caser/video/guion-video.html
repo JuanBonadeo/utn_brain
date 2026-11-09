@@ -41,7 +41,7 @@ code{ font-family:Consolas,monospace; font-size:8.6pt; background:var(--soft); b
 <div class="cover">
   <div class="k">TPI Caser · Simulación 2026</div>
   <h1>Guion del video</h1>
-  <div class="s">Cinco integrantes, siete diapositivas y AnyLogic corriendo. Una sola toma de unos 3 minutos y medio.</div>
+  <div class="s">Cinco integrantes, siete diapositivas y AnyLogic corriendo. Una sola toma de casi 4 minutos.</div>
 </div>
 
 <div class="rules">
@@ -52,21 +52,21 @@ code{ font-family:Consolas,monospace; font-size:8.6pt; background:var(--soft); b
 </div>
 <p class="small" style="font-size:8.8pt;color:var(--muted)">Reglas del enunciado del TPI. El aviso del profesor del 28/10 pide un "video breve explicando el problema, la solución y mostrando el uso"; no cambia el límite. Se sube a YouTube como <b>Oculto</b> y se entrega el link.</p>
 
-<h2 class="sec">Reparto del tiempo (objetivo: ≈ 3:40)</h2>
+<h2 class="sec">Reparto del tiempo (objetivo: ≈ 3:50)</h2>
 <div class="bar">
-  <div style="width:17%;background:#1d2b45">Jeremias 0:38</div>
-  <div style="width:15.7%;background:#2a78d6">Augusto 0:35</div>
-  <div style="width:38.1%;background:#eb5a32">Gonzalo 1:25 · AnyLogic</div>
-  <div style="width:13.5%;background:#c26a0a">Tiziano 0:30</div>
-  <div style="width:15.7%;background:#15803d">J. Ignacio 0:35</div>
+  <div style="width:16.3%;background:#1d2b45">Jeremias 0:38</div>
+  <div style="width:15%;background:#2a78d6">Augusto 0:35</div>
+  <div style="width:40.8%;background:#eb5a32">Gonzalo 1:35 · AnyLogic</div>
+  <div style="width:12.9%;background:#c26a0a">Tiziano 0:30</div>
+  <div style="width:15%;background:#15803d">J. Ignacio 0:35</div>
 </div>
 <table class="t" style="margin-top:6px">
   <tr><th>Tramo</th><th>Quién</th><th>Qué se ve</th><th>Tema</th></tr>
   <tr><td>0:00–0:38</td><td><b>Jeremias</b></td><td>Diapositivas 1, 2 (fotos) y 3</td><td>Quiénes somos, el horno real y el problema</td></tr>
   <tr><td>0:38–1:13</td><td><b>Augusto</b></td><td>Diapositiva 4</td><td>Datos reales, cómo se simula y la validación</td></tr>
-  <tr><td>1:13–2:38</td><td><b>Gonzalo</b></td><td><b>AnyLogic en vivo</b></td><td>El modelo corriendo: cola, horno, caliente sin carga, botón E3</td></tr>
-  <tr><td>2:38–3:08</td><td><b>Tiziano</b></td><td>Diapositiva 6</td><td>Los cuatro escenarios y el diseño experimental</td></tr>
-  <tr><td>3:08–3:43</td><td><b>Juan Ignacio</b></td><td>Diapositivas 7 y 8</td><td>Resultados, recomendación y cierre</td></tr>
+  <tr><td>1:13–2:48</td><td><b>Gonzalo</b></td><td><b>AnyLogic en vivo</b></td><td>El modelo corriendo: cola, horno, caliente sin carga, botón E3</td></tr>
+  <tr><td>2:48–3:18</td><td><b>Tiziano</b></td><td>Diapositiva 6</td><td>Los cuatro escenarios y el diseño experimental</td></tr>
+  <tr><td>3:18–3:53</td><td><b>Juan Ignacio</b></td><td>Diapositivas 7 y 8</td><td>Resultados, recomendación y cierre</td></tr>
 </table>
 <p style="font-size:9pt;margin-top:6px">La diapositiva 5 ("El modelo corriendo") es de <b>respaldo</b>: si AnyLogic falla en la toma, Gonzalo habla sobre esa captura. Cada integrante tiene su texto en las <b>notas del orador</b> de su diapositiva.</p>
 
@@ -85,20 +85,21 @@ code{ font-family:Consolas,monospace; font-size:8.6pt; background:var(--soft); b
   <div class="say">Usamos datos reales de la empresa: un año de registros de cada ULI, con su fecha de lavado y su peso, y las facturas de luz y de gas del propio horno. Las llegadas no las inventamos: cada semana simulada sortea una de las 52 semanas reales. Con eso armamos un modelo de eventos discretos en AnyLogic y lo validamos contra el registro histórico: reproduce las toneladas por mes, la duración de las campañas, la espera y el consumo de energía.</div>
 </div>
 
-<div class="who"><div class="head"><div class="av" style="background:#eb5a32">GC</div><div class="name">Gonzalo</div><div class="time">1:13 – 2:38</div></div>
-  <div class="screen">AnyLogic, experimento <code>Visual</code>, pausado en el día 0 y a velocidad <b>x10</b>. Play al empezar a hablar; señalar cada panel con el mouse.</div>
-  <div class="say"><span class="cue">▶ play a x10</span> Ahora vamos a ver el modelo en AnyLogic. Arranca el 18 de agosto de 2025, la primera semana de los datos reales de la empresa. <span class="cue">cola</span> Lo más importante es la cola del horno, donde vemos las ULI que van llegando, <span class="cue">horno</span> y el horno, que cambia de color según su estado. <span class="cue">statechart</span> Esos mismos estados los vemos acá, en el statechart. <span class="cue">arriba</span> Y arriba tenemos el costo acumulado, cuánto lleva esperando la ULI más vieja y cuántas campañas se hicieron.<br><br>
-  En el escenario actual de la empresa, el horno espera a tener 79 ULI para encenderse, pero acá se encendió antes porque llegó una ULI urgente, la violeta: por eso está calentando por prioridad. <span class="cue">se pone rojo → x25</span> Una vez que llega a los 900 grados, cambia a rojo y empiezan a tratarse las ULI. <span class="cue">salida</span> Acá vemos las que van saliendo: ya van 1,8 toneladas. <span class="cue">lógica</span> A la derecha está la lógica en AnyLogic: Source, Wait, Delay y Sink. <span class="cue">gráficos</span> Y abajo, la cola contra el umbral, y en qué estuvo el horno, en porcentaje del tiempo, y cuánto costó.<br><br>
-  <span class="cue">con ~5 ULI en cola → x10; cuando se pone salmón → ⏸</span> Cuando termina de tratar todas, el horno pasa a caliente sin carga. Es el gasto más grande que se puede evitar: el horno sigue encendido sin nada adentro. Justo lo pausé acá y ya lleva <i>[las horas del recuadro salmón]</i> así: son <i>[la plata del recuadro]</i> en luz y gas.<br><br>
-  <span class="cue">clic en E3 · Apagar enseguida → ▶</span> Si pasamos al escenario 3, el horno empieza a enfriarse en el momento: tarda 48 horas y, mientras tanto, se van acumulando nuevas ULI para la próxima campaña. <span class="cue">recuadro salmón</span> Y el costo de tenerlo encendido sin carga deja de aumentar. Según nuestro estudio, eso le ahorra a la empresa unos 18 millones de pesos por año. Ahora seguimos con la presentación. <span class="cue">⏸ → diapositivas</span></div>
+<div class="who"><div class="head"><div class="av" style="background:#eb5a32">GC</div><div class="name">Gonzalo</div><div class="time">1:13 – 2:48</div></div>
+  <div class="screen">AnyLogic, experimento <code>Visual</code>, pausado en el día 0 y a velocidad <b>x10</b>. Hablado con soltura: estos son los puntos y el orden, no hace falta decirlo textual.</div>
+  <div class="say">Bien, ahora vamos a ver un poco de AnyLogic. Esta es la simulación que hicimos. <span class="cue">▶ play</span> Vemos cómo en la cola del horno van llegando las ULI, que son estas cajitas, y se van acumulando. <span class="cue">⏸</span> Voy a pausar un momento.<br><br>
+  <span class="cue">tarjetas de escenarios</span> Acá abajo tenemos los escenarios, con el resultado del estudio. Ahora estamos en la regla actual: esperan a tener 79 ULI para recién ahí prender el horno, o lo encienden antes si llega una ULI urgente. Es lo que vamos a ver ahora. <span class="cue">▶ play</span> <span class="cue">llega la violeta</span> Llegó una ULI urgente, entonces el horno cambia a color naranja. <span class="cue">statechart</span> También vemos acá el estado del horno, y comienza a calentar hasta los 900 grados.<br><br>
+  <span class="cue">se pone rojo → x25</span> Una vez que llega a los 900 grados, comienza a tratar todas estas ULI, y vemos cómo se van acumulando las toneladas de tornillos tratadas mientras se mueven los gastos. <span class="cue">lógica</span> También tenemos acá la lógica en AnyLogic, con los cuatro bloques que ya explicó Augusto.<br><br>
+  <span class="cue">pocas ULI → x10; salmón → ⏸</span> Ahora, por ejemplo, lo pausé acá: está en color salmón. Este es el estado que le genera un costo a la empresa, porque el horno está caliente y no tiene carga. <span class="cue">recuadro salmón</span> Por ejemplo, acá vemos que <i>[las horas del recuadro]</i> en este estado ya gastaron unos <i>[la plata del recuadro]</i>, y a la larga eso es un gasto importante para la empresa.<br><br>
+  <span class="cue">clic en E3 · Apagar enseguida → ▶</span> Ahora, si cambio al escenario 3, que es el más óptimo, cuando se queda sin material el horno empieza a enfriarse en el momento, durante 48 horas, y se siguen acumulando las ULI para la próxima campaña. <span class="cue">⏸ → diapositivas</span> Y continuamos con la presentación, donde vamos a ver el beneficio que esto le genera a la empresa.</div>
 </div>
 
-<div class="who"><div class="head"><div class="av" style="background:#c26a0a">TM</div><div class="name">Tiziano</div><div class="time">2:38 – 3:08</div></div>
+<div class="who"><div class="head"><div class="av" style="background:#c26a0a">TM</div><div class="name">Tiziano</div><div class="time">2:48 – 3:18</div></div>
   <div class="screen">volver a las diapositivas, la 6.</div>
   <div class="say">Comparamos cuatro reglas: la actual, bajar el umbral a 45 ULI, poner una espera máxima de 15 días y apagar el horno apenas se vacía la cola. Corrimos cada una 30 veces, un año simulado por corrida, y a las cuatro les tocaron los mismos 30 años, con las mismas llegadas. Así la única diferencia es la regla, y comparamos año contra año con un test t apareado, con corrección de Bonferroni.</div>
 </div>
 
-<div class="who"><div class="head"><div class="av" style="background:#15803d">JN</div><div class="name">Juan Ignacio</div><div class="time">3:08 – 3:43</div></div>
+<div class="who"><div class="head"><div class="av" style="background:#15803d">JN</div><div class="name">Juan Ignacio</div><div class="time">3:18 – 3:53</div></div>
   <div class="screen">diapositiva 7; al decir "nuestra recomendación", pasar a la 8.</div>
   <div class="say">Bajar el umbral o poner una espera máxima reduce la espera, pero cuesta entre 3 y 5 millones de pesos más por año. Apagar el horno apenas se vacía la cola ahorra 18 millones por año, un 21 por ciento del costo, a cambio de un día más de espera promedio, y el resultado se mantiene aunque cambien los precios. <span class="cue">→ diap. 8</span> Nuestra recomendación: mantener el umbral y no dejar el horno caliente esperando. Gracias.</div>
 </div>
