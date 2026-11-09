@@ -438,6 +438,10 @@ assert {('pedSource','bajadaHall'),('bajadaHall','pedMolinetes'),('pedSourceCall
 # (escalera mecánica + fija, plano de Trenes Argentinos), cada una un área en pendiente de 4,5 m x 10 m y 4,6 m de
 # desnivel a 0,30 m/s vertical, que desembocan en la plaza de transbordo del subsuelo (supuesta) y de ahí al pasillo.
 niveles={lv.findtext('Name'):lv for lv in ped.iter('Level')}
+# Mapa de calor (2026-11-09): un DensityMap por nivel (molde del ejemplo Subway Entrance Hall), máximo de la corrida.
+for _nv,_dm in (('nivelHall','mapaCalorHall'),('nivelVestibulo','mapaCalorSubsuelo')):
+ _m=next(l for l in ped.iter('Level') if l.findtext('Name')==_nv).find(f"Presentation/DensityMap[Name='{_dm}']")
+ assert _m is not None and (_m.findtext('Type'),_m.findtext('TimePeriod'),_m.findtext('DisplayedValue'),_m.findtext('CriticalDensity'))==('PEDESTRIAN','COMPLETE','MAX','1.5'), _dm
 assert set(niveles)=={'nivelHall','nivelVestibulo'} and niveles['nivelHall'].findtext('Z')=='0' and niveles['nivelVestibulo'].findtext('Z')=='-46'
 en_nivel=lambda n: {c.findtext('Name') for c in niveles[n].find('Presentation')}
 assert {f'bordeAndenRoca{k}' for k in range(7)}|{f'hallCabecera{k}' for k in range(6)}|{'bocaNorteHall','bocaSurHall','hallEstructuraCentral','hallVestuarioSOFSE','hallBoleteriasSOFSE','plano3D','viasRoca','planoConstitucion'} <= en_nivel('nivelHall')

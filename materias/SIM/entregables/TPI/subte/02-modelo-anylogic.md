@@ -924,3 +924,12 @@ n0 del procedimiento secuencial) con evaluaciones en paralelo: ~170 s por corrid
 menos con varios núcleos, si la versión PLE lo permite. Con esos 10 días se calcula n* (`analisis_corridas.py`) y
 se agregan días sólo si hace falta. En paralelo las filas del CSV salen en cualquier orden; el cargador las arma
 por semilla y escenario.
+
+## Mapa de calor (2026-11-09)
+
+Un `DensityMap` de la Pedestrian Library por nivel (molde del ejemplo oficial *Subway Entrance Hall*):
+`mapaCalorHall` (andenes, hall y bocas de las escaleras) y `mapaCalorSubsuelo` (plaza de transbordo, pasillo y
+vestíbulo). Muestra la **densidad máxima de la corrida completa**, escala logarítmica, con densidad crítica de
+1,5 peatones/m² (rojo). Sirve para señalar dónde se forma la congestión: frente a las escaleras del bloque
+central, en las escaleras y el pasillo, y frente a los molinetes. Se ve en la franja visual; para el informe,
+captura al final de `PeatonalFranjaVisualE0` y `PeatonalFranjaVisualE1`.

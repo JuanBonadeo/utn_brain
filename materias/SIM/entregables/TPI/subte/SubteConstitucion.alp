@@ -37037,6 +37037,72 @@ return String.join(",", partes);]]></Body>
 						<Point><X>41</X><Y>0</Y></Point>
 					</Points>
 				</TargetLine>
+				<DensityMap>
+					<Id>1800000000501</Id>
+					<Name><![CDATA[mapaCalorHall]]></Name>
+					<X>-520</X><Y>40</Y>
+					<Label><X>-15</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<Z>0</Z>
+					<Width>14</Width>
+					<Height>220</Height>
+					<Transparency>0.25</Transparency>
+					<CriticalDensity>1.5</CriticalDensity>
+					<Type>PEDESTRIAN</Type>
+					<TimePeriod>COMPLETE</TimePeriod>
+					<WindowTime Class="UnitValue">
+						<Value Class="Double">5</Value>
+						<Unit Class="TimeUnits"><![CDATA[MINUTE]]></Unit>
+					</WindowTime>
+					<DisplayedValue>MAX</DisplayedValue>
+					<EnableAttenuation>true</EnableAttenuation>
+					<ColorScheme>LOGARITHMIC</ColorScheme>
+				</DensityMap>
+				<Text>
+					<Id>1800000000502</Id>
+					<Name><![CDATA[textoMapaCalorHall]]></Name>
+					<X>-500</X><Y>40</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-14013910</Color>
+					<Text><![CDATA[Mapa de calor del hall y los andenes]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>12</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000503</Id>
+					<Name><![CDATA[textoMapaCalorHall2]]></Name>
+					<X>-500</X><Y>58</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-14013910</Color>
+					<Text><![CDATA[densidad máxima de peatones en la corrida; rojo = 1,5 por m² o más]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
 			</Presentation>
 
 				</Level>
@@ -45683,6 +45749,72 @@ return String.join(",", partes);]]></Body>
 						<Point><X>0</X><Y>44.5</Y><Z>0</Z></Point>
 					</Points>
 				</Wall>
+				<DensityMap>
+					<Id>1800000000504</Id>
+					<Name><![CDATA[mapaCalorSubsuelo]]></Name>
+					<X>600</X><Y>560</Y>
+					<Label><X>-15</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<Z>0</Z>
+					<Width>14</Width>
+					<Height>220</Height>
+					<Transparency>0.25</Transparency>
+					<CriticalDensity>1.5</CriticalDensity>
+					<Type>PEDESTRIAN</Type>
+					<TimePeriod>COMPLETE</TimePeriod>
+					<WindowTime Class="UnitValue">
+						<Value Class="Double">5</Value>
+						<Unit Class="TimeUnits"><![CDATA[MINUTE]]></Unit>
+					</WindowTime>
+					<DisplayedValue>MAX</DisplayedValue>
+					<EnableAttenuation>true</EnableAttenuation>
+					<ColorScheme>LOGARITHMIC</ColorScheme>
+				</DensityMap>
+				<Text>
+					<Id>1800000000505</Id>
+					<Name><![CDATA[textoMapaCalorSubsuelo]]></Name>
+					<X>620</X><Y>560</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-14013910</Color>
+					<Text><![CDATA[Mapa de calor del subsuelo]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>12</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1800000000506</Id>
+					<Name><![CDATA[textoMapaCalorSubsuelo2]]></Name>
+					<X>620</X><Y>578</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-14013910</Color>
+					<Text><![CDATA[plaza, pasillo y vestíbulo con los molinetes]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
 			</Presentation>
 
 				</Level>
