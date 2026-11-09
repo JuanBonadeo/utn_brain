@@ -2,10 +2,11 @@
 """
 io-figs-recuperatorio.py — Figuras del resumen del recuperatorio de IO.
 
-Genera en materias/IO/figs/ los PNG r-*.png que usa
-materias/IO/estudio/recuperatorio/resumen-recuperatorio.md. Todo sale de datos
-fijos (el parcial 2026-10-03, ejemplos del apunte o ejemplos propios marcados
-como tales): correrlo dos veces da lo mismo.
+Genera en materias/IO/figs/ los PNG r-*.png que usan
+materias/IO/estudio/recuperatorio/resumen-recuperatorio.md y
+parcial-2026-resuelto.md (las r-mapa y r-parcial-*). Todo sale de datos fijos
+(el parcial 2026-10-03, ejemplos del apunte o ejemplos propios marcados como
+tales): correrlo dos veces da lo mismo.
 
 Uso (desde la raíz del repo):
     .venv/bin/python scripts/io/io-figs-recuperatorio.py
@@ -169,15 +170,15 @@ def fig_mapa():
     cols = [
         (1.95, "Ejercicio 1\nMétodo gráfico", BLUE, BLUE_L,
          ["coordenadas del óptimo", "¿un punto es factible?", "restricciones activas",
-          "holgura en un punto dado", "valor óptimo con unidad"], "§2"),
+          "holgura en un punto dado", "valor óptimo con unidad"], "resumen: §2"),
         (5.5, "Ejercicio 2\nModelo + tabla simplex", PURPLE, PURPLE_L,
          ["¿se detiene o sigue? entra/sale", "tabla inicial: quién entra/sale",
           "precio sombra y su significado", "rango de un $c_j$", "función dual",
-          "costo reducido e interpretación"], "§4 a §7 (resuelto en §7)"),
+          "costo reducido e interpretación"], "resumen: §4 a §6"),
         (9.05, "Ejercicio 3\nStock", GREEN, GREEN_L,
          ["lote óptimo sin restricción", "inversión promedio",
           "λ de la restricción de capital", "lote con la restricción",
-          "¿conviene un crédito al 12 %?"], "§8 (resuelto en §8.8)"),
+          "¿conviene un crédito al 12 %?"], "resumen: §7"),
     ]
     for x, title, c, cl, items, ref in cols:
         box(ax, x, 4.45, 3.2, 0.82, title, fc=cl, ec=c, color=c, weight="bold", size=10.5)
@@ -187,7 +188,7 @@ def fig_mapa():
             y -= 0.42
         ax.text(x, 1.05, "→ " + ref, ha="center", fontsize=9.5, color=c, weight="bold")
     box(ax, 5.5, 0.38, 10.4, 0.55,
-        "Puede caer además: transporte, asignación y transbordo (§9) · entera y mixta (§10) · redes (§11) · teoría (§12)",
+        "Puede caer además: transporte, asignación y transbordo (§8) · entera y mixta (§9) · redes (§10) · teoría (§11)",
         fc=GRAY_L, ec=MUTED, size=9.4)
     save(fig, "r-mapa.png")
 
@@ -451,11 +452,202 @@ def fig_parcial_ej2():
 
 
 # ═════════════════════════════════════════════════════════════════════════
+# 4b. La tabla simplex y sus partes (alfarería, ejemplo 1-1 del apunte)
+# ═════════════════════════════════════════════════════════════════════════
+YELLOW = "#fbbf24"
+YELLOW_L = "#fef9c3"
+
+
+def grilla(ax, x0, ytop, rows, cw, rh, fill, bold=(), size=10):
+    """Tabla genérica: rows[i][j] es el texto; fill[(i, j)] el color de fondo."""
+    for i, row in enumerate(rows):
+        y = ytop - (i + 1) * rh
+        for j, v in enumerate(row):
+            x = x0 + sum(cw[:j])
+            fc = fill.get((i, j), "white")
+            if fc is None:
+                continue
+            ax.add_patch(Rectangle((x, y), cw[j], rh, fc=fc, ec="#d1d5db", lw=0.8))
+            ax.text(x + cw[j] / 2, y + rh / 2, v, ha="center", va="center",
+                    fontsize=size, weight="bold" if i in bold else "normal")
+
+
+def badge(ax, x, y, n, c):
+    ax.add_patch(plt.Circle((x, y), 0.19, fc=c, ec="white", lw=1.2, zorder=8))
+    ax.text(x, y, str(n), ha="center", va="center", fontsize=9, weight="bold",
+            color="white", zorder=9)
+
+
+def leyenda(ax, x, y, items, dy=0.43, size=9.6, wrap_x=None):
+    """items: (n o None, color, texto). Devuelve la y final."""
+    for n, c, t in items:
+        if n is None:
+            ax.add_patch(Rectangle((x - 0.17, y - 0.13), 0.34, 0.26, fc=c[1], ec=c[0], lw=1.6))
+        else:
+            badge(ax, x, y, n, c)
+        ax.text(x + 0.35, y, t, va="center", fontsize=size, color=INK)
+        y -= dy
+    return y
+
+
+def fig_simplex_tabla():
+    """Tabla inicial de la alfarería con cada parte numerada."""
+    fig, ax = canvas(10.6, 8.6)
+    cw = [0.8, 1.05, 0.78, 0.78, 0.78, 0.78, 0.78, 1.0, 1.45]
+    rh = 0.5
+    x0, ytop = 0.75, 7.75
+    rows = [
+        ["", "$c_j$", "20", "45", "0", "0", "0", "", ""],
+        ["$c_B$", "Base", "$A_1$", "$A_2$", "$A_3$", "$A_4$", "$A_5$", "$X$", "θ"],
+        ["0", "$A_3$", "1", "2", "1", "0", "0", "40", "40 / 2 = 20"],
+        ["0", "$A_4$", "3", "1,5", "0", "1", "0", "75", "75 / 1,5 = 50"],
+        ["0", "$A_5$", "0", "1", "0", "0", "1", "15", "15 / 1 = 15"],
+        ["", "$z_j$", "0", "0", "0", "0", "0", "z = 0", ""],
+        ["", "$c_j - z_j$", "20", "45", "0", "0", "0", "", ""],
+    ]
+    fill = {(0, 0): None, (0, 7): None, (0, 8): None}
+    fill[(0, 1)] = PURPLE_L
+    for j in range(2, 7):
+        fill[(0, j)] = PURPLE_L
+    for j in range(9):
+        fill[(1, j)] = "#e5e7eb"
+    for i in (2, 3, 4):
+        fill[(i, 0)] = ORANGE_L
+        fill[(i, 1)] = GRAY_L
+        for j in (4, 5, 6):
+            fill[(i, j)] = BLUE_L
+        fill[(i, 7)] = GREEN_L
+        fill[(i, 8)] = "#f5f3ff"
+    for j in range(9):
+        fill[(5, j)] = "white" if j else None
+        fill[(6, j)] = YELLOW_L if j else None
+    fill[(5, 8)] = None
+    fill[(6, 7)] = None
+    fill[(6, 8)] = None
+    fill[(4, 3)] = YELLOW
+    grilla(ax, x0, ytop, rows, cw, rh, fill, bold=(1, 6))
+    X = lambda j: x0 + sum(cw[:j])
+    Y = lambda i: ytop - (i + 1) * rh
+    # columna que entra y fila que sale
+    ax.add_patch(Rectangle((X(3), Y(6)), cw[3], 7 * rh - rh, fc="none", ec=RED, lw=2.4, zorder=6))
+    ax.add_patch(Rectangle((X(0), Y(4)), sum(cw), rh, fc="none", ec=RED, lw=2.4, ls="--", zorder=6))
+    ax.annotate("ENTRA $A_2$: el mayor $c_j - z_j$ (45)", (X(3) + cw[3] / 2, Y(6)),
+                (X(3) + 0.2, Y(6) - 0.75), fontsize=9.6, color=RED, weight="bold",
+                arrowprops=dict(arrowstyle="-|>", color=RED, lw=1.4))
+    ax.annotate("SALE $A_5$:\nel menor θ (15)", (X(9), Y(4) + rh / 2), (X(9) + 0.35, Y(4) - 0.1),
+                fontsize=9.6, color=RED, weight="bold", va="center",
+                arrowprops=dict(arrowstyle="-|>", color=RED, lw=1.4))
+    # badges de columnas, arriba
+    # badges: 1 (fila c_j) a la izquierda; 2 a 6 y 9 sobre su columna; 7 y 8 a la izquierda
+    badge(ax, X(1) - 0.3, Y(0) + rh / 2, 1, PURPLE)
+    for n, xc, c in [(2, X(0) + cw[0] / 2, ORANGE), (3, X(1) + cw[1] / 2, MUTED),
+                     (4, X(2) + cw[2], INK), (5, X(4) + 1.5 * cw[4], BLUE),
+                     (6, X(7) + cw[7] / 2, GREEN), (9, X(8) + cw[8] / 2, PURPLE)]:
+        badge(ax, xc, ytop + 0.3, n, c)
+    badge(ax, X(0) - 0.3, Y(5) + rh / 2, 7, INK)
+    badge(ax, X(0) - 0.3, Y(6) + rh / 2, 8, ORANGE)
+    ax.plot([X(2) + 0.05, X(4) - 0.05], [ytop + 0.08] * 2, color=INK, lw=1.2)
+    ax.plot([X(4) + 0.05, X(7) - 0.05], [ytop + 0.08] * 2, color=BLUE, lw=1.6)
+    ax.text(X(0), ytop + 0.72,
+            "Alfarería (apunte, ej. 1-1):  Max z = 20x₁ + 45x₂   s.a.  x₁ + 2x₂ ≤ 40 (horas) · "
+            "3x₁ + 1,5x₂ ≤ 75 (kg) · x₂ ≤ 15 (demanda)",
+            fontsize=9.6, color=MUTED)
+    # leyenda
+    ly = Y(6) - 1.45
+    izq = [
+        (1, PURPLE, "Fila $c_j$: coeficiente de cada variable en el funcional"),
+        (2, ORANGE, "Columna $c_B$: los $c_j$ de las variables básicas"),
+        (3, MUTED, "Base: qué variable es básica en cada fila"),
+        (4, INK, "Cuerpo: $Y_j = B^{-1}A_j$; cada $y_{ij}$. El coef. de sustitución es $-y_{ij}$"),
+        (5, BLUE, "Columnas que al inicio forman la identidad (holguras y\n"
+                  "ficticias). En cualquier tabla, debajo de ellas está $B^{-1}$"),
+    ]
+    der = [
+        (6, GREEN, "Columna $X$: valor de cada básica, $x_B = B^{-1}b$;\nabajo, $z = c_B\\,x_B$"),
+        (7, INK, "Fila $z_j = c_B\\,Y_j$ (fila por fila: $c_B$ por la columna)"),
+        (8, ORANGE, "Fila $c_j - z_j$: decide quién ENTRA y si es óptima"),
+        (9, PURPLE, "θ = $x_i / y_{ij}$, sólo con $y_{ij} > 0$: decide quién SALE"),
+        (None, (INK, YELLOW), "Pivote: cruce de la columna que entra y la fila que sale"),
+    ]
+    leyenda(ax, 0.55, ly, izq, dy=0.5, size=9.4)
+    leyenda(ax, 5.95, ly, der, dy=0.5, size=9.4)
+    save(fig, "r-simplex-tabla.png")
+
+
+def fig_simplex_optima():
+    """Tabla óptima de la alfarería: dónde se lee cada resultado."""
+    fig, ax = canvas(10.6, 7.0)
+    cw = [0.8, 1.05, 0.78, 0.78, 0.78, 0.78, 0.78, 1.25]
+    rh = 0.5
+    x0, ytop = 0.75, 6.4
+    rows = [
+        ["", "$c_j$", "20", "45", "0", "0", "0", ""],
+        ["$c_B$", "Base", "$A_1$", "$A_2$", "$A_3$", "$A_4$", "$A_5$", "$X$"],
+        ["20", "$A_1$", "1", "0", "1", "0", "−2", "10"],
+        ["0", "$A_4$", "0", "0", "−3", "1", "9/2", "45/2"],
+        ["45", "$A_2$", "0", "1", "0", "0", "1", "15"],
+        ["", "$z_j$", "20", "45", "20", "0", "5", "z* = 875"],
+        ["", "$c_j - z_j$", "0", "0", "−20", "0", "−5", ""],
+    ]
+    fill = {(0, 0): None, (0, 7): None, (5, 0): None, (6, 0): None, (6, 7): None}
+    for j in range(1, 7):
+        fill[(0, j)] = PURPLE_L
+    for j in range(8):
+        fill[(1, j)] = "#e5e7eb"
+    for i in (2, 3, 4):
+        fill[(i, 0)] = ORANGE_L
+        fill[(i, 1)] = GRAY_L
+        for j in (4, 5, 6):
+            fill[(i, j)] = BLUE_L
+        fill[(i, 7)] = GREEN_L
+    for j in (4, 5, 6):
+        fill[(5, j)] = ORANGE_L
+    fill[(5, 7)] = GREEN_L
+    for j in range(1, 7):
+        fill[(6, j)] = YELLOW_L
+    grilla(ax, x0, ytop, rows, cw, rh, fill, bold=(1, 6))
+    X = lambda j: x0 + sum(cw[:j])
+    Y = lambda i: ytop - (i + 1) * rh
+    # B^-1 recuadrado
+    ax.add_patch(Rectangle((X(4), Y(4)), 3 * cw[4], 3 * rh, fc="none", ec=BLUE, lw=2.4, zorder=6))
+    ax.plot([X(4) + 0.05, X(7) - 0.05], [ytop + 0.08] * 2, color=BLUE, lw=1.6)
+    ax.text(X(4) + 1.5 * cw[4], ytop + 0.3, "$B^{-1}$", ha="center", fontsize=12,
+            color=BLUE, weight="bold")
+    # básicas: identidad (A1, A2 y A4)
+    for j in (2, 3, 5):
+        ax.add_patch(Rectangle((X(j) + 0.05, Y(4) + 0.05), cw[j] - 0.1, 3 * rh - 0.1,
+                               fc="none", ec=GREEN, lw=1.4, ls=(0, (3, 2)), zorder=7))
+    # anotaciones a la derecha
+    xr = X(8) + 0.35
+    ax.annotate("valores de las básicas:\n10 vasijas, 15 cántaros;\nsobran 22,5 kg de arcilla",
+                (X(8), Y(3) + rh / 2), (xr, Y(2) + rh), fontsize=9.4, color=GREEN,
+                va="center", arrowprops=dict(arrowstyle="-|>", color=GREEN, lw=1.3))
+    ax.annotate("$z_j$ bajo las holguras =\nvalores implícitos\nu = (20; 0; 5)",
+                (X(7) - 0.05, Y(5) + rh / 2), (xr, Y(4)), fontsize=9.4, color=ORANGE,
+                va="center", arrowprops=dict(arrowstyle="-|>", color=ORANGE, lw=1.3,
+                                             connectionstyle="arc3,rad=-0.25"))
+    ax.annotate("todos ≤ 0 (Max): ÓPTIMA.\nLas no básicas ($A_3$, $A_5$)\ndan < 0: única",
+                (X(7) - 0.05, Y(6) + rh / 2), (xr, Y(6) - 0.3), fontsize=9.4, color=INK,
+                va="center", arrowprops=dict(arrowstyle="-|>", color=INK, lw=1.3,
+                                             connectionstyle="arc3,rad=-0.25"))
+    # leyenda abajo
+    ly = Y(6) - 1.35
+    items = [
+        (None, (BLUE, BLUE_L), "$B^{-1}$: debajo de $A_3$, $A_4$ y $A_5$, las columnas que en la tabla "
+                               "inicial eran la identidad.\nNo debajo de las básicas actuales"),
+        (None, (GREEN, "white"), "Las básicas ($A_1$, $A_4$, $A_2$) forman ahora la identidad y "
+                                 "tienen $c_j - z_j = 0$: sirve de control"),
+        (None, (ORANGE, ORANGE_L), "Valor implícito de cada restricción: $z_j$ de su holgura, "
+                                   "o sea $-(c_j - z_j)$ porque la holgura tiene $c_j = 0$"),
+    ]
+    leyenda(ax, 0.55, ly, items, dy=0.55, size=9.4)
+    save(fig, "r-simplex-optima.png")
+
+
+# ═════════════════════════════════════════════════════════════════════════
 # 5. Rangos de sensibilidad del ejercicio 2
 # ═════════════════════════════════════════════════════════════════════════
-def fig_rangos():
-    fig, axs = plt.subplots(6, 1, figsize=(7.6, 6.4))
-    data = [
+RANGOS_PARCIAL = [
         ("$c_1$ (nafta, no básica)", None, 50 + 5 / 3, 50, 30, 60, PURPLE,
          "c₁ ≤ 51,67\n(si gana más, la nafta entra)"),
         ("$c_2$ (diésel, básica)", 80 - 20 / 7, 120, 80, 60, 130, BLUE,
@@ -467,20 +659,39 @@ def fig_rangos():
          "866,67 ≤ b₂ ≤ 1.333,33\n(cada unidad vale u₂ = 50)"),
         ("$b_3$ (mínimo de diésel)", None, 1333.33, 500, 0, 1500, GREEN,
          "b₃ ≤ 1.333,33\n(sobran 833,33 t: u₃ = 0)"),
-    ]
+]
+
+RANGOS_ALFARERIA = [
+    ("$c_1$ (vasija, básica)", 0, 22.5, 20, -5, 30, BLUE, "0 ≤ c₁ ≤ 22,5"),
+    ("$c_2$ (cántaro, básica)", 40, None, 45, 30, 60, BLUE, "c₂ ≥ 40"),
+    ("$b_1$ (horas)", 30, 47.5, 40, 20, 55, GREEN,
+     "30 ≤ b₁ ≤ 47,5\n(cada hora vale u₁ = 20)"),
+    ("$b_2$ (kg de arcilla)", 52.5, None, 75, 40, 95, GREEN,
+     "b₂ ≥ 52,5\n(sobran 22,5 kg: u₂ = 0)"),
+    ("$b_3$ (demanda de cántaros)", 10, 20, 15, 5, 25, GREEN,
+     "10 ≤ b₃ ≤ 20\n(cada cántaro más vale u₃ = 5)"),
+]
+
+
+def fig_rangos(data, title, fname):
+    fig, axs = plt.subplots(len(data), 1, figsize=(7.6, 1.07 * len(data)))
     for ax, (name, lo, hi, cur, xmin, xmax, c, txt) in zip(axs, data):
         ax.set_xlim(xmin, xmax)
         ax.set_ylim(-1, 1)
         ax.axhline(0, color=GRID, lw=2)
         a = lo if lo is not None else xmin
-        ax.plot([a, hi], [0, 0], color=c, lw=7, solid_capstyle="butt", alpha=0.85)
+        b = hi if hi is not None else xmax
+        ax.plot([a, b], [0, 0], color=c, lw=7, solid_capstyle="butt", alpha=0.85)
         if lo is not None:
             ax.plot(lo, 0, "|", color=c, ms=18, mew=2)
             ax.text(lo, -0.95, coma(lo, 2).rstrip("0").rstrip(","), ha="center", fontsize=9.5, color=c)
         else:
             ax.text(xmin, -0.95, "−∞", ha="left", fontsize=9.5, color=c)
-        ax.plot(hi, 0, "|", color=c, ms=18, mew=2)
-        ax.text(hi, -0.95, coma(hi, 2).rstrip("0").rstrip(","), ha="center", fontsize=9.5, color=c)
+        if hi is not None:
+            ax.plot(hi, 0, "|", color=c, ms=18, mew=2)
+            ax.text(hi, -0.95, coma(hi, 2).rstrip("0").rstrip(","), ha="center", fontsize=9.5, color=c)
+        else:
+            ax.text(xmax, -0.95, "+∞", ha="right", fontsize=9.5, color=c)
         ax.plot(cur, 0, "o", color=INK, ms=7, zorder=5)
         ax.text(cur, 0.5, f"actual {coma(cur, 0)}", ha="center", fontsize=9.3)
         ax.set_yticks([])
@@ -491,39 +702,51 @@ def fig_rangos():
                 fontsize=10, weight="bold")
         ax.text(xmax + (xmax - xmin) * 0.03, 0, txt, ha="left", va="center",
                 fontsize=9.5, color=MUTED, wrap=False)
-    fig.suptitle("Rangos en los que la base óptima no cambia (parcial 2026, ejercicio 2)",
-                 fontsize=11, weight="bold", x=0.5, y=0.995)
+    fig.suptitle(title, fontsize=11, weight="bold", x=0.5, y=0.995)
     fig.subplots_adjust(left=0.27, right=0.68, hspace=0.45)
-    save(fig, "r-rangos-sensibilidad.png")
+    save(fig, fname)
 
 
 # ═════════════════════════════════════════════════════════════════════════
 # 6. Pares primal–dual (holguras complementarias)
 # ═════════════════════════════════════════════════════════════════════════
-def fig_pares():
-    fig, ax = canvas(11, 5.8)
-    ax.text(2.6, 5.45, "PRIMAL (Max Z)", ha="center", fontsize=11, weight="bold", color=BLUE)
-    ax.text(8.4, 5.45, "DUAL (Min W)", ha="center", fontsize=11, weight="bold", color=ORANGE)
-    pares = [
+PARES_PARCIAL = [
         ("x₁ nafta = 0", "holgura dual 1 = 5/3  (costo reducido)", False),
         ("x₂ diésel = 1333,33", "holgura dual 2 = 0", True),
         ("x₃ fueloil = 666,67", "holgura dual 3 = 0", True),
         ("x₄ holgura ① = 0", "u₁ = 40/3 ≈ 13,33", False),
         ("x₅ holgura ② = 0", "u₂ = 50", False),
         ("x₆ exceso ③ = 833,33", "u₃ = 0", True),
-    ]
+]
+PIE_PARCIAL = ("En cada par, al menos uno vale cero. Si sobra recurso (x₆ > 0), su precio "
+               "sombra es 0; si se produce (x₂, x₃ > 0), su restricción dual se cumple con igualdad.")
+
+PARES_ALFARERIA = [
+    ("x₁ vasijas = 10", "exceso dual 1 = 0", True),
+    ("x₂ cántaros = 15", "exceso dual 2 = 0", True),
+    ("x₃ holgura de horas = 0", "u₁ = 20", False),
+    ("x₄ holgura de arcilla = 22,5", "u₂ = 0", True),
+    ("x₅ holgura de demanda = 0", "u₃ = 5", False),
+]
+PIE_ALFARERIA = ("Sobra arcilla (x₄ > 0), así que su precio sombra es 0. Se fabrican vasijas y cántaros, "
+                 "así que sus restricciones duales se cumplen con igualdad.")
+
+
+def fig_pares(pares, pie, fname, primal="PRIMAL (Max z)", dual="DUAL (Min w)"):
+    h = 1.1 + 0.78 * len(pares)
+    fig, ax = canvas(11, h)
+    ax.text(2.6, h - 0.35, primal, ha="center", fontsize=11, weight="bold", color=BLUE)
+    ax.text(8.4, h - 0.35, dual, ha="center", fontsize=11, weight="bold", color=ORANGE)
     for k, (p, d, pnz) in enumerate(pares):
-        y = 4.75 - k * 0.78
+        y = h - 1.05 - k * 0.78
         box(ax, 2.6, y, 3.6, 0.55, p, fc=BLUE_L if pnz else GRAY_L,
             ec=BLUE if pnz else MUTED, weight="bold" if pnz else "normal")
         box(ax, 8.4, y, 3.9, 0.55, d, fc=GRAY_L if pnz else ORANGE_L,
             ec=MUTED if pnz else ORANGE, weight="normal" if pnz else "bold")
         arrow(ax, (4.45, y), (6.4, y), style="<|-|>", color=GREEN, lw=1.4)
         ax.text(5.42, y + 0.12, "producto = 0", ha="center", fontsize=8.2, color=GREEN)
-    ax.text(5.5, 0.12, "En cada par, al menos uno vale cero. Si sobra recurso (x₆ > 0), su precio "
-            "sombra es 0; si se produce (x₂, x₃ > 0), su restricción dual se cumple con igualdad.",
-            ha="center", fontsize=9.2, color=INK)
-    save(fig, "r-pares-primal-dual.png")
+    ax.text(5.5, 0.12, pie, ha="center", fontsize=9.2, color=INK)
+    save(fig, fname)
 
 
 # ═════════════════════════════════════════════════════════════════════════
@@ -569,7 +792,7 @@ def fig_stock_basico():
 
 
 # ═════════════════════════════════════════════════════════════════════════
-# 8. Stock: curva de costo (con los datos del artículo A del parcial)
+# 8. Stock: curva de costo (datos del artículo A del parcial, sin nombrarlo)
 # ═════════════════════════════════════════════════════════════════════════
 def fig_stock_costo():
     C, L, i, D = 50, 150, 0.20, 12000
@@ -590,7 +813,7 @@ def fig_stock_costo():
     ax.set_ylim(0, 1.05)
     ax.grid(color=GRID, lw=0.6)
     ax.legend(frameon=False, loc="upper right", fontsize=9)
-    ax.set_title("Costo por unidad: CT(Q) = C + L/Q + C·i·Q/(2D)   (artículo A del parcial: C = 50, L = 150, i = 20 %, D = 12.000)",
+    ax.set_title("Costo por unidad: CT(Q) = C + L/Q + C·i·Q/(2D)   (ejemplo: C = 50, L = 150, i = 20 %, D = 12.000)",
                  fontsize=10)
     ax.text(1000, 0.3, "C = 50 $/u es constante: sólo sube toda la curva,\nno mueve el mínimo. CT(Q*) = 50,50 $/u",
             fontsize=8.8, color=MUTED)
@@ -686,52 +909,56 @@ def fig_stock_descuentos():
 
 
 # ═════════════════════════════════════════════════════════════════════════
-# 11. Stock: Lagrange con restricción de capital (parcial, ejercicio 3)
+# 11. Stock: Lagrange con restricción de capital (ejemplo propio y parcial, ej. 3)
 # ═════════════════════════════════════════════════════════════════════════
-def fig_stock_lagrange():
-    DA, DB, LA, LB, CA, CB, i = 12000, 8000, 150, 200, 50, 80, 0.20
+def fig_stock_lagrange(art, i, I0s, fname, lam_max=0.4, ylim=None, nombres=("A", "B")):
+    """art: [(D, L, C), (D, L, C)]. I0s: [(I0, color)]. Lotes y λ por bisección."""
+    (DA, LA, CA), (DB, LB, CB) = art
     qa = lambda l: np.sqrt(2 * DA * LA / (CA * (i + l)))
     qb = lambda l: np.sqrt(2 * DB * LB / (CB * (i + l)))
     inv = lambda l: CA * qa(l) / 2 + CB * qb(l) / 2
-    lam = np.linspace(0, 0.4, 400)
+    lam = np.linspace(0, lam_max, 400)
     fig, axs = plt.subplots(1, 2, figsize=(11.6, 4.4))
     ax = axs[0]
     ax.plot(lam, inv(lam), color=BLUE, lw=2.4)
     ax.plot(0, inv(0), "o", color=INK, ms=7)
-    ax.text(0.008, inv(0) + 300, f"λ = 0: I = {coma(inv(0), 0)} (lotes sin restricción)",
+    span = inv(0) - inv(lam_max)
+    ax.text(0.02 * lam_max, inv(0) + 0.03 * span, f"λ = 0: I = {coma(inv(0), 0)} (lotes sin restricción)",
             fontsize=8.8)
-    for I0, c in ((23000, GREEN), (28000, ORANGE)):
-        lo, hi = 0.0, 2.0
+    sols = []
+    for I0, c in I0s:
+        lo, hi = 0.0, 5.0
         for _ in range(80):
             mid = (lo + hi) / 2
             lo, hi = (mid, hi) if inv(mid) > I0 else (lo, mid)
+        sols.append((lo, c))
         ax.axhline(I0, color=c, ls="--", lw=1.2)
         ax.plot(lo, I0, "o", color=c, ms=8, zorder=6)
-        ax.text(lo + 0.008, I0 + 350, f"I₀ = {coma(I0, 0)} → λ ≈ {coma(lo, 3)}", color=c,
-                fontsize=9, weight="bold")
+        ax.text(lo + 0.02 * lam_max, I0 + 0.035 * span, f"I₀ = {coma(I0, 0)} → λ ≈ {coma(lo, 3)}",
+                color=c, fontsize=9, weight="bold")
     ax.set_xlabel("λ")
     ax.set_ylabel(r"inversión media $I = \sum C_j Q_j / 2$")
     ax.set_title("Se sube λ hasta que I = I₀")
     ax.grid(color=GRID, lw=0.6)
-    ax.set_ylim(19000, 34500)
+    if ylim:
+        ax.set_ylim(*ylim)
     ax = axs[1]
-    ax.plot(lam, qa(lam), color=PURPLE, lw=2.2, label=r"$Q_A$ (tornillos)")
-    ax.plot(lam, qb(lam), color=BLUE, lw=2.2, label=r"$Q_B$ (tuercas)")
-    for l, c in ((0.2089, GREEN), (0.0759, ORANGE)):
+    nA, nB = nombres
+    ax.plot(lam, qa(lam), color=PURPLE, lw=2.2, label=f"$Q_A$ ({nA})")
+    ax.plot(lam, qb(lam), color=BLUE, lw=2.2, label=f"$Q_B$ ({nB})")
+    for l, c in sols:
         ax.axvline(l, color=c, ls="--", lw=1.1)
         ax.plot(l, qa(l), "o", color=c, ms=6)
         ax.plot(l, qb(l), "o", color=c, ms=6)
-    ax.text(0.212, qb(0.2089) - 32, f"$Q_B$ ≈ {qb(0.2089):.0f}", color=GREEN, fontsize=8.8)
-    ax.text(0.212, qa(0.2089) + 10, f"$Q_A$ ≈ {qa(0.2089):.0f}", color=GREEN, fontsize=8.8)
-    ax.text(0.079, qb(0.0759) + 12, f"$Q_B$ ≈ {qb(0.0759):.0f}", color=ORANGE, fontsize=8.8)
-    ax.text(0.079, qa(0.0759) + 12, f"$Q_A$ ≈ {qa(0.0759):.0f}", color=ORANGE, fontsize=8.8)
+        ax.text(l + 0.008 * lam_max / 0.4, qa(l) + 10, f"$Q_A$ ≈ {qa(l):.0f}", color=c, fontsize=8.8)
+        ax.text(l + 0.008 * lam_max / 0.4, qb(l) + 12, f"$Q_B$ ≈ {qb(l):.0f}", color=c, fontsize=8.8)
     ax.set_xlabel("λ")
     ax.set_ylabel("lote")
     ax.set_title(r"$Q_j = \sqrt{2D_jL_j\,/\,(C_j(i + \lambda))}$: todos se achican juntos")
     ax.grid(color=GRID, lw=0.6)
     ax.legend(frameon=False, fontsize=9)
     fig.tight_layout(w_pad=2.5)
-    save(fig, "r-stock-lagrange.png")
+    save(fig, fname)
 
 
 # ═════════════════════════════════════════════════════════════════════════
@@ -1126,21 +1353,34 @@ def fig_redes():
 
 if __name__ == "__main__":
     print("Figuras del recuperatorio de IO →", OUT)
-    fig_mapa()
+    # ── resumen ──
     fig_tipos()
-    fig_parcial_ej1()
     fig_simplex_flujo()
-    fig_parcial_ej2()
-    fig_rangos()
-    fig_pares()
+    fig_simplex_tabla()
+    fig_simplex_optima()
+    fig_rangos(RANGOS_ALFARERIA, "Rangos en los que la base óptima no cambia (alfarería)",
+               "r-rangos-sensibilidad.png")
+    fig_pares(PARES_ALFARERIA, PIE_ALFARERIA, "r-pares-primal-dual.png")
     fig_stock_basico()
     fig_stock_costo()
     fig_stock_ingreso()
     fig_stock_descuentos()
-    fig_stock_lagrange()
+    fig_stock_lagrange([(6000, 200, 60), (3000, 300, 150)], 0.25, [(20000, GREEN)],
+                       "r-stock-lagrange.png", lam_max=0.5, ylim=(17000, 30000))
     fig_stock_ss()
     fig_stock_sistemas()
     fig_transporte()
     fig_bb()
     tree, dist, prev, total, flow = fig_redes()
     print("  redes:", tree, dist, prev, total, flow)
+    # ── parcial 2026 resuelto ──
+    fig_mapa()
+    fig_parcial_ej1()
+    fig_parcial_ej2()
+    fig_rangos(RANGOS_PARCIAL, "Rangos en los que la base óptima no cambia (ejercicio 2)",
+               "r-parcial-ej2-rangos.png")
+    fig_pares(PARES_PARCIAL, PIE_PARCIAL, "r-parcial-ej2-pares.png",
+              primal="PRIMAL (Max Z)", dual="DUAL (Min W)")
+    fig_stock_lagrange([(12000, 150, 50), (8000, 200, 80)], 0.20,
+                       [(23000, GREEN), (28000, ORANGE)], "r-parcial-ej3-lagrange.png",
+                       ylim=(19000, 34500), nombres=("tornillos", "tuercas"))
