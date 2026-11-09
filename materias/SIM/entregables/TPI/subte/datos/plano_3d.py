@@ -64,9 +64,10 @@ COLOR = {
 }
 
 
-# Escaleras de los accesos reales (bloque central del hall): x0, y0, x1, y1 en px. Coinciden con escaleraNorte y
-# escaleraSur del modelo; la norte tiene su tope al norte y la sur al sur.
-ESC_NORTE, ESC_SUR = (-270, 670, -225, 770), (-270, 900, -225, 1000)
+# Escaleras mecánicas de los accesos reales (bloque central del hall, capa ESCALERA del plano): x0, y0, x1, y1 en px.
+# Coinciden con escaleraNorte y escaleraSur del modelo; las dos tienen el tope al oeste (muesca del bloque central, en
+# el hall) y el pie al este, en la plaza de transbordo.
+ESC_NORTE, ESC_SUR = (-385, 740, -280, 768), (-385, 916, -280, 944)
 PLAZA = (-280, 660, -152, 1010)
 
 
@@ -347,15 +348,15 @@ def main():
     for c in rectangulos(corte_subsuelo(), 5):
         g.rect('pisoSubsuelo3D', *c, Z_SUB - 1, 1, COLOR['subsuelo'])
     resumen['pisos'] = len(pisos)
-    # Plaza de transbordo (subsuelo, debajo del bloque central) y escaleras norte y sur: 10 escalones de 1 m cada
-    # una, de Z 0 en su tope a -4,6 m. Son las áreas en pendiente escaleraNorte/escaleraSur del modelo.
+    # Plaza de transbordo (subsuelo, debajo del bloque central) y escaleras mecánicas norte y sur: 10 escalones de
+    # 1,05 m cada una, de Z 0 en su tope (oeste) a -4,6 m en su pie (este). Son las áreas en pendiente
+    # escaleraNorte/escaleraSur del modelo.
     g.rect('plazaTransbordo3D', PLAZA[0], PLAZA[1], PLAZA[2] - PLAZA[0], PLAZA[3] - PLAZA[1], Z_SUB - 1, 1, COLOR['subsuelo'])
-    for i in range(10):
-        tope = -Z_SUB * (10 - i) / 10 + Z_SUB          # escalón i: el 0 está en el tope (nivel del hall)
-        x0, y0, x1, y1 = ESC_NORTE
-        g.rect('escaleraNorte3D', x0, y0 + 10 * i, x1 - x0, 10, Z_SUB - 1, tope - Z_SUB + 1, COLOR['escalera'])
-        x0, y0, x1, y1 = ESC_SUR
-        g.rect('escaleraSur3D', x0, y1 - 10 * (i + 1), x1 - x0, 10, Z_SUB - 1, tope - Z_SUB + 1, COLOR['escalera'])
+    for nombre, (x0, y0, x1, y1) in (('escaleraNorte3D', ESC_NORTE), ('escaleraSur3D', ESC_SUR)):
+        paso = (x1 - x0) / 10
+        for i in range(10):
+            tope = -Z_SUB * (10 - i) / 10 + Z_SUB      # escalón i: el 0 está en el tope (nivel del hall)
+            g.rect(nombre, x0 + paso * i, y0, paso, y1 - y0, Z_SUB - 1, tope - Z_SUB + 1, COLOR['escalera'])
     # Escalera B3 (calle Brasil -> vestíbulo): sube hacia el sur, de -5 m (Y 400) a la vereda (Y 455).
     for i in range(10):
         tope = Z_SUB - Z_SUB * (i + 1) / 10

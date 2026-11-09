@@ -434,8 +434,9 @@ conns={(c.findtext('SourceEmbeddedObjectReference/ItemName'),c.findtext('TargetE
 assert {('pedSource','bajadaHall'),('bajadaHall','pedMolinetes'),('pedSourceCalle','pedMolinetes'),('pedMolinetes','pedSalida'),('pedSalida','pedSink')}<=conns and ('pedSource','pedMolinetes') not in conns
 # Subsuelo (2026-11-02): hall del Roca a nivel de calle (nivelHall, Z 0) y pasillo + vestíbulo a -4,60 m (nivelVestibulo;
 # plaza de transbordo a -4,60 m, GCBA 2015).
-# Accesos reales (2026-11-04, reemplazan a la boca B2 inventada): escaleras norte y sur del bloque central del hall
-# (escalera mecánica + fija, plano de Trenes Argentinos), cada una un área en pendiente de 4,5 m x 10 m y 4,6 m de
+# Accesos reales (2026-11-04, reemplazan a la boca B2 inventada; 2026-11-09, sobre las escaleras mecánicas del plano):
+# escaleras mecánicas norte y sur del bloque central del hall (capa ESCALERA del plano de Trenes Argentinos, X -386 a
+# -278), cada una un área en pendiente de 10,5 m x 2,8 m con el tope al oeste (muesca del bloque central) y 4,6 m de
 # desnivel a 0,30 m/s vertical, que desembocan en la plaza de transbordo del subsuelo (supuesta) y de ahí al pasillo.
 niveles={lv.findtext('Name'):lv for lv in ped.iter('Level')}
 # Mapa de calor (2026-11-09): un DensityMap por nivel (molde del ejemplo Subway Entrance Hall), máximo de la corrida.
@@ -463,15 +464,15 @@ assert 'accesoNortePed' in {x.findtext('Name') for x in agents['Pasajero'].finda
 def _linea(nivel, n):
  t=niveles[nivel].find(f"Presentation/TargetLine[Name='{n}']"); x,y=float(t.findtext('X')),float(t.findtext('Y'))
  return [(x+float(q.findtext('X')),y+float(q.findtext('Y'))) for q in t.findall('Points/Point')]
-for nombre,y,dy,tope,boca_hall,boca_plaza in (('escaleraNorte','670','-100',670,'bocaNorteHall','bocaNortePlaza'),('escaleraSur','900','100',1000,'bocaSurHall','bocaSurPlaza')):
+for nombre,y,boca_hall,boca_plaza in (('escaleraNorte','740','bocaNorteHall','bocaNortePlaza'),('escaleraSur','916','bocaSurHall','bocaSurPlaza')):
  esc=niveles['nivelVestibulo'].find(f"Presentation/RectangleNode[Name='{nombre}']")
  esc_p={q.findtext('Name'):q.findtext('Value/Code') for q in esc.findall('EmbeddedObject/Parameters/Parameter')}
- assert esc_p['speedRestricted']=='true' and abs(float(esc_p['maxSpeed'])-10/(4.6/0.30))<0.01 and esc.findtext('Sloped')=='true', nombre
- assert (esc.findtext('X'),esc.findtext('Y'),esc.findtext('Width'),esc.findtext('Height'),esc.findtext('Slope/Dx'),esc.findtext('Slope/Dy'),esc.findtext('Slope/Dz'))==('-270',y,'45','100','0',dy,'46'), nombre
- # La línea del subsuelo queda dentro de la escalera, a menos de 1 m de su tope (donde aparece quien baja).
- lp=_linea('nivelVestibulo',boca_plaza); assert all(-270<=x<=-225 and abs(yy-tope)<=10 for x,yy in lp), (boca_plaza,lp)
- # La línea del hall queda fuera del bloque central (obstáculo) y a menos de 3 m del tope.
- lh=_linea('nivelHall',boca_hall); assert all(-270<=x<=-225 and 10<=abs(yy-tope)<=30 for x,yy in lh), (boca_hall,lh)
+ assert esc_p['speedRestricted']=='true' and abs(float(esc_p['maxSpeed'])-10.5/(4.6/0.30))<0.01 and esc.findtext('Sloped')=='true', nombre
+ assert (esc.findtext('X'),esc.findtext('Y'),esc.findtext('Width'),esc.findtext('Height'),esc.findtext('Slope/Dx'),esc.findtext('Slope/Dy'),esc.findtext('Slope/Dz'))==('-385',y,'105','28','-105','0','46') and esc.findtext('Slope/X')=='105', nombre
+ # La línea del subsuelo queda dentro de la escalera, a menos de 1 m de su tope (X -385, donde aparece quien baja).
+ lp=_linea('nivelVestibulo',boca_plaza); assert all(-385<x<=-375 and int(y)<yy<int(y)+28 for x,yy in lp), (boca_plaza,lp)
+ # La línea del hall queda fuera del bloque central (muesca oeste en X -385) y a menos de 3 m del tope.
+ lh=_linea('nivelHall',boca_hall); assert all(-415<=x<=-390 and int(y)<yy<int(y)+28 for x,yy in lh), (boca_hall,lh)
 # El horario embebido es exactamente el extraído de los PDFs oficiales del Roca.
 import csv as _csv
 horario=[r['segundos_desde_07'] for r in _csv.DictReader(open(p.parent/'datos'/'arribos_roca_constitucion_habiles.csv',encoding='utf-8'),delimiter=';')]
@@ -520,7 +521,8 @@ def _abs(nombre, paso=3):
  pts=[(float(q.findtext('X')),float(q.findtext('Y'))) for q in el.iter('Point')][::paso]
  return [(X+x,Y+y) for x,y in pts]
 assert _abs('pasilloRocaNorte')==[(-152,949),(-20,949),(-20,335),(80,335)]
-assert _abs('plazaTransbordo')==[(-152,949),(-152,660),(-280,660),(-280,1010),(-152,1010),(-152,999)], _abs('plazaTransbordo')
+# Plaza: el lado oeste (X -280) se abre en el pie de cada escalera mecánica y la encierra en un bolsillo.
+assert _abs('plazaTransbordo')==[(-152,949),(-152,660),(-280,660),(-280,739),(-386,739),(-386,769),(-280,769),(-280,915),(-386,915),(-386,945),(-280,945),(-280,1010),(-152,1010),(-152,999)], _abs('plazaTransbordo')
 assert _abs('pasilloRocaSur')==[(-152,999),(30,999),(30,385),(80,385)]
 assert ped.find(".//*[Name='pasilloRocaFondo']") is None and ped.find(".//*[Name='entradaPeatonal']") is None
 # El pasillo arranca en la plaza de transbordo (X = -152); el vestíbulo queda cerrado del lado de los andenes de la C.
