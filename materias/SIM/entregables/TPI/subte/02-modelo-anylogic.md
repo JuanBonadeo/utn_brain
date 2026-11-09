@@ -918,3 +918,9 @@ arriba de la animación, y compila y ejecuta los textos del panel en vivo.
 **Pendiente en el IDE (opcional, 1 minuto):** agregar cuatro *View Areas* (paleta Presentación) sobre los bloques,
 para saltar entre ellos durante la defensa. No se escriben a mano porque ningún ejemplo de AnyLogic trae una para
 copiar el formato. Durante la corrida, el panel en vivo queda arriba de la animación: se ve desplazando la vista.
+
+**Producción en paralelo (2026-11-09).** `PeatonalCorridasApareadas` corre 40 corridas (10 días × 4 escenarios, el
+n0 del procedimiento secuencial) con evaluaciones en paralelo: ~170 s por corrida en serie (≈ 1 h 50) y bastante
+menos con varios núcleos, si la versión PLE lo permite. Con esos 10 días se calcula n* (`analisis_corridas.py`) y
+se agregan días sólo si hace falta. En paralelo las filas del CSV salen en cualquier orden; el cargador las arma
+por semilla y escenario.

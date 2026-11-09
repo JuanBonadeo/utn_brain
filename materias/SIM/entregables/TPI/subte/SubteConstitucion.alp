@@ -47903,7 +47903,7 @@ figurasPed.add(figura);]]></StartupCode>
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
 					<Color>-12490271</Color>
-					<Text><![CDATA[Subte Constitución - 30 días x 4 escenarios (E0, E1, E3, E13), día SBASE sorteado]]></Text>
+					<Text><![CDATA[Subte Constitución - 10 días x 4 escenarios (E0, E1, E3, E13), día SBASE sorteado, en paralelo]]></Text>
 					<Font>
 						<Name>SansSerif</Name>
 						<Size>24</Size>
@@ -47913,9 +47913,9 @@ figurasPed.add(figura);]]></StartupCode>
 				</Text>
 			</Presentation>
 
-			<AllowParallelEvaluations>false</AllowParallelEvaluations>
+			<AllowParallelEvaluations>true</AllowParallelEvaluations>
 			<UseFreeformParameters>true</UseFreeformParameters>
-			<NumberOfRuns>120</NumberOfRuns>
+			<NumberOfRuns>40</NumberOfRuns>
 			<FreeformParamValue>	
 				<Id>1791000000007</Id>
 			</FreeformParamValue>
@@ -48185,7 +48185,7 @@ figurasPed.add(figura);]]></StartupCode>
 			</ModelTimeProperties>
 			<PresentationProperties>
 				<EnableZoomAndPanning>false</EnableZoomAndPanning>
-				<Title><![CDATA[Subte Constitución - 30 días x 4 escenarios (E0, E1, E3, E13), día SBASE sorteado]]></Title>
+				<Title><![CDATA[Subte Constitución - 10 días x 4 escenarios (E0, E1, E3, E13), día SBASE sorteado, en paralelo]]></Title>
 				<EnableDeveloperPanel>true</EnableDeveloperPanel>
 				<ShowDeveloperPanelOnStart>false</ShowDeveloperPanelOnStart>
 			</PresentationProperties>

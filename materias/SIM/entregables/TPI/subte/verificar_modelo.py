@@ -600,12 +600,15 @@ assert pvs['PeatonalFranjaPrueba'].findtext('NumberOfRuns')=='2' and float(pvs['
 assert prueba['horizonteArribosPedSeg']=='1800'
 assert ped_defaults_early['pruebaSinteticaPed']=='false'
 pvs={k:v for k,v in pvs.items() if k!='PeatonalFranjaPrueba'}
-for name,(runs,modo,archivo,final) in {'PeatonalCorridasApareadas':('120','true','"corridas_peatonales.csv"','17900'),
+for name,(runs,modo,archivo,final) in {'PeatonalCorridasApareadas':('40','true','"corridas_peatonales.csv"','17900'),
                                        'PeatonalCorridasDemo':('6','false','"corridas_peatonales_demo.csv"','900')}.items():
  e=pvs[name]
  assert e.get('ActiveObjectClassId')==ped.findtext('Id')
  assert e.findtext('UseFreeformParameters')=='true' and e.findtext('NumberOfRuns')==runs
- assert e.findtext('AllowParallelEvaluations')=='false'
+ # Apareadas en paralelo (2026-11-09): 10 días x 4 escenarios = n0 del procedimiento secuencial. Es seguro porque cada
+ # fuente de azar tiene su generador (lo único static es la constante posesPed del pasajero) y la escritura de los CSV
+ # está sincronizada.
+ assert e.findtext('AllowParallelEvaluations')==('true' if name=='PeatonalCorridasApareadas' else 'false')
  assert float(e.findtext('ModelTimeProperties/FinalTime'))<18000, 'PLE limita la Pedestrian Library a 5 h de modelo'
  free={ped_param_ids[x.findtext('Id')]:x.findtext('Expression/Code') for x in e.findall('FreeformParamValue')}
  assert set(free)==set(ped_param_ids.values())
