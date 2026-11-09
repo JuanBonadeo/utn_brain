@@ -49,7 +49,8 @@ def extraer(alp):
     assert model.findtext("ModelTimeUnit") == "Hour"
     refs = {id(i) for tag in ("FreeformParamValue", "RangeVariationParamValue") for v in root.iter(tag) for i in v.findall("Id")}
     ids = [(i.text or "").strip() for i in root.iter("Id") if id(i) not in refs]
-    dup = {i for i in ids if ids.count(i) > 1}
+    # Al guardar, el IDE pone <Id>0</Id> en las series de los gráficos (DatasetExpression): no es un Id real.
+    dup = {i for i in ids if ids.count(i) > 1 and i != "0"}
     assert not dup, f"Ids duplicados: {dup}"
     assert main.findtext("CurrentLevel") == main.find("Presentation/Level").findtext("Id"), "Main necesita un Level con el Id de CurrentLevel"
     bloques = {b.findtext("Name"): b for b in main.findall("EmbeddedObjects/EmbeddedObject")}

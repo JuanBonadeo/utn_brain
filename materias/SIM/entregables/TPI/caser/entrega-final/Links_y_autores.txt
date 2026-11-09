@@ -1,0 +1,25 @@
+TPI Simulación 2026 · Grupo 10 · UTN FRRo
+¿Cuándo encender el horno? Régimen de campañas de un horno de cementación y temple, con datos reales.
+
+Modelo en AnyLogic Cloud: https://cloud.anylogic.com/model/e73c3e20-deaf-4a33-b342-e99cd97e57a6
+Video (YouTube):          https://youtu.be/gL6IQnE1T7s
+
+Autores
+- Augusto Brizio        legajo 52479  brizioaugusto@gmail.com
+- Gonzalo Casermeiro    legajo 52674  gonzacasermeiro@gmail.com
+- Jeremias Constantini  legajo 53112  jerecostantini123@gmail.com
+- Tiziano Messina       legajo 52911  tizilmessina@gmail.com
+- Juan Ignacio Navos    legajo 53169  juaninavos@gmail.com
+
+Contenido de la entrega
+1. CaserHorno.alp                                   Modelo de AnyLogic 8.9 (PLE). Experimentos: Visual (animación),
+                                                    VerificacionMM1 y CorridasE0E3 (120 corridas: 4 escenarios x 30 réplicas).
+2. TPI_Caser_Grupo10_Informe.pdf                    Informe tipo paper (LaTeX).
+3. TPI_Caser_Grupo10_Resultados_Corridas.xlsx       Planilla con las 120 corridas, medias por escenario, tests apareados
+                                                    (fórmulas vivas) y costos.
+   TPI_Caser_Grupo10_Corridas_AnyLogic.csv          CSV crudo que escribe CorridasE0E3 (fuente de la planilla).
+4-5. Links de AnyLogic Cloud y del video (arriba).
+   fuente-latex/                                    Fuente del informe (tpi-caser.tex, referencias.bib y figuras).
+
+Uso del modelo: abrir CaserHorno.alp en AnyLogic 8.9, compilar (F7) y correr el experimento Visual. Las tarjetas de abajo
+cambian el escenario en vivo (E3 apaga el horno apenas se vacía la cola) y los botones de la derecha cambian la velocidad.
