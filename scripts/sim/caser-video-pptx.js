@@ -80,8 +80,8 @@ s.addText("Simulación del régimen de campañas de un horno de cementación, co
 cinta(s, 0.6, 3.3, 8.8, 0.32, true, true);
 s.addText("Augusto Brizio · Gonzalo Casermeiro · Jeremias Constantini · Tiziano Messina · Juan Ignacio Navos",
   { x: 0.6, y: 4.45, w: 8.8, h: 0.3, fontSize: 13, color: C.background1, margin: 0, isTextBox: true, objectName: "autores" });
-s.addText("UTN · Facultad Regional Rosario · Simulación 2026", { x: 0.6, y: 4.8, w: 8.8, h: 0.3, fontSize: 11, color: "9AA8BF", margin: 0, isTextBox: true, objectName: "facultad" });
-s.addNotes("GONZALO (0:00–0:35, diapositivas 1 y 2). Hola, somos Augusto Brizio, Gonzalo Casermeiro, Jeremias Constantini, Tiziano Messina y Juan Ignacio Navos. Nuestro caso es real: el horno de cementación y temple de una fábrica de tornillos de Santa Fe.");
+s.addText("Grupo 10 · UTN · Facultad Regional Rosario · Simulación 2026", { x: 0.6, y: 4.8, w: 8.8, h: 0.3, fontSize: 11, color: "9AA8BF", margin: 0, isTextBox: true, objectName: "facultad" });
+s.addNotes("JEREMIAS (0:00–0:30, diapositivas 1 y 2). Hola, somos el grupo 10 y vamos a presentar el caso de una fábrica de tornillos de Santa Fe: su horno de cementación y temple. Las piezas entran al horno en cajones de tornillos de unos 140 kilos, que en la planta llaman ULI.");
 
 // ---------------------------------------------------------------- 2. El problema
 s = pres.addSlide({ masterName: "CONTENIDO", sectionTitle: "Presentación" });
@@ -98,7 +98,7 @@ s.addText([
   { text: " ", options: { fontSize: 10, breakLine: true } },
   { text: "¿Cuántas ULI conviene esperar antes de encenderlo?", options: { fontSize: 22, bold: true, color: "FFFFFF" } },
 ], { x: 5.9, y: 1.5, w: 3.3, h: 2.8, valign: "top", margin: 0, isTextBox: true, objectName: "preguntaTxt" });
-s.addNotes("GONZALO (sigue). El horno tarda 36 horas en calentarse y 48 en enfriarse, y mientras está caliente gasta luz y gas aunque esté vacío. Por eso se prende por campañas, cuando se juntan unos 80 cajones de piezas. La empresa nos preguntó: ¿cuántos cajones conviene esperar antes de encenderlo?");
+s.addNotes("JEREMIAS (sigue). El horno tarda 36 horas en calentarse y 48 en enfriarse, y caliente gasta luz y gas aunque esté vacío. Por eso se prende por campañas, cuando se juntan unas 80 ULI. La empresa nos preguntó: ¿cuántas conviene esperar antes de encenderlo?");
 
 // ---------------------------------------------------------------- 3. Datos y modelo
 pres.addSection({ title: "Modelo" });
@@ -125,20 +125,20 @@ bloques.forEach(([b, d], i) => {
     { x, y: 3.95, w: 1.75, h: 0.75, align: "center", valign: "middle", margin: 0, isTextBox: true, objectName: `pmlTxt${i}` });
   if (i < 3) s.addShape(pres.shapes.RIGHT_ARROW, { x: x + 1.85, y: 4.2, w: 0.35, h: 0.25, fill: { color: "AAB2BD" }, line: { color: "AAB2BD", width: 0 }, objectName: `flecha${i}` });
 });
-s.addNotes("AUGUSTO (0:35–1:10). Usamos datos reales de la empresa: un año de registros de cada cajón, con su fecha de lavado y su peso, y las facturas de luz y de gas del propio horno. Las llegadas no las inventamos: cada semana simulada sortea una de las 52 semanas reales. Con eso armamos un modelo de eventos discretos en AnyLogic y lo validamos contra el registro histórico: reproduce las toneladas por mes, la duración de las campañas, la espera y el consumo de energía.");
+s.addNotes("AUGUSTO (0:30–1:05). Usamos datos reales de la empresa: un año de registros de cada ULI, con su fecha de lavado y su peso, y las facturas de luz y de gas del propio horno. Las llegadas no las inventamos: cada semana simulada sortea una de las 52 semanas reales. Con eso armamos un modelo de eventos discretos en AnyLogic y lo validamos contra el registro histórico: reproduce las toneladas por mes, la duración de las campañas, la espera y el consumo de energía.");
 
 // ---------------------------------------------------------------- 4. AnyLogic
 s = pres.addSlide({ masterName: "CONTENIDO", sectionTitle: "Modelo" });
 s.addText("El modelo corriendo", { placeholder: "title" });
 s.addImage({ path: path.join(SIM, "figs", "tpi-caser-visual.png"), x: 0.5, y: 1.1, w: 6.6, h: 3.71, altText: "Animación del modelo en AnyLogic", objectName: "captura" });
-const items = [["Cola", "cada cajón, coloreado según cuánto espera; violeta = urgente"], ["Horno", "seis estados, del apagado al enfriado"],
+const items = [["Cola", "cada ULI, coloreada según cuánto espera; violeta = urgente"], ["Horno", "seis estados, del apagado al enfriado"],
   ["Plata", "costo en vivo y horas de horno caliente sin carga"]];
 items.forEach(([h, t], i) => {
   const y = 1.15 + i * 1.2;
   s.addText([{ text: h, options: { bold: true, fontSize: 15, color: C.text2, breakLine: true } }, { text: t, options: { fontSize: 13, color: C.text1 } }],
     { x: 7.35, y, w: 2.2, h: 1.05, valign: "top", margin: 0, isTextBox: true, objectName: `item${i}` });
 });
-s.addNotes("JEREMIAS (1:10–1:45). Acá se pasa a AnyLogic en vivo; esta diapositiva queda de respaldo si algo falla. Este es el modelo corriendo. Cada cuadradito es un cajón esperando; cambian de color según cuánto esperan, y el violeta es un pedido urgente, que obliga a prender el horno antes. Acá el horno calienta, y ahora carga un cajón cada 85 minutos. Cuando se vacía la cola, la regla actual lo deja caliente hasta 48 horas por si llega algo: es lo salmón de la cinta de tiempo. Si aplico el escenario E3, el horno se apaga en el momento.");
+s.addNotes("GONZALO (1:05–1:45). Acá se pasa a AnyLogic en vivo; esta diapositiva queda de respaldo si algo falla. Este es el modelo en AnyLogic: por dentro es Source, Wait, Delay y Sink, y el horno tiene seis estados. Cada cuadradito es una ULI esperando; cambian de color según cuánto esperan, y el violeta es un pedido urgente, que obliga a prender el horno antes. Acá el horno calienta, y ahora carga una ULI cada 85 minutos. Cuando se vacía la cola, la regla actual lo deja caliente hasta 48 horas por si llega algo: es lo salmón de la cinta de tiempo. Si aplico el escenario E3, el horno se apaga en el momento.");
 
 // ---------------------------------------------------------------- 5. Escenarios
 pres.addSection({ title: "Resultados" });
@@ -161,7 +161,7 @@ met.forEach(([v, t], i) => {
   s.addText(v, { x, y: 3.6, w: 2.85, h: 0.6, fontSize: 28, bold: true, color: C.accent1, margin: 0, isTextBox: true, objectName: `met${i}` });
   s.addText(t, { x, y: 4.2, w: 2.85, h: 0.45, fontSize: 13, color: C.text1, margin: 0, isTextBox: true, objectName: `metTxt${i}` });
 });
-s.addNotes("TIZIANO (1:45–2:15). Comparamos cuatro reglas: la actual, bajar el umbral a 45 cajones, poner una espera máxima de 15 días y apagar el horno apenas se vacía la cola. Corrimos cada una 30 veces, un año simulado por corrida, y a las cuatro les tocaron los mismos 30 años, con las mismas llegadas. Así la única diferencia es la regla, y podemos comparar año contra año con un test t apareado, con corrección de Bonferroni.");
+s.addNotes("TIZIANO (1:45–2:15). Comparamos cuatro reglas: la actual, bajar el umbral a 45 ULI, poner una espera máxima de 15 días y apagar el horno apenas se vacía la cola. Corrimos cada una 30 veces, un año simulado por corrida, y a las cuatro les tocaron los mismos 30 años, con las mismas llegadas. Así la única diferencia es la regla, y podemos comparar año contra año con un test t apareado, con corrección de Bonferroni.");
 
 // ---------------------------------------------------------------- 6. Resultados
 s = pres.addSlide({ masterName: "CONTENIDO", sectionTitle: "Resultados" });
@@ -190,7 +190,7 @@ s.addNotes("JUAN IGNACIO (2:15–2:50, diapositivas 6 y 7). Bajar el umbral o po
 s = pres.addSlide({ masterName: "OSCURA", sectionTitle: "Resultados" });
 s.addText("Recomendación", { placeholder: "title" });
 s.addText("Mantener el umbral y apagar el horno apenas se vacía la cola", { x: 0.6, y: 2.35, w: 5.2, h: 1.0, fontSize: 22, bold: true, color: C.background1, margin: 0, valign: "top", isTextBox: true, objectName: "recomendacion" });
-s.addText("Lo que cuesta no es esperar más o menos cajones: es el horno caliente sin nada adentro.", { x: 0.6, y: 3.45, w: 5.2, h: 0.8, fontSize: 14, color: "C9D3E3", margin: 0, valign: "top", isTextBox: true, objectName: "porque" });
+s.addText("Lo que cuesta no es esperar más o menos ULI: es el horno caliente sin nada adentro.", { x: 0.6, y: 3.45, w: 5.2, h: 0.8, fontSize: 14, color: "C9D3E3", margin: 0, valign: "top", isTextBox: true, objectName: "porque" });
 s.addText("−21,5 %", { x: 6.1, y: 1.9, w: 3.4, h: 1.0, fontSize: 60, bold: true, color: "7DD3A0", align: "left", margin: 0, isTextBox: true, objectName: "ahorroPct" });
 s.addText("del costo de operar el horno (≈ 18 M$ por año), con 1,1 días más de espera media", { x: 6.1, y: 2.95, w: 3.4, h: 0.9, fontSize: 13, color: "C9D3E3", margin: 0, valign: "top", isTextBox: true, objectName: "ahorroTxt" });
 s.addText("Trabajo futuro: sumar la demanda y el nivel de servicio para ponerle precio a la espera.", { x: 0.6, y: 4.75, w: 8.8, h: 0.35, fontSize: 12, color: "9AA8BF", margin: 0, isTextBox: true, objectName: "futuro" });

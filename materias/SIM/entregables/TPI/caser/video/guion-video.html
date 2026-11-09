@@ -54,45 +54,45 @@ code{ font-family:Consolas,monospace; font-size:8.6pt; background:var(--soft); b
 
 <h2 class="sec">Reparto del tiempo (objetivo: 2:50, con 10 s de margen)</h2>
 <div class="bar">
-  <div style="width:20.6%;background:#1d2b45">Gonzalo 0:35</div>
+  <div style="width:17.6%;background:#1d2b45">Jeremias 0:30</div>
   <div style="width:20.6%;background:#2a78d6">Augusto 0:35</div>
-  <div style="width:20.6%;background:#eb5a32">Jeremias 0:35</div>
+  <div style="width:23.6%;background:#eb5a32">Gonzalo 0:40</div>
   <div style="width:17.6%;background:#c26a0a">Tiziano 0:30</div>
   <div style="width:20.6%;background:#15803d">Juan Ignacio 0:35</div>
 </div>
 <table class="t" style="margin-top:6px">
   <tr><th>Tramo</th><th>Quién</th><th>Qué se ve</th><th>Tema</th></tr>
-  <tr><td>0:00–0:35</td><td><b>Gonzalo</b></td><td>Diapositivas 1 y 2</td><td>Quiénes somos, la empresa y el problema</td></tr>
-  <tr><td>0:35–1:10</td><td><b>Augusto</b></td><td>Diapositiva 3</td><td>Datos reales, cómo se simula y la validación</td></tr>
-  <tr><td>1:10–1:45</td><td><b>Jeremias</b></td><td><b>AnyLogic en vivo</b></td><td>El modelo corriendo: cola, horno, caliente sin carga, botón E3</td></tr>
+  <tr><td>0:00–0:30</td><td><b>Jeremias</b></td><td>Diapositivas 1 y 2</td><td>Quiénes somos, la empresa y el problema</td></tr>
+  <tr><td>0:30–1:05</td><td><b>Augusto</b></td><td>Diapositiva 3</td><td>Datos reales, cómo se simula y la validación</td></tr>
+  <tr><td>1:05–1:45</td><td><b>Gonzalo</b></td><td><b>AnyLogic en vivo</b></td><td>El modelo corriendo: cola, horno, caliente sin carga, botón E3</td></tr>
   <tr><td>1:45–2:15</td><td><b>Tiziano</b></td><td>Diapositiva 5</td><td>Los cuatro escenarios y el diseño experimental</td></tr>
   <tr><td>2:15–2:50</td><td><b>Juan Ignacio</b></td><td>Diapositivas 6 y 7</td><td>Resultados, recomendación y cierre</td></tr>
 </table>
-<p style="font-size:9pt;margin-top:6px">La diapositiva 4 ("El modelo corriendo") es de <b>respaldo</b>: si AnyLogic falla en la toma, Jeremias habla sobre esa captura. Cada integrante tiene su texto en las <b>notas del orador</b> de su diapositiva.</p>
+<p style="font-size:9pt;margin-top:6px">La diapositiva 4 ("El modelo corriendo") es de <b>respaldo</b>: si AnyLogic falla en la toma, Gonzalo habla sobre esa captura. Cada integrante tiene su texto en las <b>notas del orador</b> de su diapositiva.</p>
 
 <!-- ============================================================ GUION -->
 <div class="part">
 <h2 class="sec" style="margin-top:0">Guion palabra por palabra</h2>
 <p style="font-size:9pt;color:var(--muted)">Unas 80 palabras por persona, que dichas sin apuro son 30 a 35 segundos. No hace falta decirlo textual: lo importante es no pasarse del tiempo.</p>
 
-<div class="who"><div class="head"><div class="av" style="background:#1d2b45">GC</div><div class="name">Gonzalo</div><div class="time">0:00 – 0:35</div></div>
+<div class="who"><div class="head"><div class="av" style="background:#1d2b45">JC</div><div class="name">Jeremias</div><div class="time">0:00 – 0:30</div></div>
   <div class="screen">diapositiva 1; al decir "el horno tarda", pasar a la 2.</div>
-  <div class="say">Hola, somos Augusto Brizio, Gonzalo Casermeiro, Jeremias Constantini, Tiziano Messina y Juan Ignacio Navos. Nuestro caso es real: el horno de cementación y temple de una fábrica de tornillos de Santa Fe. <span class="cue">→ diap. 2</span> El horno tarda 36 horas en calentarse y 48 en enfriarse, y mientras está caliente gasta luz y gas aunque esté vacío. Por eso se prende por campañas, cuando se juntan unos 80 cajones de piezas. La empresa nos preguntó: ¿cuántos cajones conviene esperar antes de encenderlo?</div>
+  <div class="say">Hola, somos el grupo 10 y vamos a presentar el caso de una fábrica de tornillos de Santa Fe: su horno de cementación y temple. Las piezas entran al horno en cajones de tornillos de unos 140 kilos, que en la planta llaman ULI. <span class="cue">→ diap. 2</span> El horno tarda 36 horas en calentarse y 48 en enfriarse, y caliente gasta luz y gas aunque esté vacío. Por eso se prende por campañas, cuando se juntan unas 80 ULI. La empresa nos preguntó: ¿cuántas conviene esperar antes de encenderlo?</div>
 </div>
 
-<div class="who"><div class="head"><div class="av" style="background:#2a78d6">AB</div><div class="name">Augusto</div><div class="time">0:35 – 1:10</div></div>
+<div class="who"><div class="head"><div class="av" style="background:#2a78d6">AB</div><div class="name">Augusto</div><div class="time">0:30 – 1:05</div></div>
   <div class="screen">diapositiva 3.</div>
-  <div class="say">Usamos datos reales de la empresa: un año de registros de cada cajón, con su fecha de lavado y su peso, y las facturas de luz y de gas del propio horno. Las llegadas no las inventamos: cada semana simulada sortea una de las 52 semanas reales. Con eso armamos un modelo de eventos discretos en AnyLogic y lo validamos contra el registro histórico: reproduce las toneladas por mes, la duración de las campañas, la espera y el consumo de energía.</div>
+  <div class="say">Usamos datos reales de la empresa: un año de registros de cada ULI, con su fecha de lavado y su peso, y las facturas de luz y de gas del propio horno. Las llegadas no las inventamos: cada semana simulada sortea una de las 52 semanas reales. Con eso armamos un modelo de eventos discretos en AnyLogic y lo validamos contra el registro histórico: reproduce las toneladas por mes, la duración de las campañas, la espera y el consumo de energía.</div>
 </div>
 
-<div class="who"><div class="head"><div class="av" style="background:#eb5a32">JC</div><div class="name">Jeremias</div><div class="time">1:10 – 1:45</div></div>
-  <div class="screen">AnyLogic, experimento <code>Visual</code>, pausado en el día 0 y a velocidad <b>x12</b>. Play al empezar a hablar.</div>
-  <div class="say">Este es el modelo corriendo. <span class="cue">▶ play</span> Cada cuadradito es un cajón esperando; cambian de color según cuánto esperan, y el violeta es un pedido urgente, que obliga a prender el horno antes. <span class="cue">≈ 6 s: se prende</span> Acá el horno calienta, y ahora carga un cajón cada 85 minutos. <span class="cue">≈ 14 s: se pone salmón → ⏸ pausa</span> Cuando se vacía la cola, la regla actual lo deja caliente hasta 48 horas por si llega algo: es lo salmón de la cinta de tiempo. <span class="cue">clic en E3 · Apagar enseguida → ▶ play</span> Si aplico el escenario E3, el horno se apaga en el momento.</div>
+<div class="who"><div class="head"><div class="av" style="background:#eb5a32">GC</div><div class="name">Gonzalo</div><div class="time">1:05 – 1:45</div></div>
+  <div class="screen">AnyLogic, experimento <code>Visual</code>, pausado en el día 0 y a velocidad <b>x12</b>. Play después de la primera frase.</div>
+  <div class="say">Este es el modelo en AnyLogic: por dentro es Source, Wait, Delay y Sink, y el horno tiene seis estados. <span class="cue">▶ play</span> Cada cuadradito es una ULI esperando; cambian de color según cuánto esperan, y el violeta es un pedido urgente, que obliga a prender el horno antes. <span class="cue">≈ 6 s: se prende</span> Acá el horno calienta, y ahora carga una ULI cada 85 minutos. <span class="cue">≈ 14 s: se pone salmón → ⏸ pausa</span> Cuando se vacía la cola, la regla actual lo deja caliente hasta 48 horas por si llega algo: es lo salmón de la cinta de tiempo. <span class="cue">clic en E3 · Apagar enseguida → ▶ play</span> Si aplico el escenario E3, el horno se apaga en el momento.</div>
 </div>
 
 <div class="who"><div class="head"><div class="av" style="background:#c26a0a">TM</div><div class="name">Tiziano</div><div class="time">1:45 – 2:15</div></div>
   <div class="screen">volver a las diapositivas, la 5.</div>
-  <div class="say">Comparamos cuatro reglas: la actual, bajar el umbral a 45 cajones, poner una espera máxima de 15 días y apagar el horno apenas se vacía la cola. Corrimos cada una 30 veces, un año simulado por corrida, y a las cuatro les tocaron los mismos 30 años, con las mismas llegadas. Así la única diferencia es la regla, y comparamos año contra año con un test t apareado, con corrección de Bonferroni.</div>
+  <div class="say">Comparamos cuatro reglas: la actual, bajar el umbral a 45 ULI, poner una espera máxima de 15 días y apagar el horno apenas se vacía la cola. Corrimos cada una 30 veces, un año simulado por corrida, y a las cuatro les tocaron los mismos 30 años, con las mismas llegadas. Así la única diferencia es la regla, y comparamos año contra año con un test t apareado, con corrección de Bonferroni.</div>
 </div>
 
 <div class="who"><div class="head"><div class="av" style="background:#15803d">JN</div><div class="name">Juan Ignacio</div><div class="time">2:15 – 2:50</div></div>
@@ -109,7 +109,7 @@ code{ font-family:Consolas,monospace; font-size:8.6pt; background:var(--soft); b
     <h3>Formato recomendado: Zoom (o Meet)</h3>
     <ul>
       <li>Los cinco en la llamada, <b>cámaras prendidas</b>.</li>
-      <li><b>Una sola persona comparte pantalla</b> y maneja todo (slides y AnyLogic). Conviene que sea quien tiene AnyLogic instalado. Cada uno habla en su turno y el que comparte pasa las diapositivas.</li>
+      <li><b>Gonzalo comparte pantalla</b> y maneja todo (slides y AnyLogic), porque tiene AnyLogic instalado. Cada uno habla en su turno y Gonzalo pasa las diapositivas.</li>
       <li>Grabación en la vista de <b>pantalla compartida con las cámaras al costado</b>. En Zoom: Configuración → Grabación → "Grabar el orador activo, la vista de galería y la pantalla compartida por separado" o "Vista de galería con pantalla compartida".</li>
       <li>Compartir <b>la pantalla entera</b> (no una ventana), para pasar de las slides a AnyLogic con <code>Alt</code>+<code>Tab</code> sin volver a compartir.</li>
     </ul>
@@ -127,13 +127,14 @@ code{ font-family:Consolas,monospace; font-size:8.6pt; background:var(--soft); b
   </div>
 </div>
 
-<h2 class="sec">El tramo de AnyLogic, en detalle (Jeremias)</h2>
+<h2 class="sec">El tramo de AnyLogic, en detalle (Gonzalo)</h2>
 <table class="t">
-  <tr><th>Segundo del tramo</th><th>Qué pasa en pantalla (semilla 1, velocidad x12)</th><th>Qué hacer</th></tr>
-  <tr><td>0</td><td>Día 0, horno apagado, cola vacía</td><td>▶ play y empezar a hablar</td></tr>
-  <tr><td>≈ 2–5</td><td>Llegan cajones verdes a la cola</td><td>Hablar de los colores de la cola</td></tr>
+  <tr><th>Segundos desde el play</th><th>Qué pasa en pantalla (semilla 1, velocidad x12)</th><th>Qué hacer</th></tr>
+  <tr><td>0</td><td>Día 0, horno apagado, cola vacía (pausado)</td><td>Primera frase: "por dentro es Source, Wait, Delay y Sink…" señalando el panel de la lógica y el statechart</td></tr>
+  <tr><td>≈ 6</td><td>—</td><td>▶ play (desde acá corren los tiempos de abajo)</td></tr>
+  <tr><td>≈ 2–5</td><td>Llegan ULI verdes a la cola</td><td>Hablar de los colores de la cola</td></tr>
   <tr><td>≈ 6</td><td>Llega la urgente (cuadrado violeta, el 24) → <b>Calentando por prioridad</b></td><td>"el violeta es un pedido urgente"</td></tr>
-  <tr><td>≈ 9</td><td><b>Procesando</b>: los cajones cruzan la cinta</td><td>"ahora carga un cajón cada 85 minutos"</td></tr>
+  <tr><td>≈ 9</td><td><b>Procesando</b>: las ULI cruzan la cinta</td><td>"ahora carga una ULI cada 85 minutos"</td></tr>
   <tr><td>≈ 14</td><td>Se vacía la cola → <b>Caliente sin carga</b> (salmón)</td><td>⏸ pausa; explicar lo salmón</td></tr>
   <tr><td>≈ 25</td><td>—</td><td>Clic en <b>E3 · Apagar enseguida</b> y ▶ play: pasa a <b>Enfriando</b></td></tr>
 </table>
