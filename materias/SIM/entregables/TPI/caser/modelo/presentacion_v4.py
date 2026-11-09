@@ -319,7 +319,8 @@ add(text("txtDia", W - 24, 42, "día", color=HEAD2, size=12, align="RIGHT",
               ' + "  ·  contadores desde " + fechaCorta(tInicioVis) + " (" + escenario + ")  ·  velocidad: " + '
               '(!getEngine().getRealTimeMode() ? "máxima" : getEngine().getRealTimeScale() < 24 ? '
               'String.format("%.0f h por segundo", getEngine().getRealTimeScale()) : '
-              'String.format(new java.util.Locale("es", "AR"), "%.0f días por segundo", getEngine().getRealTimeScale() / 24))'))
+              '(Math.round(getEngine().getRealTimeScale() / 24) == 1 ? "1 día por segundo" : '
+              'Math.round(getEngine().getRealTimeScale() / 24) + " días por segundo"))'))
 
 # Indicadores
 KPIS = [
@@ -489,7 +490,8 @@ for k, (lab, fn, col) in enumerate(COST):
     Y = CY0 + k * 20
     add(text(f"txtCosto{k}", BX, Y, lab, color=INK, size=11))
     add(rect(f"barraCosto{k}", BX + 140, Y + 2, 0, 12, fill=col, line=None,
-             wcode=f"200 * {fn} / Math.max(1, Math.max(visLuz(), Math.max(visGas(), visCapital())))"))
+             # escala con piso de $ 1 M: al arrancar, montos de pocos pesos no ocupan toda la barra
+             wcode=f"200 * {fn} / Math.max(1e6, Math.max(visLuz(), Math.max(visGas(), visCapital())))"))
     add(text(f"valCosto{k}", BX + BW, Y, "$", color=INK, size=11, bold=True, align="RIGHT", code=f"plata({fn})"))
 add(line("lineaTotal", BX, CY0 + 61, BW, 0, color=LINE, lw=1))
 add(text("txtTotal", BX, CY0 + 65, "Total acumulado", color=INK, size=12, bold=True))
@@ -535,8 +537,8 @@ s = s[:lvl_open + len("<Presentation>")] + nuevo + s[lvl_close:]
 
 # Bloques de la PML dentro del panel de la lógica
 # En escalera: los contadores de salida de un bloque y de entrada del siguiente quedan a distinta altura.
-for nm, (X, Y) in {"source": (LX + 24, PY + 58), "colaHorno": (LX + 88, PY + 84), "horno": (LX + 152, PY + 110),
-                   "sink": (LX + 214, PY + 136)}.items():
+for nm, (X, Y) in {"source": (LX + 24, PY + 68), "colaHorno": (LX + 88, PY + 93), "horno": (LX + 152, PY + 118),
+                   "sink": (LX + 214, PY + 143)}.items():
     s, n = re.subn(rf"(<EmbeddedObject><Id>\d+</Id><Name>{nm}</Name>)<X>-?\d+</X><Y>-?\d+</Y>",
                    rf"\g<1><X>{X}</X><Y>{Y}</Y>", s, count=1)
     assert n == 1, nm
