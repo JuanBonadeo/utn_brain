@@ -2811,11 +2811,10 @@ ULI lavadas.
   `TPI_Caser_Resultados_Corridas.xlsx` (fórmulas vivas, verificada contra el script). **Guía explicativa para el
   grupo**: [`estudio/tpi-caser/guia-tpi-caser.pdf`](estudio/tpi-caser/guia-tpi-caser.pdf).
 
-**Pendiente para la entrega** (defensa 10-11/11):
-1. ~~Correr `CorridasE0E3` en el IDE~~ hecho el 07/11: `modelo/corridas_horno.csv` es idéntico byte a byte a
-   `corridas_horno_harness.csv`; la planilla ya sale del CSV de AnyLogic.
-2. ~~Correos y legajos~~ cargados en el paper el 07/11.
-3. Subida a AnyLogic Cloud y link en el paper. Video en YouTube.
+**Estado de la entrega (09/11): completa.** Modelo `modelo/CaserHorno.alp` (animación de defensa con escenarios y
+velocidad en vivo), paper `informe/tpi-caser.pdf` sin marcas pendientes, planilla `TPI_Caser_Resultados_Corridas.xlsx`,
+AnyLogic Cloud https://cloud.anylogic.com/model/e73c3e20-deaf-4a33-b342-e99cd97e57a6 (público, sin código fuente) y
+video https://youtu.be/gL6IQnE1T7s. Guion del video y deck en `video/`; guías en `estudio/tpi-caser/`.
 
 Historial: el docente aprobó la propuesta el 27/09 y la especificación (entrega previa) se entregó ese día.
 La propuesta se envió el 16/09, el docente respondió con cinco preguntas de fondo (cómo se
@@ -3023,6 +3022,7 @@ Conclusiones:
 ---
 
 ## Log
+- **2026-11-09**: TPI Caser listo para entregar: paper con encabezado institucional, links de Cloud y YouTube; animación pulida (escenarios en vivo sin reiniciar contadores, montos en miles, PML en escalera); video grabado; guion y deck con logos y fotos del horno.
 - **2026-11-09**: TPI subte, guion del video reescrito al modelo actual (E0/E1/E3/E13, E1 = 22, día real, Bonferroni k = 9; 2:32 sin los corchetes). Pendiente para grabar: repetir el piloto con los accesos nuevos, correr las 40 corridas y cargar resultados; la presentación sigue vieja.
 - **2026-11-07**: TPI Caser, cierre de la Etapa 1. Pilotos (Welch: transitorio de 1 mes, los 90 días alcanzan;
   30 réplicas alcanzan para decidir), sensibilidad de costos, primarias alineadas (costo, espera y kg en cola),
