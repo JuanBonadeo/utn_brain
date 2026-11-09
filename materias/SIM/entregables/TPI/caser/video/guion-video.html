@@ -77,7 +77,7 @@ code{ font-family:Consolas,monospace; font-size:8.6pt; background:var(--soft); b
 
 <div class="who"><div class="head"><div class="av" style="background:#1d2b45">JC</div><div class="name">Jeremias</div><div class="time">0:00 – 0:38</div></div>
   <div class="screen">diapositiva 1; al decir "que en la planta llaman ULI", pasar a la 2 (fotos); al decir "el horno tarda", a la 3.</div>
-  <div class="say">Hola, somos el grupo 10 y vamos a presentar el caso de una fábrica de tornillos de Santa Fe: su horno de cementación y temple. Las piezas entran al horno en cajones de tornillos de unos 140 kilos, que en la planta llaman ULI. <span class="cue">→ diap. 2 (fotos)</span> Este es el horno real: un horno de cinta continua, por el que las ULI pasan de a una. <span class="cue">→ diap. 3</span> El horno tarda 36 horas en calentarse y 48 en enfriarse, y caliente gasta luz y gas aunque esté vacío. Por eso se prende por campañas, cuando se juntan unas 80 ULI. La empresa nos preguntó: ¿cuántas conviene esperar antes de encenderlo?</div>
+  <div class="say">Hola, somos el grupo 10 y vamos a presentar el caso de una fábrica de tornillos de Santa Fe: su horno de cementación y temple. Los tornillos llegan al horno en cajones de unos 140 kilos, que en la planta llaman ULI, y se vuelcan en la cinta de a un cajón por vez. <span class="cue">→ diap. 2 (fotos)</span> Este es el horno real: un horno de cinta continua, donde se vuelca el contenido de cada ULI, una por vez. <span class="cue">→ diap. 3</span> El horno tarda 36 horas en calentarse y 48 en enfriarse, y caliente gasta luz y gas aunque esté vacío. Por eso se prende por campañas, cuando se juntan unas 80 ULI. La empresa nos preguntó: ¿cuántas conviene esperar antes de encenderlo?</div>
 </div>
 
 <div class="who"><div class="head"><div class="av" style="background:#2a78d6">AB</div><div class="name">Augusto</div><div class="time">0:38 – 1:13</div></div>
@@ -87,7 +87,7 @@ code{ font-family:Consolas,monospace; font-size:8.6pt; background:var(--soft); b
 
 <div class="who"><div class="head"><div class="av" style="background:#eb5a32">GC</div><div class="name">Gonzalo</div><div class="time">1:13 – 1:53</div></div>
   <div class="screen">AnyLogic, experimento <code>Visual</code>, pausado en el día 0 y a velocidad <b>x12</b>. Play después de la primera frase.</div>
-  <div class="say">Este es el modelo en AnyLogic: por dentro es Source, Wait, Delay y Sink, y el horno tiene seis estados. <span class="cue">▶ play</span> Cada cuadradito es una ULI esperando; cambian de color según cuánto esperan, y el violeta es un pedido urgente, que obliga a prender el horno antes. <span class="cue">≈ 6 s: se prende</span> Acá el horno calienta, y ahora carga una ULI cada 85 minutos. <span class="cue">≈ 14 s: se pone salmón → ⏸ pausa</span> Cuando se vacía la cola, la regla actual lo deja caliente hasta 48 horas por si llega algo: es lo salmón de la cinta de tiempo. <span class="cue">clic en E3 · Apagar enseguida → ▶ play</span> Si aplico el escenario E3, el horno se apaga en el momento.</div>
+  <div class="say">Este es el modelo en AnyLogic: por dentro es Source, Wait, Delay y Sink, y el horno tiene seis estados. <span class="cue">▶ play</span> Cada cuadradito es una ULI esperando; cambian de color según cuánto esperan, y el violeta es un pedido urgente, que obliga a prender el horno antes. <span class="cue">≈ 6 s: se prende</span> Acá el horno calienta, y ahora vuelca una ULI en la cinta cada 85 minutos. <span class="cue">≈ 14 s: se pone salmón → ⏸ pausa</span> Cuando se vacía la cola, la regla actual lo deja caliente hasta 48 horas por si llega algo: es lo salmón de la cinta de tiempo. <span class="cue">clic en E3 · Apagar enseguida → ▶ play</span> Si aplico el escenario E3, el horno se apaga en el momento.</div>
 </div>
 
 <div class="who"><div class="head"><div class="av" style="background:#c26a0a">TM</div><div class="name">Tiziano</div><div class="time">1:53 – 2:23</div></div>
@@ -134,7 +134,7 @@ code{ font-family:Consolas,monospace; font-size:8.6pt; background:var(--soft); b
   <tr><td>≈ 6</td><td>—</td><td>▶ play (desde acá corren los tiempos de abajo)</td></tr>
   <tr><td>≈ 2–5</td><td>Llegan ULI verdes a la cola</td><td>Hablar de los colores de la cola</td></tr>
   <tr><td>≈ 6</td><td>Llega la urgente (cuadrado violeta, el 24) → <b>Calentando por prioridad</b></td><td>"el violeta es un pedido urgente"</td></tr>
-  <tr><td>≈ 9</td><td><b>Procesando</b>: las ULI cruzan la cinta</td><td>"ahora carga una ULI cada 85 minutos"</td></tr>
+  <tr><td>≈ 9</td><td><b>Procesando</b>: se vuelca una ULI tras otra en la cinta</td><td>"ahora vuelca una ULI cada 85 minutos"</td></tr>
   <tr><td>≈ 14</td><td>Se vacía la cola → <b>Caliente sin carga</b> (salmón)</td><td>⏸ pausa; explicar lo salmón</td></tr>
   <tr><td>≈ 25</td><td>—</td><td>Clic en <b>E3 · Apagar enseguida</b> y ▶ play: pasa a <b>Enfriando</b></td></tr>
 </table>

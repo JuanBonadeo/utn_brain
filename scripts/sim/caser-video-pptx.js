@@ -95,7 +95,7 @@ s.addText("Augusto Brizio · Gonzalo Casermeiro · Jeremias Constantini · Tizia
   { x: 0.6, y: 4.0, w: 8.8, h: 0.3, fontSize: 13, color: C.background1, margin: 0, isTextBox: true, objectName: "autores" });
 s.addText("Grupo 10 · UTN · Facultad Regional Rosario · Simulación 2026", { x: 0.6, y: 4.3, w: 8.8, h: 0.3, fontSize: 11, color: "9AA8BF", margin: 0, isTextBox: true, objectName: "facultad" });
 logosSobreOscuro(s, 0.6, 4.8);
-s.addNotes("JEREMIAS (0:00–0:38, diapositivas 1 a 3). Hola, somos el grupo 10 y vamos a presentar el caso de una fábrica de tornillos de Santa Fe: su horno de cementación y temple. Las piezas entran al horno en cajones de tornillos de unos 140 kilos, que en la planta llaman ULI.");
+s.addNotes("JEREMIAS (0:00–0:38, diapositivas 1 a 3). Hola, somos el grupo 10 y vamos a presentar el caso de una fábrica de tornillos de Santa Fe: su horno de cementación y temple. Los tornillos llegan al horno en cajones de unos 140 kilos, que en la planta llaman ULI, y se vuelcan en la cinta de a un cajón por vez.");
 
 // ---------------------------------------------------------------- 2. Fotos del horno
 s = pres.addSlide({ masterName: "CONTENIDO", sectionTitle: "Presentación" });
@@ -105,7 +105,7 @@ s.addText("El horno real", { placeholder: "title" });
   s.addImage({ path: IMG(f), x, y: 1.15, w: 4.4, h: 2.475, altText: cap, objectName: `foto${i}` });
   s.addText(cap, { x, y: 3.75, w: 4.4, h: 0.35, fontSize: 14, color: HEX.accent6, margin: 0, isTextBox: true, objectName: `fotoTxt${i}` });
 });
-s.addNotes("JEREMIAS (sigue). Este es el horno real: un horno de cinta continua, por el que las ULI pasan de a una.");
+s.addNotes("JEREMIAS (sigue). Este es el horno real: un horno de cinta continua, donde se vuelca el contenido de cada ULI, una por vez.");
 
 // ---------------------------------------------------------------- 3. El problema
 s = pres.addSlide({ masterName: "CONTENIDO", sectionTitle: "Presentación" });
@@ -162,7 +162,7 @@ items.forEach(([h, t], i) => {
   s.addText([{ text: h, options: { bold: true, fontSize: 15, color: C.text2, breakLine: true } }, { text: t, options: { fontSize: 13, color: C.text1 } }],
     { x: 7.35, y, w: 2.2, h: 1.05, valign: "top", margin: 0, isTextBox: true, objectName: `item${i}` });
 });
-s.addNotes("GONZALO (1:13–1:53). Acá se pasa a AnyLogic en vivo; esta diapositiva queda de respaldo si algo falla. Este es el modelo en AnyLogic: por dentro es Source, Wait, Delay y Sink, y el horno tiene seis estados. Cada cuadradito es una ULI esperando; cambian de color según cuánto esperan, y el violeta es un pedido urgente, que obliga a prender el horno antes. Acá el horno calienta, y ahora carga una ULI cada 85 minutos. Cuando se vacía la cola, la regla actual lo deja caliente hasta 48 horas por si llega algo: es lo salmón de la cinta de tiempo. Si aplico el escenario E3, el horno se apaga en el momento.");
+s.addNotes("GONZALO (1:13–1:53). Acá se pasa a AnyLogic en vivo; esta diapositiva queda de respaldo si algo falla. Este es el modelo en AnyLogic: por dentro es Source, Wait, Delay y Sink, y el horno tiene seis estados. Cada cuadradito es una ULI esperando; cambian de color según cuánto esperan, y el violeta es un pedido urgente, que obliga a prender el horno antes. Acá el horno calienta, y ahora vuelca una ULI en la cinta cada 85 minutos. Cuando se vacía la cola, la regla actual lo deja caliente hasta 48 horas por si llega algo: es lo salmón de la cinta de tiempo. Si aplico el escenario E3, el horno se apaga en el momento.");
 
 // ---------------------------------------------------------------- 5. Escenarios
 pres.addSection({ title: "Resultados" });
