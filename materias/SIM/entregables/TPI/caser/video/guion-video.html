@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Guion del video · TPI Caser</title>
+<style>
+:root{ --ink:#1f2733; --muted:#6b7480; --line:#e3e6ea; --soft:#f6f7f9; --navy:#1d2b45; --hot:#eb5a32; --sal:#f59678; --ok:#15803d; --bad:#b91c1c; }
+@page{ size:A4; margin:12mm 13mm; }
+*{ box-sizing:border-box; } html{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+body{ margin:0; color:var(--ink); font-family:"Segoe UI","Helvetica Neue",Arial,sans-serif; font-size:9.7pt; line-height:1.5; }
+p{ margin:0 0 6px; } ul,ol{ margin:2px 0 6px; padding-left:18px; } li{ margin-bottom:2px; } b{ font-weight:650; }
+h1,h2,h3{ margin:0; }
+.cover{ border-radius:14px; padding:16px 22px; color:#fff; background:linear-gradient(120deg,#1d2b45,#3a2a4a 60%,#8a3d0b); margin-bottom:10px; }
+.cover .k{ font-size:8.5pt; letter-spacing:.14em; text-transform:uppercase; opacity:.8; } .cover h1{ font-size:22pt; margin:3px 0; } .cover .s{ opacity:.9; }
+.rules{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:8px 0 10px; }
+.rule{ border-radius:10px; padding:8px 10px; background:#fdf1f1; border:1px solid #f1c3c3; }
+.rule .v{ font-size:15pt; font-weight:800; color:var(--bad); line-height:1.1; } .rule .l{ font-size:8.6pt; color:#7f1d1d; }
+h2.sec{ font-size:12.5pt; color:var(--navy); margin:12px 0 6px; }
+table{ border-collapse:collapse; width:100%; } table.t{ font-size:9.2pt; }
+table.t th{ text-align:left; font-size:7.9pt; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); border-bottom:1.5px solid var(--line); padding:4px 6px; }
+table.t td{ border-bottom:1px solid var(--line); padding:5px 6px; vertical-align:top; } table.t tr:last-child td{ border-bottom:none; }
+.bar{ display:flex; height:22px; border-radius:6px; overflow:hidden; margin:6px 0 2px; font-size:8.4pt; font-weight:700; color:#fff; }
+.bar div{ display:flex; align-items:center; justify-content:center; }
+.who{ break-inside:avoid; border:1px solid var(--line); border-radius:12px; padding:10px 12px; margin-bottom:9px; }
+.who .head{ display:flex; align-items:center; gap:10px; margin-bottom:6px; }
+.who .av{ width:34px; height:34px; border-radius:50%; color:#fff; font-weight:800; display:flex; align-items:center; justify-content:center; font-size:11pt; flex:none; }
+.who .name{ font-size:12pt; font-weight:800; } .who .time{ font-size:9pt; color:var(--muted); margin-left:auto; font-weight:700; }
+.who .screen{ font-size:8.8pt; background:#eef3fd; border:1px solid #c9d8f6; border-radius:7px; padding:4px 8px; margin-bottom:6px; }
+.who .screen::before{ content:"En pantalla: "; font-weight:700; color:#2456c9; }
+.who .say{ font-size:10.4pt; line-height:1.55; padding-left:10px; border-left:3px solid #e0b43a; }
+.cue{ display:inline-block; font-size:8pt; font-weight:800; background:#fff0e0; color:#9a3412; border:1px solid #f6c7a0; border-radius:5px; padding:0 5px; margin:0 2px; }
+.check{ list-style:none; padding-left:0; } .check li{ padding-left:20px; position:relative; } .check li::before{ content:"☐"; position:absolute; left:0; color:var(--hot); font-weight:800; }
+.grid2{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.box{ border:1px solid var(--line); border-radius:10px; padding:8px 12px; break-inside:avoid; } .box h3{ font-size:10.5pt; margin-bottom:4px; color:var(--navy); }
+.part{ break-before:page; }
+code{ font-family:Consolas,monospace; font-size:8.6pt; background:var(--soft); border-radius:4px; padding:0 3px; }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="k">TPI Caser · Simulación 2026</div>
+  <h1>Guion del video</h1>
+  <div class="s">Cinco integrantes, siete diapositivas y AnyLogic corriendo. Una sola toma de menos de 3 minutos.</div>
+</div>
+
+<div class="rules">
+  <div class="rule"><div class="v">≤ 3:00</div><div class="l">pauta estricta: pasarse es causal de recuperatorio</div></div>
+  <div class="rule"><div class="v">sin editar</div><div class="l">una sola toma, sin cortes ni montaje</div></div>
+  <div class="rule"><div class="v">5 en cámara</div><div class="l">todos los integrantes visibles (Zoom u OBS)</div></div>
+  <div class="rule"><div class="v">AnyLogic</div><div class="l">tiene que verse el modelo corriendo; slides solo de apoyo</div></div>
+</div>
+<p class="small" style="font-size:8.8pt;color:var(--muted)">Reglas del enunciado del TPI. El aviso del profesor del 28/10 pide un "video breve explicando el problema, la solución y mostrando el uso"; no cambia el límite. Se sube a YouTube como <b>Oculto</b> y se entrega el link.</p>
+
+<h2 class="sec">Reparto del tiempo (objetivo: 2:50, con 10 s de margen)</h2>
+<div class="bar">
+  <div style="width:20.6%;background:#1d2b45">Gonzalo 0:35</div>
+  <div style="width:20.6%;background:#2a78d6">Augusto 0:35</div>
+  <div style="width:20.6%;background:#eb5a32">Jeremias 0:35</div>
+  <div style="width:17.6%;background:#c26a0a">Tiziano 0:30</div>
+  <div style="width:20.6%;background:#15803d">Juan Ignacio 0:35</div>
+</div>
+<table class="t" style="margin-top:6px">
+  <tr><th>Tramo</th><th>Quién</th><th>Qué se ve</th><th>Tema</th></tr>
+  <tr><td>0:00–0:35</td><td><b>Gonzalo</b></td><td>Diapositivas 1 y 2</td><td>Quiénes somos, la empresa y el problema</td></tr>
+  <tr><td>0:35–1:10</td><td><b>Augusto</b></td><td>Diapositiva 3</td><td>Datos reales, cómo se simula y la validación</td></tr>
+  <tr><td>1:10–1:45</td><td><b>Jeremias</b></td><td><b>AnyLogic en vivo</b></td><td>El modelo corriendo: cola, horno, caliente sin carga, botón E3</td></tr>
+  <tr><td>1:45–2:15</td><td><b>Tiziano</b></td><td>Diapositiva 5</td><td>Los cuatro escenarios y el diseño experimental</td></tr>
+  <tr><td>2:15–2:50</td><td><b>Juan Ignacio</b></td><td>Diapositivas 6 y 7</td><td>Resultados, recomendación y cierre</td></tr>
+</table>
+<p style="font-size:9pt;margin-top:6px">La diapositiva 4 ("El modelo corriendo") es de <b>respaldo</b>: si AnyLogic falla en la toma, Jeremias habla sobre esa captura. Cada integrante tiene su texto en las <b>notas del orador</b> de su diapositiva.</p>
+
+<!-- ============================================================ GUION -->
+<div class="part">
+<h2 class="sec" style="margin-top:0">Guion palabra por palabra</h2>
+<p style="font-size:9pt;color:var(--muted)">Unas 80 palabras por persona, que dichas sin apuro son 30 a 35 segundos. No hace falta decirlo textual: lo importante es no pasarse del tiempo.</p>
+
+<div class="who"><div class="head"><div class="av" style="background:#1d2b45">GC</div><div class="name">Gonzalo</div><div class="time">0:00 – 0:35</div></div>
+  <div class="screen">diapositiva 1; al decir "el horno tarda", pasar a la 2.</div>
+  <div class="say">Hola, somos Augusto Brizio, Gonzalo Casermeiro, Jeremias Constantini, Tiziano Messina y Juan Ignacio Navos. Nuestro caso es real: el horno de cementación y temple de una fábrica de tornillos de Santa Fe. <span class="cue">→ diap. 2</span> El horno tarda 36 horas en calentarse y 48 en enfriarse, y mientras está caliente gasta luz y gas aunque esté vacío. Por eso se prende por campañas, cuando se juntan unos 80 cajones de piezas. La empresa nos preguntó: ¿cuántos cajones conviene esperar antes de encenderlo?</div>
+</div>
+
+<div class="who"><div class="head"><div class="av" style="background:#2a78d6">AB</div><div class="name">Augusto</div><div class="time">0:35 – 1:10</div></div>
+  <div class="screen">diapositiva 3.</div>
+  <div class="say">Usamos datos reales de la empresa: un año de registros de cada cajón, con su fecha de lavado y su peso, y las facturas de luz y de gas del propio horno. Las llegadas no las inventamos: cada semana simulada sortea una de las 52 semanas reales. Con eso armamos un modelo de eventos discretos en AnyLogic y lo validamos contra el registro histórico: reproduce las toneladas por mes, la duración de las campañas, la espera y el consumo de energía.</div>
+</div>
+
+<div class="who"><div class="head"><div class="av" style="background:#eb5a32">JC</div><div class="name">Jeremias</div><div class="time">1:10 – 1:45</div></div>
+  <div class="screen">AnyLogic, experimento <code>Visual</code>, pausado en el día 0 y a velocidad <b>x12</b>. Play al empezar a hablar.</div>
+  <div class="say">Este es el modelo corriendo. <span class="cue">▶ play</span> Cada cuadradito es un cajón esperando; cambian de color según cuánto esperan, y el violeta es un pedido urgente, que obliga a prender el horno antes. <span class="cue">≈ 6 s: se prende</span> Acá el horno calienta, y ahora carga un cajón cada 85 minutos. <span class="cue">≈ 14 s: se pone salmón → ⏸ pausa</span> Cuando se vacía la cola, la regla actual lo deja caliente hasta 48 horas por si llega algo: es lo salmón de la cinta de tiempo. <span class="cue">clic en E3 · Apagar enseguida → ▶ play</span> Si aplico el escenario E3, el horno se apaga en el momento.</div>
+</div>
+
+<div class="who"><div class="head"><div class="av" style="background:#c26a0a">TM</div><div class="name">Tiziano</div><div class="time">1:45 – 2:15</div></div>
+  <div class="screen">volver a las diapositivas, la 5.</div>
+  <div class="say">Comparamos cuatro reglas: la actual, bajar el umbral a 45 cajones, poner una espera máxima de 15 días y apagar el horno apenas se vacía la cola. Corrimos cada una 30 veces, un año simulado por corrida, y a las cuatro les tocaron los mismos 30 años, con las mismas llegadas. Así la única diferencia es la regla, y comparamos año contra año con un test t apareado, con corrección de Bonferroni.</div>
+</div>
+
+<div class="who"><div class="head"><div class="av" style="background:#15803d">JN</div><div class="name">Juan Ignacio</div><div class="time">2:15 – 2:50</div></div>
+  <div class="screen">diapositiva 6; al decir "nuestra recomendación", pasar a la 7.</div>
+  <div class="say">Bajar el umbral o poner una espera máxima reduce la espera, pero cuesta entre 3 y 5 millones de pesos más por año. Apagar el horno apenas se vacía la cola ahorra 18 millones por año, un 21 por ciento del costo, a cambio de un día más de espera promedio, y el resultado se mantiene aunque cambien los precios. <span class="cue">→ diap. 7</span> Nuestra recomendación: mantener el umbral y no dejar el horno caliente esperando. Gracias.</div>
+</div>
+</div>
+
+<!-- ============================================================ PREPARACIÓN -->
+<div class="part">
+<h2 class="sec" style="margin-top:0">Cómo grabarlo</h2>
+<div class="grid2">
+  <div class="box">
+    <h3>Formato recomendado: Zoom (o Meet)</h3>
+    <ul>
+      <li>Los cinco en la llamada, <b>cámaras prendidas</b>.</li>
+      <li><b>Una sola persona comparte pantalla</b> y maneja todo (slides y AnyLogic). Conviene que sea quien tiene AnyLogic instalado. Cada uno habla en su turno y el que comparte pasa las diapositivas.</li>
+      <li>Grabación en la vista de <b>pantalla compartida con las cámaras al costado</b>. En Zoom: Configuración → Grabación → "Grabar el orador activo, la vista de galería y la pantalla compartida por separado" o "Vista de galería con pantalla compartida".</li>
+      <li>Compartir <b>la pantalla entera</b> (no una ventana), para pasar de las slides a AnyLogic con <code>Alt</code>+<code>Tab</code> sin volver a compartir.</li>
+    </ul>
+  </div>
+  <div class="box">
+    <h3>Antes de apretar "grabar"</h3>
+    <ul class="check">
+      <li>Diapositivas en Google Slides: Drive → Nuevo → Subir archivo → <code>TPI_Caser_Video.pptx</code> → "Abrir con Presentaciones de Google". Ponerlas en modo presentación.</li>
+      <li>AnyLogic: abrir <code>CaserHorno.alp</code>, compilar (F7), correr <code>Visual</code> y <b>pausarlo enseguida</b> (día 0). Bajar la velocidad a <b>x12</b> con el botón de velocidad más lenta de la barra de abajo.</li>
+      <li>Ensayar el pase slides ↔ AnyLogic con <code>Alt</code>+<code>Tab</code>.</li>
+      <li>Cerrar notificaciones, WhatsApp Web y el correo en la computadora que comparte.</li>
+      <li>Hacer <b>dos ensayos completos con cronómetro</b>. Si dan más de 2:55, recortar frases, no correr.</li>
+      <li>Cada uno con micrófono silenciado hasta su turno.</li>
+    </ul>
+  </div>
+</div>
+
+<h2 class="sec">El tramo de AnyLogic, en detalle (Jeremias)</h2>
+<table class="t">
+  <tr><th>Segundo del tramo</th><th>Qué pasa en pantalla (semilla 1, velocidad x12)</th><th>Qué hacer</th></tr>
+  <tr><td>0</td><td>Día 0, horno apagado, cola vacía</td><td>▶ play y empezar a hablar</td></tr>
+  <tr><td>≈ 2–5</td><td>Llegan cajones verdes a la cola</td><td>Hablar de los colores de la cola</td></tr>
+  <tr><td>≈ 6</td><td>Llega la urgente (cuadrado violeta, el 24) → <b>Calentando por prioridad</b></td><td>"el violeta es un pedido urgente"</td></tr>
+  <tr><td>≈ 9</td><td><b>Procesando</b>: los cajones cruzan la cinta</td><td>"ahora carga un cajón cada 85 minutos"</td></tr>
+  <tr><td>≈ 14</td><td>Se vacía la cola → <b>Caliente sin carga</b> (salmón)</td><td>⏸ pausa; explicar lo salmón</td></tr>
+  <tr><td>≈ 25</td><td>—</td><td>Clic en <b>E3 · Apagar enseguida</b> y ▶ play: pasa a <b>Enfriando</b></td></tr>
+</table>
+<p style="font-size:9pt;margin-top:4px">Los tiempos son los de la corrida de siempre (semilla 1): la urgente llega el miércoles 20/08 a las 21:45 y el horno queda caliente sin carga el lunes 25/08 a las 02:45. A x12 pasa medio día por segundo.</p>
+
+<h2 class="sec">Después de grabar</h2>
+<ol>
+  <li>Revisar que dure <b>menos de 3:00</b>. Si se pasó, se graba de nuevo: no se puede editar.</li>
+  <li>YouTube → Crear → Subir video. Título sugerido: <i>TPI Simulación 2026 · Caser · ¿Cuándo encender el horno?</i></li>
+  <li>Audiencia: <b>"No, no es contenido para niños"</b>. Visibilidad: <b>Oculto</b>.</li>
+  <li>Copiar el link y pasármelo: va en el paper (la última marca roja) y en la entrega.</li>
+</ol>
+
+<div class="box" style="margin-top:8px;background:#eef3fd;border-color:#c9d8f6">
+  <h3>¿Y la defensa presencial del 10 y 11/11?</h3>
+  Es otra cosa: más larga y en vivo, sin límite de 3 minutos. Para eso está <code>guia-demo-visual.pdf</code>, con el guion completo de la animación, qué es cada panel y las preguntas probables.
+</div>
+</div>
+
+</body>
+</html>
