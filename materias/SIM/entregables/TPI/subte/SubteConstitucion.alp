@@ -3030,9 +3030,6 @@ return (modoDemo ? "DEMO; " : "SIN VALIDAR; ") + "E" + escenario
 			<Id>1791000000001</Id>
 			<Name><![CDATA[MainPeatonal]]></Name>
 			<StartupCode><![CDATA[inicializarPed();
-// Ruteo sin peso de densidad (2026-11-10): con el valor por defecto (10) cada peaton recalcula su A* segun la
-// densidad y eso era ~87 % del tiempo de computo con el hall lleno. Escalera y molinete los elige el modelo, no el ruteo.
-pedSource.getSettings().set_aStarDensityModifier(0);
 traceln(modoFranjaPed ? (pruebaSinteticaPed ? "FRANJA PEATONAL 07:00-09:30 - VALORES DE PRUEBA - PLANO HIPOTETICO" : "FRANJA PEATONAL 07:00-09:30 - RANGOS CON FUENTE (PLAN 5) - PLANO HIPOTETICO") : "DEMO PEATONAL - GEOMETRIA Y DATOS SINTETICOS");
 configurarMolinetesPed();
 if (modoFranjaPed) programarDemandaFranjaPed(); else proximaTandaPed.restart(0);
@@ -6255,6 +6252,84 @@ return String.join(",", partes);]]></Body>
 			</Functions>
 
 			<EmbeddedObjects>
+				<EmbeddedObject>
+					<Id>1801000000004</Id>
+					<Name><![CDATA[pedSettings]]></Name>
+					<X>515</X><Y>-1100</Y>
+					<Label><X>-15</X><Y>-30</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<ActiveObjectClass>
+						<PackageName><![CDATA[com.anylogic.libraries.pedestrian]]></PackageName>
+						<ClassName><![CDATA[PedSettings]]></ClassName>
+					</ActiveObjectClass>
+					<Parameters>
+						<Parameter>
+							<Name><![CDATA[enableSocialDistance]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[socialDistance]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[allowPedestrianSelectionByClick]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[timeStep]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[aStarDensityModifier]]></Name>
+							<Value Class="CodeValue">
+								<Code><![CDATA[0]]></Code>
+							</Value>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[sfmMass]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[funnelTouchTolerance]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[onPedSelected]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[onPedDeselected]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[onGroupAssembled]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[onGroupDisassembled]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[onGroupLeaderChanged]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[onGroupFormationChanged]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[onGroupMemberAdded]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[onGroupMemberRemoved]]></Name>
+						</Parameter>
+					</Parameters>
+					<ReplicationFlag>false</ReplicationFlag>
+					<Replication Class="CodeValue">
+						<Code><![CDATA[100]]></Code>
+					</Replication>
+					<CollectionType>ARRAY_LIST_BASED</CollectionType>
+					<InitialLocationType>XYZ</InitialLocationType>
+					<InitializationType>SPECIFIED_NUMBER</InitializationType>
+					<InitializationDatabaseTableQuery>
+						<Id>1801000000005</Id>
+						<TableReference>
+						</TableReference>
+					</InitializationDatabaseTableQuery>
+					<InitializationDatabaseType>ONE_AGENT_PER_DATABASE_RECORD</InitializationDatabaseType>
+					<QuantityColumn>
+					</QuantityColumn>
+				</EmbeddedObject>
 				<EmbeddedObject>
 					<Id>1791000000015</Id>
 					<Name><![CDATA[pedSource]]></Name>

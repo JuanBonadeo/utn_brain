@@ -401,7 +401,7 @@ for n in ('pedSource','bajadaHall','pedMolinetes','trenesRocaFuente'):
 assert _bl['bloque4'][1]<0 and _bl['bloque4'][1]+_bl['bloque4'][3]>=1700, 'el bloque 4 enmarca la animación'
 ped_defaults_early={v.findtext('Name'):v.findtext('Properties/DefaultValue/Code') for v in ped.findall("Variables/Variable[@Class='Parameter']")}
 ped_blocks={x.findtext('Name'):x.findtext('ActiveObjectClass/ClassName') for x in ped.findall('EmbeddedObjects/EmbeddedObject')}
-assert ped_blocks=={'pedSource':'PedSource','bajadaHall':'PedChangeLevel','pedSourceCalle':'PedSource','pedMolinetes':'PedService','pedSalida':'PedGoTo','pedSink':'PedSink',
+assert ped_blocks=={'pedSettings':'PedSettings','pedSource':'PedSource','bajadaHall':'PedChangeLevel','pedSourceCalle':'PedSource','pedMolinetes':'PedService','pedSalida':'PedGoTo','pedSink':'PedSink',
  # Trenes del Roca (sólo animación, Rail Library): fuente, avance al andén, descarga y fin.
  'trenesRocaFuente':'TrainSource','trenesRocaAlAnden':'TrainMoveTo','trenesRocaDescarga':'Delay','trenesRocaFin':'TrainDispose'}
 assert all(ped.find(f".//RailTrack[Name='viaRoca{k}']") is not None and ped.find(f".//RailStopline[Name='paradaRoca{k}']") is not None for k in range(7))
@@ -562,7 +562,9 @@ assert 'configurarMolinetesPed()' in ped.findtext('StartupCode')
 startup=ped.findtext('StartupCode')
 assert startup.index('inicializarPed()') < startup.index('configurarMolinetesPed()')
 assert 'cierreMetricasPed.restart(horizonteCortePed)' in startup
-assert 'pedSource.getSettings().set_aStarDensityModifier(0);' in startup, 'ruteo sin peso de densidad'
+_ps=[e for e in ped.findall('EmbeddedObjects/EmbeddedObject') if e.findtext('ActiveObjectClass/ClassName')=='PedSettings']
+assert len(_ps)==1 and {x.findtext('Name'):x.findtext('Value/Code') for x in _ps[0].findall('Parameters/Parameter')}.get('aStarDensityModifier')=='0', 'ruteo sin peso de densidad'
+assert 'aStarDensityModifier' not in startup
 assert 'if (modoFranjaPed) programarDemandaFranjaPed(); else proximaTandaPed.restart(0);' in startup
 assert ped.findtext('DestroyCode')=='emitirIncompletoPed();'
 assert callbacks_delay=='ped.servicioAsignadoPed'

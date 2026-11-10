@@ -947,9 +947,9 @@ volvía a frenar. Cambios:
 **Ruteo sin peso de densidad (10/11).** La segunda producción (10 corridas en paralelo) llegaba a las 07:45 simuladas
 en 771–1199 s de reloj y a las 08:15 en ~1 h 45 min. Un muestreo de hilos del JVM (12 volcados con `jcmd
 Thread.print`) mostró el 87 % del tiempo en `AStar`/`NavMeshGraphPathFinder` llamados por `PedGoTo`: cada peatón
-recalcula su ruta pesando la densidad (`PedSettings.aStarDensityModifier`, 10 por defecto). El arranque de
-`MainPeatonal` lo pone en 0 (`pedSource.getSettings().set_aStarDensityModifier(0)`): los peatones van por el camino más
-corto. No cambia decisiones del modelo (la escalera la fija el lado del hall y el molinete la elección de cola) y vale
+recalcula su ruta pesando la densidad (`PedSettings.aStarDensityModifier`, 10 por defecto). Es un parámetro estático
+(cambiarlo en el arranque da "cannot be changed dynamically"), así que `MainPeatonal` tiene un elemento Pedestrian
+Settings (`pedSettings`) con el valor 0: los peatones van por el camino más corto. No cambia decisiones del modelo (la escalera la fija el lado del hall y el molinete la elección de cola) y vale
 igual para los 4 escenarios. Se declara como simplificación.
 
 ## Mapa de calor (2026-11-09)
