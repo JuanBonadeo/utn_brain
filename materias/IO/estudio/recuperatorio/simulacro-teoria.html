@@ -72,8 +72,9 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .topline{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
 .timer{font-family:var(--f-mono);font-size:15px;font-variant-numeric:tabular-nums}
 .timer.low{color:var(--bad)}
-.grid{display:flex;flex-wrap:wrap;gap:6px}
-.cell{width:32px;height:32px;border-radius:50%;border:1.5px solid var(--line);background:var(--sheet);font-family:var(--f-mono);font-size:12px;display:grid;place-items:center;position:relative}
+.grid{display:grid;grid-template-columns:repeat(var(--cols),minmax(0,1fr));gap:4px;justify-items:center}
+@media (max-width:560px){.grid{grid-template-columns:repeat(var(--cols-sm),minmax(0,1fr))}}
+.cell{width:100%;max-width:34px;aspect-ratio:1;padding:0;border-radius:50%;border:1.5px solid var(--line);background:var(--sheet);font-family:var(--f-mono);font-size:11px;display:grid;place-items:center;position:relative}
 .cell.ans{border-color:var(--accent);background:var(--accent-soft)}
 .cell.cur{outline:2px solid var(--ink);outline-offset:1px}
 .cell.flag::after{content:"";position:absolute;top:-2px;right:-2px;width:9px;height:9px;border-radius:50%;background:var(--flag)}
@@ -898,7 +899,7 @@ function renderQuiz(){
       <span class="eyebrow">${label} · ${sim?`${answered}/${n} respondidas`:`${S.i+1} de ${n}`}</span>
       ${sim && S.end ? `<span class="timer" id="timer-out">--:--</span>` : `<span></span>`}
     </div>
-    <div class="grid">${gridHtml}</div>
+    <div class="grid" style="--cols:${Math.min(n,20)};--cols-sm:${Math.min(n,10)}">${gridHtml}</div>
   </div>
   <section class="sheet stack">
     <div class="qhead"><span class="tag">Pregunta ${S.i+1} · ${TOPIC_NAME[q.t]}</span>
