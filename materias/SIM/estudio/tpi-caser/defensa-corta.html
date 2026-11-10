@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>TPI Caser · para la defensa</title>
+<style>
+:root{ --ink:#1f2733; --muted:#6b7480; --line:#e3e6ea; --soft:#f6f7f9; --navy:#1d2b45;
+  --hot:#eb5a32; --sal:#f59678; --ok:#15803d; --bad:#b91c1c; --blue:#2456c9; --amber:#c26a0a; --violet:#7b3fc4; }
+@page{ size:A4; margin:13mm 14mm; }
+*{ box-sizing:border-box; } html{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+body{ margin:0; color:var(--ink); font-family:"Segoe UI","Helvetica Neue",Arial,sans-serif; font-size:10pt; line-height:1.55; }
+p{ margin:0 0 7px; } ul,ol{ margin:2px 0 7px; padding-left:18px; } li{ margin-bottom:3px; } b{ font-weight:650; }
+h1,h2,h3{ margin:0; }
+.cover{ border-radius:14px; padding:18px 22px; color:#fff; background:linear-gradient(120deg,#1d2b45,#5a2d12 60%,#d9730d); margin-bottom:10px; }
+.cover .k{ font-size:8.5pt; letter-spacing:.14em; text-transform:uppercase; opacity:.8; }
+.cover h1{ font-size:23pt; margin:3px 0 4px; } .cover .s{ opacity:.92; font-size:10.5pt; }
+.one{ display:grid; grid-template-columns:auto 1fr; gap:14px; align-items:center; margin-top:10px; background:rgba(255,255,255,.13); border-radius:10px; padding:9px 14px; }
+.one .v{ font-size:24pt; font-weight:800; line-height:1; } .one .t{ font-size:10pt; }
+.photos{ display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:8px 0; }
+.photos img{ width:100%; border-radius:8px; display:block; }
+.cap{ font-size:8.4pt; color:var(--muted); margin-top:2px; }
+.sec{ display:flex; align-items:center; gap:10px; margin:14px 0 8px; break-after:avoid; }
+.sec .n{ width:30px; height:30px; border-radius:50%; color:#fff; font-weight:800; display:flex; align-items:center; justify-content:center; flex:none; font-size:12pt; }
+.sec h2{ font-size:14pt; }
+.c1 .n{ background:var(--navy); } .c2 .n{ background:var(--blue); } .c3 .n{ background:#0f8a7e; } .c4 .n{ background:var(--amber); }
+.c5 .n{ background:var(--violet); } .c6 .n{ background:var(--bad); } .c7 .n{ background:var(--ok); }
+.part{ break-before:page; }
+.box{ border:1px solid var(--line); border-radius:10px; padding:9px 12px; margin:7px 0; break-inside:avoid; }
+.box h3{ font-size:10.5pt; margin-bottom:4px; }
+.crio{ background:#fff8e6; border-color:#f0d58a; } .crio h3{ color:#8a6200; }
+.say{ background:#eef3fd; border-color:#c9d8f6; } .say h3{ color:var(--blue); }
+.warn{ background:#fdf1f1; border-color:#f1c3c3; } .warn h3{ color:var(--bad); }
+.good{ background:#ecf8f0; border-color:#b7dcc0; } .good h3{ color:var(--ok); }
+.grid2{ display:grid; grid-template-columns:1fr 1fr; gap:10px; } .grid3{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; }
+.grid4{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
+.stat{ border-radius:10px; padding:9px 10px; text-align:center; border:1px solid var(--line); background:#fff; break-inside:avoid; }
+.stat .v{ font-size:18pt; font-weight:800; line-height:1.1; } .stat .l{ font-size:8.6pt; color:var(--muted); }
+table{ border-collapse:collapse; width:100%; } table.t{ font-size:9.4pt; }
+table.t th{ text-align:left; font-size:8pt; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); border-bottom:1.5px solid var(--line); padding:4px 6px; }
+table.t td{ border-bottom:1px solid var(--line); padding:5px 6px; vertical-align:top; } table.t tr:last-child td{ border-bottom:none; }
+table.t tr.hl td{ background:#ecf8f0; }
+.r{ text-align:right; white-space:nowrap; }
+.strip{ display:grid; grid-template-columns:repeat(7,1fr); gap:3px; margin:6px 0; font-size:8.2pt; }
+.strip div{ border-radius:6px; padding:6px 4px; text-align:center; color:#fff; font-weight:600; }
+.week{ display:grid; grid-template-columns:repeat(5,1fr); gap:4px; margin:5px 0; font-size:8.6pt; }
+.week div{ border:1px solid var(--line); border-radius:6px; padding:4px; text-align:center; background:#fff; }
+.week b{ display:block; font-size:12pt; color:var(--blue); }
+.mono{ font-family:Consolas,monospace; font-size:9pt; background:var(--soft); border:1px solid var(--line); border-radius:8px; padding:7px 10px; white-space:pre; margin:5px 0; }
+.chip{ display:inline-block; width:11px; height:11px; border-radius:2px; vertical-align:-1px; margin-right:4px; }
+.tl{ font-size:8.2pt; font-weight:800; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="k">TPI Simulación 2026 · Grupo 10 · para la defensa presencial</div>
+  <h1>¿Cuándo encender el horno?</h1>
+  <div class="s">Todo el trabajo en pocas páginas: el problema, los datos que conseguimos, cómo los usamos, los escenarios y cuánto le ahorra a la empresa.</div>
+  <div class="one"><div class="v">−18 M$</div><div class="t"><b>La respuesta:</b> si el horno se apaga apenas se queda sin tornillos para tratar, en lugar de esperarlo caliente hasta 48 horas, la fábrica se ahorra unos <b>18 millones de pesos por año</b> (el 21,5 % de lo que cuesta operarlo). A cambio, el material espera en promedio poco más de un día extra.</div></div>
+</div>
+
+<!-- ======================================================= 1 -->
+<div class="sec c1"><div class="n">1</div><h2>El problema: un horno que cuesta prender</h2></div>
+<div class="photos">
+  <div><img src="../../entregables/TPI/caser/video/img/horno-1.jpg"><div class="cap">El horno de cementación y temple de la planta.</div></div>
+  <div><img src="../../entregables/TPI/caser/video/img/horno-2.jpg"><div class="cap">La línea completa, de cinta continua.</div></div>
+</div>
+<div class="grid2">
+  <div>
+    <p>Una fábrica de tornillos de Santa Fe <b>endurece las piezas</b> en un horno de cementación y temple. Los tornillos llegan al horno en <b>ULI</b>: cajones de unos <b>140 kg</b>. Cada ULI se vuelca en la cinta del horno, una por vez, cada <b>85 minutos</b>.</p>
+    <p>El problema es que el horno <b>cuesta prenderlo</b>: tarda <b>36 horas en calentarse</b> y <b>48 en enfriarse</b>, y mientras está caliente gasta luz y gas <b>aunque esté vacío</b>.</p>
+  </div>
+  <div>
+    <p>Por eso no se prende por cada cajón: se espera a juntar <b>unas 79 ULI</b> y se hace una <b>campaña</b>. Si llega un pedido <b>urgente</b>, se prende antes. Cuando se vacía la cola, el encargado lo deja <b>caliente hasta 48 horas</b> "por si llega algo".</p>
+    <div class="box crio" style="margin:0"><h3>La pregunta de la empresa</h3>¿Cuántas ULI conviene esperar antes de prender el horno? Esperar más reparte el costo de calentar entre más kilos, pero el material espera más.</div>
+  </div>
+</div>
+<div class="tl" style="margin-top:6px">Una campaña típica</div>
+<div class="strip">
+  <div style="background:#9aa3ae">Apagado</div><div style="background:#d8b84a">Acumulando ULI</div><div style="background:#e0731a">Calentando 36 h</div>
+  <div style="background:#eb5a32">Procesando</div><div style="background:#eb5a32">Procesando</div><div style="background:#f59678">Caliente sin carga ≤ 48 h</div><div style="background:#14a394">Enfriando 48 h</div>
+</div>
+
+<!-- ======================================================= 2 -->
+<div class="part"></div>
+<div class="sec c2"><div class="n">2</div><h2>La información que conseguimos (toda real)</h2></div>
+<table class="t">
+  <tr><th>Qué</th><th>De dónde</th><th>Para qué la usamos</th></tr>
+  <tr><td><b>Cada ULI que pasó por el horno</b>: fecha de lavado, fecha de horno y peso (11.353 ULI, 2024–2026)</td><td>Sistema de gestión de la empresa</td><td>Cuándo llegan las ULI, cuánto pesan, cuánto esperaron y cómo fueron las campañas reales</td></tr>
+  <tr><td><b>Facturas de luz</b> del horno (28 meses; tiene medidor propio)</td><td>Empresa de energía</td><td>Cuántos kWh gasta por día caliente (≈ 2.400) y por cada encendido; precio del kWh (102 $)</td></tr>
+  <tr><td><b>Facturas de gas</b> (GLP) y estadística de compras (2024–2026)</td><td>YPF Gas y la empresa</td><td>Cuánto gas gasta por día caliente (≈ 130 kg) y su precio (2.250 $/kg)</td></tr>
+  <tr><td><b>Lista de precios</b> y costo del dinero (2 % mensual)</td><td>La empresa</td><td>Cuánto vale el material que espera en la cola (plata parada)</td></tr>
+  <tr><td><b>Entrevistas al encargado</b> del horno</td><td>La planta</td><td>Los tiempos (36 h, 48 h, 85 min) y la regla real: 79 ULI, urgencias, carga mientras haya cola, caliente hasta 48 h</td></tr>
+</table>
+<div class="box say"><h3>Para decir</h3>"No inventamos ningún número: los tiempos son del encargado, las llegadas y los pesos salen del registro de cada ULI, y los costos, de las facturas del propio horno."</div>
+
+<!-- ======================================================= 3 -->
+<div class="sec c3"><div class="n">3</div><h2>Cómo usamos esa información</h2></div>
+<p>No repetimos "la película" del año real: eso sería <b>una sola historia</b>, y la conclusión dependería de la suerte de ese año. Con los datos armamos un <b>generador de años posibles</b>, parecidos al real pero distintos entre sí.</p>
+<div class="grid3">
+  <div class="box"><h3>🎟️ Las semanas aleatorias</h3>Tenemos <b>52 semanas reales</b> de lavado. Es como una bolsa con 52 papelitos: cada lunes el modelo saca uno al azar, copia lo que llegó esa semana y lo devuelve a la bolsa.</div>
+  <div class="box"><h3>⚖️ El peso</h3>Cada ULI que llega sortea su peso entre los pesos reales del registro (en promedio, 141 kg).</div>
+  <div class="box"><h3>🪙 Las urgencias</h3>Cada ULI tiene una chance chica (0,54 %) de ser urgente, sacada de cuántas veces se prendió el horno antes de tiempo en la realidad.</div>
+</div>
+<div class="tl">Ejemplo ilustrativo de un papelito (una semana)</div>
+<div class="week"><div>lunes<b>0</b></div><div>martes<b>9</b></div><div>miércoles<b>0</b></div><div>jueves<b>14</b></div><div>viernes<b>3</b></div></div>
+<p style="font-size:9pt;color:var(--muted)">Usando semanas enteras se conservan los días sin lavado (la mitad de los días hábiles), los picos y las semanas flojas, tal como pasan en la planta.</p>
+<p>El horno <b>no tiene azar</b>: sigue los tiempos y la regla del encargado. Mientras corre, el modelo anota cuánto espera cada ULI y cuántas horas pasa el horno en cada estado, y lo pasa a pesos con las facturas.</p>
+
+<!-- ======================================================= 4 -->
+<div class="part"></div>
+<div class="sec c4"><div class="n">4</div><h2>Los cuatro escenarios (las reglas que probamos)</h2></div>
+<table class="t">
+  <tr><th></th><th>Regla</th><th>Qué cambia</th></tr>
+  <tr><td><b>E0</b></td><td>Regla actual</td><td>Se prende con 79 ULI (o una urgente) y queda caliente hasta 48 h si se vacía la cola. Es la base para comparar.</td></tr>
+  <tr><td><b>E1</b></td><td>Umbral bajo</td><td>Se prende con 45 ULI: el material espera menos, pero se prende más veces.</td></tr>
+  <tr><td><b>E2</b></td><td>Espera máxima</td><td>Se prende con 79 ULI o cuando la más vieja ya lleva 15 días esperando.</td></tr>
+  <tr class="hl"><td><b>E3</b></td><td>Apagar enseguida</td><td>Igual que E0, pero <b>se apaga apenas se vacía la cola</b>: no espera caliente.</td></tr>
+</table>
+
+<!-- ======================================================= 5 -->
+<div class="sec c5"><div class="n">5</div><h2>Las semillas, explicado fácil</h2></div>
+<div class="grid2">
+  <div>
+    <p>Para sortear (qué semana sale, cuánto pesa cada ULI, si es urgente), la computadora usa una secuencia de números al azar. La <b>semilla</b> es el <b>número con el que arranca ese sorteo</b>.</p>
+    <p>Pensalo como <b>mezclar un mazo de cartas siempre de la misma forma</b>: con la semilla 7 salen siempre las mismas cartas en el mismo orden. Por eso <b>la semilla 7 es siempre el mismo año</b>: las mismas ULI, el mismo día, con el mismo peso.</p>
+    <p>Usamos <b>30 semillas</b> (de la 1 a la 30): son <b>30 años distintos</b>, todos creíbles.</p>
+  </div>
+  <div class="box crio" style="margin-top:0">
+    <h3>El truco: los mismos 30 años para las cuatro reglas</h3>
+    A las cuatro reglas les tocan <b>los mismos 30 años</b>. El año 7 con E0 y el año 7 con E3 reciben exactamente los mismos tornillos: lo único distinto es la regla. Entonces se comparan <b>año contra año</b>, como gemelos:
+    <div class="mono">año 7:  E0 101,7 M$   E3 82,2 M$  → −19,5
+año 8:  E0  97,7 M$   E3 71,8 M$  → −26,0
+  ...    (30 años)
+promedio: −18,0 M$ por año</div>
+    Con las 30 diferencias se hace el <b>test de medias apareado</b>: da que el ahorro está entre <b>16,2 y 19,8 M$</b> por año, y no incluye el cero. O sea, <b>el ahorro es real</b>, no casualidad.
+  </div>
+</div>
+<div class="box say"><h3>Y en la animación</h3>La animación usa siempre la <b>semilla 1</b>: por eso cada vez que la corrés pasa exactamente lo mismo en las mismas fechas (la urgente llega siempre en la ULI 24). Es un solo año de ejemplo; los resultados salen de los 30.</div>
+
+<!-- ======================================================= 6 -->
+<div class="part"></div>
+<div class="sec c6"><div class="n">6</div><h2>Años buenos y años malos</h2></div>
+<p>Como cada semilla es un año distinto, hay años con mucho trabajo y años flojos. Eso es justamente lo que queremos capturar: <b>la variabilidad</b>.</p>
+<div class="grid4">
+  <div class="stat"><div class="v" style="color:var(--blue)">1.277–2.249</div><div class="l">ULI que llegan por año, según el año</div></div>
+  <div class="stat"><div class="v" style="color:var(--amber)">62–102 M$</div><div class="l">costo del horno por año con la regla actual</div></div>
+  <div class="stat"><div class="v" style="color:var(--violet)">1–9</div><div class="l">encendidos por urgencia por año (promedio 4,6)</div></div>
+  <div class="stat"><div class="v" style="color:var(--bad)">5–9 días</div><div class="l">espera media del material, según el año</div></div>
+</div>
+<div class="grid2" style="margin-top:6px">
+  <div class="box warn" style="margin:0"><h3>Un año "malo": el de la animación</h3>La semilla 1, la de la animación, tiene <b>9 encendidos por urgencia</b> en su primer año: tantos como el peor de los 30 años del estudio (el promedio es 4,6). Por eso en la animación aparecen dos urgentes en las primeras dos semanas. No está mal: es un año con mala suerte.</div>
+  <div class="box good" style="margin:0"><h3>Por qué importa</h3>Si mirábamos un solo año, el resultado dependía de la suerte. Con 30 años vemos que <b>E3 ahorra en los 30</b>: entre <b>11,4 M$</b> el peor año y <b>26,0 M$</b> el mejor. Y que E1 y E2 salen más caros en 25 y 29 de los 30 años.</div>
+</div>
+<div class="box say"><h3>Para decir</h3>"Simulamos 30 años distintos para que la conclusión no dependa de un año bueno o malo. Y el ahorro de apagar enseguida aparece en los 30."</div>
+
+<!-- ======================================================= 7 -->
+<div class="sec c7"><div class="n">7</div><h2>El mejor escenario y lo que gana la empresa</h2></div>
+<table class="t">
+  <tr><th>Contra la regla actual (por año)</th><th class="r">Costo</th><th class="r">Espera del material</th></tr>
+  <tr><td><b>E1</b> umbral 45</td><td class="r" style="color:var(--bad)">+4,8 M$ más caro</td><td class="r" style="color:var(--ok)">2,6 días menos</td></tr>
+  <tr><td><b>E2</b> espera máxima 15 días</td><td class="r" style="color:var(--bad)">+2,9 M$ más caro</td><td class="r" style="color:var(--ok)">1,0 día menos</td></tr>
+  <tr class="hl"><td><b>E3</b> apagar enseguida</td><td class="r" style="color:var(--ok)"><b>−18,0 M$ más barato</b></td><td class="r" style="color:var(--bad)">1,1 días más</td></tr>
+</table>
+<div class="grid4" style="margin-top:8px">
+  <div class="stat"><div class="v" style="color:var(--ok)">≈ 18 M$</div><div class="l">ahorro por año (−21,5 % del costo); ≈ 1,5 M$ por mes</div></div>
+  <div class="stat"><div class="v" style="color:var(--hot)">≈ 850 h</div><div class="l">por año de horno caliente sin nada adentro que se eliminan (≈ 35 días)</div></div>
+  <div class="stat"><div class="v" style="color:var(--blue)">≈ 82.500</div><div class="l">kWh de luz menos por año</div></div>
+  <div class="stat"><div class="v" style="color:var(--amber)">≈ 4.600 kg</div><div class="l">de gas (GLP) menos por año</div></div>
+</div>
+<div class="box good"><h3>Recomendación</h3><b>Mantener el umbral de 79 ULI y apagar el horno apenas se vacía la cola.</b> Lo que más cuesta no es esperar más o menos cajones: es tener el horno caliente sin nada adentro (unos <b>22 mil pesos por hora</b> de luz y gas). Bajar el umbral o poner una espera máxima hace esperar menos al material, pero cuesta más; solo convendría si entregar más rápido le hiciera ganar a la empresa más de 3 a 5 millones por año.</div>
+<div class="box"><h3>¿Y cómo sabemos que el modelo se parece al horno real?</h3>Lo comparamos con el registro real del mismo año: reproduce las <b>toneladas por mes</b>, la <b>duración de las campañas</b>, la <b>espera</b> y el <b>consumo de luz</b> (4 de 6 medidas dentro de la tolerancia). Prende un poco más seguido que la realidad, igual en todas las reglas, así que no cambia la comparación.</div>
+
+</body>
+</html>
