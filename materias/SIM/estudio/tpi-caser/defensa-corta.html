@@ -136,10 +136,24 @@ promedio: −18,0 M$ por año</div>
     Con las 30 diferencias se hace el <b>test de medias apareado</b>: da que el ahorro está entre <b>16,2 y 19,8 M$</b> por año, y no incluye el cero. O sea, <b>el ahorro es real</b>, no casualidad.
   </div>
 </div>
+<div class="box crio" style="break-inside:avoid">
+  <h3>El recorrido completo: de 1 año real a 120 corridas</h3>
+  <div class="grid3" style="margin-top:4px">
+    <div><b>1. Datos reales.</b> Las <b>llegadas</b> salen del último año (52 semanas de lavado, ago 2025 – ago 2026) y el <b>peso</b>, de esas mismas ULI. La <b>chance de urgencia</b> y la validación usan todo el registro 2024–2026 (11.353 ULI). Los <b>costos</b>, de las facturas.</div>
+    <div><b>2. Un año simulado.</b> Cada lunes se sortea <b>una semana real completa</b> y se repite lo que llegó cada día (con reposición: una semana puede salir varias veces). Cada ULI sortea su <b>hora</b> (entre las 6 y las 22), su <b>peso</b> y si es <b>urgente</b>. Se descartan los primeros 90 días (el modelo arranca vacío) y se miden 365.</div>
+    <div><b>3. Las 120 corridas.</b> Cada semilla es un año, y a ese mismo año se le aplican las cuatro reglas: 4 resultados por semilla. Después se compara <b>dentro de cada año</b>.</div>
+  </div>
+  <div class="mono">30 semillas (30 años)  ×  4 escenarios (E0, E1, E2, E3)  =  120 corridas
+
+año 7:  E1 − E0,  E2 − E0,  E3 − E0
+año 8:  E1 − E0,  E2 − E0,  E3 − E0
+ ...
+→ 30 diferencias por alternativa → 3 tests de medias (E1, E2 y E3 contra E0)</div>
+  <b>Son 120 corridas, pero 30 años:</b> los cuatro escenarios no viven años distintos, viven los mismos 30. La única diferencia entre E0 y E3 en el año 7 es la regla.
+</div>
 <div class="box say"><h3>Y en la animación</h3>La animación usa siempre la <b>semilla 1</b>: por eso cada vez que la corrés pasa exactamente lo mismo en las mismas fechas (la urgente llega siempre en la ULI 24). Es un solo año de ejemplo; los resultados salen de los 30.</div>
 
 <!-- ======================================================= 6 -->
-<div class="part"></div>
 <div class="sec c6"><div class="n">6</div><h2>Años buenos y años malos</h2></div>
 <p>Como cada semilla es un año distinto, hay años con mucho trabajo y años flojos. Eso es justamente lo que queremos capturar: <b>la variabilidad</b>.</p>
 <div class="grid4">
