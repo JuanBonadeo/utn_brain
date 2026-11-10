@@ -1,0 +1,1035 @@
+<title>Simulacro de teoría IO</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: una sola columna tipo hoja de examen sobre papel cuadriculado; arriba la grilla de respuestas como en una planilla de multiple choice. */
+:root{
+  --paper:#f5f7fb; --sheet:#ffffff; --ink:#18213a; --muted:#5a6582; --line:#d5dbe8; --grid:#e6ebf4;
+  --accent:#2445c4; --accent-soft:#e3e9fd; --ok:#1d7448; --ok-soft:#dff3e8; --bad:#b0281f; --bad-soft:#fbe3e0;
+  --flag:#b7791f; --flag-soft:#fbefd6;
+  --f-display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-mono:"JetBrains Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0e1320; --sheet:#151c2d; --ink:#e3e8f5; --muted:#9aa4bf; --line:#2a3550; --grid:#161e30;
+  --accent:#86a0ff; --accent-soft:#1f2a4d; --ok:#55c98f; --ok-soft:#143326; --bad:#ff8378; --bad-soft:#3a1a1a;
+  --flag:#f0b85a; --flag-soft:#3a2c12; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --paper:#0e1320; --sheet:#151c2d; --ink:#e3e8f5; --muted:#9aa4bf; --line:#2a3550; --grid:#161e30;
+  --accent:#86a0ff; --accent-soft:#1f2a4d; --ok:#55c98f; --ok-soft:#143326; --bad:#ff8378; --bad-soft:#3a1a1a;
+  --flag:#f0b85a; --flag-soft:#3a2c12; color-scheme:dark;}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px;}
+.wrap{max-width:760px;margin:0 auto;padding-block:28px 64px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex;flex-direction:column;gap:20px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:clamp(28px,5vw,40px);font-weight:800;letter-spacing:-.01em}
+h2{font-size:22px;font-weight:800}
+h3{font-size:17px;font-weight:600}
+p{margin:0}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.muted{color:var(--muted)}
+.sheet{background:var(--sheet);border:1px solid var(--line);border-radius:10px;padding:20px}
+.stack{display:flex;flex-direction:column;gap:12px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,.opt:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.btn{border:1px solid var(--line);background:var(--sheet);border-radius:8px;padding:9px 14px;font-weight:700}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--sheet)}
+.btn.ghost{background:transparent}
+.btn[disabled]{opacity:.45;cursor:default}
+
+/* home */
+.modes{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+.mode{display:flex;flex-direction:column;gap:8px;text-align:left;border:1px solid var(--line);background:var(--sheet);border-radius:10px;padding:16px}
+.mode:hover{border-color:var(--accent)}
+.mode[disabled]{opacity:.55;cursor:default}
+.mode[disabled]:hover{border-color:var(--line)}
+.mode .k{font-family:var(--f-mono);font-size:12px;color:var(--accent);letter-spacing:.06em;text-transform:uppercase}
+.mode p{font-size:14px;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);background:var(--sheet);border-radius:999px;padding:6px 12px;font-size:14px;display:inline-flex;gap:8px;align-items:center}
+.chip[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent)}
+.chip .n{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+select{font:inherit;color:var(--ink);background:var(--sheet);border:1px solid var(--line);border-radius:8px;padding:7px 10px}
+.tip{border-left:3px solid var(--accent);padding:4px 0 4px 14px;font-size:15px}
+.statgrid{display:grid;grid-template-columns:1fr auto auto;gap:4px 16px;font-size:14px;font-variant-numeric:tabular-nums}
+.statgrid .h{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.bar{height:6px;border-radius:3px;background:var(--line);overflow:hidden;align-self:center;min-width:80px}
+.bar i{display:block;height:100%;background:var(--accent)}
+
+/* quiz */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);padding-block:10px;display:flex;flex-direction:column;gap:10px;border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+.topline{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.timer{font-family:var(--f-mono);font-size:15px;font-variant-numeric:tabular-nums}
+.timer.low{color:var(--bad)}
+.grid{display:flex;flex-wrap:wrap;gap:6px}
+.cell{width:32px;height:32px;border-radius:50%;border:1.5px solid var(--line);background:var(--sheet);font-family:var(--f-mono);font-size:12px;display:grid;place-items:center;position:relative}
+.cell.ans{border-color:var(--accent);background:var(--accent-soft)}
+.cell.cur{outline:2px solid var(--ink);outline-offset:1px}
+.cell.flag::after{content:"";position:absolute;top:-2px;right:-2px;width:9px;height:9px;border-radius:50%;background:var(--flag)}
+.cell.ok{border-color:var(--ok);background:var(--ok-soft)}
+.cell.bad{border-color:var(--bad);background:var(--bad-soft)}
+.qhead{display:flex;justify-content:space-between;gap:10px;align-items:baseline;flex-wrap:wrap}
+.tag{font-family:var(--f-mono);font-size:12px;color:var(--muted);letter-spacing:.04em}
+.stem{font-size:18px;line-height:1.5}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{display:grid;grid-template-columns:34px 1fr auto;gap:12px;align-items:start;border:1px solid var(--line);border-radius:8px;padding:10px 10px 10px 12px;background:var(--sheet);text-align:left;width:100%}
+.opt:hover{border-color:var(--accent)}
+.opt .b{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--muted);display:grid;place-items:center;font-family:var(--f-mono);font-weight:600;font-size:14px}
+.opt .t{min-width:0;padding-top:3px}
+.opt.sel{border-color:var(--accent);background:var(--accent-soft)}
+.opt.sel .b{background:var(--accent);border-color:var(--accent);color:var(--sheet)}
+.opt.struck .t{text-decoration:line-through;color:var(--muted)}
+.opt.struck{opacity:.7}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.opt.right .b{background:var(--ok);border-color:var(--ok);color:var(--sheet)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.opt.wrong .b{background:var(--bad);border-color:var(--bad);color:var(--sheet)}
+.x{border:none;background:transparent;color:var(--muted);font-size:12px;font-family:var(--f-mono);padding:4px 6px;border-radius:6px}
+.x:hover{color:var(--ink);background:var(--grid)}
+.pairline{height:0;border-top:1px dashed var(--line);margin:2px 8px}
+.expl{border-radius:8px;padding:14px 16px;font-size:15px;display:flex;flex-direction:column;gap:6px}
+.expl.ok{background:var(--ok-soft);border:1px solid var(--ok)}
+.expl.bad{background:var(--bad-soft);border:1px solid var(--bad)}
+.expl.neutral{background:var(--accent-soft);border:1px solid var(--accent)}
+.expl strong{font-family:var(--f-display)}
+.nav{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.flagbtn[aria-pressed="true"]{border-color:var(--flag);background:var(--flag-soft)}
+.kbd{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+
+/* results */
+.score{font-family:var(--f-display);font-weight:800;font-size:64px;line-height:1;font-variant-numeric:tabular-nums}
+.score small{font-size:24px;color:var(--muted)}
+.rev{display:flex;flex-direction:column;gap:14px}
+.revitem{border-left:3px solid var(--line);padding:2px 0 2px 14px;display:flex;flex-direction:column;gap:6px}
+.revitem.ok{border-color:var(--ok)}
+.revitem.bad{border-color:var(--bad)}
+.revitem .ans{font-size:14px}
+.pill{display:inline-block;font-family:var(--f-mono);font-size:11px;padding:2px 8px;border-radius:999px;border:1px solid currentColor}
+.pill.ok{color:var(--ok)} .pill.bad{color:var(--bad)} .pill.flag{color:var(--flag)}
+sub,sup{font-size:.72em}
+@media (max-width:480px){.stem{font-size:17px}.opt{grid-template-columns:30px 1fr auto;gap:8px}.score{font-size:52px}}
+@media (prefers-reduced-motion:no-preference){.opt,.btn,.chip,.cell{transition:border-color .12s,background-color .12s}}
+</style>
+
+<div class="wrap" id="app"></div>
+
+<script>
+/* ---------- Banco de preguntas ----------
+   o: cuatro opciones agrupadas en dos pares (0,1) y (2,3), cada par casi idéntico.
+   e: quinta opción opcional (siempre queda última). a: índice correcto (0-4).
+   x: explicación (por qué la correcta, y en qué falla su gemela). */
+const TOPICS = [
+  ["GRA","Método gráfico y formas"],["CBA","Conceptos básicos"],["SPX","Simplex"],
+  ["SEN","Sensibilidad"],["DUA","Dualidad"],["TTA","Transporte y asignación"],
+  ["ENT","Entera y mixta"],["RED","Redes"],["STK","Stock"]];
+const TOPIC_NAME = Object.fromEntries(TOPICS);
+const SIM_WEIGHTS = {GRA:1,CBA:2,SPX:4,SEN:3,DUA:2,TTA:2,ENT:1,RED:1,STK:4}; // = 20
+
+const BANK = [
+/* ===== GRA ===== */
+{id:"gra1",t:"GRA",q:"En el método gráfico, el PL tiene soluciones óptimas alternativas cuando…",
+ o:["la recta de la función objetivo es paralela a una restricción activa en el óptimo, y el óptimo se alcanza en todo el segmento que une los dos vértices",
+    "la recta de la función objetivo es paralela a alguna restricción del sistema, y el óptimo se alcanza en todo el segmento que une los dos vértices",
+    "la recta de la función objetivo es perpendicular a una restricción activa, y el óptimo se alcanza sólo en los dos vértices extremos del segmento",
+    "la recta de la función objetivo es perpendicular a una restricción activa, y el óptimo se alcanza en todo el segmento que une los dos vértices"],a:0,
+ x:"Tiene que ser paralela a la restricción que forma el lado óptimo, o sea a una activa. Ser paralela a cualquier restricción no alcanza: puede ser una pasiva o un lado que queda del lado malo de la región. Y el óptimo vale en todo el segmento, no sólo en los extremos (Teorema 3)."},
+{id:"gra2",t:"GRA",q:"La región factible de un PL es no acotada. Entonces…",
+ o:["el problema tiene necesariamente solución no acotada, porque la función objetivo puede crecer sin límite dentro de la región",
+    "el problema tiene necesariamente solución no acotada, salvo que la función objetivo sea paralela a una de las restricciones",
+    "el problema puede tener óptimo finito; la solución es no acotada sólo si la función objetivo mejora indefinidamente en la dirección en que se abre la región",
+    "el problema puede tener óptimo finito; la solución es no acotada sólo si la región se abre en la dirección de uno de los ejes x₁ o x₂"],a:2,
+ x:"Región no acotada no es lo mismo que solución no acotada. Un Min con restricciones ≥ suele tener la región abierta y óptimo finito. Lo que importa es si la función mejora hacia donde se abre la región, en cualquier dirección, no sólo la de los ejes."},
+{id:"gra3",t:"GRA",q:"Sobre los dos tipos de restricción redundante:",
+ o:["Geométrica: la restricción no toca la región factible. Analítica: toca la región en un vértice y es combinación lineal de las restricciones que pasan por ese vértice",
+    "Geométrica: toca la región en un vértice y es combinación lineal de las restricciones que pasan por él. Analítica: no toca la región factible",
+    "Geométrica: la restricción no toca la región factible. Analítica: si se la elimina, la región factible se agranda",
+    "Geométrica: si se la elimina, la región factible se agranda. Analítica: toca la región en un vértice y es combinación lineal de las que pasan por él"],a:0,
+ x:"Una redundante, por definición, deja la región igual si se la quita. Que la región se agrande es la definición de restricción necesaria. La analítica toca un vértice y se puede escribir con las otras que pasan por ahí."},
+{id:"gra4",t:"GRA",q:"Una restricción es activa (obligatoria) en el óptimo. ¿Qué se puede afirmar con seguridad?",
+ o:["Se cumple con igualdad y su holgura o exceso vale cero",
+    "Se cumple con igualdad y su holgura o exceso es positivo",
+    "Se cumple con igualdad y su valor implícito es necesariamente distinto de cero",
+    "Se cumple con desigualdad estricta y su valor implícito es cero"],a:0,
+ x:"Activa implica holgura o exceso igual a 0. Lo que no se puede asegurar es que su valor implícito sea distinto de cero: con degeneración o redundancia analítica, una restricción activa puede tener precio sombra 0. La implicación segura es la inversa: si u ≠ 0, la restricción es activa."},
+{id:"gra5",t:"GRA",q:"Características de un PL en forma estándar:",
+ o:["La función objetivo puede ser de máximo o de mínimo; todas las restricciones son ecuaciones; todos los b_i ≥ 0; todas las variables ≥ 0",
+    "La función objetivo debe ser de máximo; todas las restricciones son ecuaciones; todos los b_i ≥ 0; todas las variables ≥ 0",
+    "La función objetivo puede ser de máximo o de mínimo; todas las restricciones son ≤; todos los b_i ≥ 0; todas las variables ≥ 0",
+    "La función objetivo puede ser de máximo o de mínimo; todas las restricciones son ecuaciones; los b_i pueden tener cualquier signo; todas las variables ≥ 0"],a:0,
+ x:"La forma estándar admite Max o Min. Que todas sean ≤ describe la forma canónica de un Max. Los b_i tienen que ser ≥ 0 para que la base inicial B = I dé una solución factible."},
+{id:"gra6",t:"GRA",q:"¿Para qué se lleva el modelo a la forma estándar?",
+ o:["Para aplicar el simplex, que necesita las restricciones como ecuaciones y una base inicial B = I que dé una solución básica factible",
+    "Para aplicar el simplex, que necesita las restricciones como ecuaciones y una base inicial cualquiera, aunque su solución no sea factible",
+    "Para poder graficar la región factible, que sólo se dibuja a partir de ecuaciones",
+    "Para poder construir el dual, que sólo existe para modelos en forma estándar"],a:0,
+ x:"El simplex arranca de una solución básica factible. Con B = I y b ≥ 0, la primera solución es x_B = b, que es factible. Por eso se agregan holguras, excesos y ficticias."},
+
+/* ===== CBA ===== */
+{id:"cba1",t:"CBA",q:"El teorema de equivalencia de la PL dice que…",
+ o:["x es punto extremo del conjunto de soluciones factibles si y sólo si x es una solución básica factible",
+    "si x es una solución básica factible, entonces es punto extremo; la recíproca no vale en general",
+    "x es punto extremo del conjunto de soluciones factibles si y sólo si x es una solución óptima",
+    "si x es solución óptima, entonces es punto extremo; la recíproca no vale en general"],a:0,
+ x:"Es un «si y sólo si» que une la geometría (vértice) con el álgebra (SBF). Las opciones c y d lo mezclan con la ubicación del óptimo, y d además es falsa: con óptimos alternativos hay óptimos en el medio de una arista."},
+{id:"cba2",t:"CBA",q:"La función objetivo de un PL con óptimo finito…",
+ o:["alcanza el óptimo en al menos un punto extremo; si lo alcanza en más de uno, también en toda combinación lineal convexa de ellos",
+    "alcanza el óptimo en al menos un punto extremo; si lo alcanza en más de uno, también en toda combinación lineal de ellos",
+    "alcanza el óptimo en exactamente un punto extremo, que es la solución básica factible óptima",
+    "alcanza el óptimo en un punto interior de la región cuando ésta es acotada"],a:0,
+ x:"Combinación convexa: coeficientes entre 0 y 1 que suman 1, es decir, el segmento entre los vértices. Una combinación lineal cualquiera se sale del segmento y hasta de la región."},
+{id:"cba3",t:"CBA",q:"¿Cuántos puntos extremos puede tener, como máximo, un conjunto convexo? ¿Y la región factible de un PL con n variables y m restricciones (forma estándar)?",
+ o:["Un conjunto convexo cualquiera no tiene cota (puede tener infinitos); la región factible de un PL tiene a lo sumo C(n, m)",
+    "Un conjunto convexo cualquiera no tiene cota (puede tener infinitos); la región factible de un PL tiene a lo sumo n·m",
+    "Ambos tienen a lo sumo C(n, m) puntos extremos",
+    "Ambos pueden tener infinitos puntos extremos; por eso el simplex no garantiza terminar"],a:0,
+ x:"Un círculo es convexo y tiene infinitos puntos extremos. En un PL cada vértice es una SBF, y hay a lo sumo C(n, m) = n! / (m!·(n−m)!) formas de elegir las m básicas."},
+{id:"cba4",t:"CBA",q:"Una solución básica factible es degenerada cuando…",
+ o:["alguna variable básica vale cero, es decir, tiene menos de m componentes estrictamente positivas",
+    "alguna variable básica vale cero, es decir, tiene menos de n − m componentes estrictamente positivas",
+    "alguna variable no básica tiene c_j − z_j = 0 en la tabla óptima",
+    "alguna variable básica tiene c_j − z_j = 0 en la tabla óptima"],a:0,
+ x:"Con m restricciones hay m básicas; si alguna vale 0, quedan menos de m positivas. La versión con n − m es un error que aparece en un material de circulación. La c es la señal de óptimos alternativos, y la d pasa siempre: toda básica tiene c_j − z_j = 0."},
+{id:"cba5",t:"CBA",q:"¿Cuál de estas afirmaciones sobre conjuntos convexos es correcta?",
+ o:["El conjunto vacío, un único punto, un semiespacio y un hiperplano son conjuntos convexos",
+    "Un único punto, un semiespacio y un hiperplano son convexos, pero el conjunto vacío no lo es",
+    "La unión de dos conjuntos convexos es siempre un conjunto convexo",
+    "La intersección de dos conjuntos convexos puede no ser convexa"],a:0,
+ x:"El vacío y el punto cumplen la definición de forma trivial. La región factible es convexa porque es una intersección de semiespacios, y la intersección conserva la convexidad. La unión no."},
+{id:"cba6",t:"CBA",q:"¿Qué inconveniente tiene la solución conceptual del PL?",
+ o:["Recorre todas las bases posibles, y su cantidad C(n, m) crece de forma combinatoria: se vuelve intratable en problemas reales",
+    "Recorre todas las bases posibles, y su cantidad C(n, m) crece linealmente con n: es lenta pero tratable",
+    "Recorre sólo bases adyacentes, y por eso puede quedar atrapada en un óptimo local",
+    "Recorre sólo bases adyacentes, y por eso puede ciclar si hay degeneración"],a:0,
+ x:"Con 20 variables y 10 restricciones ya son 184.756 bases. El simplex lo evita recorriendo sólo bases que mejoran z. En PL no hay óptimos locales que no sean globales, por la convexidad."},
+{id:"cba7",t:"CBA",q:"¿Por qué, aunque la región factible tenga infinitos puntos, alcanza con mirar un número finito para hallar el óptimo?",
+ o:["Porque el óptimo se alcanza en al menos un punto extremo, cada punto extremo es una SBF, y las SBF son a lo sumo C(n, m)",
+    "Porque el óptimo se alcanza en al menos un punto extremo, cada punto extremo es una SBF, y las SBF son exactamente C(n, m)",
+    "Porque la región factible es siempre acotada, y un conjunto acotado tiene finitos puntos",
+    "Porque la región factible es siempre acotada, y la función objetivo es continua"],a:0,
+ x:"A lo sumo, no exactamente: muchas de las C(n, m) elecciones dan soluciones no factibles o matrices singulares. Y la región no tiene por qué ser acotada."},
+
+/* ===== SPX ===== */
+{id:"spx1",t:"SPX",q:"Las variables ficticias (artificiales)…",
+ o:["se agregan en las restricciones ≥ y = para obtener la base inicial B = I; no tienen significado real y, si el problema tiene solución, deben valer cero",
+    "se agregan en las restricciones ≤ y = para obtener la base inicial B = I; no tienen significado real y, si el problema tiene solución, deben valer cero",
+    "se agregan en las restricciones ≥ y = para obtener la base inicial B = I; representan el exceso sobre el mínimo requerido",
+    "se agregan en las restricciones ≥ para medir cuánto se supera el requerimiento; pueden quedar positivas en el óptimo"],a:0,
+ x:"Las ≤ ya traen su holgura con un 1 en la identidad. Las ≥ (cuyo exceso entra con −1) y las = no, y ahí va la ficticia. El exceso es otra variable y sí tiene significado; la ficticia no tiene ninguno."},
+{id:"spx2",t:"SPX",q:"En el método de penalización (Gran M), la variable ficticia entra a la función objetivo con coeficiente…",
+ o:["−M en un Max y +M en un Min, para que el simplex la saque de la base",
+    "+M en un Max y −M en un Min, para que el simplex la saque de la base",
+    "−M en un Max y +M en un Min, para que el simplex la mantenga en la base hasta el final",
+    "0 en ambos casos; se la elimina recién al llegar al óptimo"],a:0,
+ x:"«MAX −, MIN +»: se la castiga para que cualquier solución con la ficticia positiva sea muy mala. Con +M en un Max la estarías premiando."},
+{id:"spx3",t:"SPX",q:"Se verifica la condición de optimización y en la base quedó una variable ficticia con valor cero. Entonces:",
+ o:["Se encontró el óptimo, y es una solución degenerada",
+    "Se encontró el óptimo, y es no degenerada porque la ficticia no aporta a la función objetivo",
+    "El problema es no factible, porque hay una ficticia en la base",
+    "El problema es no factible, salvo que la ficticia tenga c_j − z_j = 0"],a:0,
+ x:"Sólo hay no factibilidad si la ficticia básica tiene valor positivo. Con valor 0 la solución es factible, pero hay una básica en cero, y eso la hace degenerada."},
+{id:"spx4",t:"SPX",q:"Se verifica la condición de optimización y en la base quedó una variable ficticia con valor 3. Entonces:",
+ o:["El problema es no factible: la región factible es vacía",
+    "El problema es no factible sólo si M no se tomó suficientemente grande",
+    "Se encontró el óptimo, pero es degenerado",
+    "Se encontró el óptimo, y la ficticia indica soluciones alternativas"],e:"Ninguna de las anteriores",a:0,
+ x:"Si con la penalización el simplex no logró sacarla, no existe solución que cumpla todas las restricciones. M se toma tan grande como haga falta, así que la b no es una salida."},
+{id:"spx5",t:"SPX",q:"Si en una iteración del simplex aparece degeneración, ¿la solución final será degenerada?",
+ o:["No necesariamente: la degeneración puede ser transitoria; la solución final es degenerada sólo si en el óptimo queda alguna básica con valor cero",
+    "No necesariamente: la degeneración desaparece siempre en la iteración siguiente, porque la básica en cero sale de la base",
+    "Sí: una vez que una básica toma valor cero, la solución es degenerada hasta el óptimo",
+    "Sí, salvo que se use la regla de desempate del menor subíndice"],a:0,
+ x:"Se sale de la degeneración cuando, en una iteración posterior, el θ mínimo es único y positivo. Pero no siempre en la siguiente: la básica en cero sólo sale si tiene y_ij > 0 en la columna que entra."},
+{id:"spx6",t:"SPX",q:"En el simplex, la degeneración se origina cuando…",
+ o:["el mínimo de la prueba del cociente θ_j = min{x_i / y_ij : y_ij > 0} se repite en dos o más filas",
+    "el máximo c_j − z_j positivo (en un Max) se repite en dos o más columnas",
+    "todos los y_ij de la columna que entra son ≤ 0",
+    "una variable no básica tiene c_j − z_j = 0 en la tabla óptima"],a:0,
+ x:"Con empate en θ sale una sola variable, y las otras quedan básicas con valor 0. Un empate en la entrada no genera nada especial: se elige por el menor subíndice. La c es la señal de no acotada y la d, de alternativas."},
+{id:"spx7",t:"SPX",q:"El coeficiente de sustitución de la no básica x_j respecto de la básica x_i…",
+ o:["vale ∂x_i/∂x_j = −y_ij: si y_ij > 0, la básica x_i disminuye cuando entra x_j",
+    "vale ∂x_i/∂x_j = y_ij: si y_ij > 0, la básica x_i aumenta cuando entra x_j",
+    "vale ∂z/∂x_j = c_j − z_j: indica cuánto cambia el funcional por unidad de x_j que entra",
+    "vale ∂z/∂b_i = u_i: indica cuánto cambia el funcional por unidad de recurso"],a:0,
+ x:"De x_B = B⁻¹b − Σ Y_j·x_j sale ∂x_B/∂x_j = −Y_j. Es la tasa de sustitución física: cuánto de cada básica se resigna para hacer lugar a x_j. La c es el costo reducido y la d, el valor implícito."},
+{id:"spx8",t:"SPX",q:"En una tabla de un Max, una variable tiene c_j − z_j = 0. ¿Qué se puede concluir?",
+ o:["Si la tabla es óptima y la variable es no básica, hay soluciones óptimas alternativas",
+    "Si la tabla es óptima y la variable es básica, hay soluciones óptimas alternativas",
+    "Si la variable es no básica, hay soluciones alternativas aunque otra no básica tenga c_j − z_j > 0",
+    "Si la variable es no básica, la solución es degenerada"],a:0,
+ x:"Toda básica tiene c_j − z_j = 0, así que eso no dice nada. En una tabla que todavía no es óptima, ese cero tampoco anuncia alternativas. Degenerada es otra cosa: una básica que vale 0."},
+{id:"spx9",t:"SPX",q:"El efecto espejo consiste en que…",
+ o:["la columna de cada variable de exceso es igual a la de su ficticia multiplicada por −1, y lo mismo pasa con sus z_j; se da en las restricciones ≥",
+    "la columna de cada variable de exceso es igual a la de su ficticia multiplicada por −1, pero sus z_j son iguales; se da en las restricciones ≥",
+    "la columna de cada variable de holgura es igual a la de su ficticia multiplicada por −1; se da en las restricciones ≤",
+    "la columna de cada variable de holgura es igual a la de su ficticia; se da en las restricciones ="],a:0,
+ x:"En una ≥ el exceso entra con −1 y la ficticia con +1 en la misma fila, y esa relación se mantiene en toda la tabla, también en los z_j. Sirve para controlar y para prescindir de la columna de la ficticia, que se recupera cambiando el signo. Las ≤ no llevan ficticia."},
+{id:"spx10",t:"SPX",q:"La condición de factibilidad del simplex elige la variable que sale con…",
+ o:["θ_j = min{x_i / y_ij : y_ij > 0}; sale la básica de la fila del mínimo, que queda en cero",
+    "θ_j = min{x_i / y_ij : y_ij ≠ 0}; sale la básica de la fila del mínimo, que queda en cero",
+    "θ_j = max{x_i / y_ij : y_ij > 0}; sale la básica de la fila del máximo, que queda en cero",
+    "θ_j = max{x_i / y_ij : y_ij ≠ 0}; sale la básica de la fila del máximo"],a:0,
+ x:"Si y_ij ≤ 0, la básica no baja al entrar x_j y nunca limita. Dividir por un negativo daría un θ negativo y una solución no factible. Se toma el mínimo porque es la primera básica que llega a cero."},
+{id:"spx11",t:"SPX",q:"Al cambiar de base, el nuevo valor de la función objetivo es…",
+ o:["z = z₀ + θ_j·(c_j − z_j); en un Max el óptimo se alcanza cuando todos los c_j − z_j ≤ 0",
+    "z = z₀ + θ_j·(c_j − z_j); en un Max el óptimo se alcanza cuando todos los c_j − z_j ≥ 0",
+    "z = z₀ − θ_j·(c_j − z_j); en un Max el óptimo se alcanza cuando todos los c_j − z_j ≤ 0",
+    "z = z₀ + (c_j − z_j) / θ_j; en un Max el óptimo se alcanza cuando todos los c_j − z_j ≤ 0"],a:0,
+ x:"Como θ_j ≥ 0, en un Max z mejora sólo si c_j − z_j > 0. Cuando ninguno es positivo no hay entrada que mejore, y la tabla es óptima. En un Min es al revés: óptimo con todos ≥ 0."},
+{id:"spx12",t:"SPX",q:"En la tabla simplex de un Max, la solución es no acotada cuando…",
+ o:["existe un c_j − z_j > 0 y todos los y_ij de esa columna son ≤ 0",
+    "existe un c_j − z_j > 0 y todos los y_ij de esa columna son < 0",
+    "todos los c_j − z_j son ≤ 0 y alguna columna tiene todos sus y_ij ≤ 0",
+    "una no básica tiene c_j − z_j = 0 y su columna tiene todos los y_ij ≤ 0"],a:0,
+ x:"Lo que importa es que ningún y_ij sea positivo, ceros incluidos: entonces ninguna básica limita a θ y x_j crece sin fin mejorando z. «Todos < 0» deja afuera el caso con ceros. Si todos los c_j − z_j son ≤ 0, la tabla ya es óptima. Con c_j − z_j = 0, z no mejora."},
+{id:"spx13",t:"SPX",q:"En una iteración la solución es degenerada y debe entrar A_j, con c_j − z_j > 0 y al menos un y_ij > 0. ¿Aumenta z?",
+ o:["No necesariamente: si el mínimo θ_j se da en una fila cuya básica vale cero, θ_j = 0 y z no cambia; si las bases se repiten, el método puede ciclar",
+    "No necesariamente: si el mínimo θ_j se da en una fila cuya básica vale cero, θ_j = 0 y z disminuye; el método puede ciclar",
+    "Sí, siempre: c_j − z_j > 0 garantiza que z aumente estrictamente",
+    "Sí, siempre que el y_ij > 0 esté en la fila de la básica nula"],a:0,
+ x:"z' = z + θ_j·(c_j − z_j). Con θ_j = 0, z queda igual, y nunca empeora. Si la fila de la básica nula tiene y_ij > 0, justamente esa fila da θ = 0: la d está dada vuelta."},
+{id:"spx14",t:"SPX",q:"En la tabla óptima, una variable básica asume el valor 1. ¿Qué tipo de solución tiene el problema?",
+ o:["Con ese solo dato no se puede afirmar que sea no degenerada: hace falta que las m básicas sean positivas; esa variable, en particular, no la vuelve degenerada",
+    "No degenerada, porque una básica positiva alcanza para que la solución sea no degenerada",
+    "Degenerada, porque las básicas que valen 1 provienen de la identidad",
+    "Con soluciones alternativas, porque un valor entero en la base indica un óptimo sobre una arista"],a:0,
+ x:"Degenerada quiere decir que alguna básica vale 0, y que una valga 1 no dice nada de las otras. El PDF de preguntas frecuentes responde «no degenerada», pero sólo vale si el enunciado agrega que todas las básicas son positivas. Si en el examen aparece esa aclaración, la respuesta es «no degenerada»."},
+{id:"spx15",t:"SPX",q:"En un Min, en lugar de hacer entrar la variable con el c_j − z_j más negativo, se hace entrar otra con c_j − z_j negativo. ¿Qué pasa?",
+ o:["Se llega igual al óptimo; el más negativo da la mayor mejora por unidad que entra, aunque no necesariamente la mayor mejora total de la iteración",
+    "Se llega igual al óptimo, pero siempre con más iteraciones, porque el más negativo garantiza la mayor mejora total en cada iteración",
+    "Se pierde la factibilidad de la solución en la iteración siguiente",
+    "W empeora en esa iteración, aunque después se recupera"],a:0,
+ x:"La mejora total es θ_j·(c_j − z_j), y el criterio sólo mira el segundo factor. Cualquier c_j − z_j < 0 mejora W, o lo deja igual si θ = 0. La factibilidad la cuida la prueba del cociente, no la elección de la variable que entra."},
+{id:"spx16",t:"SPX",q:"¿Dónde se lee B⁻¹ en la tabla óptima?",
+ o:["Debajo de las columnas que formaban la identidad en la tabla inicial; si en una ≥ se borró la ficticia, sirve la columna del exceso con el signo cambiado",
+    "Debajo de las columnas que formaban la identidad en la tabla inicial; si en una ≥ se borró la ficticia, sirve la columna del exceso tal como está",
+    "Debajo de las columnas de las variables básicas de la tabla óptima",
+    "En la columna X de valores de las básicas"],a:0,
+ x:"Toda la tabla es B⁻¹ aplicada a los datos originales: donde al principio estaba I, ahora está B⁻¹. Debajo de las básicas actuales hay columnas unitarias. Por el efecto espejo, el exceso es la ficticia cambiada de signo."},
+{id:"spx17",t:"SPX",q:"El costo reducido c_j − z_j de una variable no básica, en la tabla óptima de un Max, indica…",
+ o:["cuánto tendría que aumentar c_j para que x_j tenga chance de integrar una nueva solución óptima",
+    "cuánto tendría que disminuir c_j para que x_j tenga chance de integrar una nueva solución óptima",
+    "cuánto aumenta z por cada unidad adicional del recurso asociado a x_j",
+    "cuánto vale x_j en la solución óptima"],a:0,
+ x:"En el óptimo de un Max el costo reducido de una no básica es ≤ 0. Si c_j sube más que |c_j − z_j|, se vuelve positivo y x_j entra. La c describe un precio sombra, que es de una restricción y no de una variable."},
+{id:"spx18",t:"SPX",q:"En la tabla simplex, z_j = c_B·Y_j representa…",
+ o:["lo que deja de aportar a la función objetivo la reducción de las básicas cuando entra una unidad de x_j",
+    "lo que aporta a la función objetivo cada unidad de x_j que entra, sin considerar las básicas",
+    "el valor de la variable básica de la fila j",
+    "el valor de la función objetivo cuando x_j vale uno"],a:0,
+ x:"Al entrar una unidad de x_j, cada básica baja y_ij y deja de aportar c_i·y_ij. La suma es z_j, un costo de oportunidad. Lo que aporta x_j es c_j, y la diferencia c_j − z_j es la ganancia neta."},
+{id:"spx19",t:"SPX",q:"Según el apunte, ante empates en el simplex…",
+ o:["si empatan dos candidatas a entrar, entra la de menor subíndice; si empatan dos a salir, sale la de mayor subíndice",
+    "si empatan dos candidatas a entrar, entra la de mayor subíndice; si empatan dos a salir, sale la de menor subíndice",
+    "un empate en la entrada anuncia una solución degenerada",
+    "un empate en la salida anuncia soluciones alternativas"],a:0,
+ x:"Es la regla del apunte (§3.2). El empate que anuncia degeneración es el de la salida (θ), no el de la entrada, y no tiene nada que ver con soluciones alternativas."},
+
+/* ===== SEN ===== */
+{id:"sen1",t:"SEN",q:"Si una variable de exceso tiene valor cero en la solución óptima:",
+ o:["El recurso (requerimiento) que representa la restricción se está utilizando a pleno, no sobra nada",
+    "La variable dual correspondiente a esa restricción es nula",
+    "Se puede conseguir una mejora en la función económica aumentando el lado derecho de la restricción",
+    "La restricción es redundante y se la puede eliminar sin cambiar el óptimo"],e:"Ninguna de las respuestas es correcta",a:0,
+ x:"Exceso cero quiere decir que la restricción es activa: se cumple justo. No implica que su dual sea nulo; al revés, un dual distinto de cero obliga a que esté activa. Subir el b de una ≥ la ajusta, y eso nunca mejora. La respuesta de cátedra a esta pregunta es la a."},
+{id:"sen2",t:"SEN",q:"En un problema de MINIMIZACIÓN, una restricción ≥ tiene valor implícito no nulo. Entonces:",
+ o:["u > 0: al aumentar en una unidad su término independiente, W aumenta (empeora)",
+    "u < 0: al aumentar en una unidad su término independiente, W disminuye (mejora)",
+    "u > 0: al aumentar en una unidad su término independiente, W disminuye (mejora)",
+    "u < 0: al aumentar en una unidad su término independiente, W aumenta (empeora)"],a:0,
+ x:"Subir el b de una ≥ la ajusta, y eso nunca mejora el óptimo. En un Min empeorar es que W suba, así que u ≥ 0. Resumen: Max ≤ → u ≥ 0; Max ≥ → u ≤ 0; Min ≤ → u ≤ 0; Min ≥ → u ≥ 0; ecuación → cualquier signo."},
+{id:"sen3",t:"SEN",q:"En un problema de MAXIMIZACIÓN, ¿qué signo tiene el valor implícito de una restricción ≥ y el de una ecuación?",
+ o:["≥: valor implícito ≤ 0. Ecuación: puede ser positivo, negativo o nulo",
+    "≥: valor implícito ≥ 0. Ecuación: puede ser positivo, negativo o nulo",
+    "≥: valor implícito ≤ 0. Ecuación: siempre nulo, porque no tiene holgura",
+    "≥: valor implícito ≥ 0. Ecuación: siempre positivo"],a:0,
+ x:"En un Max, exigir más (subir el b de una ≥) no puede subir z, así que u ≤ 0. Una ecuación es a la vez ≤ y ≥: según el caso, moverla hacia un lado u otro puede ayudar, y su signo es libre. Por eso en el dual su variable es irrestricta."},
+{id:"sen4",t:"SEN",q:"Un cambio Δb_k queda dentro de su rango de sensibilidad. Entonces:",
+ o:["La base óptima no cambia, pero sí los valores de las básicas (x_B = x* + r_k·Δb_k), y z cambia en u_k·Δb_k",
+    "La base óptima no cambia, ni los valores de las básicas; sólo z cambia en u_k·Δb_k",
+    "La base óptima no cambia, pero sí los c_j − z_j de las no básicas",
+    "La base óptima puede cambiar, pero z sigue variando en u_k·Δb_k"],a:0,
+ x:"Cambiar b toca x_B = B⁻¹b, o sea la factibilidad, y no la fila c_j − z_j, que no depende de b. Por eso el rango sale de pedir x_B ≥ 0. Los valores sí se mueven: el vértice óptimo se desplaza."},
+{id:"sen5",t:"SEN",q:"En un Max, cambia el c_k de una variable NO básica. ¿Hasta dónde sigue siendo óptima la tabla?",
+ o:["Mientras Δc_k ≤ −(c_k − z_k); y z* no cambia, porque x_k = 0",
+    "Mientras Δc_k ≤ (c_k − z_k); y z* no cambia, porque x_k = 0",
+    "Hay que revisar todos los c_j − z_j de las no básicas, porque c_k entra en c_B; z* cambia en Δc_k·x_k*",
+    "Hay que revisar que la columna X siga siendo ≥ 0, porque cambia B⁻¹b"],a:0,
+ x:"Sólo cambia su propio c_k − z_k, porque c_k no está en c_B. Como c_k − z_k ≤ 0, puede subir hasta |c_k − z_k| = −(c_k − z_k) sin volverse positivo. La b tiene el signo cambiado: con c_k − z_k = −8 daría Δc_k ≤ −8, un absurdo. La c describe el caso de una variable básica."},
+{id:"sen6",t:"SEN",q:"En un Max, cambia el c_k de una variable BÁSICA, dentro de su rango. ¿Qué pasa?",
+ o:["El punto óptimo no cambia, pero z* sí: z*' = z* + Δc_k·x_k*",
+    "El punto óptimo no cambia, y z* tampoco, porque la base sigue siendo la misma",
+    "El punto óptimo cambia, pero z* no",
+    "Cambian los valores de las básicas, porque c_k está en c_B"],a:0,
+ x:"Dentro del rango los c_j − z_j siguen ≤ 0: misma base, mismo vértice. Pero x_k > 0 aporta a la función objetivo con su nuevo c_k. Los valores x_B = B⁻¹b no dependen de los c."},
+{id:"sen7",t:"SEN",q:"En el análisis de sensibilidad, ¿qué condición puede romperse con cada tipo de cambio?",
+ o:["Un cambio en c_j puede romper la optimalidad (signo de los c_j − z_j); un cambio en b_i puede romper la factibilidad (x_B ≥ 0)",
+    "Un cambio en c_j puede romper la factibilidad (x_B ≥ 0); un cambio en b_i puede romper la optimalidad (signo de los c_j − z_j)",
+    "Los dos pueden romper ambas condiciones a la vez; por eso se analiza un cambio por vez",
+    "Ninguno rompe nada mientras la restricción sea activa"],a:0,
+ x:"c_j sólo aparece en la fila c_j − z_j, y b sólo en x_B = B⁻¹b. Si b rompe la factibilidad se sigue con el simplex dual; si c rompe la optimalidad, con el simplex primal."},
+{id:"sen8",t:"SEN",q:"Se está en el óptimo y se agrega una restricción nueva. ¿Cómo se procede?",
+ o:["Se verifica si la solución actual la cumple: si la cumple, el óptimo no cambia; si no, se la incorpora y se reoptimiza",
+    "Se verifica si la solución actual la cumple: si la cumple con igualdad, hay que incorporarla y reoptimizar",
+    "Se la incorpora siempre a la tabla y se reoptimiza, porque cambia la región factible",
+    "Se calcula su c_j − z_j y, si es positivo, entra a la base"],a:0,
+ x:"Agregar una restricción sólo achica la región. Si el óptimo actual sigue adentro, sigue siendo óptimo. Si la cumple con igualdad también sigue siéndolo (a lo sumo queda degenerado). La d es el procedimiento para una variable nueva."},
+{id:"sen9",t:"SEN",q:"Se evalúa agregar una nueva actividad A_N a un Max ya resuelto. Conviene incorporarla si…",
+ o:["c_N − c_B·B⁻¹·A_N > 0",
+    "c_N − c_B·A_N > 0",
+    "c_N − c_B·B⁻¹·A_N < 0",
+    "c_N − c_B·B⁻¹·b > 0"],a:0,
+ x:"Su columna en la base óptima es Y_N = B⁻¹A_N, y z_N = c_B·Y_N = u·A_N: lo que valen, a precio sombra, los recursos que consume. Si la contribución supera eso, entra y se itera. Sin B⁻¹ estarías usando la columna escrita en la base inicial."},
+{id:"sen10",t:"SEN",q:"En un Max, la restricción de horas (≤) tiene valor implícito u = 20 $/h. Esto significa que…",
+ o:["z* aumenta $20 por cada hora adicional, mientras b se mantenga dentro de su rango de sensibilidad",
+    "z* aumenta $20 por cada hora adicional, sin importar cuántas horas se agreguen",
+    "conviene comprar horas extra mientras cuesten más de $20",
+    "por cada hora que sobra en el óptimo, z* pierde $20"],a:0,
+ x:"Es un valor al margen y vale dentro del rango de b; fuera de él cambia la base y cambia el valor implícito. Conviene comprar si la hora cuesta menos de $20, porque el precio sombra es lo máximo que se paga. Con u ≠ 0 no sobran horas."},
+{id:"sen11",t:"SEN",q:"¿Cuál de estas implicaciones vale siempre en el óptimo?",
+ o:["Si el valor implícito de una restricción es distinto de cero, la restricción es activa",
+    "Si una restricción es activa, su valor implícito es distinto de cero",
+    "Si una restricción es pasiva, su valor implícito es distinto de cero",
+    "Si el valor implícito es cero, la restricción es pasiva"],a:0,
+ x:"Por holguras complementarias, holgura × valor implícito = 0, así que de u ≠ 0 sale holgura = 0. La recíproca falla: una restricción puede estar activa y tener u = 0 (degeneración, redundancia analítica). Por eso la d tampoco vale."},
+{id:"sen12",t:"SEN",q:"¿Cómo distingue el material de la cátedra el precio sombra del valor marginal?",
+ o:["Precio sombra: lo máximo que conviene pagar por una unidad adicional del recurso. Valor marginal: lo que la organización deja de ganar por no disponer de esa unidad",
+    "Precio sombra: lo que la organización deja de ganar por no disponer de una unidad más. Valor marginal: lo máximo que conviene pagar por una unidad adicional",
+    "Precio sombra: el costo reducido de una variable no básica. Valor marginal: el valor implícito de una restricción",
+    "Precio sombra: el valor implícito de una restricción pasiva. Valor marginal: el de una restricción activa"],a:0,
+ x:"Es el mismo número con dos lecturas: mirando una compra (cuánto pagar como máximo) o mirando la pérdida (cuánto se deja de ganar). El costo reducido es de variables, no de restricciones, y una pasiva tiene valor implícito 0."},
+
+/* ===== DUA ===== */
+{id:"dua1",t:"DUA",q:"Si el primal tiene soluciones óptimas alternativas, el dual tiene…; y si el primal tiene solución no acotada, el dual…",
+ o:["solución óptima degenerada; no tiene soluciones factibles",
+    "solución óptima degenerada; también tiene solución no acotada",
+    "soluciones óptimas alternativas; no tiene soluciones factibles",
+    "soluciones óptimas alternativas; también tiene solución no acotada"],a:0,
+ x:"Alternativas en uno ↔ degenerada en el otro, y la recíproca también vale. Si uno es no acotado, el otro es no factible: si el dual tuviera una solución factible, su valor sería una cota para el primal."},
+{id:"dua2",t:"DUA",q:"Si el primal no tiene soluciones factibles, el dual necesariamente…",
+ o:["no tiene soluciones factibles",
+    "tiene solución no acotada",
+    "tiene óptimo finito con w* = 0",
+    "tiene soluciones óptimas alternativas"],e:"Ninguna de las anteriores",a:4,
+ x:"Si el primal es no factible, el dual puede ser no factible o no acotado. Ninguna de las dos es obligatoria, así que la correcta es la e. Es el caso típico en el que las dos opciones del primer par parecen correctas y la trampa está en «necesariamente»."},
+{id:"dua3",t:"DUA",q:"Al construir el dual, si el primal tiene restricciones de igualdad…",
+ o:["cada restricción de igualdad del primal da una variable dual irrestricta en signo; cada variable primal irrestricta da una restricción de igualdad en el dual",
+    "cada restricción de igualdad del primal da una restricción de igualdad en el dual; cada variable primal irrestricta da una variable dual irrestricta",
+    "cada restricción de igualdad del primal da una variable dual ≥ 0, porque toda variable dual es no negativa",
+    "la restricción de igualdad se descarta al armar el dual, porque no tiene holgura"],a:0,
+ x:"Las restricciones se corresponden con variables, y las variables con restricciones. Una «=» no tiene un sentido que fije el signo del valor implícito, así que su u es libre. Simétricamente, una variable libre da una restricción «=». La b cruza mal: restricción con restricción."},
+{id:"dua4",t:"DUA",q:"Primal Max con una restricción i del tipo ≥, sin multiplicarla por −1. En el dual (Min), la variable u_i…",
+ o:["es ≤ 0",
+    "es ≥ 0",
+    "es libre en signo",
+    "no existe: la restricción ≥ se convierte en una restricción del dual"],a:0,
+ x:"Coincide con el signo del valor implícito: en un Max, una ≥ tiene u ≤ 0. Si en cambio la multiplicás por −1 (queda ≤), u queda ≥ 0 y su b entra al funcional dual con el signo cambiado. Las dos formas valen; no las mezcles."},
+{id:"dua5",t:"DUA",q:"El teorema fundamental de la dualidad establece que, si el primal tiene óptimo finito…",
+ o:["el dual también, con w* = z*, y su solución óptima es u* = c_B·B⁻¹ (los valores implícitos del primal)",
+    "el dual también, con w* = z*, y su solución óptima es u* = B⁻¹·b",
+    "el dual también, con w* ≥ z*, y su solución óptima son los costos reducidos del primal",
+    "el dual también, con w* ≤ z*, y su solución óptima son los costos reducidos del primal"],a:0,
+ x:"B⁻¹b son los valores de las básicas del primal, no del dual. Los valores implícitos (costos marginales) son c_B·B⁻¹, los z_j de las holguras. En el óptimo no hay brecha: w* = z*."},
+{id:"dua6",t:"DUA",q:"Alfarería: Max z = 20x₁ + 45x₂. En el óptimo x₁ = 10, x₂ = 15; sobran 22,5 kg de arcilla (x₄ = 22,5) y las otras holguras valen 0. Por holguras complementarias:",
+ o:["u₂ = 0 porque sobra arcilla, y las dos restricciones del dual se cumplen con igualdad porque x₁ y x₂ son positivas",
+    "u₂ = 0 porque sobra arcilla, y las dos restricciones del dual se cumplen con desigualdad estricta porque x₁ y x₂ son positivas",
+    "u₂ = 22,5, que es lo que vale la arcilla sobrante",
+    "u₂ > 0, porque la arcilla se usa en los dos productos"],a:0,
+ x:"Si sobra un recurso, al margen vale 0. Si un producto se fabrica (x_j > 0), los recursos que consume valen exactamente su contribución: la restricción dual j se cumple con igualdad. De ahí salen u₁ = 20, u₃ = 5 y w* = 875 = z*."},
+{id:"dua7",t:"DUA",q:"Holguras complementarias. En el óptimo…",
+ o:["si la holgura de la k-ésima restricción de un problema es distinta de cero, la k-ésima variable del otro vale cero",
+    "si la holgura de la k-ésima restricción de un problema es cero, la k-ésima variable del otro es distinta de cero",
+    "si la k-ésima variable de un problema es cero, la k-ésima restricción del otro tiene holgura positiva",
+    "la holgura de cada restricción es igual a la variable dual correspondiente"],a:0,
+ x:"En cada par, al menos uno vale cero. Lo que no vale es la recíproca: que uno sea cero no obliga al otro a ser positivo. Pueden ser cero los dos, y eso es degeneración."},
+{id:"dua8",t:"DUA",q:"En la tabla óptima de un primal Max, ¿dónde se lee el valor de la variable de exceso de la restricción dual j (la asociada a x_j)?",
+ o:["−(c_j − z_j) de la columna de x_j",
+    "c_j − z_j de la columna de x_j, tal como está",
+    "z_j de la columna de la holgura j",
+    "En la columna X, en la fila de x_j"],a:0,
+ x:"La restricción dual j es Σ a_ij·u_i ≥ c_j, o sea z_j ≥ c_j. Su exceso es z_j − c_j = −(c_j − z_j) ≥ 0. Si x_j es básica, vale 0 (complementariedad). Los z_j de las holguras dan los u_i."},
+
+/* ===== TTA ===== */
+{id:"tta1",t:"TTA",q:"En un problema de transporte, la oferta total supera a la demanda total. ¿Cómo se balancea?",
+ o:["Se agrega un destino ficticio con demanda igual al excedente y costo 0; lo que se le envía es capacidad ociosa de las fuentes",
+    "Se agrega un origen ficticio con oferta igual al excedente y costo 0; lo que envía es capacidad ociosa de las fuentes",
+    "Se agrega un destino ficticio con demanda igual al excedente y costo M; lo que se le envía es demanda insatisfecha",
+    "No puede balancearse: el problema no tiene solución factible"],a:0,
+ x:"Si sobra oferta, hace falta un destino que la absorba. El costo es 0 porque esos envíos no existen. Si falta oferta es al revés: origen ficticio, y lo que manda es demanda no satisfecha."},
+{id:"tta2",t:"TTA",q:"En transporte, la demanda total excede a la oferta total.",
+ o:["Tal como está no tiene solución factible; se agrega un origen ficticio con el excedente y costo 0, y lo que envía se interpreta como demanda no satisfecha",
+    "Tal como está no tiene solución factible; se agrega un destino ficticio con el excedente y costo 0, y lo que recibe se interpreta como demanda no satisfecha",
+    "Tiene solución factible, pero degenerada",
+    "Tiene solución factible, y el faltante se reparte en proporción a las demandas"],a:0,
+ x:"Las restricciones de demanda (≥ b_j) no se pueden cumplir todas. El ficticio tiene que ser un origen que «ponga» lo que falta; un destino ficticio agregaría todavía más demanda."},
+{id:"tta3",t:"TTA",q:"¿Por qué una solución básica de un transporte balanceado con m orígenes y n destinos tiene a lo sumo m + n − 1 variables positivas?",
+ o:["Porque de las m + n restricciones una es redundante (oferta total = demanda total), y quedan m + n − 1 linealmente independientes",
+    "Porque de las m + n restricciones una es redundante (oferta total = demanda total), y quedan m + n − 1 variables no básicas",
+    "Porque siempre se agrega un origen o destino ficticio, que ocupa una de las m + n posiciones",
+    "Porque hay m·n variables y se descuenta la del ficticio"],a:0,
+ x:"La cantidad de básicas es la cantidad de restricciones independientes. La b confunde básicas con no básicas: las no básicas son m·n − (m + n − 1)."},
+{id:"tta4",t:"TTA",q:"Una solución básica de un transporte balanceado con m orígenes y n destinos es degenerada cuando…",
+ o:["tiene menos de m + n − 1 variables positivas",
+    "tiene más de m + n − 1 variables positivas",
+    "tiene menos de m + n variables positivas",
+    "tiene exactamente m·n − (m + n − 1) variables positivas"],a:0,
+ x:"Hay m + n − 1 básicas; si alguna vale 0, hay menos positivas. Más de m + n − 1 positivas es imposible en una solución básica, y «menos de m + n» se cumple siempre."},
+{id:"tta5",t:"TTA",q:"En un transporte, si todas las ofertas a_i y demandas b_j son enteras y el problema es factible…",
+ o:["existe siempre una solución óptima con todas las variables enteras, por la estructura de la matriz A (coeficientes 0, 1 o −1); no hace falta exigir integralidad",
+    "toda solución óptima tiene todas las variables enteras, por la estructura de la matriz A; no hace falta exigir integralidad",
+    "existe una solución óptima entera sólo si además los costos c_ij son enteros",
+    "hay que resolverlo con programación entera, porque el simplex puede dar valores fraccionarios"],a:0,
+ x:"Las SBF son enteras, y el óptimo se alcanza en una SBF. Pero con óptimos alternativos, una combinación convexa de dos SBF enteras puede ser fraccionaria: por eso «existe» y no «toda». Los costos no influyen en la integralidad."},
+{id:"tta6",t:"TTA",q:"En un transbordo, la restricción de un nodo se escribe (salidas − entradas) = b. ¿Qué indica b?",
+ o:["b = 0: nodo de paso; b > 0: además aporta flujo propio, actúa como origen; b < 0: retiene flujo, actúa como destino",
+    "b = 0: nodo de paso; b > 0: retiene flujo, actúa como destino; b < 0: aporta flujo propio, actúa como origen",
+    "b = 0: el nodo no se usa; b ≠ 0: el nodo es de paso",
+    "b es la capacidad máxima de almacenamiento del nodo"],a:0,
+ x:"Con salidas − entradas = b, si b > 0 sale más de lo que entra: el nodo pone mercadería. Si la ecuación estuviera escrita como entradas − salidas, los signos se invierten. Leé siempre cómo está planteada."},
+{id:"tta7",t:"TTA",q:"El problema de asignación…",
+ o:["es un transporte con todas las ofertas y demandas iguales a 1; alcanza con x_ij ≥ 0 porque, por la integralidad, el óptimo sale con ceros y unos",
+    "es un transporte con todas las ofertas y demandas iguales a 1; hay que declarar x_ij binarias, porque el simplex daría valores fraccionarios",
+    "es un transporte sin restricciones de oferta, en el que cada destino elige su origen",
+    "no puede estar desbalanceado: si hay más tareas que máquinas, no tiene solución"],a:0,
+ x:"Relaciona ofertas con demandas uno a uno, con un costo por pareja. Si está desbalanceado se balancea igual que el transporte, o se pone ≤ 1 del lado que sobra."},
+{id:"tta8",t:"TTA",q:"¿Qué particularidad tienen los modelos de transporte, transbordo y asignación?",
+ o:["La mayoría de los coeficientes de la matriz A son 0, y el resto son 1 o −1",
+    "La mayoría de los coeficientes de la matriz A son 1, y el resto son 0",
+    "Todas sus restricciones son ≤, por eso no necesitan ficticias",
+    "Sólo admiten una función objetivo de minimización"],a:0,
+ x:"Esa estructura es la que da la integralidad automática. Pueden tener restricciones = o ≥, y un transporte puede ser de máximo si se trabaja con contribuciones."},
+{id:"tta9",t:"TTA",q:"¿Pueden aplicarse los algoritmos del problema de transporte al de transbordo?",
+ o:["Sí, formulándolo como un modelo balanceado, con fuentes o destinos ficticios si hace falta",
+    "Sí, sin cambios, porque el transbordo es un transporte con más destinos",
+    "No, porque los nodos intermedios tienen restricciones de igualdad",
+    "No, porque el transbordo requiere programación entera"],a:0,
+ x:"El transbordo se reescribe como un transporte balanceado y desde ahí sirven los mismos algoritmos. Igual, la cátedra plantea el modelo y lo resuelve con LINDO; los algoritmos manuales no se toman."},
+
+/* ===== ENT ===== */
+{id:"ent1",t:"ENT",q:"El óptimo del programa lineal relajado de un problema entero es…",
+ o:["una cota superior del óptimo entero en un Max, y una cota inferior en un Min",
+    "una cota inferior del óptimo entero en un Max, y una cota superior en un Min",
+    "igual al óptimo entero redondeado al entero más cercano",
+    "igual al óptimo entero si la región factible es acotada"],a:0,
+ x:"Relajar agranda la región, y el óptimo no puede empeorar: en un Max el relajado da un z mayor o igual que el entero. Redondear puede sacarte de la región o dejarte lejos del óptimo."},
+{id:"ent2",t:"ENT",q:"En ramificación y poda (Max), un nodo se poda cuando…",
+ o:["es infactible, su solución ya es entera, o su relajación da un z menor o igual que la mejor solución entera encontrada",
+    "es infactible, su solución ya es entera, o su relajación da un z mayor que la mejor solución entera encontrada",
+    "su solución tiene al menos una variable fraccionaria",
+    "su z es menor que el del nodo padre"],a:0,
+ x:"Si el relajado de una rama no supera la mejor entera, nada de esa rama puede superarla, y se poda. Si la supera, hay que seguir ramificando. Que un hijo tenga un z menor que el padre es lo normal, porque se agregó una restricción."},
+{id:"ent3",t:"ENT",q:"Sobre los métodos para problemas enteros y mixtos:",
+ o:["De corte: parten del relajado y agregan restricciones que eliminan zonas sin puntos enteros (fraccionario para enteros puros, mixto para mixtos). De búsqueda: enumeran implícitamente los puntos enteros; el principal es ramificación y poda",
+    "De corte: parten del relajado y agregan restricciones que eliminan zonas sin puntos enteros (fraccionario para mixtos, mixto para enteros puros). De búsqueda: enumeran implícitamente los puntos enteros; el principal es ramificación y poda",
+    "De corte: enumeran implícitamente los puntos enteros; el principal es ramificación y poda. De búsqueda: agregan restricciones al relajado",
+    "Ramificación y poda es un método de corte, porque cada rama agrega una restricción"],a:0,
+ x:"Que ramificar agregue restricciones no lo vuelve un método de corte: cada rama divide el espacio en dos subproblemas, en lugar de cortar una zona y seguir con un solo problema."},
+{id:"ent4",t:"ENT",q:"Un modelo en el que algunas variables deben ser enteras y otras pueden ser continuas, y las enteras sólo pueden valer 0 o 1, es un programa…",
+ o:["binario mixto","binario puro","entero puro","entero mixto con variables relajadas"],a:0,
+ x:"Puro: todas las variables enteras. Mixto: sólo algunas. Binario: las enteras restringidas a 0 o 1, para decisiones de sí o no."},
+{id:"ent5",t:"ENT",q:"Se resuelve un problema entero con LINDO. ¿Qué pasa con los precios duales y los rangos que imprime?",
+ o:["No son válidos para el modelo entero: corresponden al último relajado (con las restricciones de la ramificación), no al problema entero",
+    "Son válidos para el modelo entero, siempre que la solución óptima sea única",
+    "Son válidos, pero sólo para las variables continuas del modelo",
+    "Son válidos, pero hay que redondearlos al entero más cercano"],a:0,
+ x:"La sensibilidad supone que la base óptima se mantiene ante cambios chicos. En un entero, un cambio chico puede mover el óptimo a otro punto entero lejano."},
+{id:"ent6",t:"ENT",q:"¿Por qué no alcanza con resolver el relajado y redondear?",
+ o:["Porque el punto redondeado puede ser no factible, o factible pero lejos del óptimo entero",
+    "Porque el punto redondeado es siempre no factible",
+    "Porque el relajado no tiene solución si el problema es entero",
+    "Porque el simplex no puede trabajar con variables enteras, ni siquiera relajadas"],a:0,
+ x:"A veces el redondeo funciona (sobre todo con valores grandes), pero no hay garantía: puede salirse de la región o quedar lejos del óptimo. «Siempre no factible» es demasiado."},
+
+/* ===== RED ===== */
+{id:"red1",t:"RED",q:"Un árbol de expansión de una red conexa con n nodos…",
+ o:["conecta todos los nodos sin formar ciclos y tiene exactamente n − 1 arcos",
+    "conecta todos los nodos sin formar ciclos y tiene exactamente n arcos",
+    "conecta el origen con el destino por el camino más corto",
+    "conecta todos los nodos y puede tener ciclos si son de longitud mínima"],a:0,
+ x:"Con n nodos hacen falta n − 1 arcos para conectarlos; un arco más forma necesariamente un ciclo. La c describe la ruta más corta."},
+{id:"red2",t:"RED",q:"El procedimiento «arrancar de un nodo cualquiera y agregar en cada paso el arco más corto que conecte el árbol actual con un nodo todavía no incluido» es…",
+ o:["el algoritmo de Prim (Kruskal, en cambio, ordena todos los arcos y agrega el más corto que no forme ciclo); los dos dan un árbol de expansión mínima",
+    "el algoritmo de Kruskal (Prim, en cambio, ordena todos los arcos y agrega el más corto que no forme ciclo); los dos dan un árbol de expansión mínima",
+    "el algoritmo de Dijkstra, que da la ruta más corta desde ese nodo a todos los demás",
+    "el algoritmo de Dijkstra, que da el árbol de expansión mínima"],a:0,
+ x:"El material de circulación y el resumen de alumnos lo llaman Kruskal, pero el procedimiento es el de Prim. Si en el examen aparece descripto así con el nombre de Kruskal, probablemente lo den por bueno: fijate cómo está formulada la pregunta. Dijkstra arma rutas más cortas desde un origen, no un árbol de longitud total mínima."},
+{id:"red3",t:"RED",q:"En el algoritmo de Dijkstra, en cada paso…",
+ o:["se hace permanente la etiqueta temporal de MENOR distancia, y se reetiquetan sus vecinos si la nueva distancia es menor",
+    "se hace permanente la etiqueta temporal de MAYOR distancia, y se reetiquetan sus vecinos si la nueva distancia es menor",
+    "se agrega el arco más corto de toda la red que no forme ciclo",
+    "se busca una trayectoria con capacidad residual positiva"],a:0,
+ x:"La menor temporal ya no puede mejorar, porque cualquier otro camino pasa por nodos más lejanos. Las etiquetas son [distancia, nodo previo], y la ruta se reconstruye hacia atrás. La c es Kruskal y la d, flujo máximo."},
+{id:"red4",t:"RED",q:"En el modelo lineal de ruta más corta, con Σ salidas − Σ entradas = b_i en cada nodo, los términos independientes son…",
+ o:["b = 1 en el origen, −1 en el destino y 0 en los nodos intermedios",
+    "b = −1 en el origen, 1 en el destino y 0 en los nodos intermedios",
+    "b = 1 en todos los nodos, porque se pasa una vez por cada uno",
+    "b = la capacidad de cada nodo"],a:0,
+ x:"Se manda una unidad de flujo del origen al destino: en el origen sale una más de las que entran (+1) y en el destino entra una más (−1). Una variable por arco, minimizando Σ c_ij·x_ij."},
+{id:"red5",t:"RED",q:"En el algoritmo de la trayectoria en aumento (flujo máximo), una vez encontrada una trayectoria con capacidad residual positiva…",
+ o:["C = la MENOR capacidad residual de la trayectoria; se resta C en el sentido del flujo y se suma C en el sentido inverso",
+    "C = la MAYOR capacidad residual de la trayectoria; se resta C en el sentido del flujo y se suma C en el sentido inverso",
+    "C = la menor capacidad residual; se resta C tanto en el sentido del flujo como en el inverso",
+    "se satura el arco de mayor capacidad y se lo elimina de la red"],a:0,
+ x:"El arco más chico limita: no se puede mandar más que eso. Sumar en el sentido inverso permite deshacer flujo más adelante si conviene. Se termina cuando no queda ninguna trayectoria con residual positivo."},
+{id:"red6",t:"RED",q:"El problema de flujo capacitado con costo mínimo…",
+ o:["minimiza el costo total del flujo respetando ofertas, demandas y capacidades de los arcos; transporte, ruta más corta y flujo máximo son casos particulares",
+    "minimiza el costo total del flujo respetando ofertas y demandas, sin capacidades en los arcos; es un caso particular del transporte",
+    "busca el camino de menor costo entre un único origen y un único destino",
+    "conecta todos los nodos con el menor costo total de tendido"],a:0,
+ x:"Red dirigida conexa con al menos una fuente y un destino, capacidad y costo por arco. Es el modelo general. La c es la ruta más corta y la d, el árbol de expansión mínima."},
+
+/* ===== STK ===== */
+{id:"stk1",t:"STK",q:"La tasa de mantenimiento de stock i se calcula sumando los costos anuales de…",
+ o:["capital inmovilizado, espacio de almacenamiento, personal, riesgos (deterioro, roturas, seguros), administración e impuestos",
+    "capital inmovilizado, espacio de almacenamiento, personal, riesgos, administración y el costo fijo de emitir cada orden",
+    "compra de la mercadería, transporte y el costo fijo de emitir cada orden",
+    "faltantes y demanda insatisfecha"],a:0,
+ x:"Sólo entran los costos que dependen de cuánto stock se tiene. El costo de ordenar L es por pedido y no depende de la existencia: va aparte en la fórmula."},
+{id:"stk2",t:"STK",q:"En el modelo básico, en el lote óptimo Q* = √(2DL / (C·i))…",
+ o:["el costo de ordenar es igual al costo de mantener",
+    "el costo de compra es igual al costo de mantener",
+    "el costo de ordenar es igual al costo de compra",
+    "el costo de ordenar es el doble del costo de mantener"],a:0,
+ x:"L/Q baja con Q y C·i·Q/(2D) sube; la suma es mínima donde se cruzan. El costo de compra C es constante y no mueve el mínimo."},
+{id:"stk3",t:"STK",q:"¿Cuál es la forma de reducir el stock sin aumentar el costo total medio CT(Q)?",
+ o:["Disminuir el costo fijo de ordenar L (por ejemplo, con SMED en las preparaciones), lo que baja Q* y CT a la vez",
+    "Pedir lotes más chicos que Q*, lo que baja el stock promedio y por lo tanto CT",
+    "Aumentar la tasa de mantenimiento i, para que baje Q*",
+    "Aumentar el lead time, para pedir menos seguido"],a:0,
+ x:"Con L fijo, cualquier Q distinto de Q* sube el costo. Si baja L, el nuevo Q* es más chico y el costo también baja. Subir i achica Q* pero encarece todo."},
+{id:"stk4",t:"STK",q:"En el modelo con consumo durante el ingreso (velocidad de ingreso V, demanda D)…",
+ o:["debe ser D < V; el lote óptimo es MAYOR que el del modelo básico, y si V → D, Q* → ∞",
+    "debe ser D < V; el lote óptimo es MENOR que el del modelo básico, porque el stock máximo es menor",
+    "debe ser D > V; el lote óptimo es mayor que el del modelo básico",
+    "debe ser D > V; si V → D, Q* → 0"],a:0,
+ x:"Q* = √(2DL / (C·i·(1 − D/V))). El factor (1 − D/V) < 1 achica el denominador y el lote crece. Como el pico M = Q·(1 − D/V) es menor, mantener sale más barato y conviene un lote más grande. Si V = D, se produce sin parar."},
+{id:"stk5",t:"STK",q:"En el modelo con consumo durante el ingreso, el LT que se usa en el punto de pedido PP = D·LT incluye…",
+ o:["sólo los tiempos de organización y puesta a punto para iniciar la corrida, no el tiempo de fabricación del lote",
+    "los tiempos de organización y puesta a punto más el tiempo de fabricación del lote θ = Q/V",
+    "sólo el tiempo de fabricación del lote θ = Q/V",
+    "el tiempo de un ciclo completo T = Q/D"],a:0,
+ x:"Apenas arranca la producción ya hay unidades disponibles, así que el riesgo de quedarse sin stock está en lo que tarda en arrancar."},
+{id:"stk6",t:"STK",q:"En el descuento por cantidad EXCEDENTE (C₁ hasta a unidades, C₂ < C₁ para lo que excede), el precio medio C(Q)…",
+ o:["vale C₂ + (C₁ − C₂)·a/Q para Q > a; tiende a C₂ cuando Q → ∞ sin alcanzarlo nunca, y es continuo en Q = a",
+    "vale C₂ + (C₁ − C₂)·a/Q para Q > a; tiende a C₂ cuando Q → ∞ y lo alcanza para Q suficientemente grande",
+    "salta de C₁ a C₂ en Q = a y se mantiene en C₂ para todo el lote",
+    "salta de C₁ a C₂ en Q = a y después crece hacia C₁"],a:0,
+ x:"k/Q > 0 para todo Q finito, así que nunca llega a C₂. En Q = a da C₁, de modo que no hay salto. El salto a C₂ para todo el lote es el descuento con escalón."},
+{id:"stk7",t:"STK",q:"Descuento por cantidad excedente, con un valor mínimo de compra y costo de orden L nulo:",
+ o:["en el tramo sin descuento CT queda lineal y creciente en Q, y su mínimo está en la compra mínima; en el tramo con descuento sigue habiendo un mínimo interior, porque k = (C₁ − C₂)·a hace de costo fijo",
+    "en el tramo sin descuento CT queda lineal y creciente en Q, y su mínimo está en la compra mínima; en el tramo con descuento también es lineal, y el mínimo está en Q = a",
+    "Q* = √(2DL / (C·i)) da 0, así que conviene comprar de a una unidad",
+    "Q* tiende a infinito, porque no hay costo de pedir"],a:0,
+ x:"Con L = 0 desaparece L/Q y queda C + C·i·Q/(2D), una recta. Pero en el excedente aparece k/Q, que funciona como un L, y hay mínimo interior Q* = √(2D·(L + k) / (C₂·i))."},
+{id:"stk8",t:"STK",q:"En el modelo con restricción financiera (capital), ¿cuándo conviene aceptar un préstamo a tasa r para invertir en stock?",
+ o:["Cuando r < i + λ: λ es el costo marginal de no disponer de más capital, e i + λ es la tasa límite",
+    "Cuando r > i + λ: λ es el costo marginal de no disponer de más capital, e i + λ es la tasa límite",
+    "Cuando r < λ, porque λ es la tasa límite",
+    "Cuando r < i, porque i ya incluye el costo del capital"],a:0,
+ x:"La restricción actúa como si la tasa de mantenimiento subiera de i a i + λ; si se consigue plata más barata que eso, conviene. El apunte separa i = i₁ + i₂ y da como límite i₁ + λ. Si el enunciado separa i₁, usá i₁ + λ. Algunos resúmenes comparan sólo con λ."},
+{id:"stk9",t:"STK",q:"En el modelo con restricción de espacio de almacenamiento, λ se expresa en…",
+ o:["$ / (volumen × tiempo), por ejemplo $/(m³·mes): es el costo marginal de no disponer de una unidad más de espacio",
+    "$ / volumen, por ejemplo $/m³: es el costo marginal de no disponer de una unidad más de espacio",
+    "1 / tiempo, como una tasa de interés",
+    "$ / hora: el costo marginal de no disponer de más tiempo de preparación"],a:0,
+ x:"En Q = √(2DL / (C·i + 2λv)), 2λv se suma a C·i, que está en $/(unidad·tiempo). Con v en volumen por unidad, λ queda en $/(volumen·tiempo). La tasa 1/tiempo es la λ del capital, y $/hora, la de preparación."},
+{id:"stk10",t:"STK",q:"En los modelos multiartículo con Lagrange, al aumentar λ…",
+ o:["con restricción de espacio los lotes se achican; con restricción de tiempo de preparación los lotes se agrandan",
+    "con restricción de espacio los lotes se achican; con restricción de tiempo de preparación también se achican",
+    "con restricción de espacio los lotes se agrandan; con restricción de tiempo de preparación se achican",
+    "con restricción de espacio los lotes se agrandan; con restricción de tiempo de preparación también se agrandan"],a:0,
+ x:"Espacio: λ suma en el denominador (C·i + 2λv) y Q baja, así ocupa menos. Preparación: λτ suma al costo de orden (L + λτ) en el numerador y Q sube: menos lotes por año, menos preparaciones."},
+{id:"stk11",t:"STK",q:"¿Es lo mismo un riesgo de faltante RF = 2 % que un IPF = 98 %?",
+ o:["No: el RF es la probabilidad de que la demanda durante el LT supere el punto de pedido; el IPF es la fracción de la demanda entregada directamente desde el stock",
+    "No: el RF es la fracción de la demanda que no se entrega desde el stock; el IPF es la probabilidad de que la demanda durante el LT supere el punto de pedido",
+    "Sí: el IPF es el complemento del RF, porque los dos miden la probabilidad de no tener faltante",
+    "Sí, siempre que la demanda sea normal"],a:0,
+ x:"El RF es una probabilidad por ciclo, y un ciclo con faltante puede perder sólo unas pocas unidades. Con RF = 2 %, el IPF suele ser bastante mayor que 98 %. La b intercambia las definiciones."},
+{id:"stk12",t:"STK",q:"¿Por qué la tabla del riesgo de faltante es la de la normal estándar?",
+ o:["Si la demanda es normal, la demanda en el LT también lo es (propiedad reproductiva); si no es normal, la demanda acumulada en el LT se aproxima a una normal (teorema central del límite)",
+    "Si la demanda es normal, la demanda en el LT se aproxima a una normal (teorema central del límite); si no es normal, también lo es por la propiedad reproductiva",
+    "Porque el modelo supone siempre demanda normal; si no lo fuera, no se aplica",
+    "Porque el lead time siempre se distribuye normalmente"],a:0,
+ x:"La propiedad reproductiva es de la normal: la suma de normales es normal. El teorema central del límite cubre el caso en que la demanda diaria no es normal. La b los cruza."},
+{id:"stk13",t:"STK",q:"En el modelo aleatorio de revisión periódica, la demanda y su desvío se estudian durante…",
+ o:["T + LT, porque es el intervalo en que el sistema depende sólo del stock disponible hasta que llega el pedido siguiente; SS = z·σ·√(T + LT)",
+    "T + LT, porque es el intervalo en que el sistema depende sólo del stock disponible; SS = z·σ·(T + LT)",
+    "LT, igual que en el punto de pedido; SS = z·σ·√LT",
+    "T, porque es el intervalo entre revisiones; SS = z·σ·√T"],a:0,
+ x:"Lo que se pide hoy tiene que cubrir hasta que llegue el pedido de la próxima revisión: T + LT. Las varianzas se suman, así que va la raíz del tiempo, no el tiempo."},
+{id:"stk14",t:"STK",q:"Diferencia entre el modelo de punto de pedido y el de revisión periódica:",
+ o:["Punto de pedido: lo activa la demanda, Q fijo, registro actualizado en cada movimiento. Revisión periódica: lo activa el tiempo, cantidad variable, se actualiza sólo al revisar",
+    "Punto de pedido: lo activa el tiempo, Q fijo, registro actualizado en cada movimiento. Revisión periódica: lo activa la demanda, cantidad variable, se actualiza sólo al revisar",
+    "Punto de pedido: lo activa la demanda, cantidad variable. Revisión periódica: lo activa el tiempo, Q fijo",
+    "Son equivalentes; sólo cambia la forma de calcular el stock de seguridad"],a:0,
+ x:"En revisión periódica el SS cubre T + LT, así que hay más stock promedio. A cambio no hace falta un registro permanente, y se pueden agrupar artículos de un mismo proveedor."},
+{id:"stk15",t:"STK",q:"Clasificación ABC y gestión de los artículos de bajo costo:",
+ o:["A hasta el 75 % del costo anual acumulado, B del 75 % al 95 %, C del 95 % al 100 %; los C se gestionan con revisión periódica",
+    "A hasta el 75 % del costo anual acumulado, B del 75 % al 95 %, C del 95 % al 100 %; los C se gestionan con punto de pedido",
+    "A hasta el 75 % de la cantidad de artículos, B del 75 % al 95 %, C del 95 % al 100 %; los C se gestionan con revisión periódica",
+    "A hasta el 50 % del costo anual, B del 50 % al 80 %, C del 80 % al 100 %; los C se gestionan con punto de pedido"],a:0,
+ x:"Se ordena por costo anual C·D, no por cantidad de ítems. Para los C no se justifica un registro permanente, así que van a revisión periódica."},
+{id:"stk16",t:"STK",q:"En el modelo de período común para n artículos, CT(T) = C + L/T + (S/2)·T. Entonces…",
+ o:["T* = √(2L/S), con L el costo de toda la orden conjunta y S = Σ δ_j·D_j; después Q_j* = D_j·T*",
+    "T* = √(2L/S), con L el costo de orden de UN solo artículo y S = Σ δ_j·D_j; después Q_j* = D_j·T*",
+    "T* = √(2S/L), con L el costo de toda la orden conjunta; después Q_j* = T*/D_j",
+    "T* = √(2L·S); después Q_j* = D_j / T*"],a:0,
+ x:"L/T es el costo anual de ordenar (una hipérbola) y (S/2)·T el de mantener (una recta creciente); el mínimo está donde se igualan. No hace falta conocer cada L_j, sólo el costo del trámite conjunto."},
+{id:"stk17",t:"STK",q:"¿Por qué el stock se considera un desperdicio, y por qué existe igual?",
+ o:["Porque no agrega valor al producto, oculta problemas de producción e inmoviliza capital; existe porque en la mayoría de los casos no es posible eliminarlo: es un desperdicio inevitable",
+    "Porque no agrega valor al producto, oculta problemas de producción e inmoviliza capital; existe porque siempre reduce los costos totales",
+    "Porque se deteriora con el tiempo; existe porque la demanda siempre es aleatoria",
+    "Porque genera costos de ordenar; existe para aprovechar los descuentos por cantidad"],a:0,
+ x:"Desperdicio es todo lo que no es esencial para agregar valor. El stock ideal sería nulo, pero casi nunca se puede: por eso se lo llama desperdicio inevitable."},
+{id:"stk18",t:"STK",q:"¿Cómo se logra la reducción de existencias?",
+ o:["Disminuyendo el tamaño de los lotes y acortando los plazos de provisión, previa mejora continua que elimine progresivamente las causas que generan stock",
+    "Disminuyendo el tamaño de los lotes y acortando los plazos de provisión; las causas que generan stock se atacan después, una vez reducido",
+    "Aumentando el stock de seguridad para evitar faltantes",
+    "Pasando todos los artículos a revisión periódica"],a:0,
+ x:"Si se achican los lotes sin bajar L ni atacar las causas (preparaciones largas, roturas, proveedores erráticos), sólo suben los costos y los faltantes."},
+{id:"stk19",t:"STK",q:"La demanda diaria tiene un desvío σ_d = 10 unidades y el LT es de 9 días, con demandas diarias independientes. El desvío de la demanda durante el LT es…",
+ o:["30 unidades (σ_d·√LT)","90 unidades (σ_d·LT)","3,33 unidades (σ_d / √LT)","1,11 unidades (σ_d / LT)"],a:0,
+ x:"Las varianzas se suman: 9·10² = 900, y la raíz es 30. El error típico es multiplicar el desvío por el tiempo."},
+{id:"stk20",t:"STK",q:"En los modelos con Lagrange, ¿cómo se mide lo que consume cada artículo del recurso limitado?",
+ o:["Espacio: cada artículo ocupa su existencia máxima, v_j·Q_j. Capital: se toma la inversión media, C_j·Q_j/2",
+    "Espacio: cada artículo ocupa su existencia media, v_j·Q_j/2. Capital: se toma la inversión media, C_j·Q_j/2",
+    "Espacio: cada artículo ocupa su existencia máxima, v_j·Q_j. Capital: se toma la inversión máxima, C_j·Q_j",
+    "Espacio: existencia media, v_j·Q_j/2. Capital: inversión máxima, C_j·Q_j"],a:0,
+ x:"El espacio tiene que alcanzar en el peor momento, cuando entra el lote. El capital se mira en promedio, porque es plata inmovilizada a lo largo del ciclo."},
+{id:"stk21",t:"STK",q:"Primer paso al resolver un modelo de stock multiartículo con una restricción (Lagrange):",
+ o:["Calcular cada Q_j* sin restricción (λ = 0) y ver si cumple la restricción; si la cumple, no es efectiva y ése es el óptimo",
+    "Calcular cada Q_j* sin restricción (λ = 0); aunque cumpla la restricción, hay que subir λ hasta que se cumpla con igualdad",
+    "Dar a λ un valor igual a la tasa i y recalcular",
+    "Repartir el recurso en partes iguales entre los artículos"],a:0,
+ x:"Si los lotes óptimos sin restricción ya entran, la restricción no es efectiva: λ = 0, como un precio sombra nulo. Sólo si no entran, el óptimo usa todo el recurso y se busca λ > 0."},
+{id:"stk22",t:"STK",q:"Los principales objetivos de la gestión de existencias son:",
+ o:["Reducir al mínimo posible los niveles de existencia y asegurar el suministro de productos en el momento adecuado",
+    "Reducir al mínimo posible los niveles de existencia y maximizar el stock de seguridad",
+    "Maximizar las compras por cantidad y asegurar el suministro",
+    "Eliminar totalmente el stock y trabajar sólo contra pedido"],a:0,
+ x:"Los dos objetivos tiran para lados opuestos, y los modelos buscan el equilibrio entre ellos."}
+];
+
+/* ---------- utilidades ---------- */
+const LET = ["a","b","c","d","e"];
+const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const fmt = s => esc(s).replace(/([A-Za-zθλσδτ])_([A-Za-z0-9]+)/g,"$1<sub>$2</sub>");
+const shuffle = a => { a = a.slice(); for (let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; };
+const byId = Object.fromEntries(BANK.map(q=>[q.id,q]));
+const $app = document.getElementById("app");
+
+const STORE = "io-teoria-v1";
+function loadStats(){ try { return JSON.parse(localStorage.getItem(STORE)) || {}; } catch(e){ return {}; } }
+function saveStats(s){ try { localStorage.setItem(STORE, JSON.stringify(s)); } catch(e){} }
+let STATS = loadStats();
+function record(id, ok){
+  const r = STATS[id] || {seen:0, wrong:0, last:null};
+  r.seen++; if(!ok) r.wrong++; r.last = ok; STATS[id] = r; saveStats(STATS);
+}
+
+/* Mezcla: cambia el orden de los pares y dentro de cada par; la e queda última. */
+function makeItem(q){
+  let pairs = [[0,1],[2,3]].map(p => Math.random()<.5 ? p : [p[1],p[0]]);
+  if (Math.random()<.5) pairs.reverse();
+  const order = pairs.flat(); if (q.e) order.push(4);
+  return {q, order, correct: order.indexOf(q.a), ans:null, struck:new Set(), flag:false, checked:false};
+}
+const optText = (q,k) => k===4 ? q.e : q.o[k];
+
+let S = null; // estado de la sesión
+
+/* ---------- inicio ---------- */
+let pickTopics = new Set(TOPICS.map(t=>t[0]));
+function renderHome(){
+  stopTimer();
+  const wrongIds = Object.keys(STATS).filter(id => byId[id] && STATS[id].last===false);
+  const counts = {}; BANK.forEach(q=>counts[q.t]=(counts[q.t]||0)+1);
+  const topicStats = TOPICS.map(([k,n])=>{
+    const ids = BANK.filter(q=>q.t===k).map(q=>q.id);
+    let seen=0, ok=0; ids.forEach(id=>{ const r=STATS[id]; if(r){ seen+=r.seen; ok+=r.seen-r.wrong; } });
+    return {k,n,seen,ok,pct: seen? Math.round(100*ok/seen):null};
+  });
+  $app.innerHTML = `
+  <header class="stack">
+    <span class="eyebrow">Investigación Operativa · recuperatorio 19/11</span>
+    <h1>Simulacro de teoría</h1>
+    <p class="muted">${BANK.length} preguntas de opción múltiple armadas con el material de circulación y el resumen del recuperatorio. Las opciones vienen de a pares casi iguales, como en el parcial: el primer descarte es fácil y la decisión fina está dentro del par.</p>
+  </header>
+
+  <div class="modes">
+    <button class="mode" id="go-sim"><span class="k">Simulacro</span><h3>20 preguntas, nota al final</h3><p>Reparto por tema parecido al banco de preguntas. Podés volver atrás, marcar dudosas y entregar cuando quieras.</p></button>
+    <button class="mode" id="go-prac"><span class="k">Práctica</span><h3>Por tema, con corrección inmediata</h3><p>Después de cada respuesta ves por qué es la correcta y en qué falla su gemela.</p></button>
+    <button class="mode" id="go-err" ${wrongIds.length?"":"disabled"}><span class="k">Repaso</span><h3>Las que erraste (${wrongIds.length})</h3><p>${wrongIds.length?"Preguntas cuyo último intento fue incorrecto.":"Todavía no hay preguntas falladas guardadas en este navegador."}</p></button>
+  </div>
+
+  <section class="sheet stack">
+    <div class="row" style="justify-content:space-between">
+      <h2>Configuración</h2>
+    </div>
+    <div class="row">
+      <label for="timer" class="muted">Tiempo del simulacro</label>
+      <select id="timer">
+        <option value="0">Sin límite</option><option value="30">30 min</option>
+        <option value="45" selected>45 min</option><option value="60">60 min</option>
+      </select>
+      <label for="pcount" class="muted">Preguntas en práctica</label>
+      <select id="pcount"><option value="10">10</option><option value="20" selected>20</option><option value="999">Todas</option></select>
+    </div>
+    <div class="stack" style="gap:8px">
+      <span class="eyebrow">Temas para la práctica</span>
+      <div class="chips" id="chips">
+        ${TOPICS.map(([k,n])=>`<button class="chip" data-k="${k}" aria-pressed="${pickTopics.has(k)}">${n}<span class="n">${counts[k]}</span></button>`).join("")}
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet stack">
+    <h2>Cómo encarar cada pregunta</h2>
+    <p class="tip">1. Leé el enunciado entero y buscá la palabra que decide: <em>necesariamente</em>, <em>siempre</em>, <em>no básica</em>, <em>≤ vs &lt;</em>, <em>Max vs Min</em>, <em>mínimo vs máximo</em>.</p>
+    <p class="tip">2. Descartá el par que no corresponde (suele cambiar el concepto entero). Usá «tachar» para dejarlo marcado.</p>
+    <p class="tip">3. Dentro del par que queda, compará palabra por palabra: la diferencia es un signo, un subíndice o un «sólo si».</p>
+    <p class="tip">4. Si los dos del par te parecen correctos, sospechá de la e) «ninguna».</p>
+  </section>
+
+  <section class="sheet stack">
+    <div class="row" style="justify-content:space-between">
+      <h2>Tu avance en este navegador</h2>
+      <button class="btn ghost" id="reset">Borrar avance</button>
+    </div>
+    <div class="statgrid">
+      <span class="h">Tema</span><span class="h">Aciertos</span><span class="h"></span>
+      ${topicStats.map(s=>`<span>${s.n}</span><span>${s.seen? `${s.ok}/${s.seen}`:"—"}</span><span class="bar"><i style="width:${s.pct??0}%"></i></span>`).join("")}
+    </div>
+    <p class="muted" style="font-size:14px" id="reset-msg">El avance se guarda sólo en este navegador.</p>
+  </section>`;
+
+  document.getElementById("go-sim").onclick = startSim;
+  document.getElementById("go-prac").onclick = startPractice;
+  const ge = document.getElementById("go-err"); if (wrongIds.length) ge.onclick = () => startList(shuffle(wrongIds).map(id=>byId[id]), "review");
+  document.querySelectorAll(".chip").forEach(c=>c.onclick=()=>{
+    const k=c.dataset.k; pickTopics.has(k)?pickTopics.delete(k):pickTopics.add(k);
+    c.setAttribute("aria-pressed", pickTopics.has(k));
+  });
+  const rb = document.getElementById("reset"); let armed=false;
+  rb.onclick = () => {
+    if(!armed){ armed=true; rb.textContent="Confirmar borrado"; document.getElementById("reset-msg").textContent="Se borra el historial de aciertos y errores. Tocá de nuevo para confirmar."; return; }
+    STATS={}; saveStats(STATS); renderHome();
+  };
+}
+
+function startSim(){
+  const limit = +document.getElementById("timer").value;
+  const items = [];
+  TOPICS.forEach(([k])=>{
+    const pool = shuffle(BANK.filter(q=>q.t===k)).slice(0, SIM_WEIGHTS[k]||0);
+    pool.forEach(q=>items.push(makeItem(q)));
+  });
+  S = {mode:"sim", items, i:0, limit, end: limit? Date.now()+limit*60000 : null, done:false};
+  renderQuiz(); startTimer();
+}
+function startPractice(){
+  const n = +document.getElementById("pcount").value;
+  const pool = shuffle(BANK.filter(q=>pickTopics.has(q.t))).slice(0,n);
+  if(!pool.length){ return; }
+  startList(pool,"prac");
+}
+function startList(qs, mode){
+  S = {mode, items: qs.map(makeItem), i:0, limit:0, end:null, done:false};
+  renderQuiz();
+}
+
+/* ---------- temporizador ---------- */
+let tId = null;
+function startTimer(){ stopTimer(); if(!S.end) return; tId = setInterval(tick, 1000); tick(); }
+function stopTimer(){ if(tId){ clearInterval(tId); tId=null; } }
+function tick(){
+  const el = document.getElementById("timer-out"); if(!S || !S.end) return;
+  const left = Math.max(0, S.end - Date.now());
+  const m = Math.floor(left/60000), s = Math.floor(left/1000)%60;
+  if(el){ el.textContent = `${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`; el.classList.toggle("low", left < 5*60000); }
+  if(left<=0){ stopTimer(); finish(); }
+}
+
+/* ---------- pregunta ---------- */
+function renderQuiz(){
+  const it = S.items[S.i], q = it.q, sim = S.mode==="sim", n = S.items.length;
+  const showFb = !sim && it.checked;
+  const optsHtml = it.order.map((k,pos)=>{
+    let cls = "opt";
+    if (it.ans===pos) cls+=" sel";
+    if (it.struck.has(pos)) cls+=" struck";
+    if (showFb){ if(pos===it.correct) cls+=" right"; else if(it.ans===pos) cls+=" wrong"; }
+    const sep = (pos===2 || (pos===4)) ? `<div class="pairline" aria-hidden="true"></div>` : "";
+    return `${sep}<div class="${cls}" role="radio" tabindex="0" aria-checked="${it.ans===pos}" data-pos="${pos}">
+      <span class="b">${LET[pos]}</span><span class="t">${fmt(optText(q,k))}</span>
+      ${showFb?"":`<button class="x" data-strike="${pos}" aria-label="Tachar opción ${LET[pos]}">${it.struck.has(pos)?"destachar":"tachar"}</button>`}
+    </div>`;
+  }).join("");
+
+  let fb = "";
+  if (showFb){
+    const ok = it.ans===it.correct;
+    fb = `<div class="expl ${ok?"ok":"bad"}"><strong>${ok?"Correcta":"Incorrecta: era la "+LET[it.correct]+")"}</strong><span>${fmt(q.x)}</span></div>`;
+  }
+
+  const gridHtml = S.items.map((x,j)=>{
+    let c="cell"; if(j===S.i) c+=" cur";
+    if(sim){ if(x.ans!==null) c+=" ans"; if(x.flag) c+=" flag"; }
+    else if(x.checked){ c+= x.ans===x.correct?" ok":" bad"; }
+    return `<button class="${c}" data-go="${j}" aria-label="Pregunta ${j+1}">${j+1}</button>`;
+  }).join("");
+
+  const answered = S.items.filter(x=>x.ans!==null).length;
+  const label = sim ? "Simulacro" : (S.mode==="review"?"Repaso de errores":"Práctica");
+  $app.innerHTML = `
+  <div class="top">
+    <div class="topline">
+      <button class="btn ghost" id="home">← Salir</button>
+      <span class="eyebrow">${label} · ${sim?`${answered}/${n} respondidas`:`${S.i+1} de ${n}`}</span>
+      ${sim && S.end ? `<span class="timer" id="timer-out">--:--</span>` : `<span></span>`}
+    </div>
+    <div class="grid">${gridHtml}</div>
+  </div>
+  <section class="sheet stack">
+    <div class="qhead"><span class="tag">Pregunta ${S.i+1} · ${TOPIC_NAME[q.t]}</span>
+      ${sim?`<button class="btn ghost flagbtn" id="flag" aria-pressed="${it.flag}">${it.flag?"Marcada como dudosa":"Marcar dudosa"}</button>`:""}</div>
+    <p class="stem">${fmt(q.q)}</p>
+    <div class="opts" role="radiogroup">${optsHtml}</div>
+    ${fb}
+    <div class="nav">
+      <button class="btn" id="prev" ${S.i===0?"disabled":""}>Anterior</button>
+      <div class="row">
+        ${sim ? `<button class="btn" id="finish">Entregar</button>` : ""}
+        ${!sim && !it.checked ? `<button class="btn primary" id="check" ${it.ans===null?"disabled":""}>Corregir</button>` : ""}
+        ${ (sim || it.checked) ? (S.i<n-1 ? `<button class="btn primary" id="next">Siguiente</button>` : (!sim?`<button class="btn primary" id="finish">Ver resultado</button>`:"")) : ""}
+      </div>
+    </div>
+    <p class="kbd">Teclado: a–e elige · Enter ${sim?"avanza":"corrige / avanza"} · ← → navegan</p>
+  </section>
+  <div id="confirm"></div>`;
+
+  document.getElementById("home").onclick = renderHome;
+  document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{ S.i=+b.dataset.go; renderQuiz(); });
+  document.querySelectorAll(".opt").forEach(o=>{
+    o.onclick = e => { if(e.target.closest("[data-strike]")) return; choose(+o.dataset.pos); };
+    o.onkeydown = e => { if(e.key===" "){ e.preventDefault(); choose(+o.dataset.pos); } };
+  });
+  document.querySelectorAll("[data-strike]").forEach(b=>b.onclick=e=>{
+    e.stopPropagation(); const p=+b.dataset.strike; it.struck.has(p)?it.struck.delete(p):it.struck.add(p);
+    if(it.ans===p && it.struck.has(p)) it.ans=null; renderQuiz();
+  });
+  const g=id=>document.getElementById(id);
+  if(g("prev")) g("prev").onclick=()=>{ S.i--; renderQuiz(); };
+  if(g("next")) g("next").onclick=()=>{ S.i++; renderQuiz(); };
+  if(g("check")) g("check").onclick=check;
+  if(g("flag")) g("flag").onclick=()=>{ it.flag=!it.flag; renderQuiz(); };
+  if(g("finish")) g("finish").onclick=()=> sim ? confirmFinish() : finish();
+  tick();
+}
+
+function choose(pos){
+  const it = S.items[S.i];
+  if (S.mode!=="sim" && it.checked) return;
+  it.ans = pos; it.struck.delete(pos); renderQuiz();
+}
+function check(){
+  const it = S.items[S.i]; if(it.ans===null || it.checked) return;
+  it.checked = true; record(it.q.id, it.ans===it.correct); renderQuiz();
+}
+function confirmFinish(){
+  const blank = S.items.filter(x=>x.ans===null).length, flags = S.items.filter(x=>x.flag).length;
+  const box = document.getElementById("confirm");
+  box.innerHTML = `<section class="sheet stack"><h3>¿Entregar el simulacro?</h3>
+    <p class="muted">${blank? `Quedan ${blank} sin responder. `:"Respondiste todas. "}${flags?`Tenés ${flags} marcadas como dudosas.`:""}</p>
+    <div class="row"><button class="btn primary" id="yes">Entregar</button><button class="btn" id="no">Seguir respondiendo</button></div></section>`;
+  document.getElementById("yes").onclick = finish;
+  document.getElementById("no").onclick = ()=>{ box.innerHTML=""; };
+  box.scrollIntoView({behavior:"smooth", block:"center"});
+}
+
+/* ---------- resultado ---------- */
+function finish(){
+  stopTimer();
+  if (S.mode==="sim") S.items.forEach(it=>{ if(it.ans!==null) record(it.q.id, it.ans===it.correct); else record(it.q.id,false); });
+  else S.items.forEach(it=>{ if(!it.checked && it.ans!==null){ it.checked=true; record(it.q.id, it.ans===it.correct);} });
+  S.done = true;
+  const items = S.mode==="sim" ? S.items : S.items.filter(x=>x.checked);
+  const ok = items.filter(x=>x.ans===x.correct).length, n = items.length;
+  const per = {}; items.forEach(x=>{ const t=x.q.t; per[t]=per[t]||{ok:0,n:0}; per[t].n++; if(x.ans===x.correct) per[t].ok++; });
+  const wrongItems = items.filter(x=>x.ans!==x.correct);
+  const nota = n ? (10*ok/n) : 0;
+  $app.innerHTML = `
+  <header class="stack">
+    <span class="eyebrow">${S.mode==="sim"?"Simulacro entregado":"Resultado"}</span>
+    <div class="score">${ok}<small> / ${n}</small></div>
+    <p class="muted">${n? `${Math.round(100*ok/n)} % de aciertos, equivalente a ${nota.toFixed(1).replace(".",",")} sobre 10.`:"No respondiste ninguna pregunta."}</p>
+    <div class="row">
+      <button class="btn primary" id="again">${S.mode==="sim"?"Otro simulacro":"Volver al inicio"}</button>
+      ${wrongItems.length?`<button class="btn" id="redo">Practicar las ${wrongItems.length} que erré</button>`:""}
+      ${S.mode==="sim"?`<button class="btn ghost" id="home2">Inicio</button>`:""}
+    </div>
+  </header>
+  <section class="sheet stack">
+    <h2>Por tema</h2>
+    <div class="statgrid">
+      <span class="h">Tema</span><span class="h">Aciertos</span><span class="h"></span>
+      ${TOPICS.filter(([k])=>per[k]).map(([k,nm])=>`<span>${nm}</span><span>${per[k].ok}/${per[k].n}</span><span class="bar"><i style="width:${100*per[k].ok/per[k].n}%"></i></span>`).join("")}
+    </div>
+  </section>
+  <section class="sheet stack">
+    <h2>Corrección</h2>
+    <div class="rev">
+      ${items.map((x,j)=>{
+        const good = x.ans===x.correct;
+        const yours = x.ans===null ? "sin responder" : `${LET[x.ans]}) ${fmt(optText(x.q,x.order[x.ans]))}`;
+        return `<article class="revitem ${good?"ok":"bad"}">
+          <div class="row"><span class="pill ${good?"ok":"bad"}">${good?"bien":"mal"}</span>${x.flag?`<span class="pill flag">dudosa</span>`:""}<span class="tag">${j+1} · ${TOPIC_NAME[x.q.t]}</span></div>
+          <p><strong>${fmt(x.q.q)}</strong></p>
+          ${good?"":`<p class="ans">Tu respuesta: ${yours}</p>`}
+          <p class="ans">Correcta: ${LET[x.correct]}) ${fmt(optText(x.q,x.order[x.correct]))}</p>
+          <p class="ans muted">${fmt(x.q.x)}</p>
+        </article>`;}).join("")}
+    </div>
+  </section>`;
+  document.getElementById("again").onclick = ()=> S.mode==="sim" ? startSimFromResults() : renderHome();
+  const h2=document.getElementById("home2"); if(h2) h2.onclick=renderHome;
+  const rd=document.getElementById("redo"); if(rd) rd.onclick=()=>startList(wrongItems.map(x=>x.q),"prac");
+  window.scrollTo(0,0);
+}
+function startSimFromResults(){
+  const limit = S.limit;
+  const items = [];
+  TOPICS.forEach(([k])=> shuffle(BANK.filter(q=>q.t===k)).slice(0,SIM_WEIGHTS[k]||0).forEach(q=>items.push(makeItem(q))));
+  S = {mode:"sim", items, i:0, limit, end: limit? Date.now()+limit*60000:null, done:false};
+  renderQuiz(); startTimer(); window.scrollTo(0,0);
+}
+
+/* ---------- teclado ---------- */
+document.addEventListener("keydown", e=>{
+  if(!S || S.done || e.target.tagName==="SELECT") return;
+  if(!document.querySelector(".opts")) return;
+  const it = S.items[S.i];
+  const k = e.key.toLowerCase();
+  const idx = LET.indexOf(k);
+  if (idx>=0 && idx<it.order.length && !e.ctrlKey && !e.metaKey){ choose(idx); return; }
+  if (e.key==="Enter" && !e.target.closest("button")){
+    if (S.mode!=="sim" && !it.checked){ check(); return; }
+    if (S.i < S.items.length-1){ S.i++; renderQuiz(); }
+    return;
+  }
+  if (e.key==="ArrowRight" && S.i<S.items.length-1 && (S.mode==="sim"||it.checked)){ S.i++; renderQuiz(); }
+  if (e.key==="ArrowLeft" && S.i>0){ S.i--; renderQuiz(); }
+});
+
+renderHome();
+</script>
