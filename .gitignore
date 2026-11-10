@@ -74,3 +74,6 @@ materias/SIM/entregables/TPI/subte/datos/plano3d_control.png
 
 # Obsidian: estado de la interfaz (pestañas abiertas), no se versiona
 .obsidian/workspace.json
+
+# IO: réplica del parcial práctico del alumno (fotos privadas). No se sube a GitHub.
+materias/IO/estudio/recuperatorio/parcial-2026-10-03.js

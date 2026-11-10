@@ -119,6 +119,44 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .pill{display:inline-block;font-family:var(--f-mono);font-size:11px;padding:2px 8px;border-radius:999px;border:1px solid currentColor}
 .pill.ok{color:var(--ok)} .pill.bad{color:var(--bad)} .pill.flag{color:var(--flag)}
 sub,sup{font-size:.72em}
+
+/* pestañas teoría / práctica */
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line)}
+.tab{border:none;background:transparent;padding:10px 16px;font-family:var(--f-display);font-weight:600;font-size:17px;color:var(--muted);border-bottom:3px solid transparent;margin-bottom:-1px}
+.tab[aria-current="page"]{color:var(--ink);border-bottom-color:var(--accent)}
+.tab:hover{color:var(--ink)}
+
+/* parcial práctico */
+.enun{display:flex;flex-direction:column;gap:10px;font-size:15.5px}
+.model{font-family:var(--f-mono);font-size:14px;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:12px 14px;overflow-x:auto;line-height:1.75}
+.model .lbl{color:var(--muted);font-family:var(--f-body);font-size:13px;margin-left:10px}
+.fig{overflow-x:auto}
+.fig svg{display:block;width:100%;max-width:480px;height:auto}
+.fig .ax{stroke:var(--ink);stroke-width:1.2}
+.fig .gr{stroke:var(--line);stroke-width:1}
+.fig .ln{stroke:var(--ink);stroke-width:2;fill:none}
+.fig .tk{fill:var(--muted);font-family:var(--f-mono);font-size:11px}
+.fig .lb{fill:var(--accent);font-family:var(--f-mono);font-size:13px;font-weight:600}
+.fig .rg{fill:var(--accent);fill-opacity:.16;stroke:var(--accent);stroke-width:1}
+.fig .op{fill:var(--ok);stroke:var(--sheet);stroke-width:2}
+.tblwrap{overflow-x:auto}
+table.spx{border-collapse:collapse;font-family:var(--f-mono);font-size:13.5px;font-variant-numeric:tabular-nums}
+table.spx th,table.spx td{border:1px solid var(--line);padding:5px 9px;text-align:center;white-space:nowrap}
+table.spx th{background:var(--paper);font-weight:600}
+table.spx tr.zr td{background:var(--paper);color:var(--muted)}
+table.spx td.hl{background:var(--accent-soft);color:var(--ink);font-weight:600}
+.eq{display:flex;flex-direction:column;gap:8px;padding-top:14px;border-top:1px solid var(--line)}
+.eq .stem{font-size:16.5px}
+.eopts{display:flex;flex-direction:column;gap:6px}
+.eopts .opt{padding:7px 10px}
+.eopts .opt .b{width:26px;height:26px;font-size:13px}
+.prev{font-size:14px;color:var(--muted)}
+details.sol{border:1px solid var(--line);border-radius:8px;padding:10px 14px;background:var(--paper)}
+details.sol summary{cursor:pointer;font-weight:700;font-family:var(--f-display)}
+details.sol[open] summary{margin-bottom:10px}
+.sol .stack{gap:10px}
+.code{font-family:var(--f-mono);font-size:13px}
+input.seed{font:inherit;font-family:var(--f-mono);color:var(--ink);background:var(--sheet);border:1px solid var(--line);border-radius:8px;padding:8px 10px;width:9em;text-transform:uppercase}
 @media (max-width:480px){.stem{font-size:17px}.opt{grid-template-columns:30px 1fr auto;gap:8px}.score{font-size:52px}}
 @media (prefers-reduced-motion:no-preference){.opt,.btn,.chip,.cell{transition:border-color .12s,background-color .12s}}
 </style>
@@ -761,6 +799,7 @@ function renderHome(){
     return {k,n,seen,ok,pct: seen? Math.round(100*ok/seen):null};
   });
   $app.innerHTML = `
+  ${tabsHTML("teoria")}
   <header class="stack">
     <span class="eyebrow">Investigación Operativa · recuperatorio 19/11</span>
     <h1>Simulacro de teoría</h1>
@@ -814,6 +853,7 @@ function renderHome(){
     <p class="muted" style="font-size:14px" id="reset-msg">El avance se guarda sólo en este navegador.</p>
   </section>`;
 
+  bindTabs();
   document.getElementById("go-sim").onclick = startSim;
   document.getElementById("go-prac").onclick = startPractice;
   const ge = document.getElementById("go-err"); if (wrongIds.length) ge.onclick = () => startList(shuffle(wrongIds).map(id=>byId[id]), "review");
@@ -919,7 +959,7 @@ function renderQuiz(){
   </section>
   <div id="confirm"></div>`;
 
-  document.getElementById("home").onclick = renderHome;
+  document.getElementById("home").onclick = () => { stopTimer(); location.hash = "teoria"; renderHome(); };
   document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{ S.i=+b.dataset.go; renderQuiz(); });
   document.querySelectorAll(".opt").forEach(o=>{
     o.onclick = e => { if(e.target.closest("[data-strike]")) return; choose(+o.dataset.pos); };
@@ -1031,6 +1071,495 @@ document.addEventListener("keydown", e=>{
   if (e.key==="ArrowRight" && S.i<S.items.length-1 && (S.mode==="sim"||it.checked)){ S.i++; renderQuiz(); }
   if (e.key==="ArrowLeft" && S.i>0){ S.i--; renderQuiz(); }
 });
+</script>
+<script src="parcial-2026-10-03.js"></script>
+<script>
+/* ===================== PRÁCTICA ===================== */
+function tabsHTML(active){
+  return `<nav class="tabs" aria-label="Sección">
+    <button class="tab" data-tab="teoria" aria-current="${active==="teoria"?"page":"false"}">Teoría</button>
+    <button class="tab" data-tab="practica" aria-current="${active==="practica"?"page":"false"}">Práctica</button></nav>`;
+}
+function bindTabs(){ document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{ const t=b.dataset.tab; if(location.hash!=="#"+t) location.hash=t; else route(); }); }
+function route(){ stopTimer(); if(location.hash==="#practica") renderPracticeHome(); else renderHome(); }
+window.addEventListener("hashchange", route);
 
-renderHome();
+/* ---------- aritmética exacta ---------- */
+function gcd(a,b){a=Math.abs(a);b=Math.abs(b);while(b){[a,b]=[b,a%b];}return a||1;}
+class F{
+  constructor(n,d=1){ if(d<0){n=-n;d=-d;} const g=gcd(n,d); this.n=(n/g)||0; this.d=d/g; }
+  static of(x){ if(x instanceof F) return x; let d=1; while(Math.abs(x*d-Math.round(x*d))>1e-9 && d<1e6) d*=10; return new F(Math.round(x*d),d); }
+  add(o){o=F.of(o);return new F(this.n*o.d+o.n*this.d,this.d*o.d);}
+  sub(o){o=F.of(o);return new F(this.n*o.d-o.n*this.d,this.d*o.d);}
+  mul(o){o=F.of(o);return new F(this.n*o.n,this.d*o.d);}
+  div(o){o=F.of(o);return new F(this.n*o.d,this.d*o.n);}
+  neg(){return new F(-this.n,this.d);} sign(){return Math.sign(this.n);} isZero(){return this.n===0;}
+  cmp(o){o=F.of(o);return Math.sign(this.n*o.d-o.n*this.d);} eq(o){return this.cmp(o)===0;}
+  val(){return this.n/this.d;} isInt(){return this.d===1;}
+}
+const Z0 = new F(0);
+const nf = (x,dec=2) => Number(x).toLocaleString("es-AR",{maximumFractionDigits:dec,minimumFractionDigits:0}).replace(/−/g,"−").replace(/^-/,"−");
+const fs = q => q.d===1 ? nf(q.n,0) : (q.d<=99 ? `${q.n<0?"−":""}${Math.abs(q.n)}/${q.d}` : nf(q.val()));
+const fsa = q => q.d===1 ? nf(q.n,0) : `${fs(q)} ≈ ${nf(q.val())}`;
+function inv3(M){
+  const A=M.map((row,i)=>[...row,...[0,1,2].map(j=>new F(i===j?1:0))]);
+  for(let c=0;c<3;c++){
+    let p=-1; for(let r=c;r<3;r++) if(!A[r][c].isZero()){p=r;break;}
+    if(p<0) return null; [A[c],A[p]]=[A[p],A[c]];
+    const pv=A[c][c]; A[c]=A[c].map(x=>x.div(pv));
+    for(let r=0;r<3;r++) if(r!==c && !A[r][c].isZero()){ const f=A[r][c]; A[r]=A[r].map((x,j)=>x.sub(f.mul(A[c][j]))); }
+  }
+  return A.map(r=>r.slice(3));
+}
+const combos3 = n => { const o=[]; for(let a=0;a<n;a++)for(let b=a+1;b<n;b++)for(let c=b+1;c<n;c++)o.push([a,b,c]); return o; };
+
+/* ---------- azar reproducible ---------- */
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;}}
+function seedNum(s){ let h=2166136261; for(const ch of s){ h^=ch.charCodeAt(0); h=Math.imul(h,16777619); } return h>>>0; }
+const pick=(r,a)=>a[Math.floor(r()*a.length)];
+const rng=(a,b,s)=>{const o=[];for(let x=a;x<=b+1e-9;x+=s)o.push(+x.toFixed(4));return o;};
+const shufR=(r,a)=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+const newSeed=()=>Math.random().toString(36).slice(2,7).toUpperCase();
+
+/* opciones: 4 en a–d y "Ninguna" en e. noneP: probabilidad de quitar la correcta. */
+const NONE = "Ninguna de las anteriores.";
+function mkOpts(r, correct, distract, noneP=0){
+  const seen=new Set([correct]); const ds=[];
+  for(const d of distract){ if(!seen.has(d)){ seen.add(d); ds.push(d);} if(ds.length===4) break; }
+  let useNone = r()<noneP && ds.length>=4;
+  const four = useNone ? ds.slice(0,4) : [correct, ...ds.slice(0,3)];
+  while(four.length<4) four.push("—");
+  const order = shufR(r,four);
+  return {opts:[...order, NONE], a: useNone ? 4 : order.indexOf(correct)};
+}
+
+/* ---------- notación ---------- */
+const VN = ["x<sub>1</sub>","x<sub>2</sub>","x<sub>3</sub>","s<sub>1</sub>","s<sub>2</sub>","e<sub>3</sub>","a<sub>3</sub>"];
+function exprHTML(coefs, vars){
+  let out=""; coefs.forEach((c,i)=>{ const v=typeof c==="number"?c:c.val(); if(Math.abs(v)<1e-12) return;
+    const neg=v<0, ab=Math.abs(v), num = Math.abs(ab-1)<1e-12 ? "" : nf(ab,3);
+    out += out ? (neg?" − ":" + ") : (neg?"−":""); out += num + vars[i]; });
+  return out||"0";
+}
+const X2 = ["x<sub>1</sub>","x<sub>2</sub>"];
+const CIRC = ["①","②","③"];
+
+/* ===================== EJERCICIO 1: método gráfico ===================== */
+function lineInt(P,Q,s){ let a=Q,b=P,r=P*Q; const g=gcd(gcd(a,b),r); return {a:a/g,b:b/g,r:r/g,s}; }
+function ej1Build(p){
+  const cons=p.cons, axes=[{a:1,b:0,r:0,ax:"x1"},{a:0,b:1,r:0,ax:"x2"}];
+  const all=[...cons.map((c,i)=>({...c,i})),...axes];
+  const lhs=(c,v)=>v.x.mul(c.a).add(v.y.mul(c.b));
+  const feas=v=> v.x.sign()>=0 && v.y.sign()>=0 && cons.every(c=>{ const k=lhs(c,v).cmp(c.r); return c.s==="≥"?k>=0:k<=0; });
+  const verts=[], keys=new Set();
+  for(let i=0;i<all.length;i++)for(let j=i+1;j<all.length;j++){
+    const A=all[i],B=all[j], det=A.a*B.b-B.a*A.b; if(det===0) continue;
+    const v={x:new F(A.r*B.b-B.r*A.b,det), y:new F(A.a*B.r-B.a*A.r,det)};
+    if(!feas(v)) continue; const k=fs(v.x)+","+fs(v.y); if(keys.has(k)) continue; keys.add(k); verts.push(v);
+  }
+  const cx=verts.reduce((s,v)=>s+v.x.val(),0)/verts.length, cy=verts.reduce((s,v)=>s+v.y.val(),0)/verts.length;
+  verts.sort((u,v)=>Math.atan2(u.y.val()-cy,u.x.val()-cx)-Math.atan2(v.y.val()-cy,v.x.val()-cx));
+  verts.forEach(v=>{ v.z=v.x.mul(p.c[0]).add(v.y.mul(p.c[1]));
+    v.act=cons.map((c,i)=>lhs(c,v).eq(c.r)?i:-1).filter(i=>i>=0);
+    v.cut=[...v.act.map(i=>CIRC[i]), ...(v.x.isZero()?["eje x<sub>2</sub>"]:[]), ...(v.y.isZero()?["eje x<sub>1</sub>"]:[])];
+    v.txt=`(${fs(v.x)}, ${fs(v.y)})`; });
+  const best = verts.reduce((b,v)=> b===null ? v.z : ((p.type==="Min"? v.z.cmp(b)<0 : v.z.cmp(b)>0) ? v.z : b), null);
+  const opt = verts.filter(v=>v.z.eq(best));
+  const slack=(i,v)=>{ const c=cons[i], l=lhs(c,v); return c.s==="≤" ? new F(c.r).sub(l) : l.sub(c.r); };
+  const consTxt=i=>`${exprHTML([cons[i].a,cons[i].b],X2)} ${cons[i].s} ${nf(cons[i].r,0)}`;
+  const e={p,cons,verts,opt,best,lhs,feas,slack,consTxt};
+  e.intro = `<p>${p.story}</p>
+    <div class="model">${p.type==="Min"?"Minimizar":"Maximizar"} Z = ${exprHTML(p.c,X2)}<br>Sujeto a:<br>
+    ${cons.map((c,i)=>`&nbsp;&nbsp;${CIRC[i]} ${consTxt(i)}`).join("<br>")}<br>&nbsp;&nbsp;&nbsp;&nbsp;x<sub>1</sub>, x<sub>2</sub> ≥ 0</div>
+    <p>La siguiente gráfica ilustra su región factible (o parte de ella):</p>`;
+  e.fig = `<div class="fig">${graphSVG(e,false)}</div>`;
+  e.sol = `<div class="stack"><div class="fig">${graphSVG(e,true)}</div>
+    <div class="tblwrap"><table class="spx"><tr><th>Vértice</th><th>Se cortan</th><th>Z</th></tr>
+    ${verts.map(v=>`<tr><td>${v.txt}</td><td>${v.cut.join(" ∩ ")}</td><td class="${opt.includes(v)?"hl":""}">${nf(v.z.val())}</td></tr>`).join("")}</table></div>
+    <p>${opt.length>1?`El óptimo se repite en ${opt[0].txt} y ${opt[1].txt}: la función objetivo es paralela a una restricción y todo el segmento es óptimo.`:`Óptimo único en ${opt[0].txt}.`} Z* = ${nf(best.val())}.</p></div>`;
+  return e;
+}
+function niceStep(m){ for(const s of [5,10,20,25,50,100,200,250,500,1000,2000]) if(m/s<=8) return s; return 5000; }
+function graphSVG(e,region){
+  const W=460,H=330,m={l:46,r:18,t:16,b:40};
+  let mx=0,my=0; e.cons.forEach(c=>{ if(c.a>0&&c.r>0) mx=Math.max(mx,c.r/c.a); if(c.b>0&&c.r>0) my=Math.max(my,c.r/c.b); });
+  e.verts.forEach(v=>{mx=Math.max(mx,v.x.val());my=Math.max(my,v.y.val());});
+  const sxS=niceStep(mx*1.12), syS=niceStep(my*1.2), X=Math.ceil(mx*1.12/sxS)*sxS, Y=Math.ceil(my*1.2/syS)*syS;
+  const sx=x=>m.l+x/X*(W-m.l-m.r), sy=y=>H-m.b-y/Y*(H-m.t-m.b);
+  let g="";
+  for(let x=0;x<=X+1e-9;x+=sxS) g+=`<line class="gr" x1="${sx(x)}" y1="${sy(0)}" x2="${sx(x)}" y2="${sy(Y)}"/><text class="tk" x="${sx(x)}" y="${sy(0)+16}" text-anchor="middle">${x}</text>`;
+  for(let y=0;y<=Y+1e-9;y+=syS) g+=`<line class="gr" x1="${sx(0)}" y1="${sy(y)}" x2="${sx(X)}" y2="${sy(y)}"/><text class="tk" x="${sx(0)-7}" y="${sy(y)+4}" text-anchor="end">${y}</text>`;
+  if(region && e.verts.length>2) g+=`<polygon class="rg" points="${e.verts.map(v=>sx(v.x.val())+","+sy(v.y.val())).join(" ")}"/>`;
+  e.cons.forEach((c,i)=>{
+    const pts=[]; const add=(x,y)=>{ if(x>=-1e-9&&x<=X+1e-9&&y>=-1e-9&&y<=Y+1e-9 && !pts.some(p=>Math.abs(p[0]-x)<1e-6&&Math.abs(p[1]-y)<1e-6)) pts.push([x,y]); };
+    if(c.b!==0){ add(0,c.r/c.b); add(X,(c.r-c.a*X)/c.b); }
+    if(c.a!==0){ add(c.r/c.a,0); add((c.r-c.b*Y)/c.a,Y); }
+    if(pts.length<2) return; pts.sort((p,q)=>p[0]-q[0]||p[1]-q[1]); const [p,q]=[pts[0],pts[pts.length-1]];
+    g+=`<line class="ln" x1="${sx(p[0])}" y1="${sy(p[1])}" x2="${sx(q[0])}" y2="${sy(q[1])}"/>`;
+    const t=c.a<0?0.85:0.12, lx=p[0]+(q[0]-p[0])*t, ly=p[1]+(q[1]-p[1])*t;
+    g+=`<text class="lb" x="${sx(lx)+6}" y="${sy(ly)-6}">${CIRC[i]}</text>`;
+  });
+  if(region) e.opt.forEach(v=>g+=`<circle class="op" cx="${sx(v.x.val())}" cy="${sy(v.y.val())}" r="5.5"/>`);
+  g+=`<line class="ax" x1="${sx(0)}" y1="${sy(0)}" x2="${sx(X)}" y2="${sy(0)}"/><line class="ax" x1="${sx(0)}" y1="${sy(0)}" x2="${sx(0)}" y2="${sy(Y)}"/>`;
+  g+=`<text class="tk" x="${(sx(0)+sx(X))/2}" y="${H-6}" text-anchor="middle">x₁</text><text class="tk" x="12" y="${(sy(0)+sy(Y))/2}" text-anchor="middle">x₂</text>`;
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Gráfico de las restricciones">${g}</svg>`;
+}
+const STORIES1 = [
+  ["la extracción de materias primas (hierro y carbón)","Min"],["la mezcla de dos fertilizantes","Min"],["la dieta de un criadero con dos alimentos","Min"],
+  ["la producción de dos modelos de bicicleta","Max"],["la fabricación de dos tipos de pintura","Max"]];
+function genEj1(r){
+  for(let t=0;t<800;t++){
+    const st=pick(r,STORIES1), type=st[1];
+    const P1=pick(r,[60,80,100,120,150]), Q1=pick(r,[20,30,40,50,60]);
+    const P2=P1+pick(r,[10,20,30,40]), Q2=Q1+pick(r,[10,20,30,40]);
+    const L1=lineInt(P1,Q1,"≥"), L2=lineInt(P2,Q2,"≤"), k=Q1+pick(r,[0,0,10]); if(k>=Q2) continue;
+    const L3={a:-1,b:1,r:k,s:"≤"};
+    const alt=r()<0.5; let c;
+    if(alt){ const base=type==="Min"?L1:L2, f=pick(r,[5,10,20,50]); c=[base.a*f,base.b*f]; }
+    else c=[pick(r,rng(50,300,10)),pick(r,rng(100,600,50))];
+    const e=ej1Build({type,c,cons:[L1,L2,L3],story:`Considere el siguiente problema de PL asociado a ${st[0]}:`});
+    if(e.verts.length<3 || !e.verts.every(v=>v.x.isInt()&&v.y.isInt())) continue;
+    if(alt ? e.opt.length!==2 : e.opt.length!==1) continue;
+    return e;
+  }
+  return null;
+}
+function ej1Questions(e,r){
+  const qs=[], V=e.verts, opt=e.opt;
+  // 1 coordenadas
+  { let correct, ds;
+    if(opt.length===2){ correct=`Existen múltiples soluciones sobre el segmento que une ${opt[0].txt} y ${opt[1].txt}.`; ds=[opt[0].txt,opt[1].txt,...shufR(r,V.filter(v=>!opt.includes(v))).map(v=>v.txt)]; }
+    else { correct=opt[0].txt; const nb=V.filter(v=>v!==opt[0]); ds=[...shufR(r,nb).map(v=>v.txt), `Existen múltiples soluciones sobre el segmento que une ${opt[0].txt} y ${nb[0].txt}.`]; }
+    const o=mkOpts(r,correct,ds);
+    qs.push({q:"Identifique las coordenadas de la solución óptima del problema:",...o,
+      x:`Evaluando Z en los vértices: ${V.map(v=>`${v.txt} → ${nf(v.z.val())}`).join("; ")}. ${opt.length===2?`El ${e.p.type==="Min"?"mínimo":"máximo"} se repite en dos vértices adyacentes: la función objetivo es paralela a una restricción y es óptimo todo el segmento. Marcar uno solo de los extremos es incorrecto.`:`El ${e.p.type==="Min"?"mínimo":"máximo"} está sólo en ${opt[0].txt}.`}`}); }
+  // 2 punto factible
+  { const xs=Math.max(...V.map(v=>v.x.val())), ys=Math.max(...V.map(v=>v.y.val()));
+    let want = r()<0.4 ? -1 : Math.floor(r()*3); let pt=null;
+    for(let t=0;t<1600 && !pt;t++){
+      if(t===400) want=(want+1)%3; if(t===800) want=(want+1)%3; if(t===1200) want=-1;
+      const P={x:new F(5*Math.floor(r()*(xs*1.2/5+1))), y:new F(5*Math.floor(r()*(ys*1.2/5+1)))};
+      if(V.some(v=>v.x.eq(P.x)&&v.y.eq(P.y))) continue;
+      const viol=e.cons.map((c,i)=>{const k=e.lhs(c,P).cmp(c.r);return (c.s==="≥"?k<0:k>0)?i:-1;}).filter(i=>i>=0);
+      if(want<0 ? viol.length===0 : (viol.length===1&&viol[0]===want)) pt={...P,viol};
+    }
+    const ord=["primera","segunda","tercera"];
+    const txt=i=>`No, porque viola la ${ord[i]} restricción.`;
+    const correct = pt.viol.length ? txt(pt.viol[0]) : "Sí, porque satisface todas las restricciones del modelo.";
+    const o=mkOpts(r,correct,["Sí, porque satisface todas las restricciones del modelo.",txt(0),txt(1),txt(2)]);
+    qs.push({q:`¿El punto (x<sub>1</sub> = ${fs(pt.x)}, x<sub>2</sub> = ${fs(pt.y)}) es una solución factible?`,...o,
+      x:e.cons.map((c,i)=>`${CIRC[i]} ${nf(e.lhs(c,pt).val())} ${c.s} ${nf(c.r,0)} ${pt.viol.includes(i)?"✗":"✓"}`).join(" · ")}); }
+  // 3 activas
+  { let act=opt[0].act.slice(); if(opt.length===2) act=act.filter(i=>opt[1].act.includes(i));
+    const only=i=>`Solo ${e.consTxt(i)}`; const all3="Las tres restricciones.";
+    let correct = act.length===1 ? only(act[0]) : act.length===3 ? all3 : null;
+    const base=[only(0),only(1),only(2),all3];
+    let o; if(correct){ o={opts:[...shufR(r,base),NONE]}; o.a=o.opts.indexOf(correct); } else { o={opts:[...shufR(r,base),NONE],a:4}; }
+    qs.push({q:"¿Qué restricciones funcionales están activas en el óptimo?",...o,
+      x:`${opt.length===2?`El óptimo es todo el segmento, así que cuentan las restricciones activas en todos sus puntos. En ${opt[0].txt}: ${opt[0].act.map(i=>CIRC[i]).join(", ")||"ninguna"}; en ${opt[1].txt}: ${opt[1].act.map(i=>CIRC[i]).join(", ")||"ninguna"}. Activa en todo el segmento: ${act.map(i=>CIRC[i]).join(", ")||"ninguna"}.`:`En ${opt[0].txt} se cumplen con igualdad: ${act.map(i=>CIRC[i]).join(" y ")||"ninguna funcional"}.`}${!correct?" Como no es una sola ni son las tres, la respuesta es «Ninguna».":""}`}); }
+  // 4 holgura / exceso
+  { const cand=[]; V.forEach(v=>[0,1,2].forEach(i=>{ const s=e.slack(i,v); if(!s.isZero()) cand.push({v,i,s}); }));
+    const c=pick(r,cand), kind=e.cons[c.i].s==="≤"?"holgura":"exceso", val=c.s;
+    const ds=[nf(val.neg().val()),"0",nf(c.v.x.val()),nf(c.v.y.val()),nf(e.cons[c.i].r,0),nf(val.mul(2).val())].filter(s=>s!==nf(val.val()));
+    const o=mkOpts(r,nf(val.val()),ds,0.1);
+    qs.push({q:`¿Cuál es el valor de la variable de ${kind} de la ${["primera","segunda","tercera"][c.i]} restricción en el punto ${c.v.txt}?`,...o,
+      x:`${CIRC[c.i]} ${e.consTxt(c.i)}. En ${c.v.txt} el lado izquierdo vale ${nf(e.lhs(e.cons[c.i],c.v).val())}, así que la ${kind} es ${kind==="holgura"?`${nf(e.cons[c.i].r,0)} − ${nf(e.lhs(e.cons[c.i],c.v).val())}`:`${nf(e.lhs(e.cons[c.i],c.v).val())} − ${nf(e.cons[c.i].r,0)}`} = ${nf(val.val())}. Holguras y excesos nunca son negativos en un punto factible.`}); }
+  // 5 valor óptimo
+  { const vals=[...new Set(V.map(v=>nf(v.z.val())))].filter(s=>s!==nf(e.best.val()));
+    const extra=[nf(e.best.val()*0.8),nf(e.best.val()*1.25)];
+    const o=mkOpts(r,nf(e.best.val()),[...shufR(r,vals),...extra],0.1);
+    qs.push({q:`¿Cuál es el valor óptimo de Z?`,...o,x:`Z* = ${nf(e.best.val())}, en ${opt.map(v=>v.txt).join(" y ")}.`}); }
+  return qs;
+}
+
+/* ===================== EJERCICIO 2: simplex, sensibilidad, dual ===================== */
+function ej2Build(p){
+  const k=p.k, A=[[...p.A[0].map(F.of),new F(1),Z0,Z0,Z0],[...p.A[1].map(F.of),Z0,new F(1),Z0,Z0],[0,1,2].map(j=>new F(j===k?1:0)).concat([Z0,Z0,new F(-1),new F(1)])];
+  const c=[...p.c.map(F.of),Z0,Z0,Z0], b=p.b.map(F.of);
+  function info(B){
+    const Bm=[0,1,2].map(i=>B.map(j=>A[i][j])), Bi=inv3(Bm); if(!Bi) return null;
+    const mv=col=>[0,1,2].map(i=>Bi[i].reduce((s,x,t)=>s.add(x.mul(col[t])),Z0));
+    const xB=mv(b), Y=[0,1,2,3,4,5,6].map(j=>mv([A[0][j],A[1][j],A[2][j]])), cB=B.map(j=>c[j]);
+    const z=Y.map(col=>col.reduce((s,y,i)=>s.add(cB[i].mul(y)),Z0)), red=[0,1,2,3,4,5].map(j=>c[j].sub(z[j]));
+    const Z=xB.reduce((s,x,i)=>s.add(cB[i].mul(x)),Z0);
+    return {B,Bi,xB,Y,cB,z,red,Z,feas:xB.every(x=>x.sign()>=0),nondeg:xB.every(x=>x.sign()>0)};
+  }
+  const bases=combos3(6).map(info).filter(x=>x&&x.feas);
+  const opt=bases.reduce((m,x)=>!m||x.Z.cmp(m.Z)>0?x:m,null);
+  if(!opt) return {opt:null};
+  const nb=I=>[0,1,2,3,4,5].filter(j=>!I.B.includes(j));
+  function step(I){
+    const cand=nb(I).filter(j=>I.red[j].sign()>0); if(!cand.length) return null;
+    const best=cand.reduce((m,j)=>I.red[j].cmp(I.red[m])>0?j:m,cand[0]);
+    if(cand.filter(j=>I.red[j].eq(I.red[best])).length>1) return {tie:true};
+    const rows=[0,1,2].filter(i=>I.Y[best][i].sign()>0); if(!rows.length) return {unb:true};
+    const th=rows.map(i=>I.xB[i].div(I.Y[best][i])), mn=th.reduce((m,t)=>t.cmp(m)<0?t:m,th[0]);
+    const lr=rows.filter((i,t)=>th[t].eq(mn)); if(lr.length>1) return {tie:true};
+    return {enter:best,leave:I.B[lr[0]],row:lr[0],ratios:rows.map((i,t)=>({i,th:th[t]}))};
+  }
+  // primera iteración con Gran M: entra la variable del contrato mínimo
+  const init=(()=>{ const rows=[0,1,2].filter(i=>A[i][k].sign()>0), th=rows.map(i=>b[i].div(A[i][k])), mn=th.reduce((m,t)=>t.cmp(m)<0?t:m,th[0]);
+    const lr=rows.filter((i,t)=>th[t].eq(mn)); return {enter:k,leave:[3,4,6][lr[0]],unique:lr.length===1,rows,th}; })();
+  const T = p.T ? info(p.T) : null;
+  const e={p,A,c,b,info,bases,opt,nb,step,init,T};
+  const P=p.ctx.prods, kk=k;
+  e.intro=`<p>${p.ctx.firm} produce ${P.map((n,i)=>`${n} (x<sub>${i+1}</sub>)`).join(", ").replace(/, ([^,]*)$/," y $1")}, midiendo sus cantidades en ${p.ctx.unit}. El objetivo es maximizar la ganancia en ${p.ctx.money}. El modelo lineal formulado es el siguiente:</p>
+   <div class="model">Maximizar Z = ${exprHTML(p.c,VN)}<br>Sujeto a:<br>
+   &nbsp;&nbsp;${exprHTML(p.A[0],VN)} ≤ ${nf(p.b[0],0)}<span class="lbl">(${p.ctx.res[0][0]})</span><br>
+   &nbsp;&nbsp;${exprHTML(p.A[1],VN)} ≤ ${nf(p.b[1],0)}<span class="lbl">(${p.ctx.res[1][0]})</span><br>
+   &nbsp;&nbsp;${VN[kk]} ≥ ${nf(p.b[2],0)}<span class="lbl">(Contrato mínimo de ${P[kk]})</span><br>
+   &nbsp;&nbsp;x<sub>1</sub>, x<sub>2</sub>, x<sub>3</sub> ≥ 0</div>
+   <p>A continuación se muestra una tabla Simplex de su resolución:</p>`;
+  e.table = I => `<div class="tblwrap"><table class="spx"><tr><th>C<sub>B</sub></th><th>Base</th>${VN.map(v=>`<th>${v}</th>`).join("")}<th>X<sub>i</sub></th></tr>
+    ${[0,1,2].map(i=>`<tr><td>${fs(I.cB[i])}</td><td>${VN[I.B[i]]}</td>${[0,1,2,3,4,5,6].map(j=>`<td>${fs(I.Y[j][i])}</td>`).join("")}<td>${fs(I.xB[i])}</td></tr>`).join("")}</table></div>`;
+  e.fullTable = I => `<div class="tblwrap"><table class="spx"><tr><th>C<sub>B</sub></th><th>Base</th>${VN.map(v=>`<th>${v}</th>`).join("")}<th>X<sub>i</sub></th></tr>
+    <tr class="zr"><td></td><td>c<sub>j</sub></td>${c.slice(0,6).map(x=>`<td>${fs(x)}</td>`).join("")}<td>−M</td><td></td></tr>
+    ${[0,1,2].map(i=>`<tr><td>${fs(I.cB[i])}</td><td>${VN[I.B[i]]}</td>${[0,1,2,3,4,5,6].map(j=>`<td>${fs(I.Y[j][i])}</td>`).join("")}<td>${fs(I.xB[i])}</td></tr>`).join("")}
+    <tr class="zr"><td></td><td>z<sub>j</sub></td>${I.z.map(x=>`<td>${fs(x)}</td>`).join("")}<td>${fs(I.Z)}</td></tr>
+    <tr class="zr"><td></td><td>c<sub>j</sub>−z<sub>j</sub></td>${I.red.map(x=>`<td class="${x.sign()>0?"hl":""}">${fs(x)}</td>`).join("")}<td>−M${I.z[6].isZero()?"":(I.z[6].sign()>0?" − ":" + ")+fs(new F(Math.abs(I.z[6].n),I.z[6].d))}</td><td></td></tr></table></div>`;
+  e.u = I => [3,4,6].map(j=>I.z[j]); // valores implícitos (a3 da el de la ≥)
+  e.range = (I,v) => { const row=I.B.indexOf(v); let lo=null,hi=null;
+    nb(I).forEach(j=>{ const y=I.Y[j][row]; if(y.isZero()) return; const q=I.red[j].div(y);
+      if(y.sign()>0){ if(lo===null||q.cmp(lo)>0) lo=q; } else { if(hi===null||q.cmp(hi)<0) hi=q; } });
+    return {lo: lo===null?null:c[v].add(lo), hi: hi===null?null:c[v].add(hi)}; };
+  const fr = x => x===null ? "∞" : fs(x);
+  e.rangeTxt = R => `[${R.lo===null?"−∞":fs(R.lo)}, ${fr(R.hi)}]`;
+  e.sol = `<div class="stack">
+    ${T?`<p><b>Tabla dada con z<sub>j</sub> y c<sub>j</sub> − z<sub>j</sub>:</b></p>${e.fullTable(T)}`:""}
+    <p><b>Tabla óptima:</b></p>${e.fullTable(opt)}
+    <p>Z* = ${fsa(opt.Z)}. Valores implícitos (z<sub>j</sub> de s<sub>1</sub>, s<sub>2</sub> y a<sub>3</sub>): u = (${e.u(opt).map(fsa).join("; ")}).</p></div>`;
+  return e;
+}
+const CTX2 = [
+  {firm:"Una refinería de petróleo", prods:["Nafta","Diésel","Fueloil"], unit:"toneladas", money:"dólares", res:[["Materia prima: petróleo crudo","tonelada más de petróleo crudo"],["Capacidad de destilación","hora más de destilación"]], u1:"tonelada de petróleo crudo"},
+  {firm:"Una fábrica de muebles", prods:["Mesas","Sillas","Estantes"], unit:"unidades", money:"pesos", res:[["Madera","m² más de madera"],["Horas de taller","hora más de taller"]], u1:"m² de madera"},
+  {firm:"Una planta de alimentos", prods:["Galletitas","Budines","Alfajores"], unit:"cajas", money:"pesos", res:[["Harina","kg más de harina"],["Horas de horno","hora más de horno"]], u1:"kg de harina"},
+  {firm:"Una metalúrgica", prods:["Perfiles","Chapas","Caños"], unit:"toneladas", money:"dólares", res:[["Acero","tonelada más de acero"],["Horas de laminado","hora más de laminado"]], u1:"tonelada de acero"}];
+function genEj2(r){
+  for(let t=0;t<4000;t++){
+    const ctx=pick(r,CTX2), c=shufR(r,rng(20,90,5)).slice(0,3);
+    const A1=[0,1,2].map(()=>pick(r,[1,1.5,2,2.5,3,4])), A2=[0,1,2].map(()=>pick(r,[0.2,0.25,0.4,0.5,0.6,0.8,1]));
+    const k=pick(r,[0,1,2]), b=[pick(r,rng(3000,8000,500)),pick(r,rng(800,2000,100)),pick(r,rng(200,800,50))];
+    const e=ej2Build({ctx,c,A:[A1,A2],b,k}); const O=e.opt; if(!O) continue;
+    if(!O.nondeg) continue;
+    if(e.bases.filter(x=>x.Z.eq(O.Z)).length>1) continue;
+    if(!e.nb(O).every(j=>O.red[j].sign()<0)) continue;
+    const dec=[0,1,2]; if(!dec.some(j=>O.B.includes(j)) || !dec.some(j=>!O.B.includes(j))) continue;
+    const u=e.u(O); if(!(u[0].sign()>0 && u[1].sign()>0)) continue;
+    if(!e.init.unique) continue;
+    const key=I=>I.B.slice().sort().join();
+    const Ts=e.bases.filter(I=>I!==O && I.nondeg && !I.B.includes(6) && (()=>{const s=e.step(I); if(!s||s.tie||s.unb) return false; const nb2=I.B.map(j=>j===s.leave?s.enter:j); return key({B:nb2})===key(O);})());
+    if(!Ts.length) continue;
+    const T=pick(r,Ts); e.T=T; e.p.T=T.B;
+    return ej2Build({...e.p});
+  }
+  return null;
+}
+function ej2Questions(e,r){
+  const qs=[], O=e.opt, T=e.T, P=e.p.ctx.prods, s=e.step(T), uO=e.u(O), uT=e.u(T), ctx=e.p.ctx;
+  // 6 qué sigue
+  { const other=e.nb(T).filter(j=>j!==s.enter);
+    const ins=(j,l)=>`Ingresar ${VN[j]} a la base y sacar ${VN[l]}.`;
+    const correct=ins(s.enter,s.leave);
+    const ds=["Detenerse, la tabla es óptima porque no hay variables artificiales en la base.",
+      ...T.B.filter(l=>l!==s.leave).map(l=>ins(s.enter,l)), ...other.map(j=>ins(j,s.leave))];
+    const o=mkOpts(r,correct,[ds[0],...shufR(r,ds.slice(1))]);
+    qs.push({q:"Según la tabla presentada, ¿qué debe suceder según Simplex?",...o,
+      x:`Con c<sub>B</sub> = (${T.cB.map(fs).join(", ")}), los c<sub>j</sub> − z<sub>j</sub> de las no básicas son ${e.nb(T).map(j=>`${VN[j]}: ${fs(T.red[j])}`).join("; ")}. El mayor positivo es el de ${VN[s.enter]}, que entra. Cocientes x<sub>i</sub>/y<sub>ij</sub> con y<sub>ij</sub> > 0: ${s.ratios.map(o=>`${VN[T.B[o.i]]}: ${fsa(o.th)}`).join("; ")} → sale ${VN[s.leave]}. Que no haya artificiales en la base no hace óptima a una tabla.`}); }
+  // 7 precio sombra restricción 2
+  { const cor=fs(uO[1]); const ds=[fs(uT[1]),"0",fs(uO[0]),fs(e.c[O.B.find(j=>j<3)]),fs(uO[1].mul(2))].filter(x=>x!==cor);
+    const o=mkOpts(r,cor,ds,0.1);
+    qs.push({q:`¿Cuál es el precio sombra de la restricción de ${ctx.res[1][0]} en el óptimo?`,...o,
+      x:`Hay que ir a la tabla óptima (base ${O.B.map(j=>VN[j]).join(", ")}). El precio sombra es el z<sub>j</sub> de s<sub>2</sub>: ${fsa(uO[1])}.${uT[1].eq(uO[1])?"":` En la tabla dada ese z<sub>j</sub> vale ${fs(uT[1])}, pero esa tabla no es óptima.`} s<sub>2</sub> no es básica (vale 0), así que la restricción está agotada y su precio sombra no es cero.`}); }
+  // 8 rango de c de una básica de decisión
+  { const v=O.B.includes(e.p.k)?e.p.k:[0,1,2].find(j=>O.B.includes(j)); const R=e.range(O,v), cor=e.rangeTxt(R);
+    const ds=[]; if(T.B.includes(v)) ds.push(e.rangeTxt(e.range(T,v)));
+    ds.push(`[0, ${R.hi===null?"∞":fs(R.hi)}]`, `[${fs(e.c[v])}, ${R.hi===null?"∞":fs(R.hi)}]`, `[${fs(e.c[v].sub(10))}, ${fs(e.c[v].add(10))}]`, `[${R.lo===null?"−∞":fs(e.c[v].mul(2).sub(R.lo))}, ${fs(e.c[v].mul(2))}]`);
+    const o=mkOpts(r,cor,ds.filter(x=>x!==cor),0.1); const row=O.B.indexOf(v);
+    qs.push({q:`¿En qué rango puede variar el c<sub>${v+1}</sub> de ${P[v]} para que la base óptima no cambie?`,...o,
+      x:`Fila de ${VN[v]} en la tabla óptima, columnas no básicas: ${e.nb(O).map(j=>`${VN[j]}: y = ${fs(O.Y[j][row])}, c<sub>j</sub>−z<sub>j</sub> = ${fs(O.red[j])}`).join("; ")}. Cota inferior de Δc: el mayor (c<sub>j</sub>−z<sub>j</sub>)/y con y > 0; cota superior: el menor con y < 0. Resultado: ${cor}${R.lo&&!R.lo.isInt()?` (${nf(R.lo.val())} ≤ c ≤ ${R.hi?nf(R.hi.val()):"∞"})`:""}. Con la tabla dada (no óptima) el rango sale mal.`}); }
+  // 9 dual
+  { const b=e.p.b, W=(s3)=>`${nf(b[0],0)}y<sub>1</sub> + ${nf(b[1],0)}y<sub>2</sub> ${s3} ${nf(b[2],0)}y<sub>3</sub>`;
+    const cor=`Minimizar W = ${W("−")}`;
+    const ds=[`Minimizar W = ${exprHTML(e.p.c,["y<sub>1</sub>","y<sub>2</sub>","y<sub>3</sub>"])}`,`Maximizar W = ${W("−")}`,`Minimizar W = ${W("+")}`,`Maximizar W = ${W("+")}`];
+    const o=mkOpts(r,cor,ds,0.05);
+    qs.push({q:"¿Cuál es la función objetivo del Dual asociado (asumiendo todas las variables duales y<sub>j</sub> ≥ 0)?",...o,
+      x:`El primal es Max, así que el dual es Min con los b<sub>i</sub> como coeficientes. La tercera restricción es ≥ en un Max: para que y<sub>3</sub> ≥ 0 se la escribe −${VN[e.p.k]} ≤ −${nf(b[2],0)}, y su término entra con signo menos. Con y<sub>3</sub> ≤ 0 sería +${nf(b[2],0)}y<sub>3</sub>, pero la consigna pide todas ≥ 0.`}); }
+  // 10 holguras no básicas
+  { const sl=[3,4,5], nbS=sl.filter(j=>!O.B.includes(j)), nm=j=>VN[j];
+    const txt=set=> set.length===0 ? "Ninguna, todas son básicas." : set.length===1 ? `Solo ${nm(set[0])}` : set.length===2 ? `${nm(set[0])} y ${nm(set[1])}` : `${nm(3)}, ${nm(4)} y ${nm(5)}`;
+    const cor=txt(nbS); const all=[[3],[4],[5],[3,4],[3,5],[4,5],[3,4,5],[]].map(txt).filter(x=>x!==cor);
+    const o=mkOpts(r,cor,shufR(r,all),0.05);
+    qs.push({q:"¿Qué variables de holgura/exceso resultan no básicas en el óptimo?",...o,
+      x:`Base óptima: ${O.B.map(j=>VN[j]).join(", ")}. Las de holgura/exceso que no están en ella valen 0: ${nbS.map(nm).join(" y ")||"ninguna"}.`}); }
+  // 11 interpretación precio sombra 1
+  { const u=fsa(uO[0]), un=ctx.u1, m=ctx.money;
+    const cor=`Si disponemos de 1 ${ctx.res[0][1]}, la ganancia aumenta en ${u} ${m}.`;
+    const ds=[`Cuesta ${u} ${m} almacenar cada ${un}.`,`Sobran ${u} unidades de ${un.split(" de ").pop()} en el inventario.`,`Si aumentamos el precio del ${P[O.B.find(j=>j<3)]}, la ganancia aumentará en ${u} ${m}.`,`Si disponemos de 1 ${ctx.res[0][1]}, la ganancia disminuye en ${u} ${m}.`];
+    const o=mkOpts(r,cor,ds,0.05);
+    qs.push({q:"¿Qué significa el precio sombra de la primera restricción económicamente?",...o,
+      x:`u<sub>1</sub> = z<sub>j</sub> de s<sub>1</sub> en la tabla óptima = ${u}. Es cuánto sube Z por cada unidad más del recurso (dentro de su rango), y lo máximo que convendría pagar por ella. Si sobrara recurso, valdría 0.`}); }
+  // 12 tabla inicial
+  { const I=e.init, ins=(j,l)=>`Ingresa ${VN[j]}, sale ${VN[l]}.`, cor=ins(I.enter,I.leave);
+    const others=[0,1,2].filter(j=>j!==I.enter);
+    const ds=[ins(I.enter,[3,4,6].find(l=>l!==I.leave)), ins(others[0],I.leave===6?3:6), ins(others[1],3), ins(I.enter,5), ins(pick(r,others),I.leave)];
+    const o=mkOpts(r,cor,ds.filter(x=>x!==cor),0.05);
+    qs.push({q:"Al plantear la tabla Simplex inicial, ¿cuál variable ingresa y cuál sale de la base?",...o,
+      x:`Base inicial: s<sub>1</sub>, s<sub>2</sub> y la artificial a<sub>3</sub> (no el exceso e<sub>3</sub>, que entra con −1). Con −M en el funcional, c<sub>j</sub> − z<sub>j</sub> de ${VN[I.enter]} es ${fs(e.c[I.enter])} + M, el mayor: entra ${VN[I.enter]}. Cocientes: ${I.rows.map((i,t)=>`${VN[[3,4,6][i]]}: ${fsa(I.th[t])}`).join("; ")} → sale ${VN[I.leave]}.`}); }
+  // 13 costo reducido de una no básica de decisión
+  { const v=[0,1,2].find(j=>!O.B.includes(j)), rc=O.red[v], a=fs(new F(Math.abs(rc.n),rc.d)), u=ctx.unit.replace(/s$/,""), m=ctx.money;
+    const cor=`−${a}; producir una unidad de ${P[v]} disminuiría la ganancia en ${a} ${m}.`;
+    const ds=[`0; significa que ya se está produciendo y es rentable.`,`${a}; significa que conviene producirlo para aumentar la ganancia.`,`−${fs(e.c[v])}; significa que no hay capacidad suficiente para producirlo.`,`−${a}; significa que hay que bajar su precio en ${a} para producirlo.`];
+    const o=mkOpts(r,cor,ds,0.05);
+    qs.push({q:`En el óptimo, ¿cuál es el costo reducido de ${P[v]} y cómo se interpreta?`,...o,
+      x:`${VN[v]} no es básica en el óptimo y su c<sub>j</sub> − z<sub>j</sub> = ${fs(rc)}. Forzar una unidad baja Z en ${a}; para que convenga producirlo, su ganancia tendría que subir más de ${a} (c > ${fsa(e.c[v].sub(rc))}).`}); }
+  return qs;
+}
+
+/* ===================== EJERCICIO 3: stock con restricción de capital ===================== */
+function ej3Build(p){
+  const [A,B]=[0,1], Q0=[0,1].map(j=>Math.sqrt(2*p.D[j]*p.L[j]/(p.C[j]*p.i)));
+  const I0=[0,1].reduce((s,j)=>s+p.C[j]*Q0[j]/2,0), ratio=I0/p.I0, lam=p.i*(ratio*ratio-1);
+  const Ql=Q0.map(q=>q*Math.sqrt(p.i/(p.i+lam)));
+  const e={p,Q0,Iopt:I0,ratio,lam,Ql};
+  const it=p.ctx.items, pct=x=>nf(x*100,1)+" %";
+  e.intro=`<p>${p.ctx.firm} maneja el inventario de dos insumos críticos: ${it[0]} y ${it[1]}. Se estima una demanda anual de D<sub>A</sub> = ${nf(p.D[0],0)} u y D<sub>B</sub> = ${nf(p.D[1],0)} u. Cada vez que se realiza un pedido se incurre en un costo fijo de L<sub>A</sub> = $${nf(p.L[0],0)} para ${it[0]} y L<sub>B</sub> = $${nf(p.L[1],0)} para ${it[1]}. El costo unitario de compra es C<sub>A</sub> = $${nf(p.C[0],0)} y C<sub>B</sub> = $${nf(p.C[1],0)}. El costo de mantenimiento de inventario se estima con una tasa anual del i = ${pct(p.i)}. La empresa cuenta con un capital máximo de I<sub>0</sub> = $${nf(p.I0,0)} para invertir en el stock de estos productos.</p>`;
+  e.sol=`<div class="stack"><div class="tblwrap"><table class="spx"><tr><th></th><th>Q* sin restricción</th><th>C·Q*/2</th><th>Q con λ</th></tr>
+    ${[0,1].map(j=>`<tr><td>${it[j]}</td><td>${nf(Q0[j],1)}</td><td>${nf(p.C[j]*Q0[j]/2,0)}</td><td>${nf(Ql[j],1)}</td></tr>`).join("")}</table></div>
+    <p>Inversión media sin restricción: ${nf(I0,0)} ${I0>p.I0?">":"≤"} ${nf(p.I0,0)}. λ = i·[(I(0)/I<sub>0</sub>)² − 1] = ${nf(p.i,2)}·[(${nf(ratio,4)})² − 1] = ${nf(lam,4)}. Tasa límite i + λ = ${pct(p.i+lam)}.</p></div>`;
+  return e;
+}
+const CTX3=[{firm:"Una ferretería mayorista",items:["Tornillos A","Tuercas B"]},{firm:"Una distribuidora de insumos médicos",items:["Guantes A","Barbijos B"]},{firm:"Una librería mayorista",items:["Cuadernos A","Resmas B"]},{firm:"Un taller metalúrgico",items:["Bulones A","Arandelas B"]}];
+function genEj3(r){
+  for(let t=0;t<500;t++){
+    const p={ctx:pick(r,CTX3),D:[pick(r,rng(4000,20000,1000)),pick(r,rng(4000,20000,1000))],L:[pick(r,rng(100,300,50)),pick(r,rng(100,300,50))],C:[pick(r,rng(20,120,5)),pick(r,rng(20,120,5))],i:pick(r,[0.15,0.2,0.25])};
+    const e0=ej3Build({...p,I0:1}); p.I0=Math.round(e0.Iopt*(0.55+0.3*r())/500)*500;
+    const e=ej3Build(p); if(e.lam<0.05||e.lam>1.5) continue;
+    const yes=r()<0.6; p.r = yes ? Math.max(3,Math.floor(e.lam*100*pick(r,[0.4,0.6,0.8]))) : Math.ceil((p.i+e.lam)*100)+pick(r,[2,5,8]);
+    if(yes && p.r/100>=e.lam) continue;
+    return ej3Build(p);
+  }
+}
+function ej3Questions(e,r){
+  const p=e.p, it=p.ctx.items, qs=[], l=x=>`λ ≈ ${nf(x,2)}`;
+  { const cands=[e.ratio-1,p.i*(e.ratio-1),e.ratio*e.ratio-1,e.lam*2,e.lam/2].filter(x=>x>0&&Math.abs(x-e.lam)>0.03);
+    const o=mkOpts(r,l(e.lam),cands.map(l),0.1);
+    qs.push({q:"¿Qué valor de λ es el más cercano al óptimo para cumplir con el presupuesto?",...o,
+      x:`Sin restricción la inversión media es ${nf(e.Iopt,0)} > ${nf(p.I0,0)}: la restricción es efectiva. Todos los lotes se achican en la misma proporción √(i/(i+λ)), así que λ = i·[(I(0)/I<sub>0</sub>)² − 1] = ${nf(p.i,2)}·[(${nf(e.ratio,4)})² − 1] ≈ ${nf(e.lam,3)}.`}); }
+  { const q=e.Q0[0], f=x=>`${nf(Math.round(x),0)} unidades`;
+    const o=mkOpts(r,f(q),[f(q*Math.SQRT2),f(q/Math.SQRT2),f(e.Q0[1]),f(e.Ql[0])],0.12);
+    qs.push({q:`¿Cuál es el tamaño de lote óptimo para ${it[0]} si se ignora la restricción?`,...o,
+      x:`Q<sub>A</sub>* = √(2·${nf(p.D[0],0)}·${nf(p.L[0],0)} / (${nf(p.C[0],0)}·${nf(p.i,2)})) = ${nf(q,1)}.`}); }
+  { const I=e.Iopt, f=x=>`$${nf(Math.round(x),0)}`, no=I>p.I0;
+    const cor=`${f(I)}, por lo tanto ${no?"NO":"SÍ"} cumple la restricción.`;
+    const ds=[`${f(I/2.6)}, por lo tanto SÍ cumple la restricción.`,`${f(p.I0)}, por lo tanto coincide con la restricción.`,`${f(2*I)}, por lo tanto NO cumple la restricción.`,`${f(I)}, por lo tanto ${no?"SÍ":"NO"} cumple la restricción.`];
+    const o=mkOpts(r,cor,ds,0.05);
+    qs.push({q:"¿Cuál es el valor más cercano a la inversión promedio si se consideran ambos lotes óptimos?",...o,
+      x:`${nf(p.C[0],0)}·${nf(e.Q0[0],1)}/2 + ${nf(p.C[1],0)}·${nf(e.Q0[1],1)}/2 = ${nf(I,0)}. Se usa la inversión media (Q/2), no la máxima. ${f(p.I0)} es el capital disponible: la inversión recién coincide con él después de ajustar λ.`}); }
+  { const q=e.Ql[1], f=x=>`${nf(Math.round(x),0)} unidades`;
+    const o=mkOpts(r,f(q),[f(e.Q0[1]),f(e.Q0[1]*p.i/(p.i+e.lam)),f(e.Ql[0]),f(q*1.3)],0.1);
+    qs.push({q:`Bajo la restricción financiera, ¿cuál es el tamaño de lote óptimo aproximado para ${it[1]}?`,...o,
+      x:`Q<sub>B</sub> = √(2·D<sub>B</sub>·L<sub>B</sub> / (C<sub>B</sub>·(i + λ))) = ${nf(e.Q0[1],1)}·√(${nf(p.i,2)}/${nf(p.i+e.lam,3)}) ≈ ${nf(q,1)}.`}); }
+  { const yes=p.r/100<e.lam, pc=nf(p.i*100,0);
+    const cor = yes ? `Sí, porque el costo marginal del capital invertido (λ ≈ ${nf(e.lam,2)}) es mayor a la tasa bancaria.` : `No, porque la tasa bancaria supera a i + λ ≈ ${nf(p.i+e.lam,2)}: el capital extra cuesta más de lo que ahorra.`;
+    const ds=["No, porque λ indica que incorporar más capital perjudica la ganancia (es negativo).","Sí, resulta conveniente porque el límite de capital actual es bajo.",`No, porque la tasa bancaria es un costo adicional y el modelo penaliza el inventario con un ${pc} %.`, yes?`No, porque la tasa bancaria supera a i + λ.`:`Sí, porque el costo marginal del capital invertido es mayor a la tasa bancaria.`];
+    const o=mkOpts(r,cor,ds,0);
+    qs.push({q:`¿Le convendría a la empresa tomar un crédito al ${p.r} % anual para expandir su presupuesto?`,...o,
+      x:`λ ≈ ${nf(e.lam,3)} es el costo marginal de no tener más capital; la restricción actúa como si la tasa fuera i + λ ≈ ${nf(p.i+e.lam,3)}. ${yes?`La tasa del crédito (${p.r} %) está por debajo de λ y también de i + λ: conviene.`:`La tasa del crédito (${p.r} %) supera a i + λ: no conviene.`} (El apunte usa i₁ + λ como límite; con estos números los dos criterios coinciden.)`}); }
+  return qs;
+}
+
+/* ===================== armado del parcial ===================== */
+const LIB = {F,ej1Build,ej2Build,ej3Build,lineInt,fs,fsa,nf,VN,NONE};
+function buildVariant(seed){
+  const r=mulberry32(seedNum(seed));
+  const e1=genEj1(r), e2=genEj2(r), e3=genEj3(r);
+  return {id:"var-"+seed, title:`Variante ${seed}`, seed, ejs:[
+    {intro:e1.intro, fig:e1.fig, sol:e1.sol, qs:ej1Questions(e1,r)},
+    {intro:e2.intro+e2.table(e2.T), fig:"", sol:e2.sol, lead:"Resuelva analíticamente y responda (una sola opción):", qs:ej2Questions(e2,r)},
+    {intro:e3.intro, fig:"", sol:e3.sol, qs:ej3Questions(e3,r)} ]};
+}
+function realExam(){ try { return typeof window.PARCIAL_REAL==="function" ? window.PARCIAL_REAL(LIB) : null; } catch(err){ console.error(err); return null; } }
+
+const PSTORE="io-practica-v1";
+const pLoad=()=>{ try{ return JSON.parse(localStorage.getItem(PSTORE))||{}; }catch(e){ return {}; } };
+const pSave=s=>{ try{ localStorage.setItem(PSTORE,JSON.stringify(s)); }catch(e){} };
+
+function renderPracticeHome(){
+  const real=realExam(), hist=pLoad();
+  const last=id=>hist[id]?`Último intento: ${hist[id].last}/${hist[id].n} · mejor: ${hist[id].best}/${hist[id].n}`:"Sin intentos todavía";
+  const vars=Object.keys(hist).filter(k=>k.startsWith("var-")).slice(-6).reverse();
+  $app.innerHTML=`${tabsHTML("practica")}
+  <header class="stack">
+    <span class="eyebrow">Investigación Operativa · recuperatorio 19/11</span>
+    <h1>Parcial práctico</h1>
+    <p class="muted">Tres ejercicios como en el parcial: método gráfico, una tabla simplex con sensibilidad y dual, y stock con restricción de capital. Resolvé en hoja aparte, marcá una opción por pregunta y entregá para ver la corrección.</p>
+  </header>
+  <div class="modes">
+    ${real?`<button class="mode" id="go-real"><span class="k">Parcial del 3/10</span><h3>El que tomaron</h3><p>Mismas preguntas y opciones. Al corregir te muestra también lo que marcaste en el parcial. ${last(real.id)}</p></button>`
+      :`<div class="mode"><span class="k">Parcial del 3/10</span><h3>No disponible acá</h3><p>La réplica del parcial vive en un archivo privado que no se sube al repositorio.</p></div>`}
+    <button class="mode" id="go-var"><span class="k">Variante nueva</span><h3>Mismos ejercicios, otros números</h3><p>Se genera al azar y cada respuesta se calcula con fracciones exactas. Cada variante tiene un código para repetirla.</p></button>
+  </div>
+  <section class="sheet stack">
+    <h2>Repetir una variante</h2>
+    <div class="row"><label for="seed" class="muted">Código</label><input class="seed" id="seed" maxlength="8" placeholder="7K3QF"><button class="btn" id="go-seed">Abrir</button></div>
+    ${vars.length?`<div class="stack" style="gap:6px">${vars.map(k=>`<div class="row"><button class="btn ghost code" data-seed="${k.slice(4)}">${k.slice(4)}</button><span class="muted" style="font-size:14px">${last(k)}</span></div>`).join("")}</div>`:""}
+  </section>`;
+  bindTabs();
+  if(real) document.getElementById("go-real").onclick=()=>startExam(real);
+  document.getElementById("go-var").onclick=()=>startExam(buildVariant(newSeed()));
+  const go=()=>{ const v=document.getElementById("seed").value.trim().toUpperCase(); if(v) startExam(buildVariant(v)); };
+  document.getElementById("go-seed").onclick=go;
+  document.getElementById("seed").onkeydown=e=>{ if(e.key==="Enter") go(); };
+  document.querySelectorAll("[data-seed]").forEach(b=>b.onclick=()=>startExam(buildVariant(b.dataset.seed)));
+}
+
+let PX=null;
+function startExam(ex){ PX={ex, ans:{}, struck:{}, done:false}; renderExam(); window.scrollTo(0,0); }
+function renderExam(){
+  const ex=PX.ex; let n=0;
+  const total=ex.ejs.reduce((s,e)=>s+e.qs.length,0), answered=Object.keys(PX.ans).length;
+  let score=0; if(PX.done) ex.ejs.forEach((e,ei)=>e.qs.forEach((q,qi)=>{ if(PX.ans[ei+"-"+qi]===q.a) score++; }));
+  const body=ex.ejs.map((e,ei)=>{
+    let ok=0; const qh=e.qs.map((q,qi)=>{ n++; const key=ei+"-"+qi, a=PX.ans[key], st=PX.struck[key]||[];
+      if(PX.done && a===q.a) ok++;
+      const opts=q.opts.map((t,pos)=>{ let cls="opt"; if(a===pos) cls+=" sel"; if(st.includes(pos)) cls+=" struck";
+        if(PX.done){ if(pos===q.a) cls+=" right"; else if(a===pos) cls+=" wrong"; }
+        return `<div class="${cls}" role="radio" tabindex="0" aria-checked="${a===pos}" data-k="${key}" data-pos="${pos}"><span class="b">${LET[pos]}</span><span class="t">${t}</span>${PX.done?"":`<button class="x" data-sk="${key}" data-sp="${pos}" aria-label="Tachar ${LET[pos]}">${st.includes(pos)?"destachar":"tachar"}</button>`}</div>`; }).join("");
+      const fb = PX.done ? `<div class="expl ${a===q.a?"ok":"bad"}"><strong>${a===q.a?"Correcta":(a===undefined?"Sin responder":"Incorrecta")}: era la ${LET[q.a]})</strong><span>${q.x}</span>${q.prev!==undefined?`<span class="prev">En el parcial marcaste ${LET[q.prev]}) ${q.prev===q.a?"✓":"✗"}</span>`:""}</div>` : "";
+      return `<div class="eq" id="q-${key}"><p class="stem"><b>${n}.</b> ${q.q}</p><div class="eopts" role="radiogroup">${opts}</div>${fb}</div>`; }).join("");
+    return `<section class="sheet stack"><div class="qhead"><h2>Ejercicio ${ei+1}</h2>${PX.done?`<span class="pill ${ok===e.qs.length?"ok":"bad"}">${ok}/${e.qs.length}</span>`:""}</div>
+      <div class="enun">${e.intro}${e.fig||""}<p class="muted">${e.lead||"Resuelva analíticamente y responda (una sola opción):"}</p></div>${qh}
+      ${PX.done?`<details class="sol"><summary>Ver resolución</summary>${e.sol}</details>`:""}</section>`;
+  }).join("");
+  $app.innerHTML=`
+  <div class="top"><div class="topline">
+    <button class="btn ghost" id="pout">← Salir</button>
+    <span class="eyebrow">${ex.title} · ${PX.done?`${score}/${total} correctas`:`${answered}/${total} respondidas`}</span>
+    ${PX.done?`<span></span>`:`<button class="btn primary" id="psub">Entregar</button>`}</div></div>
+  ${PX.done?`<section class="sheet stack"><div class="score">${score}<small> / ${total}</small></div>
+    <p class="muted">${Math.round(100*score/total)} % de aciertos.${ex.seed?` Código de esta variante: <span class="code">${ex.seed}</span>.`:""}</p>
+    <div class="row"><button class="btn primary" id="pnew">Otra variante</button><button class="btn" id="pretry">Rehacer este</button></div></section>`:""}
+  ${body}
+  <div id="pconfirm"></div>`;
+  document.getElementById("pout").onclick=()=>{ location.hash="practica"; renderPracticeHome(); };
+  if(PX.done){ document.getElementById("pnew").onclick=()=>startExam(buildVariant(newSeed())); document.getElementById("pretry").onclick=()=>startExam(ex); }
+  else document.getElementById("psub").onclick=()=>{
+    const blank=total-Object.keys(PX.ans).length, box=document.getElementById("pconfirm");
+    box.innerHTML=`<section class="sheet stack"><h3>¿Entregar?</h3><p class="muted">${blank?`Quedan ${blank} sin responder.`:"Respondiste todas."}</p><div class="row"><button class="btn primary" id="py">Entregar</button><button class="btn" id="pn">Seguir</button></div></section>`;
+    document.getElementById("py").onclick=finishExam; document.getElementById("pn").onclick=()=>box.innerHTML=""; box.scrollIntoView({behavior:"smooth",block:"center"}); };
+  document.querySelectorAll(".eopts .opt").forEach(o=>{
+    const sel=()=>{ if(PX.done) return; const k=o.dataset.k, pos=+o.dataset.pos; PX.ans[k]=pos; PX.struck[k]=(PX.struck[k]||[]).filter(x=>x!==pos); keepScroll(renderExam); };
+    o.onclick=e=>{ if(e.target.closest("[data-sk]")) return; sel(); }; o.onkeydown=e=>{ if(e.key===" "||e.key==="Enter"){ e.preventDefault(); sel(); } }; });
+  document.querySelectorAll("[data-sk]").forEach(b=>b.onclick=e=>{ e.stopPropagation(); const k=b.dataset.sk, p=+b.dataset.sp, s=PX.struck[k]||[];
+    PX.struck[k]= s.includes(p)?s.filter(x=>x!==p):[...s,p]; if(PX.ans[k]===p && PX.struck[k].includes(p)) delete PX.ans[k]; keepScroll(renderExam); });
+}
+function keepScroll(fn){ const y=window.scrollY; fn(); window.scrollTo(0,y); }
+function finishExam(){
+  PX.done=true; const ex=PX.ex; let sc=0,n=0; ex.ejs.forEach((e,ei)=>e.qs.forEach((q,qi)=>{ n++; if(PX.ans[ei+"-"+qi]===q.a) sc++; }));
+  const h=pLoad(), o=h[ex.id]||{best:0}; h[ex.id]={last:sc,best:Math.max(o.best||0,sc),n}; pSave(h);
+  renderExam(); window.scrollTo(0,0);
+}
+
+route();
 </script>
