@@ -134,19 +134,19 @@ table.t tr.hl td{ background:#fff8e6; }
       <li><b>El problema</b> (azul): qué es el horno, qué se decide y cómo funciona la simulación, en criollo.</li>
       <li><b>El modelo y los datos</b> (verde): cómo lo armamos en AnyLogic y de dónde sale cada número.</li>
       <li><b>Experimentos y resultados</b> (naranja): escenarios, réplicas, test de medias y qué dio.</li>
-      <li><b>La defensa</b> (violeta): los 10 pasos, preguntas probables y la lista de lo que falta.</li>
+      <li><b>La defensa</b> (violeta): los 10 pasos, preguntas probables, qué mostrar en vivo y lo que se entregó.</li>
     </ol>
     <p class="small muted">Si tenés 5 minutos: leé esta página y la parte 3. Si tenés 30: todo.</p>
   </div>
   <div class="card tC">
-    <h4>Qué se entrega (consigna del 28/10)</h4>
+    <h4>La entrega (consigna del 28/10): hecha el 09/11</h4>
     <ul class="check small">
-      <li class="si"><b>.alp</b> de AnyLogic: hecho y corrido (07/11): las 120 corridas dan idénticas al verificador.</li>
-      <li class="med"><b>Paper en PDF</b> (abstract, objetivos, metodología, resultados, conclusiones; los 10 pasos implícitos): borrador completo en LaTeX.</li>
-      <li class="si"><b>Planilla</b> con los resultados de las corridas: hecha, con el CSV de AnyLogic.</li>
-      <li class="no"><b>Link de AnyLogic Cloud</b> con nombres y correos de los autores.</li>
-      <li class="no"><b>Video</b> en YouTube: problema, solución y el modelo andando.</li>
-      <li class="no"><b>Defensa en vivo</b> 10 u 11/11: mostrar E0 corriendo y, si se puede, E3.</li>
+      <li class="si"><b>.alp</b> de AnyLogic, con la animación de la defensa.</li>
+      <li class="si"><b>Paper en PDF</b> en LaTeX: abstract, objetivos, metodología, resultados y conclusiones, con los 10 pasos implícitos.</li>
+      <li class="si"><b>Planilla</b> con las 120 corridas (y el CSV de AnyLogic).</li>
+      <li class="si"><b>AnyLogic Cloud</b>, público: <code>cloud.anylogic.com/model/e73c3e20-deaf-4a33-b342-e99cd97e57a6</code></li>
+      <li class="si"><b>Video</b>: <code>youtu.be/gL6IQnE1T7s</code></li>
+      <li class="no"><b>Defensa en vivo</b> 10 u 11/11: mostrar E0 corriendo y E3 (parte 4).</li>
     </ul>
   </div>
 </div>
@@ -483,7 +483,7 @@ el intervalo no incluye el 0 → E3 ahorra de verdad</div>
 
 <!-- ====================================================================== PARTE 4 -->
 <div class="part pd">
-<div class="band"><div class="num">4</div><div><div class="k">Parte 4</div><h2>La defensa: los 10 pasos, preguntas y lo que falta</h2></div></div>
+<div class="band"><div class="num">4</div><div><div class="k">Parte 4</div><h2>La defensa: los 10 pasos, preguntas y la demo</h2></div></div>
 
 <div class="sec"><div class="dot">a</div><h3>Los 10 pasos del estudio y dónde está cada uno</h3></div>
 <p class="small">En el paper van <b>implícitos</b> (la consigna lo pide así), pero en la defensa conviene saber dónde está cada uno.</p>
@@ -511,23 +511,25 @@ el intervalo no incluye el 0 → E3 ahorra de verdad</div>
 </div>
 
 <div class="sec"><div class="dot">c</div><h3>Qué mostrar en vivo</h3></div>
+<p class="small">Se puede mostrar <b>desde AnyLogic Cloud</b> (en el navegador, sin instalar nada) o desde AnyLogic. Es la misma animación, con la semilla 1: siempre pasa lo mismo en las mismas fechas.</p>
 <ol class="small">
-  <li>Abrir <code>CaserHorno.alp</code> y correr el experimento <b>Visual</b> (semilla 1, siempre la misma historia). Arrancar con <b>Ver una campaña · 1 día/s</b>.</li>
-  <li>Mostrar el encendido por urgencia del miércoles 20/08 (la ULI violeta) y la campaña.</li>
-  <li>El lunes 25/08 a las 02:45 el horno queda <b>caliente sin carga</b> (salmón): mostrar el recuadro del panel de la plata y apretar <b>E3 · Apagar enseguida</b>, que lo pasa directo a Enfriando.</li>
-  <li>Cerrar con las tarjetas de escenario: el resultado del estudio contra E0.</li>
+  <li><b>Play a x10.</b> Mientras llegan las ULI, presentar la cola (cada cuadradito es una ULI y cambia de color según cuánto espera), el horno y su statechart, y los indicadores de arriba.</li>
+  <li><b>La urgente</b> (≈ 7 s, miércoles 20/08): la ULI violeta prende el horno sin esperar a las 79. Calienta 36 h hasta ≈ 900 °C.</li>
+  <li><b>Procesando</b> (horno rojo): subir a x25; suben las toneladas tratadas, los gastos y la cinta de tiempo. La lógica en AnyLogic: Source, Wait, Delay y Sink.</li>
+  <li><b>Caliente sin carga</b> (salmón): con pocas ULI en cola bajar a x10 y pausar cuando quede salmón (del lunes 25/08 18:15 al miércoles 27/08 18:15). Leer las horas y la plata del recuadro salmón del panel "¿Dónde se va la plata?": unos 22 mil pesos por hora.</li>
+  <li><b>E3 · Apagar enseguida</b> y play: el horno empieza a enfriarse en el momento (48 h) y el recuadro deja de sumar. Los contadores no se borran al cambiar de escenario.</li>
+  <li>Si piden los otros escenarios: <b>E1</b> prende con 45 ULI (si se aprieta acumulando con más de 45, se prende enseguida) y <b>E2</b> prende si la ULI más vieja lleva 15 días. Cerrar con las tarjetas de abajo: el resultado del estudio contra E0.</li>
 </ol>
-<p class="small muted">El guion completo, con fechas y qué decir de cada panel, está en <code>guia-demo-visual.pdf</code>.</p>
+<p class="small muted">El detalle de cada panel y las preguntas sobre la animación están en <code>guia-demo-visual.pdf</code>.</p>
 
-<div class="sec"><div class="dot">d</div><h3>Lo que falta y quién</h3></div>
+<div class="sec"><div class="dot">d</div><h3>Lo entregado y la previa de la defensa</h3></div>
 <ul class="check small">
-  <li class="si"><b>Correr en AnyLogic</b> <code>CorridasE0E3</code>: hecho el 07/11, idéntico al verificador.</li>
-  <li class="si"><b>Correos y legajos</b> de los cinco: cargados en el paper (van también en la descripción del Cloud).</li>
-  <li class="no"><b>Subir a AnyLogic Cloud</b> desde el IDE (cuenta gratis) y pasar el link.</li>
-  <li class="no"><b>Grabar el video</b>: problema → escenarios → resultado → AnyLogic corriendo.</li>
-  <li class="no"><b>Definir quiénes van</b> a la defensa (10 u 11/11) y practicar la demo.</li>
+  <li class="si"><b>Entregado en el Classroom</b> (09/11): <code>CaserHorno.alp</code>, el informe PDF, la planilla <code>.xlsx</code> y el CSV de las corridas; los links de Cloud y del video en el comentario privado y en <code>Links_y_autores.txt</code>. Todo en <code>entregables/TPI/caser/entrega-final/</code>.</li>
+  <li class="no"><b>Probar el link de Cloud</b> en la laptop de la defensa y con el wifi de la facultad (en una ventana de incógnito).</li>
+  <li class="no"><b>Respaldo</b> por si falla internet: el video de YouTube descargado o una laptop con AnyLogic PLE.</li>
+  <li class="no"><b>Repasar</b> cada uno su parte de esta guía y las preguntas probables de arriba.</li>
 </ul>
-<div class="foot">Fuentes: <code>materias/SIM/entregables/TPI/caser/</code> (07-modelo-anylogic.md, 08-validacion-etapa1.md, informe/tpi-caser.tex, TPI_Caser_Resultados_Corridas.xlsx). Números de las 120 corridas de AnyLogic del 07/11 (idénticas byte a byte a las del verificador).</div>
+<div class="foot">Fuentes: <code>materias/SIM/entregables/TPI/caser/</code> (07-modelo-anylogic.md, 08-validacion-etapa1.md, informe/tpi-caser.tex, TPI_Caser_Resultados_Corridas.xlsx). Números de las 120 corridas de AnyLogic (idénticas byte a byte a las del verificador). Versión final, 10/11.</div>
 </div>
 
 </body>

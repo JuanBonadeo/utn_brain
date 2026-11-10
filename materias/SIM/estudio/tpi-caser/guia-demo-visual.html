@@ -58,7 +58,7 @@ table.t tr.hl td{ background:#fff8e6; }
   <div class="s">Qué es cada panel, qué decir de cada uno y el guion de la demo con lo que pasa, día por día, en la corrida de siempre (semilla 1).</div>
 </div>
 
-<div class="fig"><img src="../../figs/tpi-caser-visual.png"><div class="cap">La pantalla del experimento <code>Visual</code>. Los números de la parte 1 siguen el orden de lectura: de arriba a abajo y de izquierda a derecha.</div></div>
+<div class="fig"><img src="../../figs/tpi-caser-visual.png"><div class="cap">La pantalla del experimento <code>Visual</code> (acá, domingo 21/12 con la regla actual: el horno vuelve a calentar con 80 ULI en cola). Los números de la parte 1 siguen el orden de lectura: de arriba a abajo y de izquierda a derecha.</div></div>
 
 <div class="callout c3">
   <div class="h">Antes de empezar: la corrida es siempre la misma</div>
@@ -166,17 +166,17 @@ table.t tr.hl td{ background:#fff8e6; }
 <!-- ============================================================ PARTE 3 -->
 <div class="part pc">
 <div class="band"><div class="n">3</div><div><div class="k">Parte 3</div><h2>Guion de la demo (semilla 1, E0)</h2></div></div>
-<p class="small muted">Fechas de la corrida de siempre, sacadas con <code>modelo/cronologia_visual.py</code>. Arrancá con <span class="btn">Ver una campaña · 1 día/s</span>.</p>
+<p class="small muted">Fechas de la corrida de siempre, sacadas con <code>modelo/cronologia_visual.py</code>. Sirve igual en AnyLogic y en <b>AnyLogic Cloud</b> (en el navegador, sin instalar nada). Arrancá a <b>x10</b> para ir describiendo; con el horno procesando subí a <b>x25</b> y volvé a x10 cuando queden pocas ULI.</p>
 
 <div class="step"><div class="when">18/08 → 20/08</div><div class="what">Empiezan a llegar ULI (verdes). El horno pasa de <b>Apagado</b> a <b>Acumulando</b>.</div></div>
 <div class="step"><div class="when">mié 20/08 21:45</div><div class="what">Llega una <b>urgente</b> (la ULI 24, violeta) → <b>Calentando por prioridad</b> con solo 24 en cola. <i>Decir: "este encendido fue por un pedido urgente".</i></div></div>
 <div class="step"><div class="when">vie 22/08 09:45</div><div class="what">Llega a temperatura → <b>Procesando</b>: 27 ULI en cola. Se vuelcan las ULI en la cinta, una tras otra, y se va vaciando la cola.</div></div>
-<div class="step key"><div class="when">lun 25/08 02:45</div><div class="what"><b>Momento clave.</b> La cola se vacía → <b>Caliente sin carga</b> (salmón). <b>Pausá</b> y mostrá el recuadro salmón del panel de la plata. Ese lunes llegan unas pocas ULI (las carga en dos tandas cortas) y después nada: el horno espera caliente hasta el <b>miércoles 27/08 a las 18:15</b> y recién ahí enfría. En total, <b>55 h</b> de horno caliente sin carga en esta campaña.</div></div>
-<div class="step key"><div class="when">acá: apretá E3</div><div class="what">Con el horno caliente sin carga, apretá <span class="btn">E3 · Apagar enseguida</span>: pasa <b>directo a Enfriando</b>. <i>Decir: "con E3 el horno se apaga apenas no tiene carga; esas horas salmón no existen".</i> Volvé a <span class="btn">E0 · Regla actual</span> o seguí en E3.</div></div>
+<div class="step key"><div class="when">lun 25/08 02:45 → 18:15</div><div class="what"><b>Momento clave.</b> La cola se vacía → <b>Caliente sin carga</b> (salmón). Hasta las 18:15 alterna con Procesando; desde ahí queda salmón seguido (≈ 5 s a x10): <b>pausá</b> y mostrá el recuadro salmón del panel de la plata (≈ 22 mil pesos por hora). Ese lunes llegan unas pocas ULI (las carga en dos tandas cortas) y después nada: el horno espera caliente hasta el <b>miércoles 27/08 a las 18:15</b> y recién ahí enfría. En total, <b>55 h</b> de horno caliente sin carga en esta campaña.</div></div>
+<div class="step key"><div class="when">acá: apretá E3</div><div class="what">Con el horno caliente sin carga, apretá <span class="btn">E3 · Apagar enseguida</span>: pasa <b>directo a Enfriando</b> (48 h) y el recuadro salmón <b>deja de sumar</b>: los contadores no se borran al cambiar de escenario, así que se ve cómo se frena el gasto. <i>Decir: "con E3 el horno se apaga apenas no tiene carga y este gasto deja de crecer".</i> Volvé a <span class="btn">E0 · Regla actual</span> o seguí en E3.</div></div>
 <div class="step"><div class="when">mié 03/09</div><div class="what">Otra <b>urgente</b>: se prende con solo 7 en cola. Campaña corta y otra vez 48 h de salmón.</div></div>
 <div class="step"><div class="when">11/09 → 13/10</div><div class="what">Pasá a <span class="btn">Ver meses · 1 semana/s</span>. Un mes entero <b>acumulando</b>: la cola crece y los cuadraditos se ponen naranjas y rojos (la ULI más vieja llega a esperar más de un mes). <i>Decir: "esta es la otra cara: esperar a juntar 79 cajones demora el material semanas".</i></div></div>
 <div class="step"><div class="when">lun 13/10 06:45</div><div class="what">Se llena el casillero rojo → se prende <b>por umbral</b>. Al llegar a temperatura ya hay <b>110 ULI</b>: campaña larga de unos 8 días.</div></div>
-<div class="step"><div class="when">diciembre</div><div class="what">Con <span class="btn">Avanzar rápido</span>: en diciembre llega material de a poco y el horno pasa casi dos semanas yendo y viniendo entre <b>Procesando</b> y <b>Caliente sin carga</b>: la cinta de tiempo se llena de salmón.</div></div>
+<div class="step"><div class="when">diciembre</div><div class="what">Con <span class="btn">Avanzar rápido</span>: en diciembre llega material de a poco y el horno pasa casi dos semanas yendo y viniendo entre <b>Procesando</b> y <b>Caliente sin carga</b>: la cinta de tiempo se llena de salmón. <i>A velocidades muy altas AnyLogic puede dejar algunos números atrasados en pantalla al pausar: dale play un segundo a velocidad normal y se ponen al día.</i></div></div>
 
 <div class="callout c2">
   <div class="h">Comparación limpia en vivo (si hay tiempo)</div>
