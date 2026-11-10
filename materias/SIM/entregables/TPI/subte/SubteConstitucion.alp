@@ -3030,6 +3030,9 @@ return (modoDemo ? "DEMO; " : "SIN VALIDAR; ") + "E" + escenario
 			<Id>1791000000001</Id>
 			<Name><![CDATA[MainPeatonal]]></Name>
 			<StartupCode><![CDATA[inicializarPed();
+// Ruteo sin peso de densidad (2026-11-10): con el valor por defecto (10) cada peaton recalcula su A* segun la
+// densidad y eso era ~87 % del tiempo de computo con el hall lleno. Escalera y molinete los elige el modelo, no el ruteo.
+pedSource.getSettings().set_aStarDensityModifier(0);
 traceln(modoFranjaPed ? (pruebaSinteticaPed ? "FRANJA PEATONAL 07:00-09:30 - VALORES DE PRUEBA - PLANO HIPOTETICO" : "FRANJA PEATONAL 07:00-09:30 - RANGOS CON FUENTE (PLAN 5) - PLANO HIPOTETICO") : "DEMO PEATONAL - GEOMETRIA Y DATOS SINTETICOS");
 configurarMolinetesPed();
 if (modoFranjaPed) programarDemandaFranjaPed(); else proximaTandaPed.restart(0);

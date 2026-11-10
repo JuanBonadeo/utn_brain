@@ -562,6 +562,7 @@ assert 'configurarMolinetesPed()' in ped.findtext('StartupCode')
 startup=ped.findtext('StartupCode')
 assert startup.index('inicializarPed()') < startup.index('configurarMolinetesPed()')
 assert 'cierreMetricasPed.restart(horizonteCortePed)' in startup
+assert 'pedSource.getSettings().set_aStarDensityModifier(0);' in startup, 'ruteo sin peso de densidad'
 assert 'if (modoFranjaPed) programarDemandaFranjaPed(); else proximaTandaPed.restart(0);' in startup
 assert ped.findtext('DestroyCode')=='emitirIncompletoPed();'
 assert callbacks_delay=='ped.servicioAsignadoPed'
