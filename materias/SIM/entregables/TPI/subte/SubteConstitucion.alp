@@ -3379,6 +3379,36 @@ progresoPed.restart(intervaloProgresoPed());]]></StartupCode>
 					</Properties>
 				</Variable>
 				<Variable Class="PlainVariable">
+					<Id>1801000000001</Id>
+					<Name><![CDATA[nAtascadosPed]]></Name>
+					<X>-1362</X><Y>-528</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>false</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="default" StaticVariable="false">
+						<Type><![CDATA[int]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[0]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1801000000002</Id>
+					<Name><![CDATA[procesadosControlPed]]></Name>
+					<X>-1362</X><Y>-500</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>false</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="default" StaticVariable="false">
+						<Type><![CDATA[int]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[-1]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
 					<Id>1791000000178</Id>
 					<Name><![CDATA[nProcesadosHorizontePed]]></Name>
 					<X>-1612</X><Y>-808</Y>
@@ -5060,6 +5090,7 @@ if (!trenesRocaPed.isEmpty()) proximoTrenRocaPed.restart(Math.max(1, trenesRocaP
 int minutos = 7 * 60 + (int)Math.floor(time() / 60.0);
 traceln(String.format(java.util.Locale.US, "PROGRESO t=%.0f s (%02d:%02d) - hall %d (max %d) - cola %d - zona paga %d - procesados %d/%d - real %.0f s",
     time(), minutos / 60, minutos % 60, hallPed(), hallMaxPed, nEsperandoPed, pagaPed(), nProcesadosPed, nInyectadosPed, segundosRealesPed()));
+controlAtascoPed();
 if (!resultadoEmitidoPed) progresoPed.restart(intervaloProgresoPed());]]></Action>
 				</Event>
 			</Events>
@@ -5476,7 +5507,7 @@ return acumulada/fin;]]></Body>
 					<PresentationFlag>false</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Body><![CDATA[if (resultadoEmitidoPed) return;
-if (nGeneradosPed != nInyectadosPed || nProcesadosPed != nInyectadosPed)
+if (nGeneradosPed != nInyectadosPed || nProcesadosPed + nAtascadosPed != nInyectadosPed)
     throw new IllegalStateException("Conservacion peatonal violada: inyectados=" + nInyectadosPed
         + ", generados=" + nGeneradosPed + ", procesados=" + nProcesadosPed);
 resultadoEmitidoPed = true;
@@ -5639,6 +5670,31 @@ inicializadoPed = true;]]></Body>
 					</Parameter>
 					<Body><![CDATA[if (archivoSalidaPed == null || archivoSalidaPed.trim().isEmpty()) return;
 escribirLineaPed(archivoSalidaPed, linea);]]></Body>
+				</Function>
+				<Function AccessType="public" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[void]]></ReturnType>
+					<Id>1801000000003</Id>
+					<Name><![CDATA[controlAtascoPed]]></Name>
+					<X>-1077</X><Y>-234</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>false</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[// Cierre por atasco (2026-11-10): pasada la franja, si en un intervalo de progreso (15 min) no salio nadie y
+// quedan pocos peatones adentro, estan trabados contra la geometria. Se cuentan, se excluyen de las medidas y la
+// corrida emite su fila normal en vez de seguir hasta el tope de 5 h. Mas de 0,5 % trabados no se cierra: es otra falla.
+if (resultadoEmitidoPed || !modoFranjaPed || !arribosCerradosPed || time() < horizonteCortePed) { procesadosControlPed = nProcesadosPed; return; }
+int pendientes = nInyectadosPed - nProcesadosPed;
+if (pendientes > 0 && nProcesadosPed == procesadosControlPed && pendientes <= Math.max(20, nInyectadosPed / 200)) {
+    nAtascadosPed = pendientes;
+    if (Double.isNaN(ultimaDisipacionPed)) ultimaDisipacionPed = time() - tiempoUltimaTandaPed;
+    traceln("ATASCADOS: " + nAtascadosPed + " peatones sin avance en el ultimo intervalo; se excluyen y se cierra la corrida");
+    actualizarAreaColaPed();
+    emitirResultadoPed();
+    return;
+}
+procesadosControlPed = nProcesadosPed;]]></Body>
 				</Function>
 				<Function AccessType="public" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
@@ -5986,6 +6042,7 @@ sb.append(escenarioPed()).append(';').append(semillaPed).append(';').append(diaE
 for (int w = 0; w < validacionesPorVentanaPed.length; w++) sb.append(';').append(validacionesPorVentanaPed[w]);
 for (int w = 0; w < validacionesPorVentanaPed.length; w++)
     sb.append(';').append(String.format(java.util.Locale.US, "%.1f", w < perfilEfectivoPed.length ? factorDemandaPed * perfilEfectivoPed[w] : 0));
+sb.append(';').append(nAtascadosPed);
 return sb.toString();]]></Body>
 				</Function>
 				<Function AccessType="public" StaticFunction="false">
@@ -37008,7 +37065,7 @@ return String.join(",", partes);]]></Body>
 				<TargetLine>
 					<Id>1800000000205</Id>
 					<Name><![CDATA[bocaNorteHall]]></Name>
-					<X>-397</X><Y>744</Y>
+					<X>-397</X><Y>741</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -37018,13 +37075,13 @@ return String.join(",", partes);]]></Body>
 					<LineColor>-16744448</LineColor>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>0</X><Y>20</Y></Point>
+						<Point><X>0</X><Y>26</Y></Point>
 					</Points>
 				</TargetLine>
 				<TargetLine>
 					<Id>1800000000206</Id>
 					<Name><![CDATA[bocaSurHall]]></Name>
-					<X>-397</X><Y>920</Y>
+					<X>-397</X><Y>917</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -37034,7 +37091,7 @@ return String.join(",", partes);]]></Body>
 					<LineColor>-16744448</LineColor>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>0</X><Y>20</Y></Point>
+						<Point><X>0</X><Y>26</Y></Point>
 					</Points>
 				</TargetLine>
 				<DensityMap>
@@ -45683,7 +45740,7 @@ return String.join(",", partes);]]></Body>
 				<TargetLine>
 					<Id>1800000000207</Id>
 					<Name><![CDATA[bocaNortePlaza]]></Name>
-					<X>-379</X><Y>744</Y>
+					<X>-379</X><Y>741</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -45693,13 +45750,13 @@ return String.join(",", partes);]]></Body>
 					<LineColor>-16744448</LineColor>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>0</X><Y>20</Y></Point>
+						<Point><X>0</X><Y>26</Y></Point>
 					</Points>
 				</TargetLine>
 				<TargetLine>
 					<Id>1800000000208</Id>
 					<Name><![CDATA[bocaSurPlaza]]></Name>
-					<X>-379</X><Y>920</Y>
+					<X>-379</X><Y>917</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -45709,7 +45766,7 @@ return String.join(",", partes);]]></Body>
 					<LineColor>-16744448</LineColor>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>0</X><Y>20</Y></Point>
+						<Point><X>0</X><Y>26</Y></Point>
 					</Points>
 				</TargetLine>
 				<Wall>

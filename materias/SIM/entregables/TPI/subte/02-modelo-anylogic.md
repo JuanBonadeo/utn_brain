@@ -931,6 +931,19 @@ ESCALERA que entran por las muescas oeste del bloque central (X −386 a −278)
 el hall al oeste y el pie en la plaza. Las escaleras fijas curvas del centro del bloque no se modelan (simplificación:
 la gente baja por las mecánicas).
 
+**Producción del 10/11 detenida y corrección.** La primera tanda en paralelo (día 20260924, los 4 escenarios)
+tardó ~85 min y las 4 filas salieron `CSV_PEATONAL_INCOMPLETO`. Faltaban por procesar 5 (E0, E3), 10 (E13) y 14 (E1)
+de 17457 pasajeros, trabados en el hall ("hall 14" hasta las 11:45), y la corrida seguía hasta el tope de 17900 s. Además,
+el hall llegaba a ~1700 personas entre 08:00 y 09:15 y el P90 de tránsito del Roca a la cola era ~540 s: el acceso
+volvía a frenar. Cambios:
+- **Bocas de la escalera** (`bocaNorteHall/SurHall/NortePlaza/SurPlaza`) de 2,0 a 2,6 m, todo el ancho útil de cada
+  grupo (Y 741–767 y 917–943).
+- **Cierre por atasco** (`controlAtascoPed`, llamado por `progresoPed` cada 15 min): pasadas las 09:30, si en un
+  intervalo no salió nadie y quedan a lo sumo máx(20; 0,5 %) adentro, se cuentan en `nAtascadosPed`, se excluyen de las
+  medidas y la corrida emite su fila `CSV_PEATONAL` normal (el drenaje final queda como cota inferior). La cantidad
+  va al final de la fila `VENTANAS_PEATONAL` (campo 24). Con más trabados la corrida sigue saliendo incompleta.
+- Las 4 filas descartadas quedan en `corridas_peatonales_descartadas_2026-11-10.csv` (sin versionar).
+
 ## Mapa de calor (2026-11-09)
 
 Un `DensityMap` de la Pedestrian Library por nivel (molde del ejemplo oficial *Subway Entrance Hall*):

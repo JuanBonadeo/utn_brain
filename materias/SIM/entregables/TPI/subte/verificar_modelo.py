@@ -264,6 +264,17 @@ public static void main(String[] args) throws Exception {
  try{h.emitirResultadoPed();throw new AssertionError("Conservacion violada aceptada");}catch(IllegalStateException expected){}
  h.emitirIncompletoPed();ok(h.trazas.get(h.trazas.size()-1).startsWith("CSV_PEATONAL_INCOMPLETO;E0;"),"fila incompleta");
  ok(h.trazas.get(h.trazas.size()-2).contains("enTransitoHallMax="),"la corrida incompleta tambien imprime el resumen");
+ // Cierre por atasco: 15 min sin salidas pasada la franja, con pocos trabados, emite la fila normal y los excluye.
+ SubtePedLogicCheck at=new SubtePedLogicCheck();at.inicializarPed();at.modoFranjaPed=true;at.pruebaSinteticaPed=false;at.arribosCerradosPed=true;
+ at.horizonteCortePed=9000;at.nInyectadosPed=1000;at.nGeneradosPed=1000;at.nProcesadosPed=990;at.tiempoUltimaTandaPed=8900;at.nProcesadosPed=980;
+ at.clock=8100;at.controlAtascoPed();at.nProcesadosPed=990;at.clock=9000;at.controlAtascoPed();ok(!at.resultadoEmitidoPed,"no cierra en el primer control");
+ at.nProcesadosPed=995;at.clock=9900;at.controlAtascoPed();ok(!at.resultadoEmitidoPed,"no cierra si hubo salidas");
+ at.clock=10800;at.controlAtascoPed();ok(at.resultadoEmitidoPed && at.nAtascadosPed==5 && at.engine.finished,"cierra con 5 atascados");
+ ok(at.trazas.stream().anyMatch(t->t.startsWith("CSV_PEATONAL;")) && at.trazas.stream().anyMatch(t->t.startsWith("ATASCADOS: 5")),"fila normal y aviso");
+ ok(at.filaVentanasPed().endsWith(";5"),"ventanas informan los atascados");
+ SubtePedLogicCheck mu=new SubtePedLogicCheck();mu.inicializarPed();mu.modoFranjaPed=true;mu.arribosCerradosPed=true;mu.horizonteCortePed=9000;
+ mu.nInyectadosPed=1000;mu.nGeneradosPed=1000;mu.nProcesadosPed=900;mu.clock=9000;mu.controlAtascoPed();mu.clock=9900;mu.controlAtascoPed();
+ ok(!mu.resultadoEmitidoPed,"con muchos trabados no se cierra: queda incompleta");
  SubtePedLogicCheck lbl=new SubtePedLogicCheck();lbl.molinetesOperativosPed=22;ok(lbl.filaResultadoPed().startsWith("E1;"),"22 molinetes = E1");
  lbl.molinetesOperativosPed=28;ok(lbl.filaResultadoPed().startsWith("E1B;"),"28 molinetes = ampliacion E1B");
  salida.delete();new java.io.File(salida.getPath().replaceFirst("(\\\\.csv)?$","_ventanas.csv")).delete();
@@ -325,7 +336,7 @@ public static void main(String[] args) throws Exception {
   ok(mismoOrden,"E0 y E3 reciben el mismo uniforme por pasajero (mismo orden de servicios)");
   double m3=0;for(double v:sv[2])m3+=v;ok(Math.abs(m3/3000-(1.5+1.8+2.5)/3)<0.03,"media triangular E3 (1,5+1,8+2,5)/3: "+m3/3000);}
  ok(franja(20,1.0).trazas.stream().noneMatch(t->t.startsWith("ADVERTENCIA: tren")),"horario oficial: via j % 7 siempre libre");
- ok(b3.filaVentanasPed().split(";").length==23 && b3.filaVentanasPed().startsWith("E3;20260923;"+b3.diaEfectivoPed+";"),"fila de ventanas: "+b3.filaVentanasPed());
+ ok(b3.filaVentanasPed().split(";").length==24 && b3.filaVentanasPed().endsWith(";0") && b3.filaVentanasPed().startsWith("E3;20260923;"+b3.diaEfectivoPed+";"),"fila de ventanas: "+b3.filaVentanasPed());
 
  {SubtePedLogicCheck tv=franjaReal(20,2.4,1.8,3.5,-2);tv.clock=4500;for(java.lang.reflect.Method mt:SubtePedLogicCheck.class.getDeclaredMethods())if(mt.getName().startsWith("_texto")){Object v=mt.invoke(tv);ok(v!=null&&!v.toString().isEmpty(),mt.getName());}}
  System.out.println("OK: pedestrian demo, Roca timetable + street demand, triangular service, common random numbers, 09:30 cut, drain and CSV output");
@@ -470,9 +481,9 @@ for nombre,y,boca_hall,boca_plaza in (('escaleraNorte','740','bocaNorteHall','bo
  assert esc_p['speedRestricted']=='true' and abs(float(esc_p['maxSpeed'])-10.5/(4.6/0.30))<0.01 and esc.findtext('Sloped')=='true', nombre
  assert (esc.findtext('X'),esc.findtext('Y'),esc.findtext('Width'),esc.findtext('Height'),esc.findtext('Slope/Dx'),esc.findtext('Slope/Dy'),esc.findtext('Slope/Dz'))==('-385',y,'105','28','-105','0','46') and esc.findtext('Slope/X')=='105', nombre
  # La línea del subsuelo queda dentro de la escalera, a menos de 1 m de su tope (X -385, donde aparece quien baja).
- lp=_linea('nivelVestibulo',boca_plaza); assert all(-385<x<=-375 and int(y)<yy<int(y)+28 for x,yy in lp), (boca_plaza,lp)
+ lp=_linea('nivelVestibulo',boca_plaza); assert abs(lp[1][1]-lp[0][1])>=25 and all(-385<x<=-375 and int(y)<yy<int(y)+28 for x,yy in lp), (boca_plaza,lp)
  # La línea del hall queda fuera del bloque central (muesca oeste en X -385) y a menos de 3 m del tope.
- lh=_linea('nivelHall',boca_hall); assert all(-415<=x<=-390 and int(y)<yy<int(y)+28 for x,yy in lh), (boca_hall,lh)
+ lh=_linea('nivelHall',boca_hall); assert abs(lh[1][1]-lh[0][1])>=25 and all(-415<=x<=-390 and int(y)<yy<int(y)+28 for x,yy in lh), (boca_hall,lh)
 # El horario embebido es exactamente el extraído de los PDFs oficiales del Roca.
 import csv as _csv
 horario=[r['segundos_desde_07'] for r in _csv.DictReader(open(p.parent/'datos'/'arribos_roca_constitucion_habiles.csv',encoding='utf-8'),delimiter=';')]
