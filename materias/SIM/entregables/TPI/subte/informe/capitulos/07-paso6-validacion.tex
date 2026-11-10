@@ -17,13 +17,13 @@ puede contrastarse en la espera ni en el largo de cola. La tabla~\ref{tab:valida
 \toprule
 Control & Contra qué se compara & Resultado \\
 \midrule
-Caudal por ventana & Validaciones simuladas frente al perfil de SBASE & Calibración, no validación (ver texto) \\
+Caudal por ventana & Validaciones simuladas frente a las del mismo día en SBASE & Calibración, no validación (ver texto) \\
 Molinetes en uso & Molinetes con tráfico en \EO{} frente a los 19,5 activos observados & Consistente \\
 Reparto entre molinetes & Utilización por molinete frente al desbalance observado & Más parejo que la realidad \\
-Llegadas de los trenes & Horario oficial frente a llegadas reales & Atraso no modelado \\
+Llegadas de los trenes & Horario oficial frente a llegadas reales & Se usan las llegadas reales \\
 Volumen que llega en tren & Demanda del modelo frente a la matriz origen-destino del Roca & Verosímil \\
 Geometría del andén & Dispersión de la descarga frente al plano ferroviario & Del mismo orden \\
-Recorrido al vestíbulo & Distancia del modelo frente al plano georreferenciado con OSM & Subestimada \\
+Recorrido al vestíbulo & Distancia del modelo frente al plano georreferenciado con OSM & Corregido: se camina \\
 Espera y cola & Sin observaciones publicadas & No validable \\
 \bottomrule
 \end{tabularx}
@@ -40,7 +40,12 @@ Desde que cada réplica usa un día real, la comparación se hace contra el perf
 experimento escribe las validaciones simuladas y observadas por ventana (archivo de ventanas, analizado con
 \texttt{validacion\_corridas.py}). Sigue sin ser independiente, porque el día es la entrada del modelo, pero
 mide si la cola corre pasajeros de una ventana a la siguiente en días cargados.
-\pendiente{registrar el sesgo por ventana de la producción con días reales.}
+La tabla~\ref{tab:validacion-caudal} muestra el resultado de la producción, con el sesgo medio de cada ventana
+en \EO{}.
+
+\entradaGenerada{tabla-validacion}
+
+\pendiente{comentar el sesgo por ventana y el CV entre molinetes con los números de la producción.}
 
 \subsection{Uso de los molinetes}
 
@@ -54,7 +59,7 @@ se carga en el modelo, sale de la regla de elección. El modelo informa el mismo
 factor de alrededor de 3. \textcite{seriani2025} validan su modelo justamente con esta comparación. El
 modelo reparte la carga más parejo que la realidad, y hay dos razones posibles:
 \begin{itemize}
-  \item la geometría es hipotética, y en la estación real algunos molinetes quedan lejos del recorrido
+  \item el interior del vestíbulo es supuesto, y en la estación real algunos molinetes quedan lejos del recorrido
         natural;
   \item la regla de elección pondera la fila tanto como la distancia.
 \end{itemize}
@@ -144,12 +149,12 @@ Con este resultado se modificó el modelo (sección~\ref{sec:paso4-construccion-
         en el plano, y el pasillo en L de 84~m, dibujado sobre la traza de OSM. El ancho de 5~m del pasillo es
         un supuesto.
   \item El hall queda a nivel de calle y el pasillo y el vestíbulo, en el nivel $-4{,}60$~m de la plaza de
-        transbordo \parencite{gcba2015transbordo}. Se baja por las dos escaleras del bloque central del hall,
-        donde el plano de Trenes Argentinos dibuja escaleras mecánicas y fijas \parencite{sofse2026nota}: una al
-        norte y otra al sur. Cada pasajero usa la de su lado según el andén por el que bajó. Cada escalera es un
-        área en pendiente de 4,5~m por 10~m (mecánica y fija juntas), con velocidad máxima de 0,65~m/s, de modo
-        que la bajada lleva $4{,}6/0{,}30 \approx 15{,}3$~s, con la misma velocidad vertical de la fórmula, y
-        puede congestionarse. Las dos desembocan en una plaza de transbordo debajo del bloque, de donde arranca
+        transbordo \parencite{gcba2015transbordo}. Se baja por los dos grupos de escaleras mecánicas que el plano
+        de Trenes Argentinos dibuja en el bloque central del hall \parencite{sofse2026nota}: uno al norte y otro
+        al sur. Cada pasajero usa el de su lado según el andén por el que bajó. Cada escalera es un área en
+        pendiente de 10,5~m por 2,8~m, con el tope en el hall y el pie en la plaza, y velocidad máxima de
+        0,685~m/s, de modo que la bajada lleva $4{,}6/0{,}30 \approx 15{,}3$~s, con la misma velocidad vertical de
+        la fórmula, y puede congestionarse. Las escaleras fijas del bloque no se modelan. Las dos desembocan en una plaza de transbordo debajo del bloque, de donde arranca
         el pasillo. Una primera versión usaba una sola escalera de 5~m, supuesta al comienzo del pasillo; con
         días cargados el hall llegaba a tener casi \num{2000} personas esperando para bajar y el caudal por
         ventana quedaba muy por debajo del observado, lo que indicaba un acceso con menos capacidad que el
@@ -168,22 +173,24 @@ Hay dos reservas. Los pasillos subterráneos son datos voluntarios de OSM, no de
 interior del vestíbulo (su ancho, su forma y la batería de molinetes) sigue sin dato: se ubicaron sus
 accesos y sus zonas según el plano, pero las dimensiones son supuestas. La escalera B4 no se modela, porque
 baja del otro lado de la conexión con el andén y no se sabe qué molinetes usan sus pasajeros.
-\pendiente{repetir la producción con el pasillo y actualizar los resultados.}
 
 \subsection{Reproducción en otra máquina}
 
-Los 30 pares de producción se repitieron el 09/10/2026 en otra computadora, con Windows, el mismo archivo
+Con la versión del modelo del 05/10 (día promedio y vestíbulo sin hall), los 30 pares de producción se
+repitieron el 09/10/2026 en otra computadora, con Windows, el mismo archivo
 del modelo y las mismas semillas. La demanda generada coincidió en las 60 corridas. El movimiento no fue
 idéntico bit a bit: las esperas difirieron en décimas de segundo, probablemente por la aritmética de coma
 flotante de la simulación peatonal. Las diferencias \EI{} $-$ \EO{} de las tres medidas primarias variaron
-menos de 0,15~s, y la proporción coincidió con tres decimales. Los resultados no dependen de la máquina.
+menos de 0,15~s, y la proporción coincidió con tres decimales. Los resultados no dependieron de la máquina. La
+producción final se corrió en una sola computadora; la generación de la demanda es la misma, así que se espera
+el mismo comportamiento, pero no se repitió.
 
 \subsection{Lo que no se puede validar}
 
 No hay observaciones publicadas de la espera ni del largo de cola en Constitución. Los molinetes registran
 a quien pasó, no a quien esperó. El grupo no pudo medir en el lugar, y el pedido a SBASE incluye
 mediciones de cola si existen. Es la limitación principal del estudio. Los valores absolutos de espera
-dependen de los supuestos de la tabla~\ref{tab:parametros} y de la geometría hipotética. La comparación
+dependen de los supuestos de la tabla~\ref{tab:parametros} y de la geometría supuesta del subsuelo. La comparación
 entre escenarios es más robusta que los valores absolutos, porque los dos escenarios comparten todos esos
 supuestos. Aun así, el reparto más parejo del modelo puede inflar la diferencia.
 

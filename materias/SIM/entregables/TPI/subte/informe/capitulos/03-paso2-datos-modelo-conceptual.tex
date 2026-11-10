@@ -241,8 +241,11 @@ Además de los rangos de la tabla~\ref{tab:parametros}, el modelo adopta estos s
   \item El volumen de cada ventana y los trenes son los de un día hábil real con servicio normal; los días
         con el servicio del Roca interrumpido quedan fuera del estudio.
   \item El pasaje de cada tren es una variable de Poisson cuya media es la demanda acumulada de su ramal.
-  \item El vestíbulo tiene la geometría hipotética descripta en la sección~\ref{sec:paso4-construccion-verificacion},
-        porque el plano oficial no está disponible.
+  \item El hall, el andén y las escaleras del bloque central siguen el plano de Trenes Argentinos. La plaza
+        de transbordo, el ancho del pasillo y el interior del vestíbulo son supuestos
+        (sección~\ref{sec:paso4-construccion-verificacion}), porque SBASE no envió el plano del subsuelo.
+  \item Todo pasajero del Roca que entra al modelo baja por las escaleras mecánicas; las escaleras fijas del
+        bloque central no se modelan.
 \end{enumerate}
 El supuesto~4 reemplaza a dos versiones anteriores (perfil medio en todas las réplicas y trenes en
 horario), que la validación mostró optimistas: un atraso variable junta trenes que el horario separa.

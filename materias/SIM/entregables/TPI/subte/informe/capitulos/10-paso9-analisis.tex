@@ -1,5 +1,64 @@
 \section{Paso 9: análisis de los datos de salida}
 \label{sec:paso9-analisis}
-% Origen: Fórmulas de plan §7 (paired-t, Bonferroni, tamaño de muestra), tablas T-c/T-d, forest plot y comentario.
-% Tarea: T5.4. Reglas: citas con \parencite, tablas con booktabs, figuras con \label, nada de Wikipedia.
-[PENDIENTE: T5.4.]
+% Origen: analisis_corridas.py y resultados_informe.py sobre corridas_peatonales.csv (tablas en ../generado/).
+
+\subsection{Método}
+
+El análisis aplica lo fijado antes de correr (sección~\ref{sec:paso7-diseno-experimentos}). Cada réplica aporta
+un único valor de cada medida por escenario. Para cada alternativa $a \in \{\EI{}, \ET{}, \EIT{}\}$ y cada medida
+se forma la diferencia apareada $Z_j = X_{a,j} - X_{\EO{},j}$ y se construye el intervalo $t$ de Student sobre
+las $n$ diferencias \parencite{law2015}. Las tres medidas primarias usan el nivel de Bonferroni
+$1 - 0{,}05/9$; las secundarias, el 95~\% individual. Los cálculos se hacen dos veces, en la planilla y en
+Python, y coinciden.
+
+\subsection{Resultados por escenario}
+
+La tabla~\ref{tab:resultados-escenarios} muestra la media de cada medida entre las réplicas, para los cuatro
+escenarios. La figura~\ref{fig:boxplot} muestra el P90 de espera de cada réplica: las líneas unen las cuatro
+corridas de un mismo día.
+
+\entradaGenerada{tabla-resultados}
+
+\begin{figure}[H]
+\centering
+\figuraSiExiste{tpi-subte-res-boxplot.png}{0.85\textwidth}
+\caption{P90 de espera por escenario. Cada punto es una réplica (un día hábil); las líneas unen los cuatro
+escenarios del mismo día.}
+\label{fig:boxplot}
+\end{figure}
+
+\pendiente{comentar los niveles absolutos y la variación entre días.}
+
+\subsection{Comparación con la situación actual}
+
+La tabla~\ref{tab:diferencias} y la figura~\ref{fig:forest} presentan las diferencias de cada alternativa
+contra \EO{} en las tres medidas primarias, con su intervalo de Bonferroni.
+
+\entradaGenerada{tabla-diferencias}
+
+\begin{figure}[H]
+\centering
+\figuraSiExiste{tpi-subte-res-forest.png}{0.9\textwidth}
+\caption{Diferencia de cada alternativa contra \EO{} en las medidas primarias, con su intervalo de confianza
+simultáneo (Bonferroni, $k = 9$). Un intervalo entero a la izquierda del cero es una mejora con evidencia
+estadística.}
+\label{fig:forest}
+\end{figure}
+
+\pendiente{aplicar la regla de decisión a cada alternativa y primaria.}
+
+\subsection{Efecto de los números aleatorios comunes}
+
+Con números aleatorios comunes, un día cargado es malo para los cuatro escenarios, así que las medidas de una
+misma réplica están correlacionadas positivamente y la varianza de la diferencia queda por debajo de la suma de
+las varianzas. \pendiente{informar la covarianza del P90 entre \EO{} y cada alternativa y la reducción de
+varianza que produjo.}
+
+\subsection{Cantidad de réplicas}
+
+La tabla~\ref{tab:n-necesario} da el $n^{*}$ que haría falta para cada primaria y alternativa, con los
+semianchos fijados antes de correr: 1~s para los percentiles y 0,01 para la proporción.
+
+\entradaGenerada{tabla-n-necesario}
+
+\pendiente{decidir si alcanzan las 10 réplicas o hay que agregar días, según $n^{*}$.}

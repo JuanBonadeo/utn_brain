@@ -1,5 +1,41 @@
 \section{Documentación y uso de los resultados}
 \label{sec:documentacion}
-% Origen: Repositorio, verificador, cargador, planilla y video.
-% Tarea: T5.4. Reglas: citas con \parencite, tablas con booktabs, figuras con \label, nada de Wikipedia.
-[PENDIENTE: T5.4.]
+% Origen: estructura del repositorio y scripts del TPI (2026-11-10).
+
+Todo el estudio está en un repositorio Git: el modelo, los datos procesados, los scripts y este informe. La
+tabla~\ref{tab:archivos} resume qué hace cada pieza.
+
+\begin{table}[H]
+\centering
+\caption{Archivos del estudio}
+\label{tab:archivos}
+\small
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{4.6cm} X@{}}
+\toprule
+Archivo & Función \\
+\midrule
+\texttt{SubteConstitucion.alp} & Modelo de AnyLogic: capa lógica, capa peatonal y experimentos \\
+\texttt{verificar\_modelo.py} & Verificador automático: estructura, datos embebidos, geometría y funciones compiladas \\
+\texttt{datos/embeber\_dias\_sbase.py} & Embebe en el modelo los 75 días hábiles y sus llegadas reales de trenes \\
+\texttt{cargar\_corridas.py} & Valida las filas de las corridas y las carga en la planilla \\
+\texttt{04-resultados-corridas.xlsx} & Planilla con las corridas e intervalos de confianza por comparación \\
+\texttt{analisis\_corridas.py} & Diferencias apareadas, Bonferroni y $n^{*}$, independiente de la planilla \\
+\texttt{validacion\_corridas.py} & Caudal por ventana contra SBASE y reparto entre molinetes \\
+\texttt{resultados\_informe.py} & Genera las tablas y figuras de resultados de este informe \\
+\texttt{informe/} & Fuente \LaTeX{} del informe y script para compilarlo en Overleaf \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Para reproducir los resultados:
+\begin{enumerate}
+  \item correr \texttt{verificar\_modelo.py} y comprobar que todos los controles den OK;
+  \item abrir el modelo en AnyLogic~8.9 PLE y ejecutar \texttt{PeatonalCorridasApareadas}, que escribe
+        \texttt{corridas\_peatonales.csv} y \texttt{corridas\_peatonales\_ventanas.csv};
+  \item cargar las corridas con \texttt{cargar\_corridas.py corridas\_peatonales.csv -{}-escribir};
+  \item correr \texttt{analisis\_corridas.py}, \texttt{validacion\_corridas.py} y \texttt{resultados\_informe.py}.
+\end{enumerate}
+Con las mismas semillas, la demanda es idéntica en cualquier máquina; el movimiento de los peatones puede
+diferir en décimas de segundo (sección~\ref{sec:paso6-validacion}).
+
+\pendiente{agregar el enlace al video y, si se publica, al modelo en AnyLogic Cloud.}

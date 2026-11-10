@@ -90,8 +90,8 @@ cada par y su diferencia vale cero por construcción.
 
 \subsection{Escenarios}
 
-La tabla~\ref{tab:escenarios} resume los escenarios definidos. La comparación obligatoria del estudio es
-\EO{} contra \EI{}.
+La tabla~\ref{tab:escenarios} resume los escenarios definidos. Cada alternativa evaluada (\EI{}, \ET{} y
+\EIT{}) se compara contra la situación actual, \EO{}.
 
 \begin{table}[H]
 \centering
@@ -104,20 +104,22 @@ Escenario & Configuración & Estado en este informe \\
 \midrule
 \EO{} & 20 molinetes habilitados, el entero más próximo a los 19,5 con tráfico por ventana & Evaluado \\
 \EI{} & Los 22 molinetes del vestíbulo Principal & Evaluado \\
+\ET{} & 20 molinetes con validación sin contacto (tarjeta EMV o QR), más rápida que SUBE & Evaluado, con un tiempo de validación supuesto \\
+\EIT{} & 22 molinetes con validación sin contacto: las dos medidas juntas & Evaluado, con el mismo supuesto \\
 E1-b & Ampliación hipotética a 28 molinetes en el mismo banco & Implementado; no se evalúa porque el espacio físico no está verificado \\
 E2 & Desvío de una fracción del flujo hacia el vestíbulo Plaza & Implementado en la capa lógica; trabajo futuro (falta modelar Plaza) \\
-E3 & Validación sin contacto (tarjeta EMV o QR) en lugar de SUBE & Implementado en la capa lógica; trabajo futuro (no hay tiempo de validación citable) \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
 \EI{} es la alternativa más directa y de menor costo: no requiere obra, solo habilitar equipos que ya
 existen. Que los 22 molinetes estén efectivamente disponibles para ingreso en el pico es un supuesto. Por
-eso se pidió a SBASE la correspondencia entre identificadores y equipos físicos. E2 y E3 quedan fuera de
-la evaluación. E2 exige un segundo circuito para Plaza, del que no hay geometría, y un supuesto sobre
-cuántos pasajeros aceptarían desviarse. E3 no tiene un tiempo de validación EMV o QR publicado para la
-red, y el único molinete de ese tipo está en Plaza.
-\pendiente{confirmar con la cátedra la redefinición de \EI{} (22 en lugar de 28) y el alcance de E2 y E3; consulta en 08-consulta-catedra.md.}
+eso se pidió a SBASE la correspondencia entre identificadores y equipos físicos. \ET{} actúa sobre la otra
+variable del servicio: el tiempo que tarda cada pasajero en validar. No hay un tiempo de validación EMV o QR
+medido en la red, así que \ET{} y \EIT{} se evalúan con el extremo rápido del rango de la
+tabla~\ref{tab:parametros} y se leen como \enquote{qué pasaría si la validación bajara a ese rango}. E2
+queda fuera de la evaluación: exige un segundo circuito para Plaza, del que no hay geometría, y un supuesto
+sobre cuántos pasajeros aceptarían desviarse.
 
 \subsection{Plan de trabajo}
 
@@ -136,7 +138,9 @@ Definición & Aprobación del tema, perfilado del dataset de SBASE y definición
 Pedidos de datos & Correos a SBASE, Emova y Trenes Argentinos; pedidos formales por Ley~104 y Ley~\num{27275} & 23/09 y 05/10/2026 \\
 Modelo & Capa lógica, capa peatonal, demanda por horario del Roca y automatización de las corridas & 20/09 a 24/09/2026 \\
 Pilotos & Diagnóstico del atasco, corrección y calibración del escenario intermedio & 24/09 a 05/10/2026 \\
-Producción & 30 pares \EO{}-\EI{} y reproducción en una segunda máquina & 05/10 y 09/10/2026 \\
+Producción inicial & 30 pares \EO{}-\EI{} con un día promedio y reproducción en una segunda máquina & 05/10 y 09/10/2026 \\
+Modelo con días reales & Días hábiles y trenes reales, accesos por las escaleras del bloque central, \ET{} y \EIT{} & 02/11 a 09/11/2026 \\
+Producción final & 10 días hábiles reales $\times$ 4 escenarios, en paralelo & 10/11/2026 \\
 Informe y video & Redacción en \LaTeX{}, presentación y grabación & \pendiente{fecha de entrega} \\
 \bottomrule
 \end{tabularx}

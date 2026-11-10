@@ -1,6 +1,6 @@
 \section{Paso 4: construcción y verificación del programa}
 \label{sec:paso4-construccion-verificacion}
-% Origen: 02-modelo-anylogic.md §1-§7 y verificar_modelo.py (corrido el 2026-10-27).
+% Origen: 02-modelo-anylogic.md §1-§7 y secciones del 2026-11-02 al 2026-11-09; verificar_modelo.py.
 
 \subsection{Herramienta y estructura}
 
@@ -23,62 +23,87 @@ dos capas independientes dentro del mismo archivo:
 Las capas están separadas para que un cambio gráfico en el vestíbulo no altere las métricas de la capa
 lógica.
 
-\subsection{Vestíbulo hipotético}
+\subsection{Recorrido del pasajero}
 
-El plano oficial del vestíbulo no estaba disponible al construir el modelo. Por eso se diseñó un vestíbulo
-verosímil, no una reproducción de Constitución, y la vista lo indica con un aviso permanente
-(figura~\ref{fig:plano}). De fondo, la vista muestra el plano de la estación enviado por Trenes Argentinos y las
-capas de OSM, georreferenciados de modo que el pasillo del modelo coincide con el real. Tiene estas características:
+El modelo sigue al pasajero del Roca desde que baja del tren hasta que valida en un molinete y entra a la zona
+paga. Hay dos niveles peatonales, con el molde del ejemplo oficial \emph{Stairs} de AnyLogic. De fondo, la vista
+muestra el plano de la estación enviado por Trenes Argentinos y las capas de OpenStreetMap, georreferenciados de
+modo que el pasillo del modelo coincide con el real (sección~\ref{sec:paso6-validacion}).
+
 \begin{itemize}
-  \item Mide $50 \times 34$~m y tiene paredes físicas. Se ubicó sobre su posición real: bajo la calle Brasil y
-        la plaza, en el extremo sur de los andenes de la Línea~C.
-  \item El pasaje del Roca baja del tren en la cabecera de su andén y cruza el hall entre los obstáculos que
-        dibuja el plano: la estructura central de escaleras mecánicas y dos bloques de boleterías y vestuarios.
-        Cada tren descarga en uno de los siete andenes; como no hay dato del andén de cada tren, se asignan
-        por turno, en el orden del horario.
-  \item Desde la boca del hall baja a un pasillo en L de 84~m y 5~m de ancho que sigue la traza del pasillo
-        subterráneo de OpenStreetMap. El ancho es un supuesto.
-  \item La calle entra por la escalera B3 de la calle Brasil, que aterriza 11~m después de la boca del pasillo,
-        desde el lado este, como en OpenStreetMap.
-  \item La zona no paga va desde la boca del pasillo hasta las colas, con boletería, máquinas de carga y
-        columnas como obstáculos.
-  \item Los molinetes forman dos bancos de 14 pasos de 1~m, separados por una cabina. La zona paga empieza en
-        el punto donde el pasillo real se conecta con el andén de la Línea~C.
-  \item Los molinetes son servicios lineales de 1,6~m que se atraviesan de la zona no paga a la paga. Cada
-        uno tiene su propia cola de 6~m, con la cabeza a 2~m del paso, como en el ejemplo oficial
-        \emph{Subway Entrance Hall} de AnyLogic.
-  \item La zona paga mide 26~m hasta las escaleras al andén, que quedan sobre los andenes de la Línea~C.
+  \item \textbf{Andén (nivel 0).} Cada tren se detiene en una de las siete vías con andén, la primera libre. Su
+        pasaje baja por las 21 puertas de la formación (7 coches de 23~m con 3 puertas por lado) y camina el
+        andén hasta la cabecera. La dispersión con que la oleada llega al hall sale de esa caminata.
+  \item \textbf{Hall (nivel 0).} El pasajero cruza el hall entre los obstáculos dibujados con la silueta del
+        plano: las cabeceras de los andenes, el bloque central de escaleras, los vestuarios y las boleterías.
+  \item \textbf{Escaleras mecánicas.} Baja por uno de los dos grupos de escaleras mecánicas del bloque central:
+        el norte si bajó en un andén al norte del centro del bloque y el sur en otro caso. Cada escalera es un
+        área en pendiente de $10{,}5 \times 2{,}8$~m, con 4,6~m de desnivel y velocidad máxima de 0,685~m/s, de
+        modo que la bajada lleva $4{,}6/0{,}30 \approx 15{,}3$~s. La bajada se camina y puede congestionarse. Las
+        escaleras fijas del centro del bloque no se modelan.
+  \item \textbf{Subsuelo (nivel $-4{,}60$~m).} Al pie de las escaleras está la plaza de transbordo, de donde sale
+        un pasillo en L de 84~m y 5~m de ancho sobre la traza del pasillo subterráneo de OpenStreetMap. La plaza
+        y el ancho del pasillo son supuestos.
+  \item \textbf{Vestíbulo.} Mide $50 \times 34$~m. La calle entra por la escalera B3 de la calle Brasil, en su
+        posición real. La zona no paga tiene boletería, máquinas de carga y columnas como obstáculos. Los
+        molinetes forman dos bancos de 14 pasos de 1~m separados por una cabina, y la zona paga empieza donde el
+        pasillo real se conecta con el andén de la Línea~C.
+  \item \textbf{Molinetes.} Son servicios lineales de 1,6~m que se atraviesan de la zona no paga a la paga. Cada
+        uno tiene su propia cola de 6~m con la cabeza a 2~m del paso, como en el ejemplo oficial \emph{Subway
+        Entrance Hall}.
 \end{itemize}
 
-El ancho real del pasillo subterráneo no se conoce; los 34~m del vestíbulo son los que hacen falta para
-alojar 28 molinetes. Tampoco se modela la escalera B4, que baja del otro lado de la conexión con el andén:
-sin el plano de SBASE no se sabe qué molinetes usan sus pasajeros.
-
-El plano tiene 28 molinetes. Los 22 primeros representan los del vestíbulo Principal y los 6 restantes, la
-ampliación hipotética E1-b. Los escenarios no duplican la geometría: \EO{} suspende los molinetes 21 a 28 y
-\EI{} los 23 a 28, mediante la API de \texttt{ServiceWithLine}. Así, los dos escenarios atraviesan el mismo
-vestíbulo y el mismo bloque.
+El interior del vestíbulo es supuesto: los 34~m de ancho son los que hacen falta para alojar 28 molinetes. Los 22
+primeros representan los del vestíbulo Principal y los 6 restantes, la ampliación hipotética E1-b. Los escenarios
+no duplican la geometría: \EO{} suspende los molinetes 21 a 28 y \EI{} los 23 a 28, con la API de
+\texttt{ServiceWithLine}. La escalera B4 no se modela, porque baja del otro lado de la conexión con el andén y,
+sin el plano de SBASE, no se sabe qué molinetes usan sus pasajeros.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.9\textwidth]{tpi-subte-plano-hipotetico.png}
-\caption{Vestíbulo hipotético: acceso desde el Roca a la izquierda, batería de 28 molinetes en dos bancos
-y escaleras a la Línea~C a la derecha. En rojo, los molinetes suspendidos en \EO{}.}
+\figuraSiExiste{tpi-subte-modelo-espacial.png}{\textwidth}
+\caption{Modelo espacial en AnyLogic: andenes del Roca, hall con el bloque central de escaleras, plaza de
+transbordo, pasillo y vestíbulo, sobre el plano de Trenes Argentinos.}
 \label{fig:plano}
 \end{figure}
-\pendiente{reemplazar la figura por una captura del modelo con el pasillo, las dos bocas y el plano de fondo.}
+
+\subsection{Presentación del modelo}
+
+La vista del modelo se organizó en cuatro bloques, según la consigna de la cátedra, para que alguien que no lo
+conoce pueda leerlo de arriba abajo (figura~\ref{fig:bloques}):
+\begin{enumerate}
+  \item \textbf{Variables}: parámetros del escenario y de la corrida, datos embebidos, generadores aleatorios
+        y supuestos, cada uno con una línea que dice qué es;
+  \item \textbf{Medidas de rendimiento}: las primarias, las secundarias, las de validación y un panel en vivo
+        con el día, el escenario, la hora, el P90, la cola y la gente en tránsito;
+  \item \textbf{Lógica}: el diagrama de flujo del pasajero, los bloques de los trenes, los eventos y las
+        funciones;
+  \item \textbf{Modelo espacial}: la animación en 2D y 3D, con dos mapas de calor (hall y subsuelo) que
+        acumulan la densidad máxima de la corrida y marcan en rojo las zonas por encima de
+        1,5~personas/m².
+\end{enumerate}
+
+\begin{figure}[H]
+\centering
+\figuraSiExiste{tpi-subte-modelo-bloques.png}{\textwidth}
+\caption{Vista del modelo en cuatro bloques: variables, medidas de rendimiento y lógica arriba; modelo espacial
+abajo.}
+\label{fig:bloques}
+\end{figure}
 
 \subsection{Lógica de la capa peatonal}
 
-\textbf{Demanda.} Los arribos de los trenes están cargados en el modelo como un arreglo de 61 instantes
-entre las 06:30 y las 09:30. Se incluyen los trenes de 06:30 a 07:00 porque, con la demora, su pasaje
-llega al vestíbulo después de las 07:00. El perfil de SBASE de la tabla~\ref{tab:perfil} fija el volumen
-por ventana. La demanda se genera como se describió en la sección~\ref{sec:paso2-datos-modelo-conceptual}:
+\textbf{Demanda.} Cada réplica es un día hábil real, sorteado con la semilla entre los 75 días de marzo a junio de
+2026 con servicio normal del Roca (sección~\ref{sec:paso2-datos-modelo-conceptual}). Del día se toman dos cosas,
+ambas embebidas en el modelo para que funcione igual en AnyLogic Cloud:
 \begin{itemize}
-  \item el pasaje de cada tren ingresa de forma pareja durante la dispersión de la descarga;
-  \item la demanda de la calle se genera por adelgazamiento (\emph{thinning}) de un proceso de Poisson.
+  \item las validaciones del vestíbulo Principal por ventana de 15 minutos, de SBASE;
+  \item la llegada real de cada tren a Plaza Constitución, al minuto, de Trenes Argentinos.
 \end{itemize}
-Si alguno de los cuatro parámetros sin dato no tiene valor, la inicialización se detiene con un error
+Cada tren lleva la demanda acumulada desde el tren anterior de su ramal. El pasaje concreto es una variable de
+Poisson con esa media, con su propio generador. El total del Roca se reescala para que sea el 80~\% de las
+validaciones del día. La demanda de la calle se genera por adelgazamiento (\emph{thinning}) de un proceso de
+Poisson con la tasa de cada ventana. Si falta un parámetro sin dato, la inicialización se detiene con un error
 explícito en lugar de usar un valor oculto.
 
 \textbf{Elección de cola.} \texttt{PedService} delega la elección en una función propia,
@@ -90,21 +115,22 @@ están en ella. Así se evita el \enquote{efecto manada}: una oleada completa el
 \textbf{Medición.} La espera de cada pasajero empieza en el evento \texttt{onEnterQueue} y termina al
 comenzar la validación. Las métricas de la franja se congelan a las 09:30 ($t = 9000$), pero la corrida
 continúa hasta que sale el último pasajero ingresado antes de esa hora. Recién entonces el modelo escribe
-una fila de 17 campos en el archivo de corridas y termina. Antes de escribirla exige que se cumpla
+una fila de 20 campos en el archivo de corridas (anexo~\ref{anx:csv}) y, en otro archivo, las validaciones
+simuladas y observadas por ventana del mismo día. Antes de escribir exige que se cumpla
 inyectados $=$ generados $=$ procesados. Si no se cumple, se detiene con un error de conservación.
 
 \textbf{Números aleatorios comunes.} Cada fuente de azar tiene su propio generador, sembrado a partir de la
-semilla de la réplica: la calle, el tiempo de validación y la velocidad de marcha. La descarga del Roca es
-determinística. Por eso \EO{} y \EI{} con la misma semilla reciben exactamente los mismos pasajeros, en
-los mismos instantes y con los mismos tiempos de validación \parencite[cap.~11]{law2015}. Lo único que
-cambia entre los dos escenarios de un par es la cantidad de molinetes habilitados.
+semilla de la réplica: el día, la carga de los trenes, la calle, el tiempo de validación y la velocidad de
+marcha. Los cuatro escenarios de una réplica reciben el mismo día, los mismos trenes, los mismos pasajeros en
+los mismos instantes, con las mismas velocidades \parencite[cap.~11]{law2015}. Lo único que cambia es la
+cantidad de molinetes habilitados y la distribución del tiempo de validación.
 
 \textbf{Automatización.} El experimento de variación de parámetros \texttt{PeatonalCorridasApareadas}
-ejecuta 60 corridas en secuencia. La corrida $j$ usa la semilla $20260923 + \lfloor j/2 \rfloor$ y 20 o 22
-molinetes según $j$ sea par o impar. Cada par consecutivo comparte la semilla. Un script
-(\texttt{cargar\_corridas.py}) valida las filas y las transfiere a la planilla de análisis sin
-transcripción manual. Rechaza filas de demostración, corridas incompletas, pares sin \EO{} o \EI{}, pares
-con distinta demanda y violaciones de conservación.
+ejecuta 40 corridas con evaluaciones en paralelo. La corrida $j$ usa la semilla $20260923 + \lfloor j/4 \rfloor$
+y el escenario $j \bmod 4$: \EO{}, \EI{}, \ET{} y \EIT{}. Cada grupo de cuatro corridas consecutivas comparte la
+semilla y, por lo tanto, el día. Un script (\texttt{cargar\_corridas.py}) valida las filas y las transfiere a la
+planilla de análisis sin transcripción manual. Rechaza filas de demostración, corridas incompletas, réplicas sin
+\EO{}, escenarios con distinto día o distinta demanda y violaciones de conservación.
 
 \subsection{Verificación}
 
@@ -117,7 +143,10 @@ modificarlo:
   \item la estructura del XML, la unicidad de los identificadores y las referencias entre elementos;
   \item los parámetros de cada experimento;
   \item que el horario cargado en el modelo sea exactamente el extraído de los PDF oficiales;
-  \item la orientación de las 28 colas.
+  \item que los 75 días embebidos coincidan con los datos de SBASE y de Trenes Argentinos, y que en ninguno de
+        ellos dos trenes ocupen la misma vía a la vez;
+  \item la orientación de las 28 colas, la geometría de las escaleras y de la plaza, y que cada elemento de la
+        vista quede dentro de su bloque.
 \end{itemize}
 Además compila las funciones Java del modelo contra las bibliotecas instaladas de AnyLogic. Las ejercita
 en un arnés de prueba con casos de resultado conocido:
@@ -128,12 +157,13 @@ en un arnés de prueba con casos de resultado conocido:
   \item no se generan ingresos a partir de las 09:30;
   \item la proporción de pasajeros que llega en tren y la que llega desde la calle coinciden con las
         configuradas;
-  \item \EO{} y \EI{} reciben los mismos ingresos y sortean los mismos tiempos de validación;
+  \item los cuatro escenarios reciben los mismos ingresos y sortean los mismos tiempos de validación, pasajero
+        por pasajero;
   \item la media empírica del servicio triangular coincide con la teórica;
-  \item la fila de salida tiene los 17 campos en el orden de la planilla.
+  \item la fila de salida tiene los 20 campos en el orden de la planilla.
 \end{itemize}
 También comprueba que la planilla calcula los mismos intervalos de confianza que una implementación
-independiente en Python, con una diferencia menor que $10^{-6}$. La última ejecución, del 27/10/2026,
+independiente en Python, con una diferencia menor que $10^{-6}$. La última ejecución, del 10/11/2026,
 pasó todos los controles.
 
 \textbf{Traza manual.} En la capa lógica se reprodujo una oleada de 5 pasajeros con 2 molinetes y 3~s de

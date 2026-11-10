@@ -98,12 +98,43 @@ Piloto & Condición & Tiempo \\
 05/10, \EO{}, valores de prueba & Drena; con animación & 274~s \\
 05/10, \EI{}, valores de prueba & Drena; sin animación & 28~s \\
 05/10, producción, escenario intermedio & Drena; sin animación & $\approx 7$~s \\
+04/11, días reales, andén y hall caminados & Drena; sin animación & $\approx 170$~s \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Con 7~s por corrida, los 30 pares de producción llevan unos 7 minutos. El cómputo dejó de ser una
-restricción del diseño experimental.
+Con 7~s por corrida, los 30 pares de la producción del 05/10 llevaron unos 7 minutos. Ese tiempo volvió a
+crecer cuando el modelo pasó a caminar el andén y el hall, con días reales: unos 170~s por corrida. Las 120
+corridas del diseño de referencia (30 días $\times$ 4 escenarios) habrían llevado unas 5,5~horas en serie. Por
+eso la producción arranca con las $n_0 = 10$ réplicas del procedimiento secuencial (40 corridas), con
+evaluaciones en paralelo, y se agregan días solo si el $n^{*}$ calculado con ellas lo pide
+(sección~ef{sec:paso7-diseno-experimentos}).
+
+\subsection{Pilotos con días reales: el acceso era un cuello de botella falso}
+
+Cuando cada réplica pasó a usar un día real, con sus trenes reales, el piloto mostró un hall que llegaba a
+tener cerca de \num{2000} personas esperando para bajar al subsuelo. El caudal simulado de la ventana de 08:30
+quedaba entre un 13 y un 33~\% por debajo del observado ese mismo día. El modelo tenía entonces una única
+escalera de 5~m de ancho, supuesta por el grupo al comienzo del pasillo. Un acceso con menos capacidad que el
+real fabricaba una congestión que no existe y, peor, la ponía antes de los molinetes, donde amortigua las
+oleadas y achica la diferencia entre escenarios.
+
+El plano de Trenes Argentinos dibuja dos grupos de escaleras mecánicas en el bloque central del hall, justo al
+oeste de donde arranca el pasillo subterráneo. El modelo pasó a usarlos como accesos
+(sección~ef{sec:paso4-construccion-verificacion}). Una primera versión los ubicó mal, en sentido norte-sur y
+dentro de la plaza; la revisión contra el plano los corrigió el 09/11, y el piloto visual de \EO{} posterior
+mostró el recorrido esperado: la gente entra por el oeste del bloque y baja hacia la plaza.
+
+El piloto dejó otras dos observaciones, que se informan como limitaciones:
+\begin{itemize}
+  \item \textbf{Primera ventana baja.} En la ventana de 07:00 el caudal simulado queda muy por debajo del
+        observado (unos 840 frente a \num{1780} en un día de prueba). El sistema arranca vacío a las 07:00 y el
+        pasaje de un tren tarda de 6 a 9 minutos en llegar a los molinetes; los trenes anteriores a las 07:00 no
+        se generan. Afecta solo al arranque: la espera de esa ventana es baja en todos los escenarios y la
+        cohorte pico, de 08:15 a 08:45, no se ve afectada.
+  \item \textbf{Reparto más parejo que el real.} El coeficiente de variación de las validaciones entre
+        molinetes quedó cerca de 0,3, frente a 0,56 en SBASE (sección~\ref{sec:paso6-validacion}).
+\end{itemize}
 
 \subsection{Qué se aprendió}
 

@@ -1,5 +1,49 @@
 \section{Paso 10: conclusiones y recomendaciones}
 \label{sec:paso10-conclusiones}
-% Origen: Regla de plan §7.4 escrita antes de correr, alcance, limitaciones y trabajo futuro (E2, E3, plano real, medición).
-% Tarea: T5.4. Reglas: citas con \parencite, tablas con booktabs, figuras con \label, nada de Wikipedia.
-[PENDIENTE: T5.4.]
+% Origen: regla de decisión de la sección 8 (fijada antes de correr), resultados de la sección 10 y limitaciones
+% documentadas en 02-modelo-anylogic.md.
+
+\subsection{Respuesta a la pregunta del estudio}
+
+\pendiente{responder con los intervalos de la tabla~\ref{tab:diferencias}: si habilitar los 22 molinetes
+(\EI{}), validar más rápido (\ET{}) o las dos cosas (\EIT{}) reducen la espera de la hora pico frente a la
+situación actual, y cuánto.}
+
+\subsection{Recomendación}
+
+\pendiente{aplicar la regla de decisión: recomendar la alternativa de menor P90 cuyo intervalo frente a las otras
+lo sostenga, o describir el compromiso si las primarias no coinciden.}
+
+\subsection{Alcance y limitaciones}
+
+Las conclusiones valen dentro de los supuestos del modelo. Los que más pueden pesar son estos:
+\begin{itemize}
+  \item \textbf{Espera no validada.} No hay observaciones de la espera ni del largo de cola en Constitución
+        (sección~\ref{sec:paso6-validacion}). Los niveles absolutos dependen de los supuestos; la comparación
+        entre escenarios es más robusta, porque todos los comparten.
+  \item \textbf{Reparto más parejo que el real.} El modelo reparte la carga entre molinetes más parejo que la
+        gente real. Si los molinetes que agrega \EI{} quedaran en una posición poco atractiva, se usarían menos y
+        el modelo sobreestimaría su efecto.
+  \item \textbf{Proporción del Roca.} Que el 80~\% de las validaciones del vestíbulo Principal venga del Roca es
+        un supuesto: los datos disponibles no permiten estimarla.
+  \item \textbf{Tiempo de validación rápida.} \ET{} y \EIT{} usan el extremo optimista del rango técnico, no una
+        medición del molinete EMV o QR.
+  \item \textbf{Geometría del subsuelo.} La plaza de transbordo, el ancho del pasillo y el interior del
+        vestíbulo son supuestos; el hall, los andenes y las escaleras mecánicas siguen el plano oficial. Las
+        escaleras fijas del bloque central no se modelan.
+  \item \textbf{Arranque.} El sistema empieza vacío a las 07:00 y no genera el pasaje de los trenes anteriores,
+        así que la primera ventana queda con menos gente que la real.
+  \item \textbf{Pasajeros fuera del modelo.} Solo se modela a quien entra al vestíbulo Principal. Los que bajan
+        del Roca y salen a la calle o van a otro acceso no se simulan, aunque compartan el hall.
+\end{itemize}
+
+\subsection{Trabajo futuro}
+
+\begin{itemize}
+  \item Medir en el lugar la espera y el largo de cola en la hora pico, para validar los niveles absolutos.
+  \item Incorporar el plano del subsuelo de SBASE, si se recibe, y recalibrar la elección de molinete con el
+        reparto observado.
+  \item Medir el tiempo de validación del molinete EMV o QR que ya existe en la estación.
+  \item Evaluar E2, el desvío de parte del flujo al vestíbulo Plaza, que exige modelar ese segundo circuito.
+  \item Agregar un período de calentamiento desde las 06:45 para representar la primera ventana.
+\end{itemize}

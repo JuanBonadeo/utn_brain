@@ -1,5 +1,49 @@
 \section{Paso 8: corridas de producción}
 \label{sec:paso8-produccion}
-% Origen: n pares, tiempo de cómputo y controles de las corridas (tabla T-e).
-% Tarea: T5.4. Reglas: citas con \parencite, tablas con booktabs, figuras con \label, nada de Wikipedia.
-[PENDIENTE: T5.4.]
+% Origen: experimento PeatonalCorridasApareadas, corridas_peatonales.csv y cargar_corridas.py (2026-11-10).
+
+\subsection{Configuración}
+
+La producción usa el experimento \texttt{PeatonalCorridasApareadas} con la configuración de la
+tabla~\ref{tab:produccion}. Las cuatro corridas de una réplica comparten la semilla, el día sorteado y todas las
+fuentes de azar (sección~\ref{sec:paso7-diseno-experimentos}).
+
+\begin{table}[H]
+\centering
+\caption{Configuración de las corridas de producción}
+\label{tab:produccion}
+\small
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{4.2cm} X@{}}
+\toprule
+Elemento & Valor \\
+\midrule
+Réplicas & $n_0 = 10$ días hábiles, semillas \num{20260923} a \num{20260932} \\
+Corridas & 40: corrida $j$ con semilla $20260923 + \lfloor j/4 \rfloor$ y escenario $j \bmod 4$ (\EO{}, \EI{}, \ET{}, \EIT{}) \\
+Día de cada réplica & Sorteado con la semilla entre los 75 días hábiles de marzo a junio de 2026 con servicio normal del Roca \\
+Trenes & Llegadas reales de ese día, con carga de Poisson y el total del Roca igual al 80~\% de las validaciones del día \\
+Validación & \EO{} y \EI{}: triangular (1,8; 2,4; 3,5)~s. \ET{} y \EIT{}: triangular (1,5; 1,8; 2,5)~s \\
+Demora y descarga & 10~s de apertura de puertas; descenso por 21 puertas en 30~s \\
+Franja & Ingresos de 07:00 a 09:30; la corrida sigue hasta que sale el último pasajero (tope técnico en \num{17900}~s) \\
+Ejecución & Evaluaciones en paralelo, sin animación, AnyLogic~8.9.10 PLE \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Controles}
+
+Antes de analizar, cada corrida pasó por los controles automáticos del modelo y del cargador:
+\begin{itemize}
+  \item cada corrida terminó con una fila completa de 20 campos y ninguna quedó marcada como
+        \texttt{INCOMPLETO}, es decir, todas drenaron;
+  \item en cada corrida se cumplió la conservación: inyectados $=$ generados $=$ procesados;
+  \item en cada réplica, los cuatro escenarios tienen el mismo día y la misma cantidad de pasajeros generados,
+        que es la condición de los números aleatorios comunes;
+  \item las filas se cargaron en la planilla \texttt{04-resultados-corridas.xlsx} con \texttt{cargar\_corridas.py},
+        sin transcripción manual.
+\end{itemize}
+\pendiente{confirmar los controles con la salida del cargador: filas leídas, réplicas completas y días sorteados.}
+
+\subsection{Días simulados y tiempo de cómputo}
+
+\pendiente{listar los 10 días sorteados (fecha, trenes y validaciones de la franja) y el tiempo total de la
+producción en paralelo.}

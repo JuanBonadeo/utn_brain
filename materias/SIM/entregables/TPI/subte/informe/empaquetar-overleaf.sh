@@ -7,6 +7,7 @@ cd "$(dirname "$0")"
 tmp=$(mktemp -d)
 mkdir -p "$tmp/informe/figs"
 cp -R tpi-subte.tex referencias.bib capitulos "$tmp/informe/"
+[ -d generado ] && cp -R generado "$tmp/informe/"
 for f in ../../../../figs/tpi-subte-*; do [ -e "$f" ] && cp "$f" "$tmp/informe/figs/"; done
 rm -f informe-overleaf.zip
 (cd "$tmp/informe" && zip -qr "$OLDPWD/informe-overleaf.zip" .)

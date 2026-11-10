@@ -4,14 +4,14 @@
 
 \subsection{Escenarios}
 
-Se comparan cuatro configuraciones del vestíbulo Principal (tabla~\ref{tab:escenarios}). Cruzan los dos
+Se comparan cuatro configuraciones del vestíbulo Principal (tabla~\ref{tab:escenarios-experimento}). Cruzan los dos
 factores que la cátedra y el caso dejan en manos del operador: cuántos molinetes se habilitan y qué tan
 rápido valida cada pasajero.
 
 \begin{table}[H]
 \centering
 \caption{Escenarios del experimento}
-\label{tab:escenarios}
+\label{tab:escenarios-experimento}
 \small
 \begin{tabularx}{\textwidth}{@{}l l l X@{}}
 \toprule
@@ -73,7 +73,9 @@ n^{*}_a(\beta) = \min\left\{ i \ge n_0 : t_{i-1,\,1-\alpha_s/2}\sqrt{S^2(n_0)/i}
 \]
 con un semiancho tolerable fijado antes de ver los datos: $\beta = 1$~s para los percentiles y
 $\beta = 0{,}01$ para la proporción. Se usa precisión absoluta porque la relativa se indefine si la
-diferencia real es casi cero. El diseño de referencia es de 30 réplicas por escenario (120 corridas).
+diferencia real es casi cero. El diseño de referencia era de 30 réplicas por escenario (120 corridas). Con días reales cada corrida tarda
+unos 170~s, así que la producción arranca con las $n_0 = 10$ réplicas (40 corridas, en paralelo) y se
+agregan días solo si $n^{*}$ lo pide.
 
 \subsection{Regla de decisión}
 
