@@ -134,7 +134,10 @@ def convertir(origen: str, campos: list[str]) -> tuple[str, int, list[float]]:
     generados, desviados, al_corte, drenaje = valores[0:4]
     if desviados != 0:
         raise ErrorCarga(f'{origen}: E0-E1 no desvía pasajeros ({desviados})')
-    if drenaje + desviados != generados:
+    # El modelo cierra la corrida si quedan peatones sin avance (controlAtascoPed): como mucho
+    # max(20, generados/200), que se excluyen y se informan en la fila de ventanas.
+    atascados = generados - desviados - drenaje
+    if atascados < 0 or atascados > max(20, generados // 200):
         raise ErrorCarga(f'{origen}: conservación violada (generados={generados}, drenaje={drenaje})')
     if al_corte > drenaje:
         raise ErrorCarga(f'{origen}: procesados al corte mayor que con drenaje')
