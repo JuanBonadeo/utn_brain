@@ -19,7 +19,7 @@ h1,h2,h3{ margin:0; }
 .photos{ display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:8px 0; }
 .photos img{ width:100%; border-radius:8px; display:block; }
 .cap{ font-size:8.4pt; color:var(--muted); margin-top:2px; }
-.sec{ display:flex; align-items:center; gap:10px; margin:14px 0 8px; break-after:avoid; }
+.sec{ break-inside:avoid; display:flex; align-items:center; gap:10px; margin:14px 0 8px; break-after:avoid; }
 .sec .n{ width:30px; height:30px; border-radius:50%; color:#fff; font-weight:800; display:flex; align-items:center; justify-content:center; flex:none; font-size:12pt; }
 .sec h2{ font-size:14pt; }
 .c1 .n{ background:var(--navy); } .c2 .n{ background:var(--blue); } .c3 .n{ background:#0f8a7e; } .c4 .n{ background:var(--amber); }
@@ -51,6 +51,11 @@ table.t tr.hl td{ background:#ecf8f0; }
 .flow .b .nm{ display:block; font-size:12pt; font-weight:800; color:#1e48ad; margin-bottom:2px; }
 .flow .ar{ display:flex; align-items:center; color:#9aa3ae; font-size:16pt; }
 .chip{ display:inline-block; width:11px; height:11px; border-radius:2px; vertical-align:-1px; margin-right:4px; }
+.c10 .n{ background:#0e7490; } .c11 .n{ background:#a16207; } .c12 .n{ background:#9f1239; } .c13 .n{ background:#334155; }
+table.g td:first-child{ font-weight:650; white-space:nowrap; width:23%; }
+ol.steps{ margin:4px 0 6px; padding-left:20px; } ol.steps li{ margin-bottom:4px; }
+.q{ border-left:3px solid var(--bad); padding:3px 0 3px 10px; margin:7px 0; break-inside:avoid; }
+.q b.p{ color:var(--bad); } .q .a{ color:var(--ink); }
 .tl{ font-size:8.2pt; font-weight:800; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); }
 </style>
 </head>
@@ -150,8 +155,30 @@ table.t tr.hl td{ background:#ecf8f0; }
   <tr class="hl"><td><b>E3</b></td><td>Apagar enseguida</td><td>Igual que E0, pero <b>se apaga apenas se vacía la cola</b>: no espera caliente.</td></tr>
 </table>
 
-<!-- ======================================================= 5 -->
-<div class="sec c5"><div class="n">7</div><h2>Las semillas, explicado fácil</h2></div>
+<!-- ======================================================= 7: cómo corre -->
+<div class="sec c10"><div class="n">7</div><h2>Cómo corre un año dentro de AnyLogic</h2></div>
+<p>AnyLogic es de <b>eventos discretos</b>: no avanza minuto a minuto, salta de un evento al siguiente (llega una ULI, termina de calentar, sale una ULI…).</p>
+<ol class="steps">
+  <li><b>Cada día a las 0 h</b>: si es lunes, saca un papelito (una semana real). Mira cuántas ULI llegaron ese día y les sortea la hora (6 a 22 h). Sábado y domingo no llega nada.</li>
+  <li><b>Llega una ULI</b>: entra por el <b>Source</b> y queda en el <b>Wait</b>. Sortea su peso y si es urgente. El modelo pregunta: <i>¿hay 79 en cola o una urgente?</i> → si sí, <b>prende</b>.</li>
+  <li><b>Calentando 36 h</b>. Mientras tanto se siguen juntando ULI.</li>
+  <li><b>Caliente</b>: libera del Wait <b>de a una</b> (urgentes primero, después la más vieja) → <b>Delay</b> 85 min → <b>Sink</b>. Al salir una, pide la siguiente.</li>
+  <li><b>Se vacía la cola</b>: E0 espera caliente hasta 48 h (si llega algo, sigue). <b>E3 espera 0 h</b>. Después enfría 48 h y queda apagado.</li>
+  <li><b>E2</b> agrega un reloj: si la ULI más vieja lleva 15 días, prende aunque no haya 79.</li>
+</ol>
+<div class="mono">|---- 90 días ----|---------------- 365 días ----------------|
+   se descartan        se miden: horas en cada estado, esperas,
+   (arranque vacío)    cola, encendidos → $ → 1 fila del CSV</div>
+<table class="t">
+  <tr><th style="width:22%">Experimento</th><th>Para qué</th></tr>
+  <tr><td><b>Visual</b></td><td>Un año con animación (semilla 1). Las tarjetas cambian E0–E3 en vivo. Es para <b>ver</b> cómo funciona, no para concluir.</td></tr>
+  <tr><td><b>CorridasE0E3</b></td><td><b>Parameter Variation</b> de 120 iteraciones, sin animación. Del número de iteración (0 a 119) sale todo: <code>escenario = index / 30</code>, <code>semilla = 1 + index % 30</code>. Cada corrida escribe una fila → CSV → planilla con los tests.</td></tr>
+  <tr><td><b>VerificacionMM1</b></td><td>Pone el modelo en modo "cola de libro" para compararlo con fórmulas (ver sección 11).</td></tr>
+</table>
+<div class="box say"><h3>Para decir</h3>"Cada día el modelo sortea una semana real y genera las ULI; el horno se prende con 79 o una urgente, calienta 36 h, procesa de a una y al vaciarse la cola espera caliente hasta 48 h. Descartamos 90 días de arranque y medimos un año. Con un Parameter Variation corrimos las 4 reglas con las mismas 30 semillas."</div>
+
+<!-- ======================================================= 8 -->
+<div class="sec c5"><div class="n">8</div><h2>Las semillas, explicado fácil</h2></div>
 <div class="grid2">
   <div>
     <p>Para sortear (qué semana sale, cuánto pesa cada ULI, si es urgente), la computadora usa una secuencia de números al azar. La <b>semilla</b> es el <b>número con el que arranca ese sorteo</b>.</p>
@@ -186,7 +213,8 @@ año 8:  E1 − E0,  E2 − E0,  E3 − E0
 <div class="box say"><h3>Y en la animación</h3>La animación usa siempre la <b>semilla 1</b>: por eso cada vez que la corrés pasa exactamente lo mismo en las mismas fechas (la urgente llega siempre en la ULI 24). Es un solo año de ejemplo; los resultados salen de los 30.</div>
 
 <!-- ======================================================= 6 -->
-<div class="sec c6"><div class="n">8</div><h2>Años buenos y años malos</h2></div>
+<div class="part"></div>
+<div class="sec c6"><div class="n">9</div><h2>Años buenos y años malos</h2></div>
 <p>Como cada semilla es un año distinto, hay años con mucho trabajo y años flojos. Eso es justamente lo que queremos capturar: <b>la variabilidad</b>.</p>
 <div class="grid4">
   <div class="stat"><div class="v" style="color:var(--blue)">1.277–2.249</div><div class="l">ULI que llegan por año, según el año</div></div>
@@ -201,7 +229,7 @@ año 8:  E1 − E0,  E2 − E0,  E3 − E0
 <div class="box say"><h3>Para decir</h3>"Simulamos 30 años distintos para que la conclusión no dependa de un año bueno o malo. Y el ahorro de apagar enseguida aparece en los 30."</div>
 
 <!-- ======================================================= 7 -->
-<div class="sec c7"><div class="n">9</div><h2>El mejor escenario y lo que gana la empresa</h2></div>
+<div class="sec c7"><div class="n">10</div><h2>El mejor escenario y lo que gana la empresa</h2></div>
 <table class="t">
   <tr><th>Contra la regla actual (por año)</th><th class="r">Costo</th><th class="r">Espera del material</th></tr>
   <tr><td><b>E1</b> umbral 45</td><td class="r" style="color:var(--bad)">+4,8 M$ más caro</td><td class="r" style="color:var(--ok)">2,6 días menos</td></tr>
@@ -215,7 +243,72 @@ año 8:  E1 − E0,  E2 − E0,  E3 − E0
   <div class="stat"><div class="v" style="color:var(--amber)">≈ 4.600 kg</div><div class="l">de gas (GLP) menos por año</div></div>
 </div>
 <div class="box good"><h3>Recomendación</h3><b>Mantener el umbral de 79 ULI y apagar el horno apenas se vacía la cola.</b> Lo que más cuesta no es esperar más o menos cajones: es tener el horno caliente sin nada adentro (unos <b>22 mil pesos por hora</b> de luz y gas). Bajar el umbral o poner una espera máxima hace esperar menos al material, pero cuesta más; solo convendría si entregar más rápido le hiciera ganar a la empresa más de 3 a 5 millones por año.</div>
-<div class="box"><h3>¿Y cómo sabemos que el modelo se parece al horno real?</h3>Lo comparamos con el registro real del mismo año: reproduce las <b>toneladas por mes</b>, la <b>duración de las campañas</b>, la <b>espera</b> y el <b>consumo de luz</b> (4 de 6 medidas dentro de la tolerancia). Prende un poco más seguido que la realidad, igual en todas las reglas, así que no cambia la comparación.</div>
+
+<!-- ======================================================= 11: V&V -->
+<div class="part"></div>
+<div class="sec c11"><div class="n">11</div><h2>¿Está bien hecho? Verificación y validación</h2></div>
+<p>Son <b>dos pruebas distintas</b>. No mezclarlas: es lo primero que se nota.</p>
+<div class="mono">VERIFICACIÓN → ¿está bien PROGRAMADO?        → caso M/M/1 contra fórmulas   → todo bien
+VALIDACIÓN   → ¿se PARECE a la planta real?  → 6 medidas contra el registro → 4 de 6 dentro</div>
+<div class="grid2">
+  <div class="box" style="margin:0"><h3>Verificación: el caso M/M/1</h3>El modelo real no tiene fórmula (por eso se simula). Para saber si el código anda, se le "apaga" todo lo raro: umbral 1, sin calentar ni enfriar ni esperar caliente, llegadas <b>Poisson</b> y servicio <b>exponencial</b>. Eso es una cola <b>M/M/1</b>, que sí tiene fórmula.
+  <div class="mono">          Modelo   Teoría   Error
+Lq        1,632    1,633    −0,09 %
+W (h)     3,331    3,333    −0,09 %
+ρ         0,700    0,700    −0,02 %</div>
+  Poisson y exponencial se usan <b>solo para esta prueba</b>, porque tienen fórmula. No describen las llegadas reales.</div>
+  <div class="box" style="margin:0"><h3>Validación: contra el registro real</h3>E0 (la regla actual) contra lo que pasó, con tolerancias fijadas <b>antes</b> de correr:
+  <table class="t" style="font-size:8.6pt;margin-top:3px">
+    <tr><th>Medida</th><th class="r">Real</th><th class="r">Modelo</th><th></th></tr>
+    <tr><td>Toneladas / mes</td><td class="r">21,6</td><td class="r">21,1</td><td style="color:var(--ok)">✓</td></tr>
+    <tr><td>Días por campaña</td><td class="r">9,82</td><td class="r">9,68</td><td style="color:var(--ok)">✓</td></tr>
+    <tr><td>Espera media (d)</td><td class="r">7,38</td><td class="r">6,52</td><td style="color:var(--ok)">✓</td></tr>
+    <tr><td>kWh / mes</td><td class="r">38.000</td><td class="r">33.500</td><td style="color:var(--ok)">✓</td></tr>
+    <tr><td>Campañas / mes</td><td class="r">0,94</td><td class="r">1,08</td><td style="color:var(--bad)">fuera</td></tr>
+    <tr><td>ULI por campaña</td><td class="r">114</td><td class="r">139</td><td style="color:var(--bad)">fuera</td></tr>
+  </table></div>
+</div>
+<div class="box crio"><h3>¿Por qué 2 fuera no tiran abajo el estudio?</h3>No decir "no importó": decir que <b>no cambia la conclusión</b>. El modelo prende algo más seguido que la realidad, pero <b>igual en las cuatro reglas</b>, y nosotros comparamos reglas entre sí. Como una balanza que marca 2 kg de más: igual te dice cuál bolsa pesa más. Y lo central (material que mueve, duración de campaña, espera, consumo) está dentro.</div>
+
+<!-- ======================================================= 12: glosario -->
+<div class="sec c13"><div class="n">12</div><h2>Los términos, en criollo</h2></div>
+<table class="t g">
+  <tr><td>Warm-up (calentamiento del modelo)</td><td>El modelo arranca con cola vacía y horno apagado, cosa que en la planta no pasa: la primera campaña se prende recién a los 16 días. Ese arranque (el <b>transitorio</b>) distorsiona, así que se tiran los primeros <b>90 días</b>. Como en un bar: no contás gente en la primera hora, cuando recién abrió. <i>No confundir con las 36 h que tarda en calentar el horno.</i></td></tr>
+  <tr><td>No terminante</td><td>La planta no tiene un final natural: sigue mes tras mes. Lo que interesa es cómo anda "en régimen". El año medido es la <b>ventana de medición</b>, no el fin del sistema. (Terminante sería un banco que abre a las 10 y cierra a las 15.)</td></tr>
+  <tr><td>¿Por qué 365 días?</td><td>La empresa piensa el costo por año; un año tiene unas 13 campañas (con un mes verías una sola) y 52 sorteos de semanas buenas, flojas y vacías.</td></tr>
+  <tr><td>Método de Welch (gráfico)</td><td>Cómo se eligieron los 90 días: muchas réplicas sin descartar nada, se promedia mes a mes y se mira <b>desde cuándo la curva se aplana</b>. Solo el mes 1 se aparta → se tiraron 90 días, tres veces eso.</td></tr>
+  <tr><td>Intervalo de Welch</td><td>Otro Welch, mismo apellido: compara <b>dos grupos independientes</b> (11 campañas reales contra las réplicas). Se usó en la validación, no para comparar escenarios.</td></tr>
+  <tr><td>Test apareado (y números aleatorios comunes)</td><td>Como la semilla 7 es el mismo año para E0 y E3, se restan <b>año contra año</b> y se testea esa diferencia: H₀ "la diferencia media es 0". Sale mucho más preciso: ±1,8 M$ contra ±4,9 M$ si se comparara como grupos sueltos.</td></tr>
+  <tr><td>Bonferroni</td><td>Un intervalo al 95 % falla 1 de cada 20 veces; si hacés varios, la chance de que <b>alguno</b> falle crece (3 al 95 % → 86 % de que estén bien los 3). Bonferroni reparte el error: cada uno al 98,3 % para que el conjunto quede al 95 %. Los intervalos quedan un poco más anchos.</td></tr>
+  <tr><td>Bernoulli</td><td>Una moneda cargada: sí/no con probabilidad fija. Es la <b>urgencia</b>: cada ULI tiene 0,54 % de ser urgente.</td></tr>
+  <tr><td>¿Por qué no Poisson?</td><td>Poisson supone llegadas "de a goteo", parejas: daría ~7 ULI todos los días. En la planta el <b>49 % de los días no llega nada</b> y cuando hay lavado llegan en tanda. Por eso se sortean semanas reales enteras (<b>bootstrap</b>).</td></tr>
+  <tr><td>Réplica / semilla</td><td>Una réplica es una corrida completa (un año simulado). La semilla decide qué año sale. 30 semillas = 30 réplicas por escenario.</td></tr>
+</table>
+
+<!-- ======================================================= 13: lo que pueden marcar -->
+<div class="sec c12"><div class="n">13</div><h2>Lo que nos pueden marcar (y qué contestar)</h2></div>
+<p style="font-size:9pt;color:var(--muted)">El profe suele pasarle los archivos entregados a una IA antes de la defensa. Esto es lo que salió al hacer lo mismo con nuestra entrega. Lo que <b>no</b> es problema: las semillas (usamos 30, con test apareado; al otro grupo le marcaron que usó 3).</p>
+<div class="q"><b class="p">"El informe dice que un encendido por urgencia enfría sin esperar. ¿El modelo hace eso?"</b><br><span class="a">No: en el modelo las campañas por urgencia también esperan hasta 48 h calientes; el texto quedó desfasado. <b>Decirlo nosotros antes.</b> Pasa igual en E0, E1 y E2, y E3 ahorra en los 30 años (el peor, 11,4 M$), así que la dirección no cambia; el número exacto podría moverse un poco.</span></div>
+<div class="q"><b class="p">"La empresa preguntó cuántas ULI esperar. ¿Cuál es el umbral óptimo?"</b><br><span class="a">Probamos 79 y 45, no barrimos el umbral. Lo que encontramos es que la palanca grande no es el umbral sino <b>las horas de horno caliente sin carga</b> (≈ 22 mil $/h). Barrer el umbral junto con E3 queda como trabajo futuro.</span></div>
+<div class="q"><b class="p">"¿La demanda es pareja todo el año?"</b><br><span class="a">No del todo: la primera mitad del año tuvo más lavado (≈ 43 ULI/semana) que la segunda (≈ 24). Sortear semanas sueltas no reproduce esa tendencia, sí los días vacíos y los picos de cada semana. Con menos demanda hay más ratos de cola vacía, que es justo lo que E3 ahorra; no lo corrimos aparte.</span></div>
+<div class="q"><b class="p">"Dos medidas quedaron fuera de tolerancia."</b><br><span class="a">Ver sección 11: el sesgo es el mismo en las cuatro reglas y comparamos reglas entre sí. No apoyarse en "Welch dio que no es significativo": con 11 campañas reales hay pocos datos para detectar nada.</span></div>
+<div class="q"><b class="p">"Son 3 medidas por 3 escenarios: 9 intervalos, no 3."</b><br><span class="a">Cierto; con Bonferroni para 9 cada intervalo queda algo más ancho (E3: 18 ± 2,1 M$) y <b>ninguno toca el cero</b>. La conclusión no cambia.</span></div>
+<div class="q"><b class="p">"¿Dónde está la lógica? ¿El statechart decide?"</b><br><span class="a">El statechart muestra el estado del horno; la regla de despacho (quién entra y cuándo se apaga) está en código, en la función <code>despachar</code>. Tenerla abierta.</span></div>
+<div class="q"><b class="p">"El informe no tiene índice / ¿dónde están los 10 pasos?"</b><br><span class="a">Reconocer lo del índice. Los pasos están, aunque no rotulados:</span>
+<table class="t" style="font-size:8.6pt;margin-top:3px">
+  <tr><td>1 Formulación y planificación</td><td>Introducción, Objetivos</td><td>6 Validación del programado</td><td>§ Validación</td></tr>
+  <tr><td>2 Datos y definición del modelo</td><td>§ Sistema y modelo conceptual, § Datos de entrada</td><td>7 Diseño de experimentos</td><td>§ Diseño de experimentos</td></tr>
+  <tr><td>3 Validación del conceptual</td><td>Revisión con el encargado (§ Sistema y modelo conceptual)</td><td>8 Corridas de producción</td><td>Las 120 corridas (§ Resultados)</td></tr>
+  <tr><td>4 Programa y verificación</td><td>§ Implementación, § Verificación</td><td>9 Análisis de salida</td><td>Tests apareados (§ Resultados)</td></tr>
+  <tr><td>5 Ejecuciones piloto</td><td>Pilotos de Welch y de nº de réplicas (§ Diseño de experimentos)</td><td>10 Documentación y uso</td><td>Conclusiones, video, Cloud, planilla</td></tr>
+</table></div>
+
+<div class="box good"><h3>Para mañana</h3>
+<ul style="margin:0">
+  <li><b>Formato:</b> 10–15 min, solos con Flamini y Torres. Quieren que expliquemos de qué se trata, las variables, cómo se analizó y qué dio. Arrancar por el problema y la respuesta (−18 M$).</li>
+  <li><b>Abierto en la notebook:</b> el modelo en AnyLogic Cloud (animación) y, de respaldo, el <code>.alp</code> local con <code>CorridasE0E3</code>, la función <code>despachar</code> y la planilla de resultados.</li>
+  <li>Si piden ver los escenarios: mostrar las tarjetas E0–E3 en la animación y, para los números, <code>CorridasE0E3</code> + planilla.</li>
+</ul></div>
 
 </body>
 </html>
