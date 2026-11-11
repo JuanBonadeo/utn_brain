@@ -3022,6 +3022,7 @@ Conclusiones:
 ---
 
 ## Log
+- **2026-11-11**: TPI subte, documento de estado para el docente (`TPI_Subte_Estado_2026-11-11.docx`, generado con `scripts/sim/build-tpi-subte-estado-docx.py`): foto completa del trabajo (problema, datos, modelo, diseño, verificación, validación, resultados de 6 días, limitaciones y estado de los entregables).
 - **2026-11-09**: TPI Caser listo para entregar: paper con encabezado institucional, links de Cloud y YouTube; animación pulida (escenarios en vivo sin reiniciar contadores, montos en miles, PML en escalera); video grabado; guion y deck con logos y fotos del horno.
 - **2026-11-09**: TPI subte, guion del video reescrito al modelo actual (E0/E1/E3/E13, E1 = 22, día real, Bonferroni k = 9; 2:32 sin los corchetes). Pendiente para grabar: repetir el piloto con los accesos nuevos, correr las 40 corridas y cargar resultados; la presentación sigue vieja.
 - **2026-11-07**: TPI Caser, cierre de la Etapa 1. Pilotos (Welch: transitorio de 1 mes, los 90 días alcanzan;
