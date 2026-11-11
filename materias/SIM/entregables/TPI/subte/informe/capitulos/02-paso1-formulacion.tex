@@ -1,55 +1,33 @@
 \section{Paso 1: formulación del problema y planificación}
 \label{sec:paso1-formulacion}
-% Origen: 01-definicion-del-caso.md §1, §3, §5 y §6; 07-plan-tpi.md §3 (D1, D4, D5).
+% Origen: 01-definicion-del-caso.md §1, §3, §5 y §6; 07-plan-tpi.md §3 (D1, D4, D5). Plan de trabajo: anexo A.
 
-\subsection{Problema y pregunta de decisión}
+\subsection{Problema, pregunta y objetivos}
 
-En el pico de la mañana, el vestíbulo Principal de Constitución recibe oleadas de pasajeros del Roca. Por
-ventana se observan en uso unos 19,5 molinetes de los 22 que el dataset de SBASE identifica en ese
-vestíbulo. El resto de la capacidad instalada no se usa o se usa muy poco. Además, la carga entre
-molinetes es muy desigual: el más usado procesa 11 veces más pasajeros que el menos usado
-\parencite{sbase2026molinetes}. La pregunta de decisión es:
+Por ventana se observan en uso unos 19,5 molinetes de los 22 que el dataset de SBASE identifica en el
+vestíbulo Principal, y la carga entre ellos es muy desigual: el más usado procesa 11 veces más pasajeros que
+el menos usado \parencite{sbase2026molinetes}. La pregunta de decisión es:
 
 \begin{quote}
 ¿Cuánto se reduce la espera de los pasajeros si, en los días hábiles de 07:00 a 09:30, se habilitan los
 22 molinetes del vestíbulo Principal en lugar de los 20 que hoy operan en promedio?
 \end{quote}
 
-La propuesta original hablaba de habilitar \enquote{los 28 molinetes instalados}. Al procesar el dataset
-por vestíbulo se comprobó que 28 es el total de la estación: 22 molinetes en el Principal y 8 en el
-vestíbulo Plaza (sección~\ref{sec:paso2-datos-modelo-conceptual}). La pregunta se corrigió en
-consecuencia. La ampliación a 28 molinetes en el Principal se conserva solo como variante hipotética.
+La propuesta original hablaba de \enquote{los 28 molinetes instalados}, pero 28 es el total de la estación:
+22 en el Principal y 8 en el vestíbulo Plaza. La ampliación a 28 en el Principal se conserva solo como
+variante hipotética. El \textbf{objetivo general} es cuantificar, con un modelo de simulación peatonal, el
+efecto de la cantidad de molinetes habilitados sobre la espera en el pico de la mañana. Los
+\textbf{objetivos específicos} son: (1)~caracterizar la demanda por ventana con el dataset de SBASE y las
+oleadas con el horario del Roca; (2)~construir y verificar en AnyLogic un modelo de la caminata, la elección
+de molinete, la cola y la validación; (3)~comparar los escenarios con réplicas apareadas e intervalos de
+confianza para la diferencia de medias, y (4)~explicitar qué parámetros son dato y cuáles supuestos.
 
-\subsection{Objetivos}
-
-\textbf{Objetivo general.} Cuantificar, con un modelo de simulación peatonal, el efecto de la cantidad de
-molinetes habilitados sobre la espera de los pasajeros que ingresan a la Línea~C por el vestíbulo
-Principal de Constitución durante el pico de la mañana.
-
-\textbf{Objetivos específicos.}
-\begin{enumerate}
-  \item Caracterizar la demanda por ventana de 15 minutos con el dataset abierto de SBASE y la estructura
-        de las oleadas con el horario oficial del Roca.
-  \item Construir y verificar en AnyLogic un modelo que represente la caminata, la elección de molinete,
-        la cola y la validación de cada pasajero.
-  \item Comparar el escenario actual con el alternativo mediante réplicas apareadas e intervalos de
-        confianza para la diferencia de medias.
-  \item Explicitar qué parámetros son dato y cuáles son supuestos, y en qué medida las conclusiones
-        dependen de estos últimos.
-\end{enumerate}
-
-\subsection{Alcance}
-
-\begin{itemize}
-  \item \textbf{Sistema.} El vestíbulo Principal de la estación Constitución de la Línea~C. Para cada
-        pasajero, el sistema empieza cuando entra al vestíbulo, desde el hall del Roca o desde la calle.
-        Termina cuando valida y cruza a la zona paga, hacia las escaleras a los andenes.
-  \item \textbf{Período.} Días hábiles, de 07:00 a 09:30. El pico está entre las 08:15 y las 08:45. La
-        tarde no se modela: en Constitución el flujo vespertino es de salida y los molinetes de ingreso
-        apenas llegan a 500 pasajeros por ventana.
-  \item \textbf{Fuera del alcance.} El vestíbulo Plaza, los andenes y el viaje en subte, la venta y carga
-        de tarjetas, los egresos y los días no hábiles.
-\end{itemize}
+\textbf{Alcance.} El sistema es el vestíbulo Principal de la Línea~C: para cada pasajero empieza cuando entra
+al vestíbulo, desde el hall del Roca o desde la calle, y termina cuando valida y cruza a la zona paga. El
+período son los días hábiles de 07:00 a 09:30, con el pico entre las 08:15 y las 08:45. La tarde no se modela:
+el flujo vespertino es de salida y los molinetes de ingreso apenas llegan a 500 pasajeros por ventana. Quedan
+fuera el vestíbulo Plaza, los andenes y el viaje en subte, la venta y carga de tarjetas, los egresos y los
+días no hábiles. El plan de trabajo por fases está en el anexo~\ref{anx:plan}.
 
 \subsection{Medidas de rendimiento}
 
@@ -90,8 +68,13 @@ cada par y su diferencia vale cero por construcción.
 
 \subsection{Escenarios}
 
-La tabla~\ref{tab:escenarios} resume los escenarios definidos. Cada alternativa evaluada (\EI{}, \ET{} y
-\EIT{}) se compara contra la situación actual, \EO{}.
+La tabla~\ref{tab:escenarios} resume los escenarios. Cada alternativa evaluada (\EI{}, \ET{} y \EIT{}) se
+compara contra la situación actual, \EO{}. \EI{} es la alternativa más directa y de menor costo: no requiere
+obra, solo habilitar equipos que ya existen; que los 22 estén disponibles para ingreso en el pico es un
+supuesto, y se pidió a SBASE la correspondencia entre identificadores y equipos. \ET{} actúa sobre el tiempo
+de validación; como no hay un tiempo EMV o QR medido en la red, \ET{} y \EIT{} se leen como \enquote{qué
+pasaría si la validación bajara al extremo rápido del rango de la tabla~\ref{tab:parametros}}. E2 exige un
+segundo circuito para Plaza, sin geometría, y un supuesto sobre cuántos aceptarían desviarse.
 
 \begin{table}[H]
 \centering
@@ -108,40 +91,6 @@ Escenario & Configuración & Estado en este informe \\
 \EIT{} & 22 molinetes con validación sin contacto: las dos medidas juntas & Evaluado, con el mismo supuesto \\
 E1-b & Ampliación hipotética a 28 molinetes en el mismo banco & Implementado; no se evalúa porque el espacio físico no está verificado \\
 E2 & Desvío de una fracción del flujo hacia el vestíbulo Plaza & Implementado en la capa lógica; trabajo futuro (falta modelar Plaza) \\
-\bottomrule
-\end{tabularx}
-\end{table}
-
-\EI{} es la alternativa más directa y de menor costo: no requiere obra, solo habilitar equipos que ya
-existen. Que los 22 molinetes estén efectivamente disponibles para ingreso en el pico es un supuesto. Por
-eso se pidió a SBASE la correspondencia entre identificadores y equipos físicos. \ET{} actúa sobre la otra
-variable del servicio: el tiempo que tarda cada pasajero en validar. No hay un tiempo de validación EMV o QR
-medido en la red, así que \ET{} y \EIT{} se evalúan con el extremo rápido del rango de la
-tabla~\ref{tab:parametros} y se leen como \enquote{qué pasaría si la validación bajara a ese rango}. E2
-queda fuera de la evaluación: exige un segundo circuito para Plaza, del que no hay geometría, y un supuesto
-sobre cuántos pasajeros aceptarían desviarse.
-
-\subsection{Plan de trabajo}
-
-El estudio se organizó en fases, cada una con un entregable verificable (tabla~\ref{tab:plan}).
-
-\begin{table}[H]
-\centering
-\caption{Plan de trabajo}
-\label{tab:plan}
-\small
-\begin{tabularx}{\textwidth}{@{}l X l@{}}
-\toprule
-Fase & Contenido & Fecha \\
-\midrule
-Definición & Aprobación del tema, perfilado del dataset de SBASE y definición del caso & 20 a 23/09/2026 \\
-Pedidos de datos & Correos a SBASE, Emova y Trenes Argentinos; pedidos formales por Ley~104 y Ley~\num{27275} & 23/09 y 05/10/2026 \\
-Modelo & Capa lógica, capa peatonal, demanda por horario del Roca y automatización de las corridas & 20/09 a 24/09/2026 \\
-Pilotos & Diagnóstico del atasco, corrección y calibración del escenario intermedio & 24/09 a 05/10/2026 \\
-Producción inicial & 30 pares \EO{}-\EI{} con un día promedio y reproducción en una segunda máquina & 05/10 y 09/10/2026 \\
-Modelo con días reales & Días hábiles y trenes reales, accesos por las escaleras del bloque central, \ET{} y \EIT{} & 02/11 a 09/11/2026 \\
-Producción final & 6 días hábiles reales $\times$ 4 escenarios, en paralelo (24 corridas) & 10 y 11/11/2026 \\
-Informe y video & Redacción en \LaTeX{}, presentación, grabación y defensa & 10 a 11/11/2026 \\
 \bottomrule
 \end{tabularx}
 \end{table}

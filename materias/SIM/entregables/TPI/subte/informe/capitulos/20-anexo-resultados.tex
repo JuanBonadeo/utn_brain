@@ -1,0 +1,140 @@
+\section{Diseño, producción y resultados complementarios}
+\label{anx:resultados}
+% Origen: 08-paso7, 09-paso8 y 10-paso9 (tablas secundarias, sensibilidad, días simulados, NAC y n*), movidos al anexo.
+
+\subsection{Escenarios del experimento}
+\label{anx:escenarios}
+
+La tabla~\ref{tab:escenarios-experimento} detalla la configuración de los cuatro escenarios comparados. Cruzan
+los dos factores que la cátedra y el caso dejan en manos del operador: cuántos molinetes se habilitan y qué tan
+rápido valida cada pasajero.
+
+\begin{table}[H]
+\centering
+\caption{Escenarios del experimento}
+\label{tab:escenarios-experimento}
+\small
+\begin{tabularx}{\textwidth}{@{}l l l X@{}}
+\toprule
+Escenario & Molinetes & Validación (s) & Qué representa \\
+\midrule
+\EO{} & 20 & Triangular (1,8; 2,4; 3,5) & Situación actual: los molinetes que el dato muestra en uso \\
+\EI{} & 22 & Triangular (1,8; 2,4; 3,5) & Habilitar los 22 molinetes del vestíbulo Principal \\
+\ET{} & 20 & Triangular (1,5; 1,8; 2,5) & Validación sin contacto (EMV o QR) con los molinetes actuales [supuesto] \\
+\EIT{} & 22 & Triangular (1,5; 1,8; 2,5) & Las dos medidas juntas \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+La validación rápida toma como moda el extremo optimista del rango de la tabla~\ref{tab:parametros}
+\parencite[Exh.~10-27]{tcqsm2013}. No hay medición propia del molinete EMV/QR que ya existe en la estación,
+así que \ET{} y \EIT{} se leen como ``qué pasaría si la validación bajara a ese rango''.
+
+\subsection{Sensibilidad}
+\label{anx:sensibilidad}
+
+Fuera de la familia principal se corren los contextos optimista y pesimista de la
+tabla~\ref{tab:parametros} y, con el horario oficial, un atraso uniforme de los trenes de 0 y 240~s, para
+ver si la conclusión cambia de signo.
+
+\subsection{Días simulados}
+\label{anx:dias}
+
+La tabla~\ref{tab:dias-simulados} lista los días que sortearon las seis semillas. Los trenes son los que
+llegaron a Plaza Constitución entre las 07:00 y las 09:30 de ese día. Los pasajeros generados reproducen las
+validaciones observadas ese día: la diferencia es la carga de Poisson de cada tren.
+
+\begin{table}[H]
+\centering
+\caption{Días hábiles simulados en la producción}
+\label{tab:dias-simulados}
+\small
+\begin{tabular}{@{}llrrrr@{}}
+\toprule
+Semilla & Día & Trenes & Validaciones SBASE & Generados & Atascados (\EO{}) \\
+\midrule
+\num{20260923} & mié 13/05/2026 & 49 & \num{20390} & \num{20530} & 49 \\
+\num{20260924} & vie 05/06/2026 & 48 & \num{17459} & \num{17457} & 26 \\
+\num{20260925} & mié 25/03/2026 & 50 & \num{19781} & \num{19706} & 50 \\
+\num{20260926} & vie 06/03/2026 & 49 & \num{16666} & \num{16760} & 22 \\
+\num{20260927} & vie 15/05/2026 & 43 & \num{17847} & \num{17841} & 52 \\
+\num{20260928} & mié 11/03/2026 & 50 & \num{17791} & \num{17620} & 26 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Variación entre días y medidas secundarias}
+\label{anx:variacion}
+
+\begin{figure}[H]
+\centering
+\figuraSiExiste{tpi-subte-res-boxplot.png}{0.75\textwidth}
+\caption{P90 de espera por escenario. Cada punto es una réplica (un día hábil); las líneas unen los cuatro
+escenarios del mismo día.}
+\label{fig:boxplot}
+\end{figure}
+
+\textbf{Variación entre días.} El P90 de \EO{} va de 14,7~s (11/03) a 29,7~s (25/03), con un desvío de 6,0~s
+entre días. El día con más pasajeros, el 13/05 con \num{20530}, no es el de mayor espera. La espera depende de
+cómo se agrupan los trenes y no solo del total del día, que es el argumento que justifica simular las
+oleadas. El orden de los escenarios, en cambio, se repite los seis días: $\EIT{} < \EI{} \approx \ET{} < \EO{}$
+(figura~\ref{fig:boxplot}).
+
+\textbf{Secundarias.} Lq, cola máxima y espera media bajan en el mismo orden que las primarias. Dos medidas no
+sirven para comparar escenarios:
+\begin{itemize}
+  \item El P90 del tránsito del Roca hasta la cola es de unos 765~s en los cuatro escenarios. Es el recorrido
+        por el andén, el hall y la escalera, y no depende de los molinetes.
+  \item El tiempo de drenaje final queda en múltiplos de 900~s (1800, 2700 o 3600~s): lo fija el cierre por
+        atasco, que revisa cada 15~minutos. Es una cota inferior y no se interpreta.
+\end{itemize}
+
+\subsection{Efecto de los números aleatorios comunes}
+\label{anx:nac}
+
+Con números aleatorios comunes, un día cargado es malo para los cuatro escenarios, así que las medidas de una
+misma réplica están correlacionadas positivamente y la varianza de la diferencia queda por debajo de la suma de
+las varianzas. La tabla~\ref{tab:nac} lo cuantifica para el P90 de espera: la correlación entre \EO{} y cada
+alternativa es de 0,98, y la varianza de la diferencia queda entre un 43 y un 76~\% por debajo de la que
+tendrían corridas independientes. Con la misma varianza por escenario y corridas independientes, los intervalos
+habrían sido entre 1,3 y 2 veces más anchos ($\sqrt{39{,}67/16{,}95} = 1{,}53$ para \EI{}).
+
+\begin{table}[H]
+\centering
+\caption{Efecto de los números aleatorios comunes sobre el P90 de espera (6 días)}
+\label{tab:nac}
+\small
+\begin{tabular}{@{}lrrrrr@{}}
+\toprule
+Alternativa & $\operatorname{Cov}(X_{\EO{}}, X_a)$ & Correlación & $\operatorname{Var}(D)$ &
+  $\operatorname{Var}(X_{\EO{}}) + \operatorname{Var}(X_a)$ & Reducción \\
+\midrule
+\EI{}  & \num{11.36} & \num{0.981} & \num{16.95} & \num{39.67} & 57~\% \\
+\ET{}  & \num{16.62} & \num{0.984} & \num{10.65} & \num{43.89} & 76~\% \\
+\EIT{} & \num{8.14}  & \num{0.977} & \num{21.59} & \num{37.88} & 43~\% \\
+\bottomrule
+\end{tabular}
+
+\smallskip
+\footnotesize Varianzas en s$^2$, con $\operatorname{Var}(X_{\EO{}}) = \num{35.94}$. Reducción
+$= 1 - \operatorname{Var}(D) / [\operatorname{Var}(X_{\EO{}}) + \operatorname{Var}(X_a)]$.
+\end{table}
+
+\subsection{Cantidad de réplicas necesaria}
+\label{anx:n-necesario}
+
+La tabla~\ref{tab:n-necesario} da el $n^{*}$ que haría falta para cada primaria y alternativa, con los
+semianchos fijados antes de correr: 1~s para los percentiles y 0,01 para la proporción.
+
+\entradaGenerada{tabla-n-necesario}
+
+Con los semianchos fijados antes de correr, $n^{*}$ va de 87 a 338 días para los percentiles y de 20 a 54 para
+la proporción. Son cifras inalcanzables: la variación entre días es grande frente a un semiancho de 1~s, y cada
+tanda de 10 corridas lleva del orden de 100 minutos. Completar los 10 días del diseño tampoco alcanzaría
+esa precisión.
+
+Se decidió, entonces, no agregar días. La pregunta del estudio es si cada alternativa mejora, y eso lo responde
+el signo de los intervalos, que ya excluyen al cero los nueve con 6 días. Lo que queda impreciso es el tamaño de
+la mejora, y así se informa: con su intervalo y no solo con la media. Como el $n$ quedó por debajo del $n_0 = 10$
+planificado, el resultado se apoya en un $t$ crítico más exigente (4,655 con 5 grados de libertad, contra 3,622
+con 9).

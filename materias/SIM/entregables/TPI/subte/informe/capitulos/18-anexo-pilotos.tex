@@ -1,0 +1,174 @@
+\section{Historia de las ejecuciones piloto}
+\label{anx:pilotos}
+% Origen: 06-paso5-pilotos.tex, movido al anexo; en el cuerpo queda lo aprendido.
+
+Los pilotos tenían tres objetivos: comprobar en el motor de AnyLogic lo que el verificador comprueba en
+el arnés de prueba, medir el tiempo de cómputo y encontrar fallas antes de producir. Encontraron tres
+fallas que habrían invalidado los resultados. Este anexo las presenta en el orden en que aparecieron.
+
+\subsection{Demostración corta}
+
+El primer piloto usó una demostración sintética: seis oleadas de 80 pasajeros separadas por 30~s, con 3~s
+de servicio. Esos valores se eligieron para forzar una cola visible y no representan a Constitución. Con
+el corte inicial a los 600~s quedaban peatones dentro del vestíbulo. Por eso se separó el corte de las
+métricas (600~s) del fin técnico de la corrida (900~s). Con ese cambio, \EO{} y \EI{} drenaron los 480
+pasajeros y terminaron con la cola vacía.
+
+\subsection{Primer piloto de la franja completa: el sistema no drenaba}
+
+El 24/09/2026 se corrió la franja de 07:00 a 09:30 con valores de prueba:
+\begin{itemize}
+  \item 80~\% de la demanda en tren;
+  \item 60~s de demora;
+  \item 120~s de descarga;
+  \item servicio triangular (2; 3; 5)~s.
+\end{itemize}
+La corrida de \EO{} generó \num{17430} pasajeros, pero no drenó. A las 09:30 habían salido \num{12600}, y
+al llegar al tope de 5~horas de modelo de la edición PLE, \num{14232}. La utilización de los molinetes
+era de apenas 23~\%, mientras la cola llegaba a 497 personas. El cuello de botella no era la validación,
+sino el movimiento de los peatones. La corrida tardó unos 43 minutos. La de \EI{} se cortó a los 787~s
+de modelo sin un error visible.
+
+\textbf{Instrumentación.} Las métricas medían desde la entrada a la cola, por lo que no veían a quien
+todavía no había llegado a ella. Se agregaron contadores de peatones en el hall (ingresados que no
+llegaron a un molinete) y en la zona paga, y una línea de progreso cada 15 minutos simulados. Así se vio
+que, al tope de las 5~horas, unos \num{2700} peatones estaban trabados en el hall y solo 497 en las colas.
+La memoria de cada experimento se subió de 512--\num{1024}~MB a \num{4096}~MB.
+
+\textbf{Una hipótesis equivocada.} El atasco se atribuyó primero a la orientación de las colas, y se
+invirtieron. La comparación posterior con el ejemplo oficial \emph{Subway Entrance Hall} mostró que la
+orientación original era la correcta: en AnyLogic, la cabeza de la cola es el último punto de la línea.
+La inversión se deshizo. El piloto que no drenaba tenía las colas bien orientadas, así que la causa
+seguía sin encontrarse.
+
+\subsection{La causa: la elección de cola no veía la fila}
+
+Un contador agregado a la función de elección mostró que el 100~\% de las elecciones se hacían sin tiempo
+de servicio asignado: \num{18545} de \num{18545}. AnyLogic evalúa la elección de cola de
+\texttt{PedService} \emph{antes} de la acción de salida de \texttt{PedSource}, que es donde se sorteaba el
+tiempo de validación de cada pasajero. El costo de cada cola se calculaba como pasajeros en la fila por
+servicio asignado, y valía cero. La fila no pesaba y cada pasajero iba al molinete más alineado con su
+entrada. Los molinetes 2 a 8, 19 y 20 quedaban sin uso, las colas de los demás desbordaban hacia el acceso
+y 432 personas quedaban trabadas en el hall.
+
+La corrección cambió el costo: ahora usa los pasajeros asignados a cada molinete (los que caminan hacia
+él y los que esperan) multiplicados por el tiempo de validación de referencia, que se conoce antes del
+sorteo. En la misma revisión se corrigieron otras fallas menores:
+\begin{itemize}
+  \item cuatro arribos fantasma, de una lanzadera que no llega a Constitución y que se colaba al leer el
+        horario;
+  \item la espera de quien pasaba directo, que incluía unos 32~s de caminata;
+  \item la cola máxima, que se medía también durante el drenaje;
+  \item el fin técnico de la corrida, que se fijó en \num{17900}~s para emitir la fila antes del tope de
+        5~horas.
+\end{itemize}
+
+Con valores de prueba, el nuevo piloto de \EO{} drenó los \num{18545} pasajeros. Los 20 molinetes
+quedaron en uso, con utilizaciones de entre 17 y 52~\%. El caudal simulado por ventana quedó en su
+mayoría a menos del 6~\% del observado. Las mayores diferencias fueron en las ventanas de 07:15
+($-16$~\%) y 08:00 ($+15$~\%). La corrida tardó 274~s con la animación visible y 28~s sin ella.
+El par \EO{}-\EI{} con la misma semilla generó exactamente la misma demanda, lo que confirmó en el motor
+los números aleatorios comunes.
+
+\subsection{Un peatón encerrado}
+
+Con el escenario intermedio ya cargado, dos intentos de producción se cortaron: uno a las 22 corridas y
+otro a las 7. Un peatón
+empujado por la multitud quedaba dentro del contorno cerrado de la cabina o de los cierres de los bancos
+de molinetes y no podía salir, y la corrida terminaba sin drenar. Esos contornos se reemplazaron por
+paredes abiertas. Las filas de esos dos intentos se descartaron: se conservan aparte y no se cargaron en
+la planilla.
+
+\subsection{Tiempo de cómputo}
+
+La tabla~\ref{tab:computo} resume la evolución del tiempo por corrida. La caída de 43~minutos a segundos
+no se debe a optimizar el código: el sistema dejó de atascarse. Un vestíbulo que drena tiene pocos
+peatones activos a la vez, y el costo de la simulación peatonal crece con esa cantidad.
+
+\begin{table}[H]
+\centering
+\caption{Tiempo real por corrida de la franja completa}
+\label{tab:computo}
+\small
+\begin{tabular}{@{}llr@{}}
+\toprule
+Piloto & Condición & Tiempo \\
+\midrule
+24/09, \EO{}, valores de prueba & Atascado hasta el tope de 5~h & $\approx 43$~min \\
+05/10, \EO{}, valores de prueba & Drena; con animación & 274~s \\
+05/10, \EI{}, valores de prueba & Drena; sin animación & 28~s \\
+05/10, producción, escenario intermedio & Drena; sin animación & $\approx 7$~s \\
+04/11, días reales, andén y hall caminados & Drena; sin animación & $\approx 170$~s \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Con 7~s por corrida, los 30 pares de la producción del 05/10 llevaron unos 7 minutos. Ese tiempo volvió a
+crecer cuando el modelo pasó a caminar el andén y el hall, con días reales: unos 170~s por corrida. Las 120
+corridas del diseño de referencia (30 días $\times$ 4 escenarios) habrían llevado unas 5,5~horas en serie. Por
+eso la producción arranca con las $n_0 = 10$ réplicas del procedimiento secuencial (40 corridas), con
+evaluaciones en paralelo, y se agregan días solo si el $n^{*}$ calculado con ellas lo pide
+(sección~\ref{sec:paso7-diseno-experimentos}).
+
+\subsection{Pilotos con días reales: el acceso era un cuello de botella falso}
+
+Cuando cada réplica pasó a usar un día real, con sus trenes reales, el piloto mostró un hall que llegaba a
+tener cerca de \num{2000} personas esperando para bajar al subsuelo. El caudal simulado de la ventana de 08:30
+quedaba entre un 13 y un 33~\% por debajo del observado ese mismo día. El modelo tenía entonces una única
+escalera de 5~m de ancho, supuesta por el grupo al comienzo del pasillo. Un acceso con menos capacidad que el
+real fabricaba una congestión que no existe y, peor, la ponía antes de los molinetes, donde amortigua las
+oleadas y achica la diferencia entre escenarios.
+
+El plano de Trenes Argentinos dibuja dos grupos de escaleras mecánicas en el bloque central del hall, justo al
+oeste de donde arranca el pasillo subterráneo. El modelo pasó a usarlos como accesos
+(anexo~\ref{anx:recorrido}). Una primera versión los ubicó mal, en sentido norte-sur y
+dentro de la plaza; la revisión contra el plano los corrigió el 09/11, y el piloto visual de \EO{} posterior
+mostró el recorrido esperado: la gente entra por el oeste del bloque y baja hacia la plaza.
+
+El piloto dejó otras dos observaciones, que se informan como limitaciones:
+\begin{itemize}
+  \item \textbf{Primera ventana baja.} En la ventana de 07:00 el caudal simulado queda muy por debajo del
+        observado (unos 840 frente a \num{1780} en un día de prueba). El sistema arranca vacío a las 07:00 y el
+        pasaje de un tren tarda de 6 a 9 minutos en llegar a los molinetes; los trenes anteriores a las 07:00 no
+        se generan. Afecta solo al arranque: la espera de esa ventana es baja en todos los escenarios y la
+        cohorte pico, de 08:15 a 08:45, no se ve afectada.
+  \item \textbf{Reparto más parejo que el real.} El coeficiente de variación de las validaciones entre
+        molinetes quedó cerca de 0,3, frente a 0,56 en SBASE (anexo~\ref{anx:uso-molinetes}).
+\end{itemize}
+
+\subsection{La producción con días reales: peatones trabados y costo del ruteo}
+\label{anx:pilotos-produccion}
+
+Los primeros intentos de producción con el modelo final dejaron dos problemas más.
+
+\textbf{Peatones trabados al final.} Una réplica de prueba tardó unos 85~minutos y sus cuatro filas salieron
+incompletas. Quedaban entre 5 y 14 de los \num{17457} pasajeros trabados en el hall, empujados contra un
+obstáculo, y la corrida seguía hasta el tope técnico. Se hicieron dos cambios:
+\begin{itemize}
+  \item Las bocas de las escaleras se ensancharon de 2,0 a 2,6~m, todo el ancho útil de cada grupo según el plano.
+  \item Se agregó un \emph{cierre por atasco}. Pasadas las 09:30, el modelo revisa cada 15~minutos si salió
+        alguien. Si no salió nadie y quedan a lo sumo $\max(20;\ 0{,}5~\%)$ pasajeros adentro, los cuenta como
+        atascados, los excluye de las medidas y emite la fila. Con más trabados, la corrida sigue saliendo
+        incompleta y se descarta.
+\end{itemize}
+En la producción, los atascados fueron entre el 0,1 y el 0,4~\% de los pasajeros de cada corrida
+(sección~\ref{sec:paso8-produccion}).
+
+\textbf{Costo del ruteo.} Con 10 corridas en paralelo, la producción llegaba a las 08:15 simuladas recién
+después de casi dos horas de reloj. Un muestreo de los hilos de la máquina virtual de Java mostró que el 87~\%
+del tiempo se iba en el cálculo de rutas (A*). La Pedestrian Library recalcula la ruta de cada peatón pesando la
+densidad, y con el hall lleno eso domina el cómputo. Con el peso de densidad en cero, la corrida se aceleró de
+3 a 4 veces (anexo~\ref{anx:logica}).
+
+\subsection{Qué se aprendió}
+
+Las tres fallas tienen algo en común: ninguna producía un error, solo resultados plausibles pero
+equivocados o corridas que no terminaban. La elección de cola sin servicio habría dado esperas exageradas
+y un \EI{} artificialmente bueno. Las encontraron dos cosas: instrumentar lo que las métricas no miraban
+(el hall) y comparar contra el ejemplo oficial de la herramienta. Por eso el verificador incorporó un
+control para cada una:
+\begin{itemize}
+  \item la oleada se reparte entre colas aun sin servicio sorteado;
+  \item la espera de quien pasa directo es cero;
+  \item las colas tienen la orientación correcta.
+\end{itemize}

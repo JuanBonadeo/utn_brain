@@ -1,0 +1,51 @@
+\section{Antecedentes y plan de trabajo}
+\label{anx:antecedentes}
+% Origen: 01-introduccion.tex (antecedentes) y 02-paso1-formulacion.tex (plan de trabajo), movidos al anexo.
+
+\subsection{Antecedentes}
+
+Varios estudios recientes simularon estaciones de metro con AnyLogic y midieron parámetros que este
+trabajo usa como referencia.
+\begin{itemize}
+  \item \textcite{seriani2025} observaron los molinetes de una estación del Metro de Valparaíso y midieron
+        un tiempo de paso medio de 2~s. Registraron además un sesgo fuerte por cercanía: el molinete
+        más próximo al recorrido es el más usado. Validaron su modelo comparando el uso simulado de cada
+        molinete con el observado.
+  \item \textcite{wang2024} midieron con video 813 pasos por molinete en Pekín, con medias de 2,91 a 3,49~s
+        según el medio de pago.
+  \item \textcite{tian2026} modelaron una estación de trasbordo que recibe pasajeros de un ferrocarril, la
+        situación análoga a la del Roca y la Línea~C. Encontraron que el 88,2~\% usa el grupo de molinetes
+        más cercano a la salida del tren.
+  \item \textcite{li2024} calibraron con video el modelo de fuerza social de AnyLogic y obtuvieron una
+        velocidad deseada de 1,37~m/s, dentro del rango de 1,1 a 1,5~m/s de la literatura.
+  \item \textcite{zhen2024} usaron datos abiertos de molinetes de Nueva York, como aquí los de SBASE, pero
+        con arribos de Poisson y sin oleadas.
+\end{itemize}
+Lo que agrega este trabajo es representar las oleadas a partir del horario real de los trenes y
+distribuir entre ellos la demanda observada por ventana.
+
+\subsection{Plan de trabajo}
+\label{anx:plan}
+
+El estudio se organizó en fases, cada una con un entregable verificable (tabla~\ref{tab:plan}).
+
+\begin{table}[H]
+\centering
+\caption{Plan de trabajo}
+\label{tab:plan}
+\small
+\begin{tabularx}{\textwidth}{@{}l X l@{}}
+\toprule
+Fase & Contenido & Fecha \\
+\midrule
+Definición & Aprobación del tema, perfilado del dataset de SBASE y definición del caso & 20 a 23/09/2026 \\
+Pedidos de datos & Correos a SBASE, Emova y Trenes Argentinos; pedidos formales por Ley~104 y Ley~\num{27275} & 23/09 y 05/10/2026 \\
+Modelo & Capa lógica, capa peatonal, demanda por horario del Roca y automatización de las corridas & 20/09 a 24/09/2026 \\
+Pilotos & Diagnóstico del atasco, corrección y calibración del escenario intermedio & 24/09 a 05/10/2026 \\
+Producción inicial & 30 pares \EO{}-\EI{} con un día promedio y reproducción en una segunda máquina & 05/10 y 09/10/2026 \\
+Modelo con días reales & Días hábiles y trenes reales, accesos por las escaleras del bloque central, \ET{} y \EIT{} & 02/11 a 09/11/2026 \\
+Producción final & 6 días hábiles reales $\times$ 4 escenarios, en paralelo (24 corridas) & 10 y 11/11/2026 \\
+Informe y video & Redacción en \LaTeX{}, presentación, grabación y defensa & 10 a 11/11/2026 \\
+\bottomrule
+\end{tabularx}
+\end{table}

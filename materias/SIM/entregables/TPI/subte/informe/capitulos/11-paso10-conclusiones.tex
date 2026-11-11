@@ -7,16 +7,12 @@
 
 Las tres alternativas reducen la espera frente a la situación actual. Los nueve intervalos de Bonferroni de la
 tabla~\ref{tab:diferencias} quedan enteros por debajo de cero, con confianza conjunta de al menos el 95~\%
-sobre 6 días hábiles reales:
-\begin{itemize}
-  \item \textbf{Habilitar los 22 molinetes (\EI{})} baja el P90 de espera de 19,8 a 11,8~s, una reducción de
-        7,95~s con IC $[-15{,}8;\,-0{,}1]$. La proporción que espera más de 30~s pasa del 5,4 al 1,4~\%.
-  \item \textbf{Validar más rápido (\ET{})} da un efecto parecido: el P90 baja a 12,4~s, con IC
-        $[-13{,}6;\,-1{,}1]$. Entre \EI{} y \ET{} no hay diferencia demostrable.
-  \item \textbf{Las dos medidas juntas (\EIT{})} bajan el P90 a 8,5~s, una reducción de 11,25~s con IC
-        $[-20{,}1;\,-2{,}4]$. Casi nadie espera más de 30~s (0,5~\%) y el P90 del pico pasa de 24,6 a 9,3~s.
-\end{itemize}
-El signo de la mejora está establecido; su tamaño, no del todo. Los intervalos son anchos porque la espera
+sobre 6 días hábiles reales. \textbf{Habilitar los 22 molinetes (\EI{})} baja el P90 de espera de 19,8 a
+11,8~s, una reducción de 7,95~s con IC $[-15{,}8;\,-0{,}1]$, y la proporción que espera más de 30~s pasa del
+5,4 al 1,4~\%. \textbf{Validar más rápido (\ET{})} da un efecto parecido: el P90 baja a 12,4~s, con IC
+$[-13{,}6;\,-1{,}1]$; entre \EI{} y \ET{} no hay diferencia demostrable. \textbf{Las dos medidas juntas
+(\EIT{})} bajan el P90 a 8,5~s, una reducción de 11,25~s con IC $[-20{,}1;\,-2{,}4]$: casi nadie espera más de
+30~s (0,5~\%) y el P90 del pico pasa de 24,6 a 9,3~s. El signo de la mejora está establecido; su tamaño, no del todo. Los intervalos son anchos porque la espera
 varía mucho de un día a otro, y la precisión fijada antes de correr pedía más días de los que el cómputo
 permite (sección~\ref{sec:paso9-analisis}).
 
@@ -26,46 +22,30 @@ Según la regla fijada antes de correr, se recomienda \textbf{\EIT{}}: habilitar
 Principal y validar más rápido. Es la alternativa de menor P90, y su ventaja en esa medida se sostiene también
 frente a \EI{} ($-3{,}3$~s, IC $[-4{,}6;\,-2{,}0]$) y frente a \ET{} ($-3{,}9$~s, IC $[-6{,}8;\,-1{,}0]$).
 
-Las dos medidas tienen costos muy distintos, y la recomendación se puede escalonar:
-\begin{enumerate}
-  \item \textbf{Habilitar los dos molinetes que hoy no se usan.} Son molinetes instalados: es una decisión
-        operativa, sin inversión, y por sí sola reduce el P90 alrededor de un 40~\%.
-  \item \textbf{Acelerar la validación.} Depende del medio de pago (EMV o QR) y de que la validación rápida
-        alcance de verdad el rango supuesto, que no está medido. Conviene medirla antes de decidir.
-\end{enumerate}
-Con lo que el modelo muestra, el primer paso alcanza para bajar la espera de forma clara. El segundo suma una
+Las dos medidas tienen costos muy distintos, y la recomendación se puede escalonar. Primero,
+\textbf{habilitar los dos molinetes que hoy no se usan}: son molinetes instalados, es una decisión operativa,
+sin inversión, y por sí sola reduce el P90 alrededor de un 40~\%. Después, \textbf{acelerar la validación}, que
+depende del medio de pago (EMV o QR) y de que la validación rápida alcance de verdad el rango supuesto, que no
+está medido: conviene medirla antes de decidir. Con lo que el modelo muestra, el primer paso alcanza para bajar la espera de forma clara. El segundo suma una
 mejora adicional demostrable en el P90, pero no en la proporción mayor a 30~s ni en el P90 del pico.
 
-\subsection{Alcance y limitaciones}
+\subsection{Alcance, limitaciones y trabajo futuro}
 
 Las conclusiones valen dentro de los supuestos del modelo. Los que más pueden pesar son estos:
 \begin{itemize}
-  \item \textbf{Espera no validada.} No hay observaciones de la espera ni del largo de cola en Constitución
-        (sección~\ref{sec:paso6-validacion}). Los niveles absolutos dependen de los supuestos; la comparación
-        entre escenarios es más robusta, porque todos los comparten.
-  \item \textbf{Reparto más parejo que el real.} El modelo reparte la carga entre molinetes más parejo que la
-        gente real. Si los molinetes que agrega \EI{} quedaran en una posición poco atractiva, se usarían menos y
-        el modelo sobreestimaría su efecto.
-  \item \textbf{Proporción del Roca.} Que el 80~\% de las validaciones del vestíbulo Principal venga del Roca es
-        un supuesto: los datos disponibles no permiten estimarla.
-  \item \textbf{Tiempo de validación rápida.} \ET{} y \EIT{} usan el extremo optimista del rango técnico, no una
-        medición del molinete EMV o QR.
-  \item \textbf{Geometría del subsuelo.} La plaza de transbordo, el ancho del pasillo y el interior del
-        vestíbulo son supuestos; el hall, los andenes y las escaleras mecánicas siguen el plano oficial. Las
-        escaleras fijas del bloque central no se modelan.
-  \item \textbf{Arranque.} El sistema empieza vacío a las 07:00 y no genera el pasaje de los trenes anteriores,
-        así que la primera ventana queda con menos gente que la real.
-  \item \textbf{Pasajeros fuera del modelo.} Solo se modela a quien entra al vestíbulo Principal. Los que bajan
-        del Roca y salen a la calle o van a otro acceso no se simulan, aunque compartan el hall.
+  \item \textbf{Espera no validada.} No hay observaciones de la espera ni del largo de cola
+        (sección~\ref{sec:paso6-validacion}); la comparación entre escenarios es más robusta que los niveles.
+  \item \textbf{Reparto más parejo que el real.} Si los molinetes que agrega \EI{} quedaran en una posición poco
+        atractiva, se usarían menos y el modelo sobreestimaría su efecto.
+  \item \textbf{Proporción del Roca y validación rápida.} El 80~\% del Roca es un supuesto que los datos no
+        permiten estimar, y \ET{} y \EIT{} usan el extremo optimista del rango técnico, no una medición del
+        molinete EMV o QR.
+  \item \textbf{Geometría del subsuelo.} La plaza de transbordo, el pasillo y el interior del vestíbulo son
+        supuestos; las escaleras fijas del bloque central no se modelan.
+  \item \textbf{Arranque y pasajeros fuera del modelo.} El sistema empieza vacío y no genera los trenes
+        anteriores a las 07:00, así que la primera ventana queda con menos gente que la real. Los que bajan del
+        Roca y van a la calle u otro acceso no se simulan, aunque compartan el hall.
 \end{itemize}
-
-\subsection{Trabajo futuro}
-
-\begin{itemize}
-  \item Medir en el lugar la espera y el largo de cola en la hora pico, para validar los niveles absolutos.
-  \item Incorporar el plano del subsuelo de SBASE, si se recibe, y recalibrar la elección de molinete con el
-        reparto observado.
-  \item Medir el tiempo de validación del molinete EMV o QR que ya existe en la estación.
-  \item Evaluar E2, el desvío de parte del flujo al vestíbulo Plaza, que exige modelar ese segundo circuito.
-  \item Agregar un período de calentamiento desde las 06:45 para representar la primera ventana.
-\end{itemize}
+Como trabajo futuro: medir en el lugar la espera, la cola y el tiempo de validación del molinete EMV o QR;
+incorporar el plano del subsuelo de SBASE y recalibrar la elección de molinete con el reparto observado; evaluar
+E2, el desvío al vestíbulo Plaza, y agregar un calentamiento desde las 06:45 para representar la primera ventana.

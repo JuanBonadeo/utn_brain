@@ -1,12 +1,12 @@
 \section{Paso 6: validación del modelo programado}
 \label{sec:paso6-validacion}
-% Origen: 07-plan-tpi.md §6.2, 02-modelo-anylogic.md (piloto del 05/10 y reproducción del 09/10) y 09-pedidos-de-datos.md (respuesta de Trenes Argentinos, 26/10).
+% Origen: 07-plan-tpi.md §6.2, 02-modelo-anylogic.md (piloto del 05/10 y reproducción del 09/10) y 09-pedidos-de-datos.md.
+% Detalle de cada control: anexo F.
 
 Validar es comprobar que el modelo representa el sistema real con la precisión que exige la pregunta
-\parencite{law2015}. La verificación (sección~\ref{sec:paso4-construccion-verificacion}) comprueba otra
-cosa: que el programa hace lo que el modelo especifica. Con los datos disponibles, el modelo puede
-contrastarse con la realidad en el caudal, en el uso de los molinetes y en la llegada de los trenes. No
-puede contrastarse en la espera ni en el largo de cola. La tabla~\ref{tab:validacion} resume cada control.
+\parencite{law2015}. Con los datos disponibles, el modelo puede contrastarse en el caudal, en el uso de los
+molinetes y en la llegada de los trenes, pero no en la espera ni en el largo de cola. La
+tabla~\ref{tab:validacion} resume cada control; el detalle está en el anexo~\ref{anx:validacion}.
 
 \begin{table}[H]
 \centering
@@ -17,7 +17,7 @@ puede contrastarse en la espera ni en el largo de cola. La tabla~\ref{tab:valida
 \toprule
 Control & Contra qué se compara & Resultado \\
 \midrule
-Caudal por ventana & Validaciones simuladas frente a las del mismo día en SBASE & Calibración, no validación (ver texto) \\
+Caudal por ventana & Validaciones simuladas frente a las del mismo día en SBASE & Calibración, no validación \\
 Molinetes en uso & Molinetes con tráfico en \EO{} frente a los 19,5 activos observados & Consistente \\
 Reparto entre molinetes & Utilización por molinete frente al desbalance observado & Más parejo que la realidad \\
 Llegadas de los trenes & Horario oficial frente a llegadas reales & Se usan las llegadas reales \\
@@ -29,190 +29,32 @@ Espera y cola & Sin observaciones publicadas & No validable \\
 \end{tabularx}
 \end{table}
 
-\subsection{Caudal por ventana}
-
-El modelo cuenta las validaciones simuladas en cada ventana de 15 minutos y las compara con el perfil de
-SBASE. Este control es en parte circular, porque la demanda se construye con ese mismo perfil. Por eso se
-presenta como calibración: comprueba que la demanda se reparte bien entre los trenes y que la congestión no
-retiene pasajeros de una ventana a la siguiente. Con valores de prueba, el caudal simulado quedó en su
-mayoría a menos del 6~\% del observado (sección~\ref{sec:paso5-pilotos}).
-Desde que cada réplica usa un día real, la comparación se hace contra el perfil de ese mismo día: el
-experimento escribe las validaciones simuladas y observadas por ventana (archivo de ventanas, analizado con
-\texttt{validacion\_corridas.py}). Sigue sin ser independiente, porque el día es la entrada del modelo, pero
-mide si la cola corre pasajeros de una ventana a la siguiente en días cargados.
-La tabla~\ref{tab:validacion-caudal} muestra el resultado de la producción, con el sesgo medio de cada ventana
-en \EO{}.
-
-\entradaGenerada{tabla-validacion}
-
 \begin{itemize}
-  \item \textbf{De 07:30 a 09:15} el caudal simulado queda dentro de $\pm 13{,}3$~\% del observado y sigue la
-        forma del pico. Las ventanas centrales, de 08:15 y 08:45, quedan a $-5{,}4$ y $-5{,}0$~\%.
-  \item \textbf{De 07:00 a 07:30} el modelo queda un 34 y un 25~\% abajo. Es el transitorio inicial de un
-        sistema terminal: arranca vacío y el primer pasaje tarda varios minutos en caminar el andén, el hall
-        y la escalera. Estas ventanas caen fuera del pico de 08:15 a 08:45.
-  \item \textbf{En la franja completa}, el modelo valida un 6,8~\% menos que lo observado antes de las 09:30. La
-        diferencia no se pierde: son los pasajeros que a esa hora todavía van caminando y validan durante el
-        drenaje.
-  \item \textbf{El pico se corre hacia adelante.} De 08:15 a 08:45 el modelo queda abajo tres ventanas
-        seguidas (entre $-5$ y $-13$~\%) y compensa a las 09:00 y 09:15 ($+4$ y $+13$~\%). Parte de la oleada
-        del pico se demora en el acceso y valida más tarde. Es coherente con el tránsito largo del Roca hasta
-        la cola (sección~\ref{sec:paso9-analisis}). En consecuencia, el modelo puede subestimar la carga de los
-        molinetes en el pico y, con ella, la espera. El efecto es el mismo en los cuatro escenarios, porque el
-        acceso no cambia entre ellos.
-\end{itemize}
-El coeficiente de variación de la carga entre molinetes, en cambio, queda lejos de lo observado: 0,30 en el
-modelo (media de las 6 réplicas de \EO{}, desvío 0,024) contra 0,56 en SBASE. Lo discute la subsección
-siguiente.
-
-\subsection{Uso de los molinetes}
-
-\textbf{Molinetes en uso.} En el piloto de \EO{} se usaron los 20 molinetes habilitados. Coincide con los 19,5 molinetes
-con tráfico por ventana que registra SBASE.
-
-\textbf{Reparto.} En la realidad, el molinete más usado procesa 13,6 veces más pasajeros que el menos usado,
-y el coeficiente de variación de la carga entre los 21 molinetes del vestíbulo Principal es 0,56
-\parencite{sbase2026molinetes}. Esta es la única comparación independiente de las entradas: el reparto no
-se carga en el modelo, sale de la regla de elección. El modelo informa el mismo coeficiente por réplica. En el piloto de \EO{}, las utilizaciones fueron de entre 17 y 52~\%, un
-factor de alrededor de 3. \textcite{seriani2025} validan su modelo justamente con esta comparación. El
-modelo reparte la carga más parejo que la realidad, y hay dos razones posibles:
-\begin{itemize}
-  \item el interior del vestíbulo es supuesto, y en la estación real algunos molinetes quedan lejos del recorrido
-        natural;
-  \item la regla de elección pondera la fila tanto como la distancia.
-\end{itemize}
-La consecuencia importa para la conclusión. Si los dos molinetes que agrega \EI{} quedaran, en la
-estación real, en una posición poco atractiva, se usarían menos que en el modelo. En ese caso, el modelo
-\emph{sobreestimaría} la mejora de \EI{}.
-
-\subsection{Llegadas reales de los trenes}
-
-Trenes Argentinos informó la llegada real de cada tren a Plaza Constitución entre el 02/03 y el 30/06/2026,
-de 07:00 a 09:30 \parencite{sofse2026nota}. Es el mismo período del perfil de SBASE. En los 76 días
-hábiles normales llegaron entre 43 y 52 trenes por día, con una media de 48,9. El modelo usa 47.
-Comparado con el horario vigente, el atraso tiene estas características:
-\begin{itemize}
-  \item mediana de $+4$~minutos;
-  \item percentil 10 de $-1$~minuto y percentil 90 de $+11$~minutos;
-  \item percentil 99 de $+24$~minutos.
-\end{itemize}
-Además, el tren 302, de larga distancia desde Mar del Plata, llega todos los días en la franja y no figura
-en los cuadros horarios usados.
-
-Un atraso parejo solo desplaza las oleadas en el tiempo. Un atraso variable, en cambio, junta trenes que
-el horario separa. Es esperable que eso produzca oleadas más grandes y más cola que las del modelo. El
-supuesto de trenes en horario era entonces probablemente optimista sobre la espera. Por eso el modelo
-usa ahora las llegadas reales: cada réplica toma los trenes de su día. Como el horario de marzo a junio no
-es exactamente el vigente desde el 03/08, las llegadas reales además corrigen esa diferencia (por
-ejemplo, el tren 302). Cada tren se asigna a la primera vía libre: con llegadas reales llegan hasta siete
-trenes en diez minutos.
-
-\subsection{Volumen que llega en tren}
-
-La matriz origen-destino del Roca indica que entre el 44 y el 60~\% de los viajes de día hábil que salen
-de cada estación de la línea terminan en Constitución. Aplicada a los pasajeros que suben en cada estación
-entre las 07:00 y las 09:59, da unos \num{36000} pasajeros por día hábil que llegan a la terminal,
-cerca de 700 por tren. En el escenario intermedio, el modelo hace entrar por el vestíbulo Principal
-$0{,}80 \times \num{18532} \approx \num{14800}$ pasajeros desde los trenes. Haría falta que cerca del 40~\%
-de los que llegan pasen a la Línea~C. La proporción es verosímil para la principal conexión de la
-terminal con el centro, pero no la confirma ningún dato: Trenes Argentinos informó que no hay estudios de
-trasbordo. El valor de 0,80 queda como supuesto, ahora con un orden de magnitud que lo respalda.
-
-Se intentó estimar la proporción con los datos, mediante una regresión de las validaciones por ventana
-contra la cantidad de trenes que llegan en esa ventana, con un efecto fijo por día
-(\texttt{datos/estimar\_proporcion\_roca.py}). No es identificable. El horario es casi el mismo todos los
-días, así que la cantidad de trenes por ventana varía sólo entre 4 y 5 y se confunde con la forma del pico:
-la estimación da 0,15 con un intervalo del 95~\% de $[0{,}00;\ 0{,}28]$, cambia a 0,44 según el rezago de
-caminata que se suponga y cambia de signo si se controla la forma del pico. Por eso no se usa.
-
-\subsection{Geometría del andén y del acceso}
-
-El plano de la estación enviado por Trenes Argentinos muestra los paragolpes de todas las vías alineados y
-andenes útiles de entre 134 y 275~m. Una formación de 7 coches ocupa unos 153 a 161~m, del mismo orden que
-los andenes más cortos. Por eso el modelo hace bajar a cada pasajero por una de las 21 puertas de su tren y
-le hace caminar el andén: la dispersión con que la oleada llega a la cabecera sale de la geometría, en lugar
-de un parámetro (antes, 145~s supuestos).
-
-El plano no incluye los accesos ni el vestíbulo de la Línea~C, que pertenecen a SBASE. Para ubicarlos se
-georreferenció con OpenStreetMap \parencite{osm2026}. Los 13 paragolpes del plano se hicieron corresponder
-con los de OSM y se ajustó una transformación de semejanza. El resultado tiene escala 1,009, lo que
-confirma que el plano está en metros, y un residuo medio de 0,8~m. Después se pasaron al plano las bocas,
-las escaleras, los pasillos subterráneos y los andenes de la Línea~C que figuran en OSM
-(figura~\ref{fig:acceso}).
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{tpi-subte-plano-acceso.png}
-\caption{Plano de la estación \parencite{sofse2026nota} georreferenciado con OpenStreetMap
-\parencite{osm2026}. En naranja, las bocas, las escaleras y el pasillo subterráneo que unen el hall del
-Roca con los andenes de la Línea~C (en azul). La línea punteada es el recorrido desde los paragolpes de
-una vía central hasta la boca del hall. El norte está a la izquierda.}
-\label{fig:acceso}
-\end{figure}
-
-La superposición corrige dos supuestos del modelo:
-\begin{itemize}
-  \item \textbf{El vestíbulo no está debajo del hall.} Según OSM, la boca del hall baja por una escalera a
-        un pasillo que corre unos 60~m bajo el edificio cabecera hasta el extremo sur de los andenes de la
-        Línea~C, junto a la esquina de Brasil y Lima. Allí llegan también las bocas de la calle Brasil.
-  \item \textbf{El recorrido es más largo.} La distancia de 85~m de la tabla~\ref{tab:parametros} se medía
-        hasta la boca. Con la escalera y el pasillo (84~m más), el recorrido mediano desde los paragolpes
-        es de 156~m en línea recta por el hall y de 179~m en L. Con la misma fórmula, la demora
-        intermedia sería de 181 a 205~s, en lugar de los 106~s usados.
+  \item \textbf{Caudal por ventana} (anexo~\ref{anx:caudal}). Es en parte circular, porque la demanda sale del
+        mismo perfil, y se presenta como calibración. Contra el perfil del mismo día, de 07:30 a 09:15 el caudal
+        simulado queda dentro de $\pm 13{,}3$~\% del observado; las ventanas de 07:00 y 07:15 quedan un 34 y un
+        25~\% abajo por el arranque vacío. El pico se corre hacia adelante, lo que puede subestimar la espera,
+        con el mismo efecto en los cuatro escenarios.
+  \item \textbf{Reparto entre molinetes} (anexo~\ref{anx:uso-molinetes}). Es la única comparación independiente
+        de las entradas. En \EO{} se usan los 20 molinetes, coherente con los 19,5 activos de SBASE, pero el
+        coeficiente de variación de la carga es 0,30 en el modelo frente a 0,56 en la realidad. Si los molinetes
+        que agrega \EI{} quedaran en una posición poco atractiva, el modelo \emph{sobreestimaría} su mejora.
+  \item \textbf{Trenes y volumen} (anexos~\ref{anx:trenes} y~\ref{anx:volumen}). El atraso real tiene mediana de
+        $+4$~minutos y percentil 90 de $+11$, y junta trenes que el horario separa; por eso el modelo usa las
+        llegadas reales. La matriz origen-destino da unos \num{36000} pasajeros por día que llegan a la terminal:
+        el 0,80 supuesto exige que cerca del 40~\% pase a la Línea~C, una proporción verosímil que ningún dato
+        confirma y que no es identificable con regresión.
+  \item \textbf{Geometría y reproducción} (anexos~\ref{anx:geometria} y~\ref{anx:reproduccion}). El plano
+        georreferenciado con OSM (escala 1,009, residuo medio de 0,8~m) mostró un recorrido de 156 a 179~m y llevó
+        a caminar el andén, el hall y el pasillo. Con la versión del 05/10, una segunda máquina reprodujo la misma
+        demanda en las 60 corridas y diferencias \EI{} $-$ \EO{} que variaron menos de 0,15~s.
 \end{itemize}
 
-Con este resultado se modificó el modelo (sección~\ref{sec:paso4-construccion-verificacion}):
-\begin{itemize}
-  \item El pasaje del Roca baja del tren en su andén y camina el hall, entre los obstáculos medidos
-        en el plano, y el pasillo en L de 84~m, dibujado sobre la traza de OSM. El ancho de 5~m del pasillo es
-        un supuesto.
-  \item El hall queda a nivel de calle y el pasillo y el vestíbulo, en el nivel $-4{,}60$~m de la plaza de
-        transbordo \parencite{gcba2015transbordo}. Se baja por los dos grupos de escaleras mecánicas que el plano
-        de Trenes Argentinos dibuja en el bloque central del hall \parencite{sofse2026nota}: uno al norte y otro
-        al sur. Cada pasajero usa el de su lado según el andén por el que bajó. Cada escalera es un área en
-        pendiente de 10,5~m por 2,8~m, con el tope en el hall y el pie en la plaza, y velocidad máxima de
-        0,685~m/s, de modo que la bajada lleva $4{,}6/0{,}30 \approx 15{,}3$~s, con la misma velocidad vertical de
-        la fórmula, y puede congestionarse. Las escaleras fijas del bloque no se modelan. Las dos desembocan en una plaza de transbordo debajo del bloque, de donde arranca
-        el pasillo. Una primera versión usaba una sola escalera de 5~m, supuesta al comienzo del pasillo; con
-        días cargados el hall llegaba a tener casi \num{2000} personas esperando para bajar y el caudal por
-        ventana quedaba muy por debajo del observado, lo que indicaba un acceso con menos capacidad que el
-        real. El plano no rotula hacia dónde bajan las escaleras ni hay plano del subsuelo: la ubicación de las
-        bocas y de la plaza es una inferencia.
-  \item El andén también se camina: cada pasajero baja por una de las 21 puertas de su tren, junto al borde
-        del andén, y la demora queda solo para la apertura de puertas (10~s, supuesto).
-  \item La demanda de la calle entra por la escalera B3 de la calle Brasil, en su posición real.
-  \item El vestíbulo se reordenó según la secuencia real del pasillo: los molinetes quedan justo antes del
-        punto donde el pasillo se conecta con el andén de la Línea~C, y la zona paga queda sobre los andenes.
-\end{itemize}
-El pasillo y su escalera dosifican la llegada de cada oleada, que es lo que representa la dispersión de la
-descarga, y ahora además pueden congestionarse.
-
-Hay dos reservas. Los pasillos subterráneos son datos voluntarios de OSM, no del plano oficial. Y el
-interior del vestíbulo (su ancho, su forma y la batería de molinetes) sigue sin dato: se ubicaron sus
-accesos y sus zonas según el plano, pero las dimensiones son supuestas. La escalera B4 no se modela, porque
-baja del otro lado de la conexión con el andén y no se sabe qué molinetes usan sus pasajeros.
-
-\subsection{Reproducción en otra máquina}
-
-Con la versión del modelo del 05/10 (día promedio y vestíbulo sin hall), los 30 pares de producción se
-repitieron el 09/10/2026 en otra computadora, con Windows, el mismo archivo
-del modelo y las mismas semillas. La demanda generada coincidió en las 60 corridas. El movimiento no fue
-idéntico bit a bit: las esperas difirieron en décimas de segundo, probablemente por la aritmética de coma
-flotante de la simulación peatonal. Las diferencias \EI{} $-$ \EO{} de las tres medidas primarias variaron
-menos de 0,15~s, y la proporción coincidió con tres decimales. Los resultados no dependieron de la máquina. La
-producción final se corrió en una sola computadora; la generación de la demanda es la misma, así que se espera
-el mismo comportamiento, pero no se repitió.
-
-\subsection{Lo que no se puede validar}
-
-No hay observaciones publicadas de la espera ni del largo de cola en Constitución. Los molinetes registran
-a quien pasó, no a quien esperó. El grupo no pudo medir en el lugar, y el pedido a SBASE incluye
-mediciones de cola si existen. Es la limitación principal del estudio. Los valores absolutos de espera
-dependen de los supuestos de la tabla~\ref{tab:parametros} y de la geometría supuesta del subsuelo. La comparación
-entre escenarios es más robusta que los valores absolutos, porque los dos escenarios comparten todos esos
-supuestos. Aun así, el reparto más parejo del modelo puede inflar la diferencia.
-
-En síntesis, el modelo reproduce lo que el dato permite observar: el caudal, la cantidad de molinetes en
-uso y un volumen en tren compatible con la carga del Roca. Se aparta de la realidad en dos puntos
-identificados: reparte la carga más parejo y supone la proporción que llega en tren. Las conclusiones de las secciones
-siguientes se formulan como condicionales a esos supuestos.
+\textbf{Lo que no se puede validar.} No hay observaciones publicadas de la espera ni del largo de cola en
+Constitución: los molinetes registran a quien pasó, no a quien esperó. Es la limitación principal del estudio.
+Los valores absolutos de espera dependen de los supuestos de la tabla~\ref{tab:parametros} y de la geometría
+supuesta del subsuelo. La comparación entre escenarios es más robusta, porque todos comparten esos supuestos,
+aunque el reparto más parejo del modelo puede inflar la diferencia. En síntesis, el modelo reproduce el caudal,
+los molinetes en uso y un volumen en tren compatible con la carga del Roca, y se aparta de la realidad en dos
+puntos identificados: reparte la carga más parejo y supone la proporción que llega en tren. Las conclusiones se
+formulan como condicionales a esos supuestos.

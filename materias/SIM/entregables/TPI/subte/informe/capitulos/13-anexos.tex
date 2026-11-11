@@ -1,71 +1,10 @@
-\section{Esquema de la fila CSV\_PEATONAL}
-\label{anx:csv}
-% Origen: filaResultadoPed() del modelo y CAMPOS de cargar_corridas.py (20 campos).
-
-Cada corrida escribe una fila separada por punto y coma. El primer campo es el prefijo:
-\texttt{CSV\_PEATONAL} (cargable), \texttt{CSV\_PEATONAL\_DEMO} (demostración, nunca se carga) o
-\texttt{CSV\_PEATONAL\_INCOMPLETO} (corrida sin drenar, bloquea la carga).
-
-\begin{longtable}{@{}r>{\raggedright\arraybackslash}p{5.2cm}>{\raggedright\arraybackslash}p{7.5cm}@{}}
-\toprule
-Campo & Nombre & Detalle \\
-\midrule
-\endhead
-1 & Escenario & \EO{}, \EI{}, \ET{} o \EIT{} \\
-2 & Semilla & Común a los cuatro escenarios de la réplica \\
-3 & Pasajeros generados & Igual en los cuatro escenarios de la réplica \\
-4 & Pasajeros desviados & Cero en todos los escenarios evaluados \\
-5 & Procesados a las 09:30 & Validaciones hasta el corte \\
-6 & Procesados con drenaje & Igual a los generados (conservación) \\
-7 & Espera media & Segundos, desde la entrada a la cola hasta el inicio de la validación \\
-8 & P90 de espera & Primaria \\
-9 & Proporción con espera mayor a 30~s & Primaria, fracción entre 0 y 1 \\
-10 & Lq & Largo medio de la cola en la franja \\
-11 & Cola máxima & Personas \\
-12 & Tiempo de drenaje final & Último egreso menos último ingreso \\
-13 & Utilización media & Fracción, entre los molinetes habilitados \\
-14 & Dispersión de utilización & Desvío entre molinetes \\
-15 & Pasajeros de la cohorte pico & Ingresados de 08:15 a 08:45 \\
-16 & Espera media de la cohorte pico & Segundos \\
-17 & P90 de la cohorte pico & Primaria \\
-18 & Día SBASE & Índice del día sorteado (0 a 74) \\
-19 & P90 de tránsito del Roca a la cola & Segundos desde que baja del tren hasta que entra a la cola \\
-20 & CV de validaciones entre molinetes & Para validar el reparto contra SBASE \\
-\bottomrule
-\end{longtable}
-
-\section{Parámetros del modelo en la producción}
-\label{anx:parametros}
-
-\begin{table}[H]
-\centering
-\caption{Parámetros de \texttt{MainPeatonal} en \texttt{PeatonalCorridasApareadas}}
-\label{tab:anx-parametros}
-\small
-\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{4.4cm} l X@{}}
-\toprule
-Parámetro & Valor & Significado \\
-\midrule
-\texttt{molinetesOperativosPed} & 20 o 22 & Molinetes habilitados \\
-\texttt{servicioPedSeg} (min, máx) & 2,4 (1,8; 3,5) o 1,8 (1,5; 2,5) & Validación triangular: SUBE o sin contacto \\
-\texttt{proporcionRocaPed} & 0,80 & Parte de las validaciones que llega en tren [supuesto] \\
-\texttt{demoraAccesoRocaSeg} & 10~s & Del arribo a la apertura de puertas [supuesto] \\
-\texttt{duracionDescargaSeg} & 30~s & Descenso por las 21 puertas [supuesto] \\
-\texttt{diaSbasePed} & $-2$ & Día sorteado con la semilla entre los 75 días \\
-\texttt{llegadasRealesPed} & verdadero & Trenes con la llegada real del día \\
-\texttt{cargaTrenPoissonPed} & verdadero & Pasaje de cada tren con distribución de Poisson \\
-\texttt{atrasoMaxRocaSeg} & 0 & Atraso adicional (solo para sensibilidad con el horario oficial) \\
-Velocidad de marcha & U(1,1; 1,5)~m/s & Generador propio \\
-Escaleras mecánicas & 0,685~m/s & 10,5~m con 4,6~m de desnivel a 0,30~m/s vertical \\
-\bottomrule
-\end{tabularx}
-\end{table}
-
-\section{Días hábiles y trenes del Roca}
-\label{anx:roca}
-
-Los 75 días del estudio son los días hábiles de marzo a junio de 2026 con datos de SBASE y servicio normal del
-Roca. Se excluyeron cinco días con menos de 40 trenes en la franja, por servicio interrumpido: 23/03, 07/04,
-13/04, 26/05 y 18/06. Las llegadas de cada tren a Plaza Constitución provienen de la respuesta de Trenes
-Argentinos \parencite{sofse2026nota}; los perfiles por ventana, del dataset de SBASE. Los dos se embeben en el
-modelo con \texttt{datos/embeber\_dias\_sbase.py}.
+% Anexos: detalle técnico, historia y tablas secundarias que el cuerpo resume con un "ver anexo".
+% Los antiguos anexos (fila CSV, parámetros de producción y días del Roca) quedaron dentro de 17 y 15.
+\input{capitulos/14-anexo-antecedentes-plan}
+\input{capitulos/15-anexo-datos}
+\input{capitulos/16-anexo-validacion-conceptual}
+\input{capitulos/17-anexo-modelo}
+\input{capitulos/18-anexo-pilotos}
+\input{capitulos/19-anexo-validacion}
+\input{capitulos/20-anexo-resultados}
+\input{capitulos/21-anexo-documentacion}

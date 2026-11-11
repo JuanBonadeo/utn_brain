@@ -1,12 +1,11 @@
 \section{Paso 8: corridas de producción}
 \label{sec:paso8-produccion}
 % Origen: experimento PeatonalCorridasApareadas, corridas_peatonales.csv y cargar_corridas.py (2026-11-10).
-
-\subsection{Configuración}
+% Días simulados y parámetros del experimento: anexos D y G.
 
 La producción usa el experimento \texttt{PeatonalCorridasApareadas} con la configuración de la
-tabla~\ref{tab:produccion}. Las cuatro corridas de una réplica comparten la semilla, el día sorteado y todas las
-fuentes de azar (sección~\ref{sec:paso7-diseno-experimentos}).
+tabla~\ref{tab:produccion}; los parámetros del modelo están en el anexo~\ref{anx:parametros}. Las cuatro
+corridas de una réplica comparten la semilla, el día sorteado y todas las fuentes de azar.
 
 \begin{table}[H]
 \centering
@@ -31,48 +30,13 @@ Ejecución & Evaluaciones en paralelo, sin animación, AnyLogic~8.9.10 PLE \\
 \end{tabularx}
 \end{table}
 
-\subsection{Controles}
-
-Antes de analizar, cada corrida pasó por los controles automáticos del modelo y del cargador:
-\begin{itemize}
-  \item el cargador \texttt{cargar\_corridas.py} leyó 24 filas \texttt{CSV\_PEATONAL}: 6 semillas con \EO{} y
-        6 pares completos para cada alternativa. Ninguna fila quedó marcada como \texttt{INCOMPLETO};
-  \item en cada corrida se cumplió la conservación: generados $=$ procesados $+$ atascados. Los atascados
-        fueron entre 19 y 66 por corrida, entre el 0,1 y el 0,4~\% de los pasajeros del día, siempre por debajo
-        del tope de descarte;
-  \item en cada réplica, los cuatro escenarios tienen el mismo día y la misma cantidad de pasajeros generados,
-        que es la condición de los números aleatorios comunes;
-  \item ninguna fila se transcribió a mano: el análisis lee el archivo de corridas directamente.
-\end{itemize}
-La planilla \texttt{04-resultados-corridas.xlsx} habilita sus intervalos recién con 10 pares, el $n_0$ del diseño.
-Con 6 pares, los intervalos de este informe salen de \texttt{analisis\_corridas.py}, y
-\texttt{resultados\_informe.py} genera las tablas y figuras con las mismas funciones.
-
-\subsection{Días simulados y tiempo de cómputo}
-
-La tabla~\ref{tab:dias-simulados} lista los días que sortearon las seis semillas. Los trenes son los que
-llegaron a Plaza Constitución entre las 07:00 y las 09:30 de ese día. Los pasajeros generados reproducen las
-validaciones observadas ese día: la diferencia es la carga de Poisson de cada tren.
-
-\begin{table}[H]
-\centering
-\caption{Días hábiles simulados en la producción}
-\label{tab:dias-simulados}
-\small
-\begin{tabular}{@{}llrrrr@{}}
-\toprule
-Semilla & Día & Trenes & Validaciones SBASE & Generados & Atascados (\EO{}) \\
-\midrule
-\num{20260923} & mié 13/05/2026 & 49 & \num{20390} & \num{20530} & 49 \\
-\num{20260924} & vie 05/06/2026 & 48 & \num{17459} & \num{17457} & 26 \\
-\num{20260925} & mié 25/03/2026 & 50 & \num{19781} & \num{19706} & 50 \\
-\num{20260926} & vie 06/03/2026 & 49 & \num{16666} & \num{16760} & 22 \\
-\num{20260927} & vie 15/05/2026 & 43 & \num{17847} & \num{17841} & 52 \\
-\num{20260928} & mié 11/03/2026 & 50 & \num{17791} & \num{17620} & 26 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-Cada corrida mueve unos \num{18000} peatones. Aun con el ruteo sin peso de densidad, una tanda de 10 corridas
-en paralelo tardó del orden de 100 minutos. Por eso se completaron 6 de los 10 días del diseño antes de la
-entrega. La sección~\ref{sec:paso9-analisis} discute si alcanzan.
+\textbf{Controles.} El cargador \texttt{cargar\_corridas.py} leyó 24 filas \texttt{CSV\_PEATONAL} (6 semillas con
+\EO{} y 6 pares completos por alternativa), ninguna \texttt{INCOMPLETO}. En cada corrida se cumplió la
+conservación, con entre 19 y 66 atascados (0,1 a 0,4~\% de los pasajeros, por debajo del tope de descarte), y en
+cada réplica los cuatro escenarios tuvieron el mismo día y los mismos generados. Ninguna fila se transcribió a
+mano. Los intervalos salen de \texttt{analisis\_corridas.py}, porque la planilla
+\texttt{04-resultados-corridas.xlsx} los habilita recién con 10 pares; \texttt{resultados\_informe.py} genera
+las tablas y figuras con las mismas funciones. Los seis días sorteados (del 06/03 al 05/06/2026, con 43 a 50
+trenes y entre \num{16760} y \num{20530} pasajeros generados) se listan en el anexo~\ref{anx:dias}. Cada corrida
+mueve unos \num{18000} peatones y una tanda de 10 en paralelo tardó del orden de 100 minutos: por eso se
+completaron 6 de los 10 días del diseño antes de la entrega.

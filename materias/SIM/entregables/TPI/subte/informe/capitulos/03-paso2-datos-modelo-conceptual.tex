@@ -1,44 +1,17 @@
 \section{Paso 2: datos y modelo conceptual}
 \label{sec:paso2-datos-modelo-conceptual}
 % Origen: 01-definicion-del-caso.md §3 y §8, 02-modelo-anylogic.md §7, 07-plan-tpi.md §5 y 09-pedidos-de-datos.md.
+% Detalle de fuentes, parámetros y supuestos: anexo B.
 
-\subsection{Fuentes de datos}
+\subsection{Datos}
 
-\subsubsection{Validaciones por molinete (SBASE)}
-
-La fuente cuantitativa principal es el dataset abierto \emph{Subte: Viajes Molinetes}
-\parencite{sbase2026molinetes}. Tiene una fila por molinete y por ventana de 15 minutos, con la línea, la
-estación, el identificador del molinete y los pasajeros por tipo de pago. El identificador distingue los
-dos vestíbulos de Constitución:
-\begin{center}
-\small
-\begin{tabular}{@{}ll@{}}
-Vestíbulo Principal & \texttt{LineaC\_Constitucion\_Turn\textit{NN}} \\
-Vestíbulo Plaza & \texttt{LineaC\_Constitucion\_Plaza\_Turn\textit{NN}} \\
-\end{tabular}
-\end{center}
-Por eso la unidad del dato coincide con la unidad de servicio del modelo: el molinete.
-
-El procesamiento, reproducible con el script \texttt{sbase-perfil.py} del repositorio, hizo cuatro cosas:
-\begin{enumerate}
-  \item \textbf{Normalizó el campo horario.} En marzo y abril de 2026 viene como \texttt{HH:MM} y en el
-        resto de los meses como \texttt{HH:MM:SS}. Sin normalizar, cada hora se parte en dos grupos y los
-        totales salen mal sin ningún aviso.
-  \item \textbf{Excluyó los días atípicos.} Se descartaron los días cuyo flujo diario quedó por debajo del
-        50~\% de la mediana. Los días excluidos coinciden uno a uno con feriados y fines de semana largos,
-        lo que valida el criterio.
-  \item \textbf{Fijó el período representativo.} Se usaron los días hábiles de marzo a junio de 2026:
-        80 días útiles. Enero y febrero se descartaron porque son meses de vacaciones con menor carga.
-  \item \textbf{Separó los vestíbulos.} El Principal tiene 22 identificadores: \texttt{Turn07} y de
-        \texttt{Turn09} a \texttt{Turn29}. \texttt{Turn07} registró 3 pasajeros en seis meses, por lo que
-        en la práctica hay 21 molinetes con tráfico. Por ventana se observan en promedio 19,5 molinetes
-        activos.
-\end{enumerate}
-
-La tabla~\ref{tab:perfil} y la figura~\ref{fig:perfil} muestran el perfil resultante. El total medio de
-la franja es de \num{18532} validaciones por día hábil, con el pico entre las 08:15 y las 08:45. La carga
-entre molinetes es muy desigual. Entre enero y junio, \texttt{Turn14} procesó \num{1485} pasajeros por
-día hábil en la franja y \texttt{Turn23}, 129: un factor de 11.
+\textbf{Validaciones de SBASE.} La fuente principal es el dataset abierto \emph{Subte: Viajes Molinetes}
+\parencite{sbase2026molinetes}, con una fila por molinete y por ventana de 15 minutos: la unidad del dato
+coincide con la unidad de servicio del modelo. Se usaron los 80 días hábiles útiles de marzo a junio de 2026,
+sin los días atípicos, y se separaron los 22 identificadores del vestíbulo Principal, de los que 21 tienen
+tráfico (anexo~\ref{anx:sbase}). El total medio de la franja es de \num{18532} validaciones por día hábil
+(tabla~\ref{tab:perfil}). El dato cuenta validaciones, no esperas, y agrega 15 minutos, con lo que borra la
+estructura de las oleadas.
 
 \begin{table}[H]
 \centering
@@ -57,153 +30,69 @@ Pasajeros & \num{1544} & \num{1681} & \num{1804} & \num{1986} & \num{1873} & \nu
 {\footnotesize Fuente: elaboración propia sobre \textcite{sbase2026molinetes}.}
 \end{table}
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{tpi-subte-perfil-demanda.png}
-\caption{Validaciones medias por ventana en el vestíbulo Principal (barras; en rojo, el pico) y arribos de
-los trenes del Roca a Plaza Constitución según el horario oficial (marcas). Elaboración propia sobre
-\textcite{sbase2026molinetes} y \textcite{trenes2026roca}.}
-\label{fig:perfil}
-\end{figure}
+\textbf{Trenes del Roca.} El horario oficial vigente desde el 03/08/2026 da 47 trenes entre las 07:00 y las
+09:30, uno cada 3 minutos en mediana, con huecos de hasta 8 minutos \parencite{trenes2026roca}. Ante los
+pedidos de información pública (anexo~\ref{anx:pedidos}), Trenes Argentinos envió el 26/10/2026 el plano de la
+estación, la llegada real de cada tren entre el 02/03 y el 30/06/2026 y una matriz origen-destino, e informó
+que no existen estudios de trasbordo al subte \parencite{sofse2026nota}. SBASE no envió el plano del subsuelo:
+la plaza de transbordo y el interior del vestíbulo son supuestos.
 
-El dato tiene dos límites, y ambos condicionan el modelo:
-\begin{itemize}
-  \item \textbf{Cuenta validaciones, no arribos ni esperas.} No dice cuánta gente esperó ni cuánto
-        tiempo. Si en algún momento los molinetes se saturan, el conteo mide la capacidad de los
-        molinetes y no la demanda real (censura por capacidad).
-  \item \textbf{Es un agregado de 15 minutos.} Dentro de cada ventana se borra la estructura de las
-        oleadas, que es justamente lo que genera la cola.
-\end{itemize}
-
-\subsubsection{Horario del Roca}
-
-La estructura temporal de las oleadas se obtuvo del horario oficial de la línea Roca, vigente desde el
-03/08/2026 \parencite{trenes2026roca}. Se procesaron los cuatro cuadros horarios que llegan a Plaza
-Constitución: La Plata, Bosques, Glew/A.~Korn y Ezeiza/Cañuelas. De cada uno se tomaron la sección de
-lunes a viernes, los trenes con destino Constitución y el horario de llegada. Se descartaron las
-lanzaderas que no llegan a la terminal y se controló que un tren repetido en dos cuadros tuviera el mismo
-arribo. Quedan 47 trenes entre las 07:00 y las 09:30, uno cada 3 minutos en mediana, con huecos de hasta
-8 minutos. Cuatro pares de trenes llegan en el mismo minuto.
-
-El horario fija cuándo llega cada oleada, pero no cuántas personas trae ni qué parte de ellas va a la
-Línea~C.
-
-\subsubsection{Pedidos de información pública}
-
-Lo que ningún dataset publica se pidió a los organismos responsables. El 23/09/2026 se enviaron correos
-a SBASE, a Emova (la concesionaria) y a Trenes Argentinos. El 05/10 se presentaron pedidos formales:
-\begin{itemize}
-  \item a SBASE, por la Ley~104 de la Ciudad: el plano de los vestíbulos, la correspondencia entre
-        identificadores y equipos, el criterio de habilitación de molinetes y los tiempos de validación;
-  \item a Trenes Argentinos Operaciones, por la Ley~\num{27275}: el plano de la estación, los pasajeros
-        por tren, las llegadas efectivas y los estudios de trasbordo.
-\end{itemize}
-
-Trenes Argentinos respondió el 26/10/2026 \parencite{sofse2026nota}. Envió:
-\begin{itemize}
-  \item el plano de la estación ferroviaria en DWG, que no incluye los accesos de la Línea~C;
-  \item la llegada real de cada tren entre el 02/03 y el 30/06/2026, de 07:00 a 09:30;
-  \item una matriz origen-destino de la línea Roca para el mismo período.
-\end{itemize}
-Informó además que no existen estudios de trasbordo hacia el subte. Estos datos llegaron después de la
-primera producción, la del 05/10 con un día promedio. El modelo final los usa como entradas: el plano fija los
-andenes, el hall y las escaleras mecánicas, y cada réplica toma las llegadas reales de su día. La matriz
-origen-destino se usa en la validación (sección~\ref{sec:paso6-validacion}). SBASE prorrogó su plazo de
-respuesta y, al cierre de este informe, no había enviado el plano del subsuelo: la plaza de transbordo y el
-interior del vestíbulo siguen siendo supuestos.
-
-\subsection{Parámetros sin dato publicado}
-
-Cuatro parámetros no surgen de ningún dato disponible: el tiempo de validación, la dispersión con que el
-pasaje de un tren llega al vestíbulo, la demora entre el arribo del tren y la llegada del primer pasajero,
-y la proporción de la demanda que llega en tren. Para cada uno se definió un rango con fuente, con un
-valor intermedio para la comparación principal (tabla~\ref{tab:parametros}). Los contextos se ordenan por
-congestión: el optimista combina servicio corto, oleadas dispersas y menos demanda en tren; el pesimista,
-lo contrario.
+\textbf{Parámetros sin dato publicado.} Para cuatro parámetros se definió un rango con fuente, con un valor
+intermedio para la comparación principal (tabla~\ref{tab:parametros}; fuentes en el
+anexo~\ref{anx:parametros-fuentes}). Los contextos se ordenan por congestión: el optimista combina servicio
+corto, oleadas dispersas y menos demanda en tren; el pesimista, lo contrario. La velocidad de marcha es
+uniforme entre 1,1 y 1,5~m/s \parencite{li2024} y el diámetro del peatón, 0,5~m [supuesto].
 
 \begin{table}[H]
 \centering
-\caption{Parámetros sin dato publicado: rangos y fuentes}
+\caption{Parámetros sin dato publicado: rangos}
 \label{tab:parametros}
 \small
-\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{2.6cm} >{\raggedright\arraybackslash}p{2.0cm} >{\raggedright\arraybackslash}p{2.0cm} >{\raggedright\arraybackslash}p{2.0cm} X@{}}
+\begin{tabular}{@{}llll@{}}
 \toprule
-Parámetro & Optimista & Intermedio & Pesimista & Fuente y carácter \\
+Parámetro & Optimista & Intermedio & Pesimista \\
 \midrule
-Tiempo de validación (s) & Triangular (1,5; 2,0; 3,0) & Triangular (1,8; 2,4; 3,5) & Triangular (2,2; 3,0; 4,5) &
-Moda: 2,4~s con tarjeta inteligente en Londres; 2,6 a 2,9~s en Nueva York \parencite[Exh.~10-27]{tcqsm2013}.
-Cota del propio dataset: hasta 246 pasajeros en 15 minutos por molinete, o sea una media sostenida
-$\le 900/246 = 3{,}66$~s. Asimetría a la derecha por fallas de lectura [supuesto] \\
-Descenso por las puertas (s) & 45 & 30 & 20 &
-Tiempo en que el pasaje de un tren sale por las 21 puertas del lado del andén (7 coches con 3 puertas
-por lado, \cite{wikicsr}): con 200 a 530 pasajeros por tren, unos 25 por puerta a 1 a 1,5 por segundo
-[supuesto]. El andén ya no entra acá: se camina. Una descarga corta concentra la oleada y genera más cola \\
-Demora hasta abrir las puertas (s) & 5 & 10 & 20 &
-Desde el arribo del horario hasta que se abren las puertas [supuesto]. Antes era la demora andén--vestíbulo,
-$D/v + h/v_e$ con $D = 85$~m (\cite{osm2026}); la superposición con el plano llevó a simular el andén, el
-hall, las escaleras al subsuelo y el pasillo, y la demora quedó solo para la apertura (sección~\ref{sec:paso6-validacion}) \\
-Proporción que llega en tren & 0,70 & 0,80 & 0,90 &
-Supuesto explícito: no hay estudio publicado de trasbordo del Roca a la Línea~C, y Trenes Argentinos
-confirmó que no lo tiene \parencite{sofse2026nota}. Se intentó estimarla cruzando el dato de SBASE con
-las llegadas de trenes por ventana; no es identificable (sección~\ref{sec:paso6-validacion}) \\
+Tiempo de validación (s) & Triangular (1,5; 2,0; 3,0) & Triangular (1,8; 2,4; 3,5) & Triangular (2,2; 3,0; 4,5) \\
+Descenso por las puertas (s) & 45 & 30 & 20 \\
+Demora hasta abrir las puertas (s) & 5 & 10 & 20 \\
+Proporción que llega en tren & 0,70 & 0,80 & 0,90 \\
 \bottomrule
-\end{tabularx}
+\end{tabular}
 \end{table}
-
-La demora solo desplaza las oleadas en el tiempo, sin cambiar su forma, por lo que se fija en el valor
-intermedio. Los otros tres parámetros moldean la congestión y son los candidatos al análisis de
-sensibilidad.
-
-La velocidad de marcha se toma uniforme entre 1,1 y 1,5~m/s, el rango que \textcite{li2024} reportan en
-la literatura y dentro del cual cae su valor calibrado de 1,37~m/s. El diámetro del peatón se fijó en 0,5~m.
-Es un supuesto: ninguno de los estudios citados lo informa.
 
 \subsection{Modelo conceptual}
 
-\textbf{Entidades.} Cada pasajero es un agente con su velocidad, su instante de ingreso, su tiempo de
-validación y su molinete elegido. Los molinetes son servidores paralelos, cada uno con su propia cola.
-
-\textbf{Día de cada réplica.} Cada réplica representa un día hábil real, sorteado con reposición
-entre los 75 días hábiles de marzo a junio de 2026 con servicio normal del Roca (bootstrap de días). Del
-día sorteado se toman las validaciones de SBASE por ventana, $d_k$, y las llegadas reales de cada tren a
-Plaza Constitución que informó Trenes Argentinos \parencite{sofse2026nota}. Así la réplica conserva la
-variación real entre días (el volumen del pico cambia del orden del 25~\% de un día a otro) y la
-irregularidad real de los trenes (atraso con mediana de $+4$~minutos), sin suponer una distribución para
-ninguna de las dos. Se excluyeron cinco días con el servicio del Roca interrumpido (menos de 40 trenes en la
-franja, frente a una mediana de 49). En cada par de escenarios el día es el mismo.
-
-\textbf{Generación de la demanda.} La demanda de cada ventana $k$ es la observada $d_k$ del día de la
-réplica, y define una tasa de llegada a lo largo de la franja. Una fracción $p$ (la proporción que llega en tren) viaja en los
-trenes del Roca. La gente espera en las estaciones de su ramal, así que cada tren lleva la demanda que se
-acumuló desde el tren anterior \emph{de su mismo ramal}. Cada ramal toma la parte de la demanda proporcional
-a sus trenes en la franja. Con este criterio, un tren que llega después de un intervalo largo viene más
-cargado, y dos trenes de ramales distintos que llegan juntos no se reparten la misma gente. Esa demanda
-acumulada es la media del pasaje del tren: la cantidad efectiva se sortea con una distribución de Poisson
-[supuesto], porque la carga de cada formación varía aunque la tasa sea la misma. El total de la
-franja coincide con el dato; ventana por ventana, el ingreso se corre hacia el tren siguiente.
-
-El pasaje de cada tren baja por las 21 puertas de su lado del andén, de forma pareja durante el descenso,
-y desde ahí camina el andén y el hall, baja por la escalera del bloque central que le queda de su lado y sigue
-por la plaza de transbordo y el pasillo hasta el vestíbulo. El resto, $(1-p)\,d_k$, entra desde la
-calle con llegadas de Poisson no homogéneas a la tasa de cada ventana. Solo se generan ingresos antes de las
-09:30.
-
-\textbf{Servicio y elección de molinete.} Cada pasajero elige, entre los molinetes habilitados, el que
-minimiza un costo: el desvío lateral respecto de su recorrido, convertido a tiempo a 1,3~m/s, más la
-espera estimada (pasajeros ya asignados a ese molinete por el tiempo de validación de referencia). La
-literatura indica que la cercanía pesa fuerte \parencite{seriani2025,tian2026} y que la fila también
-cuenta \parencite{wang2024}. La regla combina ambos efectos. Luego el pasajero camina hasta la cola, espera
-según el orden de llegada, valida y sigue hacia las escaleras de la Línea~C.
-
-\textbf{Horizonte.} El sistema es terminal. Cada réplica representa un día hábil de 07:00 a 09:30 y,
-después del cierre de ingresos, sigue hasta que sale el último pasajero que ingresó antes de las 09:30.
-Así ninguna espera queda censurada. La unidad de tiempo es el segundo, con $t = 0$ a las 07:00.
-
-La figura~\ref{fig:conceptual} resume el flujo.
+Cada pasajero es un agente con su velocidad, su instante de ingreso, su tiempo de validación y su molinete
+elegido; los molinetes son servidores paralelos, cada uno con su propia cola (figura~\ref{fig:conceptual}).
+\begin{itemize}
+  \item \textbf{Día de cada réplica.} Cada réplica es un día hábil real, sorteado con reposición entre los 75
+        días de marzo a junio de 2026 con servicio normal del Roca (bootstrap de días). Del día se toman las
+        validaciones de SBASE por ventana, $d_k$, y las llegadas reales de cada tren \parencite{sofse2026nota}.
+        Así la réplica conserva la variación real entre días (el volumen del pico cambia del orden del 25~\%) y
+        la irregularidad de los trenes (atraso con mediana de $+4$~minutos), sin suponer una distribución. Se
+        excluyeron cinco días con el servicio interrumpido (menos de 40 trenes, frente a una mediana de 49).
+  \item \textbf{Demanda.} Una fracción $p$ de $d_k$ viaja en tren. Cada tren lleva la demanda acumulada desde
+        el tren anterior \emph{de su mismo ramal}, y su pasaje efectivo se sortea con una distribución de
+        Poisson con esa media [supuesto]. El pasaje baja por las 21 puertas, camina el andén y el hall, baja por
+        la escalera del bloque central de su lado y sigue por la plaza de transbordo y el pasillo hasta el
+        vestíbulo. El resto, $(1-p)\,d_k$, entra desde la calle con llegadas de Poisson no homogéneas. El total
+        de la franja coincide con el dato, y solo se generan ingresos antes de las 09:30.
+  \item \textbf{Elección y servicio.} Cada pasajero elige el molinete habilitado que minimiza el desvío lateral
+        respecto de su recorrido, convertido a tiempo a 1,3~m/s, más la espera estimada (pasajeros ya
+        asignados por el tiempo de validación de referencia): la cercanía pesa fuerte
+        \parencite{seriani2025,tian2026} y la fila también cuenta \parencite{wang2024}. Luego espera según el
+        orden de llegada y valida.
+  \item \textbf{Horizonte.} El sistema es terminal: cada réplica va de 07:00 a 09:30 y sigue hasta que sale el
+        último pasajero ingresado antes de las 09:30, así ninguna espera queda censurada. La unidad de tiempo es
+        el segundo, con $t = 0$ a las 07:00.
+\end{itemize}
+Los supuestos principales son la cola vacía a las 07:00, molinetes solo de ingreso y disponibles todo el
+período, nadie abandona la cola y la geometría del subsuelo; la lista completa está en el
+anexo~\ref{anx:supuestos} y el detalle de la demanda, en el~\ref{anx:demanda}.
 
 \begin{figure}[H]
 \centering
-\resizebox{\textwidth}{!}{%
+\resizebox{0.85\textwidth}{!}{%
 \begin{tikzpicture}[
   caja/.style={draw, rounded corners=2pt, align=center, font=\small, minimum height=9mm, inner sep=4pt},
   dato/.style={draw, dashed, align=center, font=\footnotesize, inner sep=3pt},
@@ -232,23 +121,3 @@ pasaje de cada tren baja por las puertas y se dispersa al caminar el andén. Cad
 según la distancia y la cola.}
 \label{fig:conceptual}
 \end{figure}
-
-\subsection{Supuestos}
-
-Además de los rangos de la tabla~\ref{tab:parametros}, el modelo adopta estos supuestos:
-\begin{enumerate}
-  \item La cola está vacía a las 07:00.
-  \item Los molinetes funcionan solo en sentido de ingreso durante la franja, y los habilitados están
-        disponibles todo el período.
-  \item Nadie abandona la cola ni cambia de molinete una vez elegido.
-  \item El volumen de cada ventana y los trenes son los de un día hábil real con servicio normal; los días
-        con el servicio del Roca interrumpido quedan fuera del estudio.
-  \item El pasaje de cada tren es una variable de Poisson cuya media es la demanda acumulada de su ramal.
-  \item El hall, el andén y las escaleras del bloque central siguen el plano de Trenes Argentinos. La plaza
-        de transbordo, el ancho del pasillo y el interior del vestíbulo son supuestos
-        (sección~\ref{sec:paso4-construccion-verificacion}), porque SBASE no envió el plano del subsuelo.
-  \item Todo pasajero del Roca que entra al modelo baja por las escaleras mecánicas; las escaleras fijas del
-        bloque central no se modelan.
-\end{enumerate}
-El supuesto~4 reemplaza a dos versiones anteriores (perfil medio en todas las réplicas y trenes en
-horario), que la validación mostró optimistas: un atraso variable junta trenes que el horario separa.
