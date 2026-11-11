@@ -5,14 +5,36 @@
 
 \subsection{Respuesta a la pregunta del estudio}
 
-\pendiente{responder con los intervalos de la tabla~\ref{tab:diferencias}: si habilitar los 22 molinetes
-(\EI{}), validar más rápido (\ET{}) o las dos cosas (\EIT{}) reducen la espera de la hora pico frente a la
-situación actual, y cuánto.}
+Las tres alternativas reducen la espera frente a la situación actual. Los nueve intervalos de Bonferroni de la
+tabla~\ref{tab:diferencias} quedan enteros por debajo de cero, con confianza conjunta de al menos el 95~\%
+sobre 6 días hábiles reales:
+\begin{itemize}
+  \item \textbf{Habilitar los 22 molinetes (\EI{})} baja el P90 de espera de 19,8 a 11,8~s, una reducción de
+        7,95~s con IC $[-15{,}8;\,-0{,}1]$. La proporción que espera más de 30~s pasa del 5,4 al 1,4~\%.
+  \item \textbf{Validar más rápido (\ET{})} da un efecto parecido: el P90 baja a 12,4~s, con IC
+        $[-13{,}6;\,-1{,}1]$. Entre \EI{} y \ET{} no hay diferencia demostrable.
+  \item \textbf{Las dos medidas juntas (\EIT{})} bajan el P90 a 8,5~s, una reducción de 11,25~s con IC
+        $[-20{,}1;\,-2{,}4]$. Casi nadie espera más de 30~s (0,5~\%) y el P90 del pico pasa de 24,6 a 9,3~s.
+\end{itemize}
+El signo de la mejora está establecido; su tamaño, no del todo. Los intervalos son anchos porque la espera
+varía mucho de un día a otro, y la precisión fijada antes de correr pedía más días de los que el cómputo
+permite (sección~\ref{sec:paso9-analisis}).
 
 \subsection{Recomendación}
 
-\pendiente{aplicar la regla de decisión: recomendar la alternativa de menor P90 cuyo intervalo frente a las otras
-lo sostenga, o describir el compromiso si las primarias no coinciden.}
+Según la regla fijada antes de correr, se recomienda \textbf{\EIT{}}: habilitar los 22 molinetes del vestíbulo
+Principal y validar más rápido. Es la alternativa de menor P90, y su ventaja en esa medida se sostiene también
+frente a \EI{} ($-3{,}3$~s, IC $[-4{,}6;\,-2{,}0]$) y frente a \ET{} ($-3{,}9$~s, IC $[-6{,}8;\,-1{,}0]$).
+
+Las dos medidas tienen costos muy distintos, y la recomendación se puede escalonar:
+\begin{enumerate}
+  \item \textbf{Habilitar los dos molinetes que hoy no se usan.} Son molinetes instalados: es una decisión
+        operativa, sin inversión, y por sí sola reduce el P90 alrededor de un 40~\%.
+  \item \textbf{Acelerar la validación.} Depende del medio de pago (EMV o QR) y de que la validación rápida
+        alcance de verdad el rango supuesto, que no está medido. Conviene medirla antes de decidir.
+\end{enumerate}
+Con lo que el modelo muestra, el primer paso alcanza para bajar la espera de forma clara. El segundo suma una
+mejora adicional demostrable en el P90, pero no en la proporción mayor a 30~s ni en el P90 del pico.
 
 \subsection{Alcance y limitaciones}
 

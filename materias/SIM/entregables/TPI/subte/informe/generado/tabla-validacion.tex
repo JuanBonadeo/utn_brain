@@ -1,0 +1,33 @@
+% Generado por resultados_informe.py; no editar a mano (se sobrescribe).
+\begin{table}[H]
+\centering
+\caption{Validaciones por ventana de 15 minutos en \EO{}: observado frente a simulado}
+\label{tab:validacion-caudal}
+\small
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+Ventana & Observado medio & Simulado medio & Sesgo \\
+\midrule
+07:00 & \num{1374} & \num{902} & \num{-34.4}~\% \\
+07:15 & \num{1807} & \num{1347} & \num{-25.4}~\% \\
+07:30 & \num{1784} & \num{1635} & \num{-8.4}~\% \\
+07:45 & \num{2032} & \num{1865} & \num{-8.2}~\% \\
+08:00 & \num{1691} & \num{1849} & \num{+9.3}~\% \\
+08:15 & \num{2248} & \num{2126} & \num{-5.4}~\% \\
+08:30 & \num{1938} & \num{1680} & \num{-13.3}~\% \\
+08:45 & \num{1594} & \num{1514} & \num{-5.0}~\% \\
+09:00 & \num{2113} & \num{2188} & \num{+3.6}~\% \\
+09:15 & \num{1742} & \num{1971} & \num{+13.2}~\% \\
+\midrule
+Total franja & \num{18322} & \num{17077} & \num{-6.8}~\% \\
+\midrule
+\multicolumn{2}{@{}l}{CV entre molinetes} & Modelo \num{0.303} & SBASE \num{0.563} \\
+\bottomrule
+\end{tabular}
+
+\smallskip
+\footnotesize Medias sobre 6 réplicas de \EO{}; el observado es el perfil SBASE del día de cada
+réplica. Sesgo $= (\text{sim} - \text{obs})/\text{obs}$. CV del modelo: media de 6 réplicas
+(desvío \num{0.024}); CV de SBASE entre los 21 molinetes con participación
+$\ge$ \num{0.5}~\% del vestíbulo Principal.
+\end{table}

@@ -117,7 +117,14 @@ comenzar la validación. Las métricas de la franja se congelan a las 09:30 ($t 
 continúa hasta que sale el último pasajero ingresado antes de esa hora. Recién entonces el modelo escribe
 una fila de 20 campos en el archivo de corridas (anexo~\ref{anx:csv}) y, en otro archivo, las validaciones
 simuladas y observadas por ventana del mismo día. Antes de escribir exige que se cumpla
-inyectados $=$ generados $=$ procesados. Si no se cumple, se detiene con un error de conservación.
+inyectados $=$ generados $=$ procesados $+$ atascados. Si no se cumple, se detiene con un error de
+conservación. Los atascados son los pocos pasajeros que el cierre por atasco excluye al final de la corrida
+(sección~\ref{sec:paso5-pilotos}); en una corrida normal valen cero.
+
+\textbf{Ruteo.} Un elemento Pedestrian Settings fija el peso de densidad del ruteo en cero: cada peatón va por
+el camino más corto en lugar de esquivar las zonas cargadas. No cambia ninguna decisión del modelo, porque la
+escalera la determina el lado del hall y el molinete la regla de elección, y vale igual para los cuatro
+escenarios. Se adoptó por costo de cómputo (sección~\ref{sec:paso5-pilotos}) y se declara como simplificación.
 
 \textbf{Números aleatorios comunes.} Cada fuente de azar tiene su propio generador, sembrado a partir de la
 semilla de la réplica: el día, la carga de los trenes, la calle, el tiempo de validación y la velocidad de

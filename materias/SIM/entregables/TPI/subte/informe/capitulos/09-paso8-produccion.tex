@@ -17,13 +17,15 @@ fuentes de azar (sección~\ref{sec:paso7-diseno-experimentos}).
 \toprule
 Elemento & Valor \\
 \midrule
-Réplicas & $n_0 = 10$ días hábiles, semillas \num{20260923} a \num{20260932} \\
-Corridas & 40: corrida $j$ con semilla $20260923 + \lfloor j/4 \rfloor$ y escenario $j \bmod 4$ (\EO{}, \EI{}, \ET{}, \EIT{}) \\
+Réplicas & Diseñadas: $n_0 = 10$ días hábiles. Completadas: 6, semillas \num{20260923} a \num{20260928} \\
+Corridas & 24 de las 40 previstas: corrida $j$ con semilla $20260923 + \lfloor j/4 \rfloor$ y escenario $j \bmod 4$ (\EO{}, \EI{}, \ET{}, \EIT{}) \\
 Día de cada réplica & Sorteado con la semilla entre los 75 días hábiles de marzo a junio de 2026 con servicio normal del Roca \\
 Trenes & Llegadas reales de ese día, con carga de Poisson y el total del Roca igual al 80~\% de las validaciones del día \\
 Validación & \EO{} y \EI{}: triangular (1,8; 2,4; 3,5)~s. \ET{} y \EIT{}: triangular (1,5; 1,8; 2,5)~s \\
 Demora y descarga & 10~s de apertura de puertas; descenso por 21 puertas en 30~s \\
 Franja & Ingresos de 07:00 a 09:30; la corrida sigue hasta que sale el último pasajero (tope técnico en \num{17900}~s) \\
+Cierre por atasco & Pasadas las 09:30, si en 15~min no sale nadie y quedan a lo sumo $\max(20;\ 0{,}5~\%)$ pasajeros, se excluyen de las medidas y se informan (sección~\ref{sec:paso5-pilotos}) \\
+Ruteo peatonal & Camino más corto, sin peso de densidad (elemento Pedestrian Settings) \\
 Ejecución & Evaluaciones en paralelo, sin animación, AnyLogic~8.9.10 PLE \\
 \bottomrule
 \end{tabularx}
@@ -33,17 +35,44 @@ Ejecución & Evaluaciones en paralelo, sin animación, AnyLogic~8.9.10 PLE \\
 
 Antes de analizar, cada corrida pasó por los controles automáticos del modelo y del cargador:
 \begin{itemize}
-  \item cada corrida terminó con una fila completa de 20 campos y ninguna quedó marcada como
-        \texttt{INCOMPLETO}, es decir, todas drenaron;
-  \item en cada corrida se cumplió la conservación: inyectados $=$ generados $=$ procesados;
+  \item el cargador \texttt{cargar\_corridas.py} leyó 24 filas \texttt{CSV\_PEATONAL}: 6 semillas con \EO{} y
+        6 pares completos para cada alternativa. Ninguna fila quedó marcada como \texttt{INCOMPLETO};
+  \item en cada corrida se cumplió la conservación: generados $=$ procesados $+$ atascados. Los atascados
+        fueron entre 19 y 66 por corrida, entre el 0,1 y el 0,4~\% de los pasajeros del día, siempre por debajo
+        del tope de descarte;
   \item en cada réplica, los cuatro escenarios tienen el mismo día y la misma cantidad de pasajeros generados,
         que es la condición de los números aleatorios comunes;
-  \item las filas se cargaron en la planilla \texttt{04-resultados-corridas.xlsx} con \texttt{cargar\_corridas.py},
-        sin transcripción manual.
+  \item ninguna fila se transcribió a mano: el análisis lee el archivo de corridas directamente.
 \end{itemize}
-\pendiente{confirmar los controles con la salida del cargador: filas leídas, réplicas completas y días sorteados.}
+La planilla \texttt{04-resultados-corridas.xlsx} habilita sus intervalos recién con 10 pares, el $n_0$ del diseño.
+Con 6 pares, los intervalos de este informe salen de \texttt{analisis\_corridas.py}, y
+\texttt{resultados\_informe.py} genera las tablas y figuras con las mismas funciones.
 
 \subsection{Días simulados y tiempo de cómputo}
 
-\pendiente{listar los 10 días sorteados (fecha, trenes y validaciones de la franja) y el tiempo total de la
-producción en paralelo.}
+La tabla~\ref{tab:dias-simulados} lista los días que sortearon las seis semillas. Los trenes son los que
+llegaron a Plaza Constitución entre las 07:00 y las 09:30 de ese día. Los pasajeros generados reproducen las
+validaciones observadas ese día: la diferencia es la carga de Poisson de cada tren.
+
+\begin{table}[H]
+\centering
+\caption{Días hábiles simulados en la producción}
+\label{tab:dias-simulados}
+\small
+\begin{tabular}{@{}llrrrr@{}}
+\toprule
+Semilla & Día & Trenes & Validaciones SBASE & Generados & Atascados (\EO{}) \\
+\midrule
+\num{20260923} & mié 13/05/2026 & 49 & \num{20390} & \num{20530} & 49 \\
+\num{20260924} & vie 05/06/2026 & 48 & \num{17459} & \num{17457} & 26 \\
+\num{20260925} & mié 25/03/2026 & 50 & \num{19781} & \num{19706} & 50 \\
+\num{20260926} & vie 06/03/2026 & 49 & \num{16666} & \num{16760} & 22 \\
+\num{20260927} & vie 15/05/2026 & 43 & \num{17847} & \num{17841} & 52 \\
+\num{20260928} & mié 11/03/2026 & 50 & \num{17791} & \num{17620} & 26 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Cada corrida mueve unos \num{18000} peatones. Aun con el ruteo sin peso de densidad, una tanda de 10 corridas
+en paralelo tardó del orden de 100 minutos. Por eso se completaron 6 de los 10 días del diseño antes de la
+entrega. La sección~\ref{sec:paso9-analisis} discute si alcanzan.

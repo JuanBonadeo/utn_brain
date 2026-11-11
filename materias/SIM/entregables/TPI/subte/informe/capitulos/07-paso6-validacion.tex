@@ -45,7 +45,25 @@ en \EO{}.
 
 \entradaGenerada{tabla-validacion}
 
-\pendiente{comentar el sesgo por ventana y el CV entre molinetes con los números de la producción.}
+\begin{itemize}
+  \item \textbf{De 07:30 a 09:15} el caudal simulado queda dentro de $\pm 13{,}3$~\% del observado y sigue la
+        forma del pico. Las ventanas centrales, de 08:15 y 08:45, quedan a $-5{,}4$ y $-5{,}0$~\%.
+  \item \textbf{De 07:00 a 07:30} el modelo queda un 34 y un 25~\% abajo. Es el transitorio inicial de un
+        sistema terminal: arranca vacío y el primer pasaje tarda varios minutos en caminar el andén, el hall
+        y la escalera. Estas ventanas caen fuera del pico de 08:15 a 08:45.
+  \item \textbf{En la franja completa}, el modelo valida un 6,8~\% menos que lo observado antes de las 09:30. La
+        diferencia no se pierde: son los pasajeros que a esa hora todavía van caminando y validan durante el
+        drenaje.
+  \item \textbf{El pico se corre hacia adelante.} De 08:15 a 08:45 el modelo queda abajo tres ventanas
+        seguidas (entre $-5$ y $-13$~\%) y compensa a las 09:00 y 09:15 ($+4$ y $+13$~\%). Parte de la oleada
+        del pico se demora en el acceso y valida más tarde. Es coherente con el tránsito largo del Roca hasta
+        la cola (sección~\ref{sec:paso9-analisis}). En consecuencia, el modelo puede subestimar la carga de los
+        molinetes en el pico y, con ella, la espera. El efecto es el mismo en los cuatro escenarios, porque el
+        acceso no cambia entre ellos.
+\end{itemize}
+El coeficiente de variación de la carga entre molinetes, en cambio, queda lejos de lo observado: 0,30 en el
+modelo (media de las 6 réplicas de \EO{}, desvío 0,024) contra 0,56 en SBASE. Lo discute la subsección
+siguiente.
 
 \subsection{Uso de los molinetes}
 

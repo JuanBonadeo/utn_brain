@@ -108,7 +108,7 @@ crecer cuando el modelo pasó a caminar el andén y el hall, con días reales: u
 corridas del diseño de referencia (30 días $\times$ 4 escenarios) habrían llevado unas 5,5~horas en serie. Por
 eso la producción arranca con las $n_0 = 10$ réplicas del procedimiento secuencial (40 corridas), con
 evaluaciones en paralelo, y se agregan días solo si el $n^{*}$ calculado con ellas lo pide
-(sección~ef{sec:paso7-diseno-experimentos}).
+(sección~\ref{sec:paso7-diseno-experimentos}).
 
 \subsection{Pilotos con días reales: el acceso era un cuello de botella falso}
 
@@ -121,7 +121,7 @@ oleadas y achica la diferencia entre escenarios.
 
 El plano de Trenes Argentinos dibuja dos grupos de escaleras mecánicas en el bloque central del hall, justo al
 oeste de donde arranca el pasillo subterráneo. El modelo pasó a usarlos como accesos
-(sección~ef{sec:paso4-construccion-verificacion}). Una primera versión los ubicó mal, en sentido norte-sur y
+(sección~\ref{sec:paso4-construccion-verificacion}). Una primera versión los ubicó mal, en sentido norte-sur y
 dentro de la plaza; la revisión contra el plano los corrigió el 09/11, y el piloto visual de \EO{} posterior
 mostró el recorrido esperado: la gente entra por el oeste del bloque y baja hacia la plaza.
 
@@ -135,6 +135,29 @@ El piloto dejó otras dos observaciones, que se informan como limitaciones:
   \item \textbf{Reparto más parejo que el real.} El coeficiente de variación de las validaciones entre
         molinetes quedó cerca de 0,3, frente a 0,56 en SBASE (sección~\ref{sec:paso6-validacion}).
 \end{itemize}
+
+\subsection{La producción con días reales: peatones trabados y costo del ruteo}
+
+Los primeros intentos de producción con el modelo final dejaron dos problemas más.
+
+\textbf{Peatones trabados al final.} Una réplica de prueba tardó unos 85~minutos y sus cuatro filas salieron
+incompletas. Quedaban entre 5 y 14 de los \num{17457} pasajeros trabados en el hall, empujados contra un
+obstáculo, y la corrida seguía hasta el tope técnico. Se hicieron dos cambios:
+\begin{itemize}
+  \item Las bocas de las escaleras se ensancharon de 2,0 a 2,6~m, todo el ancho útil de cada grupo según el plano.
+  \item Se agregó un \emph{cierre por atasco}. Pasadas las 09:30, el modelo revisa cada 15~minutos si salió
+        alguien. Si no salió nadie y quedan a lo sumo $\max(20;\ 0{,}5~\%)$ pasajeros adentro, los cuenta como
+        atascados, los excluye de las medidas y emite la fila. Con más trabados, la corrida sigue saliendo
+        incompleta y se descarta.
+\end{itemize}
+En la producción, los atascados fueron entre el 0,1 y el 0,4~\% de los pasajeros de cada corrida
+(sección~\ref{sec:paso8-produccion}).
+
+\textbf{Costo del ruteo.} Con 10 corridas en paralelo, la producción llegaba a las 08:15 simuladas recién
+después de casi dos horas de reloj. Un muestreo de los hilos de la máquina virtual de Java mostró que el 87~\%
+del tiempo se iba en el cálculo de rutas (A*). La Pedestrian Library recalcula la ruta de cada peatón pesando la
+densidad, y con el hall lleno eso domina el cómputo. Con el peso de densidad en cero, la corrida se aceleró de
+3 a 4 veces (sección~\ref{sec:paso4-construccion-verificacion}).
 
 \subsection{Qué se aprendió}
 

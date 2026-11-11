@@ -1,0 +1,20 @@
+% Generado por resultados_informe.py; no editar a mano (se sobrescribe).
+\begin{table}[H]
+\centering
+\caption{Réplicas necesarias $n^*$ para un semiancho $\beta$ del IC Bonferroni}
+\label{tab:n-necesario}
+\small
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Medida & $\beta$ & \EI{} & \ET{} & \EIT{} \\
+\midrule
+P90 de espera (s) & \num{1} & 135 & 87 & 171 \\
+Proporción con espera $>$ 30 s & \num{0.01} & 31 & 20 & 54 \\
+P90 cohorte pico (s) & \num{1} & 211 & 122 & 338 \\
+\bottomrule
+\end{tabular}
+
+\smallskip
+\footnotesize $n^* = \min\{i : t_{1-0{,}05/(2\cdot9),\,i-1}\, s(D)/\sqrt{i} \le \beta\}$, con $s(D)$ de
+los 6 pares corridos (Law, §9.5). $\beta$ en segundos para los P90 y en proporción para la espera $>$ 30~s.
+\end{table}

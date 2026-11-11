@@ -1,0 +1,29 @@
+% Generado por resultados_informe.py; no editar a mano (se sobrescribe).
+\begin{table}[H]
+\centering
+\caption{Diferencias apareadas contra \EO{} en las medidas primarias}
+\label{tab:diferencias}
+\small
+\begin{tabular}{@{}llrcrl@{}}
+\toprule
+Alternativa & Medida & $\bar D$ & IC Bonferroni (\num{99.44}~\%) & Cambio & Veredicto \\
+\midrule
+\EI{} & P90 de espera (s) & \num{-7.95} & [\num{-15.77}; \num{-0.13}] & \num{-40.3}~\% & mejora \\
+ & Proporción con espera $>$ 30 s & \num{-0.0400} & [\num{-0.0749}; \num{-0.0051}] & \num{-73.5}~\% & mejora \\
+ & P90 cohorte pico (s) & \num{-11.25} & [\num{-21.09}; \num{-1.41}] & \num{-45.8}~\% & mejora \\
+\midrule
+\ET{} & P90 de espera (s) & \num{-7.35} & [\num{-13.55}; \num{-1.15}] & \num{-37.2}~\% & mejora \\
+ & Proporción con espera $>$ 30 s & \num{-0.0290} & [\num{-0.0554}; \num{-0.0026}] & \num{-53.2}~\% & mejora \\
+ & P90 cohorte pico (s) & \num{-9.70} & [\num{-17.11}; \num{-2.29}] & \num{-39.5}~\% & mejora \\
+\midrule
+\EIT{} & P90 de espera (s) & \num{-11.25} & [\num{-20.08}; \num{-2.42}] & \num{-57.0}~\% & mejora \\
+ & Proporción con espera $>$ 30 s & \num{-0.0498} & [\num{-0.0981}; \num{-0.0016}] & \num{-91.7}~\% & mejora \\
+ & P90 cohorte pico (s) & \num{-15.20} & [\num{-27.71}; \num{-2.69}] & \num{-61.9}~\% & mejora \\
+\bottomrule
+\end{tabular}
+
+\smallskip
+\footnotesize $D = \text{alternativa} - \EO{}$ por semilla (números aleatorios comunes). Bonferroni con $k = 9$
+(3 primarias $\times$ 3 comparaciones), nivel $1 - 0{,}05/9$. 6 pares por alternativa (6 días SBASE distintos); $t_{1-0{,}05/(2\cdot9),\,5} = \num{4.655}$.
+Mejora: el IC queda entero por debajo de 0; empeora: entero por encima; sin evidencia: contiene el 0.
+\end{table}
