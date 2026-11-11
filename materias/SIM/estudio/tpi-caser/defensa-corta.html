@@ -35,7 +35,7 @@ h1,h2,h3{ margin:0; }
 .grid4{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
 .stat{ border-radius:10px; padding:9px 10px; text-align:center; border:1px solid var(--line); background:#fff; break-inside:avoid; }
 .stat .v{ font-size:18pt; font-weight:800; line-height:1.1; } .stat .l{ font-size:8.6pt; color:var(--muted); }
-table{ border-collapse:collapse; width:100%; } table.t{ font-size:9.4pt; }
+table{ border-collapse:collapse; width:100%; } tr{ break-inside:avoid; } table.t.keep{ break-inside:avoid; } table.t{ font-size:9.4pt; }
 table.t th{ text-align:left; font-size:8pt; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); border-bottom:1.5px solid var(--line); padding:4px 6px; }
 table.t td{ border-bottom:1px solid var(--line); padding:5px 6px; vertical-align:top; } table.t tr:last-child td{ border-bottom:none; }
 table.t tr.hl td{ background:#ecf8f0; }
@@ -147,13 +147,20 @@ ol.steps{ margin:4px 0 6px; padding-left:20px; } ol.steps li{ margin-bottom:4px;
 
 <!-- ======================================================= 6 -->
 <div class="sec c4"><div class="n">6</div><h2>Los cuatro escenarios (las reglas que probamos)</h2></div>
-<table class="t">
+<table class="t keep">
   <tr><th></th><th>Regla</th><th>Qué cambia</th></tr>
   <tr><td><b>E0</b></td><td>Regla actual</td><td>Se prende con 79 ULI (o una urgente) y queda caliente hasta 48 h si se vacía la cola. Es la base para comparar.</td></tr>
   <tr><td><b>E1</b></td><td>Umbral bajo</td><td>Se prende con 45 ULI: el material espera menos, pero se prende más veces.</td></tr>
   <tr><td><b>E2</b></td><td>Espera máxima</td><td>Se prende con 79 ULI o cuando la más vieja ya lleva 15 días esperando.</td></tr>
   <tr class="hl"><td><b>E3</b></td><td>Apagar enseguida</td><td>Igual que E0, pero <b>se apaga apenas se vacía la cola</b>: no espera caliente.</td></tr>
 </table>
+<div class="box crio"><h3>¿Por qué estos cuatro?</h3>La regla tiene <b>tres perillas</b> (las variables de decisión): umbral, espera máxima y horas caliente sin carga. <b>Cada alternativa mueve una sola</b> y deja las otras como hoy, así cada diferencia se explica por esa perilla.
+<ul style="margin:4px 0 0">
+  <li><b>E1 (45):</b> es la pregunta literal de la empresa, prender antes. 45 es un valor claramente más bajo (≈ una semana de llegadas contra ≈ dos y media para 79), elegido para ver el efecto; no sale de un cálculo.</li>
+  <li><b>E2 (15 días):</b> hoy el 10 % de las ULI que más esperan ya pasa los 14,4 días; el tope actúa solo sobre ese 10 %.</li>
+  <li><b>E3 (0 h):</b> lo opuesto a la práctica del encargado de dejarlo caliente 48 h "por si llega algo".</li>
+</ul>
+Si preguntan por qué no más valores: es una limitación; un valor por perilla muestra hacia dónde va cada una. Lo siguiente sería barrer el umbral con E3 aplicado.</div>
 
 <!-- ======================================================= 7: cómo corre -->
 <div class="sec c10"><div class="n">7</div><h2>Cómo corre un año dentro de AnyLogic</h2></div>
@@ -169,7 +176,7 @@ ol.steps{ margin:4px 0 6px; padding-left:20px; } ol.steps li{ margin-bottom:4px;
 <div class="mono">|---- 90 días ----|---------------- 365 días ----------------|
    se descartan        se miden: horas en cada estado, esperas,
    (arranque vacío)    cola, encendidos → $ → 1 fila del CSV</div>
-<table class="t">
+<table class="t keep">
   <tr><th style="width:22%">Experimento</th><th>Para qué</th></tr>
   <tr><td><b>Visual</b></td><td>Un año con animación (semilla 1). Las tarjetas cambian E0–E3 en vivo. Es para <b>ver</b> cómo funciona, no para concluir.</td></tr>
   <tr><td><b>CorridasE0E3</b></td><td><b>Parameter Variation</b> de 120 iteraciones, sin animación. Del número de iteración (0 a 119) sale todo: <code>escenario = index / 30</code>, <code>semilla = 1 + index % 30</code>. Cada corrida escribe una fila → CSV → planilla con los tests.</td></tr>
@@ -213,7 +220,6 @@ año 8:  E1 − E0,  E2 − E0,  E3 − E0
 <div class="box say"><h3>Y en la animación</h3>La animación usa siempre la <b>semilla 1</b>: por eso cada vez que la corrés pasa exactamente lo mismo en las mismas fechas (la urgente llega siempre en la ULI 24). Es un solo año de ejemplo; los resultados salen de los 30.</div>
 
 <!-- ======================================================= 6 -->
-<div class="part"></div>
 <div class="sec c6"><div class="n">9</div><h2>Años buenos y años malos</h2></div>
 <p>Como cada semilla es un año distinto, hay años con mucho trabajo y años flojos. Eso es justamente lo que queremos capturar: <b>la variabilidad</b>.</p>
 <div class="grid4">
