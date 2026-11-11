@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ASI — Clase de repaso AD</title>
+<style>
+  @page { size: A4; margin: 11mm 11mm 12mm; }
+  :root { --ink:#16181d; --muted:#5b6170; --line:#c9ced8; --acc:#0b4f8a; --soft:#edf3fa;
+          --hot:#c2410c; --hotbg:#fff4e8; --hotline:#f59e0b; }
+  * { box-sizing: border-box; }
+  body { font-family: "Segoe UI", Arial, sans-serif; font-size: 9pt; line-height: 1.36; color: var(--ink); margin: 0; }
+  h1 { font-size: 16pt; margin: 0; color: var(--acc); }
+  .sub { color: var(--muted); font-size: 9pt; margin: 2px 0 8px; }
+  h2 { font-size: 11pt; color: #fff; background: var(--acc); padding: 3px 7px; margin: 10px 0 4px; break-after: avoid; }
+  h2 .t { float: right; font-weight: normal; font-size: 9pt; opacity: .9; }
+  h3 { font-size: 9.6pt; color: var(--acc); margin: 6px 0 2px; break-after: avoid; }
+  p { margin: 2px 0 3px; }
+  ul { margin: 2px 0 4px; padding-left: 15px; }
+  li { margin: 1px 0; }
+  .ts { font-family: Consolas, monospace; font-size: 8pt; color: var(--muted); background: #f1f2f5; padding: 0 3px; border-radius: 2px; white-space: nowrap; }
+  .ad { border: 2px solid var(--hotline); background: var(--hotbg); border-left: 7px solid var(--hot); padding: 4px 8px; margin: 5px 0; break-inside: avoid; }
+  .ad::before { content: "⚠ ENTRA EN LA AD"; display: block; font-weight: 800; color: var(--hot); font-size: 8.2pt; letter-spacing: .5px; margin-bottom: 1px; }
+  mark { background: #ffe08a; padding: 0 2px; font-weight: 600; }
+  .hero { border: 3px solid var(--hot); background: var(--hotbg); padding: 8px 10px; margin: 6px 0 8px; break-inside: avoid; }
+  .hero h2 { background: var(--hot); margin: -8px -10px 6px; }
+  .hero ul { columns: 2; column-gap: 30px; }
+  .hero li { break-inside: avoid; }
+  .q { color: var(--muted); font-style: italic; }
+  table { border-collapse: collapse; width: 100%; margin: 3px 0 5px; break-inside: avoid; font-size: 8.6pt; }
+  th, td { border: 0.6px solid var(--line); padding: 2px 5px; text-align: left; vertical-align: top; }
+  th { background: var(--soft); }
+  .note { font-size: 8pt; color: var(--muted); border-top: 1px solid var(--line); margin-top: 10px; padding-top: 4px; }
+</style>
+</head>
+<body>
+
+<h1>ASI — Clase de repaso para la Aprobación Directa</h1>
+<div class="sub">Miércoles 2026-11-11, 18:33 a 20:40, por Zoom. Repaso de toda la materia en dos horas, unidad por unidad, y preguntas al final.
+Los horarios marcan cuándo se dijo cada cosa en la grabación.</div>
+
+<div class="hero">
+<h2>Lo que el profe dijo que entra en la AD</h2>
+<ul>
+  <li><b>Fecha:</b> <mark>martes 17/11, de 17 a 19</mark>. La idea es que se resuelva en <b>una hora</b>.</li>
+  <li><b>Formato:</b> unas <mark>5 preguntas como las de los parciales, aplicadas a BANCORP</mark> (el recuperatorio, "calculo que también"). Puede haber algo de multiple choice, sin definir.</li>
+  <li><b>Nivel:</b> aplicación directa y simple. Respuestas cortas: <mark>no más de una o dos carillas en total</mark>. "No se vayan tan detallistas."</li>
+  <li><b>Teoría:</b> <mark>no piden teoría pura; va dentro de la justificación</mark>. Los conceptos no tienen que tener el nombre exacto, pero sí estar explicados y tener sentido.</li>
+  <li><b>U1:</b> objetivos (meta vs. objetivo, SMART, negocio vs. TI), misión, visión y valores, cómo se inserta TI en la empresa.</li>
+  <li><b>Riesgos:</b> <mark>no piden la planilla de riesgos</mark>. Sí pueden pedir: definir un plan (por ejemplo, de contingencia, de 3 o 4 situaciones), una medida de mitigación, clasificar un riesgo dado y calcular la severidad, <mark>"pero sobre todo que la justifiquen"</mark>.</li>
+  <li><b>ITIL:</b> <mark>las prácticas y qué hace cada una</mark>. No piden protocolo.</li>
+  <li><b>Talento:</b> cómo definir un puesto, los tipos de evaluación, la retención (con Maslow de base), competencias genéricas vs. específicas.</li>
+  <li><b>Proyectos:</b> qué considerar, qué controlar, qué herramientas hay, la especificación del trabajo (alcance). "No profundicen demasiado." Valor ganado: "no necesariamente".</li>
+  <li><b>Emprendimientos:</b> <mark>segmentos y propuesta de valor</mark> ("lo pedimos en los últimos parciales"), secciones del Canvas, desarrollo de clientes, pivoteo y MVP.</li>
+  <li><b>Plantilla del Canvas:</b> se puede llevar; no la van a pedir.</li>
+  <li><b>Asistencia:</b> firmar la planilla el mismo día del examen. Probablemente tomen Nacho y Julián.</li>
+</ul>
+</div>
+
+<h2>Arranque y formato del examen <span class="t">18:33 – 18:37</span></h2>
+<ul>
+  <li><span class="ts">18:34</span> Clase corta ("vengo de la garganta tocada"): una recorrida rápida por todos los temas, porque ya se vieron en las consultas. Grabó la clase.</li>
+  <li><span class="ts">18:35</span> El enunciado de la AD todavía no está hecho. En años anteriores fueron cinco preguntas tipo parcial sobre el contexto del banco.</li>
+</ul>
+<div class="ad"><span class="ts">18:35</span> Ejemplo: no piden todo el análisis de un riesgo, sino <b>cómo lo calificarías</b> o <b>armar un plan de contingencia</b> para ese riesgo. "Si aprobaron los parciales, están en condiciones": la AD confirma que lo saben. <span class="ts">18:36</span> La teoría se demuestra en la justificación.</div>
+
+<h2>Unidad 1 — Gobierno de TI y planeamiento estratégico <span class="t">18:37 – 18:56</span></h2>
+<ul>
+  <li><span class="ts">18:37</span> <b>Gobierno de TI:</b> TI es parte esencial e inseparable de la dirección. Hace 20 años era un área de soporte; hoy, si se cae 15 minutos, entra en caos todo. Tiene que estar alineada con los objetivos y los valores de la empresa.</li>
+  <li><span class="ts">18:39</span> <b>Niveles de dirección:</b> institucional (hacia dónde va la empresa), intermedio (cómo se hace) y operacional (el día a día).</li>
+  <li><span class="ts">18:40</span> Normas: ISO 38500. <b>COBIT no es una norma, es un framework</b>: herramientas y recetas que se toman o no.</li>
+  <li><span class="ts">18:41</span> <b>Misión</b> (para qué existe), <b>visión</b> (cómo se ve en un tiempo dado) y <b>valores</b>. Quien no se alinea con los valores corre el riesgo de que lo echen.</li>
+  <li><span class="ts">18:42</span> Estrategias: crecer, innovar, reducir costos, servicio al cliente.</li>
+</ul>
+<div class="ad"><span class="ts">18:42</span> <b>Meta vs. objetivo</b> ("lo que siempre tomamos, en el parcial lo llevamos siempre"). La <b>meta</b> es el horizonte, apunta a la visión. Los <b>objetivos</b> son pequeñas metas controlables: se miden al final y <b>durante</b> el avance (por mes o trimestre). Si hay desvío: se cancela (raro al principio) o se ajusta algo.</div>
+<div class="ad"><span class="ts">18:43</span> <b>SMART:</b> específico, medible, alcanzable, realista, en tiempo. Ejemplo: no "vender más", sino "aumentar 30% las ventas de galletitas de variedad antes de fin de 2027". Consejo: <b>primero pensar el objetivo desde el negocio y después afinarlo con SMART</b>; si no, "queda todo muy robótico".</div>
+<div class="ad"><span class="ts">18:50</span> <b>Objetivo de negocio vs. objetivo de TI.</b> El de negocio lo tiene que entender alguien que no sabe configurar un celular: plata, tiempo, costos, eficiencia, clientes. El de TI es el técnico (redes, sensores, nube). Ejemplo: "reducir 30% las brechas de seguridad" es de TI; el de negocio sería "reducir la pérdida de clientes por mala imagen" o "sumar clientes garantizando la seguridad de su información", con % y plazo.</div>
+<ul>
+  <li><span class="ts">18:54</span> <b>Qué influye en que se cumplan los objetivos:</b> que los involucrados participen en definirlos (se comprometen), la política organizacional y, sobre todo, la <b>cultura organizacional</b>: "la cultura se come la estrategia". Ejemplo: automatizar la planilla que alguien hacía en una semana le saca estatus.</li>
+  <li><span class="ts">18:56</span> <b>Análisis organizacional, ambiental (gobierno, mercados, competencia, tecnología) y formulación de la estrategia:</b> la base de todo lo que sigue en la materia.</li>
+  <li><span class="ts">18:57</span> <b>Clasificación de la organización</b> ("no sé si lo voy a tomar, es una pavada"): tamaño; rol de TI (soporte, fábrica, cambio, estratégico, como Mercado Pago); modelo de abastecimiento (tercerizado, interno, híbrido, lo más común); estrategia de adopción (pionero, seguidor, adoptador lento). FODA lo saltó.</li>
+</ul>
+
+<h2>Unidad 2 — Gestión de riesgos <span class="t">18:57 – 19:24</span></h2>
+<ul>
+  <li><span class="ts">19:01</span> Riesgo: algo no esperado y no bueno que puede pasar. Se trabaja con prácticas de <b>COBIT</b> (no reinventar la rueda): recolectar datos, inventariar activos, identificar riesgos, clasificarlos, comunicarlos y elegir cuáles atender.</li>
+  <li><span class="ts">19:03</span> <b>No todos se atienden:</b> que salte la térmica del cuarto de limpieza no amerita plan; un rayo sobre el coaxil del servidor o un firewall débil, sí.</li>
+  <li><span class="ts">19:04</span> Activos: información, software, hardware, soportes, equipamiento, instalaciones, servicios, personas.</li>
+  <li><span class="ts">19:05</span> <b>Tablas SEI</b> (identificar y clasificar) y <b>FAIR</b> (valorar probabilidad e impacto; Whisper entendió "FEAR"). Ayudan si no tenés clara la severidad; con sentido común no hacen falta. Se pueden llevar.</li>
+  <li><span class="ts">19:07</span> <b>Riesgo positivo</b> = oportunidad, no se trata. Se atienden los negativos.</li>
+  <li><span class="ts">19:08</span> El riesgo es <b>incierto</b>: no se sabe cuándo ni dónde pasa. Lo que se puede hacer es estar preparado (planes de Japón para terremotos; la pandemia, que nadie había considerado).</li>
+</ul>
+<div class="ad"><span class="ts">19:10</span> <b>Severidad = probabilidad × impacto</b> (1 a 5 cada uno). El impacto es "lo que duele". Ejemplo: software para municipios con mala seguridad (P = 5) y clientes críticos (I = 5) → <b>25, altísima</b>. <span class="ts">19:13</span> Sirve para saber qué atender primero. El "arbolito" FAIR la desglosa en <b>frecuencia (probabilidad)</b> y <b>magnitud (impacto)</b>.</div>
+<div class="ad"><span class="ts">19:14</span> <b>Riesgo inherente:</b> el riesgo con lo que hay hoy, antes de medidas nuevas (P 4 × I 5 = 20). <span class="ts">19:15</span> <b>Priorizar:</b> ordenar de mayor a menor severidad; el meteorito (1 × 5 = 5) queda al fondo. <b>Pareto: el 80% de la severidad está en el primer 20% de los riesgos.</b> <span class="ts">19:16</span> <b>No es estático:</b> se revisa periódicamente (ejemplo del estrecho de Ormuz). <span class="ts">19:17</span> <b>Riesgo residual:</b> el que queda después de aplicar las medidas; siempre queda algo.</div>
+<div class="ad"><span class="ts">19:19</span> <b>Tipos de control y planes:</b> <b>preventivo</b> (medidas antes, para reducir el riesgo); <b>detectivo</b> → <b>plan de contingencia</b>: actuar cuando se detecta y limitar el daño (desenchufar el servidor ante un intruso, usar el matafuegos); <b>correctivo</b> (identificar qué pasó y arreglarlo). <span class="ts">19:23</span> Orden: <b>contingencia → continuidad → recuperación</b>. <b>Continuidad:</b> que la empresa siga andando mientras tanto, aunque sea a mano (papel, Excel, la notebook del gerente). <b>Recuperación:</b> volver a funcionar, <b>no como antes sino mejor</b> (si te hackearon, restaurás y sumás medidas). Todo <b>se planifica antes</b>: "cuando se está prendiendo fuego, no pensás". (Él mismo mezcló continuidad y recuperación y se corrigió.)</div>
+
+<h2>Unidad 2 — Servicios con ITIL <span class="t">19:24 – 19:48</span></h2>
+<ul>
+  <li><span class="ts">19:24</span> ITIL: biblioteca de buenas prácticas para administrar servicios. Mesa de ayuda (registra y trata de resolver) → segunda línea (soporte técnico, infraestructura) → tercero.</li>
+  <li><span class="ts">19:26</span> <b>SLA:</b> el detalle de lo que el cliente contrató ("no contrataste el pack del superclásico"). A la materia le importa más el <b>soporte interno</b>.</li>
+  <li><span class="ts">19:28</span> <b>SPOC</b> (single point of contact): la mesa de ayuda es el único punto de contacto, un embudo que deriva.</li>
+</ul>
+<div class="ad"><span class="ts">19:29</span> <b>Herramientas:</b> <b>sistema de tickets</b> ("imprescindible": se crea, se clasifica y pasa de mano en mano acumulando lo hecho); herramientas de colaboración ("no importa mucho"); <b>base de conocimiento (KB)</b>: cómo se resolvió algo, quién, cuándo, con qué pasos; <b>CMDB</b>: ficha de cada ítem (hardware, software, personas, documentos) con sus características e historial. <span class="ts">19:48</span> "Cuando definan algo de ITIL, <b>no se olviden de la CMDB, el sistema de tickets y la base de conocimiento</b>", y del SLA para validar si la persona tiene derecho a lo que pide.</div>
+<ul>
+  <li><span class="ts">19:32</span> <b>Escalado funcional</b> (a quien sabe otras cosas) vs. <b>jerárquico</b> (a quien puede autorizar: un descuento, una impresora láser).</li>
+</ul>
+<div class="ad"><span class="ts">19:34</span> <b>Las prácticas no son roles</b> (dijo que son ocho y repasó estas siete): la misma persona atiende incidentes en un momento y problemas en otro.
+<table>
+<tr><th>Práctica</th><th>Qué hace</th></tr>
+<tr><td>Gestión de incidentes</td><td><b>Alguien te llama</b> porque algo no funciona. Ticket, clasificación, prioridad, intento de resolución, derivación. Se mide con <b>KPI</b> (ej.: cuántas veces se escaló).</td></tr>
+<tr><td>Solicitud de servicio</td><td>Pedido de información o cambio básico que <b>no cambia el sistema</b>. La resuelve la mesa de ayuda.</td></tr>
+<tr><td>Gestión de eventos</td><td><b>Nadie llama: monitoreás.</b> Eventos informativos, de advertencia (el error se repite) y de excepción (se rompió → <b>dispara el plan de contingencia</b>). Monitoreo <b>pasivo</b> (revisar logs) y <b>activo</b> (seguir un ítem en vivo, con alertas).</td></tr>
+<tr><td>Gestión de problemas</td><td><b>Problema = muchos incidentes o eventos con un patrón</b> (10 llamadas iguales, el sistema que se satura todos los días a las 11). Encuentra la solución <b>pero no la aplica</b>: la manda como pedido de cambio. Ejemplo: Amazon y el origen de AWS.</td></tr>
+<tr><td>Gestión de cambios</td><td>Recibe el pedido, lo evalúa, valida, prioriza, aprueba o rechaza y lo planifica. <b>No lo implementa.</b></td></tr>
+<tr><td>Gestión de configuración</td><td><b>Implementa</b> el cambio (deploy, base de datos) y <b>lo registra en la CMDB</b>, una especie de gemelo digital.</td></tr>
+<tr><td>Gestión de versiones</td><td>Versiona software y también hardware (ej.: más memoria en un servidor).</td></tr>
+</table></div>
+
+<h2>Unidad 3 — Talento y capital humano <span class="t">19:48 – 20:03</span></h2>
+<ul>
+  <li><span class="ts">19:49</span> Visto desde el <b>gerente de sistemas</b>, no desde el empleado. Procesos clave: <b>organizar y diseñar los puestos</b> (qué puestos hay en cada área del banco y la descripción de sus funciones), <b>reclutamiento</b>, <b>retención</b> (ambiente, sueldo, compañeros: "un tercio de la vida en la oficina"), <b>desarrollo</b> (capacitación, puestos más interesantes) y <b>evaluación</b>.</li>
+</ul>
+<div class="ad"><span class="ts">19:52</span> <b>Maslow es "el centro de todo esto"</b>, "lo tomo como base", sobre todo para la <b>retención</b>: básicas (techo y comida: lavar copas en España) → seguridad (cobrar todos los meses) → pertenencia ("ponerse la camiseta", extrañar al equipo) → prestigio → autorrealización. Si no entendés esto como gerente, no retenés a tu gente.</div>
+<ul>
+  <li><span class="ts">19:56</span> <b>Reclutamiento:</b> el perfil sale del diseño de puestos. <b>Interno:</b> más barato, ya los conocés, se aprovecha la capacitación y la gente siente que crece; contras: celos y dejar sin gente un sector. <b>Externo:</b> gente nueva, riesgo de equivocarse. Hacerlo con RR. HH. o con una <b>consultora</b> (especializada; hacerlo vos consume tiempo). Aviso con el modelo <b>AIDA</b> (atención, interés, deseo, acción).</li>
+</ul>
+<div class="ad"><span class="ts">20:00</span> <b>Evaluación por competencias.</b> <b>Genéricas:</b> de la persona (pensamiento sistémico, comunicación efectiva, liderazgo, trabajo en grupo, resolución de problemas). <b>Específicas:</b> del puesto (optimización de costos cloud, seguridad por diseño, deuda técnica, arquitectura). "<b>Sepan identificar los dos tipos.</b>"</div>
+
+<h2>Unidad 4 — Higiene y seguridad laboral <span class="t">20:03 – 20:05</span></h2>
+<ul>
+  <li><span class="ts">20:03</span> Condiciones ambientales y técnicas y sus riesgos (ruido, máquinas peligrosas, calor o frío, mal aire, mala luz) y las medidas para reducirlos (sillas ergonómicas, buenos monitores, aire acondicionado). Lo pasó en dos minutos.</li>
+</ul>
+
+<h2>Unidad 5 — Proyectos <span class="t">20:05 – 20:10</span></h2>
+<ul>
+  <li><span class="ts">20:05</span> El gerente de sistemas tiene que <b>defender el proyecto</b> ante la dirección para que lo elijan y lo financien: beneficio (más ingresos, menos costos o desperdicio), alcance, tiempo y costo, comparado contra otros proyectos (sensores para galletitas rotas vs. aire acondicionado para marketing).</li>
+</ul>
+<div class="ad"><span class="ts">20:06</span> <b>TIR, ROI, VAN:</b> "no necesariamente tienen que saber calcularlos, pero sí es imprescindible <b>saber identificarlos y compararlos</b>": para qué sirve cada uno y cuándo es mejor o peor. <span class="ts">20:09</span> <b>Un proyecto tiene inicio y fin</b>, presupuesto de plata y de tiempo, y objetivos propios. Puede crear un producto nuevo (billetera virtual); gestionarlo después ya no es el proyecto.</div>
+
+<h2>Unidad 6 — Emprendedorismo (Canvas) <span class="t">20:10 – 20:29</span></h2>
+<p class="q">Dijo que lo repasa "por unas cuantas correcciones que he visto" en los parciales.</p>
+<ul>
+  <li><span class="ts">20:11</span> <b>Modelo de negocios en una hoja (Canvas), no plan de negocios</b> ("expresión de deseo, 40 o 50 páginas de sarasa").</li>
+  <li><span class="ts">20:12</span> <b>MVP:</b> el producto más completo posible en el menor tiempo (por ejemplo, un mes). <b>No es un prototipo: el cliente lo usa.</b> Se mide, se pivotea y se llega al <b>product-market fit</b>.</li>
+</ul>
+<div class="ad"><span class="ts">20:13</span> <b>Segmentos acotados a lo que podés atender.</b> "Gente con plata" o "marroquinerías" no sirve: es el mercado general. Mercado accesible (Santa Fe) vs. lo que atendés hoy. Bien hecho: "<b>marroquinerías del microcentro de Rosario, con más de 5 años y local a la calle</b>" (unas 15 a 20). Puede haber varios segmentos (hinchas de un club). <span class="ts">20:16</span> <b>Propuesta de valor:</b> no es la función del producto, es <b>lo que le resuelve a ese segmento</b>, asociada a él.</div>
+<div class="ad"><span class="ts">20:18</span> <b>Relación con clientes: get, keep, grow.</b> Get: conseguir clientes nuevos (campañas, llamar, visitar); <b>CAC</b>: USD 1000 gastados y 100 compras = USD 10 por cliente. Keep: retenerlos (cupones, el "volvé" de Mercado Libre). Grow: venderles cosas nuevas, con costo de adquisición cero. <span class="ts">20:21</span> "<b>Lo vi en los parciales: son estrategias.</b>" Poner solo "redes sociales" está mal.</div>
+<ul>
+  <li><span class="ts">20:21</span> <b>Canales:</b> cómo llegás al cliente (distribución o visibilidad). Acá sí van las redes sociales o el App Store.</li>
+</ul>
+<div class="ad"><span class="ts">20:22</span> <b>Actividades y recursos clave:</b> todo lo que hace funcionar a la empresa, no solo desarrollar: cobrar, banco, marketing, limpiar el baño; vendedores, plata, licencias, equipos, oficina. "<b>Si ponés solo desarrollo, está mal.</b>" <span class="ts">20:24</span> <b>Socios clave:</b> no son tus socios de negocio, sino de quién depende tu modelo, aunque ni lo sepan (el proveedor de placas Nvidia, una cooperativa por la que pasa el 80% de las ventas).</div>
+<div class="ad"><span class="ts">20:27</span> <b>Estructura de costos:</b> fijos (alquiler, sueldos) y variables (insumos: la harina); incluir los gastos propios del emprendedor (luz, viajes, nafta). <b>Fuente de ingresos ≠ inversión:</b> la fuente de ingresos es cómo vende el producto o de dónde sale la plata (Google: publicidad del buscador); la inversión va en recursos clave.</div>
+
+<h2>Cierre: qué entra <span class="t">20:29 – 20:33</span></h2>
+<p>El resumen del profe está en el recuadro de la primera página. En sus palabras: "las preguntas apuntan a todo esto de la materia, pero <b>al nivel que yo lo planteé acá</b>".</p>
+
+<h2>Preguntas de los alumnos <span class="t">20:33 – 20:40</span></h2>
+<table>
+<tr><th>Pregunta</th><th>Respuesta</th></tr>
+<tr><td><span class="ts">20:33</span> ¿El contexto sigue siendo BANCORP?</td><td>Sí, para la AD. Para el recuperatorio, "calculo que también".</td></tr>
+<tr><td><span class="ts">20:33</span> ¿Conviene llevar la plantilla del Canvas (U6)?</td><td>Si querés, sí; no la van a pedir. El Canvas limita el espacio y obliga a resumir.</td></tr>
+<tr><td><span class="ts">20:35</span> ¿Qué nivel de detalle? ¿Hay que completar la tabla de riesgos?</td><td>No se pide la tabla: se pide, por ejemplo, un plan de contingencia de 3 o 4 situaciones; una carilla y media es demasiado. Examen para una hora (el Zoom está reservado dos), resolución de no más de una o dos hojas.</td></tr>
+<tr><td><span class="ts">20:36</span> ¿Puede salir un ejercicio de valor ganado?</td><td>"No necesariamente": ya se hizo y está aprobado.</td></tr>
+<tr><td><span class="ts">20:37</span> ¿Cuándo salen las notas del parcial 3?</td><td>Antes del martes, depende de cada docente. Comisión 2 ya publicada (Julián). "Estudien como si aprobaran."</td></tr>
+<tr><td><span class="ts">20:39</span> Consultas</td><td>El viernes no da consulta. Preguntar a Nacho, Julián o Feraboli (Ariana no está disponible hasta fin de año).</td></tr>
+</table>
+
+<div class="note">Transcripción automática local (Whisper) de la grabación de la clase; puede haber errores en nombres propios y siglas. "FAIR" es una interpretación de lo que Whisper transcribió como "FEAR".</div>
+</body>
+</html>

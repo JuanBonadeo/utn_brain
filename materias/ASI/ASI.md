@@ -18,6 +18,7 @@
 7. TP Integrador — Personal (Telecom) / Proceso de instalación de fibra óptica
 8. Segundo parcial — qué se toma (clase de consulta 2026-09-08)
 9. Tercer parcial — qué se toma (clase de consulta 2026-10-28)
+10. Aprobación directa — qué se toma (clase de repaso 2026-11-11)
 
 ## Desarrollo
 
@@ -6044,10 +6045,28 @@ A **5 años**: **5.** Core Bancario Inteligente con IA y Big Data (Data Lake, ML
 - **El contexto no hace falta llevarlo.**
 - **Cambia respecto de la clase de consulta:** ahí se dijo que de evaluación económica no hacían falta las fórmulas; ahora el docente pide de memoria las de valor ganado **y las del TCO**, que la clase había dejado como "qué costos entran". Para ROI y TIR sigue pidiendo qué representan.
 
+### Aprobación directa — qué se toma (clase de repaso, 2026-11-11)
+
+> Fuente: `materias/ASI/fuentes/AD/2026-11-11-clase-repaso-ad-transcripcion.md` (transcripción de la clase por Zoom, 18:33 a 20:40). Resumen de la clase ordenado por hora y por unidad, con lo que entra resaltado: `materias/ASI/estudio/ad/clase-repaso-ad.html` + `.pdf`.
+
+- **Fecha:** martes **2026-11-17, de 17 a 19**. El examen está pensado para resolverse en **una hora**. Se firma la planilla de asistencia ese día; probablemente tomen Nacho y Julián.
+- **Formato:** unas **cinco preguntas como las de los parciales, aplicadas a BANCORP** (el recuperatorio, "calculo que también"). Puede haber algo de multiple choice, sin definir. El enunciado todavía no estaba hecho.
+- **Nivel:** aplicación directa y simple, "al nivel que lo planteé en esta clase". Respuestas cortas: la resolución completa **no debería pasar de una o dos hojas**. **No piden teoría pura**: la teoría va dentro de la justificación, con los conceptos explicados aunque no tengan el nombre exacto.
+- **U1:** objetivos (**meta vs. objetivo**, "lo llevamos siempre en el parcial"; **SMART**, pensando primero el objetivo de negocio y afinándolo después; **objetivo de negocio vs. de TI**); misión, visión y valores; cómo se inserta TI en la empresa. La clasificación de la organización (rol de TI, abastecimiento, adopción) "no sé si la voy a tomar".
+- **Riesgos (U2):** **no piden la planilla de riesgos.** Sí pueden pedir definir un plan (por ejemplo, un **plan de contingencia de 3 o 4 situaciones**), una medida de mitigación, o clasificar un riesgo dado y calcular su **severidad = probabilidad × impacto**, "**pero sobre todo que la justifiquen**". Repasó: riesgo inherente vs. residual, priorizar por severidad con Pareto (el 80% de la severidad en el primer 20% de los riesgos), revisión periódica, controles preventivo/detectivo/correctivo y el orden **contingencia → continuidad → recuperación** (la recuperación deja la empresa **mejor que antes**, no igual). Las tablas SEI y FAIR se pueden llevar, pero no hacen falta.
+- **ITIL (U2):** **las prácticas y qué hace cada una**; no piden protocolo. Repasó: incidentes (alguien llama), solicitud de servicio (no cambia el sistema), eventos (monitoreo pasivo y activo; la excepción dispara la contingencia), problemas (patrón de muchos incidentes; encuentra la solución pero no la aplica), cambios (evalúa y aprueba, no implementa), configuración (implementa y registra en la CMDB) y versiones. "No se olviden de **la CMDB, el sistema de tickets y la base de conocimiento**." Las prácticas no son roles.
+- **Talento (U3):** cómo **definir un puesto**, los **tipos de evaluación**, la **retención** con **Maslow como base** ("el centro de todo esto") y **competencias genéricas vs. específicas** ("sepan identificar los dos tipos"). Reclutamiento interno vs. externo, propio vs. consultora, aviso con AIDA.
+- **Higiene y seguridad (U4):** lo pasó en dos minutos (condiciones, riesgos y medidas).
+- **Proyectos (U5):** qué considerar, qué controlar, qué herramientas hay, la especificación del trabajo (alcance); "no profundicen demasiado". **TIR, ROI y VAN: saber identificarlos y compararlos**, no calcularlos. Un proyecto tiene inicio y fin. **Valor ganado: "no necesariamente"**, porque ya se tomó.
+- **Emprendimientos (U6):** **segmentos y propuesta de valor** ("lo pedimos en los últimos parciales"), las secciones del Canvas, desarrollo de clientes, pivoteo y MVP. Las correcciones que marcó por lo visto en los parciales: segmentos **acotados a lo que se puede atender** (ejemplo: "marroquinerías del microcentro de Rosario, con más de 5 años y local a la calle"); la propuesta de valor es lo que le resuelve a ese segmento, no la función del producto; **get/keep/grow son estrategias**, no "redes sociales"; actividades y recursos clave son **todo** lo que hace andar la empresa, no solo desarrollar; socios clave son de quién depende el modelo; **fuente de ingresos ≠ inversión**. La plantilla del Canvas se puede llevar, pero no la van a pedir.
+- **Consultas:** el viernes 13 el docente no da consulta; preguntar a Nacho, Julián o Feraboli.
+- **Contradicción menor dentro de la misma clase:** a las 19:07 dijo que las tablas de riesgo (SEI/FAIR) "pueden llevarlas"; a las 20:31, "no les vamos a pedir la planilla, no la traigan, no necesariamente". Lo que queda claro es que **no se pide completar la planilla**.
+
 ---
 
 ## Log
 
+- 2026-11-11: **clase de repaso para la Aprobación Directa** (Zoom, 18:33 a 20:40), grabada y transcripta. Transcripción con hora real en `fuentes/AD/2026-11-11-clase-repaso-ad-transcripcion.md`. Nueva sección "Aprobación directa — qué se toma": examen del martes 17/11 de 17 a 19, cinco preguntas tipo parcial sobre BANCORP para resolver en una hora, sin teoría pura ni planilla de riesgos, y lo que entra por unidad. Resumen de la clase por hora y por unidad, con lo que entra resaltado, en `estudio/ad/clase-repaso-ad.html` + `.pdf`.
 - 2026-11-10: **defensa de la Etapa 4.** Presentación `entregables/etapa4/etapa4-presentacion.pptx` (13 láminas: problema, Rosario como modelo y no como competencia, cómo funciona, disrupción y ejes, segmentos, MVP con H1–H5, Canvas, ingresos con gráfico del año 3, equilibrio con gráfico de margen contra fijos, equipo, inversión en dos tramos y cierre con las cuatro etapas del integrador), generada con `scripts/asi/pptx-etapa4/build.js`. Guion `etapa4-guion.md` + `.pdf`: 8:49 de habla, ~9:20 con cambios, reparto Bonadeo 1–3 · Casermeiro 4–6 · Lezcano 7–9 · Lurati 10–12 · Bonadeo 13, recortes por bloque y nueve preguntas probables. Las notas del orador del `.pptx` salen del guion.
 - 2026-11-03: reorganización de carpetas. `entregables/` por etapa (`etapa1/`, `etapa2/` con los `.docx` corregidos que estaban en `estudio/`, `etapa3/` con el handoff, que antes estaba en la raíz de la materia, y la preparación de la expo, `etapa4/`); `estudio/` por parcial (`parcial2/`, `parcial3/`). Los scripts de la etapa 3 pasaron a `scripts/asi/`. Rutas de la wiki actualizadas.
 - 2026-11-03: limpieza de `fuentes/`: se borraron de `Campus/ASI-Unidad5_…/` las copias del Acta de Proyecto y de la Ejercitación 1, idénticas a las de `Ejercitación/`.
