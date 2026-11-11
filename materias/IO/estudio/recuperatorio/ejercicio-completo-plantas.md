@@ -26,6 +26,20 @@ La empresa quiere cumplir los pedidos al **menor costo** posible. Trabajá los c
 3. ¿Sobra capacidad en la planta B?
 4. ¿Qué restricciones son activas?
 
+## La tabla óptima
+
+Para hacer la Parte 2 sin el simplex. Está en **forma Min**, con $x_3$ y $x_4$ los excesos de ① y ②, $x_5$ la holgura de ③ y $x_6$, $x_7$ las ficticias de ① y ②.
+
+| $c_i$ | Base | $A_1$ (3) | $A_2$ (2) | $A_3$ (0) | $A_4$ (0) | $A_5$ (0) | $A_6$ ($M$) | $A_7$ ($M$) | $X$ |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| 3 | $A_1$ | 1 | 0 | −1 | 1 | 0 | 1 | −1 | **4** |
+| 2 | $A_2$ | 0 | 1 | 1 | −2 | 0 | −1 | 2 | **4** |
+| 0 | $A_5$ | 0 | 0 | −1 | 2 | 1 | 1 | −2 | **2** |
+| | $z_j$ | 3 | 2 | −1 | −1 | 0 | 1 | 1 | **20** |
+| | $c_j - z_j$ | 0 | 0 | 1 | 1 | 0 | $M-1$ | $M-1$ | |
+
+Si la resolviste como Max ($z = -w$), tu tabla tiene el mismo cuerpo y la misma columna $X$, y los $c_j$, $z_j$ y $c_j - z_j$ con el signo cambiado.
+
 ## Parte 2 — Sensibilidad
 
 Contestá todo a partir de la tabla óptima, **sin volver a resolver**. Cuidado: el problema es de **mínimo**.
