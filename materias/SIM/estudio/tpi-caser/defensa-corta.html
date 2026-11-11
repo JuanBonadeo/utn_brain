@@ -23,7 +23,7 @@ h1,h2,h3{ margin:0; }
 .sec .n{ width:30px; height:30px; border-radius:50%; color:#fff; font-weight:800; display:flex; align-items:center; justify-content:center; flex:none; font-size:12pt; }
 .sec h2{ font-size:14pt; }
 .c1 .n{ background:var(--navy); } .c2 .n{ background:var(--blue); } .c3 .n{ background:#0f8a7e; } .c4 .n{ background:var(--amber); }
-.c5 .n{ background:var(--violet); } .c6 .n{ background:var(--bad); } .c7 .n{ background:var(--ok); }
+.c5 .n{ background:var(--violet); } .c8 .n{ background:#475569; } .c9 .n{ background:#1e48ad; } .c6 .n{ background:var(--bad); } .c7 .n{ background:var(--ok); }
 .part{ break-before:page; }
 .box{ border:1px solid var(--line); border-radius:10px; padding:9px 12px; margin:7px 0; break-inside:avoid; }
 .box h3{ font-size:10.5pt; margin-bottom:4px; }
@@ -46,6 +46,10 @@ table.t tr.hl td{ background:#ecf8f0; }
 .week div{ border:1px solid var(--line); border-radius:6px; padding:4px; text-align:center; background:#fff; }
 .week b{ display:block; font-size:12pt; color:var(--blue); }
 .mono{ font-family:Consolas,monospace; font-size:9pt; background:var(--soft); border:1px solid var(--line); border-radius:8px; padding:7px 10px; white-space:pre; margin:5px 0; }
+.flow{ display:flex; align-items:stretch; gap:6px; margin:8px 0; }
+.flow .b{ flex:1; border:1.5px solid #c9d8f6; background:#eef3fd; border-radius:9px; padding:7px 8px; text-align:center; font-size:9pt; }
+.flow .b .nm{ display:block; font-size:12pt; font-weight:800; color:#1e48ad; margin-bottom:2px; }
+.flow .ar{ display:flex; align-items:center; color:#9aa3ae; font-size:16pt; }
 .chip{ display:inline-block; width:11px; height:11px; border-radius:2px; vertical-align:-1px; margin-right:4px; }
 .tl{ font-size:8.2pt; font-weight:800; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); }
 </style>
@@ -107,9 +111,37 @@ table.t tr.hl td{ background:#ecf8f0; }
 <p style="font-size:9pt;color:var(--muted)">Usando semanas enteras se conservan los días sin lavado (la mitad de los días hábiles), los picos y las semanas flojas, tal como pasan en la planta.</p>
 <p>El horno <b>no tiene azar</b>: sigue los tiempos y la regla del encargado. Mientras corre, el modelo anota cuánto espera cada ULI y cuántas horas pasa el horno en cada estado, y lo pasa a pesos con las facturas.</p>
 
-<!-- ======================================================= 4 -->
+<!-- ======================================================= 4: variables -->
 <div class="part"></div>
-<div class="sec c4"><div class="n">4</div><h2>Los cuatro escenarios (las reglas que probamos)</h2></div>
+<div class="sec c8"><div class="n">4</div><h2>Las variables del modelo</h2></div>
+<p>Con los nombres de la materia, las variables del modelo son de cuatro tipos:</p>
+<table class="t">
+  <tr><th style="width:24%">Tipo</th><th style="width:30%">Qué es</th><th>En nuestro modelo</th></tr>
+  <tr><td><b>Exógenas</b> (aleatorias)</td><td>Lo que entra al sistema por azar. Sale de los datos reales.</td><td>Cuántas ULI llegan cada día (la semana sorteada), a qué hora llega cada una, cuánto pesa y si es urgente.</td></tr>
+  <tr><td><b>De decisión</b></td><td>Lo que la empresa controla. Es lo que cambia entre escenarios.</td><td><b>Umbral</b> de encendido (79 o 45 ULI), <b>espera máxima</b> (sin límite o 15 días) y <b>horas caliente sin carga</b> (48 o 0).</td></tr>
+  <tr><td><b>Parámetros</b> (fijos)</td><td>Datos que no cambian entre escenarios.</td><td>36 h de calentar, 48 h de enfriar, 85 min por ULI, kWh y gas por día caliente, precios de la luz y el gas, valor del material y costo del dinero (2 % mensual).</td></tr>
+  <tr><td><b>De estado</b></td><td>Cómo está el sistema en cada momento.</td><td>El <b>estado del horno</b> (apagado, acumulando, calentando, procesando, caliente sin carga, enfriando), <b>cuántas ULI y kilos hay en la cola</b>, el reloj y los acumuladores de horas y kWh.</td></tr>
+  <tr><td><b>Endógenas</b> (de respuesta)</td><td>Lo que medimos para comparar las reglas.</td><td>El <b>costo del año</b> (luz + gas + capital parado), la <b>espera media</b> de las ULI y los <b>kilos esperando</b> en la cola. También: campañas, kWh por kg, horas de horno caliente sin carga.</td></tr>
+</table>
+<div class="box say"><h3>Para decir (20 segundos)</h3>"Lo aleatorio que entra son las llegadas de ULI, su peso y si son urgentes, todo sacado del registro real. Lo que controla la empresa, y lo que cambiamos entre escenarios, es el umbral, la espera máxima y cuánto tiempo deja el horno caliente sin carga. El estado del sistema es el estado del horno y la cola. Y lo que medimos es el costo del año, la espera de las ULI y el capital parado en la cola."</div>
+
+<!-- ======================================================= 5: AnyLogic -->
+<div class="sec c9"><div class="n">5</div><h2>El modelo por dentro: los bloques de AnyLogic</h2></div>
+<p>El modelo usa cuatro bloques de la <b>Process Modeling Library</b> de AnyLogic, en fila, como una línea de producción:</p>
+<div class="flow">
+  <div class="b"><span class="nm">Source</span>El <b>lavado</b>: crea las ULI cuando el sorteo dice que llegan.</div><div class="ar">→</div>
+  <div class="b"><span class="nm">Wait</span>La <b>cola</b> del horno: las ULI esperan acá.</div><div class="ar">→</div>
+  <div class="b"><span class="nm">Delay</span>El <b>horno</b>: de a una ULI, 85 min cada una.</div><div class="ar">→</div>
+  <div class="b"><span class="nm">Sink</span>La <b>salida</b>: cuenta las ULI tratadas y cuánto esperaron.</div>
+</div>
+<div class="grid2">
+  <div class="box crio" style="margin:0"><h3>¿Por qué Wait y no Queue?</h3>Una <b>Queue</b> deja pasar a la siguiente apenas el horno queda libre. Pero acá no alcanza con que esté libre: tiene que estar <b>caliente</b>. Con <b>Wait</b> las ULI esperan hasta que el modelo las libera, y eso solo pasa con el horno a temperatura (primero las urgentes, después la más vieja).</div>
+  <div class="box" style="margin:0"><h3>¿Y el estado del horno?</h3>Lo lleva un <b>statechart</b> (diagrama de estados): apagado, acumulando, calentando, procesando y enfriando. Es lo que decide cuándo se prende, cuándo carga y cuándo se apaga. Tampoco usamos <b>Batch</b>, porque el horno no mete 80 ULI juntas: las trata de a una.</div>
+</div>
+<div class="box say"><h3>Para decir</h3>"Por dentro es Source, Wait, Delay y Sink: el lavado, la cola, el horno y la salida. Usamos Wait y no Queue porque las ULI solo pueden entrar con el horno caliente, y el statechart lleva el estado del horno."</div>
+
+<!-- ======================================================= 6 -->
+<div class="sec c4"><div class="n">6</div><h2>Los cuatro escenarios (las reglas que probamos)</h2></div>
 <table class="t">
   <tr><th></th><th>Regla</th><th>Qué cambia</th></tr>
   <tr><td><b>E0</b></td><td>Regla actual</td><td>Se prende con 79 ULI (o una urgente) y queda caliente hasta 48 h si se vacía la cola. Es la base para comparar.</td></tr>
@@ -119,7 +151,7 @@ table.t tr.hl td{ background:#ecf8f0; }
 </table>
 
 <!-- ======================================================= 5 -->
-<div class="sec c5"><div class="n">5</div><h2>Las semillas, explicado fácil</h2></div>
+<div class="sec c5"><div class="n">7</div><h2>Las semillas, explicado fácil</h2></div>
 <div class="grid2">
   <div>
     <p>Para sortear (qué semana sale, cuánto pesa cada ULI, si es urgente), la computadora usa una secuencia de números al azar. La <b>semilla</b> es el <b>número con el que arranca ese sorteo</b>.</p>
@@ -154,7 +186,7 @@ año 8:  E1 − E0,  E2 − E0,  E3 − E0
 <div class="box say"><h3>Y en la animación</h3>La animación usa siempre la <b>semilla 1</b>: por eso cada vez que la corrés pasa exactamente lo mismo en las mismas fechas (la urgente llega siempre en la ULI 24). Es un solo año de ejemplo; los resultados salen de los 30.</div>
 
 <!-- ======================================================= 6 -->
-<div class="sec c6"><div class="n">6</div><h2>Años buenos y años malos</h2></div>
+<div class="sec c6"><div class="n">8</div><h2>Años buenos y años malos</h2></div>
 <p>Como cada semilla es un año distinto, hay años con mucho trabajo y años flojos. Eso es justamente lo que queremos capturar: <b>la variabilidad</b>.</p>
 <div class="grid4">
   <div class="stat"><div class="v" style="color:var(--blue)">1.277–2.249</div><div class="l">ULI que llegan por año, según el año</div></div>
@@ -169,7 +201,7 @@ año 8:  E1 − E0,  E2 − E0,  E3 − E0
 <div class="box say"><h3>Para decir</h3>"Simulamos 30 años distintos para que la conclusión no dependa de un año bueno o malo. Y el ahorro de apagar enseguida aparece en los 30."</div>
 
 <!-- ======================================================= 7 -->
-<div class="sec c7"><div class="n">7</div><h2>El mejor escenario y lo que gana la empresa</h2></div>
+<div class="sec c7"><div class="n">9</div><h2>El mejor escenario y lo que gana la empresa</h2></div>
 <table class="t">
   <tr><th>Contra la regla actual (por año)</th><th class="r">Costo</th><th class="r">Espera del material</th></tr>
   <tr><td><b>E1</b> umbral 45</td><td class="r" style="color:var(--bad)">+4,8 M$ más caro</td><td class="r" style="color:var(--ok)">2,6 días menos</td></tr>
