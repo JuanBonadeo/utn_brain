@@ -112,8 +112,7 @@
 
   <div class="box">
     <h2>Rango de un \(c_k\) <span class="note">(se rompe la optimalidad)</span></h2>
-    <p><b>\(x_k\) no básica</b>: sólo cambia su \(c_k - z_k\). Max: \(\Delta c_k \leq -(c_k - z_k)\). Min: \(\Delta c_k \geq -(c_k - z_k)\).</p>
-    <p><b>\(x_k\) básica</b>: usar la <b>fila</b> de \(x_k\), columnas no básicas (sin ficticias). Max:</p>
+    <p><b>No básica</b>: Max \(\Delta c_k \leq -(c_k - z_k)\); Min \(\geq\). <b>Básica</b>: <b>fila</b> de \(x_k\), no básicas sin ficticias: \((c_j - z_j)' = (c_j - z_j) - \Delta c_k\,y_{kj}\); fuera de rango entra la que cambia de signo. Max:</p>
     \[ \max_{y_{kj}>0} \frac{c_j - z_j}{y_{kj}} \;\leq\; \Delta c_k \;\leq\; \min_{y_{kj}<0} \frac{c_j - z_j}{y_{kj}} \]
     <p>Min: se invierten los grupos. Grupo vacío → \(\pm\infty\). Dentro del rango, \(x^*\) no cambia y \(z^{*\prime} = z^* + \Delta c_k\, x_k^*\).</p>
   </div>
