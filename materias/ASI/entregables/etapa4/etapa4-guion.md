@@ -1,6 +1,6 @@
 # Etapa 4 — Guion de la defensa
 
-> Trece láminas, cuatro expositores: **8:49 de habla**, cerca de **9:20** con los cambios de expositor. Es un guion para **decir**, no
+> Trece láminas, cuatro expositores: **9:02 de habla**, cerca de **9:32** con los cambios de expositor. Es un guion para **decir**, no
 > para leer: frases cortas, una idea por lámina y ninguna tabla leída en voz alta. Está
 > medido a 145 palabras por minuto con `scripts/guion-timing.py`; el reloj de control
 > está al final.
@@ -58,58 +58,66 @@ construirlo.
 
 ---
 
-## CASERMEIRO · láminas 4 a 6 · cierra en 4:11
+## CASERMEIRO · láminas 4 a 6 · cierra en 4:19
 
 ### Lámina 4 — Cómo funciona · 1 min
 
 Cuadra es una plataforma en la nube que lleva el reclamo desde el vecino hasta la
-cuadrilla que lo resuelve, sea del municipio o de una prestadora. Son cuatro piezas.
+cuadrilla que lo resuelve. Esa cuadrilla puede ser del municipio o de una prestadora.
+Son cuatro piezas, y un conector por debajo.
 
-El vecino entra desde el celular o desde un código QR en la calle, sin instalar nada:
-saca una foto, el GPS toma la ubicación y elige una categoría. El **motor de ruteo**
-decide a quién le corresponde y agrupa los reclamos repetidos en una sola orden. La
-cuadrilla la recibe en el celular, trabaja sin conexión y cierra con foto del antes y
-del después. Y el **tablero público** muestra cuánto tarda cada responsable, con datos
+Primero, el vecino. Entra desde el celular o desde un código QR en la calle, sin
+instalar nada. Saca una foto, elige la categoría y el GPS pone la ubicación.
+
+Segundo, el **motor de ruteo**. Decide a quién le corresponde el reclamo y junta los
+repetidos en una sola orden.
+
+Tercero, la cuadrilla. Recibe la orden en el celular, trabaja sin conexión y cierra
+con una foto del antes y otra del después.
+
+Cuarto, el **tablero público**. Muestra cuánto tarda cada responsable, con datos
 abiertos y anonimizados.
 
-Por debajo, el conector: nos sumamos a los sistemas que ya existen, no los
-reemplazamos. Y la app de cuadrilla es la misma solución que planificamos para
-Personal en la Etapa 3.
+Y por debajo, el conector: nos conectamos a los sistemas que ya existen, no los
+reemplazamos. Además, la app de cuadrilla es la misma que planificamos para Personal
+en la Etapa 3.
 
 ### Lámina 5 — Por qué no es una app más · 35 s
 
-¿Por qué no es una aplicación de reclamos más? Porque, como vimos en la Unidad 6, la
-disrupción no está en la tecnología sino en **cambiar el comportamiento del mercado**.
-Hoy el reclamo es un trámite que cada organización atiende por separado y sin rendir
-cuentas. Cuadra lo convierte en un servicio con tiempos públicos, que cruza
-organizaciones.
+¿Por qué no es una aplicación de reclamos más? En la Unidad 6 vimos que la disrupción
+no está en la tecnología, sino en **cambiar el comportamiento del mercado**.
 
-Así cubre seis de los ejes de la consigna, y tiene triple impacto: baja el costo de
-cada reclamo atendido, hace visible la desigualdad entre barrios y ahorra kilómetros
-de cuadrilla.
+Hoy el reclamo es un trámite que cada organización atiende por su lado, sin rendir
+cuentas. Cuadra lo convierte en un solo servicio para todos los responsables, con los
+tiempos a la vista.
 
-### Lámina 6 — Clientes y mercado · 45 s
+Así cubre seis de los ejes de la consigna, y tiene triple impacto. Económico, porque
+baja el costo de cada reclamo. Social, porque muestra la desigualdad entre barrios. Y
+ambiental, porque ahorra kilómetros de cuadrilla.
 
-Es una plataforma de varios lados: solo funciona si están los que reclaman, los que
-resuelven y los que reciben su parte. Pagan los **municipios medianos**, que son el
-cliente principal, y las **prestadoras** con infraestructura en la vía pública. Los
-vecinos la usan gratis, pero son actores críticos: si el sistema no responde, la
-abandonan. Y los planificadores pagan por informes.
+### Lámina 6 — Clientes y mercado · 50 s
 
-El cliente que decide tiene cara: Laura, secretaria de gobierno de un municipio del
-Gran Rosario, que hoy no puede contestar cuánto tarda su gestión en arreglar una
-luminaria.
+Cuadra tiene varios tipos de clientes, y solo funciona si están todos. Pagan tres: los
+**municipios medianos**, que son el cliente principal; las **prestadoras** con
+infraestructura en la calle; y los planificadores, que compran informes. Los vecinos
+la usan gratis, pero son clave: si el sistema no les responde, la abandonan.
 
-Empezamos por el Gran Rosario, con una meta de tres, ocho y catorce municipios al
-cierre de cada año.
+En el informe armamos el perfil de quien decide la compra en el municipio. Es un
+personaje inventado, pero típico: Laura, secretaria de gobierno de una ciudad del Gran
+Rosario. Hoy no puede decir cuánto tarda su gestión en arreglar una luminaria, y eso
+es justo lo que le resolvemos.
 
-> **Si vas corto:** en la 5, saltá el triple impacto. En la 6, saltá a Laura.
+Arrancamos por el Gran Rosario: tres municipios el primer año, ocho el segundo y
+catorce el tercero.
+
+> **Si vas corto:** en la 5, saltá el triple impacto. En la 6, saltá el párrafo de
+> Laura.
 >
 > **Paso:** «Todo esto todavía es una hipótesis. Diego cuenta cómo la validamos.»
 
 ---
 
-## LEZCANO · láminas 7 a 9 · cierra en 6:30
+## LEZCANO · láminas 7 a 9 · cierra en 6:38
 
 ### Lámina 7 — El MVP · 50 s
 
@@ -162,7 +170,7 @@ suscripciones.
 
 ---
 
-## LURATI · láminas 10 a 12 · cierra en 8:38
+## LURATI · láminas 10 a 12 · cierra en 8:46
 
 ### Lámina 10 — Costos y punto de equilibrio · 55 s
 
@@ -207,17 +215,18 @@ segundo tramo va a una empresa que ya tiene un cliente pagando.
 
 ---
 
-## BONADEO · lámina 13 · cierra en 9:21
+## BONADEO · lámina 13 · cierra en 9:32
 
-### Lámina 13 — Cierre · 35 s
+### Lámina 13 — Cierre · 40 s
 
-Para cerrar: Cuadra no salió de la nada, cierra el Integrador. Parte del diagnóstico de
-la Etapa 1, Rosario como ciudad en transición y sin una estrategia unificada. Toma de
-la Etapa 2 la lógica de ITIL: cada reclamo con prioridad, responsable y tiempo
-comprometido. Y lleva la plataforma de la Etapa 3 a cualquier cuadrilla que trabaje en
-la calle; de hecho, Personal es el primer socio prestador que vamos a buscar.
+Para cerrar, una cosa: Cuadra no salió de la nada. Es el final del Integrador. En la
+Etapa 1 vimos que Rosario es una ciudad en transición, sin una estrategia unificada. En
+la Etapa 2, con ITIL, aprendimos que cada reclamo necesita prioridad, responsable y un
+tiempo comprometido. Y la plataforma que planificamos en la Etapa 3 ahora la llevamos
+a cualquier cuadrilla que trabaje en la calle. Por eso Personal es el primer socio
+prestador que vamos a buscar.
 
-Del reclamo a la cuadrilla, a la vista de todos. Muchas gracias.
+En resumen: del reclamo a la cuadrilla, a la vista de todos. Muchas gracias.
 
 ---
 
@@ -226,10 +235,10 @@ Del reclamo a la cuadrilla, a la vista de todos. Muchas gracias.
 | Corte | Quién termina | Habla | Reloj |
 |---|---|---|---|
 | Lámina 3 | Bonadeo | 1:42 | 1:42 |
-| Lámina 6 | Casermeiro | 2:21 | 4:11 |
-| Lámina 9 | Lezcano | 2:11 | 6:30 |
-| Lámina 12 | Lurati | 2:00 | 8:38 |
-| Lámina 13 | Bonadeo | 0:35 | 9:21 |
+| Lámina 6 | Casermeiro | 2:29 | 4:19 |
+| Lámina 9 | Lezcano | 2:11 | 6:38 |
+| Lámina 12 | Lurati | 2:00 | 8:46 |
+| Lámina 13 | Bonadeo | 0:38 | 9:32 |
 
 El reloj incluye unos 8 segundos por cambio de expositor. Si un bloque se pasa de su
 corte, el que sigue aplica sus recortes: **el tiempo no se recupera hablando más
