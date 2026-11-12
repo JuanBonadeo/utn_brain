@@ -1,6 +1,6 @@
 # Etapa 4 — Guion de la defensa
 
-> Trece láminas, cuatro expositores: **9:02 de habla**, cerca de **9:32** con los cambios de expositor. Es un guion para **decir**, no
+> Trece láminas, cuatro expositores: **9:00 de habla**, cerca de **9:31** con los cambios de expositor. Es un guion para **decir**, no
 > para leer: frases cortas, una idea por lámina y ninguna tabla leída en voz alta. Está
 > medido a 145 palabras por minuto con `scripts/guion-timing.py`; el reloj de control
 > está al final.
@@ -58,7 +58,7 @@ construirlo.
 
 ---
 
-## CASERMEIRO · láminas 4 a 6 · cierra en 4:19
+## CASERMEIRO · láminas 4 a 6 · cierra en 4:18
 
 ### Lámina 4 — Cómo funciona · 1 min
 
@@ -102,22 +102,20 @@ Cuadra tiene varios tipos de clientes, y solo funciona si están todos. Pagan tr
 infraestructura en la calle; y los planificadores, que compran informes. Los vecinos
 la usan gratis, pero son clave: si el sistema no les responde, la abandonan.
 
-En el informe armamos el perfil de quien decide la compra en el municipio. Es un
-personaje inventado, pero típico: Laura, secretaria de gobierno de una ciudad del Gran
-Rosario. Hoy no puede decir cuánto tarda su gestión en arreglar una luminaria, y eso
-es justo lo que le resolvemos.
+¿Y quién decide la compra? En el municipio, la secretaría de gobierno. Hoy recibe
+reclamos por teléfono, redes y mensajería, y no puede decir cuánto tarda su gestión en
+arreglar una luminaria. Eso es justo lo que le resolvemos.
 
-Arrancamos por el Gran Rosario: tres municipios el primer año, ocho el segundo y
-catorce el tercero.
+Arrancamos por el Gran Rosario, con municipios como Funes, Roldán o San Lorenzo: tres
+el primer año, ocho el segundo y catorce el tercero.
 
-> **Si vas corto:** en la 5, saltá el triple impacto. En la 6, saltá el párrafo de
-> Laura.
+> **Si vas corto:** en la 5, saltá el triple impacto. En la 6, saltá quién decide.
 >
 > **Paso:** «Todo esto todavía es una hipótesis. Diego cuenta cómo la validamos.»
 
 ---
 
-## LEZCANO · láminas 7 a 9 · cierra en 6:38
+## LEZCANO · láminas 7 a 9 · cierra en 6:37
 
 ### Lámina 7 — El MVP · 50 s
 
@@ -170,7 +168,7 @@ suscripciones.
 
 ---
 
-## LURATI · láminas 10 a 12 · cierra en 8:46
+## LURATI · láminas 10 a 12 · cierra en 8:45
 
 ### Lámina 10 — Costos y punto de equilibrio · 55 s
 
@@ -215,7 +213,7 @@ segundo tramo va a una empresa que ya tiene un cliente pagando.
 
 ---
 
-## BONADEO · lámina 13 · cierra en 9:32
+## BONADEO · lámina 13 · cierra en 9:31
 
 ### Lámina 13 — Cierre · 40 s
 
@@ -235,10 +233,10 @@ En resumen: del reclamo a la cuadrilla, a la vista de todos. Muchas gracias.
 | Corte | Quién termina | Habla | Reloj |
 |---|---|---|---|
 | Lámina 3 | Bonadeo | 1:42 | 1:42 |
-| Lámina 6 | Casermeiro | 2:29 | 4:19 |
-| Lámina 9 | Lezcano | 2:11 | 6:38 |
-| Lámina 12 | Lurati | 2:00 | 8:46 |
-| Lámina 13 | Bonadeo | 0:38 | 9:32 |
+| Lámina 6 | Casermeiro | 2:28 | 4:18 |
+| Lámina 9 | Lezcano | 2:11 | 6:37 |
+| Lámina 12 | Lurati | 2:00 | 8:45 |
+| Lámina 13 | Bonadeo | 0:38 | 9:31 |
 
 El reloj incluye unos 8 segundos por cambio de expositor. Si un bloque se pasa de su
 corte, el que sigue aplica sus recortes: **el tiempo no se recupera hablando más
