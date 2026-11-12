@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>IO — Precio sombra, costo reducido y compañía</title>
+<style>
+  @page { size: A4; margin: 7mm 8.5mm 6mm 8.5mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 8.5pt; line-height: 1.28; color: #111; }
+  h1 { font-size: 14pt; text-align: center; margin: 0 0 2.2mm; letter-spacing: .02em; }
+  h1 small { display: block; font-size: 7.8pt; font-weight: normal; color: #555; letter-spacing: 0; margin-top: .6mm; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; border-top: 1.2px solid #111; border-left: 1.2px solid #111; }
+  .box { border-right: 1.2px solid #111; border-bottom: 1.2px solid #111; padding: 1.7mm 2.4mm 1.9mm; break-inside: avoid; }
+  .full { grid-column: 1 / -1; }
+  .box h2 { font-size: 9.8pt; margin: 0 0 1.2mm; padding: .5mm 1.3mm; background: #e8eefc; border-left: 2.5px solid #2563eb; }
+  .box.r h2 { background: #fdecec; border-left-color: #dc2626; }
+  .box.g h2 { background: #e7f6ec; border-left-color: #16a34a; }
+  .box.o h2 { background: #f1f1f1; border-left-color: #6b7280; }
+  ol, ul { margin: .3mm 0 .6mm; padding-left: 4.4mm; }
+  li { margin: 0 0 .55mm; }
+  p { margin: .3mm 0 .8mm; }
+  .katex { font-size: 1.02em; }
+  .katex-display { margin: .8mm 0; }
+  table { border-collapse: collapse; width: 100%; margin: .7mm 0; font-size: 8.1pt; }
+  th, td { border: .8px solid #888; padding: .55mm 1.3mm; text-align: left; vertical-align: top; }
+  th { background: #ececec; font-weight: bold; }
+  td.c, th.c { text-align: center; }
+  .big { font-size: 10.2pt; text-align: center; margin: .6mm 0 1.2mm; }
+  .big b { color: #1d4ed8; }
+  .ojo { font-size: 8.4pt; border-left: 2px solid #dc2626; padding-left: 1.8mm; margin-top: 1mm; }
+  .note { font-size: 8.2pt; color: #333; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; }
+</style>
+</head>
+<body>
+
+<h1>Precio sombra, costo reducido y compañía<small>IO · recuperatorio 19/11 · ejemplo: la refinería del parcial (Max, tabla óptima con base \(x_3, e_3, x_2\))</small></h1>
+
+<div class="grid">
+
+  <div class="box full">
+    <h2>La pregunta que lo ordena todo: ¿de qué se habla, de un RECURSO o de un PRODUCTO?</h2>
+    <p class="big"><b>Restricción (recurso)</b> → precio sombra, en la columna de <b>su holgura</b>.
+      &nbsp;&nbsp;|&nbsp;&nbsp; <b>Variable (producto)</b> → costo reducido, en <b>su propia columna</b>.</p>
+    <table>
+      <tr><th>Concepto</th><th>Es de una…</th><th>Dónde se lee (Max)</th><th>Qué dice</th><th>Vale 0 cuando…</th><th>Unidad</th><th>Refinería</th></tr>
+      <tr><td><b>Valor implícito</b> = precio sombra = costo marginal = variable dual \(u_i\)</td><td>restricción</td>
+        <td>\(z_j\) de su holgura \(= -(c_j - z_j)\); si es \(\geq\), \(z_j\) de su ficticia</td>
+        <td>cuánto sube \(Z^*\) si \(b_i\) sube 1 (dentro del rango de \(b_i\))</td><td>sobra recurso (holgura básica \(> 0\))</td>
+        <td>$ por unidad de <b>recurso</b></td><td>crudo \(40/3\); destilación \(50\); contrato \(0\)</td></tr>
+      <tr><td><b>Costo reducido</b> \(c_j - z_j\)</td><td>variable</td><td>fila \(c_j - z_j\), columna de \(x_j\)</td>
+        <td>cuánto cambia \(Z\) por cada unidad de \(x_j\) que se fuerce a producir; cuánto tiene que mejorar \(c_j\) para que entre</td>
+        <td>\(x_j\) es básica (se produce)</td><td>$ por unidad de <b>producto</b></td><td>nafta \(-5/3\); diésel y fueloil \(0\)</td></tr>
+      <tr><td><b>\(z_j\)</b> de una variable de decisión</td><td>variable</td><td>fila \(z_j\), columna de \(x_j\)</td>
+        <td>lo que valen (a precio sombra) los recursos que consume una unidad de \(x_j\)</td><td>—</td><td>$ por unidad de producto</td><td>nafta: \(155/3 \approx 51{,}67\)</td></tr>
+      <tr><td><b>Holgura / exceso</b></td><td>restricción</td><td>columna \(X\), si es básica</td>
+        <td>cuánto <b>sobra</b> del recurso, o cuánto se pasa del mínimo</td><td>la restricción es activa</td><td>unidades del recurso (no $)</td><td>\(s_1 = s_2 = 0\); \(e_3 = 833{,}3\)</td></tr>
+      <tr><td><b>Coeficiente de sustitución</b> \(-y_{ij}\)</td><td>par variable / básica</td><td>cuerpo de la tabla, con signo cambiado</td>
+        <td>cuánto cambia la básica \(x_i\) si entra una unidad de \(x_j\)</td><td>\(x_i\) no se ve afectada</td><td>unidades físicas</td><td>—</td></tr>
+    </table>
+  </div>
+
+  <div class="box">
+    <h2>Mismo número, dos lecturas</h2>
+    <p>Precio sombra del crudo \(= 40/3 \approx 13{,}33\):</p>
+    <ul>
+      <li><b>Como ganancia:</b> con 1 t más de crudo, \(Z\) sube 13,33 (ganancia bruta).</li>
+      <li><b>Como precio límite:</b> lo <b>máximo</b> que conviene pagar por esa tonelada.</li>
+    </ul>
+    <table>
+      <tr><th class="c">Precio \(p\) de la t extra</th><th class="c">Neto \(= 13{,}33 - p\)</th><th>Decisión</th></tr>
+      <tr><td class="c">10</td><td class="c">\(+3{,}33\)</td><td>conviene</td></tr>
+      <tr><td class="c">13,33</td><td class="c">\(0\)</td><td>indiferente (límite)</td></tr>
+      <tr><td class="c">16</td><td class="c">\(-2{,}67\)</td><td>no conviene</td></tr>
+    </table>
+    <p class="note">El material de la cátedra: <b>precio sombra</b> = cuánto pagar como máximo; <b>valor marginal</b> = lo que se deja de ganar por no tener esa unidad. Mismo número. En requerimientos mínimos (\(\geq\)) se suele hablar de valor marginal.</p>
+  </div>
+
+  <div class="box g">
+    <h2>Costo reducido, leído de las dos formas</h2>
+    <p>Nafta: \(c_1 - z_1 = 50 - 155/3 = -5/3\).</p>
+    <ul>
+      <li><b>Si la forzás:</b> cada tonelada de nafta baja \(Z\) en 1,67, porque sus recursos valen 51,67 y deja 50.</li>
+      <li><b>Para que entre:</b> \(c_1\) tiene que subir más de \(5/3\): \(c_1 > 51{,}67\). Con \(c_1 = 51{,}67\) exacto, aparece un óptimo alternativo.</li>
+    </ul>
+    <p class="ojo">En un Max óptimo: costos reducidos \(\leq 0\). Si en una no básica da \(0\) → soluciones alternativas. Si alguno da \(> 0\), la tabla <b>no</b> es óptima.</p>
+  </div>
+
+  <div class="box">
+    <h2>Signo del valor implícito</h2>
+    <table>
+      <tr><th></th><th class="c">\(\leq\)</th><th class="c">\(\geq\)</th><th class="c">\(=\)</th></tr>
+      <tr><td><b>Max</b></td><td class="c">\(\geq 0\)</td><td class="c">\(\leq 0\)</td><td class="c">libre</td></tr>
+      <tr><td><b>Min</b></td><td class="c">\(\leq 0\)</td><td class="c">\(\geq 0\)</td><td class="c">libre</td></tr>
+    </table>
+    <p class="note">Regla: aflojar una restricción nunca empeora el óptimo; ajustarla nunca lo mejora. Subir el \(b\) de una \(\leq\) la afloja; subir el de una \(\geq\) la ajusta.</p>
+    <p class="note"><b>Holguras complementarias:</b> holgura \(\times\) precio sombra \(= 0\). Si sobra → vale 0. Si vale algo → está agotada. (Al revés no: activa con precio 0 es posible.)</p>
+  </div>
+
+  <div class="box r">
+    <h2>Trampas de las opciones</h2>
+    <ul>
+      <li>«Cuesta X almacenar cada unidad» → eso es stock, no precio sombra.</li>
+      <li>«Sobran X unidades» → eso es la <b>holgura</b>, no el precio sombra.</li>
+      <li>«Si sube el precio de un producto, \(Z\) sube X» → eso es cambiar un \(c_j\), no un \(b_i\).</li>
+      <li>Precio sombra leído en una tabla <b>no óptima</b> (en el parcial: 100 en vez de 50).</li>
+      <li>Multiplicar el precio sombra por un aumento grande de \(b_i\): sólo vale dentro de su rango.</li>
+      <li>\(u^* = B^{-1}b\) ✗ → eso son los valores de las básicas. \(u^* = c_B B^{-1}\) ✓.</li>
+    </ul>
+  </div>
+
+  <div class="box full o">
+    <h2>Conexión con el dual</h2>
+    <div class="two">
+      <p>Los precios sombra del primal <b>son</b> la solución del dual: \(u^* = (40/3;\ 50;\ 0)\) y \(W^* = 5000\cdot\tfrac{40}{3} + 1200\cdot 50 - 500\cdot 0 = 126.666{,}67 = Z^*\). Si \(W^* \neq Z^*\), hay un error de signo.</p>
+      <p>El exceso de la restricción dual \(j\) es \(-(c_j - z_j)\) de \(x_j\): el costo reducido es la holgura del dual. Si \(x_j\) se produce, su restricción dual se cumple con igualdad (los recursos que consume valen exactamente \(c_j\)).</p>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
