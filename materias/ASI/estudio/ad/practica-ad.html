@@ -1,0 +1,486 @@
+<title>Práctica AD de ASI</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: columna única de tarjetas de práctica, barra de filtros pegajosa arriba, resumen de avance en el encabezado */
+:root {
+  --bg: #f5f7f8;
+  --surface: #ffffff;
+  --fg: #172026;
+  --muted: #5a6a73;
+  --line: #d8e0e4;
+  --accent: #0e5e6f;
+  --accent-soft: #e2f0f2;
+  --ok: #217a45; --ok-soft: #e3f3e8;
+  --mid: #9a6a00; --mid-soft: #fbf1d9;
+  --bad: #b23b2e; --bad-soft: #fbe7e4;
+  --answer: #f0f6f7;
+  --f-display: "Space Grotesk", "Segoe UI", Arial, sans-serif;
+  --f-body: "Inter", "Segoe UI", Arial, sans-serif;
+  --f-mono: "JetBrains Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #11171a; --surface: #182126; --fg: #e3eaed; --muted: #93a4ad; --line: #2b3940;
+  --accent: #5fc0d0; --accent-soft: #17343a;
+  --ok: #6fcf93; --ok-soft: #173326; --mid: #e3b548; --mid-soft: #3a2f12; --bad: #f08a7e; --bad-soft: #3d1f1b;
+  --answer: #1c2a30; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #11171a; --surface: #182126; --fg: #e3eaed; --muted: #93a4ad; --line: #2b3940;
+  --accent: #5fc0d0; --accent-soft: #17343a;
+  --ok: #6fcf93; --ok-soft: #173326; --mid: #e3b548; --mid-soft: #3a2f12; --bad: #f08a7e; --bad-soft: #3d1f1b;
+  --answer: #1c2a30; color-scheme: dark; }
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--f-body); font-size: 15px; line-height: 1.55; }
+.wrap { max-width: 860px; margin: 0 auto; padding-block: 28px 64px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1 { font-family: var(--f-display); font-size: 1.9rem; margin: 0; letter-spacing: -0.01em; text-wrap: balance; }
+.lede { color: var(--muted); margin: 6px 0 0; max-width: 65ch; }
+.facts { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 0; padding: 0; list-style: none; }
+.facts li { font-size: 0.82rem; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 3px 9px; color: var(--muted); }
+.facts b { color: var(--fg); font-weight: 600; }
+
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding-block: 12px; margin-top: 18px; border-bottom: 1px solid var(--line); display: flex; flex-direction: column; gap: 10px; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: 500 0.85rem var(--f-body); border: 1px solid var(--line); background: var(--surface); color: var(--fg); border-radius: 999px; padding: 5px 12px; cursor: pointer; }
+.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--surface); }
+.chip:focus-visible, button:focus-visible, textarea:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+.progress { font-size: 0.85rem; color: var(--muted); font-variant-numeric: tabular-nums; display: flex; gap: 12px; flex-wrap: wrap; }
+.progress span b { font-weight: 600; }
+.p-ok b { color: var(--ok); } .p-mid b { color: var(--mid); } .p-bad b { color: var(--bad); }
+.btn { font: 600 0.85rem var(--f-body); border-radius: 7px; padding: 7px 13px; cursor: pointer; border: 1px solid var(--accent); background: var(--accent); color: var(--surface); }
+.btn.ghost { background: transparent; color: var(--accent); }
+.sim-note { font-size: 0.85rem; background: var(--accent-soft); border-radius: 8px; padding: 9px 12px; color: var(--fg); }
+
+.list { display: flex; flex-direction: column; gap: 18px; margin-top: 20px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.card[data-rate="ok"] { border-left: 4px solid var(--ok); }
+.card[data-rate="mid"] { border-left: 4px solid var(--mid); }
+.card[data-rate="bad"] { border-left: 4px solid var(--bad); }
+.meta { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 0.75rem; }
+.num { font-family: var(--f-mono); color: var(--muted); }
+.tag { text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; padding: 2px 7px; border-radius: 4px; background: var(--accent-soft); color: var(--accent); }
+.proj { color: var(--muted); }
+.q { font-family: var(--f-display); font-weight: 600; font-size: 1.08rem; line-height: 1.4; margin: 0; text-wrap: pretty; }
+.ctx { margin: 0; color: var(--muted); font-size: 0.92rem; }
+.ctx ul, .ans ul, .ans ol { margin: 4px 0; padding-left: 20px; }
+textarea { width: 100%; min-height: 120px; resize: vertical; font: 0.95rem/1.5 var(--f-body); color: var(--fg); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; }
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.ans { background: var(--answer); border-radius: 8px; padding: 14px 16px; font-size: 0.93rem; min-width: 0; }
+.ans h4 { margin: 0 0 6px; font: 600 0.75rem var(--f-body); text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); }
+.ans p { margin: 4px 0; }
+.ans table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+.ans th, .ans td { border: 1px solid var(--line); padding: 4px 7px; text-align: left; vertical-align: top; }
+.ans .tbl { overflow-x: auto; }
+.check { margin-top: 12px; border-top: 1px solid var(--line); padding-top: 10px; }
+.check label { display: flex; gap: 8px; align-items: flex-start; padding: 3px 0; cursor: pointer; }
+.check input { margin-top: 4px; accent-color: var(--accent); }
+.rate { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 0.85rem; color: var(--muted); }
+.rate button { font: 500 0.82rem var(--f-body); border-radius: 6px; padding: 5px 10px; cursor: pointer; border: 1px solid var(--line); background: var(--surface); color: var(--fg); }
+.rate button[data-v="ok"][aria-pressed="true"] { background: var(--ok-soft); border-color: var(--ok); color: var(--ok); }
+.rate button[data-v="mid"][aria-pressed="true"] { background: var(--mid-soft); border-color: var(--mid); color: var(--mid); }
+.rate button[data-v="bad"][aria-pressed="true"] { background: var(--bad-soft); border-color: var(--bad); color: var(--bad); }
+.tip { font-size: 0.82rem; color: var(--muted); }
+footer { margin-top: 36px; font-size: 0.8rem; color: var(--muted); max-width: 65ch; }
+@media (max-width: 480px) { h1 { font-size: 1.5rem; } .card { padding: 14px; } }
+@media (prefers-reduced-motion: no-preference) { .ans { animation: in .18s ease-out; } @keyframes in { from { opacity: .4; } to { opacity: 1; } } }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Práctica para la AD de ASI</h1>
+    <p class="lede">Preguntas cortas como las que anticipó el profe en la clase de repaso del 11/11, sobre los proyectos del 1er año de BANCORP. Escribí tu respuesta, abrí la sugerida y marcá qué puntos te faltaron.</p>
+    <ul class="facts">
+      <li><b>Martes 17/11</b>, 17 a 19 h</li>
+      <li><b>~5 preguntas</b> para una hora</li>
+      <li>Respuestas cortas, <b>1 o 2 hojas</b> en total</li>
+      <li>Teoría <b>dentro de la justificación</b></li>
+    </ul>
+  </header>
+
+  <div class="bar">
+    <div class="chips" id="chips" role="group" aria-label="Filtrar por unidad"></div>
+    <div class="tools">
+      <div class="progress" id="progress" aria-live="polite"></div>
+      <div class="row">
+        <button class="btn" id="sim" type="button">Simulacro de 5</button>
+        <button class="btn ghost" id="repasar" type="button">Sólo las de repasar</button>
+      </div>
+    </div>
+    <div class="sim-note" id="simNote" hidden></div>
+  </div>
+
+  <main class="list" id="list"></main>
+
+  <footer>
+    Lo que escribís y cómo te autoevaluás queda guardado en este navegador nada más. Las respuestas sugeridas salen de la wiki de ASI y del alcance que dio el docente; son un modelo de extensión y de qué conceptos nombrar, no la única respuesta válida. Los números de los ejercicios de rentabilidad son de ejemplo.
+  </footer>
+</div>
+
+<script>
+const UNITS = {
+  u1: "U1 · Estrategia",
+  rg: "U2 · Riesgos",
+  it: "U2 · ITIL",
+  u3: "U3 · Talento",
+  u4: "U4 · H&S",
+  u5: "U5 · Proyectos",
+  u6: "U6 · Canvas"
+};
+const P = {
+  bil: "Billetera Virtual Propia",
+  omni: "Omnicanalidad (token unificado)",
+  ia: "Copiloto Operativo con IA",
+  ex: "Portal del Empleado (EX)",
+  out: "Startup desde afuera, le vende a Bancorp"
+};
+
+const Q = [
+// ---------- U1
+{ id: "u1-1", u: "u1", p: "bil",
+  q: "Para el proyecto de la Billetera Virtual, escribí una meta y dos objetivos que la concreten. Explicá en una línea la diferencia.",
+  a: `<p><b>Meta:</b> que Bancorp sea el banco de referencia de los jóvenes y los no bancarizados del país. Apunta a la visión y no se mide de un día para el otro.</p>
+<p><b>Objetivo 1:</b> sumar 150.000 cuentas nuevas abiertas desde la billetera, de clientes que hoy no operan con el banco, antes de diciembre de 2027.</p>
+<p><b>Objetivo 2:</b> que el 40% de los usuarios de la billetera haga al menos un pago con QR por mes durante el primer año.</p>
+<p><b>Diferencia:</b> la meta es el horizonte general; los objetivos son pequeñas metas medibles y con plazo, que se controlan al final y durante el avance (por mes o trimestre). Si hay desvío, se ajusta o se cancela.</p>`,
+  k: ["La meta apunta a la visión y es general", "Cada objetivo tiene número y plazo", "Dice que el objetivo se controla durante el avance, no sólo al final", "Los objetivos están atados a la billetera y al segmento (jóvenes / no bancarizados)"] },
+
+{ id: "u1-2", u: "u1", p: "ia",
+  q: "Formulá un objetivo de negocio y un objetivo de TI para el Copiloto Operativo con IA. Los dos tienen que ser SMART.",
+  a: `<p><b>De negocio:</b> reducir un 25% el tiempo promedio de atención en las cajas y la plataforma de las 45 sucursales en los 12 meses siguientes a la puesta en marcha, para atender más clientes con el mismo personal.</p>
+<p><b>De TI:</b> poner en producción, antes de junio de 2027, un LLM privado alojado en la infraestructura del banco que responda consultas sobre circulares BCRA y procedimientos internos en menos de 5 segundos, con 99,5% de disponibilidad en horario bancario.</p>
+<p><b>Por qué son SMART:</b> específicos (qué y dónde), medibles (25%, 5 s, 99,5%), alcanzables y realistas para un banco de 45 sucursales, y en tiempo (plazo fijo).</p>
+<p><b>Diferencia:</b> el de negocio lo entiende cualquier gerente que no sabe de tecnología (tiempo, clientes, costo); el de TI es el técnico (modelo, disponibilidad, tiempo de respuesta).</p>`,
+  k: ["El de negocio habla de plata, tiempo, clientes o eficiencia, sin jerga técnica", "El de TI es técnico", "Los dos tienen métrica y plazo", "Explica qué letra de SMART cumple cada parte"] },
+
+{ id: "u1-3", u: "u1", p: "omni",
+  q: "Un compañero escribió este objetivo de negocio para Omnicanalidad: \"Implementar un token unificado entre Home Banking y la app\". ¿Qué está mal? Reescribilo.",
+  a: `<p><b>Qué está mal:</b> es un objetivo de TI, no de negocio (habla de la solución técnica). Además no es SMART: no tiene métrica ni plazo.</p>
+<p><b>Reescrito:</b> reducir un 30% los reclamos de clientes por problemas para operar entre la web y la app, y que el 60% de las operaciones iniciadas en la web puedan terminarse en el celular, antes de fin de 2027.</p>
+<p>El token unificado queda como objetivo de TI, que sí puede decir "implementar el token unificado en ambos canales antes de marzo de 2027".</p>`,
+  k: ["Detecta que es de TI y no de negocio", "Detecta que falta métrica y plazo", "La versión nueva habla del cliente o del negocio", "Ubica al token como objetivo de TI"] },
+
+{ id: "u1-4", u: "u1", p: "ex",
+  q: "¿Cómo justificarías el Portal del Empleado frente al Directorio usando la misión, la visión o los valores de Bancorp? ¿Qué lugar ocupa TI en el banco?",
+  a: `<p>El proyecto se alinea con el valor de <b>Agilidad</b> (licencias, recibos y evaluaciones sin papel ni demoras) y con <b>Cercanía</b> hacia el propio personal de las 45 sucursales, que hoy depende de una intranet vieja. También empuja la visión de un banco digital: si el personal no trabaja digital, difícilmente lo haga el cliente.</p>
+<p><b>Lugar de TI:</b> TI es parte inseparable de la dirección del banco (gobierno de TI, ISO 38500), no un área de soporte. Por eso un proyecto de TI se tiene que justificar con los objetivos y los valores de la empresa, no por la tecnología en sí.</p>`,
+  k: ["Nombra al menos un valor real de Bancorp", "Conecta el proyecto con misión o visión", "Dice que TI está alineada con la estrategia (gobierno de TI)"] },
+
+{ id: "u1-5", u: "u1", p: "ex",
+  q: "El Portal del Empleado tiene objetivos bien escritos, pero en Capital Humano hay gente que no quiere usarlo. ¿Qué factores influyen en que los objetivos se cumplan y qué harías?",
+  a: `<p><b>Factores:</b> que los involucrados participen en definir los objetivos (así se comprometen), la política organizacional y, sobre todo, la <b>cultura organizacional</b>: "la cultura se come la estrategia".</p>
+<p><b>En este caso:</b> el empleado que armaba a mano los recibos o las licencias siente que el portal le saca estatus. Haría participar a Capital Humano en la definición de los flujos, mostraría qué tareas de más valor pasa a hacer y lo apoyaría con el área de Gestión del Cambio que tiene Capital Humano en el organigrama.</p>`,
+  k: ["Nombra la cultura organizacional como factor central", "Nombra la participación de los involucrados", "Propone algo concreto, usando un área real (Gestión del Cambio)"] },
+
+// ---------- Riesgos
+{ id: "rg-1", u: "rg", p: "bil",
+  q: "Billetera Virtual en producción: definí un riesgo de TI, decí qué activos involucra, y calculá su severidad justificando la probabilidad y el impacto.",
+  a: `<p><b>Riesgo:</b> robo de cuentas por suplantación de identidad en el onboarding biométrico (alguien abre o toma una cuenta con datos de otra persona).</p>
+<p><b>Activos:</b> información (datos personales y biométricos), software (app y validación contra RENAPER), servicios (alta de cuentas) y la reputación del banco.</p>
+<p><b>Probabilidad 4 de 5:</b> la billetera apunta a un público masivo y nuevo, el fraude con identidades es frecuente en canales digitales y es un canal recién lanzado.</p>
+<p><b>Impacto 5 de 5:</b> pérdida de plata de los clientes, sanciones del BCRA y daño a la confianza, que es el primer valor del banco.</p>
+<p><b>Severidad = P × I = 4 × 5 = 20 de 25.</b> Es de los primeros que hay que atender.</p>`,
+  k: ["Riesgo concreto y ligado al proyecto en producción", "Activos nombrados", "Probabilidad justificada", "Impacto justificado (mejor si usa un valor de Bancorp)", "Cuenta P × I y dice qué significa el resultado"] },
+
+{ id: "rg-2", u: "rg", p: "ia",
+  q: "Copiloto con IA: el modelo puede dar información normativa equivocada a un cajero. Explicá riesgo inherente y residual con una medida de mitigación.",
+  a: `<p><b>Inherente</b> (con lo que hay hoy, sin medidas nuevas): P 4 × I 4 = 16. El LLM puede \"alucinar\" y el cajero confía en la respuesta para operar.</p>
+<p><b>Medida de mitigación:</b> que cada respuesta cite la circular o el manual del que sale y que las operaciones sensibles (montos altos, PLA/FT) pidan confirmación de un supervisor. Más una revisión mensual de respuestas por parte de Cumplimiento Normativo.</p>
+<p><b>Residual</b> (lo que queda después de la medida): P 2 × I 4 = 8. Siempre queda algo de riesgo; se acepta y se revisa periódicamente.</p>`,
+  k: ["Inherente = antes de aplicar las medidas", "Residual = el que queda después (nunca es cero)", "La medida baja probabilidad o impacto, y se nota en los números", "Menciona revisión periódica"] },
+
+{ id: "rg-3", u: "rg", p: "omni",
+  q: "Armá un plan de contingencia de 3 o 4 situaciones para una caída del token unificado de Omnicanalidad. Cerrá con qué harías en continuidad y en recuperación.",
+  a: `<p><b>Disparador:</b> el monitoreo detecta que fallan más del 20% de las validaciones de token durante 5 minutos.</p>
+<ol>
+<li><b>Caída total del servicio de token:</b> el SOC [02] y Operaciones TI [04] activan el método alternativo (código por SMS) para operaciones de bajo monto.</li>
+<li><b>Sospecha de ataque:</b> Ciberseguridad [02] bloquea las operaciones de alto monto y aísla el servidor afectado.</li>
+<li><b>Muchos clientes llamando:</b> la Mesa de Ayuda [06] usa un mensaje y un guion preparados en la base de conocimiento; se publica un aviso en la app.</li>
+<li><b>Más de 2 horas sin servicio:</b> escalado jerárquico al CIO para decidir un cambio de emergencia.</li>
+</ol>
+<p><b>Continuidad:</b> el banco sigue operando aunque sea parcial (sucursales y cajeros sin token digital, operaciones urgentes en plataforma).</p>
+<p><b>Recuperación:</b> se vuelve a funcionar, y mejor que antes: se corrige la causa y se suma redundancia del servicio de token.</p>`,
+  k: ["Hay un disparador claro", "3 o 4 situaciones, cada una con qué se hace y quién", "Las áreas salen del organigrama (no inventadas)", "Orden contingencia → continuidad → recuperación", "La recuperación deja al banco mejor que antes"] },
+
+{ id: "rg-4", u: "rg", p: "bil",
+  q: "Clasificá cada medida como control preventivo, detectivo o correctivo: (a) prueba de penetración antes del lanzamiento de la billetera, (b) alerta del SOC por muchos intentos de login fallidos, (c) restaurar la base desde el backup y parchear la vulnerabilidad, (d) capacitar a la Mesa de Ayuda en fraude.",
+  a: `<div class="tbl"><table><tr><th>Medida</th><th>Tipo</th><th>Por qué</th></tr>
+<tr><td>(a) Pentest previo</td><td>Preventivo</td><td>Se hace antes, para que el riesgo no ocurra</td></tr>
+<tr><td>(b) Alerta del SOC</td><td>Detectivo</td><td>Avisa cuando pasa; dispara el plan de contingencia</td></tr>
+<tr><td>(c) Backup + parche</td><td>Correctivo</td><td>Identifica qué pasó y lo arregla</td></tr>
+<tr><td>(d) Capacitación</td><td>Preventivo</td><td>Reduce la probabilidad antes de que pase</td></tr></table></div>`,
+  k: ["Los cuatro bien clasificados", "Asocia el detectivo con el plan de contingencia", "Justifica cada uno en una línea"] },
+
+// ---------- ITIL
+{ id: "it-1", u: "it", p: "bil",
+  q: "¿Qué práctica de ITIL corresponde a cada situación de la billetera? (a) un cliente llama porque no le llega la transferencia, (b) un empleado pide que le habiliten el acceso al panel de reportes, (c) el monitoreo avisa que la CPU del servidor de QR pasó el 90%, (d) hace una semana que todos los días a las 11 se satura el servicio de QR, (e) se propone sumar un servidor y hay que aprobarlo, (f) se instala el servidor y se registra en la CMDB.",
+  a: `<div class="tbl"><table><tr><th></th><th>Práctica</th><th>Clave</th></tr>
+<tr><td>(a)</td><td>Gestión de incidentes</td><td>Alguien llama porque algo no funciona</td></tr>
+<tr><td>(b)</td><td>Solicitud de servicio</td><td>Pedido que no cambia el sistema, lo resuelve la Mesa de Ayuda</td></tr>
+<tr><td>(c)</td><td>Gestión de eventos</td><td>Nadie llama: lo detecta el monitoreo (es de advertencia)</td></tr>
+<tr><td>(d)</td><td>Gestión de problemas</td><td>Patrón que se repite; busca la causa y la solución, no la aplica</td></tr>
+<tr><td>(e)</td><td>Gestión de cambios</td><td>Evalúa, prioriza, aprueba o rechaza; no implementa</td></tr>
+<tr><td>(f)</td><td>Gestión de configuración</td><td>Implementa y registra en la CMDB</td></tr></table></div>`,
+  k: ["Las seis bien", "Problemas encuentra la solución pero no la aplica", "Cambios aprueba pero no implementa", "Configuración implementa y registra en la CMDB"] },
+
+{ id: "it-2", u: "it", p: "bil",
+  q: "Desde las 9 de la mañana los clientes no pueden validar su identidad contra RENAPER al abrir la billetera. Llevan 40 tickets. Recorré cómo se trata con ITIL, con las áreas de Bancorp y las herramientas.",
+  a: `<ol>
+<li><b>Incidente:</b> la Mesa de Ayuda [06] (1ª línea, punto único de contacto) registra cada llamada en el <b>sistema de tickets</b>, clasifica, prioriza (alta: afecta altas de clientes) y busca en la <b>base de conocimiento</b> si ya pasó.</li>
+<li><b>Escalado funcional:</b> a Ingeniería de Software [03] (APIs e integración) si el fallo está en la integración con RENAPER, o a Infraestructura [01] si es conectividad.</li>
+<li><b>Escalado jerárquico:</b> al coordinador del área o al CIO si hace falta un cambio de emergencia o más recursos.</li>
+<li><b>Problema:</b> 40 tickets iguales son un patrón. Se busca la causa raíz (por ejemplo, un certificado vencido en la API) y se propone la solución.</li>
+<li><b>Cambio:</b> se evalúa y aprueba la solución.</li>
+<li><b>Configuración:</b> se implementa y se actualiza la <b>CMDB</b>.</li>
+<li>Se documenta la solución en la base de conocimiento y se mide con un KPI (por ejemplo, tiempo medio de resolución).</li>
+</ol>`,
+  k: ["Arranca en la Mesa de Ayuda [06] con ticket", "Escalado funcional con área real", "Escalado jerárquico", "Pasa de incidente a problema por el patrón", "Nombra CMDB, sistema de tickets y base de conocimiento", "Al menos un KPI"] },
+
+{ id: "it-3", u: "it", p: "ia",
+  q: "Con el Copiloto con IA en marcha, un gerente de sucursal pide que habiliten el copiloto para 20 cajeros nuevos sin licencia contratada. ¿Qué tipo de escalado corresponde y por qué? ¿Qué papel juega el SLA?",
+  a: `<p>Es un <b>escalado jerárquico</b>: no hace falta alguien que sepa más (funcional), sino alguien que pueda <b>autorizar</b> el gasto de licencias nuevas (el coordinador o el CIO).</p>
+<p><b>SLA:</b> la Mesa de Ayuda primero valida contra el SLA si el pedido está dentro de lo contratado. Si los 20 usuarios no están incluidos, no se resuelve en 1ª línea y se escala para autorizar.</p>
+<p>Si en cambio el copiloto no respondiera, sería escalado <b>funcional</b> a Ingeniería de Software [03].</p>`,
+  k: ["Jerárquico = quien puede autorizar", "Funcional = quien sabe otra cosa", "Usa el SLA para validar si tiene derecho a lo que pide"] },
+
+// ---------- Talento
+{ id: "u3-1", u: "u3", p: "bil",
+  q: "Definí el puesto de Desarrollador Mobile Senior para la célula de la billetera.",
+  a: `<p><b>Identificación:</b> Desarrollador Mobile Senior · Área: Ingeniería de Software y Canales Digitales [03], célula Mobile · Objetivo del puesto: desarrollar y mantener la app de la billetera con calidad y seguridad · Reporta a: Coordinador de Desarrollo de Software · Personal a cargo: 2 desarrolladores junior.</p>
+<p><b>Tareas</b> (acción + "con la finalidad de"):</p>
+<ul><li>Desarrollar las funciones de pago con QR, con la finalidad de que el cliente pague sin efectivo.</li>
+<li>Integrar la validación biométrica con RENAPER, con la finalidad de abrir cuentas 100% digitales.</li>
+<li>Revisar el código de los junior, con la finalidad de mantener la calidad y la seguridad.</li></ul>
+<p><b>Perfil:</b> ingeniero/a en sistemas o carrera afín · 4 años en desarrollo mobile · inglés técnico · conocimiento de Kotlin/Swift, APIs REST, seguridad en apps financieras · capacidades: trabajo en equipo, liderazgo, orientación al cliente.</p>`,
+  k: ["Identificación: nombre, área real, objetivo, reporta a, personal a cargo", "Tareas con \"con la finalidad de\"", "Perfil: estudios, experiencia, idiomas, conocimientos, capacidades", "Distingue puesto (qué se hace) de perfil (qué tiene que tener la persona)"] },
+
+{ id: "u3-2", u: "u3", p: "bil",
+  q: "Separá en genéricas y específicas: comunicación efectiva, seguridad por diseño en apps financieras, trabajo en equipo, optimización de costos en la nube, resolución de problemas, integración con APIs de RENAPER. Agregá una de cada tipo para un analista del SOC.",
+  a: `<p><b>Genéricas</b> (de la persona, sirven en cualquier puesto): comunicación efectiva, trabajo en equipo, resolución de problemas.</p>
+<p><b>Específicas</b> (del puesto): seguridad por diseño en apps financieras, optimización de costos en la nube, integración con APIs de RENAPER.</p>
+<p><b>Analista SOC:</b> genérica, manejo de la presión o atención al detalle; específica, análisis de logs y respuesta a incidentes de seguridad.</p>`,
+  k: ["Las seis bien separadas", "Explica el criterio: persona vs. puesto", "Ejemplos del SOC con sentido"] },
+
+{ id: "u3-3", u: "u3", p: "ia",
+  q: "Los especialistas en IA del Copiloto se están yendo a fintechs. Proponé acciones de retención usando Maslow.",
+  a: `<p>Maslow es la base: hay que cubrir los niveles de abajo antes de que pesen los de arriba.</p>
+<ul><li><b>Básicas y seguridad:</b> sueldo competitivo con el mercado fintech y actualizado por inflación; estabilidad de un banco grande.</li>
+<li><b>Pertenencia:</b> que el equipo del copiloto sea una célula con identidad, que "se ponga la camiseta"; buen ambiente y compañeros.</li>
+<li><b>Prestigio:</b> reconocimiento interno del proyecto, presentar resultados al Directorio, participar en conferencias.</li>
+<li><b>Autorrealización:</b> trabajar en problemas nuevos (el Core Inteligente a 5 años), capacitación y plan de carrera.</li></ul>
+<p>Si sólo se sube el sueldo y el trabajo es aburrido, se van igual: la retención combina varios niveles.</p>`,
+  k: ["Usa Maslow como estructura", "Una acción concreta por nivel o por varios niveles", "Atado al caso (fintechs, equipo IA)"] },
+
+{ id: "u3-4", u: "u3", p: "ia",
+  q: "Hay que cubrir un puesto de ingeniero de machine learning para el Copiloto. ¿Reclutamiento interno o externo? ¿Lo hace el banco o una consultora?",
+  a: `<p><b>Externo:</b> es un perfil que el banco no tiene. El interno es más barato, ya conocés a la persona y se siente que hay crecimiento, pero acá no hay a quién promover y sacar a alguien de otra área la deja sin gente.</p>
+<p><b>Consultora especializada:</b> el perfil es escaso y técnico; la consultora conoce el mercado y le ahorra tiempo a TI. Capital Humano coordina.</p>
+<p>El aviso se redacta con <b>AIDA</b>: atención (título atractivo), interés (el proyecto de IA en un banco nacional), deseo (requisitos y propuesta de valor), acción (cómo postularse).</p>`,
+  k: ["Elige y justifica interno o externo", "Ventajas y contras", "Justifica consultora o propio", "Menciona AIDA para el aviso"] },
+
+{ id: "u3-5", u: "u3", p: "ex",
+  q: "¿Cómo evaluarías el desempeño de un técnico de la Mesa de Ayuda? Nombrá los tipos de evaluación que conocés y cuál usarías.",
+  a: `<p><b>Tipos:</b> técnicas, psicológicas, por competencias y assessment (en la selección); y para el desempeño, la evaluación por competencias y la 360°.</p>
+<p><b>Usaría por competencias</b>, cargada en el propio Portal del Empleado:</p>
+<ul><li>Genérica: orientación al cliente (factores: trato, seguimiento del ticket hasta el cierre).</li>
+<li>Específica: diagnóstico de hardware bancario (factores: tiempo de resolución, porcentaje resuelto en 1ª línea).</li>
+<li>Escala de 1 a 5 por factor.</li></ul>
+<p>Se complementa con una <b>360°</b>: opinan su coordinador, los compañeros y los usuarios de sucursal que atiende.</p>`,
+  k: ["Nombra varios tipos de evaluación", "Competencias genéricas y específicas con factores", "Escala de medición", "Menciona 360° y quiénes opinan"] },
+
+// ---------- H&S
+{ id: "u4-1", u: "u4", p: "omni",
+  q: "Área de desarrollo de Omnicanalidad (Ingeniería de Software [03]): qué riesgos laborales hay y qué medidas de prevención corresponden.",
+  a: `<div class="tbl"><table><tr><th>Riesgo</th><th>Medida</th></tr>
+<tr><td>Posturas prolongadas, dolor de espalda</td><td>Sillas ergonómicas, pausas activas</td></tr>
+<tr><td>Fatiga visual por muchas horas de pantalla</td><td>Buenos monitores, regla 20-20-20, buena iluminación</td></tr>
+<tr><td>Estrés por fechas de entrega y guardias</td><td>Planificación realista de la PMO, rotación de guardias</td></tr>
+<tr><td>Temperatura y ventilación</td><td>Aire acondicionado y renovación de aire</td></tr>
+<tr><td>Riesgo eléctrico por cables y zapatillas</td><td>Instalación certificada, cableado ordenado</td></tr></table></div>
+<p>Se ata al área de trabajo, no a un puesto puntual.</p>`,
+  k: ["Riesgos de condiciones del área (ruido, luz, temperatura, postura)", "Una medida concreta por riesgo", "Atado al área, no a una persona"] },
+
+// ---------- Proyectos
+{ id: "u5-1", u: "u5", p: "ex",
+  q: "Como gerente de sistemas tenés que defender el Portal del Empleado ante la Dirección, que también evalúa Omnicanalidad. ¿Qué presentás?",
+  a: `<ul><li><b>Beneficio:</b> menos costo de papel y horas de Capital Humano, menos errores en recibos y licencias, empleados más conformes.</li>
+<li><b>Alcance:</b> qué incluye (recibos con firma digital, licencias, evaluaciones, e-learning) y qué no.</li>
+<li><b>Tiempo y costo:</b> plazo y presupuesto.</li>
+<li><b>Indicadores:</b> ROI, VAN y TIR para compararlo con Omnicanalidad.</li>
+<li><b>Riesgos</b> principales y alineación con los valores (Agilidad).</li></ul>
+<p>Para controlar después: avance contra el plan, costo contra el presupuesto, alcance (que no se agreguen cosas sin aprobar) y calidad. Herramientas: Gantt, red de tareas, valor ganado, acta del proyecto.</p>`,
+  k: ["Beneficio en términos de negocio", "Alcance, tiempo y costo", "Compara con el otro proyecto usando indicadores", "Qué se controla y con qué herramientas"] },
+
+{ id: "u5-2", u: "u5", p: "ia",
+  q: "Ejemplo: con una tasa del 15% anual, el Portal del Empleado da VAN +24.000, TIR 23% y ROI 50%. El Copiloto con IA da VAN +18.000, TIR 22% y ROI 60%. ¿Qué mide cada indicador y cuál elegirías?",
+  a: `<ul><li><b>VAN:</b> cuánta plata, a valor de hoy, deja el proyecto después de recuperar la inversión. Si es mayor a 0, conviene.</li>
+<li><b>TIR:</b> la tasa de rentabilidad propia del proyecto. Conviene si es mayor que la tasa de corte (15%).</li>
+<li><b>ROI:</b> cuánto se gana por cada peso invertido, en porcentaje. No tiene en cuenta el valor del dinero en el tiempo.</li></ul>
+<p>Los dos son rentables (VAN mayor a 0, TIR mayor a 15%). Elegiría el <b>Portal del Empleado</b> porque tiene mayor VAN y mayor TIR: deja más valor actual. El ROI más alto del Copiloto no alcanza porque no descuenta el tiempo. Igual la decisión final también mira estrategia y riesgo, no sólo números.</p>`,
+  k: ["Define bien VAN, TIR y ROI", "Compara TIR contra la tasa de corte", "Elige y justifica con el VAN", "Aclara que ROI no considera el valor del dinero en el tiempo"] },
+
+{ id: "u5-3", u: "u5", p: "bil",
+  q: "Escribí la especificación del alcance del proyecto de la Billetera Virtual: qué incluye, qué no, y cuándo termina el proyecto.",
+  a: `<p><b>Incluye:</b> app Android e iOS, caja de ahorro 100% digital, onboarding con biometría vía RENAPER, pago con QR interoperable, transferencias inmediatas y recargas.</p>
+<p><b>No incluye:</b> la inversión automática en FCI (queda para una segunda etapa), tarjeta física, préstamos.</p>
+<p><b>Cuándo termina:</b> con la app publicada en las tiendas y aceptada por la Gerencia de Banca Minorista. Un proyecto tiene inicio, fin, presupuesto propio y objetivos; la operación y el soporte de la billetera después ya no son el proyecto.</p>`,
+  k: ["Lista lo que entra", "Lista explícitamente lo que no entra", "Define el fin del proyecto y quién lo acepta", "Distingue proyecto de operación"] },
+
+// ---------- Canvas
+{ id: "u6-1", u: "u6", p: "out",
+  q: "Tu startup vende a bancos un servicio para validar identidad en el onboarding digital (Bancorp sería un cliente). Un compañero puso como segmento \"bancos\". Corregilo y escribí la propuesta de valor para ese segmento.",
+  a: `<p><b>Por qué está mal:</b> \"bancos\" es el mercado general, no un segmento que se pueda atender.</p>
+<p><b>Segmento acotado:</b> bancos medianos de capital nacional, con más de 30 sucursales, que estén lanzando una billetera o una cuenta 100% digital en los próximos 12 meses (unos 8 a 10 en el país, Bancorp incluido).</p>
+<p><b>Propuesta de valor</b> (lo que le resuelve, no la función): abrir cuentas digitales en minutos sin que el área de Ciberseguridad tenga que armar su propio sistema antifraude, y cumplir con el BCRA sin sumar personal.</p>`,
+  k: ["Detecta que es el mercado y no un segmento", "Segmento con criterios concretos (tipo, tamaño, situación)", "La propuesta dice qué problema le resuelve, no qué hace el producto", "La propuesta está asociada a ese segmento"] },
+
+{ id: "u6-2", u: "u6", p: "out",
+  q: "Corregí este Canvas: Relación con clientes: \"redes sociales\". Actividades clave: \"desarrollar la plataforma\". Socios clave: \"mis dos socios fundadores\". Fuente de ingresos: \"inversión de un fondo\".",
+  a: `<ul><li><b>Relación:</b> son estrategias get, keep y grow. Get: visitas comerciales a los gerentes de TI y una prueba gratis de 30 días. Keep: soporte dedicado y reportes mensuales de fraude evitado. Grow: venderle después validación para empresas. Las redes sociales van en <b>canales</b>.</li>
+<li><b>Actividades clave:</b> todo lo que hace andar la empresa, no sólo desarrollar: vender, dar soporte, cobrar, cumplir normativa, marketing.</li>
+<li><b>Socios clave:</b> de quién depende el modelo, aunque no lo sepa: RENAPER (la validación), el proveedor de nube, una cámara de bancos.</li>
+<li><b>Fuente de ingresos:</b> cómo se cobra: abono mensual más un monto por cada validación. La inversión del fondo no es ingreso; financia los recursos clave.</li></ul>`,
+  k: ["Get/keep/grow como estrategias", "Redes sociales pasan a canales", "Actividades clave más allá de desarrollo", "Socios clave = de quién depende el modelo", "Fuente de ingresos ≠ inversión"] },
+
+{ id: "u6-3", u: "u6", p: "out",
+  q: "Para la misma startup: ¿qué sería el MVP?, ¿cómo harías el desarrollo de clientes? y ¿cuándo pivotearías?",
+  a: `<p><b>MVP:</b> la validación de DNI y selfie funcionando con un solo banco piloto durante un mes, con usuarios reales. No es un prototipo: el cliente lo usa y se mide (tasa de aprobación, tiempo de alta, fraudes detectados).</p>
+<p><b>Desarrollo de clientes:</b> salir a hablar con gerentes de TI y de fraude de bancos medianos para validar que el problema existe y que pagarían por resolverlo, antes de construir todo.</p>
+<p><b>Pivotear:</b> si los bancos dicen que ya lo resuelven con su proveedor actual pero las fintechs chicas no, se cambia el segmento a fintechs. Se mide, se aprende y se ajusta hasta llegar al product-market fit.</p>`,
+  k: ["MVP lo usa el cliente real y se mide", "MVP no es prototipo", "Desarrollo de clientes = validar el problema con clientes reales", "Pivotear con un ejemplo concreto"] }
+];
+
+// ---------- estado (sólo en este navegador)
+const KEY = "asi-ad-practica-v1";
+let state = { txt: {}, rate: {}, chk: {} };
+try { const s = JSON.parse(localStorage.getItem(KEY) || "null"); if (s) state = Object.assign(state, s); } catch (e) {}
+function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
+
+let filter = "all";
+let simIds = null;
+let onlyBad = false;
+
+const chipsEl = document.getElementById("chips");
+const listEl = document.getElementById("list");
+const progEl = document.getElementById("progress");
+const simNote = document.getElementById("simNote");
+
+function renderChips() {
+  const opts = [["all", "Todas"]].concat(Object.entries(UNITS));
+  chipsEl.innerHTML = opts.map(([k, v]) => {
+    const n = k === "all" ? Q.length : Q.filter(q => q.u === k).length;
+    return `<button type="button" class="chip" data-f="${k}" aria-pressed="${filter === k && !simIds && !onlyBad}">${v} · ${n}</button>`;
+  }).join("");
+}
+
+function visible() {
+  if (simIds) return simIds.map(id => Q.find(q => q.id === id));
+  let qs = filter === "all" ? Q : Q.filter(q => q.u === filter);
+  if (onlyBad) qs = qs.filter(q => state.rate[q.id] === "bad" || state.rate[q.id] === "mid");
+  return qs;
+}
+
+function cardHTML(q, i) {
+  const r = state.rate[q.id] || "";
+  const chk = state.chk[q.id] || [];
+  return `<article class="card" data-id="${q.id}" data-rate="${r}">
+    <div class="meta"><span class="num">${String(i + 1).padStart(2, "0")}</span><span class="tag">${UNITS[q.u]}</span><span class="proj">${P[q.p]}</span></div>
+    <p class="q">${q.q}</p>
+    <textarea id="t-${q.id}" placeholder="Escribí tu respuesta como en el examen: corta y justificada." aria-label="Tu respuesta">${escapeHTML(state.txt[q.id] || "")}</textarea>
+    <div class="row">
+      <button class="btn ghost" type="button" data-act="show">Ver respuesta sugerida</button>
+      <span class="tip">Escribí primero, después comparás.</span>
+    </div>
+    <div class="ans" hidden>
+      <h4>Respuesta sugerida</h4>
+      ${q.a}
+      <div class="check">
+        <h4>Tu respuesta tiene…</h4>
+        ${q.k.map((t, j) => `<label><input type="checkbox" id="c-${q.id}-${j}" data-j="${j}" ${chk.includes(j) ? "checked" : ""}><span>${t}</span></label>`).join("")}
+      </div>
+    </div>
+    <div class="rate" role="group" aria-label="Autoevaluación">¿Cómo te salió?
+      <button type="button" data-v="ok" aria-pressed="${r === "ok"}">Bien</button>
+      <button type="button" data-v="mid" aria-pressed="${r === "mid"}">A medias</button>
+      <button type="button" data-v="bad" aria-pressed="${r === "bad"}">Repasar</button>
+    </div>
+  </article>`;
+}
+
+function escapeHTML(s) { return s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
+
+function render() {
+  renderChips();
+  const qs = visible();
+  listEl.innerHTML = qs.length ? qs.map(cardHTML).join("") :
+    `<div class="card"><p class="q">No hay preguntas marcadas como "A medias" o "Repasar" en este filtro.</p><p class="ctx">Autoevaluá algunas respuestas y volvé a tocar el botón.</p></div>`;
+  document.getElementById("repasar").setAttribute("aria-pressed", onlyBad);
+  document.getElementById("repasar").textContent = onlyBad ? "Ver todas" : "Sólo las de repasar";
+  progress();
+}
+
+function progress() {
+  const vals = Object.values(state.rate);
+  const ok = vals.filter(v => v === "ok").length, mid = vals.filter(v => v === "mid").length, bad = vals.filter(v => v === "bad").length;
+  progEl.innerHTML = `<span><b>${ok + mid + bad}</b> de ${Q.length} hechas</span><span class="p-ok"><b>${ok}</b> bien</span><span class="p-mid"><b>${mid}</b> a medias</span><span class="p-bad"><b>${bad}</b> repasar</span>`;
+}
+
+chipsEl.addEventListener("click", e => {
+  const b = e.target.closest(".chip"); if (!b) return;
+  filter = b.dataset.f; simIds = null; onlyBad = false; simNote.hidden = true; render();
+});
+
+document.getElementById("sim").addEventListener("click", () => {
+  // una pregunta de cinco bloques distintos, como el examen
+  const units = Object.keys(UNITS).sort(() => Math.random() - 0.5).slice(0, 5);
+  simIds = units.map(u => { const pool = Q.filter(q => q.u === u); return pool[Math.floor(Math.random() * pool.length)].id; });
+  onlyBad = false;
+  const fin = new Date(Date.now() + 60 * 60000);
+  simNote.hidden = false;
+  simNote.innerHTML = `<b>Simulacro:</b> 5 preguntas de bloques distintos. Date una hora (hasta las ${fin.toLocaleTimeString("es-AR", { hour: "2-digit", minute: "2-digit" })}) y no abras las sugeridas hasta terminar todas. <button class="btn ghost" type="button" id="salir">Salir del simulacro</button>`;
+  render(); window.scrollTo({ top: 0 });
+});
+
+simNote.addEventListener("click", e => { if (e.target.id === "salir") { simIds = null; simNote.hidden = true; render(); } });
+
+document.getElementById("repasar").addEventListener("click", () => { onlyBad = !onlyBad; simIds = null; simNote.hidden = true; render(); });
+
+listEl.addEventListener("click", e => {
+  const card = e.target.closest(".card"); if (!card || !card.dataset.id) return;
+  const id = card.dataset.id;
+  if (e.target.dataset.act === "show") {
+    const ans = card.querySelector(".ans"); ans.hidden = !ans.hidden;
+    e.target.textContent = ans.hidden ? "Ver respuesta sugerida" : "Ocultar respuesta sugerida";
+  }
+  const rb = e.target.closest(".rate button");
+  if (rb) {
+    state.rate[id] = state.rate[id] === rb.dataset.v ? undefined : rb.dataset.v;
+    if (!state.rate[id]) delete state.rate[id];
+    save();
+    card.dataset.rate = state.rate[id] || "";
+    card.querySelectorAll(".rate button").forEach(b => b.setAttribute("aria-pressed", b.dataset.v === state.rate[id]));
+    progress();
+  }
+});
+
+listEl.addEventListener("change", e => {
+  if (e.target.type !== "checkbox") return;
+  const id = e.target.closest(".card").dataset.id;
+  const set = new Set(state.chk[id] || []);
+  e.target.checked ? set.add(+e.target.dataset.j) : set.delete(+e.target.dataset.j);
+  state.chk[id] = [...set]; save();
+});
+
+let t;
+listEl.addEventListener("input", e => {
+  if (e.target.tagName !== "TEXTAREA") return;
+  const id = e.target.closest(".card").dataset.id;
+  state.txt[id] = e.target.value;
+  clearTimeout(t); t = setTimeout(save, 300);
+});
+
+render();
+</script>
