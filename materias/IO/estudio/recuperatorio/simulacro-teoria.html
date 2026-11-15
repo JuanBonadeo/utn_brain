@@ -231,7 +231,7 @@ const BANK = [
     "si x es una solución básica factible, entonces es punto extremo; la recíproca no vale en general",
     "x es punto extremo del conjunto de soluciones factibles si y sólo si x es una solución óptima",
     "si x es solución óptima, entonces es punto extremo; la recíproca no vale en general"],a:0,
- x:"Es un «si y sólo si» que une la geometría (vértice) con el álgebra (SBF). Las opciones c y d lo mezclan con la ubicación del óptimo, y d además es falsa: con óptimos alternativos hay óptimos en el medio de una arista."},
+ x:"Es un «si y sólo si» que une la geometría (vértice) con el álgebra (SBF). Las opciones c y d lo mezclan con la ubicación del óptimo, y la d además es falsa: con óptimos alternativos hay óptimos en el medio de una arista."},
 {id:"cba2",t:"CBA",q:"La función objetivo de un PL con óptimo finito…",
  o:["alcanza el óptimo en al menos un punto extremo; si lo alcanza en más de uno, también en toda combinación lineal convexa de ellos",
     "alcanza el óptimo en al menos un punto extremo; si lo alcanza en más de uno, también en toda combinación lineal de ellos",
@@ -795,6 +795,13 @@ function makeItem(q){
   return {q, order, correct: order.indexOf(q.a), ans:null, struck:new Set(), flag:false, checked:false};
 }
 const optText = (q,k) => k===4 ? q.e : q.o[k];
+/* Las explicaciones nombran las opciones por su letra original (a–d); con las opciones mezcladas
+   hay que traducirlas a la letra con que aparecen en pantalla. */
+const LREF = /(\b[Ll]as? (?:opciones )?)([abcd])(?=[\s,.;:)]|$)((?: y )([abcd])(?=[\s,.;:)]|$))?/g;
+const xText = it => it.q.x.replace(LREF, (m,pre,l1,rest,l2) => {
+  const map = l => LET[it.order.indexOf(LET.indexOf(l))];
+  return pre + map(l1) + (rest ? " y " + map(l2) : "");
+});
 
 let S = null; // estado de la sesión
 
@@ -950,7 +957,7 @@ function renderQuiz(){
   let fb = "";
   if (showFb){
     const ok = it.ans===it.correct;
-    fb = `<div class="expl ${ok?"ok":"bad"}"><strong>${ok?"Correcta":"Incorrecta: era la "+LET[it.correct]+")"}</strong><span>${fmt(q.x)}</span></div>`;
+    fb = `<div class="expl ${ok?"ok":"bad"}"><strong>${ok?"Correcta":"Incorrecta: era la "+LET[it.correct]+")"}</strong><span>${fmt(xText(it))}</span></div>`;
   }
 
   const gridHtml = S.items.map((x,j)=>{
@@ -1070,7 +1077,7 @@ function finish(){
           <p><strong>${fmt(x.q.q)}</strong></p>
           ${good?"":`<p class="ans">Tu respuesta: ${yours}</p>`}
           <p class="ans">Correcta: ${LET[x.correct]}) ${fmt(optText(x.q,x.order[x.correct]))}</p>
-          <p class="ans muted">${fmt(x.q.x)}</p>
+          <p class="ans muted">${fmt(xText(x))}</p>
         </article>`;}).join("")}
     </div>
   </section>`;
