@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>IO — Guía de stock para el recuperatorio</title>
+<style>
+  @page { size: A4; margin: 8mm 9mm 7mm 9mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 8.8pt; line-height: 1.33; color: #111; }
+  .page { break-after: page; }
+  .page:last-child { break-after: auto; }
+  h1 { font-size: 14pt; text-align: center; margin: 0 0 2mm; }
+  h1 small { display: block; font-size: 7.8pt; font-weight: normal; color: #555; margin-top: .6mm; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; border-top: 1.2px solid #111; border-left: 1.2px solid #111; }
+  .box { border-right: 1.2px solid #111; border-bottom: 1.2px solid #111; padding: 1.8mm 2.4mm 2mm; break-inside: avoid; }
+  .full { grid-column: 1 / -1; }
+  .box h2 { font-size: 9.8pt; margin: 0 0 1.2mm; padding: .5mm 1.3mm; background: #e7f6ec; border-left: 2.5px solid #16a34a; }
+  .box.b h2 { background: #e8eefc; border-left-color: #2563eb; }
+  .box.r h2 { background: #fdecec; border-left-color: #dc2626; }
+  .box.o h2 { background: #f1f1f1; border-left-color: #6b7280; }
+  .box.y h2 { background: #fdf6e3; border-left-color: #ca8a04; }
+  ol, ul { margin: .3mm 0 .7mm; padding-left: 4.4mm; }
+  li { margin: 0 0 .6mm; }
+  p { margin: .3mm 0 .9mm; }
+  .katex { font-size: 1.02em; }
+  .katex-display { margin: .9mm 0; }
+  table { border-collapse: collapse; width: 100%; margin: .8mm 0; font-size: 8.3pt; }
+  th, td { border: .8px solid #888; padding: .5mm 1.3mm; text-align: left; vertical-align: top; }
+  th { background: #ececec; }
+  td.c, th.c { text-align: center; }
+  .ex { background: #f7f7f7; border-left: 2px solid #9ca3af; padding: .8mm 1.8mm; margin: 1mm 0; font-size: 8.4pt; }
+  .ex b { color: #374151; }
+  .ojo { font-size: 8.4pt; border-left: 2px solid #dc2626; padding-left: 1.8mm; margin-top: 1mm; }
+  .idea { font-size: 8.6pt; color: #1e3a8a; font-weight: bold; margin-bottom: 1mm; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; }
+  .bar { display: inline-block; height: 2.4mm; background: #16a34a; vertical-align: middle; border-radius: 1px; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ PÁGINA 1 — DÓNDE ESTÁS PARADO ═══════════════ -->
+<section class="page">
+<h1>Gestión de stock: guía para el recuperatorio<small>IO · 19/11 · qué se toma, cómo reconocer el modelo y qué fórmula usar · ejemplos con números verificados</small></h1>
+<div class="grid">
+
+  <div class="box b">
+    <h2>Qué se toma (46 exámenes viejos)</h2>
+    <table>
+      <tr><th>Tema de práctica</th><th class="c">Veces</th><th></th></tr>
+      <tr><td>Aleatorio: SS, RF, punto de pedido</td><td class="c">14</td><td><span class="bar" style="width:28mm"></span></td></tr>
+      <tr><td>Período común (varios artículos)</td><td class="c">7</td><td><span class="bar" style="width:14mm"></span></td></tr>
+      <tr><td>Revisión periódica (RF)</td><td class="c">7</td><td><span class="bar" style="width:14mm"></span></td></tr>
+      <tr><td>Lagrange (sobre todo capital)</td><td class="c">6</td><td><span class="bar" style="width:12mm"></span></td></tr>
+      <tr><td>Descuentos (escalón / excedente)</td><td class="c">4</td><td><span class="bar" style="width:8mm"></span></td></tr>
+      <tr><td>Modelo básico solo</td><td class="c">2</td><td><span class="bar" style="width:4mm"></span></td></tr>
+    </table>
+    <p><b>El parcial del 3/10 tomó Lagrange con capital + «¿conviene el crédito?».</b> En teoría stock es el tema con más preguntas (29 de 89 en el banco).</p>
+  </div>
+
+  <div class="box b">
+    <h2>Orden de estudio sugerido</h2>
+    <ol>
+      <li><b>Modelo básico</b> (pág. 2): todo lo demás es una variación de él.</li>
+      <li><b>Lagrange con capital</b> (pág. 3): salió en el parcial.</li>
+      <li><b>Aleatorio y revisión periódica</b> (pág. 4): lo más tomado históricamente.</li>
+      <li><b>Período común</b> y <b>consumo durante el ingreso</b> (pág. 2).</li>
+      <li><b>Descuentos</b> (pág. 2): más teoría que práctica.</li>
+      <li><b>Teoría en una línea</b> (pág. 4): leerla antes de entrar.</li>
+    </ol>
+    <p class="ojo">En opción múltiple no hace falta deducir fórmulas: hay que <b>reconocer el modelo</b>, reemplazar bien y saber leer el resultado.</p>
+  </div>
+
+  <div class="box full">
+    <h2>La idea de todo el capítulo: pedir mucho o pedir seguido</h2>
+    <div class="two">
+      <div>
+        <p class="idea">Pedir cuesta (L cada vez). Guardar cuesta (C·i por unidad y por año). El lote óptimo equilibra las dos cosas.</p>
+        <ul>
+          <li><b>Lotes chicos:</b> poco stock guardado, pero muchos pedidos → muchas veces L.</li>
+          <li><b>Lotes grandes:</b> pocos pedidos, pero mucho stock parado → mucho C·i.</li>
+        </ul>
+        <p>Costo por unidad, en el momento de usarla:</p>
+        \[ CT(Q) = \underbrace{C}_{\text{comprar}} + \underbrace{\frac{L}{Q}}_{\text{pedir}} + \underbrace{\frac{C\,i\,Q}{2D}}_{\text{mantener}} \]
+        <p>El mínimo está donde <b>costo de pedir = costo de mantener</b>.</p>
+      </div>
+      <div>
+        <table>
+          <tr><th>Letra</th><th>Qué es</th><th>Unidad</th></tr>
+          <tr><td>\(D\)</td><td>demanda</td><td>unidades / tiempo</td></tr>
+          <tr><td>\(L\)</td><td>costo fijo de cada pedido</td><td>$ / orden</td></tr>
+          <tr><td>\(C\)</td><td>precio unitario</td><td>$ / unidad</td></tr>
+          <tr><td>\(i\)</td><td>tasa de mantenimiento</td><td>1 / tiempo</td></tr>
+          <tr><td>\(Q\)</td><td>tamaño del lote</td><td>unidades</td></tr>
+          <tr><td>\(T = Q/D\)</td><td>tiempo entre pedidos</td><td>tiempo</td></tr>
+          <tr><td>\(LT\)</td><td>plazo de entrega (lead time)</td><td>tiempo</td></tr>
+          <tr><td>\(PP\)</td><td>punto de pedido</td><td>unidades</td></tr>
+        </table>
+        <p class="ojo"><b>Regla de unidades:</b> \(D\) e \(i\) en la <b>misma</b> unidad de tiempo. Si el enunciado da \(i\) anual, usá \(D\) anual. Mezclar es el error número 1 (en el parcial, \(i = 0{,}02\) en vez de \(0{,}20\) daba 1.897 en lugar de 600).</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="box full y">
+    <h2>¿Qué modelo es? Leé el enunciado buscando estas palabras</h2>
+    <table>
+      <tr><th>Si el enunciado dice…</th><th>Modelo</th><th>Pág.</th></tr>
+      <tr><td>compra, un solo artículo, precio fijo, entrega de una vez</td><td><b>Básico</b></td><td>2</td></tr>
+      <tr><td>«se fabrica», «capacidad de producción» \(V\), «velocidad de ingreso»</td><td><b>Consumo durante el ingreso</b></td><td>2</td></tr>
+      <tr><td>precio menor para <b>todo el lote</b> si \(Q \geq a\)</td><td><b>Descuento con escalón</b></td><td>2</td></tr>
+      <tr><td>precio menor sólo para lo que <b>excede</b> de \(a\)</td><td><b>Descuento por excedente</b></td><td>2</td></tr>
+      <tr><td>varios artículos que se piden <b>juntos</b>, una orden conjunta</td><td><b>Período común</b></td><td>2</td></tr>
+      <tr><td>varios artículos + capital / espacio / horas de preparación <b>limitados</b></td><td><b>Lagrange</b></td><td>3</td></tr>
+      <tr><td>desvío \(\sigma\), «riesgo de faltante», «nivel de servicio», control permanente</td><td><b>Aleatorio con punto de pedido</b></td><td>4</td></tr>
+      <tr><td>«se revisa cada \(T\)», existencias y pedidos pendientes al revisar</td><td><b>Revisión periódica</b></td><td>4</td></tr>
+    </table>
+  </div>
+
+</div>
+</section>
+
+<!-- ═══════════════ PÁGINA 2 — MODELOS DETERMINÍSTICOS ═══════════════ -->
+<section class="page">
+<h1>Modelos con demanda conocida<small>todos los ejemplos usan \(D = 12.000\) u/año, \(L = \$150\), \(C = \$50\), \(i = 20\,\%\) anual (los Tornillos A del parcial)</small></h1>
+<div class="grid">
+
+  <div class="box">
+    <h2>1. Modelo básico</h2>
+    <p class="idea">Llega el lote entero y se consume parejo hasta 0 (diente de sierra).</p>
+    \[ Q^* = \sqrt{\frac{2\,D\,L}{C\,i}} \qquad T^* = \frac{Q^*}{D} \qquad n = \frac{D}{Q^*} \qquad PP = D \cdot LT \]
+    <div class="ex"><b>Ej.:</b> \(Q^* = \sqrt{2\cdot 12.000\cdot 150/(50\cdot 0{,}2)} = \sqrt{360.000} = 600\). Se piden \(n = 20\) veces por año, cada \(T = 0{,}05\) año. Pedir: \(150\cdot 20 = \$3.000\)/año. Mantener: \(50\cdot 0{,}2\cdot 600/2 = \$3.000\)/año. <b>Iguales</b> ✓. \(CT = 50 + 0{,}25 + 0{,}25 = \$50{,}50\) por unidad.</div>
+    <ul>
+      <li><b>Arriba</b> lo que empuja a pedir más (\(D\), \(L\)); <b>abajo</b> lo que empuja a pedir menos (\(C\), \(i\)).</li>
+      <li>Stock promedio \(= Q/2\). Inversión promedio \(= C\cdot Q/2\).</li>
+      <li>La curva es <b>plana cerca del mínimo</b>: redondear \(Q^*\) cuesta poco.</li>
+      <li><b>¿Cómo bajar el costo?</b> Bajando \(L\) (por ejemplo con SMED), no pidiendo lotes más chicos.</li>
+    </ul>
+  </div>
+
+  <div class="box">
+    <h2>2. Consumo durante el ingreso</h2>
+    <p class="idea">Se fabrica a velocidad \(V\) mientras se sigue consumiendo a \(D\): el stock nunca llega a \(Q\).</p>
+    \[ Q^* = \sqrt{\frac{2\,D\,L}{C\,i\,(1 - D/V)}} \qquad M = Q\left(1 - \frac{D}{V}\right) \]
+    <div class="ex"><b>Ej.:</b> con \(V = 36.000\) u/año, \(D/V = 1/3\): \(Q^* = 600/\sqrt{2/3} = 734{,}8\), y el pico es \(M = 489{,}9\).</div>
+    <ul>
+      <li>Hace falta <b>\(V > D\)</b>. Si \(V \to D\), \(Q^* \to \infty\): producción continua.</li>
+      <li>El lote óptimo es <b>más grande</b> que el básico (como el pico es menor, guardar sale más barato).</li>
+      <li>El \(LT\) del punto de pedido es sólo la preparación de la corrida, no el tiempo de fabricar.</li>
+    </ul>
+  </div>
+
+  <div class="box">
+    <h2>3. Descuento con escalón (todo el lote)</h2>
+    <p class="idea">Si \(Q \geq a\), <b>todo</b> el lote se paga a \(C_2 t  C_1\).</p>
+    <ol>
+      <li>Calcular \(Q_2^*\) con \(C_2\). Si \(Q_2^* \geq a\), ése es el óptimo.</li>
+      <li>Si no, comparar \(CT_1(Q_1^*)\) con \(CT_2(a)\) y quedarse con el menor.</li>
+    </ol>
+    <div class="ex"><b>Ej.:</b> \(C_2 = 48\) si \(Q \geq 1.000\). \(Q_2^* = 612 t  1.000\) → no sirve. Comparo \(CT_1(600) = 50{,}50\) contra \(CT_2(1.000) = 48 + 0{,}15 + 0{,}40 = 48{,}55\). <b>Conviene pedir 1.000.</b></div>
+    <p class="ojo">Se compara \(CT\) (costo total por unidad), nunca sólo el precio.</p>
+  </div>
+
+  <div class="box">
+    <h2>4. Descuento por excedente</h2>
+    <p class="idea">Las primeras \(a\) unidades a \(C_1\); sólo lo que excede a \(C_2\).</p>
+    \[ C(Q) = \frac{C_1 a + C_2 (Q - a)}{Q} = C_2 + \frac{(C_1 - C_2)\,a}{Q} \;\xrightarrow[Q\to\infty]{}\; C_2 \]
+    <ul>
+      <li>El precio medio baja hacia \(C_2\) <b>sin alcanzarlo nunca</b>, y es continuo en \(a\) (\(C(a) = C_1\)).</li>
+      <li>\(k = (C_1 - C_2)\,a\) actúa como un costo fijo extra: \(Q^* = \sqrt{2D(L + k)/(C_2\,i)}\), válido si da \(gt  a\).</li>
+      <li><b>Con \(L = 0\) y compra mínima:</b> en el tramo a \(C_1\), \(CT\) queda una recta creciente → su mínimo está en la compra mínima.</li>
+    </ul>
+  </div>
+
+  <div class="box full">
+    <h2>5. Período común (varios artículos en una orden conjunta)</h2>
+    <div class="two">
+      <div>
+        <p class="idea">Todos se piden juntos cada \(T\), así que se optimiza \(T\), no cada \(Q\).</p>
+        \[ CT(T) = \sum C_jD_j + \frac{L}{T} + \frac{S}{2}\,T \qquad S = \sum_j C_j\,i\,D_j \]
+        \[ T^* = \sqrt{\frac{2L}{S}} \qquad Q_j^* = D_j\,T^* \]
+        <p>\(L\) es el costo de <b>toda</b> la orden conjunta. Gráfico: recta horizontal (compra) + hipérbola que baja (pedir) + recta que sube (mantener).</p>
+      </div>
+      <div>
+        <div class="ex"><b>Ej.:</b> Tornillos A (\(D = 12.000\), \(C = 50\)) y Tuercas B (\(D = 8.000\), \(C = 80\)), \(L\) conjunto \(= \$250\), \(i = 0{,}2\).<br>
+        \(S = 50\cdot 0{,}2\cdot 12.000 + 80\cdot 0{,}2\cdot 8.000 = 248.000\).<br>
+        \(T^* = \sqrt{2\cdot 250/248.000} = 0{,}0449\) año \(\approx 16\) días.<br>
+        \(Q_A = 12.000\cdot 0{,}0449 \approx 539\); \(Q_B \approx 359\).</div>
+        <p><b>Clasificación ABC</b> (por costo anual \(C\cdot D\) acumulado): A hasta 75 %, B 75–95 %, C 95–100 %. Los <b>C</b> van a revisión periódica.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- ═══════════════ PÁGINA 3 — LAGRANGE ═══════════════ -->
+<section class="page">
+<h1>Varios artículos con un recurso limitado: Lagrange<small>el tipo de ejercicio del parcial del 3/10</small></h1>
+<div class="grid">
+
+  <div class="box full b">
+    <h2>El procedimiento es siempre el mismo</h2>
+    <div class="two">
+      <ol>
+        <li>Calcular cada \(Q_j^*\) <b>sin restricción</b> (modelo básico, \(\lambda = 0\)).</li>
+        <li>Ver cuánto recurso consumen. <b>Si alcanza</b>, la restricción no es efectiva: listo, \(\lambda = 0\).</li>
+        <li><b>Si no alcanza</b>, el óptimo usa <b>todo</b> el recurso. Se busca \(\lambda > 0\) para que la restricción se cumpla con igualdad.</li>
+        <li>Con ese \(\lambda\), recalcular los lotes.</li>
+      </ol>
+      <div>
+        <p class="idea">\(\lambda\) es el precio sombra del recurso: cuánto te cuesta no tener una unidad más.</p>
+        <p>Es la misma idea que en simplex: si el recurso sobra, \(\lambda = 0\); si está agotado, \(\lambda > 0\).</p>
+      </div>
+    </div>
+    <table>
+      <tr><th>Recurso</th><th>Restricción</th><th>Lote</th><th>Unidad de \(\lambda\)</th><th>Al subir \(\lambda\)…</th></tr>
+      <tr><td><b>Capital</b></td><td>\(\sum C_jQ_j/2 \leq I_0\) (inversión <b>media</b>)</td><td>\(\sqrt{\dfrac{2D_jL_j}{C_j\,(i+\lambda)}}\)</td><td>1 / tiempo (una tasa)</td><td>lotes más chicos</td></tr>
+      <tr><td><b>Espacio</b></td><td>\(\sum v_jQ_j \leq E_0\) (espacio <b>máximo</b>)</td><td>\(\sqrt{\dfrac{2D_jL_j}{C_j\,i + 2\lambda v_j}}\)</td><td>$ / (volumen·tiempo)</td><td>lotes más chicos</td></tr>
+      <tr><td><b>Preparación</b></td><td>\(\sum (D_j/Q_j)\,\tau_j \leq P_0\)</td><td>\(\sqrt{\dfrac{2D_j\,(L_j + \lambda\tau_j)}{C_j\,i\,(1 - D_j/V_j)}}\)</td><td>$ / hora</td><td><b>lotes más grandes</b></td></tr>
+    </table>
+    <p class="ojo"><b>Plata → promedio (\(Q/2\)); espacio → máximo (\(Q\)).</b> La plata te importa en promedio en el año; el lugar te tiene que alcanzar el día que llega el camión. Preparación: lotes más grandes = menos preparaciones por año.</p>
+  </div>
+
+  <div class="box">
+    <h2>Capital: el ejercicio del parcial, paso a paso</h2>
+    <p>A: \(D = 12.000\), \(L = 150\), \(C = 50\). B: \(D = 8.000\), \(L = 200\), \(C = 80\). \(i = 0{,}20\). \(I_0 = \$23.000\).</p>
+    <ol>
+      <li><b>Sin restricción:</b> \(Q_A = 600\), \(Q_B = 447{,}2\).</li>
+      <li><b>Inversión promedio:</b> \((50\cdot 600 + 80\cdot 447{,}2)/2 = 32.889 > 23.000\). No alcanza.</li>
+      <li><b>\(\lambda\) directo</b> (todos los lotes se achican en la misma proporción):
+        \[ \lambda = i\left[\left(\frac{I(0)}{I_0}\right)^2 - 1\right] = 0{,}2\left[\left(\tfrac{32.889}{23.000}\right)^2 - 1\right] \approx 0{,}209 \]</li>
+      <li><b>Lotes nuevos:</b> se multiplican por \(\sqrt{i/(i+\lambda)} = 0{,}699\): \(Q_A \approx 420\), \(Q_B \approx 313\). Control: inversión \(\approx 23.000\) ✓.</li>
+    </ol>
+  </div>
+
+  <div class="box">
+    <h2>¿Conviene el crédito? y otras lecturas de \(\lambda\)</h2>
+    <ul>
+      <li><b>Capital:</b> la falta de plata te cuesta como si la tasa fuera \(i + \lambda\) (\(0{,}2 + 0{,}209 \approx 41\,\%\)). <b>Si el crédito cuesta menos que eso, conviene.</b> Al 12 %: sí, conviene.</li>
+      <li>El apunte usa \(i_1 + \lambda\) cuando separa \(i = i_1 + i_2\) (costo del capital + otros costos). Algunos resúmenes comparan sólo con \(\lambda\). En el parcial, \(\lambda = 0{,}21 > 0{,}12\) y daba lo mismo.</li>
+      <li><b>Espacio:</b> \(\lambda\) = costo de no disponer de una unidad más de espacio.</li>
+      <li><b>Preparación:</b> \(\lambda\) = costo de no disponer de una hora más para preparar máquinas.</li>
+    </ul>
+    <div class="ex"><b>Ej. espacio:</b> con los mismos A y B, \(v_A = 0{,}5\) m³, \(v_B = 1\) m³, \(E_0 = 500\) m³. Sin restricción ocupan \(0{,}5\cdot 600 + 447{,}2 = 747\) m³. No entra. Tanteando, \(\lambda \approx 10{,}8\) $/(m³·año) da \(Q_A \approx 416\), \(Q_B \approx 292\) y ocupan 500 m³ ✓. (Acá no hay atajo: se tantea \(\lambda\) o se prueban las opciones.)</div>
+  </div>
+
+  <div class="box full r">
+    <h2>Trampas que aparecieron en el parcial</h2>
+    <ul>
+      <li><b>«Inversión = $23.000, coincide»:</b> 23.000 es el capital disponible, no la inversión con los lotes óptimos.</li>
+      <li><b>«$65.777, no cumple»:</b> es \(C\cdot Q\) sin dividir por 2 (inversión máxima en vez de media).</li>
+      <li><b>Lote con restricción ≈ miles de pesos:</b> usaste la fórmula de la restricción (\(C\cdot Q/2\)) en vez de la del lote. Un lote tiene que salir en unidades, parecido a los \(Q^*\), y <b>menor</b> que el lote sin restricción.</li>
+      <li><b>Verificar \(\lambda\):</b> reemplazalo y fijate que la inversión dé \(I_0\). Con \(\lambda = 0{,}12\) daba ≈ 26.000: todavía se pasaba.</li>
+    </ul>
+  </div>
+
+</div>
+</section>
+
+<!-- ═══════════════ PÁGINA 4 — ALEATORIO + TEORÍA ═══════════════ -->
+<section class="page">
+<h1>Demanda aleatoria y teoría en una línea<small>lo más tomado históricamente en práctica, y las preguntas de teoría que más se repiten</small></h1>
+<div class="grid">
+
+  <div class="box">
+    <h2>6. Punto de pedido con riesgo de faltante</h2>
+    <p class="idea">El lote sale del modelo básico. Lo aleatorio sólo cambia <b>cuándo</b> pedir: se agrega un stock de seguridad.</p>
+    \[ SS = z\cdot\sigma_d\,\sqrt{LT} \qquad PP = \bar d\cdot LT + SS \]
+    <table>
+      <tr><th>RF</th><th class="c">1 %</th><th class="c">2 %</th><th class="c">3 %</th><th class="c">5 %</th><th class="c">10 %</th></tr>
+      <tr><td>\(z\)</td><td class="c">2,33</td><td class="c">2,05</td><td class="c">1,88</td><td class="c">1,645</td><td class="c">1,28</td></tr>
+    </table>
+    <div class="ex"><b>Ej.:</b> \(\bar d = 40\)/día, \(\sigma_d = 10\), \(LT = 9\) días, RF = 5 %.<br>
+    \(SS = 1{,}645\cdot 10\cdot\sqrt 9 = 49{,}4 \to 50\) (redondear hacia arriba).<br>
+    \(PP = 40\cdot 9 + 50 = 410\): se pide cuando existencias + pendientes ≤ 410.<br>
+    Costo anual del SS \(= SS\cdot C\cdot i\).</div>
+    <ul>
+      <li>El desvío se multiplica por la <b>raíz</b> del tiempo, no por el tiempo: 10 · √9 = 30, no 90.</li>
+      <li>«Nivel de servicio 95 %» = RF 5 %.</li>
+      <li>RF = probabilidad de que la demanda durante el \(LT\) supere el PP (por ciclo).</li>
+    </ul>
+  </div>
+
+  <div class="box">
+    <h2>7. Revisión periódica</h2>
+    <p class="idea">Se revisa cada \(T\) fijo y se pide lo que falta. Lo que pedís hoy tiene que durar hasta que llegue el <b>próximo</b> pedido: \(T + LT\).</p>
+    \[ SS = z\cdot\sigma_d\sqrt{T + LT} \qquad Q = \bar d\,(T + LT) + SS - q_r - q_{pe} \]
+    <p>\(q_r\) = existencias al revisar; \(q_{pe}\) = pedidos pendientes que todavía no llegaron.</p>
+    <div class="ex"><b>Ej.:</b> mismos datos, \(T = 20\) días, al revisar hay 600 u y nada pendiente.<br>
+    \(SS = 1{,}645\cdot 10\cdot\sqrt{29} = 88{,}6 \to 89\).<br>
+    \(Q = 40\cdot 29 + 89 - 600 - 0 = 649\).</div>
+    <table>
+      <tr><th></th><th>Punto de pedido</th><th>Revisión periódica</th></tr>
+      <tr><td>Lo activa</td><td>la demanda</td><td>el tiempo</td></tr>
+      <tr><td>Cantidad</td><td>fija (\(Q^*\))</td><td>variable</td></tr>
+      <tr><td>Momento</td><td>variable</td><td>fijo (cada \(T\))</td></tr>
+      <tr><td>Registro</td><td>permanente</td><td>sólo al revisar</td></tr>
+      <tr><td>SS cubre</td><td>\(LT\)</td><td>\(T + LT\) (más stock)</td></tr>
+      <tr><td>Para</td><td>artículos A, críticos</td><td>artículos C, baratos</td></tr>
+    </table>
+  </div>
+
+  <div class="box full o">
+    <h2>Teoría en una línea (las preguntas que más se repiten)</h2>
+    <div class="two">
+      <ul>
+        <li><b>¿Por qué el stock es un desperdicio?</b> No agrega valor, inmoviliza capital y oculta problemas. Existe porque no se puede eliminar del todo: desperdicio inevitable.</li>
+        <li><b>Objetivos de la gestión:</b> reducir las existencias al mínimo y asegurar el suministro a tiempo.</li>
+        <li><b>Causas del stock:</b> demanda y aprovisionamiento aleatorios, preparación larga de máquinas, roturas, equipos o personal poco versátiles, fallas de calidad.</li>
+        <li><b>Cómo se reduce:</b> lotes más chicos y plazos más cortos, <b>después</b> de eliminar las causas con mejora continua.</li>
+        <li><b>Tasa \(i\):</b> suma de costos anuales que dependen del stock: capital inmovilizado, espacio, personal, riesgos, administración e impuestos. <b>No</b> incluye \(L\).</li>
+        <li><b>En \(Q^*\):</b> costo de pedir = costo de mantener.</li>
+        <li><b>Bajar \(CT\):</b> bajando \(L\), no achicando lotes.</li>
+      </ul>
+      <ul>
+        <li><b>RF 2 % ≠ IPF 98 %:</b> RF es probabilidad por ciclo; IPF es la fracción de la demanda entregada del stock.</li>
+        <li><b>Tabla de RF = normal:</b> por la propiedad reproductiva (demanda normal) o por el teorema central del límite (si no lo es).</li>
+        <li><b>Revisión periódica estudia \(T + LT\):</b> es lo que tiene que cubrir el pedido de hoy.</li>
+        <li><b>Consumo durante el ingreso:</b> hace falta \(V > D\); si \(V \to D\), \(Q^* \to \infty\).</li>
+        <li><b>Excedente:</b> \(C(Q) \to C_2\) sin alcanzarlo; con \(L = 0\) el tramo a \(C_1\) es una recta.</li>
+        <li><b>ABC:</b> A ≤ 75 %, B 75–95 %, C 95–100 % del costo anual; los C con revisión periódica.</li>
+        <li><b>\(\lambda\):</b> costo marginal de no tener una unidad más del recurso (capital: tasa; espacio: $/(m³·tiempo); preparación: $/hora).</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+</section>
+
+</body>
+</html>
