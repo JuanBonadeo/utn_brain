@@ -1,4 +1,4 @@
-<title>Simulacro de teoría IO</title>
+<title>Simulacro IO</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -80,6 +80,17 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .cell.flag::after{content:"";position:absolute;top:-2px;right:-2px;width:9px;height:9px;border-radius:50%;background:var(--flag)}
 .cell.ok{border-color:var(--ok);background:var(--ok-soft)}
 .cell.bad{border-color:var(--bad);background:var(--bad-soft)}
+.cell.was-ok{border-style:dashed;border-color:var(--ok)}
+.cell.was-bad{border-style:dashed;border-color:var(--bad)}
+.tmap{display:flex;flex-direction:column;gap:14px}
+.trow{display:flex;flex-direction:column;gap:8px;padding-top:12px;border-top:1px solid var(--line)}
+.thead{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px}
+.thead h3{margin-right:auto}
+.tcount{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.okc{color:var(--ok)} .badc{color:var(--bad)}
+.tbtn{padding:5px 10px;font-size:13px}
+.tcells{display:flex;flex-wrap:wrap;gap:5px}
+.tcells .cell{width:34px;height:34px;aspect-ratio:auto;max-width:none;cursor:pointer}
 .qhead{display:flex;justify-content:space-between;gap:10px;align-items:baseline;flex-wrap:wrap}
 .tag{font-family:var(--f-mono);font-size:12px;color:var(--muted);letter-spacing:.04em}
 .stem{font-size:18px;line-height:1.5}
@@ -843,12 +854,19 @@ function renderHome(){
 
   <section class="sheet stack">
     <div class="row" style="justify-content:space-between">
-      <h2>Tu avance en este navegador</h2>
+      <h2>Mapa por tema</h2>
       <button class="btn ghost" id="reset">Borrar avance</button>
     </div>
-    <div class="statgrid">
-      <span class="h">Tema</span><span class="h">Aciertos</span><span class="h"></span>
-      ${topicStats.map(s=>`<span>${s.n}</span><span>${s.seen? `${s.ok}/${s.seen}`:"—"}</span><span class="bar"><i style="width:${s.pct??0}%"></i></span>`).join("")}
+    <p class="muted" style="font-size:14px">Cada número es una pregunta del banco, coloreada según tu último intento: <span class="pill ok">bien</span> <span class="pill bad">mal</span> y en blanco las que todavía no viste. Tocá un número para practicar el tema desde esa pregunta.</p>
+    <div class="tmap">
+      ${TOPICS.map(([k,n])=>{
+        const qs=BANK.filter(q=>q.t===k), st=qs.map(q=>STATS[q.id]?.last);
+        const ok=st.filter(x=>x===true).length, bad=st.filter(x=>x===false).length, none=st.length-ok-bad;
+        return `<div class="trow">
+          <div class="thead"><h3>${n}</h3><span class="tcount"><b class="okc">${ok}</b> bien · <b class="badc">${bad}</b> mal · ${none} sin ver</span>
+            <span class="row" style="gap:6px"><button class="btn tbtn" data-topic="${k}">Practicar tema</button>${bad?`<button class="btn tbtn" data-topic="${k}" data-wrong="1">Sólo las ${bad} falladas</button>`:""}</span></div>
+          <div class="tcells">${qs.map((q,j)=>`<button class="cell ${st[j]===true?"ok":st[j]===false?"bad":""}" data-tq="${k}" data-ti="${j}" aria-label="${n}, pregunta ${j+1}">${j+1}</button>`).join("")}</div>
+        </div>`;}).join("")}
     </div>
     <p class="muted" style="font-size:14px" id="reset-msg">El avance se guarda sólo en este navegador.</p>
   </section>`;
@@ -866,6 +884,18 @@ function renderHome(){
     if(!armed){ armed=true; rb.textContent="Confirmar borrado"; document.getElementById("reset-msg").textContent="Se borra el historial de aciertos y errores. Tocá de nuevo para confirmar."; return; }
     STATS={}; saveStats(STATS); renderHome();
   };
+  document.querySelectorAll("[data-tq]").forEach(b=>b.onclick=()=>startTopic(b.dataset.tq, +b.dataset.ti, false));
+  document.querySelectorAll("[data-topic]").forEach(b=>b.onclick=()=>startTopic(b.dataset.topic, 0, !!b.dataset.wrong));
+}
+
+/* Práctica de un tema en el orden del banco, para que los números coincidan con el mapa. */
+function startTopic(k, idx, onlyWrong){
+  let qs = BANK.filter(q=>q.t===k);
+  if (onlyWrong){ qs = qs.filter(q=>STATS[q.id]?.last===false); idx = 0; }
+  if (!qs.length) return;
+  const nums = BANK.filter(q=>q.t===k).map(q=>q.id);
+  S = {mode:"topic", topic:k, onlyWrong, nums: qs.map(q=>nums.indexOf(q.id)+1), items: qs.map(makeItem), i:idx, limit:0, end:null, done:false};
+  renderQuiz(); window.scrollTo(0,0);
 }
 
 function startSim(){
@@ -927,11 +957,13 @@ function renderQuiz(){
     let c="cell"; if(j===S.i) c+=" cur";
     if(sim){ if(x.ans!==null) c+=" ans"; if(x.flag) c+=" flag"; }
     else if(x.checked){ c+= x.ans===x.correct?" ok":" bad"; }
-    return `<button class="${c}" data-go="${j}" aria-label="Pregunta ${j+1}">${j+1}</button>`;
+    else { const l=STATS[x.q.id]?.last; if(l===true) c+=" was-ok"; else if(l===false) c+=" was-bad"; }
+    const num = S.nums ? S.nums[j] : j+1;
+    return `<button class="${c}" data-go="${j}" aria-label="Pregunta ${num}">${num}</button>`;
   }).join("");
 
   const answered = S.items.filter(x=>x.ans!==null).length;
-  const label = sim ? "Simulacro" : (S.mode==="review"?"Repaso de errores":"Práctica");
+  const label = sim ? "Simulacro" : S.mode==="topic" ? `${TOPIC_NAME[S.topic]}${S.onlyWrong?" · falladas":""}` : (S.mode==="review"?"Repaso de errores":"Práctica");
   $app.innerHTML = `
   <div class="top">
     <div class="topline">
