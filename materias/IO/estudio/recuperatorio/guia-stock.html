@@ -271,5 +271,53 @@
 </div>
 </section>
 
+<!-- ═══════════════ PÁGINA 3 — UNA FÓRMULA, OCHO CAMBIOS ═══════════════ -->
+<section class="page">
+<h1>Una fórmula, ocho cambios<small>para repasar el día antes: todos los modelos son el básico con una pieza tocada</small></h1>
+<div class="cards">
+
+  <div class="card full y">
+    <div class="head"><span class="num">★</span><h2>La fórmula general</h2></div>
+    \[ CT \;=\; \underbrace{C(Q)}_{\text{precio}} \;+\; \underbrace{\frac{L}{Q}}_{\text{pedir}} \;+\; \underbrace{\frac{C(Q)\cdot i\cdot(\text{stock promedio})}{D}}_{\text{mantener}} \]
+    <p>En el básico el precio es fijo (\(C\)) y el stock promedio es \(Q/2\), así que queda \(CT = C + L/Q + C\,i\,Q/(2D)\) y \(Q^* = \sqrt{2DL/(C\,i)}\).</p>
+    <p><span class="k">C(Q) es un precio por unidad, no un costo total.</span> Aparece en los dos descuentos: en el escalón vale \(C_1\) o \(C_2\) según el tramo; en el excedente es el promedio \(C_2 + k/Q\).</p>
+  </div>
+
+  <div class="card full">
+    <div class="head"><span class="num">⇄</span><h2>Qué pieza cambia cada modelo</h2></div>
+    <table>
+      <tr><th>Modelo</th><th>Qué cambia</th><th>Cómo queda \(Q^*\)</th></tr>
+      <tr><td>1. Básico</td><td>nada</td><td>\(\sqrt{2DL/(C\,i)}\)</td></tr>
+      <tr><td>2. Consumo durante el ingreso</td><td><b>stock promedio</b> \(= Q(1 - D/V)/2\)</td><td>\(\sqrt{2DL/(C\,i\,(1 - D/V))}\)</td></tr>
+      <tr><td>3. Descuento con escalón</td><td><b>precio</b> \(C_1\) o \(C_2\) según el tramo</td><td>el del básico con \(C_2\); si da \(\lt a\), comparar con \(CT(a)\)</td></tr>
+      <tr><td>4. Descuento por excedente</td><td><b>precio</b> \(C(Q) = C_2 + k/Q\) → actúa como <b>\(L + k\)</b></td><td>\(\sqrt{2D(L + k)/(C_2\,i)}\), con \(k = (C_1 - C_2)\,a\)</td></tr>
+      <tr><td>5. Período común</td><td><b>se optimiza \(T\)</b> en vez de \(Q\), sumando todos los artículos</td><td>\(T^* = \sqrt{2L/S}\), \(Q_j = D_j\,T^*\)</td></tr>
+      <tr><td>6. Lagrange capital</td><td><b>la tasa:</b> \(i \to i + \lambda\)</td><td>\(\sqrt{2DL/(C\,(i + \lambda))}\)</td></tr>
+      <tr><td>6. Lagrange espacio</td><td><b>mantener:</b> \(C\,i \to C\,i + 2\lambda v\)</td><td>\(\sqrt{2DL/(C\,i + 2\lambda v)}\)</td></tr>
+      <tr><td>6. Lagrange preparación</td><td><b>pedir:</b> \(L \to L + \lambda\tau\)</td><td>\(\sqrt{2D(L + \lambda\tau)/(C\,i\,(1 - D/V))}\)</td></tr>
+      <tr><td>7. Aleatorio (punto de pedido)</td><td><b>stock promedio</b> \(= Q/2 + SS\); \(Q\) no cambia</td><td>el del básico; lo nuevo es \(SS\) y \(PP\)</td></tr>
+      <tr><td>8. Revisión periódica</td><td>la cantidad ya no es fija</td><td>\(Q = \bar d\,(T + LT) + SS - \text{exist.} - \text{pend.}\)</td></tr>
+    </table>
+  </div>
+
+  <div class="card full b">
+    <div class="head"><span class="num">!</span><h2>La regla para no memorizar ocho fórmulas</h2></div>
+    <div class="two">
+      <div>
+        \[ Q^* = \sqrt{\frac{2D\cdot\boxed{\text{costo fijo de pedir}}}{\boxed{\text{costo de guardar 1 unidad 1 año}}}} \]
+      </div>
+      <div>
+        <ul>
+          <li><b>Arriba</b> cambia el costo fijo: \(L + k\) (excedente), \(L + \lambda\tau\) (preparación).</li>
+          <li><b>Abajo</b> cambia el costo de guardar: \(\times(1 - D/V)\) (ingreso), \(i + \lambda\) (capital), \(C\,i + 2\lambda v\) (espacio).</li>
+          <li>Más arriba → lote <b>más grande</b>. Más abajo → lote <b>más chico</b>.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+</section>
+
 </body>
 </html>
