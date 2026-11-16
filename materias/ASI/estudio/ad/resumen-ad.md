@@ -46,7 +46,22 @@
 
 - **Riesgo:** algo no esperado y negativo que puede pasar. El riesgo positivo es una oportunidad y no se trata.
 - **Activos que pueden estar involucrados:** información, software, hardware, instalaciones, servicios y personas.
+- **Clasificación SEI** (de dónde viene el riesgo). Se escribe clase → subclase → subcategoría:
+
+| Clase | Subclases y algunas subcategorías |
+|---|---|
+| **1. Acciones de las personas** | 1.1 Involuntarias (equivocación, error, omisión) · 1.2 Deliberadas (**fraude**, sabotaje, **robo**, vandalismo) · 1.3 Inacción (habilidad, conocimiento, guía, disponibilidad) |
+| **2. Fallas de sistemas y tecnología** | 2.1 Hardware (capacidad, rendimiento, mantenimiento, obsolescencia) · 2.2 Software (configuración, control de cambios, parámetros de seguridad, **testing**) · 2.3 Sistemas (diseño, especificaciones, **integración**, complejidad) |
+| **3. Fallas de procesos internos** | 3.1 Diseño y ejecución (flujo, documentación, roles, alertas, escalado, SLA) · 3.2 Control de procesos (monitorización) · 3.3 Procesos de soporte (dotación de personal, proveedores) |
+| **4. Eventos externos** | 4.1 Desastres · 4.2 Cuestiones legales (regulaciones) · 4.3 Cuestiones del negocio (fallas del suministro) · 4.4 Dependencias con servicios (servicios públicos) |
+
+  La clase tiene que ser **coherente con la causa**: si la causa es un error del software, va en 2; si es alguien que lo aprovecha a propósito, va en 1.2.
+
+- **FAIR** sirve para **justificar** la probabilidad y el impacto, no para clasificar:
+  - **Probabilidad = frecuencia de eventos de pérdida.** Depende de qué tan seguido la amenaza entra en **contacto** con el activo (aleatorio, periódico o intencional), de si conviene **actuar** (beneficio, esfuerzo, riesgo de que lo detecten) y de la **vulnerabilidad**: la capacidad de la amenaza contra la **capacidad de resistencia** (los controles).
+  - **Impacto = magnitud de la pérdida.** La pérdida **primaria** es la directa sobre el activo (productividad, costo de reemplazo, sensibilidad: reputación, legal). La **secundaria** viene de la reacción de otros (clientes, BCRA, medios).
 - **Severidad = probabilidad × impacto**, cada uno de 1 a 5 (máximo 25). **Lo que más vale es la justificación** de cada número.
+- **Estrategias de tratamiento:** evitar, transferir (por ejemplo, un seguro), **mitigar** o aceptar. Una **mitigación específica** dice qué control se aplica, quién lo aplica y qué baja (la P o el I).
 - **Inherente vs. residual:**
   - El **inherente** es el riesgo con lo que hay hoy, antes de las medidas nuevas.
   - El **residual** es el que queda después de aplicarlas. Nunca llega a cero.
@@ -96,6 +111,17 @@
 - **Escalado:**
   - **Funcional:** a quien sabe otra cosa. Por ejemplo, de [06] a [03] por una falla de una API.
   - **Jerárquico:** a quien puede **autorizar**. Por ejemplo, al CIO por licencias nuevas o un cambio de emergencia.
+- **Quién hace qué ante un incidente en Bancorp** (si piden "roles responsables", respondé con estas áreas y puestos):
+
+| Rol / área | Responsabilidad ante el incidente |
+|---|---|
+| **Técnico de Mesa de Ayuda [06]** (1ª línea) | Recibe el aviso, abre el ticket, clasifica y prioriza, busca en la base de conocimiento, intenta resolverlo y, si no puede, lo deriva. Le avisa al usuario cómo sigue |
+| **Coordinador de Soporte Interno [06]** | Controla los tiempos del SLA, decide escalar y avisa a las sucursales si el problema es masivo |
+| **Especialista de 2ª línea** ([03] software, [01] infraestructura, [04] core) | Diagnostica y resuelve la causa técnica. Deja documentada la solución |
+| **SOC [02]** | Monitorea eventos y detecta el problema antes de que llamen. Si hay sospecha de fraude, lo investiga |
+| **Coordinador del área / CIO** (eje jerárquico) | Autoriza los recursos extra o un cambio de emergencia, y comunica a la Gerencia afectada |
+| **Gestión de cambios y de configuración** | Aprueban e implementan la solución definitiva y actualizan la CMDB |
+
 - **Siempre hay que nombrar:** el **sistema de tickets**, la **base de conocimiento** (cómo se resolvió algo), la **CMDB** (la ficha de cada ítem) y el **SLA** (para validar si el usuario tiene derecho a lo que pide). Sumá algún **KPI**, como el tiempo medio de resolución.
 
 ## U3 — Talento
@@ -152,6 +178,15 @@
   - **TIR:** la rentabilidad propia del proyecto. Conviene si es **mayor que la tasa de corte**.
   - **ROI:** la ganancia por cada peso invertido. **No considera el valor del dinero en el tiempo.**
 
+- **Adquisiciones** (salió en la AD 2025):
+  - **Qué se adquiere:** surge de la solución elegida. Se arma una tabla con el activo o servicio, la cantidad, las características mínimas, la forma de adquisición y por qué.
+  - **Formas de adquisición:** comprar, alquilar, **leasing** (alquiler con opción de compra), SaaS o pago por uso, o tercerizar (outsourcing).
+  - **RFI → RFP:** el **RFI** pide **información** para conocer qué hay en el mercado, y va primero. El **RFP** pide la **propuesta** formal con precio, plazo, equipo y SLA, y se hace cuando los requerimientos ya están claros. Se piden al menos 3 cotizaciones.
+  - **Responsables:** el **PM** del proyecto (PMO [05]) coordina. El **área técnica** define los requerimientos. **Administración y Finanzas** ve el presupuesto y la compra. **Ciberseguridad [02]** valida la seguridad. El **CIO** aprueba.
+  - **Criterios técnicos:** que cubra los requerimientos, la **integración** con los sistemas actuales (core, APIs), la seguridad, la escalabilidad y el rendimiento.
+  - **Criterios funcionales:** que sea fácil de usar para el cliente o el empleado y que haga lo que el negocio necesita.
+  - **Del proveedor:** experiencia en bancos y referencias, soporte y SLA, plazo de implementación, capacitación, y el **TCO**: el costo total durante toda la vida útil, no sólo el precio.
+
 > **Ej. alcance de la Billetera.**
 > - Incluye: app Android/iOS, cuenta digital, biometría, QR y transferencias.
 > - No incluye: la inversión en FCI (queda para una 2ª etapa), tarjeta física, préstamos.
@@ -180,3 +215,81 @@
 > - Socios clave: RENAPER y el proveedor de nube.
 > - Ingresos: abono mensual más un monto por cada validación.
 > - MVP: un mes con un solo banco piloto.
+
+<div style="page-break-before: always"></div>
+
+## Simulacro — la AD 2025 aplicada a Bancorp
+
+> Es el modelo de la AD del 25/02/2025 (contexto ElSuper, cajas de autoservicio), con las mismas 5 consignas pasadas a un proyecto de Bancorp. **Tiempo: 1 hora. Cada pregunta vale 2 puntos y se aprueba con 6.** Hacelo sin mirar la resolución, que está en la página siguiente.
+
+**Contexto: BANCORP S.A. Proyecto: Generación de Billetera Virtual Propia.**
+
+1. Defina un **objetivo de negocio** enfocado en mejorar la experiencia del cliente y un **objetivo de TI** relacionado con la implementación de la billetera, con **métricas** concretas para medir el éxito de cada uno.
+2. Para el riesgo *"Fallas en la validación de identidad del onboarding que permiten abrir cuentas con datos de otra persona"*, establezca su **clasificación SEI**, calcule la **severidad con FAIR** y proponga una **estrategia de mitigación** específica.
+3. A partir del **incidente** informado por el coordinador de la Mesa de Ayuda: *"Los pagos con QR de la billetera quedan en 'procesando' y no se acreditan, y los clientes llaman en cantidad"*, indique los **roles responsables** de su resolución y las **responsabilidades** clave de cada uno.
+4. Defina el **rol** del puesto involucrado en el **escalado** del incidente y liste **tres competencias específicas** requeridas.
+5. Para implementar la billetera, especifique las **adquisiciones** necesarias, sus **responsables** y los **criterios técnicos y funcionales** para seleccionar el equipamiento y el software.
+
+<div style="page-break-before: always"></div>
+
+### Resolución
+
+**1. Objetivos**
+
+- **De negocio:** que un cliente nuevo pueda abrir su cuenta desde el celular **en menos de 5 minutos y sin ir a una sucursal**, y que **el 80% de los usuarios califique la app con 4 estrellas o más** durante el primer año.
+  - *Cómo se mide:* el tiempo promedio de alta (registrado por la app) y la calificación en las tiendas y en una encuesta dentro de la app.
+- **De TI:** que la billetera esté **disponible el 99,5% del tiempo** y que **un pago con QR se acredite en menos de 3 segundos**, desde el lanzamiento previsto para junio de 2027.
+  - *Cómo se mide:* el monitoreo del SOC y de Operaciones TI, con un reporte mensual.
+- **Por qué está bien:** el de negocio lo entiende cualquiera (tiempo y satisfacción del cliente); el de TI es técnico. Los dos son SMART: tienen número, forma de medirse y plazo.
+
+**2. Riesgo**
+
+- **Clasificación SEI:** **2. Fallas de sistemas y tecnología → 2.3 Sistemas → 2.3.3 Integración**, porque la validación contra RENAPER puede fallar o ser engañada. Como alguien lo aprovecha a propósito, también se relaciona con **1.2.1 Fraude**.
+- **Probabilidad (FAIR) = 4.** Hay **contacto intencional**: los estafadores buscan cuentas para mover plata. El **beneficio** es alto y el **esfuerzo** bajo, con fotos o DNI robados. La **capacidad de resistencia** es media, porque el canal es nuevo y todavía no tiene historial.
+- **Impacto (FAIR) = 5.** La **pérdida primaria** es la plata robada y la investigación. La **secundaria**: reclamos de clientes, sanción del BCRA, noticias en los medios y daño a la **Confianza**, el primer valor del banco.
+- **Severidad = 4 × 5 = 20 de 25 (alta).** Se atiende antes que otros riesgos.
+- **Estrategia: mitigar.**
+  - Ingeniería de Software [03] agrega **prueba de vida** (mover la cabeza frente a la cámara) además de la foto del DNI.
+  - El SOC [02] configura una **alerta** cuando hay muchas altas desde el mismo celular o la misma IP.
+  - Durante los primeros 30 días, las cuentas nuevas tienen **un límite de monto**.
+  - Con eso, P baja a 2 y el **residual** queda en 2 × 5 = 10.
+
+**3. Incidente: roles y responsabilidades**
+
+| Rol | Qué hace |
+|---|---|
+| **Técnico de Mesa de Ayuda [06]** (1ª línea) | Atiende las llamadas, abre un ticket por cada una y las agrupa como un solo incidente masivo. Busca en la base de conocimiento, les dice a los clientes que su plata no se perdió y le avisa al coordinador |
+| **Coordinador de Soporte [06]** | Le da **prioridad alta** (afecta a muchos clientes y a la plata), controla el SLA y escala |
+| **Especialista de Ingeniería de Software [03]** (2ª línea, escalado funcional) | Revisa la API de pagos QR y la integración con el procesador de pagos. Encuentra y arregla la falla |
+| **Operaciones TI [04]** | Controla que el core acredite bien y concilia los pagos que quedaron colgados |
+| **SOC [02]** | Revisa en el monitoreo desde cuándo pasa y descarta un ataque |
+| **CIO** (escalado jerárquico) | Si pasa más de una hora, autoriza un cambio de emergencia y avisa a la Gerencia de Banca Minorista |
+| **Gestión de problemas** | Como hubo muchos incidentes iguales, busca la causa de fondo para que no se repita y la manda a **gestión de cambios**. **Configuración** la implementa y actualiza la CMDB |
+
+Al cerrar, la solución queda escrita en la base de conocimiento. KPI: el tiempo medio de resolución.
+
+**4. Puesto del escalado y competencias**
+
+- **Rol:** **Especialista en integración y APIs** del área de Ingeniería de Software y Canales Digitales [03], que es la 2ª línea del escalado funcional.
+  - Reporta al Coordinador de Desarrollo.
+  - El objetivo del puesto es mantener funcionando la conexión de la billetera con los sistemas del banco y con los servicios externos (pagos QR, RENAPER).
+  - Ante este incidente, diagnostica la causa, la corrige y documenta la solución.
+- **Tres competencias específicas** (del puesto, no de la persona):
+  1. Diagnóstico de fallas en APIs y servicios de pago: leer logs y seguir una transacción de punta a punta.
+  2. Integración con el core bancario y el middleware (ESB).
+  3. Seguridad en transacciones financieras: cifrado y normativa del BCRA.
+
+**5. Adquisiciones**
+
+| Qué se adquiere | Forma | Responsable |
+|---|---|---|
+| Servicio de validación biométrica (conexión con RENAPER) | Servicio por uso, contratado vía RFP | [03] define los requerimientos; [02] valida la seguridad |
+| Servidores en la nube para la app y los pagos | Pago por uso (cloud) | Infraestructura [01] |
+| Procesador de pagos QR interoperable | Contrato con un proveedor | [03] con Administración y Finanzas |
+| Celulares de prueba (Android y iOS) | Compra | [03] |
+| Pruebas de seguridad (pentest) | Servicio tercerizado | Ciberseguridad [02] |
+
+- **Coordinación:** el PM de la PMO [05] coordina todo, **Administración y Finanzas** hace la compra y controla el presupuesto, y el **CIO** aprueba. Primero se hace un **RFI** para ver qué proveedores hay y después un **RFP** a por lo menos 3.
+- **Criterios técnicos:** que se integre con el core y las APIs del banco, la seguridad (cifrado, normativa BCRA), que aguante muchos usuarios a la vez y la disponibilidad que garantiza el SLA (99,5% o más).
+- **Criterios funcionales:** que el alta sea simple para el cliente, que el QR sea interoperable con cualquier comercio y que los reportes sirvan a Banca Minorista.
+- **Del proveedor:** experiencia con otros bancos, soporte 24×7, plazo de implementación, capacitación y el **TCO** (todo lo que cuesta durante los años de uso, no sólo el precio inicial).
