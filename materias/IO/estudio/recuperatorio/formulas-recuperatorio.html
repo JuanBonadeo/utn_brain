@@ -191,25 +191,27 @@
   <div class="box st">
     <h2>Consumo durante el ingreso <span class="note">(se fabrica a ritmo \(V\))</span></h2>
     \[ Q^* = \sqrt{\frac{2DL}{C\,i\,(1 - D/V)}} \qquad M = Q\left(1 - \frac{D}{V}\right) \qquad \theta = \frac{Q}{V} \]
-    <p>Requiere \(V > D\). Si \(V \to D\), \(Q^* \to \infty\). El lote sale <b>más grande</b> que en el básico.</p>
+    \[ CT(Q) = C + \frac{L}{Q} + \frac{C\,i\,(1 - D/V)\,Q}{2D} \qquad \text{mantener (período)} = \frac{M}{2}\,C\,i \]
+    <p>Requiere \(V > D\). Si \(V \to D\), \(Q^* \to \infty\). El lote sale <b>más grande</b> que en el básico. Pico \(M < Q\): sube \(V - D\) durante \(\theta\), baja \(D\).</p>
   </div>
 
   <div class="box st">
     <h2>Descuentos</h2>
     <p><b>Escalón</b> (si \(Q \geq a\), todo el lote a \(C_2\)):</p>
     <ol>
-      <li>\(Q_2^* = \sqrt{2DL/(C_2\,i)}\). Si \(Q_2^* \geq a\), es el óptimo.</li>
+      <li>\(Q_2^* = \sqrt{2DL/(C_2\,i)}\). Si \(Q_2^* \geq a\), es el óptimo. Cada tramo: \(CT_j = C_j + \frac{L}{Q} + \frac{C_j\,i\,Q}{2D}\).</li>
       <li>Si no, comparar \(CT_1(Q_1^*)\) con \(CT_2(a)\): gana el menor.</li>
     </ol>
     <p><b>Excedente</b> (sólo lo que pasa de \(a\) se paga \(C_2\)):</p>
     \[ C(Q) = C_2 + \frac{k}{Q},\;\; k = (C_1 - C_2)\,a \qquad Q^* = \sqrt{\frac{2D\,(L + k)}{C_2\,i}} \;\;(\text{si} > a) \]
-    <p class="note">\(C(Q) \to C_2\) sin alcanzarlo. Comparar con el tramo 1 y quedarse con el menor \(CT\).</p>
+    \[ CT_2(Q) = C_2 + \frac{L + k}{Q} + \frac{C_2\,i\,Q}{2D} + \frac{i\,k}{2D} \]
+    <p class="note">\(C(Q) \to C_2\) sin alcanzarlo; \(CT\) continuo en \(a\) (sin salto). Comparar con el tramo 1 y quedarse con el menor \(CT\).</p>
   </div>
 
   <div class="box st">
     <h2>Período común y ABC</h2>
     \[ T^* = \sqrt{\frac{2L}{S}} \qquad S = \sum_j \delta_j\,D_j \qquad Q_j^* = D_j\,T^* \]
-    <p>\(L\) = costo de la orden conjunta. \(\delta_j = C_j\,i\) si se compra; \(C_j\,i\,(1 - D_j/V_j)\) si se fabrica.</p>
+    <p>\(L\) = costo de la orden conjunta. \(\delta_j = C_j\,i\) si se compra; \(C_j\,i\,(1 - D_j/V_j)\) si se fabrica. Por período: pedir \(= L/T\), mantener \(= S\,T/2\).</p>
     <p><b>ABC</b> por \(C_jD_j\) acumulado de mayor a menor: A hasta 75 %, B hasta 95 %, C el resto (C → revisión periódica).</p>
   </div>
 
