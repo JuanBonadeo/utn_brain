@@ -1304,11 +1304,160 @@ const BANK2 = [
  x:"Plata → promedio (es plata parada a lo largo del año). Espacio → máximo (el depósito tiene que alcanzar el día que llega el lote)."}
 ];
 
-const ALLQ = [...BANK1, ...BANK2];
+/* ===== BANCO 3: preguntas que circularon como tomadas (archivo «preguntas io.pdf», 16/11).
+   Las que venían con opciones se respetan tal cual (fixed: no se mezclan). ===== */
+const BANK3 = [
+{id:"b3p01a",t:"TTA",q:"(P1) En un modelo de transbordo de costo mínimo ya resuelto, se habilita un tramo nuevo, del depósito K al destino 2. ¿Qué cambia en el modelo?",
+ o:["Se agrega una variable nueva, x_K2, que aparece en la función objetivo y en las ecuaciones de K y del destino 2; la cantidad de restricciones no cambia y el costo óptimo no puede empeorar",
+    "Se agrega una variable nueva, x_K2, que aparece en la función objetivo y en las ecuaciones de K y del destino 2; la cantidad de restricciones no cambia, pero el costo óptimo puede empeorar",
+    "Se agrega una restricción nueva de conservación para el tramo, y el costo óptimo no puede empeorar",
+    "Se agrega una restricción nueva de conservación para el tramo, y hay que volver a balancear ofertas y demandas"],a:0,
+ x:"Un tramo es un arco, y en el modelo un arco es una variable (una columna), no una restricción. Aparece en la ecuación de balance de cada uno de sus dos extremos. La solución anterior sigue siendo factible con el tramo nuevo en 0, así que el óptimo sólo puede mejorar o quedar igual."},
+{id:"b3p01b",t:"TTA",q:"(P1) En el mismo transbordo se agrega un punto nuevo: un depósito intermedio J que no produce ni consume, conectado con los orígenes y con los destinos. ¿Qué cambia en el modelo?",
+ o:["Se agrega una restricción de conservación para J (entradas − salidas = 0) y una variable por cada tramo que entra o sale de J",
+    "Se agrega una restricción de conservación para J (entradas − salidas = capacidad de J) y una variable por cada tramo que entra o sale de J",
+    "Sólo se agregan variables para los tramos de J: como no tiene oferta ni demanda, no necesita restricción",
+    "Sólo se agregan variables para los tramos de J, y además un destino ficticio para absorber lo que pase por J"],a:0,
+ x:"Cada nodo tiene su ecuación de balance. Un punto de paso puro tiene término independiente 0: todo lo que entra sale. Sin esa ecuación, J podría crear o perder mercadería. Las ofertas y demandas totales no cambian, así que no hace falta ningún ficticio."},
+{id:"b3p02",t:"STK",q:"(P2) En el modelo básico, el lote óptimo se obtiene anulando la derivada primera de CT(Q). ¿Por qué ese punto es el mínimo que se busca?",
+ o:["Porque [[CT(Q) = C + \\tfrac{L}{Q} + \\tfrac{C\\,i\\,Q}{2D}]] tiene un único punto extremo para Q > 0 y es convexa ([[CT''(Q) = 2L/Q^3 > 0]]): ese punto es mínimo relativo y absoluto",
+    "Porque [[CT(Q) = C + \\tfrac{L}{Q} + \\tfrac{C\\,i\\,Q}{2D}]] tiene un único punto extremo para Q > 0, aunque es un máximo; el mínimo se toma en el borde, con Q lo más chico posible",
+    "Porque en ese punto se anula el costo de compra C, que es el único término que depende de Q",
+    "Porque en ese punto se anula el costo de mantener, y sólo queda el costo de pedir"],a:0,
+ x:"L/Q baja y C·i·Q/(2D) sube, y la suma tiene forma de U. La derivada se anula en el fondo de la U, donde pedir = mantener. C es constante y no depende de Q. En Q* ningún costo se anula: se igualan."},
+{id:"b3p03",t:"STK",q:"(P3) En el modelo básico, ¿qué es n* y cómo se obtiene?",
+ o:["Es el número óptimo de pedidos por período: [[n^* = \\dfrac{D}{Q^*} = \\sqrt{\\dfrac{D\\,C\\,i}{2L}}]], en pedidos por unidad de tiempo",
+    "Es el número óptimo de pedidos por período: [[n^* = \\dfrac{Q^*}{D}]], en pedidos por unidad de tiempo",
+    "Es el tiempo óptimo entre pedidos: [[n^* = \\dfrac{Q^*}{D}]], en unidades de tiempo",
+    "Es la cantidad óptima por pedido: [[n^* = \\sqrt{\\dfrac{2DL}{C\\,i}}]], en unidades"],a:0,
+ x:"n* = D/Q*: (unidades/año) ÷ (unidades/pedido) = pedidos por año. Reemplazando Q* queda √(D·C·i/(2L)). Q*/D es T*, el tiempo entre pedidos (la inversa de n*), y la última opción es Q*."},
+{id:"b3p04a",t:"DUA",q:"(P4) Relación primal–dual en el óptimo. Si la k-ésima variable del primal es positiva (se produce)…",
+ o:["la k-ésima restricción del dual se cumple con igualdad (su holgura o exceso vale 0)",
+    "la k-ésima restricción del dual se cumple con desigualdad estricta (tiene holgura positiva)",
+    "la k-ésima variable del dual también es positiva",
+    "la k-ésima variable del dual vale 0"],a:0,
+ x:"Cada variable del primal genera una restricción del dual, y cada restricción del primal una variable del dual. Por holguras complementarias, si x_k > 0, la restricción dual k se cumple con igualdad: los recursos que consume valen exactamente lo que deja. Las variables se aparean con restricciones del otro problema, no variable con variable."},
+{id:"b3p04b",t:"DUA",q:"(P4) En el óptimo, la j-ésima restricción del primal tiene holgura positiva (sobra recurso). Entonces…",
+ o:["la j-ésima variable del dual vale 0",
+    "la j-ésima variable del dual es positiva, igual a la holgura",
+    "la j-ésima restricción del dual se cumple con igualdad",
+    "la j-ésima restricción del dual tiene holgura positiva"],a:0,
+ x:"Holgura × variable dual = 0. Si sobra, el recurso vale 0 al margen. La holgura (una cantidad) no es el precio."},
+{id:"b3p05a",t:"STK",q:"(P5) Descuento con escalón: C_1 si Q < a, y C_2 < C_1 si Q ≥ a. Se calculan Q_1* (con C_1) y Q_2* (con C_2). ¿Cuál es el procedimiento?",
+ o:["Como C_2 < C_1, Q_2* > Q_1*. Si Q_2* ≥ a, Q_2* es el óptimo; si no, se comparan CT_1(Q_1*) y CT_2(a)",
+    "Como C_2 < C_1, Q_2* > Q_1*. Si Q_2* ≥ a, Q_2* es el óptimo; si no, se comparan CT_1(Q_1*) y CT_2(Q_2*)",
+    "Como C_2 < C_1, Q_2* < Q_1*. Si Q_1* ≥ a, Q_1* es el óptimo; si no, se elige a",
+    "Como C_2 < C_1, Q_2* < Q_1*. Se elige siempre el lote con menor precio unitario"],a:0,
+ x:"Q* = √(2DL/(C·i)): con precio menor, lote mayor. Si Q_2* < a, ese lote no tiene descuento (no es posible a C_2), y el mejor punto con descuento es el borde a. Se comparan los CT, no los precios."},
+{id:"b3p05b",t:"STK",q:"(P5) Ley de precios con escalón en a = 300. Con el precio sin descuento ya da Q_1* = 450. ¿Qué se concluye?",
+ o:["Q_2* también supera a (porque Q_2* > Q_1* > a), y el óptimo es Q_2*, con precio C_2",
+    "Q_2* también supera a, pero el óptimo es Q_1*, porque es el que se calculó con el precio de lista",
+    "Hay que comparar CT_1(Q_1*) con CT_2(a), como en todos los casos",
+    "Hay que comparar CT_2(Q_2*) con CT_2(a)"],a:0,
+ x:"Con el precio bajo, toda la curva de CT queda por debajo de la de C_1, y su mínimo (Q_2*) cae en el tramo con descuento. No hace falta comparar con nada."},
+{id:"b3p06",t:"SPX",q:"(P6) Modelo: ① 2x_1 + x_2 ≤ 10, ② x_1 + 3x_2 ≥ 6, ③ x_1 − x_2 = 2, x ≥ 0. ¿En qué restricciones hay que agregar variables ficticias para el simplex?",
+ o:["En ② y ③: la ≥ lleva un exceso (con −1) y una ficticia; la = lleva sólo la ficticia",
+    "En ② y ③: la ≥ lleva una holgura (con +1) y una ficticia; la = lleva un exceso y una ficticia",
+    "Sólo en ②: la = ya es una ecuación y no necesita nada",
+    "Sólo en ①: las ≤ son las que necesitan completar la identidad"],a:0,
+ x:"La ficticia se agrega donde no hay una variable con +1 que sirva para la base inicial (B = I): en las ≥ (el exceso entra con −1) y en las = (no tienen holgura). Con b ≥ 0. En un Max van con −M, en un Min con +M."},
+{id:"b3p07",t:"STK",q:"(P7) ¿Qué caracteriza a un sistema de revisión periódica?",
+ o:["Lo activa el tiempo: se revisa cada T fijo y se pide una cantidad variable (lo que falta), sin registro permanente; el stock de seguridad cubre T + LT",
+    "Lo activa el tiempo: se revisa cada T fijo y se pide siempre la misma cantidad Q*, sin registro permanente; el stock de seguridad cubre sólo LT",
+    "Lo activa la demanda: se pide Q* cada vez que el stock llega al punto de pedido, con registro permanente",
+    "Lo activa la demanda: se pide una cantidad variable cada vez que el stock llega al punto de pedido"],a:0,
+ x:"Momento fijo y cantidad variable: Q = d̄·(T + LT) + SS − existencias − pendientes. Por cubrir T + LT tiene más stock de seguridad que el punto de pedido. Se usa para artículos C y para agrupar pedidos a un proveedor."},
+{id:"b3p08",t:"ENT",q:"(P8) Un programa es binario puro: sus n variables sólo pueden valer 0 o 1. ¿Qué se puede asegurar?",
+ o:["Tiene a lo sumo 2^n soluciones posibles: si es factible, tiene óptimo finito (no puede ser no acotado), y en principio se puede resolver enumerando",
+    "Tiene a lo sumo 2^n soluciones posibles: siempre es factible, y el relajado da directamente la solución binaria",
+    "Como sus variables son enteras, el simplex sobre el relajado da siempre el óptimo binario",
+    "Como sus variables son enteras, la región factible es convexa y el óptimo está en un vértice del relajado"],a:0,
+ x:"Un conjunto finito de puntos no puede dar un Z infinito. Puede no ser factible (por ejemplo, x_1 + x_2 ≥ 3 con dos binarias). El relajado (0 ≤ x ≤ 1) puede dar fraccionarios: es sólo una cota. El conjunto de puntos binarios no es convexo."},
+{id:"b3p09",t:"TTA",q:"(P9) Un problema de transporte (orígenes → destinos) pasa a ser de transbordo al habilitar depósitos intermedios. ¿Qué pasa con las restricciones?",
+ o:["Siguen las de oferta y de demanda (como balance de cada origen y destino), y se agrega una ecuación de conservación por cada nodo de transbordo: lo que entra es igual a lo que sale",
+    "Siguen las de oferta y de demanda, y se agrega una ecuación por cada nodo de transbordo con su capacidad de almacenamiento como término independiente",
+    "Se eliminan las de oferta y de demanda, porque ahora todo pasa por los depósitos",
+    "Se eliminan las de los destinos y se reemplazan por las de los depósitos"],a:0,
+ x:"Los orígenes siguen mandando lo que tienen y los destinos siguen recibiendo lo que piden. Lo nuevo son los nodos de paso, cada uno con entradas − salidas = 0. Si un depósito además consume o aporta mercadería, ese término deja de ser 0. Los algoritmos de transporte se pueden usar si se lo formula balanceado."},
+{id:"b3p10a",t:"DUA",q:"(P10) Primal de MÁXIMO con restricciones ① ≤, ② ≥ y ③ =. Al pasar al dual (de mínimo), las variables duales son…",
+ o:["u_1 ≥ 0, u_2 ≤ 0, u_3 libre",
+    "u_1 ≤ 0, u_2 ≥ 0, u_3 libre",
+    "u_1 ≥ 0, u_2 ≥ 0, u_3 = 0, porque las igualdades no generan variable dual",
+    "u_1 ≥ 0, u_2 ≥ 0, u_3 ≥ 0, porque todas las variables duales son no negativas"],a:0,
+ x:"Primal Max: ≤ → u ≥ 0; ≥ → u ≤ 0; = → u libre. Coincide con el signo del valor implícito. Si antes se multiplica la ≥ por −1 (queda ≤), su u pasa a ser ≥ 0, pero su b entra al dual con el signo cambiado."},
+{id:"b3p10b",t:"DUA",q:"(P10) Primal de MÍNIMO con restricciones ① ≥, ② ≤ y ③ =, y x ≥ 0. En el dual (de máximo)…",
+ o:["u_1 ≥ 0, u_2 ≤ 0, u_3 libre, y cada x_j ≥ 0 da una restricción ≤",
+    "u_1 ≥ 0, u_2 ≤ 0, u_3 libre, y cada x_j ≥ 0 da una restricción ≥",
+    "u_1 ≤ 0, u_2 ≥ 0, u_3 libre, y cada x_j ≥ 0 da una restricción ≤",
+    "u_1 ≤ 0, u_2 ≥ 0, u_3 libre, y cada x_j ≥ 0 da una restricción ≥"],a:0,
+ x:"En un Min la restricción «natural» es la ≥: Min cx con Ax ≥ b da Max b·u con Aᵀu ≤ c y u ≥ 0. Por eso ≥ → u ≥ 0, ≤ → u ≤ 0, = → libre, y las x ≥ 0 dan restricciones ≤."},
+{id:"b3p11",t:"STK",q:"(P11) Stock de seguridad con plazo de provisión constante: [[SS = z\\,S_D\\sqrt{LT}]]. ¿Qué lo modifica y qué no?",
+ o:["Lo modifican el RF (vía z), la variabilidad de la demanda (S_D) y la duración del LT; no lo modifican Q, L, C, i ni la demanda media",
+    "Lo modifican el RF (vía z), la variabilidad de la demanda y la duración del LT, y también la demanda media, porque sube el punto de pedido",
+    "Lo modifican Q y L, porque lotes más grandes exigen más protección; el RF no lo modifica",
+    "Lo modifican Q y L; el LT no lo modifica, porque es constante"],a:0,
+ x:"La demanda media cambia el punto de pedido (PP = D̄·LT + SS), no el SS: el SS sólo protege la variabilidad. Que el LT sea constante quiere decir que no varía, no que su duración no importe: un LT más largo acumula más incertidumbre (√LT)."},
+{id:"b3p12",t:"TTA",q:"(P12) ¿Cuándo se agrega un destino ficticio en un transporte, y qué significa en el óptimo?",
+ o:["Cuando la oferta total supera a la demanda total: recibe el excedente con costo 0, y lo que se le envía es capacidad ociosa de cada origen",
+    "Cuando la oferta total supera a la demanda total: recibe el excedente con costo M, y lo que se le envía es demanda insatisfecha",
+    "Cuando la demanda total supera a la oferta total: recibe el faltante con costo 0, y lo que se le envía es demanda insatisfecha",
+    "Cuando la demanda total supera a la oferta total: envía el faltante con costo 0 a cada destino"],a:0,
+ x:"Sobra oferta → hace falta un destino que la absorba. Costo 0 porque esos envíos no existen. Cuando falta oferta es al revés: un origen ficticio, y lo que envía es demanda insatisfecha."},
+{id:"b3p13a",t:"STK",q:"(P13) Demanda constante de 40 u/día y LT de 5 días. ¿Cuáles son la media y la varianza de la demanda durante el LT?",
+ o:["Media D·LT = 200 y varianza 0: no hay incertidumbre, por eso no hace falta stock de seguridad y PP = 200",
+    "Media D·LT = 200 y varianza 200: en una demanda constante la varianza es igual a la media",
+    "Media 40 y varianza 0, porque la media se expresa por día",
+    "Media 40 y varianza 40 · 5 = 200"],a:0,
+ x:"Constante quiere decir sin variabilidad. Es el supuesto del modelo básico: PP = D·LT, sin stock de seguridad. La media sí se acumula a lo largo del LT."},
+{id:"b3p13b",t:"STK",q:"(P13) Demanda diaria aleatoria con media 40 y desvío S_D = 6 (días independientes), y LT constante de 9 días. Media y desvío de la demanda durante el LT:",
+ o:["Media 40 · 9 = 360; varianza 9 · 6² = 324, desvío √324 = 18",
+    "Media 40 · 9 = 360; desvío 6 · 9 = 54",
+    "Media 40 y desvío 6: no cambian con el LT",
+    "Media 360; desvío 6 / √9 = 2"],a:0,
+ x:"Las medias se suman y las varianzas también: media = D̄·LT, varianza = LT·S_D², desvío = S_D·√LT. Por la propiedad reproductiva (o el teorema central del límite) se trabaja con la normal."},
+{id:"b3p13c",t:"STK",q:"(P13) Ahora el LT también es aleatorio: media 9 días y desvío S_LT = 1 día, con D̄ = 40 y S_D = 6 por día. Según el apunte, el desvío de la demanda durante el LT es…",
+ o:["[[\\sqrt{9 \\cdot 6^2 + 40^2 \\cdot 1^2} = \\sqrt{1924} \\approx 43{,}9]]",
+    "[[\\sqrt{9 \\cdot 6^2} = 18]], porque la variabilidad del LT no afecta a la demanda",
+    "[[6 \\cdot \\sqrt{9} + 40 \\cdot 1 = 58]], sumando los desvíos",
+    "[[\\sqrt{9 \\cdot 6^2 + 1^2} \\approx 18{,}03]], sumando sólo la varianza del LT"],a:0,
+ x:"El apunte (Mascó–Torrent): S_DLT = √(LT̄·S_D² + D̄²·S_LT²). El segundo término pesa mucho: un día más de LT significa 40 unidades más de demanda. La media sigue siendo D̄·LT̄ = 360."},
+{id:"b3p14",t:"SEN",q:"(P14) ¿Son lo mismo el valor implícito de una restricción y su precio dual? ¿Qué indican?",
+ o:["Sí: es el mismo número (la variable dual u_i en el óptimo); indica cuánto cambia Z* por cada unidad adicional de b_i, mientras b_i siga dentro de su rango",
+    "Sí: es el mismo número; indica cuánto cambia Z* por cada unidad adicional de b_i, para cualquier aumento de b_i",
+    "No: el valor implícito es de una restricción y el precio dual es de una variable (es su costo reducido)",
+    "No: el precio dual sale del dual y el valor implícito de la tabla del primal, y en general dan distinto"],a:0,
+ x:"u* = c_B·B⁻¹: los valores implícitos del primal son la solución óptima del dual. También se los llama precio sombra o costo marginal. Valen al margen: fuera del rango de b cambia la base y cambia el número."},
+{id:"b3p15",t:"STK",q:"(P15) ¿Qué relación hay entre CT(Q) y la expresión [[C(Q)\\cdot Q + L + C(Q)\\cdot i\\cdot A(Q)]]?",
+ o:["La expresión es el costo de todo un lote (comprar Q, pedir una vez y mantenerlo un ciclo); CT(Q) es ese costo dividido por Q: el costo por unidad en el momento de la utilización",
+    "La expresión es el costo de todo un lote; CT(Q) es ese costo multiplicado por D: el costo anual",
+    "Son lo mismo: las dos son el costo por unidad",
+    "Son lo mismo: las dos son el costo anual"],a:0,
+ x:"CT(Q) = C(Q) + L/Q + C(Q)·i·A(Q)/Q. Con A(Q) = Q²/(2D) queda la del básico. El costo anual es CT·D. (El PDF de preguntas frecuentes iguala CT(Q) a la expresión sin dividir: es un error.)"},
+{id:"b3p16",t:"CBA",fixed:true,q:"(P16) Un PL que verifica la hipótesis de rango completo: se conoce su conjunto de soluciones, pero no se sabe si tiene solución finita o no acotada. ¿Qué puede asegurarse con esa sola información?",
+ o:["Que el óptimo, si existe, es único y está en un punto extremo, porque la región es convexa.",
+    "Que existe una solución básica factible óptima, porque toda región con puntos extremos tiene óptimo.",
+    "Que tiene al menos un punto extremo (una solución básica factible) y que sus puntos extremos son finitos, a lo sumo C(n, m).",
+    "Que la región factible es acotada, porque tiene un número finito de puntos extremos."],a:2,
+ x:"Por el teorema fundamental, si hay solución factible hay una SBF (un punto extremo), y las SBF son a lo sumo C(n, m). Nada más se puede asegurar: el óptimo puede no existir (solución no acotada), puede no ser único (alternativas), y la región puede ser no acotada aunque tenga finitos vértices."},
+{id:"b3p17",t:"ENT",fixed:true,q:"(P17) Un analista resuelve un programa lineal entero con un software de ramificación y poda. El reporte trae precios sombra y análisis de sensibilidad, y los toma como afirmaciones válidas sobre su problema entero. ¿Es correcta esa interpretación?",
+ o:["Sí, siempre que el cambio analizado quede dentro del rango de sensibilidad informado.",
+    "No: esos valores son del último programa relajado (el original sin la condición de enteros más las restricciones que agregó la ramificación) y no describen al problema entero.",
+    "Sólo es válida si el programa relajado inicial ya dio una solución entera.",
+    "Sí para los precios sombra, pero no para los rangos de los coeficientes de la función objetivo."],a:1,
+ x:"La sensibilidad supone que la base óptima se mantiene ante cambios chicos. En un entero, un cambio chico puede llevar el óptimo a otro punto entero lejano, así que esos números no valen para el problema entero."},
+{id:"b3p18",t:"SPX",fixed:true,q:"(P18) En una tabla Simplex, la columna de la variable no básica x_j tiene coeficiente de sustitución positivo en la fila de x_3, negativo en la fila de x_4 y nulo en la fila de x_2. Si x_j ingresa a la base, ¿qué ocurre con esas variables a medida que x_j se incrementa?",
+ o:["x_3 y x_4 disminuyen, y x_2 sale de la base por tener coeficiente nulo.",
+    "x_3 aumenta, x_4 disminuye (y es candidata a salir de la base) y x_2 no cambia.",
+    "Las tres quedan igual; sólo cambia z, a razón de c_j − z_j por unidad.",
+    "x_3 disminuye (y es candidata a salir de la base), x_4 aumenta y x_2 no cambia."],a:1,
+ x:"La cátedra define el coeficiente de sustitución como ∂x_i/∂x_j = −y_ij (pizarra del 1/9). Positivo en x_3 → x_3 aumenta. Negativo en x_4 → su y es positivo, x_4 baja y es la candidata a salir. Nulo en x_2 → no cambia. Atención: si el enunciado llamara «coeficiente de sustitución» al y_ij de la tabla (como hace el PDF de preguntas frecuentes), los signos se invierten y sería la otra opción del par (x_3 baja, x_4 sube). Fijate cómo lo define."}
+];
+
+const ALLQ = [...BANK1, ...BANK2, ...BANK3];
 let BANKSEL = 1;
-try { BANKSEL = +localStorage.getItem("io-bank") === 2 ? 2 : 1; } catch(e){}
-let BANK = BANKSEL === 2 ? BANK2 : BANK1;
-function useBank(n){ BANKSEL = n; BANK = n === 2 ? BANK2 : BANK1; try { localStorage.setItem("io-bank", String(n)); } catch(e){} }
+try { const v = +localStorage.getItem("io-bank"); BANKSEL = (v === 2 || v === 3) ? v : 1; } catch(e){}
+let BANK = BANKSEL === 3 ? BANK3 : BANKSEL === 2 ? BANK2 : BANK1;
+function useBank(n){ BANKSEL = n; BANK = n === 3 ? BANK3 : n === 2 ? BANK2 : BANK1; try { localStorage.setItem("io-bank", String(n)); } catch(e){} }
 
 /* ---------- utilidades ---------- */
 const LET = ["a","b","c","d","e"];
@@ -1335,6 +1484,7 @@ function record(id, ok){
 
 /* Mezcla: cambia el orden de los pares y dentro de cada par; la e queda última. */
 function makeItem(q){
+  if (q.fixed){ const order=[0,1,2,3]; if(q.e) order.push(4); return {q, order, correct: order.indexOf(q.a), ans:null, struck:new Set(), flag:false, checked:false}; }
   let pairs = [[0,1],[2,3]].map(p => Math.random()<.5 ? p : [p[1],p[0]]);
   if (Math.random()<.5) pairs.reverse();
   const order = pairs.flat(); if (q.e) order.push(4);
@@ -1371,12 +1521,13 @@ function renderHome(){
     <div class="banks" role="tablist" aria-label="Banco de preguntas">
       <button class="chip" data-bank="1" aria-pressed="${BANKSEL===1}">Banco 1<span class="n">${BANK1.length}</span></button>
       <button class="chip" data-bank="2" aria-pressed="${BANKSEL===2}">Banco 2 · nuevas, más largas<span class="n">${BANK2.length}</span></button>
+      <button class="chip" data-bank="3" aria-pressed="${BANKSEL===3}">Banco 3 · las que tomaron<span class="n">${BANK3.length}</span></button>
     </div>
     <p class="muted">${BANK.length} preguntas de opción múltiple armadas con el material de circulación y el resumen del recuperatorio. Las opciones vienen de a pares casi iguales, como en el parcial: el primer descarte es fácil y la decisión fina está dentro del par.</p>
   </header>
 
   <div class="modes">
-    <button class="mode" id="go-sim"><span class="k">Simulacro</span><h3>20 preguntas, nota al final</h3><p>Reparto por tema parecido al banco de preguntas. Podés volver atrás, marcar dudosas y entregar cuando quieras.</p></button>
+    <button class="mode" id="go-sim"><span class="k">Simulacro</span><h3>${BANK.length <= 30 ? `Las ${BANK.length}, mezcladas` : '20 preguntas'}, nota al final</h3><p>Reparto por tema parecido al banco de preguntas. Podés volver atrás, marcar dudosas y entregar cuando quieras.</p></button>
     <button class="mode" id="go-prac"><span class="k">Práctica</span><h3>Por tema, con corrección inmediata</h3><p>Después de cada respuesta ves por qué es la correcta y en qué falla su gemela.</p></button>
     <button class="mode" id="go-err" ${wrongIds.length?"":"disabled"}><span class="k">Repaso</span><h3>Las que erraste (${wrongIds.length})</h3><p>${wrongIds.length?"Preguntas cuyo último intento fue incorrecto.":"Todavía no hay preguntas falladas guardadas en este navegador."}</p></button>
   </div>
@@ -1397,7 +1548,7 @@ function renderHome(){
     <div class="stack" style="gap:8px">
       <span class="eyebrow">Temas para la práctica</span>
       <div class="chips" id="chips">
-        ${TOPICS.map(([k,n])=>`<button class="chip" data-k="${k}" aria-pressed="${pickTopics.has(k)}">${n}<span class="n">${counts[k]}</span></button>`).join("")}
+        ${TOPICS.filter(([k])=>counts[k]).map(([k,n])=>`<button class="chip" data-k="${k}" aria-pressed="${pickTopics.has(k)}">${n}<span class="n">${counts[k]}</span></button>`).join("")}
       </div>
     </div>
   </section>
@@ -1417,7 +1568,7 @@ function renderHome(){
     </div>
     <p class="muted" style="font-size:14px">Cada número es una pregunta del banco, coloreada según tu último intento: <span class="pill ok">bien</span> <span class="pill bad">mal</span> y en blanco las que todavía no viste. Tocá un número para practicar el tema desde esa pregunta.</p>
     <div class="tmap">
-      ${TOPICS.map(([k,n])=>{
+      ${TOPICS.filter(([k])=>BANK.some(q=>q.t===k)).map(([k,n])=>{
         const qs=BANK.filter(q=>q.t===k), st=qs.map(q=>STATS[q.id]?.last);
         const ok=st.filter(x=>x===true).length, bad=st.filter(x=>x===false).length, none=st.length-ok-bad;
         return `<div class="trow">
@@ -1457,13 +1608,13 @@ function startTopic(k, idx, onlyWrong){
   renderQuiz(); window.scrollTo(0,0);
 }
 
+function simPick(){
+  if (BANK.length <= 30) return shuffle(BANK).map(makeItem);
+  const items=[]; TOPICS.forEach(([k])=> shuffle(BANK.filter(q=>q.t===k)).slice(0,SIM_WEIGHTS[k]||0).forEach(q=>items.push(makeItem(q)))); return items;
+}
 function startSim(){
   const limit = +document.getElementById("timer").value;
-  const items = [];
-  TOPICS.forEach(([k])=>{
-    const pool = shuffle(BANK.filter(q=>q.t===k)).slice(0, SIM_WEIGHTS[k]||0);
-    pool.forEach(q=>items.push(makeItem(q)));
-  });
+  const items = simPick();
   S = {mode:"sim", items, i:0, limit, end: limit? Date.now()+limit*60000 : null, done:false};
   renderQuiz(); startTimer();
 }
@@ -1640,8 +1791,7 @@ function finish(){
 }
 function startSimFromResults(){
   const limit = S.limit;
-  const items = [];
-  TOPICS.forEach(([k])=> shuffle(BANK.filter(q=>q.t===k)).slice(0,SIM_WEIGHTS[k]||0).forEach(q=>items.push(makeItem(q))));
+  const items = simPick();
   S = {mode:"sim", items, i:0, limit, end: limit? Date.now()+limit*60000:null, done:false};
   renderQuiz(); startTimer(); window.scrollTo(0,0);
 }
