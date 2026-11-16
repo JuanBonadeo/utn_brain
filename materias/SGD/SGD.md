@@ -23,6 +23,14 @@ _(sin unidades cargadas todavía)_
 - **Proyecto: Spine-Guard** → `entregables/Spine-Guard/` (submódulo git,
   repo propio en github.com/JuanBonadeo/Spine-Guard). Monitor de postura con
   webcam (OpenCV + MediaPipe).
+- **TPI: UTNHub** (Grupo 7) → `entregables/utnhub/informe-utnhub.md` (+ `.pdf`)
+  Documentación final del TPI: se imprime por duplicado y se deja en el 5° piso.
+  Asistente para alumnos de la FRRO: chatbot agéntico (LangGraph + Gemini + RAG
+  en pgvector), ingesta de novedades con IA en AWS Lambda, núcleo académico
+  (correlatividades, promedio, horarios, calendario .ics). Repo:
+  github.com/augustobrizio/UTNHub (clon local en `D:/Utn/4° Año/Soporte/TPI-Soporte`),
+  app en utnhub.up.railway.app. PDF: `node scripts/sgd/utnhub-informe/build.js`;
+  capturas en `figs/utnhub-*.jpg`.
 
 ## Log
 - Archivo creado.
@@ -40,3 +48,6 @@ _(sin unidades cargadas todavía)_
 - 2026-11-03: se documenta el submódulo Spine-Guard en Entregables; se borran
   las opciones A/B/C descartadas del deck de serverless y sus generadores.
 - 2026-11-03: el generador del deck pasó a `scripts/sgd/pptx-serverless/`.
+- 2026-11-16: informe final del TPI UTNHub (24 págs., con el estilo del informe de
+  referencia: Aptos, títulos en azul, carátula de la UTN), armado desde el repo y la
+  app en producción, con diagramas de arquitectura, dominio, agente y pipeline.
