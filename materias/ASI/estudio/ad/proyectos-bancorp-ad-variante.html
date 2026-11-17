@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>ASI AD — 4 proyectos Bancorp (variante B)</title>
+<style>
+@page{size:A4;margin:8mm 9mm}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#fff;font-family:"Segoe UI",Arial,sans-serif;font-size:7.9pt;line-height:1.32;color:#151515}
+.head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:2.2mm}
+.head .u{font-family:Arial,sans-serif;font-style:italic;font-size:8pt;line-height:1.3;color:#111}
+.head .u b{display:block;font-style:normal;font-size:10.5pt;margin-top:.6mm}
+.head img{height:10mm}
+.rules{border-top:1.2pt solid #1155cc;border-bottom:.5pt solid #9aa3ad;padding:1mm 0;margin-bottom:2.6mm;font-size:7.6pt;color:#333;display:flex;justify-content:space-between;gap:4mm}
+.proj{border:.6pt solid #9aa3ad;margin-bottom:2.4mm;break-inside:avoid}
+.proj>h2{font-size:10.4pt;color:#fff;background:#1155cc;padding:1mm 2.4mm;display:flex;justify-content:space-between;align-items:baseline;gap:3mm}
+.proj>h2 span{font-weight:400;font-size:7.8pt;opacity:.92;text-align:right}
+.g{display:grid;grid-template-columns:1fr 1fr 1fr}
+.c{padding:1.8mm 2.2mm;border-right:.4pt solid #d0d5db}
+.c:last-child{border-right:0}
+h3{font-size:8pt;color:#1155cc;text-transform:uppercase;letter-spacing:.3pt;margin:1.8mm 0 .6mm}
+h3:first-child{margin-top:0}
+h3.r{color:#9c2a22}h3.v{color:#2e5e2f}
+ul,ol{padding-left:3.6mm}li{margin:.3mm 0}
+p{margin:.4mm 0}
+b{font-weight:700}
+.s,.res{display:inline-block;color:#fff;font-weight:700;padding:0 1.4mm;border-radius:1mm}
+.s{background:#9c2a22}.res{background:#2e5e2f}
+.k{color:#555;font-style:italic}
+.page{break-after:page}
+</style></head><body>
+
+<div class="head">
+  <div class="u">Universidad Tecnológica Nacional - Facultad Regional Rosario<br>Carrera: Ingeniería en Sistemas de Información<br>Asignatura: Administración de Sistemas de Información<b>Contexto: BANCORP · AD — los 4 proyectos del 1er año · variante B</b></div>
+  <img src="../../figs/bancorp-logo.png" alt="Bancorp">
+</div>
+<div class="rules"><span>Áreas TI: [01] Infra · [02] Ciberseguridad/SOC · [03] Ing. Software · [04] Ops TI/Core · [05] PMO · [06] Mesa de Ayuda · CIO</span><span>S = P × I (1–5) · preventivo baja P, detectivo/límites baja I · contingencia → continuidad → recuperación</span></div>
+
+
+<!-- ============ BILLETERA ============ -->
+<section class="proj">
+<h2>1 · Billetera Virtual Propia <span>app para jóvenes y no bancarizados · transferencias inmediatas · recargas · QR · FCI</span></h2>
+<div class="g">
+<div class="c">
+<h3>Objetivos</h3>
+<p><b>Negocio:</b> que el <b>40%</b> de los usuarios activos la use <b>8+ veces por mes</b> y que el <b>20%</b> de los de 18 a 25 contrate un <b>2º producto</b>, a 18 meses del lanzamiento. <span class="k">Se mide con operaciones por usuario y productos por cliente.</span></p>
+<p><b>TI:</b> transferencias confirmadas en <b>&lt; 10 s</b> el <b>99%</b> de las veces y <b>&lt; 1% de cierres</b> de la app por sesión, desde jun-2027. <span class="k">Monitoreo de [04] y reporte de fallas.</span></p>
+<h3>Incidente y puesto</h3>
+<p>"Las transferencias a otros bancos salen rechazadas": [06] → <b>funcional</b> a [04] (core y red de transferencias) → <b>jerárquico</b> al CIO y Operaciones Bancarias si es masivo.</p>
+<p><b>Puesto del escalado:</b> especialista de Sistemas Core [04]. <b>Competencias específicas:</b> core bancario, transferencias interbancarias y clearing, monitoreo en tiempo real.</p>
+<h3>Alcance</h3><p><b>Entra:</b> cuenta digital, transferencias, recargas, QR. <b>No entra:</b> préstamos, tarjeta de crédito, chat con personas. <b>Termina:</b> 3 meses de operación estable y acta de Banca Minorista.</p>
+</div>
+<div class="c">
+<h3 class="r">Riesgo</h3>
+<p><b>La plataforma se satura en la campaña de lanzamiento y la app no responde.</b> SEI: <b>2.1.1 Capacidad</b> (hardware).</p>
+<p><b>P 3:</b> campaña masiva, pico de altas el primer día, pruebas de carga que no reflejan el uso real.<br>
+<b>I 4:</b> sin pérdida de plata, pero reseñas malas y jóvenes que desinstalan; se resiente la <b>Innovación</b>. → <span class="s">S 12</span></p>
+<p><b>Mitigar:</b> pruebas de carga al triple del pico y lanzamiento por región (baja P) + escalado automático y cola de espera (baja I). → <span class="res">P1 × I3 = 3</span></p>
+<h3 class="r">Contingencia</h3>
+<p class="k">Disparador: respuesta de más de 5 s o más del 2% de errores durante 5 min.</p>
+<ol><li>Saturación → [01] suma servidores en la nube.</li>
+<li>Sigue lenta → [03] activa la cola y apaga recargas y FCI.</li>
+<li>Reclamos → [06] con guion y aviso en la app.</li>
+<li>Más de 1 h → el CIO pide frenar la campaña.</li></ol>
+<p><b>Continuidad:</b> Home Banking y sucursales. <b>Recuperación:</b> capacidad redimensionada y escalado probado.</p>
+</div>
+<div class="c">
+<h3 class="v">Canvas (startup desde afuera)</h3>
+<p><b>Startup:</b> "Sumá", beneficios y cashback para billeteras bancarias.</p>
+<p><b>Segmento:</b> bancos con billetera para jóvenes de menos de 2 años que necesitan subir el uso diario (6 a 8 en el país).</p>
+<p><b>Propuesta de valor:</b> que el usuario abra la billetera todos los días por descuentos cercanos, sin que el banco negocie con cada comercio.</p>
+<p><b>Get:</b> integración gratis los primeros 2 meses.<br><b>Keep:</b> reporte mensual de operaciones generadas por los beneficios.<br><b>Grow:</b> sumar beneficios para la tarjeta de crédito.</p>
+<h3>Adquisiciones</h3>
+<p>Push y SMS (SaaS) · pruebas de carga (licencia) · nube con escalado automático (por uso) · auditoría de seguridad (tercerizada). <b>Criterios:</b> escalabilidad en picos, tiempo de respuesta, normativa BCRA, soporte 24×7, TCO.</p>
+</div>
+</div>
+</section>
+
+<!-- ============ OMNICANALIDAD ============ -->
+<section class="proj">
+<h2>2 · Omnicanalidad <span>misma lógica en Home Banking y app · operación que empieza en web y termina en el celular · token unificado</span></h2>
+<div class="g">
+<div class="c">
+<h3>Objetivos</h3>
+<p><b>Negocio:</b> subir del <b>30% al 45%</b> los productos contratados por canales digitales y bajar del <b>8% al 5%</b> anual las bajas por mala experiencia digital, antes de dic-2028. <span class="k">Contrataciones por canal y bajas con motivo.</span></p>
+<p><b>TI:</b> <b>100%</b> de las operaciones sobre la capa común y una funcionalidad nueva en los dos canales en <b>1 semana en vez de 4</b>, antes de dic-2027.</p>
+<h3>Incidente y puesto</h3>
+<p>"El cliente ve un saldo distinto en la web y en la app": [06] → <b>funcional</b> a [03] (base de datos) o [04] si viene del core → <b>jerárquico</b> al CIO si es masivo.</p>
+<p><b>Puesto:</b> DBA del Core y Data Warehouse [03]. <b>Competencias:</b> bases de datos del core, replicación y consistencia de datos, consultas de auditoría.</p>
+<h3>Alcance</h3><p><b>Entra:</b> transferencias, pagos y plazos fijos en la capa común, pantallas equivalentes, token unificado. <b>No entra:</b> banca empresas, chatbot, Open Banking. <b>Termina:</b> se apaga la lógica vieja de cada canal.</p>
+</div>
+<div class="c">
+<h3 class="r">Riesgo</h3>
+<p><b>Al pasar una operación de la web al celular, un tercero se queda con la sesión y confirma una transferencia.</b> SEI: <b>1.2 Fraude</b>, por una debilidad de <b>2.2 Parámetros de seguridad</b>.</p>
+<p><b>P 2:</b> ataque difícil y hay token, pero el traspaso es nuevo y atractivo.<br>
+<b>I 5:</b> plata del cliente, BCRA, medios, <b>Confianza</b>. → <span class="s">S 10</span></p>
+<p><b>Mitigar:</b> revalidar con el token y vencimiento a los 10 min (baja P) + tope de monto y alerta del SOC (baja I). → <span class="res">P1 × I3 = 3</span></p>
+<h3 class="r">Contingencia</h3>
+<p class="k">Disparador: el SOC ve traspasos desde celulares no registrados, o un cliente denuncia una transferencia.</p>
+<ol><li>Sospecha → [02] apaga el traspaso; cada canal sigue solo.</li>
+<li>Cuentas afectadas → [02] y [04] las bloquean y retienen lo que está en curso.</li>
+<li>Denuncias → [06] y plataforma con guion; se evalúa el reintegro.</li>
+<li>Confirmado → el CIO informa a Gerencia y Cumplimiento (BCRA).</li></ol>
+<p><b>Continuidad:</b> canales por separado. <b>Recuperación:</b> traspaso corregido y pentest.</p>
+</div>
+<div class="c">
+<h3 class="v">Canvas (startup desde afuera)</h3>
+<p><b>Startup:</b> "Pantalla Única", componentes de interfaz que sirven para web y app.</p>
+<p><b>Segmento:</b> bancos medianos con equipos chicos que mantienen web y app por separado.</p>
+<p><b>Propuesta de valor:</b> cada pantalla igual en los dos canales con la mitad del trabajo y accesible desde el día uno.</p>
+<p><b>Get:</b> migración gratis de 5 pantallas.<br><b>Keep:</b> actualizaciones de accesibilidad y de normativa incluidas.<br><b>Grow:</b> componentes para cajeros y tótems de sucursal.</p>
+<h3>Adquisiciones</h3>
+<p>Replicación de datos (licencia) · consultoría de arquitectura (tercerizada) · ambientes de prueba en la nube (por uso) · pentest del traspaso. <b>Criterios:</b> compatibilidad con el core, consistencia de datos, seguridad, experiencia en bancos, TCO.</p>
+</div>
+</div>
+</section>
+
+<div class="page"></div>
+
+<div class="head">
+  <div class="u">Universidad Tecnológica Nacional - Facultad Regional Rosario<br>Carrera: Ingeniería en Sistemas de Información<br>Asignatura: Administración de Sistemas de Información<b>Contexto: BANCORP · AD — los 4 proyectos del 1er año · variante B</b></div>
+  <img src="../../figs/bancorp-logo.png" alt="Bancorp">
+</div>
+<div class="rules"><span>Áreas TI: [01] Infra · [02] Ciberseguridad/SOC · [03] Ing. Software · [04] Ops TI/Core · [05] PMO · [06] Mesa de Ayuda · CIO</span><span>S = P × I (1–5) · preventivo baja P, detectivo/límites baja I · contingencia → continuidad → recuperación</span></div>
+
+
+<!-- ============ COPILOTO IA ============ -->
+<section class="proj">
+<h2>3 · Copiloto Operativo con IA <span>LLM privado entrenado con circulares BCRA, manuales y procedimientos · para el personal de sucursales</span></h2>
+<div class="g">
+<div class="c">
+<h3>Objetivos</h3>
+<p><b>Negocio:</b> bajar de <b>3 semanas a 1</b> la capacitación de un cajero nuevo y un <b>30%</b> las observaciones de Auditoría por operaciones fuera de norma, durante 2028. <span class="k">Capital Humano e informes de Auditoría.</span></p>
+<p><b>TI:</b> <b>90%</b> de las consultas resueltas sin derivar y cada circular nueva cargada en <b>&lt; 48 h</b>, antes de dic-2027. <span class="k">Registro de consultas.</span></p>
+<h3>Incidente y puesto</h3>
+<p>"El copiloto no responde en las sucursales de la Región Patagónica": [06] → <b>funcional</b> a [01] (enlaces de sucursales) → <b>jerárquico</b> al CIO si hay que contratar más ancho de banda.</p>
+<p><b>Puesto:</b> especialista en Conectividad de Sucursales [01]. <b>Competencias:</b> redes WAN y VPN, enlaces con proveedores de telecomunicaciones, monitoreo de red.</p>
+<h3>Alcance</h3><p><b>Entra:</b> piloto en 5 sucursales y despliegue por región, circulares, manuales y políticas, capacitación de 2 h. <b>No entra:</b> datos de clientes, uso por clientes. <b>Termina:</b> 45 sucursales y validación de Cumplimiento.</p>
+</div>
+<div class="c">
+<h3 class="r">Riesgo</h3>
+<p><b>Los empleados no lo usan y siguen llamando a casa central.</b> SEI: <b>1.3 Inacción → habilidad y conocimiento</b> (falta capacitación y cambio de hábito).</p>
+<p><b>P 3:</b> personal con antigüedad, poco tiempo y desconfianza en la IA.<br>
+<b>I 3:</b> sin pérdida directa, pero la inversión no rinde y no se cumplen los objetivos. → <span class="s">S 9</span></p>
+<p><b>Mitigar:</b> referente por sucursal y acceso con un clic desde la caja (baja P) + medir el uso semanal y reforzar donde cae (baja I). → <span class="res">P2 × I2 = 4</span></p>
+<h3 class="r">Contingencia</h3>
+<p class="k">Disparador: menos del 30% de una región lo usa durante 4 semanas.</p>
+<ol><li>Uso bajo → Gestión del Cambio capacita de nuevo.</li>
+<li>Preguntas sin respuesta → [03] ajusta la base.</li>
+<li>Resistencia → los gerentes de sucursal fijan una meta de uso.</li>
+<li>Sigue a los 3 meses → el CIO evalúa rediseñar o pausar.</li></ol>
+<p><b>Continuidad:</b> se sigue atendiendo como hoy. <b>Recuperación:</b> versión mejorada y plan de adopción por región.</p>
+</div>
+<div class="c">
+<h3 class="v">Canvas (startup desde afuera)</h3>
+<p><b>Startup:</b> "Verifica IA", control de calidad de asistentes con IA.</p>
+<p><b>Segmento:</b> bancos y aseguradoras que lanzaron un asistente interno con IA en el último año.</p>
+<p><b>Propuesta de valor:</b> saber antes que el regulador cuándo tu IA responde mal, con un reporte para Cumplimiento.</p>
+<p><b>Get:</b> diagnóstico gratis sobre 200 preguntas.<br><b>Keep:</b> reporte mensual de exactitud.<br><b>Grow:</b> sumar los asistentes de atención a clientes.</p>
+<h3>Adquisiciones</h3>
+<p>IA en nube privada (SaaS) · indexación de documentos · capacitación por región (tercerizada) · mejores enlaces. <b>Criterios:</b> datos dentro del banco, exactitud en pruebas, poco ancho de banda, TCO.</p>
+</div>
+</div>
+</section>
+
+<!-- ============ PORTAL DEL EMPLEADO ============ -->
+<section class="proj">
+<h2>4 · Portal del Empleado (EX) <span>reemplaza la intranet · recibos con firma digital · licencias · evaluaciones · e-learning</span></h2>
+<div class="g">
+<div class="c">
+<h3>Objetivos</h3>
+<p><b>Negocio:</b> del <b>55% al 80%</b> del personal con la capacitación obligatoria (lavado de dinero) en plazo y de <b>10 a 3 días</b> la aprobación de una licencia, en 2028. <span class="k">Certificados y registros de Capital Humano.</span></p>
+<p><b>TI:</b> portal integrado con sueldos y el directorio: alta automática de un empleado en <b>&lt; 24 h</b> y <b>100%</b> migrado desde la intranet, antes de mar-2027.</p>
+<h3>Incidente y puesto</h3>
+<p>"Los videos del e-learning no cargan en las sucursales": [06] → <b>funcional</b> a [01] (servidores y enlaces) → <b>jerárquico</b> al CIO si hay que contratar distribución de contenidos.</p>
+<p><b>Puesto:</b> administrador de servidores y almacenamiento [01]. <b>Competencias:</b> servidores locales y en la nube, almacenamiento, rendimiento de red.</p>
+<h3>Alcance</h3><p><b>Entra:</b> contenidos de la intranet, e-learning con certificados, licencias, evaluaciones. <b>No entra:</b> reclutamiento, personal de proveedores, app propia. <b>Termina:</b> 100% migrado y acta de Capital Humano.</p>
+</div>
+<div class="c">
+<h3 class="r">Riesgo</h3>
+<p><b>El proveedor de la plataforma deja de dar el servicio o sube mucho el precio.</b> SEI: <b>3.3 Procesos de soporte → proveedores</b> / <b>4.3 Cuestiones del negocio</b> (falla del suministro).</p>
+<p><b>P 2:</b> proveedor estable y con contrato, pero hay pocos en el mercado.<br>
+<b>I 4:</b> sin recibos firmados (obligación legal), trámites frenados, <b>Integridad</b>. → <span class="s">S 8</span></p>
+<p><b>Mitigar:</b> evaluar su solvencia antes de contratar (baja P) + SLA, cláusula de salida con exportación de datos y 2º proveedor evaluado (baja I). → <span class="res">P1 × I3 = 3</span></p>
+<h3 class="r">Contingencia</h3>
+<p class="k">Disparador: incumple el SLA 2 meses seguidos o cambia las condiciones.</p>
+<ol><li>Incumplimiento → Administración y Finanzas y [05] activan la salida y exportan los datos.</li>
+<li>Sin servicio → Capital Humano manda los recibos en PDF y firma en papel temporal.</li>
+<li>Migración → [03] pasa al 2º proveedor.</li>
+<li>Siempre → el CIO informa a Gerencia General y a Cumplimiento.</li></ol>
+<p><b>Continuidad:</b> recibos y licencias por mail. <b>Recuperación:</b> nuevo proveedor con un contrato mejor.</p>
+</div>
+<div class="c">
+<h3 class="v">Canvas (startup desde afuera)</h3>
+<p><b>Startup:</b> "Norma Aula", cursos cortos de normativa.</p>
+<p><b>Segmento:</b> bancos y financieras de 300 a 3.000 empleados obligados a capacitar en prevención de lavado.</p>
+<p><b>Propuesta de valor:</b> cumplir la capacitación obligatoria con cursos de 15 min y certificados listos para auditoría, sin armar contenidos.</p>
+<p><b>Get:</b> el curso de lavado de dinero gratis el primer año para 50 empleados.<br><b>Keep:</b> se actualiza solo cuando cambia la norma.<br><b>Grow:</b> cursos de atención al cliente y ciberseguridad.</p>
+<h3>Adquisiciones</h3>
+<p>E-learning (SaaS) · contenidos (tercerizados) · almacenamiento para videos (compra) · soporte de migración. <b>Criterios:</b> certificados válidos, poco ancho de banda, accesibilidad, TCO.</p>
+</div>
+</div>
+</section>
+
+</body></html>
