@@ -66,6 +66,17 @@
   - **Funcional:** a quien sabe otra cosa. Por ejemplo, de [06] a [03] por una falla de una API.
   - **Jerárquico:** a quien puede **autorizar**. Por ejemplo, al CIO por licencias nuevas o un cambio de emergencia.
 
+**Quién hace qué ante un incidente** (si piden "roles responsables"):
+
+| Rol / área | Responsabilidad |
+|---|---|
+| **Técnico de Mesa de Ayuda [06]** (1ª línea) | Recibe, abre el ticket, clasifica y prioriza, busca en la base de conocimiento, resuelve o deriva, y avisa al usuario |
+| **Coordinador de Soporte Interno [06]** | Controla el SLA, decide escalar y avisa a las sucursales si es masivo |
+| **Especialista de 2ª línea** ([03], [01], [04]) | Diagnostica y resuelve la causa técnica, y documenta la solución |
+| **SOC [02]** | Detecta por monitoreo antes de que llamen; investiga si hay fraude |
+| **Coordinador / CIO** (jerárquico) | Autoriza recursos extra o un cambio de emergencia, y comunica a la Gerencia afectada |
+| **Cambios y configuración** | Aprueban e implementan la solución definitiva y actualizan la CMDB |
+
 - **Siempre hay que nombrar:** el **sistema de tickets**, la **base de conocimiento** (cómo se resolvió algo), la **CMDB** (la ficha de cada ítem) y el **SLA** (para validar si el usuario tiene derecho a lo que pide). Sumá algún **KPI**, como el tiempo medio de resolución.
 
 ## U3 — Talento
