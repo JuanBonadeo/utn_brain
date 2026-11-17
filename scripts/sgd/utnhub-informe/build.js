@@ -174,6 +174,7 @@ h2 .num{ min-width:1.4em; }
 h3{ font-size:14pt; margin:18pt 0 6pt; }
 h4{ font-size:11.5pt; font-weight:700; margin:12pt 0 4pt; color:var(--azul2); }
 h2 + h3{ margin-top:8pt; }
+h2.sin-num{ break-before:page; margin-top:0; }  /* anexos: siempre en hoja aparte */
 ul,ol{ margin:0 0 8pt; padding-left:20pt; }
 li{ margin:2pt 0; }
 li::marker{ color:var(--azul2); }
