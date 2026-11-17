@@ -60,7 +60,8 @@ print(json.dumps(out))`]).toString());
 }
 
 /* ───────────── markdown → html ───────────── */
-const raw = fs.readFileSync(SRC, 'utf8');
+// CRLF → LF: en Windows el .md puede quedar con CRLF y el frontmatter no se lee
+const raw = fs.readFileSync(SRC, 'utf8').replace(/\r\n/g, '\n');
 const fm = {};
 const body = raw.replace(/^---\n([\s\S]*?)\n---\n/, (_, y) => {
   let key = null;
