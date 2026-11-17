@@ -1,3 +1,10 @@
+<div style="font-size:9.5pt; line-height:1.45; border-bottom:1px solid #9aa3ad; padding-bottom:6pt; margin-bottom:14pt;">
+Universidad Tecnológica Nacional - Facultad Regional Rosario<br>
+Carrera: Ingeniería en Sistemas de Información<br>
+Asignatura: Administración de Sistemas de Información<br>
+<strong>Contexto: BANCORP</strong>
+</div>
+
 ## Bancorp en una mirada
 
 | Proyecto (1er año) | Qué es |
