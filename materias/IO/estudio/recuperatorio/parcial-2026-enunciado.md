@@ -1,6 +1,6 @@
 # Investigación Operativa — Parcial del 3/10/2026 (Tema 1)
 
-> **Para practicar en condiciones de examen.** Tiempo sugerido: 2 horas. Sólo la hoja de fórmulas. El enunciado es la transcripción que hizo un compañero; los Ej. 1 y 2 quedaron sin las opciones del original, así que se contestan con el valor. Las opciones del Ej. 3 están **reconstruidas** con los números del enunciado. La resolución está en `parcial-2026-resuelto.pdf`: no la mires hasta terminar.
+> **Para practicar en condiciones de examen.** Tiempo sugerido: 2 horas. Sólo la hoja de fórmulas. El parcial fue de opción múltiple ("el valor más cercano"). La transcripción que hizo un compañero no guardó las opciones, así que **las opciones están reconstruidas** con los números del enunciado, con los errores típicos como distractores. Elegí **una sola** opción por pregunta. La resolución está en `parcial-2026-resuelto.pdf`: no la mires hasta terminar.
 
 ## Ejercicio 1 — Método gráfico
 
@@ -14,11 +14,45 @@ x_1, x_2 \geq 0
 
 Resolvé gráficamente y contestá:
 
-1. ¿Cuáles son las coordenadas de la solución óptima del problema?
-2. ¿El punto $x_1 = 50$, $x_2 = 30$ es una solución factible?
-3. ¿Qué restricciones funcionales están activas en el óptimo?
-4. ¿Cuál es el valor de la variable de holgura de la segunda restricción en el punto $(100;\ 0)$?
-5. ¿Cuál es el costo óptimo, en pesos?
+**1)** ¿Cuáles son las coordenadas de la solución óptima del problema?
+
+- a) Única, en $(0;\ 30)$.
+- b) Única, en $(20;\ 50)$.
+- c) Infinitas: todo el segmento entre $(0;\ 30)$ y $(100;\ 0)$.
+- d) Única, en $(120;\ 0)$.
+- e) Infinitas: todo el segmento entre $(20;\ 50)$ y $(120;\ 0)$.
+
+**2)** ¿El punto $x_1 = 50$, $x_2 = 30$ es una solución factible?
+
+- a) Sí, cumple las tres restricciones y la no negatividad.
+- b) No, viola la restricción ①.
+- c) No, viola la restricción ②.
+- d) No, viola la restricción ③.
+- e) Sí, y además es la solución óptima.
+
+**3)** ¿Qué restricciones funcionales están activas en el óptimo?
+
+- a) ② y ③.
+- b) Ninguna.
+- c) ① y ②.
+- d) ① (en todo el segmento óptimo).
+- e) Sólo ②.
+
+**4)** ¿Cuál es el valor de la variable de holgura de la segunda restricción en el punto $(100;\ 0)$?
+
+- a) 0
+- b) 20
+- c) 100
+- d) 120
+- e) −20
+
+**5)** ¿Cuál es el costo óptimo, en pesos?
+
+- a) 28.000
+- b) 18.000
+- c) 22.500
+- d) 30.000
+- e) 15.000
 
 ## Ejercicio 2 — La refinería: simplex, sensibilidad y dual
 
@@ -42,14 +76,69 @@ En forma estándar con Gran M: $x_4$ y $x_5$ son las holguras de ① y ②, $x_6
 
 Resolvé analíticamente y contestá:
 
-1. Según la tabla presentada, ¿qué debe suceder según el simplex? ¿Se detiene o sigue? Si sigue, ¿qué variable entra y cuál sale?
-2. ¿Cuál es el precio sombra de la restricción de capacidad de destilación en el óptimo?
-3. ¿En qué rango puede variar el $c_2$ del diésel para que la base óptima no cambie?
-4. ¿Cuál es la función objetivo del dual asociado, suponiendo todas las variables duales $y_j \geq 0$?
-5. ¿Qué variables de holgura o exceso resultan no básicas en el óptimo?
-6. ¿Qué significa económicamente el precio sombra de la primera restricción?
-7. Al plantear la tabla simplex inicial, ¿qué variable ingresa y cuál sale de la base?
-8. En el óptimo, ¿cuál es el costo reducido de la nafta y cómo se interpreta?
+**1)** Según la tabla presentada, ¿qué debe suceder según el simplex?
+
+- a) Detenerse: la tabla es óptima porque no hay variables ficticias en la base.
+- b) Ingresar $x_3$ a la base y sacar $x_4$.
+- c) Ingresar $x_3$ a la base y sacar $x_6$.
+- d) Ingresar $x_3$ a la base y sacar $x_2$.
+- e) Ingresar $x_5$ a la base y sacar $x_4$.
+
+**2)** ¿Cuál es el precio sombra de la restricción de capacidad de destilación en el óptimo?
+
+- a) 100
+- b) 0
+- c) 13,33
+- d) 50
+- e) 80
+
+**3)** ¿En qué rango puede variar el $c_2$ del diésel para que la base óptima no cambie?
+
+- a) $[77{,}14;\ 120]$
+- b) $[0;\ 120]$
+- c) $[80;\ 120]$
+- d) $[70;\ 90]$
+- e) $[60;\ 100]$
+
+**4)** ¿Cuál es la función objetivo del dual asociado, asumiendo todas las variables duales $y_j \geq 0$?
+
+- a) Minimizar $W = 50y_1 + 80y_2 + 30y_3$
+- b) Maximizar $W = 5000y_1 + 1200y_2 - 500y_3$
+- c) Minimizar $W = 5000y_1 + 1200y_2 - 500y_3$
+- d) Minimizar $W = 5000y_1 + 1200y_2 + 500y_3$
+- e) Maximizar $W = 5000y_1 + 1200y_2 + 500y_3$
+
+**5)** ¿Qué variables de holgura o exceso resultan no básicas en el óptimo?
+
+- a) Sólo $x_4$.
+- b) Sólo $x_5$.
+- c) $x_4$, $x_5$ y $x_6$.
+- d) Sólo $x_6$.
+- e) $x_4$ y $x_5$.
+
+**6)** ¿Qué significa económicamente el precio sombra de la primera restricción?
+
+- a) Cuesta 13,33 dólares almacenar cada tonelada de petróleo crudo.
+- b) Si disponemos de 1 tonelada más de petróleo crudo, la ganancia aumenta en 13,33 dólares.
+- c) Sobran 13,33 toneladas de petróleo crudo en el inventario.
+- d) Si aumentamos el precio del diésel, la ganancia aumentará en 13,33 dólares.
+- e) Si disponemos de 1 tonelada más de petróleo crudo, la ganancia disminuye en 13,33 dólares.
+
+**7)** Al plantear la tabla simplex inicial, ¿qué variable ingresa y cuál sale de la base?
+
+- a) Ingresa $x_2$, sale $x_4$.
+- b) Ingresa $x_2$, sale $x_5$.
+- c) Ingresa $x_1$, sale $x_7$.
+- d) Ingresa $x_2$, sale $x_7$.
+- e) Ingresa $x_3$, sale $x_7$.
+
+**8)** En el óptimo, ¿cuál es el costo reducido de la nafta y cómo se interpreta?
+
+- a) −1,67: producir una tonelada de nafta disminuiría la ganancia en 1,67 dólares.
+- b) 0: significa que ya se está produciendo y es rentable.
+- c) 1,67: significa que conviene producirla para aumentar la ganancia.
+- d) −50: significa que no hay capacidad suficiente para producirla.
+- e) −1,67: significa que hay que bajar su precio en 1,67 para producirla.
 
 ## Ejercicio 3 — Stock con restricción financiera
 
@@ -106,25 +195,14 @@ Elegí **una sola opción** en cada pregunta.
 
 ## Hoja de respuestas
 
-| Ej. 1 | Respuesta |
-|---|---|
-| 1 | |
-| 2 | |
-| 3 | |
-| 4 | |
-| 5 | |
+| Ej. 1 | 1 | 2 | 3 | 4 | 5 | | | |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| Letra | | | | | | | | |
 
-| Ej. 2 | Respuesta |
-|---|---|
-| 1 | |
-| 2 | |
-| 3 | |
-| 4 | |
-| 5 | |
-| 6 | |
-| 7 | |
-| 8 | |
+| Ej. 2 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| Letra | | | | | | | | |
 
-| Ej. 3 | 1 | 2 | 3 | 4 | 5 |
-|---|:---:|:---:|:---:|:---:|:---:|
-| Letra | | | | | |
+| Ej. 3 | 1 | 2 | 3 | 4 | 5 | | | |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| Letra | | | | | | | | |
