@@ -191,7 +191,7 @@ blockquote{ margin:6pt 0 12pt; padding:8pt 12pt; background:var(--fondo); border
   border-radius:0 3pt 3pt 0; break-inside:avoid; }
 blockquote p:last-child{ margin-bottom:0; }
 figure{ margin:8pt 0 14pt; break-inside:avoid; text-align:center; }
-figure img{ max-width:100%; max-height:118mm; border:0.6pt solid var(--linea); border-radius:3pt; }
+figure img{ max-width:100%; max-height:92mm; border:0.6pt solid var(--linea); border-radius:3pt; }
 figure svg{ max-width:100%; }
 figcaption{ font-size:9pt; color:var(--gris); margin-top:4pt; }
 figcaption b{ color:var(--azul); }

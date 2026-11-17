@@ -67,11 +67,13 @@ Es la funcionalidad central. El alumno escribe una pregunta y el asistente decid
 
 Cada respuesta trae las **fuentes** que la respaldan (página web, PDF o publicación, con su fecha), y cuando la pregunta es sobre una materia puntual se muestra además una **ficha** con su año, horas, correlativas y comisiones. Las conversaciones quedan guardadas: se pueden retomar, renombrar o borrar. Sobre cada respuesta se puede copiar, regenerar o marcar como útil o no útil, y el sistema sugiere preguntas de seguimiento.
 
-![El asistente, con preguntas sugeridas para empezar.](../../figs/utnhub-chat.jpg)
+![Una conversación real: correlativas de Bases de Datos contrastadas con el historial del alumno, y las próximas mesas, con sugerencias para seguir preguntando.](../../figs/utnhub-chat-respuesta.jpg)
 
 ### Materias, correlatividades y avance
 
 La sección de materias muestra el plan completo como un **grafo**: cada materia es un nodo, las flechas son correlatividades, y el color indica si está aprobada, regular, cursando, disponible para cursar o bloqueada. Al tocar una materia se ve si el alumno puede cursarla y si puede rendirla, con el detalle de qué le falta.
+
+![Grafo de correlatividades de un alumno de 4.° año: aprobadas en verde, regulares en naranja, cursables en celeste y bloqueadas en gris. Las líneas celestes son requisitos para cursar; las naranjas, para rendir.](../../figs/utnhub-grafo.jpg)
 
 El historial se carga materia por materia o, mucho más rápido, **pegando el "Estado académico" de SYSACAD**. El sistema reconoce cada materia por similitud de texto (aunque SYSACAD la escriba en mayúsculas o sin tildes), muestra una vista previa para corregir lo que haga falta y, si el texto dice "Cursa en 4K02", también deja elegida esa comisión. Con eso se calculan el **promedio general**, el **porcentaje de avance** de la carrera, la carga horaria aprobada y los créditos de electivas acumulados contra los 20 que exige el plan.
 
@@ -80,6 +82,8 @@ El historial se carga materia por materia o, mucho más rápido, **pegando el "E
 Las 53 comisiones de la carrera se listan por año con sus materias, docentes y un **puntaje de la cátedra** que combina las encuestas públicas de UTNTAC con las reseñas que dejan los propios alumnos en UTNHub (de 1 a 5, con comentario opcional).
 
 En **Horarios**, el alumno ve sólo las materias que puede cursar según sus correlativas y arma su grilla eligiendo comisiones. Un **optimizador** le propone las mejores combinaciones según el criterio que elija: la menor cantidad de horas muertas, la menor cantidad de días, un turno preferido (mañana, tarde o noche) o dejar un día libre.
+
+![Armador de horarios con la grilla de un alumno de 4.° año: las comisiones elegidas por materia y, arriba, las horas muertas de la semana y el botón del optimizador.](../../figs/utnhub-horarios.jpg)
 
 El directorio de **profesores** reúne a 381 docentes con sus materias, cargo, mail y horarios de consulta, que el sistema obtiene del sitio de la facultad y de las planillas de UTNTAC.
 
