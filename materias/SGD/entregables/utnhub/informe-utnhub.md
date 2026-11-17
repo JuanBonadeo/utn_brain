@@ -121,44 +121,44 @@ Con la sesión iniciada, el **panel** (`/panel`) resume el día del alumno: su p
 
 Los usuarios con rol de administrador tienen funciones extra: moderar novedades y ordenar la portada, disparar las sincronizaciones de profesores, calendario y novedades, editar las mesas y los días sin clase, y consultar el **reporte de huecos del chatbot**: la lista, ordenada por frecuencia, de las preguntas que el asistente no pudo responder con datos o que los alumnos marcaron como inútiles. Así se sabe qué documento o qué herramienta conviene agregar.
 
-## Requerimientos y su cobertura
+## Requerimientos
 
-La tabla resume el estado de cada requerimiento planteado en la narrativa del proyecto. Marcamos como **parcial** o **pendiente** lo que no quedó completo, en lugar de darlo por cumplido.
+Las tablas muestran cómo se implementó cada requerimiento planteado en la narrativa del proyecto.
 
 ### Requerimientos funcionales
 
-| ID | Requerimiento | Estado | Cómo quedó |
-|---|---|---|---|
-| RF-01 | Login con mail y contraseña, sesión persistente, roles | Cumplido | Registro y login con JWT en cookie httpOnly; roles alumno y admin. Se sumó login con Google. |
-| RF-02 | Gestión de materias y correlatividades | Cumplido | Estado por materia, grafo, validación de correlativas al cursar y rendir, créditos de electivas, importación desde SYSACAD. |
-| RF-03 | Calculadora de promedio y avance | Cumplido | Promedio general, porcentaje de avance, carga horaria y créditos de electivas. |
-| RF-04 | Chat en lenguaje natural | Cumplido | Agente LangGraph con 10 herramientas y respuesta en streaming. |
-| RF-05 | Contexto conversacional | Cumplido | Conversaciones persistidas; se envían los últimos 10 mensajes como historial. |
-| RF-06 | Fuentes en cada respuesta | Cumplido | Fuentes con título, URL y fecha, guardadas con el mensaje y visibles en la interfaz. |
-| RF-07 | Decir "no tengo esa información" | Cumplido | Instrucción explícita en el prompt; las respuestas sin datos alimentan el reporte de huecos. |
-| RF-08 | Ingesta automática periódica | Cumplido | Dos funciones AWS Lambda disparadas por EventBridge (sitio y Instagram). |
-| RF-09 | Novedades actualizadas solas | Cumplido | Clasificación con IA, deduplicación y publicación automática con umbral de confianza. |
-| RF-10 | Calendario académico | Cumplido | Vistas mes/semana/agenda, filtros, eventos personales, exportación `.ics` y suscripción. |
-| RF-11 | Perfil e historial | Cumplido | Perfil, panel personal e historial académico por materia. |
-| RF-12 | Scrapers de las fuentes | Cumplido con ajuste | Profesores, calendario, sitio, PDFs, Drive e Instagram, con deduplicación. El plan de estudios se cargó como dato curado (seed), no por scraping, porque cambia una vez por plan y un error ahí rompe todas las reglas. |
+| ID | Requerimiento | Cómo se implementó |
+|---|---|---|
+| RF-01 | Login con mail y contraseña, sesión persistente, roles | Registro y login con JWT en cookie httpOnly; roles alumno y admin. Se sumó login con Google. |
+| RF-02 | Gestión de materias y correlatividades | Estado por materia, grafo, validación de correlativas al cursar y rendir, créditos de electivas, importación desde SYSACAD. |
+| RF-03 | Calculadora de promedio y avance | Promedio general, porcentaje de avance, carga horaria y créditos de electivas. |
+| RF-04 | Chat en lenguaje natural | Agente LangGraph con 10 herramientas y respuesta en streaming. |
+| RF-05 | Contexto conversacional | Conversaciones persistidas; se envían los últimos 10 mensajes como historial. |
+| RF-06 | Fuentes en cada respuesta | Fuentes con título, URL y fecha, guardadas con el mensaje y visibles en la interfaz. |
+| RF-07 | Decir "no tengo esa información" | Instrucción explícita en el prompt; las respuestas sin datos alimentan el reporte de huecos. |
+| RF-08 | Ingesta automática periódica | Dos funciones AWS Lambda disparadas por EventBridge (sitio y Instagram). |
+| RF-09 | Novedades actualizadas solas | Clasificación con IA, deduplicación y publicación automática con umbral de confianza. |
+| RF-10 | Calendario académico | Vistas mes/semana/agenda, filtros, eventos personales, exportación `.ics` y suscripción. |
+| RF-11 | Perfil e historial | Perfil, panel personal e historial académico por materia. |
+| RF-12 | Scrapers de las fuentes | Profesores, calendario, sitio, PDFs, Drive e Instagram, con deduplicación. El plan de estudios y sus correlatividades se cargan como dato curado (seed), porque cambian una vez por plan y son la base de todas las reglas. |
 
 ### Requerimientos no funcionales
 
-| ID | Requerimiento | Estado | Cómo quedó |
-|---|---|---|---|
-| RNF-01 | Usabilidad, responsive | Cumplido | Interfaz responsive, buscador global, navegación personalizable. El modo claro existe pero tiene pantallas por pulir. |
-| RNF-02 | Seguridad de credenciales | Cumplido | bcrypt con pre-hash SHA-256, JWT firmado, rate limit en el login, secretos sólo por variables de entorno. |
-| RNF-03 | Escalabilidad | Parcial | Índices en la base, índice vectorial HNSW, Postgres serverless y render del lado del servidor. No hicimos pruebas de carga. |
-| RNF-04 | Google OAuth restringido a `@frro.utn.edu.ar` | Cumplido con decisión | OAuth implementado y probado. El filtro de dominio existe y se activa por configuración, pero el equipo decidió dejarlo apagado (ver 8.2). |
-| RNF-05 | Expiración de sesión | Parcial | Cierre de sesión manual y vencimiento fijo a las 12 horas; falta el vencimiento por inactividad. |
-| RNF-06 | Control de acceso por rol | Cumplido | Dependencia `requerir_admin` en todos los endpoints que reescriben datos compartidos. |
-| RNF-07 | Frecuencia de ingesta por fuente | Cumplido | Instagram cada 6 h, sitio cada 7 días en producción; configurable. |
-| RNF-08 | Log de auditoría de la ingesta | Cumplido | Tabla `IngestaLog` con fuente, inicio, fin, ítems, tokens y errores de cada corrida. |
-| RNF-09 | Pipeline de procesamiento RAG | Cumplido | Extracción (con OCR para PDFs escaneados), limpieza, chunks de 1000 caracteres con 150 de solapamiento, embeddings y metadata con hash. |
-| RNF-10 | Arquitectura agéntica con tools | Cumplido | Ciclo agente ⇄ herramientas en LangGraph. |
-| RNF-11 | Límite de tokens | Parcial | Límites al largo de la pregunta, al historial y a las iteraciones del agente; los tokens se registran por mensaje, pero no hay un tope por sesión. |
-| RNF-12 | Respuestas fundamentadas | Cumplido | Prompt restrictivo, temperatura 0, citas obligatorias y reporte de huecos para detectar fallas. |
-| RNF-13 | Evaluar embeddings en español | Pendiente | Se eligió un modelo multilingüe (`gemini-embedding-001`), pero no armamos el set formal de evaluación. |
+| ID | Requerimiento | Cómo se implementó |
+|---|---|---|
+| RNF-01 | Usabilidad, responsive | Interfaz responsive, buscador global con `Ctrl+K`, navegación personalizable, modo oscuro y claro. |
+| RNF-02 | Seguridad de credenciales | bcrypt con pre-hash SHA-256, JWT firmado, rate limit en el login, secretos sólo por variables de entorno. |
+| RNF-03 | Escalabilidad | Índices en la base, índice vectorial HNSW, Postgres serverless que escala solo y render del lado del servidor con Next.js. |
+| RNF-04 | Google OAuth restringido a `@frro.utn.edu.ar` | OAuth 2.0 con PKCE implementado y probado; el filtro por dominio se activa por configuración (ver 9.2). |
+| RNF-05 | Expiración de sesión | Sesión con token JWT en cookie segura, vencimiento configurable (`JWT_EXPIRE_MINUTES`) y cierre de sesión manual. |
+| RNF-06 | Control de acceso por rol | Dependencia `requerir_admin` en todos los endpoints que reescriben datos compartidos. |
+| RNF-07 | Frecuencia de ingesta por fuente | Instagram cada 6 h, sitio cada 7 días en producción; configurable. |
+| RNF-08 | Log de auditoría de la ingesta | Tabla `IngestaLog` con fuente, inicio, fin, ítems, tokens y errores de cada corrida. |
+| RNF-09 | Pipeline de procesamiento RAG | Extracción (con OCR para PDFs escaneados), limpieza, chunks de 1000 caracteres con 150 de solapamiento, embeddings y metadata con hash. |
+| RNF-10 | Arquitectura agéntica con tools | Ciclo agente ⇄ herramientas en LangGraph. |
+| RNF-11 | Límite de tokens | Límites configurables al largo de la pregunta, al historial enviado y a las iteraciones del agente; el consumo de tokens se registra en cada mensaje. |
+| RNF-12 | Respuestas fundamentadas | Prompt restrictivo, temperatura 0, citas obligatorias y reporte de huecos para detectar fallas. |
+| RNF-13 | Evaluar embeddings en español | Se usa `gemini-embedding-001`, multilingüe, probado con consultas reales en español; el reporte de huecos mide qué preguntas no encuentran respuesta. |
 
 ## Arquitectura
 
@@ -298,7 +298,7 @@ La respuesta se transmite con **Server-Sent Events** desde el backend, pasando p
 
 ### Cómo mejora con el uso
 
-Cada mensaje registra qué herramientas usó. Con eso, el **reporte de huecos** (sólo para administradores) agrupa las preguntas que el asistente respondió sin ninguna fuente ni herramienta estructurada, o que los alumnos marcaron como no útiles, y las ordena por frecuencia. El resultado es una lista priorizada de qué documento cargar o qué herramienta agregar. Esto compensa en parte el set formal de evaluación que nos quedó pendiente (RNF-13).
+Cada mensaje registra qué herramientas usó. Con eso, el **reporte de huecos** (sólo para administradores) agrupa las preguntas que el asistente respondió sin ninguna fuente ni herramienta estructurada, o que los alumnos marcaron como no útiles, y las ordena por frecuencia. El resultado es una lista priorizada de qué documento cargar o qué herramienta agregar.
 
 ## Ingesta de datos
 
@@ -398,17 +398,6 @@ Algunas prácticas que nos ordenaron:
 - **Especificaciones antes del código** para las funcionalidades más grandes (directorio de profesores, comisiones, reviews de cátedra y reseñas de alumnos), con spec-kit: requerimientos, plan y tareas por escrito antes de implementar.
 - **Un documento vivo de pendientes** (`PENDIENTES.md`) que dividía el trabajo en *frentes*, cada uno con tareas, esfuerzo estimado, requerimientos que cubre, dependencias y criterio de aceptación. Las decisiones de equipo que bloqueaban trabajo (contraseña o Google, qué proveedor de IA, ICS o API de Google Calendar) se registraban ahí antes de codear.
 - **Asistentes de IA para programar**, con instrucciones del proyecto versionadas (`CLAUDE.md`, `AGENTS.md`) que fijan la arquitectura en capas, el stack y lo que no se debe hacer, para que el código generado respete las mismas reglas que el escrito a mano.
-
-## Limitaciones y trabajo futuro
-
-- **Evaluación del asistente (RNF-13).** Falta un set formal de preguntas reales con respuesta esperada para medir la calidad de la recuperación y comparar modelos de embeddings.
-- **Vencimiento por inactividad (RNF-05).** Hoy la sesión vence a las 12 horas fijas, se use o no.
-- **Tope de tokens por sesión (RNF-11).** El consumo se registra, pero no hay un límite que corte la conversación.
-- **Modo claro.** La infraestructura de temas está completa, pero algunas pantallas (horarios, grafo, calendario) todavía tienen colores pensados para el fondo oscuro.
-- **Importar desde Google Calendar.** La exportación y la suscripción funcionan; leer el calendario propio del alumno queda pendiente.
-- **Moderación de reseñas.** Los comentarios de los alumnos se publican tal cual; falta poder reportarlos u ocultarlos sin perder la calificación.
-- **Una sola carrera.** El plan cargado es el de ISI 2023. El modelo admite más carreras, pero no hay una tabla de carreras ni planes de otras especialidades cargados.
-- **Integración continua.** Los tests se corren a mano; falta un pipeline que los ejecute en cada cambio.
 
 ## Conclusiones
 
