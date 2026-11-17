@@ -1,35 +1,38 @@
 <!doctype html>
 <html lang="es"><head><meta charset="utf-8"><title>ASI AD — 4 proyectos Bancorp</title>
 <style>
-@page{size:A4;margin:7mm}
+@page{size:A4;margin:8mm 9mm}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:#fff;font-family:"Segoe UI",Arial,sans-serif;font-size:7.4pt;line-height:1.3;color:#151515}
-header{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1.3pt solid #151515;padding-bottom:1.2mm;margin-bottom:1.8mm;gap:4mm}
-header h1{font-size:11pt}
-header p{font-size:6.8pt;color:#333;text-align:right}
-.proj{border:.6pt solid #9aa3ad;margin-bottom:2.2mm;break-inside:avoid}
-.proj>h2{font-size:9pt;color:#fff;background:#1d3f6e;padding:.7mm 2mm;display:flex;justify-content:space-between}
-.proj>h2 span{font-weight:400;font-size:7pt;opacity:.9}
-.g{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0}
-.c{padding:1.2mm 1.8mm;border-right:.4pt solid #d0d5db}
+body{background:#fff;font-family:"Segoe UI",Arial,sans-serif;font-size:7.9pt;line-height:1.32;color:#151515}
+.head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:2.2mm}
+.head .u{font-family:Arial,sans-serif;font-style:italic;font-size:8pt;line-height:1.3;color:#111}
+.head .u b{display:block;font-style:normal;font-size:10.5pt;margin-top:.6mm}
+.head img{height:10mm}
+.rules{border-top:1.2pt solid #1155cc;border-bottom:.5pt solid #9aa3ad;padding:1mm 0;margin-bottom:2.6mm;font-size:7.6pt;color:#333;display:flex;justify-content:space-between;gap:4mm}
+.proj{border:.6pt solid #9aa3ad;margin-bottom:2.4mm;break-inside:avoid}
+.proj>h2{font-size:10.4pt;color:#fff;background:#1155cc;padding:1mm 2.4mm;display:flex;justify-content:space-between;align-items:baseline;gap:3mm}
+.proj>h2 span{font-weight:400;font-size:7.8pt;opacity:.92;text-align:right}
+.g{display:grid;grid-template-columns:1fr 1fr 1fr}
+.c{padding:1.8mm 2.2mm;border-right:.4pt solid #d0d5db}
 .c:last-child{border-right:0}
-h3{font-size:7.6pt;color:#1d3f6e;text-transform:uppercase;letter-spacing:.3pt;margin:1mm 0 .4mm}
+h3{font-size:8pt;color:#1155cc;text-transform:uppercase;letter-spacing:.3pt;margin:1.8mm 0 .6mm}
 h3:first-child{margin-top:0}
 h3.r{color:#9c2a22}h3.v{color:#2e5e2f}
-ul,ol{padding-left:3.2mm}li{margin:.15mm 0}
-p{margin:.2mm 0}
+ul,ol{padding-left:3.6mm}li{margin:.3mm 0}
+p{margin:.4mm 0}
 b{font-weight:700}
-.s{display:inline-block;background:#9c2a22;color:#fff;font-weight:700;padding:0 1.2mm;border-radius:1mm}
-.res{display:inline-block;background:#2e5e2f;color:#fff;font-weight:700;padding:0 1.2mm;border-radius:1mm}
+.s,.res{display:inline-block;color:#fff;font-weight:700;padding:0 1.4mm;border-radius:1mm}
+.s{background:#9c2a22}.res{background:#2e5e2f}
 .k{color:#555;font-style:italic}
 .page{break-after:page}
 </style></head><body>
 
-<header>
-  <h1>ASI · AD — lo que entra, aplicado a cada proyecto del 1er año de Bancorp</h1>
-  <p>Áreas TI: [01] Infra · [02] Ciberseguridad/SOC · [03] Ing. Software · [04] Ops TI/Core · [05] PMO · [06] Mesa de Ayuda · CIO<br>
-  Severidad = P × I (1–5). Preventivo baja P · detectivo/límites baja I. Contingencia → continuidad → recuperación (mejor que antes).</p>
-</header>
+<div class="head">
+  <div class="u">Universidad Tecnológica Nacional - Facultad Regional Rosario<br>Carrera: Ingeniería en Sistemas de Información<br>Asignatura: Administración de Sistemas de Información<b>Contexto: BANCORP · AD — los 4 proyectos del 1er año</b></div>
+  <img src="../../figs/bancorp-logo.png" alt="Bancorp">
+</div>
+<div class="rules"><span>Áreas TI: [01] Infra · [02] Ciberseguridad/SOC · [03] Ing. Software · [04] Ops TI/Core · [05] PMO · [06] Mesa de Ayuda · CIO</span><span>S = P × I (1–5) · preventivo baja P, detectivo/límites baja I · contingencia → continuidad → recuperación</span></div>
+
 
 <!-- ============ BILLETERA ============ -->
 <section class="proj">
@@ -42,6 +45,7 @@ b{font-weight:700}
 <h3>Incidente y puesto</h3>
 <p>"Los pagos QR quedan en <i>procesando</i>": [06] abre los tickets y lo trata como incidente masivo → <b>funcional</b> a [03] (API de pagos) → <b>jerárquico</b> al CIO si pasa 1 h. Muchos iguales = <b>problema</b> → cambio → configuración (CMDB).</p>
 <p><b>Puesto del escalado:</b> especialista en integración y APIs [03]. <b>Competencias específicas:</b> diagnóstico de APIs de pago, integración con el core/ESB, seguridad en transacciones.</p>
+<h3>Alcance</h3><p><b>Entra:</b> app Android/iOS, cuenta digital, biometría, QR, transferencias. <b>No entra:</b> inversión en FCI (2ª etapa), tarjeta física. <b>Termina:</b> app publicada y aceptada por Banca Minorista.</p>
 </div>
 <div class="c">
 <h3 class="r">Riesgo</h3>
@@ -81,6 +85,7 @@ b{font-weight:700}
 <h3>Incidente y puesto</h3>
 <p>"Los clientes no pueden terminar en la app lo que empezaron en la web": [06] → <b>funcional</b> a [03] (middleware/ESB) → <b>jerárquico</b> al CIO para un cambio de emergencia.</p>
 <p><b>Puesto:</b> arquitecto de integración (Middleware/ESB) [03]. <b>Competencias:</b> ESB y APIs, autenticación y sesiones multicanal, diseño de alta disponibilidad.</p>
+<h3>Alcance</h3><p><b>Entra:</b> unificar la lógica de web y app, token unificado, continuar operaciones entre canales. <b>No entra:</b> cajeros y sucursales. <b>Termina:</b> los dos canales en producción con el token.</p>
 </div>
 <div class="c">
 <h3 class="r">Riesgo</h3>
@@ -109,6 +114,12 @@ b{font-weight:700}
 </section>
 
 <div class="page"></div>
+<div class="head">
+  <div class="u">Universidad Tecnológica Nacional - Facultad Regional Rosario<br>Carrera: Ingeniería en Sistemas de Información<br>Asignatura: Administración de Sistemas de Información<b>Contexto: BANCORP · AD — los 4 proyectos del 1er año</b></div>
+  <img src="../../figs/bancorp-logo.png" alt="Bancorp">
+</div>
+<div class="rules"><span>Áreas TI: [01] Infra · [02] Ciberseguridad/SOC · [03] Ing. Software · [04] Ops TI/Core · [05] PMO · [06] Mesa de Ayuda · CIO</span><span>S = P × I (1–5) · preventivo baja P, detectivo/límites baja I · contingencia → continuidad → recuperación</span></div>
+
 
 <!-- ============ COPILOTO IA ============ -->
 <section class="proj">
@@ -121,6 +132,7 @@ b{font-weight:700}
 <h3>Incidente y puesto</h3>
 <p>"El copiloto responde con una circular vieja": [06] → <b>funcional</b> a [03] (actualizar la base de conocimiento del modelo) → <b>jerárquico</b> al CIO si hay que apagarlo.</p>
 <p><b>Puesto:</b> especialista en IA/ML [03]. <b>Competencias:</b> LLM y búsqueda en documentos (RAG), gestión de bases de conocimiento, protección de datos sensibles.</p>
+<h3>Alcance</h3><p><b>Entra:</b> LLM privado, carga de circulares, manuales y procedimientos, acceso desde sucursales. <b>No entra:</b> atención directa a clientes. <b>Termina:</b> en uso en las 45 sucursales.</p>
 </div>
 <div class="c">
 <h3 class="r">Riesgo</h3>
@@ -160,6 +172,7 @@ b{font-weight:700}
 <h3>Incidente y puesto</h3>
 <p>"Los empleados no pueden firmar el recibo": [06] → <b>funcional</b> a [03] (integración con sueldos o firma digital) → <b>jerárquico</b> al CIO si coincide con el día de cobro.</p>
 <p><b>Puesto:</b> desarrollador del portal [03]. <b>Competencias:</b> firma digital, integración con el sistema de sueldos, gestión de identidades (usuario único).</p>
+<h3>Alcance</h3><p><b>Entra:</b> recibos con firma, licencias, evaluaciones, e-learning. <b>No entra:</b> cambiar el sistema de liquidación de sueldos. <b>Termina:</b> la intranet vieja se da de baja.</p>
 </div>
 <div class="c">
 <h3 class="r">Riesgo</h3>
