@@ -15,6 +15,7 @@
  * Opciones:
  *   --html-only   deja solo el .html (no abre Chrome)
  *   --no-toc      sin índice
+ *   --no-title    sin encabezado (materia + título) arriba ni título en el pie
  *   --subtitle=".."  subtítulo bajo el título
  */
 
@@ -42,6 +43,7 @@ const outputHtml = outputPdf.replace(/\.pdf$/i, '.html');
 
 const htmlOnly = flags.includes('--html-only');
 const withToc = !flags.includes('--no-toc');
+const withTitle = !flags.includes('--no-title');
 const subtitleFlag = flags.find((f) => f.startsWith('--subtitle='));
 const subtitleArg = subtitleFlag ? subtitleFlag.split('=').slice(1).join('=') : null;
 
@@ -683,10 +685,10 @@ td .katex-display > .katex{ font-size:1em; }
 </style>
 </head>
 <body>
-<header class="masthead">
+${withTitle ? `<header class="masthead">
   <p class="eyebrow">${eyebrowFor(inputPath)}</p>
   <h1 class="doc">${docTitle}</h1>
-</header>
+</header>` : ''}
 ${subtitle ? `<div class="lead">${renderMath(marked.parse(stashMath(subtitle))).replace(/^<p>|<\/p>\s*$/g, '')}</div>` : ''}
 ${toc}
 ${body}
@@ -722,7 +724,7 @@ if (htmlOnly) process.exit(0);
       <div style="width:100%;font-family:'Avenir Next',Helvetica,Arial,sans-serif;
                   font-size:7pt;color:#8b9199;padding:0 17mm;
                   display:flex;justify-content:space-between;align-items:center;">
-        <span style="letter-spacing:.07em;">${docTitle.replace(/[<>&]/g, '')}</span>
+        <span style="letter-spacing:.07em;">${withTitle ? docTitle.replace(/[<>&]/g, '') : ''}</span>
         <span><span class="pageNumber"></span> / <span class="totalPages"></span></span>
       </div>`;
 
