@@ -16,6 +16,10 @@
  *   --html-only   deja solo el .html (no abre Chrome)
  *   --no-toc      sin índice
  *   --no-title    sin encabezado (materia + título) arriba ni título en el pie
+ *   --header=<archivo.html>  membrete repetido arriba en todas las hojas
+ *                 (headerTemplate de Chrome; las <img src> relativas al
+ *                 archivo se incrustan en base64). Ej: scripts/asi/membrete-bancorp.html
+ *   --margin-top=<mm>  margen superior (default 19; con --header conviene ~35)
  *   --subtitle=".."  subtítulo bajo el título
  */
 
@@ -44,6 +48,19 @@ const outputHtml = outputPdf.replace(/\.pdf$/i, '.html');
 const htmlOnly = flags.includes('--html-only');
 const withToc = !flags.includes('--no-toc');
 const withTitle = !flags.includes('--no-title');
+const headerFlag = flags.find((f) => f.startsWith('--header='));
+const marginTopFlag = flags.find((f) => f.startsWith('--margin-top='));
+const marginTop = marginTopFlag ? `${marginTopFlag.split('=')[1]}mm` : '19mm';
+let headerTemplate = '<div></div>';
+if (headerFlag) {
+  const headerPath = path.resolve(headerFlag.split('=').slice(1).join('='));
+  headerTemplate = fs.readFileSync(headerPath, 'utf8').replace(/src="([^"]+)"/g, (m, src) => {
+    if (/^(data:|https?:)/.test(src)) return m;
+    const img = path.resolve(path.dirname(headerPath), src);
+    const mime = img.endsWith('.png') ? 'image/png' : img.endsWith('.svg') ? 'image/svg+xml' : 'image/jpeg';
+    return `src="data:${mime};base64,${fs.readFileSync(img).toString('base64')}"`;
+  });
+}
 const subtitleFlag = flags.find((f) => f.startsWith('--subtitle='));
 const subtitleArg = subtitleFlag ? subtitleFlag.split('=').slice(1).join('=') : null;
 
@@ -367,7 +384,7 @@ ${katexCss}
 
 @page{
   size: A4;
-  margin: 19mm 17mm 20mm 17mm;
+  margin: ${marginTop} 17mm 20mm 17mm;
 }
 
 *{ box-sizing:border-box; }
@@ -733,9 +750,9 @@ if (htmlOnly) process.exit(0);
       format: 'A4',
       printBackground: true,
       displayHeaderFooter: true,
-      headerTemplate: '<div></div>',
+      headerTemplate,
       footerTemplate: foot,
-      margin: { top: '19mm', bottom: '20mm', left: '17mm', right: '17mm' },
+      margin: { top: marginTop, bottom: '20mm', left: '17mm', right: '17mm' },
     });
 
     const kb = (fs.statSync(outputPdf).size / 1024).toFixed(0);
