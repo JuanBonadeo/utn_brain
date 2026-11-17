@@ -2,14 +2,6 @@
 
 > Sólo lo que el docente dijo que entra en la clase de repaso del 2026-11-11. Ejemplos sobre los proyectos del 1er año de Bancorp.
 
-## El examen
-
-- **Martes 17/11, de 17 a 19.** Está pensado para resolverse en **una hora**. Ese día se firma la asistencia.
-- Son **unas 5 preguntas tipo parcial sobre BANCORP**. Puede haber algo de multiple choice.
-- Respuestas **cortas y aplicadas**: no más de **una o dos hojas** en total.
-- **No hay teoría pura.** La teoría se demuestra dentro de la justificación: el concepto tiene que estar explicado aunque no uses el nombre exacto.
-- **No entra:** la planilla de riesgos completa, protocolos largos, calcular VAN/TIR, valor ganado ("no necesariamente") ni la clasificación de la organización ("no sé si la voy a tomar").
-
 ## Bancorp en una mirada
 
 **Proyectos del 1er año** (de ahí salen los casos):
