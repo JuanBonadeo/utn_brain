@@ -1355,12 +1355,39 @@ $$
 
 ##### Caso 5 — Agregado de una nueva restricción
 
-Una restricción nueva puede afectar la factibilidad del óptimo actual **solo si resulta activa**. El procedimiento es de dos pasos:
+**Activa vs. pasiva (repaso).** Se aplica a las restricciones que **ya están** en el problema, evaluadas en el óptimo. Todas se cumplen, porque el óptimo es factible. Lo que cambia es cómo se cumplen:
+
+| | Cómo se cumple en el óptimo | Holgura / exceso |
+|---|---|---|
+| **Activa** | con **igualdad**: el óptimo está sobre ella | $= 0$ |
+| **Pasiva** | con **desigualdad estricta** | $> 0$ |
+
+La holgura y el exceso **siempre se informan positivos**:
+
+- Si la restricción es $\leq$: holgura $s = b - \text{LI}$ (derecha menos izquierda).
+- Si es $\geq$: exceso $e = \text{LI} - b$ (izquierda menos derecha).
+- Si es $=$: siempre es activa.
+
+**Restricción nueva.** La pregunta para decidir no es "activa o pasiva", sino si **x\* la cumple o no**. Una restricción nueva nunca formó parte del problema, así que x\* puede violarla. El procedimiento:
 
 1. **Reemplazar** los valores del óptimo actual en la restricción nueva.
 2. Decidir:
-   - Si la restricción **se satisface** (queda inactiva) → la solución óptima actual **permanece invariable**. No hay nada que hacer.
-   - Si **no se satisface** (queda activa) → la solución actual deja de ser óptima; hay que incorporar la restricción al sistema y volver a iterar.
+
+| Resultado del reemplazo | Qué sería | ¿Cambia el óptimo? |
+|---|---|---|
+| Se cumple con sobrante | pasiva | **No** |
+| Se cumple con igualdad | activa | **No** |
+| **No se cumple** | x\* deja de ser factible | **Sí**: se agrega como fila a la tabla óptima, se canoniza y se aplica **Simplex dual** |
+
+- Si se cumple, de cualquiera de las dos formas, x\* sigue siendo factible. Como ya era el mejor punto de una región más grande, también es el mejor de la región achicada.
+- Si no se cumple, al reoptimizar la restricción nueva termina siendo **activa en el nuevo óptimo**.
+- **Z nunca mejora.** Agregar una restricción achica la región factible: en un problema de máximo Z baja o se mantiene, y en uno de mínimo Z sube o se mantiene. Se mantiene solo si había un óptimo alternativo que cumple la restricción nueva. Si el Simplex dual no encuentra pivote, el problema nuevo no tiene solución factible.
+
+**Ejemplo** con óptimo $x_1 = 4,\ x_2 = 2$:
+
+- $x_1 + x_2 \leq 8$: $6 \leq 8$, se cumple con sobrante 2. Es pasiva y nada cambia.
+- $x_1 + x_2 \leq 6$: $6 \leq 6$, se cumple con igualdad. Es activa y nada cambia.
+- $x_1 + x_2 \leq 5$: $6 \leq 5$, no se cumple. Hay que reoptimizar, y en el nuevo óptimo $x_1 + x_2 = 5$.
 
 ##### Cuadro resumen
 
@@ -1855,3 +1882,4 @@ Los resultados de los Ej. 1 y 2 fueron verificados por enumeración.
 - 2026-10-02: Se completó `estudio/parcial/formulas-stock.pdf` con una segunda carilla, armada con lo que salió resolviendo la práctica y los finales 2023: cómo reconocer el modelo, conversión de unidades (las cantidades se multiplican y las tasas se dividen; "costo anual por unidad" ya es $C\cdot i$; "RF del 95 %" se lee como RF = 5 %), diferencia entre $C$ y $CT$, armado de $L$, procedimiento de descuentos, gráficos, período común y período práctico, pasos de demanda aleatoria y la comparación punto de pedido / revisión periódica (pregunta de teoría de final).
 - 2026-11-09: Material del recuperatorio (19/11) en `estudio/recuperatorio/`: `resumen-recuperatorio.pdf` reestructurado (sin intro, tabla simplex anotada, valor implícito con la alfarería), `parcial-2026-resuelto.pdf` aparte y `formulas-recuperatorio.pdf` (2 carillas). Calendario de estudio cargado en Notion.
 - 2026-11-12: Ejercicios de práctica para el recuperatorio en `estudio/recuperatorio/`: `ejercicio-sensibilidad-taller.pdf` (Max con Gran M, rangos y valores implícitos), `ejercicio-completo-plantas.pdf` (Min de punta a punta + sensibilidad), `ejercicio-dualidad.pdf` y `ejercicio-dualidad-2.pdf` (dual gráfico y primal por holguras complementarias), y `claves-dualidad.pdf` (qué se convierte en qué, lectura del dual en la tabla óptima, holguras complementarias e interpretación económica). La hoja de fórmulas suma el $c_j - z_j$ nuevo al variar un $c$ de una básica.
+- 2026-11-18: Unidad 4, Caso 5 (agregado de una nueva restricción) reescrito: repaso de activa/pasiva y cómo se calculan holgura y exceso; criterio de decisión "x* cumple o no cumple" en tres casos; Z nunca mejora; ejemplo numérico.
