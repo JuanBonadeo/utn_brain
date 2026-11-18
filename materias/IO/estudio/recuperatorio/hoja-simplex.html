@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Hoja de práctica — simplex</title>
+<style>
+  @page { size: A4 landscape; margin: 9mm 10mm; }
+  * { box-sizing: border-box; }
+  body { font-family: Arial, Helvetica, sans-serif; color: #111; margin: 0; font-size: 10pt; }
+  .page { page-break-after: always; }
+  .page:last-child { page-break-after: auto; }
+  header { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1.5px solid #333; padding-bottom: 3px; margin-bottom: 5px; }
+  header h1 { font-size: 13pt; margin: 0; }
+  header .meta { font-size: 9pt; color: #444; }
+  .pasos { font-size: 8.4pt; color: #333; margin: 0 0 6px; line-height: 1.35; }
+  .pasos b { color: #000; }
+  .bloque { margin-bottom: 9px; }
+  .titulo { display: flex; gap: 18px; font-size: 9pt; margin-bottom: 2px; }
+  .titulo span { border-bottom: 1px solid #888; min-width: 140px; display: inline-block; }
+  table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+  th, td { border: 1px solid #555; height: 27px; text-align: center; font-size: 9.5pt; }
+  th { background: #e9edf5; font-weight: bold; height: 20px; }
+  tr.cj td { background: #f3f3f3; height: 20px; }
+  tr.cj td.lab { font-style: italic; }
+  tr.z td { background: #fafafa; }
+  td.lab { font-weight: bold; font-size: 9pt; }
+  col.ci { width: 5.5%; } col.base { width: 6.5%; } col.a { width: 7%; } col.x { width: 9%; } col.th { width: 14%; }
+  .pie { display: flex; gap: 22px; font-size: 9pt; margin-top: 3px; }
+  .pie span { border-bottom: 1px solid #888; min-width: 120px; display: inline-block; }
+  .pie .op { margin-left: auto; }
+</style>
+</head>
+<body>
+
+<!-- Se generan 3 tablas por página con JavaScript -->
+<div id="hojas"></div>
+
+<script>
+const PASOS = `<b>1)</b> cᵢ = cⱼ de la básica de esa fila · <b>2)</b> zⱼ = Σ cᵢ·yᵢⱼ y cⱼ − zⱼ (básicas = 0) ·
+<b>3)</b> ¿Óptima? Max: todos ≤ 0 · Min: todos ≥ 0 · <b>4)</b> Entra: Max el mayor > 0 · Min el menor < 0 (con M manda la M; si empata, el número suelto) ·
+<b>5)</b> Sale: menor θ = X / yᵢₖ sólo con yᵢₖ > 0 · <b>6)</b> Pivoteo: F'ᵣ = Fᵣ / pivote · F'ᵢ = Fᵢ − yᵢₖ·F'ᵣ · rectángulo: nuevo = viejo − a·b / pivote.
+<b>Controles:</b> columnas básicas = identidad · X ≥ 0 · cⱼ − zⱼ de las básicas = 0.`;
+
+function tabla(n) {
+  const A = Array.from({length: 7}, (_, j) => `<th>A<sub>${j + 1}</sub></th>`).join('');
+  const vac = c => Array.from({length: c}, () => '<td></td>').join('');
+  const fila = () => `<tr><td></td><td></td>${vac(7)}<td></td><td></td></tr>`;
+  return `
+  <div class="bloque">
+    <div class="titulo"><b>Tabla ${n}</b> Problema: <span></span> &nbsp; Max / Min</div>
+    <table>
+      <colgroup><col class="ci"><col class="base">${'<col class="a">'.repeat(7)}<col class="x"><col class="th"></colgroup>
+      <tr><th>cᵢ</th><th>Base</th>${A}<th>X</th><th>θ = X / y</th></tr>
+      <tr class="cj"><td></td><td class="lab">cⱼ →</td>${vac(7)}<td></td><td></td></tr>
+      ${fila()}${fila()}${fila()}
+      <tr class="z"><td></td><td class="lab">zⱼ</td>${vac(7)}<td></td><td></td></tr>
+      <tr class="z"><td></td><td class="lab">cⱼ − zⱼ</td>${vac(7)}<td></td><td></td></tr>
+    </table>
+    <div class="pie">Entra: <span></span> Sale: <span></span> Pivote: <span></span> <span class="op">¿Óptima? &nbsp; SÍ &nbsp;/&nbsp; NO</span></div>
+  </div>`;
+}
+
+const PAGINAS = 3, POR_PAGINA = 3;
+let html = '', n = 1;
+for (let p = 1; p <= PAGINAS; p++) {
+  let t = '';
+  for (let k = 0; k < POR_PAGINA; k++) t += tabla(n++);
+  html += `<section class="page">
+    <header><h1>IO — Hoja de práctica del simplex</h1><span class="meta">Hoja ${p} de ${PAGINAS} · nombre: ____________________ · fecha: ________</span></header>
+    <p class="pasos">${PASOS}</p>${t}</section>`;
+}
+document.getElementById('hojas').innerHTML = html;
+</script>
+</body>
+</html>
