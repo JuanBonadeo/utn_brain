@@ -20,13 +20,500 @@
 ## Desarrollo
 
 ### Unidad 1 — Teoría de la información: información, entropía, canales
-*Pendiente de ingesta.*
+
+#### Conceptos clave
+- **Cantidad de información** de un suceso A: $I_{(A)} = \lg \frac{1}{p_{(A)}} = -\lg p_{(A)}$ [bit]. $\lg$ = log en base 2. **bit** = unidad de información; **binit** = dígito binario (no son lo mismo).
+- Calculadora: $\lg N = \frac{\log N}{\log 2} \approx 3{,}32 \log N = \frac{\ln N}{\ln 2}$.
+- **Entropía de la fuente**: esperanza matemática de la información por símbolo, $H(S) = \sum_i p_i \lg \frac{1}{p_i}$ [bit/símbolo]. Máxima si los símbolos son equiprobables: $H_{max} = \lg n$.
+- **Canal**: alfabeto de entrada A = (aᵢ), de salida B = (bⱼ) y matriz de probabilidades condicionales $P_{ij} = P(b_j/a_i)$ (fila = entrada, columna = salida). **Transparente**: no introduce error, matriz diagonal. **Binario simétrico (BSC)**: dos entradas, dos salidas, $P(b_2/a_1) = P(b_1/a_2) = p$ (probabilidad de error).
+- Salida: $P(b_j) = \sum_i P(a_i)\,P(b_j/a_i)$. Hacia atrás (Bayes): $P(a_i/b_j) = \frac{P(a_i)\,P(b_j/a_i)}{P(b_j)}$.
+- **H(A)** entropía a priori · **H(A/B)** entropía a posteriori o equivocación de A respecto de B · **H(B/A)** entropía del canal o equivocación de B respecto de A · **H(A,B)** entropía del sistema.
+- **Información mutua**: información real que llega al receptor en promedio. $I(A,B) = H(A) - H(A/B) = H(B) - H(B/A)$ (simétrica).
+- **Capacidad**: $C = \max I(A,B)$, maximizando sobre las probabilidades de entrada ("sintonizando la fuente"). Depende sólo del canal. Transparente + equiprobable: $C = \lg n$.
+- **Eficiencia** del canal $FF = I(A,B)/C$; **redundancia** $RED = 1 - FF$.
+- **R** tasa de información [bit/s] · **r** tasa de dígitos [binit/s o dígitos/s] · **s** velocidad de señalización $= 1/\tau_{min}$ [baudios]. $R = r\,H(A)$.
+- **M(T)** mensajes distintos en T: $M(T) = \mu^n$ (μ niveles, n pulsos de información). $I = \lg M(T)$, $R = I/T$. Si todos los pulsos son de información y duran τ: $R = \frac{1}{\tau}\lg\mu$.
+- Binario equiprobable: $C = s$; ancho de banda $B = s/2$.
+- **Teorema del canal**: si $R \le C$ existe una codificación con error arbitrariamente pequeño; si $R > C$, no.
+- **Shannon–Hartley** (canal con ruido blanco): $C = B \lg(1 + S/N)$ [bps].
+
+#### Desarrollo
+
+##### Cantidad de información
+Ejemplo primero: si sé que mañana sale el sol (p = 1), el anuncio no me informa nada; si me anuncian nieve en Rosario en enero (p ≈ 0), me informa muchísimo. La información es función inversa de la probabilidad, y la cátedra exige tres condiciones:
+1. $p_{(A)} = 1 \Rightarrow I_{(A)} = 0$.
+2. $p_{(A)} \to 0 \Rightarrow I_{(A)} \to \infty$.
+3. A y B independientes: $p_{(A \cdot B)} = p_{(A)}\,p_{(B)}$ y $I_{(A\cdot B)} = I_{(A)} + I_{(B)}$.
+
+La única función que vale 0 en 1, tiende a ∞ en 0 y convierte productos en sumas es el logaritmo; se usa base 2 porque se trabaja con mensajes binarios:
+$$I_{(A)} = \lg \frac{1}{p_{(A)}} \quad [\text{bit}]$$
+
+##### Entropía de la fuente (modelo univariado)
+El modelo univariado describe una fuente (o un receptor) por sus símbolos xᵢ y sus probabilidades. La cátedra trabaja con fuentes **ergódicas** (probabilidades independientes del tiempo) y **de memoria nula** (cada símbolo independiente de los anteriores).
+
+Ejemplo de la cátedra: fuente S con símbolos R, A, V y una muestra significativa `…R R A A A V A A R R…`. La información promedio es $\frac{N_A I_A + N_V I_V + N_R I_R}{N}$. Como $N_i/N$ es la frecuencia relativa y en una **muestra significativa** la frecuencia relativa se toma como probabilidad:
+$$H(S) = \sum_i p_i \lg\frac{1}{p_i} = -\sum_i p_i \lg p_i \quad [\text{bit/símbolo}]$$
+
+Propiedad: para un número dado de símbolos, H es máxima cuando son equiprobables. Fuente binaria con probabilidades p y 1−p: $H(p) = -p\lg p - (1-p)\lg(1-p)$, vale 0 en p = 0 o 1 y es máxima (1 bit) en p = 0,5.
+
+| Fuente | H [bit/símb] |
+|---|---|
+| Muestra binaria 13 ceros / 17 unos de 30 | 0,987 |
+| Moneda cargada, p(cara) = 2/3 | 0,918 |
+| x₁, x₂, x₃ con 0,2 / 0,5 / 0,3 | 1,486 |
+| 1/2, 1/4, 1/8, 1/16, 1/16 | 1,875 |
+
+##### El canal (modelo bivariado)
+Esquema: FUENTE → (aᵢ) → CANAL, con RUIDO que actúa sobre P(bⱼ/aᵢ) → (bⱼ) → RECEPTOR.
+
+Un canal sin memoria queda definido por la matriz
+$$P = \begin{pmatrix} P(b_1/a_1) & \cdots & P(b_s/a_1)\\ \vdots & & \vdots \\ P(b_1/a_r) & \cdots & P(b_s/a_r)\end{pmatrix}$$
+Cada fila suma 1. Para el BSC:
+$$P = \begin{pmatrix} 1-p & p \\ p & 1-p \end{pmatrix}$$
+
+Con las probabilidades de entrada y la matriz se obtienen las de salida $P(b_j)$. **Al revés no**: conociendo las salidas y la matriz, en general no se pueden calcular las entradas. Las probabilidades **hacia atrás** $P(a_i/b_j)$ salen de Bayes, a partir de la conjunta:
+$$P(a_i, b_j) = P(a_i)\,P(b_j/a_i) = P(b_j)\,P(a_i/b_j)$$
+
+$P(a_i)$ es la probabilidad **a priori**; $P(a_i/b_j)$, la **a posteriori** (después de ver bⱼ).
+
+##### Las entropías del sistema
+| Nombre | Fórmula | Qué mide |
+|---|---|---|
+| A priori | $H(A) = \sum_i P(a_i)\lg\frac{1}{P(a_i)}$ | incertidumbre de la entrada |
+| Salida | $H(B) = \sum_j P(b_j)\lg\frac{1}{P(b_j)}$ | incertidumbre de la salida |
+| A posteriori / equivocación de A resp. de B | $H(A/B) = -\sum_j P(b_j)\sum_i P(a_i/b_j)\lg P(a_i/b_j)$ | lo que sigue sin saberse de la fuente después de recibir; la información que "bloquea" el canal |
+| Del canal / equivocación de B resp. de A | $H(B/A) = -\sum_i P(a_i)\sum_j P(b_j/a_i)\lg P(b_j/a_i)$ | lo que introduce el canal (ruido) |
+| Del sistema | $H(A,B) = -\sum_{i,j} P(a_i,b_j)\lg P(a_i,b_j)$ | información media al emitir aᵢ y recibir bⱼ |
+
+Relación útil para verificar (conocimiento general): $H(A,B) = H(A) + H(B/A) = H(B) + H(A/B)$.
+
+##### Información mutua
+Es la información transferida desde la fuente al receptor a través del canal: la entropía a priori menos lo que el canal bloquea.
+$$I(A,B) = H(A) - H(A/B) = H(B) - H(B/A) = \sum_i\sum_j P(a_i,b_j)\lg\frac{P(a_i,b_j)}{P(a_i)\,P(b_j)}$$
+- Es simétrica: $I(A,B) = I(B,A)$.
+- En la práctica se calcula por $H(B) - H(B/A)$, porque H(B/A) sale directo de la matriz del canal.
+- Canal transparente: $H(A/B) = H(B/A) = 0$ y $H(A) = H(B) = H(A,B) = I(A,B)$.
+- Mínimo: 0 (basta con que un símbolo de entrada tenga probabilidad 1).
+
+##### Capacidad y eficiencia
+I(A,B) depende de la fuente y del canal. Su máximo, variando las probabilidades de entrada, es la **capacidad**: $C = \max I(A,B)$. Es función exclusiva de las probabilidades condicionales.
+- Canal transparente: $C = \max H(A) = \lg n$ (fuente equiprobable). Binario: C = 1 bit/símbolo. Si cada símbolo dura τ: $C = 1/\tau$ bps.
+- BSC con probabilidad de error p (conocimiento general; el apunte no da la fórmula cerrada): $C = 1 - H(p)$ bit/símbolo, alcanzada con entrada equiprobable.
+- Eficiencia de transmisión $FF = I(A,B)/C$; redundancia $RED = 1 - FF$ (parte no aprovechada de la capacidad).
+
+##### Velocidades: R, r, s y M(T)
+- **R (tasa de información)**: información promedio que produce la fuente en 1 s. $R = H'(A)$; con ruido, a la salida $R = H'(A) - H'(A/B)$ (H' = entropía por segundo). $R = r\,H(A)$.
+- **r (tasa de dígitos)**: dígitos transmitidos por segundo, informen o no (incluye arranque y parada).
+- **s (velocidad de señalización)**: $s = 1/\tau_{min}$ [baudios]; supone que todos los pulsos duran lo que el más corto.
+
+Mensajes de pulsos: en T segundos con n pulsos de μ niveles hay arreglos con repetición, $M(T) = \mu^n$. Si son equiprobables, $P(M) = 1/M(T)$ e $I = \lg M(T)$ (no hace falta calcular la entropía: coincide con I). Entonces $R = I/T$.
+- Si todos los pulsos son de información y de igual duración, $n = T/\tau$ y $R = \frac{1}{\tau}\lg\mu$.
+- Pulsos de arranque/parada: suman a T y a r, **no** a la información (valor fijo).
+- Varios bloques: los mensajes se multiplican y las informaciones se suman, $M = M_1 M_2$, $I = \lg M_1 + \lg M_2$.
+- Para duplicar R sin tocar los tiempos, sólo queda subir niveles: se plantea $I' = 2R\,T$, se despeja μ y se **redondea para arriba**.
+
+Equiprobable, binario y $\tau = \tau_{min}$: R es máximo, $C = R_{max} = s$; el ancho de banda es $B = s/2$.
+
+##### Errores de canal (apunte "Errores en Canales")
+- **Ruido blanco**: agitación molecular y atómica por temperatura. Aleatorio, imposible de eliminar; limita la capacidad. Su amplitud sigue una curva normal.
+- **Ancho de banda**: $B = f_2 - f_1$, frecuencias de corte donde la ganancia cae 3 dB respecto de las frecuencias medias. Si f₁ es chica, B ≈ f₂.
+- **Capacidad con ruido (Hartley–Shannon)**: con potencia de ruido N y señal de potencia S (distribución normal):
+$$H(Y/X) = B\lg(2\pi e N),\quad H(Y) = B\lg(2\pi e (N+S)),\quad C = H(Y) - H(Y/X) = B\lg\left(1+\frac{S}{N}\right)\ [\text{bps}]$$
+  Ej.: B = 1000 Hz, S/N = 3 → C = 1000·lg 4 = 2000 bps.
+- **Causas de error de canal**:
+  - *Ruido impulsivo*: la principal fuente de error. Picos que saturan el canal y afectan varios binits (**ráfaga**). Externas: acoplamientos capacitivos/inductivos (canales paralelos, conmutación mecánica, señales de supervisión, fenómenos atmosféricos). Internas: variaciones de impedancia en conexiones, sobrecarga de amplificadores, armónicas espurias de filtros. Se combate con módems adecuados.
+  - *Modulaciones espurias*: modulación cruzada (captación de otros canales por acoplamiento), intermodulación (no linealidad de amplificadores en canales multiplex; señales repetitivas como discado y supervisión), eco (reflexiones por variación de impedancia; supresores de eco).
+  - *Variaciones de nivel (desvanecimiento)*: impedancia, fallas en contactos o amplificadores, lluvia en microondas.
+  - *Distorsión*: atenuación (varía con la frecuencia; se corrige con ecualizadores), fase/frecuencia (retardos distintos por frecuencia, desfasa armónicas), variación de frecuencia de la portadora (sub-portadora de sincronismo), variación del nivel de umbral de muestreo (alarga o acorta pulsos). Ventaja: es sistemática, se corrige por diseño.
+
+#### Ejercicios resueltos tipo
+
+**Ejercicio 1 (finales 2015-12-18, 2020-10-23, 2021-09-10, 2021-12-17).** Canal binario simétrico con P(a₁) = 0,65 y P(b₁/a₁) = 0,75. Calcular a) la entropía a la salida, b) la entropía del canal H(B/A), c) la información mutua y explicar el concepto.
+
+1. Datos: P(a₂) = 0,35. Como es simétrico, la probabilidad de error es p = 1 − 0,75 = 0,25:
+$$P = \begin{pmatrix} 0{,}75 & 0{,}25 \\ 0{,}25 & 0{,}75\end{pmatrix}$$
+2. Conjuntas $P(a_i,b_j) = P(a_i)P(b_j/a_i)$: P(a₁,b₁) = 0,4875; P(a₁,b₂) = 0,1625; P(a₂,b₁) = 0,0875; P(a₂,b₂) = 0,2625.
+3. Salida: P(b₁) = 0,4875 + 0,0875 = **0,575**; P(b₂) = 0,1625 + 0,2625 = **0,425**.
+4. a) $H(B) = 0{,}575\lg\frac{1}{0{,}575} + 0{,}425\lg\frac{1}{0{,}425} = 0{,}4591 + 0{,}5246 = $ **0,9837 bit/símb**. Es la incertidumbre (información media) de lo que se observa a la salida.
+5. b) $H(B/A) = \sum_i P(a_i)\left[0{,}75\lg\frac{1}{0{,}75} + 0{,}25\lg 4\right] = (0{,}65+0{,}35)(0{,}3113 + 0{,}5) = $ **0,8113 bit/símb**. En un BSC no depende de la fuente: es H(p).
+6. c) $I(A,B) = H(B) - H(B/A) = 0{,}9837 - 0{,}8113 = $ **0,1724 bit/símb**: de los H(A) = 0,9341 bit que emite la fuente, en promedio llegan 0,17 bit por símbolo; el resto lo bloquea el ruido.
+7. Verificación por el otro lado: a posteriori P(a₁/b₁) = 0,8478, P(a₂/b₁) = 0,1522, P(a₁/b₂) = 0,3824, P(a₂/b₂) = 0,6176 → H(A/B) = 0,7616 y H(A) − H(A/B) = 0,1725 ✓ (redondeo). H(A,B) = 1,7453 = H(A) + H(B/A) ✓.
+8. Extra (conocimiento general): C = 1 − H(0,25) = 0,1887 bit/símb → FF = 0,1724/0,1887 = 0,914.
+
+**Ejercicio 2 (final 2021-09-10).** 1 pulso de arranque fijo de 5 V, 10 pulsos de datos de 128 niveles y 1 pulso de stop fijo. Todos duran 5 ms salvo el stop, de 7 ms. Calcular M(T), I, R, r y s.
+
+1. Sólo informan los 10 pulsos de datos: $M(T) = 128^{10} = 2^{70}$ mensajes.
+2. $I = \lg 2^{70} = 10\lg 128 = $ **70 bits**.
+3. T = 5 ms (arranque) + 10·5 ms + 7 ms (stop) = **62 ms**.
+4. R = 70 / 0,062 s = **1129 bps**.
+5. r = 12 dígitos / 0,062 s = **193,5 dígitos/s** (cuentan arranque y stop).
+6. s = 1/τ_min = 1/5 ms = **200 baudios**.
+
+**Ejercicio 3 (práctica N°1, ej. de fuente de 3 símbolos + canal).** Fuente x₁, x₂, x₃ con 0,2 / 0,5 / 0,3 conectada a un canal ternario con matriz (reconstruida de la resolución, ver Dudas)
+$$P = \begin{pmatrix} 0{,}5 & 0 & 0{,}5 \\ 0 & 0{,}6 & 0{,}4 \\ 0{,}2 & 0 & 0{,}8\end{pmatrix}$$
+1. Conjuntas no nulas: 0,1; 0,1; 0,3; 0,2; 0,06; 0,24 → $H(A,B) = $ **2,387 bit**.
+2. $H(B/A) = 0{,}1\cdot1 + 0{,}1\cdot1 + 0{,}3\lg\frac{1}{0{,}6} + 0{,}2\lg\frac{1}{0{,}4} + 0{,}06\lg 5 + 0{,}24\lg\frac{1}{0{,}8} = 0{,}1+0{,}1+0{,}221+0{,}264+0{,}139+0{,}077 = $ **0,902 bit**.
+3. Salida: P(y₁) = 0,16; P(y₂) = 0,30; P(y₃) = 0,54 → H(B) = 0,423 + 0,521 + 0,480 = **1,424 bit**.
+4. $I(A,B) = 1{,}424 - 0{,}902 = $ **0,522 bit/símb**. Verificación: H(A) = 1,486 y H(A,B) = H(A) + H(B/A) = 2,388 ✓.
+
+#### Dudas / pendientes
+- **Error en la práctica resuelta** (`Práctica N°1 … RESUELTO`): para el BSC con P = 0,8 y fuente 0,45/0,55 obtiene H(A,B) = 0,36 + 0,09 + 0,11 + 0,44 = 1 bit: suma las probabilidades conjuntas en vez de $-p\lg p$. El valor correcto es **H(A,B) = 1,7147 bit** (verificado; = H(A) 0,9928 + H(B/A) 0,7219).
+- **Fuente telegráfica de la práctica resuelta** (punto 2/3 con 0,2 s, raya 1/3 con 0,4 s): la resolución hace R = H/(0,2 + 0,4) = 0,918/0,6 = 1,53 bps. La duración media por símbolo es $\bar\tau = \sum p_i\tau_i = 0{,}2667$ s, de modo que **R = H/τ̄ = 3,44 bps** (conocimiento general; el apunte no trata pulsos de distinta duración y probabilidad). Consultar qué criterio acepta la cátedra.
+- **Preguntas frecuentes (Parte 1)** tiene dos errores: define la entropía del canal como "la probabilidad de aparición de bⱼ…" (es una entropía, no una probabilidad: la equivocación de B respecto de A) y escribe "r = H(A)/R" (lo correcto, según el apunte, es R = r·H(A), o sea r = R/H(A)).
+- **"Errores en Canales"** está mal impreso en la capacidad con ruido: se pierde π en $\lg(2\pi e N)$, dice "distribución mal" (normal) y "C = H(Y) = H(Y/X)" (es la resta). El Santo Resumen hace la misma corrección.
+- **Decibeles**: "Errores en Canales" usa 10 log G también para relaciones de amplitud; para tensión/corriente con igual impedancia corresponde 20 log (lo señala el Santo Resumen citando "Principios Básicos"). Para el final, 10 log para potencias y 20 log para amplitudes.
+- El apunte imprime "S R > C" (falta la "i"): es "Si R > C no es posible transmitir sin error".
+- La matriz del canal ternario del Ejercicio 3 y las del resto de la práctica eran imágenes que se perdieron en la conversión; la del Ej. 3 la reconstruí con los productos que muestra la resolución (verificada: todos los resultados cierran).
+- Agregado de conocimiento general: $C_{BSC} = 1 - H(p)$, la relación H(A,B) = H(A) + H(B/A) y el criterio τ̄ para R. En el final 2020-02-21 el enunciado dice p(a₁) = 0,05: probablemente es un error de tipeo por 0,65, que se repite en los otros finales.
+
+#### Fuentes
+- `fuentes/teoria/1 - Información, Codificación y Canales.md` (+ `.pdf`)
+- `fuentes/teoria/Errores en Canales.md`
+- `fuentes/practica/Práctica N°1 -Teoría de la Información-RESUELTO.md`
+- `fuentes/practica/Ejercitación Teoría de la Información.md`
+- `fuentes/resumenes/Para rendir el final/Práctica - Fórmulas y pasos para los ejercicios.md`
+- `fuentes/resumenes/Para rendir el final/Resumen.md`
+- `fuentes/resumenes/Para rendir el final/Teoría - Preguntas frecuentes (Parte 1).md` y `(Parte 2).md`
+- `fuentes/resumenes/1° Parcial/Resumen 1° Parcial Teoría (Parte 1).md`
+- `fuentes/resumenes/El Santo Resumen/el-santo-resumen.md` (secciones "Información, entropía y canal", "Capacidad con ruido" y "Transmisión multinivel")
+- Finales: `fuentes/finales/Práctica/2015/…2015-12-18.md`, `…/2020/…2020-10-23.md`, `…/2021/…2021-09-10.md`, `…/2021/…2021-12-17.md`; teoría: `fuentes/finales/Teoría/2020/*.md`, `fuentes/finales/Teoría/2021/*.md`
 
 ### Unidad 2 — Codificación: códigos unívocos, instantáneos, Kraft, compactos
-*Pendiente de ingesta.*
+
+#### Conceptos clave
+- **Codificación**: correspondencia entre secuencias del **alfabeto fuente** S = (s₁ … s_q) y secuencias del **alfabeto código** Z = (z₁ … z_r) (r = cantidad de símbolos código; binario r = 2).
+- **Código bloque**: asigna a cada símbolo del alfabeto fuente una secuencia **fija** de símbolos del alfabeto código. Esa secuencia es la **palabra código**.
+- **No singular**: todas sus palabras son distintas.
+- **Unívoco** (unívocamente decodificable): a cualquier secuencia de palabras código le corresponde una y sólo una secuencia de símbolos fuente. Equivalente: su extensión de orden n es no singular para todo n finito.
+- **Instantáneo**: se decodifica cada palabra sin esperar los símbolos siguientes. Condición **necesaria y suficiente**: ninguna palabra es prefijo de otra.
+- Jerarquía: instantáneo ⊂ unívoco ⊂ no singular ⊂ bloque.
+- **Inecuación de Kraft**: $\sum_{i=1}^{q} r^{-l_i} \le 1$ es condición necesaria y suficiente para que **exista al menos un** código instantáneo con esas longitudes. Un código que la cumple **puede ser** instantáneo (no necesariamente lo es).
+- **McMillan**: la misma inecuación es condición necesaria y suficiente para la existencia de un código unívoco.
+- **Longitud media**: $L = \sum_i P_i\, l_i$ [binit/símbolo].
+- **Compacto**: código instantáneo cuya longitud media es igual o menor que la de todos los códigos instantáneos aplicables a la misma fuente y el mismo alfabeto.
+- **Cota inferior**: $L \ge \frac{H(S)}{\lg r} = H_r(S)$ (entropía en unidades r-arias). Igualdad sii $P_i = r^{-l_i}$ (probabilidades potencias de 1/r).
+- **Primer teorema de Shannon** (codificación sin ruido): $H_r(S) \le \frac{L_n}{n} < H_r(S) + \frac{1}{n}$ para la extensión de orden n; $\lim_{n\to\infty} L_n/n = H_r(S)$.
+- **Huffman**: construye códigos compactos. r-ario: la cantidad de símbolos ω debe cumplir $\omega = r + \alpha(r-1)$ con α entero; si no, se agregan **símbolos falsos** de probabilidad 0.
+- **Rendimiento** $\eta = H_r(S)/L$; **redundancia** $1 - \eta = \frac{L - H_r(S)}{L}$.
+
+#### Desarrollo
+
+##### Familia de códigos, con ejemplos
+| Código | S₁ | S₂ | S₃ | S₄ | Qué es |
+|---|---|---|---|---|---|
+| Singular | 0 | 11 | 0 | 01 | dos palabras iguales |
+| No singular, no unívoco | 1 | 11 | 00 | 10 | `1100` puede ser S₂S₃ o S₁S₁S₃ |
+| Unívoco, no instantáneo (A, código "coma") | 0 | 01 | 011 | 0111 | al recibir `01` hay que esperar: si sigue 0 era S₂, si sigue 1 hay que seguir esperando |
+| Instantáneo (B) | 1 | 01 | 001 | 0001 | ninguna palabra es prefijo de otra |
+| Instantáneo (longitud constante) | 00 | 01 | 10 | 11 | todo código no singular de longitud constante es unívoco |
+
+Los códigos "coma" señalan el comienzo (A: cada palabra empieza con 0) o el fin (B: cada palabra termina en 1) de cada palabra. Ambos son unívocos; sólo B es instantáneo.
+
+**Prefijo**: de la palabra $Z_i = z_{i1} z_{i2}\ldots z_{im}$ es cualquier secuencia $z_{i1}\ldots z_{ij}$ con j ≤ m.
+
+##### Inecuación de Kraft y McMillan
+$$\sum_{i=1}^{q} r^{-l_i} \le 1$$
+Si los enteros l₁ … l_q la cumplen, existe al menos un código instantáneo r-ario con esas longitudes; y todo código instantáneo la cumple. **El teorema habla de longitudes, no de un código concreto.**
+
+Ejemplo de la cátedra: S₁ = 0, S₂ = 00, S₃ = 11 → $2^{-1}+2^{-2}+2^{-2} = 1$, cumple Kraft, pero no es instantáneo (0 es prefijo de 00). Con las mismas longitudes 1, 2, 2 sí existe uno instantáneo: 0, 10, 11.
+
+Más casos: longitudes (1, 2, 2, 3) binarias → 1/2 + 1/4 + 1/4 + 1/8 = 9/8 > 1 → no existe ningún código instantáneo (ni unívoco, por McMillan) con esas longitudes.
+
+Como los instantáneos son una subclase de los unívocos, la misma suma ≤ 1 alcanza para que exista un unívoco (suficiente); McMillan demostró que también es necesaria. Consecuencia práctica: pasar de instantáneo a unívoco no permite acortar las longitudes.
+
+##### Longitud media y cota inferior
+Ejemplo: muestra `a b c a a c b b a b a a c c a a a b` (18 eventos, a aparece 9 veces → f(a) = 1/2). Si se codifica cada evento con palabras de longitud l_a, l_b, l_c, la longitud total de la muestra es $L_M = l_a N_a + l_b N_b + l_c N_c$ y la longitud promedio por evento es $L_M / TM = f_a l_a + f_b l_b + f_c l_c$. En una muestra significativa f = P:
+$$L = \sum_i P_i\, l_i$$
+Para minimizar L: **a mayor probabilidad, menor longitud**. Si la fuente es equiprobable, las longitudes no dependen de las probabilidades.
+
+**Teorema (cota inferior)**: $\frac{H(S)}{\lg r} \le L$, o sea $H_r(S) \le L$.
+
+Esquema de la demostración del apunte:
+1. Se usa $\ln z \le z - 1$ (igualdad sólo en z = 1).
+2. Para dos distribuciones $P_i$ y $Q_i$ (ambas suman 1): $\sum_i P_i \lg\frac{Q_i}{P_i} \le 0$, o sea $H(S) \le \sum_i P_i\lg\frac{1}{Q_i}$, con igualdad sii $Q_i = P_i$.
+3. Se elige $Q_i = \frac{r^{-l_i}}{\sum_j r^{-l_j}}$. Queda $H(S) \le L\lg r + \lg\sum_j r^{-l_j}$.
+4. Si el código es instantáneo, por Kraft $\sum_j r^{-l_j} \le 1$ → el logaritmo es ≤ 0 → $H(S) \le L\lg r$.
+
+La igualdad exige $\sum r^{-l_j} = 1$ y $P_i = r^{-l_i}$, es decir $l_i = \log_r\frac{1}{P_i}$ entero. Ejemplo de la cátedra: P = 1/2, 1/8, 1/8, 1/8, 1/8 con código 0, 101, 100, 111, 110:
+$L = \frac12\cdot1 + 4\cdot\frac18\cdot3 = 2$ binit/símb y $H = \frac12\lg2 + 4\cdot\frac18\lg8 = \frac12 + \frac32 = 2$ bit → L = H_r(S): instantáneo y de longitud mínima, por lo tanto **compacto**.
+
+##### Primer teorema de Shannon
+Si $\log_r(1/P_i)$ no es entero, se elige el entero inmediato superior:
+$$\log_r\frac{1}{P_i} \le l_i < \log_r\frac{1}{P_i} + 1$$
+1. Estas longitudes cumplen Kraft: $r^{-l_i} \le P_i$ → $\sum r^{-l_i} \le \sum P_i = 1$ → existe un código instantáneo.
+2. Multiplicando por $P_i$ y sumando: $H_r(S) \le L < H_r(S) + 1$.
+3. Aplicado a la **extensión de orden n** (los símbolos se codifican de a n; $H_r(S^n) = n\,H_r(S)$ para memoria nula): $n H_r(S) \le L_n < n H_r(S) + 1$; dividiendo por n:
+$$H_r(S) \le \frac{L_n}{n} < H_r(S) + \frac{1}{n} \qquad \lim_{n\to\infty}\frac{L_n}{n} = H_r(S)$$
+$L_n/n$ es el número medio de símbolos código por símbolo de S cuando se codifica en grupos de n. Se puede acercar a la entropía tanto como se quiera, nunca bajar de ella. Costo: hay $q^n$ símbolos que codificar (complejidad).
+
+Ejemplo (armado para la wiki, verificado): fuente binaria 0,7 / 0,3, H = 0,881 bit.
+- n = 1: cualquier código binario necesita 1 binit por símbolo → L = 1; η = 0,881.
+- n = 2: símbolos 0,49 / 0,21 / 0,21 / 0,09; Huffman da longitudes 1, 2, 3, 3 → L₂ = 1,81 → L₂/2 = 0,905; η = 0,974.
+
+##### Método de Huffman (binario)
+**Paso 1 — reducciones**: ordenar las probabilidades de mayor a menor; fundir los dos últimos símbolos en uno (sumando probabilidades) y reordenar: es la **fuente reducida**. Repetir hasta tener dos símbolos.
+**Paso 2**: a la última reducción se le asigna el código compacto 0 y 1.
+**Paso 3 — retroceder**: cada símbolo conserva su palabra, salvo el que provenía de la fusión ($S_\alpha$): sus dos componentes reciben la palabra de $S_\alpha$ más un 0 y más un 1, respectivamente.
+
+No siempre hace falta reducir hasta dos símbolos: basta con llegar a una reducción cuyo código compacto sea evidente (por ejemplo, probabilidades potencias de 1/2).
+
+Ejemplo de la cátedra: 0,4 / 0,3 / 0,1 / 0,1 / 0,06 / 0,04.
+
+Reducciones (en cada paso se funden los dos menores; entre paréntesis, el símbolo nuevo):
+- S: 0,4 · 0,3 · 0,1 · 0,1 · 0,06 · 0,04
+- Red. 1: 0,4 · 0,3 · (0,1 = S₅+S₆) · 0,1 · 0,1
+- Red. 2: 0,4 · 0,3 · (0,2 = dos de 0,1) · 0,1
+- Red. 3: 0,4 · (0,3 = 0,2 + 0,1) · 0,3
+- Red. 4: (0,6 = 0,3 + 0,3) → **0** · 0,4 → **1**
+
+Hacia atrás:
+- Red. 3: 0,4 = 1 · 0,3 = 00 · 0,3 = 01 (las dos mitades de 0,6 = 0).
+- Red. 2: el 0,3 = 01 que venía de fundir se abre en 0,2 = 010 y 0,1 = 011.
+- Red. 1: 0,2 = 010 se abre en S₃ = 0100 y S₄ = 0101; el 0,1 = 011 es S₅+S₆.
+- S: S₅ = 0110, S₆ = 0111.
+
+| Sᵢ | S₁ | S₂ | S₃ | S₄ | S₅ | S₆ |
+|---|---|---|---|---|---|---|
+| Pᵢ | 0,4 | 0,3 | 0,1 | 0,1 | 0,06 | 0,04 |
+| Código | 1 | 00 | 0100 | 0101 | 0110 | 0111 |
+
+$L = 0{,}4\cdot1 + 0{,}3\cdot2 + 4\cdot(0{,}1+0{,}1+0{,}06+0{,}04) = 2{,}2$ binit/símb. H = 2,1435 bit → η = 0,9743, redundancia 0,0257.
+
+**Por qué es compacto** (demostración del apunte, por reducción al absurdo): si $C_j$ es compacto para la reducción $S_j$, el código $C_{j-1}$ obtenido al desdoblar tiene $L_{j-1} = L_j + P_{\alpha0} + P_{\alpha1}$. Si existiera para $S_{j-1}$ un código instantáneo con $L'_{j-1} < L_{j-1}$, juntando sus dos palabras más largas (las de los símbolos menos probables) y quitando el último binit se obtendría para $S_j$ un código con $L'_j = L'_{j-1} - P_{\alpha0} - P_{\alpha1} < L_j$: absurdo, porque $C_j$ era compacto. Como la reducción de dos símbolos (0, 1) es trivialmente compacta, por inducción el código final lo es.
+
+##### Huffman r-ario y símbolos falsos
+Se agrupan de a r: cada reducción tiene r − 1 símbolos menos. Para que la última reducción tenga exactamente r símbolos:
+$$\omega = r + \alpha(r-1),\quad \alpha \text{ entero}$$
+Si α no es entero, se agregan símbolos falsos de probabilidad 0 (de a uno hasta que dé entero); una vez construido el código se descartan.
+- Práctica: ω = 13, r = 4 → α = 9/3 = 3 → **no** hace falta agregar. ω = 14, r = 4 → α = 10/3 → con 16 símbolos α = 4 → hay que agregar **2** falsos.
+
+##### Rendimiento y redundancia
+$$\eta = \frac{H_r(S)}{L} = \frac{H(S)}{L\lg r}, \qquad \text{Red} = 1 - \eta$$
+Al aumentar r baja L pero baja también η en general (los símbolos falsos y el redondeo pesan más). El caso extremo de la práctica: con r = q (una señal por símbolo) L = 1, el mínimo posible, pero hay que manejar q niveles de señal distintos: ése es el inconveniente.
+
+#### Ejercicios resueltos tipo
+
+**Ejercicio 1 (final 2012-03-09).** Código: A = 0 (27/64), B = 100, C = 101, D = 110 (9/64 c/u), E = 11100, F = 11101, G = 11110 (3/64 c/u), H = 11111 (1/64). a) ¿Instantáneo? b) ¿Compacto? c) L. d) Kraft. e) η y redundancia.
+
+1. a) Ninguna palabra es prefijo de otra (0 sólo inicia A; 100, 101, 110 no inician ninguna de 5 dígitos, que empiezan con 111) → **instantáneo**.
+2. c) $L = \frac{27\cdot1 + 3\cdot9\cdot3 + 3\cdot3\cdot5 + 1\cdot5}{64} = \frac{27+81+45+5}{64} = \frac{158}{64} = $ **2,469 binit/símb**.
+3. d) $2^{-1} + 3\cdot2^{-3} + 4\cdot2^{-5} = \frac12 + \frac38 + \frac18 = $ **1** ≤ 1 → existen códigos instantáneos con esas longitudes, y como la suma es exactamente 1 no "sobra" ninguna rama del árbol (no se puede acortar ninguna palabra sin violar Kraft).
+4. e) $H = \frac{27}{64}\lg\frac{64}{27} + 3\cdot\frac{9}{64}\lg\frac{64}{9} + 3\cdot\frac{3}{64}\lg\frac{64}{3} + \frac{1}{64}\lg64 = $ **2,434 bit** (es la extensión de orden 3 de una fuente binaria 3/4, 1/4: 3·0,8113). η = 2,434/2,469 = **0,986**; redundancia **0,014**.
+5. b) Aplicando Huffman a esas probabilidades se obtienen exactamente las longitudes 1, 3, 3, 3, 5, 5, 5, 5 → L mínima = 2,469 → el código es **compacto** (L > H porque las probabilidades no son potencias de 1/2, pero ningún instantáneo lo mejora).
+
+**Ejercicio 2 (tipo práctica "Ejercitación Codificación").** Fuente de 6 símbolos 0,3 / 0,25 / 0,15 / 0,12 / 0,10 / 0,08. Código compacto **ternario** (r = 3), rendimiento.
+
+1. ¿Símbolos falsos? ω = 6: α = (6 − 3)/2 = 1,5 → no entero. Con 7: α = 2 → agrego **1** símbolo falso de probabilidad 0.
+2. Reducción 1 (fundo los tres menores 0,10 + 0,08 + 0): 0,3 / 0,25 / 0,18 / 0,15 / 0,12.
+3. Reducción 2 (0,18 + 0,15 + 0,12 = 0,45): 0,45 / 0,3 / 0,25 → código 0, 1, 2.
+4. Hacia atrás: 0,45 = 0 → 0,18 = 00, 0,15 = 01, 0,12 = 02; 0,18 = 00 → 0,10 = 000, 0,08 = 001, falso = 002 (se descarta).
+5. Código: 0,3 → 1; 0,25 → 2; 0,15 → 01; 0,12 → 02; 0,10 → 000; 0,08 → 001.
+6. L = 0,3 + 0,25 + 2(0,15 + 0,12) + 3(0,10 + 0,08) = **1,63 dígitos ternarios/símb**.
+7. H = 2,4224 bit → $H_3 = 2{,}4224/\lg3 = 1{,}5284$ → η = 1,5284/1,63 = **0,938**, redundancia 0,062. Kraft: $2\cdot3^{-1} + 2\cdot3^{-2} + 2\cdot3^{-3} = 26/27 \le 1$ ✓ (el 1/27 que falta es la rama del falso).
+
+**Ejercicio 3 (práctica N°1, último punto: puente entre unidades 1 y 2).** Pulsos de 1 ms con 4 niveles de probabilidades 1/2, 1/4, 1/8, 1/8, codificados a = 00, b = 01, c = 10, d = 11. a) R. b) Duración de un binit. c) Binits por bit.
+
+1. H = 1/2·1 + 1/4·2 + 2·1/8·3 = **1,75 bit/símb** → R = 1,75/1 ms = **1750 bps**.
+2. Cada símbolo (1 ms) se reemplaza por 2 binits → cada binit dura **0,5 ms** (r = 2000 binit/s).
+3. 2 binit/símb ÷ 1,75 bit/símb = **1,143 binit/bit**. Con un Huffman (0, 10, 110, 111) L = 1,75 = H → 1 binit/bit (probabilidades potencias de 1/2: código compacto con η = 1).
+
+#### Dudas / pendientes
+- **Kraft: ¿necesaria o suficiente?** El apunte (`2 - Codificación`, §4.6) dice "condición suficiente y necesaria para que exista al menos un código instantáneo". El `Resumen.md` de "Para rendir el final" la llama sólo "condición necesaria" (y lo mismo para McMillan). Vale el apunte. En el multiple choice la respuesta es "**puede ser** instantáneo".
+- **Definición de compacto**: el apunte lo define entre **instantáneos** ("igual o menor que la longitud media de todos los códigos instantáneos que puedan aplicarse a la misma fuente y al mismo alfabeto"). `Resumen.md` y Preguntas frecuentes lo definen entre **unívocos**. Por McMillan da lo mismo en longitud, pero para el multiple choice usar la redacción del apunte: instantáneo, todos los instantáneos, misma fuente **y mismo alfabeto**.
+- **Errata en el Huffman del apunte** (pág. 12, cuadro de la reducción 1): imprime "0,1 − 001" para el símbolo S₅+S₆; debería ser **011** (001 tendría a 00 = S₂ como prefijo). El código final del apunte (S₃ = 0100, S₄ = 0101, S₅ = 0110, S₆ = 0111) es consistente con 011. Otra opción de Huffman igual de válida (empatando distinto) es 1, 00, 011, 0100, 01010, 01011, también con L = 2,2.
+- La demostración de compacidad del apunte (pág. 13) tiene erratas: "P(j−1,1) = l(j−1,1)" (son longitudes l = l) y "P(j−1,n) = P(j−1,n+1) = P(j,n)" (es la suma). El Santo Resumen las corrige igual.
+- El Santo Resumen ilustra el primer teorema con 0,7/0,3 usando longitudes de Shannon (1 y 2 → L = 1,3); ese código no es compacto (con 1 binit por símbolo, L = 1). No contradice el teorema, pero no es el código óptimo.
+- **Shannon–Fano** no aparece en ninguna fuente de la cátedra; sólo Huffman. Las "longitudes de Shannon" $\lceil\log_r(1/P_i)\rceil$ sí aparecen, dentro de la demostración del primer teorema.
+- El apunte `2 - Codificación` lleva el rótulo "Unidad N°4" de un programa viejo; en la wiki va como Unidad 2. Los ejercicios del apunte de práctica con las tablas de probabilidades están como imágenes perdidas (EMBED PBrush): enunciados incompletos.
+- La demostración de la cota inferior la reconstruí desde el PDF/Santo Resumen (la conversión perdió las fórmulas 4.9.x); los pasos son los estándar.
+
+#### Fuentes
+- `fuentes/teoria/2 - Codificación.md` (+ `.pdf`, págs. 1–14 y 12–13 para el Huffman)
+- `fuentes/practica/Ejercitación Codificación.md`
+- `fuentes/practica/Ejercitación Códigos extra.md`
+- `fuentes/practica/Práctica N°1 -Teoría de la Información-RESUELTO.md` (último ejercicio)
+- `fuentes/resumenes/Para rendir el final/Práctica - Fórmulas y pasos para los ejercicios.md`
+- `fuentes/resumenes/Para rendir el final/Resumen.md`
+- `fuentes/resumenes/Para rendir el final/Teoría - Preguntas frecuentes (Parte 1).md` y `(Parte 2).md`
+- `fuentes/resumenes/1° Parcial/Resumen 1° Parcial Teoría (Parte 2).md`, `fuentes/resumenes/1° Parcial/Resumen Parcial 1 (2025).md`
+- `fuentes/resumenes/El Santo Resumen/el-santo-resumen.md` (secciones "Códigos", "Primer teorema de Shannon", "Huffman" y "Final")
+- Finales: `fuentes/finales/Práctica/2012/Comunicaciones - Final - 2012-03-09.md`, `fuentes/finales/Práctica/2015/…2015-12-04.md`; teoría: `fuentes/finales/Teoría/2020/*.md`, `fuentes/finales/Teoría/2021/*.md`
 
 ### Unidad 3 — Detección y corrección de errores: códigos lineales
-*Pendiente de ingesta.*
+
+#### Conceptos clave
+- **Ruido unitario**: cambio de un binit por su complemento.
+- **Distancia** entre dos palabras: cantidad de dígitos en que difieren (distancia de Hamming). **Distancia mínima** $d_{min}$: la menor entre palabras del código. Con $d_{min} = 1$ un error simple transforma una palabra en otra del código y no se detecta.
+- Detectar/corregir exige **redundancia**: usar menos palabras que las combinaciones posibles; las no usadas "absorben" el error.
+- **Bit de paridad** (par: $i_p = i_1 \oplus \ldots \oplus i_n$; impar: $\oplus 1$): detecta todo error de orden impar, no corrige. 3 + 1 dígitos: η = 3/4.
+- **Paridad por filas y columnas**: corrige error simple en la intersección fila/columna; requiere armar bloques.
+- **Hamming (paridad por zonas)**: m dígitos de información y n de control con $2^n \ge m + n + 1$. Para m = 4 → n = 3 (código 7 dígitos, η = 4/7 = 0,571). Con los controles en las posiciones 2ᵏ, el número binario C₃C₂C₁ da la posición del error.
+- **Código lineal / de grupo V**: subespacio de $2^m$ palabras de n dígitos (m < n), con suma sin acarreo (⊕).
+- **G (matriz generadora)**: m × n, filas linealmente independientes; V = todas las combinaciones lineales $v = k_1g_1 + \ldots + k_mg_m$, kᵢ ∈ {0,1}. La base no es única.
+- **V'** espacio ortogonal ($2^{n-m}$ palabras); **H (matriz de control de paridad)**: base de V', (n − m) × n.
+- Ortogonalidad: $v_i \cdot H^T = 0\ \forall v_i \in V$; $v'_i \cdot G^T = 0\ \forall v'_i \in V'$ (equivalente: $G\,H^T = 0$).
+- **Síndrome**: $S = v_{recibida}\cdot H^T$ (1 × (n−m)). S = 0 → palabra del código (correcta o error no detectable). S ≠ 0 → error. Como $(v + e)H^T = eH^T$, **el síndrome depende sólo del error**.
+- Cantidad de síndromes distintos no nulos: $2^{n-m} - 1$. Para corregir error simple en los n dígitos: $2^{n-m} - 1 \ge n$.
+- **Errores no detectables**: los que coinciden con palabras del código (sumados a una palabra dan otra palabra).
+- **Familia de errores** de un síndrome: todas las palabras (todos los errores, de cualquier orden) que dan ese síndrome. Se corrige si en la familia hay **un único** vector de peso mínimo (criterio de mayor probabilidad / máxima verosimilitud).
+
+#### Desarrollo
+
+##### Distancia y redundancia
+Código de 3 binits con las 8 combinaciones: 000 … 111. Distancias: d(100, 101) = 1; d(000, 011) = 2; d(011, 100) = 3; $d_{min} = 1$. Si se envía 100 y llega 101, que también es palabra del código, el error pasa inadvertido. Para detectar hay que aumentar $d_{min}$: usar sólo parte de las combinaciones.
+
+(Conocimiento general, no está explícito en el apunte: con $d_{min}$ se detectan hasta $d_{min} - 1$ errores y se corrigen hasta $\lfloor (d_{min}-1)/2 \rfloor$. Por eso Hamming (7,4), con $d_{min} = 3$, corrige 1.)
+
+##### Bit de paridad
+Se agrega un dígito para que la cantidad de unos sea par (o impar). Con 3 de información + 1 de paridad hay 2⁴ = 16 combinaciones y se usan 8 → $d_{min} = 2$; las otras 8 absorben el error simple.
+- TX `1010` (101 + paridad par 0) → RX `1010`: el receptor recalcula la paridad de 101 = 0, coincide → OK.
+- TX `0101` → RX `0111`: la paridad recalculada de 011 = 0 ≠ 1 recibido → error detectado, pero **no se sabe dónde**. Se descarta y se pide retransmisión.
+- Detecta todos los errores de orden K impar; los de orden par pasan.
+
+Costo: mensajes equiprobables, $H = \lg 2^3 = 3$ bit; sin paridad L = 3 → η = 1, redundancia 0. Con paridad L = 4 → η = 3/4 = **0,75**, redundancia 0,25.
+
+Otros criterios de detección del apunte: **por mayoría** (palabras de longitud fija con peso fijo de unos, ej. l = 5 con tres unos: $\binom{5}{3} = 10$ palabras de las 32; detecta todos los errores unitarios) y **de igual peso** (igual cantidad de unos que de ceros, l par).
+
+**Regla de decisión**: cuando no se puede retransmitir, se transforma la palabra errónea en la palabra válida más probable. Ej.: S₁ = 000, S₂ = 111; si llega 001 se decide 000, si llega 011 se decide 111 (se asume que el error simple es mucho más probable que el doble).
+
+##### Paridad por filas y columnas
+Se arma un bloque m × n de palabras, se agrega paridad por fila y por columna → (m+1) × (n+1). En recepción se recalculan: el dígito con error está en la **intersección** de la fila y la columna que no coinciden. Si sólo falla una fila (o una columna), el error está en un bit de paridad. Inconveniente: hay que armar bloques; no corrige palabra por palabra.
+
+##### Hamming: paridad por zonas
+Con diagrama de Venn de tres zonas (apunte `3 - Detección…`): cada control es la paridad par de los dígitos de información de su zona, con un dígito de información en cada intersección:
+$$C_1 = I_0 \oplus I_1 \oplus I_2,\quad C_2 = I_1 \oplus I_2 \oplus I_3,\quad C_3 = I_0 \oplus I_2 \oplus I_3$$
+Palabra $I_3I_2I_1I_0\,C_3C_2C_1$. En recepción se recalculan los controles y se comparan con los recibidos:
+- TX `1000 110`, RX `1010 110`: recalculados con 1010 → C₃C₂C₁ = 101; comparados con 110 recibidos cambian **C₁ y C₂** → el único dígito común a las zonas I y II es **I₁** → información correcta 1000.
+- Si cambia **un solo** control, el error está en ese dígito de control (la información está bien).
+- Si no cambia ninguno → palabra correcta.
+
+**¿Cuántos controles?** Con n controles hay $2^n$ configuraciones; deben indicar error en cada uno de los m + n dígitos más una que indique "todo bien":
+$$2^n \ge m + n + 1$$
+m = 4: n = 2 → 4 ≥ 7 no; n = 3 → 8 ≥ 8 ✓. Rendimiento: $H = \lg 2^4 = 4$ bit, L = 7 → η = 4/7 = **0,571**, redundancia 0,43.
+
+**Versión posicional** (apunte `2 - Codificación`, §4.17): se numeran las posiciones 1 … 7 y los controles van en las posiciones $2^k$ (1, 2, 4); la información, en el resto. Cada control mira las posiciones que tienen un 1 en su mismo bit de la representación binaria:
+
+| Posición | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
+|---|---|---|---|---|---|---|---|
+| Dígito | C₁ | C₂ | i₀ | C₃ | i₁ | i₂ | i₃ |
+| Binario | 001 | 010 | 011 | 100 | 101 | 110 | 111 |
+
+- C₁ = {1, 3, 5, 7} → $C_1 = i_0 \oplus i_1 \oplus i_3$
+- C₂ = {2, 3, 6, 7} → $C_2 = i_0 \oplus i_2 \oplus i_3$
+- C₃ = {4, 5, 6, 7} → $C_3 = i_1 \oplus i_2 \oplus i_3$
+
+En recepción se pone 1 en cada zona alterada; el número **C₃C₂C₁ en decimal es la posición errónea** (000 = sin error). Ejemplo del apunte: información i₀i₁i₂i₃ = 1101 → C₁ = 1, C₂ = 0, C₃ = 0 → TX `1010101`. Llega `1010111`: zona I bien (C₁ = 0), II alterada (C₂ = 1), III alterada (C₃ = 1) → 110 = **6** → se invierte la posición 6.
+
+##### Códigos lineales: estructura algebraica
+Un código de longitud constante de n dígitos con las $2^n$ palabras es compacto (η = 1) pero tiene $d_{min} = 1$. Para detectar/corregir se toma un **subespacio** V de $2^m$ palabras (m < n): todos los dígitos viajan juntos, sin un campo de control separado como en Hamming.
+
+| Objeto | Qué es | Dimensión |
+|---|---|---|
+| V | código de grupo | $2^m$ × n |
+| G | base de V (matriz generadora) | m × n |
+| V' | espacio ortogonal a V | $2^{n-m}$ × n |
+| H | base de V' (matriz de control de paridad) | (n − m) × n |
+| $H^T$ | transpuesta | n × (n − m) |
+| S | síndrome | 1 × (n − m) |
+
+La suma es sin acarreo: a + b = 0 ⇔ a = b; a + b = 1 ⇔ a = 1 + b; a + a = 0. Como son productos de matrices, no vale la conmutativa ($v H^T$, no $H^T v$).
+
+**Base**: filas linealmente independientes (ninguna es combinación lineal de las otras) que generan todo el espacio. Si, por ejemplo, $h_3 = h_1 + h_2$, ese conjunto no es base.
+
+##### Síndrome
+Se recibe $v_{i?}$. Si $v_{i?} H^T = 0$, pertenece a V: correcta (o error no detectable). Si ≠ 0, hay error. Modelando el error como un vector e con unos donde se invirtieron dígitos:
+$$v_{ie}H^T = (v_i + e)H^T = v_iH^T + eH^T = 0 + eH^T = S_e$$
+Ejemplo del apunte: $v_1 = 101110$, $v_2 = 111001$, $e = 000100$ → llegan 101010 y 111101, y ambas dan **el mismo** síndrome $S_e$: sabiendo qué error produce $S_e$, se corrigen las dos.
+
+Reglas:
+- Si dos errores simples distintos dan el mismo síndrome ($e_aH^T = e_bH^T$), ese síndrome **sólo detecta**, no corrige.
+- Hay $2^{n-m} - 1$ síndromes no nulos. Para corregir error simple en cada uno de los n dígitos hace falta uno distinto por dígito: $2^{n-m} - 1 \ge n$.
+- Con $e_i$ = vector unitario en la posición i, $e_iH^T$ = **fila i de $H^T$**. Entonces: corrige error simple en todos los dígitos ⇔ las filas de $H^T$ son no nulas y distintas entre sí. Una fila nula = error no detectado en ese dígito; filas repetidas = sólo se detecta.
+- **No se detectan** los errores que coinciden con palabras del código.
+
+##### Familia de errores asociada a un síndrome
+Para cada $S_i \ne 0$ se plantea $(x_1, \ldots, x_n)H^T = S_i$: n − m ecuaciones binarias con n incógnitas. Se eligen como independientes las variables que más se repiten, se les dan todos los valores y se despejan las demás. Las $2^m$ soluciones son la **familia**: todas las palabras del código con un mismo error, **de cualquier orden**. La palabra que viene de 000…0 muestra el error "desnudo":
+- un único vector de peso 1 → se **detecta y corrige** error simple en ese dígito;
+- ninguno de peso 1 y varios de peso 2 → **sólo se detecta** error doble;
+- el mismo síndrome lo producen también errores dobles, triples, etc.; se decide por el más probable (el de menor peso).
+
+##### Los tres tipos de ejercicio (resumen del apunte)
+1. **Dan G**: combinación lineal → V; $v'G^T = 0$ → V' → elegir base H → $H^T$; $xH^T = S_i$ → familias.
+2. **Dan H**: $vH^T = 0$ → V (y una G eligiendo m palabras independientes); $xH^T = S_i$ → familias.
+3. **Dan cantidad de mensajes y requisitos de corrección**: $2^m \ge$ mensajes → m; $2^{n-m} - 1 \ge$ síndromes necesarios → n (por prueba y error); se proponen los síndromes de cada error simple (contando en binario) → filas de $H^T$; $vH^T = 0$ → V; se eligen las palabras necesarias.
+
+#### Ejercicios resueltos tipo
+
+**Ejercicio 1 (finales 2015-12-18, 2017-02-15, 2020-02-21).** Transmitir 12 mensajes protegidos contra error simple aplicando Hamming. Ejemplo de error en un dígito de información y en uno de control.
+
+1. Información: $2^m \ge 12$ → m = 3 da 8 (no alcanza) → **m = 4**.
+2. Control: $2^n \ge m + n + 1$ → n = 3: 8 ≥ 8 ✓ → **n = 3**, palabra de 7.
+3. Posiciones: C₁ C₂ i₀ C₃ i₁ i₂ i₃; $C_1 = i_0 \oplus i_1 \oplus i_3$, $C_2 = i_0 \oplus i_2 \oplus i_3$, $C_3 = i_1 \oplus i_2 \oplus i_3$.
+4. Código (mensaje k = i₃i₂i₁i₀ en binario → palabra en posiciones 1…7):
+
+| k | i₃i₂i₁i₀ | palabra | k | i₃i₂i₁i₀ | palabra |
+|---|---|---|---|---|---|
+| 0 | 0000 | 0000000 | 6 | 0110 | 1100110 |
+| 1 | 0001 | 1110000 | 7 | 0111 | 0010110 |
+| 2 | 0010 | 1001100 | 8 | 1000 | 1101001 |
+| 3 | 0011 | 0111100 | 9 | 1001 | 0011001 |
+| 4 | 0100 | 0101010 | 10 | 1010 | 0100101 |
+| 5 | 0101 | 1011010 | 11 | 1011 | 1010101 |
+
+5. Error en información: TX k = 6 `1100110`; se invierte la posición 5 (i₁) → RX `1100010`. Zona C₁ {1,3,5,7}: 1⊕0⊕0⊕0 = 1 (alterada). C₂ {2,3,6,7}: 1⊕0⊕1⊕0 = 0 (bien). C₃ {4,5,6,7}: 0⊕0⊕1⊕0 = 1 (alterada). C₃C₂C₁ = 101 = **5** → se invierte la posición 5 → `1100110` ✓.
+6. Error en control: TX `1100110`; se invierte la posición 2 (C₂) → RX `1000110`. C₁: 1⊕0⊕1⊕0 = 0; C₂: 0⊕0⊕1⊕0 = 1; C₃: 0⊕1⊕1⊕0 = 0 → 010 = **2** → el error es el dígito de control C₂; la información no se toca.
+
+**Ejercicio 2 (apunte `4 - Ejemplos Códigos Lineales`, ej. 1; tipo "dan G").** G con filas g₁ = 100011, g₂ = 101101, g₃ = 111000 (n = 6, m = 3). a) V. b) Errores no detectados. c) Comportamiento ante errores simples.
+
+1. a) Las 8 combinaciones $k_1g_1 + k_2g_2 + k_3g_3$: V = {000000, 100011, 101101, 001110, 111000, 011011, 010101, 110110}. $d_{min} = 3$.
+2. b) No se detectan los errores iguales a palabras del código: triples en (x₁,x₅,x₆), (x₃,x₄,x₅), (x₁,x₂,x₃), (x₂,x₄,x₆); cuádruples en (x₁,x₃,x₄,x₆), (x₂,x₃,x₅,x₆), (x₁,x₂,x₄,x₅).
+3. c) $v'G^T = 0$ da: $x'_1 + x'_5 + x'_6 = 0$; $x'_1 + x'_3 + x'_4 + x'_6 = 0$; $x'_1 + x'_2 + x'_3 = 0$. Libres x'₁, x'₃, x'₆ → V' = {000000, 000111, 011100, 011011, 110110, 110001, 101010, 101101}. Base elegida (independiente): H = {011100, 011011, 110110}. Verificado: $GH^T = 0$.
+4. $H^T$ por filas (fila i = síndrome del error simple en xᵢ): x₁ → 001, x₂ → 111, x₃ → 110, x₄ → 101, x₅ → 011, x₆ → 010.
+5. Tabla de síndromes (verificada enumerando los 64 vectores):
+
+| S | Vector(es) de peso mínimo en la familia | Conclusión |
+|---|---|---|
+| 001 | 100000 | corrige error simple en x₁ |
+| 010 | 000001 | corrige x₆ |
+| 011 | 000010 | corrige x₅ |
+| 100 | 100100, 010010, 001001 | **sólo detecta** error doble (x₁x₄, x₂x₅ o x₃x₆) |
+| 101 | 000100 | corrige x₄ |
+| 110 | 001000 | corrige x₃ |
+| 111 | 010000 | corrige x₂ |
+
+6. Ejemplo: llega 111011 → S = 001 → error en x₁ → palabra correcta **011011** ✓ (está en V).
+7. Familia de 001 completa: {100000, 000011, 001101, 101110, 110101, 010110, 011000, 111011}: incluye el error simple en x₁, dobles (x₅x₆, x₂x₃), triples, cuádruples y un quíntuple.
+
+**Ejercicio 3 (final 2015-12-04; `Códigos Lineales` de práctica).** Transmitir 6 mensajes: detectar y corregir error simple en el 1° y 2° dígito, sólo detectar en el resto excepto el menos significativo, en el que no se detecta nada.
+
+1. $2^m \ge 6$ → **m = 3**.
+2. Síndromes no nulos necesarios: uno exclusivo para x₁, otro para x₂ y uno compartido para "sólo detectar" → 3. $2^{n-m} - 1 \ge 3$ → n − m = 2 → **n = 5** (con n = 4, 2¹ − 1 = 1 no alcanza).
+3. Filas de $H^T$ (= síndrome de cada error simple): x₁ → 01; x₂ → 10; x₃ → 11; x₄ → 11; x₅ → **00** (no se detecta).
+4. Ortogonalidad $vH^T = 0$: columna 1 → $x_2 + x_3 + x_4 = 0$; columna 2 → $x_1 + x_3 + x_4 = 0$. Libres x₃, x₄, x₅: $x_1 = x_2 = x_3 + x_4$.
+5. V = {00000, 00001, 00110, 00111, 11010, 11011, 11100, 11101}. Se eligen 6 cualesquiera, ej. sin 00000 ni 00001.
+6. Comprobación: e = 10000 → S = 01 (único → corrige x₁); e = 01000 → 10 (corrige x₂); e = 00100 y 00010 → 11 (sólo detecta); e = 00001 → 00: ¡00001 es palabra del código!, el error en x₅ no se detecta, como pedía el enunciado.
+
+#### Dudas / pendientes
+- **Error en el apunte `4 - Ejemplos Códigos Lineales`, ej. 1**: en los síndromes 100, 101, 110 y 111 despeja mal x₁ (cuando la primera ecuación vale 1, los dos "1 +" se cancelan y el apunte deja uno). Resultado: rotula **mal** las familias. El apunte dice 100 → corrige x₄; 101 → sólo detecta doble; 110 → x₂; 111 → x₃. Lo correcto, verificado con su propia $H^T$ y enumerando todo, es **100 → sólo detecta doble (x₁x₄, x₂x₅, x₃x₆); 101 → x₄; 110 → x₃; 111 → x₂**. Los conjuntos de vectores que lista sí son familias reales, pero bajo el síndrome equivocado. Las conclusiones generales (6 dígitos corregibles + un síndrome de sólo detección) no cambian. El Santo Resumen no lo señala. Los ej. 3 y 4 del mismo apunte los verifiqué y están bien.
+- **"Familia de errores": contradicción entre resúmenes.** `Resumen 1° Parcial Teoría (Parte 2)` y `Resumen Parcial 1 (2025)` dicen que en la familia "se pueden observar sólo los errores simples y dobles". El apunte de la cátedra muestra que la familia contiene **todos** los errores (simples, dobles, triples, cuádruples, quíntuples). En el multiple choice (finales 2021-11-19 y 2021-12-17, 1° parcial 2021) corresponde "**Todos los errores de las palabras códigos asociadas a ese síndrome**".
+- **Notación cruzada**: en Hamming (`2 - Codificación`) **m = información y n = control** ($2^n \ge m + n + 1$); en códigos lineales **n = total y m = información** (n − m = control). "Fórmulas y pasos" usa la de Hamming. No mezclar en el examen: aclarar la notación al empezar.
+- **Dos convenciones de Hamming**: Venn con campos separados (`3 - Detección…`: $I_3I_2I_1I_0C_3C_2C_1$, C₁ = I₀+I₁+I₂…) y posicional intercalada (`2 - Codificación`: controles en 1, 2, 4). Las dos están en la cátedra; la posicional permite leer la posición del error directamente. En los finales piden "aplicando Hamming" sin especificar.
+- Errata del apunte posicional (pág. 20): imprime "C₁ C₃ C₂ / 0 0 1 → 3"; con zonas I y II alteradas lo correcto es **C₃C₂C₁ = 011 = 3**.
+- En `3 - Detección…` el ejemplo "errores no detectables" lista un código de grupo con 7 palabras; falta la octava (101010, que es justamente el error triple x₁x₃x₅ que analiza).
+- `Ejercitación Códigos extra` pide un **código cíclico** con g(x) = 1 + x + x², n = 6: no hay teoría de códigos cíclicos en las fuentes (fuera de alcance; conocimiento general: G se arma con los corrimientos de los coeficientes 111000, 011100, 001110, 000111).
+- Agregados de conocimiento general: relación $d_{min}$ ↔ errores detectables/corregibles, $GH^T = 0$ y "fila i de $H^T$ = síndrome del error en xᵢ" como atajo (el apunte llega a lo mismo planteando $e_iH^T = S_i$).
+
+#### Fuentes
+- `fuentes/teoria/3 - Detección y Corrección de errores.md`
+- `fuentes/teoria/4 - Ejemplos Codigos Lineales.md` (ej. 1 a 6 y "Resumiendo")
+- `fuentes/teoria/2 - Codificación.md` (+ `.pdf` págs. 15–22: confiabilidad, paridad, mayoría, igual peso, regla de decisión, Hamming)
+- `fuentes/practica/Códigos Lineales.md`
+- `fuentes/practica/Ejercitación Códigos extra.md`, `fuentes/practica/Ejercitación Codificación.md` (ej. de paridad por zonas para 10 símbolos)
+- `fuentes/resumenes/Para rendir el final/Práctica - Fórmulas y pasos para los ejercicios.md`
+- `fuentes/resumenes/Para rendir el final/Resumen.md`, `…/Teoría - Preguntas frecuentes (Parte 1).md` y `(Parte 2).md`
+- `fuentes/resumenes/1° Parcial/Resumen 1° Parcial Teoría (Parte 1).md`, `…/Resumen 1° Parcial Teoría (Parte 2).md`, `…/Resumen Parcial 1 (2025).md`
+- `fuentes/resumenes/El Santo Resumen/el-santo-resumen.md` (secciones "Detección y corrección de errores", "Hamming", "Códigos lineales", "Familia de errores")
+- Finales: `fuentes/finales/Práctica/2015/…2015-12-04.md`, `…/2015/…2015-12-18.md`, `…/2017/…2017-02-15.md`, `…/2020/…2020-02-21.md`, `…/2011/…2011-02-18.md`, `…/2012/…2012-03-09.md`; teoría: `fuentes/finales/Teoría/2021/*.md`
 
 ### Unidad 4 — Comunicaciones digitales: transmisión multinivel, PCM, modulación, ADSL
 
@@ -593,3 +1080,4 @@ Respuesta modelo: la capa física transmite bits puros por un canal de comunicac
 ## Log
 - 2026-11-24: Alta de la materia (código CD). Se bajó el Drive de la facu (`3º AÑO/Comunicación de Datos`, 102 archivos) a `archivo/`. Las unidades salen de la teoría de la cátedra y del final de 2025. Todavía no se ingirió nada.
 - 2026-11-24: Ingesta de la teoría, la práctica, los resúmenes (incluido *El Santo Resumen*) y los finales. Desarrollo completo de las Unidades 4–7 (comunicaciones digitales, PCM y ADSL; medios y elección del medio de acceso; asignación de capacidad y colas; OSI/TCP-IP), con ejercicios del final 2025 resueltos. Erratas de las fuentes anotadas en Dudas: el ancho de banda PCM con $f_{min}$ (2·fmax vs fmax−fmin), W del ejemplo 3 del apunte de colas y I del ej. 2 de la práctica de multinivel.
+- 2026-11-24: Desarrollo completo de las Unidades 1–3 (teoría de la información y canales; codificación, Kraft, Huffman, cota de longitud media; paridad, Hamming y códigos lineales con síndrome y familias). Erratas de las fuentes anotadas en Dudas: síndromes mal rotulados en el ej. 1 de *Ejemplos Códigos Lineales*, H(A,B) del BSC en la práctica resuelta y Kraft como condición «necesaria» en un resumen.
