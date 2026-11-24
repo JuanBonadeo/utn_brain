@@ -1,0 +1,18 @@
+# Simulacro 2 — Part 1-A, Questions 2 and 3. Dr Ward = Karen, students = Daniel / Moira.
+Samantha: Questions two and three. You will hear the second part of the seminar, in which Doctor Ward answers questions from students. You now have forty seconds to read the questions.
+[PAUSA 40]
+Daniel: Doctor Ward, are second-life batteries already being used in people's homes?
+Karen: Yes, they are. Several companies are already selling home energy systems built with old car batteries, especially in Germany and the Netherlands. You connect them to the solar panels on your roof. So that is happening right now, not in the future.
+Moira: And what about recycling? Isn't it better to recycle the batteries and recover the lithium?
+Karen: Recycling is essential, but I always say: reuse first, recycle later. If a battery can still work for ten years, it makes no sense to destroy it today. That said, large-scale recycling of lithium is coming. Several big plants are being built at the moment, and I expect them to be fully operational within the next five years.
+Daniel: I read about something called a battery passport. What is that?
+Karen: Ah, yes. It's a digital record that shows where a battery comes from, what it contains and how it has been used. The European Union has made it compulsory, and it will apply to every new electric car battery sold in Europe in the next few years, certainly before the end of this decade. It will make second-life projects much easier, because we'll know the history of each battery.
+Moira: Are second-life batteries safe? I've heard that old batteries can catch fire.
+Karen: That's a fair question. They are safe, but only if they are monitored constantly. Temperature sensors and control software must check every module, because an old cell can overheat. So no, I would never say they need no special monitoring.
+Daniel: What about cobalt? There are a lot of ethical problems with cobalt mining.
+Karen: Indeed. Some manufacturers are already producing batteries without cobalt, but only for certain models. For batteries without cobalt to be used in most cars, we will have to wait much longer. I'd say that is a long-term goal, maybe twenty years.
+Moira: And finally, could parked cars give electricity back to the grid?
+Karen: Technically, yes. It's called vehicle-to-grid, and there are small pilot projects. But doing it on a large scale requires new regulations, new chargers and a lot of cooperation between car makers and energy companies. So that belongs to the long-term future.
+Karen: One last thing before we finish. This is not only a job for chemists. We need electrical engineers, software engineers, mechanical engineers and even lawyers. If you are interested in energy, there is a place for you in this industry.
+[PAUSA 3]
+Samantha: That is the end of part one A.

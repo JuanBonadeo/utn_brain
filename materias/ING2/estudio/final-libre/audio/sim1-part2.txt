@@ -1,0 +1,19 @@
+# Simulacro 1 — Part 1-A, Question 2. Sofia = Samantha, Martin = Daniel.
+Moira: Question two. You will hear two students, Sofia and Martin, preparing a seminar presentation on the same topic. You now have thirty seconds to read the questions.
+[PAUSA 30]
+Samantha: OK, Martin, we need to decide what our presentation is going to focus on. We've got ten minutes, so we can't cover everything.
+Daniel: Right. I was reading about immersion cooling last night. The servers are placed in a special liquid that absorbs the heat, so you don't need to evaporate any water at all.
+Samantha: That sounds perfect. Why isn't everybody using it?
+Daniel: Because it's still very expensive. The big companies can afford it, but for a small company it's simply too expensive. It would mean replacing all their equipment.
+Samantha: I see. Well, what I found more interesting was the question of transparency. Most companies don't say how much water they use. In my opinion, governments should make it compulsory to publish that information every year.
+Daniel: Hmm, maybe. But what about us, the users? People keep saying we should send fewer messages or watch fewer videos.
+Samantha: Honestly, I don't think individual users can solve this on their own. It's a problem of infrastructure, not of personal habits.
+Daniel: I agree with you there. Even if I stopped using the internet tomorrow, it wouldn't make any difference.
+Samantha: Another option I read about is building data centres near the sea. They could use sea water for cooling, which wouldn't compete with drinking water. I think that's a very promising idea.
+Daniel: Maybe, although salt water damages the pipes. What I liked was the Helsinki example. If the heat can warm homes, companies could actually sell it, as a product. Then cooling becomes a business, not just a cost.
+Samantha: That's a good point. So, regulation, or technology?
+Daniel: Regulation is important, but everybody will talk about it. I think the technical side is more original.
+Samantha: OK, you've convinced me. Let's focus on cooling technologies and heat reuse, and mention regulation briefly in the conclusion.
+Daniel: Great. I'll start on the slides.
+[PAUSA 3]
+Moira: That is the end of part one A.

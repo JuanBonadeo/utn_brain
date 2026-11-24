@@ -57,6 +57,14 @@ Conviene practicar ambos: el final libre evalúa el programa completo.
 - La página institucional "Exámenes Libres Inglés" (Depto. Materias Básicas →
   UDB Cultura e Idiomas) publica material de práctica y horarios de consulta.
 
+#### Práctica
+- **Simulacros propios** en `estudio/final-libre/`: `simulacro-1.md` (data centres / IA en la
+  universidad / semana de 4 días) y `simulacro-2.md` (baterías de segunda vida / smart cities /
+  edge computing). Cada uno trae PDF para imprimir, audios `.m4a` y KEY aparte. Los audios
+  se regeneran desde las transcripciones con `python3 scripts/ing2/tts-listening.py <audio/x.txt>`.
+- Material oficial para simular: práctica para libres (completa con audio) y final 14-11-2023
+  (sin audio de listening).
+
 #### Dudas / pendientes
 - Confirmar con la cátedra la **fecha de mesa** y si la estructura 2026 se mantiene
   igual a la del modelo 2023.
@@ -452,3 +460,5 @@ integrate, automate, immersion, artificiality*.
   del 2° parcial. Del Drive "Inglés libre" que compartió Juan se bajó a
   `fuentes/drive-libre/` la planificación 2026, la práctica de examen (con audios y KEY),
   los TPs de la cátedra y un repaso para el final. Se crearon las unidades 1–7.
+- 2026-11-24: simulacros de final 1 y 2 en `estudio/final-libre/` (consignas + PDF + KEY +
+  audios generados con `say`), y el script `scripts/ing2/tts-listening.py`. Unidad 1: sección Práctica.

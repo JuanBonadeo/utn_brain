@@ -1,0 +1,11 @@
+# Simulacro 2 — Part 1-A, Question 1. Lecturer: Dr Helen Ward = Karen.
+Samantha: English Two. Final exam. Part one A. Question one. You will hear the first part of a seminar talk about electric car batteries. You now have thirty seconds to read the questions.
+[PAUSA 30]
+Karen: Good afternoon, and welcome to this week's sustainability seminar. My name is Helen Ward, and I work on energy storage. Today I want to talk about what happens to the battery of an electric car when the car no longer needs it.
+Karen: An electric car battery does not suddenly die. It loses capacity slowly, year after year. When its capacity falls below seventy per cent of the original, the car's range becomes too short for most drivers, and the battery is usually replaced. But here is the important point: a battery at seventy per cent is far from useless. It simply isn't good enough for a car any more.
+Karen: So what can we do with it? The most promising answer is what we call a second life. Old car batteries can be used for stationary storage, that is, batteries that do not move. For instance, they can store the energy produced by solar panels during the day, so that it can be used at night, when the sun is not shining.
+Karen: Let me give you a real example. In a football stadium in Amsterdam, the energy storage system is built with batteries from electric cars. In total, the project uses one hundred and forty-eight car batteries. They store energy from the solar panels on the roof, and they provide backup power if the electricity grid fails during a match.
+Karen: Now, how does a battery get from a car to a stadium? The process has three main steps. First, every battery is tested to measure how much capacity it still has. Second, the batteries are sorted according to their condition, because you don't want to mix good and weak cells. And third, they are reassembled into new modules, with new electronics and a new control system.
+Karen: The results are very encouraging. A second-life battery can work for about ten more years in a stationary system. And because most of the expensive materials are already there, it costs about half the price of a new battery. That makes it particularly attractive for schools, hospitals and small businesses.
+[PAUSA 3]
+Samantha: That is the end of question one.
