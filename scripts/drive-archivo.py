@@ -44,6 +44,7 @@ MATERIAS = {
     "SIM": ("1F9-Ml_ppaLDSGrxLoO1kmz39XGxtEl-9", "4º AÑO/Simulación"),
     "TPA": ("1NhoZw0orcdC-8Aw1c9lGfrQBa5zqxSdP", "4º AÑO/Tecnologías para la Automatización"),
     "IYS": ("1V-QfFznBzNwUVzWgURqLYvRBMOq_Mxz4", "2° AÑO/Ingeniería y Sociedad"),
+    "ING2": ("10XtuY3ND_g2iI6-PoVtc99WYugjMXoIz", "2° AÑO/Inglés II"),
     "IPP": ("1ofC3BJb8651rZIN6nvlS6nesNMhdQR3l", "Electivas/Introducción a la Práctica Profesional (IPP)"),
     "SGD": ("1rGbGb7_Vspbf98t-ggGYeP08QGIGxF9n", "Electivas/Soporte a la Gestión de Datos con Programación Visual"),
 }
