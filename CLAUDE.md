@@ -21,6 +21,7 @@ tiempo repitiendo cosas que ya deberían estar escritas en algún lado.
 | IPP | Intro a la Práctica Profesional |
 | ISW | Ingeniería y Calidad de Software (ICS) |
 | ING2 | Inglés II (pendiente de 2°, se rinde libre) |
+| CD | Comunicación de Datos (pendiente de 3°, final) |
 
 ## ESTRUCTURA
 Todo lo de una materia vive dentro de `materias/[CÓDIGO]/`. No hay carpetas
@@ -57,7 +58,7 @@ de materia fuera de ahí.
     volcado tal cual (`Examenes/`, `Material de Cursado/`, `Resumenes/`,
     `LEER.pdf`). El mapeo código → carpeta del Drive vive en
     `scripts/drive-archivo.py` (`MATERIAS`): `4º AÑO/` para ASI, ISW, IO, LEG,
-    RD, SIM y TPA; `2° AÑO/Ingeniería y Sociedad` para IYS; `2° AÑO/Inglés II` para ING2; `Electivas/` para
+    RD, SIM y TPA; `2° AÑO/Ingeniería y Sociedad` para IYS; `2° AÑO/Inglés II` para ING2; `3º AÑO/Comunicación de Datos` para CD; `Electivas/` para
     IPP y SGD. Si se agrega una materia, se suma ahí.
   - En una máquina nueva (o si falta `archivo/`), se baja con
     `python3 scripts/drive-archivo.py` (en Windows: `py scripts\drive-archivo.py`).
