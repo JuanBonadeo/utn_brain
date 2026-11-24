@@ -171,7 +171,7 @@ Fuente: «Fórmulas y pasos», «1 - Información, Codificación y Canales».
 
 | Paso | Fórmula |
 |---|---|
-| Matriz del CBS | $P(b_1/a_1)=P(b_2/a_2)=p$, $P(b_2/a_1)=P(b_1/a_2)=1-p$ |
+| Matriz del CBS ($p$ = probabilidad de **error**) | $P(b_2/a_1)=P(b_1/a_2)=p$, $P(b_1/a_1)=P(b_2/a_2)=1-p$ |
 | Probabilidad de salida | $P(b_j)=\sum_i P(a_i)\,P(b_j/a_i)$ |
 | Conjunta | $P(a_i,b_j)=P(a_i)\,P(b_j/a_i)$ |
 | Hacia atrás (Bayes) | $P(a_i/b_j)=\dfrac{P(a_i)\,P(b_j/a_i)}{P(b_j)}$ |
@@ -180,7 +180,7 @@ Fuente: «Fórmulas y pasos», «1 - Información, Codificación y Canales».
 | Entropía del canal (equivocación de B respecto de A) | $H(B/A)=\sum_i\sum_j P(a_i)\,P(b_j/a_i)\lg\dfrac{1}{P(b_j/a_i)}$ |
 | Información mutua | $I(A,B)=H(B)-H(B/A)$ [bits/símbolo] |
 
-Atajo útil en el CBS: $H(B/A)=H(p)=p\lg\frac1p+(1-p)\lg\frac1{1-p}$, **no depende de $P(a_1)$**.
+Atajo útil en el CBS: $H(B/A)=H(p)=p\lg\frac1p+(1-p)\lg\frac1{1-p}$, **no depende de $P(a_1)$**. Como $H(p)=H(1-p)$, da lo mismo usar la probabilidad de error o la de acierto, pero en este banco, en la wiki y en el resumen $p$ es siempre la de **error**: en los finales, $P(b_1/a_1)=0{,}75$ es el acierto y $p=0{,}25$.
 
 Concepto que piden explicar: $I(A,B)$ es la información que en promedio realmente llega al receptor por símbolo: la incertidumbre de la salida menos la que agrega el ruido del canal. Es simétrica ($I(A,B)=I(B,A)=H(A)-H(A/B)$) y su máximo sobre las fuentes posibles es la capacidad $C$.
 
@@ -200,7 +200,7 @@ Concepto que piden explicar: $I(A,B)$ es la información que en promedio realmen
    - $0{,}65(0{,}25)\lg4=0{,}3250$
    - $0{,}35(0{,}25)\lg4=0{,}1750$
    - $0{,}35(0{,}75)\lg\frac1{0{,}75}=0{,}1089$
-   - Suma: $H(B/A)=\mathbf{0{,}8113}$ bits/símbolo (igual a $H(0{,}75)$).
+   - Suma: $H(B/A)=\mathbf{0{,}8113}$ bits/símbolo (igual a $H(p)=H(0{,}25)$).
 5. c) $I(A,B)=0{,}9837-0{,}8113=\mathbf{0{,}1724}$ bits/símbolo. De cada símbolo emitido, que trae $H(A)=0{,}934$ bits, llegan efectivamente 0,172 bits; el resto lo «tapa» el ruido del canal (error del 25 %).
 
 #### 2.2 — 21/02/2020 — resuelto ($P(a_1)=0{,}05$)
@@ -209,7 +209,7 @@ Concepto que piden explicar: $I(A,B)$ es la información que en promedio realmen
 
 1. $P(b_1)=0{,}05(0{,}75)+0{,}95(0{,}25)=0{,}0375+0{,}2375=0{,}275$; $P(b_2)=0{,}725$.
 2. a) $H(B)=0{,}5122+0{,}3364=\mathbf{0{,}8485}$ bits/símbolo.
-3. b) $H(B/A)=H(0{,}75)=\mathbf{0{,}8113}$ bits/símbolo (mismo canal).
+3. b) $H(B/A)=H(0{,}25)=\mathbf{0{,}8113}$ bits/símbolo (mismo canal).
 4. c) $I(A,B)=\mathbf{0{,}0373}$ bits/símbolo. La fuente casi siempre emite $a_2$ ($H(A)=0{,}286$ bits), así que hay poca información para transferir y el canal ruidoso deja pasar muy poco.
 
 Es probable que el 0,05 sea un error de tipeo de 0,65 (ver Dudas). Resolvé lo que dice la hoja.
@@ -261,7 +261,7 @@ Es probable que el 0,05 sea un error de tipeo de 0,65 (ver Dudas). Resolvé lo q
 - $H(B/A)$ se pondera con $P(a_i)$; si te olvidás del peso, te da $2H(p)$.
 - La «entropía del canal» del enunciado es $H(B/A)$, no $H(A/B)$.
 - $I(A,B)\ge0$ siempre. Si te da negativa, sumaste mal.
-- La «Práctica N°1 RESUELTO» calcula $H(A,B)$ sumando probabilidades (da «1»). Es incorrecto: con $p=(0{,}45;0{,}55)$ y $P=0{,}8$, las conjuntas son 0,36; 0,09; 0,11; 0,44 y $H(A,B)=1{,}7147$ bits.
+- La «Práctica N°1 RESUELTO» calcula $H(A,B)$ sumando probabilidades (da «1»). Es incorrecto: con $P(a_i)=(0{,}45;0{,}55)$ y probabilidad de acierto $1-p=0{,}8$ ($p=0{,}2$), las conjuntas son 0,36; 0,09; 0,11; 0,44 y $H(A,B)=1{,}7147$ bits.
 
 ---
 ## 3. Códigos compactos — Huffman r-ario, longitud media, rendimiento, Kraft
