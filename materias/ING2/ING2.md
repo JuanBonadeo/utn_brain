@@ -354,6 +354,9 @@ Sirve en el oral para preguntarle al otro equipo o al moderador.
   vs. negative effects of the growth of technology* (práctica). Practicados en el repaso:
   green hydrogen, IA en la investigación académica, autos autónomos.
 
+> Hoja de repaso corta (claves, formatos y un ejemplo de cada tipo):
+> `estudio/final-libre/resumen-writing.md` (+ PDF).
+
 #### Desarrollo: for and against (4 párrafos)
 
 | Párrafo | Contenido | Regla |
@@ -514,3 +517,4 @@ integrate, automate, immersion, artificiality*.
   parafraseadas". Unidad 5: tres tipos de ensayo (for and against, opinion de un solo lado,
   problems and solutions), basado en un texto, y la contradicción de los handouts sobre el
   opinion essay. Unidad 6: debate problem/solution.
+- 2026-11-25: `estudio/final-libre/resumen-writing` (+ PDF): claves, formatos y ejemplos de los tres tipos de ensayo. Unidad 5: link.
