@@ -1,0 +1,29 @@
+# Simulacro 3 — Part 1-A, Questions 4 and 5. Thandi = Tessa (ZA), Ravi = Rishi (IN). Dificultad alta: velocidad 200, ruido 0.04, huecos 0.3.
+[RUIDO 0.04]
+[VELOCIDAD 170]
+Samantha: Questions four and five. You will hear two students, Thandi and Ravi, discussing the future of three-dimensional printed housing for a seminar report. You now have forty seconds to read the questions.
+[PAUSA 40]
+[VELOCIDAD 200]
+[HUECO 0.3]
+Tessa: Okay, Ravi, let's agree on the main message of our report. What do you want to say about jobs?
+Rishi: Honestly, I wanted to argue that printing will destroy construction jobs. One machine, fewer bricklayers, fewer labourers.
+Tessa: I don't think so. You still need people to prepare the site, pour the foundations, fit the roof and the windows, and somebody to operate the printer. The firms I read about are training their existing workers, not firing them.
+Rishi: Hmm. I suppose the roof, the plumbing and the wiring are still done by hand. Right, you've convinced me. The jobs will change, but they won't disappear. I'll delete that paragraph.
+Tessa: Good. Now, price. Everybody says that printed houses are cheaper.
+Rishi: Cheaper to build, certainly. And I'd say the savings are already reaching the buyers.
+Tessa: I don't think so. The builder saves money, but the company still has to recover the cost of developing the printer, so at the moment the price in the shop window is almost the same. Maybe later, but not yet.
+Rishi: I still think prices will drop quickly. But all right, let's say that's my opinion and not a fact.
+Tessa: And applications? What do you want to put there?
+Rishi: Emergency housing. After a flood or an earthquake, a printer can produce a shelter in a day or two. That's the best use, in my view.
+Tessa: Sounds good, but I'm not convinced. You need electricity, water and flat ground, and after a disaster you have none of them. I'd rather recommend it for social housing in planned neighbourhoods, where the logistics are easier.
+Rishi: Fair enough, but I'll still say that emergencies are where it makes the biggest difference.
+Tessa: Now the timeline, which is the part where I'm least sure. Let's start with regulations. At the moment every project needs a special permit.
+Rishi: A committee led by Doctor Okonkwo, that's O, K, O, N, K, W, O, has published a first draft. I thought official standards would take ten years, but they now say they will be approved within three years. Sorry, five.
+Tessa: Okay. And then the really ambitious idea: printing with local soil instead of cement, so nothing has to be transported.
+Rishi: Mixes with less cement could be on the market within five years, but replacing it completely with earth from the site is more like twelve years away. No, twenty, because the research is still in the laboratory.
+Tessa: Agreed. And to finish on a positive note, what already exists? Families are living in printed houses right now, in several countries.
+Rishi: Yes, mostly single houses or small groups, as pilots. Whole estates with hundreds of homes are still a few years away. But the families are already there.
+Tessa: Perfect. Let's write it up like that.
+[VELOCIDAD 170]
+[PAUSA 3]
+Samantha: That is the end of part one A, questions four and five.

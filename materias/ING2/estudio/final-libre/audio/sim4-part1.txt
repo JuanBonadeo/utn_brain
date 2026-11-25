@@ -1,0 +1,17 @@
+# Simulacro 4 — Part 1-A, Questions 1, 2 and 3. Lecturer = Moira (IE). Dificultad alta: velocidad 200, ruido 0.03, huecos 0.3.
+[RUIDO 0.03]
+[VELOCIDAD 170]
+Samantha: English Two. Final exam, simulacro four. Part one A. Questions one, two and three. You will hear a lecture about desalination plants. You now have thirty seconds to read the questions.
+[PAUSA 30]
+[VELOCIDAD 200]
+[HUECO 0.3]
+Moira: Good morning, everybody. Today's topic is how we turn seawater into drinking water. We'll look at the technology, then follow the process through a plant, and end with a real example.
+Moira: Let's begin with the basic problem. Only about three per cent of the planet's water is fresh, and most of that is frozen. Which means that roughly ninety-seven per cent is salt water.
+Moira: Desalination started with distillation: you boil seawater and collect the steam. That needs a great deal of heat. Most new plants use reverse osmosis instead, which relies on something different. The seawater is pumped against a membrane at very high pressure, and only the water passes through. The first membranes were made of cellulose acetate. Today's have a thin active layer of polyamide. That's P, O, L, Y, A, M, I, D, E, on top of a plastic support.
+Moira: Energy is the big cost. Fifty years ago, plants needed more than ten kilowatt-hours for every cubic metre of water. Today the figure is about four. Sorry, three. Still a lot of electricity.
+Moira: And the waste? The salty by-product is called brine, and it is about twice as salty as seawater. Critics claim it kills fish. The studies, however, show that fish simply swim away. What really suffers are the organisms living on the seabed near the outlet.
+Moira: Now, how does a plant work? Step by step. First, the intake. Screens at the entrance stop fish and seaweed. Then comes pre-treatment. Filters take out sand and algae, which would otherwise block the membranes. Next, high-pressure pumps push the water through the membranes. In older plants only about thirty-five per cent of the water came out fresh. In a modern plant it's about forty per cent. No, forty-five. The rest leaves as brine, which is diluted with seawater and returned to the sea through a diffuser. And one last step. Pure water is aggressive to pipes and tastes flat, so it is re-mineralised by adding calcium. A little chlorine is also added to disinfect it. Then the water is stored and sent to homes.
+Moira: To finish, a real example. Let's call it the Eastgate plant. It was designed to produce one hundred thousand cubic metres a day, but after an extension it now produces one hundred and fifty thousand. At the opening ceremony the mayor said it would supply a million people. In reality it supplies about six hundred thousand. Construction cost three hundred and fifty million dollars. No, that was the first estimate. The final bill was four hundred and fifty million.
+[VELOCIDAD 170]
+[PAUSA 3]
+Samantha: That is the end of part one A, questions one, two and three.

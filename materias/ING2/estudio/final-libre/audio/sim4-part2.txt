@@ -1,0 +1,23 @@
+# Simulacro 4 — Part 1-A, Questions 4 and 5. Callum = Daniel (GB), Jess = Karen (AU). Dificultad alta: velocidad 200, ruido 0.04, huecos 0.3.
+[RUIDO 0.04]
+[VELOCIDAD 170]
+Samantha: Questions four and five. You will hear two students, Callum and Jess, discussing whether their coastal city should build a desalination plant. You now have forty seconds to read the questions.
+[PAUSA 40]
+[VELOCIDAD 200]
+[HUECO 0.3]
+Daniel: Right, Jess, the council wants our report by Friday. Let me say where I stand. Honestly, my first instinct is that a plant is a waste of money. Our real problem is the leaking pipes: the city loses a quarter of its water. We should repair those before building anything.
+Karen: Repairing pipes is sensible, but it isn't a first step towards a plant. It's a separate job. The city has been fixing leaks for ten years and still runs short every dry summer. Even with zero leaks we'd have a deficit. And I think a plant is a sensible investment for a city like ours.
+Daniel: Hmm, I'm not sure. Let's move on to the environment. The main objection, for me, is energy. Desalination uses huge amounts of electricity. Brine worries people, but you can dilute it and release it far from the coast, so it isn't such a big issue.
+Karen: I'd say the opposite. Energy can come from solar panels, but brine is the real environmental concern. Even diluted, it is denser than seawater and sinks to the seabed.
+Daniel: Hmm. I still think energy is the bigger problem. Anyway, it all comes down to money. I said it was a waste.
+Karen: Look at the numbers. The last drought cost local businesses about a hundred and twenty million. The plant would cost about four hundred million over thirty years, and it can run on a solar farm during the day.
+Daniel: Right. When you put it like that, I've changed my mind. A plant is a sensible investment for us.
+Karen: Good. Now, the technology section. Where are we with solar power?
+Daniel: A few plants already run on solar farms, but only during the day. Running a big plant entirely on renewable energy, twenty-four hours a day, with batteries, will take about a decade. Some companies say five years, but I don't believe them.
+Karen: And the by-products? Some plants already sell the salt recovered from brine. Lithium is a different story. That's only in pilot projects, and I'd say it won't be a business for another ten years.
+Daniel: Okay. What about graphene membranes? That's G, R, A, P, H, E, N, E. They could cut energy use a lot.
+Karen: In laboratories they work, yes. Some companies promise them in ten years. Doctor Kowalczyk, that's K, O, W, A, L, C, Z, Y, K, thinks fifteen. Sorry, twenty-five. So for the report, I'd call it a long-term idea.
+Daniel: Agreed. Let's write it up like that.
+[VELOCIDAD 170]
+[PAUSA 3]
+Samantha: That is the end of part one A, questions four and five.

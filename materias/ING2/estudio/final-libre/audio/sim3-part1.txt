@@ -1,0 +1,17 @@
+# Simulacro 3 — Part 1-A, Questions 1, 2 and 3. Lecturer = Karen (AU). Dificultad alta: velocidad 200, ruido 0.03, huecos 0.3.
+[RUIDO 0.03]
+[VELOCIDAD 170]
+Samantha: English Two. Final exam, simulacro three. Part one A. Questions one, two and three. You will hear a lecture about three-dimensional printed houses. You now have thirty seconds to read the questions.
+[PAUSA 30]
+[VELOCIDAD 200]
+[HUECO 0.3]
+Karen: Good afternoon, everyone. Today we're looking at houses that are printed rather than built. I'll cover the machine and the material, then the process step by step, and finally a real comparison.
+Karen: Let's start with the material. Some teams have printed with clay, and a few with recycled plastic, but those are experiments. The mix used in the great majority of houses is cement-based, with sand and some additives. As for the machine, the robotic arm is the best known from the videos, but it's small. For full-size houses, the standard solution is a gantry. That's G, A, N, T, R, Y. A big frame that moves along rails above the site.
+Karen: How long does it take? The walls of a small house need about forty-eight hours of printing. Sorry, I mean twenty-eight. Forty-eight is for the two-storey version. And people? A traditional crew for the walls is about ten. Critics say the printer replaces the whole crew with one machine. What the pilot projects show, however, is that you still need three people: one for the mix, one at the controls, and one inspecting.
+Karen: Now, the limits. Many people assume the printer can't handle windows and doors, but it simply leaves gaps for them. The real limitation is the top of the house. Printers can't manage the roof, so workers lift it into place with a crane.
+Karen: Let's move on to the process. Everything starts with a digital model, drawn by the architect. You might imagine the software cutting it into vertical sections, because the walls go up. But in fact it cuts the model into horizontal layers, each about two centimetres thick. On site, workers prepare the ground first. A layer of gravel goes down, but that is only to drain the water. The actual base of the house is a flat concrete slab, which workers pour.
+Karen: Then the printer starts, laying two thin walls with a zigzag pattern between them. About halfway up, printing pauses. Workers run pipes and cables through the cavities, and they also place steel reinforcement bars, which are what really give the wall its strength. Then the printer carries on to the top.
+Karen: Finally, the numbers, from a pilot project that compared two identical small houses. The printed house cost about one hundred and forty-five thousand dollars. No, sorry, one hundred and fifty-four thousand, against one hundred and seventy-five thousand for the conventional one. The printed walls took four days. Conventional walls usually take about three weeks, but in this pilot they took five, because of the rain. So: faster, and somewhat cheaper. That's all for today.
+[VELOCIDAD 170]
+[PAUSA 3]
+Samantha: That is the end of part one A, questions one, two and three.
