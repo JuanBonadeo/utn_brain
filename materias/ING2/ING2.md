@@ -38,8 +38,20 @@ Final del 14-11-2023 (Fernández Gallino) y "práctica de examen" para libres:
 |---|---|---|---|
 | **Part 1-A** Listening | 2 audios (charla / clase) | 15 | completar notas con 1–3 palabras, T/F, multiple choice, asignar A/B/C, leer gráficos |
 | **Part 1-B** Reading | 1–2 textos largos | 45 | preguntas abiertas, headings, referentes, sinónimos, conectores, multiple choice con T, flow-chart |
-| **Part 2** Writing | ensayo ~250 palabras | 40 | *for and against* con opinión final |
-| **Oral** | debate grupal (2–3 alumnos), 20–30 min | aparte | presentación breve + debate a favor / en contra de una moción |
+| **Part 2** Writing | ensayo ~250 palabras sobre el tema de un texto | 40 | uno de tres tipos: *for and against*, *opinion* o *problems and solutions* (Unidad 5) |
+| **Oral** | debate grupal (2–3 alumnos), 20–30 min | aparte | presentación breve + debate *for/against* o *problem/solution* |
+
+**Testimonio de un alumno que aprobó el final libre** (audio del 25-11-2026, `fuentes/audio-info-final-2026-11-25`):
+- "Es fácil." Lo que complica es el **note-taking**: te preguntan cosas del texto y tenés que
+  poner **exactamente lo que quieren**.
+- Hay un ejercicio que pide **resumir pros y contras en una tabla** (vale 4 p.). Si lo
+  respondés en viñetas en vez de **dibujar la tabla**, te bajan 3 de 4 puntos.
+- Writing: **tres tipos de ensayo** (for and against, opinion, problems and solutions). El
+  *opinion essay* "nos cazó a todos": hay que tomar **un solo lado** y no escribir nada del otro.
+- Oral: for/against o problem/solution, cada uno toma una parte y discuten. "Muy fácil."
+- El consejo central: **no pensar de más**. Lo que se premia es poner **las mismas ideas del
+  texto, parafraseadas**, sin copiar oraciones enteras y sin agregar razonamientos propios.
+  Él tardó en entenderlo: practicaba con ideas complejas que no estaban en el texto.
 
 Los parciales de cursada (2025) usan el mismo formato pero con más ítems de
 gramática (cloze, tiempos verbales, rephrase) y una tarea de note-taking de 20 p.
@@ -93,6 +105,11 @@ contenido: una paráfrasis fiel del texto vale lo mismo que la frase literal.
 | **Multiple choice "Write T"** | Descartá por lo que el texto *no dice*. Los distractores usan palabras del texto en otra relación. |
 | **Flow-chart / diagrama** | Seguí la secuencia temporal del texto. "NO MORE THAN THREE WORDS **from the text**". |
 | **List three tasks…** | Tres ítems distintos, cada uno con verbo + objeto. |
+| **Note-taking: pros and cons** | **Dibujá la tabla** (Advantages / Disadvantages) y completala con las ideas del texto en frases cortas. En viñetas sueltas te bajan 3 de 4 p. (testimonio del final). |
+
+> **Regla de oro (testimonio del final + KEY oficiales):** la respuesta esperada es **la idea
+> del texto, parafraseada**. No infieras ni agregues razonamientos propios, y no copies
+> oraciones enteras textuales. Es el error que más puntos costó en los simulacros 1 y 2.
 | **"What questions do these statements answer?"** (modelos viejos) | Armá la pregunta con auxiliar y *wh-word* correctos (ver Unidad 4). |
 
 #### Ejercicios resueltos tipo
@@ -315,14 +332,29 @@ Sirve en el oral para preguntarle al otro equipo o al moderador.
 ### Unidad 5 — Writing (Part 2): el ensayo argumentativo
 
 #### Conceptos clave
-- 40 p., **~250 palabras**. Consigna típica: *"write a balanced argument before presenting
-  your own point of view. Points of view have to be accounted for by clear and convincing
-  evidence."* Es un **for and against essay** con opinión al final.
+- 40 p., **~250 palabras**. Hay **tres tipos de ensayo** y el examen te pide uno
+  (testimonio de un alumno que aprobó; los apuntes de Bettucci trabajan los tres):
+
+| Tipo | Consigna típica | Estructura | Regla que más se castiga |
+|---|---|---|---|
+| **For and against** | *"write a balanced argument before presenting your own point of view"* | intro sin opinión / a favor / en contra / conclusión con opinión | nada de *I think* antes del último párrafo |
+| **Opinion** | *"Do you agree or disagree? Give reasons and examples."* | intro **con tu opinión** / razón 1 + ejemplos / razón 2 + ejemplos / conclusión que reafirma | **un solo lado**: no menciones el otro (la cátedra lo tacha) |
+| **Problems and solutions** | *"Discuss the problems caused by X and suggest solutions."* | intro (el problema) / problemas: causas y efectos / soluciones con su resultado esperado / conclusión | cada solución tiene que responder a un problema que nombraste |
+
+- El ensayo **se basa en un texto** (el del reading o uno que trae la Part 2): usá **sus
+  ideas parafraseadas** como argumentos. No hace falta inventar razonamientos propios
+  complejos, y no conviene: se premia reproducir las ideas del texto con tus palabras.
+- **Contradicción en las fuentes (opinion essay):** el TP "Opinion essays – activities" de
+  Bettucci rotula un párrafo *"opposing viewpoint(s)"*, pero el handout "Writing an opinion
+  essay" (misma profesora) usa intro + 2 párrafos de razones + conclusión, sin el otro lado.
+  El alumno que rindió dice que lo del otro lado se tacha. **Criterio seguro: no lo incluyas**
+  salvo que la consigna lo pida explícitamente.
+- La consigna del final 2023 fue for and against.
 - Temas tomados: *Beneficial and harmful effects of video games* (final 2023); *positive
   vs. negative effects of the growth of technology* (práctica). Practicados en el repaso:
   green hydrogen, IA en la investigación académica, autos autónomos.
 
-#### Desarrollo: estructura de 4 párrafos
+#### Desarrollo: for and against (4 párrafos)
 
 | Párrafo | Contenido | Regla |
 |---|---|---|
@@ -341,6 +373,18 @@ Frases que conviene llevar memorizadas:
 - **Conclusión:** *"All things considered, I believe that…" / "On balance, although there
   are some disadvantages, I feel that…" / "To sum up, it appears that the benefits of X
   outweigh the risks."*
+
+#### Desarrollo: opinion essay y problems and solutions
+- **Opinion** (handout "Writing an opinion essay", Bettucci): ¶1 presentá el tema (parafraseá el
+  título o abrí con una pregunta) y **decí si estás de acuerdo**; ¶2 primera razón con al menos
+  dos hechos o ejemplos; ¶3 más razones con ejemplos; ¶4 resumí y **repetí tu opinión con otras
+  palabras**. Frases: *"I strongly believe that…" / "In my opinion, …" / "The main reason why I
+  agree is that…" / "Another reason is that…" / "For these reasons, I am convinced that…"*.
+- **Problems and solutions:** ¶1 presentá el problema; ¶2 problemas, con causas y efectos
+  (*"One of the main problems is…", "This leads to…", "As a consequence…"*); ¶3 soluciones,
+  cada una con el resultado que tendría (*"One possible solution would be…", "This would
+  result in…", "Another measure could be…"*); ¶4 conclusión (*"To sum up, if these measures
+  are taken, …"*).
 
 Cómo sumar puntos: una idea por oración, **conectores** entre oraciones, nominalización,
 hedging (*may, it appears that*) y **evidencia concreta** (un dato, un estudio, un ejemplo).
@@ -396,6 +440,8 @@ el último párrafo.
   moderador presenta la **moción** y asigna roles **a favor / en contra** (no elegís
   el lado); (3) debate moderado; (4) el tribunal delibera la nota individual.
 - Tema: alguno de los textos del escrito o del libro obligatorio (Oxford EAP B1).
+- Según un alumno que rindió libre, el debate también puede ser **problem/solution** (un
+  lado plantea problemas y el otro soluciones). Lo describe como "muy fácil".
 
 #### Desarrollo: expresiones útiles
 - **Abrir:** *"To kick things off, it is widely argued that…" / "I would like to start by
@@ -462,3 +508,9 @@ integrate, automate, immersion, artificiality*.
   los TPs de la cátedra y un repaso para el final. Se crearon las unidades 1–7.
 - 2026-11-24: simulacros de final 1 y 2 en `estudio/final-libre/` (consignas + PDF + KEY +
   audios generados con `say`), y el script `scripts/ing2/tts-listening.py`. Unidad 1: sección Práctica.
+- 2026-11-25: ingest de una nota de voz de un alumno que aprobó el final libre
+  (`fuentes/audio-info-final-2026-11-25`, transcripción automática). Unidad 1: testimonio del
+  formato real. Unidad 2: ejercicio de pros y contras en tabla y regla de "ideas del texto
+  parafraseadas". Unidad 5: tres tipos de ensayo (for and against, opinion de un solo lado,
+  problems and solutions), basado en un texto, y la contradicción de los handouts sobre el
+  opinion essay. Unidad 6: debate problem/solution.
