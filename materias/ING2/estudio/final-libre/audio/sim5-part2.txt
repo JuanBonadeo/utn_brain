@@ -1,0 +1,31 @@
+# Simulacro 5 — Part 1-A, Questions 4 and 5. Host = Karen (AU), Ravi = Rishi (IN), Niamh = Moira (IE). Ruido 0.04, 200 wpm. Autocorrecciones (two hundred thousand/two hundred and twenty-five thousand; three/five years). Ravi cambia de opinion sobre los ciberataques. Cada idea de Q4 la mencionan los dos hablantes.
+[RUIDO 0.04]
+[VELOCIDAD 170]
+Samantha: Questions four and five. You will hear a radio discussion between two energy engineers, Ravi and Niamh, led by a host. You now have forty seconds to read the questions.
+[PAUSA 40]
+[VELOCIDAD 200]
+[HUECO 0.3]
+Karen: Welcome to Power Talk. Today I'm joined by two engineers, Ravi Menon and Niamh Keane. Let's start with the big question: how do we avoid blackouts when we depend more and more on solar and wind? Ravi?
+Rishi: Well, my view is simple. The cheapest tool we have is the customer. If a utility pays households to use less electricity at peak times, what we call demand response, we avoid building power plants that only work a few hours a year. A small payment for switching off the air conditioning for twenty minutes is a fair deal for everybody.
+Moira: I like the logic, Ravi, and for factories I would agree, because one manager makes the decision. But households? Families won't change their habits for a few cents. I've seen the surveys, and most people simply can't be bothered.
+Rishi: With automation they don't have to bother. The washing machine just waits for the cheap hour.
+Moira: Maybe. But that brings me to my main worry, and it isn't the money. It's the data. A smart meter knows when you wake up, when you cook and when you go on holiday. For me, that is an invasion of privacy.
+Rishi: Some people say so, but I don't agree. Privacy is manageable. Data can be anonymised, and strict laws exist. What really worries me is the hardware: cheap devices that break.
+Moira: Hardware failure is real, but I would put cyberattacks first. Think of Ukraine in twenty fifteen: hackers switched off the power for about two hundred thousand people, in winter. Sorry, two hundred and twenty-five thousand.
+Rishi: Honestly, I think that risk is overstated. Those attackers needed months of preparation, and a well-run utility can detect them.
+Moira: And yet it worked. The more devices you connect, Ravi, the more doors you open. Every smart meter is a door.
+Rishi: Hmm. Okay, you have a point. If millions of devices have weak passwords, one flaw is enough. So yes, I now agree it is a serious threat. Probably the most serious one.
+Karen: Let's talk about the timeline. What is realistic? Niamh, start with batteries.
+Moira: Let me be careful. Some people say that every house should have its own battery. Frankly, that is too expensive for most families, so I would drop that idea. What I do see is community batteries, big units serving a whole neighbourhood. There are pilot schemes now, but I'd expect them to be common within three years. No, sorry, five years. Covering every neighbourhood will take far longer.
+Rishi: I agree. And dynamic pricing, where the price changes hour by hour, is already available from several utilities as we speak. What will take five years is offering it to every household.
+Karen: And the full vision, the self-healing national grid?
+Rishi: Parts of it exist now. A few sections of the network already heal themselves, and within five years I expect whole regions to work that way. But a whole country? That is a long-term goal. Twenty years at least. Maybe more.
+Moira: Yes, I'd say the same. The regulation also needs to catch up.
+Karen: A final thought from each of you?
+Rishi: Technology is not the obstacle. People and money are.
+Moira: And security must be designed from the start, not added later.
+Karen: Thank you both.
+[PAUSA 3]
+[VELOCIDAD 170]
+[HUECO 0.7]
+Samantha: That is the end of questions four and five.

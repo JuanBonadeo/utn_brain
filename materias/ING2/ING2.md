@@ -70,9 +70,13 @@ Conviene practicar ambos: el final libre evalúa el programa completo.
   UDB Cultura e Idiomas) publica material de práctica y horarios de consulta.
 
 #### Práctica
-- **Simulacros propios** en `estudio/final-libre/`: `simulacro-1.md` (data centres / IA en la
-  universidad / semana de 4 días) y `simulacro-2.md` (baterías de segunda vida / smart cities /
-  edge computing). Cada uno trae PDF para imprimir, audios `.m4a` y KEY aparte. Los audios
+- **Simulacros propios** en `estudio/final-libre/`, cada uno con PDF para imprimir, audios `.m4a`
+  y KEY aparte:
+  - `simulacro-1` y `simulacro-2`: formato del final 2023, listening fácil (voz lenta y clara).
+  - `simulacro-3` a `simulacro-6`: **todos los tipos de consigna de los finales** en cada uno
+    (incluida la tabla de pros y contras) y listening difícil (≈200 palabras por minuto, ruido,
+    acentos y una respuesta trampa por ítem). Writing: 3 opinion, 4 problems and solutions,
+    5 for and against, 6 opinion. Duran 3 h, más que el examen real. Los audios
   se regeneran desde las transcripciones con `python3 scripts/ing2/tts-listening.py <audio/x.txt>`.
 - Material oficial para simular: práctica para libres (completa con audio) y final 14-11-2023
   (sin audio de listening).
@@ -518,3 +522,4 @@ integrate, automate, immersion, artificiality*.
   problems and solutions), basado en un texto, y la contradicción de los handouts sobre el
   opinion essay. Unidad 6: debate problem/solution.
 - 2026-11-25: `estudio/final-libre/resumen-writing` (+ PDF): claves, formatos y ejemplos de los tres tipos de ensayo. Unidad 5: link.
+- 2026-11-25: simulacros 3 a 6 (todos los tipos de consigna, listening difícil con trampas, los tres tipos de ensayo). Unidad 1: sección Práctica.

@@ -1,0 +1,32 @@
+# Simulacro 6 — Part 1-A, Questions 4 and 5. Host = Moira (IE), Tom = Daniel (GB), Thandi = Tessa (ZA). Ruido 0.04, 200 wpm. Autocorrecciones (two hundred/three hundred dollars; twenty twenty/twenty twenty-one). Tom cambia de opinion sobre la proteccion de los datos neuronales. Cada idea de Q4 la mencionan los dos hablantes.
+[RUIDO 0.04]
+[VELOCIDAD 170]
+Samantha: Questions four and five. You will hear a radio discussion about the future of brain implants between a neural engineer, Tom, and a lawyer, Thandi, led by a host. You now have forty seconds to read the questions.
+[PAUSA 40]
+[VELOCIDAD 200]
+[HUECO 0.3]
+Moira: Welcome to Tech Ethics. Today we ask what should happen as brain implants leave the laboratory. With me are Tom Hayes, a neural engineer, and Thandi Mokoena, a lawyer who works on digital rights. Tom, let's start with the money. Who will pay for this research?
+Daniel: Honestly, healthy customers will. If companies sell implants or headsets to people who want a better memory or faster typing, that income will finance the medical work for paralysed patients. It's how many technologies grew.
+Tessa: I know that argument, Tom, but I don't buy it. Money goes where the profit is. If the profitable customer is a healthy gamer, patients will wait. Public money should go to patients first.
+Daniel: Perhaps. But we're not that far apart. Let's talk about regulation. Thandi?
+Tessa: My priority is data. Neural data should receive special legal protection. Chile changed its constitution to protect it in twenty twenty. Sorry, twenty twenty-one.
+Daniel: Hmm, I'm not convinced. For me it is just medical data, like a heart rate. We already have laws for health information, so why create a new category?
+Tessa: Because a heart rate cannot reveal what you are thinking. Brain data can reveal your emotions, your preferences, perhaps one day your political opinions. And once it is collected, you cannot change it, as you can change a password.
+Daniel: Okay, that is a good point. I take it back. If it can reveal emotions and intentions, it deserves stronger protection than a heart rate. Yes, special rules, I agree.
+Moira: What about fairness? Thandi?
+Tessa: My fear is inequality. If implants improve memory, only the wealthy will afford them, and the gap between rich and poor will grow.
+Daniel: I understand the worry, but I see it differently. Phones were luxury items once, and now almost everybody has one. Prices fall. The real inequality is between people who have access to doctors and people who don't.
+Tessa: Phones don't change your brain. That is the difference.
+Moira: Let's talk about timing. What is already here, and what is not? Tom?
+Daniel: Consumer headbands are already on sale. You can buy one for under two hundred dollars. Sorry, under three hundred. They measure concentration, roughly. I expect much better versions within ten years, but they are not mind-readers.
+Tessa: For implants that restore speech, clinical trials are running now. But hospital approval takes time. Realistically, within ten years. Not tomorrow, and not for everyone.
+Moira: And direct brain-to-brain communication, telepathy?
+Daniel: Researchers have connected two brains in a laboratory with very simple signals, like yes or no. But a real conversation? I wouldn't expect it in our lifetime.
+Tessa: Not in ours, no. Maybe never.
+Moira: A final thought from each of you?
+Daniel: Build the technology, but write the rules before the products arrive.
+Tessa: And remember that the patient comes first. Thank you.
+[PAUSA 3]
+[VELOCIDAD 170]
+[HUECO 0.7]
+Samantha: That is the end of questions four and five.

@@ -1,0 +1,18 @@
+# Simulacro 5 — Part 1-A, Questions 1, 2 and 3. Lecture = Tessa (ZA). Dificultad alta: 200 wpm, ruido 0.03, autocorrecciones (forty/fifty, fifteen/five, four hundred and twenty/two hundred and forty, two minutes/ninety seconds), palabra deletreada (phasor), distractor para cada hueco.
+[RUIDO 0.03]
+[VELOCIDAD 170]
+Samantha: English Two. Final exam. Part one A. Questions one, two and three. You will hear a lecture about smart electricity grids and blackouts. You now have thirty seconds to read the questions.
+[PAUSA 30]
+[VELOCIDAD 200]
+[HUECO 0.3]
+Tessa: Good afternoon, everyone. Most of us never think about the electricity grid until the moment it stops working, so let me begin with the most famous failure of recent decades. In August two thousand and three, a blackout in the north-east of the United States and in Ontario left about forty million people without power. Sorry, I should say fifty million.
+Tessa: Many people assume that lightning or a cyberattack caused it. In fact, the cause was quite innocent. In Ohio, some overgrown trees touched a high-voltage line. But the alarm software in the control room failed silently, so the operators saw nothing, and a local fault spread across eight states.
+Tessa: Why is a traditional grid so fragile? Because it was designed in the twentieth century for a one-way flow, from a few huge power stations to millions of people who simply consume. The utility knows almost nothing about what happens in between. You might expect the control room operators to notice a fault first. Not at all. In many places, the first sign of trouble is a phone call from an angry customer.
+Tessa: A smart grid changes this in two ways. First, it is full of sensors. You may have heard of smart meters, but those only measure households. The sensors I mean are much faster, and they are called phasor measurement units. Phasor: P, H, A, S, O, R. They measure voltage and current many times per second, so engineers can see the health of the network in real time. Second, the flow becomes two-way. A family with solar panels no longer only consumes electricity; it also produces some, and it sells the surplus. That family is not just a consumer, and it is not just a producer. Someone who does both is what we call a prosumer.
+Tessa: Now let me explain how a smart grid heals itself, because this is what makes the biggest difference in a storm. Imagine a storm brings down a cable. Step one: the sensors detect a short circuit. It is not an overload, which builds up slowly; a short circuit is a sudden, abnormal surge of current. Step two: within a fraction of a second, automatic switches isolate the damaged section. They do not repair it; a crew does that later. They simply cut it off from the rest of the network. Step three: the control software looks for other lines with spare capacity and reroutes the electricity through them. In an old grid, customers could wait for hours. In a good smart grid, the supply returns in under two minutes. Sorry, I mean under ninety seconds.
+Tessa: Does all this really work? Let us look at the average time a customer is without power in a year. In Germany it is around twelve minutes. In Japan it is even lower: about fifteen minutes. No, sorry, five minutes. And in the United States, where the network is older and storms are more severe, it is around four hundred and twenty minutes. Sorry, two hundred and forty. Four hundred and twenty is what you get in a year with major hurricanes. Two hundred and forty minutes is four hours. Monitoring and automation clearly help.
+Tessa: Next week we will look at the storage of energy.
+[PAUSA 3]
+[VELOCIDAD 170]
+[HUECO 0.7]
+Samantha: That is the end of questions one, two and three.

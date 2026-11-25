@@ -1,0 +1,18 @@
+# Simulacro 6 — Part 1-A, Questions 1, 2 and 3. Lecture = Karen (AU). Dificultad alta: 200 wpm, ruido 0.03, autocorrecciones (twenty/eighteen, seventy/seventy-eight), palabra deletreada (ECoG), un distractor para cada hueco.
+[RUIDO 0.03]
+[VELOCIDAD 170]
+Samantha: English Two. Final exam. Part one A. Questions one, two and three. You will hear a lecture about brain-computer interfaces. You now have thirty seconds to read the questions.
+[PAUSA 30]
+[VELOCIDAD 200]
+[HUECO 0.3]
+Karen: Good morning. Today I want to talk about brain-computer interfaces, or BCIs: systems that read signals from the brain and turn them into commands. The idea is older than most people think. Hans Berger published his first article on the electrical activity of the human brain in nineteen twenty-nine, but he had made the first human recording five years earlier, in nineteen twenty-four.
+Karen: There are two families of BCIs. Non-invasive systems read the signals from outside, with sensors on the scalp. That is the EEG. It is safe and cheap, but the skull blurs the signal, like trying to follow a conversation through a wall. Invasive systems put the electrodes closer to the neurons. Some lie on the surface of the brain, beneath the skull. They are called ECoG: E, C, O, G. Others go inside the brain tissue. The classic example is the Utah array, a tiny square with a ten-by-ten grid of needles. That would be a hundred, but four positions are empty, so it has ninety-six electrodes.
+Karen: What can they do? In twenty twelve, a woman with paralysis used a robotic arm to lift a bottle to her lips and drink by herself. Many reports say she drank water. In fact, it was coffee.
+Karen: But implants have a long-term problem. People worry about infection, and surgeons control that quite well. The real problem is scarring. The brain forms scar tissue around the electrodes, and over the months the signal becomes weaker.
+Karen: Now, the most exciting progress is in speech. Let me explain how a speech BCI works. Step one: electrodes record signals from the motor cortex. You might expect the auditory cortex, the area that processes sound, but no. What we need is the area that sends commands to the lips, the tongue and the larynx, even when the person can no longer move them. Step two: a machine-learning model converts those signals into phonemes. Not letters, and not whole words, at least at first. Phonemes are the basic sounds of speech. Step three: a language model assembles the most probable sentence, and in the latest studies it is spoken by a digital avatar, not by a robot or a digital assistant, using the patient's own voice, rebuilt from old recordings.
+Karen: How fast is it? In twenty twenty-one, a system based on imagined handwriting reached ninety characters a minute, about twenty words per minute. Sorry, eighteen words per minute. In twenty twenty-three, a team at Stanford decoded speech at sixty-two words per minute, and another team, in San Francisco, reached seventy. Sorry, seventy-eight. Natural conversation is about a hundred and fifty, so there is still a long way to go.
+Karen: I would like to finish with a warning. Whatever the advertisements promise, no current implant can read your private thoughts. It only decodes what a person is trying to say.
+[PAUSA 3]
+[VELOCIDAD 170]
+[HUECO 0.7]
+Samantha: That is the end of questions one, two and three.
