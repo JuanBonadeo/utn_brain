@@ -13,7 +13,7 @@ Formato del .txt (una intervención por línea):
     [HUECO 0.25]                 -> silencio entre intervenciones (default 0.7 s)
 
 Uso:
-    python3 scripts/ing2/tts-listening.py materias/ING2/estudio/final-libre/audio/sim1-part1.txt
+    python3 scripts/ing2/tts-listening.py materias/ING2/estudio/final-libre/simulacro-1/audio/sim1-part1.txt
     (deja sim1-part1.m4a al lado del .txt)
 
 Sólo biblioteca estándar + `say` y `afconvert` (vienen con macOS).
