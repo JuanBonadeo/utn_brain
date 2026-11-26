@@ -175,7 +175,9 @@ offline backups, a network divided into sections, staff training and drills. [S�
 **Question 9 (2 × 1 p.)**
 
 1. *Why can drones be grounded? / Why can't drones always make deliveries? / Why can't drones
-   fly in some conditions?* Se exige *Why* + auxiliar. Mal formada = 0,5 p.
+   fly in some conditions? / Why aren't drones a perfect solution?* (esta última apunta a la
+   oración "Drones are not a perfect solution", que el texto explica justo después con la lluvia
+   y el viento). Se exige *Why* + auxiliar invertido. Mal formada = 0,5 p.
 2. *How much can the drones carry? / How heavy a load can the drones carry?* (también "How many
    kilograms…?").
 
