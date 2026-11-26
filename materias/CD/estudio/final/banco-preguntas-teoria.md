@@ -2,7 +2,7 @@
 
 UTN FRRo · ISI · 3° año · Teoría: Ing. Jorge A. Campanaro.
 
-**Qué hay acá.** Todas las preguntas de teoría de los finales disponibles, agrupadas por tema y con **respuesta modelo** de extensión de examen escrito. Las preguntas equivalentes están fusionadas, con todas sus fechas.
+**Qué hay acá.** Todas las preguntas de teoría de los finales disponibles, agrupadas por tema y con **respuesta modelo** de extensión de examen escrito. Las preguntas equivalentes están fusionadas, con todas sus fechas. Desde la cursada 2025 suma también las preguntas conceptuales de los parciales de Medín y Baró, marcadas con su origen.
 
 **Finales relevados** (en `materias/CD/fuentes/finales/Teoría/`):
 
@@ -19,6 +19,18 @@ UTN FRRo · ISI · 3° año · Teoría: Ing. Jorge A. Campanaro.
 
 > Las marcas de los alumnos se leyeron de los PDF (relleno de color) y de los escaneos. **No son confiables**: los errores detectados están en [Dudas / pendientes](#dudas--pendientes). Las respuestas de este banco salen de los apuntes de la cátedra (`fuentes/teoria/`, `fuentes/practica/3 - Medios de transmisión.md`) y, donde el apunte no está en el repo, del *Santo Resumen*, que cita página del apunte.
 
+**Material de la cursada 2025** (com. 303: teoría Medín, práctica Baró; en `fuentes/cursada-2025/drive-propio/`). No son finales, pero son el plan actual y comparten temas con el final. Se citan con estos códigos:
+
+| Código | Fuente | Qué aporta |
+|---|---|---|
+| M1 | `Resumen Comunicación de Datos - Medin 1er Parcial.md` | Resumen del alumno del 1.er parcial: información, canales, codificación, síndrome. Parte Baró: sistema de comunicación, perturbaciones, ganancia/atenuación, dB, rango dinámico, S/R, multinivel, Hamming. |
+| M2 | `Resumen de Comunicación de datos - 2do parcial teoría.md` | 2.º parcial de Medín: elección del medio de acceso, segurización, radioenlace, asignación de capacidad (Kleinrock), colas. Incluye un parcial resuelto de la com. 305 (código **305**). |
+| B2 | `2do Parcial - Comunicacion De Datos - Baró.md` | Compendio de MC del 2.º parcial de Baró (medios de transmisión), con la opción marcada por un alumno. |
+| B3 | `Resumen de Comunicación de datos - 3er parcial Práctica.md` | 3.er parcial de Baró: modulación AM/FM/PM, ASK/FSK/PSK, TDM, muestreo, cuantificación, PCM; "Ejercicio 1 – Definiciones". |
+| HFC | `Tps Baro/TP N°1 - Cables HFC.md` | TP de práctica (2024) sobre redes HFC y DOCSIS. |
+
+> Son resúmenes de alumnos. Las marcas dudosas del compendio B2 están en [Dudas E](#e-marcas-del-compendio-mc-de-baró-b2) y los errores de los resúmenes, en [Dudas F](#f-errores-en-los-resúmenes-de-la-cursada-2025-m1-m2-b3).
+
 Rutas de las citas, relativas a `materias/CD/fuentes/`. "(conocimiento general)" = no está en el material de la cátedra.
 
 ---
@@ -26,43 +38,52 @@ Rutas de las citas, relativas a `materias/CD/fuentes/`. "(conocimiento general)"
 ## Frecuencia de temas
 
 ★ = salió en 4 o más finales · ★★ = salió en 6 (todos los que tenían ese bloque).
+**Cursada 2025** (nota): en qué parcial de 2025 aparece el tema (M1, M2, B2, B3, 305; ver códigos arriba). No suma a la columna *Finales*.
 
-| Tema | 28/08/20 | 18/12/20 | 10/09/21 | 19/11/21 | 17/12/21 | 04/04/25 | FAQ (s/f) | Finales |
-|---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-| Inecuación de Kraft | X | X | X | X | X | X | X | **6 ★★** |
-| Cota inferior de la longitud media | X | X | X | X | X | X | X | **6 ★★** |
-| Elección del medio de acceso (zona × velocidad) | X | X | X | X | X | X | X | **6 ★★** |
-| Código unívoco | X | | X | X | X | X | X | **5 ★** |
-| Código compacto | X | | X | X | X | X | X | **5 ★** |
-| Código bloque / palabra código / no singular | X | X | X | X | X | | X | **5 ★** |
-| Distancia de un código / $d_{min}=1$ | X | X | X | X | X | | | **5 ★** |
-| Tasa de información / tasa de dígitos | X | X | X | X | X | | X | **5 ★** |
-| FDM (concepto, ancho de banda, duplicar señales) | X | X | X | X | X | | X | **5 ★** |
-| TDM (concepto) | X | X | X | X | X | | X | **5 ★** |
-| Digitalización: muestreo, Nyquist, PCM | X | X | X | X | X | | X | **5 ★** |
-| AM (definición, bandas laterales, portadora suprimida) | X | X | X | X | X | | | **5 ★** |
-| Mensaje digital por red analógica (ASK/FSK/PSK, multinivel) | X | X | X | | | X | X | **4 ★** |
-| Código instantáneo y su condición | X | X | X | | | X | X | **4 ★** |
-| Información mutua | X | | X | X | X | | X | **4 ★** |
-| Familia de errores de un síndrome | X | | X | X | X | | | **4 ★** |
-| Medios: fibra, radio, satélite (propiedades) | X | X | X | | | X | X | **4 ★** |
-| Entropía de la fuente | X | X | X | | | | X | 3 |
-| Canal binario simétrico / entropía del canal | | X | | X | X | | X | 3 |
-| Síndrome (concepto) | | X | | X | X | | X | 3 |
-| Matriz generadora / base de un código de grupo | X | | X | | | | X | 2 |
-| Colas: punto de saturación, intensidad de tráfico | | | | X | X | | X | 2 |
-| Errores de canal / ruido impulsivo | | | | | | | X | 0 (solo FAQ) |
-| Huffman, extensión r-aria | | | | | | | X | 0 (solo FAQ) |
-| Asignación de capacidad, OSI/TCP-IP, CDM/WDM | | | | | | | | 0 |
+| Tema | 28/08/20 | 18/12/20 | 10/09/21 | 19/11/21 | 17/12/21 | 04/04/25 | FAQ (s/f) | Finales | Cursada 2025 |
+|---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+| Inecuación de Kraft | X | X | X | X | X | X | X | **6 ★★** | M1 |
+| Cota inferior de la longitud media | X | X | X | X | X | X | X | **6 ★★** | M1 |
+| Elección del medio de acceso (zona × velocidad) | X | X | X | X | X | X | X | **6 ★★** | M2 |
+| Código unívoco | X | | X | X | X | X | X | **5 ★** | M1 |
+| Código compacto | X | | X | X | X | X | X | **5 ★** | |
+| Código bloque / palabra código / no singular | X | X | X | X | X | | X | **5 ★** | M1 |
+| Distancia de un código / $d_{min}=1$ | X | X | X | X | X | | | **5 ★** | |
+| Tasa de información / tasa de dígitos | X | X | X | X | X | | X | **5 ★** | M1 |
+| FDM (concepto, ancho de banda, duplicar señales) | X | X | X | X | X | | X | **5 ★** | |
+| TDM (concepto) | X | X | X | X | X | | X | **5 ★** | B3 |
+| Digitalización: muestreo, Nyquist, PCM | X | X | X | X | X | | X | **5 ★** | B3 |
+| AM (definición, bandas laterales, portadora suprimida) | X | X | X | X | X | | | **5 ★** | B3 |
+| Mensaje digital por red analógica (ASK/FSK/PSK, multinivel) | X | X | X | | | X | X | **4 ★** | B3 |
+| Código instantáneo y su condición | X | X | X | | | X | X | **4 ★** | M1 |
+| Información mutua | X | | X | X | X | | X | **4 ★** | M1 |
+| Familia de errores de un síndrome | X | | X | X | X | | | **4 ★** | M1 |
+| Medios: fibra, radio, satélite (propiedades) | X | X | X | | | X | X | **4 ★** | **B2** (≈45 MC) |
+| Entropía de la fuente | X | X | X | | | | X | 3 | M1 |
+| Canal binario simétrico / entropía del canal | | X | | X | X | | X | 3 | M1 |
+| Síndrome (concepto) | | X | | X | X | | X | 3 | M1 |
+| Matriz generadora / base de un código de grupo | X | | X | | | | X | 2 | |
+| Colas: punto de saturación, intensidad de tráfico | | | | X | X | | X | 2 | M2, 305 |
+| Errores de canal / ruido impulsivo / perturbaciones | | | | | | | X | 0 (solo FAQ) | M1 |
+| Huffman, extensión r-aria | | | | | | | X | 0 (solo FAQ) | |
+| Colas abiertas: elementos, M/M/1, Little, percentil 90, Kendall | | | | | | | X | 0 (solo FAQ) | M2, 305 |
+| Asignación de capacidad de canales (Kleinrock) | | | | | | | | 0 | M2 |
+| Cantidad de información de un suceso; capacidad y eficiencia del canal | | | | | | | | 0 | M1 |
+| Atenuación, ganancia, dB, rango dinámico, S/R | | | | | | | | 0 | M1 |
+| Hamming: cantidad de bits de control | | | | | | | | 0 | M1 |
+| Modulación (concepto, portadora, FM/PM), ancho de banda, armónicos | | | | | | | | 0 | B3 |
+| OSI/TCP-IP, CDM/WDM | | | | | | | | 0 | |
 
 **Lectura rápida.** El núcleo que se repite en todos los finales es **codificación de fuente** (unívoco, instantáneo, Kraft, compacto, cota inferior) y **elección de medio de acceso**. Lo segundo más frecuente: **FDM/TDM/muestreo/AM** y **distancia/síndrome**. El final de 2025 (plan actual) pasó a desarrollo pero repitió exactamente esos tres bloques: modulación digital sobre red analógica, códigos y medios de acceso.
+
+**Cursada 2025.** Medín repite en el 1.er parcial el mismo núcleo de información y codificación (M1) y en el 2.º suma asignación de capacidad y colas (M2). Baró evalúa medios de transmisión con MC de datos puntuales (B2) y, en el 3.º, definiciones de modulación y PCM (B3). Los temas en 0 de esa parte (dB, S/R, Kleinrock, colas abiertas) no salieron en los finales relevados, pero son del programa actual.
 
 ---
 
 ## 1. Teoría de la información
 
 ### 1.1 Entropía de la fuente: concepto, fórmula, cuándo es máxima
-**Salió:** 18/12/2020 (MC "La entropía de la fuente es…"), 28/08/2020 y 10/09/2021 (MC "La función entropía es…"), FAQ ("Definir entropía", "¿Cuándo la entropía es máxima?").
+**Salió:** 18/12/2020 (MC "La entropía de la fuente es…"), 28/08/2020 y 10/09/2021 (MC "La función entropía es…"), FAQ ("Definir entropía", "¿Cuándo la entropía es máxima?"); cursada 2025: M1, con la definición textual y el máximo en símbolos equiprobables (parcial Medín 2025, resumen del alumno).
 
 **Respuesta.** La entropía $H(S)$ es la **esperanza matemática de la información por símbolo de la fuente**, o sea, la cantidad media de información que aporta cada símbolo emitido. Si el símbolo $s_i$ tiene probabilidad $p_i$, la información que aporta es $I(s_i)=\lg\frac{1}{p_i}$ (con $\lg=\log_2$, unidad *bit*), y entonces:
 
@@ -91,12 +112,13 @@ Fuente binaria ($p$, $1-p$):
 (teoria/1 - Información, Codificación y Canales.md)
 
 ### 1.2 Tasa de información, tasa de dígitos y velocidad de señalización
-**Salió:** tasa de información en 18/12/2020, 19/11/2021 y 17/12/2021 (MC); tasa de dígitos en 28/08/2020 y 10/09/2021 (MC); FAQ "Concepto de entropía, tasa de información, tasa de dígitos y velocidad de señalización. Dar ejemplos".
+**Salió:** tasa de información en 18/12/2020, 19/11/2021 y 17/12/2021 (MC); tasa de dígitos en 28/08/2020 y 10/09/2021 (MC); FAQ "Concepto de entropía, tasa de información, tasa de dígitos y velocidad de señalización. Dar ejemplos"; cursada 2025: M1, en la parte de Medín y en la de Baró, con la deducción de multinivel (parcial Medín y Baró 2025, resumen del alumno).
 
 **Respuesta.**
 - **Tasa (velocidad) de información $R$:** cantidad de bits **en promedio** que se transmiten en 1 segundo, es decir, la información **promedio** que produce la fuente **por unidad de tiempo**. $R = H'(A)$ [bit/s]. Con canal ruidoso, a la salida llega $R = H'(A) - H'(A/B)$.
 - **Tasa de dígitos (binits) $r$:** cantidad de **dígitos transmitidos por segundo** [dígitos/s]. Se relaciona con la anterior por $R = r\cdot H(A)$: $H$ mide información en bit/símbolo, $R$ en bit/s.
 - **Velocidad de señalización $s$:** inversa de la duración del pulso más corto, $s = 1/\tau_{min}$ [baudios]. Con pulsos de $n$ niveles equiprobables e iguales duraciones: $R = \frac{1}{\tau}\lg n = s\,\lg n$.
+- **De dónde sale (Baró, M1):** un mensaje de duración $T$ tiene $T/\tau$ pulsos de $\mu$ niveles, así que hay $M(T)=\mu^{T/\tau}$ mensajes distintos. Lleva $I=\lg M(T)$ bits y $R=\frac{I}{T}=\frac{1}{\tau}\lg\mu$. Con $\tau=\tau_{min}$, $R=s\lg\mu$.
 
 **Ejemplo:** pulsos de $\tau = 1$ ms con 4 niveles equiprobables → $s = 1000$ baudios, $r = 1000$ dígitos/s, $H = \lg 4 = 2$ bit/dígito, $R = r\,H = 2000$ bit/s. Si los pulsos fueran binarios, $R = s = 1000$ bit/s: en binario equiprobable **la capacidad coincide con la señalización**.
 
@@ -105,7 +127,7 @@ Fuente binaria ($p$, $1-p$):
 (teoria/1 - Información, Codificación y Canales.md)
 
 ### 1.3 Canal binario simétrico (BSC)
-**Salió:** 18/12/2020, 19/11/2021, 17/12/2021 (MC).
+**Salió:** 18/12/2020, 19/11/2021, 17/12/2021 (MC); cursada 2025: M1, con la definición de canal, el canal transparente (matriz diagonal) y el BSC (parcial Medín 2025, resumen del alumno).
 
 **Respuesta.** Un canal queda definido por su alfabeto de entrada $A$, su alfabeto de salida $B$ y la matriz de probabilidades condicionales $P(b_j/a_i)$. El **canal binario simétrico** tiene **dos entradas** ($a_1=0$, $a_2=1$) y dos salidas ($b_1=0$, $b_2=1$), y es simétrico porque **la probabilidad de recibir un 0 cuando se envió un 1 es igual a la de recibir un 1 cuando se envió un 0**: $P(b_1/a_2)=P(b_2/a_1)=p$ (probabilidad de error).
 
@@ -128,11 +150,12 @@ La simetría es del **canal** (probabilidades condicionales), no de la fuente: n
 (teoria/1 - Información, Codificación y Canales.md)
 
 ### 1.4 Información mutua, entropía del canal (canal real)
-**Salió:** información mutua en 28/08/2020, 10/09/2021, 19/11/2021, 17/12/2021 (MC); FAQ "Concepto de entropía, de información mutua y de entropía del canal", "En un canal real, ¿cuál es la entropía que lo define y cuál es su concepto?".
+**Salió:** información mutua en 28/08/2020, 10/09/2021, 19/11/2021, 17/12/2021 (MC); FAQ "Concepto de entropía, de información mutua y de entropía del canal", "En un canal real, ¿cuál es la entropía que lo define y cuál es su concepto?"; cursada 2025: M1, con probabilidades a priori y a posteriori, Bayes, las dos equivocaciones y la información mutua (parcial Medín 2025, resumen del alumno).
 
 **Respuesta.**
-- **Entropía a priori** $H(A)$: incertidumbre sobre la fuente antes de recibir.
-- **Equivocación de A respecto de B** $H(A/B)$: incertidumbre que **queda** sobre la fuente después de recibir. Es la información que "bloquea" el canal.
+- **Entropía a priori** $H(A)$: incertidumbre sobre la fuente antes de recibir. Usa la **probabilidad a priori** $P(a_i)$.
+- **Probabilidad a posteriori** ("hacia atrás") $P(a_i/b_j)$: probabilidad de que, recibido $b_j$, se haya enviado $a_i$. Sale por Bayes: $P(a_i/b_j)=\frac{P(a_i)\,P(b_j/a_i)}{P(b_j)}$.
+- **Equivocación de A respecto de B** $H(A/B)=-\sum_j\sum_i P(b_j)\,P(a_i/b_j)\lg P(a_i/b_j)$ (entropía a posteriori): incertidumbre que **queda** sobre la fuente después de recibir. Es la información que "bloquea" el canal.
 - **Entropía del canal** = **equivocación de B respecto de A**:
 $$H(B/A) = -\sum_i\sum_j P(a_i)\,P(b_j/a_i)\,\lg P(b_j/a_i)$$
 Es la incertidumbre sobre la salida conociendo la entrada: la mide **el ruido** del canal. Es la entropía que caracteriza a un canal real. En un canal transparente (matriz diagonal, sin error) vale 0.
@@ -146,6 +169,34 @@ Es simétrica. Si el canal es transparente, $I(A,B)=H(A)$; si la salida es indep
 **En el MC:** "La información transferida desde la fuente al receptor a través del canal". El apunte agrega "esto es, la información real que llega al receptor **en promedio**", así que esa opción también reproduce el apunte (ver Dudas).
 
 (teoria/1 - Información, Codificación y Canales.md)
+
+### 1.5 Cantidad de información de un suceso; el bit
+**Salió:** cursada 2025: M1 (Medín: propiedades de $I(A)$; Baró: definición de bit y alfabeto n-ario) (parcial Medín y Baró 2025, resumen del alumno). No salió en los finales relevados.
+
+**Respuesta.** La cantidad de información $I(A)$ que aporta un suceso es función inversa de su probabilidad: cuanto menos esperable es, más informa.
+$$I(A)=\lg\frac{1}{p(A)}\quad[\text{bit}]$$
+- Si $p(A)\to1$, $I(A)\to0$: un suceso seguro no informa.
+- Si $p(A)\to0$, $I(A)\to\infty$.
+- Para sucesos independientes, $p(A\cap B)=p(A)\,p(B)$ y la información se **suma**: $I(A\cap B)=I(A)+I(B)$. Esa aditividad es la que lleva al logaritmo; con base 2 la unidad es el *bit*.
+- **Bit:** cantidad de información que aporta la aparición de un símbolo de un alfabeto binario (equiprobable). En un alfabeto de $n$ símbolos equiprobables, cada carácter aporta $I=\lg n$.
+- Si se promedia $I$ sobre todos los símbolos de la fuente, con las frecuencias relativas como probabilidades, se llega a la entropía (§1.1).
+
+**Ejemplo:** un suceso de $p=1/8$ aporta $\lg 8=3$ bit; un dígito decimal equiprobable, $\lg 10\approx3{,}32$ bit.
+
+(teoria/1 - Información, Codificación y Canales.md; cursada-2025/drive-propio/Resumen Comunicación de Datos - Medin 1er Parcial.md)
+
+### 1.6 Capacidad del canal, eficiencia y redundancia; tasa $R$ frente a $C$
+**Salió:** cursada 2025: M1 (parcial Medín y Baró 2025, resumen del alumno). En los finales solo aparece $C$ de pasada (§1.4).
+
+**Respuesta.**
+- **Capacidad:** $C=\max I(A,B)$, maximizando sobre las probabilidades de entrada (se "sintoniza" la fuente). Depende **solo** de la matriz $P(b_j/a_i)$. En un canal **transparente** $H(A/B)=0$, $I=H(A)$, y entonces $C=\max H(A)=\lg n$ bit/símbolo, con la fuente equiprobable. Binario: $C=1$ bit/símbolo, o $C=1/\tau$ bit/s.
+- **Eficiencia de transmisión:** $FF=I(A,B)/C$.
+- **Redundancia de transmisión:** $RED=1-FF$, la parte de la capacidad del canal que no se aprovecha.
+- **Tasa vs. capacidad** (Shannon): si la fuente tiene tasa $R<C$, existe una codificación que transmite con probabilidad de error arbitrariamente pequeña pese al ruido. Si $R>C$, no es posible. En bit/s, $C$ depende del ancho de banda y de la S/N (§dB.4), y del medio (cobre, fibra).
+
+**Ejemplo:** BSC con $p=0{,}1$ → $C=1-H(0{,}1)\approx0{,}531$ bit/símbolo, con entrada equiprobable. Si la fuente emite $P(0)=0{,}9$: $P(b_1)=0{,}82$, $H(B)\approx0{,}680$, $I=0{,}680-0{,}469=0{,}211$ bit → $FF\approx0{,}40$ y $RED\approx0{,}60$.
+
+(teoria/1 - Información, Codificación y Canales.md; cursada-2025/drive-propio/Resumen Comunicación de Datos - Medin 1er Parcial.md)
 
 ---
 
@@ -165,6 +216,72 @@ Es simétrica. Si el canal es transparente, $I(A,B)=H(A)$; si la salida es indep
 
 (teoria/Errores en Canales.md)
 
+### 2.2 Sistema de comunicación y perturbaciones: distorsión, interferencia y ruido
+**Salió:** cursada 2025: M1, parte Baró (parcial Baró 2025, resumen del alumno). En los finales, solo la variante FAQ del §2.1.
+
+**Respuesta.** Bloques del sistema:
+- **Fuente:** genera el mensaje.
+- **Transductores** de entrada y salida: convierten el mensaje (acústico, visual, alfanumérico) en señal eléctrica y viceversa.
+- **Transmisor:** filtrado, procesamiento y amplificación. Ahí se **modula** (corrimiento en frecuencia para adaptar la señal al canal).
+- **Canal:** el camino entre emisor y receptor. Ahí entran las perturbaciones.
+- **Receptor:** demodula. Tiene que ser **sensible** (detectar señales débiles por encima del ruido) y **selectivo** (separar la señal útil de las demás).
+- **Destino.**
+
+```
+ Fuente → Transductor → Transmisor ──── Canal ────► Receptor → Transductor → Destino
+                         (modula)        ▲          (demodula)
+                                   perturbaciones:
+                         distorsión · interferencia · ruido
+```
+
+| Perturbación | Qué es | Origen | ¿Se elimina? |
+|---|---|---|---|
+| **Distorsión** | Alteración de la **forma** de la señal por la respuesta imperfecta del canal: atenúa distinto cada frecuencia (distorsión de amplitud) y la retrasa distinto (de fase o retardo de grupo). Desaparece cuando se deja de aplicar la señal. | El propio canal | Sí, en teoría: si es lineal se compensa. La de fase es la más difícil. |
+| **Interferencia** | Señales extrañas, de forma parecida a la útil, que se meten en el canal | Generalmente artificial: canales adyacentes, encendido de motores, conmutación; natural: rayos | Sí, en teoría (filtrado, blindaje, separación de canales) |
+| **Ruido** | Señal aleatoria e impredecible, independiente de la señal | Natural, sobre todo térmico | **No**, ni siquiera en teoría: solo se mejora la S/N (§dB.4) |
+
+La **atenuación** es el efecto menos grave: solo baja la intensidad y se compensa amplificando.
+
+(practica/1 - Principios Básicos de la Electrónica y las Comunicaciones.md; cursada-2025/drive-propio/Resumen Comunicación de Datos - Medin 1er Parcial.md)
+
+---
+
+## Atenuación, ganancia, dB y relación señal/ruido
+
+> **Salió:** cursada 2025: M1, parte Baró (1.er parcial de Baró, resumen del alumno). No salió en los finales de teoría relevados; es el apunte «Principios Básicos» de la práctica.
+
+### dB.1 Ganancia y atenuación
+**Respuesta.**
+- **Ganancia** = salida / entrada: $G_P=P_o/P_i$, $G_V=V_o/V_i$, $G_I=I_o/I_i$.
+- **Atenuación** = entrada / salida $=1/G$. En sistemas pasivos (cables, redes resistivas), que siempre atenúan, se usa la atenuación como forma normal de expresar la transferencia.
+- Las dos son **adimensionales** (se miden en "veces").
+- **En cascada se multiplican:** dos tramos de atenuación 10 dan 100 veces. En dB se **suman** (10 dB + 10 dB = 20 dB), y por eso se usan logaritmos: comprimen rangos muy amplios y pasan productos a sumas.
+
+### dB.2 El decibel
+**Respuesta.**
+- El **bel** es el logaritmo decimal de una relación de potencias; el **decibel** es su décima parte: $X_{dB}=10\log_{10}\frac{P_o}{P_i}$ (ganancia) o $10\log_{10}\frac{P_i}{P_o}$ (atenuación). Viene de la *Unidad de Transmisión* de la telefonía: una atenuación de 10 veces en 10 millas de línea patrón a 886 Hz.
+- Con tensiones o corrientes **medidas sobre la misma impedancia**: $X_{dB}=20\log\frac{V_1}{V_2}=20\log\frac{I_1}{I_2}$, porque $P\propto V^2$.
+- **Nivel relativo:** dos señales del mismo sistema comparadas entre sí. **Nivel absoluto:** una señal comparada con una referencia fija (p. ej. 1 mW → dBm; dBm es conocimiento general).
+- Valores para tener a mano: ×2 de potencia ≈ +3 dB; ×10 = +10 dB; ×100 = +20 dB; mitad = −3 dB. Las frecuencias de corte de un sistema se definen a −3 dB (potencia mitad), y entre ellas queda su ancho de banda $AB=f_2-f_1$.
+
+**Ejemplo:** amplificador con $P_i=1$ W y $P_o=10$ W → $G=10$ veces = 10 dB. Si antes hay un cable que atenúa 3 dB, la ganancia total es $10-3=7$ dB (≈ 5 veces).
+
+### dB.3 Rango dinámico
+**Respuesta.**
+- Diferencia, en dB, entre el **nivel máximo** que puede entregar un dispositivo y el **ruido de fondo** que hay cuando no hay señal. Cuanto mayor, más "limpia" es la comunicación.
+- En una cadena de dispositivos (emisor, amplificador, parlante), el rango dinámico real es el del **dispositivo con peores características**.
+- Aparatos de calidad: de 80 a 95 dB. En un conversor digital de $n$ bits, $RD\approx20\log2^n\approx6n$ dB: 8 bits ≈ 48 dB, 16 bits ≈ 96 dB (el estándar del CD).
+
+### dB.4 Relación señal/ruido (S/N)
+**Respuesta.**
+- $S/N=\frac{P_{señal}}{P_{ruido}}$: cociente de potencias, **adimensional**, que casi siempre se expresa en dB: $(S/N)_{dB}=10\log\frac{S}{N}$. Cuanto más alta, mejor: hay más información útil frente a lo no deseado.
+- El ruido no se puede eliminar; lo único que se puede hacer es **mejorar la S/N** (más potencia o calidad de señal, mejor modulación, antenas directivas, receptor más sensible).
+- Fija el techo de velocidad: Hartley-Shannon, $C=B\lg(1+S/N)$, con $S/N$ **en veces**, no en dB.
+
+**Ejemplo:** canal telefónico con $B=3100$ Hz y $(S/N)=30$ dB → $S/N=1000$ → $C=3100\cdot\lg1001\approx30{,}9$ kbit/s.
+
+(practica/1 - Principios Básicos de la Electrónica y las Comunicaciones.md; cursada-2025/drive-propio/Resumen Comunicación de Datos - Medin 1er Parcial.md; teoria/Errores en Canales.md para Hartley-Shannon)
+
 ---
 
 ## 3. Codificación de fuente
@@ -172,7 +289,7 @@ Es simétrica. Si el canal es transparente, $I(A,B)=H(A)$; si la salida es indep
 > Bloque más preguntado. En el MC las opciones difieren en una palabra: hay que saber la definición textual del apunte.
 
 ### 3.1 Código bloque y palabra código
-**Salió:** código bloque en 18/12/2020; palabra código en 28/08/2020, 10/09/2021, 19/11/2021 y 17/12/2021 (MC).
+**Salió:** código bloque en 18/12/2020; palabra código en 28/08/2020, 10/09/2021, 19/11/2021 y 17/12/2021 (MC); cursada 2025: M1, con alfabeto fuente/código, código bloque y palabra código (parcial Medín 2025, resumen del alumno).
 
 **Respuesta.** Codificar es poner en correspondencia las secuencias del **alfabeto fuente** $S=\{s_1,\dots,s_q\}$ con secuencias de un **alfabeto código** $Z=\{z_1,\dots,z_r\}$.
 - **Código bloque:** asigna a **cada símbolo del alfabeto fuente una secuencia fija de símbolos del alfabeto código**.
@@ -185,7 +302,7 @@ Ejemplo: $s_1\to 00,\ s_2\to 01,\ s_3\to 10,\ s_4\to 11$. Cada $s_i$ tiene asign
 (teoria/2 - Codificación.md)
 
 ### 3.2 Código no singular, unívoco e instantáneo (definiciones y ejemplos)
-**Salió:** no singular en 18/12/2020; unívoco en 28/08/2020, 10/09/2021, 19/11/2021, 17/12/2021 y **04/04/2025** (desarrollo); instantáneo en 18/12/2020 y **04/04/2025**; condición necesaria y suficiente de instantáneo en 28/08/2020, 18/12/2020 y 10/09/2021; FAQ ("Definir código no singular, unívoco e instantáneo. Dar ejemplos", "Concepto de código unívoco, instantáneo y compacto. Condiciones necesarias").
+**Salió:** no singular en 18/12/2020; unívoco en 28/08/2020, 10/09/2021, 19/11/2021, 17/12/2021 y **04/04/2025** (desarrollo); instantáneo en 18/12/2020 y **04/04/2025**; condición necesaria y suficiente de instantáneo en 28/08/2020, 18/12/2020 y 10/09/2021; FAQ ("Definir código no singular, unívoco e instantáneo. Dar ejemplos", "Concepto de código unívoco, instantáneo y compacto. Condiciones necesarias"); cursada 2025: M1, con no singular, unívoco por la extensión de orden $n$, código coma, instantáneo y su condición (parcial Medín 2025, resumen del alumno).
 
 **Respuesta.** Son clases anidadas: instantáneos ⊂ unívocos ⊂ no singulares ⊂ bloque.
 
@@ -206,13 +323,14 @@ Ejemplos del apunte, uno por clase:
 - 1.ª columna: si llega `1100`, puede ser $s_2s_3$ o $s_1s_1s_3$. Las palabras son distintas, pero una secuencia es ambigua.
 - 2.ª columna: es unívoco (cada palabra empieza con 0, que marca el comienzo), pero al recibir `01` hay que esperar el siguiente símbolo para saber si es $s_2$ o el inicio de $s_3$: `0` es prefijo de `01`.
 - 3.ª columna: ninguna palabra es prefijo de otra → se decodifica al terminar cada palabra.
+- **Código coma:** el comienzo o el fin de cada palabra lo señala un dígito fijo (un 0 o un 1). La 3.ª columna es un código coma: el `1` cierra cada palabra.
 
 **En el MC:** unívoco = "si a cualquier **secuencia de palabras** código le corresponde una y solo una **secuencia de símbolos** de la fuente". "Si a cualquier palabra código le corresponde un único símbolo" describe un código no singular, no uno unívoco. Instantáneo = "puede decodificarse sin esperar la llegada de la próxima palabra código" y su condición = "ninguna palabra código sea **prefijo** de otra" (no "terminación"/"subfijo", y la longitud variable no tiene nada que ver).
 
 (teoria/2 - Codificación.md; resumenes/El Santo Resumen/el-santo-resumen.md, sección Final)
 
 ### 3.3 Inecuación de Kraft (y McMillan)
-**Salió:** 28/08/2020, 18/12/2020, 10/09/2021, 19/11/2021, 17/12/2021 (MC "Un código que cumple la inecuación de Kraft es…") y **04/04/2025** ("Explicar la inecuación de Kraft").
+**Salió:** 28/08/2020, 18/12/2020, 10/09/2021, 19/11/2021, 17/12/2021 (MC "Un código que cumple la inecuación de Kraft es…") y **04/04/2025** ("Explicar la inecuación de Kraft"); cursada 2025: M1, con la nota "el teorema no dice que cualquier código que cumpla la condición sea instantáneo" (parcial Medín 2025, resumen del alumno).
 
 **Respuesta.** **Teorema de Kraft:** si los enteros $l_1,\dots,l_q$ satisfacen
 $$\sum_{i=1}^{q} r^{-l_i}\le 1$$
@@ -231,7 +349,7 @@ Ejemplo del apunte ($r=2$, longitudes 1, 2, 2): $2^{-1}+2^{-2}+2^{-2}=1\le 1$ �
 (teoria/2 - Codificación.md)
 
 ### 3.4 Código compacto, longitud media y Huffman
-**Salió:** compacto en 28/08/2020, 10/09/2021, 19/11/2021, 17/12/2021 (MC) y **04/04/2025**; FAQ ("Concepto de código compacto y ventajas de su aplicación", "¿Para qué sirve el método de Huffman? ¿Qué puede suceder si el alfabeto código tiene r=2?").
+**Salió:** compacto en 28/08/2020, 10/09/2021, 19/11/2021, 17/12/2021 (MC) y **04/04/2025**; FAQ ("Concepto de código compacto y ventajas de su aplicación", "¿Para qué sirve el método de Huffman? ¿Qué puede suceder si el alfabeto código tiene r=2?"); cursada 2025: M1 trae solo la longitud media ("desde el punto de vista económico interesan los códigos de longitud mínima"), no el compacto (parcial Medín 2025, resumen del alumno).
 
 **Respuesta.**
 - **Longitud media:** $L=\sum_{i} P_i\, l_i$ [dígitos/símbolo].
@@ -253,7 +371,7 @@ Ejemplo del apunte ($r=2$, longitudes 1, 2, 2): $2^{-1}+2^{-2}+2^{-2}=1\le 1$ �
 (teoria/2 - Codificación.md)
 
 ### 3.5 Cota inferior de la longitud media
-**Salió:** 28/08/2020, 18/12/2020, 10/09/2021, 19/11/2021, 17/12/2021 (MC) y **04/04/2025** ("Dar la cota inferior de la long. media"); FAQ.
+**Salió:** 28/08/2020, 18/12/2020, 10/09/2021, 19/11/2021, 17/12/2021 (MC) y **04/04/2025** ("Dar la cota inferior de la long. media"); FAQ; cursada 2025: M1, con el enunciado textual del MC (parcial Medín 2025, resumen del alumno).
 
 **Respuesta.** Para un código instantáneo (y, por McMillan, para uno unívoco) aplicado a una fuente de memoria nula, la longitud media no puede bajar de la **entropía r-aria** de la fuente:
 $$L \;\ge\; H_r(S)=\frac{H(S)}{\lg r}=\sum_i P_i\log_r\frac{1}{P_i}$$
@@ -299,7 +417,7 @@ Expresa el **límite inferior** de la longitud media: ningún código puede repr
 (teoria/3 - Detección y Corrección de errores.md)
 
 ### 4.3 Síndrome: concepto, aplicación y condición para corregir errores simples
-**Salió:** concepto en 18/12/2020, 19/11/2021, 17/12/2021 (MC); FAQ ("Concepto de síndrome y aplicaciones. Ejemplo. Condiciones necesarias para corregir errores simples en cada uno de los dígitos de la palabra código", "¿Por qué el síndrome de una palabra con error coincide con el síndrome de la palabra que modela el error?").
+**Salió:** concepto en 18/12/2020, 19/11/2021, 17/12/2021 (MC); FAQ ("Concepto de síndrome y aplicaciones. Ejemplo. Condiciones necesarias para corregir errores simples en cada uno de los dígitos de la palabra código", "¿Por qué el síndrome de una palabra con error coincide con el síndrome de la palabra que modela el error?"); cursada 2025: M1, con la definición textual del MC y "síndrome 0 → la palabra pertenece al grupo"; Hamming en la parte Baró (parcial Medín y Baró 2025, resumen del alumno).
 
 **Respuesta.**
 - **Síndrome:** resultado de multiplicar la **palabra recibida (posiblemente con error) por la matriz de control de paridad transpuesta**: $S = v^{*}\cdot H^T$. Dimensiones: $(1\times n)(n\times(n-m)) = 1\times(n-m)$.
@@ -308,6 +426,7 @@ Expresa el **límite inferior** de la longitud media: ningún código puede repr
 $$S(v^{*})=(v\oplus e)\,H^T = \underbrace{v\,H^T}_{=0\ (v\in V)} \oplus\; e\,H^T = S(e)$$
 El síndrome depende solo del error, no de la palabra transmitida. Por eso el mismo error en dos palabras distintas da el mismo síndrome.
 - **Condición para corregir error simple en cada uno de los $n$ dígitos:** cada error simple $e_i$ debe dar un síndrome **distinto y no nulo**. Hacen falta al menos $n$ síndromes no nulos: $2^{n-m}-1\ge n$. Como $e_i H^T$ es la columna $i$ de $H$, eso equivale a que **las columnas de $H$ sean todas distintas y no nulas** (esto último es derivación propia). Si dos errores simples $e_a$ y $e_b$ dan el mismo síndrome, se **detecta** el error pero **no se corrige**.
+- **Cuántos bits de control hacen falta (Hamming, Baró en M1):** con $m$ bits de información y $k$ de control, corregir un error simple en cualquiera de los $m+k$ dígitos exige $2^k\ge m+k+1$: los $m+k$ errores simples más el caso "sin error". Para $m=4$: con $k=2$, $4<7$ ✗; con $k=3$, $8\ge8$ ✓ → Hamming (7,4). Es la misma condición $2^{n-m}-1\ge n$ de arriba, con $n=m+k$.
 
 **Ejemplo** (apunte): $v_1=101110$ y $v_2=111001$ con el error $e=000100$ → $v_1\oplus e=101010$ y $v_2\oplus e=111101$. Las dos dan el mismo $S=e\,H^T\neq0$ → error en el 4.º dígito; se corrige y se recupera $v_1$ y $v_2$.
 
@@ -316,7 +435,7 @@ El síndrome depende solo del error, no de la palabra transmitida. Por eso el mi
 (teoria/3 - Detección y Corrección de errores.md)
 
 ### 4.4 Familia de errores de cada síndrome; errores no detectables
-**Salió:** familia en 28/08/2020, 10/09/2021, 19/11/2021, 17/12/2021 (MC); FAQ ("En qué condiciones no se detecta y corrige un error").
+**Salió:** familia en 28/08/2020, 10/09/2021, 19/11/2021, 17/12/2021 (MC); FAQ ("En qué condiciones no se detecta y corrige un error"); cursada 2025: M1, que copia la opción **incorrecta** "solo simples y dobles" (parcial Medín 2025, resumen del alumno; ver Dudas F).
 
 **Respuesta.**
 - **Errores no detectables:** los que **coinciden con palabras del código de grupo** (distintas de la nula). Como $e\in V$, $v\oplus e\in V$ y el síndrome sigue siendo 0: el receptor lo toma como palabra correcta. En el ejemplo del apunte (código de 8 palabras de 6 dígitos), no se detectan los errores triples y cuádruples cuyo patrón es una palabra del código (`101010`, `011011`, …).
@@ -331,7 +450,7 @@ El síndrome depende solo del error, no de la palabra transmitida. Por eso el mi
 ## 5. Comunicaciones digitales: modulación
 
 ### 5.1 Mensaje digital por una red analógica: tipos, aplicación, cómo aumentar la velocidad, gráficas
-**Salió:** **04/04/2025** (desarrollo: "a) Qué tipos de modulación se aplican para transmitir mensajes digitales por una red que transporta señales analógicas; b) cómo se aumenta la velocidad; c) cuál es su principal aplicación práctica; d) hacer todas las gráficas"); 28/08/2020 y 10/09/2021 (MC "Si se tiene que transmitir una señal digital por una red que opera con señales analógicas se debe…"); 18/12/2020 (MC "Para aumentar la velocidad de una FSK o PSK sin aumentar el ancho de banda del canal se debe…"); FAQ, con seis variantes de la misma pregunta ("Modulación FSK, PSK y multinivel. Gráficas y aplicación", "Explicar modulación con señal digital y portadora analógica…", "Aplicación de modulación analógica con mensaje digital…", "¿Cómo se puede transmitir una señal digital por un canal analógico?…", "Explique ASK conceptualmente y realice los gráficos", "Demodulación ASK coherente").
+**Salió:** **04/04/2025** (desarrollo: "a) Qué tipos de modulación se aplican para transmitir mensajes digitales por una red que transporta señales analógicas; b) cómo se aumenta la velocidad; c) cuál es su principal aplicación práctica; d) hacer todas las gráficas"); 28/08/2020 y 10/09/2021 (MC "Si se tiene que transmitir una señal digital por una red que opera con señales analógicas se debe…"); 18/12/2020 (MC "Para aumentar la velocidad de una FSK o PSK sin aumentar el ancho de banda del canal se debe…"); FAQ, con seis variantes de la misma pregunta ("Modulación FSK, PSK y multinivel. Gráficas y aplicación", "Explicar modulación con señal digital y portadora analógica…", "Aplicación de modulación analógica con mensaje digital…", "¿Cómo se puede transmitir una señal digital por un canal analógico?…", "Explique ASK conceptualmente y realice los gráficos", "Demodulación ASK coherente"); cursada 2025: B3, con ASK/FSK/PSK y la aplicación (PC por línea telefónica con MODEM) (parcial Baró 2025, resumen del alumno).
 
 **Respuesta.**
 
@@ -404,7 +523,7 @@ Multinivel:
 (teoria/5 - Comunicaciones Digitales.md; teoria/1 - Información, Codificación y Canales.md; resumenes/El Santo Resumen/el-santo-resumen.md, sección Final)
 
 ### 5.2 Modulación de amplitud (AM): definición, ubicación del mensaje, portadora suprimida, banda lateral única
-**Salió:** definición en 28/08/2020, 18/12/2020, 10/09/2021; "dónde queda la banda del mensaje" en 18/12/2020, 19/11/2021, 17/12/2021; portadora suprimida en 19/11/2021 y 17/12/2021 (MC).
+**Salió:** definición en 28/08/2020, 18/12/2020, 10/09/2021; "dónde queda la banda del mensaje" en 18/12/2020, 19/11/2021, 17/12/2021; portadora suprimida en 19/11/2021 y 17/12/2021 (MC); cursada 2025: B3, "la amplitud de la portadora varía de acuerdo al mensaje", con $f_c\approx1000$ kHz (parcial Baró 2025, resumen del alumno).
 
 **Respuesta.**
 - **AM:** la información del mensaje queda contenida en las **variaciones de amplitud de una onda senoidal de muy alta frecuencia llamada portadora**. Modular es "adaptar" el mensaje al medio y **trasladarlo en frecuencia** ($f_m\ll f_c$; p. ej., radio AM: voz de 20 Hz–20 kHz sobre una portadora de unos 1000 kHz).
@@ -465,12 +584,53 @@ Ojo: el apunte 1 da también $B=s/2$ (ver Dudas).
 
 (resumenes/El Santo Resumen/el-santo-resumen.md, "Banda base y modulación" y ADSL, que citan el apunte «Principios Básicos» y teoria/6 - Espectro de la señal ADSL; teoria/5 - Comunicaciones Digitales.md)
 
+### 5.5 Modulación: concepto y para qué se modula; señal portadora; ancho de banda
+**Salió:** cursada 2025: B3 ("Ejercicio 1 – Definiciones": ancho de banda, señal portadora y su utilidad; concepto de modulación) y M1, parte Baró (para qué se modula) (parcial Baró 2025, resumen del alumno). En los finales aparece implícita en AM (§5.2).
+
+**Respuesta.**
+- **Modular** es variarle a una portadora **un** parámetro (amplitud, frecuencia o fase) de acuerdo con el mensaje. Tiene dos caras: **adaptar** el mensaje al medio y **trasladarlo en frecuencia**, de $f_m$ a $f_c\gg f_m$. Siempre el mensaje modula a la portadora.
+- **Para qué:** adaptar la señal al canal (una señal digital en banda base no llega lejos por un par de cobre: es muy sensible al ruido); alcanzar mayores distancias; alejarse del ruido de baja frecuencia; compartir el canal entre varias señales con portadoras distintas (FDM). También permite antenas de tamaño razonable, porque se dimensionan con $\lambda$ (conocimiento general).
+- **Señal portadora:** señal de alta frecuencia que **transporta** el mensaje de origen a destino. La información viaja en las variaciones que el mensaje le imprime. Puede ser analógica (senoidal) o digital (tren de pulsos).
+- **Casos que estudia la cátedra** (por tipo de mensaje y de portadora):
+
+```
+ Mensaje      Portadora               Técnicas
+ analógico    analógica (senoidal)    AM, FM, PM
+ digital      analógica (senoidal)    ASK, FSK, PSK  → MODEM (§5.1)
+ analógico    digital (pulsos)        PAM, PDM, PPM → PCM (§6.2)
+```
+Baró llama **modulación analógica** a la de portadora senoidal y **modulación digital** a la de portadora de pulsos, sin importar el mensaje.
+- **Ancho de banda:** diferencia entre la frecuencia máxima y la mínima que deja pasar un canal (o que ocupa una señal): $AB=f_{max}-f_{min}$ [Hz]. En un sistema real, $f_{min}$ y $f_{max}$ son las frecuencias de corte a −3 dB (§dB.2). A más ancho de banda, más velocidad de transmisión posible.
+
+**Ejemplo:** radio AM: voz y música de 20 Hz a 20 kHz sobre una portadora de ≈ 1000 kHz; radio FM: el mismo mensaje sobre ≈ 100 MHz.
+
+(teoria/5 - Comunicaciones Digitales.md; practica/1 - Principios Básicos de la Electrónica y las Comunicaciones.md; cursada-2025/drive-propio/Resumen de Comunicación de datos - 3er parcial Práctica.md)
+
+### 5.6 FM y PM
+**Salió:** cursada 2025: B3 (parcial Baró 2025, resumen del alumno). No salió en los finales relevados.
+
+**Respuesta.**
+- **FM (modulación de frecuencia):** amplitud y fase de la portadora constantes; **la frecuencia de la portadora varía según la amplitud del mensaje**. Ejemplo: radio FM, portadora de ≈ 100 MHz.
+- **PM (modulación de fase):** amplitud y frecuencia constantes; varía la **fase**. Fase y frecuencia están las dos dentro del argumento del coseno, así que con modulación continua la gráfica de PM no se distingue de la de FM. Por eso se dibuja con saltos discretos de fase (por ejemplo, 180°), que es el caso PSK (§5.1).
+- Comparación (conocimiento general): FM es más inmune al ruido que AM, porque el ruido afecta sobre todo la amplitud, a cambio de ocupar más ancho de banda.
+
+(teoria/5 - Comunicaciones Digitales.md; cursada-2025/drive-propio/Resumen de Comunicación de datos - 3er parcial Práctica.md)
+
+### 5.7 Armónico de la serie de Fourier
+**Salió:** cursada 2025: B3 ("Otro parcial de Baró": "Defina claramente… armónico de la serie de Fourier") (resumen del alumno).
+
+**Respuesta.** Una señal periódica de período $T_0$ se puede descomponer (serie de Fourier) en una suma de senoides cuyas frecuencias son **múltiplos enteros** de la frecuencia **fundamental** $f_0=1/T_0$. Cada una de esas componentes, de frecuencia $n\,f_0$, es un **armónico**; el de $n=1$ es la fundamental. Las amplitudes de los armónicos forman el espectro de líneas de la señal.
+
+**Ejemplo:** un tren de pulsos de período $T$ y ancho $\tau$ tiene armónicos en $1/T,\ 2/T,\ 3/T,\dots$, con una envolvente sinc que se anula en $1/\tau$. De ahí sale el ancho de banda práctico (§5.3).
+
+(teoria/5 - Comunicaciones Digitales.md; cursada-2025/drive-propio/Resumen de Comunicación de datos - 3er parcial Práctica.md)
+
 ---
 
 ## 6. Muestreo, digitalización y PCM
 
 ### 6.1 ¿Qué hay que hacer primero para digitalizar un mensaje analógico? (Nyquist)
-**Salió:** 28/08/2020, 10/09/2021, 19/11/2021, 17/12/2021 (MC); TDM "las señales se muestrean con…" en 28/08/2020 y 18/12/2020 (MC); FAQ ("Cómo digitalizar una señal analógica").
+**Salió:** 28/08/2020, 10/09/2021, 19/11/2021, 17/12/2021 (MC); TDM "las señales se muestrean con…" en 28/08/2020 y 18/12/2020 (MC); FAQ ("Cómo digitalizar una señal analógica"); cursada 2025: B3, con las definiciones de muestreo ("Ejercicio 1") y de tasa de Nyquist ("Otro parcial de Baró") (resumen del alumno).
 
 **Respuesta.** El primer paso es **muestrear** el mensaje con un **tren de pulsos (portadora digital) de frecuencia $f_s\ge 2f_{max}$** del mensaje (**tasa de Nyquist** o teorema del muestreo).
 
@@ -491,11 +651,11 @@ Etapas de la digitalización: **muestreo → cuantificación → codificación**
 (teoria/5 - Comunicaciones Digitales.md)
 
 ### 6.2 PCM (modulación por pulsos codificados)
-**Salió:** 18/12/2020 (MC "En una transmisión PCM las muestras de cada señal…"); FAQ (PCM en Parte 2).
+**Salió:** 18/12/2020 (MC "En una transmisión PCM las muestras de cada señal…"); FAQ (PCM en Parte 2); cursada 2025: B3, con las definiciones de cuantificación y codificación ("Ejercicio 1") y de PDM ("Otro parcial de Baró"), más los cálculos de trama (resumen del alumno).
 
 **Respuesta.** Primero, las técnicas de portadora digital con mensaje analógico: el mensaje modula un parámetro de cada pulso.
 - **PAM:** varía la amplitud.
-- **PDM:** varía la duración.
+- **PDM (o PWM):** varía la duración (el ancho) del pulso según la amplitud del mensaje.
 - **PPM:** varía la posición.
 
 **PCM** es la cuarta técnica y la que se usa hoy: la amplitud de cada muestra PAM se **cuantifica y codifica**.
@@ -505,6 +665,10 @@ Etapas de la digitalización: **muestreo → cuantificación → codificación**
 4. **Multiplexado TDM** de muestras de varios canales en una **trama**: la PCM 30+2 lleva 30 canales de información y 2 de sincronismo y señalización.
 
 Cuentas: $T_s=1/f_s=N\cdot T_M$, $T_M=n\cdot\tau$, $B_w=1/\tau=N\cdot n\cdot f_s$.
+
+Ejemplos resueltos en B3, con voz de $f_{max}=4$ kHz → $f_s=8$ kHz y $T_s=125$ µs:
+- **PCM 30+2:** 32 canales × 8 bits = 256 bits en 125 µs → $r=2{,}048$ Mbps.
+- **T1:** 24 canales × (7 bits + 1 de sincronismo) + 1 bit de señalización por trama = 193 bits en 125 µs → $r=1{,}544$ Mbps.
 
 ```
  Muestreadores → MUX (PAM/TDM) → Cuantificador → MUX sinc./señalización → Codificador de línea → señal PCM
@@ -546,7 +710,7 @@ Por lo tanto, **para duplicar la cantidad de señales en el mismo canal hay que 
 (teoria/5 - Comunicaciones Digitales.md)
 
 ### 7.3 TDM: concepto, trama y diferencia con FDM
-**Salió:** 28/08/2020, 18/12/2020, 10/09/2021, 19/11/2021, 17/12/2021 (MC "En una transmisión con multiplexado TDM las señales…"); FAQ ("Explique detalladamente la técnica TDM", "Explicar la diferencia entre FDM y TDM. Ejemplo con gráfico", "¿En una transmisión, cada mensaje ocupa un lugar determinado del ancho de banda del canal? ¿Por qué?").
+**Salió:** 28/08/2020, 18/12/2020, 10/09/2021, 19/11/2021, 17/12/2021 (MC "En una transmisión con multiplexado TDM las señales…"); FAQ ("Explique detalladamente la técnica TDM", "Explicar la diferencia entre FDM y TDM. Ejemplo con gráfico", "¿En una transmisión, cada mensaje ocupa un lugar determinado del ancho de banda del canal? ¿Por qué?"); cursada 2025: B3, con TDM y trama (parcial Baró 2025, resumen del alumno).
 
 **Respuesta.**
 - **TDM (multiplexación por división de tiempo):** se divide el uso del canal **en el tiempo**. Se muestrea cada mensaje ($f_s\ge2f_{max}$) y, como entre pulsos queda un **tiempo muerto**, ahí se intercalan muestras de los otros mensajes. Los usuarios toman su turno en forma circular y, **en su intervalo, cada muestra ocupa todo el ancho de banda del canal**, una por vez: no hay simultaneidad.
@@ -591,7 +755,7 @@ Por lo tanto, **para duplicar la cantidad de señales en el mismo canal hay que 
 ## 8. Medios de transmisión y elección del medio de acceso
 
 ### 8.1 Propiedades de los medios (MC verdadero/falso y opciones)
-**Salió:** fibra y ruido eléctrico en 28/08/2020, 18/12/2020, 10/09/2021; "la fibra transmite por…" en 18/12/2020; atenuación de ondas de radio en 28/08/2020, 18/12/2020, 10/09/2021; ventaja del satélite en 28/08/2020 y 10/09/2021; cablemodem en 10/09/2021.
+**Salió:** fibra y ruido eléctrico en 28/08/2020, 18/12/2020, 10/09/2021; "la fibra transmite por…" en 18/12/2020; atenuación de ondas de radio en 28/08/2020, 18/12/2020, 10/09/2021; ventaja del satélite en 28/08/2020 y 10/09/2021; cablemodem en 10/09/2021; cursada 2025: B2 repite "fibra y ruido eléctrico" (VF) y suma dos VF de coaxil. El resto del compendio de Baró está en [Multiple choice de medios de transmisión](#multiple-choice-de-medios-de-transmisión-2do-parcial-baró).
 
 **Respuestas.**
 - **"El ruido eléctrico, interferencias y acoplamientos eléctricos afectan a la fibra óptica" → FALSO.** La fibra transporta **luz**, así que las sobrecargas de energía, la interferencia electromagnética y los cortes de suministro no la afectan.
@@ -599,8 +763,9 @@ Por lo tanto, **para duplicar la cantidad de señales en el mismo canal hay que 
 - **"La atenuación de las ondas de radio depende de la frecuencia y de la distancia recorrida" → VERDADERO.** Las propiedades de las ondas de radio dependen de la frecuencia: a baja frecuencia atraviesan obstáculos pero la potencia cae drásticamente con la distancia; a alta frecuencia viajan en línea recta, rebotan y la lluvia las absorbe (microondas desde unos 4 GHz).
 - **"Una de las ventajas de las microondas satelitales es…" → poder llegar con la señal a lugares muy lejanos e inaccesibles.** El satélite es un repetidor en el cielo con gran cobertura. Las demás opciones son falsas: el ancho de banda satelital es caro y menor que el de la fibra, el aire no da "más velocidad" y la instalación del enlace no es barata.
 - **"Una empresa de zona urbana que requiere gran ancho de banda contrata cablemodem por coaxil a la empresa de TV cable" → FALSO.** Según la cátedra, el coaxil queda **solo para cablemodem de usuarios residenciales** por la red de TV cable. Para una empresa urbana con gran BW se usa fibra óptica.
+  - **Por qué es residencial:** la red de TV cable es **HFC** (híbrida fibra-coaxil). Desde la cabecera, una troncal de fibra en anillos redundantes llega a nodos ópticos; ahí la señal pasa a eléctrica y se distribuye en un **bus de coaxil de 75 Ω**, compartido por los abonados de la zona, hasta el cablemodem (estándar DOCSIS). Es una red de difusión pensada para hogares, con el ancho de banda de subida compartido (TP HFC de Baró, 2024).
 
-(practica/3 - Medios de transmisión.md; teoria/Elección medio de acceso V03.md)
+(practica/3 - Medios de transmisión.md; teoria/Elección medio de acceso V03.md; cursada-2025/drive-propio/Tps Baro/TP N°1 - Cables HFC.md)
 
 ### 8.2 Características (ventajas y desventajas) de los medios de acceso: par telefónico, fibra óptica, radioenlace, satélite
 **Salió:** **04/04/2025** (3-a, desarrollo); FAQ ("Indicar al menos tres medios de comunicación de acceso…").
@@ -617,7 +782,7 @@ Por lo tanto, **para duplicar la cantidad de señales en el mismo canal hay que 
 (teoria/Elección medio de acceso V03.md; practica/3 - Medios de transmisión.md)
 
 ### 8.3 Elegir un medio de acceso según la zona y la velocidad
-**Salió:** **04/04/2025** (3-b, cuatro casos) y MC de 28/08/2020, 18/12/2020, 10/09/2021, 19/11/2021, 17/12/2021; FAQ (dos variantes con tres casos cada una).
+**Salió:** **04/04/2025** (3-b, cuatro casos) y MC de 28/08/2020, 18/12/2020, 10/09/2021, 19/11/2021, 17/12/2021; FAQ (dos variantes con tres casos cada una); cursada 2025: M2, con las mismas variables de decisión ("ver ejemplos del apunte") (parcial Medín 2025, resumen del alumno).
 
 **Criterio de la cátedra.** Se evalúan estas variables:
 - ubicación (urbana, suburbana, rural, montañosa, bosque/selva);
@@ -642,18 +807,91 @@ Como las consignas no dan todas las variables, **conviene escribir el supuesto**
 | **Zona suburbana, velocidad media, con espacio físico** (19/11/21, 17/12/21) | **Radioenlace** | El dato "disponiendo de espacio físico" apunta al mástil del RE, y el RE cubre BW medio. FO si hay presupuesto o segurización (ej. 7 usa FO + RE para BW medio). El cablemodem es residencial. |
 | **Industria en la ruta 9 entre Cañada de Gómez y Rosario, gran velocidad** (18/12/20, 19/11/21, 17/12/21) | **Fibra óptica** | Gran BW (>100 M) solo lo da la fibra. Sobre el corredor Rosario–Córdoba el operador tiene troncales de fibra; zona suburbana o rural (ej. 6/7: FO, con segurización por RE). El satélite no da gran velocidad. |
 
-**Segurización.** Si el servicio no admite cortes, se agrega un segundo acceso con **recursos disjuntos**:
-- recorridos de fibra que no compartan tramo hasta la sala de equipos;
-- y, mejor, **otro operador con infraestructura propia** (si el operador 2 alquila infraestructura al 1, una caída del 1 tira ambos).
+**Segurización:** ver §8.4.
 
 (teoria/Elección medio de acceso V03.md; resumenes/El Santo Resumen/el-santo-resumen.md, "Elección del medio de acceso")
+
+### 8.4 Segurización (plan de contingencia) y consideraciones para instalar un radioenlace
+**Salió:** cursada 2025: M2 (2.º parcial de Medín, "explicación de conceptos") (resumen del alumno). En los finales aparece dentro de los casos de §8.3 que piden segurización.
+
+**Respuesta.**
+- **Segurización (plan de contingencia):** un segundo medio de comunicación entre los mismos puntos para cuando falla el principal. Hace falta cuando el servicio **no admite cortes**. Como se usa ocasionalmente, conviene que sea **más barato** que el principal (p. ej., fibra principal con respaldo por radioenlace o satélite).
+- **Consideraciones** (el respaldo tiene que usar **recursos disjuntos**):
+  - Acceso y segurización **por fibra**: los dos recorridos no pueden compartir ningún tramo hasta la sala de equipos, porque una sola obra que corte el ducto tira los dos.
+  - Acceso y segurización **por radioenlace o fibra**: conviene que los den **operadores distintos**, y que el segundo tenga infraestructura propia. Si los dos servicios son del mismo proveedor (o el operador 2 le alquila la red al 1), una caída del proveedor deja sin servicio principal y sin respaldo.
+- **Radioenlace:** necesita **visión directa** entre los extremos, sin obstáculos. Es sencillo si la organización tiene un edificio en altura. Si no, hay que levantar una estructura sostén de antenas, normalmente un **mástil arriostrado**, cuyas riendas se anclan a una distancia del pie de alrededor del 60 % de la altura (para 30 m, un terreno de unos 36 × 36 m). Por eso el dato decisivo es el **espacio físico**: sin espacio, el radioenlace queda descartado (→ satélite, o par + HDSL si llega la red).
+
+(teoria/Elección medio de acceso V03.md; cursada-2025/drive-propio/Resumen de Comunicación de datos - 2do parcial teoría.md)
+
+---
+
+## Multiple choice de medios de transmisión (2do parcial Baró)
+
+**Salió:** compendio "2do parcial de Baró 2024 – compendio de preguntas para estudiar", usado en la cursada 2025 (B2): 44 preguntas, con la opción marcada por un alumno. Acá están fusionadas las repetidas (con distintas opciones) en 34 ítems. Para cada uno va la respuesta correcta y por qué; cuando la marca del alumno es distinta o dudosa, se aclara (resumen en [Dudas E](#e-marcas-del-compendio-mc-de-baró-b2)). Los valores salen del apunte de Medios de transmisión, que sigue a Tanenbaum, salvo donde dice "conocimiento general".
+
+### MC.1 Par trenzado (UTP)
+1. **Una diferencia entre UTP Cat. 5 y Cat. 6** (dos versiones). → Si está la opción: "**el Cat. 6 tiene más vueltas por metro que el Cat. 5**". En la versión que no la trae: "**ninguna de las anteriores**". Cat. 5 = 100 MHz y Cat. 6 = 250 MHz, así que "100/600 MHz" es falsa, y "16/100" o "16/200" también (16 MHz es Cat. 3). "Cat. 5 tiene más vueltas" está invertida: cada categoría trenza más apretado para bajar la diafonía. "Cat. 6 usa 2 pares y Cat. 5 usa 4" también está invertida: en Cat. 5e se usan los hilos 1-2 para Tx y 3-6 para Rx, y en Cat. 6 los cuatro pares.
+2. **¿Por qué se trenzan los hilos del UTP?** (dos versiones) → "**para disminuir la interferencia entre pares**" (diafonía). Dos hilos paralelos forman una antena; al trenzarlos, los campos de vueltas sucesivas se cancelan. Baró: se trenzan para **disminuir, no anular**, el acoplamiento magnético entre pares. No es para bajar la atenuación ni para llegar a 100 m o a 100 MHz.
+3. **Pines de cada puerto de conexión UTP** → **8** (RJ-45: 4 pares × 2 hilos).
+
+### MC.2 Cable coaxil
+4. **"Banda ancha con coaxil utiliza el cableado coaxial existente (50 Ω)"** → **Falso.** Banda ancha usa el coaxil de **75 Ω** (grueso: analógico, TV cable, ≈ 500 m, ≈ 500 MHz). El de **50 Ω** es el de banda base (fino: digital, ≈ 200 m).
+5. **"El coaxil de banda base se usa actualmente para distribución de video, voz e internet"** → **Falso.** Eso lo hace el coaxil de **banda ancha** (75 Ω) en las redes HFC de TV cable (§8.1). El de banda base (50 Ω, Ethernet viejo) está en desuso.
+
+### MC.3 Fibra óptica
+6. **La ley de Snell** (dos versiones) → "especifica los ángulos de incidencia y **refracción** de la luz" / "relaciona los ángulos de incidencia y refracción con los **índices** de refracción": $n_1\sin\theta_1=n_2\sin\theta_2$. No es "reflexión": la reflexión total interna es una consecuencia, a partir del ángulo crítico. Tampoco tiene que ver con zonas de atenuación, anchos de banda ni dispersión cromática.
+7. **Longitud de onda de transmisión** → **≈ 1300 nm**. Las ventanas típicas son 850, 1300 y 1550 nm, infrarrojo cercano (conocimiento general).
+8. **La fibra monomodo…** ("más económica por un solo haz / por más delgada / por el erbio"; "distancias más grandes por ser más barata") → **ninguna**. La monomodo es **más cara**. Llega más lejos porque no tiene dispersión modal, no por precio. El erbio es de los amplificadores ópticos (EDFA, conocimiento general).
+9. **La fibra multimodo…** (dos versiones) → "**es menos frágil y menos costosa que la monomodo**" y "**tiene más atenuación por km que la monomodo**". Su núcleo es grande (50–62,5 µm contra 8–10 µm): es más fácil de conectar y usa componentes más baratos (LED), pero tiene más pérdida y dispersión modal y se usa a menos de 2 km. Falsas: "un solo haz" (eso es monomodo), "más delgada" (es más gruesa), "menos repetidores".
+10. **Emisor y receptor de la fibra** → emisor: **diodo emisor de luz (LED) o diodo láser** (opción "c y e"); receptor: **fotodiodo**.
+11. **Pérdida por un empalme** → **≈ 10 %**. El apunte da 10–20 % para conectores; un empalme mecánico ronda el 10 % y uno por fusión pierde menos (Tanenbaum, conocimiento general). 3 dB sería perder el 50 %.
+12. **Velocidad de propagación en la fibra** → "**es menor que en el aire**": con índice ≈ 1,5, va a ≈ 200.000 km/s. No es mayor que en cualquier medio ni igual a 300.000 km/s.
+13. **¿Qué limita la velocidad (bps) en la fibra?** → **el fotodiodo**, es decir, la conversión óptico-eléctrica: su tiempo de respuesta (≈ 1 ns) limita la tasa a ≈ 1 Gbps, mientras que la fibra en sí tiene un ancho de banda enorme (Tanenbaum, conocimiento general). La atenuación limita la **distancia**, no los bps.
+
+### MC.4 Microondas (radioenlace terrestre)
+14. **Microondas es un tipo de señal…** (dos versiones) → En una: **ninguna de las anteriores**. "λ elevada y f pequeña" está al revés; "no requiere licencia en todo su espectro" es falso; "espectro audible", también; y "se propagan omnidireccionalmente" es falso, porque van en un haz. En la otra: "**de longitud de onda muy pequeña y frecuencia elevada**".
+15. **Banda de frecuencias de microondas** → **1.000 a 38.000 MHz** (≈ 1–38 GHz). 300–3000 MHz es UHF y 300–3000 GHz ya es infrarrojo lejano.
+16. **Longitud de onda de una señal de 2,48 GHz** → **121 mm**: $\lambda=c/f=3\cdot10^8/2{,}48\cdot10^9\approx0{,}121$ m. (Con 2,4 GHz da 125 mm.)
+17. **Torres y distancia de un enlace punto a punto** (dos versiones) → torres de **100 m** ↔ repetidores a **80 km**. La distancia crece aproximadamente con la raíz cuadrada de la altura.
+18. **Principal ventaja de las microondas** → "**el bajo costo de sus componentes e instalación, y la fácil instalación**": dos torres con antenas cuestan menos que enterrar 50 km de fibra. Falsas: "gran BW comparado con la fibra", "alta velocidad por usar el aire" y "llegar a lugares muy lejanos" (esa es la del satélite).
+19. **Microondas…** ("haz estrecho para conectar PC", "costosa", "el medio inalámbrico más eficiente", "no se usa por su escasa velocidad") → "**es el medio inalámbrico más eficiente para enlaces terrestres**".
+20. **Desvanecimiento por trayectoria múltiple** → "**ondas de un radioenlace terrestre que, tras rebotar (refractarse) en la atmósfera, llegan al receptor y causan interferencia**". Llegan con retardo y fuera de fase respecto de la onda directa, y pueden cancelarla. Depende del clima y de la frecuencia.
+
+### MC.5 Infrarrojo y láser
+21. **La transmisión por infrarrojo…** → "**requiere baja inversión**": emisores y receptores baratos y fáciles de construir, sin licencia. Falsas: "no tiene inconvenientes cuando llueve" y "trabaja en baja frecuencia" (está en THz). Ojo con "se utiliza en fibra óptica": la luz de la fibra (850–1550 nm) **es** infrarrojo cercano, pero la pregunta habla del infrarrojo como medio inalámbrico (Dudas E).
+22. **¿Por qué el infrarrojo no se puede usar en exteriores?** → "**el sol brilla con igual intensidad en el infrarrojo que en el visible**" y lo interfiere.
+23. **Las ondas infrarrojas…** → "**se pueden usar en una LAN con haces relativamente desenfocados para conectar las PC**". "1 mm de ancho a 500 m" describe al láser; no requieren licencia; los equipos son baratos. No atraviesan paredes: es una limitación de alcance, pero también una ventaja de seguridad.
+24. **Banda del infrarrojo** → **del orden de los THz** ($\approx10^{12}$–$10^{14}$ Hz). $10^{10}$–$10^{12}$ Hz son microondas y milimétricas.
+25. **El láser…** → "**tiene un haz demasiado estrecho y complicado para conectar PC**": apuntar un haz de 1 mm a un blanco a 500 m es difícil. Se usa punto a punto entre edificios. No es caro ni es el inalámbrico más eficiente.
+26. **Las ondas por láser…** ("requieren licencia", "casi solo se usan dentro de la fibra", "son inmunes a las corrientes de convección", "son menos focalizadas que las microondas") → **el compendio no tiene marca**. Por descarte: "**prácticamente se utilizan solo para transmitir dentro de la fibra óptica**". No requieren licencia, **no** son inmunes a la convección (el aire caliente del techo desvía el haz) y son **más** focalizadas que las microondas. Además, la cátedra dice que el láser por aire no tuvo expansión (§8.2). Ver Dudas E.
+
+### MC.6 Satélite
+27. **Altura de un satélite de órbita baja (LEO)** → **≈ 700 km**. GEO: ≈ 36.000 km sobre el ecuador. MEO: ≈ 10.000 km, entre los cinturones de Van Allen (inferior, 1.000–5.000 km; superior, 15.000–20.000 km).
+28. **Latencia de un satélite de órbita media (MEO)** → **35 a 87 ms**. LEO: 1–7 ms; GEO: ≈ 270 ms. "6 horas" es el período orbital de un MEO, no su latencia.
+29. **Ancho de banda de cada transpondedor** → el compendio (y el resumen del alumno) marca "**50 a 100 MHz**". Según Tanenbaum (conocimiento general), el valor típico es **36 a 50 MHz**, que también está entre las opciones. **Dudoso**: ver Dudas E.
+30. **Vida útil en órbita** → "**entre 10 y 15 años**". El apunte dice que el combustible se termina "por lo general a los 10 años".
+31. **Banda L** → **1,5/1,6 GHz**. Las demás: S 1,9/2,2; C 4/6; Ku 11/14; Ka 20/30 GHz (bajada/subida). La C fue la primera comercial y está saturada; Ku y Ka sufren con la lluvia.
+32. **¿Qué significa VSAT?** (dos versiones) → "**terminales de apertura muy pequeña**" (*Very Small Aperture Terminal*: antena de 1 m o menos). En la versión en inglés, la correcta es "**ninguna de las anteriores**". **"Very Small Amplitude Terminals" está mal** (amplitud ≠ apertura), aunque es la que marcó el alumno.
+33. **Una ventaja de la transmisión por satélite** → "**versatilidad en las comunicaciones móviles**". Falsas: "más BW que la fibra"; "disponibilidad por debajo del 99 %" y "BER muy alto" (no son ventajas); "latencia muy baja" (GEO ≈ 270 ms, por eso no sirve bien para tiempo real). En los finales, la ventaja correcta era otra opción: "llegar a lugares muy lejanos e inaccesibles" (§8.1).
+
+### MC.7 Velocidad de propagación en el aire
+34. **La velocidad de propagación de una señal en el aire…** (dos versiones) → En una: "**es tal que su retardo equivale a ≈ 3 µs/km**" ($1/300.000$ km/s $\approx3{,}3$ µs/km). En la otra: "**es mayor que en cualquier medio de transmisión guiado**" (en cobre y fibra va a ≈ 2/3 de $c$). Falsas: "similar a la del par trenzado", "menor que en la fibra", "200.000 km/s". "Igual a 300.000 km/s" es casi cierta en el aire (Dudas E), pero la marcada es la más segura.
+
+### MC.8 Datos sueltos del resumen B2 que pueden caer
+- **Medios confinados (guiados):** par trenzado, coaxil, fibra, HFC. **No confinados:** radio, microondas, infrarrojo, láser, satélite.
+- **Impedancias:** UTP 100 Ω, FTP 120 Ω, STP 150 Ω; coaxil 50 Ω (banda base) y 75 Ω (banda ancha). El STP se discontinuó por caro: había que blindar también las fichas.
+- **UTP:** la atenuación limita el segmento a **100 m** (después, repetidor).
+- **Fibra:** la transmisión es unidireccional, así que un enlace full-dúplex usa **2 pelos** (o dos bandas en una fibra).
+- **Satélite GEO:** no es una solución óptima para aplicaciones de tiempo real (retardo).
+
+(practica/3 - Medios de transmisión.md; cursada-2025/drive-propio/2do Parcial - Comunicacion De Datos - Baró.md; resumenes/2° Parcial/Resumen Parcial 2 (2025).md, que confirma VSAT)
 
 ---
 
 ## 9. Teoría de colas
 
 ### 9.1 Punto de saturación de un sistema de cola cerrada
-**Salió:** 19/11/2021 y 17/12/2021 (MC); FAQ ("Explique brevemente y grafique adecuadamente el punto de saturación de un sistema de cola cerrada").
+**Salió:** 19/11/2021 y 17/12/2021 (MC); FAQ ("Explique brevemente y grafique adecuadamente el punto de saturación de un sistema de cola cerrada"); cursada 2025: M2 (sistema cerrado, mismo desarrollo) y parcial com. 305 ("Explicar el concepto de punto de saturación", respondido con el criterio del enlace; ver el recuadro al final) (resumen del alumno).
 
 **Respuesta.** Modelo **cerrado** de población finita: $N$ terminales interactúan con una CPU y cada usuario alterna entre "pensando" (tiempo medio $E[t]$), esperando y recibiendo servicio (tiempo medio $E[s]$). Se grafica el tiempo de respuesta medio $W$ en función de $N$:
 - Con $N=1$ no hay cola: $W=E[s]$.
@@ -681,10 +919,12 @@ Es el **número máximo de terminales que se pueden conectar sin causar interfer
 
 **En el MC:** "el punto correspondiente al número **máximo** de usuarios que se pueden conectar con una **mínima** interferencia mutua".
 
-(teoria/Teoría de Colas.md)
+> **Dos usos de "punto de saturación".** En colas cerradas es $N^*$, un número de terminales. En **asignación de capacidad** (Medín 2025, parcial com. 305) se llama así al **umbral del factor de utilización** de un enlace, usualmente entre $0{,}8$ y $1$: si $\rho=\frac{\lambda}{\eta C}$ lo supera, el enlace está saturado o cerca (§9.6). Si la consigna no aclara cuál pide, conviene dar los dos.
+
+(teoria/Teoría de Colas.md; cursada-2025/drive-propio/Resumen de Comunicación de datos - 2do parcial teoría.md)
 
 ### 9.2 Intensidad de tráfico y factor de utilización
-**Salió:** 19/11/2021 y 17/12/2021 (MC).
+**Salió:** 19/11/2021 y 17/12/2021 (MC); cursada 2025: M2, con el mismo ejemplo de 15 s y 10 s → 2 servidores (resumen del alumno).
 
 **Respuesta.** La **intensidad de tráfico** $u$ es la relación entre el **tiempo de servicio promedio** $E[s]$ y el **intervalo promedio entre arribos** $E[\tau]$:
 $$u=\frac{E[s]}{E[\tau]}=\lambda\,E[s]\qquad(\lambda=1/E[\tau]=\text{frecuencia de arribos})\quad[\text{Erlang}]$$
@@ -696,7 +936,7 @@ El **factor de utilización del servicio** es $\rho=u/c$ (intensidad de tráfico
 (teoria/Teoría de Colas.md)
 
 ### 9.3 Notación de Kendall: ¿qué simboliza la segunda M de M/M/1?
-**Salió:** FAQ.
+**Salió:** FAQ; cursada 2025: parcial com. 305 ("Qué es M/M/1 cuando es cola de espera sin límites, fuente de usuarios infinita y disciplina FIFO") (resumen del alumno).
 
 **Respuesta.** La notación de Kendall es $A/B/c/k/n/Z$:
 - $A$: distribución del **intervalo entre arribos**;
@@ -708,13 +948,67 @@ El **factor de utilización del servicio** es $\rho=u/c$ (intensidad de tráfico
 
 La forma corta $A/B/c$ supone cola sin límite, población infinita y disciplina FIFO. En **M/M/1**, la **segunda M** indica que el **tiempo de servicio tiene distribución exponencial** (Markoviana: servicio "aleatorio"), la primera M indica intervalos entre arribos exponenciales (arribos de Poisson), y el 1 indica un solo servidor.
 
+**Para la consigna de la com. 305:** M/M/1 con cola ilimitada, población infinita y FIFO es el sistema en el que los intervalos entre arribos son exponenciales de media $1/\lambda$ (arribos de Poisson), el tiempo de servicio es exponencial de media $1/\mu$ y hay un único servidor.
+
 (teoria/Teoría de Colas.md)
+
+### 9.4 Elementos de un sistema de colas abiertas
+**Salió:** cursada 2025: parcial com. 305 ("Enumere los elementos de un sistema de colas abiertas y explíquelos") y M2 (resumen del alumno). No salió en los finales relevados.
+
+**Respuesta.** Una cola es una línea de espera; la teoría de colas estudia el fenómeno de esperar.
+- **Fuente (población de usuarios):** las entidades que piden un servicio. **Infinita:** la frecuencia de arribos no depende de cuántos hay en el sistema. **Finita:** sí depende. Una población finita pero grande se aproxima como infinita.
+- **Proceso de arribo:** intervalos entre arribos $\tau$ independientes e idénticamente distribuidos; en M/M, exponenciales (arribos de Poisson) de media $E[\tau]=1/\lambda$.
+- **Servicio y servidores:** tiempo de servicio $s$ i.i.d.; el servicio "aleatorio" es exponencial, $W_s(t)=1-e^{-\mu t}$ con $\mu=1/E[s]$. Puede haber un servidor (atiende de a uno) o $c$ servidores idénticos.
+- **Cola** y su **capacidad máxima:** infinita, o finita. En un *sistema de pérdida*, el que llega con todo ocupado no puede esperar.
+- **Disciplina de cola:** FIFO (la habitual), LIFO o por prioridades.
+- **Abierto** significa que los usuarios llegan del exterior, reciben el servicio y se van (a diferencia del cerrado, §9.1).
+
+Tiempos: $t_w=t_q+t_s$, el tiempo en el sistema es el de cola más el de servicio.
+
+```
+ fuente ──λ──► [ cola ▯▯▯ ] ──► ( servidores 1..c, μ ) ──► salida
+               ◄── t_q ───►     ◄──────── t_s ───────►
+               ◄─────────────────── t_w ─────────────►
+```
+
+(teoria/Teoría de Colas.md; cursada-2025/drive-propio/Resumen de Comunicación de datos - 2do parcial teoría.md)
+
+### 9.5 M/M/1 y M/M/c: medidas de performance, leyes de Little y percentil 90
+**Salió:** cursada 2025: M2 y parcial com. 305 (ejercicios, con "conclusiones y propuestas de solución") (resumen del alumno). Es la teoría que se usa para interpretar el problema de colas del final práctico (04/04/2025).
+
+**Respuesta.**
+- $u=\lambda E[s]=\lambda/\mu$ (intensidad de tráfico) y $\rho=u/c$, que debe ser $<1$ para que el sistema sea estable.
+- **M/M/c:** $W_q=\frac{C(c,u)\,E[s]}{c(1-\rho)}$. $C(c,u)$ es la fórmula C de Erlang: la probabilidad de que **todos los servidores** estén ocupados, o sea, de que el que llega tenga que esperar.
+- **M/M/1** ($C=\rho$): $W_q=\frac{\rho\,E[s]}{1-\rho}$ y $W=W_q+E[s]=\frac{E[s]}{1-\rho}$.
+- **Leyes de Little:** $L=\lambda W$ (usuarios en el sistema) y $L_q=\lambda W_q$ (en la cola).
+- **Percentil 90:** $\pi_w(90)$ es el tiempo que no supera el 90 % de los usuarios, $P[t_w\le\pi_w(90)]=0{,}9$; ídem en la cola. En M/M/1: $\pi_w(90)=W\ln10\approx2{,}3\,W$ y $\pi_q(90)=W\ln(10\rho)$ (ver Dudas F).
+- Cuando $\rho\to1$, $W$ y $L$ crecen sin límite. Por eso la conclusión típica es agregar servidores o separar el sistema en varios.
+
+**Ejemplo** (apunte, ej. 1): $\lambda=1/48$ por min y $E[s]=30$ min → $\rho=5/8$, $W_q=50$ min, $W=80$ min, $\pi_q(90)=80\ln6{,}25\approx146{,}6$ min.
+
+(teoria/Teoría de Colas.md; cursada-2025/drive-propio/Resumen de Comunicación de datos - 2do parcial teoría.md)
+
+### 9.6 Asignación de capacidad de canales (Kleinrock): retardo y utilización de un enlace
+**Salió:** cursada 2025: M2 (2.º parcial de Medín: conceptos y ejercicios con redes en estrella) (resumen del alumno). No salió en los finales de teoría relevados.
+
+**Respuesta.** Se usa el criterio de **Kleinrock**: el costo es linealmente proporcional a la capacidad. El enlace de salida de cada concentrador se modela como una cola M/M/1: arribos de Poisson, longitudes de mensaje exponenciales, buffer FIFO infinito (los reales bloquean con probabilidad menor a $10^{-3}$) y tiempo de procesamiento nodal despreciable frente a la espera.
+- $\lambda_i$ [mensajes/s]: frecuencia promedio de mensajes del enlace $i$, la suma de las de todas las líneas que entran al nodo (sus terminales más las de los nodos que cuelgan de él).
+- $1/\eta_i$ [bits/mensaje]: longitud promedio del mensaje ($\eta_i$ = mensajes por bit).
+- $\mu_i=\eta_iC_i$ [mensajes/s]: lo que puede despachar un enlace de capacidad $C_i$ [bps].
+- **Retardo promedio:** $T_i=\frac{1}{\mu_i-\lambda_i}=\frac{1}{\eta_iC_i-\lambda_i}=\frac{1}{\eta_iC_i(1-\rho_i)}$. Incluye la transmisión y la espera en el buffer.
+- **Utilización** (coincide con la intensidad de tráfico, porque hay un solo servidor): $\rho_i=\frac{\lambda_i}{\eta_iC_i}<1$. Si $\rho_i\to0$, $T_i\to\frac{1}{\eta_iC_i}$, que es el tiempo de transmitir un mensaje; si $\rho_i\to1$, $T_i\to\infty$. En 2025 se usó como umbral de saturación $0{,}8<\rho<1$ (§9.1).
+- **Red completa:** aplicando Little a la red como "caja negra", $\delta=\sum\lambda_i$ y $E[T]=\frac{1}{\delta}\sum_i\lambda_iT_i$.
+- **Regla de la raíz cuadrada** (capacidad total $C$ fija, minimizando $E[T]$ con multiplicadores de Lagrange): $C_i^{opt}=\frac{\lambda_i}{\eta_i}+C(1-\rho)\frac{\sqrt{\lambda_i/\eta_i}}{\sum_j\sqrt{\lambda_j/\eta_j}}$, con $\rho=\frac{1}{C}\sum_j\frac{\lambda_j}{\eta_j}$. Cada enlace recibe lo mínimo para su tráfico más una parte del sobrante proporcional a la raíz de su flujo. Más $C$ da menos retardo, pero más costo.
+
+**Ejemplo** (apunte): $\lambda_1=0{,}33$ mens/s, $1/\eta_1=120$ bits, $C_1=100$ bps → $\eta_1C_1\approx0{,}833$ mens/s, $\rho_1\approx0{,}4$ y $T_1=\frac{1}{0{,}833-0{,}33}\approx2$ s.
+
+(teoria/Asignación de Capacidad de Canales.md; cursada-2025/drive-propio/Resumen de Comunicación de datos - 2do parcial teoría.md)
 
 ---
 
 ## 10. Temas sin preguntas de teoría en los finales relevados
 
-- **Asignación de capacidad de canales**, **OSI / TCP-IP / hardware de redes** y **multiplexado CDM/WDM**: no aparecen en ningún final de teoría disponible (2020–2025). CDM/WDM, colas abiertas y asignación de capacidad sí aparecen en el **2° parcial** (según el *Santo Resumen*) y entran en la práctica del final (problema de colas en 04/04/2025). Para el final de teoría, la prioridad es baja.
+- **Asignación de capacidad de canales**, **OSI / TCP-IP / hardware de redes** y **multiplexado CDM/WDM**: no aparecen en ningún final de teoría disponible (2020–2025). CDM/WDM, colas abiertas y asignación de capacidad sí aparecen en el **2° parcial** (según el *Santo Resumen*) y entran en la práctica del final (problema de colas en 04/04/2025). En la cursada 2025, colas abiertas y asignación de capacidad se tomaron en el 2.º parcial de Medín (M2; ahora en §9.4–9.6). OSI/TCP-IP y CDM/WDM no aparecen en ningún material de 2025 relevado. Para el final de teoría, la prioridad sigue siendo baja.
 
 ---
 
@@ -777,3 +1071,35 @@ Las marcas se leyeron de los PDF (relleno verde o amarillo) y de los escaneos de
 - **"Teoria vieja.md" y FAQ:** no tienen fecha y son del plan viejo. Las conté aparte (columna FAQ), no como finales.
 - **El apunte de Medios de transmisión** está en `fuentes/practica/`, no en `fuentes/teoria/`. La parte de satélites y radioenlace de §8.2 se apoya en él y en el *Santo*.
 - **Ruta 9:** que haya troncales de fibra sobre el corredor Rosario–Cañada de Gómez es contexto local, no está en el apunte. La elección de fibra se justifica igual por el ancho de banda ("gran velocidad" > 100 M → solo FO).
+- **Transpondedor (MC.29):** confirmar con el material de Baró qué valor da (50–100 MHz o 36–50 MHz).
+
+### E. Marcas del compendio MC de Baró (B2)
+De las 44 preguntas, la marca del alumno está **mal en 1**, es **dudosa en 1** y **falta en 1**. Las demás coinciden con el apunte o con conocimiento general sólido.
+1. **VSAT (MC.32), mal:** marcó "Very Small Amplitude Terminals". Es *Very Small **Aperture** Terminal* → "ninguna de las anteriores". El otro resumen del 2.º parcial (`resumenes/2° Parcial/Resumen Parcial 2 (2025).md`) lo corrige igual, y la otra versión de la misma pregunta ("terminales de apertura muy pequeña") el alumno la marcó bien.
+2. **Transpondedor (MC.29), dudosa:** marcó "50 a 100 MHz", que repite en su resumen. Tanenbaum da 36–50 MHz por transpondedor (conocimiento general) y el apunte de la cátedra no da el número. Si Baró lo dio en clase, usá su valor; si no, "36 a 50 MHz".
+3. **"Las ondas por láser" (MC.26), sin marca:** por descarte, "prácticamente se usan solo dentro de la fibra óptica". El otro resumen tampoco la resuelve.
+4. **Ambiguas aunque la marca sea defendible:**
+   - Velocidad en el aire, segunda versión (MC.34): "mayor que en cualquier medio guiado" y "igual a 300.000 km/s" son las dos casi ciertas (en el aire $v\approx c$; estrictamente, $c$ es en el vacío).
+   - Infrarrojo, "se utiliza para transmisión en fibra óptica" (MC.21): la fibra trabaja en infrarrojo cercano, así que no es absurda; la pregunta apunta al infrarrojo inalámbrico.
+   - Microondas, "se propagan unidireccionalmente" (MC.14): son direccionales (haz). La marcada, "λ muy pequeña y frecuencia elevada", es la segura.
+5. **El resumen del mismo alumno ("Resumencirijillo", al final de B2) contradice sus propias marcas:**
+   - "Ley de Snell: ángulos de incidencia y **reflexión**": en el MC marcó **refracción**, que es lo correcto (MC.6).
+   - "Propagación FO: **mayor** que cualquier medio": es falso; en el MC marcó "menor que en el aire", que es lo correcto (MC.12).
+
+### F. Errores en los resúmenes de la cursada 2025 (M1, M2, B3)
+1. **M1, familia de errores:** "se pueden observar solo los errores simples y dobles" → **falso**: son **todos** los errores (§4.4). Es la misma marca errónea de los finales 2020/2021 (Dudas A).
+2. **M1, capacidad:** pone $C=\max H(A)$ como definición general. Solo vale en un canal **transparente**; en general $C=\max I(A,B)$ (§1.6).
+3. **M1, equivocaciones:** escribe $H(A/B)$ y $H(B/A)$ sin el signo menos; así, con $\lg P\le0$, dan negativas. Va $-\sum\sum$ o $\lg\frac{1}{P}$. El apunte tiene la misma errata en una línea y la corrige en la siguiente.
+4. **M1, "código de bloque" en códigos lineales:** lo define como palabras de longitud constante $n$. En codificación de fuente, "código bloque" es otra cosa: cada símbolo va a una secuencia fija, de longitud que puede variar (§3.1). Mismo nombre, dos conceptos; si aparece, aclaralo.
+5. **M1, S/R y dB:** "[S/N] = dB" → la S/N es adimensional (cociente de potencias) y el dB es una forma de expresarla. Además, la ganancia en dB con tensiones o corrientes es $20\log$, no $10\log$ (§dB.2).
+6. **M1, Hamming:** el "método analítico" asigna $i_0,i_1,i_2,i_3$ a las posiciones 3, 5, 6 y 7, lo que da $C_1\oplus i_0\oplus i_1\oplus i_3$, $C_2\oplus i_0\oplus i_2\oplus i_3$ y $C_3\oplus i_1\oplus i_2\oplus i_3$. Pero después copia las ecuaciones del diagrama de Venn ($C_1\oplus i_0\oplus i_1\oplus i_2$, …), que corresponden a otra asignación. Las dos son códigos de Hamming válidos; no las mezcles en un mismo ejercicio.
+7. **M1, distorsión:** "altera la amplitud de la señal". Altera la **forma**: amplitud y fase según la frecuencia (§2.2).
+8. **M2, retardo:** "el tiempo de retardo se define como el tiempo necesario para transmitir el mensaje completo". Eso es solo el límite $\rho\to0$; en general $T_i$ incluye la espera en el buffer. El apunte dice "para $\rho_i<1$", pero el sentido es $\rho_i\ll1$ (§9.6).
+9. **M2, $C(c,u)$:** "probabilidad de que todos los **usuarios** estén ocupados" → son los **servidores**.
+10. **M2, percentil 90 en M/M/1:** escribe $\pi(90)=W\ln(10\rho)$ y $\pi_q(90)=W_q\ln(10\rho)$. Lo correcto es $\pi_q(90)=W\ln(10\rho)$ en la cola y $\pi_w(90)=W\ln10$ en el sistema. El ejemplo del hospital usa bien $\pi_q=W\ln(10\rho)\approx113{,}8$ min, y el apunte lo confirma (146,6 min $=80\ln6{,}25$).
+11. **M2, hospital:** pasa $E[s]=20$ min a "0,3 h" (es $0{,}\overline{3}$ h) y llama $L$ a "pacientes en cola" ($L$ es en el sistema; en cola es $L_q$). Los resultados en minutos están bien.
+12. **M2, ejercicios de asignación:** en el del ISP, $\rho=\frac{150/1230}{5000/1500}\approx0{,}037$ (pone 0,03; la conclusión no cambia). En el del DataCenter, $\rho_1=1{,}2/750=0{,}0016$ (no "0,0016 %"), y la fórmula del retardo está mal escrita: $T_1=\frac{1}{\eta C_1-\lambda_1}=\frac{1}{750-1{,}2}\approx1{,}34$ ms.
+13. **B3, FM:** "se trabaja con $f_p=100$ kHz" → son **100 MHz** (radio FM, 88–108 MHz; el apunte 5 dice 100 MHz).
+14. **B3, PDM/PWM:** "varía solo frecuencia" → varía el **ancho (duración)** del pulso. El mismo resumen lo dice bien más abajo.
+15. **B3, último ejercicio (38 + 2 muestras, 8 bits, 5 kHz):** $T_s=1/10\text{ kHz}=0{,}1$ **ms**, no µs. Entonces $\tau=0{,}1\text{ ms}/320=0{,}3125$ µs y $r=3{,}2$ **Mbps**, no Gbps. En otro ejercicio, "1,136 mHz" es MHz.
+16. **B3, demodulación:** "para demodulación se utiliza ASK" es una frase trunca; no la uses. La demodulación está en §5.1.
