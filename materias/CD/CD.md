@@ -19,6 +19,8 @@
 5. Unidad 5 — Medios de transmisión, multiplexación (CDM, WDM) y elección del medio de acceso
 6. Unidad 6 — Asignación de capacidad de canales y teoría de colas
 7. Unidad 7 — Modelo OSI, TCP/IP y hardware de redes
+8. Unidad 8 — Códigos correctores de error: códigos cíclicos y convolucionales  📌 *(informe 2 de la cursada 2025)*
+9. Unidad 9 — Internet de las cosas (IoT) y seguridad en la transmisión de datos  📌 *(informes 4 y 5 de la cursada 2025)*
 
 **Cómo está armada cada unidad:** Conceptos clave → Desarrollo → Ejercicios resueltos tipo → Dudas / pendientes → Fuentes.
 
@@ -1083,6 +1085,423 @@ Respuesta modelo: la capa física transmite bits puros por un canal de comunicac
 - `fuentes/resumenes/2° Parcial/Resumen Parcial 2 (2025).md` (OSI, TCP/IP, redes)
 - `fuentes/resumenes/El Santo Resumen/el-santo-resumen.md` (Modelo OSI)
 
+### Unidad 8 — Códigos correctores de error: códigos cíclicos y convolucionales
+
+#### Conceptos clave
+- **Capacidad de un código según $d_{min}$** (el informe lo enuncia como condición necesaria y suficiente): detecta hasta k errores ⇔ $d_{min} \ge k+1$; corrige hasta k ⇔ $d_{min} \ge 2k+1$. Corrector de orden 1 ⇔ $d_{min} = 3$ (Hamming (7,4)).
+- **Repetición**: cada binit se manda n veces y se decide por mayoría. Con n = 3 sobre un BSC con p = 0,01: $P_e = 3p^2(1-p) + p^3 \approx 3 \cdot 10^{-4}$, contra $10^{-2}$ sin repetir. Paga con rendimiento: η = 1/3.
+- **Código de bloque**: palabras de longitud fija n; cada palabra depende sólo del bloque de información actual. **Código convolucional**: la salida depende de la entrada actual y de las anteriores (**memoria**). Trabaja sobre flujos continuos.
+- **Código cíclico**: código lineal (de grupo) en el que todo **corrimiento circular** de una palabra del código es otra palabra del código.
+- **Notación polinómica**: la palabra $v = (v_1 \ldots v_n)$ se escribe $v(x) = v_1x^{n-1} + \ldots + v_{n-1}x + v_n$, con el primer dígito como coeficiente de mayor grado, igual que en el informe y en CRC. Aritmética módulo 2: $x^i + x^i = 0$.
+- **Polinomio generador g(x)**: de grado n − m (= cantidad de dígitos de control), **divide a $x^n + 1$**. Toda palabra del código es múltiplo de g(x): $c(x) = q(x)\,g(x)$. Se mantiene la notación de la U3: n = dígitos totales, m = información.
+- **Codificación sistemática**: $c(x) = x^{n-m}\,i(x) + R_{g(x)}\!\left[x^{n-m}\,i(x)\right]$, donde $R_g[\cdot]$ es el resto de dividir por g(x). Quedan la información adelante y el resto como control.
+- **Síndrome**: $s(x) = R_{g(x)}[v'(x)]$. Si s = 0, la palabra es del código; si s ≠ 0, hay error. Es lo mismo que $S = v' \cdot H^T$ de la U3 y también **depende sólo del error**: $R_g[c + e] = R_g[e]$.
+- **CRC**: código cíclico usado sólo para **detectar** (Ethernet usa CRC‑32).
+- **BCH**: cíclicos binarios que corrigen t > 1 errores. **Reed–Solomon**: BCH no binario que trabaja con símbolos de b bits y es bueno contra **ráfagas**.
+- **Convolucional (1 entrada, 2 salidas, K = 3)**: tasa $R = 1/2$, **longitud de restricción** K = entrada actual + 2 de memoria, $2^{K-1} = 4$ estados. Lo definen sus **secuencias generadoras** (ej. $g_1 = 111$, $g_2 = 101$).
+- **Distancia libre $d_{free}$**: peso mínimo de un camino que sale del estado 0 y vuelve a él. Cumple el papel de $d_{min}$: corrige $\lfloor (d_{free}-1)/2 \rfloor$ errores "cercanos".
+- **Viterbi**: decodificación de **máxima verosimilitud** sobre el trellis. Conserva en cada estado el camino sobreviviente de menor distancia acumulada.
+- **Código catastrófico**: entradas que difieren en infinitos bits producen salidas que difieren en pocos bits. Un error finito en el canal causa entonces infinitos errores de información, y por eso se evita.
+
+#### Desarrollo
+
+##### Detectar vs corregir (lo que el informe agrega a la U3)
+- **Detector**: con la redundancia el receptor sabe que hubo error, pero no dónde, y pide **retransmisión**. **Corrector**: con más redundancia deduce qué se transmitió y corrige un número limitado de errores.
+- Usar todas las $2^n$ combinaciones hace imposible detectar. Dejar combinaciones sin usar es condición **necesaria pero no suficiente**: en BCD (10 de 16 combinaciones) 0011 → 0010 no se detecta porque 0010 también es del código.
+- **Regla de decisión**: cuando no se puede retransmitir, la palabra errónea se reemplaza por la palabra del código más cercana, que es la más probable si los errores simples dominan. Corregir así también puede introducir un error nuevo.
+- Repetición con n = 2: llega "0 … 1" y es imposible decidir. Con n = 3 se decide por mayoría. Las probabilidades del ejemplo BSC: sin error $\bar p^3$, un error $3p\bar p^2$, dos errores $3p^2\bar p$, tres errores $p^3$. Se decodifica mal con 2 o 3 errores.
+
+##### Códigos cíclicos
+**Definición y ejemplo (informe).** Si $a = 100100$ pertenece a un código cíclico, también pertenecen su corrimiento a izquierda 001001 y a derecha 010010. Un corrimiento a izquierda equivale a multiplicar por x módulo $x^n + 1$, porque $x^n \equiv 1$ (conocimiento general). Por eso las palabras son los múltiplos de g(x) y g(x) tiene que dividir a $x^n + 1$.
+
+**Matrices (conocimiento general, enlaza con la U3).**
+- **G no sistemática**: sus m filas son g(x) y sus corrimientos $x\,g(x), \ldots, x^{m-1}g(x)$. Para g = 1011 y n = 7: 1011000, 0101100, 0010110, 0001011.
+- **G sistemática**: la fila i es $x^{n-i} + R_g[x^{n-i}]$, con i = 1 … m (información ‖ resto).
+- **H**: con $h(x) = (x^n + 1)/g(x)$ (polinomio de paridad), las filas de H son los corrimientos de h(x) leído al revés. También sirve tomar como $H^T$ la tabla de restos $R_g[x^{n-i}]$, porque el resto es lineal y su núcleo es el código: es otra base de V'.
+- **Atajo de la U3**: el resto de un error simple en la posición i es la **fila i de $H^T$**. Si todos los restos de $x^{n-1}, \ldots, x^0$ son no nulos y distintos, el código corrige error simple.
+
+**Codificación sistemática por división (el procedimiento del informe, en binario).**
+1. Se multiplica la información por $x^{n-m}$: se agregan n − m ceros a la derecha.
+2. Se divide por g(x) en módulo 2 (restas = XOR, sin acarreo) y se toma el resto $r(x)$, de grado < n − m.
+3. $c(x) = x^{n-m}i(x) + r(x)$, porque en binario "− r" es "+ r". La palabra resultante es múltiplo de g(x).
+
+El informe llama "síndrome" a ese resto. Es correcto si se mira $x^{n-m}i(x)$ como una palabra recibida, pero en la codificación conviene llamarlo **resto o control** para no mezclarlo con el síndrome de recepción.
+
+**Ejemplo del informe en $\mathbb{F}_3$ (verificado).** Es un código [8,2] con $g(x) = (x^2+1)(x^2+x+2)(x^2+2x+2) = x^6 + x^4 + x^2 + 1$, factores de $x^8 - 1 = (x+1)(x+2)(x^2+1)(x^2+x+2)(x^2+2x+2)$. Codifica los 9 mensajes de 2 símbolos: 10 → 10101010, 12 → 12121212, 22 → 22222222, etc. Los restos y las palabras del informe están bien. Sólo describe mal cómo armó g: dice "todos menos uno de los factores" y en realidad dejó afuera dos, $(x+1)$ y $(x+2)$. El ejemplo sirve para ver la mecánica; en el final se trabaja en binario.
+
+**Recepción.** Se divide lo recibido $v'(x)$ por g(x). Resto 0: correcta, o con un error no detectable (un error que es múltiplo de g(x), es decir, igual a una palabra del código). Resto ≠ 0: hay error, y con la tabla síndrome → patrón de error se corrige, igual que en Hamming.
+
+**Implementación (conocimiento general).** La división se hace con un **registro de desplazamiento con realimentación** de n − m celdas y compuertas XOR en las posiciones de los coeficientes de g(x). Por eso los cíclicos son baratos en hardware y "fáciles de decodificar", como dice el informe.
+
+**CRC: propiedades de detección (conocimiento general).** Con g(x) de grado r:
+- detecta todo error simple si g tiene más de un término;
+- detecta todo error de cantidad impar de bits si $(x+1)$ divide a g;
+- detecta toda **ráfaga de longitud ≤ r**;
+- no detecta los errores múltiplos de g(x).
+
+CRC‑32 de Ethernet: r = 32.
+
+**BCH y Reed–Solomon.**
+
+| | BCH (binario) | Reed–Solomon |
+|---|---|---|
+| Alfabeto | bits | símbolos de b bits ($\mathbb{F}_{2^b}$) |
+| Parámetros (conocimiento general) | $n = 2^q - 1$, $n - m \le q\,t$, $d_{min} \ge 2t+1$ | $n = 2^b - 1$ símbolos, corrige $t = (n-m)/2$ símbolos |
+| Fuerte en | errores aleatorios múltiples, bloques de pocos cientos de bits | **ráfagas**: un símbolo errado cubre hasta b bits errados |
+| Usos | — | CD/DVD, DVB, QR, código exterior junto con un convolucional |
+
+Los dos son sistemáticos y corrigen más de un error, a diferencia de Hamming.
+
+##### Códigos convolucionales
+**Idea.** Son de 1955 (Elias, conocimiento general). Son lineales como los de bloque, pero el codificador es un circuito secuencial con memoria: un registro de desplazamiento y sumadores módulo 2. Cada bit de entrada produce n bits de salida que dependen de él y de los K − 1 bits anteriores. Las salidas se **multiplexan** (se intercalan) en un único flujo.
+
+**Codificador de referencia (R = 1/2, K = 3, $g_1 = 111$, $g_2 = 101$, el clásico "(7,5)" en octal):**
+$$v_1(t) = u_t \oplus u_{t-1} \oplus u_{t-2}, \qquad v_2(t) = u_t \oplus u_{t-2}$$
+- **Respuesta impulsiva**: es la salida ante u = 1 0 0 (el 1 más los ceros de vaciado): 11 10 11. Se obtiene intercalando bit a bit $g_1$ y $g_2$.
+- **Función de transferencia**: como es un sistema LTI discreto, $v = u * h$ (convolución, de ahí el nombre). Con la transformada z, $H_1(z) = 1 + z^{-1} + z^{-2}$ y $H_2(z) = 1 + z^{-2}$. Matricialmente, $v = u\,G$.
+- El informe usa el mismo código con el orden invertido ($g_1 = 101$, $g_2 = 111$). Sale el mismo código con los dos bits de cada par intercambiados: respuesta impulsiva 11 01 11; la entrada 1100 da 11 10 10 11, verificado.
+
+**Representaciones.**
+1. **Diagrama de conexiones**: registro, sumadores y conmutador de salida.
+2. **Diagrama de estados**: el estado es el contenido de la memoria, $(u_{t-1}u_{t-2})$; cada flecha se rotula "entrada/salida".
+3. **Diagrama de Trellis**: el diagrama de estados desplegado en el tiempo. Cada columna repite los $2^{K-1}$ estados y codificar es recorrer un camino.
+
+Además existe el **árbol** (conocimiento general). El *puncturing* no es una representación (ver Dudas).
+
+**Tabla de transiciones (equivale al diagrama de estados; el trellis repite esta tabla en cada instante):**
+
+| Estado actual $u_{t-1}u_{t-2}$ | Entrada 0 → próximo / salida | Entrada 1 → próximo / salida |
+|---|---|---|
+| 00 | 00 / 00 | 10 / 11 |
+| 01 | 00 / 11 | 10 / 00 |
+| 10 | 01 / 10 | 11 / 01 |
+| 11 | 01 / 01 | 11 / 10 |
+
+**Distancia libre.** El camino 00 → 10 → 01 → 00 (entrada 100) da 11 10 11, de peso 5, y ningún otro camino que vuelva a 00 pesa menos (verificado por enumeración). Entonces $d_{free} = 5$ y el código corrige 2 errores en la ventana de unas pocas longitudes de restricción.
+
+**Viterbi (decisión dura).**
+1. En cada instante se calcula, para cada transición, la distancia de Hamming entre el par recibido y la salida de la rama: es la métrica de rama.
+2. A cada estado llegan dos caminos. Se suma la métrica acumulada y se queda el **sobreviviente** de menor métrica; el otro se descarta.
+3. Al final, con la cola de K − 1 ceros que devuelve el codificador a 00, se toma el camino que termina en 00 y se lee la entrada de sus ramas.
+
+Con **decisión blanda** se usa la distancia euclidiana sobre las muestras sin cuantizar, y rinde mejor. La secuencia de estados es una cadena de Markov oculta: se observan las salidas, no los estados.
+
+**Probabilidad de error (informe).** Para p chico, con decisión dura:
+$$P_{eb} \lesssim \frac{1}{k}\,(2\sqrt{p})^{d_{free}}$$
+Para p = 10⁻³ y $d_{free} = 5$: $(2\sqrt{10^{-3}})^5 = 32 \cdot 10^{-7{,}5} \approx 1{,}01 \cdot 10^{-6}$ (verificado). Un BSC malo pasa a ser utilizable a costa de duplicar la velocidad binaria, porque R = 1/2.
+
+**Códigos catastróficos (ejemplo del informe, verificado).** Con $g_1 = 110$ y $g_2 = 011$, los lazos de los estados 00 y 11 emiten 00. La entrada 111…1100 produce 10 01 00 00 … 00 10 01, a distancia 4 de la salida de la entrada nula, mientras que las entradas difieren en infinitos bits. Criterio general (conocimiento general): el código es catastrófico si $\text{mcd}(g_1(D), g_2(D)) \ne D^\ell$. Acá $g_1 = 1 + D$ y $g_2 = D(1 + D)$, que tienen el factor común $1 + D$.
+
+**Puncturing.** Se parte de un código "madre" de tasa $1/n$ y se eliminan bits de salida según una matriz de perforación conocida por los dos extremos, para obtener tasas mayores (2/3, 3/4, …; ISDB‑T). El receptor rellena los huecos con bits "dummy" y decodifica con el mismo Viterbi del código madre.
+
+**Aplicaciones.** Enlaces de radio y celulares (GSM), satélite y espacio profundo, DVB‑S/C/T, módems V.32bis/V.34, ADSL2+ y SHDSL. Es habitual la **concatenación**: RS como código exterior, contra ráfagas, y convolucional como código interior. La **TCM** (modulación codificada Trellis) combina el código con la modulación para recuperar el margen que se pierde al densificar la constelación (vínculo con la U4).
+
+**Bloque vs convolucional.**
+
+| | Cíclicos / bloque | Convolucionales |
+|---|---|---|
+| Unidad | bloque de m → n dígitos | flujo continuo, R = k/n |
+| Memoria | no | sí (K − 1 bits) |
+| Métrica de protección | $d_{min}$ | $d_{free}$ |
+| Decodificación | síndrome (resto de dividir por g) | Viterbi sobre el trellis |
+| Típico | detección (CRC), ráfagas (RS) | corrección en tiempo real en canales ruidosos |
+
+#### Ejercicios resueltos tipo
+
+**Ejercicio 1: cíclico (7,4) sistemático, $g(x) = x^3 + x + 1$ (1011).** Codificar i = 1001, verificar que es cíclico y corregir un error simple.
+1. $x^3\,i(x) = x^6 + x^3$ → 1001**000**.
+2. División módulo 2:
+```
+1001000
+1011           (XOR en las posiciones del 1 líder)
+-------
+0010000
+  1011
+-------
+0000110   → resto r = 110  (x² + x)
+```
+3. c = 1001 ‖ 110 = **1001110**, es decir, $c(x) = x^6 + x^3 + x^2 + x$. Verificación: $R_g[c] = 000$ ✓.
+4. Es cíclico: el corrimiento 0011101 también es palabra del código. Las 16 palabras cumplen la propiedad, con $d_{min} = 3$ (verificado).
+5. Tabla de síndromes (resto de cada error simple = fila de $H^T$):
+
+| Posición | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
+|---|---|---|---|---|---|---|---|
+| Error | $x^6$ | $x^5$ | $x^4$ | $x^3$ | $x^2$ | $x$ | 1 |
+| Síndrome | 101 | 111 | 110 | 011 | 100 | 010 | 001 |
+
+Los 7 síndromes son no nulos y distintos, y $2^{3} - 1 = 7 \ge 7$: corrige error simple en todos los dígitos. Es un Hamming (7,4) en forma cíclica.
+
+6. Llega 1011110 (error en la posición 3). $R_g = 110$ → posición 3 → se invierte → 1001110 ✓.
+
+**Ejercicio 2: CRC con $g(x) = x^4 + x + 1$ (10011).** Mensaje M = 1101011111 (es el ejemplo clásico de Tanenbaum).
+1. Se agregan 4 ceros: 1101011111**0000**. Dividido por 10011, el resto es **0010**.
+2. Trama transmitida: **11010111110010**. En recepción, el resto da 0000 ✓.
+3. Una ráfaga de 3 bits (posiciones 4 a 6) da 11001011110010, con resto 1000 ≠ 0: detectada. Tiene longitud ≤ r = 4, así que la detección está garantizada.
+4. Con un error $e(x) = x^4 g(x)$ (bits 100110000 desde la posición 6) llega 11010011000010, con resto **0000**: **no se detecta**, porque el error es múltiplo de g.
+
+**Ejercicio 3: convolucional R = 1/2, K = 3, $g_1 = 111$, $g_2 = 101$.** Codificar u = 1011 y decodificar con Viterbi una recepción con 2 errores.
+1. Se agrega la cola 00: u = 1011**00**. Usando la tabla de transiciones, los estados son 00 → 10 → 01 → 10 → 11 → 01 → 00.
+2. Salida: **11 10 00 01 01 11**.
+3. Se invierten los bits 2 y 7 del flujo. Llega r = **10 10 00 11 01 11**.
+4. Métricas acumuladas de los sobrevivientes ("—" = estado todavía inalcanzable):
+
+| t | r | 00 | 01 | 10 | 11 |
+|---|---|---|---|---|---|
+| 1 | 10 | 1 | — | 1 | — |
+| 2 | 10 | 2 | **1** | 2 | 3 |
+| 3 | 00 | 2 | 3 | **1** | 3 |
+| 4 | 11 | 3 | 2 | 2 | **2** |
+| 5 | 01 | 3 | **2** | 3 | 2 |
+| 6 | 11 | **2** | 3 | 3 | 3 |
+
+5. Termina en 00 con métrica 2. El trace-back da los estados 00‑10‑01‑10‑11‑01‑00 → û = 1011 00 ✓. Se corrigieron 2 errores, consistente con $d_{free} = 5$. No hubo empates (verificado con un decodificador en Python).
+
+**Ejercicio 4 (`Ejercitación Códigos extra`; queda resuelto el pendiente de la U3).** $g(x) = 1 + x + x^2$, n = 6. Pide G, H y si se detectan errores simples.
+1. $x^6 + 1 = (x^3 + 1)^2 = (x+1)^2(x^2+x+1)^2$, así que g divide a $x^6 + 1$ ✓. Grado 2 → n − m = 2, **m = 4**: hay 16 palabras.
+2. **G** (corrimientos): 111000, 011100, 001110, 000111. La forma sistemática es 100011, 010010, 001001, 000111, y genera el mismo código.
+3. $h(x) = (x^6+1)/g(x) = x^4 + x^3 + x + 1$ (11011, simétrico). **H** = {110110, 011011}. Se verifica $G H^T = 0$ y que V' = {000000, 011011, 101101, 110110}.
+4. Filas de $H^T$ (síndrome de cada error simple): x₁ → 10, x₂ → 11, x₃ → 01, x₄ → 10, x₅ → 11, x₆ → 01.
+5. Conclusión: ninguna fila es nula, así que **se detecta todo error simple**, en información y en control. Las filas se repiten de a pares (x₁/x₄, x₂/x₅, x₃/x₆), así que **no se corrige**. Además $2^{2} - 1 = 3 < 6$ y $d_{min} = 2$: por ejemplo, 001001 ($x^3 + 1$) es palabra del código. Todo verificado enumerando las 64 palabras de 6 dígitos.
+
+#### Dudas / pendientes
+- **Errores del informe N° 2** (verificados):
+  - Cubo de 3 bits: dice que de 100 a 011 "hay que recorrer necesariamente **4** aristas". Son **3**, que es la distancia máxima en 3 bits.
+  - Presenta Hamming(7,4) como "palabra de 7 binits con **4** bits de paridad". Son **3** de paridad y 4 de información, como el mismo informe dice después.
+  - Combinaciones por mayoría: escribe $\frac{5!}{3!(3-5)!}$, que debe ser $(5-3)!$. La lista de 10 palabras repite 01011 y le falta **01110**.
+  - Paridad par: "bit que es 1 si la palabra es par" está al revés. Con paridad par, $i_p = 1$ cuando la información tiene cantidad **impar** de unos.
+  - Llama "de peso constante" al código de **igual peso** (tantos unos como ceros). Igual peso es un caso particular de peso constante. "Por mayoría" lo describe de forma vaga; la U3 lo define como peso fijo.
+  - Dice que Hamming(7,4) corrige error simple "y detecta errores de dos bits". Con $d_{min} = 3$ se puede **o** corregir 1 **o** detectar 2, no las dos cosas a la vez. Hacerlo a la vez exige el Hamming extendido (8,4) (conocimiento general).
+  - BCH: la condición está mal transcripta ("t < (2m − 1)/2"; es $t < (2^m - 1)/2$) y faltan los parámetros. Los de la tabla son de conocimiento general.
+  - RS: "es posible detectar y corregir sólo un símbolo de error" es falso en general. Un RS corrige $(n-m)/2$ símbolos; por ejemplo, RS(255,223) corrige 16.
+  - Notación convolucional inconsistente: primero usa (n, m, k) con n = entradas y m = salidas, y después [2,1,3] con 2 = salidas, 1 = entrada, 3 = longitud de restricción. La literatura usa (n, k, K) con n = salidas. Las etiquetas de estado "$S_{2^{(k-1)^n}-1}$" deberían ser $2^{(K-1)\cdot k}$ estados.
+  - Pone el **puncturing** entre las "representaciones gráficas" (y lo repite en la pregunta 8 del anexo). Es una técnica para subir la tasa; la tercera representación es el **Trellis** (o el árbol).
+  - Asocia la distancia euclidiana/Hamming con canales "paso banda / banda base". La distinción real es decisión blanda vs dura.
+  - "Corrige $(d_{free}-1)/2$ errores por cada n·L bits" es aproximado: la capacidad vale para errores suficientemente separados, no para una ventana rígida de 6 bits.
+- **Ejemplo de Viterbi del informe** (r = 01 10 11 11 01 00 01): la solución está sólo en una imagen. Recalculado por enumeración con los generadores que declara ($g_1 = 101$, $g_2 = 111$), el camino de máxima verosimilitud es û = 11000 (+00), con 4 discrepancias, que es más de lo que garantiza $d_{free} = 5$. Con el orden invertido (111/101) da 10011 (+00) con 3. No se puede saber cuál muestra la figura. Para estudiar, usar el Ejercicio 3.
+- **Notación**: en la U3, m = información y n = total. El informe usa (n, r), k y m indistintamente. En el final, aclarar la notación al empezar.
+- Conocimiento general agregado: G/H desde g y h, LFSR, propiedades de CRC, parámetros BCH/RS, criterio del mcd, árbol y tabla de transiciones.
+- ⚠️ No hay apunte de la cátedra sobre cíclicos y convolucionales en `fuentes/teoria/`. Todo sale del informe del grupo y de conocimiento general. Confirmar con Medín qué nivel piden (¿división polinómica y Viterbi a mano o sólo conceptos?).
+
+#### Fuentes
+- `fuentes/cursada-2025/drive-propio/Tps Medin/INFORME N2 TEORIA- CÓDIGOS CORRECTORES DE ERROR- Códigos Cíclicos – Códigos Convolucionales.md`, incluido el anexo de autoevaluación de 10 preguntas.
+- `fuentes/practica/Ejercitación Códigos extra.md` (ejercicio del código cíclico con $g(x) = 1 + x + x^2$).
+- Ejemplo de CRC: Tanenbaum, *Redes de computadoras* (conocimiento general).
+
+### Unidad 9 — Internet de las cosas (IoT) y seguridad en la transmisión de datos
+
+#### Conceptos clave
+- **IoT**: objetos con sensores, software y conectividad que recopilan y comparten datos por la red de forma autónoma. Origen: Kevin Ashton, RFID en la cadena de suministro de Procter & Gamble (1999, año: conocimiento general).
+- **Impulsores**: conectividad ubicua y barata, adopción de IP, más cómputo con menos consumo, miniaturización, analítica y nube.
+- **Arquitectura**: percepción → red → aplicación (el modelo mínimo; hay de 4, 5 y 7 capas).
+- **Servicios de seguridad**: confidencialidad, integridad, autenticación y no repudio (los 4 de la PKI), más disponibilidad.
+- **Criptografía** (protocolos, algoritmos y hashes) ⊃ **cifrado** (texto plano ↔ cifrado con clave).
+- **Simétrica**: un secreto compartido (DES, AES). **Asimétrica**: un par pública/privada; lo que cifra una lo descifra la otra.
+- **Hash**: resumen de longitud fija. **MAC**: hash con clave compartida. **Firma digital**: hash cifrado con la privada del emisor.
+- **PKI / X.509 / AC**: el certificado asocia una clave pública con una identidad y lo firma una Autoridad de Certificación. **TLS**: canal seguro (HTTPS). **VPN**: túnel cifrado sobre una red pública.
+
+#### Desarrollo
+
+##### A. Internet de las cosas
+
+| Rama de aplicación | Ejemplos del informe |
+|---|---|
+| Consumo | domótica (HomeKit, Echo, Home Assistant), vestibles, asistencia a adultos mayores |
+| Comercial | IoMT médica (monitoreo remoto, camas inteligentes), transporte (telepeaje, flotas) |
+| Industrial (IIoT) | agricultura de precisión, manufactura (mantenimiento predictivo), marítima (Sigfox) |
+| Infraestructura | ciudad inteligente (Songdo), red eléctrica inteligente / AMI, iluminación remota |
+| Militar | reconocimiento y vigilancia (radar Xaver 1000) |
+
+| Capa | Función |
+|---|---|
+| Percepción | sensores (temperatura, humo, presencia) y actuadores |
+| Red | lleva los datos a Internet por una pasarela (Wi‑Fi, celular o cableada) |
+| Aplicación | servicios: hogar, ciudad o fábrica inteligente |
+
+**Tecnologías de comunicación.** Datos del informe N° 4; *(cg)* = conocimiento general.
+
+| Tecnología | Banda | Alcance | Velocidad | Rasgo |
+|---|---|---|---|---|
+| RFID | LF/HF/UHF *(cg)* | cm–m | baja | tag (chip + antena) + lector + host; anticolisión |
+| NFC | 13,56 MHz | pocos cm | ≤ 424 kbit/s | sin emparejamiento; tags pasivos; pagos |
+| BLE | 2,4 GHz | ~10 m | ~1,4 Mbps (LE 2M) | punto a punto, broadcast, malla; años con una pila |
+| Zigbee | 2,4 GHz | 75–100 m en interiores | ≤ 250 kbps | **malla** con coordinador/router/dispositivo final; 65 000 nodos; AES‑128 |
+| Z‑Wave | < 1 GHz | 100 m | 40–100 kbps | malla propietaria; 232 nodos, 4 saltos |
+| Wi‑Fi 6 | 2,4/5/6 GHz | decenas de m | alta | TWT: despierta sólo para recibir |
+| LoRaWAN / Sigfox / NB‑IoT *(cg)* | sub‑GHz / celular | km | kbps o menos | LPWAN; LoRaWAN cifra con AES (informe N° 5) |
+
+**Protocolos de aplicación** (la seguridad es del informe N° 5; el resto *(cg)*):
+
+| | MQTT | CoAP |
+|---|---|---|
+| Modelo | publicación/suscripción vía *broker* | cliente/servidor REST |
+| Transporte | TCP | UDP |
+| Seguridad | no trae; **TLS** + usuario/contraseña o certificados | **DTLS** |
+
+**Sistemas embebidos.** Hardware y software dedicados a una función, con recursos limitados, bajo costo y bajo consumo. Componentes: microcontrolador (CPU + RAM + ROM + periféricos), E/S, sensores, actuadores, PCB, SO y aplicación. **Arduino**: placa libre con microcontrolador, para prototipar. **Raspberry Pi**: una computadora completa con GNU/Linux.
+
+**Cloud.**
+- Relación con el IoT: el IoT genera volúmenes masivos de datos y la nube los almacena y procesa de forma escalable y bajo demanda.
+- Modelos de servicio: **SaaS** (la aplicación; capa alta), **PaaS** (la plataforma de desarrollo) e **IaaS** (servidores, disco y red; capa baja).
+- Despliegue: pública, privada, híbrida y comunitaria.
+- Contras: depende de la conexión y los datos quedan fuera del control del usuario.
+- **Edge computing**: procesar cerca de la fuente, con menos latencia y menos tráfico.
+
+**Analítica.** Bodega de datos, dashboards, alertas y KPIs. Permite decidir en tiempo real y anticiparse a los problemas (mantenimiento predictivo), con cuestiones éticas de consentimiento.
+
+**Internet vs Web.** Internet es la red física que transporta los datos; la Web es una capa de aplicación encima. Fases de la Web: investigación → *brochureware* → transaccional → social. Siguiendo a Evans (Cisco), el IoT sería "la primera evolución real de Internet".
+
+**Retos.**
+- **IPv6**: direcciones para miles de millones de sensores, con una coexistencia con IPv4 costosa que no da seguridad por sí sola.
+- **Energía**: sensores autosuficientes (piezoeléctricos, solares, eólicos).
+- **Estándares e interoperabilidad**.
+- **Disponibilidad**.
+- **Almacenamiento y procesamiento** (big data, IA).
+- **Seguridad y privacidad**.
+
+##### B. Seguridad en la transmisión de datos
+
+| Servicio | Mecanismo |
+|---|---|
+| Confidencialidad | cifrado (simétrico para los datos) |
+| Integridad | hash / MAC |
+| Autenticación | certificados, desafío‑respuesta, MAC |
+| No repudio | **firma digital**; un MAC no alcanza porque la clave es compartida *(cg)* |
+
+| | Simétrica | Asimétrica |
+|---|---|---|
+| Claves | un secreto compartido | par pública/privada |
+| Velocidad | alta | lenta *(cg)* |
+| Problema | **distribuir la clave** | saber que la pública es de quien dice ser → PKI |
+| Ejemplos | DES (56 bits, inseguro *(cg)*), AES | RSA (PKCS#1), curvas elípticas *(cg)* |
+| Uso | cifrar los datos | cifrar con la **pública del destinatario**; firmar con la **privada del emisor** |
+
+**Sobre digital (esquema híbrido).** Los datos se cifran con una clave simétrica y esa clave se cifra con la pública de cada destinatario: una copia de los datos y n copias de la clave. Es lo que hace TLS. El informe recomienda **dos pares de claves por usuario**: uno de firma, sin copia, y uno de cifrado, con respaldo, porque si se pierde la privada de cifrado lo cifrado no se recupera.
+
+**Hash.** Propiedades *(cg)*: longitud fija, unidireccional, resistente a colisiones.
+
+| Algoritmo | Salida | Estado |
+|---|---|---|
+| MD5 (1992) | 128 bits | colisiones conocidas → no usar |
+| SHA‑1 (1995) | 160 bits | vulnerable |
+| SHA‑2 (2001) | 224–512 bits | seguro |
+| RIPEMD‑160 | 160 bits | se usa en Bitcoin |
+
+Usos:
+- contraseñas guardadas hasheadas;
+- **checksums** de descargas (integridad);
+- **blockchain**: cada bloque guarda el hash del anterior, así que alterar uno obliga a rehacer todos los siguientes; la prueba de trabajo y la mayoría de los nodos lo impiden.
+
+Vínculo con la U8 *(cg)*: un **CRC** detecta errores accidentales, pero no manipulación, porque cualquiera lo recalcula. Para eso hace falta un MAC o una firma.
+
+**MAC**: CBC‑MAC (último bloque de un cifrado CBC), **HMAC** (hash + clave; HMAC‑SHA‑256) y UMAC (hash universal).
+
+**PBKDF** (lentos a propósito, contra la fuerza bruta en GPU): PBKDF2 (itera un hash), bcrypt (Blowfish), scrypt (mucha RAM) y Argon2 (ganador de la Password Hashing Competition).
+
+**Firma digital.**
+1. El emisor calcula h = hash(M), cifra h con su privada y envía M + firma.
+2. El receptor recalcula hash(M), descifra la firma con la pública del emisor y compara.
+3. Si coinciden, quedan verificados el origen y la integridad.
+
+**Desafío‑respuesta.** A manda un desafío; B lo devuelve cifrado con su privada; si A, al descifrarlo con la pública de B, recupera el desafío, B queda autenticado.
+
+**PKI.**
+- **Certificado X.509**: sujeto (identificado por un **DN** único), su clave pública, la AC emisora y la validez, todo **firmado por la AC**.
+- **Componentes**:
+  - **Documento de prácticas de certificación**: público; rige el ciclo de vida.
+  - **AC**: firma certificados y **CRL**. Su privada está en un **HSM**, en una red aislada; la AC raíz es la única **autofirmada**.
+  - **Autoridad de Registro**: es la interfaz con el exterior; verifica la identidad y pide la emisión o la revocación.
+  - **Directorio**: LDAP sobre SSL/TLS.
+- **Confianza**: se instala el certificado de la AC y con él se verifican las firmas (las AC raíz de los navegadores).
+- **PKCS**: #1 = RSA, #7 = mensajes, #11 = dispositivos criptográficos.
+
+**SSL/TLS.**
+- **Historia**: Netscape creó SSL en 1994 (la 1.0 no se publicó; siguieron 2.0 y 3.0). TLS deriva de SSL 3.0. El RFC 7568 (2015) declaró obsoleto SSL 3.0. TLS 1.3: RFC 8446, **2018**.
+- **Qué protege**: los datos **en tránsito**, no en los extremos.
+- **Handshake** (simplificado):
+  1. El cliente ofrece versiones y suites de cifrado.
+  2. El servidor elige una y manda su **certificado**, que contiene su clave pública.
+  3. El cliente lo valida contra las AC en las que confía y genera el secreto. En TLS ≤ 1.2 con RSA lo cifra con la pública del servidor.
+  4. Los dos derivan el **secreto maestro** y las claves de sesión simétricas.
+  5. Intercambian *Finished* cifrados; desde ahí, datos cifrados con MAC/AEAD.
+- **TLS 1.3** *(cg)*: sólo (EC)DHE, con secreto hacia adelante; 1 RTT; el certificado va cifrado.
+
+**VPN.**
+- Túnel cifrado **cliente VPN ↔ servidor VPN** sobre Internet; red virtual (enlaces lógicos) y privada.
+- Usos: acceso remoto, teletrabajo, unir sedes sin enlaces dedicados.
+- Protocolos: PPTP (obsoleto *(cg)*), L2TP (encapsula; cifra con IPsec) e **IPsec** (autentica y cifra paquetes IP, gestiona claves); *(cg)* OpenVPN y WireGuard.
+- Seguridad: autenticación fuerte y chequeo del estado del equipo remoto.
+
+**Seguridad en IoT.**
+- Por qué es débil: los dispositivos priorizan la función, tienen poca CPU y memoria, hay muchísimos (gran superficie de ataque) y suelen no tener cifrado ni autenticación.
+- Amenazas: MitM, suplantación, manipulación de comandos, DDoS.
+- Protocolos: MQTT+TLS, CoAP+DTLS, LoRaWAN (AES), Zigbee (AES‑128 y autenticación mutua).
+
+**Man in the Middle.**
+- Fases: intercepción (Wi‑Fi pública o falsa) → lectura y modificación si el tráfico no va cifrado → suplantación.
+- Prevención según el informe: desconfiar del Wi‑Fi, instalar software de fuentes conocidas y usar antivirus (detecta el envenenamiento ARP).
+- Defensa de fondo *(cg)*: **TLS con validación de certificados**.
+
+**Metadatos** *(cg; el título del informe los nombra, pero no los desarrolla)*:
+- TLS oculta el contenido, pero no las IPs, puertos, tamaños y tiempos, ni el nombre del sitio en el SNI (salvo ECH).
+- Una VPN oculta el destino al ISP, pero no al proveedor de la VPN.
+- Para ocultar quién habla con quién hace falta algo como Tor.
+
+#### Preguntas tipo
+Respuestas cortas, a partir de los anexos de autoevaluación de los informes N° 4 y N° 5.
+
+**IoT**
+1. *¿Concepto básico de IoT?* Interconexión de objetos cotidianos por la red, que recopilan y comparten datos de forma autónoma.
+2. *¿Ramas de aplicación?* Consumo, comercial, industrial, infraestructura y militar.
+3. *¿Diferencia entre Internet y la Web?* Internet es la red de routers y enlaces que transporta datos. La Web es una capa de aplicación encima, que hace accesibles esos datos.
+4. *¿Por qué IPv6 en IoT?* El pool de IPv4 se agotó y cada sensor necesita una dirección única. IPv6 agrega espacio de direcciones casi ilimitado y autoconfiguración.
+5. *¿Desafío energético?* Que los sensores sean autosuficientes (vibración, sol, viento), porque cambiar pilas en miles de dispositivos no escala.
+6. *¿Características de un sistema embebido?* Función específica, sensores y actuadores, recursos limitados, tamaño chico, bajo costo y bajo consumo.
+7. *¿Importancia de Arduino?* Es una plataforma abierta y barata para prototipar dispositivos que leen sensores, procesan y se comunican, con mucha comunidad y documentación.
+8. *¿Relación cloud–IoT?* El IoT genera volúmenes masivos de datos y la nube los almacena y procesa de forma escalable y accesible bajo demanda.
+9. *¿Fases de la Web?* Investigación → brochureware → transaccional → social.
+10. *¿Qué es RFID y cómo se compone?* Identificación por radiofrecuencia con un chip y antena en lugar de un código impreso. Se compone de tags (transponders), lectores/escritores con antena y un host con software.
+
+**Seguridad**
+1. *¿Criptografía vs cifrado?* La criptografía es el campo (protocolos, algoritmos, hashes para proteger mensajes). El cifrado es la operación de pasar de texto plano a cifrado y volver con la clave.
+2. *¿Cuándo simétrica y cuándo asimétrica?* Simétrica para el volumen de datos, por velocidad. Asimétrica para intercambiar claves y para firmar, porque no exige compartir la privada. En la práctica se combinan (sobre digital, TLS).
+3. *¿Desafío‑respuesta?* Se manda un desafío y el otro lo devuelve cifrado con su privada. Si al descifrarlo con su pública aparece el desafío original, queda identificado.
+4. *¿Qué es un hash y para qué sirve?* Un resumen de longitud fija. Sirve para verificar integridad y, cifrado con la privada del emisor, es la firma digital.
+5. *¿Qué es un MAC y qué tipos hay?* Un hash con clave compartida que da integridad y autenticidad. Tipos: CBC‑MAC, HMAC y UMAC.
+6. *¿PBKDF comunes?* PBKDF2, bcrypt, scrypt y Argon2.
+7. *¿Dos usos del hashing?* Checksums de descargas y blockchain (además, almacenar contraseñas).
+8. *¿Qué es una PKI?* El conjunto de hardware, software, personas, políticas y procedimientos para crear, gestionar, distribuir y revocar certificados de clave pública.
+9. *¿Los 4 aspectos que aborda la PKI?* Confidencialidad, autenticación, integridad y no repudio.
+10. *¿Por qué HTTP no es seguro y qué protocolos lo resuelven?* Viaja en texto plano y se puede interceptar. SSL y su sucesor TLS lo resuelven (HTTPS).
+
+#### Dudas / pendientes
+- **Errores del informe N° 4**:
+  - Arduino: "todas son AVR de Atmel" es falso. Due usa ARM SAM3X, Nano 33 BLE usa nRF52840 y Uno R4 usa Renesas RA4M1.
+  - El agotamiento de IPv4 en IANA fue el **3/2/2011**, no en "febrero de 2010".
+  - "25 billones" de dispositivos y "4–5 trillones" de dólares son calcos del inglés: son **miles de millones** y **billones**.
+  - "Wi‑Fi 6, la última versión": ya existe Wi‑Fi 7.
+  - Zigbee: en 2,4 GHz son 250 kbps; 20 y 40 kbps corresponden a 868 y 915 MHz.
+  - Usa "IoMT" para el IoT médico y también para el militar (el militar suele llamarse IoBT).
+  - "Facebook = nube comunitaria" y "AWS = nube híbrida" son ejemplos dudosos: AWS es pública.
+  - La "historia de los embebidos" (ferias de 1934 y 1938) es historia de la domótica.
+  - Dice que la capa de aplicación "garantiza confidencialidad e integridad" y que la de red "digitaliza". La seguridad atraviesa todas las capas y la conversión analógico-digital ocurre en la percepción.
+- **Errores del informe N° 5**:
+  - TLS 1.3 es de **2018** (RFC 8446), no de 2020.
+  - **NAT** no es un protocolo de VPN y no "asigna IPs dinámicas" (eso es DHCP).
+  - Bajo "vulnerabilidades de SSL" lista ventajas de TLS. Vulnerabilidades reales *(cg)*: POODLE, BEAST y Heartbleed (bug de OpenSSL).
+  - "Versiones basadas en MD4 (como SHA‑2) son seguras" es confuso: MD4 está roto.
+  - Presenta MD5 y SHA‑1 como "los más utilizados" sin advertir que no sirven para firmas.
+  - El paso 3 del handshake está confuso ("se ofrece a verificar la clave privada") y describe el intercambio RSA, que TLS 1.3 eliminó.
+  - "La asimétrica es la más segura" es engañoso: depende del algoritmo y la clave, y en la práctica se usa en esquema híbrido.
+  - "La simétrica brinda cierta autenticidad": sin MAC, no la garantiza.
+  - "Maximizar la velocidad" como razón de una VPN: el túnel agrega overhead.
+  - "Firmar = cifrar con la privada" vale para RSA, no para ECDSA.
+- **Hueco del informe N° 5**: la "encriptación de los metadatos" del título no se desarrolla. Lo de Desarrollo es conocimiento general.
+- ⚠️ No hay apunte de cátedra de estos temas. Si el final de regulares es "sobre el 100 % de los informes", probablemente entren como preguntas conceptuales. Confirmar con la cátedra.
+
+#### Fuentes
+- `fuentes/cursada-2025/drive-propio/Tps Medin/INFORME N4- INTERNET DE LAS COSAS (IoT).md`, con el anexo de 10 preguntas.
+- `fuentes/cursada-2025/drive-propio/Tps Medin/INFORME N5- SEGURIDAD EN LA TRANSMISIÓN DE DATOS.md`, con el anexo de 10 preguntas.
+
 ## Log
 - 2026-11-24: Alta de la materia (código CD). Se bajó el Drive de la facu (`3º AÑO/Comunicación de Datos`, 102 archivos) a `archivo/`. Las unidades salen de la teoría de la cátedra y del final de 2025. Todavía no se ingirió nada.
 - 2026-11-24: Ingesta de la teoría, la práctica, los resúmenes (incluido *El Santo Resumen*) y los finales. Desarrollo completo de las Unidades 4–7 (comunicaciones digitales, PCM y ADSL; medios y elección del medio de acceso; asignación de capacidad y colas; OSI/TCP-IP), con ejercicios del final 2025 resueltos. Erratas de las fuentes anotadas en Dudas: el ancho de banda PCM con $f_{min}$ (2·fmax vs fmax−fmin), W del ejemplo 3 del apunte de colas y I del ej. 2 de la práctica de multinivel.
@@ -1092,3 +1511,4 @@ Respuesta modelo: la capa física transmite bits puros por un canal de comunicac
 - 2026-11-24: `estudio/final/resumen-final.md` + pdf (35 págs.) — resumen para el final ordenado por prioridad, con los 3 problemas y las 3 preguntas del final 2025 resueltos, hoja de fórmulas y 17 figuras (`figs/cd-*.png`, de `scripts/cd/cd-figs-final.py`).
 - 2026-11-24: `estudio/final/podcasts/` — 8 fuentes para NotebookLM (de `scripts/cd/cd-podcasts.py`, a partir del resumen y los bancos) + README con los prompts por episodio.
 - 2026-11-26: Ingesta de los mails de la cursada 2025 (comisión 303, Medín y Baró) en `fuentes/cursada-2025/`: presentación y condiciones, prácticas de Baró (multinivel, velocidades y capacidad) y de Medín (codificación, asignación de capacidad, teoría de colas). Encabezado de la wiki: cátedra, condiciones, informes 2025 (incluyen códigos cíclicos y convolucionales, IoT y seguridad, que no están en la wiki) y temario de los parciales. Ojo: *Ejercicio de Teoría de Colas* escribe ρ = μ/λ, cuando es ρ = λ/μ (el valor 0,8 está bien). *ejercicios teoria de colas.pdf* es un escaneo sin texto.
+- 2026-11-26: Unidades nuevas 8 (códigos cíclicos y convolucionales: g(x), síndrome por resto, CRC, convolucional R=1/2 K=3, trellis, Viterbi) y 9 (IoT y seguridad: capas, tecnologías, MQTT/CoAP, criptografía, PKI, TLS, VPN), sacadas de los informes 2, 4 y 5 de la cursada 2025. Errores de los informes anotados en Dudas: el ejemplo de Viterbi del informe 2 no sirve para estudiar. Ninguno de los dos temas tiene apunte de cátedra.
