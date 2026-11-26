@@ -176,6 +176,7 @@ input.seed{font:inherit;font-family:var(--f-mono);color:var(--ink);background:va
 
 <div class="wrap" id="app"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="banco-formato-real.js"></script>
 
 <script>
 /* ---------- Banco de preguntas ----------
@@ -2071,10 +2072,14 @@ const BANK5C = [
  x:"T + LT = 16: media 800; desvío 10·√16 = 40; SS = 2,05·40 = 82. Q = 800 + 82 − 500 − 100 = 282. La segunda olvida los pendientes; la tercera usa σ·16 en vez de σ·√16; la cuarta no tiene SS."}
 ];
 
-const ALLQ = [...BANK1, ...BANK2, ...BANK3, ...BANK4A, ...BANK4B, ...BANK5A, ...BANK5B, ...BANK5C];
-const BANKS = {1:BANK1, 2:BANK2, 3:BANK3, 4:BANK4A, 5:BANK4B, 6:BANK5A, 7:BANK5B, 8:BANK5C};
+/* ===== BANCOS 9-11: formato real del recuperatorio del 19/11 (viven en banco-formato-real.js). ===== */
+const EXTRA = window.IO_EXTRA || {};
+const BANKREC = EXTRA.REC || [], BANKF1 = EXTRA.F1 || [], BANKF2 = EXTRA.F2 || [];
+const ALLQ = [...BANK1, ...BANK2, ...BANK3, ...BANK4A, ...BANK4B, ...BANK5A, ...BANK5B, ...BANK5C, ...BANKREC, ...BANKF1, ...BANKF2];
+const BANKS = {1:BANK1, 2:BANK2, 3:BANK3, 4:BANK4A, 5:BANK4B, 6:BANK5A, 7:BANK5B, 8:BANK5C, 9:BANKREC, 10:BANKF1, 11:BANKF2};
+const REALFMT = n => n>=9 && n<=11;
 let BANKSEL = 1;
-try { const v = +localStorage.getItem("io-bank"); BANKSEL = [2,3,4,5,6,7,8].includes(v) ? v : 1; } catch(e){}
+try { const v = +localStorage.getItem("io-bank"); BANKSEL = (BANKS[v] && BANKS[v].length) ? v : 1; } catch(e){}
 let BANK = BANKS[BANKSEL] || BANK1;
 function useBank(n){ BANKSEL = n; BANK = BANKS[n] || BANK1; try { localStorage.setItem("io-bank", String(n)); } catch(e){} }
 
@@ -2135,7 +2140,7 @@ function renderHome(){
   $app.innerHTML = `
   ${tabsHTML("teoria")}
   <header class="stack">
-    <span class="eyebrow">Investigación Operativa · recuperatorio 19/11</span>
+    <span class="eyebrow">Investigación Operativa · globalizador de febrero</span>
     <h1>Simulacro de teoría</h1>
     <div class="banks" role="tablist" aria-label="Banco de preguntas">
       <button class="chip" data-bank="1" aria-pressed="${BANKSEL===1}">Banco 1<span class="n">${BANK1.length}</span></button>
@@ -2147,7 +2152,15 @@ function renderHome(){
       <button class="chip" data-bank="7" aria-pressed="${BANKSEL===7}">Extra difícil · tanda 4<span class="n">${BANK5B.length}</span></button>
       <button class="chip" data-bank="8" aria-pressed="${BANKSEL===8}">Extra difícil · tanda 5<span class="n">${BANK5C.length}</span></button>
     </div>
-    <p class="muted">${BANK.length} preguntas de opción múltiple armadas con el material de circulación y el resumen del recuperatorio. Las opciones vienen de a pares casi iguales, como en el parcial: el primer descarte es fácil y la decisión fina está dentro del par.</p>
+    ${BANKREC.length?`<span class="eyebrow">Formato real · como el recuperatorio del 19/11</span>
+    <div class="banks" role="tablist" aria-label="Bancos con formato real">
+      <button class="chip" data-bank="9" aria-pressed="${BANKSEL===9}">Recuperatorio 19/11 · el que tomaron<span class="n">${BANKREC.length}</span></button>
+      <button class="chip" data-bank="10" aria-pressed="${BANKSEL===10}">Formato real · tanda 1<span class="n">${BANKF1.length}</span></button>
+      <button class="chip" data-bank="11" aria-pressed="${BANKSEL===11}">Formato real · tanda 2<span class="n">${BANKF2.length}</span></button>
+    </div>`:""}
+    <p class="muted">${BANKSEL===9 ? `Las ${BANK.length} preguntas de teoría del recuperatorio, en el orden y con las opciones originales. La corrección te muestra también lo que marcaste ese día.`
+      : REALFMT(BANKSEL) ? `${BANK.length} preguntas nuevas escritas como las del recuperatorio: una situación para traducir al concepto y cuatro opciones largas, cada una con su «porque». ${BANKSEL===10?"Dualidad, sensibilidad, simplex, redes y entera.":"Stock, transporte y asignación, formas y conceptos básicos."}`
+      : `${BANK.length} preguntas de opción múltiple armadas con el material de circulación y el resumen del recuperatorio. Las opciones vienen de a pares casi iguales: sirven para fijar contenido, pero son más cortas y directas que las que toman.`}</p>
   </header>
 
   <div class="modes">
@@ -2179,16 +2192,20 @@ function renderHome(){
 
   <section class="sheet stack">
     <h2>Cómo encarar cada pregunta</h2>
-    <p class="tip">1. Leé el enunciado entero y buscá la palabra que decide: <em>necesariamente</em>, <em>siempre</em>, <em>no básica</em>, <em>≤ vs &lt;</em>, <em>Max vs Min</em>, <em>mínimo vs máximo</em>.</p>
+    ${REALFMT(BANKSEL)?`<p class="tip">1. Traducí la situación al concepto antes de mirar las opciones: ¿de qué modelo, tabla o teorema está hablando?</p>
+    <p class="tip">2. Decidí primero la conclusión (cambia / no cambia, se puede / no se puede). Eso descarta un par entero. Usá «tachar».</p>
+    <p class="tip">3. En el par que queda, leé sólo el «porque». Una conclusión correcta con una razón falsa es una opción incorrecta.</p>
+    <p class="tip">4. Desconfiá de la razón que es verdadera pero no responde lo que se pregunta: es el distractor más común del examen.</p>`
+    :`<p class="tip">1. Leé el enunciado entero y buscá la palabra que decide: <em>necesariamente</em>, <em>siempre</em>, <em>no básica</em>, <em>≤ vs &lt;</em>, <em>Max vs Min</em>, <em>mínimo vs máximo</em>.</p>
     <p class="tip">2. Descartá el par que no corresponde (suele cambiar el concepto entero). Usá «tachar» para dejarlo marcado.</p>
     <p class="tip">3. Dentro del par que queda, compará palabra por palabra: la diferencia es un signo, un subíndice o un «sólo si».</p>
-    <p class="tip">4. Si los dos del par te parecen correctos, sospechá de la e) «ninguna».</p>
+    <p class="tip">4. Si los dos del par te parecen correctos, sospechá de la e) «ninguna».</p>`}
   </section>
 
   <section class="sheet stack">
     <div class="row" style="justify-content:space-between">
       <h2>Mapa por tema</h2>
-      <button class="btn ghost" id="reset">Borrar avance</button>
+      <span class="row" style="gap:6px"><button class="btn ghost" id="export">Exportar avance</button><button class="btn ghost" id="reset">Borrar avance</button></span>
     </div>
     <p class="muted" style="font-size:14px">Cada número es una pregunta del banco, coloreada según tu último intento: <span class="pill ok">bien</span> <span class="pill bad">mal</span> y en blanco las que todavía no viste. Tocá un número para practicar el tema desde esa pregunta.</p>
     <div class="tmap">
@@ -2201,7 +2218,7 @@ function renderHome(){
           <div class="tcells">${qs.map((q,j)=>`<button class="cell ${st[j]===true?"ok":st[j]===false?"bad":""}" data-tq="${k}" data-ti="${j}" aria-label="${n}, pregunta ${j+1}">${j+1}</button>`).join("")}</div>
         </div>`;}).join("")}
     </div>
-    <p class="muted" style="font-size:14px" id="reset-msg">El avance se guarda sólo en este navegador.</p>
+    <p class="muted" style="font-size:14px" id="reset-msg">El avance se guarda sólo en este navegador. «Exportar avance» lo baja a un archivo para dejarlo en el repo.</p>
   </section>`;
 
   bindTabs();
@@ -2213,6 +2230,17 @@ function renderHome(){
     const k=c.dataset.k; pickTopics.has(k)?pickTopics.delete(k):pickTopics.add(k);
     c.setAttribute("aria-pressed", pickTopics.has(k));
   });
+  document.getElementById("export").onclick = () => {
+    const d = new Date(), pad = n => String(n).padStart(2,"0");
+    const stamp = `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+    const bankOf = {}; Object.entries(BANKS).forEach(([n,qs]) => qs.forEach(q => bankOf[q.id] = +n));
+    const teoria = Object.entries(STATS).map(([id,r]) => ({id, banco: bankOf[id] || null, tema: byId[id] ? byId[id].t : null, vistas: r.seen, mal: r.wrong, ultimoBien: r.last}));
+    let practica = {}; try { practica = JSON.parse(localStorage.getItem("io-practica-v1")) || {}; } catch(e){}
+    const blob = new Blob([JSON.stringify({exportado: d.toISOString(), teoria, practica}, null, 1)], {type:"application/json"});
+    const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = `avance-io-${stamp}.json`;
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    document.getElementById("reset-msg").textContent = `Se descargó avance-io-${stamp}.json. Guardalo en materias/IO/estudio/globalizador/avance/ para que quede en el repo.`;
+  };
   const rb = document.getElementById("reset"); let armed=false;
   rb.onclick = () => {
     if(!armed){ armed=true; rb.textContent="Confirmar borrado"; document.getElementById("reset-msg").textContent="Se borra el historial de aciertos y errores. Tocá de nuevo para confirmar."; return; }
@@ -2438,6 +2466,7 @@ document.addEventListener("keydown", e=>{
 });
 </script>
 <script src="parcial-2026-10-03.js"></script>
+<script src="recuperatorio-2026-11-19.js"></script>
 <script>
 /* ===================== PRÁCTICA ===================== */
 function tabsHTML(active){
@@ -2844,6 +2873,7 @@ function buildVariant(seed){
     {intro:e2.intro+e2.table(e2.T), fig:"", sol:e2.sol, lead:"Resuelva analíticamente y responda (una sola opción):", qs:ej2Questions(e2,r)},
     {intro:e3.intro, fig:"", sol:e3.sol, qs:ej3Questions(e3,r)} ]};
 }
+function recupExam(){ try { return typeof window.RECUP_REAL==="function" ? window.RECUP_REAL(LIB) : null; } catch(err){ console.error(err); return null; } }
 function realExam(){ try { return typeof window.PARCIAL_REAL==="function" ? window.PARCIAL_REAL(LIB) : null; } catch(err){ console.error(err); return null; } }
 
 const PSTORE="io-practica-v1";
@@ -2851,16 +2881,17 @@ const pLoad=()=>{ try{ return JSON.parse(localStorage.getItem(PSTORE))||{}; }cat
 const pSave=s=>{ try{ localStorage.setItem(PSTORE,JSON.stringify(s)); }catch(e){} };
 
 function renderPracticeHome(){
-  const real=realExam(), hist=pLoad();
+  const real=realExam(), recup=recupExam(), hist=pLoad();
   const last=id=>hist[id]?`Último intento: ${hist[id].last}/${hist[id].n} · mejor: ${hist[id].best}/${hist[id].n}`:"Sin intentos todavía";
   const vars=Object.keys(hist).filter(k=>k.startsWith("var-")).slice(-6).reverse();
   $app.innerHTML=`${tabsHTML("practica")}
   <header class="stack">
-    <span class="eyebrow">Investigación Operativa · recuperatorio 19/11</span>
+    <span class="eyebrow">Investigación Operativa · globalizador de febrero</span>
     <h1>Parcial práctico</h1>
     <p class="muted">Tres ejercicios como en el parcial: método gráfico, una tabla simplex con sensibilidad y dual, y stock con restricción de capital. Resolvé en hoja aparte, marcá una opción por pregunta y entregá para ver la corrección.</p>
   </header>
   <div class="modes">
+    ${recup?`<button class="mode" id="go-recup"><span class="k">Recuperatorio del 19/11</span><h3>El que tomaron</h3><p>Gráfico con cuatro restricciones, simplex con sensibilidad y dual, y stock con descuento por excedente. Al corregir te muestra lo que marcaste. ${last(recup.id)}</p></button>`:""}
     ${real?`<button class="mode" id="go-real"><span class="k">Parcial del 3/10</span><h3>El que tomaron</h3><p>Mismas preguntas y opciones. Al corregir te muestra también lo que marcaste en el parcial. ${last(real.id)}</p></button>`
       :`<div class="mode"><span class="k">Parcial del 3/10</span><h3>No disponible acá</h3><p>La réplica del parcial vive en un archivo privado que no se sube al repositorio.</p></div>`}
     <button class="mode" id="go-var"><span class="k">Variante nueva</span><h3>Mismos ejercicios, otros números</h3><p>Se genera al azar y cada respuesta se calcula con fracciones exactas. Cada variante tiene un código para repetirla.</p></button>
@@ -2872,6 +2903,7 @@ function renderPracticeHome(){
   </section>`;
   bindTabs();
   if(real) document.getElementById("go-real").onclick=()=>startExam(real);
+  if(recup) document.getElementById("go-recup").onclick=()=>startExam(recup);
   document.getElementById("go-var").onclick=()=>startExam(buildVariant(newSeed()));
   const go=()=>{ const v=document.getElementById("seed").value.trim().toUpperCase(); if(v) startExam(buildVariant(v)); };
   document.getElementById("go-seed").onclick=go;
