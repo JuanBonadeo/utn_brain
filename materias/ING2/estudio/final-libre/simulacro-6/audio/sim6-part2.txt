@@ -1,5 +1,5 @@
 # Simulacro 6 — Part 1-A, Questions 4 and 5. Host = Moira (IE), Tom = Daniel (GB), Thandi = Tessa (ZA). Ruido 0.04, 200 wpm. Autocorrecciones (two hundred/three hundred dollars; twenty twenty/twenty twenty-one). Tom cambia de opinion sobre la proteccion de los datos neuronales. Cada idea de Q4 la mencionan los dos hablantes.
-[RUIDO 0.04]
+[RUIDO 0.008]
 [VELOCIDAD 170]
 Samantha: Questions four and five. You will hear a radio discussion about the future of brain implants between a neural engineer, Tom, and a lawyer, Thandi, led by a host. You now have forty seconds to read the questions.
 [PAUSA 40]

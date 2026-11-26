@@ -1,5 +1,5 @@
 # Simulacro 3 — Part 1-A, Questions 4 and 5. Thandi = Tessa (ZA), Ravi = Rishi (IN). Dificultad alta: velocidad 200, ruido 0.04, huecos 0.3.
-[RUIDO 0.04]
+[RUIDO 0.008]
 [VELOCIDAD 170]
 Samantha: Questions four and five. You will hear two students, Thandi and Ravi, discussing the future of three-dimensional printed housing for a seminar report. You now have forty seconds to read the questions.
 [PAUSA 40]

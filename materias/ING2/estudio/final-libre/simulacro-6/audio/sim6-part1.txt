@@ -1,5 +1,5 @@
 # Simulacro 6 — Part 1-A, Questions 1, 2 and 3. Lecture = Karen (AU). Dificultad alta: 200 wpm, ruido 0.03, autocorrecciones (twenty/eighteen, seventy/seventy-eight), palabra deletreada (ECoG), un distractor para cada hueco.
-[RUIDO 0.03]
+[RUIDO 0.007]
 [VELOCIDAD 170]
 Samantha: English Two. Final exam. Part one A. Questions one, two and three. You will hear a lecture about brain-computer interfaces. You now have thirty seconds to read the questions.
 [PAUSA 30]

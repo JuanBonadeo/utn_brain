@@ -9,7 +9,7 @@ Formato del .txt (una intervención por línea):
     [PAUSA 30]                   -> 30 segundos de silencio
     [VELOCIDAD 195]              -> palabras por minuto desde esa línea en adelante (default 170)
     [RUIDO 0.03]                 -> ruido de fondo (murmullo de aula) en todo el audio;
-                                    0.02 = suave, 0.04 = molesto, 0.06 = difícil
+                                    0.005 = apenas se nota, 0.007-0.008 = murmullo de aula (simulacros 3-6), 0.015 = molesto, 0.03 = tapa la voz
     [HUECO 0.25]                 -> silencio entre intervenciones (default 0.7 s)
 
 Uso:

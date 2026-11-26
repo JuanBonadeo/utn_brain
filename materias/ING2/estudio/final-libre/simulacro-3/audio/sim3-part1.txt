@@ -1,5 +1,5 @@
 # Simulacro 3 — Part 1-A, Questions 1, 2 and 3. Lecturer = Karen (AU). Dificultad alta: velocidad 200, ruido 0.03, huecos 0.3.
-[RUIDO 0.03]
+[RUIDO 0.007]
 [VELOCIDAD 170]
 Samantha: English Two. Final exam, simulacro three. Part one A. Questions one, two and three. You will hear a lecture about three-dimensional printed houses. You now have thirty seconds to read the questions.
 [PAUSA 30]
