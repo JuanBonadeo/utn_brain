@@ -31,11 +31,56 @@
 | 4 | Resumen + **recién acá tu opinión** | Repetís la opinión con otras palabras | Conclusión: qué pasa si se aplican |
 | ⚠ | Nada de *I think* antes del ¶4 | **Un solo lado:** no menciones el otro, te lo tachan | Cada solución responde a un problema que nombraste |
 
-## Expresiones (pocas, para no fallar)
+## Expresiones
 
-- **For and against:** *On the one hand, … / On the other hand, … / Taking everything into account, I believe that…*
-- **Opinion:** *I strongly believe that… / The main reason why I agree is that… / For these reasons, I am convinced that…*
-- **Problems and solutions:** *One of the main problems is… / This leads to… / One possible solution would be to… / This would result in…*
+### Introducción (sirven para los tres tipos)
+
+| Para… | Expresión |
+|---|---|
+| Presentar el tema | *In recent years, X has become…* / *Nowadays, X is one of the most debated issues in…* |
+| Dar contexto | *Since the pandemic, …* / *This has become increasingly common as…* |
+| Abrir con pregunta | *Is it true that X will change the way we work?* |
+| Anunciar el enfoque | *This essay will examine…* (for and against) / *I strongly believe that…* (opinion) / *However, it also creates several problems.* (problems and solutions) |
+
+### Cuerpo, según el tipo
+
+| Tipo | Expresiones |
+|---|---|
+| **For and against** | *On the one hand, …* / *The main advantage of X is…* / *On the other hand, …* / *One major drawback is…* / *Critics argue that…* |
+| **Opinion** | *The main reason why I agree is that…* / *Another reason is that…* / *A clear example of this is…* |
+| **Problems and solutions** | *One of the main problems is…* / *Another problem is that…* / *This leads to…* / *One possible solution would be to…* / *Another measure could be…* / *This would result in…* |
+
+### Conectores
+
+| Función | Conectores |
+|---|---|
+| Ordenar | *To begin with, … / Secondly, … / Finally, … / Last but not least, …* |
+| Sumar | *In addition, … / Moreover, … / Furthermore, … / What is more, …* |
+| Contrastar | *However, … / On the other hand, … / Although + oración / Despite + sustantivo o -ing / whereas* |
+| Causa | *because + oración / due to + sustantivo / since + oración* |
+| Efecto | *As a result, … / Therefore, … / This leads to… / which leads to…* |
+| Ejemplo | *For example, … / For instance, … / such as + sustantivo* |
+| Finalidad | *in order to + verbo / so that + oración* |
+
+### Conclusión
+
+| Tipo | Expresiones |
+|---|---|
+| For and against | *Taking everything into account, I believe that…* / *On balance, although…, I feel that…* |
+| Opinion | *For these reasons, I am convinced that…* / *To conclude, I firmly believe that…* |
+| Problems and solutions | *To sum up, X affects… However, if these measures are taken, …* / *In conclusion, although X causes…, it can be solved if…* |
+
+### Revisión final (tus errores típicos)
+
+| Error | Correcto | Por qué |
+|---|---|---|
+| *This have* | *This has* | 3.ª persona: *has / is / -s* |
+| *an hybrid* | *a hybrid* | *an* solo antes de sonido vocal |
+| *a software* | *software* | incontable: *software, information, advice, work* |
+| *affects directly on* | *directly affects* | *affect* no lleva preposición |
+| *journals* | *working days* | falso amigo: jornada |
+| *work weather* | *work environment* | *weather* = clima meteorológico |
+| *loose* | *lose* | *lose* = perder; *loose* = flojo |
 
 ## Ejemplos
 
