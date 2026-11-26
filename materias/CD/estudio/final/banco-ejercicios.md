@@ -2,6 +2,8 @@
 
 Banco armado con **todos** los enunciados de práctica de finales que hay en `fuentes/finales/Práctica/` (2011–2025) y en el PDF «Comunicaciones - Finales Viejos» (finales del plan viejo, cátedra Di Santo, ~2000–2006). Cada número está verificado con Python.
 
+Ampliado con las prácticas de la **cursada 2025 (com. 303: práctica Baró, teoría Medín)** de `fuentes/cursada-2025/`: práctica de multinivel de Baró, prácticas de codificación, colas y asignación de capacidad de Medín, el ejercicio del router, las resoluciones manuscritas escaneadas y los parciales que el alumno pasó a sus resúmenes (`drive-propio/`). El origen se marca así: «(práctica Baró 2025)», «(práctica Medín 2025)», «(parcial Baró, resumen del alumno)», «(cuaderno del alumno 2025)».
+
 **Convenciones**
 
 - $\lg x = \log_2 x$. En la calculadora: $\lg x = \ln x/\ln 2 \approx 3{,}32\,\log_{10} x$.
@@ -13,20 +15,23 @@ Banco armado con **todos** los enunciados de práctica de finales que hay en `fu
 
 ## Tabla de frecuencia
 
-| Tipo de ejercicio | Finales 2011–2025 | Finales viejos (plan anterior) | Total |
-|---|---|---|---|
-| §1. Transmisión multinivel ($M(T)$, $I$, $R$, $r$, $s$, duplicar $R$) | 18/02/2011, 09/03/2012, 13/03/2015, 15/02/2017, 28/08/2020, 23/10/2020, 20/11/2020, 18/12/2020, 10/09/2021, 19/11/2021, 17/12/2021, **04/04/2025** | F2, F6, F9 (×2), F10, 29/11/2002, ¿07/02/2005?, 25/02/2005, 23/09/2005, 22/12/2005, 03/03/2006 | **23** |
-| §6. TDM – PCM (ancho de banda de la trama) | 09/03/2012, 13/03/2015, 18/12/2015, 21/02/2020, 28/08/2020, 23/10/2020, 20/11/2020, 18/12/2020, 10/09/2021, 19/11/2021, **04/04/2025** | F1, F4, F7, F12, 17/02/2006, 03/03/2006, sin fecha (pág. 22) | **18** |
-| §8. Teoría de colas M/M/1 | 18/02/2011, 20/11/2020, 18/12/2020, 19/11/2021, 17/12/2021, **04/04/2025** | F1, F2, F4, F6, F13, 29/11/2002, 07/05/2004, 22/12/2005, 17/02/2006 | **15** |
-| §7. FDM (cantidad de señales, ancho de banda, portadoras) | 18/02/2011, 04/12/2015, 15/02/2017, 28/08/2020 | F3, F6, F8, F9, F13, ¿07/02/2005?, 25/02/2005, 23/09/2005, 22/12/2005 | **13** |
-| §2. Canal binario / ternario (entropías, información mutua) | 04/12/2015, 18/12/2015, 21/02/2020, 23/10/2020, 10/09/2021, 17/12/2021 | F12, sin fecha (pág. 22) | **8** |
-| §3. Código compacto (Huffman), L, η, Kraft | 09/03/2012, 13/03/2015 | F3, F13, 29/11/2002, ¿07/02/2005?, 07/05/2004, 23/09/2005, 03/03/2006 | **9** |
-| §4. Códigos lineales (H → G → V → síndromes, diseño) | 04/12/2015 | F1, F4, F5, F10, F11, 07/05/2004, 25/02/2005, 17/02/2006 | **9** |
-| §5. Hamming | 18/12/2015, 15/02/2017, 21/02/2020 | F8, F12 | **5** |
-| §9. Asignación de capacidad / retardo de enlace | — | F3, F10, F11, sin fecha (pág. 22) | **4** |
-| §10. Entropía de fuente + Shannon; FSK | — | F5 (×2), F7 | **3** |
+| Tipo de ejercicio | Finales 2011–2025 | Finales viejos (plan anterior) | Total finales | Cursada 2025 (com. 303) |
+|---|---|---|---|---|
+| §1. Transmisión multinivel ($M(T)$, $I$, $R$, $r$, $s$, duplicar $R$) | 18/02/2011, 09/03/2012, 13/03/2015, 15/02/2017, 28/08/2020, 23/10/2020, 20/11/2020, 18/12/2020, 10/09/2021, 19/11/2021, 17/12/2021, **04/04/2025** | F2, F6, F9 (×2), F10, 29/11/2002, ¿07/02/2005?, 25/02/2005, 23/09/2005, 22/12/2005, 03/03/2006 | **23** | Práctica Baró (11 ej., 1er parcial) + ejemplo de la teleimpresora |
+| §6. TDM – PCM (ancho de banda de la trama) | 09/03/2012, 13/03/2015, 18/12/2015, 21/02/2020, 28/08/2020, 23/10/2020, 20/11/2020, 18/12/2020, 10/09/2021, 19/11/2021, **04/04/2025** | F1, F4, F7, F12, 17/02/2006, 03/03/2006, sin fecha (pág. 22) | **18** | Parciales de práctica de Baró (4 tramas en el resumen del alumno) |
+| §8. Teoría de colas (M/M/1, M/M/c, modelo cerrado, costos) | 18/02/2011, 20/11/2020, 18/12/2020, 19/11/2021, 17/12/2021, **04/04/2025** | F1, F2, F4, F6, F13, 29/11/2002, 07/05/2004, 22/12/2005, 17/02/2006 | **15** | Práctica Medín (11 ej.), router/gateway, 2° parcial (propuestos) y parcial com. 305 |
+| §7. FDM (cantidad de señales, ancho de banda, portadoras) | 18/02/2011, 04/12/2015, 15/02/2017, 28/08/2020 | F3, F6, F8, F9, F13, ¿07/02/2005?, 25/02/2005, 23/09/2005, 22/12/2005 | **13** | — |
+| §2. Canal binario / ternario (entropías, información mutua) | 04/12/2015, 18/12/2015, 21/02/2020, 23/10/2020, 10/09/2021, 17/12/2021 | F12, sin fecha (pág. 22) | **8** | — (sólo teoría en el resumen del 1er parcial) |
+| §3. Código compacto (Huffman), L, η, Kraft | 09/03/2012, 13/03/2015 | F3, F13, 29/11/2002, ¿07/02/2005?, 07/05/2004, 23/09/2005, 03/03/2006 | **9** | Práctica Medín de codificación (ej. 1–5: Kraft, fantasmas, Huffman cuaternario) |
+| §4. Códigos lineales (H → G → V → síndromes, diseño) | 04/12/2015 | F1, F4, F5, F10, F11, 07/05/2004, 25/02/2005, 17/02/2006 | **9** | — |
+| §5. Hamming | 18/12/2015, 15/02/2017, 21/02/2020 | F8, F12 | **5** | Práctica Medín ej. 6 (10 símbolos) |
+| §9. Asignación de capacidad / retardo de enlace | — | F3, F10, F11, sin fecha (pág. 22) | **4** | Práctica Medín (3 ej.) + 2 redes del 2° parcial (estrella con ISP, árbol de 8 nodos) |
+| §10. Entropía de fuente + Shannon; FSK | — | F5 (×2), F7 | **3** | — |
+| §11. Atenuación, ganancia y dB | — | — | **0** | Teoría de Baró, 1er parcial (sin ejercicios numéricos) |
 
 **Lectura rápida.** En las 9 hojas de 2020–2025 la práctica sale casi siempre de este menú: **multinivel** (8 de 9), **TDM-PCM** (8 de 9), y un tercer problema que alterna entre **canal binario simétrico** (siempre $P(a_1)=0{,}65$, $P(b_1/a_1)=0{,}75$) y **colas M/M/1** (sala de emergencias o caja única, con números repetidos). Hamming (último: 21/02/2020) y FDM (último: 28/08/2020) no volvieron. Huffman y códigos lineales son casi exclusivos de los finales viejos.
+
+**Cursada 2025.** Baró tomó multinivel (1er parcial) y TDM-PCM (parciales de práctica); Medín, codificación, colas y asignación de capacidad. En colas, 2025 sumó tipos que ningún final tomó todavía: **M/M/2**, **modelo cerrado con punto de saturación** y **comparación de costos**. En capacidad sumó **redes en árbol**, donde los $\lambda$ se acumulan hacia el nodo central. Multinivel, TDM-PCM y la sala de emergencias se repiten con los mismos números que los finales.
 
 Repeticiones textuales (mismos números):
 
@@ -70,7 +75,7 @@ Pasos:
 
 ### Ejercicios
 
-#### 1.1 — 23/10/2020 (= ej. 11 del apunte resuelto) — resuelto
+#### 1.1 — 23/10/2020 (= ej. 11 del apunte resuelto = ej. 6 de la práctica Baró 2025) — resuelto
 
 > Una transmisión multinivel considera grupos de 13 pulsos de 58 niveles c/u. La transmisión tiene 1 pulso fijo de arranque de +3 V y 1 pulso fijo de stop de −3 V. Cada pulso dura 10 µs. Calcular: a) $M(T)$ e $I_x$; b) $R$; c) gráfica.
 
@@ -135,12 +140,49 @@ Pasos:
 2. a) $I=9\lg128=63$ bits; $R=63/26\ \text{ms}=2423$ bps.
 3. b) $I=9$ bits; $R=9/26\ \text{ms}=346{,}2$ bps.
 
+#### 1.6 — práctica Baró 2025, ej. 9 (= ej. 14 del apunte resuelto) — resuelto (dos subsistemas, unidades mezcladas)
+
+> Transmisión con dos subsistemas (según el esquema): un bloque de 5 pulsos de 7 niveles (el 0 cuenta) que dura 100 µs y un bloque de 8 pulsos binarios que dura 40 ms. a) Pulsos y niveles de cada subsistema. b) $M(T)$. c) $I_x$. d) $R$. e) ¿Cómo duplicar $R$ sin variar la duración de los pulsos ni el período $T$?
+
+1. a) Bloque 1: $n_1=5$, $\mu_1=7$. Bloque 2: $n_2=8$, $\mu_2=2$.
+2. b) Los mensajes se multiplican: $M(T)=7^5\cdot2^8=16807\times256=4\,302\,592$ mensajes.
+3. c) La información se suma: $I=5\lg7+8\lg2=14{,}04+8=\mathbf{22{,}04}$ bits.
+4. d) $T=100\ \mu s+40\ ms=40{,}1$ ms (pasar a la misma unidad) → $R=22{,}04/40{,}1\ ms=\mathbf{549{,}5}$ bps.
+5. e) Con $T$ fijo, duplicar $R$ es duplicar $I$. Tocando sólo los niveles del bloque multinivel:
+   - $5\lg\mu'+8=2(5\lg7+8)\Rightarrow\lg\mu'=2\lg7+1{,}6=7{,}215$
+   - $\mu'=2^{7{,}215}=148{,}5\Rightarrow$ **149 niveles** (redondeo para arriba).
+   - La resolución de la práctica toma $\lg7\approx2{,}8$ ($I=22$ bits, $2R=1097$ bps) y llega a $\mu'=146{,}8\to147$. Con 147 niveles $R=1097{,}2$ bps, que no llega al doble exacto (1099,1 bps). Ver Dudas.
+
+#### 1.7 — práctica Baró 2025, ej. 10 (= ej. 15 del apunte; sin resolución en la fuente) — resuelto
+
+> Grupos de 13 pulsos de 58 niveles, más 1 pulso de arranque y 1 de stop de amplitud fija. El período dura 100 µs y todos los pulsos duran lo mismo. a) $I_x$. b) $R$. c) ¿Cómo duplicar la velocidad sin variar la duración de los pulsos ni el período? d) Gráfica.
+
+1. $N=15$ pulsos en $T=100\ \mu s$ → $\tau=100/15=6{,}67\ \mu s$.
+2. a) $I=13\lg58=\mathbf{76{,}15}$ bits (arranque y stop no informan).
+3. b) $R=76{,}15/100\ \mu s=\mathbf{761{,}5}$ kbps.
+4. c) Sólo quedan los niveles: $13\lg\mu'=2\cdot13\lg58\Rightarrow\mu'=58^2=\mathbf{3364}$ niveles.
+   - Regla: si todos los pulsos de información tienen el mismo $\mu$, duplicar $I$ con los mismos pulsos es **elevar los niveles al cuadrado** (cuadruplicar: a la cuarta).
+5. d) Gráfica como en 1.1, con $\tau=6{,}67\ \mu s$ y $T=100\ \mu s$.
+
+#### 1.8 — práctica Baró 2025, ej. 11 (= ej. 16 del apunte) — resuelto (la incógnita es la cantidad de pulsos)
+
+> Dos subsistemas: 5 pulsos de 6 niveles y $n$ pulsos binarios. Todos los pulsos duran lo mismo y $T=500\ \mu s$. a) Niveles y pulsos de cada subsistema. b) $I_x$. c) $R$. d) ¿Cómo duplicar $R$ sin variar la duración de los pulsos ni el período? e) Si $R=5$ Mbps, ¿cuántos pulsos son binarios?
+
+1. a) Bloque 1: 5 pulsos, $\mu=6$ ($M_1=6^5=7776$). Bloque 2: $n$ pulsos, $\mu=2$ ($M_2=2^n$).
+2. b) $I=5\lg6+n=12{,}92+n$ bits. c) $R=(12{,}92+n)/500\ \mu s$. Los dos quedan en función de $n$.
+3. e) $I=R\,T=5\times10^6\times500\times10^{-6}=2500$ bits $\Rightarrow n=2500-12{,}92=2487{,}08$.
+   - Con $n=2487$, $R=4{,}99985$ Mbps (apenas menos). Para **alcanzar** 5 Mbps hacen falta **2488** binarios. La práctica da 2487.
+4. d) Con $n=2488$, duplicar $R$ es llegar a $I=5000$ bits con los mismos pulsos:
+   - Sólo con el bloque de 6 niveles: $5\lg\mu'=5000-2488\Rightarrow\lg\mu'=502{,}4$. Absurdo ($2^{502}$ niveles).
+   - Con los binarios: $2488\lg\mu_b=5000-12{,}92\Rightarrow\lg\mu_b=2{,}004\Rightarrow\mu_b=4{,}01\Rightarrow$ **5 niveles**. Con 4 niveles quedan 4988,9 bits: no alcanza.
+   - La práctica deja d) planteado, porque lo resuelve antes de conocer $n$.
+
 #### Resto de los multinivel (enunciado + resultados)
 
 | Origen | Enunciado (resumido) | Resultados |
 |---|---|---|
 | 10/09/2021 | 1 arranque fijo, 10 datos de 128 niveles, 1 stop; todos 5 ms salvo stop 7 ms. a) $R$; b) datos binarios. | $T=62$ ms; $I=70$ bits; $R=1129$ bps. b) $I=10$ bits, $R=161{,}3$ bps. |
-| 17/12/2021 (= ej. 12 apunte) | 10 pulsos de 64 niveles, sin control, 2 ms c/u. a) mensajes; b) $I_x$; c) $R$; d) gráfica. | $M=64^{10}=2^{60}\approx1{,}15\times10^{18}$; $I=60$ bits; $T=20$ ms; $R=3$ kbps. |
+| 17/12/2021 (= ej. 12 apunte = ej. 7 práctica Baró 2025) | 10 pulsos de 64 niveles, sin control, 2 ms c/u. a) mensajes; b) $I_x$; c) $R$; d) gráfica. | $M=64^{10}=2^{60}\approx1{,}15\times10^{18}$; $I=60$ bits; $T=20$ ms; $R=3$ kbps. |
 | 20/11/2020 (= ej. 8 apunte + R) | 5 pulsos de igual duración: el 1° binario, el resto cualquier nivel entre +4 y −4 con 0. a) mensajes; b) $R$; c) todos binarios. | $\mu=9$; $M=2\cdot9^4=13122$; $I=\lg13122=13{,}68$ bits. **No se da $\tau$**: $R=13{,}68/(5\tau)=2{,}736/\tau$ bps. c) $I=5$ bits, $R=1/\tau$. (Si fuese binario: $\lceil13{,}68\rceil=14$ pulsos para igualar los mensajes, como en el apunte.) |
 | 18/12/2020 = 19/11/2021 | 15 pulsos de igual duración: el 1° binario, el resto entre +5 y −5 con 0. a) mensajes; b) $R$; c) los multinivel pasan a binarios. | $\mu=11$; $M=2\cdot11^{14}\approx7{,}59\times10^{14}$; $I=1+14\lg11=49{,}43$ bits. Sin $\tau$: $R=49{,}43/(15\tau)=3{,}295/\tau$. Con $\tau=1\ \mu s$ (supuesto del alumno de 18/12/2020): $R=3{,}295$ Mbps. c) $I=15$ bits, $R=1/\tau$ (1 Mbps con $\tau=1\ \mu s$). |
 | 18/02/2011 = 22/12/2005 = F10 | Carácter de impulsos de 8 niveles equiprobables (8,6,…,−6), duración 12 ms. a) pulsos si $R=1{,}5$ kbps; b) duración de cada impulso; c) capacidad mínima. | $I=R\,T=18$ bits; $n=18/\lg8=6$ pulsos; $\tau=2$ ms; $C_{\min}=R=1{,}5$ kbps. (Coincide con la «Rta» impresa.) |
@@ -151,6 +193,13 @@ Pasos:
 | F9 P2 | 14 pulsos: 1 arranque, 1 sincronismo, 9 datos, 1 paridad, 2 parada. Todos 25 ms salvo el arranque de 30 ms. Velocidad de dígitos, de señalización y $R$. | $T=30+13(25)=355$ ms; $r=14/0{,}355=39{,}44$ dígitos/s; $s=1/25\ \text{ms}=40$ baudios; datos binarios (supuesto) → $I=9$ bits, $R=25{,}35$ bps. La paridad no agrega información nueva. |
 | F9 P3 | Canal digital, mensajes de 8 bits, $\tau=4$ ms. a) mensajes distintos y $R$. b) 1° pulso fijo 1,5 V, los otros 7 cualquier entero entre −2 y +4 (con 0). Mensajes, $R$ y conclusiones. | a) $M=256$; $T=32$ ms; $R=8/32\ \text{ms}=250$ bps. b) $\mu=7$; $M=7^7=823543$; $I=7\lg7=19{,}65$ bits; $R=614{,}1$ bps. Conclusión: aun perdiendo un pulso en sincronismo, más niveles por pulso dan más del doble de $R$ con el mismo $\tau$. |
 | 23/09/2005 | Transmisión binaria de $T=100$ ms con $\tau=0{,}05$ ms. a) Niveles necesarios para mandar el mismo mensaje en 40 ms sin acortar $\tau$. b) Con 8 niveles, ¿qué $\tau$ mantiene $T=40$ ms? Misma información. | $I=100/0{,}05=2000$ bits. a) En 40 ms entran 800 pulsos: $800\lg\mu=2000\Rightarrow\mu=2^{2{,}5}=5{,}66\Rightarrow$ **6 niveles**. b) $2000/3=666{,}7\Rightarrow667$ pulsos; $\tau=40/667=0{,}0600$ ms ≈ 60 µs. |
+| práctica Baró 2025, ej. 1 (gráfico) | 6 pulsos binarios (+2 y −2 V). $\mu$, $n$, $I$, $M(T)$. | $\mu=2$; $n=6$; $I=6$ bits; $M=64$. |
+| práctica Baró 2025, ej. 2 (gráfico, = ej. 2 apunte) | 6 pulsos de 7 niveles (−3…+3), $T=100$ ms. | $M=7^6=117\,649$; $I=6\lg7=16{,}84$ bits; $R=168{,}4$ bps. La práctica 2025 repite el error del apunte ($I=2{,}81$ bits, $R=28{,}1$ bps). |
+| práctica Baró 2025, ej. 3 (= ej. 3 apunte) | 18 pulsos de 128 niveles, 1 ms c/u. $M(T)$, $I$, $R$, gráfica. | $M=128^{18}=2^{126}$; $I=126$ bits; $T=18$ ms; $R=7$ kbps (coincide). |
+| práctica Baró 2025, ej. 4 (gráfico) | 6 pulsos de 4 niveles (4, 2, 0, −2), $T=60\ \mu s$. | $M=4^6=4096$; $I=12$ bits; $R=200$ kbps (coincide). |
+| práctica Baró 2025, ej. 5 (gráfico, = ej. 7 apunte) | 5 pulsos binarios (0 y 2), $T=30\ \mu s$. | $M=32$; $I=5$ bits. ($R=166{,}7$ kbps, no lo pide.) |
+| práctica Baró 2025, ej. 8 (= ej. 13 apunte) | Fax de 400 líneas × 400 puntos, 64 niveles de brillo equiprobables, a 4800 bps. ¿Cuánto tarda una imagen? | $I=160\,000\times\lg64=960\,000$ bits; $T=I/R=\mathbf{200\ s}$ (coincide). |
+| Teoría Baró 2025 («Velocidades de transmisión…») | Teleimpresora: arranque y 5 pulsos de letra de 20 ms c/u, parada de 30 ms. $s$, $r$, $R$. | $T=150$ ms; $s=1/20\ ms=50$ baudios; $r=7/0{,}15=46{,}7$ binits/s; $R=5/0{,}15=33{,}3$ bps. Siempre $R<r\le s$ (la fuente redondea $r$ a 46). |
 
 ### Trampas frecuentes
 
@@ -159,7 +208,9 @@ Pasos:
 - $s$ usa el pulso **más corto**, aunque sea el de arranque.
 - Redondear niveles **hacia arriba** (con menos no se alcanza la $R$ pedida).
 - Si el enunciado no da $\tau$, dejá $R$ en función de $\tau$ y aclaralo; no inventes un valor sin decirlo.
-- El ejercicio 2 del apunte resuelto tiene un error: escribe $I=\lg7^6=2{,}81$ bits (es $\lg7$). Lo correcto es $I=6\lg7=16{,}84$ bits y $R=168{,}4$ bps.
+- El ejercicio 2 del apunte resuelto tiene un error: escribe $I=\lg7^6=2{,}81$ bits (es $\lg7$). Lo correcto es $I=6\lg7=16{,}84$ bits y $R=168{,}4$ bps. La práctica de Baró 2025 (ej. 2) lo repite.
+- No redondees $\lg\mu$ en pasos intermedios cuando después despejás un exponente: $\lg7\approx2{,}8$ en vez de 2,807 mueve la respuesta de 149 a 147 niveles (1.6).
+- Si dan $T$ y «todos los pulsos duran lo mismo», $\tau=T/N$ con $N$ = **todos** los pulsos (1.7).
 
 ---
 
@@ -368,6 +419,42 @@ Pasos (Huffman r-ario):
 4. $L=(0{,}33+0{,}22+0{,}12)(1)+(0{,}11+0{,}06+0{,}05)(2)+(0{,}03\cdot3+0{,}02)(3)=0{,}67+0{,}44+0{,}33=\mathbf{1{,}44}$ cuaternarios/símbolo.
 5. $H=2{,}7536$ bits; $H_4=2{,}7536/2=1{,}3768$; $\eta=\mathbf{0{,}9561}$; redundancia $\mathbf{0{,}0439}$.
 
+#### 3.4 — práctica Medín 2025, ej. 5 — resuelto (cuaternario con fantasmas; comparación con $r=3$ y $r=11$)
+
+> Fuente S: $S_1=0{,}15$, $S_2=0{,}04$, $S_3=0{,}08$, $S_4=0{,}12$, $S_5=0{,}10$, $S_6=0{,}03$, $S_7=0{,}22$, $S_8=0{,}05$, $S_9=0{,}06$, $S_{10}=0{,}1$, $S_{11}=0{,}05$. a) Código cuaternario por Huffman. b) Rendimiento. c) Redundancia. d) Si codificamos con tres niveles, ¿el rendimiento aumenta o disminuye? e) Mínimo número de señales para obtener la mínima longitud; valor de $L$. f) Código compacto de e). g) Inconveniente de e).
+
+La tabla de probabilidades se leyó del PDF: el .md convertido la perdió (suma 1 ✓).
+
+1. $\omega=11$, $r=4$: $11=4+3\alpha\Rightarrow\alpha=2{,}33$ → agrego **2 fantasmas** $z_1,z_2$ con $P=0$ ($\omega=13$, $\alpha=3$).
+2. Reducciones (de a 4; $A=S_2+S_6+z_1+z_2=0{,}07$, $B=A+S_9+S_8+S_{11}=0{,}23$, $C=S_4+S_5+S_{10}+S_3=0{,}40$):
+
+| $S_0$ | $S_1$ | $S_2$ | $S_3$ → dígito |
+|---|---|---|---|
+| $S_7$ 0,22 | $S_7$ 0,22 | $B$ 0,23 | $C$ 0,40 → 0 |
+| $S_1$ 0,15 | $S_1$ 0,15 | $S_7$ 0,22 | $B$ 0,23 → 1 |
+| $S_4$ 0,12 | $S_4$ 0,12 | $S_1$ 0,15 | $S_7$ 0,22 → 2 |
+| $S_5$ 0,10 | $S_5$ 0,10 | $S_4$ 0,12 | $S_1$ 0,15 → 3 |
+| $S_{10}$ 0,10 | $S_{10}$ 0,10 | $S_5$ 0,10 | |
+| $S_3$ 0,08 | $S_3$ 0,08 | $S_{10}$ 0,10 | |
+| $S_9$ 0,06 | $A$ 0,07 | $S_3$ 0,08 | |
+| $S_8$ 0,05 | $S_9$ 0,06 | | |
+| $S_{11}$ 0,05 | $S_8$ 0,05 | | |
+| $S_2$ 0,04 | $S_{11}$ 0,05 | | |
+| $S_6$ 0,03 | | | |
+| $z_1$ 0 | | | |
+| $z_2$ 0 | | | |
+
+3. Vuelta atrás: $S_7=2$, $S_1=3$; $C=0$ → $S_4=00$, $S_5=01$, $S_{10}=02$, $S_3=03$; $B=1$ → $A=10$, $S_9=11$, $S_8=12$, $S_{11}=13$; $A=10$ → $S_2=100$, $S_6=101$ (102 y 103 son de los fantasmas, se descartan).
+4. a) $L=1(0{,}22+0{,}15)+2(0{,}12+0{,}10+0{,}10+0{,}08+0{,}06+0{,}05+0{,}05)+3(0{,}04+0{,}03)=0{,}37+1{,}12+0{,}21=\mathbf{1{,}70}$ cuaternarios/símbolo.
+5. b) $H(S)=3{,}2273$ bits/símbolo; $H_4=3{,}2273/2=1{,}6137$; $\eta=1{,}6137/1{,}70=\mathbf{0{,}9492}$.
+6. c) Redundancia $=1-\eta=\mathbf{0{,}0508}$. Kraft: $2\cdot4^{-1}+7\cdot4^{-2}+2\cdot4^{-3}=0{,}96875$; lo que falta hasta 1 son las ramas de los fantasmas.
+7. d) Ternario: $11=3+2\cdot4$, **sin fantasmas**. Huffman ternario: $S_7=2$; $S_1=01$, $S_4=02$, $S_5=11$, $S_{10}=12$; $S_3=000$, $S_9=001$, $S_8=002$, $S_{11}=100$, $S_2=101$, $S_6=102$.
+   - $L_3=0{,}22+2(0{,}47)+3(0{,}31)=\mathbf{2{,}09}$ ternarios/símbolo; $H_3=3{,}2273/1{,}585=2{,}0362$; $\eta=\mathbf{0{,}9743}$.
+   - El rendimiento **aumenta** (0,949 → 0,974): en cuaternario se desperdician dos ramas en fantasmas; en ternario no hace falta ninguno.
+8. e) La longitud mínima posible es $L=1$: una señal distinta por símbolo → **11 señales** (niveles), $L=\mathbf{1}$.
+9. f) Código 11-ario: $S_1\to0$, $S_2\to1$, …, $S_{11}\to10$. Rendimiento $\eta=H/\lg11=3{,}2273/3{,}4594=0{,}9329$.
+10. g) Inconvenientes: hacen falta 11 niveles distinguibles; con la misma potencia quedan más juntos y el ruido los confunde más, y el equipo es más complejo *(conocimiento general)*. Además el rendimiento baja (0,933): con longitud fija ya no se aprovecha que unos símbolos sean más probables que otros.
+
 #### Resto (enunciado + resultados)
 
 | Origen | Fuente y pedido | Resultado |
@@ -377,6 +464,10 @@ Pasos (Huffman r-ario):
 | 29/11/2002 | Ternario: $A=0{,}2$, $B=0{,}04$, $C=0{,}05$, $D=0{,}01$, $E=0{,}1$, $F=0{,}06$, $G=0{,}025$, $H=0{,}3$, $I=0{,}2$, $J=0{,}015$. $L$ y rendimiento; ¿otro más corto? | $\omega=10$ → 1 falso. $H=1$; $A=00$, $I=01$, $E=02$, $F=21$, $C=22$, $B=200$, $G=201$, $J=2020$, $D=2021$. $L=1{,}815$; $H=2{,}7178$ bits; $H_3=1{,}7147$; $\eta=0{,}9448$. |
 | ¿07/02/2005? | Igual a 3.2 pero con $P(a)=0{,}2575$, $P(c)=0{,}125$ (la tabla suma 0,97). | Ver Dudas. Con esos pesos (normalizados): $L=1{,}7655$, $\eta=0{,}9300$. |
 | F5 P1 c-d | Codificar en forma compacta con $k_i=0,1,2,3$ una fuente de caracteres equiprobables. | Falta la cantidad de caracteres de la fuente → ver Dudas. |
+| práctica Medín 2025, ej. 1 | Fuente con longitudes $l=3,5,3,3$. ¿Puede hallarse un código instantáneo? | Supongo binario (la hoja no da $r$). Kraft: $3\cdot2^{-3}+2^{-5}=0{,}40625\le1$ → **sí**, por ejemplo 000, 01100, 010, 001. |
+| práctica Medín 2025, ej. 2 | $S_1=0$, $S_2=00$, $S_3=11$: verificar que cumple Kraft pero no es instantáneo. | $2^{-1}+2\cdot2^{-2}=1\le1$, pero 0 es prefijo de 00. Con las mismas longitudes 1, 2, 2 sí existe uno: 0, 10, 11. |
+| práctica Medín 2025, ej. 3 | $P=1/2,\ 1/4,\ 1/8,\ 1/8$. ¿Se cumple $L=H$? Código instantáneo con esas longitudes. | $l_i=\lg(1/P_i)=1,2,3,3$ → 0, 10, 110, 111; $L=H=1{,}75$ bits/símbolo, $\eta=1$ (probabilidades potencias de 1/2). |
+| práctica Medín 2025, ej. 4 | ¿Hay que agregar fantasmas? a) $\omega=13$, $r=4$. b) $\omega=14$, $r=4$. | a) $\alpha=(13-4)/3=3$ entero → **no**. b) $\alpha=10/3$ → agregar **2** ($16=4+3\cdot4$). |
 
 ### Trampas frecuentes
 
@@ -557,6 +648,17 @@ Fuente: «Fórmulas y pasos» (Hamming), «2 - Codificación», «Resumen 1° Pa
 - F8: «Se transmiten 14 mensajes (lectura dudosa) … establecer el código de detección y corrección de errores simples aplicando Hamming; ejemplificar.» → Igual que 5.1: $m=4$, $n=3$.
 - F12: «Aplicando Hamming, escribir el código (4 dígitos) completo indicando zonas y ecuaciones. Ejemplo de recepción con error unitario.» → $m=4$ dígitos de información, $n=3$, tabla completa de 16 palabras de arriba.
 
+#### 5.4 — práctica Medín 2025, ej. 6 — resuelto
+
+> Transmitir un alfabeto de 10 símbolos con un código de longitud constante. a) Codificar de forma que, controlando paridad por zonas, se detecten y corrijan errores unitarios (la corrección se hace al recibir cada palabra). b) Ejemplo con un error en algún dígito.
+
+1. a) $2^m\ge10\Rightarrow m=4$ (se usan 10 de las 16 combinaciones); $2^n\ge n+5\Rightarrow n=3$ → palabras de 7 dígitos, todas de la misma longitud.
+2. Zonas, ecuaciones y tabla: las de la receta. Se asignan, por ejemplo, las 10 primeras filas a $S_1\dots S_{10}$.
+3. b) Envío $I=1001$: $C_1=1\oplus0\oplus1=0$, $C_2=1\oplus0\oplus1=0$, $C_3=0\oplus0\oplus1=1$ → tira $C_1C_2I_1C_3I_2I_3I_4=0\,0\,1\,1\,0\,0\,1$ (fila 1001|001 de la tabla ✓).
+   - Llega $0\,0\,1\,1\,\mathbf{1}\,0\,1$ (error en la posición 5, $I_2$).
+   - Con la información recibida $I=1101$ recalculo $C_1C_2C_3=1\,0\,0$; los recibidos son $0\,0\,1$.
+   - Diferencia: $C_1=1$, $C_2=0$, $C_3=1$ → $C_3C_2C_1=101_2=5$ → corrijo la posición 5: $I=1001$ ✓.
+
 ### Trampas frecuentes
 
 - La desigualdad es $2^n\ge n+m+1$ (el «+1» es el caso «sin error»).
@@ -646,6 +748,15 @@ Pasos:
 4. $T_s=125\ \mu s$; $\tau=1/B_w=5$ ns; $T_m=40$ ns.
 5. Técnica: TDM-PCM. Como el canal es pasabanda (100–300 MHz), la trama se transmite modulando una portadora dentro de esa banda *(conocimiento general; la guía sólo usa la diferencia de cortes)*.
 
+#### 6.5 — parcial Baró (resumen del alumno, cursada 2025) — resuelto (bits de control por canal y por trama)
+
+> Transmitir 24 señales de voz ($f_{\max}=4$ kHz) codificadas con 7 bits por canal, agregando 1 bit de sincronismo **por canal** y 1 bit de señalización **por trama**. Velocidad de transmisión.
+
+1. $f_s=2f_{\max}=8$ kHz → $T_s=125\ \mu s$.
+2. Bits por trama: $24\times7+24\times1+1=\mathbf{193}$.
+3. $\tau=125\ \mu s/193=0{,}6477\ \mu s$ → $r=1/\tau=193\times8000=\mathbf{1{,}544\ Mbps}$ (coincide con el alumno; es la trama T1 *(conocimiento general)*).
+4. Diferencia con 6.1: el control viene en **bits** sueltos, no en muestras enteras; no sirve $N\,n\,2f_{\max}$ directo, hay que contar los bits de la trama.
+
 #### Resto (enunciado + resultados)
 
 | Origen | Datos | Resultado |
@@ -660,6 +771,9 @@ Pasos:
 | 03/03/2006 | Seis señales por canal digital de $B_w=2{,}4$ MHz: $S_1$: $f_{\min}=2$ kHz, $W=8$ kHz; $S_2$: $W=16$ kHz; $S_3$: $f_{\min}=10$, $f_{\max}=20$ kHz; $S_4$: $f_{\max}=6$ kHz, $W=4$ kHz; $S_5$: $f_{\max}=12$ kHz; $S_6$: $W=4$ kHz. ¿Bits por muestra? | Todas se muestrean a la tasa de la más rápida: $f_{\max}=20$ kHz ($S_3$) → $f_s=40$ kHz. $n=2{,}4\times10^6/(6\times40\,000)=\mathbf{10}$ bits. |
 | 13/03/2015 | 30 señales de distinta frecuencia (S1–S4 $f_{\max}=3$ kHz; S5–S12 $f_{\max}=2$ kHz, $w=2$ kHz; S13–S17 $f_{\min}=0{,}5$, $f_{\max}=1{,}5$ kHz; S18–S25 $f_{\max}=1{,}5$ kHz; S26–S30 $f_{\min}=1$ kHz, $w=3$ kHz) + 2 de sincronismo y señalización; 8 dígitos. | $N=32$; la mayor $f_{\max}$ es la de S26–S30: $1+3=4$ kHz → $f_s=8$ kHz; $B_w=32\times8\times8000=\mathbf{2{,}048\ MHz}$. Lectura parcial, ver Dudas. |
 | Sin fecha (pág. 22) | 28 canales de 3,4 kHz; 7 bits por muestra + 1 de paridad por señal, 1 de sincronismo por muestra y 1 de señalización por trama. Tasa de dígitos y ancho de banda. | Interpretación A (trama $=28\times8+1+1=226$ bits): $r=226\times6800=1{,}5368$ Mbps, $B_w=1{,}5368$ MHz. Interpretación B (sincronismo en cada muestra: $28\times9+1=253$ bits): $r=B_w=1{,}7204$ MHz. Ver Dudas. |
+| Parcial Baró (resumen del alumno, «Primer ejercicio») | 30 señales de voz + 2 de control (señalización y sincronismo), $f_{\max}=4$ kHz. Velocidad. No da bits: el alumno supone 8 («por práctica común»). | $N=32$; $T_s=125\ \mu s$; $T_m=3{,}906\ \mu s$; $\tau=488{,}3$ ns; $r=\mathbf{2{,}048}$ Mbps (E1). El alumno da 487,5 ns y 2,05 Mbps por redondear $T_m=3{,}9\ \mu s$. |
+| «Parcial random» de Baró (resumen del alumno) | Trama de 25 muestras + 2 de control, $f_{\max}=3000$ Hz, 7 bits. Ancho de banda, técnicas, gráficos. Además: definir ancho de banda, portadora, muestreo, cuantificación y codificación. | $f_s=6$ kHz; $T_s=166{,}7\ \mu s$; $T_m=6{,}173\ \mu s$; $\tau=0{,}8818\ \mu s$; $B_w=27\cdot7\cdot6000=\mathbf{1{,}134}$ MHz; TDM-PCM. (El alumno escribe «mHz» y primero 1,136 MHz, por redondeo.) |
+| «Otro parcial» de Baró (resumen del alumno) | Trama de 38 muestras + 2 de control, $f_{\max}=5$ kHz, 8 dígitos. Velocidad $r$, gráficos y técnicas. Además: definir tasa de Nyquist, PDM y armónico de Fourier. | $f_s=10$ kHz; $T_s=100\ \mu s$; $T_m=2{,}5\ \mu s$; $\tau=0{,}3125\ \mu s$; $r=40\cdot8\cdot10\,000=\mathbf{3{,}2}$ Mbps. **El alumno pone $T_s=0{,}1\ \mu s$ y llega a 3,2 Gbps**: error de unidades (es 0,1 ms). |
 
 ### Trampas frecuentes
 
@@ -667,7 +781,9 @@ Pasos:
 - $f_s=2f_{\max}$, **no** $2W$, aunque den $f_{\min}$ (la cátedra muestrea con $f_{\max}$ cuando $f_{\min}\ll f_{\max}$).
 - Con señales distintas en TDM, todas se muestrean con la $f_s$ de la más rápida.
 - En «cuántas señales» se redondea **hacia abajo**; en «cuántos bits» el resultado es lo que entra en el canal.
-- No confundir con FDM: si no dan bits por muestra, es FDM.
+- No confundir con FDM: si no dan bits por muestra, es FDM. Excepción en los parciales de Baró: «señales de voz» sin bits → TDM con 8 bits supuestos (decilo explícitamente).
+- Si el control viene en bits por canal o por trama (no en muestras), contá los bits de la trama (6.5).
+- $1/10\ \text{kHz}=0{,}1$ **ms**, no 0,1 µs: verificá el orden de magnitud de $r$ (Mbps para tramas de voz, no Gbps).
 
 ---
 
@@ -763,11 +879,11 @@ Pasos:
 
 ---
 
-## 8. Teoría de colas — M/M/1 abierta
+## 8. Teoría de colas — M/M/1, M/M/c, modelo cerrado y costos
 
 ### Receta
 
-Fuente: «Teoría de Colas» págs. 6–9 (fórmulas tomadas del Santo Resumen, que las transcribe), práctica «Ejercitación Teoría de cola».
+Fuente: «Teoría de Colas» págs. 6–9 (fórmulas tomadas del Santo Resumen, que las transcribe), práctica «Ejercitación Teoría de cola» (= «5 - Práctica Teoría de Cola», Medín 2025), resolución manuscrita de Medín (escaneos), wiki Unidad 6.
 
 | Magnitud | Fórmula |
 |---|---|
@@ -785,10 +901,49 @@ Pasos:
 2. $\rho=\lambda E[s]$; si $\rho\ge1$, un servidor no alcanza.
 3. $W_q$, $W$, $L_q$, $L$ con las fórmulas. Definir cada término y poner unidades.
 4. Problemas «inversos» (dan $L_q$, $W$, $\rho$): usar **sólo Little y $W=W_q+E[s]$**, porque esos datos no siempre son consistentes con M/M/1.
+5. Si con un servidor da $\rho\ge1$: calcular $u=\lambda E[s]$ y probar $c=\lceil u\rceil,\lceil u\rceil+1,\dots$ con M/M/c hasta cumplir lo pedido.
+
+**Percentil 90** (lo pide toda la práctica de Medín 2025):
+
+| Magnitud | Fórmula |
+|---|---|
+| $\pi_q(90)$, M/M/1: tiempo en cola que no supera el 90 % de los usuarios | $\pi_q(90)=W\ln(10\rho)$ |
+| $\pi_w(90)$, M/M/1: tiempo en el sistema *(conocimiento general)* | $\pi_w(90)=W\ln10\approx2{,}3\,W$ |
+
+Si $\rho\le0{,}1$, $\pi_q(90)=0$: más del 90 % no espera nada *(conocimiento general)*.
+
+**M/M/c: $c$ servidores con una sola cola.** Fórmulas de la wiki (Unidad 6), reconstruidas con conocimiento general porque en los apuntes son imágenes:
+
+| Magnitud | Fórmula |
+|---|---|
+| Intensidad de tráfico | $u=\lambda E[s]$ [Erlang]; hace falta $c>u$ |
+| Utilización de cada servidor | $\rho=u/c<1$ |
+| Probabilidad de sistema vacío | $P_0=\left[\displaystyle\sum_{n=0}^{c-1}\frac{u^n}{n!}+\frac{u^c}{c!\,(1-\rho)}\right]^{-1}$ |
+| Erlang C (probabilidad de tener que esperar) | $C(c,u)=\dfrac{u^c}{c!\,(1-\rho)}\,P_0$ |
+| Tiempo en cola | $W_q=\dfrac{C(c,u)\,E[s]}{c\,(1-\rho)}$ |
+| Resto | $W=W_q+E[s]$; $L_q=\lambda W_q$; $L=\lambda W$ |
+| Percentil 90 en cola | $\pi_q(90)=\dfrac{E[s]}{c(1-\rho)}\ln\big(10\,C(c,u)\big)$ |
+
+Con $c=1$: $C=\rho$ y se vuelve a M/M/1. Con $c=2$: $P_0=\left[1+u+\dfrac{u^2}{2(1-\rho)}\right]^{-1}$.
+
+**Modelo cerrado (sistema interactivo con $N$ terminales).** $E[s]$: servicio de CPU por interacción; $E[t]$: tiempo de pensamiento. Nadie entra ni sale.
+
+| Magnitud | Fórmula |
+|---|---|
+| CPU libre | $p_0=\left[\displaystyle\sum_{k=0}^{N}\frac{N!}{(N-k)!}\left(\frac{E[s]}{E[t]}\right)^k\right]^{-1}$ |
+| Utilización de la CPU | $\rho=1-p_0$ |
+| Interacciones por unidad de tiempo | $T=\rho/E[s]$ (no confundir con el $T_i$ de §9) |
+| Tiempo de respuesta | $W=\dfrac{N}{T}-E[t]$ |
+| Interacciones pendientes en el sistema | $L=T\,W=N-T\,E[t]$ |
+| Punto de saturación | $N^*=\dfrac{E[s]+E[t]}{E[s]}$ |
+
+$N^*$ es el máximo de **terminales** sin interferencia mutua: corte de las asíntotas $W=E[s]$ (pocos terminales) y $W=N\,E[s]-E[t]$ ($N\to\infty$). Pasado $N^*$, cada terminal nuevo suma ≈ $E[s]$ al tiempo de respuesta de todos.
+
+**Costos (elegir servidor u opción).** Costo por hora $=$ costo del servidor (sueldo o equipo) $+\ L\times$ costo por hora de cada unidad en el sistema (máquina parada, equipo fuera de servicio). Se usa $L$, no $L_q$: la unidad que está siendo atendida tampoco produce. Control por Little: arribos del período $\times W\times$ costo por hora da lo mismo.
 
 ### Ejercicios
 
-#### 8.1 — 04/04/2025 = 17/12/2021 = 20/11/2020 — resuelto
+#### 8.1 — 04/04/2025 = 17/12/2021 = 20/11/2020 (= ej. 6 de la práctica Medín 2025, que agrega $\pi(90)$) — resuelto
 
 > Sala de emergencias atendida por un doctor. Llegadas Poisson, un paciente cada media hora. Atención exponencial, 20 min en promedio. a) Tiempo promedio que el paciente espera para ser atendido. b) Tiempo promedio en la sala de espera de emergencias. c) N° promedio de pacientes en cola. d) N° promedio de pacientes en sala de espera de emergencias.
 
@@ -798,10 +953,11 @@ Pasos:
 4. b) $W=W_q+E[s]=40+20=\mathbf{60\ min}$ (tiempo total en emergencias: espera + atención).
 5. c) $L_q=\lambda W_q=40/30=\mathbf{1{,}33}$ pacientes.
 6. d) $L=\lambda W=60/30=\mathbf{2}$ pacientes.
+7. e) (práctica Medín 2025) $\pi_q(90)=W\ln(10\rho)=60\ln(20/3)=60\times1{,}897=\mathbf{113{,}8\ min}$: el 10 % de los pacientes espera más de casi 2 horas para ser atendido.
 
-Interpretación de a)/b) y c)/d) en Dudas.
+Interpretación de a)/b) y c)/d) en Dudas. La resolución manuscrita de Medín trabaja en horas ($\lambda=2$ p/h, $\mu=3$ p/h) y llega a los mismos valores, salvo $L$ (ver Dudas).
 
-#### 8.2 — 19/11/2021 = 18/12/2020 (= ej. 3 de la práctica) — resuelto
+#### 8.2 — 19/11/2021 = 18/12/2020 (= ej. 3, 7 y 9 de la práctica Medín 2025) — resuelto
 
 > Caja única de 7 a 14 h. Arribos Poisson, 100 personas/día; servicio ≈ 3 min. Definiendo términos y unidades: a) tiempo promedio en cola; b) tiempo promedio en la empresa; c) N° de usuarios promedio en el sistema [en cola]; d) N° de usuarios promedio en la empresa.
 
@@ -811,6 +967,8 @@ Interpretación de a)/b) y c)/d) en Dudas.
 4. b) $W=7{,}5+3=\mathbf{10{,}5\ min}$.
 5. c) $L_q=0{,}2381\times7{,}5=\mathbf{1{,}786}$ usuarios.
 6. d) $L=0{,}2381\times10{,}5=\mathbf{2{,}5}$ usuarios.
+
+7. (Ej. 9 de la práctica 2025) $\pi_q(90)=10{,}5\ln(7{,}14)=\mathbf{20{,}6\ min}$. Conclusión: la espera media (7,5 min) es razonable, pero el 10 % de los usuarios espera más de 20 min; con $\rho=0{,}71$ un aumento de demanda dispara la cola, así que una segunda caja en horas pico es la propuesta natural.
 
 La resolución del alumno del 18/12/2020 redondea $\rho=0{,}72$ y obtiene 7,7 / 10,7 / 1,85 / 2,57: diferencias de redondeo.
 
@@ -832,6 +990,82 @@ La resolución del alumno del 18/12/2020 redondea $\rho=0{,}72$ y obtiene 7,7 / 
 4. $E[s]=\rho/\lambda=0{,}6/0{,}144=\mathbf{4{,}17\ min}$.
 5. Ojo: con M/M/1 y $\rho=0{,}6$ sería $L_q=\rho^2/(1-\rho)=0{,}9$, no 3. Los datos no son M/M/1; por eso se resuelve sólo con Little.
 
+#### 8.5 — práctica Medín 2025, ej. 2 — resuelto (M/M/2, pago de haberes)
+
+> Pago de haberes en 2 cajas; los empleados llegan según Poisson, 40 personas/día, de 8 a 12 h. Cobro ≈ 4 min por empleado. a) Tiempo promedio en cola. b) Tiempo promedio en el banco. c) Usuarios promedio en cola. d) Usuarios promedio en el banco. e) $\pi(90)$ del tiempo de espera.
+
+1. 4 h = 240 min → $\lambda=40/240=0{,}1667$ pers/min; $E[s]=4$ min.
+2. $u=\lambda E[s]=0{,}667$ Erlang; $c=2$ → $\rho=u/c=\mathbf{0{,}333}$ (cada caja ocupada un tercio del tiempo).
+3. $P_0=\left[1+u+\dfrac{u^2}{2(1-\rho)}\right]^{-1}=[1+0{,}667+0{,}333]^{-1}=\mathbf{0{,}5}$.
+4. $C(2;\,0{,}667)=\dfrac{u^2}{2(1-\rho)}\,P_0=0{,}333\times0{,}5=\mathbf{0{,}1667}$: sólo 1 de cada 6 empleados tiene que esperar.
+5. a) $W_q=\dfrac{0{,}1667\times4}{2\times0{,}667}=\mathbf{0{,}5\ min}$. b) $W=0{,}5+4=\mathbf{4{,}5\ min}$.
+6. c) $L_q=0{,}1667\times0{,}5=\mathbf{0{,}083}$ personas. d) $L=0{,}1667\times4{,}5=\mathbf{0{,}75}$ personas.
+7. e) $\pi_q(90)=\dfrac{4}{2(0{,}667)}\ln(10\times0{,}1667)=3\ln1{,}667=\mathbf{1{,}53\ min}$.
+
+#### 8.6 — práctica Medín 2025, ej. 4 — resuelto (modelo cerrado, punto de saturación)
+
+> Sistema interactivo con 5 terminales y tiempo de pensamiento medio de 6 s. La CPU ejecuta 15 000 instrucciones/s y cada interacción pide 20 000 en promedio. Tiempo de respuesta, interacciones promedio, utilización de la CPU, interacciones pendientes en el sistema y punto de saturación. ¿Qué pasa si se agregan 2 terminales?
+
+1. $E[s]=20\,000/15\,000=1{,}333$ s; $E[t]=6$ s; $E[s]/E[t]=0{,}2222$.
+2. Punto de saturación: $N^*=(1{,}333+6)/1{,}333=\mathbf{5{,}5}$ terminales.
+3. $p_0$ con $N=5$. Términos $\frac{5!}{(5-k)!}(0{,}2222)^k$ para $k=0\dots5$: 1; 1,1111; 0,9877; 0,6584; 0,2926; 0,0650. Suma 4,1149 → $p_0=\mathbf{0{,}2430}$.
+4. Utilización de la CPU: $\rho=1-p_0=\mathbf{0{,}757}$.
+5. Interacciones por segundo: $T=\rho/E[s]=0{,}757/1{,}333=\mathbf{0{,}568}$ int/s.
+6. Tiempo de respuesta: $W=N/T-E[t]=5/0{,}568-6=\mathbf{2{,}81\ s}$.
+7. Interacciones pendientes: $L=T\,W=0{,}568\times2{,}81=\mathbf{1{,}59}$.
+8. Con 7 terminales (más que $N^*$). Términos: 1; 1,5556; 2,0741; 2,3045; 2,0485; 1,3656; 0,6070; 0,1349. Suma 11,090 → $p_0=0{,}0902$; $\rho=0{,}910$; $T=0{,}682$ int/s; $W=7/0{,}682-6=\mathbf{4{,}26\ s}$; $L=2{,}91$.
+9. Conclusión: +40 % de terminales da sólo +20 % de interacciones por segundo (0,568 → 0,682) y +52 % de tiempo de respuesta (2,81 → 4,26 s). Con 5 ya se estaba al borde de $N^*=5{,}5$; con 7 la CPU está ocupada el 91 % y se entra en la zona de la asíntota $W\approx N\,E[s]-E[t]$, donde cada terminal nuevo suma ≈1,33 s de respuesta para todos.
+
+#### 8.7 — práctica Medín 2025, ej. 5 — resuelto (costos: obrero x vs obrero y)
+
+> Las máquinas se descomponen según Poisson, 1 por hora; cada máquina ociosa cuesta \$25/h. El obrero x cobra \$20/h y repara $\mu_x=2$ máq/h; el obrero y cobra \$12/h y repara $\mu_y=1{,}2$ máq/h. Jornada de 8 h. Costo de trabajo = mano de obra + tiempo no productivo. Recomendación al gerente.
+
+1. Un reparador = M/M/1 con $\lambda=1$ máq/h. La máquina no produce mientras espera **ni** mientras la reparan → se usa $L$.
+2. Obrero x: $E[s]=0{,}5$ h; $\rho=0{,}5$; $W=0{,}5/0{,}5=1$ h; $L=\lambda W=\mathbf{1}$ máquina.
+   - Costo por hora $=20+25\times1=\$45$; por jornada $45\times8=\mathbf{\$360}$.
+3. Obrero y: $E[s]=0{,}8\overline{3}$ h; $\rho=0{,}8\overline{3}$; $W=0{,}8\overline{3}/0{,}1\overline{6}=5$ h; $L=\mathbf{5}$ máquinas.
+   - Costo por hora $=12+25\times5=\$137$; por jornada $\mathbf{\$1096}$.
+4. Recomendación: **contratar a x**. Cobra \$8/h más, pero con y hay en promedio 4 máquinas más paradas (\$100/h de pérdida extra). Con $\rho_y=0{,}83$ el taller queda cerca de la saturación.
+5. Contraste: la resolución manuscrita de Medín redondea $\rho_y=0{,}83$ y da $W=4{,}88$ h, \$134/h y \$1072 por jornada. El resumen del 2° parcial del alumno da los valores exactos. La recomendación no cambia.
+
+#### 8.8 — práctica Medín 2025, ej. 11 — resuelto (costos: mantenimiento manual vs con máquinas)
+
+> «Computodos» revisa sus equipos una vez al año. Opción manual: \$750 000, servicio exponencial de media 6 h. Opción con máquinas: \$1 000 000, media 3 h. Los equipos llegan según Poisson, 3 por día. Un equipo parado cuesta \$150/h. La empresa trabaja 24 h, 365 días. ¿Qué alternativa conviene?
+
+1. $\lambda=3/24=0{,}125$ equipos/h; año = 8760 h.
+2. Manual: $\rho=0{,}125\times6=0{,}75$; $W=6/0{,}25=24$ h; $L=0{,}125\times24=3$ equipos parados en promedio.
+   - Parada anual $=3\times150\times8760=\$3\,942\,000$; total $=\mathbf{\$4\,692\,000}$.
+3. Con máquinas: $\rho=0{,}375$; $W=3/0{,}625=4{,}8$ h; $L=0{,}6$ equipos.
+   - Parada anual $=0{,}6\times150\times8760=\$788\,400$; total $=\mathbf{\$1\,788\,400}$.
+4. **Conviene el mantenimiento con máquinas**: ahorra ≈ \$2,9 millones por año. Control por Little: $3\times365=1095$ equipos/año $\times W\times\$150$ da los mismos costos de parada.
+5. Supuesto: los \$750 000 y \$1 000 000 son anuales (la hoja no lo aclara). Aunque fuesen un pago único, la conclusión no cambia: la diferencia en paradas (\$3 153 600 por año) supera la diferencia de costo (\$250 000).
+
+#### 8.9 — parcial Medín 2025, com. 305 (resumen del alumno) — resuelto + propuesta
+
+> Caja con 6 horas de atención, 50 personas por día, tiempo de servicio 7 min. a) Tiempo promedio en la caja [en cola]. b) Tiempo promedio en la compañía. c) Usuarios promedio en cola. d) Usuarios promedio en el organismo. (El mismo parcial pedía también los elementos de un sistema de colas abierto y el concepto de punto de saturación.)
+
+1. $\lambda=50/360=0{,}1389$ pers/min; $\rho=0{,}1389\times7=35/36=\mathbf{0{,}9722}$.
+2. a) $W_q=\dfrac{(35/36)\times7}{1/36}=\mathbf{245\ min}$. b) $W=245+7=\mathbf{252\ min}$.
+3. c) $L_q=0{,}1389\times245=\mathbf{34{,}03}$ personas. d) $L=0{,}1389\times252=\mathbf{35}$ personas.
+4. Conclusión: con $\rho=0{,}97$ la espera media pasa las 4 horas; inaceptable. Con **2 cajas** (M/M/2): $u=0{,}972$, $\rho=0{,}486$, $P_0=0{,}346$, $C(2,u)=0{,}318$, $W_q=\mathbf{2{,}17\ min}$, $W=9{,}17$ min, $L_q=0{,}30$, $L=1{,}27$.
+5. El alumno usa $\rho=0{,}9723$ y obtiene $W_q=245{,}70$ min y $L_q=34{,}13$: con $\rho$ tan cerca de 1, un redondeo en la cuarta cifra mueve el resultado. Conviene trabajar con la fracción ($35/36$).
+
+#### 8.10 — práctica Medín 2025, ej. 10 («Panis») — enunciado incompleto, resuelto con supuesto
+
+> Los clientes forman una sola cola frente a los empleados. Llegan según Poisson, 60 por hora; el servicio es exponencial de media 12 min. ¿Cuál es el tiempo medio de estancia del cliente hasta que fue atendido? Si el gerente agrega servidores, ¿cuál es el tiempo de espera?
+
+1. $\lambda=1$ cliente/min; $E[s]=12$ min → $u=\lambda E[s]=\mathbf{12}$ Erlang: hacen falta **al menos 13 empleados** para que $\rho<1$. La hoja no dice cuántos hay (ver Dudas).
+2. Supuesto ilustrativo, M/M/c con una sola cola ($W_q$ y $W$ en minutos):
+
+| $c$ | $\rho$ | $C(c;12)$ | $W_q$ | $W$ |
+|---|---|---|---|---|
+| 13 | 0,923 | 0,704 | 8,45 | 20,45 |
+| 14 | 0,857 | 0,482 | 2,89 | 14,89 |
+| 15 | 0,800 | 0,319 | 1,28 | 13,28 |
+| 16 | 0,750 | 0,205 | 0,61 | 12,61 |
+
+3. Lectura: pasar de 13 a 14 empleados baja la espera en cola a un tercio; a partir de ahí la mejora es marginal. «Estancia hasta que fue atendido» se puede leer como $W$ (hasta terminar la atención) o $W_q$ (hasta empezarla): la tabla da los dos.
+
 #### Resto (enunciado + resultados)
 
 | Origen | Datos | Resultado |
@@ -839,15 +1073,24 @@ La resolución del alumno del 18/12/2020 redondea $\rho=0{,}72$ y obtiene 7,7 / 
 | F4 | Banco de 10 a 16 h, 30 personas/día, atención exponencial de 10 min. $\rho$, $W_q$, $W$, $L_q$, $L$. | $\lambda=30/360=0{,}0833$/min; $\rho=0{,}833$; $W_q=50$ min; $W=60$ min; $L_q=4{,}17$; $L=5$ (coincide con el alumno). |
 | F6 | Servidor de impresión de 8 a 14 h, lunes a viernes; 70 trabajos/semana; impresión exponencial de 5 min/trabajo. Resultados en minutos. | Semana = 5 × 360 = 1800 min; $\lambda=0{,}0389$/min; $\rho=0{,}194$; $W_q=1{,}21$ min; $W=6{,}21$ min; $L_q=0{,}047$; $L=0{,}241$. |
 | F1 = F13 = 17/02/2006 | $\lambda=0{,}015$ mensajes/s; «frecuencia [tiempo] de servicio» = 18 s/mensaje; longitud media 72 caracteres/mensaje. a) Factor de utilización; b) velocidad del servidor; c) tiempo de espera. | Con $E[s]=18$ s (así lo dice 17/02/2006): a) $\rho=0{,}015\times18=0{,}27$; b) $72/18=4$ caracteres/s; c) $W_q=0{,}27\times18/0{,}73=6{,}66$ s ($W=24{,}66$ s). La resolución del alumno lee 18 s como retardo total; ver Dudas. |
-| 29/11/2002 (= práctica de capacidad) | Centro de cómputos: 120 mensajes/h; longitud exponencial de media 144 caracteres; servidor del enlace a 8 caracteres/s. a) Tiempo medio de espera; b) utilización del enlace. | $\lambda=1/30$ msj/s; $E[s]=144/8=18$ s; b) $\rho=0{,}6$; a) $W_q=27$ s ($W=45$ s). |
+| 29/11/2002 (= ej. 2 de la práctica de capacidad = ej. 8 de la práctica de colas, Medín 2025) | Centro de cómputos: 120 mensajes/h; longitud exponencial de media 144 caracteres; servidor del enlace a 8 caracteres/s. a) Tiempo medio de espera; b) utilización del enlace. | $\lambda=1/30$ msj/s; $E[s]=144/8=18$ s; b) $\rho=0{,}6$; a) $W_q=27$ s ($W=45$ s). |
 | 07/05/2004 | Aeropuerto: 10 pasajeros en cola, tiempo total en el sistema 30 min, factor de uso 0,9. Frecuencia de arribo, tiempo en cola, tiempo de servicio. | Igual que 8.4: $30\lambda=10+0{,}9\Rightarrow\lambda=0{,}363$/min; $W_q=27{,}52$ min; $E[s]=2{,}48$ min. (M/M/1 daría $L_q=8{,}1$: datos no M/M/1.) |
+| práctica Medín 2025, ej. 1 (minibanco) | Caja única de 10 a 15 h; 60 personas/día; servicio 5 min. $W_q$, $W$, $L_q$, $L$, $\pi(90)$. | $\lambda=60/300=0{,}2$/min; $\rho=0{,}2\times5=\mathbf{1}$: **sistema saturado**, la cola crece sin límite y las fórmulas no aplican. Propuesta: 2 cajas → $u=1$, $\rho=0{,}5$, $P_0=1/3$, $C=1/3$, $W_q=1{,}67$ min, $W=6{,}67$ min, $L_q=0{,}33$, $L=1{,}33$, $\pi_q(90)=5\ln(3{,}33)=6{,}02$ min. |
+| «Ejercicio de Teoría de Colas» (Medín 2025), ej. 1 | Router M/M/1: llegan 100 paq/s, procesa 125 paq/s. $\rho$, $L$, $L_q$, $W$, $W_q$. | $\rho=100/125=0{,}8$; $L=\rho/(1-\rho)=4$; $L_q=3{,}2$; $W=L/\lambda=40$ ms; $W_q=32$ ms ($E[s]=8$ ms). Coincide con la fuente, que escribe mal $\rho=\mu/\lambda$ (ver Dudas). |
+| ídem, ej. 2 | Gateway de LAN: $\lambda=10$ paq/s, $\mu=15$ paq/s. | $\rho=0{,}667$; $L_q=1{,}33$; $L=2$; $W_q=133{,}3$ ms; $W=200$ ms (coincide). |
+| 2° parcial Medín 2025, propuestos (resumen del alumno) | Sala de emergencias (= 8.1) y obrero x/y (= 8.7). | Mismos números. El resumen asigna a) $=W$, b) $=W_q$, c) $=L$, d) $=L_q$, al revés que este banco y que Medín (ver Dudas). |
 
 ### Trampas frecuentes
 
 - Unidades: $\lambda$ por minuto y $E[s]$ en minutos (o ambos en horas). «100 personas/día» se divide por los minutos **de atención**, no por 1440.
 - $W$ incluye el servicio; $W_q$ no.
 - Little vale siempre; las fórmulas de $W_q$ con $\rho$ sólo para M/M/1.
-- $\rho\ge1$ → la cola crece sin límite: hay que decirlo, no seguir calculando.
+- $\rho\ge1$ → la cola crece sin límite: hay que decirlo, no seguir calculando (minibanco: $\rho=1$ exacto).
+- $\rho=\lambda/\mu=\lambda E[s]$, nunca $\mu/\lambda$ (error escrito en el «Ejercicio de Teoría de Colas» 2025).
+- Con $\rho$ cerca de 1 no redondees $\rho$: 0,83 en vez de $5/6$ cambia $W$ de 5 a 4,88 h (8.7); 0,9723 en vez de $35/36$ cambia $W_q$ de 245 a 245,7 min (8.9).
+- En costos se multiplica por $L$ (unidades en el sistema), no por $L_q$.
+- Varias cajas con **una sola cola** (M/M/c) son mejores que colas separadas; el M/M/c se calcula con Erlang C, no dividiendo $\lambda$ por $c$.
+- «Punto de saturación» en teoría es $N^*$ del modelo cerrado (terminales), no «cuando $\rho$ llega a 1» ni «número de servidores».
 
 ---
 
@@ -869,11 +1112,15 @@ Fuente: «Asignación de Capacidad de Canales» (Kleinrock, regla de la raíz cu
 
 ($\lambda_i/\eta_i=\lambda_i\cdot$ longitud media = tráfico ofrecido en bps.)
 
+Regla de la raíz cuadrada (Kleinrock): con costo proporcional a la capacidad total $C$ fija, el retardo medio $\frac1\gamma\sum\lambda_iT_i$ es mínimo si cada enlace recibe lo imprescindible ($\lambda_i/\eta_i$) más una parte del remanente $C(1-\rho)$ **proporcional a la raíz cuadrada** de su tráfico. $T_{\min}$ es inversamente proporcional a $C$: más capacidad (más costo), menos retardo.
+
 Pasos:
 
 1. $\lambda_i$ de cada enlace = terminales del nodo × frecuencia por terminal (en mensajes/s).
+   - **Red en árbol** (Medín 2025): el $\lambda$ de un enlace suma los terminales del propio nodo **más** los $\lambda$ de todos los enlaces que llegan a ese nodo desde las hojas (hipótesis de independencia de Kleinrock). El enlace al nodo central lleva el tráfico de toda la red.
 2. Tabla con $\lambda_i$, $\lambda_i/\eta_i$ [bps], $\sqrt{\lambda_i/\eta_i}$, sumas.
 3. $\rho$, $C(1-\rho)$, $C_i^{opt}$ (control: $\sum C_i^{opt}=C$), $T_i$ y $T_{\min}$.
+4. Si en vez de repartir $C$ te dan la capacidad de cada enlace («¿la capacidad es acorde?»): $\rho_i=\lambda_i/(\eta_iC_i)$ y $T_i=\dfrac{1}{\eta_iC_i-\lambda_i}=\dfrac{1/(\eta_iC_i)}{1-\rho_i}$ por enlace, y concluir (holgado, ajustado o saturado).
 
 ### Ejercicios
 
@@ -911,7 +1158,7 @@ Pasos:
 5. b) $T_1=1/(1672{,}24/100-0{,}2)=0{,}0605$ s; $T_2=0{,}0812$ s; $T_3=0{,}0497$ s.
 6. c) $T_{\min}=13{,}3711^2/(0{,}6\times4940)=\mathbf{0{,}0603\ s}$.
 
-#### 9.3 — F10 = F11 — resuelto
+#### 9.3 — F10 = F11 (= ej. 3 de la práctica de capacidad, Medín 2025) — resuelto
 
 > Nodo concentrador de 1200 bps al que llegan mensajes de 120 bits. a) Máxima frecuencia de arribos para que el retardo no exceda 2 s. b) Si $\lambda\to\eta_iC_i$, ¿qué pasa?
 
@@ -919,11 +1166,70 @@ Pasos:
 2. a) $T=\dfrac1{10-\lambda}\le2\Rightarrow10-\lambda\ge0{,}5\Rightarrow\lambda\le\mathbf{9{,}5}$ mensajes/s ($\rho=0{,}95$).
 3. b) $\rho\to1$: el denominador tiende a 0 y el retardo crece sin límite (el buffer se llena; el enlace no da abasto).
 
+#### 9.4 — práctica Medín 2025, ej. 1 — resuelto (4 concentradores, $C^{opt}$ y $T_{\min}$)
+
+> 4 concentradores en estrella hacia una CPU central. Cada terminal transmite 10 mensajes/s de 6 bits en promedio. Santa Fe: 20 terminales; Venado Tuerto: 10; Villa Constitución: 5; Cañada de Gómez: 5. a) Tiempo mínimo para una red de capacidad total 5000 bps. b) $C^{opt}$.
+
+1. $\lambda_i$ = terminales × 10 msg/s; $1/\eta=6$ bits → tráfico ofrecido $\lambda_i/\eta=6\lambda_i$ bps.
+
+| Nodo | Term. | $\lambda_i$ [msg/s] | $\lambda_i/\eta$ [bps] | $\sqrt{\lambda_i/\eta}$ | $C_i^{opt}$ [bps] | $\rho_i$ | $T_i$ [ms] |
+|---|---|---|---|---|---|---|---|
+| Santa Fe | 20 | 200 | 1200 | 34,641 | 2160,43 | 0,555 | 6,25 |
+| Venado Tuerto | 10 | 100 | 600 | 24,495 | 1279,13 | 0,469 | 8,83 |
+| Villa Constitución | 5 | 50 | 300 | 17,321 | 780,22 | 0,385 | 12,49 |
+| Cañada de Gómez | 5 | 50 | 300 | 17,321 | 780,22 | 0,385 | 12,49 |
+| Σ | 40 | 400 | 2400 | 93,777 | 5000,00 | | |
+
+2. $\rho=2400/5000=0{,}48$; remanente $C(1-\rho)=2600$ bps.
+3. b) Santa Fe: $C_1=1200+2600\times34{,}641/93{,}777=1200+960{,}43=\mathbf{2160{,}43}$ bps. Igual los demás; suman 5000 ✓.
+4. $T_1=\dfrac{1}{2160{,}43/6-200}=\dfrac{1}{160{,}07}=6{,}25$ ms.
+5. a) $T_{\min}=\dfrac{93{,}777^2}{400\times2600}=\dfrac{8794{,}1}{1\,040\,000}=\mathbf{8{,}46\ ms}$ (igual a $\sum\lambda_iT_i/\gamma$ ✓).
+6. Para ver qué gana la regla: repartiendo parejo (1250 bps por enlace), Santa Fe queda con $\eta C=208{,}3$ msg/s para $\lambda=200$ ($\rho=0{,}96$, $T=120$ ms) y el promedio de la red sube a 63,9 ms, unas 7,6 veces más.
+
+#### 9.5 — red en árbol con datacenter (cuaderno del alumno y 2° parcial Medín 2025) — resuelto
+
+> Una empresa quiere evaluar la red sobre el nodo central (nodo 1, donde está el datacenter): utilización de los enlaces y recomendación sobre tiempos y capacidades. Árbol: 4→3, 5→3, 3→2, 2→1, 6→1, 8→7, 7→1. Terminales por nodo: 1: 10; 2: 2; 3: 2; 4: 6; 5: 6; 6: 6; 7: 6; 8: 2. Capacidad 4500 bps, 0,03 mensajes/s por terminal, mensajes de 6 bits.
+
+1. Acumulo desde las hojas ($f=0{,}03$ msg/s por terminal):
+   - $\lambda_4=\lambda_5=\lambda_6=6f=0{,}18$; $\lambda_8=2f=0{,}06$
+   - $\lambda_3=2f+\lambda_4+\lambda_5=0{,}42$; $\lambda_2=2f+\lambda_3=0{,}48$; $\lambda_7=6f+\lambda_8=0{,}24$
+   - $\lambda_1=10f+\lambda_2+\lambda_6+\lambda_7=\mathbf{1{,}2}$ msg/s (= 40 terminales × 0,03)
+2. $\eta C=4500/6=750$ msg/s → $\rho_1=1{,}2/750=\mathbf{0{,}0016}$ (0,16 %).
+3. $T_1=\dfrac{1}{750-1{,}2}=\mathbf{1{,}335\ ms}$: prácticamente sólo el tiempo de transmitir ($1/750=1{,}333$ ms).
+4. Si cada enlace tiene 4500 bps, todos quedan con $\rho_i<0{,}1\,\%$ y $T_i\approx1{,}334$ ms.
+5. Recomendación: la red está muy sobredimensionada; se puede bajar capacidad (repartir una $C$ menor con $C^{opt}$, o canales comerciales más chicos) sin cambiar los tiempos de forma apreciable.
+6. Con $f=1/30$ exacto (1 mensaje cada 30 s): $\lambda_1=40/30=1{,}333$ msg/s, $\rho_1=0{,}00178$, $T_1=1{,}336$ ms. Misma conclusión.
+
+Errores de las fuentes (detalle en Dudas): el cuaderno mezcla $f=1/30$ y 0,03 ($\lambda_1=1{,}29$) y da $T_1=0{,}000035$ s; el resumen escribe «0,0016 %» y una fórmula de $T_1$ mal armada.
+
+#### 9.6 — sucursal en Capitán Bermúdez (cuaderno del alumno y 2° parcial Medín 2025) — resuelto, dos versiones de datos
+
+> Red: Pto. San Martín (50 terminales) → Cap. Bermúdez (40) → Rosario (50) ← Funes o Roldán (10); Rosario → ISP. Enlaces internos de 3000 bps; enlace al ISP de 5000 bps. Una empresa evalúa sumar la sucursal de Capitán Bermúdez sobre el enlace Pto. San Martín–Rosario: ¿la capacidad es acorde?
+
+Datos según la fuente: el cuaderno dice 1 mensaje cada 30 s por terminal, de 8 bits (y Funes); el resumen del 2° parcial dice 1 mensaje cada «1230 s», de 1500 bits (y Roldán).
+
+1. Terminales que pesan sobre cada enlace: PSM→CB 50; CB→Rosario $50+40=90$; Funes→Rosario 10; Rosario→ISP $50+40+50+10=150$.
+2. Versión del cuaderno ($f=1/30$, 8 bits): $\eta C=3000/8=375$ msg/s en los internos y $5000/8=625$ msg/s al ISP.
+
+| Enlace | $\lambda$ [msg/s] | $\rho$ | $T$ [ms] |
+|---|---|---|---|
+| PSM → CB | 1,667 | 0,0044 | 2,68 |
+| CB → Rosario | 3,000 | 0,0080 | 2,69 |
+| Funes → Rosario | 0,333 | 0,0009 | 2,67 |
+| Rosario → ISP | 5,000 | 0,0080 | 1,61 |
+
+Sobra capacidad: el enlace CB→Rosario recién se saturaría con $30\times375=11\,250$ terminales aguas arriba. Se puede incorporar Bermúdez.
+3. Versión del resumen ($f=1/1230$, 1500 bits): $\lambda_{ISP}=150/1230=0{,}122$ msg/s; $\eta C_{ISP}=5000/1500=3{,}33$ msg/s → $\rho_{ISP}=\mathbf{0{,}0366}$ (el resumen da 0,03, truncado). En CB→Rosario: $\rho=0{,}0366$, $T=1/(2-0{,}073)=0{,}519$ s. También sobra capacidad.
+4. Ojo: con 1500 bits y 1 mensaje cada 30 s, $\rho_{ISP}=5/3{,}33=1{,}5$ y $\rho_{CB\to Ros}=1{,}5$: **saturado**, la conclusión se invierte. Por eso importa el dato «1230» (ver Dudas).
+5. Error del cuaderno: escribe «Frec prom = 0,03 seg»; es 0,0333 **mensajes/s** (la inversa de 30 s).
+
 ### Trampas frecuentes
 
-- $1/\eta$ es la **longitud** (bits/mensaje); $\eta C$ son mensajes/s.
+- $1/\eta$ es la **longitud** (bits/mensaje); $\eta C$ son mensajes/s: capacidad **dividida** por la longitud, no multiplicada (error del cuaderno en 9.5).
 - Verificar $\sum C_i^{opt}=C$.
 - $\lambda$ por terminal × cantidad de terminales, y en mensajes **por segundo**.
+- En árbol, cada enlace suma sus terminales **y** todo lo que le llega de los nodos anteriores.
+- $\rho=0{,}0016$ es 0,16 %, no «0,0016 %».
 
 ---
 
@@ -955,6 +1261,37 @@ Supuesto: la fuente tiene tantos símbolos como palabras posibles, $5^{16}$ (ver
 2. FSK = dos ASK superpuestas: un «1» enciende $f_{p1}$ y un «0» enciende $f_{p2}$.
 3. *(Conocimiento general)* Cada ASK ocupa $\pm1/\tau$ alrededor de su portadora, así que $B_{FSK}\approx|f_{p2}-f_{p1}|+2/\tau=|f_{p2}-f_{p1}|+20$ kHz.
 4. Gráficas: tren binario; portadora $f_{p1}$ en los «1»; portadora $f_{p2}$ en los «0»; suma (señal FSK de amplitud constante y frecuencia que salta).
+
+---
+
+## 11. Atenuación, ganancia y dB (teoría de Baró, 1er parcial 2025)
+
+### Receta
+
+Fuente: «Resumen Comunicación de Datos - Medin 1er Parcial» (sección Baró) y «Velocidades de transmisión de datos…» (Baró).
+
+| Magnitud | Fórmula |
+|---|---|
+| Ganancia | $G=\dfrac{\text{salida}}{\text{entrada}}$, en «veces» (sin unidad): $G_V=V_0/V_f$, $G_P=P_0/P_f$, $G_I=I_0/I_f$ |
+| Atenuación | $A=\dfrac{\text{entrada}}{\text{salida}}=\dfrac1G$ |
+| En decibeles | $G_{dB}=10\log_{10}G$; $A_{dB}=10\log_{10}A$ |
+| Etapas en serie | en veces se **multiplican**; en dB se **suman** |
+| Relación señal/ruido | $S/N=P_{señal}/P_{ruido}$; en dB, $10\log_{10}(S/N)$ |
+
+- Rango dinámico: diferencia entre el nivel máximo que puede emitir un dispositivo y el ruido de fondo sin señal. En una cadena manda el peor dispositivo; en equipos de calidad, 80–95 dB.
+- Ancho de banda según Baró: frecuencia en la que la salida cae 3 dB (mitad de la potencia).
+- *(Conocimiento general)* Las fórmulas con $10\log_{10}$ son para cocientes de **potencia**; para tensión o corriente se usa $20\log_{10}$.
+
+### Ejercicio
+
+#### 11.1 — ejemplo del resumen (Baró 2025)
+
+> Dos componentes en serie, cada uno con una atenuación de 10 veces. Atenuación del sistema.
+
+1. En veces: $A=10\times10=\mathbf{100}$ veces.
+2. En dB: $10\log_{10}100=\mathbf{20\ dB}=10\ dB+10\ dB$.
+
+Las fuentes de 2025 no traen ejercicios numéricos de este tema y ningún final lo tomó; no se inventaron.
 
 ---
 
@@ -1001,3 +1338,23 @@ Supuesto: la fuente tiene tantos símbolos como palabras posibles, $5^{16}$ (ver
 **Contraste con el Santo Resumen**
 
 30. Coincide en las fórmulas de multinivel, canal, Huffman ($\omega=r+\alpha(r-1)$), síndromes/familias, M/M/1 y raíz cuadrada. Difiere en FDM ($N\cdot2W$ contra $2f_{\max}$ de la respuesta oficial, punto 2) y repite el redondeo a 77 bits (punto 3). Su afirmación de que 2021 y 2025 repiten números se confirma: 19/11/2021 P1 = 04/04/2025 P2, y 17/12/2021 P3 = 04/04/2025 P3.
+
+**Cursada 2025 (com. 303): errores y supuestos**
+
+31. **Multinivel, práctica Baró ej. 9 (= ej. 14 del apunte)**: redondea $\lg7\approx2{,}8$ y da 147 niveles para duplicar $R$. Con $\lg7=2{,}807$ son 149 ($\mu'=148{,}5$). Con 147, $R=1097{,}2$ bps, que no llega al doble exacto (1099,1 bps).
+32. **Multinivel, práctica Baró ej. 2**: repite el error del apunte ($I=2{,}81$ bits en vez de 16,84; punto 8).
+33. **Multinivel, práctica Baró ej. 11**: $n=2487{,}08$; la práctica toma 2487, que no alcanza los 5 Mbps (hacen falta 2488). Escribe «500 seg × 5 bps» por «500 µs × 5 Mbps» (los 2500 bits están bien). El inciso d) queda planteado sin resolver; ver 1.8.
+34. **Baró, $B=s/2$ contra $B_w=1/\tau$**: el apunte teórico de Baró 2025 («Velocidades de transmisión…») define $B=s/2$ (Nyquist), pero en sus parciales de TDM-PCM el alumno usa $B_w=1/\tau$ y no hay corrección visible. Refuerza el punto 1: en el examen, aclarar cuál se usa.
+35. **TDM, parciales de Baró (resumen del alumno)**: en el «Otro parcial» pone $T_s=1/10\ \text{kHz}=0{,}1\ \mu s$ (es 0,1 ms) y llega a $r=3{,}2$ Gbps; lo correcto es 3,2 Mbps. En el «Primer ejercicio» el enunciado no da bits por muestra y el alumno supone 8; redondea $T_m=3{,}9\ \mu s$ y da 2,05 Mbps (exacto 2,048). En el «Parcial random» escribe «mHz» por MHz.
+36. **Codificación, práctica Medín 2025**: el .md convertido perdió todas las tablas (longitudes del ej. 1, código del ej. 2, probabilidades de los ej. 3 y 5); se leyeron del PDF renderizado, sin ambigüedades. El ej. 1 no dice el alfabeto: supuse binario. El ej. 3 dice «$L=H_N(s)$»: lo tomé como la entropía en la base del código (binaria).
+37. **Sala de emergencias, a)–d)**: la resolución manuscrita de Medín toma a) $=W_q$ (40 min) y b) $=W$ (60 min), como este banco (punto 10). El resumen del 2° parcial del alumno los invierte: a) $=W$, b) $=W_q$, c) $=L$, d) $=L_q$. Seguí a Medín.
+38. **Sala de emergencias, resolución manuscrita de Medín**: escribe «$L=2\cdot1\Rightarrow L=1$ p»; es $L=2$ pacientes (el producto está bien planteado). También anota «$\rho=\mu/c$» donde va $\rho=u/c$, y escribe $\pi(90)=1{,}8$ h truncado (es 1,897 h); el valor en minutos, 113,8, está bien.
+39. **Obrero x vs y, resolución de Medín**: redondea $\rho_y=0{,}83$ → $W=4{,}88$ h, \$134/h y \$1072 por jornada. Exacto: 5 h, \$137 y \$1096. La recomendación (x) no cambia.
+40. **«Ejercicio de Teoría de Colas» (router y gateway)**: escribe $\rho=\mu/\lambda$ y «125/100 = 0,8» (125/100 es 1,25). Lo correcto es $\rho=\lambda/\mu=100/125=0{,}8$. Los demás resultados están bien. Las fórmulas de $L$, $L_q$, $W$ y $W_q$ se perdieron en la conversión (eran imágenes).
+41. **«Panis» (práctica Medín ej. 10)**: no da la cantidad de empleados. Con 60 clientes/h y 12 min de servicio, $u=12$ Erlang: con menos de 13 servidores el sistema se satura. La tabla de 8.10 es un supuesto ilustrativo ($c=13\dots16$).
+42. **«Computodos» (práctica Medín ej. 11)**: no aclara si \$750 000 y \$1 000 000 son anuales; la conclusión no depende de eso (8.8).
+43. **Parcial com. 305**: el alumno redondea $\rho=0{,}9723$ (exacto $35/36$) → $W_q=245{,}70$ y $L_q=34{,}13$ en vez de 245 min y 34,03. El mismo resumen define «punto de saturación» como el momento en que el tráfico supera la capacidad del enlace ($\rho\to1$) y toma «saturado» como $0{,}8<\rho<1$. La teoría de la cátedra lo define como $N^*$ del modelo cerrado (máximo de terminales sin interferencia mutua); el umbral 0,8 es un criterio práctico del alumno.
+44. **Red en árbol (9.5)**: el cuaderno escribe $\lambda_4=0{,}03\times6=0{,}2$ (eso es $6/30$; con 0,03 da 0,18) y mezcla los dos valores hasta $\lambda_1=1{,}29$ (40/30 = 1,333 o 40 × 0,03 = 1,2). Su $T_1=0{,}000035$ s sale de usar $\eta C=6\times4500$ en vez de $4500/6$ ($1/27\,000=3{,}7\times10^{-5}$ s); lo correcto es 1,34 ms, y no «menor a 1 µs» como concluye. El resumen del 2° parcial escribe $\rho_1=0{,}0016\,\%$ (es 0,16 %) y $T_1=\lambda_1/(\eta C-(1-\rho_1))$; al evaluar pone 1 en el numerador y el número (0,0013 s) coincide con el correcto $1/(\eta C-\lambda_1)$ sólo porque $\lambda_1$ y $1-\rho_1$ son ≈1 frente a 750.
+45. **Capitán Bermúdez (9.6)**: el cuaderno dice 1 mensaje cada 30 s y 8 bits; el resumen, 1 cada «1230 s» y 1500 bits, y nombra Roldán en vez de Funes. «1230» puede ser una mala transcripción de «1/30»: con 1 cada 30 s y 1500 bits, el enlace al ISP y el CB→Rosario quedarían con $\rho=1{,}5$ (saturados) y la conclusión se invierte. El resumen da $\rho_{ISP}=0{,}03$ (es 0,0366).
+46. **Informe N3 de Medín (colas y capacidad)**: todas las fórmulas y las tablas del ejemplo de las 7 ciudades son imágenes no convertidas; no aporta números nuevos. Sus conclusiones (un M/M/1 con capacidad $m\mu$ da menor $W$ que un M/M/m, aunque el M/M/m espera algo menos en cola) coinciden con la wiki.
+47. **Fuentes vacías**: `ejercicios teoria de colas.md` y `drive-propio/ejercicios.md` tienen 0 bytes; su contenido se tomó de los escaneos (`ejercicios-colas-medin-1..3`, `ejercicios-propio-1..2`).
