@@ -12,6 +12,11 @@ ALUMNO, LEG. & FECHA: …………………………………………………�
 
 ## PART 1-A — LISTENING (15 p.)
 
+> **Audio 1** (`audio/sim4-part1.m4a`) → Questions 1, 2 y 3.  
+> **Audio 2** (`audio/sim4-part2.m4a`) → Questions 4 y 5.  
+> Leé las consignas de ese audio antes de ponerlo, y ponelo una sola vez.
+
+
 ### DESALINATION PLANTS
 
 **QUESTION 1 (5 p.)**

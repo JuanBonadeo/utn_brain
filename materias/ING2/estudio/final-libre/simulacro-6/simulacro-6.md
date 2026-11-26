@@ -12,6 +12,11 @@ ALUMNO, LEG. & FECHA: …………………………………………………�
 
 ## PART 1-A — LISTENING (15 p.)
 
+> **Audio 1** (`audio/sim6-part1.m4a`) → Questions 1, 2 y 3.  
+> **Audio 2** (`audio/sim6-part2.m4a`) → Questions 4 y 5.  
+> Leé las consignas de ese audio antes de ponerlo, y ponelo una sola vez.
+
+
 ### BRAIN-COMPUTER INTERFACES
 
 **QUESTION 1 (5 p.)**

@@ -9,6 +9,11 @@ ALUMNO, LEG. & FECHA: …………………………………………………�
 
 ## PART 1-A — LISTENING (15 p.)
 
+> **Audio 1** (`audio/sim2-part1.m4a`) → Questions 1.  
+> **Audio 2** (`audio/sim2-part2.m4a`) → Questions 2 y 3.  
+> Leé las consignas de ese audio antes de ponerlo, y ponelo una sola vez.
+
+
 ### A SECOND LIFE FOR ELECTRIC CAR BATTERIES
 
 **QUESTION 1 (7 p.)**

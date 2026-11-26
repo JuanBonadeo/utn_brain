@@ -10,6 +10,11 @@ ALUMNO, LEG. & FECHA: …………………………………………………�
 
 ## PART 1-A — LISTENING (15 p.)
 
+> **Audio 1** (`audio/sim1-part1.m4a`) → Questions 1.  
+> **Audio 2** (`audio/sim1-part2.m4a`) → Questions 2.  
+> Leé las consignas de ese audio antes de ponerlo, y ponelo una sola vez.
+
+
 ### THE HIDDEN COST OF THE CLOUD
 
 **QUESTION 1 (8 p.)**
